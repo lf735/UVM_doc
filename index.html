@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation UVM | Guide & Référence</title>
+  <meta name="description" content="Documentation et guide de référence pour Universal Verification Methodology (UVM) et SystemVerilog.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <button class="icon-button menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <a href="#" class="brand">
+        <span>UVM Documentation</span>
+        <span class="brand-badge">v1.2</span>
+      </a>
+    </div>
+
+    <div class="header-actions">
+      <button class="icon-button" id="theme-toggle" aria-label="Changer de thème">
+        <!-- SVG icon injected by main.js -->
+      </button>
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="icon-button" aria-label="GitHub">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+      <div class="search-box">
+        <input type="text" id="search-input" class="search-input" placeholder="Rechercher...">
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Introduction</div>
+        <ul class="nav-list">
+          <li><a href="#intro" class="nav-link active">Aperçu & Objectifs</a></li>
+          <li><a href="#architecture" class="nav-link">Architecture UVM</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Composants & Structure</div>
+        <ul class="nav-list">
+          <li><a href="#components" class="nav-link">Composants UVM</a></li>
+          <li><a href="#phases" class="nav-link">Phases d'exécution</a></li>
+          <li><a href="#factory" class="nav-link">UVM Factory & Config DB</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-section">
+        <div class="nav-section-title">Stimuli & Transactions</div>
+        <ul class="nav-list">
+          <li><a href="#sequences" class="nav-link">Sequences & Items</a></li>
+          <li><a href="#tlm" class="nav-link">Ports & Communications TLM</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- Intro Section -->
+      <section id="intro" class="doc-section">
+        <h1>Guide de Documentation UVM</h1>
+        <p>Bienvenue sur le portail de documentation dédié à l'<strong>Universal Verification Methodology (UVM)</strong> en SystemVerilog. Ce site regroupe les standards, patrons d'architecture et exemples pratiques pour concevoir des environnements de vérification robustes et réutilisables.</p>
+        
+        <div class="callout">
+          <p><strong>Note :</strong> Ce projet est configuré pour un déploiement continu et automatique via <strong>GitHub Pages</strong> et <strong>GitHub Actions</strong>.</p>
+        </div>
+      </section>
+
+      <!-- Architecture Section -->
+      <section id="architecture" class="doc-section">
+        <h2>Architecture d'un Testbench UVM</h2>
+        <p>Un environnement de vérification UVM typique structure les composants selon une hiérarchie stricte d'objets et de composants :</p>
+        <ul>
+          <li><strong>uvm_test :</strong> Instancie l'environnement et configure les tests.</li>
+          <li><strong>uvm_env :</strong> Regroupe les agents, scoreboards et modules d'analyse.</li>
+          <li><strong>uvm_agent :</strong> Encapsule le sequencer, le driver et le monitor pour une interface donnée.</li>
+          <li><strong>uvm_scoreboard :</strong> Compare les résultats observés aux résultats attendus du modèle de référence.</li>
+        </ul>
+      </section>
+
+      <!-- Components Section -->
+      <section id="components" class="doc-section">
+        <h2>Composants UVM Clés</h2>
+        <p>Chaque composant hérite de <code>uvm_component</code> et participe aux phases de simulation.</p>
+
+        <h3>Exemple : Driver UVM minimal</h3>
+        <div class="code-container">
+          <div class="code-header">
+            <span>my_driver.sv</span>
+            <button class="copy-btn">Copier</button>
+          </div>
+          <pre><code>class my_driver extends uvm_driver #(my_transaction);
+  `uvm_component_utils(my_driver)
+
+  function new(string name = "my_driver", uvm_component parent = null);
+    super.new(name, parent);
+  endfunction
+
+  virtual task run_phase(uvm_phase phase);
+    forever begin
+      seq_item_port.get_next_item(req);
+      drive_transfer(req);
+      seq_item_port.item_done();
+    end
+  endtask
+endclass</code></pre>
+        </div>
+      </section>
+
+      <!-- Phases Section -->
+      <section id="phases" class="doc-section">
+        <h2>Phases UVM</h2>
+        <p>UVM synchronise la construction et l'exécution via des phases automatiques ordonnées :</p>
+        <ol>
+          <li><code>build_phase</code> : Construction et configuration de la hiérarchie.</li>
+          <li><code>connect_phase</code> : Connexion des ports TLM et interfaces virtuelles.</li>
+          <li><code>end_of_elaboration_phase</code> : Derniers réglages de topologie.</li>
+          <li><code>run_phase</code> : Phase consommatrice de temps (tâches temporelles).</li>
+          <li><code>check_phase</code> / <code>report_phase</code> : Validation des résultats et génération du rapport final.</li>
+        </ol>
+      </section>
+
+      <!-- Factory & Config DB Section -->
+      <section id="factory" class="doc-section">
+        <h2>Factory et uvm_config_db</h2>
+        <p>La Factory permet d'enregistrer des composants et de surcharger dynamiquement des types lors des tests sans modifier le code source existant :</p>
+        <div class="code-container">
+          <div class="code-header">
+            <span>override_example.sv</span>
+            <button class="copy-btn">Copier</button>
+          </div>
+          <pre><code>// Surcharge d'un driver par un driver d'erreur pour un test spécifique
+set_type_override_by_type(my_driver::get_type(), error_driver::get_type());</code></pre>
+        </div>
+      </section>
+
+      <!-- Sequences Section -->
+      <section id="sequences" class="doc-section">
+        <h2>Sequences & Stimuli</h2>
+        <p>Les séquences séparent la génération de scénarios de stimuli du protocole de transmission physique (géré par le driver).</p>
+      </section>
+
+      <!-- TLM Section -->
+      <section id="tlm" class="doc-section">
+        <h2>Ports & Communication TLM</h2>
+        <p>Les interfaces Transaction Level Modeling (TLM) assurent un couplage faible entre le monitor, les agents et le scoreboard grâce à des ports et exports (<code>uvm_analysis_port</code>, <code>uvm_analysis_imp</code>).</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
