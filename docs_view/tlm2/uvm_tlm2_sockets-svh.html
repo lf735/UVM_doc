@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLM Sockets | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="banner-file-link"><code>src/tlm2/uvm_tlm2_sockets.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 56">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 56)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TLM_Sockets" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">TLM Sockets</a></h1><div class=CBody><p>Each uvm_tlm_*_socket class is derived from a corresponding uvm_tlm_*_socket_base class.&nbsp;  The base class contains most of the implementation of the class, The derived classes (in this file) contain the connection semantics.</p><p>Sockets come in several flavors: Each socket is either an initiator or a target, a pass-through or a terminator.&nbsp; Further, any particular socket implements either the blocking interfaces or the nonblocking interfaces.&nbsp; Terminator sockets are used on initiators and targets as well as interconnect components as shown in the figure above.&nbsp; Pass-through sockets are used to enable connections to cross hierarchical boundaries.</p><p>There are eight socket types: the cross of blocking and nonblocking, pass-through and termination, target and initiator</p><p>Sockets are specified based on what they are (IS-A) and what they contains (HAS-A).&nbsp; IS-A and HAS-A are types of object relationships.&nbsp; IS-A refers to the inheritance relationship and HAS-A refers to the ownership relationship.&nbsp; For example if you say D is a B that means that D is derived from base B.&nbsp; If you say object A HAS-A B that means that B is a member of A.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td class=SEntry><a href="#TLM_Sockets" >TLM Sockets</a></td><td class=SDescription>Each uvm_tlm_*_socket class is derived from a corresponding uvm_tlm_*_socket_base class. </td></tr>
+  <!-- index=1 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_tlm_b_initiator_socket" id=link1  >uvm_tlm_b_initiator_socket</a></td><td class=SDescription>IS-A forward port; has no backward path except via the payload contents</td></tr>
+  <!-- index=5 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_tlm_b_target_socket" id=link2  >uvm_tlm_b_target_socket</a></td><td class=SDescription>IS-A forward imp; has no backward path except via the payload contents.</td></tr>
+  <!-- index=9 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_tlm_nb_initiator_socket" id=link3  >uvm_tlm_nb_initiator_socket</a></td><td class=SDescription>IS-A forward port; HAS-A backward imp</td></tr>
+  <!-- index=13 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_tlm_nb_target_socket" id=link4  >uvm_tlm_nb_target_socket</a></td><td class=SDescription>IS-A forward imp; HAS-A backward port</td></tr>
+  <!-- index=17 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_tlm_b_passthrough_initiator_socket" id=link5  >uvm_tlm_b_passthrough_initiator_socket</a></td><td class=SDescription>IS-A forward port;</td></tr>
+  <!-- index=18 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_tlm_b_passthrough_target_socket" id=link6  >uvm_tlm_b_passthrough_target_socket</a></td><td class=SDescription>IS-A forward export;</td></tr>
+  <!-- index=19 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_tlm_nb_passthrough_initiator_socket" id=link7  >uvm_tlm_nb_passthrough_initiator_socket</a></td><td class=SDescription>IS-A forward port; HAS-A backward export</td></tr>
+  <!-- index=20 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_tlm_nb_passthrough_target_socket" id=link8  >uvm_tlm_nb_passthrough_target_socket</a></td><td class=SDescription>IS-A forward export; HAS-A backward port</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_b_initiator_socket" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">uvm_tlm_b_initiator_socket</a></h2><div class=CBody><p>IS-A forward port; has no backward path except via the payload contents</p>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_b_initiator_socket" id=link9  >uvm_tlm_b_initiator_socket</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>IS-A forward port; has no backward path except via the payload contents</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>uvm_tlm_b_initiator_socket_base#(T)</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tlm_b_initiator_socket</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_tlm_b_initiator_socket #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_generic_payload</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_tlm_b_initiator_socket_base #(T)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=2 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_b_initiator_socket.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_b_initiator_socket.new" id=link10  >new</a></td><td class=SDescription>Construct a new instance of this socket</td></tr>
+  <!-- index=4 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_b_initiator_socket.Connect" >Connect</a></td><td class=SDescription>Connect this socket to the specified <a href="#uvm_tlm_b_target_socket" class=LClass id=link11  >uvm_tlm_b_target_socket</a></td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_b_initiator_socket.Methods" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_b_initiator_socket.new" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap width=100%>name,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap width=100%>parent</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Construct a new instance of this socket</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_b_initiator_socket.Connect" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">Connect</a></h3><div class=CBody><p>Connect this socket to the specified <a href="#uvm_tlm_b_target_socket" class=LClass id=link12  >uvm_tlm_b_target_socket</a></p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_b_target_socket" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">uvm_tlm_b_target_socket</a></h2><div class=CBody><p>IS-A forward imp; has no backward path except via the payload contents.</p><p>The component instantiating this socket must implement a b_transport() method with the following signature</p><blockquote><pre>task b_transport(T t, uvm_tlm_time delay);</pre></blockquote>
+
+<!--START_ND_SUMMARY index=5-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=5 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_b_target_socket" id=link13  >uvm_tlm_b_target_socket</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>IS-A forward imp; has no backward path except via the payload contents.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>uvm_tlm_b_target_socket_base#(T)</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tlm_b_target_socket</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_tlm_b_target_socket #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>IMP</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_generic_payload</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_tlm_b_target_socket_base #(T)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=6 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_b_target_socket.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=7 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_b_target_socket.new" id=link14  >new</a></td><td class=SDescription>Construct a new instance of this socket <i>imp</i> is a reference to the class implementing the b_transport() method. </td></tr>
+  <!-- index=8 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_b_target_socket.Connect" >Connect</a></td><td class=SDescription>Connect this socket to the specified <a href="#uvm_tlm_b_initiator_socket" class=LClass id=link15  >uvm_tlm_b_initiator_socket</a></td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_b_target_socket.Methods" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_b_target_socket.new" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap>parent,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>IMP&nbsp;</td>
+      <td class=PParameter nowrap>imp</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> null</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Construct a new instance of this socket <i>imp</i> is a reference to the class implementing the b_transport() method.&nbsp; If not specified, it is assume to be the same as <i>parent</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_b_target_socket.Connect" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">Connect</a></h3><div class=CBody><p>Connect this socket to the specified <a href="#uvm_tlm_b_initiator_socket" class=LClass id=link16  >uvm_tlm_b_initiator_socket</a></p></div></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_nb_initiator_socket" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">uvm_tlm_nb_initiator_socket</a></h2><div class=CBody><p>IS-A forward port; HAS-A backward imp</p><p>The component instantiating this socket must implement a nb_transport_bw() method with the following signature</p><blockquote><pre>function uvm_tlm_sync_e nb_transport_bw(T t, ref P p, input uvm_tlm_time delay);</pre></blockquote>
+
+<!--START_ND_SUMMARY index=9-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=9 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_nb_initiator_socket" id=link17  >uvm_tlm_nb_initiator_socket</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>IS-A forward port; HAS-A backward imp</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>uvm_tlm_nb_initiator_socket_base#(T,P)</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tlm_nb_initiator_socket</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_tlm_nb_initiator_socket #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>IMP</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_generic_payload,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>P</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_phase_e</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_tlm_nb_initiator_socket_base #(T,P)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=10 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_nb_initiator_socket.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=11 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_nb_initiator_socket.new" id=link18  >new</a></td><td class=SDescription>Construct a new instance of this socket <i>imp</i> is a reference to the class implementing the nb_transport_bw() method. </td></tr>
+  <!-- index=12 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_nb_initiator_socket.Connect" >Connect</a></td><td class=SDescription>Connect this socket to the specified <a href="#uvm_tlm_nb_target_socket" class=LClass id=link19  >uvm_tlm_nb_target_socket</a></td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_nb_initiator_socket.Methods" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=11 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_nb_initiator_socket.new" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap>parent,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>IMP&nbsp;</td>
+      <td class=PParameter nowrap>imp</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> null</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Construct a new instance of this socket <i>imp</i> is a reference to the class implementing the nb_transport_bw() method.&nbsp; If not specified, it is assume to be the same as <i>parent</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=12 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_nb_initiator_socket.Connect" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">Connect</a></h3><div class=CBody><p>Connect this socket to the specified <a href="#uvm_tlm_nb_target_socket" class=LClass id=link20  >uvm_tlm_nb_target_socket</a></p></div></div></div>
+
+
+
+
+ <!--CONTENT index=13 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_nb_target_socket" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">uvm_tlm_nb_target_socket</a></h2><div class=CBody><p>IS-A forward imp; HAS-A backward port</p><p>The component instantiating this socket must implement a nb_transport_fw() method with the following signature</p><blockquote><pre>function uvm_tlm_sync_e nb_transport_fw(T t, ref P p, input uvm_tlm_time delay);</pre></blockquote>
+
+<!--START_ND_SUMMARY index=13-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=13 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_nb_target_socket" id=link21  >uvm_tlm_nb_target_socket</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>IS-A forward imp; HAS-A backward port</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>uvm_tlm_nb_target_socket_base#(T,P)</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tlm_nb_target_socket</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_tlm_nb_target_socket #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>IMP</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_generic_payload,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>P</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_phase_e</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_tlm_nb_target_socket_base #(T,P)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=14 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_nb_target_socket.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=15 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_nb_target_socket.new" id=link22  >new</a></td><td class=SDescription>Construct a new instance of this socket <i>imp</i> is a reference to the class implementing the nb_transport_fw() method. </td></tr>
+  <!-- index=16 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_nb_target_socket.connect" id=link23  >connect</a></td><td class=SDescription>Connect this socket to the specified <a href="#uvm_tlm_nb_initiator_socket" class=LClass id=link24  >uvm_tlm_nb_initiator_socket</a></td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=14 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_nb_target_socket.Methods" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=15 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_nb_target_socket.new" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap>parent,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>IMP&nbsp;</td>
+      <td class=PParameter nowrap>imp</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> null</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Construct a new instance of this socket <i>imp</i> is a reference to the class implementing the nb_transport_fw() method.&nbsp; If not specified, it is assume to be the same as <i>parent</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=16 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_nb_target_socket.connect" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">connect</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function void connect(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>this_type&nbsp;</td>
+      <td class=PParameter nowrap width=100%>provider</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Connect this socket to the specified <a href="#uvm_tlm_nb_initiator_socket" class=LClass id=link25  >uvm_tlm_nb_initiator_socket</a></p></div></div></div>
+
+
+
+
+ <!--CONTENT index=17 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_b_passthrough_initiator_socket" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">uvm_tlm_b_passthrough_initiator_socket</a></h2><div class=CBody><p>IS-A forward port;</p>
+
+<!--START_ND_SUMMARY index=17-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=17 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_b_passthrough_initiator_socket" id=link26  >uvm_tlm_b_passthrough_initiator_socket</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>IS-A forward port;</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>uvm_tlm_b_passthrough_initiator_socket_base#(T)</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tlm_b_passthrough_initiator_socket</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_tlm_b_passthrough_initiator_socket #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_generic_payload</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_tlm_b_passthrough_initiator_socket_base #(T)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=18 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_b_passthrough_target_socket" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">uvm_tlm_b_passthrough_target_socket</a></h2><div class=CBody><p>IS-A forward export;</p>
+
+<!--START_ND_SUMMARY index=18-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=18 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_b_passthrough_target_socket" id=link27  >uvm_tlm_b_passthrough_target_socket</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>IS-A forward export;</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>uvm_tlm_b_passthrough_target_socket_base#(T)</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tlm_b_passthrough_target_socket</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_tlm_b_passthrough_target_socket #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_generic_payload</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_tlm_b_passthrough_target_socket_base #(T)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=19 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_nb_passthrough_initiator_socket" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">uvm_tlm_nb_passthrough_initiator_socket</a></h2><div class=CBody><p>IS-A forward port; HAS-A backward export</p>
+
+<!--START_ND_SUMMARY index=19-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=19 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_nb_passthrough_initiator_socket" id=link28  >uvm_tlm_nb_passthrough_initiator_socket</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>IS-A forward port; HAS-A backward export</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>uvm_tlm_nb_passthrough_initiator_socket_base#(T,P)</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tlm_nb_passthrough_initiator_socket</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_tlm_nb_passthrough_initiator_socket #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_generic_payload,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>P</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_phase_e</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_tlm_nb_passthrough_initiator_socket_base #(T,P)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=20 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_nb_passthrough_target_socket" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">uvm_tlm_nb_passthrough_target_socket</a></h2><div class=CBody><p>IS-A forward export; HAS-A backward port</p>
+
+<!--START_ND_SUMMARY index=20-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=20 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_nb_passthrough_target_socket" id=link29  >uvm_tlm_nb_passthrough_target_socket</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>IS-A forward export; HAS-A backward port</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>uvm_tlm_nb_passthrough_target_socket_base#(T,P)</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tlm_nb_passthrough_target_socket</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_tlm_nb_passthrough_target_socket #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_generic_payload,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>P</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_tlm_phase_e</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_tlm_nb_passthrough_target_socket_base #(T,P)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=21 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_nb_passthrough_target_socket.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=22 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_nb_passthrough_target_socket.connect" id=link30  >connect</a></td><td class=SDescription>Connect this socket to the specified <a href="#uvm_tlm_nb_initiator_socket" class=LClass id=link31  >uvm_tlm_nb_initiator_socket</a></td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=21 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_nb_passthrough_target_socket.Methods" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=22 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_nb_passthrough_target_socket.connect" href="../../src_view/tlm2/uvm_tlm2_sockets.svh.html#L56" target="_top" class="src-code-link" data-src-file="tlm2/uvm_tlm2_sockets.svh" data-src-line="56">connect</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function void connect(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>this_type&nbsp;</td>
+      <td class=PParameter nowrap width=100%>provider</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Connect this socket to the specified <a href="#uvm_tlm_nb_initiator_socket" class=LClass id=link32  >uvm_tlm_nb_initiator_socket</a></p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

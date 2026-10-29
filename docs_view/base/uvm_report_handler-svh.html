@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>uvm_report_handler | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="banner-file-link"><code>src/base/uvm_report_handler.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 55">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 55)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_report_handler" href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">uvm_report_handler</a></h1><div class=CBody><p>The uvm_report_handler is the class to which most methods in <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link10  >uvm_report_object</a> delegate.&nbsp; It stores the maximum verbosity, actions, and files that affect the way reports are handled.</p><p>The report handler is not intended for direct use.&nbsp; See <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link11  >uvm_report_object</a> for information on the UVM reporting mechanism.</p><p>The relationship between <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link12  >uvm_report_object</a> (a base class for uvm_component) and uvm_report_handler is typically one to one, but it can be many to one if several uvm_report_objects are configured to use the same uvm_report_handler_object.&nbsp; See <a href="uvm_report_object-svh.html#uvm_report_object.set_report_handler" class=LMethod id=link13  >uvm_report_object::set_report_handler</a>.</p><p>The relationship between uvm_report_handler and <a href="uvm_report_server-svh.html#uvm_report_server" class=LClass id=link14  >uvm_report_server</a> is many to one.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_report_handler" id=link3  >uvm_report_handler</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>The uvm_report_handler is the class to which most methods in <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link4  >uvm_report_object</a> delegate. </td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link1  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link2  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_report_handler</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_report_handler extends uvm_object
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=1 -->
+
+<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_report_handler.new" id=link5  >new</a></td><td class=SDescription>Creates and initializes a new uvm_report_handler object.</td></tr>
+  <!-- index=2 -->
+
+<tr class="SMethod SIndent1"><td class=SEntry><a href="#uvm_report_handler.print" id=link6  >print</a></td><td class=SDescription>The uvm_report_handler implements the <a href="uvm_object-svh.html#uvm_object.do_print" class=LMethod id=link7  >uvm_object::do_print()</a> such that <i>print</i> method provides UVM printer formatted output of the current configuration. </td></tr>
+  <!-- index=3 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_report_handler.Message_Processing" >Message Processing</a></td><td class=SDescription></td></tr>
+  <!-- index=4 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_handler.process_report_message" id=link8  >process_report_message</a></td><td class=SDescription>This is the common handler method used by the four core reporting methods (e.g. </td></tr>
+  <!-- index=5 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_report_handler.Convenience_Methods" >Convenience Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=6 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_handler.format_action" id=link9  >format_action</a></td><td class=SDescription>Returns a string representation of the <i>action</i>, e.g., &ldquo;DISPLAY&rdquo;.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.new" href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> &quot;uvm_report_handler&quot;</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Creates and initializes a new uvm_report_handler object.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.print" href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">print</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void do_print (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_printer&nbsp;</td>
+      <td class=PParameter nowrap width=100%>printer</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>The uvm_report_handler implements the <a href="uvm_object-svh.html#uvm_object.do_print" class=LMethod id=link15  >uvm_object::do_print()</a> such that <i>print</i> method provides UVM printer formatted output of the current configuration.&nbsp;  A snippet of example output is shown here:</p><blockquote><pre>uvm_test_top                uvm_report_handler  -     @555
+  max_verbosity_level       uvm_verbosity       32    UVM_FULL
+  id_verbosities            uvm_pool            3     -
+    [ID1]                   uvm_verbosity       32    UVM_LOW
+  severity_id_verbosities   array               4     -
+    [UVM_INFO:ID4]          int                 32    501
+  id_actions                uvm_pool            2     -
+    [ACT_ID]                uvm_action          32    DISPLAY LOG COUNT
+  severity_actions          array               4     -
+    [UVM_INFO]              uvm_action          32    DISPLAY
+    [UVM_WARNING]           uvm_action          32    DISPLAY RM_RECORD COUNT
+    [UVM_ERROR]             uvm_action          32    DISPLAY COUNT
+    [UVM_FATAL]             uvm_action          32    DISPLAY EXIT
+  default_file_handle       int                 32    'h1</pre></blockquote></div></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.Message_Processing" href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">Message Processing</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.process_report_message" href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">process_report_message</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void process_report_message(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_report_message&nbsp;</td>
+      <td class=PParameter nowrap width=100%>report_message</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>This is the common handler method used by the four core reporting methods (e.g.&nbsp; <a href="uvm_globals-svh.html#uvm_report_error" class=LMethod id=link16  >uvm_report_error</a>) in <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link17  >uvm_report_object</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.Convenience_Methods" href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">Convenience Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.format_action" href="../../src_view/base/uvm_report_handler.svh.html#L55" target="_top" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">format_action</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>static function string format_action(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_action&nbsp;</td>
+      <td class=PParameter nowrap width=100%>action</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Returns a string representation of the <i>action</i>, e.g., &ldquo;DISPLAY&rdquo;.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

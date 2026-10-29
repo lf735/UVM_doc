@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explicit Register Predictor | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="banner-file-link"><code>src/reg/uvm_reg_predictor.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 34">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 34)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Explicit_Register_Predictor" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">Explicit Register Predictor</a></h1><div class=CBody><p>The <a href="#uvm_reg_predictor" class=LClass id=link2  >uvm_reg_predictor</a> class defines a predictor component, which is used to update the register model&rsquo;s mirror values based on transactions explicitly observed on a physical bus.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#Explicit_Register_Predictor" >Explicit Register Predictor</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>The <a href="#uvm_reg_predictor" class=LClass id=link1  >uvm_reg_predictor</a> class defines a predictor component, which is used to update the register model&rsquo;s mirror values based on transactions explicitly observed on a physical bus.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_predictor" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">uvm_reg_predictor</a></h2><div class=CBody><p>Updates the register model mirror based on observed bus transactions</p><p>This class converts observed bus transactions of type <i>BUSTYPE</i> to generic registers transactions, determines the register being accessed based on the bus address, then updates the register&rsquo;s mirror value with the observed bus data, subject to the register&rsquo;s access mode.&nbsp; See <a href="uvm_reg-svh.html#uvm_reg.predict" class=LMethod id=link17  >uvm_reg::predict</a> for details.</p><p>Memories can be large, so their accesses are not predicted.</p>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_reg_predictor" id=link7  >uvm_reg_predictor</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Updates the register model mirror based on observed bus transactions</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_misc-svh.html#uvm_void" class=LClass id=link3  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link4  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link5  >uvm_report_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link6  >uvm_component</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_reg_predictor</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_reg_predictor #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>BUSTYPE</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_component</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=2 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_predictor.Variables" >Variables</a></td><td class=SDescription></td></tr>
+  <!-- index=3 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_predictor.bus_in" id=link8  >bus_in</a></td><td class=SDescription>Observed bus transactions of type <i>BUSTYPE</i> are received from this port and processed.</td></tr>
+  <!-- index=4 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_predictor.reg_ap" id=link9  >reg_ap</a></td><td class=SDescription>Analysis output port that publishes <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link10  >uvm_reg_item</a> transactions converted from bus transactions received on <i>bus_in</i>.</td></tr>
+  <!-- index=5 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_predictor.map" id=link11  >map</a></td><td class=SDescription>The map used to convert a bus address to the corresponding register or memory handle. </td></tr>
+  <!-- index=6 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_predictor.adapter" id=link12  >adapter</a></td><td class=SDescription>The adapter used to convey the parameters of a bus operation in terms of a canonical <a href="uvm_reg_item-svh.html#uvm_reg_bus_op" class=LClass id=link13  >uvm_reg_bus_op</a> datum. </td></tr>
+  <!-- index=7 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_predictor.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=8 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_predictor.new" id=link14  >new</a></td><td class=SDescription>Create a new instance of this type, giving it the optional <i>name</i> and <i>parent</i>.</td></tr>
+  <!-- index=9 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_predictor.pre_predict" id=link15  >pre_predict</a></td><td class=SDescription>Override this method to change the value or re-direct the target register</td></tr>
+  <!-- index=10 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_predictor.check_phase" id=link16  >check_phase</a></td><td class=SDescription>Checks that no pending register transactions are still queued.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.Variables" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">Variables</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.bus_in" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">bus_in</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>uvm_analysis_imp #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>BUSTYPE,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_predictor&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(BUSTYPE)</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>) bus_in</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Observed bus transactions of type <i>BUSTYPE</i> are received from this port and processed.</p><p>For each incoming transaction, the predictor will attempt to get the register or memory handle corresponding to the observed bus address.</p><p>If there is a match, the predictor calls the register or memory&rsquo;s predict method, passing in the observed bus data.&nbsp; The register or memory mirror will be updated with this data, subject to its configured access behavior--RW, RO, WO, etc.&nbsp; The predictor will also convert the bus transaction to a generic <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link18  >uvm_reg_item</a> and send it out the <i>reg_ap</i> analysis port.</p><p>If the register is wider than the bus, the predictor will collect the multiple bus transactions needed to determine the value being read or written.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.reg_ap" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">reg_ap</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=2>uvm_analysis_port #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_reg_item</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=2>) reg_ap</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Analysis output port that publishes <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link19  >uvm_reg_item</a> transactions converted from bus transactions received on <i>bus_in</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.map" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">map</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_map map
+  </td></tr></table></blockquote><div class=CBody><p>The map used to convert a bus address to the corresponding register or memory handle.&nbsp; Must be configured before the run phase.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.adapter" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">adapter</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_adapter adapter
+  </td></tr></table></blockquote><div class=CBody><p>The adapter used to convey the parameters of a bus operation in terms of a canonical <a href="uvm_reg_item-svh.html#uvm_reg_bus_op" class=LClass id=link20  >uvm_reg_bus_op</a> datum.&nbsp; The <a href="uvm_reg_adapter-svh.html#uvm_reg_adapter" class=LClass id=link21  >uvm_reg_adapter</a> must be configured before the run phase.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.Methods" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.new" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap width=100%>name,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap width=100%>parent</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Create a new instance of this type, giving it the optional <i>name</i> and <i>parent</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.pre_predict" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">pre_predict</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void pre_predict(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rw</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Override this method to change the value or re-direct the target register</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.check_phase" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">check_phase</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void check_phase(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
+      <td class=PParameter nowrap width=100%>phase</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Checks that no pending register transactions are still queued.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

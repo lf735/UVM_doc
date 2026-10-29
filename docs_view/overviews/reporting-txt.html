@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporting Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CGroup"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Reporting_Classes" href="#">Reporting Classes</a></h1><div class=CBody><p>The reporting classes provide a facility for issuing reports with consistent formatting.&nbsp; Users can configure what actions to take and what files to send output to based on report severity, ID, or both severity and ID.&nbsp; Users can also filter messages based on their verbosity settings.</p><p>The primary interface to the UVM reporting facility is the <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link1  >uvm_report_object</a> from which all <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link2  >uvm_components</a> extend.&nbsp; The uvm_report_object delegates most tasks to its internal <a href="../base/uvm_report_handler-svh.html#uvm_report_handler" class=LClass id=link3  >uvm_report_handler</a>.&nbsp; If the report handler determines the report is not filtered based the configured verbosity setting, it sends the report to the central <a href="../base/uvm_report_server-svh.html#uvm_report_server" class=LClass id=link4  >uvm_report_server</a> for formatting and processing.</p><img src="../../images/uvm_ref_reporting.gif" width="433" height="232">
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#Reporting_Classes" >Reporting Classes</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>The reporting classes provide a facility for issuing reports with consistent formatting. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

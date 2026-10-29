@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLM Interfaces | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TLM_Interfaces" href="#">TLM Interfaces</a></h1><div class=CBody><p>The UVM TLM library defines several abstract, transaction-level interfaces and the ports and exports that facilitate their use.&nbsp; Each TLM interface consists of one or more methods used to transport data, typically whole transactions (objects) at a time.&nbsp; Component designs that use TLM ports and exports to communicate are inherently more reusable, interoperable, and modular.</p><p>The UVM TLM library specifies the required behavior (semantic) of each interface method.&nbsp; Classes (components) that implement a TLM interface must meet the specified semantic.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#TLM_Interfaces" >TLM Interfaces</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>The UVM TLM library defines several abstract, transaction-level interfaces and the ports and exports that facilitate their use. </td></tr>
+  <!-- index=1 -->
+
+<tr class="SGeneric SIndent1 SMarked"><td class=SEntry><a href="#TLM1" >TLM1</a></td><td class=SDescription>The TLM1 ports provide blocking and non-blocking pass-by-value transaction-level interfaces. </td></tr>
+  <!-- index=2 -->
+
+<tr class="SGeneric SIndent1"><td class=SEntry><a href="#TLM2" >TLM2</a></td><td class=SDescription>The TLM2 sockets provide blocking and non-blocking transaction-level interfaces with well-defined completion semantics.</td></tr>
+  <!-- index=3 -->
+
+<tr class="SGeneric SIndent1 SMarked"><td class=SEntry><a href="#Sequencer_Port" >Sequencer Port</a></td><td class=SDescription>A push or pull port, with well-defined completion semantics. </td></tr>
+  <!-- index=4 -->
+
+<tr class="SGeneric SIndent1"><td class=SEntry><a href="#Analysis" >Analysis</a></td><td class=SDescription>The <i>analysis</i> interface is used to perform non-blocking broadcasts of transactions to connected components. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="TLM1" href="#">TLM1</a></h3><div class=CBody><p>The TLM1 ports provide blocking and non-blocking pass-by-value transaction-level interfaces.&nbsp; The semantics of these interfaces are limited to message passing.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="TLM2" href="#">TLM2</a></h3><div class=CBody><p>The TLM2 sockets provide blocking and non-blocking transaction-level interfaces with well-defined completion semantics.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="Sequencer_Port" href="#">Sequencer Port</a></h3><div class=CBody><p>A push or pull port, with well-defined completion semantics.&nbsp; It is used to connect sequencers with drivers and layering sequences.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="Analysis" href="#">Analysis</a></h3><div class=CBody><p>The <i>analysis</i> interface is used to perform non-blocking broadcasts of transactions to connected components.&nbsp;  It is typically used by such components as monitors to publish transactions observed on a bus to its subscribers, which are typically scoreboards and response/coverage collectors.</p><img src="../../images/uvm_ref_tlm_analysis_if.gif" width="117" height="67"></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

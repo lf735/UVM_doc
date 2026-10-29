@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factory Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Factory_Classes" href="#">Factory Classes</a></h1><div class=CBody><p>As the name implies, the <a href="../base/uvm_factory-svh.html#uvm_factory" class=LClass id=link2  >uvm_factory</a> is used to manufacture (create) UVM objects and components.&nbsp; Only one instance of the factory is present in a given simulation.</p><p>User-defined object and component types are registered with the factory via typedef or macro invocation, as explained in <a href="../base/uvm_factory-svh.html#uvm_default_factory.Usage" class=LGroup id=link3  >uvm_default_factory::Usage</a>.&nbsp; The factory generates and stores lightweight proxies to the user-defined objects and components: <a href="../base/uvm_registry-svh.html#uvm_object_registry#(T,Tname)" class=LClass id=link4  >uvm_object_registry #(T,Tname)</a> for objects and <a href="../base/uvm_registry-svh.html#uvm_component_registry#(T,Tname)" class=LClass id=link5  >uvm_component_registry #(T,Tname)</a> for components.&nbsp;  Each proxy only knows how to create an instance of the object or component it represents, and so is very efficient in terms of memory usage.</p><p>When the user requests a new object or component from the factory (e.g.&nbsp; <a href="../base/uvm_factory-svh.html#uvm_factory.create_object_by_type" class=LMethod id=link6  >uvm_factory::create_object_by_type</a>), the factory will determine what type of object to create based on its configuration, then ask that type&rsquo;s proxy to create an instance of the type, which is returned to the user.</p><img src="../../images/uvm_ref_factory.gif" width="472" height="131">
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#Factory_Classes" >Factory Classes</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>As the name implies, the <a href="../base/uvm_factory-svh.html#uvm_factory" class=LClass id=link1  >uvm_factory</a> is used to manufacture (create) UVM objects and components. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

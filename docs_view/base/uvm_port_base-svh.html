@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Port Base Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="banner-file-link"><code>src/base/uvm_port_base.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 51">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 51)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Port_Base_Classes" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">Port Base Classes</a></h1><div class=CBody>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td class=SEntry><a href="#Port_Base_Classes" >Port Base Classes</a></td><td class=SDescription></td></tr>
+  <!-- index=1 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_port_component_base" id=link1  >uvm_port_component_base</a></td><td class=SDescription>This class defines an interface for obtaining a port&rsquo;s connectivity lists after or during the end_of_elaboration phase. </td></tr>
+  <!-- index=8 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_port_component#(PORT)" id=link2  >uvm_port_component #(PORT)</a></td><td class=SDescription>See description of <a href="#uvm_port_component_base" class=LClass id=link3  >uvm_port_component_base</a> for information about this class</td></tr>
+  <!-- index=11 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_port_base#(IF)" id=link4  >uvm_port_base #(IF)</a></td><td class=SDescription>Transaction-level communication between components is handled via its ports, exports, and imps, all of which derive from this class.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_port_component_base" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">uvm_port_component_base</a></h2><div class=CBody><p>This class defines an interface for obtaining a port&rsquo;s connectivity lists after or during the end_of_elaboration phase.&nbsp;  The sub-class, <a href="#uvm_port_component#(PORT)" class=LClass id=link15  >uvm_port_component #(PORT)</a>, implements this interface.</p><p>The connectivity lists are returned in the form of handles to objects of this type.&nbsp; This allowing traversal of any port&rsquo;s fan-out and fan-in network through recursive calls to <a href="#uvm_port_component_base.get_connected_to" class=LMethod id=link16  >get_connected_to</a> and <a href="#uvm_port_component_base.get_provided_to" class=LMethod id=link17  >get_provided_to</a>.&nbsp; Each port&rsquo;s full name and type name can be retrieved using <i>get_full_name</i> and <i>get_type_name</i> methods inherited from <a href="uvm_component-svh.html#uvm_component" class=LClass id=link18  >uvm_component</a>.</p>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_port_component_base" id=link9  >uvm_port_component_base</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This class defines an interface for obtaining a port&rsquo;s connectivity lists after or during the end_of_elaboration phase. </td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link5  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link6  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link7  >uvm_report_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_component-svh.html#uvm_component" class=LClass id=link8  >uvm_component</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_port_component_base</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_port_component_base extends uvm_component
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=2 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_port_component_base.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_component_base.get_connected_to" id=link10  >get_connected_to</a></td><td class=SDescription>For a port or export type, this function fills <i>list</i> with all of the ports, exports and implementations that this port is connected to.</td></tr>
+  <!-- index=4 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_component_base.get_provided_to" id=link11  >get_provided_to</a></td><td class=SDescription>For an implementation or export type, this function fills <i>list</i> with all of the ports, exports and implementations that this port is provides its implementation to.</td></tr>
+  <!-- index=5 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_component_base.is_port" id=link12  >is_port</a></td><td class=SDescription></td></tr>
+  <!-- index=6 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_component_base.is_export" id=link13  >is_export</a></td><td class=SDescription></td></tr>
+  <!-- index=7 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_component_base.is_imp" id=link14  >is_imp</a></td><td class=SDescription>These function determine the type of port. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_port_component_base.Methods" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_component_base.get_connected_to" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_connected_to</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=4>pure virtual function void get_connected_to(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
+      <td class=PType nowrap>uvm_port_list&nbsp;</td>
+      <td class=PParameter nowrap width=100%>list</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=4>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>For a port or export type, this function fills <i>list</i> with all of the ports, exports and implementations that this port is connected to.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_component_base.get_provided_to" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_provided_to</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=4>pure virtual function void get_provided_to(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
+      <td class=PType nowrap>uvm_port_list&nbsp;</td>
+      <td class=PParameter nowrap width=100%>list</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=4>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>For an implementation or export type, this function fills <i>list</i> with all of the ports, exports and implementations that this port is provides its implementation to.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_component_base.is_port" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">is_port</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>pure virtual function bit is_port()
+  </td></tr></table></blockquote><div class=CBody></div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_component_base.is_export" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">is_export</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>pure virtual function bit is_export()
+  </td></tr></table></blockquote><div class=CBody></div></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_component_base.is_imp" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">is_imp</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>pure virtual function bit is_imp()
+  </td></tr></table></blockquote><div class=CBody><p>These function determine the type of port.&nbsp; The functions are mutually exclusive; one will return 1 and the other two will return 0.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_port_component#(PORT)" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">uvm_port_component #(PORT)</a></h2><div class=CBody><p>See description of <a href="#uvm_port_component_base" class=LClass id=link27  >uvm_port_component_base</a> for information about this class</p>
+
+<!--START_ND_SUMMARY index=8-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=8 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_port_component#(PORT)" id=link24  >uvm_port_component #(PORT)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>See description of <a href="#uvm_port_component_base" class=LClass id=link25  >uvm_port_component_base</a> for information about this class</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link19  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link20  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link21  >uvm_report_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_component-svh.html#uvm_component" class=LClass id=link22  >uvm_component</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="#uvm_port_component_base" class=LClass id=link23  >uvm_port_component_base</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_port_component#(PORT)</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_port_component #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>PORT</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_object</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_port_component_base</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=9 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_port_component#(PORT).Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=10 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_component#(PORT).get_port" id=link26  >get_port</a></td><td class=SDescription>Retrieve the actual port object that this proxy refers to.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_port_component#(PORT).Methods" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_component#(PORT).get_port" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_port</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function PORT get_port()
+  </td></tr></table></blockquote><div class=CBody><p>Retrieve the actual port object that this proxy refers to.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=11 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_port_base#(IF)" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">uvm_port_base #(IF)</a></h2><div class=CBody><p>Transaction-level communication between components is handled via its ports, exports, and imps, all of which derive from this class.</p><p>The uvm_port_base extends IF, which is the type of the interface implemented by derived port, export, or implementation.&nbsp; IF is also a type parameter to uvm_port_base.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>IF</td><td class=CDLDescription>The interface type implemented by the subtype to this base port</td></tr></table><p>The UVM provides a complete set of ports, exports, and imps for the OSCI- standard TLM interfaces.&nbsp; They can be found in the ../src/tlm/ directory.&nbsp; For the TLM interfaces, the IF parameter is always <a href="../tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2)" class=LClass id=link47  >uvm_tlm_if_base #(T1,T2)</a>.</p><p>Just before <a href="uvm_component-svh.html#uvm_component.end_of_elaboration_phase" class=LMethod id=link48  >uvm_component::end_of_elaboration_phase</a>, an internal <a href="uvm_component-svh.html#uvm_component.resolve_bindings" class=LMethod id=link49  >uvm_component::resolve_bindings</a> process occurs, after which each port and export holds a list of all imps connected to it via hierarchical connections to other ports and exports.&nbsp; In effect, we are collapsing the port&rsquo;s fanout, which can span several levels up and down the component hierarchy, into a single array held local to the port.&nbsp; Once the list is determined, the port&rsquo;s min and max connection settings can be checked and enforced.</p><p>uvm_port_base possesses the properties of components in that they have a hierarchical instance path and parent.&nbsp; Because SystemVerilog does not support multiple inheritance, uvm_port_base cannot extend both the interface it implements and <a href="uvm_component-svh.html#uvm_component" class=LClass id=link50  >uvm_component</a>.&nbsp; Thus, uvm_port_base contains a local instance of uvm_component, to which it delegates such commands as get_name, get_full_name, and get_parent.</p>
+
+<!--START_ND_SUMMARY index=11-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=11 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_port_base#(IF)" id=link28  >uvm_port_base #(IF)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Transaction-level communication between components is handled via its ports, exports, and imps, all of which derive from this class.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry>IF</div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_port_base#(IF)</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>virtual class uvm_port_base #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>IF</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>uvm_void</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends IF</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=12 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_port_base#(IF).Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=13 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).new" id=link29  >new</a></td><td class=SDescription>The first two arguments are the normal <a href="uvm_component-svh.html#uvm_component" class=LClass id=link30  >uvm_component</a> constructor arguments.</td></tr>
+  <!-- index=14 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).get_name" id=link31  >get_name</a></td><td class=SDescription>Returns the leaf name of this port.</td></tr>
+  <!-- index=15 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).get_full_name" id=link32  >get_full_name</a></td><td class=SDescription>Returns the full hierarchical name of this port.</td></tr>
+  <!-- index=16 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).get_parent" id=link33  >get_parent</a></td><td class=SDescription>Returns the handle to this port&rsquo;s parent, or <i>null</i> if it has no parent.</td></tr>
+  <!-- index=17 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).get_comp" id=link34  >get_comp</a></td><td class=SDescription>Returns a handle to the internal proxy component representing this port.</td></tr>
+  <!-- index=18 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).get_type_name" id=link35  >get_type_name</a></td><td class=SDescription>Returns the type name to this port. </td></tr>
+  <!-- index=19 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).min_size" >min_size</a></td><td class=SDescription>Returns the minimum number of implementation ports that must be connected to this port by the end_of_elaboration phase.</td></tr>
+  <!-- index=20 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).max_size" >max_size</a></td><td class=SDescription>Returns the maximum number of implementation ports that must be connected to this port by the end_of_elaboration phase.</td></tr>
+  <!-- index=21 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).is_unbounded" id=link36  >is_unbounded</a></td><td class=SDescription>Returns 1 if this port has no maximum on the number of implementation ports this port can connect to. </td></tr>
+  <!-- index=22 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).is_port" id=link37  >is_port</a></td><td class=SDescription></td></tr>
+  <!-- index=23 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).is_export" id=link38  >is_export</a></td><td class=SDescription></td></tr>
+  <!-- index=24 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).is_imp" id=link39  >is_imp</a></td><td class=SDescription>Returns 1 if this port is of the type given by the method name, 0 otherwise.</td></tr>
+  <!-- index=25 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).size" id=link40  >size</a></td><td class=SDescription>Gets the number of implementation ports connected to this port. </td></tr>
+  <!-- index=26 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).set_default_index" id=link41  >set_default_index</a></td><td class=SDescription>Sets the default implementation port to use when calling an interface method. </td></tr>
+  <!-- index=27 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).connect" id=link42  >connect</a></td><td class=SDescription>Connects this port to the given <i>provider</i> port. </td></tr>
+  <!-- index=28 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).debug_connected_to" id=link43  >debug_connected_to</a></td><td class=SDescription>The <i>debug_connected_to</i> method outputs a visual text display of the port/export/imp network to which this port connects (i.e., the port&rsquo;s fanout).</td></tr>
+  <!-- index=29 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).debug_provided_to" id=link44  >debug_provided_to</a></td><td class=SDescription>The <i>debug_provided_to</i> method outputs a visual display of the port/export network that ultimately connect to this port (i.e., the port&rsquo;s fanin).</td></tr>
+  <!-- index=30 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_port_base#(IF).resolve_bindings" id=link45  >resolve_bindings</a></td><td class=SDescription>This callback is called just before entering the end_of_elaboration phase. </td></tr>
+  <!-- index=31 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_port_base#(IF).get_if" id=link46  >get_if</a></td><td class=SDescription>Returns the implementation (imp) port at the given index from the array of imps this port is connected to. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=12 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).Methods" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=13 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).new" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap>parent,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_port_type_e&nbsp;</td>
+      <td class=PParameter nowrap>port_type,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap>min_size</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>0,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap>max_size</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>1</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>The first two arguments are the normal <a href="uvm_component-svh.html#uvm_component" class=LClass id=link51  >uvm_component</a> constructor arguments.</p><p>The <i>port_type</i> can be one of <a href="uvm_object_globals-svh.html#UVM_PORT" class=LConstant id=link52  >UVM_PORT</a>, <a href="uvm_object_globals-svh.html#UVM_EXPORT" class=LConstant id=link53  >UVM_EXPORT</a>, or <a href="uvm_object_globals-svh.html#UVM_IMPLEMENTATION" class=LConstant id=link54  >UVM_IMPLEMENTATION</a>.</p><p>The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of implementation (imp) ports that must be connected to this port base by the end of elaboration.&nbsp; Setting <i>max_size</i> to <i>UVM_UNBOUNDED_CONNECTIONS</i> sets no maximum, i.e., an unlimited number of connections are allowed.</p><p>By default, the parent/child relationship of any port being connected to this port is not checked.&nbsp; This can be overridden by configuring the port&rsquo;s <i>check_connection_relationships</i> bit via <i>uvm_config_int::set()</i>.&nbsp; See <a href="#uvm_port_base#(IF).connect" class=LMethod id=link55  >connect</a> for more information.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=14 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).get_name" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_name</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function string get_name()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the leaf name of this port.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=15 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).get_full_name" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_full_name</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_full_name()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the full hierarchical name of this port.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=16 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).get_parent" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_parent</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function uvm_component get_parent()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the handle to this port&rsquo;s parent, or <i>null</i> if it has no parent.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=17 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).get_comp" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_comp</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function uvm_port_component_base get_comp()
+  </td></tr></table></blockquote><div class=CBody><p>Returns a handle to the internal proxy component representing this port.</p><p>Ports are considered components.&nbsp; However, they do not inherit <a href="uvm_component-svh.html#uvm_component" class=LClass id=link56  >uvm_component</a>.&nbsp; Instead, they contain an instance of <a href="#uvm_port_component#(PORT)" class=LClass id=link57  >uvm_port_component #(PORT)</a> that serves as a proxy to this port.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=18 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).get_type_name" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_type_name</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_type_name()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the type name to this port.&nbsp; Derived port classes must implement this method to return the concrete type.&nbsp; Otherwise, only a generic &ldquo;uvm_port&rdquo;, &ldquo;uvm_export&rdquo; or &ldquo;uvm_implementation&rdquo; is returned.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=19 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).min_size" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">min_size</a></h3><div class=CBody><p>Returns the minimum number of implementation ports that must be connected to this port by the end_of_elaboration phase.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=20 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).max_size" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">max_size</a></h3><div class=CBody><p>Returns the maximum number of implementation ports that must be connected to this port by the end_of_elaboration phase.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=21 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).is_unbounded" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">is_unbounded</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_unbounded ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns 1 if this port has no maximum on the number of implementation ports this port can connect to.&nbsp; A port is unbounded when the <i>max_size</i> argument in the constructor is specified as <i>UVM_UNBOUNDED_CONNECTIONS</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=22 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).is_port" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">is_port</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_port ()
+  </td></tr></table></blockquote><div class=CBody></div></div></div>
+
+
+
+
+ <!--CONTENT index=23 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).is_export" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">is_export</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_export ()
+  </td></tr></table></blockquote><div class=CBody></div></div></div>
+
+
+
+
+ <!--CONTENT index=24 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).is_imp" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">is_imp</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_imp ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns 1 if this port is of the type given by the method name, 0 otherwise.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=25 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).size" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">size</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function int size ()
+  </td></tr></table></blockquote><div class=CBody><p>Gets the number of implementation ports connected to this port.&nbsp; The value is not valid before the end_of_elaboration phase, as port connections have not yet been resolved.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=26 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).set_default_index" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">set_default_index</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function void set_default_index (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap width=100%>index</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Sets the default implementation port to use when calling an interface method.&nbsp; This method should only be called on UVM_EXPORT types.&nbsp; The value must not be set before the end_of_elaboration phase, when port connections have not yet been resolved.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=27 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).connect" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">connect</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void connect (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>this_type&nbsp;</td>
+      <td class=PParameter nowrap width=100%>provider</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Connects this port to the given <i>provider</i> port.&nbsp; The ports must be compatible in the following ways</p><ul><li>Their type parameters must match</li><li>The <i>provider</i>&rsquo;s interface type (blocking, non-blocking, analysis, etc.) must be compatible.&nbsp; Each port has an interface mask that encodes the interface(s) it supports.&nbsp; If the bitwise AND of these masks is equal to the this port&rsquo;s mask, the requirement is met and the ports are compatible.&nbsp; For example, a uvm_blocking_put_port #(T) is compatible with a uvm_put_export #(T) and uvm_blocking_put_imp #(T) because the export and imp provide the interface required by the uvm_blocking_put_port.</li><li>Ports of type <a href="uvm_object_globals-svh.html#UVM_EXPORT" class=LConstant id=link58  >UVM_EXPORT</a> can only connect to other exports or imps.</li><li>Ports of type <a href="uvm_object_globals-svh.html#UVM_IMPLEMENTATION" class=LConstant id=link59  >UVM_IMPLEMENTATION</a> cannot be connected, as they are bound to the component that implements the interface at time of construction.</li></ul><p>In addition to type-compatibility checks, the relationship between this port and the <i>provider</i> port will also be checked if the port&rsquo;s <i>check_connection_relationships</i> configuration has been set.&nbsp; (See <a href="#uvm_port_base#(IF).new" class=LMethod id=link60  >new</a> for more information.)</p><h4 class=CHeading>Relationships, when enabled, are checked are as follows</h4><ul><li>If this port is a UVM_PORT type, the <i>provider</i> can be a parent port, or a sibling export or implementation port.</li><li>If this port is a <a href="uvm_object_globals-svh.html#UVM_EXPORT" class=LConstant id=link61  >UVM_EXPORT</a> type, the provider can be a child export or implementation port.</li></ul><p>If any relationship check is violated, a warning is issued.</p><p>Note- the <a href="uvm_component-svh.html#uvm_component.connect_phase" class=LMethod id=link62  >uvm_component::connect_phase</a> method is related to but not the same as this method.&nbsp; The component&rsquo;s <i>connect</i> method is a phase callback where port&rsquo;s <i>connect</i> method calls are made.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=28 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).debug_connected_to" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">debug_connected_to</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function void debug_connected_to (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap>level</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>0,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap>max_level</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>-1</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>The <i>debug_connected_to</i> method outputs a visual text display of the port/export/imp network to which this port connects (i.e., the port&rsquo;s fanout).</p><p>This method must not be called before the end_of_elaboration phase, as port connections are not resolved until then.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=29 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).debug_provided_to" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">debug_provided_to</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function void debug_provided_to (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap>level</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>0,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap>max_level</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>-1</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>The <i>debug_provided_to</i> method outputs a visual display of the port/export network that ultimately connect to this port (i.e., the port&rsquo;s fanin).</p><p>This method must not be called before the end_of_elaboration phase, as port connections are not resolved until then.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=30 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).resolve_bindings" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">resolve_bindings</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void resolve_bindings()
+  </td></tr></table></blockquote><div class=CBody><p>This callback is called just before entering the end_of_elaboration phase.&nbsp; It recurses through each port&rsquo;s fanout to determine all the imp destinations.&nbsp; It then checks against the required min and max connections.&nbsp; After resolution, <a href="#uvm_port_base#(IF).size" class=LMethod id=link63  >size</a> returns a valid value and <a href="#uvm_port_base#(IF).get_if" class=LMethod id=link64  >get_if</a> can be used to access a particular imp.</p><p>This method is automatically called just before the start of the end_of_elaboration phase.&nbsp; Users should not need to call it directly.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=31 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_port_base#(IF).get_if" href="../../src_view/base/uvm_port_base.svh.html#L51" target="_top" class="src-code-link" data-src-file="base/uvm_port_base.svh" data-src-line="51">get_if</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=2>function uvm_port_base #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>IF</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=2>) get_if(int index=0)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Returns the implementation (imp) port at the given index from the array of imps this port is connected to.&nbsp; Use <a href="#uvm_port_base#(IF).size" class=LMethod id=link65  >size</a> to get the valid range for index.&nbsp; This method can only be called at the end_of_elaboration phase or after, as port connections are not resolved before then.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

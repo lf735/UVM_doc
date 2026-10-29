@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>uvm_transaction | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="banner-file-link"><code>src/base/uvm_transaction.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 124">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 124)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_transaction" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">uvm_transaction</a></h1><div class=CBody><p>The uvm_transaction class is the root base class for UVM transactions.&nbsp; Inheriting all the methods of <a href="uvm_object-svh.html#uvm_object" class=LClass id=link40  >uvm_object</a>, uvm_transaction adds a timing and recording interface.</p><p>This class provides timestamp properties, notification events, and transaction recording support.</p><p>Use of this class as a base for user-defined transactions is deprecated.&nbsp; Its subtype, <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link41  >uvm_sequence_item</a>, shall be used as the base class for all user-defined transaction types.</p><p>The intended use of this API is via a <a href="../comps/uvm_driver-svh.html#uvm_driver#(REQ,RSP)" class=LClass id=link42  >uvm_driver #(REQ,RSP)</a> to call <a href="uvm_component-svh.html#uvm_component.accept_tr" class=LMethod id=link43  >uvm_component::accept_tr</a>, <a href="uvm_component-svh.html#uvm_component.begin_tr" class=LMethod id=link44  >uvm_component::begin_tr</a>, and <a href="uvm_component-svh.html#uvm_component.end_tr" class=LMethod id=link45  >uvm_component::end_tr</a> during the course of sequence item execution.&nbsp; These methods in the component base class will call into the corresponding methods in this class to set the corresponding timestamps (<i>accept_time</i>, <i>begin_time</i>, and <i>end_time</i>), trigger the corresponding event (<a href="#uvm_transaction.begin_event" class=LVariable id=link46  >begin_event</a> and <a href="#uvm_transaction.end_event" class=LVariable id=link47  >end_event</a>, and, if enabled, record the transaction contents to a vendor-specific transaction database.</p><p>Note that get_next_item/item_done when called on a uvm_seq_item_pull_port will automatically trigger the begin_event and end_events via calls to begin_tr and end_tr.&nbsp; While convenient, it is generally the responsibility of drivers to mark a transaction&rsquo;s progress during execution.&nbsp;  To allow the driver or layering sequence to control sequence item timestamps, events, and recording, you must call <a href="../tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).disable_auto_item_recording" class=LMethod id=link48  >uvm_sqr_if_base#(REQ,RSP)::disable_auto_item_recording</a> at the beginning of the driver&rsquo;s <i>run_phase</i> task.</p><p>Users may also use the transaction&rsquo;s event pool, <a href="#uvm_transaction.events" class=LVariable id=link49  >events</a>, to define custom events for the driver to trigger and the sequences to wait on.&nbsp; Any in-between events such as marking the beginning of the address and data phases of transaction execution could be implemented via the <a href="#uvm_transaction.events" class=LVariable id=link50  >events</a> pool.</p><p>In pipelined protocols, the driver may release a sequence (return from finish_item() or it&rsquo;s `uvm_do macro) before the item has been completed.&nbsp; If the driver uses the begin_tr/end_tr API in uvm_component, the sequence can wait on the item&rsquo;s <a href="#uvm_transaction.end_event" class=LVariable id=link51  >end_event</a> to block until the item was fully executed, as in the following example.</p><blockquote><pre>task uvm_execute(item, ...);
+    // can use the `uvm_do macros as well
+    start_item(item);
+    item.randomize();
+    finish_item(item);
+    item.end_event.wait_on();
+    // get_response(rsp, item.get_transaction_id()); //if needed
+endtask</pre></blockquote><p>A simple two-stage pipeline driver that can execute address and data phases concurrently might be implemented as follows:</p><blockquote><pre>task run();
+    // this driver supports a two-deep pipeline
+    fork
+      do_item();
+      do_item();
+    join
+endtask
+
+
+task do_item();
+
+  forever begin
+    mbus_item req;
+
+    lock.get();
+
+    seq_item_port.get(req); // Completes the sequencer-driver handshake
+
+    accept_tr(req);
+
+      // request bus, wait for grant, etc.
+
+    begin_tr(req);
+
+      // execute address phase
+
+    // allows next transaction to begin address phase
+    lock.put();
+
+      // execute data phase
+      // (may trigger custom &quot;data_phase&quot; event here)
+
+    end_tr(req);
+
+  end
+
+endtask: do_item</pre></blockquote>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_transaction" id=link3  >uvm_transaction</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>The uvm_transaction class is the root base class for UVM transactions. </td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link1  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link2  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_transaction</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_transaction extends uvm_object
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=1 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_transaction.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=2 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.new" id=link4  >new</a></td><td class=SDescription>Creates a new transaction object. </td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.accept_tr" id=link5  >accept_tr</a></td><td class=SDescription>Calling <i>accept_tr</i> indicates that the transaction item has been received by a consumer component. </td></tr>
+  <!-- index=4 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.do_accept_tr" id=link6  >do_accept_tr</a></td><td class=SDescription>This user-definable callback is called by <a href="#uvm_transaction.accept_tr" class=LMethod id=link7  >accept_tr</a> just before the accept event is triggered. </td></tr>
+  <!-- index=5 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.begin_tr" id=link8  >begin_tr</a></td><td class=SDescription>This function indicates that the transaction has been started and is not the child of another transaction. </td></tr>
+  <!-- index=6 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.begin_child_tr" id=link9  >begin_child_tr</a></td><td class=SDescription>This function indicates that the transaction has been started as a child of a parent transaction given by <i>parent_handle</i>. </td></tr>
+  <!-- index=7 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.do_begin_tr" id=link10  >do_begin_tr</a></td><td class=SDescription>This user-definable callback is called by <a href="#uvm_transaction.begin_tr" class=LMethod id=link11  >begin_tr</a> and <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link12  >begin_child_tr</a> just before the begin event is triggered. </td></tr>
+  <!-- index=8 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.end_tr" id=link13  >end_tr</a></td><td class=SDescription>This function indicates that the transaction execution has ended. </td></tr>
+  <!-- index=9 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.do_end_tr" id=link14  >do_end_tr</a></td><td class=SDescription>This user-definable callback is called by <a href="#uvm_transaction.end_tr" class=LMethod id=link15  >end_tr</a> just before the end event is triggered. </td></tr>
+  <!-- index=10 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.get_tr_handle" id=link16  >get_tr_handle</a></td><td class=SDescription>Returns the handle associated with the transaction, as set by a previous call to <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link17  >begin_child_tr</a> or <a href="#uvm_transaction.begin_tr" class=LMethod id=link18  >begin_tr</a> with transaction recording enabled.</td></tr>
+  <!-- index=11 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.disable_recording" id=link19  >disable_recording</a></td><td class=SDescription>Turns off recording for the transaction stream. </td></tr>
+  <!-- index=12 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.enable_recording" id=link20  >enable_recording</a></td><td class=SDescription>Turns on recording to the <i>stream</i> specified.</td></tr>
+  <!-- index=13 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.is_recording_enabled" id=link21  >is_recording_enabled</a></td><td class=SDescription>Returns 1 if recording is currently on, 0 otherwise.</td></tr>
+  <!-- index=14 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.is_active" id=link22  >is_active</a></td><td class=SDescription>Returns 1 if the transaction has been started but has not yet been ended. </td></tr>
+  <!-- index=15 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.get_event_pool" id=link23  >get_event_pool</a></td><td class=SDescription>Returns the event pool associated with this transaction.</td></tr>
+  <!-- index=16 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.set_initiator" id=link24  >set_initiator</a></td><td class=SDescription>Sets initiator as the initiator of this transaction.</td></tr>
+  <!-- index=17 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.get_initiator" id=link25  >get_initiator</a></td><td class=SDescription>Returns the component that produced or started the transaction, as set by a previous call to set_initiator.</td></tr>
+  <!-- index=18 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.get_accept_time" id=link26  >get_accept_time</a></td><td class=SDescription></td></tr>
+  <!-- index=19 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.get_begin_time" id=link27  >get_begin_time</a></td><td class=SDescription></td></tr>
+  <!-- index=20 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.get_end_time" id=link28  >get_end_time</a></td><td class=SDescription>Returns the time at which this transaction was accepted, begun, or ended, as by a previous call to <a href="#uvm_transaction.accept_tr" class=LMethod id=link29  >accept_tr</a>, <a href="#uvm_transaction.begin_tr" class=LMethod id=link30  >begin_tr</a>, <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link31  >begin_child_tr</a>, or <a href="#uvm_transaction.end_tr" class=LMethod id=link32  >end_tr</a>.</td></tr>
+  <!-- index=21 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.set_transaction_id" id=link33  >set_transaction_id</a></td><td class=SDescription>Sets this transaction&rsquo;s numeric identifier to id. </td></tr>
+  <!-- index=22 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_transaction.get_transaction_id" id=link34  >get_transaction_id</a></td><td class=SDescription>Returns this transaction&rsquo;s numeric identifier, which is -1 if not set explicitly by <i>set_transaction_id</i>.</td></tr>
+  <!-- index=23 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_transaction.Variables" >Variables</a></td><td class=SDescription></td></tr>
+  <!-- index=24 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_transaction.events" id=link35  >events</a></td><td class=SDescription>The event pool instance for this transaction. </td></tr>
+  <!-- index=25 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_transaction.begin_event" id=link36  >begin_event</a></td><td class=SDescription>A <i>uvm_event#(uvm_object)</i> that is triggered when this transaction&rsquo;s actual execution on the bus begins, typically as a result of a driver calling <a href="uvm_component-svh.html#uvm_component.begin_tr" class=LMethod id=link37  >uvm_component::begin_tr</a>. </td></tr>
+  <!-- index=26 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_transaction.end_event" id=link38  >end_event</a></td><td class=SDescription>A <i>uvm_event#(uvm_object)</i> that is triggered when this transaction&rsquo;s actual execution on the bus ends, typically as a result of a driver calling <a href="uvm_component-svh.html#uvm_component.end_tr" class=LMethod id=link39  >uvm_component::end_tr</a>. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.Methods" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.new" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>&quot;&quot;,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap>initiator</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>null</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Creates a new transaction object.&nbsp; The name is the instance name of the transaction.&nbsp; If not supplied, then the object is unnamed.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.accept_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">accept_tr</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function void accept_tr (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
+      <td class=PParameter nowrap>accept_time</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> 0</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Calling <i>accept_tr</i> indicates that the transaction item has been received by a consumer component.&nbsp; Typically a <a href="../comps/uvm_driver-svh.html#uvm_driver#(REQ,RSP)" class=LClass id=link52  >uvm_driver #(REQ,RSP)</a> would call <a href="uvm_component-svh.html#uvm_component.accept_tr" class=LMethod id=link53  >uvm_component::accept_tr</a>, which calls this method-- upon return from a <i>get_next_item()</i>, <i>get()</i>, or <i>peek()</i> call on its sequencer port, <a href="../comps/uvm_driver-svh.html#uvm_driver#(REQ,RSP).seq_item_port" class=LPort id=link54  >uvm_driver#(REQ,RSP)::seq_item_port</a>.</p><p>With some protocols, the received item may not be started immediately after it is accepted.&nbsp; For example, a bus driver, having accepted a request transaction, may still have to wait for a bus grant before beginning to execute the request.</p><h4 class=CHeading>This function performs the following actions</h4><ul><li>The transaction&rsquo;s internal accept time is set to the current simulation time, or to accept_time if provided and non-zero.&nbsp; The <i>accept_time</i> may be any time, past or future.</li><li>The transaction&rsquo;s internal accept event is triggered.&nbsp; Any processes waiting on the this event will resume in the next delta cycle.</li><li>The <a href="#uvm_transaction.do_accept_tr" class=LMethod id=link55  >do_accept_tr</a> method is called to allow for any post-accept action in derived classes.</li></ul></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_accept_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_accept_tr</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual protected function void do_accept_tr ()
+  </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#uvm_transaction.accept_tr" class=LMethod id=link56  >accept_tr</a> just before the accept event is triggered.&nbsp; Implementations should call <i>super.do_accept_tr</i> to ensure correct operation.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_tr</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function integer begin_tr (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
+      <td class=PParameter nowrap>begin_time</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> 0</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>This function indicates that the transaction has been started and is not the child of another transaction.&nbsp; Generally, a consumer component begins execution of a transactions it receives.</p><p>Typically a <a href="../comps/uvm_driver-svh.html#uvm_driver#(REQ,RSP)" class=LClass id=link57  >uvm_driver #(REQ,RSP)</a> would call <a href="uvm_component-svh.html#uvm_component.begin_tr" class=LMethod id=link58  >uvm_component::begin_tr</a>, which calls this method, before actual execution of a sequence item transaction.&nbsp; Sequence items received by a driver are always a child of a parent sequence.&nbsp; In this case, begin_tr obtains the parent handle and delegates to <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link59  >begin_child_tr</a>.</p><p>See <a href="#uvm_transaction.accept_tr" class=LMethod id=link60  >accept_tr</a> for more information on how the begin-time might differ from when the transaction item was received.</p><h4 class=CHeading>This function performs the following actions</h4><ul><li>The transaction&rsquo;s internal start time is set to the current simulation time, or to begin_time if provided and non-zero.&nbsp; The begin_time may be any time, past or future, but should not be less than the accept time.</li><li>If recording is enabled, then a new database-transaction is started with the same begin time as above.</li><li>The <a href="#uvm_transaction.do_begin_tr" class=LMethod id=link61  >do_begin_tr</a> method is called to allow for any post-begin action in derived classes.</li><li>The transaction&rsquo;s internal begin event is triggered.&nbsp; Any processes waiting on this event will resume in the next delta cycle.</li></ul><p>The return value is a transaction handle, which is valid (non-zero) only if recording is enabled.&nbsp; The meaning of the handle is implementation specific.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_child_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_child_tr</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function integer begin_child_tr (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
+      <td class=PParameter nowrap>begin_time</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> 0,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>integer&nbsp;</td>
+      <td class=PParameter nowrap>parent_handle</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> 0</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>This function indicates that the transaction has been started as a child of a parent transaction given by <i>parent_handle</i>.&nbsp; Generally, a consumer component calls this method via <a href="uvm_component-svh.html#uvm_component.begin_child_tr" class=LMethod id=link62  >uvm_component::begin_child_tr</a> to indicate the actual start of execution of this transaction.</p><p>The parent handle is obtained by a previous call to begin_tr or begin_child_tr.&nbsp; If the parent_handle is invalid (=0), then this function behaves the same as <a href="#uvm_transaction.begin_tr" class=LMethod id=link63  >begin_tr</a>.</p><h4 class=CHeading>This function performs the following actions</h4><ul><li>The transaction&rsquo;s internal start time is set to the current simulation time, or to begin_time if provided and non-zero.&nbsp; The begin_time may be any time, past or future, but should not be less than the accept time.</li><li>If recording is enabled, then a new database-transaction is started with the same begin time as above.&nbsp; The inherited <a href="uvm_object-svh.html#uvm_object.record" class=LMethod id=link64  >uvm_object::record</a> method is then called, which records the current property values to this new transaction.&nbsp; Finally, the newly started transaction is linked to the parent transaction given by parent_handle.</li><li>The <a href="#uvm_transaction.do_begin_tr" class=LMethod id=link65  >do_begin_tr</a> method is called to allow for any post-begin action in derived classes.</li><li>The transaction&rsquo;s internal begin event is triggered.&nbsp; Any processes waiting on this event will resume in the next delta cycle.</li></ul><p>The return value is a transaction handle, which is valid (non-zero) only if recording is enabled.&nbsp; The meaning of the handle is implementation specific.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_begin_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_begin_tr</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual protected function void do_begin_tr ()
+  </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#uvm_transaction.begin_tr" class=LMethod id=link66  >begin_tr</a> and <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link67  >begin_child_tr</a> just before the begin event is triggered.&nbsp; Implementations should call <i>super.do_begin_tr</i> to ensure correct operation.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.end_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">end_tr</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function void end_tr (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
+      <td class=PParameter nowrap>end_time</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>0,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
+      <td class=PParameter nowrap>free_handle</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>1</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>This function indicates that the transaction execution has ended.&nbsp; Generally, a consumer component ends execution of the transactions it receives.</p><p>You must have previously called <a href="#uvm_transaction.begin_tr" class=LMethod id=link68  >begin_tr</a> or <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link69  >begin_child_tr</a> for this call to be successful.</p><p>Typically a <a href="../comps/uvm_driver-svh.html#uvm_driver#(REQ,RSP)" class=LClass id=link70  >uvm_driver #(REQ,RSP)</a> would call <a href="uvm_component-svh.html#uvm_component.end_tr" class=LMethod id=link71  >uvm_component::end_tr</a>, which calls this method, upon completion of a sequence item transaction.&nbsp; Sequence items received by a driver are always a child of a parent sequence.&nbsp; In this case, begin_tr obtain the parent handle and delegate to <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link72  >begin_child_tr</a>.</p><h4 class=CHeading>This function performs the following actions</h4><ul><li>The transaction&rsquo;s internal end time is set to the current simulation time, or to <i>end_time</i> if provided and non-zero.&nbsp; The <i>end_time</i> may be any time, past or future, but should not be less than the begin time.</li><li>If recording is enabled and a database-transaction is currently active, then the record method inherited from uvm_object is called, which records the final property values.&nbsp; The transaction is then ended.&nbsp; If <i>free_handle</i> is set, the transaction is released and can no longer be linked to (if supported by the implementation).</li><li>The <a href="#uvm_transaction.do_end_tr" class=LMethod id=link73  >do_end_tr</a> method is called to allow for any post-end action in derived classes.</li><li>The transaction&rsquo;s internal end event is triggered.&nbsp; Any processes waiting on this event will resume in the next delta cycle.</li></ul></div></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_end_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_end_tr</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual protected function void do_end_tr ()
+  </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#uvm_transaction.end_tr" class=LMethod id=link74  >end_tr</a> just before the end event is triggered.&nbsp; Implementations should call <i>super.do_end_tr</i> to ensure correct operation.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_tr_handle" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_tr_handle</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function integer get_tr_handle ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the handle associated with the transaction, as set by a previous call to <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link75  >begin_child_tr</a> or <a href="#uvm_transaction.begin_tr" class=LMethod id=link76  >begin_tr</a> with transaction recording enabled.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=11 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.disable_recording" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">disable_recording</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function void disable_recording ()
+  </td></tr></table></blockquote><div class=CBody><p>Turns off recording for the transaction stream.&nbsp; This method does not effect a <a href="uvm_component-svh.html#uvm_component" class=LClass id=link77  >uvm_component</a>&rsquo;s recording streams.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=12 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.enable_recording" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">enable_recording</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function void enable_recording (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_tr_stream&nbsp;</td>
+      <td class=PParameter nowrap width=100%>stream</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Turns on recording to the <i>stream</i> specified.</p><p>If transaction recording is on, then a call to <i>record</i> is made when the transaction is ended.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=13 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.is_recording_enabled" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">is_recording_enabled</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_recording_enabled()
+  </td></tr></table></blockquote><div class=CBody><p>Returns 1 if recording is currently on, 0 otherwise.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=14 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.is_active" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">is_active</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_active ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns 1 if the transaction has been started but has not yet been ended.&nbsp; Returns 0 if the transaction has not been started.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=15 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_event_pool" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_event_pool</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_event_pool get_event_pool ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the event pool associated with this transaction.</p><p>By default, the event pool contains the events: begin, accept, and end.&nbsp; Events can also be added by derivative objects.&nbsp; An event pool is a specialization of <a href="uvm_pool-svh.html#uvm_pool#(KEY,T)" class=LClass id=link78  >uvm_pool#(KEY,T)</a>, e.g. a <i>uvm_pool#(uvm_event)</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=16 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.set_initiator" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">set_initiator</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function void set_initiator (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap width=100%>initiator</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Sets initiator as the initiator of this transaction.</p><p>The initiator can be the component that produces the transaction.&nbsp; It can also be the component that started the transaction.&nbsp; This or any other usage is up to the transaction designer.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=17 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_initiator" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_initiator</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_component get_initiator ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the component that produced or started the transaction, as set by a previous call to set_initiator.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=18 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_accept_time" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_accept_time</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function time get_accept_time ()
+  </td></tr></table></blockquote><div class=CBody></div></div></div>
+
+
+
+
+ <!--CONTENT index=19 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_begin_time" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_begin_time</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function time get_begin_time ()
+  </td></tr></table></blockquote><div class=CBody></div></div></div>
+
+
+
+
+ <!--CONTENT index=20 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_end_time" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_end_time</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function time get_end_time ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the time at which this transaction was accepted, begun, or ended, as by a previous call to <a href="#uvm_transaction.accept_tr" class=LMethod id=link79  >accept_tr</a>, <a href="#uvm_transaction.begin_tr" class=LMethod id=link80  >begin_tr</a>, <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link81  >begin_child_tr</a>, or <a href="#uvm_transaction.end_tr" class=LMethod id=link82  >end_tr</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=21 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.set_transaction_id" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">set_transaction_id</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function void set_transaction_id(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>integer&nbsp;</td>
+      <td class=PParameter nowrap width=100%>id</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Sets this transaction&rsquo;s numeric identifier to id.&nbsp; If not set via this method, the transaction ID defaults to -1.</p><p>When using sequences to generate stimulus, the transaction ID is used along with the sequence ID to route responses in sequencers and to correlate responses to requests.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=22 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_transaction_id" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_transaction_id</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function integer get_transaction_id()
+  </td></tr></table></blockquote><div class=CBody><p>Returns this transaction&rsquo;s numeric identifier, which is -1 if not set explicitly by <i>set_transaction_id</i>.</p><p>When using a <a href="../seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP)" class=LClass id=link83  >uvm_sequence #(REQ,RSP)</a> to generate stimulus, the transaction ID is used along with the sequence ID to route responses in sequencers and to correlate responses to requests.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=23 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.Variables" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">Variables</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=24 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.events" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">events</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>const uvm_event_pool events = new
+  </td></tr></table></blockquote><div class=CBody><p>The event pool instance for this transaction.&nbsp; This pool is used to track various milestones: by default, begin, accept, and end</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=25 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_event" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_event</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=2>uvm_event#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_object</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=2>) begin_event</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>A <i>uvm_event#(uvm_object)</i> that is triggered when this transaction&rsquo;s actual execution on the bus begins, typically as a result of a driver calling <a href="uvm_component-svh.html#uvm_component.begin_tr" class=LMethod id=link84  >uvm_component::begin_tr</a>.&nbsp; Processes that wait on this event will block until the transaction has begun.</p><p>For more information, see the general discussion for <a href="#uvm_transaction" class=LClass id=link85  >uvm_transaction</a>.&nbsp; See <a href="uvm_event-svh.html#uvm_event#(T)" class=LClass id=link86  >uvm_event#(T)</a> for details on the event API.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=26 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.end_event" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">end_event</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=2>uvm_event#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_object</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=2>) end_event</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>A <i>uvm_event#(uvm_object)</i> that is triggered when this transaction&rsquo;s actual execution on the bus ends, typically as a result of a driver calling <a href="uvm_component-svh.html#uvm_component.end_tr" class=LMethod id=link87  >uvm_component::end_tr</a>.&nbsp; Processes that wait on this event will block until the transaction has ended.</p><p>For more information, see the general discussion for <a href="#uvm_transaction" class=LClass id=link88  >uvm_transaction</a>.&nbsp; See <a href="uvm_event-svh.html#uvm_event#(T)" class=LClass id=link89  >uvm_event#(T)</a> for details on the event API.</p><blockquote><pre>virtual task my_sequence::body();
+ ...
+ start_item(item);    \
+ item.randomize();     } `uvm_do(item)
+ finish_item(item);   /
+ // return from finish item does not always mean item is completed
+ item.end_event.wait_on();
+ ...</pre></blockquote></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dap/uvm_dap.svh | UVM 1.2 Source Code</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="src-viewer-body">
+  <div class="src-sticky-bar">
+    <div class="src-breadcrumbs">
+      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <span class="sep">/</span>
+      <span class="src-cur-file">dap/uvm_dap.svh</span>
+      <span class="badge badge-info">34 lines</span>
+      <span class="badge badge-secondary">1.2 KB</span>
+    </div>
+    <div class="src-actions">
+      <select class="sym-jump-select" onchange="if(this.value) window.location.hash = this.value">
+              <option value="">Jump to Symbol (1 symbols)...</option>
+              <option value="#L25">macro: `UVM_DAP_SVH (L25)</option>
+            </select>
+      
+      <button class="btn btn-outline" id="copy-src-btn" title="Copy raw source code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Code</span>
+      </button>
+      <a href="../../uvm-1.2/src/dap/uvm_dap.svh" download class="btn btn-outline" title="Download raw source file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Raw</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="src-code-container">
+    <table class="sv-code-table">
+      <tbody>
+        <tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// </span></td></tr><tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2011 Mentor Graphics Corporation</span></td></tr><tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2011 Cadence Design Systems, Inc.</span></td></tr><tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc.</span></td></tr><tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   Copyright 2013      NVIDIA Corporation</span></td></tr><tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr><tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr><tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr><tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr><tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr><tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr><tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr><tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr><tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr><tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr><tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr><tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr><tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr><tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code"><span class="sv-macro">`ifndef</span> <span class="sv-uvm-type">UVM_DAP_SVH</span></td></tr><tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code"> <span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_DAP_SVH</span></td></tr><tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr><tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-comment">// Set/Get DAPS</span></td></tr><tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"> <span class="sv-macro">`include</span> <span class="sv-string">&quot;dap/uvm_set_get_dap_base.svh&quot;</span></td></tr><tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"> <span class="sv-macro">`include</span> <span class="sv-string">&quot;dap/uvm_simple_lock_dap.svh&quot;</span></td></tr><tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"> <span class="sv-macro">`include</span> <span class="sv-string">&quot;dap/uvm_get_to_lock_dap.svh&quot;</span></td></tr><tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"> <span class="sv-macro">`include</span> <span class="sv-string">&quot;dap/uvm_set_before_get_dap.svh&quot;</span></td></tr><tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">&nbsp;</td></tr><tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-macro">`endif</span> <span class="sv-comment">// UVM_DAP_SVH</span></td></tr><tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <textarea id="raw-source-text" style="display:none">// 
+//------------------------------------------------------------------------------
+//   Copyright 2007-2011 Mentor Graphics Corporation
+//   Copyright 2007-2011 Cadence Design Systems, Inc.
+//   Copyright 2010-2011 Synopsys, Inc.
+//   Copyright 2013      NVIDIA Corporation
+//   All Rights Reserved Worldwide
+//
+//   Licensed under the Apache License, Version 2.0 (the
+//   &quot;License&quot;); you may not use this file except in
+//   compliance with the License.  You may obtain a copy of
+//   the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in
+//   writing, software distributed under the License is
+//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR
+//   CONDITIONS OF ANY KIND, either express or implied.  See
+//   the License for the specific language governing
+//   permissions and limitations under the License.
+//------------------------------------------------------------------------------
+
+`ifndef UVM_DAP_SVH
+ `define UVM_DAP_SVH
+
+// Set/Get DAPS
+ `include &quot;dap/uvm_set_get_dap_base.svh&quot;
+ `include &quot;dap/uvm_simple_lock_dap.svh&quot;
+ `include &quot;dap/uvm_get_to_lock_dap.svh&quot;
+ `include &quot;dap/uvm_set_before_get_dap.svh&quot;
+
+`endif // UVM_DAP_SVH
+
+</textarea>
+
+  <script>
+    document.getElementById('copy-src-btn').addEventListener('click', function() {
+      const text = document.getElementById('raw-source-text').value;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-src-btn');
+        const span = btn.querySelector('span');
+        const orig = span.textContent;
+        span.textContent = 'Copied!';
+        btn.classList.add('btn-success');
+        setTimeout(() => { span.textContent = orig; btn.classList.remove('btn-success'); }, 2000);
+      });
+    });
+
+    function highlightTargetLine() {
+      const hash = window.location.hash;
+      document.querySelectorAll('.sv-code-table tr.active-line').forEach(el => el.classList.remove('active-line'));
+      if (hash && hash.startsWith('#L')) {
+        const target = document.querySelector(hash);
+        if (target) {
+          target.classList.add('active-line');
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+    window.addEventListener('hashchange', highlightTargetLine);
+    window.addEventListener('DOMContentLoaded', highlightTargetLine);
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+  </script>
+</body>
+</html>

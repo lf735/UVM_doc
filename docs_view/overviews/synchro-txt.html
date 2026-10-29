@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synchronization Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Synchronization_Classes" href="#">Synchronization Classes</a></h1><div class=CBody><img src="../../images/uvm_ref_sync.gif" width="458" height="77"><p>The UVM provides event and barrier synchronization classes for managing concurrent processes.</p><ul><li><a href="../base/uvm_event-svh.html#uvm_event#(T)" class=LClass id=link1  >uvm_event#(T)</a> - UVM&rsquo;s event class augments the SystemVerilog event datatype with such services as setting callbacks and data delivery.</li><li><a href="../base/uvm_barrier-svh.html#uvm_barrier" class=LClass id=link2  >uvm_barrier</a> - A barrier is used to prevent a pre-configured number of processes from continuing until all have reached a certain point in simulation.</li><li>uvm_event_pool and uvm_barrier_pool - The event and barrier pool classes are specializations of <a href="../base/uvm_pool-svh.html#uvm_object_string_pool#(T)" class=LClass id=link3  >uvm_object_string_pool #(T)</a> used to store collections of ~uvm_event#(uvm_object)~s and <a href="../base/uvm_barrier-svh.html#uvm_barrier" class=LClass id=link4  >uvm_barriers</a>, respectively, indexed by string name.&nbsp;  Each pool class contains a static, &ldquo;global&rdquo; pool instance for sharing across all processes.</li><li><a href="../base/uvm_event_callback-svh.html#uvm_event_callback" class=LClass id=link5  >uvm_event_callback</a> - The event callback is used to create callback objects that may be attached to <a href="../base/uvm_event-svh.html#uvm_event#(T)" class=LClass id=link6  >uvm_event#(T)</a>s.</li></ul>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#Synchronization_Classes" >Synchronization Classes</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription></td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

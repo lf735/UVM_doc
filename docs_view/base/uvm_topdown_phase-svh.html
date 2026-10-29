@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>uvm_topdown_phase | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/base/uvm_topdown_phase.svh.html#L35" target="_top" class="banner-file-link"><code>src/base/uvm_topdown_phase.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/base/uvm_topdown_phase.svh.html#L35" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 35">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 35)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_topdown_phase" href="../../src_view/base/uvm_topdown_phase.svh.html#L35" target="_top" class="src-code-link" data-src-file="base/uvm_topdown_phase.svh" data-src-line="35">uvm_topdown_phase</a></h1><div class=CBody><p>Virtual base class for function phases that operate top-down.&nbsp; The pure virtual function execute() is called for each component.</p><p>A top-down function phase completes when the <a href="#uvm_topdown_phase.execute" class=LMethod id=link9  >execute()</a> method has been called and returned on all applicable components in the hierarchy.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_topdown_phase" id=link4  >uvm_topdown_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Virtual base class for function phases that operate top-down. </td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link1  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link2  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link3  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_topdown_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_topdown_phase extends uvm_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=1 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_topdown_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=2 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_topdown_phase.new" id=link5  >new</a></td><td class=SDescription>Create a new instance of a top-down phase</td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_topdown_phase.traverse" id=link6  >traverse</a></td><td class=SDescription>Traverses the component tree in top-down order, calling <a href="#uvm_topdown_phase.execute" class=LMethod id=link7  >execute</a> for each component.</td></tr>
+  <!-- index=4 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_topdown_phase.execute" id=link8  >execute</a></td><td class=SDescription>Executes the top-down phase <i>phase</i> for the component <i>comp</i>.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_topdown_phase.Methods" href="../../src_view/base/uvm_topdown_phase.svh.html#L35" target="_top" class="src-code-link" data-src-file="base/uvm_topdown_phase.svh" data-src-line="35">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_topdown_phase.new" href="../../src_view/base/uvm_topdown_phase.svh.html#L35" target="_top" class="src-code-link" data-src-file="base/uvm_topdown_phase.svh" data-src-line="35">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap width=100%>name</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Create a new instance of a top-down phase</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_topdown_phase.traverse" href="../../src_view/base/uvm_topdown_phase.svh.html#L35" target="_top" class="src-code-link" data-src-file="base/uvm_topdown_phase.svh" data-src-line="35">traverse</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void traverse(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap width=100%>comp,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
+      <td class=PParameter nowrap width=100%>phase,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase_state&nbsp;</td>
+      <td class=PParameter nowrap width=100%>state</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Traverses the component tree in top-down order, calling <a href="#uvm_topdown_phase.execute" class=LMethod id=link10  >execute</a> for each component.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_topdown_phase.execute" href="../../src_view/base/uvm_topdown_phase.svh.html#L35" target="_top" class="src-code-link" data-src-file="base/uvm_topdown_phase.svh" data-src-line="35">execute</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void execute(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap width=100%>comp,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
+      <td class=PParameter nowrap width=100%>phase</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Executes the top-down phase <i>phase</i> for the component <i>comp</i>.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

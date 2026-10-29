@@ -1,74 +1,104 @@
-# UVM Documentation Site
+# UVM 1.2 Interactive Documentation & Source Explorer
 
-Site de documentation statique pour **UVM (Universal Verification Methodology)**, prêt pour un déploiement continu sur **GitHub Pages**.
+A modern, dynamic web documentation platform and SystemVerilog source code explorer for **Universal Verification Methodology (UVM 1.2)**.
 
-## 🚀 Fonctionnalités du site
-
-- **Design moderne & responsive** : Interface claire et ergonomique sur desktop et mobile.
-- **Mode Sombre / Clair** : Basculement automatique avec sauvegarde des préférences locales (`localStorage`).
-- **Filtrage / Recherche instantanée** : Champ de recherche en direct dans la barre latérale.
-- **Snippets de code SystemVerilog** : Blocs préformatés avec bouton de copie en un clic.
-- **Déploiement GitHub Actions** : Workflow automatisé prêt à l'emploi (`.github/workflows/deploy.yml`).
+Ready for local offline browsing and automated continuous deployment to **GitHub Pages**.
 
 ---
 
-## 📁 Structure du projet
+## 🚀 Key Features
+
+- **Dynamic Interactive Web Portal**: Fast, responsive layout with single-page navigation and deep-linking.
+- **SystemVerilog Web Source Viewer**: Complete syntax highlighting, clickable line numbers (`#Lxx`), copy buttons, and raw downloads for all 155 source files (`.sv`, `.svh`, `.c`, `.h`).
+- **Bidirectional Deep Linking**:
+  - Class and macro reference pages include prominent **"View Source"** buttons jumping directly to their definition lines in the source code.
+  - Source files include a **"Documentation"** button returning directly to the reference manual.
+- **Split-Screen Mode**: View API documentation and SystemVerilog implementation side-by-side with an interactive resizable divider.
+- **Instant Symbol & Full-Text Search**: Live search modal across 880+ classes, methods, macros, and source files with keyboard navigation (`/` or `Ctrl+K`).
+- **Dark & Light Mode**: Seamless theme switching with local storage persistence and real-time iframe synchronization.
+- **100% English Documentation**: All menus, titles, descriptions, and user interface elements in English.
+- **Zero-Dependency Static Build**: Generated with Python standard library; fully functional offline without external servers.
+
+---
+
+## 📁 Repository Structure
 
 ```text
 UVM_doc/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml      # Workflow GitHub Actions pour le déploiement sur Pages
+│       └── deploy.yml        # GitHub Actions continuous deployment workflow
 ├── css/
-│   └── style.css           # Feuilles de style (variables CSS, thèmes, mise en page)
+│   └── style.css             # Unified stylesheet (theme variables, syntax colors, layout)
 ├── js/
-│   └── main.js             # Interactions (mode nuit, menu mobile, recherche, copie)
-├── index.html              # Page principale de documentation
-├── .gitignore              # Fichiers à ignorer par git
-├── LICENSE                 # Licence Apache 2.0 du projet
-├── NOTICE                  # Attributions légales et avis tiers (Accellera, Mentor, Cadence, etc.)
-└── README.md               # Documentation du dépôt
+│   ├── app.js                # Core SPA application (router, search, theme, split view)
+│   └── search_data.js        # Generated index of categories, source tree, and symbols
+├── scripts/
+│   └── build_docs.py         # Python build script generating docs_view and src_view
+├── docs_view/                # Modernized, responsive UVM 1.2 reference HTML pages
+├── src_view/                 # Syntax-highlighted HTML views of all 155 source files
+├── uvm-1.2/                  # Official Accellera UVM 1.2 distribution
+│   ├── src/                  # Raw SystemVerilog and C source tree
+│   └── docs/                 # Original reference documentation assets
+├── index.html                # Main application portal shell
+├── LICENSE                   # Apache 2.0 open-source license
+├── NOTICE                    # Legal attributions and third-party notices
+└── README.md                 # Project documentation
 ```
 
 ---
 
-## 💻 Visualisation en local
+## 💻 Local Preview
 
-Vous pouvez prévisualiser le site immédiatement de deux manières :
+You can preview the site immediately using any local web server:
 
-### Option 1 : Serveur local Python (recommandé)
 ```bash
+# Start a local HTTP server
 python -m http.server 8000
 ```
-Puis ouvrez votre navigateur sur [http://localhost:8000](http://localhost:8000).
 
-### Option 2 : Ouverture directe
-Ouvrez directement le fichier `index.html` dans n'importe quel navigateur web.
+Then open your browser at **[http://localhost:8000](http://localhost:8000)**.
 
 ---
 
-## 🌐 Déploiement sur GitHub Pages
+## 🛠️ Rebuilding the Documentation
 
-1. **Liez votre dépôt distant sur GitHub** :
+If you modify or update any files in `uvm-1.2/src` or `uvm-1.2/docs`, you can regenerate the entire documentation site with a single command:
+
+```bash
+python scripts/build_docs.py
+```
+
+The build script will:
+1. Parse all 155 source files in `uvm-1.2/src/`.
+2. Generate syntax-highlighted HTML files in `src_view/` with clickable line anchors.
+3. Map every class, method, and macro to its definition line number.
+4. Modernize all 146 documentation files in `docs_view/` and inject **"View Source"** deep links.
+5. Generate `js/search_data.js` containing category trees, source directory trees, and search indices.
+
+---
+
+## 🌐 GitHub Pages Deployment
+
+This repository is pre-configured with a GitHub Actions workflow (`.github/workflows/deploy.yml`).
+
+1. Push your changes to GitHub:
    ```bash
-   git remote add origin https://github.com/<votre-utilisateur>/<nom-du-repo>.git
-   git push -u origin main
+   git add .
+   git commit -m "Generate dynamic UVM 1.2 documentation"
+   git push origin main
    ```
-
-2. **Activez GitHub Pages dans les paramètres du dépôt GitHub** :
-   - Rendez-vous sur votre dépôt GitHub : **Settings** > **Pages**.
-   - Sous **Build and deployment** > **Source**, choisissez **GitHub Actions**.
-   - À chaque `git push` sur la branche `main`, le workflow déploiera automatiquement le site.
+2. Enable GitHub Pages:
+   - Navigate to **Settings** > **Pages** in your GitHub repository.
+   - Under **Build and deployment** > **Source**, select **GitHub Actions**.
+3. Every push to `main` automatically deploys the updated portal.
 
 ---
 
-## 📄 Licence et Conformité
+## 📄 License & Attribution
 
-Ce projet est distribué sous la licence libre et open source **[Apache License 2.0](LICENSE)**.
+This project is licensed under the **[Apache License 2.0](LICENSE)**.
 
-### Attributions légales & UVM (Accellera)
-- **Universal Verification Methodology (UVM) 1.2** est un standard de l'[Accellera Systems Initiative](https://www.accellera.org/), distribué sous licence Apache 2.0.
-- Conformément à la section 4(d) de la licence Apache 2.0, toutes les mentions d'attribution des contributeurs originaux (Mentor Graphics Corporation, Cadence Design Systems, Inc., Synopsys, Inc., Cypress Semiconductor Corp., NVIDIA Corporation) sont conservées et répertoriées dans le fichier **[NOTICE](NOTICE)**.
-- Les fichiers sources du projet comportent les en-têtes d'attribution conformes à l'annexe de la licence Apache 2.0.
-
-
+### UVM Standard Attribution
+- **Universal Verification Methodology (UVM) 1.2** is an open-source standard developed and maintained by the **[Accellera Systems Initiative](https://www.accellera.org/)** under the Apache 2.0 License.
+- In compliance with Section 4(d) of the Apache 2.0 License, all original contributor notices (Mentor Graphics Corporation, Cadence Design Systems, Inc., Synopsys, Inc., Cypress Semiconductor Corp., NVIDIA Corporation) are preserved in the **[NOTICE](NOTICE)** file.

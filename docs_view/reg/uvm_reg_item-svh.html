@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generic Register Operation Descriptors | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="banner-file-link"><code>src/reg/uvm_reg_item.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 41">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 41)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Generic_Register_Operation_Descriptors" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">Generic Register Operation Descriptors</a></h1><div class=CBody><p>This section defines the abstract register transaction item.&nbsp; It also defines a descriptor for a physical bus operation that is used by <a href="uvm_reg_adapter-svh.html#uvm_reg_adapter" class=LClass id=link2  >uvm_reg_adapter</a> subtypes to convert from a protocol-specific address/data/rw operation to a bus-independent, canonical r/w operation.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td class=SEntry><a href="#Generic_Register_Operation_Descriptors" >Generic Register Operation Descriptors</a></td><td class=SDescription>This section defines the abstract register transaction item. </td></tr>
+  <!-- index=1 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_reg_item" id=link1  >uvm_reg_item</a></td><td class=SDescription>Defines an abstract register transaction item. </td></tr>
+  <!-- index=22 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_reg_bus_op" >uvm_reg_bus_op</a></td><td class=SDescription>Struct that defines a generic bus transaction for register and memory accesses, having <i>kind</i> (read or write), <i>address</i>, <i>data</i>, and <i>byte enable</i> information. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_item" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">uvm_reg_item</a></h2><div class=CBody><p>Defines an abstract register transaction item.&nbsp; No bus-specific information is present, although a handle to a <a href="uvm_reg_map-svh.html#uvm_reg_map" class=LClass id=link29  >uvm_reg_map</a> is provided in case a user wishes to implement a custom address translation algorithm.</p>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_reg_item" id=link7  >uvm_reg_item</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Defines an abstract register transaction item. </td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_misc-svh.html#uvm_void" class=LClass id=link3  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link4  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_transaction-svh.html#uvm_transaction" class=LClass id=link5  >uvm_transaction</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link6  >uvm_sequence_item</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_reg_item</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_reg_item extends uvm_sequence_item
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=2 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_item.Variables" >Variables</a></td><td class=SDescription></td></tr>
+  <!-- index=3 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_item.element_kind" id=link8  >element_kind</a></td><td class=SDescription>Kind of element being accessed: REG, MEM, or FIELD. </td></tr>
+  <!-- index=4 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_item.element" id=link9  >element</a></td><td class=SDescription>A handle to the RegModel model element associated with this transaction. </td></tr>
+  <!-- index=5 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_item.kind" id=link10  >kind</a></td><td class=SDescription>Kind of access: READ or WRITE.</td></tr>
+  <!-- index=6 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_item.value" id=link11  >value</a></td><td class=SDescription>The value to write to, or after completion, the value read from the DUT. </td></tr>
+  <!-- index=7 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_item.offset" id=link12  >offset</a></td><td class=SDescription>For memory accesses, the offset address. </td></tr>
+  <!-- index=8 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_item.status" id=link13  >status</a></td><td class=SDescription>The result of the transaction: IS_OK, HAS_X, or ERROR. </td></tr>
+  <!-- index=9 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_item.local_map" id=link14  >local_map</a></td><td class=SDescription>The local map used to obtain addresses. </td></tr>
+  <!-- index=10 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_item.map" id=link15  >map</a></td><td class=SDescription>The original map specified for the operation. </td></tr>
+  <!-- index=11 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_item.path" id=link16  >path</a></td><td class=SDescription>The path being used: <a href="uvm_reg_model-svh.html#UVM_FRONTDOOR" class=LConstant id=link17  >UVM_FRONTDOOR</a> or <a href="uvm_reg_model-svh.html#UVM_BACKDOOR" class=LConstant id=link18  >UVM_BACKDOOR</a>.</td></tr>
+  <!-- index=12 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_item.parent" id=link19  >parent</a></td><td class=SDescription>The sequence from which the operation originated.</td></tr>
+  <!-- index=13 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_item.prior" id=link20  >prior</a></td><td class=SDescription>The priority requested of this transfer, as defined by <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.start_item" class=LMethod id=link21  >uvm_sequence_base::start_item</a>.</td></tr>
+  <!-- index=14 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_item.extension" id=link22  >extension</a></td><td class=SDescription>Handle to optional user data, as conveyed in the call to write(), read(), mirror(), or update() used to trigger the operation.</td></tr>
+  <!-- index=15 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_item.bd_kind" id=link23  >bd_kind</a></td><td class=SDescription>If path is UVM_BACKDOOR, this member specifies the abstraction kind for the backdoor access, e.g. </td></tr>
+  <!-- index=16 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_item.fname" id=link24  >fname</a></td><td class=SDescription>The file name from where this transaction originated, if provided at the call site.</td></tr>
+  <!-- index=17 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_item.lineno" id=link25  >lineno</a></td><td class=SDescription>The file name from where this transaction originated, if provided at the call site.</td></tr>
+  <!-- index=18 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_item.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=19 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_item.new" id=link26  >new</a></td><td class=SDescription>Create a new instance of this type, giving it the optional <i>name</i>.</td></tr>
+  <!-- index=20 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_item.convert2string" id=link27  >convert2string</a></td><td class=SDescription>Returns a string showing the contents of this transaction.</td></tr>
+  <!-- index=21 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_item.do_copy" id=link28  >do_copy</a></td><td class=SDescription>Copy the <i>rhs</i> object into this object. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.Variables" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">Variables</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.element_kind" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">element_kind</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_elem_kind_e element_kind
+  </td></tr></table></blockquote><div class=CBody><p>Kind of element being accessed: REG, MEM, or FIELD.&nbsp; See <a href="uvm_reg_model-svh.html#uvm_elem_kind_e" class=LType id=link30  >uvm_elem_kind_e</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.element" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">element</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_object element
+  </td></tr></table></blockquote><div class=CBody><p>A handle to the RegModel model element associated with this transaction.&nbsp; Use <a href="#uvm_reg_item.element_kind" class=LVariable id=link31  >element_kind</a> to determine the type to cast  to: <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link32  >uvm_reg</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link33  >uvm_mem</a>, or <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link34  >uvm_reg_field</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.kind" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">kind</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>rand uvm_access_e kind
+  </td></tr></table></blockquote><div class=CBody><p>Kind of access: READ or WRITE.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.value" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">value</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>rand uvm_reg_data_t value[]
+  </td></tr></table></blockquote><div class=CBody><p>The value to write to, or after completion, the value read from the DUT.&nbsp; Burst operations use the <a href="#uvm_reg_item.value" class=LVariable id=link35  >values</a> property.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.offset" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">offset</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>rand uvm_reg_addr_t offset
+  </td></tr></table></blockquote><div class=CBody><p>For memory accesses, the offset address.&nbsp; For bursts, the <i>starting</i> offset address.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.status" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">status</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_status_e status
+  </td></tr></table></blockquote><div class=CBody><p>The result of the transaction: IS_OK, HAS_X, or ERROR.&nbsp; See <a href="uvm_reg_model-svh.html#uvm_status_e" class=LType id=link36  >uvm_status_e</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.local_map" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">local_map</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_map local_map
+  </td></tr></table></blockquote><div class=CBody><p>The local map used to obtain addresses.&nbsp; Users may customize address-translation using this map.&nbsp; Access to the sequencer and bus adapter can be obtained by getting this map&rsquo;s root map, then calling <a href="uvm_reg_map-svh.html#uvm_reg_map.get_sequencer" class=LMethod id=link37  >uvm_reg_map::get_sequencer</a> and <a href="uvm_reg_map-svh.html#uvm_reg_map.get_adapter" class=LMethod id=link38  >uvm_reg_map::get_adapter</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.map" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">map</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_map map
+  </td></tr></table></blockquote><div class=CBody><p>The original map specified for the operation.&nbsp; The actual <a href="#uvm_reg_item.map" class=LVariable id=link39  >map</a> used may differ when a test or sequence written at the block level is reused at the system level.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=11 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.path" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">path</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_path_e path
+  </td></tr></table></blockquote><div class=CBody><p>The path being used: <a href="uvm_reg_model-svh.html#UVM_FRONTDOOR" class=LConstant id=link40  >UVM_FRONTDOOR</a> or <a href="uvm_reg_model-svh.html#UVM_BACKDOOR" class=LConstant id=link41  >UVM_BACKDOOR</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=12 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.parent" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">parent</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>rand uvm_sequence_base parent
+  </td></tr></table></blockquote><div class=CBody><p>The sequence from which the operation originated.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=13 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.prior" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">prior</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>int prior = -1
+  </td></tr></table></blockquote><div class=CBody><p>The priority requested of this transfer, as defined by <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.start_item" class=LMethod id=link42  >uvm_sequence_base::start_item</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=14 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.extension" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">extension</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>rand uvm_object extension
+  </td></tr></table></blockquote><div class=CBody><p>Handle to optional user data, as conveyed in the call to write(), read(), mirror(), or update() used to trigger the operation.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=15 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.bd_kind" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">bd_kind</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>string bd_kind
+  </td></tr></table></blockquote><div class=CBody><p>If path is UVM_BACKDOOR, this member specifies the abstraction kind for the backdoor access, e.g.&nbsp; &ldquo;RTL&rdquo; or &ldquo;GATES&rdquo;.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=16 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.fname" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">fname</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>string fname
+  </td></tr></table></blockquote><div class=CBody><p>The file name from where this transaction originated, if provided at the call site.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=17 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.lineno" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">lineno</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>int lineno
+  </td></tr></table></blockquote><div class=CBody><p>The file name from where this transaction originated, if provided at the call site.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=18 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.Methods" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=19 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.new" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Create a new instance of this type, giving it the optional <i>name</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=20 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.convert2string" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">convert2string</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string convert2string()
+  </td></tr></table></blockquote><div class=CBody><p>Returns a string showing the contents of this transaction.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=21 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_item.do_copy" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">do_copy</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void do_copy(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rhs</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Copy the <i>rhs</i> object into this object.&nbsp; The <i>rhs</i> object must derive from <a href="#uvm_reg_item" class=LClass id=link43  >uvm_reg_item</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=22 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_bus_op" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">uvm_reg_bus_op</a></h2><div class=CBody><p>Struct that defines a generic bus transaction for register and memory accesses, having <i>kind</i> (read or write), <i>address</i>, <i>data</i>, and <i>byte enable</i> information.&nbsp; If the bus is narrower than the register or memory location being accessed, there will be multiple of these bus operations for every abstract <a href="#uvm_reg_item" class=LClass id=link51  >uvm_reg_item</a> transaction.&nbsp; In this case, <i>data</i> represents the portion of <a href="#uvm_reg_item.value" class=LVariable id=link52  >uvm_reg_item::value</a> being transferred during this bus cycle.&nbsp; If the bus is wide enough to perform the register or memory operation in a single cycle, <i>data</i> will be the same as <a href="#uvm_reg_item.value" class=LVariable id=link53  >uvm_reg_item::value</a>.</p>
+
+<!--START_ND_SUMMARY index=22-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=22 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_reg_bus_op" >uvm_reg_bus_op</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Struct that defines a generic bus transaction for register and memory accesses, having <i>kind</i> (read or write), <i>address</i>, <i>data</i>, and <i>byte enable</i> information. </td></tr>
+  <!-- index=23 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_bus_op.Variables" >Variables</a></td><td class=SDescription></td></tr>
+  <!-- index=24 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_bus_op.kind" id=link44  >kind</a></td><td class=SDescription>Kind of access: READ or WRITE.</td></tr>
+  <!-- index=25 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_bus_op.addr" id=link45  >addr</a></td><td class=SDescription>The bus address.</td></tr>
+  <!-- index=26 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_bus_op.data" id=link46  >data</a></td><td class=SDescription>The data to write. </td></tr>
+  <!-- index=27 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_bus_op.n_bits" id=link47  >n_bits</a></td><td class=SDescription>The number of bits of <a href="#uvm_reg_item.value" class=LVariable id=link48  >uvm_reg_item::value</a> being transferred by this transaction.</td></tr>
+  <!-- index=28 -->
+
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_bus_op.byte_en" id=link49  >byte_en</a></td><td class=SDescription>Enables for the byte lanes on the bus. </td></tr>
+  <!-- index=29 -->
+
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_bus_op.status" id=link50  >status</a></td><td class=SDescription>The result of the transaction: UVM_IS_OK, UVM_HAS_X, UVM_NOT_OK. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=23 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bus_op.Variables" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">Variables</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=24 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bus_op.kind" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">kind</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_access_e kind
+  </td></tr></table></blockquote><div class=CBody><p>Kind of access: READ or WRITE.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=25 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bus_op.addr" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">addr</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_addr_t addr
+  </td></tr></table></blockquote><div class=CBody><p>The bus address.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=26 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bus_op.data" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">data</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_data_t data
+  </td></tr></table></blockquote><div class=CBody><p>The data to write.&nbsp; If the bus width is smaller than the register or memory width, <i>data</i> represents only the portion of <i>value</i> that is being transferred this bus cycle.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=27 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bus_op.n_bits" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">n_bits</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>int n_bits
+  </td></tr></table></blockquote><div class=CBody><p>The number of bits of <a href="#uvm_reg_item.value" class=LVariable id=link54  >uvm_reg_item::value</a> being transferred by this transaction.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=28 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bus_op.byte_en" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">byte_en</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_byte_en_t byte_en
+  </td></tr></table></blockquote><div class=CBody><p>Enables for the byte lanes on the bus.&nbsp; Meaningful only when the bus supports byte enables and the operation originates from a field write/read.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=29 -->
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bus_op.status" href="../../src_view/reg/uvm_reg_item.svh.html#L41" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_item.svh" data-src-line="41">status</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_status_e status
+  </td></tr></table></blockquote><div class=CBody><p>The result of the transaction: UVM_IS_OK, UVM_HAS_X, UVM_NOT_OK.&nbsp; See <a href="uvm_reg_model-svh.html#uvm_status_e" class=LType id=link55  >uvm_status_e</a>.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

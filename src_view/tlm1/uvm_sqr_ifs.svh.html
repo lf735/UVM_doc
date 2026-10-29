@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tlm1/uvm_sqr_ifs.svh | UVM 1.2 Source Code</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="src-viewer-body">
+  <div class="src-sticky-bar">
+    <div class="src-breadcrumbs">
+      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <span class="sep">/</span>
+      <span class="src-cur-file">tlm1/uvm_sqr_ifs.svh</span>
+      <span class="badge badge-info">252 lines</span>
+      <span class="badge badge-secondary">10.0 KB</span>
+    </div>
+    <div class="src-actions">
+      <select class="sym-jump-select" onchange="if(this.value) window.location.hash = this.value">
+              <option value="">Jump to Symbol (14 symbols)...</option>
+              <option value="#L25">macro: `UVM_SEQ_ITEM_TASK_ERROR (L25)</option><option value="#L26">macro: `UVM_SEQ_ITEM_FUNCTION_ERROR (L26)</option><option value="#L38">class: uvm_sqr_if_base (L38)</option>
+            </select>
+      <a href="../../docs_view/tlm1/uvm_sqr_ifs-svh.html" class="btn btn-outline" target="_top" title="View Reference Documentation for this file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <span>Documentation</span>
+                </a>
+      <button class="btn btn-outline" id="copy-src-btn" title="Copy raw source code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Code</span>
+      </button>
+      <a href="../../uvm-1.2/src/tlm1/uvm_sqr_ifs.svh" download class="btn btn-outline" title="Download raw source file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Raw</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="src-code-container">
+    <table class="sv-code-table">
+      <tbody>
+        <tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2011 Mentor Graphics Corporation</span></td></tr><tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Cadence Design Systems, Inc.</span></td></tr><tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Copyright 2010 Synopsys, Inc.</span></td></tr><tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   Copyright 2013-2014 NVIDIA Corporation</span></td></tr><tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr><tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr><tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr><tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr><tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr><tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr><tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr><tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr><tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr><tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr><tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr><tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr><tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr><tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr><tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_SEQ_ITEM_TASK_ERROR</span> <span class="sv-string">&quot;Sequencer interface task not implemented&quot;</span></td></tr><tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_SEQ_ITEM_FUNCTION_ERROR</span> <span class="sv-string">&quot;Sequencer interface function not implemented&quot;</span></td></tr><tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">&nbsp;</td></tr><tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-comment">// CLASS: uvm_sqr_if_base #(REQ,RSP)</span></td></tr><tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-comment">// This class defines an interface for sequence drivers to communicate with</span></td></tr><tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-comment">// sequencers. The driver requires the interface via a port, and the sequencer</span></td></tr><tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-comment">// implements it and provides it via an export.</span></td></tr><tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">&nbsp;</td></tr><tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_sqr_if_base</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-keyword">type</span> <span class="sv-ident">T1</span><span class="sv-op">=</span><span class="sv-uvm-type">uvm_object</span><span class="sv-op">,</span> <span class="sv-ident">T2</span><span class="sv-op">=</span><span class="sv-ident">T1</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">&nbsp;</td></tr><tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">  <span class="sv-comment">// Task: get_next_item</span></td></tr><tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">  <span class="sv-comment">// Retrieves the next available item from a sequence.  The call will block</span></td></tr><tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">  <span class="sv-comment">// until an item is available.  The following steps occur on this call:</span></td></tr><tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">  <span class="sv-comment">// 1 - Arbitrate among requesting, unlocked, relevant sequences - choose the</span></td></tr><tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">  <span class="sv-comment">//     highest priority sequence based on the current sequencer arbitration</span></td></tr><tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">  <span class="sv-comment">//     mode. If no sequence is available, wait for a requesting unlocked</span></td></tr><tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">  <span class="sv-comment">//     relevant sequence,  then re-arbitrate.</span></td></tr><tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">  <span class="sv-comment">// 2 - The chosen sequence will return from wait_for_grant</span></td></tr><tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">  <span class="sv-comment">// 3 - The chosen sequence &lt;uvm_sequence_base::pre_do&gt; is called</span></td></tr><tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">  <span class="sv-comment">// 4 - The chosen sequence item is randomized</span></td></tr><tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">  <span class="sv-comment">// 5 - The chosen sequence &lt;uvm_sequence_base::post_do&gt; is called</span></td></tr><tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">  <span class="sv-comment">// 6 - Return with a reference to the item</span></td></tr><tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">  <span class="sv-comment">// Once &lt;get_next_item&gt; is called, &lt;item_done&gt; must be called to indicate the</span></td></tr><tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">  <span class="sv-comment">// completion of the request to the sequencer.  This will remove the request</span></td></tr><tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">  <span class="sv-comment">// item from the sequencer FIFO.</span></td></tr><tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">&nbsp;</td></tr><tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">get_next_item</span><span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T1</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;get_next_item&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code"> </td></tr><tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">&nbsp;</td></tr><tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">  <span class="sv-comment">// Task: try_next_item</span></td></tr><tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">  <span class="sv-comment">// Retrieves the next available item from a sequence if one is available.</span></td></tr><tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code">  <span class="sv-comment">// Otherwise, the function returns immediately with request set to ~null~.</span></td></tr><tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code">  <span class="sv-comment">// The following steps occur on this call:</span></td></tr><tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code">  <span class="sv-comment">// 1 - Arbitrate among requesting, unlocked, relevant sequences - choose the</span></td></tr><tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code">  <span class="sv-comment">//     highest priority sequence based on the current sequencer arbitration</span></td></tr><tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code">  <span class="sv-comment">//     mode. If no sequence is available, return ~null~.</span></td></tr><tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code">  <span class="sv-comment">// 2 - The chosen sequence will return from wait_for_grant</span></td></tr><tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code">  <span class="sv-comment">// 3 - The chosen sequence &lt;uvm_sequence_base::pre_do&gt; is called</span></td></tr><tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code">  <span class="sv-comment">// 4 - The chosen sequence item is randomized</span></td></tr><tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code">  <span class="sv-comment">// 5 - The chosen sequence &lt;uvm_sequence_base::post_do&gt; is called</span></td></tr><tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code">  <span class="sv-comment">// 6 - Return with a reference to the item</span></td></tr><tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code">  <span class="sv-comment">// Once &lt;try_next_item&gt; is called, &lt;item_done&gt; must be called to indicate the</span></td></tr><tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code">  <span class="sv-comment">// completion of the request to the sequencer.  This will remove the request</span></td></tr><tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code">  <span class="sv-comment">// item from the sequencer FIFO.</span></td></tr><tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code">&nbsp;</td></tr><tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">try_next_item</span><span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T1</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;try_next_item&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code">&nbsp;</td></tr><tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code">&nbsp;</td></tr><tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code">  <span class="sv-comment">// Function: item_done</span></td></tr><tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code">  <span class="sv-comment">// Indicates that the request is completed to the sequencer.  Any </span></td></tr><tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code">  <span class="sv-comment">// &lt;uvm_sequence_base::wait_for_item_done&gt;</span></td></tr><tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code">  <span class="sv-comment">// calls made by a sequence for this item will return.</span></td></tr><tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code">  <span class="sv-comment">// The current item is removed from the sequencer FIFO.</span></td></tr><tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L96"><td class="ln" data-line="96"><a href="#L96">96</a></td><td class="code">  <span class="sv-comment">// If a response item is provided, then it will be sent back to the requesting</span></td></tr><tr id="L97"><td class="ln" data-line="97"><a href="#L97">97</a></td><td class="code">  <span class="sv-comment">// sequence. The response item must have its sequence ID and transaction ID</span></td></tr><tr id="L98"><td class="ln" data-line="98"><a href="#L98">98</a></td><td class="code">  <span class="sv-comment">// set correctly, using the &lt;uvm_sequence_item::set_id_info&gt; method:</span></td></tr><tr id="L99"><td class="ln" data-line="99"><a href="#L99">99</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L100"><td class="ln" data-line="100"><a href="#L100">100</a></td><td class="code">  <span class="sv-comment">//|  rsp.set_id_info(req);</span></td></tr><tr id="L101"><td class="ln" data-line="101"><a href="#L101">101</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L102"><td class="ln" data-line="102"><a href="#L102">102</a></td><td class="code">  <span class="sv-comment">// Before &lt;item_done&gt; is called, any calls to peek will retrieve the current</span></td></tr><tr id="L103"><td class="ln" data-line="103"><a href="#L103">103</a></td><td class="code">  <span class="sv-comment">// item that was obtained by &lt;get_next_item&gt;.  After &lt;item_done&gt; is called, peek</span></td></tr><tr id="L104"><td class="ln" data-line="104"><a href="#L104">104</a></td><td class="code">  <span class="sv-comment">// will cause the sequencer to arbitrate for a new item.</span></td></tr><tr id="L105"><td class="ln" data-line="105"><a href="#L105">105</a></td><td class="code">&nbsp;</td></tr><tr id="L106"><td class="ln" data-line="106"><a href="#L106">106</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">item_done</span><span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T2</span> <span class="sv-ident">t</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L107"><td class="ln" data-line="107"><a href="#L107">107</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;item_done&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L108"><td class="ln" data-line="108"><a href="#L108">108</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L109"><td class="ln" data-line="109"><a href="#L109">109</a></td><td class="code">&nbsp;</td></tr><tr id="L110"><td class="ln" data-line="110"><a href="#L110">110</a></td><td class="code">  </td></tr><tr id="L111"><td class="ln" data-line="111"><a href="#L111">111</a></td><td class="code">  <span class="sv-comment">// Task: wait_for_sequences</span></td></tr><tr id="L112"><td class="ln" data-line="112"><a href="#L112">112</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L113"><td class="ln" data-line="113"><a href="#L113">113</a></td><td class="code">  <span class="sv-comment">// Waits for a sequence to have a new item available. The default</span></td></tr><tr id="L114"><td class="ln" data-line="114"><a href="#L114">114</a></td><td class="code">  <span class="sv-comment">// implementation in the sequencer calls</span></td></tr><tr id="L115"><td class="ln" data-line="115"><a href="#L115">115</a></td><td class="code">  <span class="sv-comment">//  &lt;uvm_wait_for_nba_region&gt;.</span></td></tr><tr id="L116"><td class="ln" data-line="116"><a href="#L116">116</a></td><td class="code">  <span class="sv-comment">// User-derived sequencers</span></td></tr><tr id="L117"><td class="ln" data-line="117"><a href="#L117">117</a></td><td class="code">  <span class="sv-comment">// may override its &lt;wait_for_sequences&gt; implementation to perform some other</span></td></tr><tr id="L118"><td class="ln" data-line="118"><a href="#L118">118</a></td><td class="code">  <span class="sv-comment">// application-specific implementation.</span></td></tr><tr id="L119"><td class="ln" data-line="119"><a href="#L119">119</a></td><td class="code">&nbsp;</td></tr><tr id="L120"><td class="ln" data-line="120"><a href="#L120">120</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">wait_for_sequences</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L121"><td class="ln" data-line="121"><a href="#L121">121</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;wait_for_sequences&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L122"><td class="ln" data-line="122"><a href="#L122">122</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L123"><td class="ln" data-line="123"><a href="#L123">123</a></td><td class="code">&nbsp;</td></tr><tr id="L124"><td class="ln" data-line="124"><a href="#L124">124</a></td><td class="code">&nbsp;</td></tr><tr id="L125"><td class="ln" data-line="125"><a href="#L125">125</a></td><td class="code">  <span class="sv-comment">// Function: has_do_available</span></td></tr><tr id="L126"><td class="ln" data-line="126"><a href="#L126">126</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L127"><td class="ln" data-line="127"><a href="#L127">127</a></td><td class="code">  <span class="sv-comment">// Indicates whether a sequence item is available for immediate processing.</span></td></tr><tr id="L128"><td class="ln" data-line="128"><a href="#L128">128</a></td><td class="code">  <span class="sv-comment">// Implementations should return 1 if an item is available, 0 otherwise. </span></td></tr><tr id="L129"><td class="ln" data-line="129"><a href="#L129">129</a></td><td class="code">&nbsp;</td></tr><tr id="L130"><td class="ln" data-line="130"><a href="#L130">130</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">has_do_available</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L131"><td class="ln" data-line="131"><a href="#L131">131</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;has_do_available&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L132"><td class="ln" data-line="132"><a href="#L132">132</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L133"><td class="ln" data-line="133"><a href="#L133">133</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L134"><td class="ln" data-line="134"><a href="#L134">134</a></td><td class="code">&nbsp;</td></tr><tr id="L135"><td class="ln" data-line="135"><a href="#L135">135</a></td><td class="code">&nbsp;</td></tr><tr id="L136"><td class="ln" data-line="136"><a href="#L136">136</a></td><td class="code">  <span class="sv-comment">//-----------------------</span></td></tr><tr id="L137"><td class="ln" data-line="137"><a href="#L137">137</a></td><td class="code">  <span class="sv-comment">// uvm_tlm_blocking_slave_if</span></td></tr><tr id="L138"><td class="ln" data-line="138"><a href="#L138">138</a></td><td class="code">  <span class="sv-comment">//-----------------------</span></td></tr><tr id="L139"><td class="ln" data-line="139"><a href="#L139">139</a></td><td class="code">&nbsp;</td></tr><tr id="L140"><td class="ln" data-line="140"><a href="#L140">140</a></td><td class="code">  <span class="sv-comment">// Task: get</span></td></tr><tr id="L141"><td class="ln" data-line="141"><a href="#L141">141</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L142"><td class="ln" data-line="142"><a href="#L142">142</a></td><td class="code">  <span class="sv-comment">// Retrieves the next available item from a sequence.  The call blocks until</span></td></tr><tr id="L143"><td class="ln" data-line="143"><a href="#L143">143</a></td><td class="code">  <span class="sv-comment">// an item is available. The following steps occur on this call:</span></td></tr><tr id="L144"><td class="ln" data-line="144"><a href="#L144">144</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L145"><td class="ln" data-line="145"><a href="#L145">145</a></td><td class="code">  <span class="sv-comment">// 1 - Arbitrate among requesting, unlocked, relevant sequences - choose the</span></td></tr><tr id="L146"><td class="ln" data-line="146"><a href="#L146">146</a></td><td class="code">  <span class="sv-comment">//     highest priority sequence based on the current sequencer arbitration</span></td></tr><tr id="L147"><td class="ln" data-line="147"><a href="#L147">147</a></td><td class="code">  <span class="sv-comment">//     mode. If no sequence is available, wait for a requesting unlocked</span></td></tr><tr id="L148"><td class="ln" data-line="148"><a href="#L148">148</a></td><td class="code">  <span class="sv-comment">//     relevant sequence, then re-arbitrate.</span></td></tr><tr id="L149"><td class="ln" data-line="149"><a href="#L149">149</a></td><td class="code">  <span class="sv-comment">// 2 - The chosen sequence will return from &lt;uvm_sequence_base::wait_for_grant&gt;</span></td></tr><tr id="L150"><td class="ln" data-line="150"><a href="#L150">150</a></td><td class="code">  <span class="sv-comment">// 3 - The chosen sequence &lt;uvm_sequence_base::pre_do&gt; is called</span></td></tr><tr id="L151"><td class="ln" data-line="151"><a href="#L151">151</a></td><td class="code">  <span class="sv-comment">// 4 - The chosen sequence item is randomized</span></td></tr><tr id="L152"><td class="ln" data-line="152"><a href="#L152">152</a></td><td class="code">  <span class="sv-comment">// 5 - The chosen sequence &lt;uvm_sequence_base::post_do&gt; is called</span></td></tr><tr id="L153"><td class="ln" data-line="153"><a href="#L153">153</a></td><td class="code">  <span class="sv-comment">// 6 - Indicate &lt;item_done&gt; to the sequencer</span></td></tr><tr id="L154"><td class="ln" data-line="154"><a href="#L154">154</a></td><td class="code">  <span class="sv-comment">// 7 - Return with a reference to the item</span></td></tr><tr id="L155"><td class="ln" data-line="155"><a href="#L155">155</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L156"><td class="ln" data-line="156"><a href="#L156">156</a></td><td class="code">  <span class="sv-comment">// When get is called, &lt;item_done&gt; may not be called.  A new item can be</span></td></tr><tr id="L157"><td class="ln" data-line="157"><a href="#L157">157</a></td><td class="code">  <span class="sv-comment">// obtained by calling get again, or a response may be sent using either</span></td></tr><tr id="L158"><td class="ln" data-line="158"><a href="#L158">158</a></td><td class="code">  <span class="sv-comment">// &lt;put&gt;, or uvm_driver::rsp_port.write().</span></td></tr><tr id="L159"><td class="ln" data-line="159"><a href="#L159">159</a></td><td class="code">&nbsp;</td></tr><tr id="L160"><td class="ln" data-line="160"><a href="#L160">160</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">get</span><span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T1</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L161"><td class="ln" data-line="161"><a href="#L161">161</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;get&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L162"><td class="ln" data-line="162"><a href="#L162">162</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L163"><td class="ln" data-line="163"><a href="#L163">163</a></td><td class="code">&nbsp;</td></tr><tr id="L164"><td class="ln" data-line="164"><a href="#L164">164</a></td><td class="code">  <span class="sv-comment">// Task: peek</span></td></tr><tr id="L165"><td class="ln" data-line="165"><a href="#L165">165</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L166"><td class="ln" data-line="166"><a href="#L166">166</a></td><td class="code">  <span class="sv-comment">// Returns the current request item if one is in the sequencer FIFO.  If no</span></td></tr><tr id="L167"><td class="ln" data-line="167"><a href="#L167">167</a></td><td class="code">  <span class="sv-comment">// item is in the FIFO, then the call will block until the sequencer has a new</span></td></tr><tr id="L168"><td class="ln" data-line="168"><a href="#L168">168</a></td><td class="code">  <span class="sv-comment">// request. The following steps will occur if the sequencer FIFO is empty:</span></td></tr><tr id="L169"><td class="ln" data-line="169"><a href="#L169">169</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L170"><td class="ln" data-line="170"><a href="#L170">170</a></td><td class="code">  <span class="sv-comment">// 1 - Arbitrate among requesting, unlocked, relevant sequences - choose the</span></td></tr><tr id="L171"><td class="ln" data-line="171"><a href="#L171">171</a></td><td class="code">  <span class="sv-comment">// highest priority sequence based on the current sequencer arbitration mode.</span></td></tr><tr id="L172"><td class="ln" data-line="172"><a href="#L172">172</a></td><td class="code">  <span class="sv-comment">// If no sequence is available, wait for a requesting unlocked relevant</span></td></tr><tr id="L173"><td class="ln" data-line="173"><a href="#L173">173</a></td><td class="code">  <span class="sv-comment">// sequence, then re-arbitrate.</span></td></tr><tr id="L174"><td class="ln" data-line="174"><a href="#L174">174</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L175"><td class="ln" data-line="175"><a href="#L175">175</a></td><td class="code">  <span class="sv-comment">// 2 - The chosen sequence will return from &lt;uvm_sequence_base::wait_for_grant&gt;</span></td></tr><tr id="L176"><td class="ln" data-line="176"><a href="#L176">176</a></td><td class="code">  <span class="sv-comment">// 3 - The chosen sequence &lt;uvm_sequence_base::pre_do&gt; is called</span></td></tr><tr id="L177"><td class="ln" data-line="177"><a href="#L177">177</a></td><td class="code">  <span class="sv-comment">// 4 - The chosen sequence item is randomized</span></td></tr><tr id="L178"><td class="ln" data-line="178"><a href="#L178">178</a></td><td class="code">  <span class="sv-comment">// 5 - The chosen sequence &lt;uvm_sequence_base::post_do&gt; is called</span></td></tr><tr id="L179"><td class="ln" data-line="179"><a href="#L179">179</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L180"><td class="ln" data-line="180"><a href="#L180">180</a></td><td class="code">  <span class="sv-comment">// Once a request item has been retrieved and is in the sequencer FIFO,</span></td></tr><tr id="L181"><td class="ln" data-line="181"><a href="#L181">181</a></td><td class="code">  <span class="sv-comment">// subsequent calls to peek will return the same item.  The item will stay in</span></td></tr><tr id="L182"><td class="ln" data-line="182"><a href="#L182">182</a></td><td class="code">  <span class="sv-comment">// the FIFO until either get or &lt;item_done&gt; is called.</span></td></tr><tr id="L183"><td class="ln" data-line="183"><a href="#L183">183</a></td><td class="code">&nbsp;</td></tr><tr id="L184"><td class="ln" data-line="184"><a href="#L184">184</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">peek</span><span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T1</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L185"><td class="ln" data-line="185"><a href="#L185">185</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;peek&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L186"><td class="ln" data-line="186"><a href="#L186">186</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L187"><td class="ln" data-line="187"><a href="#L187">187</a></td><td class="code">&nbsp;</td></tr><tr id="L188"><td class="ln" data-line="188"><a href="#L188">188</a></td><td class="code">&nbsp;</td></tr><tr id="L189"><td class="ln" data-line="189"><a href="#L189">189</a></td><td class="code">  <span class="sv-comment">// Task: put</span></td></tr><tr id="L190"><td class="ln" data-line="190"><a href="#L190">190</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L191"><td class="ln" data-line="191"><a href="#L191">191</a></td><td class="code">  <span class="sv-comment">// Sends a response back to the sequence that issued the request. Before the</span></td></tr><tr id="L192"><td class="ln" data-line="192"><a href="#L192">192</a></td><td class="code">  <span class="sv-comment">// response is put, it must have its sequence ID and transaction ID set to</span></td></tr><tr id="L193"><td class="ln" data-line="193"><a href="#L193">193</a></td><td class="code">  <span class="sv-comment">// match the request.  This can be done using the</span></td></tr><tr id="L194"><td class="ln" data-line="194"><a href="#L194">194</a></td><td class="code">  <span class="sv-comment">// &lt;uvm_sequence_item::set_id_info&gt; call:</span></td></tr><tr id="L195"><td class="ln" data-line="195"><a href="#L195">195</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L196"><td class="ln" data-line="196"><a href="#L196">196</a></td><td class="code">  <span class="sv-comment">//   rsp.set_id_info(req);</span></td></tr><tr id="L197"><td class="ln" data-line="197"><a href="#L197">197</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L198"><td class="ln" data-line="198"><a href="#L198">198</a></td><td class="code">  <span class="sv-comment">// While this is a task, it will not consume time (including delta cycles).</span></td></tr><tr id="L199"><td class="ln" data-line="199"><a href="#L199">199</a></td><td class="code">  <span class="sv-comment">// The response will be put into the</span></td></tr><tr id="L200"><td class="ln" data-line="200"><a href="#L200">200</a></td><td class="code">  <span class="sv-comment">// sequence response queue or it will be sent to the</span></td></tr><tr id="L201"><td class="ln" data-line="201"><a href="#L201">201</a></td><td class="code">  <span class="sv-comment">// sequence response handler.</span></td></tr><tr id="L202"><td class="ln" data-line="202"><a href="#L202">202</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L203"><td class="ln" data-line="203"><a href="#L203">203</a></td><td class="code">   </td></tr><tr id="L204"><td class="ln" data-line="204"><a href="#L204">204</a></td><td class="code">&nbsp;</td></tr><tr id="L205"><td class="ln" data-line="205"><a href="#L205">205</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">put</span><span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T2</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L206"><td class="ln" data-line="206"><a href="#L206">206</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;put&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L207"><td class="ln" data-line="207"><a href="#L207">207</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L208"><td class="ln" data-line="208"><a href="#L208">208</a></td><td class="code">&nbsp;</td></tr><tr id="L209"><td class="ln" data-line="209"><a href="#L209">209</a></td><td class="code">&nbsp;</td></tr><tr id="L210"><td class="ln" data-line="210"><a href="#L210">210</a></td><td class="code">  <span class="sv-comment">// Function: put_response</span></td></tr><tr id="L211"><td class="ln" data-line="211"><a href="#L211">211</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L212"><td class="ln" data-line="212"><a href="#L212">212</a></td><td class="code">  <span class="sv-comment">// Sends a response back to the sequence that issued the request. Before the</span></td></tr><tr id="L213"><td class="ln" data-line="213"><a href="#L213">213</a></td><td class="code">  <span class="sv-comment">// response is put, it must have its sequence ID and transaction ID set to</span></td></tr><tr id="L214"><td class="ln" data-line="214"><a href="#L214">214</a></td><td class="code">  <span class="sv-comment">// match the request.  This can be done using the</span></td></tr><tr id="L215"><td class="ln" data-line="215"><a href="#L215">215</a></td><td class="code">  <span class="sv-comment">// &lt;uvm_sequence_item::set_id_info&gt; call:</span></td></tr><tr id="L216"><td class="ln" data-line="216"><a href="#L216">216</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L217"><td class="ln" data-line="217"><a href="#L217">217</a></td><td class="code">  <span class="sv-comment">//   rsp.set_id_info(req);</span></td></tr><tr id="L218"><td class="ln" data-line="218"><a href="#L218">218</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L219"><td class="ln" data-line="219"><a href="#L219">219</a></td><td class="code">&nbsp;</td></tr><tr id="L220"><td class="ln" data-line="220"><a href="#L220">220</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">put_response</span><span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T2</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L221"><td class="ln" data-line="221"><a href="#L221">221</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;put_response&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L222"><td class="ln" data-line="222"><a href="#L222">222</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L223"><td class="ln" data-line="223"><a href="#L223">223</a></td><td class="code">&nbsp;</td></tr><tr id="L224"><td class="ln" data-line="224"><a href="#L224">224</a></td><td class="code">  <span class="sv-comment">// Function: disable_auto_item_recording</span></td></tr><tr id="L225"><td class="ln" data-line="225"><a href="#L225">225</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L226"><td class="ln" data-line="226"><a href="#L226">226</a></td><td class="code">  <span class="sv-comment">// By default, item recording is performed automatically when</span></td></tr><tr id="L227"><td class="ln" data-line="227"><a href="#L227">227</a></td><td class="code">  <span class="sv-comment">// get_next_item() and item_done() are called.</span></td></tr><tr id="L228"><td class="ln" data-line="228"><a href="#L228">228</a></td><td class="code">  <span class="sv-comment">// However, this works only for simple, in-order, blocking transaction</span></td></tr><tr id="L229"><td class="ln" data-line="229"><a href="#L229">229</a></td><td class="code">  <span class="sv-comment">// execution. For pipelined and out-of-order transaction execution, the</span></td></tr><tr id="L230"><td class="ln" data-line="230"><a href="#L230">230</a></td><td class="code">  <span class="sv-comment">// driver must turn off this automatic recording and call</span></td></tr><tr id="L231"><td class="ln" data-line="231"><a href="#L231">231</a></td><td class="code">  <span class="sv-comment">// &lt;uvm_transaction::accept_tr&gt;, &lt;uvm_transaction::begin_tr&gt;</span></td></tr><tr id="L232"><td class="ln" data-line="232"><a href="#L232">232</a></td><td class="code">  <span class="sv-comment">// and &lt;uvm_transaction::end_tr&gt; explicitly at appropriate points in time.</span></td></tr><tr id="L233"><td class="ln" data-line="233"><a href="#L233">233</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L234"><td class="ln" data-line="234"><a href="#L234">234</a></td><td class="code">  <span class="sv-comment">// This methods be called at the beginning of the driver&#x27;s ~run_phase()~ method.</span></td></tr><tr id="L235"><td class="ln" data-line="235"><a href="#L235">235</a></td><td class="code">  <span class="sv-comment">// Once disabled, automatic recording cannot be re-enabled.</span></td></tr><tr id="L236"><td class="ln" data-line="236"><a href="#L236">236</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L237"><td class="ln" data-line="237"><a href="#L237">237</a></td><td class="code">  <span class="sv-comment">// For backward-compatibility, automatic item recording can be globally</span></td></tr><tr id="L238"><td class="ln" data-line="238"><a href="#L238">238</a></td><td class="code">  <span class="sv-comment">// turned off at compile time by defining UVM_DISABLE_AUTO_ITEM_RECORDING</span></td></tr><tr id="L239"><td class="ln" data-line="239"><a href="#L239">239</a></td><td class="code">&nbsp;</td></tr><tr id="L240"><td class="ln" data-line="240"><a href="#L240">240</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">disable_auto_item_recording</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L241"><td class="ln" data-line="241"><a href="#L241">241</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;disable_auto_item_recording&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L242"><td class="ln" data-line="242"><a href="#L242">242</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L243"><td class="ln" data-line="243"><a href="#L243">243</a></td><td class="code">  </td></tr><tr id="L244"><td class="ln" data-line="244"><a href="#L244">244</a></td><td class="code">  <span class="sv-comment">// Function: is_auto_item_recording_enabled</span></td></tr><tr id="L245"><td class="ln" data-line="245"><a href="#L245">245</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L246"><td class="ln" data-line="246"><a href="#L246">246</a></td><td class="code">  <span class="sv-comment">// Return TRUE if automatic item recording is enabled for this port instance.</span></td></tr><tr id="L247"><td class="ln" data-line="247"><a href="#L247">247</a></td><td class="code">&nbsp;</td></tr><tr id="L248"><td class="ln" data-line="248"><a href="#L248">248</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">is_auto_item_recording_enabled</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L249"><td class="ln" data-line="249"><a href="#L249">249</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;is_auto_item_recording_enabled&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_SEQ_ITEM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L250"><td class="ln" data-line="250"><a href="#L250">250</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L251"><td class="ln" data-line="251"><a href="#L251">251</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L252"><td class="ln" data-line="252"><a href="#L252">252</a></td><td class="code"><span class="sv-keyword">endclass</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <textarea id="raw-source-text" style="display:none">//
+//------------------------------------------------------------------------------
+//   Copyright 2007-2011 Mentor Graphics Corporation
+//   Copyright 2007-2010 Cadence Design Systems, Inc.
+//   Copyright 2010 Synopsys, Inc.
+//   Copyright 2013-2014 NVIDIA Corporation
+//   All Rights Reserved Worldwide
+//
+//   Licensed under the Apache License, Version 2.0 (the
+//   &quot;License&quot;); you may not use this file except in
+//   compliance with the License.  You may obtain a copy of
+//   the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in
+//   writing, software distributed under the License is
+//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR
+//   CONDITIONS OF ANY KIND, either express or implied.  See
+//   the License for the specific language governing
+//   permissions and limitations under the License.
+//------------------------------------------------------------------------------
+
+
+`define UVM_SEQ_ITEM_TASK_ERROR &quot;Sequencer interface task not implemented&quot;
+`define UVM_SEQ_ITEM_FUNCTION_ERROR &quot;Sequencer interface function not implemented&quot;
+
+//------------------------------------------------------------------------------
+//
+// CLASS: uvm_sqr_if_base #(REQ,RSP)
+//
+// This class defines an interface for sequence drivers to communicate with
+// sequencers. The driver requires the interface via a port, and the sequencer
+// implements it and provides it via an export.
+//
+//------------------------------------------------------------------------------
+
+virtual class uvm_sqr_if_base #(type T1=uvm_object, T2=T1);
+
+  // Task: get_next_item
+  //
+  // Retrieves the next available item from a sequence.  The call will block
+  // until an item is available.  The following steps occur on this call:
+  //
+  // 1 - Arbitrate among requesting, unlocked, relevant sequences - choose the
+  //     highest priority sequence based on the current sequencer arbitration
+  //     mode. If no sequence is available, wait for a requesting unlocked
+  //     relevant sequence,  then re-arbitrate.
+  // 2 - The chosen sequence will return from wait_for_grant
+  // 3 - The chosen sequence &lt;uvm_sequence_base::pre_do&gt; is called
+  // 4 - The chosen sequence item is randomized
+  // 5 - The chosen sequence &lt;uvm_sequence_base::post_do&gt; is called
+  // 6 - Return with a reference to the item
+  //
+  // Once &lt;get_next_item&gt; is called, &lt;item_done&gt; must be called to indicate the
+  // completion of the request to the sequencer.  This will remove the request
+  // item from the sequencer FIFO.
+
+  virtual task get_next_item(output T1 t);
+    uvm_report_error(&quot;get_next_item&quot;, `UVM_SEQ_ITEM_TASK_ERROR, UVM_NONE);
+  endtask
+ 
+
+  // Task: try_next_item
+  //
+  // Retrieves the next available item from a sequence if one is available.
+  // Otherwise, the function returns immediately with request set to ~null~.
+  // The following steps occur on this call:
+  //
+  // 1 - Arbitrate among requesting, unlocked, relevant sequences - choose the
+  //     highest priority sequence based on the current sequencer arbitration
+  //     mode. If no sequence is available, return ~null~.
+  // 2 - The chosen sequence will return from wait_for_grant
+  // 3 - The chosen sequence &lt;uvm_sequence_base::pre_do&gt; is called
+  // 4 - The chosen sequence item is randomized
+  // 5 - The chosen sequence &lt;uvm_sequence_base::post_do&gt; is called
+  // 6 - Return with a reference to the item
+  //
+  // Once &lt;try_next_item&gt; is called, &lt;item_done&gt; must be called to indicate the
+  // completion of the request to the sequencer.  This will remove the request
+  // item from the sequencer FIFO.
+
+  virtual task try_next_item(output T1 t);
+    uvm_report_error(&quot;try_next_item&quot;, `UVM_SEQ_ITEM_TASK_ERROR, UVM_NONE);
+  endtask
+
+
+  // Function: item_done
+  //
+  // Indicates that the request is completed to the sequencer.  Any 
+  // &lt;uvm_sequence_base::wait_for_item_done&gt;
+  // calls made by a sequence for this item will return.
+  //
+  // The current item is removed from the sequencer FIFO.
+  //
+  // If a response item is provided, then it will be sent back to the requesting
+  // sequence. The response item must have its sequence ID and transaction ID
+  // set correctly, using the &lt;uvm_sequence_item::set_id_info&gt; method:
+  //
+  //|  rsp.set_id_info(req);
+  //
+  // Before &lt;item_done&gt; is called, any calls to peek will retrieve the current
+  // item that was obtained by &lt;get_next_item&gt;.  After &lt;item_done&gt; is called, peek
+  // will cause the sequencer to arbitrate for a new item.
+
+  virtual function void item_done(input T2 t = null);
+    uvm_report_error(&quot;item_done&quot;, `UVM_SEQ_ITEM_FUNCTION_ERROR, UVM_NONE);
+  endfunction
+
+  
+  // Task: wait_for_sequences
+  //
+  // Waits for a sequence to have a new item available. The default
+  // implementation in the sequencer calls
+  //  &lt;uvm_wait_for_nba_region&gt;.
+  // User-derived sequencers
+  // may override its &lt;wait_for_sequences&gt; implementation to perform some other
+  // application-specific implementation.
+
+  virtual task wait_for_sequences();
+    uvm_report_error(&quot;wait_for_sequences&quot;, `UVM_SEQ_ITEM_TASK_ERROR, UVM_NONE);
+  endtask
+
+
+  // Function: has_do_available
+  //
+  // Indicates whether a sequence item is available for immediate processing.
+  // Implementations should return 1 if an item is available, 0 otherwise. 
+
+  virtual function bit has_do_available();
+    uvm_report_error(&quot;has_do_available&quot;, `UVM_SEQ_ITEM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+
+
+  //-----------------------
+  // uvm_tlm_blocking_slave_if
+  //-----------------------
+
+  // Task: get
+  //
+  // Retrieves the next available item from a sequence.  The call blocks until
+  // an item is available. The following steps occur on this call:
+  //
+  // 1 - Arbitrate among requesting, unlocked, relevant sequences - choose the
+  //     highest priority sequence based on the current sequencer arbitration
+  //     mode. If no sequence is available, wait for a requesting unlocked
+  //     relevant sequence, then re-arbitrate.
+  // 2 - The chosen sequence will return from &lt;uvm_sequence_base::wait_for_grant&gt;
+  // 3 - The chosen sequence &lt;uvm_sequence_base::pre_do&gt; is called
+  // 4 - The chosen sequence item is randomized
+  // 5 - The chosen sequence &lt;uvm_sequence_base::post_do&gt; is called
+  // 6 - Indicate &lt;item_done&gt; to the sequencer
+  // 7 - Return with a reference to the item
+  //
+  // When get is called, &lt;item_done&gt; may not be called.  A new item can be
+  // obtained by calling get again, or a response may be sent using either
+  // &lt;put&gt;, or uvm_driver::rsp_port.write().
+
+  virtual task get(output T1 t);
+    uvm_report_error(&quot;get&quot;, `UVM_SEQ_ITEM_TASK_ERROR, UVM_NONE);
+  endtask
+
+  // Task: peek
+  //
+  // Returns the current request item if one is in the sequencer FIFO.  If no
+  // item is in the FIFO, then the call will block until the sequencer has a new
+  // request. The following steps will occur if the sequencer FIFO is empty:
+  //
+  // 1 - Arbitrate among requesting, unlocked, relevant sequences - choose the
+  // highest priority sequence based on the current sequencer arbitration mode.
+  // If no sequence is available, wait for a requesting unlocked relevant
+  // sequence, then re-arbitrate.
+  //
+  // 2 - The chosen sequence will return from &lt;uvm_sequence_base::wait_for_grant&gt;
+  // 3 - The chosen sequence &lt;uvm_sequence_base::pre_do&gt; is called
+  // 4 - The chosen sequence item is randomized
+  // 5 - The chosen sequence &lt;uvm_sequence_base::post_do&gt; is called
+  //
+  // Once a request item has been retrieved and is in the sequencer FIFO,
+  // subsequent calls to peek will return the same item.  The item will stay in
+  // the FIFO until either get or &lt;item_done&gt; is called.
+
+  virtual task peek(output T1 t);
+    uvm_report_error(&quot;peek&quot;, `UVM_SEQ_ITEM_TASK_ERROR, UVM_NONE);
+  endtask
+
+
+  // Task: put
+  //
+  // Sends a response back to the sequence that issued the request. Before the
+  // response is put, it must have its sequence ID and transaction ID set to
+  // match the request.  This can be done using the
+  // &lt;uvm_sequence_item::set_id_info&gt; call:
+  //
+  //   rsp.set_id_info(req);
+  //
+  // While this is a task, it will not consume time (including delta cycles).
+  // The response will be put into the
+  // sequence response queue or it will be sent to the
+  // sequence response handler.
+  //
+   
+
+  virtual task put(input T2 t);
+    uvm_report_error(&quot;put&quot;, `UVM_SEQ_ITEM_TASK_ERROR, UVM_NONE);
+  endtask
+
+
+  // Function: put_response
+  //
+  // Sends a response back to the sequence that issued the request. Before the
+  // response is put, it must have its sequence ID and transaction ID set to
+  // match the request.  This can be done using the
+  // &lt;uvm_sequence_item::set_id_info&gt; call:
+  //
+  //   rsp.set_id_info(req);
+  //
+
+  virtual function void put_response(input T2 t);
+    uvm_report_error(&quot;put_response&quot;, `UVM_SEQ_ITEM_FUNCTION_ERROR, UVM_NONE);
+  endfunction
+
+  // Function: disable_auto_item_recording
+  //
+  // By default, item recording is performed automatically when
+  // get_next_item() and item_done() are called.
+  // However, this works only for simple, in-order, blocking transaction
+  // execution. For pipelined and out-of-order transaction execution, the
+  // driver must turn off this automatic recording and call
+  // &lt;uvm_transaction::accept_tr&gt;, &lt;uvm_transaction::begin_tr&gt;
+  // and &lt;uvm_transaction::end_tr&gt; explicitly at appropriate points in time.
+  //
+  // This methods be called at the beginning of the driver&#x27;s ~run_phase()~ method.
+  // Once disabled, automatic recording cannot be re-enabled.
+  //
+  // For backward-compatibility, automatic item recording can be globally
+  // turned off at compile time by defining UVM_DISABLE_AUTO_ITEM_RECORDING
+
+  virtual function void disable_auto_item_recording();
+    uvm_report_error(&quot;disable_auto_item_recording&quot;, `UVM_SEQ_ITEM_FUNCTION_ERROR, UVM_NONE);
+  endfunction
+  
+  // Function: is_auto_item_recording_enabled
+  //
+  // Return TRUE if automatic item recording is enabled for this port instance.
+
+  virtual function bit is_auto_item_recording_enabled();
+    uvm_report_error(&quot;is_auto_item_recording_enabled&quot;, `UVM_SEQ_ITEM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+endclass
+</textarea>
+
+  <script>
+    document.getElementById('copy-src-btn').addEventListener('click', function() {
+      const text = document.getElementById('raw-source-text').value;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-src-btn');
+        const span = btn.querySelector('span');
+        const orig = span.textContent;
+        span.textContent = 'Copied!';
+        btn.classList.add('btn-success');
+        setTimeout(() => { span.textContent = orig; btn.classList.remove('btn-success'); }, 2000);
+      });
+    });
+
+    function highlightTargetLine() {
+      const hash = window.location.hash;
+      document.querySelectorAll('.sv-code-table tr.active-line').forEach(el => el.classList.remove('active-line'));
+      if (hash && hash.startsWith('#L')) {
+        const target = document.querySelector(hash);
+        if (target) {
+          target.classList.add('active-line');
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+    window.addEventListener('hashchange', highlightTargetLine);
+    window.addEventListener('DOMContentLoaded', highlightTargetLine);
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+  </script>
+</body>
+</html>

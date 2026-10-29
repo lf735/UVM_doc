@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tlm1/uvm_tlm_ifs.svh | UVM 1.2 Source Code</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="src-viewer-body">
+  <div class="src-sticky-bar">
+    <div class="src-breadcrumbs">
+      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <span class="sep">/</span>
+      <span class="src-cur-file">tlm1/uvm_tlm_ifs.svh</span>
+      <span class="badge badge-info">218 lines</span>
+      <span class="badge badge-secondary">6.7 KB</span>
+    </div>
+    <div class="src-actions">
+      <select class="sym-jump-select" onchange="if(this.value) window.location.hash = this.value">
+              <option value="">Jump to Symbol (15 symbols)...</option>
+              <option value="#L23">macro: `UVM_TASK_ERROR (L23)</option><option value="#L24">macro: `UVM_FUNCTION_ERROR (L24)</option><option value="#L48">class: uvm_tlm_if_base (L48)</option>
+            </select>
+      <a href="../../docs_view/tlm1/uvm_tlm_ifs-svh.html" class="btn btn-outline" target="_top" title="View Reference Documentation for this file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <span>Documentation</span>
+                </a>
+      <button class="btn btn-outline" id="copy-src-btn" title="Copy raw source code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Code</span>
+      </button>
+      <a href="../../uvm-1.2/src/tlm1/uvm_tlm_ifs.svh" download class="btn btn-outline" title="Download raw source file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Raw</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="src-code-container">
+    <table class="sv-code-table">
+      <tbody>
+        <tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//-----------------------------------------------------------------------------</span></td></tr><tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2011 Mentor Graphics Corporation</span></td></tr><tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Cadence Design Systems, Inc.</span></td></tr><tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Copyright 2010 Synopsys, Inc.</span></td></tr><tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr><tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr><tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr><tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr><tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr><tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr><tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr><tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr><tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr><tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr><tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr><tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr><tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-comment">//-----------------------------------------------------------------------------</span></td></tr><tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr><tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_TASK_ERROR</span> <span class="sv-string">&quot;TLM interface task not implemented&quot;</span></td></tr><tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_FUNCTION_ERROR</span> <span class="sv-string">&quot;TLM interface function not implemented&quot;</span></td></tr><tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr><tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code"><span class="sv-comment">//-----------------------------------------------------------------------------</span></td></tr><tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-comment">// CLASS: uvm_tlm_if_base #(T1,T2)</span></td></tr><tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-comment">// This class declares all of the methods of the TLM API.</span></td></tr><tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-comment">// Various subsets of these methods are combined to form primitive TLM</span></td></tr><tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-comment">// interfaces, which are then paired in various ways to form more abstract</span></td></tr><tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-comment">// &quot;combination&quot; TLM interfaces. Components that require a particular interface</span></td></tr><tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-comment">// use ports to convey that requirement. Components that provide a particular</span></td></tr><tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code"><span class="sv-comment">// interface use exports to convey its availability.</span></td></tr><tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-comment">// Communication between components is established by connecting ports to</span></td></tr><tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code"><span class="sv-comment">// compatible exports, much like connecting module signal-level output ports to</span></td></tr><tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code"><span class="sv-comment">// compatible input ports. The difference is that UVM ports and exports bind</span></td></tr><tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code"><span class="sv-comment">// interfaces (groups of methods), not signals and wires. The methods of the</span></td></tr><tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code"><span class="sv-comment">// interfaces so bound pass data as whole transactions (e.g. objects).</span></td></tr><tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code"><span class="sv-comment">// The set of primitive and combination TLM interfaces afford many choices for</span></td></tr><tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code"><span class="sv-comment">// designing components that communicate at the transaction level.</span></td></tr><tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code"><span class="sv-comment">// </span></td></tr><tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code"><span class="sv-comment">//-----------------------------------------------------------------------------</span></td></tr><tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">&nbsp;</td></tr><tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code"><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_tlm_if_base</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-keyword">type</span> <span class="sv-ident">T1</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">,</span> <span class="sv-keyword">type</span> <span class="sv-ident">T2</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">&nbsp;</td></tr><tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">  <span class="sv-comment">// Group: Blocking put</span></td></tr><tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">&nbsp;</td></tr><tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">  <span class="sv-comment">// Task: put</span></td></tr><tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">  <span class="sv-comment">// Sends a user-defined transaction of type T. </span></td></tr><tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">  <span class="sv-comment">// Components implementing the put method will block the calling thread if</span></td></tr><tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">  <span class="sv-comment">// it cannot immediately accept delivery of the transaction.</span></td></tr><tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">&nbsp;</td></tr><tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">put</span><span class="sv-op">(</span> <span class="sv-keyword">input</span> <span class="sv-ident">T1</span> <span class="sv-ident">t</span> <span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;put&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">&nbsp;</td></tr><tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">  <span class="sv-comment">// Group: Blocking get</span></td></tr><tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">&nbsp;</td></tr><tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code">  <span class="sv-comment">// Task: get</span></td></tr><tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code">  <span class="sv-comment">// Provides a new transaction of type T. </span></td></tr><tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code">  <span class="sv-comment">// The calling thread is blocked if the requested transaction cannot be</span></td></tr><tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code">  <span class="sv-comment">// provided immediately. The new transaction is returned in the provided</span></td></tr><tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code">  <span class="sv-comment">// output argument. </span></td></tr><tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code">  <span class="sv-comment">// The implementation of get must regard the transaction as consumed.</span></td></tr><tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code">  <span class="sv-comment">// Subsequent calls to get must return a different transaction instance.</span></td></tr><tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code">&nbsp;</td></tr><tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">get</span><span class="sv-op">(</span> <span class="sv-keyword">output</span> <span class="sv-ident">T2</span> <span class="sv-ident">t</span> <span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;get&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code">&nbsp;</td></tr><tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code">&nbsp;</td></tr><tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code">  <span class="sv-comment">// Group: Blocking peek</span></td></tr><tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code">&nbsp;</td></tr><tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code">  <span class="sv-comment">// Task: peek</span></td></tr><tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code">  <span class="sv-comment">// Obtain a new transaction without consuming it. </span></td></tr><tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code">  <span class="sv-comment">// If a transaction is available, then it is written to the provided output</span></td></tr><tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code">  <span class="sv-comment">// argument. If a transaction is not available, then the calling thread is</span></td></tr><tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code">  <span class="sv-comment">// blocked until one is available. </span></td></tr><tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code">  <span class="sv-comment">// The returned transaction is not consumed. A subsequent peek or get will</span></td></tr><tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code">  <span class="sv-comment">// return the same transaction.</span></td></tr><tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code">&nbsp;</td></tr><tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">peek</span><span class="sv-op">(</span> <span class="sv-keyword">output</span> <span class="sv-ident">T2</span> <span class="sv-ident">t</span> <span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;peek&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L96"><td class="ln" data-line="96"><a href="#L96">96</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L97"><td class="ln" data-line="97"><a href="#L97">97</a></td><td class="code">&nbsp;</td></tr><tr id="L98"><td class="ln" data-line="98"><a href="#L98">98</a></td><td class="code">&nbsp;</td></tr><tr id="L99"><td class="ln" data-line="99"><a href="#L99">99</a></td><td class="code">  <span class="sv-comment">// Group: Non-blocking put</span></td></tr><tr id="L100"><td class="ln" data-line="100"><a href="#L100">100</a></td><td class="code">&nbsp;</td></tr><tr id="L101"><td class="ln" data-line="101"><a href="#L101">101</a></td><td class="code">  <span class="sv-comment">// Function: try_put</span></td></tr><tr id="L102"><td class="ln" data-line="102"><a href="#L102">102</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L103"><td class="ln" data-line="103"><a href="#L103">103</a></td><td class="code">  <span class="sv-comment">// Sends a transaction of type T, if possible. </span></td></tr><tr id="L104"><td class="ln" data-line="104"><a href="#L104">104</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L105"><td class="ln" data-line="105"><a href="#L105">105</a></td><td class="code">  <span class="sv-comment">// If the component is ready to accept the transaction argument, then it does</span></td></tr><tr id="L106"><td class="ln" data-line="106"><a href="#L106">106</a></td><td class="code">  <span class="sv-comment">// so and returns 1, otherwise it returns 0.</span></td></tr><tr id="L107"><td class="ln" data-line="107"><a href="#L107">107</a></td><td class="code">&nbsp;</td></tr><tr id="L108"><td class="ln" data-line="108"><a href="#L108">108</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">try_put</span><span class="sv-op">(</span> <span class="sv-keyword">input</span> <span class="sv-ident">T1</span> <span class="sv-ident">t</span> <span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L109"><td class="ln" data-line="109"><a href="#L109">109</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;try_put&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L110"><td class="ln" data-line="110"><a href="#L110">110</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L111"><td class="ln" data-line="111"><a href="#L111">111</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L112"><td class="ln" data-line="112"><a href="#L112">112</a></td><td class="code">&nbsp;</td></tr><tr id="L113"><td class="ln" data-line="113"><a href="#L113">113</a></td><td class="code">&nbsp;</td></tr><tr id="L114"><td class="ln" data-line="114"><a href="#L114">114</a></td><td class="code">  <span class="sv-comment">// Function: can_put</span></td></tr><tr id="L115"><td class="ln" data-line="115"><a href="#L115">115</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L116"><td class="ln" data-line="116"><a href="#L116">116</a></td><td class="code">  <span class="sv-comment">// Returns 1 if the component is ready to accept the transaction; 0 otherwise.</span></td></tr><tr id="L117"><td class="ln" data-line="117"><a href="#L117">117</a></td><td class="code">&nbsp;</td></tr><tr id="L118"><td class="ln" data-line="118"><a href="#L118">118</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">can_put</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L119"><td class="ln" data-line="119"><a href="#L119">119</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;can_put&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L120"><td class="ln" data-line="120"><a href="#L120">120</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L121"><td class="ln" data-line="121"><a href="#L121">121</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L122"><td class="ln" data-line="122"><a href="#L122">122</a></td><td class="code">&nbsp;</td></tr><tr id="L123"><td class="ln" data-line="123"><a href="#L123">123</a></td><td class="code">&nbsp;</td></tr><tr id="L124"><td class="ln" data-line="124"><a href="#L124">124</a></td><td class="code">  <span class="sv-comment">// Group: Non-blocking get</span></td></tr><tr id="L125"><td class="ln" data-line="125"><a href="#L125">125</a></td><td class="code">&nbsp;</td></tr><tr id="L126"><td class="ln" data-line="126"><a href="#L126">126</a></td><td class="code">  <span class="sv-comment">// Function: try_get</span></td></tr><tr id="L127"><td class="ln" data-line="127"><a href="#L127">127</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L128"><td class="ln" data-line="128"><a href="#L128">128</a></td><td class="code">  <span class="sv-comment">// Provides a new transaction of type T.</span></td></tr><tr id="L129"><td class="ln" data-line="129"><a href="#L129">129</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L130"><td class="ln" data-line="130"><a href="#L130">130</a></td><td class="code">  <span class="sv-comment">// If a transaction is immediately available, then it is written to the output</span></td></tr><tr id="L131"><td class="ln" data-line="131"><a href="#L131">131</a></td><td class="code">  <span class="sv-comment">// argument and 1 is returned. Otherwise, the output argument is not modified</span></td></tr><tr id="L132"><td class="ln" data-line="132"><a href="#L132">132</a></td><td class="code">  <span class="sv-comment">// and 0 is returned.</span></td></tr><tr id="L133"><td class="ln" data-line="133"><a href="#L133">133</a></td><td class="code">&nbsp;</td></tr><tr id="L134"><td class="ln" data-line="134"><a href="#L134">134</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">try_get</span><span class="sv-op">(</span> <span class="sv-keyword">output</span> <span class="sv-ident">T2</span> <span class="sv-ident">t</span> <span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L135"><td class="ln" data-line="135"><a href="#L135">135</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;try_get&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L136"><td class="ln" data-line="136"><a href="#L136">136</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L137"><td class="ln" data-line="137"><a href="#L137">137</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L138"><td class="ln" data-line="138"><a href="#L138">138</a></td><td class="code">&nbsp;</td></tr><tr id="L139"><td class="ln" data-line="139"><a href="#L139">139</a></td><td class="code">&nbsp;</td></tr><tr id="L140"><td class="ln" data-line="140"><a href="#L140">140</a></td><td class="code">  <span class="sv-comment">// Function: can_get</span></td></tr><tr id="L141"><td class="ln" data-line="141"><a href="#L141">141</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L142"><td class="ln" data-line="142"><a href="#L142">142</a></td><td class="code">  <span class="sv-comment">// Returns 1 if a new transaction can be provided immediately upon request,</span></td></tr><tr id="L143"><td class="ln" data-line="143"><a href="#L143">143</a></td><td class="code">  <span class="sv-comment">// 0 otherwise.</span></td></tr><tr id="L144"><td class="ln" data-line="144"><a href="#L144">144</a></td><td class="code">&nbsp;</td></tr><tr id="L145"><td class="ln" data-line="145"><a href="#L145">145</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">can_get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L146"><td class="ln" data-line="146"><a href="#L146">146</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;can_get&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L147"><td class="ln" data-line="147"><a href="#L147">147</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L148"><td class="ln" data-line="148"><a href="#L148">148</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L149"><td class="ln" data-line="149"><a href="#L149">149</a></td><td class="code">&nbsp;</td></tr><tr id="L150"><td class="ln" data-line="150"><a href="#L150">150</a></td><td class="code">&nbsp;</td></tr><tr id="L151"><td class="ln" data-line="151"><a href="#L151">151</a></td><td class="code">  <span class="sv-comment">// Group: Non-blocking peek</span></td></tr><tr id="L152"><td class="ln" data-line="152"><a href="#L152">152</a></td><td class="code">&nbsp;</td></tr><tr id="L153"><td class="ln" data-line="153"><a href="#L153">153</a></td><td class="code">  <span class="sv-comment">// Function: try_peek</span></td></tr><tr id="L154"><td class="ln" data-line="154"><a href="#L154">154</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L155"><td class="ln" data-line="155"><a href="#L155">155</a></td><td class="code">  <span class="sv-comment">// Provides a new transaction without consuming it. </span></td></tr><tr id="L156"><td class="ln" data-line="156"><a href="#L156">156</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L157"><td class="ln" data-line="157"><a href="#L157">157</a></td><td class="code">  <span class="sv-comment">// If available, a transaction is written to the output argument and 1 is</span></td></tr><tr id="L158"><td class="ln" data-line="158"><a href="#L158">158</a></td><td class="code">  <span class="sv-comment">// returned. A subsequent peek or get will return the same transaction. If a</span></td></tr><tr id="L159"><td class="ln" data-line="159"><a href="#L159">159</a></td><td class="code">  <span class="sv-comment">// transaction is not available, then the argument is unmodified and 0 is</span></td></tr><tr id="L160"><td class="ln" data-line="160"><a href="#L160">160</a></td><td class="code">  <span class="sv-comment">// returned.</span></td></tr><tr id="L161"><td class="ln" data-line="161"><a href="#L161">161</a></td><td class="code">&nbsp;</td></tr><tr id="L162"><td class="ln" data-line="162"><a href="#L162">162</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">try_peek</span><span class="sv-op">(</span> <span class="sv-keyword">output</span> <span class="sv-ident">T2</span> <span class="sv-ident">t</span> <span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L163"><td class="ln" data-line="163"><a href="#L163">163</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;try_peek&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L164"><td class="ln" data-line="164"><a href="#L164">164</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L165"><td class="ln" data-line="165"><a href="#L165">165</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L166"><td class="ln" data-line="166"><a href="#L166">166</a></td><td class="code">&nbsp;</td></tr><tr id="L167"><td class="ln" data-line="167"><a href="#L167">167</a></td><td class="code">&nbsp;</td></tr><tr id="L168"><td class="ln" data-line="168"><a href="#L168">168</a></td><td class="code">  <span class="sv-comment">// Function: can_peek</span></td></tr><tr id="L169"><td class="ln" data-line="169"><a href="#L169">169</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L170"><td class="ln" data-line="170"><a href="#L170">170</a></td><td class="code">  <span class="sv-comment">// Returns 1 if a new transaction is available; 0 otherwise.</span></td></tr><tr id="L171"><td class="ln" data-line="171"><a href="#L171">171</a></td><td class="code">&nbsp;</td></tr><tr id="L172"><td class="ln" data-line="172"><a href="#L172">172</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">can_peek</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L173"><td class="ln" data-line="173"><a href="#L173">173</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;can_ppeek&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L174"><td class="ln" data-line="174"><a href="#L174">174</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L175"><td class="ln" data-line="175"><a href="#L175">175</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L176"><td class="ln" data-line="176"><a href="#L176">176</a></td><td class="code">&nbsp;</td></tr><tr id="L177"><td class="ln" data-line="177"><a href="#L177">177</a></td><td class="code">&nbsp;</td></tr><tr id="L178"><td class="ln" data-line="178"><a href="#L178">178</a></td><td class="code">  <span class="sv-comment">// Group: Blocking transport</span></td></tr><tr id="L179"><td class="ln" data-line="179"><a href="#L179">179</a></td><td class="code">&nbsp;</td></tr><tr id="L180"><td class="ln" data-line="180"><a href="#L180">180</a></td><td class="code">  <span class="sv-comment">// Task: transport</span></td></tr><tr id="L181"><td class="ln" data-line="181"><a href="#L181">181</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L182"><td class="ln" data-line="182"><a href="#L182">182</a></td><td class="code">  <span class="sv-comment">// Executes the given request and returns the response in the given output</span></td></tr><tr id="L183"><td class="ln" data-line="183"><a href="#L183">183</a></td><td class="code">  <span class="sv-comment">// argument. The calling thread may block until the operation is complete.</span></td></tr><tr id="L184"><td class="ln" data-line="184"><a href="#L184">184</a></td><td class="code">&nbsp;</td></tr><tr id="L185"><td class="ln" data-line="185"><a href="#L185">185</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">transport</span><span class="sv-op">(</span> <span class="sv-keyword">input</span> <span class="sv-ident">T1</span> <span class="sv-ident">req</span> <span class="sv-op">,</span> <span class="sv-keyword">output</span> <span class="sv-ident">T2</span> <span class="sv-ident">rsp</span> <span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L186"><td class="ln" data-line="186"><a href="#L186">186</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;transport&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_TASK_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L187"><td class="ln" data-line="187"><a href="#L187">187</a></td><td class="code">  <span class="sv-keyword">endtask</span></td></tr><tr id="L188"><td class="ln" data-line="188"><a href="#L188">188</a></td><td class="code">&nbsp;</td></tr><tr id="L189"><td class="ln" data-line="189"><a href="#L189">189</a></td><td class="code">&nbsp;</td></tr><tr id="L190"><td class="ln" data-line="190"><a href="#L190">190</a></td><td class="code">  <span class="sv-comment">// Group: Non-blocking transport</span></td></tr><tr id="L191"><td class="ln" data-line="191"><a href="#L191">191</a></td><td class="code">&nbsp;</td></tr><tr id="L192"><td class="ln" data-line="192"><a href="#L192">192</a></td><td class="code">  <span class="sv-comment">// Task: nb_transport</span></td></tr><tr id="L193"><td class="ln" data-line="193"><a href="#L193">193</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L194"><td class="ln" data-line="194"><a href="#L194">194</a></td><td class="code">  <span class="sv-comment">// Executes the given request and returns the response in the given output</span></td></tr><tr id="L195"><td class="ln" data-line="195"><a href="#L195">195</a></td><td class="code">  <span class="sv-comment">// argument. Completion of this operation must occur without blocking.</span></td></tr><tr id="L196"><td class="ln" data-line="196"><a href="#L196">196</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L197"><td class="ln" data-line="197"><a href="#L197">197</a></td><td class="code">  <span class="sv-comment">// If for any reason the operation could not be executed immediately, then</span></td></tr><tr id="L198"><td class="ln" data-line="198"><a href="#L198">198</a></td><td class="code">  <span class="sv-comment">// a 0 must be returned; otherwise 1.</span></td></tr><tr id="L199"><td class="ln" data-line="199"><a href="#L199">199</a></td><td class="code">&nbsp;</td></tr><tr id="L200"><td class="ln" data-line="200"><a href="#L200">200</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">nb_transport</span><span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T1</span> <span class="sv-ident">req</span><span class="sv-op">,</span> <span class="sv-keyword">output</span> <span class="sv-ident">T2</span> <span class="sv-ident">rsp</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L201"><td class="ln" data-line="201"><a href="#L201">201</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;nb_transport&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L202"><td class="ln" data-line="202"><a href="#L202">202</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr><tr id="L203"><td class="ln" data-line="203"><a href="#L203">203</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L204"><td class="ln" data-line="204"><a href="#L204">204</a></td><td class="code">&nbsp;</td></tr><tr id="L205"><td class="ln" data-line="205"><a href="#L205">205</a></td><td class="code">&nbsp;</td></tr><tr id="L206"><td class="ln" data-line="206"><a href="#L206">206</a></td><td class="code">  <span class="sv-comment">// Group: Analysis</span></td></tr><tr id="L207"><td class="ln" data-line="207"><a href="#L207">207</a></td><td class="code">&nbsp;</td></tr><tr id="L208"><td class="ln" data-line="208"><a href="#L208">208</a></td><td class="code">  <span class="sv-comment">// Function: write</span></td></tr><tr id="L209"><td class="ln" data-line="209"><a href="#L209">209</a></td><td class="code">  <span class="sv-comment">//</span></td></tr><tr id="L210"><td class="ln" data-line="210"><a href="#L210">210</a></td><td class="code">  <span class="sv-comment">// Broadcasts a user-defined transaction of type T to any number of listeners.</span></td></tr><tr id="L211"><td class="ln" data-line="211"><a href="#L211">211</a></td><td class="code">  <span class="sv-comment">// The operation must complete without blocking. </span></td></tr><tr id="L212"><td class="ln" data-line="212"><a href="#L212">212</a></td><td class="code">&nbsp;</td></tr><tr id="L213"><td class="ln" data-line="213"><a href="#L213">213</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">write</span><span class="sv-op">(</span> <span class="sv-keyword">input</span> <span class="sv-ident">T1</span> <span class="sv-ident">t</span> <span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L214"><td class="ln" data-line="214"><a href="#L214">214</a></td><td class="code">    <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span><span class="sv-string">&quot;write&quot;</span><span class="sv-op">,</span> <span class="sv-macro">`UVM_FUNCTION_ERROR</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L215"><td class="ln" data-line="215"><a href="#L215">215</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L216"><td class="ln" data-line="216"><a href="#L216">216</a></td><td class="code">&nbsp;</td></tr><tr id="L217"><td class="ln" data-line="217"><a href="#L217">217</a></td><td class="code"><span class="sv-keyword">endclass</span></td></tr><tr id="L218"><td class="ln" data-line="218"><a href="#L218">218</a></td><td class="code">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <textarea id="raw-source-text" style="display:none">//
+//-----------------------------------------------------------------------------
+//   Copyright 2007-2011 Mentor Graphics Corporation
+//   Copyright 2007-2010 Cadence Design Systems, Inc.
+//   Copyright 2010 Synopsys, Inc.
+//   All Rights Reserved Worldwide
+//
+//   Licensed under the Apache License, Version 2.0 (the
+//   &quot;License&quot;); you may not use this file except in
+//   compliance with the License.  You may obtain a copy of
+//   the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in
+//   writing, software distributed under the License is
+//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR
+//   CONDITIONS OF ANY KIND, either express or implied.  See
+//   the License for the specific language governing
+//   permissions and limitations under the License.
+//-----------------------------------------------------------------------------
+
+`define UVM_TASK_ERROR &quot;TLM interface task not implemented&quot;
+`define UVM_FUNCTION_ERROR &quot;TLM interface function not implemented&quot;
+
+//-----------------------------------------------------------------------------
+//
+// CLASS: uvm_tlm_if_base #(T1,T2)
+//
+// This class declares all of the methods of the TLM API.
+//
+// Various subsets of these methods are combined to form primitive TLM
+// interfaces, which are then paired in various ways to form more abstract
+// &quot;combination&quot; TLM interfaces. Components that require a particular interface
+// use ports to convey that requirement. Components that provide a particular
+// interface use exports to convey its availability.
+//
+// Communication between components is established by connecting ports to
+// compatible exports, much like connecting module signal-level output ports to
+// compatible input ports. The difference is that UVM ports and exports bind
+// interfaces (groups of methods), not signals and wires. The methods of the
+// interfaces so bound pass data as whole transactions (e.g. objects).
+// The set of primitive and combination TLM interfaces afford many choices for
+// designing components that communicate at the transaction level.
+// 
+//-----------------------------------------------------------------------------
+
+virtual class uvm_tlm_if_base #(type T1=int, type T2=int);
+
+  // Group: Blocking put
+
+  // Task: put
+  //
+  // Sends a user-defined transaction of type T. 
+  //
+  // Components implementing the put method will block the calling thread if
+  // it cannot immediately accept delivery of the transaction.
+
+  virtual task put( input T1 t );
+    uvm_report_error(&quot;put&quot;, `UVM_TASK_ERROR, UVM_NONE);
+  endtask
+
+  // Group: Blocking get
+
+  // Task: get
+  //
+  // Provides a new transaction of type T. 
+  //
+  // The calling thread is blocked if the requested transaction cannot be
+  // provided immediately. The new transaction is returned in the provided
+  // output argument. 
+  //
+  // The implementation of get must regard the transaction as consumed.
+  // Subsequent calls to get must return a different transaction instance.
+
+  virtual task get( output T2 t );
+    uvm_report_error(&quot;get&quot;, `UVM_TASK_ERROR, UVM_NONE);
+  endtask
+
+
+  // Group: Blocking peek
+
+  // Task: peek
+  //
+  // Obtain a new transaction without consuming it. 
+  //
+  // If a transaction is available, then it is written to the provided output
+  // argument. If a transaction is not available, then the calling thread is
+  // blocked until one is available. 
+  //
+  // The returned transaction is not consumed. A subsequent peek or get will
+  // return the same transaction.
+
+  virtual task peek( output T2 t );
+    uvm_report_error(&quot;peek&quot;, `UVM_TASK_ERROR, UVM_NONE);
+  endtask
+
+
+  // Group: Non-blocking put
+
+  // Function: try_put
+  //
+  // Sends a transaction of type T, if possible. 
+  //
+  // If the component is ready to accept the transaction argument, then it does
+  // so and returns 1, otherwise it returns 0.
+
+  virtual function bit try_put( input T1 t );
+    uvm_report_error(&quot;try_put&quot;, `UVM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+
+
+  // Function: can_put
+  //
+  // Returns 1 if the component is ready to accept the transaction; 0 otherwise.
+
+  virtual function bit can_put();
+    uvm_report_error(&quot;can_put&quot;, `UVM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+
+
+  // Group: Non-blocking get
+
+  // Function: try_get
+  //
+  // Provides a new transaction of type T.
+  //
+  // If a transaction is immediately available, then it is written to the output
+  // argument and 1 is returned. Otherwise, the output argument is not modified
+  // and 0 is returned.
+
+  virtual function bit try_get( output T2 t );
+    uvm_report_error(&quot;try_get&quot;, `UVM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+
+
+  // Function: can_get
+  //
+  // Returns 1 if a new transaction can be provided immediately upon request,
+  // 0 otherwise.
+
+  virtual function bit can_get();
+    uvm_report_error(&quot;can_get&quot;, `UVM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+
+
+  // Group: Non-blocking peek
+
+  // Function: try_peek
+  //
+  // Provides a new transaction without consuming it. 
+  //
+  // If available, a transaction is written to the output argument and 1 is
+  // returned. A subsequent peek or get will return the same transaction. If a
+  // transaction is not available, then the argument is unmodified and 0 is
+  // returned.
+
+  virtual function bit try_peek( output T2 t );
+    uvm_report_error(&quot;try_peek&quot;, `UVM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+
+
+  // Function: can_peek
+  //
+  // Returns 1 if a new transaction is available; 0 otherwise.
+
+  virtual function bit can_peek();
+    uvm_report_error(&quot;can_ppeek&quot;, `UVM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+
+
+  // Group: Blocking transport
+
+  // Task: transport
+  //
+  // Executes the given request and returns the response in the given output
+  // argument. The calling thread may block until the operation is complete.
+
+  virtual task transport( input T1 req , output T2 rsp );
+    uvm_report_error(&quot;transport&quot;, `UVM_TASK_ERROR, UVM_NONE);
+  endtask
+
+
+  // Group: Non-blocking transport
+
+  // Task: nb_transport
+  //
+  // Executes the given request and returns the response in the given output
+  // argument. Completion of this operation must occur without blocking.
+  //
+  // If for any reason the operation could not be executed immediately, then
+  // a 0 must be returned; otherwise 1.
+
+  virtual function bit nb_transport(input T1 req, output T2 rsp);
+    uvm_report_error(&quot;nb_transport&quot;, `UVM_FUNCTION_ERROR, UVM_NONE);
+    return 0;
+  endfunction
+
+
+  // Group: Analysis
+
+  // Function: write
+  //
+  // Broadcasts a user-defined transaction of type T to any number of listeners.
+  // The operation must complete without blocking. 
+
+  virtual function void write( input T1 t );
+    uvm_report_error(&quot;write&quot;, `UVM_FUNCTION_ERROR, UVM_NONE);
+  endfunction
+
+endclass
+
+</textarea>
+
+  <script>
+    document.getElementById('copy-src-btn').addEventListener('click', function() {
+      const text = document.getElementById('raw-source-text').value;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-src-btn');
+        const span = btn.querySelector('span');
+        const orig = span.textContent;
+        span.textContent = 'Copied!';
+        btn.classList.add('btn-success');
+        setTimeout(() => { span.textContent = orig; btn.classList.remove('btn-success'); }, 2000);
+      });
+    });
+
+    function highlightTargetLine() {
+      const hash = window.location.hash;
+      document.querySelectorAll('.sv-code-table tr.active-line').forEach(el => el.classList.remove('active-line'));
+      if (hash && hash.startsWith('#L')) {
+        const target = document.querySelector(hash);
+        if (target) {
+          target.classList.add('active-line');
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+    window.addEventListener('hashchange', highlightTargetLine);
+    window.addEventListener('DOMContentLoaded', highlightTargetLine);
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+  </script>
+</body>
+</html>

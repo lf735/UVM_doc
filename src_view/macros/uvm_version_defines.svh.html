@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>macros/uvm_version_defines.svh | UVM 1.2 Source Code</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="src-viewer-body">
+  <div class="src-sticky-bar">
+    <div class="src-breadcrumbs">
+      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <span class="sep">/</span>
+      <span class="src-cur-file">macros/uvm_version_defines.svh</span>
+      <span class="badge badge-info">149 lines</span>
+      <span class="badge badge-secondary">4.2 KB</span>
+    </div>
+    <div class="src-actions">
+      <select class="sym-jump-select" onchange="if(this.value) window.location.hash = this.value">
+              <option value="">Jump to Symbol (11 symbols)...</option>
+              <option value="#L24">macro: `UVM_VERSION_DEFINES_SVH (L24)</option><option value="#L49">macro: `UVM_MAJOR_REV (L49)</option><option value="#L57">macro: `UVM_MINOR_REV (L57)</option><option value="#L83">macro: `UVM_NAME (L83)</option><option value="#L92">macro: `UVM_VERSION_STRING (L92)</option><option value="#L94">macro: `UVM_VERSION_STRING (L94)</option><option value="#L118">macro: `UVM_MAJOR_REV_1 (L118)</option><option value="#L125">macro: `UVM_MINOR_REV_2 (L125)</option><option value="#L131">macro: `UVM_VERSION_1_2 (L131)</option><option value="#L134">macro: `UVM_MAJOR_VERSION_1_2 (L134)</option><option value="#L147">macro: `UVM_POST_VERSION_1_1 (L147)</option>
+            </select>
+      <a href="../../docs_view/macros/uvm_version_defines-svh.html" class="btn btn-outline" target="_top" title="View Reference Documentation for this file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <span>Documentation</span>
+                </a>
+      <button class="btn btn-outline" id="copy-src-btn" title="Copy raw source code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Code</span>
+      </button>
+      <a href="../../uvm-1.2/src/macros/uvm_version_defines.svh" download class="btn btn-outline" title="Download raw source file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Raw</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="src-code-container">
+    <table class="sv-code-table">
+      <tbody>
+        <tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr><tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Mentor Graphics Corporation</span></td></tr><tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Cadence Design Systems, Inc. </span></td></tr><tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc.</span></td></tr><tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Copyright 2014      NVIDIA Corporation</span></td></tr><tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr><tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr><tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr><tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr><tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr><tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr><tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr><tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr><tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr><tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr><tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr><tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr><tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr><tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr><tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code"><span class="sv-macro">`ifndef</span> <span class="sv-uvm-type">UVM_VERSION_DEFINES_SVH</span></td></tr><tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_VERSION_DEFINES_SVH</span></td></tr><tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr><tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code"><span class="sv-comment">// Title: UVM Version Defines</span></td></tr><tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">&nbsp;</td></tr><tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-comment">// Group: UVM Revision Values</span></td></tr><tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-comment">// These macros provide the current values for the ~MAJOR~, ~MINOR~,</span></td></tr><tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-comment">// and optionally the ~FIX~ revision.</span></td></tr><tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-comment">// Example with UVM version 1.2:</span></td></tr><tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-comment">//  UVM_MAJOR_REV - &#x27;1&#x27;</span></td></tr><tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-comment">//  UVM_MINOR_REV - &#x27;2&#x27;</span></td></tr><tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-comment">//  UVM_FIX_REV - &#x27;undefined&#x27;</span></td></tr><tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code"><span class="sv-comment">// Example with UVM version 1.1a:</span></td></tr><tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-comment">//  UVM_MAJOR_REV - &#x27;1&#x27;</span></td></tr><tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code"><span class="sv-comment">//  UVM_MINOR_REV - &#x27;1&#x27;</span></td></tr><tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code"><span class="sv-comment">//  UVM_FIX_REV - &#x27;a&#x27;</span></td></tr><tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">&nbsp;</td></tr><tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code"><span class="sv-comment">// Macro: UVM_MAJOR_REV</span></td></tr><tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code"><span class="sv-comment">// Defines the MAJOR revision number.</span></td></tr><tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code"><span class="sv-comment">// For UVM version 1.2, the MAJOR revision number is &#x27;1&#x27;</span></td></tr><tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code"><span class="sv-comment">// | `define UVM_MAJOR_REV 1</span></td></tr><tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_MAJOR_REV</span> <span class="sv-number">1</span></td></tr><tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">&nbsp;</td></tr><tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code"><span class="sv-comment">// Macro: UVM_MINOR_REV</span></td></tr><tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code"><span class="sv-comment">// Defines the MINOR revision number.</span></td></tr><tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code"><span class="sv-comment">// For UVM version 1.2, the MINOR revision number is &#x27;2&#x27;</span></td></tr><tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code"><span class="sv-comment">// | `define UVM_MINOR_REV 2</span></td></tr><tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_MINOR_REV</span> <span class="sv-number">2</span></td></tr><tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">&nbsp;</td></tr><tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code"><span class="sv-comment">// Macro: UVM_FIX_REV</span></td></tr><tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code"><span class="sv-comment">// (Optionally) Defines the FIX revision letter.</span></td></tr><tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code"><span class="sv-comment">// For the first &quot;X.Y&quot; release of the UVM, there is no</span></td></tr><tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code"><span class="sv-comment">// FIX revision letter.  In these cases, the UVM_FIX_REV</span></td></tr><tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code"><span class="sv-comment">// is left undefined.</span></td></tr><tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code"><span class="sv-comment">// For any subsequent &quot;X.Y&quot; fix releases, the UVM_FIX_REV</span></td></tr><tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code"><span class="sv-comment">// value is set to the appropriate fix release letter.</span></td></tr><tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code"><span class="sv-comment">// Example:</span></td></tr><tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code"><span class="sv-comment">// 1.1 - First release, UVM_FIX_REV is undefined</span></td></tr><tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code"><span class="sv-comment">// 1.1a - Fix release, UVM_FIX_REV is &#x27;a&#x27;</span></td></tr><tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code">&nbsp;</td></tr><tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code"><span class="sv-comment">// Include this in the comment when the FIX rev is present:</span></td></tr><tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code"><span class="sv-comment">// | `define UVM_FIX_REV a</span></td></tr><tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code">&nbsp;</td></tr><tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code"><span class="sv-comment">//`define UVM_FIX_REV a</span></td></tr><tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code">&nbsp;</td></tr><tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code"><span class="sv-comment">// Macro: UVM_NAME</span></td></tr><tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code"><span class="sv-comment">// The name used by the library when displaying the name of</span></td></tr><tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code"><span class="sv-comment">// the library.</span></td></tr><tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code"><span class="sv-comment">// | `define UVM_NAME UVM</span></td></tr><tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_NAME</span> <span class="sv-ident">UVM</span></td></tr><tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code">&nbsp;</td></tr><tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code"><span class="sv-comment">// Macro: UVM_VERSION_STRING</span></td></tr><tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code"><span class="sv-comment">// Provides a string-ized version of the UVM Library version number.</span></td></tr><tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code"><span class="sv-comment">// When there is a FIX_REV, the string is &quot;&lt;name&gt;-&lt;major&gt;.&lt;minor&gt;&lt;fix&gt;&quot; (such as &quot;UVM-1.1d&quot;).</span></td></tr><tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code"><span class="sv-comment">// When there is NO FIX_REV, the string is &quot;&lt;name&gt;-&lt;major&gt;.&lt;minor&gt;&quot; (such as &quot;UVM-1.2&quot;).</span></td></tr><tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code">&nbsp;</td></tr><tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code"><span class="sv-macro">`ifdef</span> <span class="sv-uvm-type">UVM_FIX_REV</span></td></tr><tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code"> <span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_VERSION_STRING</span> `<span class="sv-string">&quot;`UVM_NAME``-```UVM_MAJOR_REV``.```UVM_MINOR_REV`UVM_FIX_REV`&quot;</span></td></tr><tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code"><span class="sv-macro">`else</span></td></tr><tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code"> <span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_VERSION_STRING</span> `<span class="sv-string">&quot;`UVM_NAME``-```UVM_MAJOR_REV``.```UVM_MINOR_REV```&quot;</span></td></tr><tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code"><span class="sv-macro">`endif</span></td></tr><tr id="L96"><td class="ln" data-line="96"><a href="#L96">96</a></td><td class="code">&nbsp;</td></tr><tr id="L97"><td class="ln" data-line="97"><a href="#L97">97</a></td><td class="code"><span class="sv-comment">// Group: Conditional Compilation</span></td></tr><tr id="L98"><td class="ln" data-line="98"><a href="#L98">98</a></td><td class="code"><span class="sv-comment">// These macros provide the ability to conditionally compile based on the</span></td></tr><tr id="L99"><td class="ln" data-line="99"><a href="#L99">99</a></td><td class="code"><span class="sv-comment">// revision of the library which is being used.</span></td></tr><tr id="L100"><td class="ln" data-line="100"><a href="#L100">100</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L101"><td class="ln" data-line="101"><a href="#L101">101</a></td><td class="code"><span class="sv-comment">// These macros are required for conditional compilation, as SystemVerilog does</span></td></tr><tr id="L102"><td class="ln" data-line="102"><a href="#L102">102</a></td><td class="code"><span class="sv-comment">// not support conditionals with `ifdefs.</span></td></tr><tr id="L103"><td class="ln" data-line="103"><a href="#L103">103</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L104"><td class="ln" data-line="104"><a href="#L104">104</a></td><td class="code"><span class="sv-comment">// For example:</span></td></tr><tr id="L105"><td class="ln" data-line="105"><a href="#L105">105</a></td><td class="code"><span class="sv-comment">// |  // Illegal:</span></td></tr><tr id="L106"><td class="ln" data-line="106"><a href="#L106">106</a></td><td class="code"><span class="sv-comment">// | `if (UVM_MAJOR_REV == 1)</span></td></tr><tr id="L107"><td class="ln" data-line="107"><a href="#L107">107</a></td><td class="code"><span class="sv-comment">// |</span></td></tr><tr id="L108"><td class="ln" data-line="108"><a href="#L108">108</a></td><td class="code"><span class="sv-comment">// | // Legal:</span></td></tr><tr id="L109"><td class="ln" data-line="109"><a href="#L109">109</a></td><td class="code"><span class="sv-comment">// | `ifdef UVM_MAJOR_REV_1</span></td></tr><tr id="L110"><td class="ln" data-line="110"><a href="#L110">110</a></td><td class="code"><span class="sv-comment">// </span></td></tr><tr id="L111"><td class="ln" data-line="111"><a href="#L111">111</a></td><td class="code">&nbsp;</td></tr><tr id="L112"><td class="ln" data-line="112"><a href="#L112">112</a></td><td class="code">&nbsp;</td></tr><tr id="L113"><td class="ln" data-line="113"><a href="#L113">113</a></td><td class="code"><span class="sv-comment">// Macro: UVM_MAJOR_REV_1</span></td></tr><tr id="L114"><td class="ln" data-line="114"><a href="#L114">114</a></td><td class="code"><span class="sv-comment">// Indicates that the MAJOR version of this release is &#x27;1&#x27;.</span></td></tr><tr id="L115"><td class="ln" data-line="115"><a href="#L115">115</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L116"><td class="ln" data-line="116"><a href="#L116">116</a></td><td class="code"><span class="sv-comment">// | `define UVM_MAJOR_REV_1</span></td></tr><tr id="L117"><td class="ln" data-line="117"><a href="#L117">117</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L118"><td class="ln" data-line="118"><a href="#L118">118</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_MAJOR_REV_1</span></td></tr><tr id="L119"><td class="ln" data-line="119"><a href="#L119">119</a></td><td class="code">&nbsp;</td></tr><tr id="L120"><td class="ln" data-line="120"><a href="#L120">120</a></td><td class="code"><span class="sv-comment">// Macro: UVM_MINOR_REV_2</span></td></tr><tr id="L121"><td class="ln" data-line="121"><a href="#L121">121</a></td><td class="code"><span class="sv-comment">// Indicates that the MINOR version of this release is &#x27;2&#x27;.</span></td></tr><tr id="L122"><td class="ln" data-line="122"><a href="#L122">122</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L123"><td class="ln" data-line="123"><a href="#L123">123</a></td><td class="code"><span class="sv-comment">// | `define UVM_MINOR_REV_2</span></td></tr><tr id="L124"><td class="ln" data-line="124"><a href="#L124">124</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L125"><td class="ln" data-line="125"><a href="#L125">125</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_MINOR_REV_2</span></td></tr><tr id="L126"><td class="ln" data-line="126"><a href="#L126">126</a></td><td class="code">&nbsp;</td></tr><tr id="L127"><td class="ln" data-line="127"><a href="#L127">127</a></td><td class="code"><span class="sv-comment">// Macro: UVM_VERSION_1_2</span></td></tr><tr id="L128"><td class="ln" data-line="128"><a href="#L128">128</a></td><td class="code"><span class="sv-comment">// Indicates that the version of this release is &#x27;1.2&#x27;.</span></td></tr><tr id="L129"><td class="ln" data-line="129"><a href="#L129">129</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L130"><td class="ln" data-line="130"><a href="#L130">130</a></td><td class="code"><span class="sv-comment">// | `define UVM_VERSION_1_2</span></td></tr><tr id="L131"><td class="ln" data-line="131"><a href="#L131">131</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_VERSION_1_2</span></td></tr><tr id="L132"><td class="ln" data-line="132"><a href="#L132">132</a></td><td class="code">&nbsp;</td></tr><tr id="L133"><td class="ln" data-line="133"><a href="#L133">133</a></td><td class="code"><span class="sv-comment">// Undocumented, same thing as UVM_VERSION_1_2</span></td></tr><tr id="L134"><td class="ln" data-line="134"><a href="#L134">134</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_MAJOR_VERSION_1_2</span></td></tr><tr id="L135"><td class="ln" data-line="135"><a href="#L135">135</a></td><td class="code">&nbsp;</td></tr><tr id="L136"><td class="ln" data-line="136"><a href="#L136">136</a></td><td class="code"><span class="sv-comment">// Group: UVM Version Ladder</span></td></tr><tr id="L137"><td class="ln" data-line="137"><a href="#L137">137</a></td><td class="code">&nbsp;</td></tr><tr id="L138"><td class="ln" data-line="138"><a href="#L138">138</a></td><td class="code"><span class="sv-comment">// Macro: UVM_POST_VERSION_1_1</span></td></tr><tr id="L139"><td class="ln" data-line="139"><a href="#L139">139</a></td><td class="code"><span class="sv-comment">// Indicates that this version of the UVM came after the</span></td></tr><tr id="L140"><td class="ln" data-line="140"><a href="#L140">140</a></td><td class="code"><span class="sv-comment">// 1.1 versions, including the various 1.1 fix revisions.  </span></td></tr><tr id="L141"><td class="ln" data-line="141"><a href="#L141">141</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L142"><td class="ln" data-line="142"><a href="#L142">142</a></td><td class="code"><span class="sv-comment">// The first UVM version wherein this macro is defined is</span></td></tr><tr id="L143"><td class="ln" data-line="143"><a href="#L143">143</a></td><td class="code"><span class="sv-comment">// 1.2, and the macro will continue to be defined</span></td></tr><tr id="L144"><td class="ln" data-line="144"><a href="#L144">144</a></td><td class="code"><span class="sv-comment">// for all future revisions of the UVM library.</span></td></tr><tr id="L145"><td class="ln" data-line="145"><a href="#L145">145</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L146"><td class="ln" data-line="146"><a href="#L146">146</a></td><td class="code"><span class="sv-comment">// | `define UVM_POST_VERSION_1_1</span></td></tr><tr id="L147"><td class="ln" data-line="147"><a href="#L147">147</a></td><td class="code"><span class="sv-macro">`define</span> <span class="sv-uvm-type">UVM_POST_VERSION_1_1</span></td></tr><tr id="L148"><td class="ln" data-line="148"><a href="#L148">148</a></td><td class="code">&nbsp;</td></tr><tr id="L149"><td class="ln" data-line="149"><a href="#L149">149</a></td><td class="code"><span class="sv-macro">`endif</span> <span class="sv-comment">// UVM_VERSION_DEFINES_SVH</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <textarea id="raw-source-text" style="display:none">//----------------------------------------------------------------------
+//   Copyright 2007-2010 Mentor Graphics Corporation
+//   Copyright 2007-2010 Cadence Design Systems, Inc. 
+//   Copyright 2010-2011 Synopsys, Inc.
+//   Copyright 2014      NVIDIA Corporation
+//   All Rights Reserved Worldwide
+//
+//   Licensed under the Apache License, Version 2.0 (the
+//   &quot;License&quot;); you may not use this file except in
+//   compliance with the License.  You may obtain a copy of
+//   the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in
+//   writing, software distributed under the License is
+//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR
+//   CONDITIONS OF ANY KIND, either express or implied.  See
+//   the License for the specific language governing
+//   permissions and limitations under the License.
+//----------------------------------------------------------------------
+
+`ifndef UVM_VERSION_DEFINES_SVH
+`define UVM_VERSION_DEFINES_SVH
+
+// Title: UVM Version Defines
+
+// Group: UVM Revision Values
+// These macros provide the current values for the ~MAJOR~, ~MINOR~,
+// and optionally the ~FIX~ revision.
+//
+// Example with UVM version 1.2:
+//  UVM_MAJOR_REV - &#x27;1&#x27;
+//  UVM_MINOR_REV - &#x27;2&#x27;
+//  UVM_FIX_REV - &#x27;undefined&#x27;
+//
+// Example with UVM version 1.1a:
+//  UVM_MAJOR_REV - &#x27;1&#x27;
+//  UVM_MINOR_REV - &#x27;1&#x27;
+//  UVM_FIX_REV - &#x27;a&#x27;
+//
+
+// Macro: UVM_MAJOR_REV
+// Defines the MAJOR revision number.
+//
+// For UVM version 1.2, the MAJOR revision number is &#x27;1&#x27;
+//
+// | `define UVM_MAJOR_REV 1
+`define UVM_MAJOR_REV 1
+
+// Macro: UVM_MINOR_REV
+// Defines the MINOR revision number.
+//
+// For UVM version 1.2, the MINOR revision number is &#x27;2&#x27;
+//
+// | `define UVM_MINOR_REV 2
+`define UVM_MINOR_REV 2
+
+// Macro: UVM_FIX_REV
+// (Optionally) Defines the FIX revision letter.
+//
+// For the first &quot;X.Y&quot; release of the UVM, there is no
+// FIX revision letter.  In these cases, the UVM_FIX_REV
+// is left undefined.
+//
+// For any subsequent &quot;X.Y&quot; fix releases, the UVM_FIX_REV
+// value is set to the appropriate fix release letter.
+//
+// Example:
+// 1.1 - First release, UVM_FIX_REV is undefined
+// 1.1a - Fix release, UVM_FIX_REV is &#x27;a&#x27;
+
+// Include this in the comment when the FIX rev is present:
+// | `define UVM_FIX_REV a
+
+//`define UVM_FIX_REV a
+
+// Macro: UVM_NAME
+// The name used by the library when displaying the name of
+// the library.
+//
+// | `define UVM_NAME UVM
+`define UVM_NAME UVM
+
+// Macro: UVM_VERSION_STRING
+// Provides a string-ized version of the UVM Library version number.
+//
+// When there is a FIX_REV, the string is &quot;&lt;name&gt;-&lt;major&gt;.&lt;minor&gt;&lt;fix&gt;&quot; (such as &quot;UVM-1.1d&quot;).
+// When there is NO FIX_REV, the string is &quot;&lt;name&gt;-&lt;major&gt;.&lt;minor&gt;&quot; (such as &quot;UVM-1.2&quot;).
+
+`ifdef UVM_FIX_REV
+ `define UVM_VERSION_STRING `&quot;`UVM_NAME``-```UVM_MAJOR_REV``.```UVM_MINOR_REV`UVM_FIX_REV`&quot;
+`else
+ `define UVM_VERSION_STRING `&quot;`UVM_NAME``-```UVM_MAJOR_REV``.```UVM_MINOR_REV```&quot;
+`endif
+
+// Group: Conditional Compilation
+// These macros provide the ability to conditionally compile based on the
+// revision of the library which is being used.
+//
+// These macros are required for conditional compilation, as SystemVerilog does
+// not support conditionals with `ifdefs.
+//
+// For example:
+// |  // Illegal:
+// | `if (UVM_MAJOR_REV == 1)
+// |
+// | // Legal:
+// | `ifdef UVM_MAJOR_REV_1
+// 
+
+
+// Macro: UVM_MAJOR_REV_1
+// Indicates that the MAJOR version of this release is &#x27;1&#x27;.
+//
+// | `define UVM_MAJOR_REV_1
+//
+`define UVM_MAJOR_REV_1
+
+// Macro: UVM_MINOR_REV_2
+// Indicates that the MINOR version of this release is &#x27;2&#x27;.
+//
+// | `define UVM_MINOR_REV_2
+//
+`define UVM_MINOR_REV_2
+
+// Macro: UVM_VERSION_1_2
+// Indicates that the version of this release is &#x27;1.2&#x27;.
+//
+// | `define UVM_VERSION_1_2
+`define UVM_VERSION_1_2
+
+// Undocumented, same thing as UVM_VERSION_1_2
+`define UVM_MAJOR_VERSION_1_2
+
+// Group: UVM Version Ladder
+
+// Macro: UVM_POST_VERSION_1_1
+// Indicates that this version of the UVM came after the
+// 1.1 versions, including the various 1.1 fix revisions.  
+//
+// The first UVM version wherein this macro is defined is
+// 1.2, and the macro will continue to be defined
+// for all future revisions of the UVM library.
+//
+// | `define UVM_POST_VERSION_1_1
+`define UVM_POST_VERSION_1_1
+
+`endif // UVM_VERSION_DEFINES_SVH
+</textarea>
+
+  <script>
+    document.getElementById('copy-src-btn').addEventListener('click', function() {
+      const text = document.getElementById('raw-source-text').value;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-src-btn');
+        const span = btn.querySelector('span');
+        const orig = span.textContent;
+        span.textContent = 'Copied!';
+        btn.classList.add('btn-success');
+        setTimeout(() => { span.textContent = orig; btn.classList.remove('btn-success'); }, 2000);
+      });
+    });
+
+    function highlightTargetLine() {
+      const hash = window.location.hash;
+      document.querySelectorAll('.sv-code-table tr.active-line').forEach(el => el.classList.remove('active-line'));
+      if (hash && hash.startsWith('#L')) {
+        const target = document.querySelector(hash);
+        if (target) {
+          target.classList.add('active-line');
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+    window.addEventListener('hashchange', highlightTargetLine);
+    window.addEventListener('DOMContentLoaded', highlightTargetLine);
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sequence Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Sequence_Classes" href="#">Sequence Classes</a></h1><div class=CBody><p>Sequences encapsulate user-defined procedures that generate multiple <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link2  >uvm_sequence_item</a>-based transactions.&nbsp; Such sequences can be reused, extended, randomized, and combined sequentially and hierarchically in interesting ways to produce realistic stimulus to your DUT.</p><p>With <i>uvm_sequence</i> objects, users can encapsulate DUT initialization code, bus-based stress tests, network protocol stacks-- anything procedural-- then have them all execute in specific or random order to more quickly reach corner cases and coverage goals.</p><p>The UVM sequence item and sequence class hierarchy is shown below.</p><img src="../../images/uvm_ref_sequence.gif" width="520" height="230"><ul><li><a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link3  >uvm_sequence_item</a> - The <i>uvm_sequence_item</i> is the base class for user-defined transactions that leverage the stimulus generation and control capabilities of the sequence-sequencer mechanism.</li><li><a href="../seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP)" class=LClass id=link4  >uvm_sequence #(REQ,RSP)</a> - The <i>uvm_sequence</i> extends <i>uvm_sequence_item</i> to add the ability to generate streams of <i>uvm_sequence_items</i>, either directly or by recursively executing other <i>uvm_sequences</i>.</li></ul>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#Sequence_Classes" >Sequence Classes</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Sequences encapsulate user-defined procedures that generate multiple <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link1  >uvm_sequence_item</a>-based transactions. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

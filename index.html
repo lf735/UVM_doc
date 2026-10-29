@@ -14,178 +14,176 @@
   limitations under the License.
 -->
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Documentation UVM | Guide & Référence</title>
-  <meta name="description" content="Documentation et guide de référence pour Universal Verification Methodology (UVM) et SystemVerilog.">
+  <title>UVM 1.2 Interactive Documentation & Source Explorer</title>
+  <meta name="description" content="Dynamic modern documentation and SystemVerilog source code browser for Accellera Universal Verification Methodology (UVM 1.2).">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body id="app-container" class="mode-docs">
 
-  <!-- Site Header -->
-  <header class="site-header">
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <button class="icon-button menu-toggle" id="menu-toggle" aria-label="Ouvrir le menu">
+  <!-- Application Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <button class="icon-btn" id="menu-toggle" aria-label="Toggle navigation menu">
         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
-      <a href="#" class="brand">
-        <span>UVM Documentation</span>
-        <span class="brand-badge">v1.2</span>
+      <a href="#/doc/overviews/intro-txt.html" class="brand-link">
+        <div class="brand-icon">U</div>
+        <span>UVM 1.2 Docs</span>
+        <span class="brand-badge">Standard</span>
       </a>
     </div>
 
-    <div class="header-actions">
-      <button class="icon-button" id="theme-toggle" aria-label="Changer de thème">
-        <!-- SVG icon injected by main.js -->
+    <!-- Global Search Input Trigger -->
+    <div class="search-trigger" id="search-trigger" role="button" tabindex="0" title="Quick search (Press /)">
+      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8" stroke-width="2"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2"/>
+      </svg>
+      <span class="search-placeholder">Search classes, macros, methods, files...</span>
+      <kbd class="search-kbd">/</kbd>
+    </div>
+
+    <!-- View Mode Switcher -->
+    <div class="view-switcher">
+      <button class="view-btn active" data-mode="docs" title="Documentation View">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span>Docs</span>
       </button>
-      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="icon-button" aria-label="GitHub">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+      <button class="view-btn" data-mode="source" title="Source Code Explorer">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+        <span>Source</span>
+      </button>
+      <button class="view-btn" data-mode="split" title="Split View (Documentation + Source Code)">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <line x1="12" y1="3" x2="12" y2="21"/>
+        </svg>
+        <span>Split View</span>
+      </button>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
+        <!-- SVG injected by js -->
+      </button>
+      <a href="https://github.com/accellera-official" target="_blank" rel="noopener noreferrer" class="icon-btn" title="Accellera Official GitHub">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
         </svg>
       </a>
     </div>
   </header>
 
-  <div class="layout">
+  <!-- Application Layout -->
+  <div class="app-layout">
     <!-- Sidebar Navigation -->
-    <nav class="sidebar" id="sidebar">
-      <div class="search-box">
-        <input type="text" id="search-input" class="search-input" placeholder="Rechercher...">
+    <aside class="app-sidebar" id="sidebar">
+      <div class="sidebar-tabs">
+        <button class="sidebar-tab-btn active" data-tab="docs">Documentation</button>
+        <button class="sidebar-tab-btn" data-tab="source">Source Tree</button>
+        <button class="sidebar-tab-btn" data-tab="index">Index A-Z</button>
       </div>
 
-      <div class="nav-section">
-        <div class="nav-section-title">Introduction</div>
-        <ul class="nav-list">
-          <li><a href="#intro" class="nav-link active">Aperçu & Objectifs</a></li>
-          <li><a href="#architecture" class="nav-link">Architecture UVM</a></li>
-        </ul>
+      <div class="sidebar-filter">
+        <input type="text" id="sidebar-filter" class="filter-input" placeholder="Filter current view...">
       </div>
 
-      <div class="nav-section">
-        <div class="nav-section-title">Composants & Structure</div>
-        <ul class="nav-list">
-          <li><a href="#components" class="nav-link">Composants UVM</a></li>
-          <li><a href="#phases" class="nav-link">Phases d'exécution</a></li>
-          <li><a href="#factory" class="nav-link">UVM Factory & Config DB</a></li>
-        </ul>
+      <div class="sidebar-content" id="sidebar-content">
+        <!-- Rendered by js/app.js -->
       </div>
+    </aside>
 
-      <div class="nav-section">
-        <div class="nav-section-title">Stimuli & Transactions</div>
-        <ul class="nav-list">
-          <li><a href="#sequences" class="nav-link">Sequences & Items</a></li>
-          <li><a href="#tlm" class="nav-link">Ports & Communications TLM</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main class="content">
-      <!-- Intro Section -->
-      <section id="intro" class="doc-section">
-        <h1>Guide de Documentation UVM</h1>
-        <p>Bienvenue sur le portail de documentation dédié à l'<strong>Universal Verification Methodology (UVM)</strong> en SystemVerilog. Ce site regroupe les standards, patrons d'architecture et exemples pratiques pour concevoir des environnements de vérification robustes et réutilisables.</p>
-        
-        <div class="callout">
-          <p><strong>Note :</strong> Ce projet est configuré pour un déploiement continu et automatique via <strong>GitHub Pages</strong> et <strong>GitHub Actions</strong>.</p>
-        </div>
-      </section>
-
-      <!-- Architecture Section -->
-      <section id="architecture" class="doc-section">
-        <h2>Architecture d'un Testbench UVM</h2>
-        <p>Un environnement de vérification UVM typique structure les composants selon une hiérarchie stricte d'objets et de composants :</p>
-        <ul>
-          <li><strong>uvm_test :</strong> Instancie l'environnement et configure les tests.</li>
-          <li><strong>uvm_env :</strong> Regroupe les agents, scoreboards et modules d'analyse.</li>
-          <li><strong>uvm_agent :</strong> Encapsule le sequencer, le driver et le monitor pour une interface donnée.</li>
-          <li><strong>uvm_scoreboard :</strong> Compare les résultats observés aux résultats attendus du modèle de référence.</li>
-        </ul>
-      </section>
-
-      <!-- Components Section -->
-      <section id="components" class="doc-section">
-        <h2>Composants UVM Clés</h2>
-        <p>Chaque composant hérite de <code>uvm_component</code> et participe aux phases de simulation.</p>
-
-        <h3>Exemple : Driver UVM minimal</h3>
-        <div class="code-container">
-          <div class="code-header">
-            <span>my_driver.sv</span>
-            <button class="copy-btn">Copier</button>
+    <!-- Main Viewport Panes -->
+    <main class="app-viewport" id="app-viewport">
+      <!-- Documentation Pane -->
+      <section class="pane" id="doc-pane">
+        <div class="pane-header">
+          <div class="pane-header-title">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+            <span id="doc-pane-title">Reference Documentation</span>
           </div>
-          <pre><code>class my_driver extends uvm_driver #(my_transaction);
-  `uvm_component_utils(my_driver)
-
-  function new(string name = "my_driver", uvm_component parent = null);
-    super.new(name, parent);
-  endfunction
-
-  virtual task run_phase(uvm_phase phase);
-    forever begin
-      seq_item_port.get_next_item(req);
-      drive_transfer(req);
-      seq_item_port.item_done();
-    end
-  endtask
-endclass</code></pre>
-        </div>
-      </section>
-
-      <!-- Phases Section -->
-      <section id="phases" class="doc-section">
-        <h2>Phases UVM</h2>
-        <p>UVM synchronise la construction et l'exécution via des phases automatiques ordonnées :</p>
-        <ol>
-          <li><code>build_phase</code> : Construction et configuration de la hiérarchie.</li>
-          <li><code>connect_phase</code> : Connexion des ports TLM et interfaces virtuelles.</li>
-          <li><code>end_of_elaboration_phase</code> : Derniers réglages de topologie.</li>
-          <li><code>run_phase</code> : Phase consommatrice de temps (tâches temporelles).</li>
-          <li><code>check_phase</code> / <code>report_phase</code> : Validation des résultats et génération du rapport final.</li>
-        </ol>
-      </section>
-
-      <!-- Factory & Config DB Section -->
-      <section id="factory" class="doc-section">
-        <h2>Factory et uvm_config_db</h2>
-        <p>La Factory permet d'enregistrer des composants et de surcharger dynamiquement des types lors des tests sans modifier le code source existant :</p>
-        <div class="code-container">
-          <div class="code-header">
-            <span>override_example.sv</span>
-            <button class="copy-btn">Copier</button>
+          <div>
+            <button class="icon-btn" id="open-full-doc" title="Expand documentation full width">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
           </div>
-          <pre><code>// Surcharge d'un driver par un driver d'erreur pour un test spécifique
-set_type_override_by_type(my_driver::get_type(), error_driver::get_type());</code></pre>
         </div>
+        <iframe id="doc-frame" class="pane-frame" src="docs_view/overviews/intro-txt.html" title="UVM Reference Documentation"></iframe>
       </section>
 
-      <!-- Sequences Section -->
-      <section id="sequences" class="doc-section">
-        <h2>Sequences & Stimuli</h2>
-        <p>Les séquences séparent la génération de scénarios de stimuli du protocole de transmission physique (géré par le driver).</p>
-      </section>
+      <!-- Draggable Split Divider -->
+      <div class="split-divider" id="split-divider" title="Drag to resize panes"></div>
 
-      <!-- TLM Section -->
-      <section id="tlm" class="doc-section">
-        <h2>Ports & Communication TLM</h2>
-        <p>Les interfaces Transaction Level Modeling (TLM) assurent un couplage faible entre le monitor, les agents et le scoreboard grâce à des ports et exports (<code>uvm_analysis_port</code>, <code>uvm_analysis_imp</code>).</p>
-      </section>
-
-      <!-- Site Footer -->
-      <footer class="site-footer">
-        <div class="site-footer-content">
-          <p>Ce projet de documentation est sous licence <a href="LICENSE" target="_blank" rel="noopener noreferrer">Apache 2.0</a>.</p>
-          <p>UVM (Universal Verification Methodology) 1.2 est un standard open source développé et maintenu par <a href="https://www.accellera.org" target="_blank" rel="noopener noreferrer">Accellera Systems Initiative</a> sous licence Apache 2.0. Consultez le fichier <a href="NOTICE" target="_blank" rel="noopener noreferrer">NOTICE</a> pour les mentions légales et attributions des contributeurs originaux (Mentor Graphics, Cadence, Synopsys, Cypress Semiconductor, NVIDIA).</p>
+      <!-- Source Code Pane -->
+      <section class="pane" id="src-pane">
+        <div class="pane-header">
+          <div class="pane-header-title">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <span id="src-pane-title">SystemVerilog Source</span>
+          </div>
+          <div>
+            <button class="icon-btn" id="open-full-src" title="Expand source code full width">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
+          </div>
         </div>
-      </footer>
+        <iframe id="src-frame" class="pane-frame" src="src_view/comps/uvm_driver.svh.html#L44" title="SystemVerilog Source Code"></iframe>
+      </section>
     </main>
   </div>
 
-  <script src="js/main.js"></script>
+  <!-- Instant Search Modal -->
+  <div class="search-modal-backdrop" id="search-modal">
+    <div class="search-modal-card">
+      <div class="modal-search-header">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8" stroke-width="2"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2"/>
+        </svg>
+        <input type="text" id="modal-search-input" class="modal-search-input" placeholder="Search classes, methods, macros, source files..." autocomplete="off">
+        <kbd class="search-kbd">ESC</kbd>
+      </div>
+
+      <div class="modal-search-filters">
+        <button class="filter-pill active" data-type="all">All</button>
+        <button class="filter-pill" data-type="class">Classes</button>
+        <button class="filter-pill" data-type="macro">Macros</button>
+        <button class="filter-pill" data-type="file">Source Files</button>
+      </div>
+
+      <ul class="modal-search-results" id="modal-search-results">
+        <!-- Injected dynamically by js/app.js -->
+      </ul>
+
+      <div class="modal-search-footer">
+        <span><kbd class="search-kbd">↑</kbd> <kbd class="search-kbd">↓</kbd> to navigate</span>
+        <span><kbd class="search-kbd">↵</kbd> to select</span>
+        <span><kbd class="search-kbd">ESC</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search & App Scripts -->
+  <script src="js/search_data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
-

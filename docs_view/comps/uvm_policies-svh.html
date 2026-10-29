@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Policy Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="banner-file-link"><code>src/comps/uvm_policies.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 41">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 41)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Policy_Classes" href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="src-code-link" data-src-file="comps/uvm_policies.svh" data-src-line="41">Policy Classes</a></h1><div class=CBody><p>Policy classes are used to implement polymorphic operations that differ between built-in types and class-based types.&nbsp; Generic components can then be built that work with either classes or built-in types, depending on what policy class is used.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td class=SEntry><a href="#Policy_Classes" >Policy Classes</a></td><td class=SDescription>Policy classes are used to implement polymorphic operations that differ between built-in types and class-based types. </td></tr>
+  <!-- index=1 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_built_in_comp#(T)" id=link1  >uvm_built_in_comp #(T)</a></td><td class=SDescription>This policy class is used to compare built-in types.</td></tr>
+  <!-- index=2 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_built_in_converter#(T)" id=link2  >uvm_built_in_converter #(T)</a></td><td class=SDescription>This policy class is used to convert built-in types to strings.</td></tr>
+  <!-- index=3 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_built_in_clone#(T)" id=link3  >uvm_built_in_clone #(T)</a></td><td class=SDescription>This policy class is used to clone built-in types via the = operator.</td></tr>
+  <!-- index=4 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_class_comp#(T)" id=link4  >uvm_class_comp #(T)</a></td><td class=SDescription>This policy class is used to compare two objects of the same type.</td></tr>
+  <!-- index=5 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_class_converter#(T)" id=link5  >uvm_class_converter #(T)</a></td><td class=SDescription>This policy class is used to convert a class object to a string.</td></tr>
+  <!-- index=6 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_class_clone#(T)" id=link6  >uvm_class_clone #(T)</a></td><td class=SDescription>This policy class is used to clone class objects.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_built_in_comp#(T)" href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="src-code-link" data-src-file="comps/uvm_policies.svh" data-src-line="41">uvm_built_in_comp #(T)</a></h2><div class=CBody><p>This policy class is used to compare built-in types.</p><p>Provides a comp method that compares the built-in type, T, for which the == operator is defined.</p>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_built_in_comp#(T)" id=link7  >uvm_built_in_comp #(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This policy class is used to compare built-in types.</td></tr>
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_built_in_comp #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_built_in_converter#(T)" href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="src-code-link" data-src-file="comps/uvm_policies.svh" data-src-line="41">uvm_built_in_converter #(T)</a></h2><div class=CBody><p>This policy class is used to convert built-in types to strings.</p><p>Provides a convert2string method that converts the built-in type, T, to a string using the %p format specifier.</p>
+
+<!--START_ND_SUMMARY index=2-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=2 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_built_in_converter#(T)" id=link8  >uvm_built_in_converter #(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This policy class is used to convert built-in types to strings.</td></tr>
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_built_in_converter #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_built_in_clone#(T)" href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="src-code-link" data-src-file="comps/uvm_policies.svh" data-src-line="41">uvm_built_in_clone #(T)</a></h2><div class=CBody><p>This policy class is used to clone built-in types via the = operator.</p><p>Provides a clone method that returns a copy of the built-in type, T.</p>
+
+<!--START_ND_SUMMARY index=3-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=3 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_built_in_clone#(T)" id=link9  >uvm_built_in_clone #(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This policy class is used to clone built-in types via the = operator.</td></tr>
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_built_in_clone #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_class_comp#(T)" href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="src-code-link" data-src-file="comps/uvm_policies.svh" data-src-line="41">uvm_class_comp #(T)</a></h2><div class=CBody><p>This policy class is used to compare two objects of the same type.</p><p>Provides a comp method that compares two objects of type T.&nbsp; The class T must provide the method &ldquo;function bit compare(T rhs)&rdquo;, similar to the <a href="../base/uvm_object-svh.html#uvm_object.compare" class=LMethod id=link11  >uvm_object::compare</a> method.</p>
+
+<!--START_ND_SUMMARY index=4-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=4 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_class_comp#(T)" id=link10  >uvm_class_comp #(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This policy class is used to compare two objects of the same type.</td></tr>
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_class_comp #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_class_converter#(T)" href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="src-code-link" data-src-file="comps/uvm_policies.svh" data-src-line="41">uvm_class_converter #(T)</a></h2><div class=CBody><p>This policy class is used to convert a class object to a string.</p><p>Provides a convert2string method that converts an instance of type T to a string.&nbsp; The class T must provide the method &ldquo;function string convert2string()&rdquo;, similar to the <a href="../base/uvm_object-svh.html#uvm_object.convert2string" class=LMethod id=link13  >uvm_object::convert2string</a> method.</p>
+
+<!--START_ND_SUMMARY index=5-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=5 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_class_converter#(T)" id=link12  >uvm_class_converter #(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This policy class is used to convert a class object to a string.</td></tr>
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_class_converter #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_class_clone#(T)" href="../../src_view/comps/uvm_policies.svh.html#L41" target="_top" class="src-code-link" data-src-file="comps/uvm_policies.svh" data-src-line="41">uvm_class_clone #(T)</a></h2><div class=CBody><p>This policy class is used to clone class objects.</p><p>Provides a clone method that returns a copy of the built-in type, T.&nbsp; The class T must implement the clone method, to which this class delegates the operation.&nbsp; If T is derived from <a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link15  >uvm_object</a>, then T must instead implement <a href="../base/uvm_object-svh.html#uvm_object.do_copy" class=LMethod id=link16  >uvm_object::do_copy</a>, either directly or indirectly through use of the `uvm_field macros.</p>
+
+<!--START_ND_SUMMARY index=6-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=6 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_class_clone#(T)" id=link14  >uvm_class_clone #(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This policy class is used to clone class objects.</td></tr>
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_class_clone #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

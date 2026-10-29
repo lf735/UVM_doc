@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tlm1/uvm_analysis_port.svh | UVM 1.2 Source Code</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="src-viewer-body">
+  <div class="src-sticky-bar">
+    <div class="src-breadcrumbs">
+      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <span class="sep">/</span>
+      <span class="src-cur-file">tlm1/uvm_analysis_port.svh</span>
+      <span class="badge badge-info">155 lines</span>
+      <span class="badge badge-secondary">5.0 KB</span>
+    </div>
+    <div class="src-actions">
+      <select class="sym-jump-select" onchange="if(this.value) window.location.hash = this.value">
+              <option value="">Jump to Symbol (10 symbols)...</option>
+              <option value="#L56">class: uvm_analysis_port (L56)</option><option value="#L110">class: uvm_analysis_imp (L110)</option><option value="#L126">class: uvm_analysis_export (L126)</option>
+            </select>
+      <a href="../../docs_view/tlm1/uvm_analysis_port-svh.html" class="btn btn-outline" target="_top" title="View Reference Documentation for this file">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <span>Documentation</span>
+                </a>
+      <button class="btn btn-outline" id="copy-src-btn" title="Copy raw source code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Code</span>
+      </button>
+      <a href="../../uvm-1.2/src/tlm1/uvm_analysis_port.svh" download class="btn btn-outline" title="Download raw source file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Raw</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="src-code-container">
+    <table class="sv-code-table">
+      <tbody>
+        <tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr><tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2011 Mentor Graphics Corporation</span></td></tr><tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2011 Cadence Design Systems, Inc. </span></td></tr><tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Copyright 2010 Synopsys, Inc.</span></td></tr><tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr><tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr><tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr><tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr><tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr><tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr><tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr><tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr><tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr><tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr><tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr><tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr><tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr><tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr><tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr><tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code"><span class="sv-comment">// Title: Analysis Ports</span></td></tr><tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-comment">// This section defines the port, export, and imp classes used for transaction</span></td></tr><tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-comment">// analysis.</span></td></tr><tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">&nbsp;</td></tr><tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">&nbsp;</td></tr><tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-comment">// Class: uvm_analysis_port</span></td></tr><tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code"><span class="sv-comment">// Broadcasts a value to all subscribers implementing a &lt;uvm_analysis_imp&gt;.</span></td></tr><tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-comment">// </span></td></tr><tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code"><span class="sv-comment">//| class mon extends uvm_component;</span></td></tr><tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code"><span class="sv-comment">//|   uvm_analysis_port#(trans) ap;</span></td></tr><tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code"><span class="sv-comment">//|</span></td></tr><tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code"><span class="sv-comment">//|   function new(string name = &quot;sb&quot;, uvm_component parent = null);</span></td></tr><tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code"><span class="sv-comment">//|      super.new(name, parent);</span></td></tr><tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code"><span class="sv-comment">//|      ap = new(&quot;ap&quot;, this);</span></td></tr><tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code"><span class="sv-comment">//|   endfunction</span></td></tr><tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code"><span class="sv-comment">//|</span></td></tr><tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code"><span class="sv-comment">//|   task run_phase(uvm_phase phase);</span></td></tr><tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code"><span class="sv-comment">//|       trans t;</span></td></tr><tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code"><span class="sv-comment">//|       ...</span></td></tr><tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code"><span class="sv-comment">//|       ap.write(t);</span></td></tr><tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code"><span class="sv-comment">//|       ...</span></td></tr><tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code"><span class="sv-comment">//|   endfunction</span></td></tr><tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code"><span class="sv-comment">//| endclass</span></td></tr><tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">&nbsp;</td></tr><tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code"><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_analysis_port</span> <span class="sv-op">#</span> <span class="sv-op">(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span> <span class="sv-op">=</span> <span class="sv-keyword">int</span><span class="sv-op">)</span></td></tr><tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_tlm_if_base</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">&nbsp;</td></tr><tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_PORT</span><span class="sv-op">,</span> <span class="sv-number">0</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_UNBOUNDED_CONNECTIONS</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">    <span class="sv-ident">m_if_mask</span> <span class="sv-op">=</span> <span class="sv-macro">`UVM_TLM_ANALYSIS_MASK</span><span class="sv-op">;</span>  </td></tr><tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">&nbsp;</td></tr><tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-ident">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-string">&quot;uvm_analysis_port&quot;</span><span class="sv-op">;</span></td></tr><tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code">&nbsp;</td></tr><tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code">  <span class="sv-comment">// Method: write</span></td></tr><tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code">  <span class="sv-comment">// Send specified value to all connected interface</span></td></tr><tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code">  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">write</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code">    <span class="sv-uvm-type">uvm_tlm_if_base</span> <span class="sv-op">#</span> <span class="sv-op">(</span><span class="sv-ident">T</span><span class="sv-op">,</span> <span class="sv-ident">T</span><span class="sv-op">)</span> <span class="sv-ident">tif</span><span class="sv-op">;</span></td></tr><tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code">    <span class="sv-keyword">for</span> <span class="sv-op">(</span><span class="sv-keyword">int</span> <span class="sv-ident">i</span> <span class="sv-op">=</span> <span class="sv-number">0</span><span class="sv-op">;</span> <span class="sv-ident">i</span> <span class="sv-op">&lt;</span> <span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-ident">size</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-ident">i</span><span class="sv-op">+</span><span class="sv-op">+</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr><tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code">      <span class="sv-ident">tif</span> <span class="sv-op">=</span> <span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-ident">get_if</span> <span class="sv-op">(</span><span class="sv-ident">i</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code">      <span class="sv-keyword">if</span> <span class="sv-op">(</span> <span class="sv-ident">tif</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-keyword">null</span> <span class="sv-op">)</span></td></tr><tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code">        <span class="sv-uvm-type">uvm_report_fatal</span> <span class="sv-op">(</span><span class="sv-string">&quot;NTCONN&quot;</span><span class="sv-op">,</span> <span class="sv-op">{</span><span class="sv-string">&quot;No uvm_tlm interface is connected to &quot;</span><span class="sv-op">,</span> <span class="sv-ident">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-string">&quot; for executing write()&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code">      <span class="sv-ident">tif</span><span class="sv-op">.</span><span class="sv-ident">write</span> <span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code">    <span class="sv-keyword">end</span> </td></tr><tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code">&nbsp;</td></tr><tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code"><span class="sv-keyword">endclass</span></td></tr><tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code">&nbsp;</td></tr><tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code">&nbsp;</td></tr><tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code">&nbsp;</td></tr><tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code"><span class="sv-comment">// Class: uvm_analysis_imp</span></td></tr><tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code"><span class="sv-comment">// Receives all transactions broadcasted by a &lt;uvm_analysis_port&gt;. It serves as</span></td></tr><tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code"><span class="sv-comment">// the termination point of an analysis port/export/imp connection. The component</span></td></tr><tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code"><span class="sv-comment">// attached to the ~imp~ class--called a ~subscriber~-- implements the analysis</span></td></tr><tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code"><span class="sv-comment">// interface.</span></td></tr><tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code"><span class="sv-comment">// Will invoke the ~write(T)~ method in the parent component.</span></td></tr><tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code"><span class="sv-comment">// The implementation of the ~write(T)~ method must not modify</span></td></tr><tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code"><span class="sv-comment">// the value passed to it.</span></td></tr><tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L96"><td class="ln" data-line="96"><a href="#L96">96</a></td><td class="code"><span class="sv-comment">//| class sb extends uvm_component;</span></td></tr><tr id="L97"><td class="ln" data-line="97"><a href="#L97">97</a></td><td class="code"><span class="sv-comment">//|   uvm_analysis_imp#(trans, sb) ap;</span></td></tr><tr id="L98"><td class="ln" data-line="98"><a href="#L98">98</a></td><td class="code"><span class="sv-comment">//|</span></td></tr><tr id="L99"><td class="ln" data-line="99"><a href="#L99">99</a></td><td class="code"><span class="sv-comment">//|   function new(string name = &quot;sb&quot;, uvm_component parent = null);</span></td></tr><tr id="L100"><td class="ln" data-line="100"><a href="#L100">100</a></td><td class="code"><span class="sv-comment">//|      super.new(name, parent);</span></td></tr><tr id="L101"><td class="ln" data-line="101"><a href="#L101">101</a></td><td class="code"><span class="sv-comment">//|      ap = new(&quot;ap&quot;, this);</span></td></tr><tr id="L102"><td class="ln" data-line="102"><a href="#L102">102</a></td><td class="code"><span class="sv-comment">//|   endfunction</span></td></tr><tr id="L103"><td class="ln" data-line="103"><a href="#L103">103</a></td><td class="code"><span class="sv-comment">//|</span></td></tr><tr id="L104"><td class="ln" data-line="104"><a href="#L104">104</a></td><td class="code"><span class="sv-comment">//|   function void write(trans t);</span></td></tr><tr id="L105"><td class="ln" data-line="105"><a href="#L105">105</a></td><td class="code"><span class="sv-comment">//|       ...</span></td></tr><tr id="L106"><td class="ln" data-line="106"><a href="#L106">106</a></td><td class="code"><span class="sv-comment">//|   endfunction</span></td></tr><tr id="L107"><td class="ln" data-line="107"><a href="#L107">107</a></td><td class="code"><span class="sv-comment">//| endclass</span></td></tr><tr id="L108"><td class="ln" data-line="108"><a href="#L108">108</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L109"><td class="ln" data-line="109"><a href="#L109">109</a></td><td class="code">&nbsp;</td></tr><tr id="L110"><td class="ln" data-line="110"><a href="#L110">110</a></td><td class="code"><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_analysis_imp</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">,</span> <span class="sv-keyword">type</span> <span class="sv-ident">IMP</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span></td></tr><tr id="L111"><td class="ln" data-line="111"><a href="#L111">111</a></td><td class="code">  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_tlm_if_base</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L112"><td class="ln" data-line="112"><a href="#L112">112</a></td><td class="code">  <span class="sv-macro">`UVM_IMP_COMMON</span><span class="sv-op">(</span><span class="sv-macro">`UVM_TLM_ANALYSIS_MASK</span><span class="sv-op">,</span><span class="sv-string">&quot;uvm_analysis_imp&quot;</span><span class="sv-op">,</span><span class="sv-ident">IMP</span><span class="sv-op">)</span></td></tr><tr id="L113"><td class="ln" data-line="113"><a href="#L113">113</a></td><td class="code">  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">write</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L114"><td class="ln" data-line="114"><a href="#L114">114</a></td><td class="code">    <span class="sv-ident">m_imp</span><span class="sv-op">.</span><span class="sv-ident">write</span> <span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L115"><td class="ln" data-line="115"><a href="#L115">115</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L116"><td class="ln" data-line="116"><a href="#L116">116</a></td><td class="code"><span class="sv-keyword">endclass</span></td></tr><tr id="L117"><td class="ln" data-line="117"><a href="#L117">117</a></td><td class="code">&nbsp;</td></tr><tr id="L118"><td class="ln" data-line="118"><a href="#L118">118</a></td><td class="code">&nbsp;</td></tr><tr id="L119"><td class="ln" data-line="119"><a href="#L119">119</a></td><td class="code">&nbsp;</td></tr><tr id="L120"><td class="ln" data-line="120"><a href="#L120">120</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L121"><td class="ln" data-line="121"><a href="#L121">121</a></td><td class="code"><span class="sv-comment">// Class: uvm_analysis_export</span></td></tr><tr id="L122"><td class="ln" data-line="122"><a href="#L122">122</a></td><td class="code"><span class="sv-comment">//</span></td></tr><tr id="L123"><td class="ln" data-line="123"><a href="#L123">123</a></td><td class="code"><span class="sv-comment">// Exports a lower-level &lt;uvm_analysis_imp&gt; to its parent.</span></td></tr><tr id="L124"><td class="ln" data-line="124"><a href="#L124">124</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr><tr id="L125"><td class="ln" data-line="125"><a href="#L125">125</a></td><td class="code">&nbsp;</td></tr><tr id="L126"><td class="ln" data-line="126"><a href="#L126">126</a></td><td class="code"><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_analysis_export</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span></td></tr><tr id="L127"><td class="ln" data-line="127"><a href="#L127">127</a></td><td class="code">  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_tlm_if_base</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L128"><td class="ln" data-line="128"><a href="#L128">128</a></td><td class="code">&nbsp;</td></tr><tr id="L129"><td class="ln" data-line="129"><a href="#L129">129</a></td><td class="code">  <span class="sv-comment">// Function: new</span></td></tr><tr id="L130"><td class="ln" data-line="130"><a href="#L130">130</a></td><td class="code">  <span class="sv-comment">// Instantiate the export.</span></td></tr><tr id="L131"><td class="ln" data-line="131"><a href="#L131">131</a></td><td class="code">  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L132"><td class="ln" data-line="132"><a href="#L132">132</a></td><td class="code">    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_EXPORT</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_UNBOUNDED_CONNECTIONS</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L133"><td class="ln" data-line="133"><a href="#L133">133</a></td><td class="code">    <span class="sv-ident">m_if_mask</span> <span class="sv-op">=</span> <span class="sv-macro">`UVM_TLM_ANALYSIS_MASK</span><span class="sv-op">;</span></td></tr><tr id="L134"><td class="ln" data-line="134"><a href="#L134">134</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L135"><td class="ln" data-line="135"><a href="#L135">135</a></td><td class="code">&nbsp;</td></tr><tr id="L136"><td class="ln" data-line="136"><a href="#L136">136</a></td><td class="code">  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-ident">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L137"><td class="ln" data-line="137"><a href="#L137">137</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-string">&quot;uvm_analysis_export&quot;</span><span class="sv-op">;</span></td></tr><tr id="L138"><td class="ln" data-line="138"><a href="#L138">138</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L139"><td class="ln" data-line="139"><a href="#L139">139</a></td><td class="code">  </td></tr><tr id="L140"><td class="ln" data-line="140"><a href="#L140">140</a></td><td class="code">  <span class="sv-comment">// analysis port differs from other ports in that it broadcasts</span></td></tr><tr id="L141"><td class="ln" data-line="141"><a href="#L141">141</a></td><td class="code">  <span class="sv-comment">// to all connected interfaces. Ports only send to the interface</span></td></tr><tr id="L142"><td class="ln" data-line="142"><a href="#L142">142</a></td><td class="code">  <span class="sv-comment">// at the index specified in a call to set_if (0 by default).</span></td></tr><tr id="L143"><td class="ln" data-line="143"><a href="#L143">143</a></td><td class="code">  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">write</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L144"><td class="ln" data-line="144"><a href="#L144">144</a></td><td class="code">    <span class="sv-uvm-type">uvm_tlm_if_base</span> <span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-ident">T</span><span class="sv-op">,</span> <span class="sv-ident">T</span><span class="sv-op">)</span> <span class="sv-ident">tif</span><span class="sv-op">;</span></td></tr><tr id="L145"><td class="ln" data-line="145"><a href="#L145">145</a></td><td class="code">    <span class="sv-keyword">for</span> <span class="sv-op">(</span><span class="sv-keyword">int</span> <span class="sv-ident">i</span> <span class="sv-op">=</span> <span class="sv-number">0</span><span class="sv-op">;</span> <span class="sv-ident">i</span> <span class="sv-op">&lt;</span> <span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-ident">size</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-ident">i</span><span class="sv-op">+</span><span class="sv-op">+</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr><tr id="L146"><td class="ln" data-line="146"><a href="#L146">146</a></td><td class="code">      <span class="sv-ident">tif</span> <span class="sv-op">=</span> <span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-ident">get_if</span> <span class="sv-op">(</span><span class="sv-ident">i</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L147"><td class="ln" data-line="147"><a href="#L147">147</a></td><td class="code">      <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">tif</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span></td></tr><tr id="L148"><td class="ln" data-line="148"><a href="#L148">148</a></td><td class="code">         <span class="sv-uvm-type">uvm_report_fatal</span> <span class="sv-op">(</span><span class="sv-string">&quot;NTCONN&quot;</span><span class="sv-op">,</span> <span class="sv-op">{</span><span class="sv-string">&quot;No uvm_tlm interface is connected to &quot;</span><span class="sv-op">,</span> <span class="sv-ident">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-string">&quot; for executing write()&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L149"><td class="ln" data-line="149"><a href="#L149">149</a></td><td class="code">      <span class="sv-ident">tif</span><span class="sv-op">.</span><span class="sv-ident">write</span> <span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr><tr id="L150"><td class="ln" data-line="150"><a href="#L150">150</a></td><td class="code">    <span class="sv-keyword">end</span> </td></tr><tr id="L151"><td class="ln" data-line="151"><a href="#L151">151</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr><tr id="L152"><td class="ln" data-line="152"><a href="#L152">152</a></td><td class="code">&nbsp;</td></tr><tr id="L153"><td class="ln" data-line="153"><a href="#L153">153</a></td><td class="code"><span class="sv-keyword">endclass</span></td></tr><tr id="L154"><td class="ln" data-line="154"><a href="#L154">154</a></td><td class="code">&nbsp;</td></tr><tr id="L155"><td class="ln" data-line="155"><a href="#L155">155</a></td><td class="code">&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <textarea id="raw-source-text" style="display:none">//
+//----------------------------------------------------------------------
+//   Copyright 2007-2011 Mentor Graphics Corporation
+//   Copyright 2007-2011 Cadence Design Systems, Inc. 
+//   Copyright 2010 Synopsys, Inc.
+//   All Rights Reserved Worldwide
+//
+//   Licensed under the Apache License, Version 2.0 (the
+//   &quot;License&quot;); you may not use this file except in
+//   compliance with the License.  You may obtain a copy of
+//   the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in
+//   writing, software distributed under the License is
+//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR
+//   CONDITIONS OF ANY KIND, either express or implied.  See
+//   the License for the specific language governing
+//   permissions and limitations under the License.
+//----------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+// Title: Analysis Ports
+//------------------------------------------------------------------------------
+//
+// This section defines the port, export, and imp classes used for transaction
+// analysis.
+//
+//------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+// Class: uvm_analysis_port
+//
+// Broadcasts a value to all subscribers implementing a &lt;uvm_analysis_imp&gt;.
+// 
+//| class mon extends uvm_component;
+//|   uvm_analysis_port#(trans) ap;
+//|
+//|   function new(string name = &quot;sb&quot;, uvm_component parent = null);
+//|      super.new(name, parent);
+//|      ap = new(&quot;ap&quot;, this);
+//|   endfunction
+//|
+//|   task run_phase(uvm_phase phase);
+//|       trans t;
+//|       ...
+//|       ap.write(t);
+//|       ...
+//|   endfunction
+//| endclass
+//------------------------------------------------------------------------------
+
+class uvm_analysis_port # (type T = int)
+  extends uvm_port_base # (uvm_tlm_if_base #(T,T));
+
+  function new (string name, uvm_component parent);
+    super.new (name, parent, UVM_PORT, 0, UVM_UNBOUNDED_CONNECTIONS);
+    m_if_mask = `UVM_TLM_ANALYSIS_MASK;  
+  endfunction
+
+  virtual function string get_type_name();
+    return &quot;uvm_analysis_port&quot;;
+  endfunction
+
+  // Method: write
+  // Send specified value to all connected interface
+  function void write (input T t);
+    uvm_tlm_if_base # (T, T) tif;
+    for (int i = 0; i &lt; this.size(); i++) begin
+      tif = this.get_if (i);
+      if ( tif == null )
+        uvm_report_fatal (&quot;NTCONN&quot;, {&quot;No uvm_tlm interface is connected to &quot;, get_full_name(), &quot; for executing write()&quot;}, UVM_NONE);
+      tif.write (t);
+    end 
+  endfunction
+
+endclass
+
+
+
+//------------------------------------------------------------------------------
+// Class: uvm_analysis_imp
+//
+// Receives all transactions broadcasted by a &lt;uvm_analysis_port&gt;. It serves as
+// the termination point of an analysis port/export/imp connection. The component
+// attached to the ~imp~ class--called a ~subscriber~-- implements the analysis
+// interface.
+//
+// Will invoke the ~write(T)~ method in the parent component.
+// The implementation of the ~write(T)~ method must not modify
+// the value passed to it.
+//
+//| class sb extends uvm_component;
+//|   uvm_analysis_imp#(trans, sb) ap;
+//|
+//|   function new(string name = &quot;sb&quot;, uvm_component parent = null);
+//|      super.new(name, parent);
+//|      ap = new(&quot;ap&quot;, this);
+//|   endfunction
+//|
+//|   function void write(trans t);
+//|       ...
+//|   endfunction
+//| endclass
+//------------------------------------------------------------------------------
+
+class uvm_analysis_imp #(type T=int, type IMP=int)
+  extends uvm_port_base #(uvm_tlm_if_base #(T,T));
+  `UVM_IMP_COMMON(`UVM_TLM_ANALYSIS_MASK,&quot;uvm_analysis_imp&quot;,IMP)
+  function void write (input T t);
+    m_imp.write (t);
+  endfunction
+endclass
+
+
+
+//------------------------------------------------------------------------------
+// Class: uvm_analysis_export
+//
+// Exports a lower-level &lt;uvm_analysis_imp&gt; to its parent.
+//------------------------------------------------------------------------------
+
+class uvm_analysis_export #(type T=int)
+  extends uvm_port_base #(uvm_tlm_if_base #(T,T));
+
+  // Function: new
+  // Instantiate the export.
+  function new (string name, uvm_component parent = null);
+    super.new (name, parent, UVM_EXPORT, 1, UVM_UNBOUNDED_CONNECTIONS);
+    m_if_mask = `UVM_TLM_ANALYSIS_MASK;
+  endfunction
+
+  virtual function string get_type_name();
+    return &quot;uvm_analysis_export&quot;;
+  endfunction
+  
+  // analysis port differs from other ports in that it broadcasts
+  // to all connected interfaces. Ports only send to the interface
+  // at the index specified in a call to set_if (0 by default).
+  function void write (input T t);
+    uvm_tlm_if_base #(T, T) tif;
+    for (int i = 0; i &lt; this.size(); i++) begin
+      tif = this.get_if (i);
+      if (tif == null)
+         uvm_report_fatal (&quot;NTCONN&quot;, {&quot;No uvm_tlm interface is connected to &quot;, get_full_name(), &quot; for executing write()&quot;}, UVM_NONE);
+      tif.write (t);
+    end 
+  endfunction
+
+endclass
+
+
+</textarea>
+
+  <script>
+    document.getElementById('copy-src-btn').addEventListener('click', function() {
+      const text = document.getElementById('raw-source-text').value;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-src-btn');
+        const span = btn.querySelector('span');
+        const orig = span.textContent;
+        span.textContent = 'Copied!';
+        btn.classList.add('btn-success');
+        setTimeout(() => { span.textContent = orig; btn.classList.remove('btn-success'); }, 2000);
+      });
+    });
+
+    function highlightTargetLine() {
+      const hash = window.location.hash;
+      document.querySelectorAll('.sv-code-table tr.active-line').forEach(el => el.classList.remove('active-line'));
+      if (hash && hash.startsWith('#L')) {
+        const target = document.querySelector(hash);
+        if (target) {
+          target.classList.add('active-line');
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }
+    window.addEventListener('hashchange', highlightTargetLine);
+    window.addEventListener('DOMContentLoaded', highlightTargetLine);
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+  </script>
+</body>
+</html>

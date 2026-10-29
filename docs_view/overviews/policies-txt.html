@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Policy Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Policy_Classes" href="#">Policy Classes</a></h1><div class=CBody><p>Each of UVM&rsquo;s policy classes perform a specific task for <a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link2  >uvm_object</a>-based objects: printing, comparing, recording, packing, and unpacking.&nbsp; They are implemented separately from <i>uvm_object</i> so that users can plug in different ways to print, compare, etc. without modifying the object class being operated on.&nbsp; The user can simply apply a different printer or compare &ldquo;policy&rdquo; to change how an object is printed or compared.</p><p>Each policy class includes several user-configurable parameters that control the operation.&nbsp;  Users may also customize operations by deriving new policy subtypes from these base types.&nbsp; For example, the UVM provides four different <i>uvm_printer</i>-based policy classes, each of which print objects in a different format.</p><ul><li><a href="../base/uvm_printer-svh.html#uvm_printer" class=LClass id=link3  >uvm_printer</a> - performs deep printing of <i>uvm_object</i>-based objects.&nbsp; The UVM provides several subtypes to <i>uvm_printer</i> that print objects in a specific format: <a href="../base/uvm_printer-svh.html#uvm_table_printer" class=LClass id=link4  >uvm_table_printer</a>, <a href="../base/uvm_printer-svh.html#uvm_tree_printer" class=LClass id=link5  >uvm_tree_printer</a>, and <a href="../base/uvm_printer-svh.html#uvm_line_printer" class=LClass id=link6  >uvm_line_printer</a>.&nbsp;  Each such printer has many configuration options that goven what and how object members are printed.</li><li><a href="../base/uvm_comparer-svh.html#uvm_comparer" class=LClass id=link7  >uvm_comparer</a> - performs deep comparison of <i>uvm_object</i>-based objects.&nbsp; Users may configure what is compared and how miscompares are reported.</li><li><a href="../base/uvm_recorder-svh.html#uvm_recorder" class=LClass id=link8  >uvm_recorder</a> - performs the task of recording <i>uvm_object</i>-based objects to a transaction data base.&nbsp; The implementation is vendor-specific.</li><li><a href="../base/uvm_packer-svh.html#uvm_packer" class=LClass id=link9  >uvm_packer</a> - used to pack (serialize) and unpack <i>uvm_object</i>-based properties into bit, byte, or int arrays and back again.</li></ul>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#Policy_Classes" >Policy Classes</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Each of UVM&rsquo;s policy classes perform a specific task for <a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link1  >uvm_object</a>-based objects: printing, comparing, recording, packing, and unpacking. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

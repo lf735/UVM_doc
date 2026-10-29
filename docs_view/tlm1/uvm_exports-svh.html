@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLM Export Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="banner-file-link"><code>src/tlm1/uvm_exports.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 80">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 80)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TLM_Export_Classes" href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="src-code-link" data-src-file="tlm1/uvm_exports.svh" data-src-line="80">TLM Export Classes</a></h1><div class=CBody><p>The following classes define the TLM export classes.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td class=SEntry><a href="#TLM_Export_Classes" >TLM Export Classes</a></td><td class=SDescription>The following classes define the TLM export classes.</td></tr>
+  <!-- index=1 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_*_export#(T)" >uvm_*_export #(T)</a></td><td class=SDescription>The unidirectional uvm_*_export is a port that <i>forwards</i> or <i>promotes</i> an interface implementation from a child component to its parent. </td></tr>
+  <!-- index=4 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_*_export#(REQ,RSP)" >uvm_*_export #(REQ,RSP)</a></td><td class=SDescription>The bidirectional uvm_*_export is a port that <i>forwards</i> or <i>promotes</i> an interface implementation from a child component to its parent. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_*_export#(T)" href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="src-code-link" data-src-file="tlm1/uvm_exports.svh" data-src-line="80">uvm_*_export #(T)</a></h2><div class=CBody><p>The unidirectional uvm_*_export is a port that <i>forwards</i> or <i>promotes</i> an interface implementation from a child component to its parent.&nbsp; An export can be connected to any compatible child export or imp port.&nbsp; It must ultimately be connected to at least one implementation of its associated interface.</p><p>The interface type represented by the asterisk is any of the following</p><blockquote><pre>blocking_put
+nonblocking_put
+put
+
+blocking_get
+nonblocking_get
+get
+
+blocking_peek
+nonblocking_peek
+peek
+
+blocking_get_peek
+nonblocking_get_peek
+get_peek</pre></blockquote><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>T</td><td class=CDLDescription>The type of transaction to be communicated by the export</td></tr></table><p>Exports are connected to interface implementations directly via <a href="uvm_imps-svh.html#uvm_*_imp#(T,IMP)" class=LClass id=link2  >uvm_*_imp #(T,IMP)</a> ports or indirectly via other <a href="#uvm_*_export#(T)" class=LClass id=link3  >uvm_*_export #(T)</a> exports.</p>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_*_export#(T)" >uvm_*_export #(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>The unidirectional uvm_*_export is a port that <i>forwards</i> or <i>promotes</i> an interface implementation from a child component to its parent. </td></tr>
+  <!-- index=2 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_*_export#(T).Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_*_export#(T).new" >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link1  >uvm_component</a> constructor arguments. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_*_export#(T).Methods" href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="src-code-link" data-src-file="tlm1/uvm_exports.svh" data-src-line="80">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_*_export#(T).new" href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="src-code-link" data-src-file="tlm1/uvm_exports.svh" data-src-line="80">new</a></h3><div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link4  >uvm_component</a> constructor arguments.&nbsp; The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of interfaces that must have been supplied to this port by the end of elaboration.</p><blockquote><pre>function new (string name,
+              uvm_component parent,
+              int min_size=1,
+              int max_size=1)</pre></blockquote></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_*_export#(REQ,RSP)" href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="src-code-link" data-src-file="tlm1/uvm_exports.svh" data-src-line="80">uvm_*_export #(REQ,RSP)</a></h2><div class=CBody><p>The bidirectional uvm_*_export is a port that <i>forwards</i> or <i>promotes</i> an interface implementation from a child component to its parent.&nbsp; An export can be connected to any compatible child export or imp port.&nbsp; It must ultimately be connected to at least one implementation of its associated interface.</p><p>The interface type represented by the asterisk is any of the following</p><blockquote><pre>blocking_transport
+nonblocking_transport
+transport
+
+blocking_master
+nonblocking_master
+master
+
+blocking_slave
+nonblocking_slave
+slave</pre></blockquote><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>REQ</td><td class=CDLDescription>The type of request transaction to be communicated by the export</td></tr><tr><td class=CDLEntry>RSP</td><td class=CDLDescription>The type of response transaction to be communicated by the export</td></tr></table><p>Exports are connected to interface implementations directly via <a href="uvm_imps-svh.html#uvm_*_imp#(REQ,RSP,IMP,REQ_IMP,RSP_IMP)" class=LClass id=link6  >uvm_*_imp #(REQ, RSP, IMP, REQ_IMP, RSP_IMP)</a> ports or indirectly via other <a href="#uvm_*_export#(REQ,RSP)" class=LClass id=link7  >uvm_*_export #(REQ,RSP)</a> exports.</p>
+
+<!--START_ND_SUMMARY index=4-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=4 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_*_export#(REQ,RSP)" >uvm_*_export #(REQ,RSP)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>The bidirectional uvm_*_export is a port that <i>forwards</i> or <i>promotes</i> an interface implementation from a child component to its parent. </td></tr>
+  <!-- index=5 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_*_export#(REQ,RSP).Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=6 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_*_export#(REQ,RSP).new" >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link5  >uvm_component</a> constructor arguments. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_*_export#(REQ,RSP).Methods" href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="src-code-link" data-src-file="tlm1/uvm_exports.svh" data-src-line="80">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_*_export#(REQ,RSP).new" href="../../src_view/tlm1/uvm_exports.svh.html#L80" target="_top" class="src-code-link" data-src-file="tlm1/uvm_exports.svh" data-src-line="80">new</a></h3><div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link8  >uvm_component</a> constructor arguments.&nbsp; The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of interfaces that must have been supplied to this port by the end of elaboration.</p><blockquote><pre>function new (string name,
+              uvm_component parent,
+              int min_size=1,
+              int max_size=1)</pre></blockquote></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

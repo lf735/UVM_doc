@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User-Defined Phases | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="User-Defined_Phases" href="#">User-Defined Phases</a></h1><div class=CBody><p>To define your own custom phase, use the following pattern.</p><p>1.&nbsp; Extend the appropriate base class for your phase type.</p><blockquote><pre>class my_PHASE_phase extends uvm_task_phase;
+class my_PHASE_phase extends uvm_topdown_phase;
+class my_PHASE_phase extends uvm_bottomup_phase;</pre></blockquote><p>2.&nbsp; Optionally, implement your exec_task or exec_func method.</p><blockquote><pre>task exec_task(uvm_component comp, uvm_phase schedule);
+function void exec_func(uvm_component comp, uvm_phase schedule);</pre></blockquote><p>If implemented, these methods usually call the related method on the component</p><blockquote><pre>comp.PHASE_phase(uvm_phase phase);</pre></blockquote><p>3.&nbsp; Since the phase class is a singleton, providing an accessor method allows for easy global use, and protecting the constructor prevents misuse.</p><blockquote><pre>class my_PHASE_phase extends uvm_topdown_phase;  or uvm_task_phase/uvm_bottomum_phase
+  static local my_PHASE_phase m_inst;      Local reference to global IMP
+  protected function new(string name=&quot;PHASE&quot;);    Protected constructor for singleton
+    super.new(name);
+  endfunction : new
+  static function my_PHASE_phase get();   Static method for accessing singleton
+    if (m_imp == null)
+      m_imp = new();
+    return m_imp;
+  endfunction : get
+   Optionally implement exec_func/exec_task
+endclass : my_PHASE_phase</pre></blockquote><p>4.&nbsp; Insert the phase in a phase schedule or domain using the <a href="../base/uvm_phase-svh.html#uvm_phase.add" class=LMethod id=link1  >uvm_phase::add</a> method:</p><blockquote><pre>my_schedule.add(my_PHASE_class::get());</pre></blockquote>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#User-Defined_Phases" >User-Defined Phases</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>To define your own custom phase, use the following pattern.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

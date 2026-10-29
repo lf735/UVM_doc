@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UVM Common Phases | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="banner-file-link"><code>src/base/uvm_common_phases.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 63">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 63)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="UVM_Common_Phases" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">UVM Common Phases</a></h1><div class=CBody><p>The common phases are the set of function and task phases that all <a href="uvm_component-svh.html#uvm_component" class=LClass id=link11  >uvm_component</a>s execute together.&nbsp; All <a href="uvm_component-svh.html#uvm_component" class=LClass id=link12  >uvm_component</a>s are always synchronized with respect to the common phases.</p><p>The names of the UVM phases (which will be returned by get_name() for a phase instance) match the class names specified below with the &ldquo;uvm_&rdquo; and &ldquo;_phase&rdquo; removed.&nbsp;  For example, the build phase corresponds to the uvm_build_phase class below and has the name &ldquo;build&rdquo;, which means that the following can be used to call foo() at the end of the build phase (after all lower levels have finished build):</p><blockquote><pre>function void phase_ended(uvm_phase phase) ;
+   if (phase.get_name()==&quot;build&quot;) foo() ;
+endfunction</pre></blockquote><p>The common phases are executed in the sequence they are specified below.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td class=SEntry><a href="#UVM_Common_Phases" >UVM Common Phases</a></td><td class=SDescription>The common phases are the set of function and task phases that all <a href="uvm_component-svh.html#uvm_component" class=LClass id=link1  >uvm_component</a>s execute together. </td></tr>
+  <!-- index=1 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_build_phase" id=link2  >uvm_build_phase</a></td><td class=SDescription>Create and configure of testbench structure</td></tr>
+  <!-- index=4 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_connect_phase" id=link3  >uvm_connect_phase</a></td><td class=SDescription>Establish cross-component connections.</td></tr>
+  <!-- index=7 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_end_of_elaboration_phase" id=link4  >uvm_end_of_elaboration_phase</a></td><td class=SDescription>Fine-tune the testbench.</td></tr>
+  <!-- index=10 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_start_of_simulation_phase" id=link5  >uvm_start_of_simulation_phase</a></td><td class=SDescription>Get ready for DUT to be simulated.</td></tr>
+  <!-- index=13 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_run_phase" id=link6  >uvm_run_phase</a></td><td class=SDescription>Stimulate the DUT.</td></tr>
+  <!-- index=16 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_extract_phase" id=link7  >uvm_extract_phase</a></td><td class=SDescription>Extract data from different points of the verification environment.</td></tr>
+  <!-- index=19 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_check_phase" id=link8  >uvm_check_phase</a></td><td class=SDescription>Check for any unexpected conditions in the verification environment.</td></tr>
+  <!-- index=22 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_report_phase" id=link9  >uvm_report_phase</a></td><td class=SDescription>Report results of the test.</td></tr>
+  <!-- index=25 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_final_phase" id=link10  >uvm_final_phase</a></td><td class=SDescription>Tie up loose ends.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_build_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_build_phase</a></h2><div class=CBody><p>Create and configure of testbench structure</p><p><a href="uvm_topdown_phase-svh.html#uvm_topdown_phase" class=LClass id=link19  >uvm_topdown_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.build_phase" class=LMethod id=link20  >uvm_component::build_phase</a> method.</p><h4 class=CHeading>Upon entry</h4><ul><li>The top-level components have been instantiated under <a href="uvm_root-svh.html#uvm_root" class=LClass id=link21  >uvm_root</a>.</li><li>Current simulation time is still equal to 0 but some &ldquo;delta cycles&rdquo; may have occurred</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Instantiate sub-components.</li><li>Instantiate register model.</li><li>Get configuration values for the component being built.</li><li>Set configuration values for sub-components.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All <a href="uvm_component-svh.html#uvm_component" class=LClass id=link22  >uvm_component</a>s have been instantiated.</li></ul>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_build_phase" id=link17  >uvm_build_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Create and configure of testbench structure</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link13  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link14  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link15  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_topdown_phase-svh.html#uvm_topdown_phase" class=LClass id=link16  >uvm_topdown_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_build_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_build_phase extends uvm_topdown_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=2 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_build_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_build_phase.get" id=link18  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_build_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_build_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_build_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_connect_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_connect_phase</a></h2><div class=CBody><p>Establish cross-component connections.</p><p><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link29  >uvm_bottomup_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.connect_phase" class=LMethod id=link30  >uvm_component::connect_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>All components have been instantiated.</li><li>Current simulation time is still equal to 0 but some &ldquo;delta cycles&rdquo; may have occurred.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Connect TLM ports and exports.</li><li>Connect TLM initiator sockets and target sockets.</li><li>Connect register model to adapter components.</li><li>Setup explicit phase domains.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All cross-component connections have been established.</li><li>All independent phase domains are set.</li></ul>
+
+<!--START_ND_SUMMARY index=4-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=4 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_connect_phase" id=link27  >uvm_connect_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Establish cross-component connections.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link23  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link24  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link25  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link26  >uvm_bottomup_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_connect_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_connect_phase extends uvm_bottomup_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=5 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_connect_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=6 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_connect_phase.get" id=link28  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_connect_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_connect_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_connect_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_end_of_elaboration_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_end_of_elaboration_phase</a></h2><div class=CBody><p>Fine-tune the testbench.</p><p><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link37  >uvm_bottomup_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.end_of_elaboration_phase" class=LMethod id=link38  >uvm_component::end_of_elaboration_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>The verification environment has been completely assembled.</li><li>Current simulation time is still equal to 0 but some &ldquo;delta cycles&rdquo; may have occurred.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Display environment topology.</li><li>Open files.</li><li>Define additional configuration settings for components.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>None.</li></ul>
+
+<!--START_ND_SUMMARY index=7-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=7 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_end_of_elaboration_phase" id=link35  >uvm_end_of_elaboration_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Fine-tune the testbench.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link31  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link32  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link33  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link34  >uvm_bottomup_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_end_of_elaboration_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_end_of_elaboration_phase extends uvm_bottomup_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=8 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_end_of_elaboration_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=9 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_end_of_elaboration_phase.get" id=link36  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_end_of_elaboration_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_end_of_elaboration_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_end_of_elaboration_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_start_of_simulation_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_start_of_simulation_phase</a></h2><div class=CBody><p>Get ready for DUT to be simulated.</p><p><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link45  >uvm_bottomup_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.start_of_simulation_phase" class=LMethod id=link46  >uvm_component::start_of_simulation_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Other simulation engines, debuggers, hardware assisted platforms and all other run-time tools have been started and synchronized.</li><li>The verification environment has been completely configured and is ready to start.</li><li>Current simulation time is still equal to 0 but some &ldquo;delta cycles&rdquo; may have occurred.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Display environment topology</li><li>Set debugger breakpoint</li><li>Set initial run-time configuration values.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>None.</li></ul>
+
+<!--START_ND_SUMMARY index=10-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=10 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_start_of_simulation_phase" id=link43  >uvm_start_of_simulation_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Get ready for DUT to be simulated.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link39  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link40  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link41  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link42  >uvm_bottomup_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_start_of_simulation_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_start_of_simulation_phase extends uvm_bottomup_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=11 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_start_of_simulation_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=12 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_start_of_simulation_phase.get" id=link44  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=11 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_start_of_simulation_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=12 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_start_of_simulation_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_start_of_simulation_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=13 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_run_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_run_phase</a></h2><div class=CBody><p>Stimulate the DUT.</p><p>This <a href="uvm_task_phase-svh.html#uvm_task_phase" class=LClass id=link53  >uvm_task_phase</a> calls the <a href="uvm_component-svh.html#uvm_component.run_phase" class=LMethod id=link54  >uvm_component::run_phase</a> virtual method.&nbsp; This phase runs in parallel to the runtime phases, <a href="uvm_runtime_phases-svh.html#uvm_pre_reset_phase" class=LClass id=link55  >uvm_pre_reset_phase</a> through <a href="uvm_runtime_phases-svh.html#uvm_post_shutdown_phase" class=LClass id=link56  >uvm_post_shutdown_phase</a>.&nbsp; All components in the testbench are synchronized with respect to the run phase regardless of the phase domain they belong to.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that power has been applied.</li><li>There should not have been any active clock edges before entry into this phase (e.g. x-&gt;1 transitions via initial blocks).</li><li>Current simulation time is still equal to 0 but some &ldquo;delta cycles&rdquo; may have occurred.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Components implement behavior that is exhibited for the entire run-time, across the various run-time phases.</li><li>Backward compatibility with OVM.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>The DUT no longer needs to be simulated, and</li><li>The <a href="uvm_runtime_phases-svh.html#uvm_post_shutdown_phase" class=LClass id=link57  >uvm_post_shutdown_phase</a> is ready to end</li></ul><p>The run phase terminates in one of two ways.</p><h4 class=CHeading>1.&nbsp; All run_phase objections are dropped</h4><p>When all objections on the run_phase objection have been dropped, the phase ends and all of its threads are killed.&nbsp; If no component raises a run_phase objection immediately upon entering the phase, the phase ends immediately.</p><h4 class=CHeading>2.&nbsp; Timeout</h4><p>The phase ends if the timeout expires before all objections are dropped.&nbsp; By default, the timeout is set to 9200 seconds.&nbsp; You may override this via <a href="uvm_root-svh.html#uvm_root.set_timeout" class=LMethod id=link58  >uvm_root::set_timeout</a>.</p><p>If a timeout occurs in your simulation, or if simulation never ends despite completion of your test stimulus, then it usually indicates that a component continues to object to the end of a phase.</p>
+
+<!--START_ND_SUMMARY index=13-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=13 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_run_phase" id=link51  >uvm_run_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Stimulate the DUT.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link47  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link48  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link49  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_task_phase-svh.html#uvm_task_phase" class=LClass id=link50  >uvm_task_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_run_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_run_phase extends uvm_task_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=14 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_run_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=15 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_run_phase.get" id=link52  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=14 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_run_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=15 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_run_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_run_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=16 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_extract_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_extract_phase</a></h2><div class=CBody><p>Extract data from different points of the verification environment.</p><p><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link65  >uvm_bottomup_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.extract_phase" class=LMethod id=link66  >uvm_component::extract_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>The DUT no longer needs to be simulated.</li><li>Simulation time will no longer advance.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Extract any remaining data and final state information from scoreboard and testbench components</li><li>Probe the DUT (via zero-time hierarchical references and/or backdoor accesses) for final state information.</li><li>Compute statistics and summaries.</li><li>Display final state information</li><li>Close files.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All data has been collected and summarized.</li></ul>
+
+<!--START_ND_SUMMARY index=16-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=16 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_extract_phase" id=link63  >uvm_extract_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Extract data from different points of the verification environment.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link59  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link60  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link61  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link62  >uvm_bottomup_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_extract_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_extract_phase extends uvm_bottomup_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=17 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_extract_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=18 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_extract_phase.get" id=link64  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=17 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_extract_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=18 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_extract_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_extract_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=19 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_check_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_check_phase</a></h2><div class=CBody><p>Check for any unexpected conditions in the verification environment.</p><p><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link73  >uvm_bottomup_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.check_phase" class=LMethod id=link74  >uvm_component::check_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>All data has been collected.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Check that no unaccounted-for data remain.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>Test is known to have passed or failed.</li></ul>
+
+<!--START_ND_SUMMARY index=19-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=19 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_check_phase" id=link71  >uvm_check_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Check for any unexpected conditions in the verification environment.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link67  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link68  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link69  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link70  >uvm_bottomup_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_check_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_check_phase extends uvm_bottomup_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=20 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_check_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=21 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_check_phase.get" id=link72  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=20 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_check_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=21 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_check_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_check_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=22 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_report_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_report_phase</a></h2><div class=CBody><p>Report results of the test.</p><p><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link81  >uvm_bottomup_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.report_phase" class=LMethod id=link82  >uvm_component::report_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Test is known to have passed or failed.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Report test results.</li><li>Write results to file.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>End of test.</li></ul>
+
+<!--START_ND_SUMMARY index=22-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=22 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_report_phase" id=link79  >uvm_report_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Report results of the test.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link75  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link76  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link77  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_bottomup_phase-svh.html#uvm_bottomup_phase" class=LClass id=link78  >uvm_bottomup_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_report_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_report_phase extends uvm_bottomup_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=23 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_report_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=24 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_phase.get" id=link80  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=23 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=24 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_report_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=25 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_final_phase" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">uvm_final_phase</a></h2><div class=CBody><p>Tie up loose ends.</p><p><a href="uvm_topdown_phase-svh.html#uvm_topdown_phase" class=LClass id=link89  >uvm_topdown_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.final_phase" class=LMethod id=link90  >uvm_component::final_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>All test-related activity has completed.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Close files.</li><li>Terminate co-simulation engines.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>Ready to exit simulator.</li></ul>
+
+<!--START_ND_SUMMARY index=25-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=25 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_final_phase" id=link87  >uvm_final_phase</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Tie up loose ends.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link83  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link84  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#uvm_phase" class=LClass id=link85  >uvm_phase</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_topdown_phase-svh.html#uvm_topdown_phase" class=LClass id=link86  >uvm_topdown_phase</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_final_phase</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_final_phase extends uvm_topdown_phase
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=26 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_final_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=27 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_final_phase.get" id=link88  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=26 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_final_phase.Methods" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=27 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_final_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" target="_top" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_final_phase get()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

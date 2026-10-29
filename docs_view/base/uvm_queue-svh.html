@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>uvm_queue #(T) | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="banner-file-link"><code>src/base/uvm_queue.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 36">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 36)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_queue#(T)" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">uvm_queue #(T)</a></h1><div class=CBody><p>Implements a class-based dynamic queue.&nbsp; Allows queues to be allocated on demand, and passed and stored by reference.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_queue#(T)" id=link3  >uvm_queue #(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Implements a class-based dynamic queue. </td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link1  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link2  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_queue#(T)</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>class uvm_queue #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
+      <td class=PParameter nowrap>T</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>int</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>) extends uvm_object</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+</td></tr>
+
+  <!-- index=1 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_queue#(T).Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=2 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_queue#(T).new" id=link4  >new</a></td><td class=SDescription>Creates a new queue with the given <i>name</i>.</td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_queue#(T).get_global_queue" id=link5  >get_global_queue</a></td><td class=SDescription>Returns the singleton global queue for the item type, T.</td></tr>
+  <!-- index=4 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_queue#(T).get_global" id=link6  >get_global</a></td><td class=SDescription>Returns the specified item instance from the global item queue.</td></tr>
+  <!-- index=5 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_queue#(T).get" id=link7  >get</a></td><td class=SDescription>Returns the item at the given <i>index</i>.</td></tr>
+  <!-- index=6 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_queue#(T).size" id=link8  >size</a></td><td class=SDescription>Returns the number of items stored in the queue.</td></tr>
+  <!-- index=7 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_queue#(T).insert" id=link9  >insert</a></td><td class=SDescription>Inserts the item at the given <i>index</i> in the queue.</td></tr>
+  <!-- index=8 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_queue#(T).delete" id=link10  >delete</a></td><td class=SDescription>Removes the item at the given <i>index</i> from the queue; if <i>index</i> is not provided, the entire contents of the queue are deleted.</td></tr>
+  <!-- index=9 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_queue#(T).pop_front" id=link11  >pop_front</a></td><td class=SDescription>Returns the first element in the queue (index=0), or <i>null</i> if the queue is empty.</td></tr>
+  <!-- index=10 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_queue#(T).pop_back" id=link12  >pop_back</a></td><td class=SDescription>Returns the last element in the queue (index=size()-1), or <i>null</i> if the queue is empty.</td></tr>
+  <!-- index=11 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_queue#(T).push_front" id=link13  >push_front</a></td><td class=SDescription>Inserts the given <i>item</i> at the front of the queue.</td></tr>
+  <!-- index=12 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_queue#(T).push_back" id=link14  >push_back</a></td><td class=SDescription>Inserts the given <i>item</i> at the back of the queue.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).Methods" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).new" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Creates a new queue with the given <i>name</i>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).get_global_queue" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">get_global_queue</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function this_type get_global_queue ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the singleton global queue for the item type, T.</p><p>This allows items to be shared amongst components throughout the verification environment.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).get_global" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">get_global</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>static function T get_global (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap width=100%>index</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Returns the specified item instance from the global item queue.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).get" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">get</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function T get (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap width=100%>index</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Returns the item at the given <i>index</i>.</p><p>If no item exists by that key, a new item is created with that key and returned.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).size" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">size</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function int size ()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the number of items stored in the queue.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).insert" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">insert</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void insert (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap width=100%>index,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
+      <td class=PParameter nowrap width=100%>item</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Inserts the item at the given <i>index</i> in the queue.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).delete" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">delete</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>virtual function void delete (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap>index</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%>-1</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Removes the item at the given <i>index</i> from the queue; if <i>index</i> is not provided, the entire contents of the queue are deleted.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).pop_front" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">pop_front</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function T pop_front()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the first element in the queue (index=0), or <i>null</i> if the queue is empty.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).pop_back" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">pop_back</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function T pop_back()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the last element in the queue (index=size()-1), or <i>null</i> if the queue is empty.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=11 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).push_front" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">push_front</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void push_front(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
+      <td class=PParameter nowrap width=100%>item</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Inserts the given <i>item</i> at the front of the queue.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=12 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_queue#(T).push_back" href="../../src_view/base/uvm_queue.svh.html#L36" target="_top" class="src-code-link" data-src-file="base/uvm_queue.svh" data-src-line="36">push_back</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual function void push_back(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
+      <td class=PParameter nowrap width=100%>item</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Inserts the given <i>item</i> at the back of the queue.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

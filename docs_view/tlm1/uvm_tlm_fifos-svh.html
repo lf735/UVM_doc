@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLM FIFO Classes | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="banner-file-link"><code>src/tlm1/uvm_tlm_fifos.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 46">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 46)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TLM_FIFO_Classes" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">TLM FIFO Classes</a></h1><div class=CBody><p>This section defines TLM-based FIFO classes.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td class=SEntry><a href="#TLM_FIFO_Classes" >TLM FIFO Classes</a></td><td class=SDescription>This section defines TLM-based FIFO classes.</td></tr>
+  <!-- index=1 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_tlm_fifo#(T)" >uvm_tlm_fifo#(T)</a></td><td class=SDescription>This class provides storage of transactions between two independently running processes. </td></tr>
+  <!-- index=9 -->
+
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_tlm_analysis_fifo#(T)" >uvm_tlm_analysis_fifo#(T)</a></td><td class=SDescription>An analysis_fifo is a <a href="#uvm_tlm_fifo#(T)" class=LClass id=link1  >uvm_tlm_fifo#(T)</a> with an unbounded size and a write interface. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_fifo#(T)" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">uvm_tlm_fifo#(T)</a></h2><div class=CBody><p>This class provides storage of transactions between two independently running processes.&nbsp; Transactions are put into the FIFO via the <i>put_export</i>. transactions are fetched from the FIFO in the order they arrived via the <i>get_peek_export</i>.&nbsp; The <i>put_export</i> and <i>get_peek_export</i> are inherited from the <a href="uvm_tlm_fifo_base-svh.html#uvm_tlm_fifo_base#(T)" class=LClass id=link11  >uvm_tlm_fifo_base #(T)</a> super class, and the interface methods provided by these exports are defined by the <a href="uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2)" class=LClass id=link12  >uvm_tlm_if_base #(T1,T2)</a> class.</p>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_fifo#(T)" >uvm_tlm_fifo#(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This class provides storage of transactions between two independently running processes. </td></tr>
+  <!-- index=2 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_fifo#(T).Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_fifo#(T).new" id=link2  >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the normal uvm_component constructor arguments. </td></tr>
+  <!-- index=4 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_fifo#(T).size" id=link3  >size</a></td><td class=SDescription>Returns the capacity of the FIFO-- that is, the number of entries the FIFO is capable of holding. </td></tr>
+  <!-- index=5 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_fifo#(T).used" id=link4  >used</a></td><td class=SDescription>Returns the number of entries put into the FIFO.</td></tr>
+  <!-- index=6 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_fifo#(T).is_empty" id=link5  >is_empty</a></td><td class=SDescription>Returns 1 when there are no entries in the FIFO, 0 otherwise.</td></tr>
+  <!-- index=7 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_fifo#(T).is_full" id=link6  >is_full</a></td><td class=SDescription>Returns 1 when the number of entries in the FIFO is equal to its <a href="#uvm_tlm_fifo#(T).size" class=LMethod id=link7  >size</a>, 0 otherwise.</td></tr>
+  <!-- index=8 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_fifo#(T).flush" id=link8  >flush</a></td><td class=SDescription>Removes all entries from the FIFO, after which <a href="#uvm_tlm_fifo#(T).used" class=LMethod id=link9  >used</a> returns 0 and <a href="#uvm_tlm_fifo#(T).is_empty" class=LMethod id=link10  >is_empty</a> returns 1.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_fifo#(T).Methods" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_fifo#(T).new" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
+      <td class=PParameter nowrap>name,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap>parent</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> null,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
+      <td class=PParameter nowrap>size</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> 1</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=5>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>The <i>name</i> and <i>parent</i> are the normal uvm_component constructor arguments.&nbsp; The <i>parent</i> should be <i>null</i> if the <a href="#uvm_tlm_fifo#(T)" class=LClass id=link13  >uvm_tlm_fifo#(T)</a> is going to be used in a statically elaborated construct (e.g., a module).&nbsp; The <i>size</i> indicates the maximum size of the FIFO; a value of zero indicates no upper bound.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_fifo#(T).size" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">size</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function int size()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the capacity of the FIFO-- that is, the number of entries the FIFO is capable of holding.&nbsp; A return value of 0 indicates the FIFO capacity has no limit.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_fifo#(T).used" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">used</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function int used()
+  </td></tr></table></blockquote><div class=CBody><p>Returns the number of entries put into the FIFO.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_fifo#(T).is_empty" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">is_empty</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function bit is_empty()
+  </td></tr></table></blockquote><div class=CBody><p>Returns 1 when there are no entries in the FIFO, 0 otherwise.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_fifo#(T).is_full" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">is_full</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function bit is_full()
+  </td></tr></table></blockquote><div class=CBody><p>Returns 1 when the number of entries in the FIFO is equal to its <a href="#uvm_tlm_fifo#(T).size" class=LMethod id=link14  >size</a>, 0 otherwise.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_fifo#(T).flush" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">flush</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void flush()
+  </td></tr></table></blockquote><div class=CBody><p>Removes all entries from the FIFO, after which <a href="#uvm_tlm_fifo#(T).used" class=LMethod id=link15  >used</a> returns 0 and <a href="#uvm_tlm_fifo#(T).is_empty" class=LMethod id=link16  >is_empty</a> returns 1.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tlm_analysis_fifo#(T)" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">uvm_tlm_analysis_fifo#(T)</a></h2><div class=CBody><p>An analysis_fifo is a <a href="#uvm_tlm_fifo#(T)" class=LClass id=link19  >uvm_tlm_fifo#(T)</a> with an unbounded size and a write interface.&nbsp; It can be used any place a <a href="uvm_analysis_port-svh.html#uvm_analysis_imp" class=LClass id=link20  >uvm_analysis_imp</a> is used.&nbsp; Typical usage is as a buffer between a <a href="uvm_analysis_port-svh.html#uvm_analysis_port" class=LClass id=link21  >uvm_analysis_port</a> in an initiator component and TLM1 target component.</p>
+
+<!--START_ND_SUMMARY index=9-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=9 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tlm_analysis_fifo#(T)" >uvm_tlm_analysis_fifo#(T)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>An analysis_fifo is a <a href="#uvm_tlm_fifo#(T)" class=LClass id=link17  >uvm_tlm_fifo#(T)</a> with an unbounded size and a write interface. </td></tr>
+  <!-- index=10 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_analysis_fifo#(T).Ports" >Ports</a></td><td class=SDescription></td></tr>
+  <!-- index=11 -->
+
+<tr class="SPort SIndent2"><td class=SEntry><a href="#uvm_tlm_analysis_fifo#(T).analysis_export#(T)" >analysis_export #(T)</a></td><td class=SDescription>The analysis_export provides the write method to all connected analysis ports and parent exports:</td></tr>
+  <!-- index=12 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_analysis_fifo#(T).Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=13 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_analysis_fifo#(T).new" id=link18  >new</a></td><td class=SDescription>This is the standard uvm_component constructor. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_analysis_fifo#(T).Ports" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">Ports</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=11 -->
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_analysis_fifo#(T).analysis_export#(T)" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">analysis_export #(T)</a></h3><div class=CBody><p>The analysis_export provides the write method to all connected analysis ports and parent exports:</p><blockquote><pre>function void write (T t)</pre></blockquote><p>Access via ports bound to this export is the normal mechanism for writing to an analysis FIFO.&nbsp; See write method of <a href="uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2)" class=LClass id=link22  >uvm_tlm_if_base #(T1,T2)</a> for more information.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=12 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_analysis_fifo#(T).Methods" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=13 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_analysis_fifo#(T).new" href="../../src_view/tlm1/uvm_tlm_fifos.svh.html#L46" target="_top" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifos.svh" data-src-line="46">new</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=6>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>string&nbsp;</td>
+      <td class=PType nowrap>name&nbsp;</td>
+      <td class=PParameter nowrap>,</td>
+      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
+      <td class=PDefaultValue width=100%></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap>uvm_component&nbsp;</td>
+      <td class=PParameter nowrap>parent</td>
+      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PDefaultValue width=100%> null</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=6>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>This is the standard uvm_component constructor.&nbsp; <i>name</i> is the local name of this component.&nbsp; The <i>parent</i> should be left unspecified when this component is instantiated in statically elaborated constructs and must be specified when this component is a child of another UVM component.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

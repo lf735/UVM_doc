@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Callbacks | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    <div class="doc-source-banner">
+                  <div class="banner-info">
+                    <span class="file-label">Source File:</span>
+                    <a href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="banner-file-link"><code>src/reg/uvm_reg_cbs.svh</code></a>
+                  </div>
+                  <div class="banner-actions">
+                    <a href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 44">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                      <span>View Source (Line 44)</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Register_Callbacks" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">Register Callbacks</a></h1><div class=CBody><p>This section defines the base class used for all register callback extensions.&nbsp; It also includes pre-defined callback extensions for use on read-only and write-only registers.</p>
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td class=SEntry><a href="#Register_Callbacks" >Register Callbacks</a></td><td class=SDescription>This section defines the base class used for all register callback extensions. </td></tr>
+  <!-- index=1 -->
+
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_reg_cbs" id=link1  >uvm_reg_cbs</a></td><td class=SDescription>Facade class for field, register, memory and backdoor access callback methods.</td></tr>
+  <!-- index=10 -->
+
+<tr class="SSection"><td class=SEntry><a href="#Typedefs" >Typedefs</a></td><td class=SDescription></td></tr>
+  <!-- index=11 -->
+
+<tr class="SType"><td class=SEntry><a href="#uvm_reg_cb" >uvm_reg_cb</a></td><td class=SDescription>Convenience callback type declaration for registers</td></tr>
+  <!-- index=12 -->
+
+<tr class="SType SMarked"><td class=SEntry><a href="#uvm_reg_cb_iter" >uvm_reg_cb_iter</a></td><td class=SDescription>Convenience callback iterator type declaration for registers</td></tr>
+  <!-- index=13 -->
+
+<tr class="SType"><td class=SEntry><a href="#uvm_reg_bd_cb" >uvm_reg_bd_cb</a></td><td class=SDescription>Convenience callback type declaration for backdoor</td></tr>
+  <!-- index=14 -->
+
+<tr class="SType SMarked"><td class=SEntry><a href="#uvm_reg_bd_cb_iter" >uvm_reg_bd_cb_iter</a></td><td class=SDescription>Convenience callback iterator type declaration for backdoor</td></tr>
+  <!-- index=15 -->
+
+<tr class="SType"><td class=SEntry><a href="#uvm_mem_cb" >uvm_mem_cb</a></td><td class=SDescription>Convenience callback type declaration for memories</td></tr>
+  <!-- index=16 -->
+
+<tr class="SType SMarked"><td class=SEntry><a href="#uvm_mem_cb_iter" >uvm_mem_cb_iter</a></td><td class=SDescription>Convenience callback iterator type declaration for memories</td></tr>
+  <!-- index=17 -->
+
+<tr class="SType"><td class=SEntry><a href="#uvm_reg_field_cb" >uvm_reg_field_cb</a></td><td class=SDescription>Convenience callback type declaration for fields</td></tr>
+  <!-- index=18 -->
+
+<tr class="SType SMarked"><td class=SEntry><a href="#uvm_reg_field_cb_iter" >uvm_reg_field_cb_iter</a></td><td class=SDescription>Convenience callback iterator type declaration for fields</td></tr>
+  <!-- index=19 -->
+
+<tr class="SGroup"><td class=SEntry><a href="#Predefined_Extensions" >Predefined Extensions</a></td><td class=SDescription></td></tr>
+  <!-- index=20 -->
+
+<tr class="SSMethod SIndent1"><td class=SEntry><a href="#uvm_reg_read_only_cbs" id=link2  >uvm_reg_read_only_cbs</a></td><td class=SDescription>Pre-defined register callback method for read-only registers that will issue an error if a write() operation is attempted.</td></tr>
+  <!-- index=25 -->
+
+<tr class="SSMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_reg_write_only_cbs" id=link3  >uvm_reg_write_only_cbs</a></td><td class=SDescription>Pre-defined register callback method for write-only registers that will issue an error if a read() operation is attempted.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=1 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_cbs" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_cbs</a></h2><div class=CBody><p>Facade class for field, register, memory and backdoor access callback methods.</p>
+
+<!--START_ND_SUMMARY index=1-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=1 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_reg_cbs" id=link7  >uvm_reg_cbs</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Facade class for field, register, memory and backdoor access callback methods.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_misc-svh.html#uvm_void" class=LClass id=link4  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link5  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_callback-svh.html#uvm_callback" class=LClass id=link6  >uvm_callback</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_reg_cbs</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_reg_cbs extends uvm_callback
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=2 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_cbs.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=3 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_cbs.pre_write" id=link8  >pre_write</a></td><td class=SDescription>Called before a write operation.</td></tr>
+  <!-- index=4 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_cbs.post_write" id=link9  >post_write</a></td><td class=SDescription>Called after a write operation.</td></tr>
+  <!-- index=5 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_cbs.pre_read" id=link10  >pre_read</a></td><td class=SDescription>Callback called before a read operation.</td></tr>
+  <!-- index=6 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_cbs.post_read" id=link11  >post_read</a></td><td class=SDescription>Callback called after a read operation.</td></tr>
+  <!-- index=7 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_cbs.post_predict" id=link12  >post_predict</a></td><td class=SDescription>Called by the <a href="uvm_reg_field-svh.html#uvm_reg_field.predict" class=LMethod id=link13  >uvm_reg_field::predict()</a> method after a successful UVM_PREDICT_READ or UVM_PREDICT_WRITE prediction.</td></tr>
+  <!-- index=8 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_cbs.encode" id=link14  >encode</a></td><td class=SDescription>Data encoder</td></tr>
+  <!-- index=9 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_cbs.decode" id=link15  >decode</a></td><td class=SDescription>Data decode</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=2 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.Methods" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=3 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.pre_write" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">pre_write</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual task pre_write(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rw</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Called before a write operation.</p><p>All registered <i>pre_write</i> callback methods are invoked after the invocation of the <i>pre_write</i> method of associated object (<a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link16  >uvm_reg</a>, <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link17  >uvm_reg_field</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link18  >uvm_mem</a>, or <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor" class=LClass id=link19  >uvm_reg_backdoor</a>).&nbsp; If the element being written is a <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link20  >uvm_reg</a>, all <i>pre_write</i> callback methods are invoked before the contained <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link21  >uvm_reg_fields</a>.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Backdoor</td><td class=CDLDescription><a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor.pre_write" class=LMethod id=link22  >uvm_reg_backdoor::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link23  >uvm_reg_cbs::pre_write</a> cbs for backdoor.</td></tr><tr><td class=CDLEntry>Register</td><td class=CDLDescription><a href="uvm_reg-svh.html#uvm_reg.pre_write" class=LMethod id=link24  >uvm_reg::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link25  >uvm_reg_cbs::pre_write</a> cbs for reg, then foreach field: <a href="uvm_reg_field-svh.html#uvm_reg_field.pre_write" class=LMethod id=link26  >uvm_reg_field::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link27  >uvm_reg_cbs::pre_write</a> cbs for field</td></tr><tr><td class=CDLEntry>RegField</td><td class=CDLDescription><a href="uvm_reg_field-svh.html#uvm_reg_field.pre_write" class=LMethod id=link28  >uvm_reg_field::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link29  >uvm_reg_cbs::pre_write</a> cbs for field</td></tr><tr><td class=CDLEntry>Memory</td><td class=CDLDescription><a href="uvm_mem-svh.html#uvm_mem.pre_write" class=LMethod id=link30  >uvm_mem::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link31  >uvm_reg_cbs::pre_write</a> cbs for mem</td></tr></table><p>The <i>rw</i> argument holds information about the operation.</p><ul><li>Modifying the <i>value</i> modifies the actual value written.</li><li>For memories, modifying the <i>offset</i> modifies the offset used in the operation.</li><li>For non-backdoor operations, modifying the access <i>path</i> or address <i>map</i> modifies the actual path or map used in the operation.</li></ul><p>If the <i>rw.status</i> is modified to anything other than <a href="uvm_reg_model-svh.html#UVM_IS_OK" class=LConstant id=link32  >UVM_IS_OK</a>, the operation is aborted.</p><p>See <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link33  >uvm_reg_item</a> for details on <i>rw</i> information.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=4 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.post_write" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">post_write</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual task post_write(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rw</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Called after a write operation.</p><p>All registered <i>post_write</i> callback methods are invoked before the invocation of the <i>post_write</i> method of the associated object (<a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link34  >uvm_reg</a>, <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link35  >uvm_reg_field</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link36  >uvm_mem</a>, or <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor" class=LClass id=link37  >uvm_reg_backdoor</a>).&nbsp; If the element being written is a <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link38  >uvm_reg</a>, all <i>post_write</i> callback methods are invoked before the contained <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link39  >uvm_reg_fields</a>.</p><h4 class=CHeading>Summary of callback order</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Backdoor</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_write" class=LMethod id=link40  >uvm_reg_cbs::post_write</a> cbs for backdoor, <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor.post_write" class=LMethod id=link41  >uvm_reg_backdoor::post_write</a></td></tr><tr><td class=CDLEntry>Register</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_write" class=LMethod id=link42  >uvm_reg_cbs::post_write</a> cbs for reg, <a href="uvm_reg-svh.html#uvm_reg.post_write" class=LMethod id=link43  >uvm_reg::post_write</a>, then foreach field: <a href="#uvm_reg_cbs.post_write" class=LMethod id=link44  >uvm_reg_cbs::post_write</a> cbs for field, <a href="uvm_reg_field-svh.html#uvm_reg_field.post_read" class=LMethod id=link45  >uvm_reg_field::post_read</a></td></tr><tr><td class=CDLEntry>RegField</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_write" class=LMethod id=link46  >uvm_reg_cbs::post_write</a> cbs for field, <a href="uvm_reg_field-svh.html#uvm_reg_field.post_write" class=LMethod id=link47  >uvm_reg_field::post_write</a></td></tr><tr><td class=CDLEntry>Memory</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_write" class=LMethod id=link48  >uvm_reg_cbs::post_write</a> cbs for mem, <a href="uvm_mem-svh.html#uvm_mem.post_write" class=LMethod id=link49  >uvm_mem::post_write</a></td></tr></table><p>The <i>rw</i> argument holds information about the operation.</p><ul><li>Modifying the <i>status</i> member modifies the returned status.</li><li>Modifying the <i>value</i> or <i>offset</i> members has no effect, as the operation has already completed.</li></ul><p>See <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link50  >uvm_reg_item</a> for details on <i>rw</i> information.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=5 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.pre_read" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">pre_read</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual task pre_read(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rw</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Callback called before a read operation.</p><p>All registered <i>pre_read</i> callback methods are invoked after the invocation of the <i>pre_read</i> method of associated object (<a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link51  >uvm_reg</a>, <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link52  >uvm_reg_field</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link53  >uvm_mem</a>, or <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor" class=LClass id=link54  >uvm_reg_backdoor</a>).&nbsp; If the element being read is a <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link55  >uvm_reg</a>, all <i>pre_read</i> callback methods are invoked before the contained <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link56  >uvm_reg_fields</a>.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Backdoor</td><td class=CDLDescription><a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor.pre_read" class=LMethod id=link57  >uvm_reg_backdoor::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link58  >uvm_reg_cbs::pre_read</a> cbs for backdoor</td></tr><tr><td class=CDLEntry>Register</td><td class=CDLDescription><a href="uvm_reg-svh.html#uvm_reg.pre_read" class=LMethod id=link59  >uvm_reg::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link60  >uvm_reg_cbs::pre_read</a> cbs for reg, then foreach field: <a href="uvm_reg_field-svh.html#uvm_reg_field.pre_read" class=LMethod id=link61  >uvm_reg_field::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link62  >uvm_reg_cbs::pre_read</a> cbs for field</td></tr><tr><td class=CDLEntry>RegField</td><td class=CDLDescription><a href="uvm_reg_field-svh.html#uvm_reg_field.pre_read" class=LMethod id=link63  >uvm_reg_field::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link64  >uvm_reg_cbs::pre_read</a> cbs for field</td></tr><tr><td class=CDLEntry>Memory</td><td class=CDLDescription><a href="uvm_mem-svh.html#uvm_mem.pre_read" class=LMethod id=link65  >uvm_mem::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link66  >uvm_reg_cbs::pre_read</a> cbs for mem</td></tr></table><p>The <i>rw</i> argument holds information about the operation.</p><ul><li>The <i>value</i> member of <i>rw</i> is not used has no effect if modified.</li><li>For memories, modifying the <i>offset</i> modifies the offset used in the operation.</li><li>For non-backdoor operations, modifying the access <i>path</i> or address <i>map</i> modifies the actual path or map used in the operation.</li></ul><p>If the <i>rw.status</i> is modified to anything other than <a href="uvm_reg_model-svh.html#UVM_IS_OK" class=LConstant id=link67  >UVM_IS_OK</a>, the operation is aborted.</p><p>See <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link68  >uvm_reg_item</a> for details on <i>rw</i> information.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=6 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.post_read" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">post_read</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual task post_read(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rw</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Callback called after a read operation.</p><p>All registered <i>post_read</i> callback methods are invoked before the invocation of the <i>post_read</i> method of the associated object (<a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link69  >uvm_reg</a>, <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link70  >uvm_reg_field</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link71  >uvm_mem</a>, or <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor" class=LClass id=link72  >uvm_reg_backdoor</a>).&nbsp; If the element being read is a <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link73  >uvm_reg</a>, all <i>post_read</i> callback methods are invoked before the contained <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link74  >uvm_reg_fields</a>.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Backdoor</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_read" class=LMethod id=link75  >uvm_reg_cbs::post_read</a> cbs for backdoor, <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor.post_read" class=LMethod id=link76  >uvm_reg_backdoor::post_read</a></td></tr><tr><td class=CDLEntry>Register</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_read" class=LMethod id=link77  >uvm_reg_cbs::post_read</a> cbs for reg, <a href="uvm_reg-svh.html#uvm_reg.post_read" class=LMethod id=link78  >uvm_reg::post_read</a>, then foreach field: <a href="#uvm_reg_cbs.post_read" class=LMethod id=link79  >uvm_reg_cbs::post_read</a> cbs for field, <a href="uvm_reg_field-svh.html#uvm_reg_field.post_read" class=LMethod id=link80  >uvm_reg_field::post_read</a></td></tr><tr><td class=CDLEntry>RegField</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_read" class=LMethod id=link81  >uvm_reg_cbs::post_read</a> cbs for field, <a href="uvm_reg_field-svh.html#uvm_reg_field.post_read" class=LMethod id=link82  >uvm_reg_field::post_read</a></td></tr><tr><td class=CDLEntry>Memory</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_read" class=LMethod id=link83  >uvm_reg_cbs::post_read</a> cbs for mem, <a href="uvm_mem-svh.html#uvm_mem.post_read" class=LMethod id=link84  >uvm_mem::post_read</a></td></tr></table><p>The <i>rw</i> argument holds information about the operation.</p><ul><li>Modifying the readback <i>value</i> or <i>status</i> modifies the actual returned value and status.</li><li>Modifying the <i>value</i> or <i>offset</i> members has no effect, as the operation has already completed.</li></ul><p>See <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link85  >uvm_reg_item</a> for details on <i>rw</i> information.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=7 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.post_predict" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">post_predict</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=4>virtual function void post_predict(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
+      <td class=PType nowrap>uvm_reg_field&nbsp;</td>
+      <td class=PParameter nowrap width=100%>fld,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
+      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
+      <td class=PParameter nowrap width=100%>previous,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>inout&nbsp;</td>
+      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
+      <td class=PParameter nowrap width=100%>value,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
+      <td class=PType nowrap>uvm_predict_e&nbsp;</td>
+      <td class=PParameter nowrap width=100%>kind,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
+      <td class=PType nowrap>uvm_path_e&nbsp;</td>
+      <td class=PParameter nowrap width=100%>path,</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
+      <td class=PType nowrap>uvm_reg_map&nbsp;</td>
+      <td class=PParameter nowrap width=100%>map</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=4>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Called by the <a href="uvm_reg_field-svh.html#uvm_reg_field.predict" class=LMethod id=link86  >uvm_reg_field::predict()</a> method after a successful UVM_PREDICT_READ or UVM_PREDICT_WRITE prediction.</p><p><i>previous</i> is the previous value in the mirror and <i>value</i> is the latest predicted value.&nbsp; Any change to <i>value</i> will modify the predicted mirror value.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=8 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.encode" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">encode</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=4>virtual function void encode(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
+      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
+      <td class=PParameter nowrap width=100%>data[]</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=4>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Data encoder</p><p>The registered callback methods are invoked in order of registration after all the <i>pre_write</i> methods have been called.&nbsp; The encoded data is passed through each invocation in sequence.&nbsp; This allows the <i>pre_write</i> methods to deal with clear-text data.</p><p>By default, the data is not modified.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=9 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.decode" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">decode</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=4>virtual function void decode(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
+      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
+      <td class=PParameter nowrap width=100%>data[]</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=4>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Data decode</p><p>The registered callback methods are invoked in <i>reverse order</i> of registration before all the <i>post_read</i> methods are called.&nbsp; The decoded data is passed through each invocation in sequence.&nbsp; This allows the <i>post_read</i> methods to deal with clear-text data.</p><p>The reversal of the invocation order is to allow the decoding of the data to be performed in the opposite order of the encoding with both operations specified in the same callback extension.</p><p>By default, the data is not modified.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=10 -->
+<div class="CSection"><div class=CTopic><h2 class=CTitle><a name="Typedefs" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">Typedefs</a></h2><div class=CBody>
+
+<!--START_ND_SUMMARY index=10-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=10 -->
+
+<tr class="SSection"><td class=SEntry><a href="#Typedefs" >Typedefs</a></td><td class=SDescription></td></tr>
+  <!-- index=11 -->
+
+<tr class="SType SIndent1"><td class=SEntry><a href="#uvm_reg_cb" >uvm_reg_cb</a></td><td class=SDescription>Convenience callback type declaration for registers</td></tr>
+  <!-- index=12 -->
+
+<tr class="SType SIndent1 SMarked"><td class=SEntry><a href="#uvm_reg_cb_iter" >uvm_reg_cb_iter</a></td><td class=SDescription>Convenience callback iterator type declaration for registers</td></tr>
+  <!-- index=13 -->
+
+<tr class="SType SIndent1"><td class=SEntry><a href="#uvm_reg_bd_cb" >uvm_reg_bd_cb</a></td><td class=SDescription>Convenience callback type declaration for backdoor</td></tr>
+  <!-- index=14 -->
+
+<tr class="SType SIndent1 SMarked"><td class=SEntry><a href="#uvm_reg_bd_cb_iter" >uvm_reg_bd_cb_iter</a></td><td class=SDescription>Convenience callback iterator type declaration for backdoor</td></tr>
+  <!-- index=15 -->
+
+<tr class="SType SIndent1"><td class=SEntry><a href="#uvm_mem_cb" >uvm_mem_cb</a></td><td class=SDescription>Convenience callback type declaration for memories</td></tr>
+  <!-- index=16 -->
+
+<tr class="SType SIndent1 SMarked"><td class=SEntry><a href="#uvm_mem_cb_iter" >uvm_mem_cb_iter</a></td><td class=SDescription>Convenience callback iterator type declaration for memories</td></tr>
+  <!-- index=17 -->
+
+<tr class="SType SIndent1"><td class=SEntry><a href="#uvm_reg_field_cb" >uvm_reg_field_cb</a></td><td class=SDescription>Convenience callback type declaration for fields</td></tr>
+  <!-- index=18 -->
+
+<tr class="SType SIndent1 SMarked"><td class=SEntry><a href="#uvm_reg_field_cb_iter" >uvm_reg_field_cb_iter</a></td><td class=SDescription>Convenience callback iterator type declaration for fields</td></tr>
+  <!-- index=19 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#Predefined_Extensions" >Predefined Extensions</a></td><td class=SDescription></td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=11 -->
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cb" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_cb</a></h3><div class=CBody><p>Convenience callback type declaration for registers</p><p>Use this declaration to register the register callbacks rather than the more verbose parameterized class</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=12 -->
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cb_iter" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_cb_iter</a></h3><div class=CBody><p>Convenience callback iterator type declaration for registers</p><p>Use this declaration to iterate over registered register callbacks rather than the more verbose parameterized class</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=13 -->
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bd_cb" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_bd_cb</a></h3><div class=CBody><p>Convenience callback type declaration for backdoor</p><p>Use this declaration to register register backdoor callbacks rather than the more verbose parameterized class</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=14 -->
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_bd_cb_iter" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_bd_cb_iter</a></h3><div class=CBody><p>Convenience callback iterator type declaration for backdoor</p><p>Use this declaration to iterate over registered register backdoor callbacks rather than the more verbose parameterized class</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=15 -->
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_cb" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_mem_cb</a></h3><div class=CBody><p>Convenience callback type declaration for memories</p><p>Use this declaration to register memory callbacks rather than the more verbose parameterized class</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=16 -->
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_cb_iter" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_mem_cb_iter</a></h3><div class=CBody><p>Convenience callback iterator type declaration for memories</p><p>Use this declaration to iterate over registered memory callbacks rather than the more verbose parameterized class</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=17 -->
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_field_cb" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_field_cb</a></h3><div class=CBody><p>Convenience callback type declaration for fields</p><p>Use this declaration to register field callbacks rather than the more verbose parameterized class</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=18 -->
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_field_cb_iter" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_field_cb_iter</a></h3><div class=CBody><p>Convenience callback iterator type declaration for fields</p><p>Use this declaration to iterate over registered field callbacks rather than the more verbose parameterized class</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=19 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Predefined_Extensions" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">Predefined Extensions</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=20 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_read_only_cbs" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_read_only_cbs</a></h2><div class=CBody><p>Pre-defined register callback method for read-only registers that will issue an error if a write() operation is attempted.</p>
+
+<!--START_ND_SUMMARY index=20-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=20 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_reg_read_only_cbs" id=link91  >uvm_reg_read_only_cbs</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Pre-defined register callback method for read-only registers that will issue an error if a write() operation is attempted.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_misc-svh.html#uvm_void" class=LClass id=link87  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link88  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_callback-svh.html#uvm_callback" class=LClass id=link89  >uvm_callback</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="#uvm_reg_cbs" class=LClass id=link90  >uvm_reg_cbs</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_reg_read_only_cbs</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_reg_read_only_cbs extends uvm_reg_cbs
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=21 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_read_only_cbs.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=22 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_read_only_cbs.pre_write" id=link92  >pre_write</a></td><td class=SDescription>Produces an error message and sets status to <a href="uvm_reg_model-svh.html#UVM_NOT_OK" class=LConstant id=link93  >UVM_NOT_OK</a>.</td></tr>
+  <!-- index=23 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_read_only_cbs.add" id=link94  >add</a></td><td class=SDescription>Add this callback to the specified register and its contained fields.</td></tr>
+  <!-- index=24 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_read_only_cbs.remove" id=link95  >remove</a></td><td class=SDescription>Remove this callback from the specified register and its contained fields.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=21 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_read_only_cbs.Methods" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=22 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_read_only_cbs.pre_write" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">pre_write</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual task pre_write(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rw</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Produces an error message and sets status to <a href="uvm_reg_model-svh.html#UVM_NOT_OK" class=LConstant id=link96  >UVM_NOT_OK</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=23 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_read_only_cbs.add" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">add</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>static function void add(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rg</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Add this callback to the specified register and its contained fields.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=24 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_read_only_cbs.remove" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">remove</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>static function void remove(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rg</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Remove this callback from the specified register and its contained fields.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=25 -->
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_write_only_cbs" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">uvm_reg_write_only_cbs</a></h2><div class=CBody><p>Pre-defined register callback method for write-only registers that will issue an error if a read() operation is attempted.</p>
+
+<!--START_ND_SUMMARY index=25-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=25 -->
+
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_reg_write_only_cbs" id=link101  >uvm_reg_write_only_cbs</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Pre-defined register callback method for write-only registers that will issue an error if a read() operation is attempted.</td></tr>
+
+  <!-- HIERARCHY -->
+  <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+      <div class=ClassHierarchy>
+        <table border=0 cellspacing=0 cellpadding=0>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_misc-svh.html#uvm_void" class=LClass id=link97  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link98  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_callback-svh.html#uvm_callback" class=LClass id=link99  >uvm_callback</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="#uvm_reg_cbs" class=LClass id=link100  >uvm_reg_cbs</a></div></div></td></tr>
+          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_reg_write_only_cbs</div></div></td></tr>
+        </table>
+      </div>
+  </td></tr>
+
+
+
+  <!-- PROTOTYPE -->
+  <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
+  <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_reg_write_only_cbs extends uvm_reg_cbs
+  </td></tr></table></blockquote></td></tr>
+
+  <!-- index=26 -->
+
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_write_only_cbs.Methods" >Methods</a></td><td class=SDescription></td></tr>
+  <!-- index=27 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_write_only_cbs.pre_read" id=link102  >pre_read</a></td><td class=SDescription>Produces an error message and sets status to <a href="uvm_reg_model-svh.html#UVM_NOT_OK" class=LConstant id=link103  >UVM_NOT_OK</a>.</td></tr>
+  <!-- index=28 -->
+
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_write_only_cbs.add" id=link104  >add</a></td><td class=SDescription>Add this callback to the specified register and its contained fields.</td></tr>
+  <!-- index=29 -->
+
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_write_only_cbs.remove" id=link105  >remove</a></td><td class=SDescription>Remove this callback from the specified register and its contained fields.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+
+
+
+ <!--CONTENT index=26 -->
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_write_only_cbs.Methods" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">Methods</a></h3></div></div>
+
+
+
+
+ <!--CONTENT index=27 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_write_only_cbs.pre_read" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">pre_read</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>virtual task pre_read(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rw</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Produces an error message and sets status to <a href="uvm_reg_model-svh.html#UVM_NOT_OK" class=LConstant id=link106  >UVM_NOT_OK</a>.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=28 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_write_only_cbs.add" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">add</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>static function void add(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rg</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Add this callback to the specified register and its contained fields.</p></div></div></div>
+
+
+
+
+ <!--CONTENT index=29 -->
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_write_only_cbs.remove" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" target="_top" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">remove</a></h3>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
+      <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
+      <td class=PBeforeParameters colspan=3>static function void remove(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg&nbsp;</td>
+      <td class=PParameter nowrap width=100%>rg</td>
+    </tr>
+    <tr>
+      <td class=PAfterParameters colspan=3>)</td></tr>
+      </table></td></tr>
+    </table></blockquote>
+<div class=CBody><p>Remove this callback from the specified register and its contained fields.</p></div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparators | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    
+    <div class="doc-main-content">
+      <div id=Content>
+
+
+ <!--CONTENT index=0 -->
+<div class="CGroup"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Comparators" href="#">Comparators</a></h1><div class=CBody><p>A common function of testbenches is to compare streams of transactions for equivalence.&nbsp; For example, a testbench may compare a stream of transactions from a DUT with expected results.</p><p>The UVM library provides a base class called <i>uvm_in_order_comparator</i> and two derived classes: <i>uvm_in_order_built_in_comparator</i> for comparing streams of built-in types and <i>uvm_in_order_class_comparator</i> for comparing streams of class objects.</p><p>The <i>uvm_algorithmic_comparator</i> also compares two streams of transactions, but the transaction streams might be of different type objects.&nbsp; Thus, this comparator will employ a user-defined transformation function to convert one type to another before performing a comparison.</p><img src="../../images/uvm_ref_comparators.gif" width="306" height="305">
+
+<!--START_ND_SUMMARY index=0-->
+<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+  <!-- index=0 -->
+
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#Comparators" >Comparators</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>A common function of testbenches is to compare streams of transactions for equivalence. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+</div></div></div>
+
+</div><!--Content-->
+
+
+
+
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.theme) {
+        document.documentElement.setAttribute('data-theme', e.data.theme);
+      }
+    });
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (window.parent && window.parent.openSourceView) {
+          e.preventDefault();
+          const targetHref = new URL(link.href, window.location.href).href;
+          window.parent.openSourceView(targetHref);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
