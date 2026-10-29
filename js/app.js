@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Global handler for when a doc page requests to view source code
-  window.openSourceView = function(srcUrl) {
+  window.openSourceView = function (srcUrl) {
     // Normalize url if full URL
     const relUrl = srcUrl.includes('src_view/') ? srcUrl.substring(srcUrl.indexOf('src_view/')) : srcUrl;
     currentSrcUrl = relUrl;
@@ -442,6 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
     splitDivider.addEventListener('mousedown', (e) => {
       isDragging = true;
       splitDivider.classList.add('active');
+      document.body.classList.add('is-resizing');
       document.body.style.cursor = 'col-resize';
       document.body.style.userSelect = 'none';
     });
@@ -453,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = viewport.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const totalWidth = rect.width;
-      const pct = Math.max(20, Math.min(80, (x / totalWidth) * 100));
+      const pct = Math.max(15, Math.min(85, (x / totalWidth) * 100));
       document.getElementById('doc-pane').style.width = `${pct}%`;
       document.getElementById('src-pane').style.width = `${100 - pct}%`;
     });
@@ -462,6 +463,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isDragging) {
         isDragging = false;
         splitDivider.classList.remove('active');
+        document.body.classList.remove('is-resizing');
         document.body.style.cursor = '';
         document.body.style.userSelect = '';
       }
@@ -503,7 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', (e) => {
     // Open on '/' or 'Ctrl+K' / 'Cmd+K'
     if ((e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') ||
-        (e.key === 'k' && (e.ctrlKey || e.metaKey))) {
+      (e.key === 'k' && (e.ctrlKey || e.metaKey))) {
       e.preventDefault();
       openSearchModal();
     } else if (e.key === 'Escape' && searchModal && searchModal.classList.contains('open')) {
@@ -572,8 +574,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (!q) return true;
       return item.name.toLowerCase().includes(q) ||
-             (item.desc && item.desc.toLowerCase().includes(q)) ||
-             (item.category && item.category.toLowerCase().includes(q));
+        (item.desc && item.desc.toLowerCase().includes(q)) ||
+        (item.category && item.category.toLowerCase().includes(q));
     }).slice(0, 50); // limit to top 50 matches for performance
 
     searchSelectedIndex = filteredSearchResults.length > 0 ? 0 : -1;

@@ -20,9 +20,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SRC_DIR = BASE_DIR / "uvm-1.2" / "src"
 DOCS_DIR = BASE_DIR / "uvm-1.2" / "docs" / "html"
 DOCS_FILES_DIR = DOCS_DIR / "files"
+DOCS_IMAGES_DIR = DOCS_DIR / "images"
 OUTPUT_SRC_VIEW = BASE_DIR / "src_view"
 OUTPUT_DOCS_VIEW = BASE_DIR / "docs_view"
 OUTPUT_JS_DIR = BASE_DIR / "js"
+OUTPUT_IMAGES_DIR = BASE_DIR / "images"
 
 # SystemVerilog keywords (IEEE 1800)
 SV_KEYWORDS = set([
@@ -291,7 +293,7 @@ def generate_source_views():
             </select>''' if sym_options else ""
 
             html_content = f'''<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" class="src-page">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -469,7 +471,7 @@ def modernize_doc_files():
                 </div>'''
 
             modern_html = f'''<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" class="doc-page">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -518,6 +520,22 @@ def modernize_doc_files():
             count += 1
 
     print(f"Modernized {count} documentation pages in {OUTPUT_DOCS_VIEW}.")
+
+def copy_assets():
+    """Copy documentation images and diagram assets to images/ and docs_view/images/."""
+    print("Copying documentation images and diagram assets...")
+    if DOCS_IMAGES_DIR.exists():
+        OUTPUT_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+        docs_img_dir = OUTPUT_DOCS_VIEW / "images"
+        docs_img_dir.mkdir(parents=True, exist_ok=True)
+        img_count = 0
+        for img in DOCS_IMAGES_DIR.glob("*.*"):
+            shutil.copy2(img, OUTPUT_IMAGES_DIR / img.name)
+            shutil.copy2(img, docs_img_dir / img.name)
+            img_count += 1
+        print(f"Copied {img_count} images to {OUTPUT_IMAGES_DIR} and {docs_img_dir}.")
+    else:
+        print(f"Warning: {DOCS_IMAGES_DIR} does not exist.")
 
 def parse_navigation_and_categories():
     """Extract categories from menu.html and normalize URLs to docs_view."""
@@ -735,6 +753,7 @@ def main():
     map_docs_to_sources()
     generate_source_views()
     modernize_doc_files()
+    copy_assets()
     generate_search_and_nav_data()
 
     print("=" * 60)
