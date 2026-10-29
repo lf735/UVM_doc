@@ -11,10 +11,10 @@
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
-                    <a href="../../src_view/comps/uvm_monitor.svh.html#L34" target="_top" class="banner-file-link"><code>src/comps/uvm_monitor.svh</code></a>
+                    <a href="../../src_view/comps/uvm_monitor.svh.html#L34" class="banner-file-link src-code-link" data-src-url="../../src_view/comps/uvm_monitor.svh.html#L34"><code>src/comps/uvm_monitor.svh</code></a>
                   </div>
                   <div class="banner-actions">
-                    <a href="../../src_view/comps/uvm_monitor.svh.html#L34" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 34">
+                    <a href="../../src_view/comps/uvm_monitor.svh.html#L34" class="btn btn-primary btn-sm src-code-link" data-src-url="../../src_view/comps/uvm_monitor.svh.html#L34" title="Open source code with syntax highlighting at line 34">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                       <span>View Source (Line 34)</span>
                     </a>
@@ -25,7 +25,7 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_monitor" href="../../src_view/comps/uvm_monitor.svh.html#L34" target="_top" class="src-code-link" data-src-file="comps/uvm_monitor.svh" data-src-line="34">uvm_monitor</a></h1><div class=CBody><p>This class should be used as the base class for user-defined monitors.</p><p>Deriving from uvm_monitor allows you to distinguish monitors from generic component types inheriting from uvm_component.&nbsp;  Such monitors will automatically inherit features that may be added to uvm_monitor in the future.</p>
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_monitor" href="../../src_view/comps/uvm_monitor.svh.html#L34" class="src-code-link" data-src-file="comps/uvm_monitor.svh" data-src-line="34">uvm_monitor</a></h1><div class=CBody><p>This class should be used as the base class for user-defined monitors.</p><p>Deriving from uvm_monitor allows you to distinguish monitors from generic component types inheriting from uvm_component.&nbsp;  Such monitors will automatically inherit features that may be added to uvm_monitor in the future.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -68,13 +68,13 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_monitor.Methods" href="../../src_view/comps/uvm_monitor.svh.html#L34" target="_top" class="src-code-link" data-src-file="comps/uvm_monitor.svh" data-src-line="34">Methods</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_monitor.Methods" href="../../src_view/comps/uvm_monitor.svh.html#L34" class="src-code-link" data-src-file="comps/uvm_monitor.svh" data-src-line="34">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_monitor.new" href="../../src_view/comps/uvm_monitor.svh.html#L34" target="_top" class="src-code-link" data-src-file="comps/uvm_monitor.svh" data-src-line="34">new</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_monitor.new" href="../../src_view/comps/uvm_monitor.svh.html#L34" class="src-code-link" data-src-file="comps/uvm_monitor.svh" data-src-line="34">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -97,28 +97,57 @@
   </div>
 
   <script>
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
 
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/doc/comps/uvm_monitor-svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Inform parent that doc is loaded
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'docNavigated',
+          url: 'docs_view/comps/uvm_monitor-svh.html'
+        }, '*');
+      }
+    } catch (e) {}
+
+    // Intercept clicks on source code links
     document.addEventListener('click', function(e) {
       const link = e.target.closest('a');
       if (!link) return;
       const href = link.getAttribute('href');
-      if (!href) return;
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
 
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        if (window.parent && window.parent.openSourceView) {
-          e.preventDefault();
-          const targetHref = new URL(link.href, window.location.href).href;
-          window.parent.openSourceView(targetHref);
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openSourceView',
+            url: targetHref
+          }, '*');
         }
+        try {
+          if (window.parent && window.parent.openSourceView) {
+            window.parent.openSourceView(targetHref);
+          }
+        } catch (err) {}
       }
     });
   </script>

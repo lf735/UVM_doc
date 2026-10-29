@@ -9,7 +9,7 @@
 <body class="src-viewer-body">
   <div class="src-sticky-bar">
     <div class="src-breadcrumbs">
-      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <a href="../../index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
       <span class="sep">/</span>
       <span class="src-cur-file">macros/uvm_message_defines.svh</span>
       <span class="badge badge-info">537 lines</span>
@@ -20,7 +20,7 @@
               <option value="">Jump to Symbol (41 symbols)...</option>
               <option value="#L23">macro: `UVM_MESSAGE_DEFINES_SVH (L23)</option><option value="#L26">macro: `UVM_LINE_WIDTH (L26)</option><option value="#L30">macro: `UVM_NUM_LINES (L30)</option><option value="#L38">macro: `UVM_REPORT_DISABLE_FILE (L38)</option><option value="#L39">macro: `UVM_REPORT_DISABLE_LINE (L39)</option><option value="#L43">macro: `uvm_file (L43)</option><option value="#L45">macro: `uvm_file (L45)</option><option value="#L49">macro: `uvm_line (L49)</option><option value="#L51">macro: `uvm_line (L51)</option><option value="#L112">macro: `uvm_info (L112)</option><option value="#L129">macro: `uvm_warning (L129)</option><option value="#L146">macro: `uvm_error (L146)</option><option value="#L163">macro: `uvm_fatal (L163)</option><option value="#L179">macro: `uvm_info_context (L179)</option><option value="#L194">macro: `uvm_warning_context (L194)</option><option value="#L209">macro: `uvm_error_context (L209)</option><option value="#L224">macro: `uvm_fatal_context (L224)</option><option value="#L242">macro: `uvm_message_begin (L242)</option><option value="#L257">macro: `uvm_message_end (L257)</option><option value="#L267">macro: `uvm_message_context_begin (L267)</option><option value="#L284">macro: `uvm_message_context_end (L284)</option><option value="#L295">macro: `uvm_info_begin (L295)</option><option value="#L319">macro: `uvm_info_end (L319)</option><option value="#L328">macro: `uvm_warning_begin (L328)</option><option value="#L341">macro: `uvm_warning_end (L341)</option><option value="#L350">macro: `uvm_error_begin (L350)</option><option value="#L364">macro: `uvm_error_end (L364)</option><option value="#L373">macro: `uvm_fatal_begin (L373)</option><option value="#L387">macro: `uvm_fatal_end (L387)</option><option value="#L396">macro: `uvm_info_context_begin (L396)</option><option value="#L409">macro: `uvm_info_context_end (L409)</option><option value="#L418">macro: `uvm_warning_context_begin (L418)</option><option value="#L430">macro: `uvm_warning_context_end (L430)</option><option value="#L439">macro: `uvm_error_context_begin (L439)</option><option value="#L452">macro: `uvm_error_context_end (L452)</option><option value="#L461">macro: `uvm_fatal_context_begin (L461)</option><option value="#L474">macro: `uvm_fatal_context_end (L474)</option><option value="#L488">macro: `uvm_message_add_tag (L488)</option><option value="#L497">macro: `uvm_message_add_int (L497)</option><option value="#L509">macro: `uvm_message_add_string (L509)</option><option value="#L530">macro: `uvm_message_add_object (L530)</option>
             </select>
-      <a href="../../docs_view/macros/uvm_message_defines-svh.html" class="btn btn-outline" target="_top" title="View Reference Documentation for this file">
+      <a href="../../docs_view/macros/uvm_message_defines-svh.html" class="btn btn-outline src-to-doc-btn" data-doc-url="../../docs_view/macros/uvm_message_defines-svh.html" title="View Reference Documentation for this file">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                   <span>Documentation</span>
                 </a>
@@ -609,15 +609,49 @@
     window.addEventListener('hashchange', highlightTargetLine);
     window.addEventListener('DOMContentLoaded', highlightTargetLine);
 
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
+
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/src/macros/uvm_message_defines.svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Intercept clicks on doc button or doc links
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+      if (link.classList.contains('src-to-doc-btn') || href.includes('docs_view/')) {
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openDocView',
+            url: targetHref
+          }, '*');
+        }
+        try {
+          if (window.parent && window.parent.openDocView) {
+            window.parent.openDocView(targetHref);
+          }
+        } catch (err) {}
+      }
+    });
   </script>
 </body>
 </html>

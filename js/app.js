@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const appContainer = document.getElementById('app-container');
   const docFrame = document.getElementById('doc-frame');
   const srcFrame = document.getElementById('src-frame');
+  const docPane = document.getElementById('doc-pane');
+  const srcPane = document.getElementById('src-pane');
   const docPaneTitle = document.getElementById('doc-pane-title');
   const srcPaneTitle = document.getElementById('src-pane-title');
   const themeToggle = document.getElementById('theme-toggle');
@@ -33,6 +35,50 @@ document.addEventListener('DOMContentLoaded', () => {
   let searchFilterType = 'all';
   let searchSelectedIndex = -1;
   let filteredSearchResults = [];
+
+  // =========================================================================
+  // URL Normalization Helpers
+  // =========================================================================
+
+  function normalizeDocUrl(url) {
+    if (!url) return 'docs_view/overviews/intro-txt.html';
+    let clean = url.replace(/^[./]+/, '');
+    if (clean.includes('docs_view/')) {
+      clean = clean.substring(clean.indexOf('docs_view/'));
+    } else {
+      clean = 'docs_view/' + clean;
+    }
+    return clean;
+  }
+
+  function normalizeSrcUrl(url) {
+    if (!url) return 'src_view/comps/uvm_driver.svh.html#L44';
+    let clean = url.replace(/^[./]+/, '');
+    if (clean.includes('src_view/')) {
+      clean = clean.substring(clean.indexOf('src_view/'));
+    } else {
+      clean = 'src_view/' + clean;
+    }
+    return clean;
+  }
+
+  function setFrameSrc(frame, relUrl) {
+    if (!frame || !relUrl) return;
+    try {
+      const targetUrl = new URL(relUrl, window.location.href);
+      const currentUrl = new URL(frame.src, window.location.href);
+      if (currentUrl.pathname === targetUrl.pathname && currentUrl.hash === targetUrl.hash) {
+        return;
+      }
+      if (currentUrl.pathname === targetUrl.pathname && targetUrl.hash) {
+        if (frame.contentWindow) {
+          frame.contentWindow.location.hash = targetUrl.hash;
+          return;
+        }
+      }
+    } catch (e) { }
+    frame.src = relUrl;
+  }
 
   // =========================================================================
   // Theme Management
@@ -79,11 +125,32 @@ document.addEventListener('DOMContentLoaded', () => {
   viewBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const mode = btn.getAttribute('data-mode');
-      setViewMode(mode);
+      if (mode === 'split') {
+        if (currentMode === 'docs') {
+          // Auto pair with corresponding source code if available
+          const docClean = currentDocUrl.replace(/^docs_view\//, '');
+          if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
+            const pairedSrc = UVM_DATA.docToSrc[docClean];
+            currentSrcUrl = pairedSrc;
+            setFrameSrc(srcFrame, pairedSrc);
+            updateSrcTitle(pairedSrc);
+          }
+        } else if (currentMode === 'source') {
+          // Auto pair with corresponding doc if available
+          const srcClean = currentSrcUrl.replace(/^src_view\//, '').split('#')[0];
+          if (typeof UVM_DATA !== 'undefined' && UVM_DATA.srcToDoc && UVM_DATA.srcToDoc[srcClean]) {
+            const pairedDoc = UVM_DATA.srcToDoc[srcClean];
+            currentDocUrl = pairedDoc;
+            setFrameSrc(docFrame, pairedDoc);
+            updateDocTitle(pairedDoc);
+          }
+        }
+      }
+      setViewMode(mode, true);
     });
   });
 
-  function setViewMode(mode) {
+  function setViewMode(mode, updateHistory = true) {
     currentMode = mode;
     appContainer.classList.remove('mode-docs', 'mode-source', 'mode-split');
     appContainer.classList.add(`mode-${mode}`);
@@ -92,25 +159,67 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
     });
 
-    updateHash();
+    if (mode !== 'split') {
+      if (docPane) { docPane.style.width = ''; docPane.style.flex = ''; }
+      if (srcPane) { srcPane.style.width = ''; srcPane.style.flex = ''; }
+    }
+
+    if (updateHistory) {
+      updateHash();
+    }
   }
 
   // Global handler for when a doc page requests to view source code
   window.openSourceView = function (srcUrl) {
-    // Normalize url if full URL
-    const relUrl = srcUrl.includes('src_view/') ? srcUrl.substring(srcUrl.indexOf('src_view/')) : srcUrl;
-    currentSrcUrl = relUrl;
-    if (srcFrame) {
-      srcFrame.src = relUrl;
-    }
-    updateSrcTitle(relUrl);
+    const fullSrc = normalizeSrcUrl(srcUrl);
+    currentSrcUrl = fullSrc;
+    setFrameSrc(srcFrame, fullSrc);
+    updateSrcTitle(fullSrc);
 
-    // If user is currently in docs mode, switch to split view so they can see both!
-    if (currentMode === 'docs') {
-      setViewMode('split');
+    // Switch to split view so user sees both doc and source!
+    if (currentMode !== 'split') {
+      setViewMode('split', true);
+    } else {
+      updateHash();
     }
-    updateHash();
   };
+
+  // Global handler for when a source page requests to view documentation
+  window.openDocView = function (docUrl) {
+    const fullDoc = normalizeDocUrl(docUrl);
+    currentDocUrl = fullDoc;
+    setFrameSrc(docFrame, fullDoc);
+    updateDocTitle(fullDoc);
+
+    // Switch to split view so user sees both doc and source!
+    if (currentMode !== 'split') {
+      setViewMode('split', true);
+    } else {
+      updateHash();
+    }
+  };
+
+  // Cross-frame messaging listener (supports file:// and http/https)
+  window.addEventListener('message', (e) => {
+    if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.type === 'openSourceView' && e.data.url) {
+      window.openSourceView(e.data.url);
+    } else if (e.data.type === 'openDocView' && e.data.url) {
+      window.openDocView(e.data.url);
+    } else if (e.data.type === 'docNavigated' && e.data.url) {
+      const fullDoc = normalizeDocUrl(e.data.url);
+      currentDocUrl = fullDoc;
+      updateDocTitle(fullDoc);
+      highlightActiveSidebar(fullDoc);
+      updateHash();
+    } else if (e.data.type === 'srcNavigated' && e.data.url) {
+      const fullSrc = normalizeSrcUrl(e.data.url);
+      currentSrcUrl = fullSrc;
+      updateSrcTitle(fullSrc);
+      highlightActiveSidebar(fullSrc);
+      updateHash();
+    }
+  });
 
   // =========================================================================
   // Hash Routing
@@ -127,27 +236,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hash.startsWith('#/split')) {
       const query = hash.split('?')[1] || '';
       const params = new URLSearchParams(query);
-      const doc = params.get('doc') || currentDocUrl;
-      const src = params.get('src') || currentSrcUrl;
-      currentDocUrl = doc;
-      currentSrcUrl = src;
-      setViewMode('split');
-      if (docFrame && docFrame.src !== doc) docFrame.src = doc;
-      if (srcFrame && srcFrame.src !== src) srcFrame.src = src;
-      updateDocTitle(doc);
-      updateSrcTitle(src);
+      const rawDoc = params.get('doc');
+      const rawSrc = params.get('src');
+
+      const fullDoc = rawDoc ? normalizeDocUrl(rawDoc) : currentDocUrl;
+      const fullSrc = rawSrc ? normalizeSrcUrl(rawSrc) : currentSrcUrl;
+
+      currentDocUrl = fullDoc;
+      currentSrcUrl = fullSrc;
+
+      setViewMode('split', false);
+
+      setFrameSrc(docFrame, fullDoc);
+      setFrameSrc(srcFrame, fullSrc);
+
+      updateDocTitle(fullDoc);
+      updateSrcTitle(fullSrc);
+      highlightActiveSidebar(fullDoc);
     } else if (hash.startsWith('#/src/')) {
-      const srcPath = 'src_view/' + hash.substring(6);
+      const srcPath = normalizeSrcUrl(hash.substring(6));
       currentSrcUrl = srcPath;
-      setViewMode('source');
-      if (srcFrame && srcFrame.src !== srcPath) srcFrame.src = srcPath;
+      setViewMode('source', false);
+      setFrameSrc(srcFrame, srcPath);
       updateSrcTitle(srcPath);
+      highlightActiveSidebar(srcPath);
     } else if (hash.startsWith('#/doc/')) {
-      const docPath = 'docs_view/' + hash.substring(6);
+      const docPath = normalizeDocUrl(hash.substring(6));
       currentDocUrl = docPath;
-      setViewMode('docs');
-      if (docFrame && docFrame.src !== docPath) docFrame.src = docPath;
+      setViewMode('docs', false);
+      setFrameSrc(docFrame, docPath);
       updateDocTitle(docPath);
+      highlightActiveSidebar(docPath);
     } else {
       loadDoc(currentDocUrl, false);
     }
@@ -155,14 +274,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateHash() {
     if (currentMode === 'split') {
-      const doc = currentDocUrl.replace('docs_view/', '');
-      const src = currentSrcUrl.replace('src_view/', '');
+      const doc = currentDocUrl.replace(/^docs_view\//, '');
+      const src = currentSrcUrl.replace(/^src_view\//, '');
       window.location.hash = `#/split?doc=${encodeURIComponent(doc)}&src=${encodeURIComponent(src)}`;
     } else if (currentMode === 'source') {
-      const src = currentSrcUrl.replace('src_view/', '');
+      const src = currentSrcUrl.replace(/^src_view\//, '');
       window.location.hash = `#/src/${src}`;
     } else {
-      const doc = currentDocUrl.replace('docs_view/', '');
+      const doc = currentDocUrl.replace(/^docs_view\//, '');
       window.location.hash = `#/doc/${doc}`;
     }
   }
@@ -170,27 +289,51 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('hashchange', parseHash);
 
   function loadDoc(url, pushState = true) {
-    currentDocUrl = url;
-    if (docFrame) docFrame.src = url;
-    updateDocTitle(url);
-    if (currentMode === 'source') {
-      setViewMode('docs');
+    const fullDoc = normalizeDocUrl(url);
+    currentDocUrl = fullDoc;
+    setFrameSrc(docFrame, fullDoc);
+    updateDocTitle(fullDoc);
+
+    if (currentMode === 'split') {
+      // In split mode, check if we should pair with its source file
+      const docClean = fullDoc.replace(/^docs_view\//, '');
+      if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
+        const pairedSrc = UVM_DATA.docToSrc[docClean];
+        currentSrcUrl = pairedSrc;
+        setFrameSrc(srcFrame, pairedSrc);
+        updateSrcTitle(pairedSrc);
+      }
+      updateHash();
+    } else if (currentMode === 'source') {
+      setViewMode('docs', true);
     } else {
       updateHash();
     }
-    highlightActiveSidebar(url);
+    highlightActiveSidebar(fullDoc);
   }
 
   function loadSource(url, pushState = true) {
-    currentSrcUrl = url;
-    if (srcFrame) srcFrame.src = url;
-    updateSrcTitle(url);
-    if (currentMode === 'docs') {
-      setViewMode('source');
+    const fullSrc = normalizeSrcUrl(url);
+    currentSrcUrl = fullSrc;
+    setFrameSrc(srcFrame, fullSrc);
+    updateSrcTitle(fullSrc);
+
+    if (currentMode === 'split') {
+      // In split mode, check if we should pair with its doc file
+      const srcClean = fullSrc.replace(/^src_view\//, '').split('#')[0];
+      if (typeof UVM_DATA !== 'undefined' && UVM_DATA.srcToDoc && UVM_DATA.srcToDoc[srcClean]) {
+        const pairedDoc = UVM_DATA.srcToDoc[srcClean];
+        currentDocUrl = pairedDoc;
+        setFrameSrc(docFrame, pairedDoc);
+        updateDocTitle(pairedDoc);
+      }
+      updateHash();
+    } else if (currentMode === 'docs') {
+      setViewMode('source', true);
     } else {
       updateHash();
     }
-    highlightActiveSidebar(url);
+    highlightActiveSidebar(fullSrc);
   }
 
   function updateDocTitle(url) {
@@ -439,6 +582,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (splitDivider) {
     let isDragging = false;
+    const viewport = document.getElementById('app-viewport');
+
     splitDivider.addEventListener('mousedown', (e) => {
       isDragging = true;
       splitDivider.classList.add('active');
@@ -448,15 +593,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      const viewport = document.getElementById('app-viewport');
-      if (!viewport) return;
+      if (!isDragging || !viewport || !docPane || !srcPane) return;
       const rect = viewport.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const totalWidth = rect.width;
       const pct = Math.max(15, Math.min(85, (x / totalWidth) * 100));
-      document.getElementById('doc-pane').style.width = `${pct}%`;
-      document.getElementById('src-pane').style.width = `${100 - pct}%`;
+      docPane.style.flex = `0 0 ${pct}%`;
+      docPane.style.width = `${pct}%`;
+      srcPane.style.flex = `0 0 calc(${100 - pct}% - 6px)`;
+      srcPane.style.width = `calc(${100 - pct}% - 6px)`;
     });
 
     window.addEventListener('mouseup', () => {
@@ -468,16 +613,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.userSelect = '';
       }
     });
+
+    // Double-click to reset 50/50
+    splitDivider.addEventListener('dblclick', () => {
+      if (docPane) { docPane.style.width = ''; docPane.style.flex = ''; }
+      if (srcPane) { srcPane.style.width = ''; srcPane.style.flex = ''; }
+    });
   }
 
   // Pane actions: Open Full View & Copy Link
   const openFullDoc = document.getElementById('open-full-doc');
   if (openFullDoc) {
-    openFullDoc.addEventListener('click', () => setViewMode('docs'));
+    openFullDoc.addEventListener('click', () => setViewMode('docs', true));
   }
   const openFullSrc = document.getElementById('open-full-src');
   if (openFullSrc) {
-    openFullSrc.addEventListener('click', () => setViewMode('source'));
+    openFullSrc.addEventListener('click', () => setViewMode('source', true));
   }
 
   // =========================================================================
@@ -618,16 +769,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!item) return;
     closeSearchModal();
 
-    if (item.doc) {
-      loadDoc(item.doc);
-      if (item.src) {
-        // Also preload source in split mode
-        currentSrcUrl = item.src;
-        if (srcFrame) srcFrame.src = item.src;
-        updateSrcTitle(item.src);
+    if (currentMode === 'split') {
+      if (item.doc) {
+        currentDocUrl = normalizeDocUrl(item.doc);
+        setFrameSrc(docFrame, currentDocUrl);
+        updateDocTitle(currentDocUrl);
       }
-    } else if (item.src) {
-      loadSource(item.src);
+      if (item.src) {
+        currentSrcUrl = normalizeSrcUrl(item.src);
+        setFrameSrc(srcFrame, currentSrcUrl);
+        updateSrcTitle(currentSrcUrl);
+      } else if (item.doc) {
+        const docClean = currentDocUrl.replace(/^docs_view\//, '');
+        if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
+          currentSrcUrl = UVM_DATA.docToSrc[docClean];
+          setFrameSrc(srcFrame, currentSrcUrl);
+          updateSrcTitle(currentSrcUrl);
+        }
+      }
+      updateHash();
+      highlightActiveSidebar(item.doc || item.src);
+    } else {
+      if (item.doc) {
+        loadDoc(item.doc);
+        if (item.src) {
+          currentSrcUrl = normalizeSrcUrl(item.src);
+          setFrameSrc(srcFrame, currentSrcUrl);
+          updateSrcTitle(currentSrcUrl);
+        }
+      } else if (item.src) {
+        loadSource(item.src);
+      }
     }
   }
 

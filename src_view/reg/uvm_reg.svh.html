@@ -9,7 +9,7 @@
 <body class="src-viewer-body">
   <div class="src-sticky-bar">
     <div class="src-breadcrumbs">
-      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <a href="../../index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
       <span class="sep">/</span>
       <span class="src-cur-file">reg/uvm_reg.svh</span>
       <span class="badge badge-info">3101 lines</span>
@@ -20,7 +20,7 @@
               <option value="">Jump to Symbol (8 symbols)...</option>
               <option value="#L37">class: uvm_reg (L37)</option>
             </select>
-      <a href="../../docs_view/reg/uvm_reg-svh.html" class="btn btn-outline" target="_top" title="View Reference Documentation for this file">
+      <a href="../../docs_view/reg/uvm_reg-svh.html" class="btn btn-outline src-to-doc-btn" data-doc-url="../../docs_view/reg/uvm_reg-svh.html" title="View Reference Documentation for this file">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                   <span>Documentation</span>
                 </a>
@@ -3173,15 +3173,49 @@ endfunction
     window.addEventListener('hashchange', highlightTargetLine);
     window.addEventListener('DOMContentLoaded', highlightTargetLine);
 
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
+
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/src/reg/uvm_reg.svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Intercept clicks on doc button or doc links
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+      if (link.classList.contains('src-to-doc-btn') || href.includes('docs_view/')) {
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openDocView',
+            url: targetHref
+          }, '*');
+        }
+        try {
+          if (window.parent && window.parent.openDocView) {
+            window.parent.openDocView(targetHref);
+          }
+        } catch (err) {}
+      }
+    });
   </script>
 </body>
 </html>

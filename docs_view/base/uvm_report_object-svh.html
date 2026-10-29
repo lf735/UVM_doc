@@ -11,10 +11,10 @@
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
-                    <a href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="banner-file-link"><code>src/base/uvm_report_object.svh</code></a>
+                    <a href="../../src_view/base/uvm_report_object.svh.html#L81" class="banner-file-link src-code-link" data-src-url="../../src_view/base/uvm_report_object.svh.html#L81"><code>src/base/uvm_report_object.svh</code></a>
                   </div>
                   <div class="banner-actions">
-                    <a href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 81">
+                    <a href="../../src_view/base/uvm_report_object.svh.html#L81" class="btn btn-primary btn-sm src-code-link" data-src-url="../../src_view/base/uvm_report_object.svh.html#L81" title="Open source code with syntax highlighting at line 81">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                       <span>View Source (Line 81)</span>
                     </a>
@@ -25,7 +25,7 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_report_object" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_object</a></h1><div class=CBody><p>The uvm_report_object provides an interface to the UVM reporting facility.&nbsp; Through this interface, components issue the various messages that occur during simulation.&nbsp; Users can configure what actions are taken and what file(s) are output for individual messages from a particular component or for all messages from all components in the environment.&nbsp; Defaults are applied where there is no explicit configuration.</p><p>Most methods in uvm_report_object are delegated to an internal instance of a <a href="uvm_report_handler-svh.html#uvm_report_handler" class=LClass id=link32  >uvm_report_handler</a>, which stores the reporting configuration and determines whether an issued message should be displayed based on that configuration.&nbsp; Then, to display a message, the report handler delegates the actual formatting and production of messages to a central <a href="uvm_report_server-svh.html#uvm_report_server" class=LClass id=link33  >uvm_report_server</a>.</p><p>A report consists of an id string, severity, verbosity level, and the textual message itself.&nbsp; They may optionally include the filename and line number from which the message came.&nbsp; If the verbosity level of a report is greater than the configured maximum verbosity level of its report object, it is ignored.&nbsp; If a report passes the verbosity filter in effect, the report&rsquo;s action is determined.&nbsp; If the action includes output to a file, the configured file descriptor(s) are determined.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Actions</td><td class=CDLDescription>can be set for (in increasing priority) severity, id, and (severity,id) pair.&nbsp; They include output to the screen <a href="uvm_object_globals-svh.html#UVM_DISPLAY" class=LConstant id=link34  >UVM_DISPLAY</a>, whether the message counters should be incremented <a href="uvm_object_globals-svh.html#UVM_COUNT" class=LConstant id=link35  >UVM_COUNT</a>, and whether a $finish should occur <a href="uvm_object_globals-svh.html#UVM_EXIT" class=LConstant id=link36  >UVM_EXIT</a>.</td></tr><tr><td class=CDLEntry>Default Actions</td><td class=CDLDescription>The following provides the default actions assigned to each severity.&nbsp; These can be overridden by any of the <i>set_*_action</i> methods.</td></tr></table><blockquote><pre>UVM_INFO -       UVM_DISPLAY
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_report_object" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_object</a></h1><div class=CBody><p>The uvm_report_object provides an interface to the UVM reporting facility.&nbsp; Through this interface, components issue the various messages that occur during simulation.&nbsp; Users can configure what actions are taken and what file(s) are output for individual messages from a particular component or for all messages from all components in the environment.&nbsp; Defaults are applied where there is no explicit configuration.</p><p>Most methods in uvm_report_object are delegated to an internal instance of a <a href="uvm_report_handler-svh.html#uvm_report_handler" class=LClass id=link32  >uvm_report_handler</a>, which stores the reporting configuration and determines whether an issued message should be displayed based on that configuration.&nbsp; Then, to display a message, the report handler delegates the actual formatting and production of messages to a central <a href="uvm_report_server-svh.html#uvm_report_server" class=LClass id=link33  >uvm_report_server</a>.</p><p>A report consists of an id string, severity, verbosity level, and the textual message itself.&nbsp; They may optionally include the filename and line number from which the message came.&nbsp; If the verbosity level of a report is greater than the configured maximum verbosity level of its report object, it is ignored.&nbsp; If a report passes the verbosity filter in effect, the report&rsquo;s action is determined.&nbsp; If the action includes output to a file, the configured file descriptor(s) are determined.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Actions</td><td class=CDLDescription>can be set for (in increasing priority) severity, id, and (severity,id) pair.&nbsp; They include output to the screen <a href="uvm_object_globals-svh.html#UVM_DISPLAY" class=LConstant id=link34  >UVM_DISPLAY</a>, whether the message counters should be incremented <a href="uvm_object_globals-svh.html#UVM_COUNT" class=LConstant id=link35  >UVM_COUNT</a>, and whether a $finish should occur <a href="uvm_object_globals-svh.html#UVM_EXIT" class=LConstant id=link36  >UVM_EXIT</a>.</td></tr><tr><td class=CDLEntry>Default Actions</td><td class=CDLDescription>The following provides the default actions assigned to each severity.&nbsp; These can be overridden by any of the <i>set_*_action</i> methods.</td></tr></table><blockquote><pre>UVM_INFO -       UVM_DISPLAY
 UVM_WARNING -    UVM_DISPLAY
 UVM_ERROR -      UVM_DISPLAY | UVM_COUNT
 UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>File descriptors</td><td class=CDLDescription>These can be set by (in increasing priority) default, severity level, an id, or (severity,id) pair.&nbsp;  File descriptors are standard SystemVerilog file descriptors; they may refer to more than one file.&nbsp; It is the user&rsquo;s responsibility to open and close them.</td></tr><tr><td class=CDLEntry>Default file handle</td><td class=CDLDescription>The default file handle is 0, which means that reports are not sent to a file even if a UVM_LOG attribute is set in the action associated with the report.&nbsp; This can be overridden by any of the <i>set_*_file</i> methods.</td></tr></table>
@@ -165,7 +165,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=1 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.new" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">new</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.new" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -183,13 +183,13 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Reporting" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Reporting</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Reporting" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Reporting</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_get_report_object" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_get_report_object</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_get_report_object" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_get_report_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_report_object uvm_get_report_object()
   </td></tr></table></blockquote><div class=CBody><p>Returns the nearest uvm_report_object when called.&nbsp;  From inside a uvm_component, the method simply returns <i>this</i>.</p><p>See also the global version of <a href="#uvm_report_object.uvm_get_report_object" class=LMethod id=link38  >uvm_get_report_object</a>.</p></div></div></div>
 
@@ -197,7 +197,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=4 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_enabled" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_enabled</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_enabled" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_enabled</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function int uvm_report_enabled(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
@@ -223,7 +223,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual function void uvm_report(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -269,7 +269,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_info" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_info</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_info" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_info</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual function void uvm_report_info(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -311,7 +311,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_warning" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_warning</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_warning" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_warning</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual function void uvm_report_warning(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -353,7 +353,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_error" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_error</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_error" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_error</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual function void uvm_report_error(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -395,7 +395,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_fatal" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_fatal</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_report_fatal" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_report_fatal</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual function void uvm_report_fatal(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -437,7 +437,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=10 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_process_report_message" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_process_report_message</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.uvm_process_report_message" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">uvm_process_report_message</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>virtual function void uvm_process_report_message(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_report_message&nbsp;</td>
@@ -453,13 +453,13 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=11 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Verbosity_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Verbosity Configuration</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Verbosity_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Verbosity Configuration</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_verbosity_level</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_verbosity_level</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function int get_report_verbosity_level(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -481,7 +481,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=13 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_max_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_max_verbosity_level</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_max_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_max_verbosity_level</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function int get_report_max_verbosity_level()
   </td></tr></table></blockquote><div class=CBody><p>Gets the maximum verbosity level in effect for this report object.&nbsp; Any report from this component whose verbosity exceeds this maximum will be ignored.</p></div></div></div>
 
@@ -489,7 +489,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_verbosity_level</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_verbosity_level</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_verbosity_level (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
@@ -505,7 +505,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_id_verbosity" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_id_verbosity</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_id_verbosity" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_id_verbosity</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_id_verbosity (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -523,7 +523,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=16 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_verbosity" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_id_verbosity</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_verbosity" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_id_verbosity</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_severity_id_verbosity (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -543,13 +543,13 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=17 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Action_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Action Configuration</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Action_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Action Configuration</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=18 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_action" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_action</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_action" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function int get_report_action(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -567,7 +567,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_action" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_action</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_action" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_severity_action (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -585,7 +585,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_id_action" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_id_action</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_id_action" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_id_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_id_action (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -603,7 +603,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_action" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_id_action</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_action" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_id_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_severity_id_action (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -623,13 +623,13 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=22 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.File_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">File Configuration</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.File_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">File Configuration</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=23 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_file_handle" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_file_handle</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_file_handle" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_file_handle</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function int get_report_file_handle(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -647,7 +647,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=24 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_default_file" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_default_file</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_default_file" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_default_file</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_default_file (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>UVM_FILE&nbsp;</td>
@@ -663,7 +663,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=25 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_id_file" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_id_file</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_id_file" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_id_file</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_id_file (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -681,7 +681,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=26 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_file" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_file</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_file" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_file</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_severity_file (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -699,7 +699,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=27 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_file" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_id_file</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_file" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_id_file</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_severity_id_file (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -719,13 +719,13 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=28 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Override_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Override Configuration</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Override_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Override Configuration</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=29 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_override" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_override</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_override" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_severity_override(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -743,7 +743,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=30 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_override" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_id_override</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_override" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_severity_id_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_severity_id_override(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_severity&nbsp;</td>
@@ -763,13 +763,13 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=31 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Report_Handler_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Report Handler Configuration</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.Report_Handler_Configuration" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">Report Handler Configuration</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=32 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_handler</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.set_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">set_report_handler</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_report_handler(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_report_handler&nbsp;</td>
@@ -785,7 +785,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=33 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_handler</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.get_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">get_report_handler</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_report_handler get_report_handler()
   </td></tr></table></blockquote><div class=CBody><p>Returns the underlying report handler to which most reporting tasks are delegated.</p></div></div></div>
 
@@ -793,7 +793,7 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
 
 
  <!--CONTENT index=34 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.reset_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L81" target="_top" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">reset_report_handler</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_object.reset_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">reset_report_handler</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function void reset_report_handler
   </td></tr></table></blockquote><div class=CBody><p>Resets the underlying report handler to its default settings.&nbsp; This clears any settings made with the <i>set_report_*</i> methods (see below).</p></div></div></div>
 
@@ -806,28 +806,57 @@ UVM_FATAL -      UVM_DISPLAY | UVM_EXIT</pre></blockquote><table border=0 cellsp
   </div>
 
   <script>
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
 
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/doc/base/uvm_report_object-svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Inform parent that doc is loaded
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'docNavigated',
+          url: 'docs_view/base/uvm_report_object-svh.html'
+        }, '*');
+      }
+    } catch (e) {}
+
+    // Intercept clicks on source code links
     document.addEventListener('click', function(e) {
       const link = e.target.closest('a');
       if (!link) return;
       const href = link.getAttribute('href');
-      if (!href) return;
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
 
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        if (window.parent && window.parent.openSourceView) {
-          e.preventDefault();
-          const targetHref = new URL(link.href, window.location.href).href;
-          window.parent.openSourceView(targetHref);
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openSourceView',
+            url: targetHref
+          }, '*');
         }
+        try {
+          if (window.parent && window.parent.openSourceView) {
+            window.parent.openSourceView(targetHref);
+          }
+        } catch (err) {}
       }
     });
   </script>

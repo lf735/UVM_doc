@@ -11,10 +11,10 @@
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
-                    <a href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="banner-file-link"><code>src/comps/uvm_algorithmic_comparator.svh</code></a>
+                    <a href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="banner-file-link src-code-link" data-src-url="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68"><code>src/comps/uvm_algorithmic_comparator.svh</code></a>
                   </div>
                   <div class="banner-actions">
-                    <a href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 68">
+                    <a href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="btn btn-primary btn-sm src-code-link" data-src-url="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" title="Open source code with syntax highlighting at line 68">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                       <span>View Source (Line 68)</span>
                     </a>
@@ -25,7 +25,7 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CFile"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Algorithmic_Comparator" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Algorithmic Comparator</a></h1><div class=CBody><p>A common function of testbenches is to compare streams of transactions for equivalence.&nbsp; For example, a testbench may compare a stream of transactions from a DUT with expected results.</p><p>The UVM library provides a base class called <a href="uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type)" class=LClass id=link1  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> and two derived classes, which are <a href="uvm_in_order_comparator-svh.html#uvm_in_order_built_in_comparator#(T)" class=LClass id=link2  >uvm_in_order_built_in_comparator #(T)</a> for comparing streams of built-in types and <a href="uvm_in_order_comparator-svh.html#uvm_in_order_class_comparator#(T)" class=LClass id=link3  >uvm_in_order_class_comparator #(T)</a> for comparing streams of class objects.</p><p>The uvm_algorithmic_comparator also compares two streams of transactions; however, the transaction streams might be of different type objects.&nbsp; This device will use a user-written transformation function to convert one type to another before performing a comparison.</p>
+<div class="CFile"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Algorithmic_Comparator" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Algorithmic Comparator</a></h1><div class=CBody><p>A common function of testbenches is to compare streams of transactions for equivalence.&nbsp; For example, a testbench may compare a stream of transactions from a DUT with expected results.</p><p>The UVM library provides a base class called <a href="uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type)" class=LClass id=link1  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> and two derived classes, which are <a href="uvm_in_order_comparator-svh.html#uvm_in_order_built_in_comparator#(T)" class=LClass id=link2  >uvm_in_order_built_in_comparator #(T)</a> for comparing streams of built-in types and <a href="uvm_in_order_comparator-svh.html#uvm_in_order_class_comparator#(T)" class=LClass id=link3  >uvm_in_order_class_comparator #(T)</a> for comparing streams of class objects.</p><p>The uvm_algorithmic_comparator also compares two streams of transactions; however, the transaction streams might be of different type objects.&nbsp; This device will use a user-written transformation function to convert one type to another before performing a comparison.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -39,7 +39,7 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER)</a></h2><div class=CBody><p>Compares two streams of data objects of different types, <i>BEFORE</i> and <i>AFTER</i>.</p><p>The algorithmic comparator is a wrapper around <a href="uvm_in_order_comparator-svh.html#uvm_in_order_class_comparator#(T)" class=LClass id=link10  >uvm_in_order_class_comparator #(T)</a>.&nbsp; Like the in-order comparator, the algorithmic comparator compares two streams of transactions, the <i>BEFORE</i> stream and the <i>AFTER</i> stream.&nbsp; It is often the case when two streams of transactions need to be compared that the two streams are in different forms.&nbsp; That is, the type of the <i>BEFORE</i> transaction stream is different than the type of the <i>AFTER</i> transaction stream.</p><p>The uvm_algorithmic_comparator&rsquo;s <i>TRANSFORMER</i> type parameter specifies the class responsible for converting transactions of type <i>BEFORE</i> into those of type <i>AFTER</i>.&nbsp; This transformer class must provide a transform() method with the following prototype:</p><blockquote><pre>function AFTER transform (BEFORE b);</pre></blockquote><p>Matches and mismatches are reported in terms of the <i>AFTER</i> transactions.&nbsp; For more information, see the <a href="uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type)" class=LClass id=link11  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> class.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER)</a></h2><div class=CBody><p>Compares two streams of data objects of different types, <i>BEFORE</i> and <i>AFTER</i>.</p><p>The algorithmic comparator is a wrapper around <a href="uvm_in_order_comparator-svh.html#uvm_in_order_class_comparator#(T)" class=LClass id=link10  >uvm_in_order_class_comparator #(T)</a>.&nbsp; Like the in-order comparator, the algorithmic comparator compares two streams of transactions, the <i>BEFORE</i> stream and the <i>AFTER</i> stream.&nbsp; It is often the case when two streams of transactions need to be compared that the two streams are in different forms.&nbsp; That is, the type of the <i>BEFORE</i> transaction stream is different than the type of the <i>AFTER</i> transaction stream.</p><p>The uvm_algorithmic_comparator&rsquo;s <i>TRANSFORMER</i> type parameter specifies the class responsible for converting transactions of type <i>BEFORE</i> into those of type <i>AFTER</i>.&nbsp; This transformer class must provide a transform() method with the following prototype:</p><blockquote><pre>function AFTER transform (BEFORE b);</pre></blockquote><p>Matches and mismatches are reported in terms of the <i>AFTER</i> transactions.&nbsp; For more information, see the <a href="uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type)" class=LClass id=link11  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> class.</p>
 
 <!--START_ND_SUMMARY index=1-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -109,31 +109,31 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Ports" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Ports</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Ports" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Ports</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).before_export" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">before_export</a></h3><div class=CBody><p>The export to which a data stream of type BEFORE is sent via a connected analysis port.&nbsp; Publishers (monitors) can send in an ordered stream of transactions against which the transformed BEFORE transactions will (be compared.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).before_export" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">before_export</a></h3><div class=CBody><p>The export to which a data stream of type BEFORE is sent via a connected analysis port.&nbsp; Publishers (monitors) can send in an ordered stream of transactions against which the transformed BEFORE transactions will (be compared.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).after_export" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">after_export</a></h3><div class=CBody><p>The export to which a data stream of type AFTER is sent via a connected analysis port.&nbsp; Publishers (monitors) can send in an ordered stream of transactions to be transformed and compared to the AFTER transactions.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).after_export" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">after_export</a></h3><div class=CBody><p>The export to which a data stream of type AFTER is sent via a connected analysis port.&nbsp; Publishers (monitors) can send in an ordered stream of transactions to be transformed and compared to the AFTER transactions.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Methods" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Methods</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Methods" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" target="_top" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">new</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -164,28 +164,57 @@
   </div>
 
   <script>
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
 
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/doc/comps/uvm_algorithmic_comparator-svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Inform parent that doc is loaded
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'docNavigated',
+          url: 'docs_view/comps/uvm_algorithmic_comparator-svh.html'
+        }, '*');
+      }
+    } catch (e) {}
+
+    // Intercept clicks on source code links
     document.addEventListener('click', function(e) {
       const link = e.target.closest('a');
       if (!link) return;
       const href = link.getAttribute('href');
-      if (!href) return;
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
 
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        if (window.parent && window.parent.openSourceView) {
-          e.preventDefault();
-          const targetHref = new URL(link.href, window.location.href).href;
-          window.parent.openSourceView(targetHref);
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openSourceView',
+            url: targetHref
+          }, '*');
         }
+        try {
+          if (window.parent && window.parent.openSourceView) {
+            window.parent.openSourceView(targetHref);
+          }
+        } catch (err) {}
       }
     });
   </script>

@@ -11,10 +11,10 @@
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
-                    <a href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="banner-file-link"><code>src/comps/uvm_in_order_comparator.svh</code></a>
+                    <a href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="banner-file-link src-code-link" data-src-url="../../src_view/comps/uvm_in_order_comparator.svh.html#L72"><code>src/comps/uvm_in_order_comparator.svh</code></a>
                   </div>
                   <div class="banner-actions">
-                    <a href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 72">
+                    <a href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="btn btn-primary btn-sm src-code-link" data-src-url="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" title="Open source code with syntax highlighting at line 72">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                       <span>View Source (Line 72)</span>
                     </a>
@@ -25,7 +25,7 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Comparators" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">Comparators</a></h1><div class=CBody><p>The following classes define comparators for objects and built-in types.</p>
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Comparators" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">Comparators</a></h1><div class=CBody><p>The following classes define comparators for objects and built-in types.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -47,7 +47,7 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type)" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a></h2><div class=CBody><p>Compares two streams of data objects of the type parameter, T.&nbsp; These transactions may either be classes or built-in types.&nbsp; To be successfully compared, the two streams of data must be in the same order.&nbsp; Apart from that, there are no assumptions made about the relative timing of the two streams of data.</p><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>T</td><td class=CDLDescription>Specifies the type of transactions to be compared.</td></tr><tr><td class=CDLEntry>comp_type</td><td class=CDLDescription>A policy class to compare the two transaction streams.&nbsp; It must provide the static method &ldquo;function bit comp(T a, T b)&rdquo; which returns <i>TRUE</i> if <i>a</i> and <i>b</i> are the same.</td></tr><tr><td class=CDLEntry>convert</td><td class=CDLDescription>A policy class to convert the transactions being compared to a string.&nbsp; It must provide the static method &ldquo;function string convert2string(T a)&rdquo;.</td></tr><tr><td class=CDLEntry>pair_type</td><td class=CDLDescription>A policy class to allow pairs of transactions to be handled as a single <a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link4  >uvm_object</a> type.</td></tr></table><p>Built in types (such as ints, bits, logic, and structs) can be compared using the default values for comp_type, convert, and pair_type.&nbsp; For convenience, you can use the subtype, <a href="#uvm_in_order_built_in_comparator#(T)" class=LClass id=link5  >uvm_in_order_built_in_comparator #(T)</a> for built-in types.</p><p>When T is a <a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link6  >uvm_object</a>, you can use the convenience subtype <a href="#uvm_in_order_class_comparator#(T)" class=LClass id=link7  >uvm_in_order_class_comparator #(T)</a>.</p><p>Comparisons are commutative, meaning it does not matter which data stream is connected to which export, before_export or after_export.</p><p>Comparisons are done in order and as soon as a transaction is received from both streams.&nbsp; Internal fifos are used to buffer incoming transactions on one stream until a transaction to compare arrives on the other stream.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type)" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a></h2><div class=CBody><p>Compares two streams of data objects of the type parameter, T.&nbsp; These transactions may either be classes or built-in types.&nbsp; To be successfully compared, the two streams of data must be in the same order.&nbsp; Apart from that, there are no assumptions made about the relative timing of the two streams of data.</p><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>T</td><td class=CDLDescription>Specifies the type of transactions to be compared.</td></tr><tr><td class=CDLEntry>comp_type</td><td class=CDLDescription>A policy class to compare the two transaction streams.&nbsp; It must provide the static method &ldquo;function bit comp(T a, T b)&rdquo; which returns <i>TRUE</i> if <i>a</i> and <i>b</i> are the same.</td></tr><tr><td class=CDLEntry>convert</td><td class=CDLDescription>A policy class to convert the transactions being compared to a string.&nbsp; It must provide the static method &ldquo;function string convert2string(T a)&rdquo;.</td></tr><tr><td class=CDLEntry>pair_type</td><td class=CDLDescription>A policy class to allow pairs of transactions to be handled as a single <a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link4  >uvm_object</a> type.</td></tr></table><p>Built in types (such as ints, bits, logic, and structs) can be compared using the default values for comp_type, convert, and pair_type.&nbsp; For convenience, you can use the subtype, <a href="#uvm_in_order_built_in_comparator#(T)" class=LClass id=link5  >uvm_in_order_built_in_comparator #(T)</a> for built-in types.</p><p>When T is a <a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link6  >uvm_object</a>, you can use the convenience subtype <a href="#uvm_in_order_class_comparator#(T)" class=LClass id=link7  >uvm_in_order_class_comparator #(T)</a>.</p><p>Comparisons are commutative, meaning it does not matter which data stream is connected to which export, before_export or after_export.</p><p>Comparisons are done in order and as soon as a transaction is received from both streams.&nbsp; Internal fifos are used to buffer incoming transactions on one stream until a transaction to compare arrives on the other stream.</p>
 
 <!--START_ND_SUMMARY index=1-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -79,37 +79,37 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).Ports" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">Ports</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).Ports" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">Ports</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).before_export" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">before_export</a></h3><div class=CBody><p>The export to which one stream of data is written.&nbsp; The port must be connected to an analysis port that will provide such data.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).before_export" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">before_export</a></h3><div class=CBody><p>The export to which one stream of data is written.&nbsp; The port must be connected to an analysis port that will provide such data.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).after_export" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">after_export</a></h3><div class=CBody><p>The export to which the other stream of data is written.&nbsp; The port must be connected to an analysis port that will provide such data.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).after_export" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">after_export</a></h3><div class=CBody><p>The export to which the other stream of data is written.&nbsp; The port must be connected to an analysis port that will provide such data.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).pair_ap" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">pair_ap</a></h3><div class=CBody><p>The comparator sends out pairs of transactions across this analysis port.&nbsp; Both matched and unmatched pairs are published via a pair_type objects.&nbsp; Any connected analysis export(s) will receive these transaction pairs.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).pair_ap" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">pair_ap</a></h3><div class=CBody><p>The comparator sends out pairs of transactions across this analysis port.&nbsp; Both matched and unmatched pairs are published via a pair_type objects.&nbsp; Any connected analysis export(s) will receive these transaction pairs.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).Methods" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">Methods</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).Methods" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).flush" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">flush</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_in_order_comparator#(T,comp_type,convert,pair_type).flush" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">flush</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void flush()
   </td></tr></table></blockquote><div class=CBody><p>This method sets m_matches and m_mismatches back to zero.&nbsp; The <a href="../tlm1/uvm_tlm_fifos-svh.html#uvm_tlm_fifo#(T).flush" class=LMethod id=link8  >uvm_tlm_fifo#(T)::flush</a> takes care of flushing the FIFOs.</p></div></div></div>
 
@@ -117,7 +117,7 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_in_order_built_in_comparator#(T)" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">uvm_in_order_built_in_comparator #(T)</a></h2><div class=CBody><p>This class uses the uvm_built_in_* comparison, converter, and pair classes.&nbsp; Use this class for built-in types (int, bit, string, etc.)</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_in_order_built_in_comparator#(T)" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">uvm_in_order_built_in_comparator #(T)</a></h2><div class=CBody><p>This class uses the uvm_built_in_* comparison, converter, and pair classes.&nbsp; Use this class for built-in types (int, bit, string, etc.)</p>
 
 <!--START_ND_SUMMARY index=8-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -161,7 +161,7 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_in_order_class_comparator#(T)" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" target="_top" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">uvm_in_order_class_comparator #(T)</a></h2><div class=CBody><p>This class uses the uvm_class_* comparison, converter, and pair classes.&nbsp; Use this class for comparing user-defined objects of type T, which must provide compare() and convert2string() method.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_in_order_class_comparator#(T)" href="../../src_view/comps/uvm_in_order_comparator.svh.html#L72" class="src-code-link" data-src-file="comps/uvm_in_order_comparator.svh" data-src-line="72">uvm_in_order_class_comparator #(T)</a></h2><div class=CBody><p>This class uses the uvm_class_* comparison, converter, and pair classes.&nbsp; Use this class for comparing user-defined objects of type T, which must provide compare() and convert2string() method.</p>
 
 <!--START_ND_SUMMARY index=9-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -210,28 +210,57 @@
   </div>
 
   <script>
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
 
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/doc/comps/uvm_in_order_comparator-svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Inform parent that doc is loaded
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'docNavigated',
+          url: 'docs_view/comps/uvm_in_order_comparator-svh.html'
+        }, '*');
+      }
+    } catch (e) {}
+
+    // Intercept clicks on source code links
     document.addEventListener('click', function(e) {
       const link = e.target.closest('a');
       if (!link) return;
       const href = link.getAttribute('href');
-      if (!href) return;
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
 
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        if (window.parent && window.parent.openSourceView) {
-          e.preventDefault();
-          const targetHref = new URL(link.href, window.location.href).href;
-          window.parent.openSourceView(targetHref);
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openSourceView',
+            url: targetHref
+          }, '*');
         }
+        try {
+          if (window.parent && window.parent.openSourceView) {
+            window.parent.openSourceView(targetHref);
+          }
+        } catch (err) {}
       }
     });
   </script>

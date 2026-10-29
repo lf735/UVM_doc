@@ -11,10 +11,10 @@
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
-                    <a href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="banner-file-link"><code>src/seq/uvm_sequence_base.svh</code></a>
+                    <a href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="banner-file-link src-code-link" data-src-url="../../src_view/seq/uvm_sequence_base.svh.html#L134"><code>src/seq/uvm_sequence_base.svh</code></a>
                   </div>
                   <div class="banner-actions">
-                    <a href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 134">
+                    <a href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="btn btn-primary btn-sm src-code-link" data-src-url="../../src_view/seq/uvm_sequence_base.svh.html#L134" title="Open source code with syntax highlighting at line 134">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                       <span>View Source (Line 134)</span>
                     </a>
@@ -25,7 +25,7 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_sequence_base" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">uvm_sequence_base</a></h1><div class=CBody><p>The uvm_sequence_base class provides the interfaces needed to create streams of sequence items and/or other sequences.</p><p>A sequence is executed by calling its <a href="#uvm_sequence_base.start" class=LMethod id=link58  >start</a> method, either directly or invocation of any of the `uvm_do_* macros.</p><h4 class=CHeading>Executing sequences via <a href="#uvm_sequence_base.start" class=LMethod id=link59  >start</a></h4><p>A sequence&rsquo;s <a href="#uvm_sequence_base.start" class=LMethod id=link60  >start</a> method has a <i>parent_sequence</i> argument that controls whether <a href="#uvm_sequence_base.pre_do" class=LMethod id=link61  >pre_do</a>, <a href="#uvm_sequence_base.mid_do" class=LMethod id=link62  >mid_do</a>, and <a href="#uvm_sequence_base.post_do" class=LMethod id=link63  >post_do</a> are called <b>in the parent</b> sequence.&nbsp; It also has a <i>call_pre_post</i> argument that controls whether its <a href="#uvm_sequence_base.pre_body" class=LMethod id=link64  >pre_body</a> and <a href="#uvm_sequence_base.post_body" class=LMethod id=link65  >post_body</a> methods are called.&nbsp; In all cases, its <a href="#uvm_sequence_base.pre_start" class=LMethod id=link66  >pre_start</a> and <a href="#uvm_sequence_base.post_start" class=LMethod id=link67  >post_start</a> methods are always called.</p><p>When <a href="#uvm_sequence_base.start" class=LMethod id=link68  >start</a> is called directly, you can provide the appropriate arguments according to your application.</p><p>The sequence execution flow looks like this</p><p>User code</p><blockquote><pre>sub_seq.randomize(...); // optional
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_sequence_base" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">uvm_sequence_base</a></h1><div class=CBody><p>The uvm_sequence_base class provides the interfaces needed to create streams of sequence items and/or other sequences.</p><p>A sequence is executed by calling its <a href="#uvm_sequence_base.start" class=LMethod id=link58  >start</a> method, either directly or invocation of any of the `uvm_do_* macros.</p><h4 class=CHeading>Executing sequences via <a href="#uvm_sequence_base.start" class=LMethod id=link59  >start</a></h4><p>A sequence&rsquo;s <a href="#uvm_sequence_base.start" class=LMethod id=link60  >start</a> method has a <i>parent_sequence</i> argument that controls whether <a href="#uvm_sequence_base.pre_do" class=LMethod id=link61  >pre_do</a>, <a href="#uvm_sequence_base.mid_do" class=LMethod id=link62  >mid_do</a>, and <a href="#uvm_sequence_base.post_do" class=LMethod id=link63  >post_do</a> are called <b>in the parent</b> sequence.&nbsp; It also has a <i>call_pre_post</i> argument that controls whether its <a href="#uvm_sequence_base.pre_body" class=LMethod id=link64  >pre_body</a> and <a href="#uvm_sequence_base.post_body" class=LMethod id=link65  >post_body</a> methods are called.&nbsp; In all cases, its <a href="#uvm_sequence_base.pre_start" class=LMethod id=link66  >pre_start</a> and <a href="#uvm_sequence_base.post_start" class=LMethod id=link67  >post_start</a> methods are always called.</p><p>When <a href="#uvm_sequence_base.start" class=LMethod id=link68  >start</a> is called directly, you can provide the appropriate arguments according to your application.</p><p>The sequence execution flow looks like this</p><p>User code</p><blockquote><pre>sub_seq.randomize(...); // optional
 sub_seq.start(seqr, parent_seq, priority, call_pre_post)</pre></blockquote><p>The following methods are called, in order</p><blockquote><pre>sub_seq.pre_start()        (task)
 sub_seq.pre_body()         (task)  if call_pre_post==1
   parent_seq.pre_do(0)     (task)  if parent_sequence!=null
@@ -237,7 +237,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=1 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.do_not_randomize" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">do_not_randomize</a></h3>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.do_not_randomize" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">do_not_randomize</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>bit do_not_randomize
   </td></tr></table></blockquote><div class=CBody><p>If set, prevents the sequence from being randomized before being executed by the `uvm_do*() and `uvm_rand_send*() macros, or as a default sequence.</p></div></div></div>
 
@@ -245,7 +245,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=2 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.new" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">new</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.new" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -263,7 +263,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.is_item" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">is_item</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.is_item" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">is_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function bit is_item()
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 on items and 0 on sequences.&nbsp; As this object is a sequence, <i>is_item</i> will always return 0.</p></div></div></div>
 
@@ -271,7 +271,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=4 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_sequence_state" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_sequence_state</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_sequence_state" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_sequence_state</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_sequence_state_enum get_sequence_state()
   </td></tr></table></blockquote><div class=CBody><p>Returns the sequence state as an enumerated value.&nbsp; Can use to wait on the sequence reaching or changing from one or more states.</p><blockquote><pre>wait(get_sequence_state() &amp; (UVM_STOPPED|UVM_FINISHED));</pre></blockquote></div></div></div>
 
@@ -279,7 +279,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.wait_for_sequence_state" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">wait_for_sequence_state</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.wait_for_sequence_state" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">wait_for_sequence_state</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4>task wait_for_sequence_state(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>int&nbsp;</td>
@@ -296,7 +296,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_tr_handle" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_tr_handle</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_tr_handle" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_tr_handle</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function integer get_tr_handle()
   </td></tr></table></blockquote><div class=CBody><p>Returns the integral recording transaction handle for this sequence.&nbsp; Can be used to associate sub-sequences and sequence items as child transactions when calling <a href="../base/uvm_component-svh.html#uvm_component.begin_child_tr" class=LMethod id=link87  >uvm_component::begin_child_tr</a>.</p></div></div></div>
 
@@ -304,13 +304,13 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=7 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Sequence_Execution" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Sequence Execution</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Sequence_Execution" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Sequence Execution</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.start" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">start</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.start" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">start</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual task start (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequencer_base&nbsp;</td>
@@ -340,7 +340,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.pre_start" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">pre_start</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.pre_start" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">pre_start</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task pre_start()
   </td></tr></table></blockquote><div class=CBody><p>This task is a user-definable callback that is called before the optional execution of <a href="#uvm_sequence_base.pre_body" class=LMethod id=link91  >pre_body</a>.&nbsp; This method should not be called directly by the user.</p></div></div></div>
 
@@ -348,7 +348,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=10 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.pre_body" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">pre_body</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.pre_body" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">pre_body</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task pre_body()
   </td></tr></table></blockquote><div class=CBody><p>This task is a user-definable callback that is called before the execution of <a href="#uvm_sequence_base.body" class=LMethod id=link92  >body</a> <i>only</i> when the sequence is started with <a href="#uvm_sequence_base.start" class=LMethod id=link93  >start</a>.&nbsp; If <a href="#uvm_sequence_base.start" class=LMethod id=link94  >start</a> is called with <i>call_pre_post</i> set to 0, <i>pre_body</i> is not called.&nbsp; This method should not be called directly by the user.</p></div></div></div>
 
@@ -356,7 +356,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.pre_do" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">pre_do</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.pre_do" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">pre_do</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>virtual task pre_do(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
@@ -372,7 +372,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.mid_do" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">mid_do</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.mid_do" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">mid_do</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>virtual function void mid_do(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence_item&nbsp;</td>
@@ -388,7 +388,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=13 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.body" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">body</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.body" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">body</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task body()
   </td></tr></table></blockquote><div class=CBody><p>This is the user-defined task where the main sequence code resides.&nbsp; This method should not be called directly by the user.</p></div></div></div>
 
@@ -396,7 +396,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.post_do" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">post_do</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.post_do" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">post_do</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>virtual function void post_do(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence_item&nbsp;</td>
@@ -412,7 +412,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.post_body" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">post_body</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.post_body" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">post_body</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task post_body()
   </td></tr></table></blockquote><div class=CBody><p>This task is a user-definable callback task that is called after the execution of <a href="#uvm_sequence_base.body" class=LMethod id=link95  >body</a> <i>only</i> when the sequence is started with <a href="#uvm_sequence_base.start" class=LMethod id=link96  >start</a>.&nbsp; If <a href="#uvm_sequence_base.start" class=LMethod id=link97  >start</a> is called with <i>call_pre_post</i> set to 0, <i>post_body</i> is not called.&nbsp; This task is a user-definable callback task that is called after the execution of the body, unless the sequence is started with call_pre_post=0.&nbsp; This method should not be called directly by the user.</p></div></div></div>
 
@@ -420,7 +420,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=16 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.post_start" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">post_start</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.post_start" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">post_start</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task post_start()
   </td></tr></table></blockquote><div class=CBody><p>This task is a user-definable callback that is called after the optional execution of <a href="#uvm_sequence_base.post_body" class=LMethod id=link98  >post_body</a>.&nbsp; This method should not be called directly by the user.</p></div></div></div>
 
@@ -428,13 +428,13 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=17 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Run-Time_Phasing" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Run-Time Phasing</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Run-Time_Phasing" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Run-Time Phasing</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=18 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_starting_phase" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_starting_phase</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_starting_phase" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_starting_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_phase get_starting_phase()
   </td></tr></table></blockquote><div class=CBody><p>Returns the &lsquo;starting phase&rsquo;.</p><p>If non-<i>null</i>, the starting phase specifies the phase in which this sequence was started.&nbsp;  The starting phase is set automatically when this sequence is started as the default sequence on a sequencer.&nbsp; See <a href="uvm_sequencer_base-svh.html#uvm_sequencer_base.start_phase_sequence" class=LMethod id=link99  >uvm_sequencer_base::start_phase_sequence</a> for more information.</p><p>Internally, the <a href="#uvm_sequence_base" class=LClass id=link100  >uvm_sequence_base</a> uses an <a href="../dap/uvm_get_to_lock_dap-svh.html#uvm_get_to_lock_dap" class=LClass id=link101  >uvm_get_to_lock_dap</a> to protect the starting phase value from being modified after the reference has been read.&nbsp;  Once the sequence has ended its execution (either via natural termination, or being killed), then the starting phase value can be modified again.</p></div></div></div>
 
@@ -442,7 +442,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_starting_phase" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_starting_phase</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_starting_phase" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_starting_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_starting_phase(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
@@ -458,7 +458,7 @@ parent_seq.post_do(item)        (func) /</pre></blockquote><p>Attempting to exec
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_automatic_phase_objection" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_automatic_phase_objection</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_automatic_phase_objection" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_automatic_phase_objection</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_automatic_phase_objection(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
@@ -487,7 +487,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_automatic_phase_objection" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_automatic_phase_objection</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_automatic_phase_objection" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_automatic_phase_objection</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit get_automatic_phase_objection()
   </td></tr></table></blockquote><div class=CBody><p>Returns (and locks) the value of the &lsquo;automatically object to starting phase&rsquo; bit.</p><p>If 1, then the sequence will automatically raise an objection to the starting phase (if the starting phase is not <i>null</i>) immediately prior to <a href="#uvm_sequence_base.pre_start" class=LMethod id=link107  >pre_start</a> being called.&nbsp;  The objection will be dropped after <a href="#uvm_sequence_base.post_start" class=LMethod id=link108  >post_start</a> has executed, or <a href="#uvm_sequence_base.kill" class=LMethod id=link109  >kill</a> has been called.</p></div></div></div>
 
@@ -495,13 +495,13 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=22 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Sequence_Control" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Sequence Control</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Sequence_Control" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Sequence Control</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=23 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_priority" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_priority</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_priority" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_priority</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_priority (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
@@ -517,7 +517,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=24 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_priority" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_priority</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_priority" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_priority</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function int get_priority()
   </td></tr></table></blockquote><div class=CBody><p>This function returns the current priority of the sequence.</p></div></div></div>
 
@@ -525,7 +525,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=25 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.is_relevant" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">is_relevant</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.is_relevant" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">is_relevant</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function bit is_relevant()
   </td></tr></table></blockquote><div class=CBody><p>The default is_relevant implementation returns 1, indicating that the sequence is always relevant.</p><p>Users may choose to override with their own virtual function to indicate to the sequencer that the sequence is not currently relevant after a request has been made.</p><p>When the sequencer arbitrates, it will call is_relevant on each requesting, unblocked sequence to see if it is relevant.&nbsp; If a 0 is returned, then the sequence will not be chosen.</p><p>If all requesting sequences are not relevant, then the sequencer will call wait_for_relevant on all sequences and re-arbitrate upon its return.</p><p>Any sequence that implements is_relevant must also implement wait_for_relevant so that the sequencer has a way to wait for a sequence to become relevant.</p></div></div></div>
 
@@ -533,7 +533,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=26 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.wait_for_relevant" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">wait_for_relevant</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.wait_for_relevant" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">wait_for_relevant</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task wait_for_relevant()
   </td></tr></table></blockquote><div class=CBody><p>This method is called by the sequencer when all available sequences are not relevant.&nbsp;  When wait_for_relevant returns the sequencer attempt to re-arbitrate.</p><p>Returning from this call does not guarantee a sequence is relevant, although that would be the ideal.&nbsp; The method provide some delay to prevent an infinite loop.</p><p>If a sequence defines is_relevant so that it is not always relevant (by default, a sequence is always relevant), then the sequence must also supply a wait_for_relevant method.</p></div></div></div>
 
@@ -541,7 +541,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=27 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.lock" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">lock</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.lock" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">lock</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>task lock(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequencer_base&nbsp;</td>
@@ -559,7 +559,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=28 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.grab" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">grab</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.grab" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">grab</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>task grab(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequencer_base&nbsp;</td>
@@ -577,7 +577,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=29 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.unlock" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">unlock</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.unlock" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">unlock</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function void unlock(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequencer_base&nbsp;</td>
@@ -595,7 +595,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=30 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.ungrab" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">ungrab</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.ungrab" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">ungrab</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function void ungrab(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequencer_base&nbsp;</td>
@@ -613,7 +613,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=31 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.is_blocked" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">is_blocked</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.is_blocked" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">is_blocked</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_blocked()
   </td></tr></table></blockquote><div class=CBody><p>Returns a bit indicating whether this sequence is currently prevented from running due to another lock or grab.&nbsp; A 1 is returned if the sequence is currently blocked.&nbsp; A 0 is returned if no lock or grab prevents this sequence from executing.&nbsp; Note that even if a sequence is not blocked, it is possible for another sequence to issue a lock or grab before this sequence can issue a request.</p></div></div></div>
 
@@ -621,7 +621,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=32 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.has_lock" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">has_lock</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.has_lock" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">has_lock</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit has_lock()
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if this sequence has a lock, 0 otherwise.</p><p>Note that even if this sequence has a lock, a child sequence may also have a lock, in which case the sequence is still blocked from issuing operations on the sequencer.</p></div></div></div>
 
@@ -629,7 +629,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=33 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.kill" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">kill</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.kill" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">kill</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function void kill()
   </td></tr></table></blockquote><div class=CBody><p>This function will kill the sequence, and cause all current locks and requests in the sequence&rsquo;s default sequencer to be removed.&nbsp; The sequence state will change to UVM_STOPPED, and the post_body() and post_start() callback methods will not be executed.</p><p>If a sequence has issued locks, grabs, or requests on sequencers other than the default sequencer, then care must be taken to unregister the sequence with the other sequencer(s) using the sequencer unregister_sequence() method.</p></div></div></div>
 
@@ -637,7 +637,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=34 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.do_kill" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">do_kill</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.do_kill" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">do_kill</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void do_kill()
   </td></tr></table></blockquote><div class=CBody><p>This function is a user hook that is called whenever a sequence is terminated by using either sequence.kill() or sequencer.stop_sequences() (which effectively calls sequence.kill()).</p></div></div></div>
 
@@ -645,13 +645,13 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=35 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Sequence_Item_Execution" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Sequence Item Execution</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Sequence_Item_Execution" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Sequence Item Execution</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=36 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.create_item" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">create_item</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.create_item" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">create_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>protected function uvm_sequence_item create_item(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object_wrapper&nbsp;</td>
@@ -671,7 +671,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=37 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.start_item" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">start_item</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.start_item" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">start_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual task start_item (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence_item&nbsp;</td>
@@ -697,7 +697,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=38 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.finish_item" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">finish_item</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.finish_item" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">finish_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual task finish_item (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence_item&nbsp;</td>
@@ -719,7 +719,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=39 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.wait_for_grant" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">wait_for_grant</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.wait_for_grant" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">wait_for_grant</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual task wait_for_grant(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
@@ -741,7 +741,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=40 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.send_request" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">send_request</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.send_request" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">send_request</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual function void send_request(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence_item&nbsp;</td>
@@ -763,7 +763,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=41 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.wait_for_item_done" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">wait_for_item_done</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.wait_for_item_done" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">wait_for_item_done</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>virtual task wait_for_item_done(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
@@ -781,13 +781,13 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=42 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Response_API" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Response API</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.Response_API" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">Response API</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=43 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.use_response_handler" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">use_response_handler</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.use_response_handler" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">use_response_handler</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void use_response_handler(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
@@ -803,7 +803,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=44 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_use_response_handler" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_use_response_handler</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_use_response_handler" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_use_response_handler</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit get_use_response_handler()
   </td></tr></table></blockquote><div class=CBody><p>Returns the state of the use_response_handler bit.</p></div></div></div>
 
@@ -811,7 +811,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=45 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.response_handler" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">response_handler</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.response_handler" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">response_handler</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>virtual function void response_handler(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence_item&nbsp;</td>
@@ -827,7 +827,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=46 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_response_queue_error_report_disabled" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_response_queue_error_report_disabled</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_response_queue_error_report_disabled" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_response_queue_error_report_disabled</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_response_queue_error_report_disabled(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
@@ -843,7 +843,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=47 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_response_queue_error_report_disabled" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_response_queue_error_report_disabled</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_response_queue_error_report_disabled" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_response_queue_error_report_disabled</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit get_response_queue_error_report_disabled()
   </td></tr></table></blockquote><div class=CBody><p>When this bit is 0 (default value), error reports are generated when the response queue overflows.&nbsp; When this bit is 1, no such error reports are generated.</p></div></div></div>
 
@@ -851,7 +851,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=48 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_response_queue_depth" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_response_queue_depth</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.set_response_queue_depth" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">set_response_queue_depth</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_response_queue_depth(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
@@ -867,7 +867,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=49 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_response_queue_depth" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_response_queue_depth</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.get_response_queue_depth" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">get_response_queue_depth</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function int get_response_queue_depth()
   </td></tr></table></blockquote><div class=CBody><p>Returns the current depth setting for the response queue.</p></div></div></div>
 
@@ -875,7 +875,7 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
 
 
  <!--CONTENT index=50 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.clear_response_queue" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" target="_top" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">clear_response_queue</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sequence_base.clear_response_queue" href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="134">clear_response_queue</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void clear_response_queue()
   </td></tr></table></blockquote><div class=CBody><p>Empties the response queue for this sequence.</p></div></div></div>
 
@@ -888,28 +888,57 @@ seq.start(my_sequencer);</pre></blockquote><p>Internally, the <a href="#uvm_sequ
   </div>
 
   <script>
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
 
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/doc/seq/uvm_sequence_base-svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Inform parent that doc is loaded
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'docNavigated',
+          url: 'docs_view/seq/uvm_sequence_base-svh.html'
+        }, '*');
+      }
+    } catch (e) {}
+
+    // Intercept clicks on source code links
     document.addEventListener('click', function(e) {
       const link = e.target.closest('a');
       if (!link) return;
       const href = link.getAttribute('href');
-      if (!href) return;
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
 
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        if (window.parent && window.parent.openSourceView) {
-          e.preventDefault();
-          const targetHref = new URL(link.href, window.location.href).href;
-          window.parent.openSourceView(targetHref);
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openSourceView',
+            url: targetHref
+          }, '*');
         }
+        try {
+          if (window.parent && window.parent.openSourceView) {
+            window.parent.openSourceView(targetHref);
+          }
+        } catch (err) {}
       }
     });
   </script>

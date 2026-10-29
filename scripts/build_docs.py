@@ -278,7 +278,7 @@ def generate_source_views():
             doc_btn = ""
             if doc_rel:
                 doc_href = f"{root_rel}docs_view/{doc_rel}"
-                doc_btn = f'''<a href="{doc_href}" class="btn btn-outline" target="_top" title="View Reference Documentation for this file">
+                doc_btn = f'''<a href="{doc_href}" class="btn btn-outline src-to-doc-btn" data-doc-url="{doc_href}" title="View Reference Documentation for this file">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                   <span>Documentation</span>
                 </a>'''
@@ -303,7 +303,7 @@ def generate_source_views():
 <body class="src-viewer-body">
   <div class="src-sticky-bar">
     <div class="src-breadcrumbs">
-      <a href="{root_rel}index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <a href="{root_rel}index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
       <span class="sep">/</span>
       <span class="src-cur-file">{html.escape(rel_path)}</span>
       <span class="badge badge-info">{line_count} lines</span>
@@ -360,15 +360,49 @@ def generate_source_views():
     window.addEventListener('hashchange', highlightTargetLine);
     window.addEventListener('DOMContentLoaded', highlightTargetLine);
 
+    // Theme sync
     window.addEventListener('message', function(e) {{
       if (e.data && e.data.theme) {{
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }}
     }});
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {{
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }}
+    try {{
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {{
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }}
+    }} catch (e) {{}}
+
+    // Auto-restore into main app if opened directly outside iframe
+    try {{
+      if (window.self === window.top) {{
+        window.location.replace('{root_rel}index.html#/src/{rel_path}.html' + window.location.hash);
+      }}
+    }} catch (e) {{}}
+
+    // Intercept clicks on doc button or doc links
+    document.addEventListener('click', function(e) {{
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+      if (link.classList.contains('src-to-doc-btn') || href.includes('docs_view/')) {{
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {{
+          window.parent.postMessage({{
+            type: 'openDocView',
+            url: targetHref
+          }}, '*');
+        }}
+        try {{
+          if (window.parent && window.parent.openDocView) {{
+            window.parent.openDocView(targetHref);
+          }}
+        }} catch (err) {{}}
+      }}
+    }});
   </script>
 </body>
 </html>'''
@@ -438,7 +472,7 @@ def modernize_doc_files():
                 # Only rewrite to src_view if file actually exists in src
                 if (SRC_DIR / subpath).exists():
                     line_no = target_line if subpath == associated_src else 1
-                    return f'href="{root_rel}src_view/{subpath}.html#L{line_no}" target="_top" class="src-code-link" data-src-file="{subpath}" data-src-line="{line_no}"'
+                    return f'href="{root_rel}src_view/{subpath}.html#L{line_no}" class="src-code-link" data-src-file="{subpath}" data-src-line="{line_no}"'
                 else:
                     return f'href="#"'
 
@@ -460,10 +494,10 @@ def modernize_doc_files():
                 view_source_banner = f'''<div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
-                    <a href="{src_view_url}" target="_top" class="banner-file-link"><code>src/{html.escape(associated_src)}</code></a>
+                    <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}"><code>src/{html.escape(associated_src)}</code></a>
                   </div>
                   <div class="banner-actions">
-                    <a href="{src_view_url}" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line {target_line}">
+                    <a href="{src_view_url}" class="btn btn-primary btn-sm src-code-link" data-src-url="{src_view_url}" title="Open source code with syntax highlighting at line {target_line}">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                       <span>View Source (Line {target_line})</span>
                     </a>
@@ -487,28 +521,57 @@ def modernize_doc_files():
   </div>
 
   <script>
+    // Theme sync
     window.addEventListener('message', function(e) {{
       if (e.data && e.data.theme) {{
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }}
     }});
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {{
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }}
+    try {{
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {{
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }}
+    }} catch (e) {{}}
 
+    // Auto-restore into main app if opened directly outside iframe
+    try {{
+      if (window.self === window.top) {{
+        window.location.replace('{root_rel}index.html#/doc/{rel_path}' + window.location.hash);
+      }}
+    }} catch (e) {{}}
+
+    // Inform parent that doc is loaded
+    try {{
+      if (window.parent && window.parent !== window) {{
+        window.parent.postMessage({{
+          type: 'docNavigated',
+          url: 'docs_view/{rel_path}'
+        }}, '*');
+      }}
+    }} catch (e) {{}}
+
+    // Intercept clicks on source code links
     document.addEventListener('click', function(e) {{
       const link = e.target.closest('a');
       if (!link) return;
       const href = link.getAttribute('href');
-      if (!href) return;
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
 
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {{
-        if (window.parent && window.parent.openSourceView) {{
-          e.preventDefault();
-          const targetHref = new URL(link.href, window.location.href).href;
-          window.parent.openSourceView(targetHref);
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {{
+          window.parent.postMessage({{
+            type: 'openSourceView',
+            url: targetHref
+          }}, '*');
         }}
+        try {{
+          if (window.parent && window.parent.openSourceView) {{
+            window.parent.openSourceView(targetHref);
+          }}
+        }} catch (err) {{}}
       }}
     }});
   </script>
@@ -724,6 +787,16 @@ def generate_search_and_nav_data():
     source_tree = build_source_tree()
     search_items = build_search_index(categories)
 
+    # Pre-calculate Doc <-> Source cross-referencing maps
+    def get_target_line(src):
+        for sym in FILE_SYMBOLS.get(src, []):
+            if sym['type'] in ('class', 'macro'):
+                return sym['line']
+        return 1
+
+    doc_to_src = {doc: f"src_view/{src}.html#L{get_target_line(src)}" for doc, src in DOC_TO_SRC_MAP.items()}
+    src_to_doc = {f"{src}.html": f"docs_view/{doc}" for src, doc in SRC_TO_DOC_MAP.items()}
+
     OUTPUT_JS_DIR.mkdir(parents=True, exist_ok=True)
     out_file = OUTPUT_JS_DIR / "search_data.js"
 
@@ -731,7 +804,9 @@ def generate_search_and_nav_data():
     payload = {
         "categories": categories,
         "sourceTree": source_tree,
-        "searchIndex": search_items
+        "searchIndex": search_items,
+        "docToSrc": doc_to_src,
+        "srcToDoc": src_to_doc
     }
 
     js_content = f"""/**

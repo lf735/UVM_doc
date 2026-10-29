@@ -11,10 +11,10 @@
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
-                    <a href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="banner-file-link"><code>src/base/uvm_transaction.svh</code></a>
+                    <a href="../../src_view/base/uvm_transaction.svh.html#L124" class="banner-file-link src-code-link" data-src-url="../../src_view/base/uvm_transaction.svh.html#L124"><code>src/base/uvm_transaction.svh</code></a>
                   </div>
                   <div class="banner-actions">
-                    <a href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="btn btn-primary btn-sm" title="Open source code with syntax highlighting at line 124">
+                    <a href="../../src_view/base/uvm_transaction.svh.html#L124" class="btn btn-primary btn-sm src-code-link" data-src-url="../../src_view/base/uvm_transaction.svh.html#L124" title="Open source code with syntax highlighting at line 124">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                       <span>View Source (Line 124)</span>
                     </a>
@@ -25,7 +25,7 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_transaction" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">uvm_transaction</a></h1><div class=CBody><p>The uvm_transaction class is the root base class for UVM transactions.&nbsp; Inheriting all the methods of <a href="uvm_object-svh.html#uvm_object" class=LClass id=link40  >uvm_object</a>, uvm_transaction adds a timing and recording interface.</p><p>This class provides timestamp properties, notification events, and transaction recording support.</p><p>Use of this class as a base for user-defined transactions is deprecated.&nbsp; Its subtype, <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link41  >uvm_sequence_item</a>, shall be used as the base class for all user-defined transaction types.</p><p>The intended use of this API is via a <a href="../comps/uvm_driver-svh.html#uvm_driver#(REQ,RSP)" class=LClass id=link42  >uvm_driver #(REQ,RSP)</a> to call <a href="uvm_component-svh.html#uvm_component.accept_tr" class=LMethod id=link43  >uvm_component::accept_tr</a>, <a href="uvm_component-svh.html#uvm_component.begin_tr" class=LMethod id=link44  >uvm_component::begin_tr</a>, and <a href="uvm_component-svh.html#uvm_component.end_tr" class=LMethod id=link45  >uvm_component::end_tr</a> during the course of sequence item execution.&nbsp; These methods in the component base class will call into the corresponding methods in this class to set the corresponding timestamps (<i>accept_time</i>, <i>begin_time</i>, and <i>end_time</i>), trigger the corresponding event (<a href="#uvm_transaction.begin_event" class=LVariable id=link46  >begin_event</a> and <a href="#uvm_transaction.end_event" class=LVariable id=link47  >end_event</a>, and, if enabled, record the transaction contents to a vendor-specific transaction database.</p><p>Note that get_next_item/item_done when called on a uvm_seq_item_pull_port will automatically trigger the begin_event and end_events via calls to begin_tr and end_tr.&nbsp; While convenient, it is generally the responsibility of drivers to mark a transaction&rsquo;s progress during execution.&nbsp;  To allow the driver or layering sequence to control sequence item timestamps, events, and recording, you must call <a href="../tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).disable_auto_item_recording" class=LMethod id=link48  >uvm_sqr_if_base#(REQ,RSP)::disable_auto_item_recording</a> at the beginning of the driver&rsquo;s <i>run_phase</i> task.</p><p>Users may also use the transaction&rsquo;s event pool, <a href="#uvm_transaction.events" class=LVariable id=link49  >events</a>, to define custom events for the driver to trigger and the sequences to wait on.&nbsp; Any in-between events such as marking the beginning of the address and data phases of transaction execution could be implemented via the <a href="#uvm_transaction.events" class=LVariable id=link50  >events</a> pool.</p><p>In pipelined protocols, the driver may release a sequence (return from finish_item() or it&rsquo;s `uvm_do macro) before the item has been completed.&nbsp; If the driver uses the begin_tr/end_tr API in uvm_component, the sequence can wait on the item&rsquo;s <a href="#uvm_transaction.end_event" class=LVariable id=link51  >end_event</a> to block until the item was fully executed, as in the following example.</p><blockquote><pre>task uvm_execute(item, ...);
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_transaction" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">uvm_transaction</a></h1><div class=CBody><p>The uvm_transaction class is the root base class for UVM transactions.&nbsp; Inheriting all the methods of <a href="uvm_object-svh.html#uvm_object" class=LClass id=link40  >uvm_object</a>, uvm_transaction adds a timing and recording interface.</p><p>This class provides timestamp properties, notification events, and transaction recording support.</p><p>Use of this class as a base for user-defined transactions is deprecated.&nbsp; Its subtype, <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link41  >uvm_sequence_item</a>, shall be used as the base class for all user-defined transaction types.</p><p>The intended use of this API is via a <a href="../comps/uvm_driver-svh.html#uvm_driver#(REQ,RSP)" class=LClass id=link42  >uvm_driver #(REQ,RSP)</a> to call <a href="uvm_component-svh.html#uvm_component.accept_tr" class=LMethod id=link43  >uvm_component::accept_tr</a>, <a href="uvm_component-svh.html#uvm_component.begin_tr" class=LMethod id=link44  >uvm_component::begin_tr</a>, and <a href="uvm_component-svh.html#uvm_component.end_tr" class=LMethod id=link45  >uvm_component::end_tr</a> during the course of sequence item execution.&nbsp; These methods in the component base class will call into the corresponding methods in this class to set the corresponding timestamps (<i>accept_time</i>, <i>begin_time</i>, and <i>end_time</i>), trigger the corresponding event (<a href="#uvm_transaction.begin_event" class=LVariable id=link46  >begin_event</a> and <a href="#uvm_transaction.end_event" class=LVariable id=link47  >end_event</a>, and, if enabled, record the transaction contents to a vendor-specific transaction database.</p><p>Note that get_next_item/item_done when called on a uvm_seq_item_pull_port will automatically trigger the begin_event and end_events via calls to begin_tr and end_tr.&nbsp; While convenient, it is generally the responsibility of drivers to mark a transaction&rsquo;s progress during execution.&nbsp;  To allow the driver or layering sequence to control sequence item timestamps, events, and recording, you must call <a href="../tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).disable_auto_item_recording" class=LMethod id=link48  >uvm_sqr_if_base#(REQ,RSP)::disable_auto_item_recording</a> at the beginning of the driver&rsquo;s <i>run_phase</i> task.</p><p>Users may also use the transaction&rsquo;s event pool, <a href="#uvm_transaction.events" class=LVariable id=link49  >events</a>, to define custom events for the driver to trigger and the sequences to wait on.&nbsp; Any in-between events such as marking the beginning of the address and data phases of transaction execution could be implemented via the <a href="#uvm_transaction.events" class=LVariable id=link50  >events</a> pool.</p><p>In pipelined protocols, the driver may release a sequence (return from finish_item() or it&rsquo;s `uvm_do macro) before the item has been completed.&nbsp; If the driver uses the begin_tr/end_tr API in uvm_component, the sequence can wait on the item&rsquo;s <a href="#uvm_transaction.end_event" class=LVariable id=link51  >end_event</a> to block until the item was fully executed, as in the following example.</p><blockquote><pre>task uvm_execute(item, ...);
     // can use the `uvm_do macros as well
     start_item(item);
     item.randomize();
@@ -181,13 +181,13 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=1 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.Methods" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">Methods</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.Methods" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.new" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">new</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.new" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
@@ -209,7 +209,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.accept_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">accept_tr</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.accept_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">accept_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function void accept_tr (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
@@ -227,7 +227,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=4 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_accept_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_accept_tr</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_accept_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_accept_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual protected function void do_accept_tr ()
   </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#uvm_transaction.accept_tr" class=LMethod id=link56  >accept_tr</a> just before the accept event is triggered.&nbsp; Implementations should call <i>super.do_accept_tr</i> to ensure correct operation.</p></div></div></div>
 
@@ -235,7 +235,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_tr</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function integer begin_tr (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
@@ -253,7 +253,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_child_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_child_tr</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_child_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_child_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function integer begin_child_tr (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
@@ -275,7 +275,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_begin_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_begin_tr</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_begin_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_begin_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual protected function void do_begin_tr ()
   </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#uvm_transaction.begin_tr" class=LMethod id=link66  >begin_tr</a> and <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link67  >begin_child_tr</a> just before the begin event is triggered.&nbsp; Implementations should call <i>super.do_begin_tr</i> to ensure correct operation.</p></div></div></div>
 
@@ -283,7 +283,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.end_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">end_tr</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.end_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">end_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5>function void end_tr (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
@@ -305,7 +305,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_end_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_end_tr</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.do_end_tr" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">do_end_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual protected function void do_end_tr ()
   </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#uvm_transaction.end_tr" class=LMethod id=link74  >end_tr</a> just before the end event is triggered.&nbsp; Implementations should call <i>super.do_end_tr</i> to ensure correct operation.</p></div></div></div>
 
@@ -313,7 +313,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=10 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_tr_handle" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_tr_handle</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_tr_handle" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_tr_handle</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function integer get_tr_handle ()
   </td></tr></table></blockquote><div class=CBody><p>Returns the handle associated with the transaction, as set by a previous call to <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link75  >begin_child_tr</a> or <a href="#uvm_transaction.begin_tr" class=LMethod id=link76  >begin_tr</a> with transaction recording enabled.</p></div></div></div>
 
@@ -321,7 +321,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.disable_recording" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">disable_recording</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.disable_recording" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">disable_recording</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function void disable_recording ()
   </td></tr></table></blockquote><div class=CBody><p>Turns off recording for the transaction stream.&nbsp; This method does not effect a <a href="uvm_component-svh.html#uvm_component" class=LClass id=link77  >uvm_component</a>&rsquo;s recording streams.</p></div></div></div>
 
@@ -329,7 +329,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.enable_recording" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">enable_recording</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.enable_recording" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">enable_recording</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void enable_recording (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_tr_stream&nbsp;</td>
@@ -345,7 +345,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=13 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.is_recording_enabled" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">is_recording_enabled</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.is_recording_enabled" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">is_recording_enabled</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_recording_enabled()
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if recording is currently on, 0 otherwise.</p></div></div></div>
 
@@ -353,7 +353,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.is_active" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">is_active</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.is_active" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">is_active</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_active ()
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if the transaction has been started but has not yet been ended.&nbsp; Returns 0 if the transaction has not been started.</p></div></div></div>
 
@@ -361,7 +361,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_event_pool" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_event_pool</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_event_pool" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_event_pool</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_event_pool get_event_pool ()
   </td></tr></table></blockquote><div class=CBody><p>Returns the event pool associated with this transaction.</p><p>By default, the event pool contains the events: begin, accept, and end.&nbsp; Events can also be added by derivative objects.&nbsp; An event pool is a specialization of <a href="uvm_pool-svh.html#uvm_pool#(KEY,T)" class=LClass id=link78  >uvm_pool#(KEY,T)</a>, e.g. a <i>uvm_pool#(uvm_event)</i>.</p></div></div></div>
 
@@ -369,7 +369,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=16 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.set_initiator" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">set_initiator</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.set_initiator" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">set_initiator</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_initiator (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
@@ -385,7 +385,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=17 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_initiator" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_initiator</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_initiator" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_initiator</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_component get_initiator ()
   </td></tr></table></blockquote><div class=CBody><p>Returns the component that produced or started the transaction, as set by a previous call to set_initiator.</p></div></div></div>
 
@@ -393,7 +393,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=18 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_accept_time" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_accept_time</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_accept_time" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_accept_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function time get_accept_time ()
   </td></tr></table></blockquote><div class=CBody></div></div></div>
 
@@ -401,7 +401,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_begin_time" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_begin_time</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_begin_time" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_begin_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function time get_begin_time ()
   </td></tr></table></blockquote><div class=CBody></div></div></div>
 
@@ -409,7 +409,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_end_time" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_end_time</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_end_time" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_end_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function time get_end_time ()
   </td></tr></table></blockquote><div class=CBody><p>Returns the time at which this transaction was accepted, begun, or ended, as by a previous call to <a href="#uvm_transaction.accept_tr" class=LMethod id=link79  >accept_tr</a>, <a href="#uvm_transaction.begin_tr" class=LMethod id=link80  >begin_tr</a>, <a href="#uvm_transaction.begin_child_tr" class=LMethod id=link81  >begin_child_tr</a>, or <a href="#uvm_transaction.end_tr" class=LMethod id=link82  >end_tr</a>.</p></div></div></div>
 
@@ -417,7 +417,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.set_transaction_id" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">set_transaction_id</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.set_transaction_id" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">set_transaction_id</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3>function void set_transaction_id(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>integer&nbsp;</td>
@@ -433,7 +433,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=22 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_transaction_id" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_transaction_id</a></h3>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.get_transaction_id" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">get_transaction_id</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function integer get_transaction_id()
   </td></tr></table></blockquote><div class=CBody><p>Returns this transaction&rsquo;s numeric identifier, which is -1 if not set explicitly by <i>set_transaction_id</i>.</p><p>When using a <a href="../seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP)" class=LClass id=link83  >uvm_sequence #(REQ,RSP)</a> to generate stimulus, the transaction ID is used along with the sequence ID to route responses in sequencers and to correlate responses to requests.</p></div></div></div>
 
@@ -441,13 +441,13 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=23 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.Variables" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">Variables</a></h3></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.Variables" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=24 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.events" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">events</a></h3>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.events" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">events</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>const uvm_event_pool events = new
   </td></tr></table></blockquote><div class=CBody><p>The event pool instance for this transaction.&nbsp; This pool is used to track various milestones: by default, begin, accept, and end</p></div></div></div>
 
@@ -455,7 +455,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=25 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_event" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_event</a></h3>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.begin_event" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_event</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=2>uvm_event#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_object</td>
@@ -470,7 +470,7 @@ endtask: do_item</pre></blockquote>
 
 
  <!--CONTENT index=26 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.end_event" href="../../src_view/base/uvm_transaction.svh.html#L124" target="_top" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">end_event</a></h3>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_transaction.end_event" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">end_event</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=2>uvm_event#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_object</td>
@@ -497,28 +497,57 @@ endtask: do_item</pre></blockquote>
   </div>
 
   <script>
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
 
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/doc/base/uvm_transaction-svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Inform parent that doc is loaded
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'docNavigated',
+          url: 'docs_view/base/uvm_transaction-svh.html'
+        }, '*');
+      }
+    } catch (e) {}
+
+    // Intercept clicks on source code links
     document.addEventListener('click', function(e) {
       const link = e.target.closest('a');
       if (!link) return;
       const href = link.getAttribute('href');
-      if (!href) return;
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
 
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        if (window.parent && window.parent.openSourceView) {
-          e.preventDefault();
-          const targetHref = new URL(link.href, window.location.href).href;
-          window.parent.openSourceView(targetHref);
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openSourceView',
+            url: targetHref
+          }, '*');
         }
+        try {
+          if (window.parent && window.parent.openSourceView) {
+            window.parent.openSourceView(targetHref);
+          }
+        } catch (err) {}
       }
     });
   </script>

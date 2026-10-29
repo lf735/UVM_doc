@@ -9,7 +9,7 @@
 <body class="src-viewer-body">
   <div class="src-sticky-bar">
     <div class="src-breadcrumbs">
-      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <a href="../../index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
       <span class="sep">/</span>
       <span class="src-cur-file">base/uvm_base.svh</span>
       <span class="badge badge-info">111 lines</span>
@@ -180,15 +180,49 @@
     window.addEventListener('hashchange', highlightTargetLine);
     window.addEventListener('DOMContentLoaded', highlightTargetLine);
 
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
+
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/src/base/uvm_base.svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Intercept clicks on doc button or doc links
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+      if (link.classList.contains('src-to-doc-btn') || href.includes('docs_view/')) {
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openDocView',
+            url: targetHref
+          }, '*');
+        }
+        try {
+          if (window.parent && window.parent.openDocView) {
+            window.parent.openDocView(targetHref);
+          }
+        } catch (err) {}
+      }
+    });
   </script>
 </body>
 </html>

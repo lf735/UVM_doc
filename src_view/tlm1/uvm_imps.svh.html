@@ -9,7 +9,7 @@
 <body class="src-viewer-body">
   <div class="src-sticky-bar">
     <div class="src-breadcrumbs">
-      <a href="../../index.html#/src" target="_top" class="src-nav-home" title="UVM Source Tree">src</a>
+      <a href="../../index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
       <span class="sep">/</span>
       <span class="src-cur-file">tlm1/uvm_imps.svh</span>
       <span class="badge badge-info">316 lines</span>
@@ -20,7 +20,7 @@
               <option value="">Jump to Symbol (21 symbols)...</option>
               <option value="#L82">class: uvm_blocking_put_imp (L82)</option><option value="#L88">class: uvm_nonblocking_put_imp (L88)</option><option value="#L94">class: uvm_put_imp (L94)</option><option value="#L100">class: uvm_blocking_get_imp (L100)</option><option value="#L106">class: uvm_nonblocking_get_imp (L106)</option><option value="#L112">class: uvm_get_imp (L112)</option><option value="#L118">class: uvm_blocking_peek_imp (L118)</option><option value="#L124">class: uvm_nonblocking_peek_imp (L124)</option><option value="#L130">class: uvm_peek_imp (L130)</option><option value="#L136">class: uvm_blocking_get_peek_imp (L136)</option><option value="#L142">class: uvm_nonblocking_get_peek_imp (L142)</option><option value="#L148">class: uvm_get_peek_imp (L148)</option><option value="#L232">class: uvm_blocking_master_imp (L232)</option><option value="#L243">class: uvm_nonblocking_master_imp (L243)</option><option value="#L254">class: uvm_master_imp (L254)</option><option value="#L265">class: uvm_blocking_slave_imp (L265)</option><option value="#L276">class: uvm_nonblocking_slave_imp (L276)</option><option value="#L287">class: uvm_slave_imp (L287)</option><option value="#L298">class: uvm_blocking_transport_imp (L298)</option><option value="#L304">class: uvm_nonblocking_transport_imp (L304)</option><option value="#L310">class: uvm_transport_imp (L310)</option>
             </select>
-      <a href="../../docs_view/tlm1/uvm_imps-svh.html" class="btn btn-outline" target="_top" title="View Reference Documentation for this file">
+      <a href="../../docs_view/tlm1/uvm_imps-svh.html" class="btn btn-outline src-to-doc-btn" data-doc-url="../../docs_view/tlm1/uvm_imps-svh.html" title="View Reference Documentation for this file">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                   <span>Documentation</span>
                 </a>
@@ -388,15 +388,49 @@ endclass
     window.addEventListener('hashchange', highlightTargetLine);
     window.addEventListener('DOMContentLoaded', highlightTargetLine);
 
+    // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
         document.documentElement.setAttribute('data-theme', e.data.theme);
       }
     });
-    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-    if (parentTheme) {
-      document.documentElement.setAttribute('data-theme', parentTheme);
-    }
+    try {
+      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+      if (parentTheme) {
+        document.documentElement.setAttribute('data-theme', parentTheme);
+      }
+    } catch (e) {}
+
+    // Auto-restore into main app if opened directly outside iframe
+    try {
+      if (window.self === window.top) {
+        window.location.replace('../../index.html#/src/tlm1/uvm_imps.svh.html' + window.location.hash);
+      }
+    } catch (e) {}
+
+    // Intercept clicks on doc button or doc links
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+      const href = link.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+      if (link.classList.contains('src-to-doc-btn') || href.includes('docs_view/')) {
+        e.preventDefault();
+        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({
+            type: 'openDocView',
+            url: targetHref
+          }, '*');
+        }
+        try {
+          if (window.parent && window.parent.openDocView) {
+            window.parent.openDocView(targetHref);
+          }
+        } catch (err) {}
+      }
+    });
   </script>
 </body>
 </html>
