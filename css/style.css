@@ -261,9 +261,11 @@ body.is-resizing iframe {
 }
 
 /* Global Search Trigger */
-.search-trigger {
+.search-trigger,
+#search-trigger {
   flex: 1;
   max-width: 480px;
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -274,20 +276,33 @@ body.is-resizing iframe {
   color: var(--text-muted);
   cursor: pointer;
   font-size: 0.875rem;
+  white-space: nowrap;
   transition: all 0.15s ease;
 }
 
-.search-trigger:hover {
+.search-trigger:hover,
+#search-trigger:hover {
   border-color: var(--primary);
   color: var(--text-main);
   box-shadow: 0 0 0 3px var(--primary-light);
 }
 
-.search-trigger .search-placeholder {
+.search-trigger svg,
+#search-trigger svg {
+  flex-shrink: 0;
+}
+
+.search-trigger .search-placeholder,
+#search-trigger .search-placeholder {
   flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .search-kbd {
+  flex-shrink: 0;
   background: var(--surface-color);
   border: 1px solid var(--border-color);
   border-radius: 4px;
