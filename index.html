@@ -247,6 +247,70 @@
     </div>
   </div>
 
+  <!-- Image Zoom Lightbox Modal -->
+  <div class="image-modal-backdrop" id="image-zoom-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Agrandissement diagramme" style="display: none;">
+    <div class="image-modal-container">
+      <div class="image-modal-header">
+        <div class="image-modal-title-wrapper">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <span class="image-modal-title" id="image-modal-title">Diagramme UVM</span>
+        </div>
+        <div class="image-modal-toolbar">
+          <button type="button" class="image-tool-btn" id="image-zoom-out" title="Zoom arrière (-)" aria-label="Zoom out">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </button>
+          <span class="image-zoom-level" id="image-zoom-level" title="Niveau de zoom actuel">100%</span>
+          <button type="button" class="image-tool-btn" id="image-zoom-in" title="Zoom avant (+)" aria-label="Zoom in">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="11" y1="8" x2="11" y2="14"/>
+              <line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </button>
+          <button type="button" class="image-tool-btn" id="image-zoom-fit" title="Ajuster à l'écran (0)" aria-label="Fit to screen">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 3 21 3 21 9"/>
+              <polyline points="9 21 3 21 3 15"/>
+              <polyline points="21 15 21 21 15 21"/>
+              <polyline points="3 9 3 3 9 3"/>
+            </svg>
+            <span class="image-tool-label">Adapter</span>
+          </button>
+          <button type="button" class="image-tool-btn" id="image-zoom-actual" title="Taille réelle 1:1" aria-label="Actual size">
+            <span class="image-tool-label">1:1</span>
+          </button>
+          <div class="image-modal-divider"></div>
+          <button type="button" class="image-modal-close-btn" id="image-modal-close" title="Fermer (Échap)" aria-label="Fermer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="image-modal-viewport" id="image-modal-viewport">
+        <div class="image-modal-stage" id="image-modal-stage">
+          <img src="" alt="Agrandissement diagramme" id="image-modal-img" class="image-modal-img" draggable="false">
+        </div>
+      </div>
+      <div class="image-modal-footer">
+        <span><kbd>Molette</kbd> Zoomer</span>
+        <span><kbd>Glisser</kbd> Déplacer</span>
+        <span><kbd>Double-clic</kbd> Agrandir / Réinitialiser</span>
+        <span><kbd>Échap</kbd> Fermer</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Search & App Scripts -->
   <script src="js/search_data.js"></script>
   <script src="js/app.js"></script>

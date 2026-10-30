@@ -18,7 +18,32 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Core_Base_Classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Core_Base_Classes" id="Core_Base_Classes" href="#">Core Base Classes</a></h1><div class=CBody><p>The UVM library defines a set of base classes and utilities that facilitate the design of modular, scalable, reusable verification environments.</p><p>The basic building blocks for all environments are components and the transactions they use to communicate.&nbsp; The UVM provides base classes for these, as shown below.</p><img src="../../images/uvm_ref_base.gif" width="229" height="161"><ul><li><a href="../base/uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link1  >uvm_object</a> - All components and transactions derive from <i>uvm_object</i>, which defines an interface of core class-based operations: create, copy, compare, print, sprint, record, etc.&nbsp;  It also defines interfaces for instance identification (name, type name, unique id, etc.) and random seeding.</li><li><a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_component</a> - The <i>uvm_component</i> class is the root base class for all UVM components.&nbsp; Components are quasi-static objects that exist throughout simulation.&nbsp; This allows them to establish structural hierarchy much like <i>modules</i> and <i>program blocks</i>.&nbsp; Every component is uniquely addressable via a hierarchical path name, e.g.&nbsp; &ldquo;env1.pci1.master3.driver&rdquo;.&nbsp; The <i>uvm_component</i> also defines a phased test flow that components follow during the course of simulation.&nbsp; Each phase-- <i>build</i>, <i>connect</i>, <i>run</i>, etc.-- is defined by a callback that is executed in precise order.&nbsp; Finally, the <i>uvm_component</i> also defines configuration, reporting, transaction recording, and factory interfaces.</li><li><a href="../base/uvm_transaction-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link3  >uvm_transaction</a> - The <i>uvm_transaction</i> is the root base class for UVM transactions, which, unlike <i>uvm_components</i>, are transient in nature.&nbsp; It extends <a href="../base/uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link4  >uvm_object</a> to include a timing and recording interface.&nbsp; Simple transactions can derive directly from <i>uvm_transaction</i>, while sequence-enabled transactions derive from <i>uvm_sequence_item</i>.</li><li><a href="../base/uvm_root-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_root</a> - The <i>uvm_root</i> class is special <i>uvm_component</i> that serves as the top-level component for all UVM components, provides phasing control for all UVM components, and other global services.</li></ul>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Core_Base_Classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Core_Base_Classes" id="Core_Base_Classes" href="#">Core Base Classes</a></h1><div class=CBody><p>The UVM library defines a set of base classes and utilities that facilitate the design of modular, scalable, reusable verification environments.</p><p>The basic building blocks for all environments are components and the transactions they use to communicate.&nbsp; The UVM provides base classes for these, as shown below.</p><figure class="doc-diagram-card">
+  <div class="doc-diagram-header">
+    <span class="doc-diagram-label" title="UVM Ref Base">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      <span>UVM Ref Base</span>
+    </span>
+    <div class="doc-diagram-actions">
+      <button type="button" class="doc-img-zoom-btn" title="Agrandir et zoomer le diagramme" aria-label="Agrandir et zoomer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="11" y1="8" x2="11" y2="14"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+        <span>Agrandir</span>
+      </button>
+    </div>
+  </div>
+  <div class="doc-diagram-body">
+    <img src="../../images/uvm_ref_base.gif" class="doc-diagram-img" alt="UVM Ref Base" title="Cliquer pour agrandir et zoomer" loading="lazy">
+  </div>
+</figure><ul><li><a href="../base/uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link1  >uvm_object</a> - All components and transactions derive from <i>uvm_object</i>, which defines an interface of core class-based operations: create, copy, compare, print, sprint, record, etc.&nbsp;  It also defines interfaces for instance identification (name, type name, unique id, etc.) and random seeding.</li><li><a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_component</a> - The <i>uvm_component</i> class is the root base class for all UVM components.&nbsp; Components are quasi-static objects that exist throughout simulation.&nbsp; This allows them to establish structural hierarchy much like <i>modules</i> and <i>program blocks</i>.&nbsp; Every component is uniquely addressable via a hierarchical path name, e.g.&nbsp; &ldquo;env1.pci1.master3.driver&rdquo;.&nbsp; The <i>uvm_component</i> also defines a phased test flow that components follow during the course of simulation.&nbsp; Each phase-- <i>build</i>, <i>connect</i>, <i>run</i>, etc.-- is defined by a callback that is executed in precise order.&nbsp; Finally, the <i>uvm_component</i> also defines configuration, reporting, transaction recording, and factory interfaces.</li><li><a href="../base/uvm_transaction-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link3  >uvm_transaction</a> - The <i>uvm_transaction</i> is the root base class for UVM transactions, which, unlike <i>uvm_components</i>, are transient in nature.&nbsp; It extends <a href="../base/uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link4  >uvm_object</a> to include a timing and recording interface.&nbsp; Simple transactions can derive directly from <i>uvm_transaction</i>, while sequence-enabled transactions derive from <i>uvm_sequence_item</i>.</li><li><a href="../base/uvm_root-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_root</a> - The <i>uvm_root</i> class is special <i>uvm_component</i> that serves as the top-level component for all UVM components, provides phasing control for all UVM components, and other global services.</li></ul>
 
 <!--START_ND_SUMMARY index=0-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -702,6 +727,39 @@
             window.parent.openSourceView(targetHref);
           }
         } catch (err) {}
+      }
+    });
+
+    // Diagram enlarge & zoom lightbox triggers
+    document.addEventListener('click', function(e) {
+      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
+      const img = e.target.closest('.doc-diagram-img');
+      if (zoomBtn || img) {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = (zoomBtn || img).closest('.doc-diagram-card');
+        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
+        if (targetImg) {
+          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
+          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
+          const fullSrc = targetImg.src;
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({
+              type: 'openImageModal',
+              src: fullSrc,
+              title: title
+            }, '*');
+          } else {
+            window.open(fullSrc, '_blank');
+          }
+        }
+      }
+    });
+
+    // Forward Escape key to parent to close modals if iframe has focus
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'closeImageModal' }, '*');
       }
     });
   </script>

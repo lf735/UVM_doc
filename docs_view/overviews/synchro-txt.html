@@ -18,7 +18,32 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Synchronization_Classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Synchronization_Classes" id="Synchronization_Classes" href="#">Synchronization Classes</a></h1><div class=CBody><img src="../../images/uvm_ref_sync.gif" width="458" height="77"><p>The UVM provides event and barrier synchronization classes for managing concurrent processes.</p><ul><li><a href="../base/uvm_event-svh.html#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LClass id=link1  >uvm_event#(T)</a> - UVM&rsquo;s event class augments the SystemVerilog event datatype with such services as setting callbacks and data delivery.</li><li><a href="../base/uvm_barrier-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_barrier</a> - A barrier is used to prevent a pre-configured number of processes from continuing until all have reached a certain point in simulation.</li><li>uvm_event_pool and uvm_barrier_pool - The event and barrier pool classes are specializations of <a href="../base/uvm_pool-svh.html#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LClass id=link3  >uvm_object_string_pool #(T)</a> used to store collections of ~uvm_event#(uvm_object)~s and <a href="../base/uvm_barrier-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link4  >uvm_barriers</a>, respectively, indexed by string name.&nbsp;  Each pool class contains a static, &ldquo;global&rdquo; pool instance for sharing across all processes.</li><li><a href="../base/uvm_event_callback-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_event_callback</a> - The event callback is used to create callback objects that may be attached to <a href="../base/uvm_event-svh.html#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LClass id=link6  >uvm_event#(T)</a>s.</li></ul>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Synchronization_Classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Synchronization_Classes" id="Synchronization_Classes" href="#">Synchronization Classes</a></h1><div class=CBody><figure class="doc-diagram-card">
+  <div class="doc-diagram-header">
+    <span class="doc-diagram-label" title="UVM Ref Sync">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      <span>UVM Ref Sync</span>
+    </span>
+    <div class="doc-diagram-actions">
+      <button type="button" class="doc-img-zoom-btn" title="Agrandir et zoomer le diagramme" aria-label="Agrandir et zoomer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="11" y1="8" x2="11" y2="14"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+        <span>Agrandir</span>
+      </button>
+    </div>
+  </div>
+  <div class="doc-diagram-body">
+    <img src="../../images/uvm_ref_sync.gif" class="doc-diagram-img" alt="UVM Ref Sync" title="Cliquer pour agrandir et zoomer" loading="lazy">
+  </div>
+</figure><p>The UVM provides event and barrier synchronization classes for managing concurrent processes.</p><ul><li><a href="../base/uvm_event-svh.html#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LClass id=link1  >uvm_event#(T)</a> - UVM&rsquo;s event class augments the SystemVerilog event datatype with such services as setting callbacks and data delivery.</li><li><a href="../base/uvm_barrier-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_barrier</a> - A barrier is used to prevent a pre-configured number of processes from continuing until all have reached a certain point in simulation.</li><li>uvm_event_pool and uvm_barrier_pool - The event and barrier pool classes are specializations of <a href="../base/uvm_pool-svh.html#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LClass id=link3  >uvm_object_string_pool #(T)</a> used to store collections of ~uvm_event#(uvm_object)~s and <a href="../base/uvm_barrier-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link4  >uvm_barriers</a>, respectively, indexed by string name.&nbsp;  Each pool class contains a static, &ldquo;global&rdquo; pool instance for sharing across all processes.</li><li><a href="../base/uvm_event_callback-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_event_callback</a> - The event callback is used to create callback objects that may be attached to <a href="../base/uvm_event-svh.html#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LClass id=link6  >uvm_event#(T)</a>s.</li></ul>
 
 <!--START_ND_SUMMARY index=0-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -702,6 +727,39 @@
             window.parent.openSourceView(targetHref);
           }
         } catch (err) {}
+      }
+    });
+
+    // Diagram enlarge & zoom lightbox triggers
+    document.addEventListener('click', function(e) {
+      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
+      const img = e.target.closest('.doc-diagram-img');
+      if (zoomBtn || img) {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = (zoomBtn || img).closest('.doc-diagram-card');
+        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
+        if (targetImg) {
+          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
+          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
+          const fullSrc = targetImg.src;
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({
+              type: 'openImageModal',
+              src: fullSrc,
+              title: title
+            }, '*');
+          } else {
+            window.open(fullSrc, '_blank');
+          }
+        }
+      }
+    });
+
+    // Forward Escape key to parent to close modals if iframe has focus
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'closeImageModal' }, '*');
       }
     });
   </script>

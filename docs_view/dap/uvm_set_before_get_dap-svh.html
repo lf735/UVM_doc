@@ -886,6 +886,39 @@
         } catch (err) {}
       }
     });
+
+    // Diagram enlarge & zoom lightbox triggers
+    document.addEventListener('click', function(e) {
+      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
+      const img = e.target.closest('.doc-diagram-img');
+      if (zoomBtn || img) {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = (zoomBtn || img).closest('.doc-diagram-card');
+        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
+        if (targetImg) {
+          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
+          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
+          const fullSrc = targetImg.src;
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({
+              type: 'openImageModal',
+              src: fullSrc,
+              title: title
+            }, '*');
+          } else {
+            window.open(fullSrc, '_blank');
+          }
+        }
+      }
+    });
+
+    // Forward Escape key to parent to close modals if iframe has focus
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'closeImageModal' }, '*');
+      }
+    });
   </script>
 </body>
 </html>

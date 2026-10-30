@@ -303,6 +303,48 @@ def process_doc_code_blocks(html_text):
 def process_doc_prototypes(html_text):
     return re.sub(r'<table\b[^>]*class=["\']?Prototype["\']?[^>]*>[\s\S]*?</table>', lambda m: highlight_prototype_table(m.group(0)), html_text, flags=re.IGNORECASE)
 
+def wrap_doc_diagrams(body_html):
+    """Wrap <img> elements in a structured card with label, border framing, and zoom/enlarge button."""
+    def repl_img(m):
+        full_tag = m.group(0)
+        src_m = re.search(r'src=["\']([^"\']+)["\']', full_tag, re.IGNORECASE)
+        if not src_m:
+            return full_tag
+        src = src_m.group(1)
+        filename = posixpath.basename(src)
+        name_no_ext = re.sub(r'\.[a-zA-Z0-9]+$', '', filename)
+        label_words = [w.upper() if w.lower() in ('uvm', 'tlm', 'uml', 'if', 'ifs') else w.capitalize() for w in name_no_ext.split('_')]
+        title = " ".join(label_words)
+
+        return f'''<figure class="doc-diagram-card">
+  <div class="doc-diagram-header">
+    <span class="doc-diagram-label" title="{html.escape(title)}">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      <span>{html.escape(title)}</span>
+    </span>
+    <div class="doc-diagram-actions">
+      <button type="button" class="doc-img-zoom-btn" title="Agrandir et zoomer le diagramme" aria-label="Agrandir et zoomer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="11" y1="8" x2="11" y2="14"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+        <span>Agrandir</span>
+      </button>
+    </div>
+  </div>
+  <div class="doc-diagram-body">
+    <img src="{src}" class="doc-diagram-img" alt="{html.escape(title)}" title="Cliquer pour agrandir et zoomer" loading="lazy">
+  </div>
+</figure>'''
+
+    return re.sub(r'<img\b[^>]*>', repl_img, body_html, flags=re.IGNORECASE)
+
 # Global Symbol Maps
 SYMBOL_MAP = {}
 FILE_SYMBOLS = {}
@@ -909,6 +951,9 @@ def modernize_doc_files():
 
             # Syntax highlight method/class/task prototypes (<table class=Prototype>)
             body_content = process_doc_prototypes(body_content)
+
+            # Wrap diagrams in clean framing card with enlarge/zoom button
+            body_content = wrap_doc_diagrams(body_content)
 
             # Record headings for left navigation subheadings and search
             doc_key = f"docs_view/{rel_path}"
@@ -1617,6 +1662,39 @@ def modernize_doc_files():
             window.parent.openSourceView(targetHref);
           }}
         }} catch (err) {{}}
+      }}
+    }});
+
+    // Diagram enlarge & zoom lightbox triggers
+    document.addEventListener('click', function(e) {{
+      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
+      const img = e.target.closest('.doc-diagram-img');
+      if (zoomBtn || img) {{
+        e.preventDefault();
+        e.stopPropagation();
+        const card = (zoomBtn || img).closest('.doc-diagram-card');
+        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
+        if (targetImg) {{
+          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
+          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
+          const fullSrc = targetImg.src;
+          if (window.parent && window.parent !== window) {{
+            window.parent.postMessage({{
+              type: 'openImageModal',
+              src: fullSrc,
+              title: title
+            }}, '*');
+          }} else {{
+            window.open(fullSrc, '_blank');
+          }}
+        }}
+      }}
+    }});
+
+    // Forward Escape key to parent to close modals if iframe has focus
+    window.addEventListener('keydown', function(e) {{
+      if (e.key === 'Escape' && window.parent && window.parent !== window) {{
+        window.parent.postMessage({{ type: 'closeImageModal' }}, '*');
       }}
     }});
   </script>

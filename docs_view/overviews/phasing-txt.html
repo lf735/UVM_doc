@@ -32,7 +32,32 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="Phasing_Implementation"><div class="CTopic"><h2 class=CTitle><a name="Phasing_Implementation" id="Phasing_Implementation" href="#">Phasing Implementation</a></h2><div class=CBody><p>The API described here provides a general purpose testbench phasing solution, consisting of a phaser machine, traversing a master schedule graph, which is built by the integrator from one or more instances of template schedules provided by UVM or by 3rd-party VIP, and which supports implicit or explicit synchronization, runtime control of threads and jumps.</p><p>Each schedule leaf node refers to a single phase that is compatible with that VIP&rsquo;s components and which executes the required behavior via a functor or delegate extending the phase into component context as required.</p><p>Execution threads are tracked on a per-component basis.</p><h4 class=CHeading>Class hierarchy</h4><p>A single class represents both the definition, the state, and the context of a phase.&nbsp; It is instantiated once as a singleton IMP and one or more times as nodes in a graph which represents serial and parallel phase relationships and stores current state as the phaser progresses, and the phase implementation which specifies required component behavior (by extension into component context if non-default behavior required.)</p><img src="../../images/uvm_ref_phases_uml.gif" width="358" height="239"><p><b>The following classes related to phasing are defined herein</b></p><p><a href="../base/uvm_phase-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link1  >uvm_phase</a> : The base class for defining a phase&rsquo;s behavior, state, context</p><p><a href="../base/uvm_domain-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_domain</a> : Phasing schedule node representing an independent branch of the schedule</p><p><a href="../base/uvm_bottomup_phase-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link3  >uvm_bottomup_phase</a> : A phase implementation for bottom up function phases.</p><p><a href="../base/uvm_topdown_phase-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link4  >uvm_topdown_phase</a> : A phase implementation for topdown function phases.</p><p><a href="../base/uvm_task_phase-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_task_phase</a> : A phase implementation for task phases.</p><p><b>Common, Run-Time and User-Defined Phases</b></p><p>The common phases to all <a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link6  >uvm_component</a>s are described in <a href="../base/uvm_common_phases-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LSection id=link7  >UVM Common Phases</a>.</p><p>The run-time phases are described in <a href="../base/uvm_runtime_phases-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LSection id=link8  >UVM Run-Time Phases</a>.</p><p>The ability to create user-defined phases is described <a href="test-phasing-txt.html#doc-nav-main" data-target-id="doc-nav-main" class=LSection id=link9  >User-Defined Phases</a>.</p>
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="Phasing_Implementation"><div class="CTopic"><h2 class=CTitle><a name="Phasing_Implementation" id="Phasing_Implementation" href="#">Phasing Implementation</a></h2><div class=CBody><p>The API described here provides a general purpose testbench phasing solution, consisting of a phaser machine, traversing a master schedule graph, which is built by the integrator from one or more instances of template schedules provided by UVM or by 3rd-party VIP, and which supports implicit or explicit synchronization, runtime control of threads and jumps.</p><p>Each schedule leaf node refers to a single phase that is compatible with that VIP&rsquo;s components and which executes the required behavior via a functor or delegate extending the phase into component context as required.</p><p>Execution threads are tracked on a per-component basis.</p><h4 class=CHeading>Class hierarchy</h4><p>A single class represents both the definition, the state, and the context of a phase.&nbsp; It is instantiated once as a singleton IMP and one or more times as nodes in a graph which represents serial and parallel phase relationships and stores current state as the phaser progresses, and the phase implementation which specifies required component behavior (by extension into component context if non-default behavior required.)</p><figure class="doc-diagram-card">
+  <div class="doc-diagram-header">
+    <span class="doc-diagram-label" title="UVM Ref Phases UML">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      <span>UVM Ref Phases UML</span>
+    </span>
+    <div class="doc-diagram-actions">
+      <button type="button" class="doc-img-zoom-btn" title="Agrandir et zoomer le diagramme" aria-label="Agrandir et zoomer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          <line x1="11" y1="8" x2="11" y2="14"/>
+          <line x1="8" y1="11" x2="14" y2="11"/>
+        </svg>
+        <span>Agrandir</span>
+      </button>
+    </div>
+  </div>
+  <div class="doc-diagram-body">
+    <img src="../../images/uvm_ref_phases_uml.gif" class="doc-diagram-img" alt="UVM Ref Phases UML" title="Cliquer pour agrandir et zoomer" loading="lazy">
+  </div>
+</figure><p><b>The following classes related to phasing are defined herein</b></p><p><a href="../base/uvm_phase-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link1  >uvm_phase</a> : The base class for defining a phase&rsquo;s behavior, state, context</p><p><a href="../base/uvm_domain-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_domain</a> : Phasing schedule node representing an independent branch of the schedule</p><p><a href="../base/uvm_bottomup_phase-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link3  >uvm_bottomup_phase</a> : A phase implementation for bottom up function phases.</p><p><a href="../base/uvm_topdown_phase-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link4  >uvm_topdown_phase</a> : A phase implementation for topdown function phases.</p><p><a href="../base/uvm_task_phase-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_task_phase</a> : A phase implementation for task phases.</p><p><b>Common, Run-Time and User-Defined Phases</b></p><p>The common phases to all <a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link6  >uvm_component</a>s are described in <a href="../base/uvm_common_phases-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LSection id=link7  >UVM Common Phases</a>.</p><p>The run-time phases are described in <a href="../base/uvm_runtime_phases-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LSection id=link8  >UVM Run-Time Phases</a>.</p><p>The ability to create user-defined phases is described <a href="test-phasing-txt.html#doc-nav-main" data-target-id="doc-nav-main" class=LSection id=link9  >User-Defined Phases</a>.</p>
 
 <!--START_ND_SUMMARY index=1-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -716,6 +741,39 @@
             window.parent.openSourceView(targetHref);
           }
         } catch (err) {}
+      }
+    });
+
+    // Diagram enlarge & zoom lightbox triggers
+    document.addEventListener('click', function(e) {
+      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
+      const img = e.target.closest('.doc-diagram-img');
+      if (zoomBtn || img) {
+        e.preventDefault();
+        e.stopPropagation();
+        const card = (zoomBtn || img).closest('.doc-diagram-card');
+        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
+        if (targetImg) {
+          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
+          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
+          const fullSrc = targetImg.src;
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({
+              type: 'openImageModal',
+              src: fullSrc,
+              title: title
+            }, '*');
+          } else {
+            window.open(fullSrc, '_blank');
+          }
+        }
+      }
+    });
+
+    // Forward Escape key to parent to close modals if iframe has focus
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'closeImageModal' }, '*');
       }
     });
   </script>
