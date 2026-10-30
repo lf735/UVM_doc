@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentDocUrl = 'docs_view/overviews/intro-txt.html';
   let currentSrcUrl = 'src_view/comps/uvm_driver.svh.html#L44';
   let activeSidebarTab = 'docs'; // 'docs' | 'source' | 'index'
-  let searchFilterType = 'all';
-  let sidebarFilterType = 'all';
+  let searchFilterTypes = new Set(['all']);
+  let sidebarFilterTypes = new Set(['all']);
   let modalRegexEnabled = false;
   let modalCaseSensitive = false;
   let sidebarRegexEnabled = false;
@@ -529,18 +529,64 @@ document.addEventListener('DOMContentLoaded', () => {
         return safeText.replace(pattern, '<strong style="color:var(--primary); text-decoration:underline">$1</strong>');
       }
 
+      function isItemTypeAllowed(itemType, filterSet) {
+        if (!filterSet || filterSet.has('all') || filterSet.size === 0) return true;
+        if (itemType === 'method') {
+          return filterSet.has('function') || filterSet.has('task') || filterSet.has('method');
+        }
+        return filterSet.has(itemType);
+      }
+
+      function handleMultiFilterPillClick(clickedPill, allPills, filterSet, onFilterChange) {
+        const type = clickedPill.getAttribute('data-type');
+        if (!type) return;
+
+        if (type === 'all') {
+          // Clicking 'All' resets to only 'all'
+          filterSet.clear();
+          filterSet.add('all');
+          allPills.forEach(p => p.classList.toggle('active', p.getAttribute('data-type') === 'all'));
+        } else {
+          // If 'all' was active, deactivate it because specific types are being selected
+          if (filterSet.has('all')) {
+            filterSet.delete('all');
+            const allPill = Array.from(allPills).find(p => p.getAttribute('data-type') === 'all');
+            if (allPill) allPill.classList.remove('active');
+          }
+
+          // Toggle the clicked type (non-exclusive)
+          if (filterSet.has(type)) {
+            filterSet.delete(type);
+            clickedPill.classList.remove('active');
+          } else {
+            filterSet.add(type);
+            clickedPill.classList.add('active');
+          }
+
+          // If no specific types remain selected, reset back to 'all'
+          if (filterSet.size === 0) {
+            filterSet.clear();
+            filterSet.add('all');
+            allPills.forEach(p => p.classList.toggle('active', p.getAttribute('data-type') === 'all'));
+          }
+        }
+
+        onFilterChange();
+      }
+
       function docItemMatchesMatcher(item, matcher) {
         if (!matcher) {
-          if (sidebarFilterType === 'all') return true;
-          if (sidebarFilterType === 'class') {
-            return item.title && !item.title.includes('Package') && !item.title.includes('Overview');
+          if (sidebarFilterTypes.has('all') || sidebarFilterTypes.size === 0) return true;
+          if (sidebarFilterTypes.has('class') && item.title && !item.title.includes('Package') && !item.title.includes('Overview')) {
+            return true;
           }
           if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docHeadings && item.href) {
             const headings = UVM_DATA.docHeadings[item.href] || [];
             return headings.some(h => {
-              if (sidebarFilterType === 'function' || sidebarFilterType === 'task') return h.type === 'method';
-              if (sidebarFilterType === 'macro') return h.type === 'macro';
-              return true;
+              if (h.type === 'main') return sidebarFilterTypes.has('class');
+              if (h.type === 'method') return sidebarFilterTypes.has('function') || sidebarFilterTypes.has('task');
+              if (h.type === 'macro') return sidebarFilterTypes.has('macro');
+              return false;
             });
           }
           return true;
@@ -573,6 +619,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docHeadings && item.href) {
           const headings = UVM_DATA.docHeadings[item.href] || [];
           return headings.some(h => {
+            if (!sidebarFilterTypes.has('all') && sidebarFilterTypes.size > 0) {
+              if (h.type === 'main' && !sidebarFilterTypes.has('class')) return false;
+              if (h.type === 'method' && !sidebarFilterTypes.has('function') && !sidebarFilterTypes.has('task')) return false;
+              if (h.type === 'macro' && !sidebarFilterTypes.has('macro')) return false;
+            }
             const hTitle = matcher.isCaseSensitive ? (h.title || '') : (h.title || '').toLowerCase();
             const hGroup = matcher.isCaseSensitive ? (h.group || '') : (h.group || '').toLowerCase();
             const combined = `${lowerTitle} ${hTitle} ${hGroup}`;
@@ -661,10 +712,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       sidebarPills.forEach(pill => {
         pill.addEventListener('click', () => {
-          sidebarPills.forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          sidebarFilterType = pill.getAttribute('data-type');
-          renderSidebar();
+          handleMultiFilterPillClick(pill, sidebarPills, sidebarFilterTypes, () => {
+            renderSidebar();
+          });
         });
       });
 
@@ -720,7 +770,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       function filterGroupItems(items, matcher) {
         if (!matcher) {
-          if (sidebarFilterType === 'all') return items;
+          if (sidebarFilterTypes.has('all') || sidebarFilterTypes.size === 0) return items;
         }
         const res = [];
         items.forEach(item => {
@@ -818,7 +868,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
 
         const allSymbols = items.filter(x => {
-          if (sidebarFilterType !== 'all' && x.type !== sidebarFilterType) return false;
+          if (!isItemTypeAllowed(x.type, sidebarFilterTypes)) return false;
           return x.type === 'class' || x.type === 'macro' || x.type === 'function' || x.type === 'task' || x.type === 'method';
         });
 
@@ -1104,10 +1154,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       searchFilterPills.forEach(pill => {
         pill.addEventListener('click', () => {
-          searchFilterPills.forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-          searchFilterType = pill.getAttribute('data-type');
-          executeSearch(searchInput ? searchInput.value : '');
+          handleMultiFilterPillClick(pill, searchFilterPills, searchFilterTypes, () => {
+            executeSearch(searchInput ? searchInput.value : '');
+          });
         });
       });
 
@@ -1191,7 +1240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         items.forEach(item => {
-          if (searchFilterType !== 'all' && item.type !== searchFilterType) {
+          if (!isItemTypeAllowed(item.type, searchFilterTypes)) {
             return;
           }
           const res = matchSymbolItem(item, matcher);
