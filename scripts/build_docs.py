@@ -581,7 +581,8 @@ def map_docs_to_sources():
             try:
                 with open(doc_path, 'r', encoding='latin-1') as df:
                     txt = df.read()
-            except Exception:
+            except Exception as e:
+                print(f"Error reading {doc_path} for mapping: {e}")
                 continue
 
             m = re.search(r'href=["\'](?:(?:\.\./)+)src/([^"\']+)["\']', txt)
@@ -635,7 +636,7 @@ def generate_source_views():
             raw_href = f"{root_rel}uvm-1.2/src/{rel_path}"
 
             syms = FILE_SYMBOLS.get(rel_path, [])
-            sym_options = "".join([f'<option value="#L{s["line"]}">{s["type"]}: {s["name"]} (L{s["line"]})</option>' for s in syms if s["type"] in ('class', 'macro')])
+            sym_options = "".join([f'<option value="#L{s["line"]}">{html.escape(s["type"])}: {html.escape(s["name"])} (L{s["line"]})</option>' for s in syms if s["type"] in ('class', 'macro')])
             sym_select = f'''<select class="sym-jump-select" onchange="if(this.value) window.location.hash = this.value">
               <option value="">Jump to Symbol ({len(syms)} symbols)...</option>
               {sym_options}
@@ -791,7 +792,8 @@ def modernize_doc_files():
             try:
                 with open(doc_file, 'r', encoding='latin-1') as df:
                     raw_html = df.read()
-            except Exception:
+            except Exception as e:
+                print(f"Error reading {doc_path} for mapping: {e}")
                 continue
 
             content_start = raw_html.find('<div id=Content>')
@@ -1908,7 +1910,8 @@ def build_search_index(categories):
         try:
             with open(mf, 'r', encoding='latin-1') as f:
                 m_html = f.read()
-        except Exception:
+        except Exception as e:
+            print(f"Error reading {mf} for tooltips: {e}")
             continue
         for m in re.finditer(r'<div class=CToolTip id="?([^">]+)"?>([\s\S]*?)</div>\s*</div>', m_html):
             tid = m.group(1).replace('"', '').strip()
@@ -1935,7 +1938,8 @@ def build_search_index(categories):
         try:
             with open(mf, 'r', encoding='latin-1') as f:
                 c_html = f.read()
-        except Exception:
+        except Exception as e:
+            print(f"Error reading {mf} for search index: {e}")
             continue
 
         matches = re.finditer(r'<span class=ISymbol>([^<]+)</span>\s*<div class=ISubIndex>([\s\S]*?)</div>', c_html)

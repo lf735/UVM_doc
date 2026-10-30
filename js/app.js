@@ -194,6 +194,16 @@ document.addEventListener('DOMContentLoaded', () => {
       // View Modes (Docs / Source / Split)
       // =========================================================================
 
+
+      // Debounce utility
+      function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+      }
+
       const viewBtns = document.querySelectorAll('.view-btn');
       viewBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -448,7 +458,8 @@ document.addEventListener('DOMContentLoaded', () => {
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
       }
 
       function getQueryMatcher(rawQuery, isRegex, isCaseSensitive, errorTargetEl) {
@@ -533,26 +544,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
       function highlightMatch(text, matcher) {
         if (!text) return '';
-        const safeText = escapeHtml(text);
-        if (!matcher) return safeText;
+        if (!matcher) return escapeHtml(text);
 
+        let pattern = null;
         if (matcher.type === 'regex') {
-          if (!matcher.valid || !matcher.regex) return safeText;
+          if (!matcher.valid || !matcher.regex) return escapeHtml(text);
           try {
             const gFlags = (matcher.regex.flags || '') + (matcher.regex.flags.includes('g') ? '' : 'g');
-            const re = new RegExp(matcher.regex.source, gFlags);
-            return safeText.replace(re, m => `<strong style="color:var(--primary); text-decoration:underline">${m}</strong>`);
+            pattern = new RegExp(matcher.regex.source, gFlags);
           } catch (e) {
-            return safeText;
+            return escapeHtml(text);
+          }
+        } else {
+          const words = matcher.words;
+          if (!words || words.length === 0) return escapeHtml(text);
+          const escaped = words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).filter(Boolean);
+          if (escaped.length === 0) return escapeHtml(text);
+          pattern = new RegExp(`(${escaped.join('|')})`, matcher.isCaseSensitive ? 'g' : 'gi');
+        }
+
+        const parts = [];
+        let lastIndex = 0;
+        let match;
+
+        while ((match = pattern.exec(text)) !== null) {
+          if (match.index > lastIndex) {
+            parts.push(escapeHtml(text.substring(lastIndex, match.index)));
+          }
+          parts.push(`<strong style="color:var(--primary); text-decoration:underline">${escapeHtml(match[0])}</strong>`);
+          lastIndex = pattern.lastIndex;
+
+          if (match[0].length === 0) {
+              pattern.lastIndex++;
           }
         }
 
-        const words = matcher.words;
-        if (!words || words.length === 0) return safeText;
-        const escaped = words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).filter(Boolean);
-        if (escaped.length === 0) return safeText;
-        const pattern = new RegExp(`(${escaped.join('|')})`, matcher.isCaseSensitive ? 'g' : 'gi');
-        return safeText.replace(pattern, '<strong style="color:var(--primary); text-decoration:underline">$1</strong>');
+        if (lastIndex < text.length) {
+          parts.push(escapeHtml(text.substring(lastIndex)));
+        }
+
+        return parts.join('');
       }
 
       function isItemTypeAllowed(itemType, filterSet) {
@@ -691,12 +722,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (sidebarFilter) {
-        sidebarFilter.addEventListener('input', (e) => {
+        sidebarFilter.addEventListener('input', debounce((e) => {
           if (sidebarFilterClear) {
             sidebarFilterClear.style.display = e.target.value.length > 0 ? 'inline-flex' : 'none';
           }
           renderSidebar();
-        });
+        }, 150));
 
         sidebarFilter.addEventListener('keydown', (e) => {
           if (e.key === 'r' && e.altKey) {
@@ -1057,16 +1088,22 @@ document.addEventListener('DOMContentLoaded', () => {
           document.body.style.userSelect = 'none';
         });
 
+        let rafPending = false;
         window.addEventListener('mousemove', (e) => {
           if (!isDragging || !viewport || !docPane || !srcPane) return;
-          const rect = viewport.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const totalWidth = rect.width;
-          const pct = Math.max(15, Math.min(85, (x / totalWidth) * 100));
-          docPane.style.flex = `0 0 ${pct}%`;
-          docPane.style.width = `${pct}%`;
-          srcPane.style.flex = `0 0 calc(${100 - pct}% - 6px)`;
-          srcPane.style.width = `calc(${100 - pct}% - 6px)`;
+          if (rafPending) return;
+          rafPending = true;
+          window.requestAnimationFrame(() => {
+            const rect = viewport.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const totalWidth = rect.width;
+            const pct = Math.max(15, Math.min(85, (x / totalWidth) * 100));
+            docPane.style.flex = `0 0 ${pct}%`;
+            docPane.style.width = `${pct}%`;
+            srcPane.style.flex = `0 0 calc(${100 - pct}% - 6px)`;
+            srcPane.style.width = `calc(${100 - pct}% - 6px)`;
+            rafPending = false;
+          });
         });
 
         window.addEventListener('mouseup', () => {
@@ -1215,12 +1252,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
+        searchInput.addEventListener('input', debounce((e) => {
           if (modalSearchClear) {
             modalSearchClear.style.display = e.target.value.length > 0 ? 'inline-flex' : 'none';
           }
           executeSearch(e.target.value);
-        });
+        }, 150));
 
         searchInput.addEventListener('keydown', (e) => {
           const items = searchResults.querySelectorAll('.search-result-item');
