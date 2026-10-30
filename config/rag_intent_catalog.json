@@ -1,0 +1,255 @@
+{
+  "version": "1.0",
+  "description": "Curated UVM 1.2 Domain Intent & Synonym Catalog for Hierarchical RAG Retrieval",
+  "entries": [
+    {
+      "patterns": ["uvm_config_db", "uvm_resource_db", "config_db"],
+      "intents": [
+        "pass virtual interface vif to driver monitor testbench components",
+        "hierarchical configuration database set and get mechanism",
+        "sharing configuration objects parameters across uvm hierarchy",
+        "retrieve virtual interface in build phase",
+        "contextual configuration scope and precedence lookup"
+      ],
+      "synonyms": ["vif", "virtual interface", "config_db", "resource_db", "set", "get", "build_phase", "scope", "hierarchical database"]
+    },
+    {
+      "patterns": ["uvm_objection", "objections"],
+      "intents": [
+        "end of simulation coordination and shutdown management",
+        "keep test alive until stimulus sequences finish executing",
+        "raise and drop objection in main sequence or test run_phase",
+        "set drain time set_drain_time before phase termination",
+        "prevent phase from ending prematurely while transactions are inflight"
+      ],
+      "synonyms": ["raise_objection", "drop_objection", "drain time", "end of test", "simulation termination", "phase control", "keep alive"]
+    },
+    {
+      "patterns": ["uvm_factory", "factory", "uvm_object_wrapper"],
+      "intents": [
+        "type and instance override for polymorphism and testbench customization",
+        "replace component or transaction with extended class without modifying original code",
+        "difference between create and new constructor in uvm",
+        "set_type_override_by_type and set_inst_override_by_name usage",
+        "register classes with `uvm_component_utils and `uvm_object_utils macros"
+      ],
+      "synonyms": ["type override", "instance override", "polymorphism", "create", "new", "factory override", "substitute class", "component_utils"]
+    },
+    {
+      "patterns": ["uvm_analysis_port", "uvm_analysis_export", "uvm_analysis_imp", "tlm_analysis"],
+      "intents": [
+        "broadcast transaction from monitor to scoreboard and coverage collectors",
+        "one-to-many non-blocking passive observation communication pattern",
+        "connect monitor analysis port to scoreboard write function implementation",
+        "tlm analysis broadcast pattern for passive monitoring"
+      ],
+      "synonyms": ["analysis port", "broadcast", "monitor to scoreboard", "subscriber", "write", "tlm broadcast", "subscriber write method"]
+    },
+    {
+      "patterns": ["uvm_driver", "uvm_sequencer", "seq_item_port", "seq_item_export"],
+      "intents": [
+        "pull sequence item from sequencer using get_next_item and item_done",
+        "drive pin level pin-wiggling transactions on virtual interface vif",
+        "bidirectional handshaking between driver and sequencer",
+        "req and rsp transaction handshaking and response sending"
+      ],
+      "synonyms": ["get_next_item", "item_done", "seq_item_port", "drive pins", "virtual interface", "vif", "handshake", "req rsp"]
+    },
+    {
+      "patterns": ["uvm_sequence", "uvm_sequence_item", "uvm_sequence_base"],
+      "intents": [
+        "generate stimulus transactions constraints and randomization",
+        "start sequence on target sequencer with seq.start(m_sequencer)",
+        "synchronize concurrent virtual sequences across multiple interfaces",
+        "nested sequences body task wait_for_grant send_request workflow"
+      ],
+      "synonyms": ["stimulus", "randomize", "body task", "start", "virtual sequence", "seq.start", "p_sequencer", "wait_for_grant"]
+    },
+    {
+      "patterns": ["uvm_scoreboard", "uvm_subscriber"],
+      "intents": [
+        "compare expected DUT response and actual received transactions",
+        "check datapath accuracy protocol compliance and end-to-end data integrity",
+        "collect functional coverage from monitor via write method",
+        "predict DUT behavior using golden reference model"
+      ],
+      "synonyms": ["scoreboard", "write method", "compare", "expected vs actual", "reference model", "coverage collector", "checker"]
+    },
+    {
+      "patterns": ["uvm_monitor"],
+      "intents": [
+        "passively capture pin activity and bus signals from virtual interface vif",
+        "convert signal toggles into high-level sequence item transactions",
+        "broadcast sampled packets through analysis port to scoreboard",
+        "bus protocol sampling without driving DUT signals"
+      ],
+      "synonyms": ["passive observation", "pin sampling", "virtual interface", "vif", "analysis port", "protocol monitor", "bus sampling"]
+    },
+    {
+      "patterns": ["uvm_agent"],
+      "intents": [
+        "encapsulate driver sequencer and monitor into reusable verification unit",
+        "active vs passive agent configuration using uvm_active_passive_enum",
+        "instantiate and connect sequencer and driver in connect phase",
+        "reusable protocol verification IP component container"
+      ],
+      "synonyms": ["active agent", "passive agent", "is_active", "UVC", "driver sequencer monitor container", "verification component"]
+    },
+    {
+      "patterns": ["uvm_env"],
+      "intents": [
+        "top level environment container for agents scoreboards and coverage",
+        "structural hierarchy assembly in build_phase and connect_phase",
+        "instantiate multi-agent subsystem verification environment"
+      ],
+      "synonyms": ["environment", "top level env", "agents scoreboards container", "build_phase", "connect_phase", "testbench environment"]
+    },
+    {
+      "patterns": ["uvm_test", "uvm_root", "run_test"],
+      "intents": [
+        "entry point for verification execution with +UVM_TESTNAME plusarg",
+        "run_test top level test selection from simulator command line",
+        "configure test environment and start main virtual sequences"
+      ],
+      "synonyms": ["run_test", "+UVM_TESTNAME", "command line plusarg", "test selection", "top level test", "simulation entry"]
+    },
+    {
+      "patterns": ["uvm_phase", "uvm_phasing", "common_phases", "runtime_phases"],
+      "intents": [
+        "execution lifecycle order build connect end_of_elaboration start_of_simulation run extract check report",
+        "top-down build phase vs bottom-up connect phase execution",
+        "synchronization of testbench components across simulation phases",
+        "domain and phase jumping or synchronization"
+      ],
+      "synonyms": ["build_phase", "connect_phase", "run_phase", "reset_phase", "main_phase", "phase order", "top-down", "bottom-up"]
+    },
+    {
+      "patterns": ["uvm_tlm_fifo", "tlm_fifo", "uvm_tlm_analysis_fifo"],
+      "intents": [
+        "buffering transactions between asynchronous or mismatched threads",
+        "put and get blocking and non-blocking FIFO queues",
+        "analysis fifo with unbounded or bounded storage for scoreboards"
+      ],
+      "synonyms": ["fifo", "queue", "buffering", "put", "get", "blocking", "analysis_fifo", "transaction buffer"]
+    },
+    {
+      "patterns": ["uvm_reg_block", "uvm_reg_field", "uvm_reg", "ral"],
+      "intents": [
+        "register abstraction layer RAL memory mapped registers model",
+        "frontdoor vs backdoor register access read and write mirror and predict",
+        "register bitfields addresses offsets reset values and access policies",
+        "adapter translation between uvm_reg_bus_op and bus sequence item"
+      ],
+      "synonyms": ["RAL", "register abstraction layer", "frontdoor", "backdoor", "read", "write", "mirror", "predict", "register block"]
+    },
+    {
+      "patterns": ["uvm_reg_adapter"],
+      "intents": [
+        "translate between abstract RAL read and write transactions and bus-specific sequence items",
+        "reg2bus and bus2reg conversion methods implementation",
+        "provide bus address data byte enables to driver from register model"
+      ],
+      "synonyms": ["adapter", "reg2bus", "bus2reg", "bus adapter", "RAL adapter", "bus transaction translation"]
+    },
+    {
+      "patterns": ["uvm_reg_predictor"],
+      "intents": [
+        "explicit register prediction from bus monitor analysis port",
+        "update mirrored register values without waiting for frontdoor write acknowledgment",
+        "track register state during bus transactions passively"
+      ],
+      "synonyms": ["predictor", "explicit prediction", "register mirror update", "monitor observe register", "mirrored value"]
+    },
+    {
+      "patterns": ["uvm_report_server", "uvm_report_handler", "uvm_report_object"],
+      "intents": [
+        "logging messaging and verbosity control UVM_NONE UVM_LOW UVM_MEDIUM UVM_HIGH UVM_FULL UVM_DEBUG",
+        "uvm_info uvm_warning uvm_error uvm_fatal reporting macros and formatting",
+        "filter or catch messages and demote errors with report catchers",
+        "quit count maximum fatal errors before simulation exit"
+      ],
+      "synonyms": ["uvm_info", "uvm_error", "uvm_fatal", "verbosity", "report catcher", "logging", "quit_count", "plusarg +UVM_VERBOSITY"]
+    },
+    {
+      "patterns": ["uvm_report_catcher"],
+      "intents": [
+        "intercept demote or promote error messages in testbench",
+        "ignore expected errors during negative testing",
+        "catch message action demote to info or warning"
+      ],
+      "synonyms": ["catch", "demote", "promote", "negative testing", "intercept error", "expected error"]
+    },
+    {
+      "patterns": ["uvm_recorder", "uvm_tr_stream"],
+      "intents": [
+        "record transactions to waveform or transaction database",
+        "visualize transactions in waveform viewers EPWave Verdi DVE",
+        "stream recording of sequence items with custom attributes"
+      ],
+      "synonyms": ["transaction recording", "waveforms", "stream", "record", "attributes", "tracing"]
+    },
+    {
+      "patterns": ["uvm_barrier"],
+      "intents": [
+        "synchronize multiple concurrent processes or sequences at a rendezvous point",
+        "wait for threshold number of processes before unlocking barrier",
+        "multithreaded coordination in verification environments"
+      ],
+      "synonyms": ["barrier", "rendezvous", "synchronization", "wait_for", "threshold", "concurrent coordination"]
+    },
+    {
+      "patterns": ["uvm_event", "uvm_event_pool"],
+      "intents": [
+        "thread synchronization and signaling across components without direct coupling",
+        "trigger event and wait_trigger with optional payload data",
+        "global and shared event pool lookup by string key"
+      ],
+      "synonyms": ["event", "event pool", "trigger", "wait_trigger", "cross-component signaling"]
+    },
+    {
+      "patterns": ["uvm_callback", "uvm_callbacks"],
+      "intents": [
+        "non-intrusive testbench behavior modification without modifying base classes",
+        "inject error corruption or custom delays into drivers and monitors",
+        "register and invoke callback hooks with `uvm_do_callbacks"
+      ],
+      "synonyms": ["callback", "error injection", "hook", "extend behavior", "uvm_do_callbacks", "unintrusive"]
+    },
+    {
+      "patterns": ["uvm_component"],
+      "intents": [
+        "quasi-static hierarchical testbench building block with parent child tree",
+        "phased execution lifecycle management",
+        "get_full_name hierarchy path lookup and build_phase creation"
+      ],
+      "synonyms": ["quasi-static", "parent child", "component hierarchy", "get_full_name", "testbench structure"]
+    },
+    {
+      "patterns": ["uvm_object"],
+      "intents": [
+        "dynamic transient data structures transactions packets and configuration",
+        "clone copy print compare pack unpack utility methods",
+        "automation macros with `uvm_field_* implementation"
+      ],
+      "synonyms": ["dynamic object", "transaction", "copy", "clone", "compare", "print", "pack", "field macros"]
+    },
+    {
+      "patterns": ["uvm_heartbeat"],
+      "intents": [
+        "monitor testbench activity to detect deadlocks or hung simulations",
+        "check component progress during simulation time steps"
+      ],
+      "synonyms": ["heartbeat", "deadlock detection", "hang detection", "watchdog", "activity monitor"]
+    },
+    {
+      "patterns": ["uvm_cmdline_processor"],
+      "intents": [
+        "parse command line plusargs simulator options at runtime",
+        "extract strings values or arguments from command line arguments",
+        "get_arg_values get_arg_matches and plusarg processing"
+      ],
+      "synonyms": ["plusargs", "command line", "simulator args", "+UVM_VERBOSITY", "runtime arguments"]
+    }
+  ]
+}
+

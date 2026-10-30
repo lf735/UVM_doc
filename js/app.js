@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsModelList = document.getElementById('settings-model-list');
   const settingsToggleHybrid = document.getElementById('settings-toggle-hybrid');
   const settingsToggleAutoSemantic = document.getElementById('settings-toggle-auto-semantic');
+  const settingsModeConsolidated = document.getElementById('settings-mode-consolidated');
+  const settingsModeMixed = document.getElementById('settings-mode-mixed');
   const settingsCacheStatus = document.getElementById('settings-cache-status');
   const settingsClearCache = document.getElementById('settings-clear-cache');
 
@@ -1335,6 +1337,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (settingsToggleAutoSemantic && window.UVMRagEngine) {
           settingsToggleAutoSemantic.checked = window.UVMRagEngine.isAutoSemantic;
         }
+        if (window.UVMRagEngine) {
+          const mode = window.UVMRagEngine.displayMode;
+          if (settingsModeConsolidated) settingsModeConsolidated.checked = (mode !== 'mixed');
+          if (settingsModeMixed) settingsModeMixed.checked = (mode === 'mixed');
+        }
         updateCacheStatusUI();
         searchSettingsModal.style.display = 'flex';
         if (searchSettingsDone) searchSettingsDone.focus();
@@ -1414,6 +1421,22 @@ document.addEventListener('DOMContentLoaded', () => {
       if (settingsToggleAutoSemantic) {
         settingsToggleAutoSemantic.addEventListener('change', (e) => {
           if (window.UVMRagEngine) window.UVMRagEngine.setAutoSemantic(e.target.checked);
+        });
+      }
+      if (settingsModeConsolidated) {
+        settingsModeConsolidated.addEventListener('change', (e) => {
+          if (e.target.checked && window.UVMRagEngine) {
+            window.UVMRagEngine.setDisplayMode('consolidated');
+            if (modalAiEnabled && searchInput) executeSearch(searchInput.value);
+          }
+        });
+      }
+      if (settingsModeMixed) {
+        settingsModeMixed.addEventListener('change', (e) => {
+          if (e.target.checked && window.UVMRagEngine) {
+            window.UVMRagEngine.setDisplayMode('mixed');
+            if (modalAiEnabled && searchInput) executeSearch(searchInput.value);
+          }
         });
       }
       if (settingsClearCache) {
@@ -1679,21 +1702,27 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modalAiLoading) modalAiLoading.style.display = 'none';
 
             // Filter results by active pills if any
-            const filtered = results.filter(r => isItemTypeAllowed(r.chunk.type, searchFilterTypes));
+            const filtered = results.filter(r => isItemTypeAllowed(r.targetType || r.type, searchFilterTypes) || isItemTypeAllowed(r.type, searchFilterTypes));
 
             filteredSearchResults = filtered.map(r => ({
               item: {
-                name: r.chunk.title,
-                type: r.chunk.type,
-                category: r.chunk.category,
-                doc: r.chunk.url,
-                src: (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc) ? UVM_DATA.docToSrc[r.chunk.url.split('#')[0]] : null,
+                name: r.title,
+                type: r.targetType || r.type,
+                category: r.category,
+                doc: r.targetUrl || r.chunk.url,
+                src: (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc) ? UVM_DATA.docToSrc[(r.targetUrl || r.chunk.url).split('#')[0]] : null,
                 desc: r.snippet
               },
               score: r.score,
               matchPct: r.matchPct,
               snippet: r.snippet,
-              chunk: r.chunk
+              chunk: r.chunk,
+              targetSectionTitle: r.targetSectionTitle,
+              targetType: r.targetType,
+              highlightedTitle: r.highlightedTitle,
+              title: r.title,
+              breadcrumb: r.breadcrumb,
+              type: r.type
             }));
 
             searchSelectedIndex = filteredSearchResults.length > 0 ? 0 : -1;
@@ -1705,28 +1734,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let html = '';
             filteredSearchResults.forEach((res, idx) => {
-              const c = res.chunk;
               const pct = res.matchPct;
               const badgeClass = pct >= 80 ? 'rag-match-high' : (pct >= 65 ? 'rag-match-med' : 'rag-match-low');
-              const typeBadgeClass = c.type === 'class' ? 'badge-class' :
-                (c.type === 'macro' ? 'badge-macro' :
-                  (c.type === 'function' ? 'badge-function' :
-                    (c.type === 'task' ? 'badge-task' :
-                      (c.type === 'method' ? 'badge-method' : 'badge-file'))));
+              const displayType = res.targetType || res.type;
+              const typeBadgeClass = displayType === 'class' ? 'badge-class' :
+                (displayType === 'macro' ? 'badge-macro' :
+                  (displayType === 'function' ? 'badge-function' :
+                    (displayType === 'task' ? 'badge-task' :
+                      (displayType === 'method' ? 'badge-method' : 'badge-file'))));
+
+              const sectionBadge = res.targetSectionTitle ?
+                `<span class="rag-section-badge" title="Section ciblée dans ce document">🎯 Section: ${escapeHtml(res.targetSectionTitle)}</span>` : '';
 
               html += `<li class="search-result-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}">
                 <div class="res-main">
-                  <div class="res-title-row" style="display:flex; align-items:center; gap:0.4rem;">
-                    <span style="color:var(--text-muted); font-size:0.775rem;">${escapeHtml(c.breadcrumb)}</span>
+                  <div class="res-title-row" style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+                    <span style="color:var(--text-muted); font-size:0.775rem;">${escapeHtml(res.breadcrumb)}</span>
+                    ${sectionBadge}
                   </div>
                   <div style="font-weight:600; font-size:0.925rem; color:var(--text-main); margin-top:0.15rem;">
-                    ${res.highlightedTitle || escapeHtml(c.title)}
+                    ${res.highlightedTitle || escapeHtml(res.title)}
                   </div>
                   <div class="rag-snippet">${res.snippet}</div>
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.35rem; flex-shrink:0;">
                   <span class="rag-match-badge ${badgeClass}">${pct}% match</span>
-                  <span class="res-badge ${typeBadgeClass}">${c.type}</span>
+                  <span class="res-badge ${typeBadgeClass}">${displayType}</span>
                 </div>
               </li>`;
             });

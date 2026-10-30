@@ -24,7 +24,8 @@
     CONSENT: 'uvm_rag_consent',
     SELECTED_MODEL: 'uvm_rag_selected_model',
     HYBRID_ENABLED: 'uvm_rag_hybrid_enabled',
-    AUTO_SEMANTIC: 'uvm_rag_auto_semantic'
+    AUTO_SEMANTIC: 'uvm_rag_auto_semantic',
+    DISPLAY_MODE: 'uvm_rag_display_mode'
   };
 
   // Default models catalog fallback if config/rag_models.json is not loaded
@@ -88,6 +89,7 @@
       this.currentModelId = localStorage.getItem(STORAGE_KEYS.SELECTED_MODEL) || 'all-minilm-l6-v2';
       this.isHybrid = localStorage.getItem(STORAGE_KEYS.HYBRID_ENABLED) !== 'false'; // default true
       this.isAutoSemantic = localStorage.getItem(STORAGE_KEYS.AUTO_SEMANTIC) === 'true'; // default false
+      this.displayMode = localStorage.getItem(STORAGE_KEYS.DISPLAY_MODE) || 'consolidated'; // 'consolidated' or 'mixed'
       this.idleTimer = null;
       this.IDLE_TIMEOUT_MS = 3 * 60 * 1000; // 3 minutes idle release
 
@@ -143,6 +145,11 @@
     setAutoSemantic(enabled) {
       this.isAutoSemantic = !!enabled;
       localStorage.setItem(STORAGE_KEYS.AUTO_SEMANTIC, this.isAutoSemantic ? 'true' : 'false');
+    }
+
+    setDisplayMode(mode) {
+      this.displayMode = (mode === 'mixed') ? 'mixed' : 'consolidated';
+      localStorage.setItem(STORAGE_KEYS.DISPLAY_MODE, this.displayMode);
     }
 
     resetIdleTimer() {
@@ -357,6 +364,7 @@
     async search(query, options = {}) {
       const topK = options.topK || 20;
       const onProgress = options.onProgress || null;
+      const displayMode = options.displayMode || this.displayMode;
 
       if (!query || !query.trim()) {
         return [];
@@ -399,29 +407,156 @@
           finalScore = (dot * 0.70) + (lexScore * 0.30);
         }
 
-        scored.push({ index: i, score: finalScore, vectorScore: dot });
+        scored.push({ index: i, score: finalScore, vectorScore: dot, chunk: this.chunks[i] });
       }
 
-      // 3. Sort by highest score
+      // Sort by highest score
       scored.sort((a, b) => b.score - a.score);
 
-      // 4. Enrich top results with smart snippets and badges
-      const results = [];
-      const topSelected = scored.slice(0, topK);
+      // 3. Presentation Strategy: Option A (Consolidated) or Option B (Mixed Deduplicated)
+      if (displayMode === 'mixed') {
+        return this.formatMixedResults(scored, query, topK);
+      } else {
+        return this.formatConsolidatedResults(scored, query, topK);
+      }
+    }
 
-      for (const item of topSelected) {
-        const chunk = this.chunks[item.index];
+    /**
+     * Option A: Hierarchical Parent-Child Consolidation
+     * Groups matches under authoritative Parent documents (Classes/Guides)
+     * Highlights the most relevant child method/section with a dedicated deep-link badge.
+     */
+    formatConsolidatedResults(scored, query, topK) {
+      const docsMap = new Map();
+
+      // Take top 150 items to ensure comprehensive document matching
+      const poolLimit = Math.min(scored.length, 150);
+      for (let i = 0; i < poolLimit; i++) {
+        const item = scored[i];
+        const chunk = item.chunk;
+        const docUrl = chunk.docUrl || chunk.url.split('#')[0];
+
+        if (!docsMap.has(docUrl)) {
+          docsMap.set(docUrl, {
+            docUrl,
+            parentChunk: chunk.level === 'parent' ? chunk : null,
+            parentScore: chunk.level === 'parent' ? item.score : null,
+            parentVectorScore: chunk.level === 'parent' ? item.vectorScore : null,
+            children: [],
+            bestChild: null,
+            bestChildScore: -Infinity,
+            topScore: item.score
+          });
+        }
+
+        const entry = docsMap.get(docUrl);
+        if (chunk.level === 'parent' && !entry.parentChunk) {
+          entry.parentChunk = chunk;
+          entry.parentScore = item.score;
+          entry.parentVectorScore = item.vectorScore;
+        } else if (chunk.level === 'child') {
+          entry.children.push(item);
+          if (item.score > entry.bestChildScore) {
+            entry.bestChildScore = item.score;
+            entry.bestChild = item;
+          }
+        }
+        if (item.score > entry.topScore) {
+          entry.topScore = item.score;
+        }
+      }
+
+      const results = [];
+      for (const [docUrl, entry] of docsMap.entries()) {
+        let pChunk = entry.parentChunk;
+        if (!pChunk) {
+          // Look up parent chunk from dataset
+          pChunk = this.chunks.find(c => c.docUrl === docUrl && c.level === 'parent');
+          if (!pChunk && entry.children.length > 0) {
+            pChunk = entry.children[0].chunk;
+          }
+        }
+        if (!pChunk) continue;
+
+        const pScore = entry.parentScore !== null ? entry.parentScore : (entry.topScore * 0.75);
+        const cScore = entry.bestChildScore !== -Infinity ? entry.bestChildScore : pScore;
+
+        // Composite document score: weighted combination
+        const combinedScore = (Math.max(pScore, cScore) * 0.70) + (Math.min(pScore, cScore) * 0.30);
+        const bestTargetItem = (entry.bestChild && entry.bestChild.score >= (pScore - 0.05)) ? entry.bestChild : { chunk: pChunk, score: pScore, vectorScore: pScore };
+
+        // Snippet chosen from the best matching text
+        const snippetText = bestTargetItem.chunk.text || pChunk.text;
+        const snippet = this.extractSmartSnippet(snippetText, query);
+        const matchPct = Math.round(Math.max(0, Math.min(1, (combinedScore + 0.2) / 1.1)) * 100);
+
+        const isChildTarget = bestTargetItem.chunk.id !== pChunk.id;
+        const targetSectionTitle = isChildTarget ? (bestTargetItem.chunk.rawTitle || bestTargetItem.chunk.title) : null;
+
+        results.push({
+          mode: 'consolidated',
+          score: combinedScore,
+          vectorScore: bestTargetItem.vectorScore,
+          matchPct,
+          chunk: pChunk,
+          targetChunk: bestTargetItem.chunk,
+          targetUrl: bestTargetItem.chunk.url,
+          targetSectionTitle,
+          targetType: bestTargetItem.chunk.type,
+          title: pChunk.title,
+          pageHeading: pChunk.pageHeading || pChunk.title,
+          category: pChunk.category,
+          breadcrumb: pChunk.breadcrumb,
+          snippet,
+          highlightedTitle: this.highlightSnippet(pChunk.title, query)
+        });
+      }
+
+      results.sort((a, b) => b.score - a.score);
+      return results.slice(0, topK);
+    }
+
+    /**
+     * Option B: Mixed Results with Strict Single-Page Deduplication
+     * Displays individual methods or guides, but enforces that each document
+     * appears at most once in the top results list.
+     */
+    formatMixedResults(scored, query, topK) {
+      const results = [];
+      const seenDocs = new Set();
+
+      for (const item of scored) {
+        const chunk = item.chunk;
+        const docUrl = chunk.docUrl || chunk.url.split('#')[0];
+
+        // Strict single-page deduplication
+        if (seenDocs.has(docUrl)) {
+          continue;
+        }
+        seenDocs.add(docUrl);
+
         const snippet = this.extractSmartSnippet(chunk.text, query);
         const matchPct = Math.round(Math.max(0, Math.min(1, (item.score + 0.2) / 1.1)) * 100);
 
         results.push({
-          chunk,
+          mode: 'mixed',
           score: item.score,
           vectorScore: item.vectorScore,
           matchPct,
+          chunk,
+          targetChunk: chunk,
+          targetUrl: chunk.url,
+          targetSectionTitle: null,
+          targetType: chunk.type,
+          title: chunk.title,
+          pageHeading: chunk.title,
+          category: chunk.category,
+          breadcrumb: chunk.breadcrumb,
           snippet,
           highlightedTitle: this.highlightSnippet(chunk.title, query)
         });
+
+        if (results.length >= topK) break;
       }
 
       return results;

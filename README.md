@@ -31,6 +31,7 @@ UVM_doc/
 │   └── workflows/
 │       └── deploy.yml        # GitHub Actions continuous deployment workflow
 ├── config/
+│   ├── rag_intent_catalog.json # Curated UVM verification intent & synonym catalog
 │   ├── rag_models.json       # Catalog of AI embedding models (ratings, sizes, paths)
 │   └── rag_prompts.json      # 15 starter natural language queries
 ├── css/
@@ -125,8 +126,10 @@ This repository is pre-configured with a GitHub Actions workflow (`.github/workf
 
 ## 📚 Product Specification & Engineering Guidelines
 
-For comprehensive reverse-engineered architecture, protocol catalogs, development rules, and post-mortem lessons learned:
+For comprehensive technical specifications, user guides, reverse-engineered architecture, protocol catalogs, development rules, and post-mortem lessons learned:
 
+- **[RAG Technical Specification & Architecture](RAG_SPECIFICATION.md)**: Comprehensive specification of the client-side 2-level hierarchical RAG, intent catalog embedding enrichment, vector cosine similarity pipeline, and hybrid ranking.
+- **[RAG User Guide (Recherche en Langage Naturel)](RAG_USER_GUIDE.md)**: End-user handbook on using the AI natural language search, query examples by verification domain, interpreting deep-link results, and settings customization.
 - **[Product Specification & Engineering Methodology](PRODUCT_SPEC_AND_METHODOLOGY.md)**: Reverse-engineered specification, `postMessage` protocol catalog, 5 golden development rules, and 3-level verification strategy.
 - **[Lessons Learned & Technical Traps Guide](LESSONS_LEARNED.md)**: Real-world post-mortem analysis of CSS pointer-events modal bugs, smooth scrolling race conditions, legacy HTML ID mapping, search engine regex error handling, and cross-frame event capture.
 
