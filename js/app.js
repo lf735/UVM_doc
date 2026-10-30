@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sidebar = document.getElementById('sidebar');
   const sidebarContent = document.getElementById('sidebar-content');
   const sidebarFilter = document.getElementById('sidebar-filter');
+  const sidebarToggleAll = document.getElementById('sidebar-toggle-all');
   const splitDivider = document.getElementById('split-divider');
 
   // Search Modal Elements
@@ -549,11 +550,58 @@ document.addEventListener('DOMContentLoaded', () => {
     attachSidebarListeners();
   }
 
+  // =========================================================================
+  // Left Sidebar Expand / Collapse All Controller
+  // =========================================================================
+
+  function updateSidebarToggleAllBtn() {
+    if (!sidebarToggleAll) return;
+    if (activeSidebarTab === 'index') {
+      sidebarToggleAll.style.display = 'none';
+      return;
+    }
+    const allGroups = sidebarContent.querySelectorAll('.nav-group');
+    if (allGroups.length === 0) {
+      sidebarToggleAll.style.display = 'none';
+      return;
+    }
+    sidebarToggleAll.style.display = 'inline-flex';
+    const allCollapsed = Array.from(allGroups).every(g => g.classList.contains('collapsed'));
+    const textSpan = sidebarToggleAll.querySelector('.sidebar-toggle-text');
+    const icon = sidebarToggleAll.querySelector('.sidebar-toggle-icon');
+    if (allCollapsed) {
+      if (textSpan) textSpan.textContent = 'Expand all';
+      if (icon) icon.innerHTML = '<polyline points="4 6 12 14 20 6"/>';
+      sidebarToggleAll.setAttribute('title', 'Expand all sections');
+    } else {
+      if (textSpan) textSpan.textContent = 'Collapse all';
+      if (icon) icon.innerHTML = '<polyline points="4 14 12 6 20 14"/>';
+      sidebarToggleAll.setAttribute('title', 'Collapse all sections');
+    }
+  }
+
+  if (sidebarToggleAll) {
+    sidebarToggleAll.addEventListener('click', () => {
+      const allGroups = sidebarContent.querySelectorAll('.nav-group');
+      if (allGroups.length === 0) return;
+      const anyExpanded = Array.from(allGroups).some(g => !g.classList.contains('collapsed'));
+      if (anyExpanded) {
+        // Collapse all
+        allGroups.forEach(g => g.classList.add('collapsed'));
+      } else {
+        // Expand all
+        allGroups.forEach(g => g.classList.remove('collapsed'));
+      }
+      updateSidebarToggleAllBtn();
+    });
+  }
+
   function attachSidebarListeners() {
     // Collapsible group headers
     sidebarContent.querySelectorAll('.nav-group-header').forEach(header => {
       header.addEventListener('click', () => {
         header.closest('.nav-group').classList.toggle('collapsed');
+        updateSidebarToggleAllBtn();
       });
     });
 
@@ -580,7 +628,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Ensure parent groups of active doc item are expanded so it is visible
-    const activeItem = sidebarContent.querySelector('.nav-item-link.active');
+    const activeItem = sidebarContent.querySelector('.nav-item-link.active, .file-tree-item.active');
     if (activeItem) {
       let p = activeItem.closest('.nav-group');
       while (p) {
@@ -588,6 +636,8 @@ document.addEventListener('DOMContentLoaded', () => {
         p = p.parentElement ? p.parentElement.closest('.nav-group') : null;
       }
     }
+
+    updateSidebarToggleAllBtn();
   }
 
   function highlightActiveSidebar(url) {
@@ -605,6 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
+    updateSidebarToggleAllBtn();
   }
 
   // =========================================================================
