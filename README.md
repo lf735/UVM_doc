@@ -30,13 +30,18 @@ UVM_doc/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml        # GitHub Actions continuous deployment workflow
+├── config/
+│   ├── rag_models.json       # Catalog of AI embedding models (ratings, sizes, paths)
+│   └── rag_prompts.json      # 15 starter natural language queries
 ├── css/
 │   └── style.css             # Unified stylesheet (theme variables, syntax colors, layout)
 ├── js/
 │   ├── app.js                # Core SPA application (router, search, theme, split view)
+│   ├── rag_engine.js         # Client-side RAG & vector similarity search engine
 │   └── search_data.js        # Generated index (untracked, built at deployment & locally)
 ├── scripts/
-│   └── build_docs.py         # Python build script generating docs_view and src_view
+│   ├── build_docs.py         # Python build script generating docs_view and src_view
+│   └── build_rag_embeddings.py # Generates intelligent chunks & dense vector embeddings
 ├── docs_view/                # Modernized, responsive UVM 1.2 reference HTML pages
 ├── src_view/                 # Syntax-highlighted HTML views of all 155 source files
 ├── uvm-1.2/                  # Official Accellera UVM 1.2 distribution
@@ -73,16 +78,31 @@ python scripts/build_docs.py
 
 # Fast search-only build (< 1s): regenerates js/search_data.js from existing views
 python scripts/build_docs.py --search-only
+
+# Generate RAG intelligent chunks and vector embeddings (data/rag_embeddings.bin)
+python scripts/build_rag_embeddings.py
 ```
 
-The build script will:
+The build scripts will:
 1. Parse all 155 source files in `uvm-1.2/src/`.
 2. Generate syntax-highlighted HTML files in `src_view/` with clickable line anchors.
 3. Map every class, method, and macro to its definition line number.
 4. Modernize all 146 documentation files in `docs_view/` and inject **"View Source"** deep links.
 5. Generate `js/search_data.js` containing category trees, source directory trees, and search indices.
+6. Generate `data/rag_chunks.json` and `data/rag_embeddings.bin` for client-side semantic vector search.
 
-> **Note on version control:** `js/search_data.js` (~1.5 MB) is excluded from Git tracking (`.gitignore`) to avoid repository bloat and diff churn. The GitHub Actions deployment workflow automatically builds this file upon deployment.
+> **Note on version control:** `js/search_data.js` (~1.5 MB) and `data/` (~5.8 MB) are excluded from Git tracking (`.gitignore`) to avoid repository bloat and diff churn. The GitHub Actions deployment workflow automatically builds these files upon deployment.
+
+---
+
+## ✨ Natural Language Semantic Search (Client-Side RAG)
+
+In addition to instant symbol and regex search, the portal includes an in-browser semantic retrieval engine:
+- **Toggle mode**: Press `Alt+N` or click the `✨` button in the search modal (`Ctrl+K` or `/`).
+- **Privacy & zero-server**: Query embeddings are computed locally in your browser using Transformers.js (`all-MiniLM-L6-v2` or configurable models in `config/rag_models.json`). No queries or data are sent to any external server.
+- **Smart Snippets**: Automatically extracts the most relevant 1-2 sentences with key concept highlights.
+- **Configurable Models & Prompts**: Add or modify models in `config/rag_models.json` and question suggestions in `config/rag_prompts.json`.
+- **Memory & Cache Hygiene**: The AI model is cached permanently on disk (CacheStorage) but automatically unloaded from browser RAM after 3 minutes of inactivity or when the modal closes.
 
 ---
 

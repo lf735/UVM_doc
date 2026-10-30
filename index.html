@@ -223,6 +223,17 @@
         <button type="button" id="modal-search-regex" class="search-option-btn" title="Use Regular Expression (Alt+R)" aria-label="Use Regular Expression">
           <span>.*</span>
         </button>
+        <button type="button" id="modal-search-ai" class="search-option-btn search-ai-btn" title="Recherche en langage naturel / IA (Alt+N)" aria-label="Recherche en langage naturel / IA" aria-pressed="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          </svg>
+        </button>
+        <button type="button" id="modal-search-settings" class="search-option-btn" title="Paramètres de recherche et IA" aria-label="Paramètres de recherche et IA">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
         <kbd class="search-kbd">ESC</kbd>
       </div>
 
@@ -233,6 +244,30 @@
         <button class="filter-pill" data-type="task">Tasks</button>
         <button class="filter-pill" data-type="macro">Macros</button>
         <button class="filter-pill" data-type="file">Source Files</button>
+      </div>
+
+      <!-- AI Progress Indicator -->
+      <div id="modal-ai-loading" class="modal-ai-loading" style="display:none;" role="status" aria-live="polite">
+        <div class="ai-loading-header">
+          <span class="ai-loading-text" id="ai-loading-text">Chargement du modèle d'IA...</span>
+          <span class="ai-loading-pct" id="ai-loading-pct">0%</span>
+        </div>
+        <div class="ai-loading-bar-track">
+          <div class="ai-loading-bar-fill" id="ai-loading-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- AI Starter Prompts -->
+      <div id="modal-search-prompts" class="modal-search-prompts" style="display:none;">
+        <div class="prompts-header">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Suggestions de questions en langage naturel :</span>
+        </div>
+        <div class="prompts-chips" id="prompts-chips">
+          <!-- Rendered dynamically from config/rag_prompts.json -->
+        </div>
       </div>
 
       <ul class="modal-search-results" id="modal-search-results">
@@ -311,8 +346,112 @@
     </div>
   </div>
 
+  <!-- AI Onboarding & Consent Modal -->
+  <div class="modal-backdrop-generic" id="ai-consent-modal" role="dialog" aria-modal="true" aria-labelledby="ai-consent-title" style="display: none;">
+    <div class="modal-card-generic ai-consent-card">
+      <div class="modal-header-generic">
+        <div class="modal-title-with-icon">
+          <span class="ai-sparkle-badge">✨</span>
+          <h2 id="ai-consent-title" class="modal-title-h2">Activer la recherche en langage naturel</h2>
+        </div>
+        <button type="button" class="modal-close-generic" id="ai-consent-close" aria-label="Fermer (Échap)">&times;</button>
+      </div>
+      <div class="modal-body-generic">
+        <p class="ai-consent-desc">
+          La recherche en langage naturel comprend le sens de vos questions techniques grâce à un modèle d'embedding IA exécuté <strong>directement et localement dans votre navigateur</strong>.
+        </p>
+
+        <div class="ai-consent-highlights">
+          <div class="ai-hl-item">
+            <span class="ai-hl-icon">🔒</span>
+            <div><strong>100% Privé</strong><br><small>Vos requêtes ne quittent jamais votre machine.</small></div>
+          </div>
+          <div class="ai-hl-item">
+            <span class="ai-hl-icon">⚡</span>
+            <div><strong>Exécution Rapide</strong><br><small>Similarité cosinus calculée en &lt; 3 ms.</small></div>
+          </div>
+          <div class="ai-hl-item">
+            <span class="ai-hl-icon">💾</span>
+            <div><strong>Mémoire Maîtrisée</strong><br><small>RAM libérée automatiquement à la fermeture.</small></div>
+          </div>
+        </div>
+
+        <div class="ai-model-selection-section">
+          <label class="ai-section-label" id="ai-consent-model-label">Choisissez votre modèle d'IA :</label>
+          <div class="ai-model-list" id="ai-consent-model-list" role="radiogroup" aria-labelledby="ai-consent-model-label">
+            <!-- Dynamically populated from config/rag_models.json with star ratings -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer-generic">
+        <button type="button" class="btn btn-secondary" id="ai-consent-cancel">Annuler</button>
+        <button type="button" class="btn btn-primary" id="ai-consent-confirm">
+          <span>Activer la recherche IA</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search & AI Settings Modal -->
+  <div class="modal-backdrop-generic" id="search-settings-modal" role="dialog" aria-modal="true" aria-labelledby="search-settings-title" style="display: none;">
+    <div class="modal-card-generic settings-card">
+      <div class="modal-header-generic">
+        <div class="modal-title-with-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <h2 id="search-settings-title" class="modal-title-h2">Paramètres de recherche &amp; IA</h2>
+        </div>
+        <button type="button" class="modal-close-generic" id="search-settings-close" aria-label="Fermer (Échap)">&times;</button>
+      </div>
+      <div class="modal-body-generic">
+        <!-- Model Selection -->
+        <div class="settings-group">
+          <label class="settings-group-title" id="settings-model-label">Modèle d'embedding actif</label>
+          <div class="ai-model-list" id="settings-model-list" role="radiogroup" aria-labelledby="settings-model-label">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Toggles -->
+        <div class="settings-group">
+          <label class="settings-group-title">Options de recherche</label>
+          <label class="settings-toggle-row">
+            <div>
+              <strong>Recherche Hybride</strong>
+              <small>Combine la similarité sémantique et la correspondance exacte des mots-clés.</small>
+            </div>
+            <input type="checkbox" id="settings-toggle-hybrid" class="toggle-checkbox" checked>
+          </label>
+          <label class="settings-toggle-row">
+            <div>
+              <strong>Détection automatique sémantique</strong>
+              <small>Active automatiquement le mode sémantique pour les phrases de plus de 3 mots.</small>
+            </div>
+            <input type="checkbox" id="settings-toggle-auto-semantic" class="toggle-checkbox">
+          </label>
+        </div>
+
+        <!-- Cache Management -->
+        <div class="settings-group">
+          <label class="settings-group-title">Stockage &amp; Mémoire</label>
+          <div class="settings-cache-row">
+            <span id="settings-cache-status">Calcul de l'espace disque...</span>
+            <button type="button" class="btn btn-sm btn-outline-danger" id="settings-clear-cache">Vider le cache IA</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer-generic">
+        <button type="button" class="btn btn-primary" id="search-settings-done">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Search & App Scripts -->
   <script src="js/search_data.js"></script>
+  <script src="js/rag_engine.js"></script>
   <script src="js/app.js"></script>
 </body>
 

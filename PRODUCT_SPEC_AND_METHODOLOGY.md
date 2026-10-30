@@ -141,6 +141,12 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
   2. Les templates de code (attention aux f-strings contenant du JavaScript : doubler toutes les accolades `{{` et `}}`).
   3. L'écriture des fichiers finaux en encodage `UTF-8` strict avec gestion propre des fichiers sources hérités en `latin-1`.
 
+### Règle 6 : Architecture RAG Client-Side et Respect de la Confidentialité
+- **Principe** : La recherche en langage naturel ne doit jamais reposer sur une API externe payante ou distante qui collecterait les questions techniques de l'utilisateur.
+- **Exécution locale** : L'embedding de la requête est généré directement sur le matériel de l'utilisateur (WASM/WebGPU via Transformers.js).
+- **Précalcul CI/CD** : La base vectorielle de la documentation est calculée une fois pour toutes lors du déploiement GitHub Pages via `scripts/build_rag_embeddings.py` et stockée au format binaire compact `data/rag_embeddings.bin`.
+- **Hygiène Mémoire** : Aucun modèle n'est téléchargé au chargement initial du site (0 Ko supplémentaire). L'instance en mémoire vive (RAM) est libérée dès la fermeture de la recherche.
+
 ---
 
 ## 4. Méthodologie de Vérification & Recette Automatisée

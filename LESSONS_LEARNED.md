@@ -224,3 +224,29 @@ Le fichier de données de recherche [`js/search_data.js`](file:///c:/Dev/UVM_doc
 4. **Mode Rapide `--search-only`** : Pour le développement local, une option `--search-only` permet de regénérer uniquement `search_data.js` en moins d'une seconde en lisant les en-têtes directement depuis `docs_view` sans devoir réécrire l'ensemble des 300+ pages HTML.
 5. **Résilience Frontend** : Si un développeur ouvre `index.html` en local sans avoir généré l'index, la barre latérale affiche un message d'aide explicite indiquant la commande à lancer.
 
+---
+
+## 9. Architecture RAG Client-Side (Embeddings Vectoriels & Transformers.js)
+
+### 9.1 Découpage Sémantique Enrichi (*Contextual Retrieval*)
+- Pour un corpus technique structuré (comme la documentation de l'IEEE 1800 UVM), un découpage naïf en blocs de caractères détruit le sens (signatures tronquées, méthodes isolées de leur classe).
+- **Règle** : Chaque segment doit être injecté d'un en-tête contextuel :
+  `[UVM 1.2 Method] [{class_name}::{method_name}] Class: {class_name}. Category: {category}.`
+  Cela permet aux modèles d'embedding de comprendre immédiatement le contexte parent sans devoir augmenter artificiellement la taille du chunk.
+
+### 9.2 Calcul Vectoriel Instantané en TypedArrays
+- Pour 2 500 segments et un vecteur de dimension 384 :
+  - Stocker les données sous forme de fichier binaire brut `Float32Array` contigu (`rag_embeddings.bin`) ne pèse que 3,8 Mo (contre > 15 Mo en JSON textuel).
+  - Le chargement en mémoire se fait via `new Float32Array(arrayBuffer)` en 0 ms.
+  - Le produit scalaire (similarité cosinus) sur 2 500 vecteurs en JavaScript s'exécute en **moins de 3 millisecondes** grâce aux optimisations SIMD des moteurs V8 modernes.
+
+### 9.3 Gestion du Cycle de Vie Mémoire (RAM vs Disque)
+- Les modèles WASM/ONNX peuvent rapidement consommer 60 à 150 Mo de RAM dans le processus du navigateur.
+- **Règle** : Dissocier strictement le stockage persistant sur disque (géré par la `Cache API`) de l'instance en mémoire vive (RAM).
+  - La RAM du modèle est libérée dès la fermeture de la modale de recherche ou après 3 minutes d'inactivité via `session.release()`.
+  - Au rechargement, le modèle se réinstancie depuis le cache disque local sans aucun appel réseau.
+
+### 9.4 Extraits Intelligents (*Smart Snippets*) sans Surcharge
+- Plutôt que d'exécuter un modèle NLP lourd pour générer des résumés, le système découpe le segment en phrases via regex et calcule la densité de pertinence textuelle uniquement sur le **Top 10** des résultats au moment de l'affichage (< 2 ms).
+
+

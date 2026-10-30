@@ -29,13 +29,21 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install RAG embedding dependencies
+        run: pip install fastembed
+
       - name: Generate search data and views
         run: python scripts/build_docs.py
 
-      - name: Verify search data was generated
+      - name: Generate RAG embeddings database
+        run: python scripts/build_rag_embeddings.py
+
+      - name: Verify generated search and RAG assets
         run: |
           test -f js/search_data.js || { echo "::error::js/search_data.js not found!" ; exit 1; }
-          ls -lh js/search_data.js
+          test -f data/rag_chunks.json || { echo "::error::data/rag_chunks.json not found!" ; exit 1; }
+          test -f data/rag_embeddings.bin || { echo "::error::data/rag_embeddings.bin not found!" ; exit 1; }
+          ls -lh js/search_data.js data/rag_chunks.json data/rag_embeddings.bin
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

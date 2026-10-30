@@ -33,7 +33,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalSearchClear = document.getElementById('modal-search-clear');
   const modalSearchCase = document.getElementById('modal-search-case');
   const modalSearchRegex = document.getElementById('modal-search-regex');
+  const modalSearchAi = document.getElementById('modal-search-ai');
+  const modalSearchSettings = document.getElementById('modal-search-settings');
   const modalSearchHeader = document.querySelector('.modal-search-header');
+
+  const modalAiLoading = document.getElementById('modal-ai-loading');
+  const aiLoadingText = document.getElementById('ai-loading-text');
+  const aiLoadingPct = document.getElementById('ai-loading-pct');
+  const aiLoadingBarFill = document.getElementById('ai-loading-bar-fill');
+  const modalSearchPrompts = document.getElementById('modal-search-prompts');
+  const promptsChips = document.getElementById('prompts-chips');
+
+  const aiConsentModal = document.getElementById('ai-consent-modal');
+  const aiConsentClose = document.getElementById('ai-consent-close');
+  const aiConsentCancel = document.getElementById('ai-consent-cancel');
+  const aiConsentConfirm = document.getElementById('ai-consent-confirm');
+  const aiConsentModelList = document.getElementById('ai-consent-model-list');
+
+  const searchSettingsModal = document.getElementById('search-settings-modal');
+  const searchSettingsClose = document.getElementById('search-settings-close');
+  const searchSettingsDone = document.getElementById('search-settings-done');
+  const settingsModelList = document.getElementById('settings-model-list');
+  const settingsToggleHybrid = document.getElementById('settings-toggle-hybrid');
+  const settingsToggleAutoSemantic = document.getElementById('settings-toggle-auto-semantic');
+  const settingsCacheStatus = document.getElementById('settings-cache-status');
+  const settingsClearCache = document.getElementById('settings-clear-cache');
 
   // Image Zoom Modal Elements
   const imageZoomModal = document.getElementById('image-zoom-modal');
@@ -1158,6 +1182,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalSearchClear) modalSearchClear.style.display = 'none';
         if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
         if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
+        if (modalAiEnabled) {
+          renderPromptChips();
+          if (modalSearchPrompts) modalSearchPrompts.style.display = 'block';
+        } else {
+          if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+        }
         searchInput.focus();
         searchSelectedIndex = -1;
         executeSearch('');
@@ -1166,6 +1196,235 @@ document.addEventListener('DOMContentLoaded', () => {
       function closeSearchModal() {
         if (!searchModal) return;
         searchModal.classList.remove('open');
+        if (modalAiLoading) modalAiLoading.style.display = 'none';
+        if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+        if (window.UVMRagEngine) {
+          window.UVMRagEngine.unloadPipeline();
+        }
+      }
+
+      // RAG State & Helpers
+      let modalAiEnabled = false;
+      let activeAiSearchId = 0;
+
+      function renderStarRating(rating) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+          stars += i <= rating ? '★' : '☆';
+        }
+        return stars;
+      }
+
+      function renderPromptChips() {
+        if (!promptsChips || !window.UVMRagEngine) return;
+        const prompts = window.UVMRagEngine.prompts || [];
+        if (!prompts.length) {
+          fetch('config/rag_prompts.json').then(r => r.ok ? r.json() : []).then(data => {
+            if (window.UVMRagEngine) window.UVMRagEngine.prompts = data;
+            renderPromptChips();
+          }).catch(() => {});
+          return;
+        }
+
+        let html = '';
+        prompts.slice(0, 15).forEach(p => {
+          html += `<button type="button" class="prompt-chip" data-query="${escapeHtml(p.query)}" title="${escapeHtml(p.category)} : cliquer pour poser la question">
+            <span>${escapeHtml(p.query)}</span>
+          </button>`;
+        });
+        promptsChips.innerHTML = html;
+        promptsChips.querySelectorAll('.prompt-chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            const query = chip.getAttribute('data-query');
+            if (searchInput) {
+              searchInput.value = query;
+              if (modalSearchClear) modalSearchClear.style.display = 'inline-flex';
+              if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+              searchInput.focus();
+              executeSearch(query);
+            }
+          });
+        });
+      }
+
+      function renderAiModelList(container, isConsent) {
+        if (!container || !window.UVMRagEngine) return;
+        const models = window.UVMRagEngine.models || [];
+        const currentId = window.UVMRagEngine.currentModelId;
+        let html = '';
+
+        models.forEach(m => {
+          const isSelected = m.id === currentId;
+          const recBadge = m.recommended ? `<span class="ai-badge-rec">Recommandé</span>` : '';
+          const radioName = isConsent ? 'consent-model-radio' : 'settings-model-radio';
+          html += `
+            <label class="ai-model-card ${isSelected ? 'selected' : ''}" data-model-id="${m.id}" tabindex="0" role="radio" aria-checked="${isSelected}">
+              <input type="radio" name="${radioName}" value="${m.id}" class="ai-model-radio" ${isSelected ? 'checked' : ''}>
+              <div class="ai-model-info">
+                <div class="ai-model-header">
+                  <span class="ai-model-name">${escapeHtml(m.name)}</span>
+                  ${recBadge}
+                </div>
+                <div class="ai-model-desc">${escapeHtml(m.description)}</div>
+                <div class="ai-model-metrics">
+                  <span class="ai-metric-item"><strong>Vitesse:</strong> <span class="ai-stars">${renderStarRating(m.speedRating)}</span></span>
+                  <span class="ai-metric-item"><strong>Précision:</strong> <span class="ai-stars">${renderStarRating(m.accuracyRating)}</span></span>
+                  <span class="ai-metric-item"><strong>Poids:</strong> ${escapeHtml(m.downloadSize)} (${escapeHtml(m.ramUsage)})</span>
+                </div>
+              </div>
+            </label>
+          `;
+        });
+
+        container.innerHTML = html;
+
+        container.querySelectorAll('.ai-model-card').forEach(card => {
+          const selectCard = () => {
+            container.querySelectorAll('.ai-model-card').forEach(c => {
+              c.classList.remove('selected');
+              c.setAttribute('aria-checked', 'false');
+            });
+            card.classList.add('selected');
+            card.setAttribute('aria-checked', 'true');
+            const radio = card.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
+            const modelId = card.getAttribute('data-model-id');
+            window.UVMRagEngine.setModel(modelId);
+          };
+
+          card.addEventListener('click', selectCard);
+          card.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+              e.preventDefault();
+              selectCard();
+            }
+          });
+        });
+      }
+
+      function updateCacheStatusUI() {
+        if (!settingsCacheStatus || !window.UVMRagEngine) return;
+        window.UVMRagEngine.getCacheInfo().then(({ count, sizeMB }) => {
+          if (settingsCacheStatus) {
+            settingsCacheStatus.textContent = sizeMB > 0 ? `Stockage utilisé : ~${sizeMB} Mo (${count} fichiers en cache)` : 'Aucun modèle en cache';
+          }
+        }).catch(() => {
+          if (settingsCacheStatus) settingsCacheStatus.textContent = 'Information de cache non disponible';
+        });
+      }
+
+      function openAiConsentModal() {
+        if (!aiConsentModal) return;
+        renderAiModelList(aiConsentModelList, true);
+        aiConsentModal.style.display = 'flex';
+        if (aiConsentConfirm) aiConsentConfirm.focus();
+      }
+
+      function closeAiConsentModal() {
+        if (!aiConsentModal) return;
+        aiConsentModal.style.display = 'none';
+        if (searchInput) searchInput.focus();
+      }
+
+      function openSearchSettingsModal() {
+        if (!searchSettingsModal) return;
+        renderAiModelList(settingsModelList, false);
+        if (settingsToggleHybrid && window.UVMRagEngine) {
+          settingsToggleHybrid.checked = window.UVMRagEngine.isHybrid;
+        }
+        if (settingsToggleAutoSemantic && window.UVMRagEngine) {
+          settingsToggleAutoSemantic.checked = window.UVMRagEngine.isAutoSemantic;
+        }
+        updateCacheStatusUI();
+        searchSettingsModal.style.display = 'flex';
+        if (searchSettingsDone) searchSettingsDone.focus();
+      }
+
+      function closeSearchSettingsModal() {
+        if (!searchSettingsModal) return;
+        searchSettingsModal.style.display = 'none';
+        if (searchInput) searchInput.focus();
+      }
+
+      function toggleAiSearchMode(forceState) {
+        if (forceState !== undefined) {
+          modalAiEnabled = forceState;
+        } else {
+          modalAiEnabled = !modalAiEnabled;
+        }
+
+        if (modalSearchAi) {
+          modalSearchAi.classList.toggle('active', modalAiEnabled);
+          modalSearchAi.setAttribute('aria-pressed', modalAiEnabled ? 'true' : 'false');
+        }
+
+        if (searchInput) {
+          if (modalAiEnabled) {
+            searchInput.placeholder = "Posez votre question en langage naturel (ex: 'how to pass vifs with config db')...";
+          } else {
+            searchInput.placeholder = "Search classes, functions, tasks, macros, files...";
+          }
+        }
+
+        const query = searchInput ? searchInput.value.trim() : '';
+        if (modalAiEnabled && !query) {
+          renderPromptChips();
+          if (modalSearchPrompts) modalSearchPrompts.style.display = 'block';
+        } else {
+          if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+        }
+
+        executeSearch(searchInput ? searchInput.value : '');
+      }
+
+      if (modalSearchAi) {
+        modalSearchAi.addEventListener('click', () => {
+          if (!modalAiEnabled && window.UVMRagEngine && !window.UVMRagEngine.hasConsent()) {
+            openAiConsentModal();
+          } else {
+            toggleAiSearchMode();
+          }
+        });
+      }
+
+      if (modalSearchSettings) {
+        modalSearchSettings.addEventListener('click', openSearchSettingsModal);
+      }
+
+      if (aiConsentClose) aiConsentClose.addEventListener('click', closeAiConsentModal);
+      if (aiConsentCancel) aiConsentCancel.addEventListener('click', closeAiConsentModal);
+      if (aiConsentConfirm) {
+        aiConsentConfirm.addEventListener('click', () => {
+          if (window.UVMRagEngine) {
+            window.UVMRagEngine.grantConsent();
+          }
+          closeAiConsentModal();
+          toggleAiSearchMode(true);
+        });
+      }
+
+      if (searchSettingsClose) searchSettingsClose.addEventListener('click', closeSearchSettingsModal);
+      if (searchSettingsDone) searchSettingsDone.addEventListener('click', closeSearchSettingsModal);
+      if (settingsToggleHybrid) {
+        settingsToggleHybrid.addEventListener('change', (e) => {
+          if (window.UVMRagEngine) window.UVMRagEngine.setHybrid(e.target.checked);
+          executeSearch(searchInput ? searchInput.value : '');
+        });
+      }
+      if (settingsToggleAutoSemantic) {
+        settingsToggleAutoSemantic.addEventListener('change', (e) => {
+          if (window.UVMRagEngine) window.UVMRagEngine.setAutoSemantic(e.target.checked);
+        });
+      }
+      if (settingsClearCache) {
+        settingsClearCache.addEventListener('click', async () => {
+          if (confirm('Voulez-vous vraiment effacer les modèles d\'IA mis en cache localement ?')) {
+            if (window.UVMRagEngine) {
+              await window.UVMRagEngine.clearCache();
+              updateCacheStatusUI();
+            }
+          }
+        });
       }
 
       if (searchTrigger) {
@@ -1173,6 +1432,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       window.addEventListener('keydown', (e) => {
+        // Handle shortcuts when AI Consent Modal is open
+        if (aiConsentModal && aiConsentModal.style.display !== 'none') {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            closeAiConsentModal();
+            return;
+          }
+        }
+
+        // Handle shortcuts when Search Settings Modal is open
+        if (searchSettingsModal && searchSettingsModal.style.display !== 'none') {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            closeSearchSettingsModal();
+            return;
+          }
+        }
+
         // Handle shortcuts when Image Zoom Modal is open
         if (imageZoomModal && imageZoomModal.classList.contains('open')) {
           if (e.key === 'Escape') {
@@ -1224,6 +1501,22 @@ document.addEventListener('DOMContentLoaded', () => {
         searchModal.addEventListener('click', (e) => {
           if (e.target === searchModal) {
             closeSearchModal();
+          }
+        });
+      }
+
+      if (aiConsentModal) {
+        aiConsentModal.addEventListener('click', (e) => {
+          if (e.target === aiConsentModal) {
+            closeAiConsentModal();
+          }
+        });
+      }
+
+      if (searchSettingsModal) {
+        searchSettingsModal.addEventListener('click', (e) => {
+          if (e.target === searchSettingsModal) {
+            closeSearchSettingsModal();
           }
         });
       }
@@ -1302,6 +1595,13 @@ document.addEventListener('DOMContentLoaded', () => {
             modalCaseSensitive = !modalCaseSensitive;
             if (modalSearchCase) modalSearchCase.classList.toggle('active', modalCaseSensitive);
             executeSearch(searchInput.value);
+          } else if (e.key === 'n' && e.altKey) {
+            e.preventDefault();
+            if (!modalAiEnabled && window.UVMRagEngine && !window.UVMRagEngine.hasConsent()) {
+              openAiConsentModal();
+            } else {
+              toggleAiSearchMode();
+            }
           } else if (e.key === 'Escape') {
             if (searchInput.value.length > 0) {
               e.preventDefault();
@@ -1325,8 +1625,137 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      function executeSearch(query) {
+      async function executeSearch(query) {
         if (!searchResults) return;
+
+        // Auto-detect natural language if setting is enabled and not yet in AI mode
+        if (!modalAiEnabled && window.UVMRagEngine && window.UVMRagEngine.isAutoSemantic && window.UVMRagEngine.hasConsent()) {
+          const words = (query || '').trim().split(/\s+/);
+          if (words.length >= 3 && /^(how|what|why|where|can|is|when|comment|pourquoi|quelle?|est)/i.test(words[0])) {
+            toggleAiSearchMode(true);
+            return;
+          }
+        }
+
+        // ==========================================
+        // Mode 1: AI / Natural Language Semantic Search
+        // ==========================================
+        if (modalAiEnabled) {
+          const trimmed = (query || '').trim();
+          if (!trimmed) {
+            renderPromptChips();
+            if (modalSearchPrompts) modalSearchPrompts.style.display = 'block';
+            searchResults.innerHTML = '';
+            filteredSearchResults = [];
+            searchSelectedIndex = -1;
+            return;
+          }
+
+          if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+
+          const searchId = ++activeAiSearchId;
+
+          // Show progress / loading state
+          if (modalAiLoading) {
+            modalAiLoading.style.display = 'flex';
+            if (aiLoadingText) aiLoadingText.textContent = "Calcul de similarité sémantique...";
+            if (aiLoadingPct) aiLoadingPct.textContent = "";
+            if (aiLoadingBarFill) aiLoadingBarFill.style.width = "30%";
+          }
+
+          try {
+            const results = await window.UVMRagEngine.search(trimmed, {
+              topK: 30,
+              onProgress: (prog) => {
+                if (searchId !== activeAiSearchId) return;
+                if (modalAiLoading) modalAiLoading.style.display = 'flex';
+                if (aiLoadingText && prog.message) aiLoadingText.textContent = prog.message;
+                if (aiLoadingPct && prog.progress !== undefined) aiLoadingPct.textContent = `${prog.progress}%`;
+                if (aiLoadingBarFill && prog.progress !== undefined) aiLoadingBarFill.style.width = `${prog.progress}%`;
+              }
+            });
+
+            if (searchId !== activeAiSearchId) return; // Discard superseded search
+            if (modalAiLoading) modalAiLoading.style.display = 'none';
+
+            // Filter results by active pills if any
+            const filtered = results.filter(r => isItemTypeAllowed(r.chunk.type, searchFilterTypes));
+
+            filteredSearchResults = filtered.map(r => ({
+              item: {
+                name: r.chunk.title,
+                type: r.chunk.type,
+                category: r.chunk.category,
+                doc: r.chunk.url,
+                src: (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc) ? UVM_DATA.docToSrc[r.chunk.url.split('#')[0]] : null,
+                desc: r.snippet
+              },
+              score: r.score,
+              matchPct: r.matchPct,
+              snippet: r.snippet,
+              chunk: r.chunk
+            }));
+
+            searchSelectedIndex = filteredSearchResults.length > 0 ? 0 : -1;
+
+            if (filteredSearchResults.length === 0) {
+              searchResults.innerHTML = '<li style="padding:2rem; text-align:center; color:var(--text-muted); font-size:0.875rem">Aucun résultat sémantique trouvé pour cette question. Essayez de reformuler.</li>';
+              return;
+            }
+
+            let html = '';
+            filteredSearchResults.forEach((res, idx) => {
+              const c = res.chunk;
+              const pct = res.matchPct;
+              const badgeClass = pct >= 80 ? 'rag-match-high' : (pct >= 65 ? 'rag-match-med' : 'rag-match-low');
+              const typeBadgeClass = c.type === 'class' ? 'badge-class' :
+                (c.type === 'macro' ? 'badge-macro' :
+                  (c.type === 'function' ? 'badge-function' :
+                    (c.type === 'task' ? 'badge-task' :
+                      (c.type === 'method' ? 'badge-method' : 'badge-file'))));
+
+              html += `<li class="search-result-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}">
+                <div class="res-main">
+                  <div class="res-title-row" style="display:flex; align-items:center; gap:0.4rem;">
+                    <span style="color:var(--text-muted); font-size:0.775rem;">${escapeHtml(c.breadcrumb)}</span>
+                  </div>
+                  <div style="font-weight:600; font-size:0.925rem; color:var(--text-main); margin-top:0.15rem;">
+                    ${res.highlightedTitle || escapeHtml(c.title)}
+                  </div>
+                  <div class="rag-snippet">${res.snippet}</div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.35rem; flex-shrink:0;">
+                  <span class="rag-match-badge ${badgeClass}">${pct}% match</span>
+                  <span class="res-badge ${typeBadgeClass}">${c.type}</span>
+                </div>
+              </li>`;
+            });
+
+            searchResults.innerHTML = html;
+            searchResults.querySelectorAll('.search-result-item').forEach(el => {
+              el.addEventListener('click', () => {
+                const idx = parseInt(el.getAttribute('data-index'), 10);
+                selectSearchResult(filteredSearchResults[idx].item);
+              });
+            });
+
+          } catch (err) {
+            console.error('[RAG] Search error:', err);
+            if (modalAiLoading) modalAiLoading.style.display = 'none';
+            searchResults.innerHTML = `<li style="padding:1.5rem; text-align:center; color:#ef4444; font-size:0.875rem">
+              <strong>Erreur lors du calcul IA</strong><br>
+              <span style="font-size:0.775rem; color:var(--text-muted)">${escapeHtml(err.message)}</span>
+            </li>`;
+          }
+          return;
+        }
+
+        // ==========================================
+        // Mode 2: Standard Exact / Regex / Case Search
+        // ==========================================
+        if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+        if (modalAiLoading) modalAiLoading.style.display = 'none';
+
         if (typeof UVM_DATA === 'undefined') {
           searchResults.innerHTML = `<li style="padding:1.5rem; text-align:center; color:var(--text-muted, #64748b); font-size:0.875rem">
             <strong>Search index not available</strong><br>
