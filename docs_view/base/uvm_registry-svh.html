@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Factory Component and Object Wrappers | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -80,17 +83,17 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_component_registry #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_component,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>Tname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&lt;unknown&gt;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_component_registry</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_component,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">Tname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&lt;unknown&gt;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_object_wrapper</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_object_wrapper</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -131,13 +134,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).create_component" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create_component</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function uvm_component create_component (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>parent</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_component <span class="sv-proto-name">create_component</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">parent</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates a component of type T having the provided <i>name</i> and <i>parent</i>.&nbsp; This is an override of the method in <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link14  >uvm_object_wrapper</a>.&nbsp; It is called by the factory after determining the type of object to create.&nbsp; You should not call this method directly.&nbsp; Call <a href="#uvm_component_registry#(T,Tname).create" class=LMethod id=link15  >create</a> instead.</p></div></div></div>
@@ -147,7 +150,7 @@
 
  <!--CONTENT index=5 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).get_type_name" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get_type_name</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_type_name()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the value given by the string parameter, <i>Tname</i>.&nbsp; This method overrides the method in <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link16  >uvm_object_wrapper</a>.</p></div></div></div>
 
 
@@ -155,7 +158,7 @@
 
  <!--CONTENT index=6 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).get" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function this_type get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-ident">this_type</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton instance of this type.&nbsp; Type-based factory operation depends on there being a single proxy instance for each registered type.</p></div></div></div>
 
 
@@ -165,21 +168,21 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).create" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function T create(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>parent,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>contxt</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> T <span class="sv-proto-name">create</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">parent</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">contxt</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns an instance of the component type, <i>T</i>, represented by this proxy, subject to any factory overrides based on the context provided by the <i>parent</i>&rsquo;s full name.&nbsp; The <i>contxt</i> argument, if supplied, supersedes the <i>parent</i>&rsquo;s context.&nbsp; The new instance will have the given leaf <i>name</i> and <i>parent</i>.</p></div></div></div>
@@ -191,17 +194,17 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).set_type_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_type_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function void set_type_override (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object_wrapper&nbsp;</td>
-      <td class=PParameter nowrap>override_type,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>replace</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_type_override</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">override_type</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">replace</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type, <i>T</i>, represented by this proxy, provided no instance override applies.&nbsp; The original type, <i>T</i>, is typically a super class of the override type.</p></div></div></div>
@@ -213,21 +216,21 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).set_inst_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_inst_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function void set_inst_override(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object_wrapper&nbsp;</td>
-      <td class=PParameter nowrap>override_type,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>inst_path,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>parent</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_inst_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">override_type</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">inst_path</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">parent</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Configures the factory to create a component of the type represented by <i>override_type</i> whenever a request is made to create an object of the type, <i>T</i>, represented by this proxy,  with matching instance paths.&nbsp; The original type, <i>T</i>, is typically a super class of the override type.</p><p>If <i>parent</i> is not specified, <i>inst_path</i> is interpreted as an absolute instance path, which enables instance overrides to be set from outside component classes.&nbsp; If <i>parent</i> is specified, <i>inst_path</i> is interpreted as being relative to the <i>parent</i>&rsquo;s hierarchical instance path, i.e.&nbsp; <i>{parent.get_full_name(),&rdquo;.&rdquo;,inst_path}</i> is the instance path that is registered with the override.&nbsp; The <i>inst_path</i> may contain wildcards for matching against multiple contexts.</p></div></div></div>
@@ -263,17 +266,17 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_object_registry #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_object,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>Tname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&lt;unknown&gt;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_object_registry</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_object,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">Tname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&lt;unknown&gt;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_object_wrapper</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_object_wrapper</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -308,13 +311,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).create_object" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual function uvm_object create_object(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_object <span class="sv-proto-name">create_object</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates an object of type <i>T</i> and returns it as a handle to a <a href="uvm_object-svh.html#uvm_object" class=LClass id=link30  >uvm_object</a>.&nbsp; This is an override of the method in <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link31  >uvm_object_wrapper</a>.&nbsp; It is called by the factory after determining the type of object to create.&nbsp; You should not call this method directly.&nbsp; Call <a href="#uvm_object_registry#(T,Tname).create" class=LMethod id=link32  >create</a> instead.</p></div></div></div>
@@ -324,7 +327,7 @@
 
  <!--CONTENT index=12 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).get_type_name" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get_type_name</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_type_name()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the value given by the string parameter, <i>Tname</i>.&nbsp; This method overrides the method in <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link33  >uvm_object_wrapper</a>.</p></div></div></div>
 
 
@@ -332,7 +335,7 @@
 
  <!--CONTENT index=13 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).get" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function this_type get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-ident">this_type</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton instance of this type.&nbsp; Type-based factory operation depends on there being a single proxy instance for each registered type.</p></div></div></div>
 
 
@@ -342,21 +345,21 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).create" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function T create (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>parent</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>contxt</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> T <span class="sv-proto-name">create</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">parent</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">contxt</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns an instance of the object type, <i>T</i>, represented by this proxy, subject to any factory overrides based on the context provided by the <i>parent</i>&rsquo;s full name.&nbsp; The <i>contxt</i> argument, if supplied, supersedes the <i>parent</i>&rsquo;s context.&nbsp; The new instance will have the given leaf <i>name</i>, if provided.</p></div></div></div>
@@ -368,17 +371,17 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).set_type_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_type_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function void set_type_override (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object_wrapper&nbsp;</td>
-      <td class=PParameter nowrap>override_type,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>replace</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_type_override</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">override_type</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">replace</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type represented by this proxy, provided no instance override applies.&nbsp; The original type, <i>T</i>, is typically a super class of the override type.</p></div></div></div>
@@ -390,21 +393,21 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).set_inst_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_inst_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function void set_inst_override(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object_wrapper&nbsp;</td>
-      <td class=PParameter nowrap>override_type,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>inst_path,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>parent</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_inst_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">override_type</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">inst_path</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">parent</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type represented by this proxy, with matching instance paths.&nbsp; The original type, <i>T</i>, is typically a super class of the override type.</p><p>If <i>parent</i> is not specified, <i>inst_path</i> is interpreted as an absolute instance path, which enables instance overrides to be set from outside component classes.&nbsp; If <i>parent</i> is specified, <i>inst_path</i> is interpreted as being relative to the <i>parent</i>&rsquo;s hierarchical instance path, i.e.&nbsp; <i>{parent.get_full_name(),&rdquo;.&rdquo;,inst_path}</i> is the instance path that is registered with the override.&nbsp; The <i>inst_path</i> may contain wildcards for matching against multiple contexts.</p></div></div></div>
@@ -413,15 +416,51 @@
 
 
  <!--CONTENT index=17 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).Usage" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Usage</a></h3><div class=CBody><p>This section describes usage for the uvm_*_registry classes.</p><p>The wrapper classes are used to register lightweight proxies of objects and components.</p><p>To register a particular component type, you need only typedef a specialization of its proxy class, which is typically done inside the class.</p><p>For example, to register a UVM component of type <i>mycomp</i></p><blockquote><pre>class mycomp extends uvm_component;
-  typedef uvm_component_registry #(mycomp,&quot;mycomp&quot;) type_id;
-endclass</pre></blockquote><p>However, because of differences between simulators, it is necessary to use a macro to ensure vendor interoperability with factory registration.&nbsp; To register a UVM component of type <i>mycomp</i> in a vendor-independent way, you would write instead:</p><blockquote><pre>class mycomp extends uvm_component;
-  `uvm_component_utils(mycomp);
-  ...
-endclass</pre></blockquote><p>The <a href="../macros/uvm_object_defines-svh.html#`uvm_component_utils" class=LMacro >`uvm_component_utils</a> macro is for non-parameterized classes.&nbsp; In this example, the typedef underlying the macro specifies the <i>Tname</i> parameter as &ldquo;mycomp&rdquo;, and <i>mycomp</i>&rsquo;s get_type_name() is defined to return the same.&nbsp; With <i>Tname</i> defined, you can use the factory&rsquo;s name-based methods to set overrides and create objects and components of non-parameterized types.</p><p>For parameterized types, the type name changes with each specialization, so you cannot specify a <i>Tname</i> inside a parameterized class and get the behavior you want; the same type name string would be registered for all specializations of the class!&nbsp; (The factory would produce warnings for each specialization beyond the first.)&nbsp; To avoid the warnings and simulator interoperability issues with parameterized classes, you must register parameterized classes with a different macro.</p><p>For example, to register a UVM component of type driver #(T), you would write:</p><blockquote><pre>class driver #(type T=int) extends uvm_component;
-  `uvm_component_param_utils(driver #(T));
-  ...
-endclass</pre></blockquote><p>The <a href="../macros/uvm_object_defines-svh.html#`uvm_component_param_utils" class=LMacro >`uvm_component_param_utils</a> and <a href="../macros/uvm_object_defines-svh.html#`uvm_object_param_utils" class=LMacro >`uvm_object_param_utils</a> macros are used to register parameterized classes with the factory.&nbsp; Unlike the non-param versions, these macros do not specify the <i>Tname</i> parameter in the underlying uvm_component_registry typedef, and they do not define the get_type_name method for the user class.&nbsp; Consequently, you will not be able to use the factory&rsquo;s name-based methods for parameterized classes.</p><p>The primary purpose for adding the factory&rsquo;s type-based methods was to accommodate registration of parameterized types and eliminate the many sources of errors associated with string-based factory usage.&nbsp; Thus, use of name-based lookup in <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link34  >uvm_factory</a> is no longer recommended.</p></div></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).Usage" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Usage</a></h3><div class=CBody><p>This section describes usage for the uvm_*_registry classes.</p><p>The wrapper classes are used to register lightweight proxies of objects and components.</p><p>To register a particular component type, you need only typedef a specialization of its proxy class, which is typically done inside the class.</p><p>For example, to register a UVM component of type <i>mycomp</i></p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mycomp</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_component_registry</span> <span class="sv-op">#(</span><span class="sv-ident">mycomp</span><span class="sv-op">,</span><span class="sv-string">&quot;mycomp&quot;</span><span class="sv-op">)</span> <span class="sv-ident">type_id</span><span class="sv-op">;</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><p>However, because of differences between simulators, it is necessary to use a macro to ensure vendor interoperability with factory registration.&nbsp; To register a UVM component of type <i>mycomp</i> in a vendor-independent way, you would write instead:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mycomp</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">mycomp</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><p>The <a href="../macros/uvm_object_defines-svh.html#`uvm_component_utils" class=LMacro >`uvm_component_utils</a> macro is for non-parameterized classes.&nbsp; In this example, the typedef underlying the macro specifies the <i>Tname</i> parameter as &ldquo;mycomp&rdquo;, and <i>mycomp</i>&rsquo;s get_type_name() is defined to return the same.&nbsp; With <i>Tname</i> defined, you can use the factory&rsquo;s name-based methods to set overrides and create objects and components of non-parameterized types.</p><p>For parameterized types, the type name changes with each specialization, so you cannot specify a <i>Tname</i> inside a parameterized class and get the behavior you want; the same type name string would be registered for all specializations of the class!&nbsp; (The factory would produce warnings for each specialization beyond the first.)&nbsp; To avoid the warnings and simulator interoperability issues with parameterized classes, you must register parameterized classes with a different macro.</p><p>For example, to register a UVM component of type driver #(T), you would write:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">driver</span> <span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <span class="sv-macro">`uvm_component_param_utils</span><span class="sv-op">(</span><span class="sv-ident">driver</span> <span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><p>The <a href="../macros/uvm_object_defines-svh.html#`uvm_component_param_utils" class=LMacro >`uvm_component_param_utils</a> and <a href="../macros/uvm_object_defines-svh.html#`uvm_object_param_utils" class=LMacro >`uvm_object_param_utils</a> macros are used to register parameterized classes with the factory.&nbsp; Unlike the non-param versions, these macros do not specify the <i>Tname</i> parameter in the underlying uvm_component_registry typedef, and they do not define the get_type_name method for the user class.&nbsp; Consequently, you will not be able to use the factory&rsquo;s name-based methods for parameterized classes.</p><p>The primary purpose for adding the factory&rsquo;s type-based methods was to accommodate registration of parameterized types and eliminate the many sources of errors associated with string-based factory usage.&nbsp; Thus, use of name-based lookup in <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link34  >uvm_factory</a> is no longer recommended.</p></div></div></div>
 
 </div><!--Content-->
 
@@ -432,6 +471,29 @@ endclass</pre></blockquote><p>The <a href="../macros/uvm_object_defines-svh.html
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

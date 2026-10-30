@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UVM Recorders | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -70,7 +73,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_recorder extends uvm_object
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_recorder</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=2 -->
@@ -194,7 +197,7 @@
 
  <!--CONTENT index=2 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.default_radix" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">default_radix</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_radix_enum default_radix = UVM_HEX
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_radix_enum</span> <span class="sv-ident">default_radix</span> <span class="sv-op">=</span> <span class="sv-uvm-type">UVM_HEX</span>
   </td></tr></table></blockquote><div class=CBody><p>This is the default radix setting if <a href="#uvm_recorder.record_field" class=LMethod id=link48  >record_field</a> is called without a radix.</p></div></div></div>
 
 
@@ -202,31 +205,31 @@
 
  <!--CONTENT index=3 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.physical" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">physical</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>bit physical = 1
-  </td></tr></table></blockquote><div class=CBody><p>This bit provides a filtering mechanism for fields.</p><p>The <a href="#uvm_recorder.abstract" class=LVariable id=link49  >abstract</a> and physical settings allow an object to distinguish between two different classes of fields.</p><p>It is up to you, in the <a href="uvm_object-svh.html#uvm_object.do_record" class=LMethod id=link50  >uvm_object::do_record</a> method, to test the setting of this field if you want to use the physical trait as a filter.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">physical</span> <span class="sv-op">=</span><span class="sv-ident"> 1
+  </span></td></tr></table></blockquote><div class=CBody><p>This bit provides a filtering mechanism for fields.</p><p>The <a href="#uvm_recorder.abstract" class=LVariable id=link49  >abstract</a> and physical settings allow an object to distinguish between two different classes of fields.</p><p>It is up to you, in the <a href="uvm_object-svh.html#uvm_object.do_record" class=LMethod id=link50  >uvm_object::do_record</a> method, to test the setting of this field if you want to use the physical trait as a filter.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.abstract" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">abstract</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>bit abstract = 1
-  </td></tr></table></blockquote><div class=CBody><p>This bit provides a filtering mechanism for fields.</p><p>The abstract and physical settings allow an object to distinguish between two different classes of fields.</p><p>It is up to you, in the <a href="uvm_object-svh.html#uvm_object.do_record" class=LMethod id=link51  >uvm_object::do_record</a> method, to test the setting of this field if you want to use the abstract trait as a filter.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">abstract</span> <span class="sv-op">=</span><span class="sv-ident"> 1
+  </span></td></tr></table></blockquote><div class=CBody><p>This bit provides a filtering mechanism for fields.</p><p>The abstract and physical settings allow an object to distinguish between two different classes of fields.</p><p>It is up to you, in the <a href="uvm_object-svh.html#uvm_object.do_record" class=LMethod id=link51  >uvm_object::do_record</a> method, to test the setting of this field if you want to use the abstract trait as a filter.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.identifier" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">identifier</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>bit identifier = 1
-  </td></tr></table></blockquote><div class=CBody><p>This bit is used to specify whether or not an object&rsquo;s reference should be recorded when the object is recorded.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">identifier</span> <span class="sv-op">=</span><span class="sv-ident"> 1
+  </span></td></tr></table></blockquote><div class=CBody><p>This bit is used to specify whether or not an object&rsquo;s reference should be recorded when the object is recorded.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.recursion_policy" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">recursion_policy</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_recursion_policy_enum policy = UVM_DEFAULT_POLICY
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_recursion_policy_enum</span> <span class="sv-ident">policy</span> <span class="sv-op">=</span> <span class="sv-uvm-type">UVM_DEFAULT_POLICY</span>
   </td></tr></table></blockquote><div class=CBody><p>Sets the recursion policy for recording objects.</p><p>The default policy is deep (which means to recurse an object).</p></div></div></div>
 
 
@@ -240,7 +243,7 @@
 
  <!--CONTENT index=8 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.get_stream" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">get_stream</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function uvm_tr_stream get_stream()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_tr_stream</span> <span class="sv-proto-name">get_stream</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns a reference to the stream which created this record.</p><p>A warning will be asserted if get_stream is called prior to the record being initialized via <a href="#uvm_recorder.do_open" class=LMethod id=link52  >do_open</a>.</p></div></div></div>
 
 
@@ -256,13 +259,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.close" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">close</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void close(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap>close_time</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">close</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">close_time</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Closes this recorder.</p><p>Closing a recorder marks the end of the transaction in the stream.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>close_time</td><td class=CDLDescription>Optional time to record as the closing time of this transaction.</td></tr></table><p>This method will trigger a <a href="#uvm_recorder.do_close" class=LMethod id=link54  >do_close</a> call.</p></div></div></div>
@@ -274,13 +277,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.free" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">free</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void free(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap>close_time</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">free</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">close_time</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Frees this recorder</p><p>Freeing a recorder indicates that the stream and database can release any references to the recorder.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>close_time</td><td class=CDLDescription>Optional time to record as the closing time of this transaction.</td></tr></table><p>If a recorder has not yet been closed (via a call to <a href="#uvm_recorder.close" class=LMethod id=link55  >close</a>), then <a href="#uvm_recorder.close" class=LMethod id=link56  >close</a> will automatically be called, and passed the <i>close_time</i>.&nbsp;  If the recorder has already been closed, then the <i>close_time</i> will be ignored.</p><p>This method will trigger a <a href="#uvm_recorder.do_free" class=LMethod id=link57  >do_free</a> call.</p></div></div></div>
@@ -290,7 +293,7 @@
 
  <!--CONTENT index=12 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.is_open" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">is_open</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_open()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_open</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns true if this <i>uvm_recorder</i> was opened on its stream, but has not yet been closed.</p></div></div></div>
 
 
@@ -298,7 +301,7 @@
 
  <!--CONTENT index=13 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.get_open_time" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">get_open_time</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function time get_open_time()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">time</span> <span class="sv-proto-name">get_open_time</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the <i>open_time</i></p></div></div></div>
 
 
@@ -306,7 +309,7 @@
 
  <!--CONTENT index=14 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.is_closed" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">is_closed</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_closed()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_closed</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns true if this <i>uvm_recorder</i> was closed on its stream, but has not yet been freed.</p></div></div></div>
 
 
@@ -314,7 +317,7 @@
 
  <!--CONTENT index=15 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.get_close_time" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">get_close_time</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function time get_close_time()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">time</span> <span class="sv-proto-name">get_close_time</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the <i>close_time</i></p></div></div></div>
 
 
@@ -328,7 +331,7 @@
 
  <!--CONTENT index=17 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.get_handle" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">get_handle</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function integer get_handle()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">get_handle</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns a unique ID for this recorder.</p><p>A value of <i>0</i> indicates that the recorder has been <i>freed</i>, and no longer has a valid ID.</p></div></div></div>
 
 
@@ -338,18 +341,30 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.get_recorder_from_handle" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">get_recorder_from_handle</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function uvm_recorder get_recorder_from_handle(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>integer&nbsp;</td>
-      <td class=PParameter nowrap width=100%>id</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> uvm_recorder <span class="sv-proto-name">get_recorder_from_handle</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">integer</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Static accessor, returns a recorder reference for a given unique id.</p><p>If no recorder exists with the given <i>id</i>, or if the recorder with that <i>id</i> has been freed, then <i>null</i> is returned.</p><p>This method can be used to access the recorder associated with a call to <a href="uvm_transaction-svh.html#uvm_transaction.begin_tr" class=LMethod id=link58  >uvm_transaction::begin_tr</a> or <a href="uvm_component-svh.html#uvm_component.begin_tr" class=LMethod id=link59  >uvm_component::begin_tr</a>.</p><blockquote><pre>integer handle = tr.begin_tr();
-uvm_recorder recorder = uvm_recorder::get_recorder_from_handle(handle);
-if (recorder != null) begin
-  recorder.record_string(&quot;begin_msg&quot;, &quot;Started recording transaction!&quot;);
-end</pre></blockquote></div></div></div>
+<div class=CBody><p>Static accessor, returns a recorder reference for a given unique id.</p><p>If no recorder exists with the given <i>id</i>, or if the recorder with that <i>id</i> has been freed, then <i>null</i> is returned.</p><p>This method can be used to access the recorder associated with a call to <a href="uvm_transaction-svh.html#uvm_transaction.begin_tr" class=LMethod id=link58  >uvm_transaction::begin_tr</a> or <a href="uvm_component-svh.html#uvm_component.begin_tr" class=LMethod id=link59  >uvm_component::begin_tr</a>.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">integer</span> <span class="sv-ident">handle</span> <span class="sv-op">=</span> <span class="sv-ident">tr</span><span class="sv-op">.</span><span class="sv-method">begin_tr</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-uvm-type">uvm_recorder</span> <span class="sv-ident">recorder</span> <span class="sv-op">=</span> <span class="sv-uvm-type">uvm_recorder</span><span class="sv-op">::</span><span class="sv-method">get_recorder_from_handle</span><span class="sv-op">(</span><span class="sv-ident">handle</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">recorder</span> <span class="sv-op">!=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span>
+  <span class="sv-ident">recorder</span><span class="sv-op">.</span><span class="sv-method">record_string</span><span class="sv-op">(</span><span class="sv-string">&quot;begin_msg&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;Started recording transaction!&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">end</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -364,25 +379,25 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.record_field" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">record_field</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void record_field(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_bitstream_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>size,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_radix_enum&nbsp;</td>
-      <td class=PParameter nowrap>radix</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>UVM_NORADIX</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_field</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_bitstream_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">size</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">radix</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">UVM_NORADIX</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records an integral field (less than or equal to 4096 bits).</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value of the field to record.</td></tr><tr><td class=CDLEntry>size</td><td class=CDLDescription>Number of bits of the field which apply (Usually obtained via $bits).</td></tr><tr><td class=CDLEntry>radix</td><td class=CDLDescription>The <a href="uvm_object_globals-svh.html#uvm_radix_enum" class=LType id=link60  >uvm_radix_enum</a> to use.</td></tr></table><p>This method will trigger a <a href="#uvm_recorder.do_record_field" class=LMethod id=link61  >do_record_field</a> call.</p></div></div></div>
@@ -394,25 +409,25 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.record_field_int" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">record_field_int</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void record_field_int(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_integral_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>size,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_radix_enum&nbsp;</td>
-      <td class=PParameter nowrap>radix</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>UVM_NORADIX</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_field_int</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_integral_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">size</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">radix</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">UVM_NORADIX</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records an integral field (less than or equal to 64 bits).</p><p>This optimized version of <a href="#uvm_recorder.record_field" class=LMethod id=link62  >record_field</a> is useful for sizes up to 64 bits.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value of the field to record</td></tr><tr><td class=CDLEntry>size</td><td class=CDLDescription>Number of bits of the wfield which apply (Usually obtained via $bits).</td></tr><tr><td class=CDLEntry>radix</td><td class=CDLDescription>The <a href="uvm_object_globals-svh.html#uvm_radix_enum" class=LType id=link63  >uvm_radix_enum</a> to use.</td></tr></table><p>This method will trigger a <a href="#uvm_recorder.do_record_field_int" class=LMethod id=link64  >do_record_field_int</a> call.</p></div></div></div>
@@ -424,13 +439,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.record_field_real" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">record_field_real</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void record_field_real(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>real&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_field_real</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">real</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a real field.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value of the field to record</td></tr></table><p>This method will trigger a <a href="#uvm_recorder.do_record_field_real" class=LMethod id=link65  >do_record_field_real</a> call.</p></div></div></div>
@@ -442,13 +457,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.record_object" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">record_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void record_object(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_object</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records an object field.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Object to record</td></tr></table><p>The implementation must use the <a href="#uvm_recorder.recursion_policy" class=LVariable id=link66  >recursion_policy</a> and <a href="#uvm_recorder.identifier" class=LVariable id=link67  >identifier</a> to determine exactly what should be recorded.</p></div></div></div>
@@ -460,13 +475,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.record_string" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">record_string</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void record_string(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_string</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a string field.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value of the field</td></tr></table></div></div></div>
@@ -478,13 +493,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.record_time" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">record_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void record_time(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_time</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a time field.</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value of the field</td></tr></table></div></div></div>
@@ -496,31 +511,43 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.record_generic" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">record_generic</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void record_generic(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>type_name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_generic</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">type_name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Records a name/value pair, where <i>value</i> has been converted to a string.</p><h4 class=CHeading>For example</h4><blockquote><pre>recorder.record_generic(&quot;myvar&quot;,&quot;var_type&quot;, $sformatf(&quot;%0d&quot;,myvar), 32);</pre></blockquote><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value of the field</td></tr><tr><td class=CDLEntry>type_name</td><td class=CDLDescription><i>optional</i> Type name of the field</td></tr></table></div></div></div>
+<div class=CBody><p>Records a name/value pair, where <i>value</i> has been converted to a string.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">recorder</span><span class="sv-op">.</span><span class="sv-method">record_generic</span><span class="sv-op">(</span><span class="sv-string">&quot;myvar&quot;</span><span class="sv-op">,</span><span class="sv-string">&quot;var_type&quot;</span><span class="sv-op">,</span> $<span class="sv-method">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;%0d&quot;</span><span class="sv-op">,</span><span class="sv-ident">myvar</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-number">32</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value of the field</td></tr><tr><td class=CDLEntry>type_name</td><td class=CDLDescription><i>optional</i> Type name of the field</td></tr></table></div></div></div>
 
 
 
 
  <!--CONTENT index=27 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.use_record_attribute" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">use_record_attribute</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function bit use_record_attribute()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">use_record_attribute</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Indicates that this recorder does (or does not) support usage of the <a href="../macros/uvm_object_defines-svh.html#`uvm_record_attribute" class=LMacro id=link68  >`uvm_record_attribute</a> macro.</p><p>The default return value is <i>0</i> (not supported), developers can optionally extend <i>uvm_recorder</i> and set the value to <i>1</i> if they support the <a href="../macros/uvm_object_defines-svh.html#`uvm_record_attribute" class=LMacro id=link69  >`uvm_record_attribute</a> macro.</p></div></div></div>
 
 
@@ -528,7 +555,7 @@ end</pre></blockquote></div></div></div>
 
  <!--CONTENT index=28 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.get_record_attribute_handle" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">get_record_attribute_handle</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function integer get_record_attribute_handle()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">get_record_attribute_handle</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Provides a tool-specific handle which is compatible with <a href="../macros/uvm_object_defines-svh.html#`uvm_record_attribute" class=LMacro id=link70  >`uvm_record_attribute</a>.</p><p>By default, this method will return the same value as <a href="#uvm_recorder.get_handle" class=LMethod id=link71  >get_handle</a>, however tool vendors can override this method to provide tool-specific handles which will be passed to the <a href="../macros/uvm_object_defines-svh.html#`uvm_record_attribute" class=LMacro id=link72  >`uvm_record_attribute</a> macro.</p></div></div></div>
 
 
@@ -544,15 +571,15 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_open" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_open</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_open(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_tr_stream&nbsp;</td>
-      <td class=PParameter nowrap width=100%>stream,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap width=100%>open_time,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>type_name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_open</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tr_stream</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">stream</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">open_time</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">type_name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Callback triggered via <a href="uvm_tr_stream-svh.html#uvm_tr_stream.open_recorder" class=LMethod id=link73  >uvm_tr_stream::open_recorder</a>.</p><p>The <i>do_open</i> callback can be used to initialize any internal state within the recorder, as well as providing a location to record any initial information.</p></div></div></div>
@@ -564,11 +591,11 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_close" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_close</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_close(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap width=100%>close_time</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_close</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">close_time</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Callback triggered via <a href="#uvm_recorder.close" class=LMethod id=link74  >close</a>.</p><p>The <i>do_close</i> callback can be used to set internal state within the recorder, as well as providing a location to record any closing information.</p></div></div></div>
@@ -578,7 +605,7 @@ end</pre></blockquote></div></div></div>
 
  <!--CONTENT index=32 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_free" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_free</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>protected virtual function void do_free()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_free</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Callback triggered via <a href="#uvm_recorder.free" class=LMethod id=link75  >free</a>.</p><p>The <i>do_free</i> callback can be used to release the internal state within the recorder, as well as providing a location to record any &ldquo;freeing&rdquo; information.</p></div></div></div>
 
 
@@ -588,17 +615,17 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_record_field" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_field</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>pure virtual protected function void do_record_field(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_bitstream_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>size,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_radix_enum&nbsp;</td>
-      <td class=PParameter nowrap width=100%>radix</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_field</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_bitstream_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">size</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">radix</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records an integral field (less than or equal to 4096 bits).</p><p><i>Mandatory</i> Backend implementation of <a href="#uvm_recorder.record_field" class=LMethod id=link76  >record_field</a></p></div></div></div>
@@ -610,17 +637,17 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_record_field_int" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_field_int</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>pure virtual protected function void do_record_field_int(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_integral_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>size,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_radix_enum&nbsp;</td>
-      <td class=PParameter nowrap width=100%>radix</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_field_int</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_integral_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">size</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">radix</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records an integral field (less than or equal to 64 bits).</p><p><i>Mandatory</i> Backend implementation of <a href="#uvm_recorder.record_field_int" class=LMethod id=link77  >record_field_int</a></p></div></div></div>
@@ -632,13 +659,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_record_field_real" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_field_real</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>pure virtual protected function void do_record_field_real(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>real&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_field_real</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">real</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a real field.</p><p><i>Mandatory</i> Backend implementation of <a href="#uvm_recorder.record_field_real" class=LMethod id=link78  >record_field_real</a></p></div></div></div>
@@ -650,13 +677,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_record_object" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>pure virtual protected function void do_record_object(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_object</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records an object field.</p><p><i>Mandatory</i> Backend implementation of <a href="#uvm_recorder.record_object" class=LMethod id=link79  >record_object</a></p></div></div></div>
@@ -668,13 +695,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_record_string" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_string</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>pure virtual protected function void do_record_string(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_string</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a string field.</p><p><i>Mandatory</i> Backend implementation of <a href="#uvm_recorder.record_string" class=LMethod id=link80  >record_string</a></p></div></div></div>
@@ -686,13 +713,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_record_time" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>pure virtual protected function void do_record_time(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_time</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a time field.</p><p><i>Mandatory</i> Backend implementation of <a href="#uvm_recorder.record_time" class=LMethod id=link81  >record_time</a></p></div></div></div>
@@ -704,15 +731,15 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_recorder.do_record_generic" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_generic</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>pure virtual protected function void do_record_generic(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>type_name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_generic</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">type_name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a name/value pair, where <i>value</i> has been converted to a string.</p><p><i>Mandatory</i> Backend implementation of <a href="#uvm_recorder.record_generic" class=LMethod id=link82  >record_generic</a></p></div></div></div>
@@ -748,7 +775,7 @@ end</pre></blockquote></div></div></div>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_text_recorder extends uvm_recorder
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_text_recorder</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_recorder</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=41 -->
@@ -805,13 +832,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.new" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;unnamed-uvm_text_recorder&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;unnamed-uvm_text_recorder&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Constructor</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Instance name</td></tr></table></div></div></div>
@@ -829,15 +856,15 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_open" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_open</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_open(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_tr_stream&nbsp;</td>
-      <td class=PParameter nowrap width=100%>stream,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap width=100%>open_time,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>type_name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_open</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tr_stream</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">stream</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">open_time</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">type_name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Callback triggered via <a href="uvm_tr_stream-svh.html#uvm_tr_stream.open_recorder" class=LMethod id=link105  >uvm_tr_stream::open_recorder</a>.</p><p>Text-backend specific implementation.</p></div></div></div>
@@ -849,11 +876,11 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_close" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_close</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_close(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap width=100%>close_time</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_close</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">close_time</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Callback triggered via <a href="#uvm_recorder.close" class=LMethod id=link106  >uvm_recorder::close</a>.</p><p>Text-backend specific implementation.</p></div></div></div>
@@ -863,7 +890,7 @@ end</pre></blockquote></div></div></div>
 
  <!--CONTENT index=45 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_free" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_free</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>protected virtual function void do_free()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_free</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Callback triggered via <a href="#uvm_recorder.free" class=LMethod id=link107  >uvm_recorder::free</a>.</p><p>Text-backend specific implementation.</p></div></div></div>
 
 
@@ -873,17 +900,17 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_record_field" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_field</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_record_field(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_bitstream_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>size,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_radix_enum&nbsp;</td>
-      <td class=PParameter nowrap width=100%>radix</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_field</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_bitstream_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">size</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">radix</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records an integral field (less than or equal to 4096 bits).</p><p>Text-backend specific implementation.</p></div></div></div>
@@ -895,17 +922,17 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_record_field_int" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_field_int</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_record_field_int(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_integral_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>size,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_radix_enum&nbsp;</td>
-      <td class=PParameter nowrap width=100%>radix</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_field_int</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_integral_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">size</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">radix</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records an integral field (less than or equal to 64 bits).</p><p>Text-backend specific implementation.</p></div></div></div>
@@ -917,13 +944,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_record_field_real" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_field_real</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_record_field_real(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>real&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_field_real</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">real</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Record a real field.</p><p>Text-backened specific implementation.</p></div></div></div>
@@ -935,13 +962,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_record_object" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_record_object(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_object</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Record an object field.</p><p>Text-backend specific implementation.</p><p>The method uses <i>identifier</i> to determine whether or not to record the object instance id, and <i>recursion_policy</i> to determine whether or not to recurse into the object.</p></div></div></div>
@@ -953,13 +980,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_record_string" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_string</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_record_string(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_string</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a string field.</p><p>Text-backend specific implementation.</p></div></div></div>
@@ -971,13 +998,13 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_record_time" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_record_time(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_time</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a time field.</p><p>Text-backend specific implementation.</p></div></div></div>
@@ -989,15 +1016,15 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.do_record_generic" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">do_record_generic</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual function void do_record_generic(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>type_name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record_generic</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">type_name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Records a name/value pair, where <i>value</i> has been converted to a string.</p><p>Text-backend specific implementation.</p></div></div></div>
@@ -1015,25 +1042,25 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.write_attribute" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">write_attribute</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void write_attribute(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>nm,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_bitstream_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_radix_enum&nbsp;</td>
-      <td class=PParameter nowrap>radix,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>integer&nbsp;</td>
-      <td class=PParameter nowrap>numbits</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>$bits(uvm_bitstream_t)</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">write_attribute</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">nm</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_bitstream_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">radix</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">integer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">numbits</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">$bits(uvm_bitstream_t)</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Outputs an integral attribute to the textual log</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>nm</td><td class=CDLDescription>Name of the attribute</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value</td></tr><tr><td class=CDLEntry>radix</td><td class=CDLDescription>Radix of the output</td></tr><tr><td class=CDLEntry>numbits</td><td class=CDLDescription>number of valid bits</td></tr></table></div></div></div>
@@ -1045,25 +1072,25 @@ end</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_text_recorder.write_attribute_int" href="../../src_view/base/uvm_recorder.svh.html#L43" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="43">write_attribute_int</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void write_attribute_int(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>nm,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_integral_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_radix_enum&nbsp;</td>
-      <td class=PParameter nowrap>radix,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>integer&nbsp;</td>
-      <td class=PParameter nowrap>numbits</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>$bits(uvm_bitstream_t)</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">write_attribute_int</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">nm</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_integral_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">radix</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">integer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">numbits</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">$bits(uvm_bitstream_t)</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Outputs an integral attribute to the textual log</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>nm</td><td class=CDLDescription>Name of the attribute</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value</td></tr><tr><td class=CDLEntry>radix</td><td class=CDLDescription>Radix of the output</td></tr><tr><td class=CDLEntry>numbits</td><td class=CDLDescription>number of valid bits</td></tr></table></div></div></div>
@@ -1077,6 +1104,29 @@ end</pre></blockquote></div></div></div>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

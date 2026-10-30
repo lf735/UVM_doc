@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UVM Resource Database | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -53,7 +56,19 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_resource_db" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">uvm_resource_db</a></h2><div class=CBody><p>All of the functions in uvm_resource_db#(T) are static, so they must be called using the :: operator.&nbsp;  For example:</p><blockquote><pre>uvm_resource_db#(int)::set(&quot;A&quot;, &quot;*&quot;, 17, this);</pre></blockquote><p>The parameter value &ldquo;int&rdquo; identifies the resource type as uvm_resource#(int).&nbsp;  Thus, the type of the object in the resource container is int.&nbsp; This maintains the type-safety characteristics of resource operations.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_resource_db" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">uvm_resource_db</a></h2><div class=CBody><p>All of the functions in uvm_resource_db#(T) are static, so they must be called using the :: operator.&nbsp;  For example:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-keyword">int</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-string">&quot;A&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;*&quot;</span><span class="sv-op">,</span> <span class="sv-number">17</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>The parameter value &ldquo;int&rdquo; identifies the resource type as uvm_resource#(int).&nbsp;  Thus, the type of the object in the resource container is int.&nbsp; This maintains the type-safety characteristics of resource operations.</p>
 
 <!--START_ND_SUMMARY index=2-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -66,13 +81,13 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_resource_db #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_object</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_resource_db</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_object</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -125,11 +140,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.get_by_type" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">get_by_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function rsrc_t get_by_type(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>scope</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> rsrc_t <span class="sv-proto-name">get_by_type</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">scope</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Get a resource by type.&nbsp;  The type is specified in the db class parameter so the only argument to this function is the <i>scope</i>.</p></div></div></div>
@@ -141,21 +156,21 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.get_by_name" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">get_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function rsrc_t get_by_name(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>scope,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>rpterr</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> rsrc_t <span class="sv-proto-name">get_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">scope</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">rpterr</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Imports a resource by <i>name</i>.&nbsp;  The first argument is the current <i>scope</i> of the resource to be retrieved and the second argument is the <i>name</i>.&nbsp; The <i>rpterr</i> flag indicates whether or not to generate a warning if no matching resource is found.</p></div></div></div>
@@ -167,13 +182,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.set_default" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">set_default</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function rsrc_t set_default(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>scope,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> rsrc_t <span class="sv-proto-name">set_default</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">scope</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>add a new item into the resources database.&nbsp;  The item will not be written to so it will have its default value.&nbsp; The resource is created using <i>name</i> and <i>scope</i> as the lookup parameters.</p></div></div></div>
@@ -185,29 +200,29 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.set" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">set</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>static function void set(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>scope,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">scope</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap>val,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>accessor</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">val</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">accessor</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Create a new resource, write a <i>val</i> to it, and set it into the database using <i>name</i> and <i>scope</i> as the lookup parameters.&nbsp; The <i>accessor</i> is used for auditing.</p></div></div></div>
@@ -219,24 +234,24 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.set_anonymous" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">set_anonymous</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>static function void set_anonymous(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>scope,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_anonymous</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">scope</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap>val,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>accessor</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">val</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">accessor</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Create a new resource, write a <i>val</i> to it, and set it into the database.&nbsp;  The resource has no name and therefore will not be entered into the name map.&nbsp; But is does have a <i>scope</i> for lookup purposes.&nbsp; The <i>accessor</i> is used for auditing.</p></div></div></div>
@@ -248,29 +263,29 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.read_by_name" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">read_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>static function bit read_by_name(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>scope,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>inout&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap>val,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>accessor</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">read_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">scope</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">inout</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">val</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">accessor</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>locate a resource by <i>name</i> and <i>scope</i> and read its value.&nbsp; The value is returned through the output argument <i>val</i>.&nbsp;  The return value is a bit that indicates whether or not the read was successful.&nbsp; The <i>accessor</i> is used for auditing.</p></div></div></div>
@@ -282,24 +297,24 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.read_by_type" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">read_by_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>static function bit read_by_type(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>scope,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>inout&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap>val,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>accessor</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">read_by_type</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">scope</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">inout</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">val</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">accessor</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Read a value by type.&nbsp;  The value is returned through the output argument <i>val</i>.&nbsp;  The <i>scope</i> is used for the lookup.&nbsp; The return value is a bit that indicates whether or not the read is successful.&nbsp; The <i>accessor</i> is used for auditing.</p></div></div></div>
@@ -311,29 +326,29 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.write_by_name" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">write_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>static function bit write_by_name(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>scope,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap>val,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>accessor</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">write_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">scope</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">val</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">accessor</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>write a <i>val</i> into the resources database.&nbsp;  First, look up the resource by <i>name</i> and <i>scope</i>.&nbsp;  If it is not located then add a new resource to the database and then write its value.</p><p>Because the <i>scope</i> is matched to a resource which may be a regular expression, and consequently may target other scopes beyond the <i>scope</i> argument.&nbsp; Care must be taken with this function.&nbsp; If a <a href="#uvm_resource_db.get_by_name" class=LMethod id=link18  >get_by_name</a> match is found for <i>name</i> and <i>scope</i> then <i>val</i> will be written to that matching resource and thus may impact other scopes which also match the resource.</p></div></div></div>
@@ -345,24 +360,24 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.write_by_type" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">write_by_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>static function bit write_by_type(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>scope,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap>val,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>accessor</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">write_by_type</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">scope</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">val</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">accessor</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>write a <i>val</i> into the resources database.&nbsp;  First, look up the resource by type.&nbsp;  If it is not located then add a new resource to the database and then write its value.</p><p>Because the <i>scope</i> is matched to a resource which may be a regular expression, and consequently may target other scopes beyond the <i>scope</i> argument.&nbsp; Care must be taken with this function.&nbsp; If a <a href="#uvm_resource_db.get_by_name" class=LMethod id=link19  >get_by_name</a> match is found for <i>name</i> and <i>scope</i> then <i>val</i> will be written to that matching resource and thus may impact other scopes which also match the resource.</p></div></div></div>
@@ -372,7 +387,7 @@
 
  <!--CONTENT index=13 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db.dump" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">dump</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function void dump()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">dump</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Dump all the resources in the resource pool.&nbsp; This is useful for debugging purposes.&nbsp;  This function does not use the parameter T, so it will dump the same thing -- the entire database -- no matter the value of the parameter.</p></div></div></div>
 
 
@@ -412,7 +427,7 @@
 
  <!--CONTENT index=16 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db_options.turn_on_tracing" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">turn_on_tracing</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function void turn_on_tracing()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">turn_on_tracing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Turn tracing on for the resource database.&nbsp; This causes all reads and writes to the database to display information about the accesses.&nbsp; Tracing is off by default.</p><p>This method is implicitly called by the <i>+UVM_RESOURCE_DB_TRACE</i>.</p></div></div></div>
 
 
@@ -420,7 +435,7 @@
 
  <!--CONTENT index=17 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db_options.turn_off_tracing" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">turn_off_tracing</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function void turn_off_tracing()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">turn_off_tracing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Turn tracing off for the resource database.</p></div></div></div>
 
 
@@ -428,7 +443,7 @@
 
  <!--CONTENT index=18 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_db_options.is_tracing" href="../../src_view/base/uvm_resource_db.svh.html#L54" class="src-code-link" data-src-file="base/uvm_resource_db.svh" data-src-line="54">is_tracing</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function bit is_tracing()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_tracing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if the tracing facility is on and 0 if it is off.</p></div></div></div>
 
 </div><!--Content-->
@@ -440,6 +455,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

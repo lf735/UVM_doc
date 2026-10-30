@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_object | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -50,7 +53,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_object extends uvm_void
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_object</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_void</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=1 -->
@@ -194,13 +197,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.new" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates a new uvm_object with the given instance <i>name</i>.&nbsp; If <i>name</i> is not supplied, the object is unnamed.</p></div></div></div>
@@ -216,15 +219,15 @@
 
  <!--CONTENT index=3 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_object.use_uvm_seeding" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">use_uvm_seeding</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static bit use_uvm_seeding = 1
-  </td></tr></table></blockquote><div class=CBody><p>This bit enables or disables the UVM seeding mechanism.&nbsp; It globally affects the operation of the <a href="#uvm_object.reseed" class=LMethod id=link55  >reseed</a> method.</p><p>When enabled, UVM-based objects are seeded based on their type and full hierarchical name rather than allocation order.&nbsp; This improves random stability for objects whose instance names are unique across each type.&nbsp; The <a href="uvm_component-svh.html#uvm_component" class=LClass id=link56  >uvm_component</a> class is an example of a type that has a unique instance name.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">bit</span> <span class="sv-ident">use_uvm_seeding</span> <span class="sv-op">=</span><span class="sv-ident"> 1
+  </span></td></tr></table></blockquote><div class=CBody><p>This bit enables or disables the UVM seeding mechanism.&nbsp; It globally affects the operation of the <a href="#uvm_object.reseed" class=LMethod id=link55  >reseed</a> method.</p><p>When enabled, UVM-based objects are seeded based on their type and full hierarchical name rather than allocation order.&nbsp; This improves random stability for objects whose instance names are unique across each type.&nbsp; The <a href="uvm_component-svh.html#uvm_component" class=LClass id=link56  >uvm_component</a> class is an example of a type that has a unique instance name.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.reseed" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">reseed</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function void reseed ()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">reseed</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Calls <i>srandom</i> on the object to reseed the object using the UVM seeding mechanism, which sets the seed based on type name and instance name instead of based on instance position in a thread.</p><p>If the <a href="#uvm_object.use_uvm_seeding" class=LVariable id=link57  >use_uvm_seeding</a> static variable is set to 0, then reseed() does not perform any function.</p></div></div></div>
 
 
@@ -240,11 +243,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.set_name" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">set_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void set_name (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_name</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Sets the instance name of this object, overwriting any previously given name.</p></div></div></div>
@@ -254,7 +257,7 @@
 
  <!--CONTENT index=7 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.get_name" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">get_name</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_name ()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_name</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the name of the object, as provided by the <i>name</i> argument in the <a href="#uvm_object.new" class=LMethod id=link58  >new</a> constructor or <a href="#uvm_object.set_name" class=LMethod id=link59  >set_name</a> method.</p></div></div></div>
 
 
@@ -262,7 +265,7 @@
 
  <!--CONTENT index=8 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.get_full_name" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">get_full_name</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_full_name ()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_full_name</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the full hierarchical name of this object.&nbsp; The default implementation is the same as <a href="#uvm_object.get_name" class=LMethod id=link60  >get_name</a>, as uvm_objects do not inherently possess hierarchy.</p><p>Objects possessing hierarchy, such as <a href="uvm_component-svh.html#uvm_component" class=LClass id=link61  >uvm_components</a>, override the default implementation.&nbsp; Other objects might be associated with component hierarchy but are not themselves components.&nbsp; For example, <a href="../seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP)" class=LClass id=link62  >uvm_sequence #(REQ,RSP)</a> classes are typically associated with a <a href="../seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP)" class=LClass id=link63  >uvm_sequencer #(REQ,RSP)</a>.&nbsp; In this case, it is useful to override get_full_name to return the sequencer&rsquo;s full name concatenated with the sequence&rsquo;s name.&nbsp; This provides the sequence a full context, which is useful when debugging.</p></div></div></div>
 
 
@@ -270,7 +273,7 @@
 
  <!--CONTENT index=9 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.get_inst_id" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">get_inst_id</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function int get_inst_id ()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_inst_id</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the object&rsquo;s unique, numeric instance identifier.</p></div></div></div>
 
 
@@ -278,7 +281,7 @@
 
  <!--CONTENT index=10 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.get_inst_count" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">get_inst_count</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function int get_inst_count()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_inst_count</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the current value of the instance counter, which represents the total number of uvm_object-based objects that have been allocated in simulation.&nbsp; The instance counter is used to form a unique numeric instance identifier.</p></div></div></div>
 
 
@@ -286,43 +289,91 @@
 
  <!--CONTENT index=11 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.get_type" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">get_type</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_object_wrapper get_type ()
-  </td></tr></table></blockquote><div class=CBody><p>Returns the type-proxy (wrapper) for this object.&nbsp; The <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link64  >uvm_factory</a>&rsquo;s type-based override and creation methods take arguments of <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link65  >uvm_object_wrapper</a>.&nbsp; This method, if implemented, can be used as convenient means of supplying those arguments.</p><p>The default implementation of this method produces an error and returns <i>null</i>.&nbsp; To enable use of this method, a user&rsquo;s subtype must implement a version that returns the subtype&rsquo;s wrapper.</p><h4 class=CHeading>For example</h4><blockquote><pre>class cmd extends uvm_object;
-  typedef uvm_object_registry #(cmd) type_id;
-  static function type_id get_type();
-    return type_id::get();
-  endfunction
-endclass</pre></blockquote><h4 class=CHeading>Then, to use</h4><blockquote><pre>factory.set_type_override(cmd::get_type(),subcmd::get_type());</pre></blockquote><p>This function is implemented by the `uvm_*_utils macros, if employed.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_object_wrapper</span> <span class="sv-proto-name">get_type</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the type-proxy (wrapper) for this object.&nbsp; The <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link64  >uvm_factory</a>&rsquo;s type-based override and creation methods take arguments of <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link65  >uvm_object_wrapper</a>.&nbsp; This method, if implemented, can be used as convenient means of supplying those arguments.</p><p>The default implementation of this method produces an error and returns <i>null</i>.&nbsp; To enable use of this method, a user&rsquo;s subtype must implement a version that returns the subtype&rsquo;s wrapper.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">cmd</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_object_registry</span> <span class="sv-op">#(</span><span class="sv-ident">cmd</span><span class="sv-op">)</span> <span class="sv-ident">type_id</span><span class="sv-op">;</span>
+  <span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-ident">type_id</span> <span class="sv-method">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">return</span> <span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><h4 class=CHeading>Then, to use</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-method">set_type_override</span><span class="sv-op">(</span><span class="sv-ident">cmd</span><span class="sv-op">::</span><span class="sv-method">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-ident">subcmd</span><span class="sv-op">::</span><span class="sv-method">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>This function is implemented by the `uvm_*_utils macros, if employed.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=12 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.get_object_type" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">get_object_type</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function uvm_object_wrapper get_object_type ()
-  </td></tr></table></blockquote><div class=CBody><p>Returns the type-proxy (wrapper) for this object.&nbsp; The <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link66  >uvm_factory</a>&rsquo;s type-based override and creation methods take arguments of <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link67  >uvm_object_wrapper</a>.&nbsp; This method, if implemented, can be used as convenient means of supplying those arguments.&nbsp; This method is the same as the static <a href="#uvm_object.get_type" class=LMethod id=link68  >get_type</a> method, but uses an already allocated object to determine the type-proxy to access (instead of using the static object).</p><p>The default implementation of this method does a factory lookup of the proxy using the return value from <a href="#uvm_object.get_type_name" class=LMethod id=link69  >get_type_name</a>.&nbsp; If the type returned by <a href="#uvm_object.get_type_name" class=LMethod id=link70  >get_type_name</a> is not registered with the factory, then a <i>null</i> handle is returned.</p><h4 class=CHeading>For example</h4><blockquote><pre>class cmd extends uvm_object;
-  typedef uvm_object_registry #(cmd) type_id;
-  static function type_id get_type();
-    return type_id::get();
-  endfunction
-  virtual function type_id get_object_type();
-    return type_id::get();
-  endfunction
-endclass</pre></blockquote><p>This function is implemented by the `uvm_*_utils macros, if employed.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_object_wrapper</span> <span class="sv-proto-name">get_object_type</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the type-proxy (wrapper) for this object.&nbsp; The <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link66  >uvm_factory</a>&rsquo;s type-based override and creation methods take arguments of <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link67  >uvm_object_wrapper</a>.&nbsp; This method, if implemented, can be used as convenient means of supplying those arguments.&nbsp; This method is the same as the static <a href="#uvm_object.get_type" class=LMethod id=link68  >get_type</a> method, but uses an already allocated object to determine the type-proxy to access (instead of using the static object).</p><p>The default implementation of this method does a factory lookup of the proxy using the return value from <a href="#uvm_object.get_type_name" class=LMethod id=link69  >get_type_name</a>.&nbsp; If the type returned by <a href="#uvm_object.get_type_name" class=LMethod id=link70  >get_type_name</a> is not registered with the factory, then a <i>null</i> handle is returned.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">cmd</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_object_registry</span> <span class="sv-op">#(</span><span class="sv-ident">cmd</span><span class="sv-op">)</span> <span class="sv-ident">type_id</span><span class="sv-op">;</span>
+  <span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-ident">type_id</span> <span class="sv-method">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">return</span> <span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-ident">type_id</span> <span class="sv-method">get_object_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">return</span> <span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><p>This function is implemented by the `uvm_*_utils macros, if employed.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=13 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.get_type_name" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">get_type_name</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_type_name ()
-  </td></tr></table></blockquote><div class=CBody><p>This function returns the type name of the object, which is typically the type identifier enclosed in quotes.&nbsp; It is used for various debugging functions in the library, and it is used by the factory for creating objects.</p><p>This function must be defined in every derived class.</p><h4 class=CHeading>A typical implementation is as follows</h4><blockquote><pre>class mytype extends uvm_object;
-  ...
-  const static string type_name = &quot;mytype&quot;;
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_type_name</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+  </td></tr></table></blockquote><div class=CBody><p>This function returns the type name of the object, which is typically the type identifier enclosed in quotes.&nbsp; It is used for various debugging functions in the library, and it is used by the factory for creating objects.</p><p>This function must be defined in every derived class.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">const</span> <span class="sv-keyword">static</span> <span class="sv-keyword">string</span> <span class="sv-ident">type_name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;mytype&quot;</span><span class="sv-op">;</span>
 
-  virtual function string get_type_name();
-    return type_name;
-  endfunction</pre></blockquote><p>We define the <i>type_name</i> static variable to enable access to the type name without need of an object of the class, i.e., to enable access via the scope operator, <i>mytype::type_name</i>.</p></div></div></div>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-method">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">return</span> <span class="sv-ident">type_name</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span></code></pre>
+</div><p>We define the <i>type_name</i> static variable to enable access to the type name without need of an object of the class, i.e., to enable access via the scope operator, <i>mytype::type_name</i>.</p></div></div></div>
 
 
 
@@ -337,28 +388,40 @@ endclass</pre></blockquote><p>This function is implemented by the `uvm_*_utils m
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.create" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">create</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual function uvm_object create (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_object <span class="sv-proto-name">create</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>create</i> method allocates a new object of the same type as this object and returns it via a base uvm_object handle.&nbsp; Every class deriving from uvm_object, directly or indirectly, must implement the create method.</p><h4 class=CHeading>A typical implementation is as follows</h4><blockquote><pre>class mytype extends uvm_object;
-  ...
-  virtual function uvm_object create(string name=&quot;&quot;);
-    mytype t = new(name);
-    return t;
-  endfunction</pre></blockquote></div></div></div>
+<div class=CBody><p>The <i>create</i> method allocates a new object of the same type as this object and returns it via a base uvm_object handle.&nbsp; Every class deriving from uvm_object, directly or indirectly, must implement the create method.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_object</span> <span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">mytype</span> <span class="sv-ident">t</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">return</span> <span class="sv-ident">t</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=16 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.clone" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">clone</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function uvm_object clone ()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_object</span> <span class="sv-proto-name">clone</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>The <i>clone</i> method creates and returns an exact copy of this object.</p><p>The default implementation calls <a href="#uvm_object.create" class=LMethod id=link71  >create</a> followed by <a href="#uvm_object.copy" class=LMethod id=link72  >copy</a>.&nbsp; As clone is virtual, derived classes may override this implementation if desired.</p></div></div></div>
 
 
@@ -374,13 +437,13 @@ endclass</pre></blockquote><p>This function is implemented by the `uvm_*_utils m
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.print" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">print</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void print (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_printer&nbsp;</td>
-      <td class=PParameter nowrap>printer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_printer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">printer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>The <i>print</i> method deep-prints this object&rsquo;s properties in a format and manner governed by the given <i>printer</i> argument; if the <i>printer</i> argument is not provided, the global <a href="uvm_object_globals-svh.html#uvm_default_printer" class=LVariable id=link73  >uvm_default_printer</a> is used.&nbsp; See <a href="uvm_printer-svh.html#uvm_printer" class=LClass id=link74  >uvm_printer</a> for more information on printer output formatting.&nbsp; See also <a href="uvm_printer-svh.html#uvm_line_printer" class=LClass id=link75  >uvm_line_printer</a>, <a href="uvm_printer-svh.html#uvm_tree_printer" class=LClass id=link76  >uvm_tree_printer</a>, and <a href="uvm_printer-svh.html#uvm_table_printer" class=LClass id=link77  >uvm_table_printer</a> for details on the pre-defined printer &ldquo;policies,&rdquo; or formatters, provided by the UVM.</p><p>The <i>print</i> method is not virtual and must not be overloaded.&nbsp; To include custom information in the <i>print</i> and <a href="#uvm_object.sprint" class=LMethod id=link78  >sprint</a> operations, derived classes must override the <a href="#uvm_object.do_print" class=LMethod id=link79  >do_print</a> method and use the provided printer policy class to format the output.</p></div></div></div>
@@ -392,13 +455,13 @@ endclass</pre></blockquote><p>This function is implemented by the `uvm_*_utils m
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.sprint" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">sprint</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function string sprint (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_printer&nbsp;</td>
-      <td class=PParameter nowrap>printer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">sprint</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_printer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">printer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>The <i>sprint</i> method works just like the <a href="#uvm_object.print" class=LMethod id=link80  >print</a> method, except the output is returned in a string rather than displayed.</p><p>The <i>sprint</i> method is not virtual and must not be overloaded.&nbsp; To include additional fields in the <a href="#uvm_object.print" class=LMethod id=link81  >print</a> and <i>sprint</i> operation, derived classes must override the <a href="#uvm_object.do_print" class=LMethod id=link82  >do_print</a> method and use the provided printer policy class to format the output.&nbsp; The printer policy will manage all string concatenations and provide the string to <i>sprint</i> to return to the caller.</p></div></div></div>
@@ -410,57 +473,117 @@ endclass</pre></blockquote><p>This function is implemented by the `uvm_*_utils m
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.do_print" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">do_print</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void do_print (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_printer&nbsp;</td>
-      <td class=PParameter nowrap width=100%>printer</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_print</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_printer</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">printer</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_print</i> method is the user-definable hook called by <a href="#uvm_object.print" class=LMethod id=link83  >print</a> and <a href="#uvm_object.sprint" class=LMethod id=link84  >sprint</a> that allows users to customize what gets printed or sprinted beyond the field information provided by the `uvm_field_* macros, <a href="../macros/uvm_object_defines-svh.html#Utility_and_Field_Macros_for_Components_and_Objects" class=LSection >Utility and Field Macros for Components and Objects</a>.</p><p>The <i>printer</i> argument is the policy object that governs the format and content of the output.&nbsp; To ensure correct <a href="#uvm_object.print" class=LMethod id=link85  >print</a> and <a href="#uvm_object.sprint" class=LMethod id=link86  >sprint</a> operation, and to ensure a consistent output format, the <i>printer</i> must be used by all <a href="#uvm_object.do_print" class=LMethod id=link87  >do_print</a> implementations.&nbsp; That is, instead of using <i>$display</i> or string concatenations directly, a <i>do_print</i> implementation must call through the <i>printer&rsquo;s</i> API to add information to be printed or sprinted.</p><h4 class=CHeading>An example implementation of <i>do_print</i> is as follows</h4><blockquote><pre>class mytype extends uvm_object;
-  data_obj data;
-  int f1;
-  virtual function void do_print (uvm_printer printer);
-    super.do_print(printer);
-    printer.print_field_int(&quot;f1&quot;, f1, $bits(f1), UVM_DEC);
-    printer.print_object(&quot;data&quot;, data);
-  endfunction</pre></blockquote><h4 class=CHeading>Then, to print and sprint the object, you could write</h4><blockquote><pre>mytype t = new;
-t.print();
-uvm_report_info(&quot;Received&quot;,t.sprint());</pre></blockquote><p>See <a href="uvm_printer-svh.html#uvm_printer" class=LClass id=link88  >uvm_printer</a> for information about the printer API.</p></div></div></div>
+<div class=CBody><p>The <i>do_print</i> method is the user-definable hook called by <a href="#uvm_object.print" class=LMethod id=link83  >print</a> and <a href="#uvm_object.sprint" class=LMethod id=link84  >sprint</a> that allows users to customize what gets printed or sprinted beyond the field information provided by the `uvm_field_* macros, <a href="../macros/uvm_object_defines-svh.html#Utility_and_Field_Macros_for_Components_and_Objects" class=LSection >Utility and Field Macros for Components and Objects</a>.</p><p>The <i>printer</i> argument is the policy object that governs the format and content of the output.&nbsp; To ensure correct <a href="#uvm_object.print" class=LMethod id=link85  >print</a> and <a href="#uvm_object.sprint" class=LMethod id=link86  >sprint</a> operation, and to ensure a consistent output format, the <i>printer</i> must be used by all <a href="#uvm_object.do_print" class=LMethod id=link87  >do_print</a> implementations.&nbsp; That is, instead of using <i>$display</i> or string concatenations directly, a <i>do_print</i> implementation must call through the <i>printer&rsquo;s</i> API to add information to be printed or sprinted.</p><h4 class=CHeading>An example implementation of <i>do_print</i> is as follows</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-ident">data_obj</span> <span class="sv-ident">data</span><span class="sv-op">;</span>
+  <span class="sv-keyword">int</span> <span class="sv-ident">f1</span><span class="sv-op">;</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">do_print</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_printer</span> <span class="sv-ident">printer</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-method">do_print</span><span class="sv-op">(</span><span class="sv-ident">printer</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">printer</span><span class="sv-op">.</span><span class="sv-method">print_field_int</span><span class="sv-op">(</span><span class="sv-string">&quot;f1&quot;</span><span class="sv-op">,</span> <span class="sv-ident">f1</span><span class="sv-op">,</span> $<span class="sv-method">bits</span><span class="sv-op">(</span><span class="sv-ident">f1</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_DEC</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">printer</span><span class="sv-op">.</span><span class="sv-method">print_object</span><span class="sv-op">(</span><span class="sv-string">&quot;data&quot;</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span></code></pre>
+</div><h4 class=CHeading>Then, to print and sprint the object, you could write</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">mytype</span> <span class="sv-ident">t</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">;</span>
+<span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-method">print</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-uvm-type">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;Received&quot;</span><span class="sv-op">,</span><span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-method">sprint</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>See <a href="uvm_printer-svh.html#uvm_printer" class=LClass id=link88  >uvm_printer</a> for information about the printer API.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=21 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.convert2string" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">convert2string</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string convert2string()
-  </td></tr></table></blockquote><div class=CBody><p>This virtual function is a user-definable hook, called directly by the user, that allows users to provide object information in the form of a string.&nbsp; Unlike <a href="#uvm_object.sprint" class=LMethod id=link89  >sprint</a>, there is no requirement to use a <a href="uvm_printer-svh.html#uvm_printer" class=LClass id=link90  >uvm_printer</a> policy object.&nbsp; As such, the format and content of the output is fully customizable, which may be suitable for applications not requiring the consistent formatting offered by the <a href="#uvm_object.print" class=LMethod id=link91  >print</a>/<a href="#uvm_object.sprint" class=LMethod id=link92  >sprint</a>/<a href="#uvm_object.do_print" class=LMethod id=link93  >do_print</a> API.</p><p>Fields declared in <a href="../macros/uvm_object_defines-svh.html#Utility_Macros" class=LGroup id=link94  >Utility Macros</a> macros (`uvm_field_*), if used, will not automatically appear in calls to convert2string.</p><p>An example implementation of convert2string follows.</p><blockquote><pre>class base extends uvm_object;
-  string field = &quot;foo&quot;;
-  virtual function string convert2string();
-    convert2string = {&quot;base_field=&quot;,field};
-  endfunction
-endclass
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span>
+  </td></tr></table></blockquote><div class=CBody><p>This virtual function is a user-definable hook, called directly by the user, that allows users to provide object information in the form of a string.&nbsp; Unlike <a href="#uvm_object.sprint" class=LMethod id=link89  >sprint</a>, there is no requirement to use a <a href="uvm_printer-svh.html#uvm_printer" class=LClass id=link90  >uvm_printer</a> policy object.&nbsp; As such, the format and content of the output is fully customizable, which may be suitable for applications not requiring the consistent formatting offered by the <a href="#uvm_object.print" class=LMethod id=link91  >print</a>/<a href="#uvm_object.sprint" class=LMethod id=link92  >sprint</a>/<a href="#uvm_object.do_print" class=LMethod id=link93  >do_print</a> API.</p><p>Fields declared in <a href="../macros/uvm_object_defines-svh.html#Utility_Macros" class=LGroup id=link94  >Utility Macros</a> macros (`uvm_field_*), if used, will not automatically appear in calls to convert2string.</p><p>An example implementation of convert2string follows.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">base</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-keyword">string</span> <span class="sv-ident">field</span> <span class="sv-op">=</span> <span class="sv-string">&quot;foo&quot;</span><span class="sv-op">;</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">convert2string</span> <span class="sv-op">=</span> <span class="sv-op">{</span><span class="sv-string">&quot;base_field=&quot;</span><span class="sv-op">,</span><span class="sv-ident">field</span><span class="sv-op">}</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span>
 
-class obj2 extends uvm_object;
-  string field = &quot;bar&quot;;
-  virtual function string convert2string();
-    convert2string = {&quot;child_field=&quot;,field};
-  endfunction
-endclass
+<span class="sv-keyword">class</span> <span class="sv-ident">obj2</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-keyword">string</span> <span class="sv-ident">field</span> <span class="sv-op">=</span> <span class="sv-string">&quot;bar&quot;</span><span class="sv-op">;</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">convert2string</span> <span class="sv-op">=</span> <span class="sv-op">{</span><span class="sv-string">&quot;child_field=&quot;</span><span class="sv-op">,</span><span class="sv-ident">field</span><span class="sv-op">}</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span>
 
-class obj extends base;
-  int addr = 'h123;
-  int data = 'h456;
-  bit write = 1;
-  obj2 child = new;
-  virtual function string convert2string();
-     convert2string = {super.convert2string(),
-       $sformatf(&quot; write=%0d addr=%8h data=%8h &quot;,write,addr,data),
-       child.convert2string()};
-  endfunction
-endclass</pre></blockquote><h4 class=CHeading>Then, to display an object, you could write</h4><blockquote><pre>obj o = new;
-uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string()});</pre></blockquote><h4 class=CHeading>The output will look similar to</h4><blockquote><pre>UVM_INFO @ 0: reporter [BusMaster] Sending:
-   base_field=foo write=1 addr=00000123 data=00000456 child_field=bar</pre></blockquote></div></div></div>
+<span class="sv-keyword">class</span> <span class="sv-ident">obj</span> <span class="sv-keyword">extends</span> <span class="sv-ident">base</span><span class="sv-op">;</span>
+  <span class="sv-keyword">int</span> <span class="sv-ident">addr</span> <span class="sv-op">=</span> <span class="sv-string">&#x27;h123;
+  int data = &#x27;</span><span class="sv-ident">h456</span><span class="sv-op">;</span>
+  <span class="sv-keyword">bit</span> <span class="sv-ident">write</span> <span class="sv-op">=</span> <span class="sv-number">1</span><span class="sv-op">;</span>
+  <span class="sv-ident">obj2</span> <span class="sv-ident">child</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">;</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-ident">convert2string</span> <span class="sv-op">=</span> <span class="sv-op">{</span><span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span>
+       $<span class="sv-method">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot; write=%0d addr=%8h data=%8h &quot;</span><span class="sv-op">,</span><span class="sv-ident">write</span><span class="sv-op">,</span><span class="sv-ident">addr</span><span class="sv-op">,</span><span class="sv-ident">data</span><span class="sv-op">)</span><span class="sv-op">,</span>
+       <span class="sv-ident">child</span><span class="sv-op">.</span><span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><h4 class=CHeading>Then, to display an object, you could write</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">obj</span> <span class="sv-ident">o</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">;</span>
+<span class="sv-uvm-type">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;BusMaster&quot;</span><span class="sv-op">,</span><span class="sv-op">{</span><span class="sv-string">&quot;Sending:\n &quot;</span><span class="sv-op">,</span><span class="sv-ident">o</span><span class="sv-op">.</span><span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><h4 class=CHeading>The output will look similar to</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">UVM_INFO</span> @ <span class="sv-number">0</span><span class="sv-op">:</span> <span class="sv-ident">reporter</span> <span class="sv-op">[</span><span class="sv-ident">BusMaster</span><span class="sv-op">]</span> <span class="sv-ident">Sending</span><span class="sv-op">:</span>
+   <span class="sv-ident">base_field</span><span class="sv-op">=</span><span class="sv-ident">foo</span> <span class="sv-ident">write</span><span class="sv-op">=</span><span class="sv-number">1</span> <span class="sv-ident">addr</span><span class="sv-op">=</span><span class="sv-number">00000123</span> <span class="sv-ident">data</span><span class="sv-op">=</span><span class="sv-number">00000456</span> <span class="sv-ident">child_field</span><span class="sv-op">=</span><span class="sv-ident">bar</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -475,13 +598,13 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.record" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">record</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void record (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_recorder&nbsp;</td>
-      <td class=PParameter nowrap>recorder</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_recorder</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">recorder</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>The <i>record</i> method deep-records this object&rsquo;s properties according to an optional <i>recorder</i> policy.&nbsp; The method is not virtual and must not be overloaded.&nbsp; To include additional fields in the record operation, derived classes should override the <a href="#uvm_object.do_record" class=LMethod id=link95  >do_record</a> method.</p><p>The optional <i>recorder</i> argument specifies the recording policy, which governs how recording takes place.&nbsp; See <a href="uvm_recorder-svh.html#uvm_recorder" class=LClass id=link96  >uvm_recorder</a> for information.</p><p>A simulator&rsquo;s recording mechanism is vendor-specific.&nbsp; By providing access via a common interface, the uvm_recorder policy provides vendor-independent access to a simulator&rsquo;s recording capabilities.</p></div></div></div>
@@ -493,20 +616,32 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.do_record" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">do_record</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void do_record (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_recorder&nbsp;</td>
-      <td class=PParameter nowrap width=100%>recorder</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_record</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_recorder</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">recorder</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_record</i> method is the user-definable hook called by the <a href="#uvm_object.record" class=LMethod id=link97  >record</a> method.&nbsp; A derived class should override this method to include its fields in a record operation.</p><p>The <i>recorder</i> argument is policy object for recording this object.&nbsp; A do_record implementation should call the appropriate recorder methods for each of its fields.&nbsp; Vendor-specific recording implementations are encapsulated in the <i>recorder</i> policy, thereby insulating user-code from vendor-specific behavior.&nbsp; See <a href="uvm_recorder-svh.html#uvm_recorder" class=LClass id=link98  >uvm_recorder</a> for more information.</p><h4 class=CHeading>A typical implementation is as follows</h4><blockquote><pre>class mytype extends uvm_object;
-  data_obj data;
-  int f1;
-  function void do_record (uvm_recorder recorder);
-    recorder.record_field(&quot;f1&quot;, f1, $bits(f1), UVM_DEC);
-    recorder.record_object(&quot;data&quot;, data);
-  endfunction</pre></blockquote></div></div></div>
+<div class=CBody><p>The <i>do_record</i> method is the user-definable hook called by the <a href="#uvm_object.record" class=LMethod id=link97  >record</a> method.&nbsp; A derived class should override this method to include its fields in a record operation.</p><p>The <i>recorder</i> argument is policy object for recording this object.&nbsp; A do_record implementation should call the appropriate recorder methods for each of its fields.&nbsp; Vendor-specific recording implementations are encapsulated in the <i>recorder</i> policy, thereby insulating user-code from vendor-specific behavior.&nbsp; See <a href="uvm_recorder-svh.html#uvm_recorder" class=LClass id=link98  >uvm_recorder</a> for more information.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-ident">data_obj</span> <span class="sv-ident">data</span><span class="sv-op">;</span>
+  <span class="sv-keyword">int</span> <span class="sv-ident">f1</span><span class="sv-op">;</span>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">do_record</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_recorder</span> <span class="sv-ident">recorder</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">recorder</span><span class="sv-op">.</span><span class="sv-method">record_field</span><span class="sv-op">(</span><span class="sv-string">&quot;f1&quot;</span><span class="sv-op">,</span> <span class="sv-ident">f1</span><span class="sv-op">,</span> $<span class="sv-method">bits</span><span class="sv-op">(</span><span class="sv-ident">f1</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_DEC</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">recorder</span><span class="sv-op">.</span><span class="sv-method">record_object</span><span class="sv-op">(</span><span class="sv-string">&quot;data&quot;</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -521,11 +656,11 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.copy" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">copy</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void copy (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rhs</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">copy</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rhs</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>The copy makes this object a copy of the specified object.</p><p>The <i>copy</i> method is not virtual and should not be overloaded in derived classes.&nbsp; To copy the fields of a derived class, that class should override the <a href="#uvm_object.do_copy" class=LMethod id=link99  >do_copy</a> method.</p></div></div></div>
@@ -537,22 +672,34 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.do_copy" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">do_copy</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void do_copy (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rhs</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_copy</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rhs</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_copy</i> method is the user-definable hook called by the <a href="#uvm_object.copy" class=LMethod id=link100  >copy</a> method.&nbsp; A derived class should override this method to include its fields in a <a href="#uvm_object.copy" class=LMethod id=link101  >copy</a> operation.</p><h4 class=CHeading>A typical implementation is as follows</h4><blockquote><pre>class mytype extends uvm_object;
-  ...
-  int f1;
-  function void do_copy (uvm_object rhs);
-    mytype rhs_;
-    super.do_copy(rhs);
-    $cast(rhs_,rhs);
-    field_1 = rhs_.field_1;
-  endfunction</pre></blockquote><p>The implementation must call <i>super.do_copy</i>, and it must $cast the rhs argument to the derived type before copying.</p></div></div></div>
+<div class=CBody><p>The <i>do_copy</i> method is the user-definable hook called by the <a href="#uvm_object.copy" class=LMethod id=link100  >copy</a> method.&nbsp; A derived class should override this method to include its fields in a <a href="#uvm_object.copy" class=LMethod id=link101  >copy</a> operation.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">int</span> <span class="sv-ident">f1</span><span class="sv-op">;</span>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">do_copy</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">mytype</span> <span class="sv-ident">rhs_</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-method">do_copy</span><span class="sv-op">(</span><span class="sv-ident">rhs</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    $<span class="sv-method">cast</span><span class="sv-op">(</span><span class="sv-ident">rhs_</span><span class="sv-op">,</span><span class="sv-ident">rhs</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">field_1</span> <span class="sv-op">=</span> <span class="sv-ident">rhs_</span><span class="sv-op">.</span><span class="sv-ident">field_1</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span></code></pre>
+</div><p>The implementation must call <i>super.do_copy</i>, and it must $cast the rhs argument to the derived type before copying.</p></div></div></div>
 
 
 
@@ -567,17 +714,17 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.compare" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">compare</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function bit compare (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>rhs,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_comparer&nbsp;</td>
-      <td class=PParameter nowrap>comparer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">compare</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">rhs</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_comparer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">comparer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Deep compares members of this data object with those of the object provided in the <i>rhs</i> (right-hand side) argument, returning 1 on a match, 0 otherwise.</p><p>The <i>compare</i> method is not virtual and should not be overloaded in derived classes.&nbsp; To compare the fields of a derived class, that class should override the <a href="#uvm_object.do_compare" class=LMethod id=link102  >do_compare</a> method.</p><p>The optional <i>comparer</i> argument specifies the comparison policy.&nbsp; It allows you to control some aspects of the comparison operation.&nbsp; It also stores the results of the comparison, such as field-by-field miscompare information and the total number of miscompares.&nbsp; If a compare policy is not provided, then the global <i>uvm_default_comparer</i> policy is used.&nbsp; See <a href="uvm_comparer-svh.html#uvm_comparer" class=LClass id=link103  >uvm_comparer</a> for more information.</p></div></div></div>
@@ -589,24 +736,36 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.do_compare" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">do_compare</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function bit do_compare (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rhs,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_comparer&nbsp;</td>
-      <td class=PParameter nowrap width=100%>comparer</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">do_compare</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rhs</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_comparer</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">comparer</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_compare</i> method is the user-definable hook called by the <a href="#uvm_object.compare" class=LMethod id=link104  >compare</a> method.&nbsp; A derived class should override this method to include its fields in a compare operation.&nbsp; It should return 1 if the comparison succeeds, 0 otherwise.</p><h4 class=CHeading>A typical implementation is as follows</h4><blockquote><pre>class mytype extends uvm_object;
-  ...
-  int f1;
-  virtual function bit do_compare (uvm_object rhs,uvm_comparer comparer);
-    mytype rhs_;
-    do_compare = super.do_compare(rhs,comparer);
-    $cast(rhs_,rhs);
-    do_compare &amp;= comparer.compare_field_int(&quot;f1&quot;, f1, rhs_.f1);
-  endfunction</pre></blockquote><p>A derived class implementation must call <i>super.do_compare()</i> to ensure its base class&rsquo; properties, if any, are included in the comparison.&nbsp; Also, the rhs argument is provided as a generic uvm_object.&nbsp; Thus, you must <i>$cast</i> it to the type of this object before comparing.</p><p>The actual comparison should be implemented using the uvm_comparer object rather than direct field-by-field comparison.&nbsp; This enables users of your class to customize how comparisons are performed and how much miscompare information is collected.&nbsp; See uvm_comparer for more details.</p></div></div></div>
+<div class=CBody><p>The <i>do_compare</i> method is the user-definable hook called by the <a href="#uvm_object.compare" class=LMethod id=link104  >compare</a> method.&nbsp; A derived class should override this method to include its fields in a compare operation.&nbsp; It should return 1 if the comparison succeeds, 0 otherwise.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">int</span> <span class="sv-ident">f1</span><span class="sv-op">;</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">do_compare</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">,</span><span class="sv-uvm-type">uvm_comparer</span> <span class="sv-ident">comparer</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">mytype</span> <span class="sv-ident">rhs_</span><span class="sv-op">;</span>
+    <span class="sv-ident">do_compare</span> <span class="sv-op">=</span> <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-method">do_compare</span><span class="sv-op">(</span><span class="sv-ident">rhs</span><span class="sv-op">,</span><span class="sv-ident">comparer</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    $<span class="sv-method">cast</span><span class="sv-op">(</span><span class="sv-ident">rhs_</span><span class="sv-op">,</span><span class="sv-ident">rhs</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">do_compare</span> <span class="sv-op">&amp;=</span> <span class="sv-ident">comparer</span><span class="sv-op">.</span><span class="sv-method">compare_field_int</span><span class="sv-op">(</span><span class="sv-string">&quot;f1&quot;</span><span class="sv-op">,</span> <span class="sv-ident">f1</span><span class="sv-op">,</span> <span class="sv-ident">rhs_</span><span class="sv-op">.</span><span class="sv-ident">f1</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span></code></pre>
+</div><p>A derived class implementation must call <i>super.do_compare()</i> to ensure its base class&rsquo; properties, if any, are included in the comparison.&nbsp; Also, the rhs argument is provided as a generic uvm_object.&nbsp; Thus, you must <i>$cast</i> it to the type of this object before comparing.</p><p>The actual comparison should be implemented using the uvm_comparer object rather than direct field-by-field comparison.&nbsp; This enables users of your class to customize how comparisons are performed and how much miscompare information is collected.&nbsp; See uvm_comparer for more details.</p></div></div></div>
 
 
 
@@ -621,19 +780,19 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.pack" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">pack</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>function int pack (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>bitstream[],</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_packer&nbsp;</td>
-      <td class=PParameter nowrap>packer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">pack</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">bitstream</span>[],</td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_packer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">packer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody></div></div></div>
@@ -645,19 +804,19 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.pack_bytes" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">pack_bytes</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>function int pack_bytes (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref byte&nbsp;</td>
-      <td class=PType nowrap>unsigned&nbsp;</td>
-      <td class=PParameter nowrap>bytestream[],</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_packer&nbsp;</td>
-      <td class=PParameter nowrap>packer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">pack_bytes</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-keyword">byte</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">bytestream</span>[],</td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_packer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">packer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody></div></div></div>
@@ -669,19 +828,19 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.pack_ints" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">pack_ints</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>function int pack_ints (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref int&nbsp;</td>
-      <td class=PType nowrap>unsigned&nbsp;</td>
-      <td class=PParameter nowrap>intstream[],</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_packer&nbsp;</td>
-      <td class=PParameter nowrap>packer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">pack_ints</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">intstream</span>[],</td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_packer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">packer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>The pack methods bitwise-concatenate this object&rsquo;s properties into an array of bits, bytes, or ints.&nbsp; The methods are not virtual and must not be overloaded.&nbsp; To include additional fields in the pack operation, derived classes should override the <a href="#uvm_object.do_pack" class=LMethod id=link105  >do_pack</a> method.</p><p>The optional <i>packer</i> argument specifies the packing policy, which governs the packing operation.&nbsp; If a packer policy is not provided, the global <a href="uvm_object_globals-svh.html#uvm_default_packer" class=LVariable id=link106  >uvm_default_packer</a> policy is used.&nbsp; See <a href="uvm_packer-svh.html#uvm_packer" class=LClass id=link107  >uvm_packer</a> for more information.</p><p>The return value is the total number of bits packed into the given array.&nbsp; Use the array&rsquo;s built-in <i>size</i> method to get the number of bytes or ints consumed during the packing process.</p></div></div></div>
@@ -693,27 +852,39 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.do_pack" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">do_pack</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void do_pack (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_packer&nbsp;</td>
-      <td class=PParameter nowrap width=100%>packer</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_pack</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_packer</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">packer</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_pack</i> method is the user-definable hook called by the <a href="#uvm_object.pack" class=LMethod id=link108  >pack</a> methods.&nbsp; A derived class should override this method to include its fields in a pack operation.</p><p>The <i>packer</i> argument is the policy object for packing.&nbsp; The policy object should be used to pack objects.</p><p>A typical example of an object packing itself is as follows</p><blockquote><pre>class mysubtype extends mysupertype;
-  ...
-  shortint myshort;
-  obj_type myobj;
-  byte myarray[];
-  ...
-  function void do_pack (uvm_packer packer);
-    super.do_pack(packer); // pack mysupertype properties
-    packer.pack_field_int(myarray.size(), 32);
-    foreach (myarray)
-      packer.pack_field_int(myarray[index], 8);
-    packer.pack_field_int(myshort, $bits(myshort));
-    packer.pack_object(myobj);
-  endfunction</pre></blockquote><p>The implementation must call <i>super.do_pack</i> so that base class properties are packed as well.</p><p>If your object contains dynamic data (object, string, queue, dynamic array, or associative array), and you intend to unpack into an equivalent data structure when unpacking, you must include meta-information about the dynamic data when packing as follows.</p><ul><li>For queues, dynamic arrays, or associative arrays, pack the number of elements in the array in the 32 bits immediately before packing individual elements, as shown above.</li><li>For string data types, append a zero byte after packing the string contents.</li><li>For objects, pack 4 bits immediately before packing the object.&nbsp; For <i>null</i> objects, pack 4&rsquo;b0000.&nbsp; For non-<i>null</i> objects, pack 4&rsquo;b0001.</li></ul><p>When the `uvm_field_* macros are used, <a href="../macros/uvm_object_defines-svh.html#Utility_and_Field_Macros_for_Components_and_Objects" class=LSection >Utility and Field Macros for Components and Objects</a>, the above meta information is included provided the <a href="uvm_packer-svh.html#uvm_packer.use_metadata" class=LVariable id=link109  >uvm_packer::use_metadata</a> variable is set for the packer.</p><p>Packing order does not need to match declaration order.&nbsp; However, unpacking order must match packing order.</p></div></div></div>
+<div class=CBody><p>The <i>do_pack</i> method is the user-definable hook called by the <a href="#uvm_object.pack" class=LMethod id=link108  >pack</a> methods.&nbsp; A derived class should override this method to include its fields in a pack operation.</p><p>The <i>packer</i> argument is the policy object for packing.&nbsp; The policy object should be used to pack objects.</p><p>A typical example of an object packing itself is as follows</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mysubtype</span> <span class="sv-keyword">extends</span> <span class="sv-ident">mysupertype</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">shortint</span> <span class="sv-ident">myshort</span><span class="sv-op">;</span>
+  <span class="sv-ident">obj_type</span> <span class="sv-ident">myobj</span><span class="sv-op">;</span>
+  <span class="sv-keyword">byte</span> <span class="sv-ident">myarray</span><span class="sv-op">[</span><span class="sv-op">]</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">do_pack</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_packer</span> <span class="sv-ident">packer</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-method">do_pack</span><span class="sv-op">(</span><span class="sv-ident">packer</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-comment">// pack mysupertype properties</span>
+    <span class="sv-ident">packer</span><span class="sv-op">.</span><span class="sv-method">pack_field_int</span><span class="sv-op">(</span><span class="sv-ident">myarray</span><span class="sv-op">.</span><span class="sv-method">size</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-number">32</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">foreach</span> <span class="sv-op">(</span><span class="sv-ident">myarray</span><span class="sv-op">)</span>
+      <span class="sv-ident">packer</span><span class="sv-op">.</span><span class="sv-method">pack_field_int</span><span class="sv-op">(</span><span class="sv-ident">myarray</span><span class="sv-op">[</span><span class="sv-ident">index</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-number">8</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">packer</span><span class="sv-op">.</span><span class="sv-method">pack_field_int</span><span class="sv-op">(</span><span class="sv-ident">myshort</span><span class="sv-op">,</span> $<span class="sv-method">bits</span><span class="sv-op">(</span><span class="sv-ident">myshort</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">packer</span><span class="sv-op">.</span><span class="sv-method">pack_object</span><span class="sv-op">(</span><span class="sv-ident">myobj</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span></code></pre>
+</div><p>The implementation must call <i>super.do_pack</i> so that base class properties are packed as well.</p><p>If your object contains dynamic data (object, string, queue, dynamic array, or associative array), and you intend to unpack into an equivalent data structure when unpacking, you must include meta-information about the dynamic data when packing as follows.</p><ul><li>For queues, dynamic arrays, or associative arrays, pack the number of elements in the array in the 32 bits immediately before packing individual elements, as shown above.</li><li>For string data types, append a zero byte after packing the string contents.</li><li>For objects, pack 4 bits immediately before packing the object.&nbsp; For <i>null</i> objects, pack 4&rsquo;b0000.&nbsp; For non-<i>null</i> objects, pack 4&rsquo;b0001.</li></ul><p>When the `uvm_field_* macros are used, <a href="../macros/uvm_object_defines-svh.html#Utility_and_Field_Macros_for_Components_and_Objects" class=LSection >Utility and Field Macros for Components and Objects</a>, the above meta information is included provided the <a href="uvm_packer-svh.html#uvm_packer.use_metadata" class=LVariable id=link109  >uvm_packer::use_metadata</a> variable is set for the packer.</p><p>Packing order does not need to match declaration order.&nbsp; However, unpacking order must match packing order.</p></div></div></div>
 
 
 
@@ -728,19 +899,19 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.unpack" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">unpack</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>function int unpack (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>bitstream[],</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_packer&nbsp;</td>
-      <td class=PParameter nowrap>packer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">unpack</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">bitstream</span>[],</td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_packer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">packer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody></div></div></div>
@@ -752,19 +923,19 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.unpack_bytes" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">unpack_bytes</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>function int unpack_bytes (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref byte&nbsp;</td>
-      <td class=PType nowrap>unsigned&nbsp;</td>
-      <td class=PParameter nowrap>bytestream[],</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_packer&nbsp;</td>
-      <td class=PParameter nowrap>packer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">unpack_bytes</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-keyword">byte</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">bytestream</span>[],</td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_packer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">packer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody></div></div></div>
@@ -776,19 +947,19 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.unpack_ints" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">unpack_ints</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>function int unpack_ints (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref int&nbsp;</td>
-      <td class=PType nowrap>unsigned&nbsp;</td>
-      <td class=PParameter nowrap>intstream[],</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_packer&nbsp;</td>
-      <td class=PParameter nowrap>packer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">unpack_ints</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">intstream</span>[],</td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_packer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">packer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>The unpack methods extract property values from an array of bits, bytes, or ints.&nbsp; The method of unpacking <i>must</i> exactly correspond to the method of packing.&nbsp; This is assured if (a) the same <i>packer</i> policy is used to pack and unpack, and (b) the order of unpacking is the same as the order of packing used to create the input array.</p><p>The unpack methods are fixed (non-virtual) entry points that are directly callable by the user.&nbsp; To include additional fields in the <a href="#uvm_object.unpack" class=LMethod id=link110  >unpack</a> operation, derived classes should override the <a href="#uvm_object.do_unpack" class=LMethod id=link111  >do_unpack</a> method.</p><p>The optional <i>packer</i> argument specifies the packing policy, which governs both the pack and unpack operation.&nbsp; If a packer policy is not provided, then the global <i>uvm_default_packer</i> policy is used.&nbsp; See uvm_packer for more information.</p><p>The return value is the actual number of bits unpacked from the given array.</p></div></div></div>
@@ -800,23 +971,35 @@ uvm_report_info(&quot;BusMaster&quot;,{&quot;Sending:\n &quot;,o.convert2string(
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.do_unpack" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">do_unpack</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void do_unpack (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_packer&nbsp;</td>
-      <td class=PParameter nowrap width=100%>packer</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_unpack</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_packer</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">packer</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_unpack</i> method is the user-definable hook called by the <a href="#uvm_object.unpack" class=LMethod id=link112  >unpack</a> method.&nbsp; A derived class should override this method to include its fields in an unpack operation.</p><p>The <i>packer</i> argument is the policy object for both packing and unpacking.&nbsp; It must be the same packer used to pack the object into bits.&nbsp; Also, do_unpack must unpack fields in the same order in which they were packed.&nbsp; See <a href="uvm_packer-svh.html#uvm_packer" class=LClass id=link113  >uvm_packer</a> for more information.</p><p>The following implementation corresponds to the example given in do_pack.</p><blockquote><pre>function void do_unpack (uvm_packer packer);
- int sz;
-  super.do_unpack(packer); // unpack super's properties
-  sz = packer.unpack_field_int(myarray.size(), 32);
-  myarray.delete();
-  for(int index=0; index&lt;sz; index++)
-    myarray[index] = packer.unpack_field_int(8);
-  myshort = packer.unpack_field_int($bits(myshort));
-  packer.unpack_object(myobj);
-endfunction</pre></blockquote><p>If your object contains dynamic data (object, string, queue, dynamic array, or associative array), and you intend to <a href="#uvm_object.unpack" class=LMethod id=link114  >unpack</a> into an equivalent data structure, you must have included meta-information about the dynamic data when it was packed.</p><ul><li>For queues, dynamic arrays, or associative arrays, unpack the number of elements in the array from the 32 bits immediately before unpacking individual elements, as shown above.</li><li>For string data types, unpack into the new string until a <i>null</i> byte is encountered.</li><li>For objects, unpack 4 bits into a byte or int variable.&nbsp; If the value is 0, the target object should be set to <i>null</i> and unpacking continues to the next property, if any.&nbsp; If the least significant bit is 1, then the target object should be allocated and its properties unpacked.</li></ul></div></div></div>
+<div class=CBody><p>The <i>do_unpack</i> method is the user-definable hook called by the <a href="#uvm_object.unpack" class=LMethod id=link112  >unpack</a> method.&nbsp; A derived class should override this method to include its fields in an unpack operation.</p><p>The <i>packer</i> argument is the policy object for both packing and unpacking.&nbsp; It must be the same packer used to pack the object into bits.&nbsp; Also, do_unpack must unpack fields in the same order in which they were packed.&nbsp; See <a href="uvm_packer-svh.html#uvm_packer" class=LClass id=link113  >uvm_packer</a> for more information.</p><p>The following implementation corresponds to the example given in do_pack.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">do_unpack</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_packer</span> <span class="sv-ident">packer</span><span class="sv-op">)</span><span class="sv-op">;</span>
+ <span class="sv-keyword">int</span> <span class="sv-ident">sz</span><span class="sv-op">;</span>
+  <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-method">do_unpack</span><span class="sv-op">(</span><span class="sv-ident">packer</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-comment">// unpack super&#x27;s properties</span>
+  <span class="sv-ident">sz</span> <span class="sv-op">=</span> <span class="sv-ident">packer</span><span class="sv-op">.</span><span class="sv-method">unpack_field_int</span><span class="sv-op">(</span><span class="sv-ident">myarray</span><span class="sv-op">.</span><span class="sv-method">size</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-number">32</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-ident">myarray</span><span class="sv-op">.</span><span class="sv-method">delete</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">for</span><span class="sv-op">(</span><span class="sv-keyword">int</span> <span class="sv-ident">index</span><span class="sv-op">=</span><span class="sv-number">0</span><span class="sv-op">;</span> <span class="sv-ident">index</span><span class="sv-op">&lt;</span><span class="sv-ident">sz</span><span class="sv-op">;</span> <span class="sv-ident">index</span><span class="sv-op">+</span><span class="sv-op">+</span><span class="sv-op">)</span>
+    <span class="sv-ident">myarray</span><span class="sv-op">[</span><span class="sv-ident">index</span><span class="sv-op">]</span> <span class="sv-op">=</span> <span class="sv-ident">packer</span><span class="sv-op">.</span><span class="sv-method">unpack_field_int</span><span class="sv-op">(</span><span class="sv-number">8</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-ident">myshort</span> <span class="sv-op">=</span> <span class="sv-ident">packer</span><span class="sv-op">.</span><span class="sv-method">unpack_field_int</span><span class="sv-op">(</span>$<span class="sv-method">bits</span><span class="sv-op">(</span><span class="sv-ident">myshort</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-ident">packer</span><span class="sv-op">.</span><span class="sv-method">unpack_object</span><span class="sv-op">(</span><span class="sv-ident">myobj</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">endfunction</span></code></pre>
+</div><p>If your object contains dynamic data (object, string, queue, dynamic array, or associative array), and you intend to <a href="#uvm_object.unpack" class=LMethod id=link114  >unpack</a> into an equivalent data structure, you must have included meta-information about the dynamic data when it was packed.</p><ul><li>For queues, dynamic arrays, or associative arrays, unpack the number of elements in the array from the 32 bits immediately before unpacking individual elements, as shown above.</li><li>For string data types, unpack into the new string until a <i>null</i> byte is encountered.</li><li>For objects, unpack 4 bits into a byte or int variable.&nbsp; If the value is 0, the target object should be set to <i>null</i> and unpacking continues to the next property, if any.&nbsp; If the least significant bit is 1, then the target object should be allocated and its properties unpacked.</li></ul></div></div></div>
 
 
 
@@ -831,21 +1014,21 @@ endfunction</pre></blockquote><p>If your object contains dynamic data (object, s
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.set_int_local" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">set_int_local</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual function void set_int_local (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>field_name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_bitstream_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>recurse</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_int_local</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">field_name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_bitstream_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">recurse</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody></div></div></div>
@@ -857,21 +1040,21 @@ endfunction</pre></blockquote><p>If your object contains dynamic data (object, s
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.set_string_local" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">set_string_local</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual function void set_string_local (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>field_name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>recurse</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_string_local</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">field_name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">recurse</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody></div></div></div>
@@ -883,70 +1066,82 @@ endfunction</pre></blockquote><p>If your object contains dynamic data (object, s
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object.set_object_local" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">set_object_local</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual function void set_object_local (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>field_name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>clone</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>recurse</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_object_local</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">field_name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">clone</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">recurse</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>These methods provide write access to integral, string, and uvm_object-based properties indexed by a <i>field_name</i> string.&nbsp; The object designer choose which, if any, properties will be accessible, and overrides the appropriate methods depending on the properties&rsquo; types.&nbsp; For objects, the optional <i>clone</i> argument specifies whether to clone the <i>value</i> argument before assignment.</p><p>The global <a href="uvm_globals-svh.html#uvm_is_match" class=LMethod id=link115  >uvm_is_match</a> function is used to match the field names, so <i>field_name</i> may contain wildcards.</p><p>An example implementation of all three methods is as follows.</p><blockquote><pre>class mytype extends uvm_object;
+<div class=CBody><p>These methods provide write access to integral, string, and uvm_object-based properties indexed by a <i>field_name</i> string.&nbsp; The object designer choose which, if any, properties will be accessible, and overrides the appropriate methods depending on the properties&rsquo; types.&nbsp; For objects, the optional <i>clone</i> argument specifies whether to clone the <i>value</i> argument before assignment.</p><p>The global <a href="uvm_globals-svh.html#uvm_is_match" class=LMethod id=link115  >uvm_is_match</a> function is used to match the field names, so <i>field_name</i> may contain wildcards.</p><p>An example implementation of all three methods is as follows.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
 
-  local int myint;
-  local byte mybyte;
-  local shortint myshort; // no access
-  local string mystring;
-  local obj_type myobj;
+  <span class="sv-keyword">local</span> <span class="sv-keyword">int</span> <span class="sv-ident">myint</span><span class="sv-op">;</span>
+  <span class="sv-keyword">local</span> <span class="sv-keyword">byte</span> <span class="sv-ident">mybyte</span><span class="sv-op">;</span>
+  <span class="sv-keyword">local</span> <span class="sv-keyword">shortint</span> <span class="sv-ident">myshort</span><span class="sv-op">;</span> <span class="sv-comment">// no access</span>
+  <span class="sv-keyword">local</span> <span class="sv-keyword">string</span> <span class="sv-ident">mystring</span><span class="sv-op">;</span>
+  <span class="sv-keyword">local</span> <span class="sv-ident">obj_type</span> <span class="sv-ident">myobj</span><span class="sv-op">;</span>
 
-  // provide access to integral properties
-  function void set_int_local(string field_name, uvm_bitstream_t value);
-    if (uvm_is_match (field_name, &quot;myint&quot;))
-      myint = value;
-    else if (uvm_is_match (field_name, &quot;mybyte&quot;))
-      mybyte = value;
-  endfunction
+  <span class="sv-comment">// provide access to integral properties</span>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">set_int_local</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">field_name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_bitstream_t</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_is_match</span> <span class="sv-op">(</span><span class="sv-ident">field_name</span><span class="sv-op">,</span> <span class="sv-string">&quot;myint&quot;</span><span class="sv-op">)</span><span class="sv-op">)</span>
+      <span class="sv-ident">myint</span> <span class="sv-op">=</span> <span class="sv-ident">value</span><span class="sv-op">;</span>
+    <span class="sv-keyword">else</span> <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_is_match</span> <span class="sv-op">(</span><span class="sv-ident">field_name</span><span class="sv-op">,</span> <span class="sv-string">&quot;mybyte&quot;</span><span class="sv-op">)</span><span class="sv-op">)</span>
+      <span class="sv-ident">mybyte</span> <span class="sv-op">=</span> <span class="sv-ident">value</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  // provide access to string properties
-  function void set_string_local(string field_name, string value);
-    if (uvm_is_match (field_name, &quot;mystring&quot;))
-      mystring = value;
-  endfunction
+  <span class="sv-comment">// provide access to string properties</span>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">set_string_local</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">field_name</span><span class="sv-op">,</span> <span class="sv-keyword">string</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_is_match</span> <span class="sv-op">(</span><span class="sv-ident">field_name</span><span class="sv-op">,</span> <span class="sv-string">&quot;mystring&quot;</span><span class="sv-op">)</span><span class="sv-op">)</span>
+      <span class="sv-ident">mystring</span> <span class="sv-op">=</span> <span class="sv-ident">value</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  // provide access to sub-objects
-  function void set_object_local(string field_name, uvm_object value,
-                                 bit clone=1);
-    if (uvm_is_match (field_name, &quot;myobj&quot;)) begin
-      if (value != null) begin
-        obj_type tmp;
-        // if provided value is not correct type, produce error
-        if (!$cast(tmp, value) )
-          /* error */
-        else begin
-          if(clone)
-            $cast(myobj, tmp.clone());
-          else
-            myobj = tmp;
-        end
-      end
-      else
-        myobj = null; // value is null, so simply assign null to myobj
-    end
-  endfunction
-  ...</pre></blockquote><p>Although the object designer implements these methods to provide outside access to one or more properties, they are intended for internal use (e.g., for command-line debugging and auto-configuration) and should not be called directly by the user.</p></div></div></div>
+  <span class="sv-comment">// provide access to sub-objects</span>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">set_object_local</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">field_name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">value</span><span class="sv-op">,</span>
+                                 <span class="sv-keyword">bit</span> <span class="sv-ident">clone</span><span class="sv-op">=</span><span class="sv-number">1</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_is_match</span> <span class="sv-op">(</span><span class="sv-ident">field_name</span><span class="sv-op">,</span> <span class="sv-string">&quot;myobj&quot;</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span>
+      <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">value</span> <span class="sv-op">!=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span>
+        <span class="sv-ident">obj_type</span> <span class="sv-ident">tmp</span><span class="sv-op">;</span>
+        <span class="sv-comment">// if provided value is not correct type, produce error</span>
+        <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-op">!</span>$<span class="sv-method">cast</span><span class="sv-op">(</span><span class="sv-ident">tmp</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span> <span class="sv-op">)</span>
+          <span class="sv-comment">/* error */</span>
+        <span class="sv-keyword">else</span> <span class="sv-keyword">begin</span>
+          <span class="sv-keyword">if</span><span class="sv-op">(</span><span class="sv-ident">clone</span><span class="sv-op">)</span>
+            $<span class="sv-method">cast</span><span class="sv-op">(</span><span class="sv-ident">myobj</span><span class="sv-op">,</span> <span class="sv-ident">tmp</span><span class="sv-op">.</span><span class="sv-method">clone</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
+          <span class="sv-keyword">else</span>
+            <span class="sv-ident">myobj</span> <span class="sv-op">=</span> <span class="sv-ident">tmp</span><span class="sv-op">;</span>
+        <span class="sv-keyword">end</span>
+      <span class="sv-keyword">end</span>
+      <span class="sv-keyword">else</span>
+        <span class="sv-ident">myobj</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">;</span> <span class="sv-comment">// value is null, so simply assign null to myobj</span>
+    <span class="sv-keyword">end</span>
+  <span class="sv-keyword">endfunction</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span></code></pre>
+</div><p>Although the object designer implements these methods to provide outside access to one or more properties, they are intended for internal use (e.g., for command-line debugging and auto-configuration) and should not be called directly by the user.</p></div></div></div>
 
 </div><!--Content-->
 
@@ -957,6 +1152,29 @@ endfunction</pre></blockquote><p>If your object contains dynamic data (object, s
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

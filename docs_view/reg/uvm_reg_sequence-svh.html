@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register Sequence Classes | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -71,13 +74,13 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>BASE</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_sequence #(uvm_reg_item)</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">BASE</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_sequence #(uvm_reg_item)</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends BASE</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends BASE</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -142,15 +145,27 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CParameter"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.BASE" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">BASE</a></h3><div class=CBody><p>Specifies the sequence type to extend from.</p><p>When used as a translation sequence running on a bus sequencer, <i>BASE</i> must be compatible with the sequence type expected by the bus sequencer.</p><p>When used as a test sequence running on a particular sequencer, <i>BASE</i> must be compatible with the sequence type expected by that sequencer.</p><p>When used as a virtual test sequence without a sequencer, <i>BASE</i> does not need to be specified, i.e. the default specialization is adequate.</p><p>To maximize opportunities for reuse, user-defined RegModel sequences should &ldquo;promote&rdquo; the BASE parameter.</p><blockquote><pre>class my_reg_sequence #(type BASE=uvm_sequence #(uvm_reg_item))
-                              extends uvm_reg_sequence #(BASE);</pre></blockquote><p>This way, the RegModel sequence can be extended from user-defined base sequences.</p></div></div></div>
+<div class="CParameter"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.BASE" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">BASE</a></h3><div class=CBody><p>Specifies the sequence type to extend from.</p><p>When used as a translation sequence running on a bus sequencer, <i>BASE</i> must be compatible with the sequence type expected by the bus sequencer.</p><p>When used as a test sequence running on a particular sequencer, <i>BASE</i> must be compatible with the sequence type expected by that sequencer.</p><p>When used as a virtual test sequence without a sequencer, <i>BASE</i> does not need to be specified, i.e. the default specialization is adequate.</p><p>To maximize opportunities for reuse, user-defined RegModel sequences should &ldquo;promote&rdquo; the BASE parameter.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">my_reg_sequence</span> <span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">BASE</span><span class="sv-op">=</span><span class="sv-uvm-type">uvm_sequence</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_reg_item</span><span class="sv-op">)</span><span class="sv-op">)</span>
+                              <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_reg_sequence</span> <span class="sv-op">#(</span><span class="sv-ident">BASE</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>This way, the RegModel sequence can be extended from user-defined base sequences.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.model" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">model</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_block model
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_reg_block</span> <span class="sv-ident">model</span>
   </td></tr></table></blockquote><div class=CBody><p>Block abstraction this sequence executes on, defined only when this sequence is a user-defined test sequence.</p></div></div></div>
 
 
@@ -158,7 +173,7 @@
 
  <!--CONTENT index=4 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.adapter" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">adapter</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_adapter adapter
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_reg_adapter</span> <span class="sv-ident">adapter</span>
   </td></tr></table></blockquote><div class=CBody><p>Adapter to use for translating between abstract register transactions and physical bus transactions, defined only when this sequence is a translation sequence.</p></div></div></div>
 
 
@@ -168,10 +183,10 @@
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.reg_seqr" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">reg_seqr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=2>uvm_sequencer #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_reg_item</td>
+      <td class=PBeforeParameters colspan=2><span class="sv-proto-name">uvm_sequencer</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">uvm_reg_item</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=2>) reg_seqr</td></tr>
+      <td class=PAfterParameters colspan=2><span class="sv-op">) reg_seqr</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Layered upstream &ldquo;register&rdquo; sequencer.</p><p>Specifies the upstream sequencer between abstract register transactions and physical bus transactions.&nbsp; Defined only when this sequence is a translation sequence, and we want to &ldquo;pull&rdquo; from an upstream sequencer.</p></div></div></div>
@@ -183,13 +198,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.new" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;uvm_reg_sequence_inst&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;uvm_reg_sequence_inst&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Create a new instance, giving it the optional <i>name</i>.</p></div></div></div>
@@ -199,7 +214,7 @@
 
  <!--CONTENT index=7 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.body" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">body</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task body()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">body</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Continually gets a register transaction from the configured upstream sequencer, <a href="#uvm_reg_sequence.reg_seqr" class=LVariable id=link34  >reg_seqr</a>, and executes the corresponding bus transaction via <a href="#uvm_reg_sequence.do_reg_item" class=LMethod id=link35  >do_reg_item</a>.</p><p>User-defined RegModel test sequences must override body() and not call super.body(), else a warning will be issued and the calling process not return.</p></div></div></div>
 
 
@@ -209,11 +224,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.do_reg_item" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">do_reg_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task do_reg_item(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">do_reg_item</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Executes the given register transaction, <i>rw</i>, via the sequencer on which this sequence was started (i.e. m_sequencer).&nbsp; Uses the configured <a href="#uvm_reg_sequence.adapter" class=LVariable id=link36  >adapter</a> to convert the register transaction into the type expected by this sequencer.</p></div></div></div>
@@ -222,7 +237,31 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.Convenience_Write/Read_API" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">Convenience Write/<span class=HB> </span>Read API</a></h3><div class=CBody><p>The following methods delegate to the corresponding method in the register or memory element.&nbsp; They allow a sequence <i>body()</i> to do reads and writes without having to explicitly supply itself to <i>parent</i> sequence argument.&nbsp; Thus, a register write</p><blockquote><pre>model.regA.write(status, value, .parent(this));</pre></blockquote><p>can be written instead as</p><blockquote><pre>write_reg(model.regA, status, value);</pre></blockquote></div></div></div>
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.Convenience_Write/Read_API" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">Convenience Write/<span class=HB> </span>Read API</a></h3><div class=CBody><p>The following methods delegate to the corresponding method in the register or memory element.&nbsp; They allow a sequence <i>body()</i> to do reads and writes without having to explicitly supply itself to <i>parent</i> sequence argument.&nbsp; Thus, a register write</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>can be written instead as</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">write_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -231,57 +270,81 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.write_reg" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">write_reg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task write_reg(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap>rg,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_path_e&nbsp;</td>
-      <td class=PParameter nowrap>path</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> UVM_DEFAULT_PATH,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_map&nbsp;</td>
-      <td class=PParameter nowrap>map</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>prior</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> -1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">write_reg</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">rg</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_path_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">path</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_DEFAULT_PATH,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_map</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">map</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">prior</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> -1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Writes the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.write" class=LMethod id=link37  >uvm_reg::write</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>write_reg(model.regA, status, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.write(status, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Writes the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.write" class=LMethod id=link37  >uvm_reg::write</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">write_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -290,57 +353,81 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.read_reg" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">read_reg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task read_reg(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap>rg,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_path_e&nbsp;</td>
-      <td class=PParameter nowrap>path</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> UVM_DEFAULT_PATH,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_map&nbsp;</td>
-      <td class=PParameter nowrap>map</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>prior</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> -1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">read_reg</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">rg</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_path_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">path</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_DEFAULT_PATH,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_map</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">map</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">prior</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> -1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Reads the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.read" class=LMethod id=link38  >uvm_reg::read</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>read_reg(model.regA, status, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.read(status, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Reads the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.read" class=LMethod id=link38  >uvm_reg::read</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">read_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">read</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -349,47 +436,71 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.poke_reg" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">poke_reg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task poke_reg(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap>rg,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>kind</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">poke_reg</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">rg</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">kind</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Pokes the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.poke" class=LMethod id=link39  >uvm_reg::poke</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>poke_reg(model.regA, status, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.poke(status, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Pokes the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.poke" class=LMethod id=link39  >uvm_reg::poke</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">poke_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">poke</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -398,47 +509,71 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.peek_reg" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">peek_reg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task peek_reg(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap>rg,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>kind</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">peek_reg</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">rg</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">kind</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Peeks the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.peek" class=LMethod id=link40  >uvm_reg::peek</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>peek_reg(model.regA, status, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.peek(status, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Peeks the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.peek" class=LMethod id=link40  >uvm_reg::peek</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">peek_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">peek</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -447,52 +582,76 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.update_reg" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">update_reg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task update_reg(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap>rg,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_path_e&nbsp;</td>
-      <td class=PParameter nowrap>path</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> UVM_DEFAULT_PATH,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_map&nbsp;</td>
-      <td class=PParameter nowrap>map</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>prior</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> -1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">update_reg</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">rg</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_path_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">path</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_DEFAULT_PATH,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_map</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">map</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">prior</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> -1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Updates the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.update" class=LMethod id=link41  >uvm_reg::update</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>update_reg(model.regA, status, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.update(status, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Updates the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.update" class=LMethod id=link41  >uvm_reg::update</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">update_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">update</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -501,57 +660,81 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.mirror_reg" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">mirror_reg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task mirror_reg(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap>rg,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_check_e&nbsp;</td>
-      <td class=PParameter nowrap>check</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> UVM_NO_CHECK,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_path_e&nbsp;</td>
-      <td class=PParameter nowrap>path</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> UVM_DEFAULT_PATH,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_map&nbsp;</td>
-      <td class=PParameter nowrap>map</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>prior</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> -1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">mirror_reg</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">rg</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_check_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">check</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_NO_CHECK,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_path_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">path</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_DEFAULT_PATH,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_map</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">map</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">prior</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> -1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Mirrors the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.mirror" class=LMethod id=link42  >uvm_reg::mirror</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>mirror_reg(model.regA, status, UVM_CHECK);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.mirror(status, UVM_CHECK, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Mirrors the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.mirror" class=LMethod id=link42  >uvm_reg::mirror</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">mirror_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_CHECK</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">mirror</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_CHECK</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -560,62 +743,86 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.write_mem" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">write_mem</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task write_mem(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_mem&nbsp;</td>
-      <td class=PParameter nowrap>mem,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_addr_t&nbsp;</td>
-      <td class=PParameter nowrap>offset,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_path_e&nbsp;</td>
-      <td class=PParameter nowrap>path</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> UVM_DEFAULT_PATH,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_map&nbsp;</td>
-      <td class=PParameter nowrap>map</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>prior</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> -1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">write_mem</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_mem</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">mem</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_addr_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">offset</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_path_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">path</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_DEFAULT_PATH,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_map</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">map</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">prior</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> -1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Writes the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.write" class=LMethod id=link43  >uvm_mem::write</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>write_mem(model.regA, status, offset, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.write(status, offset, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Writes the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.write" class=LMethod id=link43  >uvm_mem::write</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">write_mem</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -624,62 +831,86 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.read_mem" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">read_mem</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task read_mem(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_mem&nbsp;</td>
-      <td class=PParameter nowrap>mem,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_addr_t&nbsp;</td>
-      <td class=PParameter nowrap>offset,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_path_e&nbsp;</td>
-      <td class=PParameter nowrap>path</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> UVM_DEFAULT_PATH,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_map&nbsp;</td>
-      <td class=PParameter nowrap>map</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>prior</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> -1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">read_mem</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_mem</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">mem</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_addr_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">offset</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_path_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">path</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_DEFAULT_PATH,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_map</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">map</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">prior</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> -1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Reads the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.read" class=LMethod id=link44  >uvm_mem::read</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>read_mem(model.regA, status, offset, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.read(status, offset, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Reads the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.read" class=LMethod id=link44  >uvm_mem::read</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">read_mem</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">read</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -688,52 +919,76 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.poke_mem" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">poke_mem</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task poke_mem(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_mem&nbsp;</td>
-      <td class=PParameter nowrap>mem,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_addr_t&nbsp;</td>
-      <td class=PParameter nowrap>offset,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>kind</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">poke_mem</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_mem</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">mem</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_addr_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">offset</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">kind</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Pokes the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.poke" class=LMethod id=link45  >uvm_mem::poke</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>poke_mem(model.regA, status, offset, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.poke(status, offset, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Pokes the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.poke" class=LMethod id=link45  >uvm_mem::poke</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">poke_mem</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">poke</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -742,52 +997,76 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_sequence.peek_mem" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">peek_mem</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual task peek_mem(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_mem&nbsp;</td>
-      <td class=PParameter nowrap>mem,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_status_e&nbsp;</td>
-      <td class=PParameter nowrap>status,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_addr_t&nbsp;</td>
-      <td class=PParameter nowrap>offset,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>kind</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>extension</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>fname</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>lineno</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">peek_mem</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_mem</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">mem</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_status_e</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">status</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_addr_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">offset</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">kind</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">extension</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">fname</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">lineno</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Peeks the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.peek" class=LMethod id=link46  >uvm_mem::peek</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><blockquote><pre>peek_mem(model.regA, status, offset, value);</pre></blockquote><p>is equivalent to</p><blockquote><pre>model.regA.peek(status, offset, value, .parent(this));</pre></blockquote></div></div></div>
+<div class=CBody><p>Peeks the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.peek" class=LMethod id=link46  >uvm_mem::peek</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">peek_mem</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>is equivalent to</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">peek</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -820,11 +1099,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual class uvm_reg_frontdoor extends uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(uvm_sequence_item)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> uvm_reg_frontdoor <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">uvm_sequence_item</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -857,7 +1136,7 @@
 
  <!--CONTENT index=22 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_frontdoor.rw_info" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">rw_info</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_item rw_info
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_reg_item</span> <span class="sv-ident">rw_info</span>
   </td></tr></table></blockquote><div class=CBody><p>Holds information about the register being read or written</p></div></div></div>
 
 
@@ -865,7 +1144,7 @@
 
  <!--CONTENT index=23 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_frontdoor.sequencer" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">sequencer</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_sequencer_base sequencer
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_sequencer_base</span> <span class="sv-ident">sequencer</span>
   </td></tr></table></blockquote><div class=CBody><p>Sequencer executing the operation</p></div></div></div>
 
 
@@ -881,13 +1160,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_frontdoor.new" href="../../src_view/reg/uvm_reg_sequence.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="57">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Constructor, new object given optional <i>name</i>.</p></div></div></div>
@@ -901,6 +1180,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

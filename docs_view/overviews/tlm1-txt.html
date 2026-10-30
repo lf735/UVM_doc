@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TLM1 Interfaces, Ports, Exports and Transport Interfaces | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -73,30 +76,54 @@
 
 
  <!--CONTENT index=4 -->
-<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="Ports,Exports,and_Imps" href="#">Ports, Exports, and Imps</a></h3><div class=CBody><p>The UVM provides unidirectional ports, exports, and implementation ports for connecting your components via the TLM interfaces.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Ports</td><td class=CDLDescription>instantiated in components that <i>require</i>, or <i>use</i>, the associate interface to initiate transaction requests.</td></tr><tr><td class=CDLEntry>Exports</td><td class=CDLDescription>instantiated by components that <i>forward</i> an implementation of the methods defined in the associated interface.&nbsp; The implementation is typically provided by an <i>imp</i> port in a child component.</td></tr><tr><td class=CDLEntry>Imps</td><td class=CDLDescription>instantiated by components that <i>provide</i> or <i>implement</i> an implementation of the methods defined in the associated interface.</td></tr></table><img src="../../images/uvm_ref_tlm_uni_ports.gif" width="397" height="227"><p>A summary of port, export, and imp declarations are</p><blockquote><pre>class uvm_*_export #(type T=int)
-  extends uvm_port_base #(tlm_if_base #(T,T));
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="Ports,Exports,and_Imps" href="#">Ports, Exports, and Imps</a></h3><div class=CBody><p>The UVM provides unidirectional ports, exports, and implementation ports for connecting your components via the TLM interfaces.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Ports</td><td class=CDLDescription>instantiated in components that <i>require</i>, or <i>use</i>, the associate interface to initiate transaction requests.</td></tr><tr><td class=CDLEntry>Exports</td><td class=CDLDescription>instantiated by components that <i>forward</i> an implementation of the methods defined in the associated interface.&nbsp; The implementation is typically provided by an <i>imp</i> port in a child component.</td></tr><tr><td class=CDLEntry>Imps</td><td class=CDLDescription>instantiated by components that <i>provide</i> or <i>implement</i> an implementation of the methods defined in the associated interface.</td></tr></table><img src="../../images/uvm_ref_tlm_uni_ports.gif" width="397" height="227"><p>A summary of port, export, and imp declarations are</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_</span><span class="sv-op">*</span><span class="sv-ident">_export</span> <span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span>
+  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#(</span><span class="sv-ident">tlm_if_base</span> <span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-class uvm_*_port #(type T=int)
-  extends uvm_port_base #(tlm_if_base #(T,T));
+<span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_</span><span class="sv-op">*</span><span class="sv-ident">_port</span> <span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span>
+  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#(</span><span class="sv-ident">tlm_if_base</span> <span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-class uvm_*_imp #(type T=int)
-  extends uvm_port_base #(tlm_if_base #(T,T));</pre></blockquote><p>where the asterisk can be any of</p><blockquote><pre>blocking_put
-nonblocking_put
-put
+<span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_</span><span class="sv-op">*</span><span class="sv-ident">_imp</span> <span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span>
+  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#(</span><span class="sv-ident">tlm_if_base</span> <span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>where the asterisk can be any of</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">blocking_put</span>
+<span class="sv-ident">nonblocking_put</span>
+<span class="sv-ident">put</span>
 
-blocking_get
-nonblocking_get
-get
+<span class="sv-ident">blocking_get</span>
+<span class="sv-ident">nonblocking_get</span>
+<span class="sv-ident">get</span>
 
-blocking_peek
-nonblocking_peek
-peek
+<span class="sv-ident">blocking_peek</span>
+<span class="sv-ident">nonblocking_peek</span>
+<span class="sv-ident">peek</span>
 
-blocking_get_peek
-nonblocking_get_peek
-get_peek
+<span class="sv-ident">blocking_get_peek</span>
+<span class="sv-ident">nonblocking_get_peek</span>
+<span class="sv-ident">get_peek</span>
 
-analysis</pre></blockquote></div></div></div>
+<span class="sv-ident">analysis</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -120,185 +147,221 @@ analysis</pre></blockquote></div></div></div>
 
 
  <!--CONTENT index=8 -->
-<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="Ports,Exports,and_Imps" href="#">Ports, Exports, and Imps</a></h3><div class=CBody><p>The UVM provides bidirectional ports, exports, and implementation ports for connecting your components via the TLM interfaces.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Ports</td><td class=CDLDescription>instantiated in components that <i>require</i>, or <i>use</i>, the associate interface to initiate transaction requests.</td></tr><tr><td class=CDLEntry>Exports</td><td class=CDLDescription>instantiated by components that <i>forward</i> an implementation of the methods defined in the associated interface.&nbsp; The implementation is typically provided by an <i>imp</i> port in a child component.</td></tr><tr><td class=CDLEntry>Imps</td><td class=CDLDescription>instantiated by components that <i>provide</i> or <i>implement</i> an implementation of the methods defined in the associated interface.</td></tr></table><img src="../../images/uvm_ref_tlm_bidir_ports.gif" width="409" height="227"><p>A summary of port, export, and imp declarations are</p><blockquote><pre>class uvm_*_port #(type REQ=int, RSP=int)
-  extends uvm_port_base #(tlm_if_base #(REQ, RSP));
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="Ports,Exports,and_Imps" href="#">Ports, Exports, and Imps</a></h3><div class=CBody><p>The UVM provides bidirectional ports, exports, and implementation ports for connecting your components via the TLM interfaces.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Ports</td><td class=CDLDescription>instantiated in components that <i>require</i>, or <i>use</i>, the associate interface to initiate transaction requests.</td></tr><tr><td class=CDLEntry>Exports</td><td class=CDLDescription>instantiated by components that <i>forward</i> an implementation of the methods defined in the associated interface.&nbsp; The implementation is typically provided by an <i>imp</i> port in a child component.</td></tr><tr><td class=CDLEntry>Imps</td><td class=CDLDescription>instantiated by components that <i>provide</i> or <i>implement</i> an implementation of the methods defined in the associated interface.</td></tr></table><img src="../../images/uvm_ref_tlm_bidir_ports.gif" width="409" height="227"><p>A summary of port, export, and imp declarations are</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_</span><span class="sv-op">*</span><span class="sv-ident">_port</span> <span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">REQ</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">,</span> <span class="sv-ident">RSP</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span>
+  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#(</span><span class="sv-ident">tlm_if_base</span> <span class="sv-op">#(</span><span class="sv-ident">REQ</span><span class="sv-op">,</span> <span class="sv-ident">RSP</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-class uvm_*_export #(type REQ=int, RSP=int)
-  extends uvm_port_base #(tlm_if_base #(REQ, RSP));
+<span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_</span><span class="sv-op">*</span><span class="sv-ident">_export</span> <span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">REQ</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">,</span> <span class="sv-ident">RSP</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span>
+  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#(</span><span class="sv-ident">tlm_if_base</span> <span class="sv-op">#(</span><span class="sv-ident">REQ</span><span class="sv-op">,</span> <span class="sv-ident">RSP</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-class uvm_*_imp #(type REQ=int, RSP=int)
-  extends uvm_port_base #(tlm_if_base #(REQ, RSP));</pre></blockquote><p>where the asterisk can be any of</p><blockquote><pre>transport
-blocking_transport
-nonblocking_transport
+<span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_</span><span class="sv-op">*</span><span class="sv-ident">_imp</span> <span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">REQ</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">,</span> <span class="sv-ident">RSP</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span>
+  <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_port_base</span> <span class="sv-op">#(</span><span class="sv-ident">tlm_if_base</span> <span class="sv-op">#(</span><span class="sv-ident">REQ</span><span class="sv-op">,</span> <span class="sv-ident">RSP</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>where the asterisk can be any of</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">transport</span>
+<span class="sv-ident">blocking_transport</span>
+<span class="sv-ident">nonblocking_transport</span>
 
-blocking_master
-nonblocking_master
-master
+<span class="sv-ident">blocking_master</span>
+<span class="sv-ident">nonblocking_master</span>
+<span class="sv-ident">master</span>
 
-blocking_slave
-nonblocking_slave
-slave</pre></blockquote></div></div></div>
+<span class="sv-ident">blocking_slave</span>
+<span class="sv-ident">nonblocking_slave</span>
+<span class="sv-ident">slave</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=9 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Usage" href="#">Usage</a></h3><div class=CBody><p>This example illustrates basic TLM connectivity using the blocking put interface.</p><img src="../../images/uvm_ref_tlm_hierarchy.gif" width="486" height="236"><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>port-to-port</td><td class=CDLDescription>leaf1&rsquo;s <i>out</i> port is connected to its parent&rsquo;s (comp1) <i>out</i> port</td></tr><tr><td class=CDLEntry>port-to-export</td><td class=CDLDescription>comp1&rsquo;s <i>out</i> port is connected to comp2&rsquo;s <i>in</i> export</td></tr><tr><td class=CDLEntry>export-to-export</td><td class=CDLDescription>comp2&rsquo;s <i>in</i> export is connected to its child&rsquo;s (subcomp2) <i>in</i> export</td></tr><tr><td class=CDLEntry>export-to-imp</td><td class=CDLDescription>subcomp2&rsquo;s <i>in</i> export is connected leaf2&rsquo;s <i>in</i> imp port.</td></tr><tr><td class=CDLEntry>imp-to-implementation</td><td class=CDLDescription>leaf2&rsquo;s <i>in</i> imp port is connected to its implementation, leaf2</td></tr></table><p>Hierarchical port connections are resolved and optimized just before <a href="../base/uvm_component-svh.html#uvm_component.end_of_elaboration_phase" class=LMethod id=link1  >uvm_component::end_of_elaboration_phase</a>.&nbsp; After optimization, calling any port&rsquo;s interface method (e.g. leaf1.out.put(trans)) incurs a single hop to get to the implementation (e.g. leaf2&rsquo;s put task), no matter how far up and down the hierarchy the implementation resides.</p><blockquote><pre>`include &quot;uvm_pkg.sv&quot;
-import uvm_pkg::*;
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Usage" href="#">Usage</a></h3><div class=CBody><p>This example illustrates basic TLM connectivity using the blocking put interface.</p><img src="../../images/uvm_ref_tlm_hierarchy.gif" width="486" height="236"><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>port-to-port</td><td class=CDLDescription>leaf1&rsquo;s <i>out</i> port is connected to its parent&rsquo;s (comp1) <i>out</i> port</td></tr><tr><td class=CDLEntry>port-to-export</td><td class=CDLDescription>comp1&rsquo;s <i>out</i> port is connected to comp2&rsquo;s <i>in</i> export</td></tr><tr><td class=CDLEntry>export-to-export</td><td class=CDLDescription>comp2&rsquo;s <i>in</i> export is connected to its child&rsquo;s (subcomp2) <i>in</i> export</td></tr><tr><td class=CDLEntry>export-to-imp</td><td class=CDLDescription>subcomp2&rsquo;s <i>in</i> export is connected leaf2&rsquo;s <i>in</i> imp port.</td></tr><tr><td class=CDLEntry>imp-to-implementation</td><td class=CDLDescription>leaf2&rsquo;s <i>in</i> imp port is connected to its implementation, leaf2</td></tr></table><p>Hierarchical port connections are resolved and optimized just before <a href="../base/uvm_component-svh.html#uvm_component.end_of_elaboration_phase" class=LMethod id=link1  >uvm_component::end_of_elaboration_phase</a>.&nbsp; After optimization, calling any port&rsquo;s interface method (e.g. leaf1.out.put(trans)) incurs a single hop to get to the implementation (e.g. leaf2&rsquo;s put task), no matter how far up and down the hierarchy the implementation resides.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`include</span> <span class="sv-string">&quot;uvm_pkg.sv&quot;</span>
+<span class="sv-keyword">import</span> <span class="sv-uvm-type">uvm_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span>
 
-class trans extends uvm_transaction;
-  rand int addr;
-  rand int data;
-  rand bit write;
-endclass
+<span class="sv-keyword">class</span> <span class="sv-ident">trans</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_transaction</span><span class="sv-op">;</span>
+  <span class="sv-keyword">rand</span> <span class="sv-keyword">int</span> <span class="sv-ident">addr</span><span class="sv-op">;</span>
+  <span class="sv-keyword">rand</span> <span class="sv-keyword">int</span> <span class="sv-ident">data</span><span class="sv-op">;</span>
+  <span class="sv-keyword">rand</span> <span class="sv-keyword">bit</span> <span class="sv-ident">write</span><span class="sv-op">;</span>
+<span class="sv-keyword">endclass</span>
 
-class leaf1 extends uvm_component;
+<span class="sv-keyword">class</span> <span class="sv-ident">leaf1</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
 
-  `uvm_component_utils(leaf1)
+  <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">leaf1</span><span class="sv-op">)</span>
 
-  uvm_blocking_put_port #(trans) out;
+  <span class="sv-uvm-type">uvm_blocking_put_port</span> <span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">)</span> <span class="sv-ident">out</span><span class="sv-op">;</span>
 
-  function new(string name, uvm_component parent=null);
-    super.new(name,parent);
-    out = new(&quot;out&quot;,this);
-  endfunction
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">=</span><span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">out</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;out&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  virtual task run_phase(uvm_phase phase);
-    trans t;
-    phase.raise_objection(this, &quot;prolonging run_phase&quot;);
-    t = new;
-    t.randomize();
-    out.put(t);
-    phase.drop_objection(this, &quot;prolonging run_phase&quot;);
-  endtask
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-method">run_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">trans</span> <span class="sv-ident">t</span><span class="sv-op">;</span>
+    <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">raise_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;prolonging run_phase&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">t</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">;</span>
+    <span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">out</span><span class="sv-op">.</span><span class="sv-method">put</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">drop_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;prolonging run_phase&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endtask</span>
 
-endclass
-
-
-class comp1 extends uvm_component;
-
-  `uvm_component_utils(comp1)
-
-  uvm_blocking_put_port #(trans) out;
-
-  leaf1 leaf;
-
-  function new(string name, uvm_component parent=null);
-    super.new(name,parent);
-  endfunction
-
-  virtual function void build_phase(uvm_phase phase);
-    out = new(&quot;out&quot;,this);
-    leaf = new(&quot;leaf1&quot;,this);
-  endfunction
-
-  // connect port to port
-  virtual function void connect_phase(uvm_phase phase);
-    leaf.out.connect(out);
-  endfunction
-
-endclass
+<span class="sv-keyword">endclass</span>
 
 
-class leaf2 extends uvm_component;
+<span class="sv-keyword">class</span> <span class="sv-ident">comp1</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
 
-  `uvm_component_utils(leaf2)
+  <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">comp1</span><span class="sv-op">)</span>
 
-  uvm_blocking_put_imp #(trans,leaf2) in;
+  <span class="sv-uvm-type">uvm_blocking_put_port</span> <span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">)</span> <span class="sv-ident">out</span><span class="sv-op">;</span>
 
-  function new(string name, uvm_component parent=null);
-    super.new(name,parent);
-    // connect imp to implementation (this)
-    in = new(&quot;in&quot;,this);
-  endfunction
+  <span class="sv-ident">leaf1</span> <span class="sv-ident">leaf</span><span class="sv-op">;</span>
 
-  virtual task put(trans t);
-    $display(&quot;Got trans: addr=%0d, data=%0d, write=%0d&quot;,
-        t.addr, t.data, t.write);
-  endtask
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">=</span><span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-endclass
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">out</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;out&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">leaf</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;leaf1&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
+  <span class="sv-comment">// connect port to port</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">connect_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">leaf</span><span class="sv-op">.</span><span class="sv-ident">out</span><span class="sv-op">.</span><span class="sv-method">connect</span><span class="sv-op">(</span><span class="sv-ident">out</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-class subcomp2 extends uvm_component;
-
-  `uvm_component_utils(subcomp2)
-
-  uvm_blocking_put_export #(trans) in;
-
-  leaf2 leaf;
-
-  function new(string name, uvm_component parent=null);
-    super.new(name,parent);
-  endfunction
-
-  virtual function void build_phase(uvm_phase phase);
-    in = new(&quot;in&quot;,this);
-    leaf = new(&quot;leaf2&quot;,this);
-  endfunction
-
-  // connect export to imp
-  virtual function void connect_phase(uvm_phase phase);
-    in.connect(leaf.in);
-  endfunction
-
-endclass
+<span class="sv-keyword">endclass</span>
 
 
-class comp2 extends uvm_component;
+<span class="sv-keyword">class</span> <span class="sv-ident">leaf2</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
 
-  `uvm_component_utils(comp2)
+  <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">leaf2</span><span class="sv-op">)</span>
 
-  uvm_blocking_put_export #(trans) in;
+  <span class="sv-uvm-type">uvm_blocking_put_imp</span> <span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">,</span><span class="sv-ident">leaf2</span><span class="sv-op">)</span> <span class="sv-ident">in</span><span class="sv-op">;</span>
 
-  subcomp2 subcomp;
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">=</span><span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-comment">// connect imp to implementation (this)</span>
+    <span class="sv-ident">in</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;in&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  function new(string name, uvm_component parent=null);
-    super.new(name,parent);
-  endfunction
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-method">put</span><span class="sv-op">(</span><span class="sv-ident">trans</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    $<span class="sv-method">display</span><span class="sv-op">(</span><span class="sv-string">&quot;Got trans: addr=%0d, data=%0d, write=%0d&quot;</span><span class="sv-op">,</span>
+        <span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-ident">addr</span><span class="sv-op">,</span> <span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-ident">data</span><span class="sv-op">,</span> <span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-ident">write</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endtask</span>
 
-  virtual function void build_phase(uvm_phase phase);
-    in = new(&quot;in&quot;,this);
-    subcomp = new(&quot;subcomp2&quot;,this);
-  endfunction
-
-  // connect export to export
-  virtual function void connect_phase(uvm_phase phase);
-    in.connect(subcomp.in);
-  endfunction
-
-endclass
+<span class="sv-keyword">endclass</span>
 
 
-class env extends uvm_component;
+<span class="sv-keyword">class</span> <span class="sv-ident">subcomp2</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
 
-  `uvm_component_utils(comp1)
+  <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">subcomp2</span><span class="sv-op">)</span>
 
-  comp1 comp1_i;
-  comp2 comp2_i;
+  <span class="sv-uvm-type">uvm_blocking_put_export</span> <span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">)</span> <span class="sv-ident">in</span><span class="sv-op">;</span>
 
-  function new(string name, uvm_component parent=null);
-    super.new(name,parent);
-  endfunction
+  <span class="sv-ident">leaf2</span> <span class="sv-ident">leaf</span><span class="sv-op">;</span>
 
-  virtual function void build_phase(uvm_phase phase);
-    comp1_i = new(&quot;comp1&quot;,this);
-    comp2_i = new(&quot;comp2&quot;,this);
-  endfunction
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">=</span><span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  // connect port to export
-  virtual function void connect_phase(uvm_phase phase);
-    comp1_i.out.connect(comp2_i.in);
-  endfunction
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">in</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;in&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">leaf</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;leaf2&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-endclass
+  <span class="sv-comment">// connect export to imp</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">connect_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">in</span><span class="sv-op">.</span><span class="sv-method">connect</span><span class="sv-op">(</span><span class="sv-ident">leaf</span><span class="sv-op">.</span><span class="sv-ident">in</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+
+<span class="sv-keyword">endclass</span>
 
 
-module top;
-  env e = new(&quot;env&quot;);
-  initial run_test();
-  initial #10 uvm_top.stop_request();
-endmodule</pre></blockquote></div></div></div>
+<span class="sv-keyword">class</span> <span class="sv-ident">comp2</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+
+  <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">comp2</span><span class="sv-op">)</span>
+
+  <span class="sv-uvm-type">uvm_blocking_put_export</span> <span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">)</span> <span class="sv-ident">in</span><span class="sv-op">;</span>
+
+  <span class="sv-ident">subcomp2</span> <span class="sv-ident">subcomp</span><span class="sv-op">;</span>
+
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">=</span><span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">in</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;in&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">subcomp</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;subcomp2&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+
+  <span class="sv-comment">// connect export to export</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">connect_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">in</span><span class="sv-op">.</span><span class="sv-method">connect</span><span class="sv-op">(</span><span class="sv-ident">subcomp</span><span class="sv-op">.</span><span class="sv-ident">in</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+
+<span class="sv-keyword">endclass</span>
+
+
+<span class="sv-keyword">class</span> <span class="sv-ident">env</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+
+  <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">comp1</span><span class="sv-op">)</span>
+
+  <span class="sv-ident">comp1</span> <span class="sv-ident">comp1_i</span><span class="sv-op">;</span>
+  <span class="sv-ident">comp2</span> <span class="sv-ident">comp2_i</span><span class="sv-op">;</span>
+
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">=</span><span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">comp1_i</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;comp1&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">comp2_i</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;comp2&quot;</span><span class="sv-op">,</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+
+  <span class="sv-comment">// connect port to export</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">connect_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">comp1_i</span><span class="sv-op">.</span><span class="sv-ident">out</span><span class="sv-op">.</span><span class="sv-method">connect</span><span class="sv-op">(</span><span class="sv-ident">comp2_i</span><span class="sv-op">.</span><span class="sv-ident">in</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+
+<span class="sv-keyword">endclass</span>
+
+
+<span class="sv-keyword">module</span> <span class="sv-ident">top</span><span class="sv-op">;</span>
+  <span class="sv-ident">env</span> <span class="sv-ident">e</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;env&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">initial</span> <span class="sv-method">run_test</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">initial</span> <span class="sv-op">#</span><span class="sv-number">10</span> <span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-method">stop_request</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">endmodule</span></code></pre>
+</div></div></div></div>
 
 </div><!--Content-->
 
@@ -309,6 +372,29 @@ endmodule</pre></blockquote></div></div></div>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

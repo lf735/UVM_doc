@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_domain | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -52,7 +55,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_domain extends uvm_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_domain</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=1 -->
@@ -94,12 +97,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_domain.get_domains" href="../../src_view/base/uvm_domain.svh.html#L65" class="src-code-link" data-src-file="base/uvm_domain.svh" data-src-line="65">get_domains</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>static function void get_domains(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_domain&nbsp;</td>
-      <td class=PParameter nowrap width=100%>domains[string]</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">get_domains</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_domain</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">domains</span>[<span class="sv-param-name">string</span>]</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Provides a list of all domains in the provided <i>domains</i> argument.</p></div></div></div>
@@ -109,7 +112,7 @@
 
  <!--CONTENT index=3 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_domain.get_uvm_schedule" href="../../src_view/base/uvm_domain.svh.html#L65" class="src-code-link" data-src-file="base/uvm_domain.svh" data-src-line="65">get_uvm_schedule</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_phase get_uvm_schedule()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-proto-name">get_uvm_schedule</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the &ldquo;UVM&rdquo; schedule, which consists of the run-time phases that all components execute when participating in the &ldquo;UVM&rdquo; domain.</p></div></div></div>
 
 
@@ -117,7 +120,7 @@
 
  <!--CONTENT index=4 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_domain.get_common_domain" href="../../src_view/base/uvm_domain.svh.html#L65" class="src-code-link" data-src-file="base/uvm_domain.svh" data-src-line="65">get_common_domain</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_domain get_common_domain()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_domain</span> <span class="sv-proto-name">get_common_domain</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the &ldquo;common&rdquo; domain, which consists of the common phases that all components execute in sync with each other.&nbsp; Phases in the &ldquo;common&rdquo; domain are build, connect, end_of_elaboration, start_of_simulation, run, extract, check, report, and final.</p></div></div></div>
 
 
@@ -127,11 +130,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_domain.add_uvm_phases" href="../../src_view/base/uvm_domain.svh.html#L65" class="src-code-link" data-src-file="base/uvm_domain.svh" data-src-line="65">add_uvm_phases</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function void add_uvm_phases(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
-      <td class=PParameter nowrap width=100%>schedule</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add_uvm_phases</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">schedule</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Appends to the given <i>schedule</i> the built-in UVM phases.</p></div></div></div>
@@ -141,7 +144,7 @@
 
  <!--CONTENT index=6 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_domain.get_uvm_domain" href="../../src_view/base/uvm_domain.svh.html#L65" class="src-code-link" data-src-file="base/uvm_domain.svh" data-src-line="65">get_uvm_domain</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_domain get_uvm_domain()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_domain</span> <span class="sv-proto-name">get_uvm_domain</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get a handle to the singleton <i>uvm</i> domain</p></div></div></div>
 
 
@@ -151,11 +154,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_domain.new" href="../../src_view/base/uvm_domain.svh.html#L65" class="src-code-link" data-src-file="base/uvm_domain.svh" data-src-line="65">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Create a new instance of a phase domain.</p></div></div></div>
@@ -167,11 +170,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_domain.jump" href="../../src_view/base/uvm_domain.svh.html#L65" class="src-code-link" data-src-file="base/uvm_domain.svh" data-src-line="65">jump</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void jump(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
-      <td class=PParameter nowrap width=100%>phase</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">jump</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">phase</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>jumps all active phases of this domain to to-phase if there is a path between active-phase and to-phase</p></div></div></div>
@@ -185,6 +188,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Objection Mechanism | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -71,7 +74,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_objection extends uvm_report_object
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_objection</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_report_object</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=2 -->
@@ -143,13 +146,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.new" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates a new objection instance.&nbsp; Accesses the command line argument +UVM_OBJECTION_TRACE to turn tracing on for all objection objects.</p></div></div></div>
@@ -161,13 +164,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.trace_mode" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">trace_mode</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function bit trace_mode (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>mode</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>-1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">trace_mode</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">mode</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">-1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Set or get the trace mode for the objection object.&nbsp; If no argument is specified (or an argument other than 0 or 1) the current trace mode is unaffected.&nbsp; A trace_mode of 0 turns tracing off.&nbsp; A trace mode of 1 turns tracing on.&nbsp; The return value is the mode prior to being reset.</p></div></div></div>
@@ -185,27 +188,63 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.set_propagate_mode" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">set_propagate_mode</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void set_propagate_mode (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap width=100%>prop_mode</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_propagate_mode</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">prop_mode</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Sets the propagation mode for this objection.</p><p>By default, objections support hierarchical propagation for components.&nbsp;  For example, if we have the following basic component tree:</p><blockquote><pre>uvm_top.parent.child</pre></blockquote><p>Any objections raised by &lsquo;child&rsquo; would get propagated down to parent, and then to uvm_test_top.&nbsp;  Resulting in the following counts and totals:</p><blockquote><pre>                     | count | total |
-uvm_top.parent.child |     1 |    1  |
-uvm_top.parent       |     0 |    1  |
-uvm_top              |     0 |    1  |</pre></blockquote><p>While propagations such as these can be useful, if they are unused by the testbench then they are simply an unnecessary performance hit.&nbsp;  If the testbench is not going to use this functionality, then the performance can be improved by setting the propagation mode to 0.</p><p>When propagation mode is set to 0, all intermediate callbacks between the <i>source</i> and <i>top</i> will be skipped.&nbsp;  This would result in the following counts and totals for the above objection:</p><blockquote><pre>                     | count | total |
-uvm_top.parent.child |     1 |    1  |
-uvm_top.parent       |     0 |    0  |
-uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagation mode changes the behavior of the objection, it can only be safely changed if there are no objections <i>raised</i> or <i>draining</i>.&nbsp;  Any attempts to change the mode while objections are <i>raised</i> or <i>draining</i> will result in an error.</p></div></div></div>
+<div class=CBody><p>Sets the propagation mode for this objection.</p><p>By default, objections support hierarchical propagation for components.&nbsp;  For example, if we have the following basic component tree:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span><span class="sv-op">.</span><span class="sv-ident">child</span></code></pre>
+</div><p>Any objections raised by &lsquo;child&rsquo; would get propagated down to parent, and then to uvm_test_top.&nbsp;  Resulting in the following counts and totals:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code>                     <span class="sv-op">|</span> <span class="sv-ident">count</span> <span class="sv-op">|</span> <span class="sv-ident">total</span> <span class="sv-op">|</span>
+<span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span><span class="sv-op">.</span><span class="sv-ident">child</span> <span class="sv-op">|</span>     <span class="sv-number">1</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span>
+<span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span>       <span class="sv-op">|</span>     <span class="sv-number">0</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span>
+<span class="sv-uvm-type">uvm_top</span>              <span class="sv-op">|</span>     <span class="sv-number">0</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span></code></pre>
+</div><p>While propagations such as these can be useful, if they are unused by the testbench then they are simply an unnecessary performance hit.&nbsp;  If the testbench is not going to use this functionality, then the performance can be improved by setting the propagation mode to 0.</p><p>When propagation mode is set to 0, all intermediate callbacks between the <i>source</i> and <i>top</i> will be skipped.&nbsp;  This would result in the following counts and totals for the above objection:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code>                     <span class="sv-op">|</span> <span class="sv-ident">count</span> <span class="sv-op">|</span> <span class="sv-ident">total</span> <span class="sv-op">|</span>
+<span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span><span class="sv-op">.</span><span class="sv-ident">child</span> <span class="sv-op">|</span>     <span class="sv-number">1</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span>
+<span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span>       <span class="sv-op">|</span>     <span class="sv-number">0</span> <span class="sv-op">|</span>    <span class="sv-number">0</span>  <span class="sv-op">|</span>
+<span class="sv-uvm-type">uvm_top</span>              <span class="sv-op">|</span>     <span class="sv-number">0</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span></code></pre>
+</div><p>Since the propagation mode changes the behavior of the objection, it can only be safely changed if there are no objections <i>raised</i> or <i>draining</i>.&nbsp;  Any attempts to change the mode while objections are <i>raised</i> or <i>draining</i> will result in an error.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.get_propagate_mode" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">get_propagate_mode</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit get_propagate_mode()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">get_propagate_mode</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the propagation mode for this objection.</p></div></div></div>
 
 
@@ -215,21 +254,21 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.raise_objection" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">raise_objection</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual function void raise_objection (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>description</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>count</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">raise_objection</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">description</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">count</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Raises the number of objections for the source <i>object</i> by <i>count</i>, which defaults to 1.&nbsp;  The <i>object</i> is usually the <i>this</i> handle of the caller.&nbsp; If <i>object</i> is not specified or <i>null</i>, the implicit top-level component, <a href="uvm_root-svh.html#uvm_root" class=LClass id=link29  >uvm_root</a>, is chosen.</p><p>Raising an objection causes the following.</p><ul><li>The source and total objection counts for <i>object</i> are increased by <i>count</i>.&nbsp; <i>description</i> is a string that marks a specific objection and is used in tracing/debug.</li><li>The objection&rsquo;s <a href="#uvm_objection.raised" class=LMethod id=link30  >raised</a> virtual method is called, which calls the <a href="uvm_component-svh.html#uvm_component.raised" class=LMethod id=link31  >uvm_component::raised</a> method for all of the components up the hierarchy.</li></ul></div></div></div>
@@ -241,21 +280,21 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.drop_objection" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">drop_objection</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual function void drop_objection (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>description</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>count</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">drop_objection</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">description</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">count</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Drops the number of objections for the source <i>object</i> by <i>count</i>, which defaults to 1.&nbsp;  The <i>object</i> is usually the <i>this</i> handle of the caller.&nbsp; If <i>object</i> is not specified or <i>null</i>, the implicit top-level component, <a href="uvm_root-svh.html#uvm_root" class=LClass id=link32  >uvm_root</a>, is chosen.</p><p>Dropping an objection causes the following.</p><ul><li>The source and total objection counts for <i>object</i> are decreased by <i>count</i>.&nbsp; It is an error to drop the objection count for <i>object</i> below zero.</li><li>The objection&rsquo;s <a href="#uvm_objection.dropped" class=LMethod id=link33  >dropped</a> virtual method is called, which calls the <a href="uvm_component-svh.html#uvm_component.dropped" class=LMethod id=link34  >uvm_component::dropped</a> method for all of the components up the hierarchy.</li><li>If the total objection count has not reached zero for <i>object</i>, then the drop is propagated up the object hierarchy as with <a href="#uvm_objection.raise_objection" class=LMethod id=link35  >raise_objection</a>.&nbsp; Then, each object in the hierarchy will have updated their <i>source</i> counts--objections that they originated--and <i>total</i> counts--the total number of objections by them and all their descendants.</li></ul><p>If the total objection count reaches zero, propagation up the hierarchy is deferred until a configurable drain-time has passed and the <a href="uvm_component-svh.html#uvm_component.all_dropped" class=LMethod id=link36  >uvm_component::all_dropped</a> callback for the current hierarchy level has returned.&nbsp; The following process occurs for each instance up the hierarchy from the source caller:</p><p>A process is forked in a non-blocking fashion, allowing the <i>drop</i> call to return.&nbsp; The forked process then does the following:</p><ul><li>If a drain time was set for the given <i>object</i>, the process waits for that amount of time.</li><li>The objection&rsquo;s <a href="#uvm_objection.all_dropped" class=LMethod id=link37  >all_dropped</a> virtual method is called, which calls the <a href="uvm_component-svh.html#uvm_component.all_dropped" class=LMethod id=link38  >uvm_component::all_dropped</a> method (if <i>object</i> is a component).</li><li>The process then waits for the <i>all_dropped</i> callback to complete.</li><li>After the drain time has elapsed and all_dropped callback has completed, propagation of the dropped objection to the parent proceeds as described in <a href="#uvm_objection.raise_objection" class=LMethod id=link39  >raise_objection</a>, except as described below.</li></ul><p>If a new objection for this <i>object</i> or any of its descendants is raised during the drain time or during execution of the all_dropped callback at any point, the hierarchical chain described above is terminated and the dropped callback does not go up the hierarchy.&nbsp; The raised objection will propagate up the hierarchy, but the number of raised propagated up is reduced by the number of drops that were pending waiting for the all_dropped/drain time completion.&nbsp; Thus, if exactly one objection caused the count to go to zero, and during the drain exactly one new objection comes in, no raises or drops are propagated up the hierarchy,</p><p>As an optimization, if the <i>object</i> has no set drain-time and no registered callbacks, the forked process can be skipped and propagation proceeds immediately to the parent as described.</p></div></div></div>
@@ -267,13 +306,13 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.clear" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">clear</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual function void clear(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">clear</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Immediately clears the objection state.&nbsp; All counts are cleared and the any processes waiting on a call to wait_for(UVM_ALL_DROPPED, uvm_top) are released.</p><p>The caller, if a uvm_object-based object, should pass its &lsquo;this&rsquo; handle to the <i>obj</i> argument to document who cleared the objection.&nbsp; Any drain_times set by the user are not affected.</p></div></div></div>
@@ -297,17 +336,17 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.raised" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">raised</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void raised (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>source_obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>description,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>count</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">raised</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">source_obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">description</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">count</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Objection callback that is called when a <a href="#uvm_objection.raise_objection" class=LMethod id=link40  >raise_objection</a> has reached <i>obj</i>.&nbsp; The default implementation calls <a href="uvm_component-svh.html#uvm_component.raised" class=LMethod id=link41  >uvm_component::raised</a>.</p></div></div></div>
@@ -319,17 +358,17 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.dropped" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">dropped</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void dropped (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>source_obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>description,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>count</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">dropped</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">source_obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">description</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">count</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Objection callback that is called when a <a href="#uvm_objection.drop_objection" class=LMethod id=link42  >drop_objection</a> has reached <i>obj</i>.&nbsp; The default implementation calls <a href="uvm_component-svh.html#uvm_component.dropped" class=LMethod id=link43  >uvm_component::dropped</a>.</p></div></div></div>
@@ -341,17 +380,17 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.all_dropped" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">all_dropped</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task all_dropped (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>source_obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>description,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>count</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">all_dropped</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">source_obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">description</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">count</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Objection callback that is called when a <a href="#uvm_objection.drop_objection" class=LMethod id=link44  >drop_objection</a> has reached <i>obj</i>, and the total count for <i>obj</i> goes to zero.&nbsp; This callback is executed after the drain time associated with <i>obj</i>.&nbsp; The default implementation calls <a href="uvm_component-svh.html#uvm_component.all_dropped" class=LMethod id=link45  >uvm_component::all_dropped</a>.</p></div></div></div>
@@ -369,12 +408,12 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.get_objectors" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">get_objectors</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>function void get_objectors(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>list[$]</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">get_objectors</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">list</span>[$]</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the current list of objecting objects (objects that raised an objection but have not dropped it).</p></div></div></div>
@@ -386,17 +425,17 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.wait_for" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">wait_for</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>task wait_for(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_objection_event&nbsp;</td>
-      <td class=PParameter nowrap>objt_event,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">task</span> <span class="sv-proto-name">wait_for</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_objection_event</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">objt_event</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Waits for the raised, dropped, or all_dropped <i>event</i> to occur in the given <i>obj</i>.&nbsp; The task returns after all corresponding callbacks for that event have been executed.</p></div></div></div>
@@ -408,13 +447,13 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.get_objection_count" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">get_objection_count</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function int get_objection_count (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_objection_count</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the current number of objections raised by the given <i>object</i>.</p></div></div></div>
@@ -426,13 +465,13 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.get_objection_total" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">get_objection_total</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function int get_objection_total (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_objection_total</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the current number of objections raised by the given <i>object</i> and all descendants.</p></div></div></div>
@@ -444,13 +483,13 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.get_drain_time" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">get_drain_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function time get_drain_time (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">time</span> <span class="sv-proto-name">get_drain_time</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the current drain time set for the given <i>object</i> (default: 0 ns).</p></div></div></div>
@@ -462,17 +501,17 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection.display_objections" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">display_objections</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void display_objections(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>show_header</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">display_objections</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">show_header</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Displays objection information about the given <i>object</i>.&nbsp; If <i>object</i> is not specified or <i>null</i>, the implicit top-level component, <a href="uvm_root-svh.html#uvm_root" class=LClass id=link46  >uvm_root</a>, is chosen.&nbsp; The <i>show_header</i> argument allows control of whether a header is output.</p></div></div></div>
@@ -481,22 +520,34 @@ uvm_top              |     0 |    1  |</pre></blockquote><p>Since the propagatio
 
 
  <!--CONTENT index=22 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_objection_callback" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">uvm_objection_callback</a></h2><div class=CBody><p>The uvm_objection is the callback type that defines the callback implementations for an objection callback.&nbsp; A user uses the callback type uvm_objection_cbs_t to add callbacks to specific objections.</p><h4 class=CHeading>For example</h4><blockquote><pre>class my_objection_cb extends uvm_objection_callback;
-  function new(string name);
-    super.new(name);
-  endfunction
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_objection_callback" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">uvm_objection_callback</a></h2><div class=CBody><p>The uvm_objection is the callback type that defines the callback implementations for an objection callback.&nbsp; A user uses the callback type uvm_objection_cbs_t to add callbacks to specific objections.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">my_objection_cb</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_objection_callback</span><span class="sv-op">;</span>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  virtual function void raised (uvm_objection objection, uvm_object obj,
-      uvm_object source_obj, string description, int count);
-      `uvm_info(&quot;RAISED&quot;,&quot;%0t: Objection %s: Raised for %s&quot;, $time, objection.get_name(),
-      obj.get_full_name());
-  endfunction
-endclass
-...
-initial begin
-  my_objection_cb cb = new(&quot;cb&quot;);
-  uvm_objection_cbs_t::add(null, cb); //typewide callback
-end</pre></blockquote>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">raised</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_objection</span> <span class="sv-ident">objection</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">,</span>
+      <span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">source_obj</span><span class="sv-op">,</span> <span class="sv-keyword">string</span> <span class="sv-ident">description</span><span class="sv-op">,</span> <span class="sv-keyword">int</span> <span class="sv-ident">count</span><span class="sv-op">)</span><span class="sv-op">;</span>
+      <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;RAISED&quot;</span><span class="sv-op">,</span><span class="sv-string">&quot;%0t: Objection %s: Raised for %s&quot;</span><span class="sv-op">,</span> $<span class="sv-keyword">time</span><span class="sv-op">,</span> <span class="sv-ident">objection</span><span class="sv-op">.</span><span class="sv-method">get_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span>
+      <span class="sv-ident">obj</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span>
+<span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+<span class="sv-keyword">initial</span> <span class="sv-keyword">begin</span>
+  <span class="sv-ident">my_objection_cb</span> <span class="sv-ident">cb</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;cb&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-uvm-type">uvm_objection_cbs_t</span><span class="sv-op">::</span><span class="sv-method">add</span><span class="sv-op">(</span><span class="sv-keyword">null</span><span class="sv-op">,</span> <span class="sv-ident">cb</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-comment">//typewide callback</span>
+<span class="sv-keyword">end</span></code></pre>
+</div>
 
 <!--START_ND_SUMMARY index=22-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -523,7 +574,7 @@ end</pre></blockquote>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_objection_callback extends uvm_callback
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_objection_callback</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_callback</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=23 -->
@@ -553,19 +604,19 @@ end</pre></blockquote>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection_callback.raised" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">raised</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void raised (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_objection&nbsp;</td>
-      <td class=PParameter nowrap width=100%>objection,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>source_obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>description,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>count</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">raised</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_objection</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">objection</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">source_obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">description</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">count</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Objection raised callback function.&nbsp; Called by <a href="#uvm_objection.raised" class=LMethod id=link54  >uvm_objection::raised</a>.</p></div></div></div>
@@ -577,19 +628,19 @@ end</pre></blockquote>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection_callback.dropped" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">dropped</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void dropped (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_objection&nbsp;</td>
-      <td class=PParameter nowrap width=100%>objection,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>source_obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>description,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>count</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">dropped</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_objection</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">objection</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">source_obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">description</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">count</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Objection dropped callback function.&nbsp; Called by <a href="#uvm_objection.dropped" class=LMethod id=link55  >uvm_objection::dropped</a>.</p></div></div></div>
@@ -601,19 +652,19 @@ end</pre></blockquote>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_objection_callback.all_dropped" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">all_dropped</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task all_dropped (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_objection&nbsp;</td>
-      <td class=PParameter nowrap width=100%>objection,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_object&nbsp;</td>
-      <td class=PParameter nowrap width=100%>source_obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>description,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>count</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">all_dropped</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_objection</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">objection</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">source_obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">description</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">count</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Objection all_dropped callback function.&nbsp; Called by <a href="#uvm_objection.all_dropped" class=LMethod id=link56  >uvm_objection::all_dropped</a>.</p></div></div></div>
@@ -627,6 +678,29 @@ end</pre></blockquote>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

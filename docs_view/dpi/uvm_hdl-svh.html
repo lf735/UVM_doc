@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UVM HDL Backdoor Access support routines. | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -25,7 +28,19 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="UVM_HDL_Backdoor_Access_support_routines" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">UVM HDL Backdoor Access support routines.</a></h1><div class=CBody><p>These routines provide an interface to the DPI/PLI implementation of backdoor access used by registers.</p><p>If you DON&rsquo;T want to use the DPI HDL API, then compile your SystemVerilog code with the vlog switch</p><blockquote><pre>vlog ... +define+UVM_HDL_NO_DPI ...</pre></blockquote>
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="UVM_HDL_Backdoor_Access_support_routines" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">UVM HDL Backdoor Access support routines.</a></h1><div class=CBody><p>These routines provide an interface to the DPI/PLI implementation of backdoor access used by registers.</p><p>If you DON&rsquo;T want to use the DPI HDL API, then compile your SystemVerilog code with the vlog switch</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>Command Line</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">vlog</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-cmdline-opt">+define</span><span class="sv-cmdline-opt">+UVM_HDL_NO_DPI</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span></code></pre>
+</div>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -76,7 +91,7 @@
 
  <!--CONTENT index=2 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="UVM_HDL_MAX_WIDTH" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">UVM_HDL_MAX_WIDTH</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>parameter int UVM_HDL_MAX_WIDTH = `UVM_HDL_MAX_WIDTH
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">parameter</span> <span class="sv-keyword">int</span> <span class="sv-uvm-type">UVM_HDL_MAX_WIDTH</span> <span class="sv-op">=</span><span class="sv-ident"> `</span><span class="sv-uvm-type">UVM_HDL_MAX_WIDTH</span>
   </td></tr></table></blockquote><div class=CBody><p>Sets the maximum size bit vector for backdoor access.&nbsp; This parameter will be looked up by the DPI-C code using: vpi_handle_by_name( &ldquo;uvm_pkg::UVM_HDL_MAX_WIDTH&rdquo;, 0);</p></div></div></div>
 
 
@@ -92,11 +107,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_check_path" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">uvm_hdl_check_path</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>import &quot;DPI-C&quot; context function int uvm_hdl_check_path(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>path</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">import</span> &quot;DPI-<span class="sv-proto-name">C</span>&quot; <span class="sv-keyword">context</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">uvm_hdl_check_path</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">path</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Checks that the given HDL <i>path</i> exists.&nbsp; Returns 0 if NOT found, 1 otherwise.</p></div></div></div>
@@ -108,13 +123,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_deposit" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">uvm_hdl_deposit</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>import &quot;DPI-C&quot; context function int uvm_hdl_deposit(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>path,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_hdl_data_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">import</span> &quot;DPI-<span class="sv-proto-name">C</span>&quot; <span class="sv-keyword">context</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">uvm_hdl_deposit</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">path</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_hdl_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Sets the given HDL <i>path</i> to the specified <i>value</i>.&nbsp; Returns 1 if the call succeeded, 0 otherwise.</p></div></div></div>
@@ -126,13 +141,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_force" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">uvm_hdl_force</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>import &quot;DPI-C&quot; context function int uvm_hdl_force(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>path,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_hdl_data_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">import</span> &quot;DPI-<span class="sv-proto-name">C</span>&quot; <span class="sv-keyword">context</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">uvm_hdl_force</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">path</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_hdl_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Forces the <i>value</i> on the given <i>path</i>.&nbsp; Returns 1 if the call succeeded, 0 otherwise.</p></div></div></div>
@@ -144,21 +159,21 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_force_time" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">uvm_hdl_force_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>task uvm_hdl_force_time(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>path,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_hdl_data_t&nbsp;</td>
-      <td class=PParameter nowrap>value,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap>force_time</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> 0</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">task</span> <span class="sv-proto-name">uvm_hdl_force_time</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">path</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_hdl_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">force_time</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Forces the <i>value</i> on the given <i>path</i> for the specified amount of <i>force_time</i>.&nbsp; If <i>force_time</i> is 0, <a href="#uvm_hdl_deposit" class=LMethod id=link11  >uvm_hdl_deposit</a> is called.&nbsp; Returns 1 if the call succeeded, 0 otherwise.</p></div></div></div>
@@ -170,15 +185,15 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_release_and_read" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">uvm_hdl_release_and_read</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>import &quot;DPI-C&quot; context function int uvm_hdl_release_and_read(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>path,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>inout&nbsp;</td>
-      <td class=PType nowrap>uvm_hdl_data_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">import</span> &quot;DPI-<span class="sv-proto-name">C</span>&quot; <span class="sv-keyword">context</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">uvm_hdl_release_and_read</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">path</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">inout</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_hdl_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Releases a value previously set with <a href="#uvm_hdl_force" class=LMethod id=link12  >uvm_hdl_force</a>.&nbsp; Returns 1 if the call succeeded, 0 otherwise.&nbsp; <i>value</i> is set to the HDL value after the release.&nbsp; For &lsquo;reg&rsquo;, the value will still be the forced value until it has been procedurally reassigned.&nbsp; For &lsquo;wire&rsquo;, the value will change immediately to the resolved value of its continuous drivers, if any.&nbsp; If none, its value remains as forced until the next direct assignment.</p></div></div></div>
@@ -190,11 +205,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_release" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">uvm_hdl_release</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>import &quot;DPI-C&quot; context function int uvm_hdl_release(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>path</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">import</span> &quot;DPI-<span class="sv-proto-name">C</span>&quot; <span class="sv-keyword">context</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">uvm_hdl_release</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">path</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Releases a value previously set with <a href="#uvm_hdl_force" class=LMethod id=link13  >uvm_hdl_force</a>.&nbsp; Returns 1 if the call succeeded, 0 otherwise.</p></div></div></div>
@@ -206,15 +221,15 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_read" href="../../src_view/dpi/uvm_hdl.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="1">uvm_hdl_read()</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>import &quot;DPI-C&quot; context function int uvm_hdl_read(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>path,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>uvm_hdl_data_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">import</span> &quot;DPI-<span class="sv-proto-name">C</span>&quot; <span class="sv-keyword">context</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">uvm_hdl_read</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">path</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_hdl_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Gets the value at the given <i>path</i>.&nbsp; Returns 1 if the call succeeded, 0 otherwise.</p></div></div></div>
@@ -228,6 +243,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

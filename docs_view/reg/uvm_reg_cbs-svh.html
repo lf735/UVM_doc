@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register Callbacks | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -104,7 +107,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_reg_cbs extends uvm_callback
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_reg_cbs</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_callback</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=2 -->
@@ -146,11 +149,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.pre_write" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">pre_write</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task pre_write(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">pre_write</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Called before a write operation.</p><p>All registered <i>pre_write</i> callback methods are invoked after the invocation of the <i>pre_write</i> method of associated object (<a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link16  >uvm_reg</a>, <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link17  >uvm_reg_field</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link18  >uvm_mem</a>, or <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor" class=LClass id=link19  >uvm_reg_backdoor</a>).&nbsp; If the element being written is a <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link20  >uvm_reg</a>, all <i>pre_write</i> callback methods are invoked before the contained <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link21  >uvm_reg_fields</a>.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Backdoor</td><td class=CDLDescription><a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor.pre_write" class=LMethod id=link22  >uvm_reg_backdoor::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link23  >uvm_reg_cbs::pre_write</a> cbs for backdoor.</td></tr><tr><td class=CDLEntry>Register</td><td class=CDLDescription><a href="uvm_reg-svh.html#uvm_reg.pre_write" class=LMethod id=link24  >uvm_reg::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link25  >uvm_reg_cbs::pre_write</a> cbs for reg, then foreach field: <a href="uvm_reg_field-svh.html#uvm_reg_field.pre_write" class=LMethod id=link26  >uvm_reg_field::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link27  >uvm_reg_cbs::pre_write</a> cbs for field</td></tr><tr><td class=CDLEntry>RegField</td><td class=CDLDescription><a href="uvm_reg_field-svh.html#uvm_reg_field.pre_write" class=LMethod id=link28  >uvm_reg_field::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link29  >uvm_reg_cbs::pre_write</a> cbs for field</td></tr><tr><td class=CDLEntry>Memory</td><td class=CDLDescription><a href="uvm_mem-svh.html#uvm_mem.pre_write" class=LMethod id=link30  >uvm_mem::pre_write</a>, <a href="#uvm_reg_cbs.pre_write" class=LMethod id=link31  >uvm_reg_cbs::pre_write</a> cbs for mem</td></tr></table><p>The <i>rw</i> argument holds information about the operation.</p><ul><li>Modifying the <i>value</i> modifies the actual value written.</li><li>For memories, modifying the <i>offset</i> modifies the offset used in the operation.</li><li>For non-backdoor operations, modifying the access <i>path</i> or address <i>map</i> modifies the actual path or map used in the operation.</li></ul><p>If the <i>rw.status</i> is modified to anything other than <a href="uvm_reg_model-svh.html#UVM_IS_OK" class=LConstant id=link32  >UVM_IS_OK</a>, the operation is aborted.</p><p>See <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link33  >uvm_reg_item</a> for details on <i>rw</i> information.</p></div></div></div>
@@ -162,11 +165,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.post_write" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">post_write</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task post_write(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">post_write</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Called after a write operation.</p><p>All registered <i>post_write</i> callback methods are invoked before the invocation of the <i>post_write</i> method of the associated object (<a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link34  >uvm_reg</a>, <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link35  >uvm_reg_field</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link36  >uvm_mem</a>, or <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor" class=LClass id=link37  >uvm_reg_backdoor</a>).&nbsp; If the element being written is a <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link38  >uvm_reg</a>, all <i>post_write</i> callback methods are invoked before the contained <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link39  >uvm_reg_fields</a>.</p><h4 class=CHeading>Summary of callback order</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Backdoor</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_write" class=LMethod id=link40  >uvm_reg_cbs::post_write</a> cbs for backdoor, <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor.post_write" class=LMethod id=link41  >uvm_reg_backdoor::post_write</a></td></tr><tr><td class=CDLEntry>Register</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_write" class=LMethod id=link42  >uvm_reg_cbs::post_write</a> cbs for reg, <a href="uvm_reg-svh.html#uvm_reg.post_write" class=LMethod id=link43  >uvm_reg::post_write</a>, then foreach field: <a href="#uvm_reg_cbs.post_write" class=LMethod id=link44  >uvm_reg_cbs::post_write</a> cbs for field, <a href="uvm_reg_field-svh.html#uvm_reg_field.post_read" class=LMethod id=link45  >uvm_reg_field::post_read</a></td></tr><tr><td class=CDLEntry>RegField</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_write" class=LMethod id=link46  >uvm_reg_cbs::post_write</a> cbs for field, <a href="uvm_reg_field-svh.html#uvm_reg_field.post_write" class=LMethod id=link47  >uvm_reg_field::post_write</a></td></tr><tr><td class=CDLEntry>Memory</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_write" class=LMethod id=link48  >uvm_reg_cbs::post_write</a> cbs for mem, <a href="uvm_mem-svh.html#uvm_mem.post_write" class=LMethod id=link49  >uvm_mem::post_write</a></td></tr></table><p>The <i>rw</i> argument holds information about the operation.</p><ul><li>Modifying the <i>status</i> member modifies the returned status.</li><li>Modifying the <i>value</i> or <i>offset</i> members has no effect, as the operation has already completed.</li></ul><p>See <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link50  >uvm_reg_item</a> for details on <i>rw</i> information.</p></div></div></div>
@@ -178,11 +181,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.pre_read" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">pre_read</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task pre_read(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">pre_read</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Callback called before a read operation.</p><p>All registered <i>pre_read</i> callback methods are invoked after the invocation of the <i>pre_read</i> method of associated object (<a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link51  >uvm_reg</a>, <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link52  >uvm_reg_field</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link53  >uvm_mem</a>, or <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor" class=LClass id=link54  >uvm_reg_backdoor</a>).&nbsp; If the element being read is a <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link55  >uvm_reg</a>, all <i>pre_read</i> callback methods are invoked before the contained <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link56  >uvm_reg_fields</a>.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Backdoor</td><td class=CDLDescription><a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor.pre_read" class=LMethod id=link57  >uvm_reg_backdoor::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link58  >uvm_reg_cbs::pre_read</a> cbs for backdoor</td></tr><tr><td class=CDLEntry>Register</td><td class=CDLDescription><a href="uvm_reg-svh.html#uvm_reg.pre_read" class=LMethod id=link59  >uvm_reg::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link60  >uvm_reg_cbs::pre_read</a> cbs for reg, then foreach field: <a href="uvm_reg_field-svh.html#uvm_reg_field.pre_read" class=LMethod id=link61  >uvm_reg_field::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link62  >uvm_reg_cbs::pre_read</a> cbs for field</td></tr><tr><td class=CDLEntry>RegField</td><td class=CDLDescription><a href="uvm_reg_field-svh.html#uvm_reg_field.pre_read" class=LMethod id=link63  >uvm_reg_field::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link64  >uvm_reg_cbs::pre_read</a> cbs for field</td></tr><tr><td class=CDLEntry>Memory</td><td class=CDLDescription><a href="uvm_mem-svh.html#uvm_mem.pre_read" class=LMethod id=link65  >uvm_mem::pre_read</a>, <a href="#uvm_reg_cbs.pre_read" class=LMethod id=link66  >uvm_reg_cbs::pre_read</a> cbs for mem</td></tr></table><p>The <i>rw</i> argument holds information about the operation.</p><ul><li>The <i>value</i> member of <i>rw</i> is not used has no effect if modified.</li><li>For memories, modifying the <i>offset</i> modifies the offset used in the operation.</li><li>For non-backdoor operations, modifying the access <i>path</i> or address <i>map</i> modifies the actual path or map used in the operation.</li></ul><p>If the <i>rw.status</i> is modified to anything other than <a href="uvm_reg_model-svh.html#UVM_IS_OK" class=LConstant id=link67  >UVM_IS_OK</a>, the operation is aborted.</p><p>See <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link68  >uvm_reg_item</a> for details on <i>rw</i> information.</p></div></div></div>
@@ -194,11 +197,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.post_read" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">post_read</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task post_read(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">post_read</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Callback called after a read operation.</p><p>All registered <i>post_read</i> callback methods are invoked before the invocation of the <i>post_read</i> method of the associated object (<a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link69  >uvm_reg</a>, <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link70  >uvm_reg_field</a>, <a href="uvm_mem-svh.html#uvm_mem" class=LClass id=link71  >uvm_mem</a>, or <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor" class=LClass id=link72  >uvm_reg_backdoor</a>).&nbsp; If the element being read is a <a href="uvm_reg-svh.html#uvm_reg" class=LClass id=link73  >uvm_reg</a>, all <i>post_read</i> callback methods are invoked before the contained <a href="uvm_reg_field-svh.html#uvm_reg_field" class=LClass id=link74  >uvm_reg_fields</a>.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Backdoor</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_read" class=LMethod id=link75  >uvm_reg_cbs::post_read</a> cbs for backdoor, <a href="uvm_reg_backdoor-svh.html#uvm_reg_backdoor.post_read" class=LMethod id=link76  >uvm_reg_backdoor::post_read</a></td></tr><tr><td class=CDLEntry>Register</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_read" class=LMethod id=link77  >uvm_reg_cbs::post_read</a> cbs for reg, <a href="uvm_reg-svh.html#uvm_reg.post_read" class=LMethod id=link78  >uvm_reg::post_read</a>, then foreach field: <a href="#uvm_reg_cbs.post_read" class=LMethod id=link79  >uvm_reg_cbs::post_read</a> cbs for field, <a href="uvm_reg_field-svh.html#uvm_reg_field.post_read" class=LMethod id=link80  >uvm_reg_field::post_read</a></td></tr><tr><td class=CDLEntry>RegField</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_read" class=LMethod id=link81  >uvm_reg_cbs::post_read</a> cbs for field, <a href="uvm_reg_field-svh.html#uvm_reg_field.post_read" class=LMethod id=link82  >uvm_reg_field::post_read</a></td></tr><tr><td class=CDLEntry>Memory</td><td class=CDLDescription><a href="#uvm_reg_cbs.post_read" class=LMethod id=link83  >uvm_reg_cbs::post_read</a> cbs for mem, <a href="uvm_mem-svh.html#uvm_mem.post_read" class=LMethod id=link84  >uvm_mem::post_read</a></td></tr></table><p>The <i>rw</i> argument holds information about the operation.</p><ul><li>Modifying the readback <i>value</i> or <i>status</i> modifies the actual returned value and status.</li><li>Modifying the <i>value</i> or <i>offset</i> members has no effect, as the operation has already completed.</li></ul><p>See <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link85  >uvm_reg_item</a> for details on <i>rw</i> information.</p></div></div></div>
@@ -210,27 +213,27 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.post_predict" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">post_predict</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual function void post_predict(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_field&nbsp;</td>
-      <td class=PParameter nowrap width=100%>fld,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>previous,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>inout&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_predict_e&nbsp;</td>
-      <td class=PParameter nowrap width=100%>kind,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_path_e&nbsp;</td>
-      <td class=PParameter nowrap width=100%>path,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_map&nbsp;</td>
-      <td class=PParameter nowrap width=100%>map</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">post_predict</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_field</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">fld</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">previous</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">inout</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_predict_e</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">kind</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_path_e</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">path</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_map</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">map</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Called by the <a href="uvm_reg_field-svh.html#uvm_reg_field.predict" class=LMethod id=link86  >uvm_reg_field::predict()</a> method after a successful UVM_PREDICT_READ or UVM_PREDICT_WRITE prediction.</p><p><i>previous</i> is the previous value in the mirror and <i>value</i> is the latest predicted value.&nbsp; Any change to <i>value</i> will modify the predicted mirror value.</p></div></div></div>
@@ -242,12 +245,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.encode" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">encode</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual function void encode(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>data[]</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">encode</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">data</span>[]</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Data encoder</p><p>The registered callback methods are invoked in order of registration after all the <i>pre_write</i> methods have been called.&nbsp; The encoded data is passed through each invocation in sequence.&nbsp; This allows the <i>pre_write</i> methods to deal with clear-text data.</p><p>By default, the data is not modified.</p></div></div></div>
@@ -259,12 +262,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_cbs.decode" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">decode</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual function void decode(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_data_t&nbsp;</td>
-      <td class=PParameter nowrap width=100%>data[]</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">decode</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_data_t</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">data</span>[]</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Data decode</p><p>The registered callback methods are invoked in <i>reverse order</i> of registration before all the <i>post_read</i> methods are called.&nbsp; The decoded data is passed through each invocation in sequence.&nbsp; This allows the <i>post_read</i> methods to deal with clear-text data.</p><p>The reversal of the invocation order is to allow the decoding of the data to be performed in the opposite order of the encoding with both operations specified in the same callback extension.</p><p>By default, the data is not modified.</p></div></div></div>
@@ -395,7 +398,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_reg_read_only_cbs extends uvm_reg_cbs
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_reg_read_only_cbs</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_reg_cbs</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=21 -->
@@ -425,11 +428,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_read_only_cbs.pre_write" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">pre_write</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task pre_write(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">pre_write</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Produces an error message and sets status to <a href="uvm_reg_model-svh.html#UVM_NOT_OK" class=LConstant id=link96  >UVM_NOT_OK</a>.</p></div></div></div>
@@ -441,11 +444,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_read_only_cbs.add" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">add</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function void add(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rg</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rg</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Add this callback to the specified register and its contained fields.</p></div></div></div>
@@ -457,11 +460,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_read_only_cbs.remove" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">remove</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function void remove(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rg</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">remove</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rg</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Remove this callback from the specified register and its contained fields.</p></div></div></div>
@@ -498,7 +501,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_reg_write_only_cbs extends uvm_reg_cbs
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_reg_write_only_cbs</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_reg_cbs</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=26 -->
@@ -528,11 +531,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_write_only_cbs.pre_read" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">pre_read</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task pre_read(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">pre_read</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Produces an error message and sets status to <a href="uvm_reg_model-svh.html#UVM_NOT_OK" class=LConstant id=link106  >UVM_NOT_OK</a>.</p></div></div></div>
@@ -544,11 +547,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_write_only_cbs.add" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">add</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function void add(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rg</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rg</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Add this callback to the specified register and its contained fields.</p></div></div></div>
@@ -560,11 +563,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_write_only_cbs.remove" href="../../src_view/reg/uvm_reg_cbs.svh.html#L44" class="src-code-link" data-src-file="reg/uvm_reg_cbs.svh" data-src-line="44">remove</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function void remove(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rg</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">remove</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rg</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Remove this callback from the specified register and its contained fields.</p></div></div></div>
@@ -578,6 +581,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_task_phase | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -25,13 +28,25 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_task_phase" href="../../src_view/base/uvm_task_phase.svh.html#L58" class="src-code-link" data-src-file="base/uvm_task_phase.svh" data-src-line="58">uvm_task_phase</a></h1><div class=CBody><p>Base class for all task phases.&nbsp; It forks a call to <a href="uvm_phase-svh.html#uvm_phase.exec_task" class=LMethod id=link9  >uvm_phase::exec_task()</a> for each component in the hierarchy.</p><p>The completion of the task does not imply, nor is it required for, the end of phase.&nbsp; Once the phase completes, any remaining forked <a href="uvm_phase-svh.html#uvm_phase.exec_task" class=LMethod id=link10  >uvm_phase::exec_task()</a> threads are forcibly and immediately killed.</p><p>By default, the way for a task phase to extend over time is if there is at least one component that raises an objection.</p><blockquote><pre>class my_comp extends uvm_component;
-   task main_phase(uvm_phase phase);
-      phase.raise_objection(this, &quot;Applying stimulus&quot;)
-      ...
-      phase.drop_objection(this, &quot;Applied enough stimulus&quot;)
-   endtask
-endclass</pre></blockquote><p>There is however one scenario wherein time advances within a task-based phase without any objections to the phase being raised.&nbsp; If two (or more) phases share a common successor, such as the <a href="uvm_common_phases-svh.html#uvm_run_phase" class=LClass id=link11  >uvm_run_phase</a> and the <a href="uvm_runtime_phases-svh.html#uvm_post_shutdown_phase" class=LClass id=link12  >uvm_post_shutdown_phase</a> sharing the <a href="uvm_common_phases-svh.html#uvm_extract_phase" class=LClass id=link13  >uvm_extract_phase</a> as a successor, then phase advancement is delayed until all predecessors of the common successor are ready to proceed.&nbsp;  Because of this, it is possible for time to advance between <a href="uvm_component-svh.html#uvm_component.phase_started" class=LMethod id=link14  >uvm_component::phase_started</a> and <a href="uvm_component-svh.html#uvm_component.phase_ended" class=LMethod id=link15  >uvm_component::phase_ended</a> of a task phase without any participants in the phase raising an objection.</p>
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_task_phase" href="../../src_view/base/uvm_task_phase.svh.html#L58" class="src-code-link" data-src-file="base/uvm_task_phase.svh" data-src-line="58">uvm_task_phase</a></h1><div class=CBody><p>Base class for all task phases.&nbsp; It forks a call to <a href="uvm_phase-svh.html#uvm_phase.exec_task" class=LMethod id=link9  >uvm_phase::exec_task()</a> for each component in the hierarchy.</p><p>The completion of the task does not imply, nor is it required for, the end of phase.&nbsp; Once the phase completes, any remaining forked <a href="uvm_phase-svh.html#uvm_phase.exec_task" class=LMethod id=link10  >uvm_phase::exec_task()</a> threads are forcibly and immediately killed.</p><p>By default, the way for a task phase to extend over time is if there is at least one component that raises an objection.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">my_comp</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+   <span class="sv-keyword">task</span> <span class="sv-method">main_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+      <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">raise_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;Applying stimulus&quot;</span><span class="sv-op">)</span>
+      <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+      <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">drop_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;Applied enough stimulus&quot;</span><span class="sv-op">)</span>
+   <span class="sv-keyword">endtask</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><p>There is however one scenario wherein time advances within a task-based phase without any objections to the phase being raised.&nbsp; If two (or more) phases share a common successor, such as the <a href="uvm_common_phases-svh.html#uvm_run_phase" class=LClass id=link11  >uvm_run_phase</a> and the <a href="uvm_runtime_phases-svh.html#uvm_post_shutdown_phase" class=LClass id=link12  >uvm_post_shutdown_phase</a> sharing the <a href="uvm_common_phases-svh.html#uvm_extract_phase" class=LClass id=link13  >uvm_extract_phase</a> as a successor, then phase advancement is delayed until all predecessors of the common successor are ready to proceed.&nbsp;  Because of this, it is possible for time to advance between <a href="uvm_component-svh.html#uvm_component.phase_started" class=LMethod id=link14  >uvm_component::phase_started</a> and <a href="uvm_component-svh.html#uvm_component.phase_ended" class=LMethod id=link15  >uvm_component::phase_ended</a> of a task phase without any participants in the phase raising an objection.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -58,7 +73,7 @@ endclass</pre></blockquote><p>There is however one scenario wherein time advance
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_task_phase extends uvm_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_task_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=1 -->
@@ -88,11 +103,11 @@ endclass</pre></blockquote><p>There is however one scenario wherein time advance
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_task_phase.new" href="../../src_view/base/uvm_task_phase.svh.html#L58" class="src-code-link" data-src-file="base/uvm_task_phase.svh" data-src-line="58">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Create a new instance of a task-based phase</p></div></div></div>
@@ -104,15 +119,15 @@ endclass</pre></blockquote><p>There is however one scenario wherein time advance
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_task_phase.traverse" href="../../src_view/base/uvm_task_phase.svh.html#L58" class="src-code-link" data-src-file="base/uvm_task_phase.svh" data-src-line="58">traverse</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void traverse(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>comp,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
-      <td class=PParameter nowrap width=100%>phase,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase_state&nbsp;</td>
-      <td class=PParameter nowrap width=100%>state</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">traverse</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">comp</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">phase</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase_state</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">state</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Traverses the component tree in bottom-up order, calling <a href="#uvm_task_phase.execute" class=LMethod id=link16  >execute</a> for each component.&nbsp; The actual order for task-based phases doesn&rsquo;t really matter, as each component task is executed in a separate process whose starting order is not deterministic.</p></div></div></div>
@@ -124,13 +139,13 @@ endclass</pre></blockquote><p>There is however one scenario wherein time advance
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_task_phase.execute" href="../../src_view/base/uvm_task_phase.svh.html#L58" class="src-code-link" data-src-file="base/uvm_task_phase.svh" data-src-line="58">execute</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void execute(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>comp,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
-      <td class=PParameter nowrap width=100%>phase</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">execute</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">comp</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">phase</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Fork the task-based phase <i>phase</i> for the component <i>comp</i>.</p></div></div></div>
@@ -144,6 +159,29 @@ endclass</pre></blockquote><p>There is however one scenario wherein time advance
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

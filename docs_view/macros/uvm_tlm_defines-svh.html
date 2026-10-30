@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TLM Implementation Port Declaration Macros | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -25,31 +28,55 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TLM_Implementation_Port_Declaration_Macros" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">TLM Implementation Port Declaration Macros</a></h1><div class=CBody><p>The TLM implementation declaration macros provide a way for components to provide multiple implementation ports of the same implementation interface.&nbsp; When an implementation port is defined using the built-in set of imps, there must be exactly one implementation of the interface.</p><p>For example, if a component needs to provide a put implementation then it would have an implementation port defined like:</p><blockquote><pre>class mycomp extends uvm_component;
-  uvm_put_imp#(data_type, mycomp) put_imp;
-  ...
-  virtual task put (data_type t);
-    ...
-  endtask
-endclass</pre></blockquote><p>There are times, however, when you need more than one implementation for an interface.&nbsp; This set of declarations allow you to easily create a new implementation class to allow for multiple implementations.&nbsp; Although the new implementation class is a different class, it can be bound to the same types of exports and ports as the original class.&nbsp; Extending the put example above, let&rsquo;s say that mycomp needs to provide two put implementation ports.&nbsp; In that case, you would do something like:</p><blockquote><pre>//Define two new put interfaces which are compatible with uvm_put_ports
-//and uvm_put_exports.
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TLM_Implementation_Port_Declaration_Macros" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">TLM Implementation Port Declaration Macros</a></h1><div class=CBody><p>The TLM implementation declaration macros provide a way for components to provide multiple implementation ports of the same implementation interface.&nbsp; When an implementation port is defined using the built-in set of imps, there must be exactly one implementation of the interface.</p><p>For example, if a component needs to provide a put implementation then it would have an implementation port defined like:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mycomp</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <span class="sv-uvm-type">uvm_put_imp</span><span class="sv-op">#(</span><span class="sv-ident">data_type</span><span class="sv-op">,</span> <span class="sv-ident">mycomp</span><span class="sv-op">)</span> <span class="sv-ident">put_imp</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-ident">data_type</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">endtask</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><p>There are times, however, when you need more than one implementation for an interface.&nbsp; This set of declarations allow you to easily create a new implementation class to allow for multiple implementations.&nbsp; Although the new implementation class is a different class, it can be bound to the same types of exports and ports as the original class.&nbsp; Extending the put example above, let&rsquo;s say that mycomp needs to provide two put implementation ports.&nbsp; In that case, you would do something like:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-comment">//Define two new put interfaces which are compatible with uvm_put_ports</span>
+<span class="sv-comment">//and uvm_put_exports.</span>
 
-`uvm_put_imp_decl(_1)
-`uvm_put_imp_decl(_2)
+<span class="sv-macro">`uvm_put_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">_1</span><span class="sv-op">)</span>
+<span class="sv-macro">`uvm_put_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">_2</span><span class="sv-op">)</span>
 
-class my_put_imp#(type T=int) extends uvm_component;
-   uvm_put_imp_1#(T,my_put_imp#(T)) put_imp1;
-   uvm_put_imp_2#(T,my_put_imp#(T)) put_imp2;
-   ...
-   function void put_1 (input T t);
-     //puts coming into put_imp1
-     ...
-   endfunction
-   function void put_2(input T t);
-     //puts coming into put_imp2
-     ...
-   endfunction
-endclass</pre></blockquote><p>The important thing to note is that each `uvm_&lt;interface&gt;_imp_decl creates a new class of type uvm_&lt;interface&gt;_imp&lt;suffix&gt;, where suffix is the input argument to the macro.&nbsp; For this reason, you will typically want to put these macros in a separate package to avoid collisions and to allow sharing of the definitions.</p>
+<span class="sv-keyword">class</span> <span class="sv-ident">my_put_imp</span><span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+   <span class="sv-uvm-type">uvm_put_imp_1</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">my_put_imp</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-ident">put_imp1</span><span class="sv-op">;</span>
+   <span class="sv-uvm-type">uvm_put_imp_2</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">my_put_imp</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-ident">put_imp2</span><span class="sv-op">;</span>
+   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+   <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">put_1</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-comment">//puts coming into put_imp1</span>
+     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+   <span class="sv-keyword">endfunction</span>
+   <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">put_2</span><span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-comment">//puts coming into put_imp2</span>
+     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+   <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><p>The important thing to note is that each `uvm_&lt;interface&gt;_imp_decl creates a new class of type uvm_&lt;interface&gt;_imp&lt;suffix&gt;, where suffix is the input argument to the macro.&nbsp; For this reason, you will typically want to put these macros in a separate package to avoid collisions and to allow sharing of the definitions.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -138,160 +165,436 @@ endclass</pre></blockquote><p>The important thing to note is that each `uvm_&lt;
 
 
  <!--CONTENT index=2 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_put_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_put_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_blocking_put_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_blocking_put_impSFX for providing blocking put implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_put_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_put_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_blocking_put_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_blocking_put_impSFX for providing blocking put implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_put_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_put_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_nonblocking_put_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_nonblocking_put_impSFX for providing non-blocking put implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_put_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_put_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_nonblocking_put_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_nonblocking_put_impSFX for providing non-blocking put implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_put_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_put_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_put_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_put_impSFX for providing both blocking and non-blocking put implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_put_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_put_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_put_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_put_impSFX for providing both blocking and non-blocking put implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_get_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_get_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_blocking_get_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_blocking_get_impSFX for providing blocking get implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_get_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_get_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_blocking_get_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_blocking_get_impSFX for providing blocking get implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_get_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_get_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_nonblocking_get_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_nonblocking_get_impSFX for providing non-blocking get implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_get_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_get_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_nonblocking_get_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_nonblocking_get_impSFX for providing non-blocking get implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=7 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_get_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_get_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_get_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_get_impSFX for providing both blocking and non-blocking get implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_get_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_get_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_get_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_get_impSFX for providing both blocking and non-blocking get implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=8 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_peek_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_blocking_peek_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_blocking_peek_impSFX for providing blocking peek implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_peek_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_blocking_peek_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_blocking_peek_impSFX for providing blocking peek implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=9 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_peek_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_nonblocking_peek_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_nonblocking_peek_impSFX for providing non-blocking peek implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_peek_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_nonblocking_peek_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_nonblocking_peek_impSFX for providing non-blocking peek implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=10 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_peek_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_peek_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_peek_impSFX for providing both blocking and non-blocking peek implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_peek_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_peek_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_peek_impSFX for providing both blocking and non-blocking peek implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=11 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_get_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_get_peek_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_blocking_get_peek_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_blocking_get_peek_impSFX for providing the blocking get_peek implementation.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_get_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_get_peek_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_blocking_get_peek_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_blocking_get_peek_impSFX for providing the blocking get_peek implementation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=12 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_get_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_get_peek_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_nonblocking_get_peek_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_nonblocking_get_peek_impSFX for providing non-blocking get_peek implementation.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_get_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_get_peek_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_nonblocking_get_peek_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_nonblocking_get_peek_impSFX for providing non-blocking get_peek implementation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=13 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_get_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_get_peek_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_get_peek_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_get_peek_impSFX for providing both blocking and non-blocking get_peek implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_get_peek_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_get_peek_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_get_peek_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_get_peek_impSFX for providing both blocking and non-blocking get_peek implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=14 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_master_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_master_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_blocking_master_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_blocking_master_impSFX for providing the blocking master implementation.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_master_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_master_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_blocking_master_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_blocking_master_impSFX for providing the blocking master implementation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=15 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_master_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_master_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_nonblocking_master_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_nonblocking_master_impSFX for providing the non-blocking master implementation.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_master_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_master_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_nonblocking_master_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_nonblocking_master_impSFX for providing the non-blocking master implementation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=16 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_master_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_master_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_master_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_master_impSFX for providing both blocking and non-blocking master implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_master_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_master_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_master_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_master_impSFX for providing both blocking and non-blocking master implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=17 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_slave_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_slave_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_blocking_slave_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_blocking_slave_impSFX for providing the blocking slave implementation.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_slave_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_slave_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_blocking_slave_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_blocking_slave_impSFX for providing the blocking slave implementation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=18 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_slave_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_slave_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_nonblocking_slave_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_nonblocking_slave_impSFX for providing the non-blocking slave implementation.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_slave_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_slave_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_nonblocking_slave_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_nonblocking_slave_impSFX for providing the non-blocking slave implementation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=19 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_slave_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_slave_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_slave_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_slave_impSFX for providing both blocking and non-blocking slave implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_slave_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_slave_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_slave_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_slave_impSFX for providing both blocking and non-blocking slave implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=20 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_transport_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_transport_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_blocking_transport_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_blocking_transport_impSFX for providing the blocking transport implementation.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_blocking_transport_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_blocking_transport_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_blocking_transport_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_blocking_transport_impSFX for providing the blocking transport implementation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=21 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_transport_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_transport_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_nonblocking_transport_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_nonblocking_transport_impSFX for providing the non-blocking transport implementation.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_nonblocking_transport_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_nonblocking_transport_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_nonblocking_transport_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_nonblocking_transport_impSFX for providing the non-blocking transport implementation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=22 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_transport_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_transport_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_transport_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_transport_impSFX for providing both blocking and non-blocking transport implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_transport_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_transport_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_transport_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_transport_impSFX for providing both blocking and non-blocking transport implementations.&nbsp;  <i>SFX</i> is the suffix for the new class type.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=23 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_analysis_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_analysis_imp_decl</a></h3><div class=CBody><blockquote><pre>`uvm_analysis_imp_decl(SFX)</pre></blockquote><p>Define the class uvm_analysis_impSFX for providing an analysis implementation.&nbsp; <i>SFX</i> is the suffix for the new class type.&nbsp; The analysis implementation is the write function.&nbsp; The `uvm_analysis_imp_decl allows for a scoreboard (or other analysis component) to support input from many places.&nbsp; For example:</p><blockquote><pre>`uvm_analysis_imp_decl(_ingress)
-`uvm_analysis_imp_decl(_egress)
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_analysis_imp_decl" href="../../src_view/macros/uvm_tlm_defines.svh.html#L85" class="src-code-link" data-src-file="macros/uvm_tlm_defines.svh" data-src-line="85">`uvm_analysis_imp_decl</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_analysis_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">SFX</span><span class="sv-op">)</span></code></pre>
+</div><p>Define the class uvm_analysis_impSFX for providing an analysis implementation.&nbsp; <i>SFX</i> is the suffix for the new class type.&nbsp; The analysis implementation is the write function.&nbsp; The `uvm_analysis_imp_decl allows for a scoreboard (or other analysis component) to support input from many places.&nbsp; For example:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_analysis_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">_ingress</span><span class="sv-op">)</span>
+<span class="sv-macro">`uvm_analysis_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">_egress</span><span class="sv-op">)</span>
 
-class myscoreboard extends uvm_component;
-  uvm_analysis_imp_ingress#(mydata, myscoreboard) ingress;
-  uvm_analysis_imp_egress#(mydata, myscoreboard) egress;
-  mydata ingress_list[$];
-  ...
+<span class="sv-keyword">class</span> <span class="sv-ident">myscoreboard</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <span class="sv-uvm-type">uvm_analysis_imp_ingress</span><span class="sv-op">#(</span><span class="sv-ident">mydata</span><span class="sv-op">,</span> <span class="sv-ident">myscoreboard</span><span class="sv-op">)</span> <span class="sv-ident">ingress</span><span class="sv-op">;</span>
+  <span class="sv-uvm-type">uvm_analysis_imp_egress</span><span class="sv-op">#(</span><span class="sv-ident">mydata</span><span class="sv-op">,</span> <span class="sv-ident">myscoreboard</span><span class="sv-op">)</span> <span class="sv-ident">egress</span><span class="sv-op">;</span>
+  <span class="sv-ident">mydata</span> <span class="sv-ident">ingress_list</span><span class="sv-op">[</span>$<span class="sv-op">]</span><span class="sv-op">;</span>
+  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
 
-  function new(string name, uvm_component parent);
-    super.new(name,parent);
-    ingress = new(&quot;ingress&quot;, this);
-    egress = new(&quot;egress&quot;, this);
-  endfunction
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">ingress</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ingress&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">egress</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;egress&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  function void write_ingress(mydata t);
-    ingress_list.push_back(t);
-  endfunction
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write_ingress</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">ingress_list</span><span class="sv-op">.</span><span class="sv-method">push_back</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  function void write_egress(mydata t);
-    find_match_in_ingress_list(t);
-  endfunction
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write_egress</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-method">find_match_in_ingress_list</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  function void find_match_in_ingress_list(mydata t);
-    //implement scoreboarding for this particular dut
-    ...
-  endfunction
-endclass</pre></blockquote></div></div></div>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">find_match_in_ingress_list</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-comment">//implement scoreboarding for this particular dut</span>
+    <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div></div></div></div>
 
 </div><!--Content-->
 
@@ -302,6 +605,29 @@ endclass</pre></blockquote></div></div></div>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

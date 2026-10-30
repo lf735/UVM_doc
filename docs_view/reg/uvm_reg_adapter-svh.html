@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Classes for Adapting Between Register and Bus Operations | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -70,7 +73,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_reg_adapter extends uvm_object
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_reg_adapter</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=2 -->
@@ -106,13 +109,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.new" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Create a new instance of this type, giving it the optional <i>name</i>.</p></div></div></div>
@@ -122,7 +125,7 @@
 
  <!--CONTENT index=3 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.supports_byte_enable" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">supports_byte_enable</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>bit supports_byte_enable
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">supports_byte_enable</span>
   </td></tr></table></blockquote><div class=CBody><p>Set this bit in extensions of this class if the bus protocol supports byte enables.</p></div></div></div>
 
 
@@ -130,7 +133,7 @@
 
  <!--CONTENT index=4 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.provides_responses" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">provides_responses</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>bit provides_responses
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">provides_responses</span>
   </td></tr></table></blockquote><div class=CBody><p>Set this bit in extensions of this class if the bus driver provides separate response items.</p></div></div></div>
 
 
@@ -138,7 +141,7 @@
 
  <!--CONTENT index=5 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.parent_sequence" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">parent_sequence</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_sequence_base parent_sequence
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_sequence_base</span> <span class="sv-ident">parent_sequence</span>
   </td></tr></table></blockquote><div class=CBody><p>Set this member in extensions of this class if the bus driver requires bus items be executed via a particular sequence base type.&nbsp; The sequence assigned to this member must implement do_clone().</p></div></div></div>
 
 
@@ -148,12 +151,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.reg2bus" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">reg2bus</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>pure virtual function uvm_sequence_item reg2bus(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>const ref&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_bus_op&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_sequence_item <span class="sv-proto-name">reg2bus</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">const</span> <span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_bus_op</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Extensions of this class <i>must</i> implement this method to convert the specified <a href="uvm_reg_item-svh.html#uvm_reg_bus_op" class=LClass id=link20  >uvm_reg_bus_op</a> to a corresponding <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link21  >uvm_sequence_item</a> subtype that defines the bus transaction.</p><p>The method must allocate a new bus-specific <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item" class=LClass id=link22  >uvm_sequence_item</a>, assign its members from the corresponding members from the given generic <i>rw</i> bus operation, then return it.</p></div></div></div>
@@ -165,15 +168,15 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.bus2reg" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">bus2reg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>pure virtual function void bus2reg(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>uvm_sequence_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>bus_item,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_bus_op&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">bus2reg</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">bus_item</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_bus_op</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Extensions of this class <i>must</i> implement this method to copy members of the given bus-specific <i>bus_item</i> to corresponding members of the provided <i>bus_rw</i> instance.&nbsp; Unlike <a href="#uvm_reg_adapter.reg2bus" class=LMethod id=link23  >reg2bus</a>, the resulting transaction is not allocated from scratch.&nbsp; This is to accommodate applications where the bus response must be returned in the original request.</p></div></div></div>
@@ -183,42 +186,54 @@
 
  <!--CONTENT index=8 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.get_item" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">get_item</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function uvm_reg_item get_item()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_reg_item</span> <span class="sv-proto-name">get_item</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the bus-independent read/write information that corresponds to the generic bus transaction currently translated to a bus-specific transaction.&nbsp; This function returns a value reference only when called in the <a href="#uvm_reg_adapter.reg2bus" class=LMethod id=link24  >uvm_reg_adapter::reg2bus()</a> method.&nbsp; It returns <i>null</i> at all other times.&nbsp; The content of the return <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link25  >uvm_reg_item</a> instance must not be modified and used strictly to obtain additional information about the operation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=9 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.Example" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">Example</a></h3><div class=CBody><p>The following example illustrates how to implement a RegModel-BUS adapter class for the APB bus protocol.</p><blockquote><pre>class rreg2apb_adapter extends uvm_reg_adapter;
-  `uvm_object_utils(reg2apb_adapter)
+<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_adapter.Example" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">Example</a></h3><div class=CBody><p>The following example illustrates how to implement a RegModel-BUS adapter class for the APB bus protocol.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">rreg2apb_adapter</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_reg_adapter</span><span class="sv-op">;</span>
+  <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">reg2apb_adapter</span><span class="sv-op">)</span>
 
-  function new(string name=&quot;reg2apb_adapter&quot;);
-    super.new(name);
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;reg2apb_adapter&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-  endfunction
+  <span class="sv-keyword">endfunction</span>
 
-  virtual function uvm_sequence_item reg2bus(uvm_reg_bus_op rw);
-    apb_item apb = apb_item::type_id::create(&quot;apb_item&quot;);
-    apb.op   = (rw.kind == UVM_READ) ? apb::READ : apb::WRITE;
-    apb.addr = rw.addr;
-    apb.data = rw.data;
-    return apb;
-  endfunction
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_sequence_item</span> <span class="sv-method">reg2bus</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_bus_op</span> <span class="sv-ident">rw</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">apb_item</span> <span class="sv-ident">apb</span> <span class="sv-op">=</span> <span class="sv-ident">apb_item</span><span class="sv-op">::</span><span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;apb_item&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">apb</span><span class="sv-op">.</span><span class="sv-ident">op</span>   <span class="sv-op">=</span> <span class="sv-op">(</span><span class="sv-ident">rw</span><span class="sv-op">.</span><span class="sv-ident">kind</span> <span class="sv-op">==</span> <span class="sv-uvm-type">UVM_READ</span><span class="sv-op">)</span> <span class="sv-op">?</span> <span class="sv-ident">apb</span><span class="sv-op">::</span><span class="sv-ident">READ</span> <span class="sv-op">:</span> <span class="sv-ident">apb</span><span class="sv-op">::</span><span class="sv-ident">WRITE</span><span class="sv-op">;</span>
+    <span class="sv-ident">apb</span><span class="sv-op">.</span><span class="sv-ident">addr</span> <span class="sv-op">=</span> <span class="sv-ident">rw</span><span class="sv-op">.</span><span class="sv-ident">addr</span><span class="sv-op">;</span>
+    <span class="sv-ident">apb</span><span class="sv-op">.</span><span class="sv-ident">data</span> <span class="sv-op">=</span> <span class="sv-ident">rw</span><span class="sv-op">.</span><span class="sv-ident">data</span><span class="sv-op">;</span>
+    <span class="sv-keyword">return</span> <span class="sv-ident">apb</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  virtual function void bus2reg(uvm_sequencer_item bus_item,
-                                uvm_reg_bus_op rw);
-    apb_item apb;
-    if (!$cast(apb,bus_item)) begin
-      `uvm_fatal(&quot;CONVERT_APB2REG&quot;,&quot;Bus item is not of type apb_item&quot;)
-    end
-    rw.kind  = apb.op==apb::READ ? UVM_READ : UVM_WRITE;
-    rw.addr = apb.addr;
-    rw.data = apb.data;
-    rw.status = UVM_IS_OK;
-  endfunction
+  <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">bus2reg</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_sequencer_item</span> <span class="sv-ident">bus_item</span><span class="sv-op">,</span>
+                                <span class="sv-uvm-type">uvm_reg_bus_op</span> <span class="sv-ident">rw</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">apb_item</span> <span class="sv-ident">apb</span><span class="sv-op">;</span>
+    <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-op">!</span>$<span class="sv-method">cast</span><span class="sv-op">(</span><span class="sv-ident">apb</span><span class="sv-op">,</span><span class="sv-ident">bus_item</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span>
+      <span class="sv-macro">`uvm_fatal</span><span class="sv-op">(</span><span class="sv-string">&quot;CONVERT_APB2REG&quot;</span><span class="sv-op">,</span><span class="sv-string">&quot;Bus item is not of type apb_item&quot;</span><span class="sv-op">)</span>
+    <span class="sv-keyword">end</span>
+    <span class="sv-ident">rw</span><span class="sv-op">.</span><span class="sv-ident">kind</span>  <span class="sv-op">=</span> <span class="sv-ident">apb</span><span class="sv-op">.</span><span class="sv-ident">op</span><span class="sv-op">==</span><span class="sv-ident">apb</span><span class="sv-op">::</span><span class="sv-ident">READ</span> <span class="sv-op">?</span> <span class="sv-uvm-type">UVM_READ</span> <span class="sv-op">:</span> <span class="sv-uvm-type">UVM_WRITE</span><span class="sv-op">;</span>
+    <span class="sv-ident">rw</span><span class="sv-op">.</span><span class="sv-ident">addr</span> <span class="sv-op">=</span> <span class="sv-ident">apb</span><span class="sv-op">.</span><span class="sv-ident">addr</span><span class="sv-op">;</span>
+    <span class="sv-ident">rw</span><span class="sv-op">.</span><span class="sv-ident">data</span> <span class="sv-op">=</span> <span class="sv-ident">apb</span><span class="sv-op">.</span><span class="sv-ident">data</span><span class="sv-op">;</span>
+    <span class="sv-ident">rw</span><span class="sv-op">.</span><span class="sv-ident">status</span> <span class="sv-op">=</span> <span class="sv-uvm-type">UVM_IS_OK</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-endclass</pre></blockquote></div></div></div>
+<span class="sv-keyword">endclass</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -251,7 +266,7 @@ endclass</pre></blockquote></div></div></div>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_reg_tlm_adapter extends uvm_reg_adapter
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_reg_tlm_adapter</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_reg_adapter</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=11 -->
@@ -278,12 +293,12 @@ endclass</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_tlm_adapter.reg2bus" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">reg2bus</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual function uvm_sequence_item reg2bus(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>const ref&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_bus_op&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_sequence_item <span class="sv-proto-name">reg2bus</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">const</span> <span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_bus_op</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Converts a <a href="uvm_reg_item-svh.html#uvm_reg_bus_op" class=LClass id=link40  >uvm_reg_bus_op</a> struct to a <a href="../tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_gp" class=LClass id=link41  >uvm_tlm_gp</a> item.</p></div></div></div>
@@ -295,15 +310,15 @@ endclass</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_tlm_adapter.bus2reg" href="../../src_view/reg/uvm_reg_adapter.svh.html#L39" class="src-code-link" data-src-file="reg/uvm_reg_adapter.svh" data-src-line="39">bus2reg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual function void bus2reg(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>uvm_sequence_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>bus_item,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>uvm_reg_bus_op&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">bus2reg</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">bus_item</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_bus_op</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Converts a <a href="../tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_gp" class=LClass id=link42  >uvm_tlm_gp</a> item to a <a href="uvm_reg_item-svh.html#uvm_reg_bus_op" class=LClass id=link43  >uvm_reg_bus_op</a>. into the provided <i>rw</i> transaction.</p></div></div></div>
@@ -317,6 +332,29 @@ endclass</pre></blockquote></div></div></div>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

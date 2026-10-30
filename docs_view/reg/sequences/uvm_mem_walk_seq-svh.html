@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Memory Walking-Ones Test Sequences | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../css/style.css">
 </head>
 <body class="doc-body">
@@ -44,14 +47,38 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_single_walk_seq" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">uvm_mem_single_walk_seq</a></h2><div class=CBody><p>Runs the walking-ones algorithm on the memory given by the <a href="#uvm_mem_single_walk_seq.mem" class=LVariable id=link11  >mem</a> property, which must be assigned prior to starting this sequence.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, or &ldquo;NO_MEM_WALK_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the memory, the memory is not tested.</p><blockquote><pre>uvm_resource_db#(bit)::set({&quot;REG::&quot;,regmodel.blk.mem0.get_full_name()},
-                           &quot;NO_MEM_TESTS&quot;, 1, this);</pre></blockquote><p>The walking ones algorithm is performed for each map in which the memory is defined.</p><blockquote><pre>for (k = 0 thru memsize-1)
-  write addr=k data=~k
-  if (k &gt; 0) {
-    read addr=k-1, expect data=~(k-1)
-    write addr=k-1 data=k-1
-  if (k == last addr)
-    read addr=k, expect data=~k</pre></blockquote>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_single_walk_seq" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">uvm_mem_single_walk_seq</a></h2><div class=CBody><p>Runs the walking-ones algorithm on the memory given by the <a href="#uvm_mem_single_walk_seq.mem" class=LVariable id=link11  >mem</a> property, which must be assigned prior to starting this sequence.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, or &ldquo;NO_MEM_WALK_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the memory, the memory is not tested.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-keyword">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-ident">mem0</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">,</span>
+                           <span class="sv-string">&quot;NO_MEM_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>The walking ones algorithm is performed for each map in which the memory is defined.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">for</span> <span class="sv-op">(</span><span class="sv-ident">k</span> <span class="sv-op">=</span> <span class="sv-number">0</span> <span class="sv-ident">thru</span> <span class="sv-ident">memsize</span><span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">)</span>
+  <span class="sv-ident">write</span> <span class="sv-ident">addr</span><span class="sv-op">=</span><span class="sv-ident">k</span> <span class="sv-ident">data</span><span class="sv-op">=</span><span class="sv-op">~</span><span class="sv-ident">k</span>
+  <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">k</span> <span class="sv-op">&gt;</span> <span class="sv-number">0</span><span class="sv-op">)</span> <span class="sv-op">{</span>
+    <span class="sv-ident">read</span> <span class="sv-ident">addr</span><span class="sv-op">=</span><span class="sv-ident">k</span><span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-keyword">expect</span> <span class="sv-ident">data</span><span class="sv-op">=</span><span class="sv-op">~</span><span class="sv-op">(</span><span class="sv-ident">k</span><span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">)</span>
+    <span class="sv-ident">write</span> <span class="sv-ident">addr</span><span class="sv-op">=</span><span class="sv-ident">k</span><span class="sv-op">-</span><span class="sv-number">1</span> <span class="sv-ident">data</span><span class="sv-op">=</span><span class="sv-ident">k</span><span class="sv-op">-</span><span class="sv-number">1</span>
+  <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">k</span> <span class="sv-op">==</span> <span class="sv-ident">last</span> <span class="sv-ident">addr</span><span class="sv-op">)</span>
+    <span class="sv-ident">read</span> <span class="sv-ident">addr</span><span class="sv-op">=</span><span class="sv-ident">k</span><span class="sv-op">,</span> <span class="sv-keyword">expect</span> <span class="sv-ident">data</span><span class="sv-op">=</span><span class="sv-op">~</span><span class="sv-ident">k</span></code></pre>
+</div>
 
 <!--START_ND_SUMMARY index=1-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -78,11 +105,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>class uvm_mem_single_walk_seq extends uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(uvm_reg_item)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">class</span> uvm_mem_single_walk_seq <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">uvm_reg_item</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -115,7 +142,7 @@
 
  <!--CONTENT index=3 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_single_walk_seq.mem" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">mem</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_mem mem
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_mem</span> <span class="sv-ident">mem</span>
   </td></tr></table></blockquote><div class=CBody><p>The memory to test; must be assigned prior to starting sequence.</p></div></div></div>
 
 
@@ -131,13 +158,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_single_walk_seq.new" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;uvm_mem_walk_seq&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;uvm_mem_walk_seq&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates a new instance of the class with the given name.</p></div></div></div>
@@ -147,15 +174,27 @@
 
  <!--CONTENT index=6 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_single_walk_seq.body" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">body</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task body()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">body</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Performs the walking-ones algorithm on each map of the memory specified in <a href="#uvm_mem_single_walk_seq.mem" class=LVariable id=link12  >mem</a>.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=7 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_walk_seq" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">uvm_mem_walk_seq</a></h2><div class=CBody><p>Verifies the all memories in a block by executing the <a href="#uvm_mem_single_walk_seq" class=LClass id=link19  >uvm_mem_single_walk_seq</a> sequence on every memory within it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, or &ldquo;NO_MEM_WALK_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><blockquote><pre>uvm_resource_db#(bit)::set({&quot;REG::&quot;,regmodel.blk.get_full_name(),&quot;.*&quot;},
-                           &quot;NO_MEM_TESTS&quot;, 1, this);</pre></blockquote>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_walk_seq" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">uvm_mem_walk_seq</a></h2><div class=CBody><p>Verifies the all memories in a block by executing the <a href="#uvm_mem_single_walk_seq" class=LClass id=link19  >uvm_mem_single_walk_seq</a> sequence on every memory within it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, or &ldquo;NO_MEM_WALK_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-keyword">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;.*&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span>
+                           <span class="sv-string">&quot;NO_MEM_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div>
 
 <!--START_ND_SUMMARY index=7-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -182,11 +221,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>class uvm_mem_walk_seq extends uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(uvm_reg_item)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">class</span> uvm_mem_walk_seq <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">uvm_reg_item</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -224,14 +263,26 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_walk_seq.model" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">model</a></h3><div class=CBody><p>The block to be tested.&nbsp; Declared in the base class.</p><blockquote><pre>uvm_reg_block model;</pre></blockquote></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_walk_seq.model" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">model</a></h3><div class=CBody><p>The block to be tested.&nbsp; Declared in the base class.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_reg_block</span> <span class="sv-ident">model</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=10 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_walk_seq.mem_seq" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">mem_seq</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>protected uvm_mem_single_walk_seq mem_seq
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">protected</span> <span class="sv-uvm-type">uvm_mem_single_walk_seq</span> <span class="sv-ident">mem_seq</span>
   </td></tr></table></blockquote><div class=CBody><p>The sequence used to test one memory</p></div></div></div>
 
 
@@ -245,7 +296,7 @@
 
  <!--CONTENT index=12 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_walk_seq.body" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">body</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task body()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">body</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Executes the mem walk sequence, one block at a time.&nbsp; Do not call directly.&nbsp; Use seq.start() instead.</p></div></div></div>
 
 
@@ -255,11 +306,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_walk_seq.do_block" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">do_block</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual task do_block(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_block&nbsp;</td>
-      <td class=PParameter nowrap width=100%>blk</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">do_block</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_block</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">blk</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Test all of the memories in a given <i>block</i></p></div></div></div>
@@ -271,11 +322,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_walk_seq.reset_blk" href="../../../src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L60" class="src-code-link" data-src-file="reg/sequences/uvm_mem_walk_seq.svh" data-src-line="60">reset_blk</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task reset_blk(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_block&nbsp;</td>
-      <td class=PParameter nowrap width=100%>blk</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">reset_blk</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_block</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">blk</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Reset the DUT that corresponds to the specified block abstraction class.</p><p>Currently empty.&nbsp; Will rollback the environment&rsquo;s phase to the <i>reset</i> phase once the new phasing is available.</p><p>In the meantime, the DUT should be reset before executing this test sequence or this method should be implemented in an extension to reset the DUT.</p></div></div></div>
@@ -289,6 +340,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

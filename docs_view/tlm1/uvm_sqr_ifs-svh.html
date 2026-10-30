@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_sqr_if_base #(REQ,RSP) | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -38,17 +41,17 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual class uvm_sqr_if_base #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T1</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_object,</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_sqr_if_base</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T1</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_object,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>&nbsp;</td>
-      <td class=PParameter nowrap>T2</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>T1</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T2</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">T1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -104,12 +107,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).get_next_item" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">get_next_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual task get_next_item(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>T1&nbsp;</td>
-      <td class=PParameter nowrap width=100%>t</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">get_next_item</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T1</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Retrieves the next available item from a sequence.&nbsp;  The call will block until an item is available.&nbsp;  The following steps occur on this call:</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>1</td><td class=CDLDescription>Arbitrate among requesting, unlocked, relevant sequences - choose the highest priority sequence based on the current sequencer arbitration mode.&nbsp; If no sequence is available, wait for a requesting unlocked relevant sequence,  then re-arbitrate.</td></tr><tr><td class=CDLEntry>2</td><td class=CDLDescription>The chosen sequence will return from wait_for_grant</td></tr><tr><td class=CDLEntry>3</td><td class=CDLDescription>The chosen sequence <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.pre_do" class=LMethod id=link13  >uvm_sequence_base::pre_do</a> is called</td></tr><tr><td class=CDLEntry>4</td><td class=CDLDescription>The chosen sequence item is randomized</td></tr><tr><td class=CDLEntry>5</td><td class=CDLDescription>The chosen sequence <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.post_do" class=LMethod id=link14  >uvm_sequence_base::post_do</a> is called</td></tr><tr><td class=CDLEntry>6</td><td class=CDLDescription>Return with a reference to the item</td></tr></table><p>Once <a href="#uvm_sqr_if_base#(REQ,RSP).get_next_item" class=LMethod id=link15  >get_next_item</a> is called, <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link16  >item_done</a> must be called to indicate the completion of the request to the sequencer.&nbsp;  This will remove the request item from the sequencer FIFO.</p></div></div></div>
@@ -121,12 +124,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).try_next_item" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">try_next_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual task try_next_item(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>T1&nbsp;</td>
-      <td class=PParameter nowrap width=100%>t</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">try_next_item</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T1</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Retrieves the next available item from a sequence if one is available.&nbsp; Otherwise, the function returns immediately with request set to <i>null</i>.&nbsp; The following steps occur on this call:</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>1</td><td class=CDLDescription>Arbitrate among requesting, unlocked, relevant sequences - choose the highest priority sequence based on the current sequencer arbitration mode.&nbsp; If no sequence is available, return <i>null</i>.</td></tr><tr><td class=CDLEntry>2</td><td class=CDLDescription>The chosen sequence will return from wait_for_grant</td></tr><tr><td class=CDLEntry>3</td><td class=CDLDescription>The chosen sequence <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.pre_do" class=LMethod id=link17  >uvm_sequence_base::pre_do</a> is called</td></tr><tr><td class=CDLEntry>4</td><td class=CDLDescription>The chosen sequence item is randomized</td></tr><tr><td class=CDLEntry>5</td><td class=CDLDescription>The chosen sequence <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.post_do" class=LMethod id=link18  >uvm_sequence_base::post_do</a> is called</td></tr><tr><td class=CDLEntry>6</td><td class=CDLDescription>Return with a reference to the item</td></tr></table><p>Once <a href="#uvm_sqr_if_base#(REQ,RSP).try_next_item" class=LMethod id=link19  >try_next_item</a> is called, <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link20  >item_done</a> must be called to indicate the completion of the request to the sequencer.&nbsp;  This will remove the request item from the sequencer FIFO.</p></div></div></div>
@@ -138,24 +141,36 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).item_done" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">item_done</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>virtual function void item_done(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T2&nbsp;</td>
-      <td class=PParameter nowrap>t</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">item_done</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T2</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">t</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Indicates that the request is completed to the sequencer.&nbsp;  Any <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.wait_for_item_done" class=LMethod id=link21  >uvm_sequence_base::wait_for_item_done</a> calls made by a sequence for this item will return.</p><p>The current item is removed from the sequencer FIFO.</p><p>If a response item is provided, then it will be sent back to the requesting sequence.&nbsp; The response item must have its sequence ID and transaction ID set correctly, using the <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item.set_id_info" class=LMethod id=link22  >uvm_sequence_item::set_id_info</a> method:</p><blockquote><pre>rsp.set_id_info(req);</pre></blockquote><p>Before <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link23  >item_done</a> is called, any calls to peek will retrieve the current item that was obtained by <a href="#uvm_sqr_if_base#(REQ,RSP).get_next_item" class=LMethod id=link24  >get_next_item</a>.&nbsp;  After <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link25  >item_done</a> is called, peek will cause the sequencer to arbitrate for a new item.</p></div></div></div>
+<div class=CBody><p>Indicates that the request is completed to the sequencer.&nbsp;  Any <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.wait_for_item_done" class=LMethod id=link21  >uvm_sequence_base::wait_for_item_done</a> calls made by a sequence for this item will return.</p><p>The current item is removed from the sequencer FIFO.</p><p>If a response item is provided, then it will be sent back to the requesting sequence.&nbsp; The response item must have its sequence ID and transaction ID set correctly, using the <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item.set_id_info" class=LMethod id=link22  >uvm_sequence_item::set_id_info</a> method:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">rsp</span><span class="sv-op">.</span><span class="sv-method">set_id_info</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>Before <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link23  >item_done</a> is called, any calls to peek will retrieve the current item that was obtained by <a href="#uvm_sqr_if_base#(REQ,RSP).get_next_item" class=LMethod id=link24  >get_next_item</a>.&nbsp;  After <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link25  >item_done</a> is called, peek will cause the sequencer to arbitrate for a new item.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).wait_for_sequences" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">wait_for_sequences</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task wait_for_sequences()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">wait_for_sequences</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Waits for a sequence to have a new item available.&nbsp; The default implementation in the sequencer calls <a href="../base/uvm_globals-svh.html#uvm_wait_for_nba_region" class=LMethod id=link26  >uvm_wait_for_nba_region</a>.&nbsp; User-derived sequencers may override its <a href="#uvm_sqr_if_base#(REQ,RSP).wait_for_sequences" class=LMethod id=link27  >wait_for_sequences</a> implementation to perform some other application-specific implementation.</p></div></div></div>
 
 
@@ -163,7 +178,7 @@
 
  <!--CONTENT index=6 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).has_do_available" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">has_do_available</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function bit has_do_available()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">has_do_available</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Indicates whether a sequence item is available for immediate processing.&nbsp; Implementations should return 1 if an item is available, 0 otherwise.</p></div></div></div>
 
 
@@ -173,12 +188,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).get" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">get</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual task get(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>T1&nbsp;</td>
-      <td class=PParameter nowrap width=100%>t</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T1</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Retrieves the next available item from a sequence.&nbsp;  The call blocks until an item is available.&nbsp; The following steps occur on this call:</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>1</td><td class=CDLDescription>Arbitrate among requesting, unlocked, relevant sequences - choose the highest priority sequence based on the current sequencer arbitration mode.&nbsp; If no sequence is available, wait for a requesting unlocked relevant sequence, then re-arbitrate.</td></tr><tr><td class=CDLEntry>2</td><td class=CDLDescription>The chosen sequence will return from <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.wait_for_grant" class=LMethod id=link28  >uvm_sequence_base::wait_for_grant</a></td></tr><tr><td class=CDLEntry>3</td><td class=CDLDescription>The chosen sequence <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.pre_do" class=LMethod id=link29  >uvm_sequence_base::pre_do</a> is called</td></tr><tr><td class=CDLEntry>4</td><td class=CDLDescription>The chosen sequence item is randomized</td></tr><tr><td class=CDLEntry>5</td><td class=CDLDescription>The chosen sequence <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.post_do" class=LMethod id=link30  >uvm_sequence_base::post_do</a> is called</td></tr><tr><td class=CDLEntry>6</td><td class=CDLDescription>Indicate <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link31  >item_done</a> to the sequencer</td></tr><tr><td class=CDLEntry>7</td><td class=CDLDescription>Return with a reference to the item</td></tr></table><p>When get is called, <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link32  >item_done</a> may not be called.&nbsp;  A new item can be obtained by calling get again, or a response may be sent using either <a href="#uvm_sqr_if_base#(REQ,RSP).put" class=LMethod id=link33  >put</a>, or uvm_driver::rsp_port.write().</p></div></div></div>
@@ -190,12 +205,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).peek" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">peek</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual task peek(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>output&nbsp;</td>
-      <td class=PType nowrap>T1&nbsp;</td>
-      <td class=PParameter nowrap width=100%>t</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">peek</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T1</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the current request item if one is in the sequencer FIFO.&nbsp;  If no item is in the FIFO, then the call will block until the sequencer has a new request.&nbsp; The following steps will occur if the sequencer FIFO is empty:</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>1</td><td class=CDLDescription>Arbitrate among requesting, unlocked, relevant sequences - choose the highest priority sequence based on the current sequencer arbitration mode.&nbsp; If no sequence is available, wait for a requesting unlocked relevant sequence, then re-arbitrate.</td></tr><tr><td class=CDLEntry>2</td><td class=CDLDescription>The chosen sequence will return from <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.wait_for_grant" class=LMethod id=link34  >uvm_sequence_base::wait_for_grant</a></td></tr><tr><td class=CDLEntry>3</td><td class=CDLDescription>The chosen sequence <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.pre_do" class=LMethod id=link35  >uvm_sequence_base::pre_do</a> is called</td></tr><tr><td class=CDLEntry>4</td><td class=CDLDescription>The chosen sequence item is randomized</td></tr><tr><td class=CDLEntry>5</td><td class=CDLDescription>The chosen sequence <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.post_do" class=LMethod id=link36  >uvm_sequence_base::post_do</a> is called</td></tr></table><p>Once a request item has been retrieved and is in the sequencer FIFO, subsequent calls to peek will return the same item.&nbsp;  The item will stay in the FIFO until either get or <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link37  >item_done</a> is called.</p></div></div></div>
@@ -207,12 +222,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).put" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">put</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual task put(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T2&nbsp;</td>
-      <td class=PParameter nowrap width=100%>t</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">put</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T2</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Sends a response back to the sequence that issued the request.&nbsp; Before the response is put, it must have its sequence ID and transaction ID set to match the request.&nbsp;  This can be done using the <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item.set_id_info" class=LMethod id=link38  >uvm_sequence_item::set_id_info</a> call:</p><p>rsp.set_id_info(req);</p><p>While this is a task, it will not consume time (including delta cycles).&nbsp; The response will be put into the sequence response queue or it will be sent to the sequence response handler.</p></div></div></div>
@@ -224,12 +239,12 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).put_response" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">put_response</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>virtual function void put_response(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T2&nbsp;</td>
-      <td class=PParameter nowrap width=100%>t</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">put_response</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T2</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Sends a response back to the sequence that issued the request.&nbsp; Before the response is put, it must have its sequence ID and transaction ID set to match the request.&nbsp;  This can be done using the <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item.set_id_info" class=LMethod id=link39  >uvm_sequence_item::set_id_info</a> call:</p><p>rsp.set_id_info(req);</p></div></div></div>
@@ -239,7 +254,7 @@
 
  <!--CONTENT index=11 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).disable_auto_item_recording" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">disable_auto_item_recording</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void disable_auto_item_recording()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">disable_auto_item_recording</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>By default, item recording is performed automatically when get_next_item() and item_done() are called.&nbsp; However, this works only for simple, in-order, blocking transaction execution.&nbsp; For pipelined and out-of-order transaction execution, the driver must turn off this automatic recording and call <a href="../base/uvm_transaction-svh.html#uvm_transaction.accept_tr" class=LMethod id=link40  >uvm_transaction::accept_tr</a>, <a href="../base/uvm_transaction-svh.html#uvm_transaction.begin_tr" class=LMethod id=link41  >uvm_transaction::begin_tr</a> and <a href="../base/uvm_transaction-svh.html#uvm_transaction.end_tr" class=LMethod id=link42  >uvm_transaction::end_tr</a> explicitly at appropriate points in time.</p><p>This methods be called at the beginning of the driver&rsquo;s <i>run_phase()</i> method.&nbsp; Once disabled, automatic recording cannot be re-enabled.</p><p>For backward-compatibility, automatic item recording can be globally turned off at compile time by defining UVM_DISABLE_AUTO_ITEM_RECORDING</p></div></div></div>
 
 
@@ -247,7 +262,7 @@
 
  <!--CONTENT index=12 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_sqr_if_base#(REQ,RSP).is_auto_item_recording_enabled" href="../../src_view/tlm1/uvm_sqr_ifs.svh.html#L38" class="src-code-link" data-src-file="tlm1/uvm_sqr_ifs.svh" data-src-line="38">is_auto_item_recording_enabled</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function bit is_auto_item_recording_enabled()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_auto_item_recording_enabled</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return TRUE if automatic item recording is enabled for this port instance.</p></div></div></div>
 
 </div><!--Content-->
@@ -259,6 +274,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

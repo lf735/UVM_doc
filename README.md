@@ -9,6 +9,8 @@ Ready for local offline browsing and automated continuous deployment to **GitHub
 ## 🚀 Key Features
 
 - **Dynamic Interactive Web Portal**: Fast, responsive layout with single-page navigation and deep-linking.
+- **Google Developers Inspired Design**: High-contrast, crystal-clear typography (Google Sans & Roboto) with a refined Google Blue color scheme matching official documentation such as Google Apps Script and Google Cloud reference docs.
+- **Full Syntax Highlighting in Documentation**: Syntax-highlighted code blocks, command-line snippets, and API prototypes with language badges and 1-click clipboard copy buttons.
 - **SystemVerilog Web Source Viewer**: Complete syntax highlighting, clickable line numbers (`#Lxx`), copy buttons, and raw downloads for all 155 source files (`.sv`, `.svh`, `.c`, `.h`).
 - **Bidirectional Deep Linking**:
   - Class and macro reference pages include prominent **"View Source"** buttons jumping directly to their definition lines in the source code.

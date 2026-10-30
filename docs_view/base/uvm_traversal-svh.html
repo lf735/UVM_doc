@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_visitor #(NODE) | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -66,7 +69,7 @@
 
  <!--CONTENT index=2 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_visitor#(NODE).begin_v" href="../../src_view/base/uvm_traversal.svh.html#L30" class="src-code-link" data-src-file="base/uvm_traversal.svh" data-src-line="30">begin_v</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void begin_v()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">begin_v</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>This method will be invoked by the visitor before the first NODE is visited</p></div></div></div>
 
 
@@ -74,7 +77,7 @@
 
  <!--CONTENT index=3 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_visitor#(NODE).end_v" href="../../src_view/base/uvm_traversal.svh.html#L30" class="src-code-link" data-src-file="base/uvm_traversal.svh" data-src-line="30">end_v</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void end_v()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">end_v</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>This method will be invoked by the visitor after the last NODE is visited</p></div></div></div>
 
 
@@ -84,22 +87,34 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_visitor#(NODE).visit" href="../../src_view/base/uvm_traversal.svh.html#L30" class="src-code-link" data-src-file="base/uvm_traversal.svh" data-src-line="30">visit</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>pure virtual function void visit(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>NODE&nbsp;</td>
-      <td class=PParameter nowrap width=100%>node</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">visit</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">NODE</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">node</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>This method will be invoked by the visitor for every visited <i>node</i> of the provided structure.&nbsp; The user is expected to provide the own functionality in this function.</p><blockquote><pre>class count_nodes_visitor#(type T=uvm_component) extends uvm_visitor#(T);
-    function new (string name = &quot;&quot;);
-       super.new(name);
-    endfunction
-    local int cnt;
-    virtual function void begin_v(); cnt = 0; endfunction
-    virtual function void end_v(); `uvm_info(&quot;TEXT&quot;,$sformatf(&quot;%d elements&quot;,cnt),UVM_NONE) endfunction
-    virtual function void visit(T node); cnt++; endfunction
-endclass</pre></blockquote></div></div></div>
+<div class=CBody><p>This method will be invoked by the visitor for every visited <i>node</i> of the provided structure.&nbsp; The user is expected to provide the own functionality in this function.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">count_nodes_visitor</span><span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-uvm-type">uvm_component</span><span class="sv-op">)</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_visitor</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+       <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">endfunction</span>
+    <span class="sv-keyword">local</span> <span class="sv-keyword">int</span> <span class="sv-ident">cnt</span><span class="sv-op">;</span>
+    <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">begin_v</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-ident">cnt</span> <span class="sv-op">=</span> <span class="sv-number">0</span><span class="sv-op">;</span> <span class="sv-keyword">endfunction</span>
+    <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">end_v</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;TEXT&quot;</span><span class="sv-op">,</span>$<span class="sv-method">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;%d elements&quot;</span><span class="sv-op">,</span><span class="sv-ident">cnt</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-uvm-type">UVM_NONE</span><span class="sv-op">)</span> <span class="sv-keyword">endfunction</span>
+    <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">visit</span><span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">node</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-ident">cnt</span><span class="sv-op">+</span><span class="sv-op">+</span><span class="sv-op">;</span> <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -134,15 +149,15 @@ endclass</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_structure_proxy#(STRUCTURE).get_immediate_children" href="../../src_view/base/uvm_traversal.svh.html#L30" class="src-code-link" data-src-file="base/uvm_traversal.svh" data-src-line="30">get_immediate_children</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>pure virtual function void get_immediate_children(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>STRUCTURE&nbsp;</td>
-      <td class=PParameter nowrap width=100%>s,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>STRUCTURE&nbsp;</td>
-      <td class=PParameter nowrap width=100%>children[$]</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">get_immediate_children</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap><span class="sv-type">STRUCTURE</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">s</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">STRUCTURE</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">children</span>[$]</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>This method will be return in <i>children</i> a set of the direct subelements of <i>s</i></p></div></div></div>
@@ -180,25 +195,25 @@ endclass</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_visitor_adapter#(STRUCTURE,uvm_visitor#(STRUCTURE)).accept" href="../../src_view/base/uvm_traversal.svh.html#L30" class="src-code-link" data-src-file="base/uvm_traversal.svh" data-src-line="30">accept()</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>pure virtual function void accept(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>STRUCTURE&nbsp;</td>
-      <td class=PParameter nowrap>s,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>VISITOR&nbsp;</td>
-      <td class=PParameter nowrap>v,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_structure_proxy#(STRUCTURE)&nbsp;</td>
-      <td class=PParameter nowrap>p,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>invoke_begin_end</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">accept</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">STRUCTURE</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">s</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">VISITOR</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">v</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_structure_proxy</span>#(<span class="sv-type">STRUCTURE</span>)&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">p</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">invoke_begin_end</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Calling this function will traverse through <i>s</i> (and every subnode of <i>s</i>).&nbsp; For each node found <i>v</i>.visit(node) will be invoked.&nbsp; The children of <i>s</i> are recursively determined by invoking <i>p</i>.get_immediate_children().~invoke_begin_end~ determines whether the visitors begin/end functions should be invoked prior to traversal.</p></div></div></div>
@@ -234,17 +249,17 @@ endclass</pre></blockquote></div></div></div>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_top_down_visitor_adapter#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>STRUCTURE</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_component,</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_top_down_visitor_adapter</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">STRUCTURE</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_component,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>&nbsp;</td>
-      <td class=PParameter nowrap>VISITOR</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_visitor#(STRUCTURE)</td>
+      <td class=PParameter nowrap><span class="sv-param-name">VISITOR</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_visitor#(STRUCTURE)</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_visitor_adapter#(STRUCTURE,VISITOR)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_visitor_adapter#(STRUCTURE,VISITOR)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -282,17 +297,17 @@ endclass</pre></blockquote></div></div></div>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_bottom_up_visitor_adapter#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>STRUCTURE</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_component,</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_bottom_up_visitor_adapter</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">STRUCTURE</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_component,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>&nbsp;</td>
-      <td class=PParameter nowrap>VISITOR</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_visitor#(STRUCTURE)</td>
+      <td class=PParameter nowrap><span class="sv-param-name">VISITOR</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_visitor#(STRUCTURE)</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_visitor_adapter#(STRUCTURE,VISITOR)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_visitor_adapter#(STRUCTURE,VISITOR)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -330,17 +345,17 @@ endclass</pre></blockquote></div></div></div>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_by_level_visitor_adapter#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>STRUCTURE</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_component,</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_by_level_visitor_adapter</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">STRUCTURE</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_component,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>&nbsp;</td>
-      <td class=PParameter nowrap>VISITOR</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_visitor#(STRUCTURE)</td>
+      <td class=PParameter nowrap><span class="sv-param-name">VISITOR</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_visitor#(STRUCTURE)</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_visitor_adapter#(STRUCTURE,VISITOR)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_visitor_adapter#(STRUCTURE,VISITOR)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -378,10 +393,10 @@ endclass</pre></blockquote></div></div></div>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=2>class uvm_component_proxy extends uvm_structure_proxy#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_component</td>
+      <td class=PBeforeParameters colspan=2><span class="sv-keyword">class</span> uvm_component_proxy <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_structure_proxy</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">uvm_component</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=2>)</td></tr>
+      <td class=PAfterParameters colspan=2><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -419,10 +434,10 @@ endclass</pre></blockquote></div></div></div>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=2>class uvm_component_name_check_visitor extends uvm_visitor#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_component</td>
+      <td class=PBeforeParameters colspan=2><span class="sv-keyword">class</span> uvm_component_name_check_visitor <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_visitor</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">uvm_component</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=2>)</td></tr>
+      <td class=PAfterParameters colspan=2><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -446,7 +461,7 @@ endclass</pre></blockquote></div></div></div>
 
  <!--CONTENT index=17 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_name_check_visitor.get_name_constraint" href="../../src_view/base/uvm_traversal.svh.html#L30" class="src-code-link" data-src-file="base/uvm_traversal.svh" data-src-line="30">get_name_constraint</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_name_constraint()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_name_constraint</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>This method should return a regex for what is being considered a valid/good component name.&nbsp; The visitor will check all component names using this regex and report failing names</p></div></div></div>
 
 </div><!--Content-->
@@ -458,6 +473,29 @@ endclass</pre></blockquote></div></div></div>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

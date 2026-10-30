@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_driver #(REQ,RSP) | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -25,8 +28,20 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_driver#(REQ,RSP)" href="../../src_view/comps/uvm_driver.svh.html#L44" class="src-code-link" data-src-file="comps/uvm_driver.svh" data-src-line="44">uvm_driver #(REQ,RSP)</a></h1><div class=CBody><p>The base class for drivers that initiate requests for new transactions via a uvm_seq_item_pull_port.&nbsp; The ports are typically connected to the exports of an appropriate sequencer component.</p><p>This driver operates in pull mode.&nbsp; Its ports are typically connected to the corresponding exports in a pull sequencer as follows:</p><blockquote><pre>driver.seq_item_port.connect(sequencer.seq_item_export);
-driver.rsp_port.connect(sequencer.rsp_export);</pre></blockquote><p>The <i>rsp_port</i> needs connecting only if the driver will use it to write responses to the analysis export in the sequencer.</p>
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_driver#(REQ,RSP)" href="../../src_view/comps/uvm_driver.svh.html#L44" class="src-code-link" data-src-file="comps/uvm_driver.svh" data-src-line="44">uvm_driver #(REQ,RSP)</a></h1><div class=CBody><p>The base class for drivers that initiate requests for new transactions via a uvm_seq_item_pull_port.&nbsp; The ports are typically connected to the exports of an appropriate sequencer component.</p><p>This driver operates in pull mode.&nbsp; Its ports are typically connected to the corresponding exports in a pull sequencer as follows:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-ident">seq_item_port</span><span class="sv-op">.</span><span class="sv-method">connect</span><span class="sv-op">(</span><span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-ident">seq_item_export</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-ident">rsp_port</span><span class="sv-op">.</span><span class="sv-method">connect</span><span class="sv-op">(</span><span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-ident">rsp_export</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>The <i>rsp_port</i> needs connecting only if the driver will use it to write responses to the analysis export in the sequencer.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -56,17 +71,17 @@ driver.rsp_port.connect(sequencer.rsp_export);</pre></blockquote><p>The <i>rsp_p
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_driver #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>REQ</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_sequence_item,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>RSP</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>REQ</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_driver</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">REQ</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_sequence_item,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">RSP</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">REQ</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_component</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_component</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -119,13 +134,13 @@ driver.rsp_port.connect(sequencer.rsp_export);</pre></blockquote><p>The <i>rsp_p
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_driver#(REQ,RSP).new" href="../../src_view/comps/uvm_driver.svh.html#L44" class="src-code-link" data-src-file="comps/uvm_driver.svh" data-src-line="44">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>parent</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">parent</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates and initializes an instance of this class using the normal constructor arguments for <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link8  >uvm_component</a>: <i>name</i> is the name of the instance, and <i>parent</i> is the handle to the hierarchical parent, if any.</p></div></div></div>
@@ -139,6 +154,29 @@ driver.rsp_port.connect(sequencer.rsp_export);</pre></blockquote><p>The <i>rsp_p
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

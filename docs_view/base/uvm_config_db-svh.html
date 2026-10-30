@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UVM Configuration Database | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -68,7 +71,19 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_config_db" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_db</a></h2><div class=CBody><p>All of the functions in uvm_config_db#(T) are static, so they must be called using the :: operator.&nbsp;  For example:</p><blockquote><pre>uvm_config_db#(int)::set(this, &quot;*&quot;, &quot;A&quot;);</pre></blockquote><p>The parameter value &ldquo;int&rdquo; identifies the configuration type as an int property.</p><p>The <a href="#uvm_config_db.set" class=LMethod id=link13  >set</a> and <a href="#uvm_config_db.get" class=LMethod id=link14  >get</a> methods provide the same API and semantics as the set/get_config_* functions in <a href="uvm_component-svh.html#uvm_component" class=LClass id=link15  >uvm_component</a>.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_config_db" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_db</a></h2><div class=CBody><p>All of the functions in uvm_config_db#(T) are static, so they must be called using the :: operator.&nbsp;  For example:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-keyword">int</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;*&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;A&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>The parameter value &ldquo;int&rdquo; identifies the configuration type as an int property.</p><p>The <a href="#uvm_config_db.set" class=LMethod id=link13  >set</a> and <a href="#uvm_config_db.get" class=LMethod id=link14  >get</a> methods provide the same API and semantics as the set/get_config_* functions in <a href="uvm_component-svh.html#uvm_component" class=LClass id=link15  >uvm_component</a>.</p>
 
 <!--START_ND_SUMMARY index=2-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -95,13 +110,13 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_config_db#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_config_db</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_resource_db#(T)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_resource_db#(T)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -136,26 +151,38 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_config_db.get" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">get</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>static function bit get(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>cntxt,</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">cntxt</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>inst_name,</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">inst_name</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>field_name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>inout&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">field_name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">inout</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Get the value for <i>field_name</i> in <i>inst_name</i>, using component <i>cntxt</i> as the starting search point.&nbsp; <i>inst_name</i> is an explicit instance name relative to <i>cntxt</i> and may be an empty string if the <i>cntxt</i> is the instance that the configuration object applies to.&nbsp; <i>field_name</i> is the specific field in the scope that is being searched for.</p><p>The basic <i>get_config_*</i> methods from <a href="uvm_component-svh.html#uvm_component" class=LClass id=link16  >uvm_component</a> are mapped to this function as:</p><blockquote><pre>get_config_int(...) =&gt; uvm_config_db#(uvm_bitstream_t)::get(cntxt,...)
-get_config_string(...) =&gt; uvm_config_db#(string)::get(cntxt,...)
-get_config_object(...) =&gt; uvm_config_db#(uvm_object)::get(cntxt,...)</pre></blockquote></div></div></div>
+<div class=CBody><p>Get the value for <i>field_name</i> in <i>inst_name</i>, using component <i>cntxt</i> as the starting search point.&nbsp; <i>inst_name</i> is an explicit instance name relative to <i>cntxt</i> and may be an empty string if the <i>cntxt</i> is the instance that the configuration object applies to.&nbsp; <i>field_name</i> is the specific field in the scope that is being searched for.</p><p>The basic <i>get_config_*</i> methods from <a href="uvm_component-svh.html#uvm_component" class=LClass id=link16  >uvm_component</a> are mapped to this function as:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">get_config_int</span><span class="sv-op">(</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span> <span class="sv-op">=</span><span class="sv-op">&gt;</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_bitstream_t</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-ident">cntxt</span><span class="sv-op">,</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span>
+<span class="sv-method">get_config_string</span><span class="sv-op">(</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span> <span class="sv-op">=</span><span class="sv-op">&gt;</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-keyword">string</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-ident">cntxt</span><span class="sv-op">,</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span>
+<span class="sv-method">get_config_object</span><span class="sv-op">(</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span> <span class="sv-op">=</span><span class="sv-op">&gt;</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_object</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-ident">cntxt</span><span class="sv-op">,</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -164,22 +191,34 @@ get_config_object(...) =&gt; uvm_config_db#(uvm_object)::get(cntxt,...)</pre></b
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_config_db.set" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">set</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function void set(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>cntxt,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>inst_name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>field_name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>value</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">cntxt</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">inst_name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">field_name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Create a new or update an existing configuration setting for <i>field_name</i> in <i>inst_name</i> from <i>cntxt</i>.&nbsp; The setting is made at <i>cntxt</i>, with the full scope of the set being {<i>cntxt</i>,&rdquo;.&rdquo;,~inst_name~}.&nbsp; If <i>cntxt</i> is <i>null</i> then <i>inst_name</i> provides the complete scope information of the setting.&nbsp; <i>field_name</i> is the target field.&nbsp; Both <i>inst_name</i> and <i>field_name</i> may be glob style or regular expression style expressions.</p><p>If a setting is made at build time, the <i>cntxt</i> hierarchy is used to determine the setting&rsquo;s precedence in the database.&nbsp; Settings from hierarchically higher levels have higher precedence.&nbsp; Settings from the same level of hierarchy have a last setting wins semantic.&nbsp; A precedence setting of <a href="uvm_resource-svh.html#uvm_resource_base.default_precedence" class=LVariable id=link17  >uvm_resource_base::default_precedence</a>  is used for uvm_top, and each hierarchical level below the top is decremented by 1.</p><p>After build time, all settings use the default precedence and thus have a last wins semantic.&nbsp; So, if at run time, a low level component makes a runtime setting of some field, that setting will have precedence over a setting from the test level that was made earlier in the simulation.</p><p>The basic <i>set_config_*</i> methods from <a href="uvm_component-svh.html#uvm_component" class=LClass id=link18  >uvm_component</a> are mapped to this function as:</p><blockquote><pre>set_config_int(...) =&gt; uvm_config_db#(uvm_bitstream_t)::set(cntxt,...)
-set_config_string(...) =&gt; uvm_config_db#(string)::set(cntxt,...)
-set_config_object(...) =&gt; uvm_config_db#(uvm_object)::set(cntxt,...)</pre></blockquote></div></div></div>
+<div class=CBody><p>Create a new or update an existing configuration setting for <i>field_name</i> in <i>inst_name</i> from <i>cntxt</i>.&nbsp; The setting is made at <i>cntxt</i>, with the full scope of the set being {<i>cntxt</i>,&rdquo;.&rdquo;,~inst_name~}.&nbsp; If <i>cntxt</i> is <i>null</i> then <i>inst_name</i> provides the complete scope information of the setting.&nbsp; <i>field_name</i> is the target field.&nbsp; Both <i>inst_name</i> and <i>field_name</i> may be glob style or regular expression style expressions.</p><p>If a setting is made at build time, the <i>cntxt</i> hierarchy is used to determine the setting&rsquo;s precedence in the database.&nbsp; Settings from hierarchically higher levels have higher precedence.&nbsp; Settings from the same level of hierarchy have a last setting wins semantic.&nbsp; A precedence setting of <a href="uvm_resource-svh.html#uvm_resource_base.default_precedence" class=LVariable id=link17  >uvm_resource_base::default_precedence</a>  is used for uvm_top, and each hierarchical level below the top is decremented by 1.</p><p>After build time, all settings use the default precedence and thus have a last wins semantic.&nbsp; So, if at run time, a low level component makes a runtime setting of some field, that setting will have precedence over a setting from the test level that was made earlier in the simulation.</p><p>The basic <i>set_config_*</i> methods from <a href="uvm_component-svh.html#uvm_component" class=LClass id=link18  >uvm_component</a> are mapped to this function as:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-method">set_config_int</span><span class="sv-op">(</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span> <span class="sv-op">=</span><span class="sv-op">&gt;</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_bitstream_t</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-ident">cntxt</span><span class="sv-op">,</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span>
+<span class="sv-method">set_config_string</span><span class="sv-op">(</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span> <span class="sv-op">=</span><span class="sv-op">&gt;</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-keyword">string</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-ident">cntxt</span><span class="sv-op">,</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span>
+<span class="sv-method">set_config_object</span><span class="sv-op">(</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span> <span class="sv-op">=</span><span class="sv-op">&gt;</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_object</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-ident">cntxt</span><span class="sv-op">,</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -188,21 +227,21 @@ set_config_object(...) =&gt; uvm_config_db#(uvm_object)::set(cntxt,...)</pre></b
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_config_db.exists" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">exists</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>static function bit exists(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>cntxt,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>inst_name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>field_name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap width=100%>spell_chk</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">exists</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">cntxt</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">inst_name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">field_name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">spell_chk</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Check if a value for <i>field_name</i> is available in <i>inst_name</i>, using component <i>cntxt</i> as the starting search point.&nbsp; <i>inst_name</i> is an explicit instance name relative to <i>cntxt</i> and may be an empty string if the <i>cntxt</i> is the instance that the configuration object applies to.&nbsp; <i>field_name</i> is the specific field in the scope that is being searched for.&nbsp; The <i>spell_chk</i> arg can be set to 1 to turn spell checking on if it is expected that the field should exist in the database.&nbsp; The function returns 1 if a config parameter exists and 0 if it doesn&rsquo;t exist.</p></div></div></div>
@@ -214,15 +253,15 @@ set_config_object(...) =&gt; uvm_config_db#(uvm_object)::set(cntxt,...)</pre></b
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_config_db.wait_modified" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">wait_modified</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static task wait_modified(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>cntxt,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>inst_name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>field_name</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">wait_modified</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">cntxt</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">inst_name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">field_name</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Wait for a configuration setting to be set for <i>field_name</i> in <i>cntxt</i> and <i>inst_name</i>.&nbsp; The task blocks until a new configuration setting is applied that effects the specified field.</p></div></div></div>
@@ -256,25 +295,73 @@ set_config_object(...) =&gt; uvm_config_db#(uvm_object)::set(cntxt,...)</pre></b
 
 
  <!--CONTENT index=9 -->
-<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="uvm_config_int" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_int</a></h3><div class=CBody><p>Convenience type for uvm_config_db#(uvm_bitstream_t)</p><blockquote><pre>typedef uvm_config_db#(uvm_bitstream_t) uvm_config_int;</pre></blockquote></div></div></div>
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="uvm_config_int" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_int</a></h3><div class=CBody><p>Convenience type for uvm_config_db#(uvm_bitstream_t)</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_bitstream_t</span><span class="sv-op">)</span> <span class="sv-uvm-type">uvm_config_int</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=10 -->
-<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="uvm_config_string" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_string</a></h3><div class=CBody><p>Convenience type for uvm_config_db#(string)</p><blockquote><pre>typedef uvm_config_db#(string) uvm_config_string;</pre></blockquote></div></div></div>
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="uvm_config_string" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_string</a></h3><div class=CBody><p>Convenience type for uvm_config_db#(string)</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-keyword">string</span><span class="sv-op">)</span> <span class="sv-uvm-type">uvm_config_string</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=11 -->
-<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="uvm_config_object" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_object</a></h3><div class=CBody><p>Convenience type for uvm_config_db#(uvm_object)</p><blockquote><pre>typedef uvm_config_db#(uvm_object) uvm_config_object;</pre></blockquote></div></div></div>
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="uvm_config_object" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_object</a></h3><div class=CBody><p>Convenience type for uvm_config_db#(uvm_object)</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_object</span><span class="sv-op">)</span> <span class="sv-uvm-type">uvm_config_object</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=12 -->
-<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="uvm_config_wrapper" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_wrapper</a></h3><div class=CBody><p>Convenience type for uvm_config_db#(uvm_object_wrapper)</p><blockquote><pre>typedef uvm_config_db#(uvm_object_wrapper) uvm_config_wrapper;</pre></blockquote></div></div></div>
+<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="uvm_config_wrapper" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">uvm_config_wrapper</a></h3><div class=CBody><p>Convenience type for uvm_config_db#(uvm_object_wrapper)</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_object_wrapper</span><span class="sv-op">)</span> <span class="sv-uvm-type">uvm_config_wrapper</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -313,7 +400,7 @@ set_config_object(...) =&gt; uvm_config_db#(uvm_object)::set(cntxt,...)</pre></b
 
  <!--CONTENT index=15 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_config_db_options.turn_on_tracing" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">turn_on_tracing</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function void turn_on_tracing()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">turn_on_tracing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Turn tracing on for the configuration database.&nbsp; This causes all reads and writes to the database to display information about the accesses.&nbsp; Tracing is off by default.</p><p>This method is implicitly called by the <i>+UVM_CONFIG_DB_TRACE</i>.</p></div></div></div>
 
 
@@ -321,7 +408,7 @@ set_config_object(...) =&gt; uvm_config_db#(uvm_object)::set(cntxt,...)</pre></b
 
  <!--CONTENT index=16 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_config_db_options.turn_off_tracing" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">turn_off_tracing</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function void turn_off_tracing()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">turn_off_tracing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Turn tracing off for the configuration database.</p></div></div></div>
 
 
@@ -329,7 +416,7 @@ set_config_object(...) =&gt; uvm_config_db#(uvm_object)::set(cntxt,...)</pre></b
 
  <!--CONTENT index=17 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_config_db_options.is_tracing" href="../../src_view/base/uvm_config_db.svh.html#L38" class="src-code-link" data-src-file="base/uvm_config_db.svh" data-src-line="38">is_tracing</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function bit is_tracing()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_tracing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if the tracing facility is on and 0 if it is off.</p></div></div></div>
 
 </div><!--Content-->
@@ -341,6 +428,29 @@ set_config_object(...) =&gt; uvm_config_db#(uvm_object)::set(cntxt,...)</pre></b
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

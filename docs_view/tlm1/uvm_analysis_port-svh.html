@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Analysis Ports | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -47,21 +50,33 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_analysis_port" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L56" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="56">uvm_analysis_port</a></h2><div class=CBody><p>Broadcasts a value to all subscribers implementing a <a href="#uvm_analysis_imp" class=LClass id=link10  >uvm_analysis_imp</a>.</p><blockquote><pre>class mon extends uvm_component;
-  uvm_analysis_port#(trans) ap;
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_analysis_port" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L56" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="56">uvm_analysis_port</a></h2><div class=CBody><p>Broadcasts a value to all subscribers implementing a <a href="#uvm_analysis_imp" class=LClass id=link10  >uvm_analysis_imp</a>.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mon</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <span class="sv-uvm-type">uvm_analysis_port</span><span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">)</span> <span class="sv-ident">ap</span><span class="sv-op">;</span>
 
-  function new(string name = &quot;sb&quot;, uvm_component parent = null);
-     super.new(name, parent);
-     ap = new(&quot;ap&quot;, this);
-  endfunction
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;sb&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-ident">ap</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ap&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  task run_phase(uvm_phase phase);
-      trans t;
-      ...
-      ap.write(t);
-      ...
-  endfunction
-endclass</pre></blockquote>
+  <span class="sv-keyword">task</span> <span class="sv-method">run_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+      <span class="sv-ident">trans</span> <span class="sv-ident">t</span><span class="sv-op">;</span>
+      <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+      <span class="sv-ident">ap</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+      <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div>
 
 <!--START_ND_SUMMARY index=1-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -88,13 +103,13 @@ endclass</pre></blockquote>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_analysis_port # (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> int</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_analysis_port</span> # <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> int</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_port_base # (uvm_tlm_if_base #(T,T))</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_port_base # (uvm_tlm_if_base #(T,T))</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -120,12 +135,12 @@ endclass</pre></blockquote>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_analysis_port.write" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L56" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="56">write</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>function void write (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>t</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">write</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Send specified value to all connected interface</p></div></div></div>
@@ -134,18 +149,30 @@ endclass</pre></blockquote>
 
 
  <!--CONTENT index=4 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_analysis_imp" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L56" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="56">uvm_analysis_imp</a></h2><div class=CBody><p>Receives all transactions broadcasted by a <a href="#uvm_analysis_port" class=LClass id=link13  >uvm_analysis_port</a>.&nbsp; It serves as the termination point of an analysis port/export/imp connection.&nbsp; The component attached to the <i>imp</i> class--called a <i>subscriber</i>-- implements the analysis interface.</p><p>Will invoke the <i>write(T)</i> method in the parent component.&nbsp; The implementation of the <i>write(T)</i> method must not modify the value passed to it.</p><blockquote><pre>class sb extends uvm_component;
-  uvm_analysis_imp#(trans, sb) ap;
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_analysis_imp" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L56" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="56">uvm_analysis_imp</a></h2><div class=CBody><p>Receives all transactions broadcasted by a <a href="#uvm_analysis_port" class=LClass id=link13  >uvm_analysis_port</a>.&nbsp; It serves as the termination point of an analysis port/export/imp connection.&nbsp; The component attached to the <i>imp</i> class--called a <i>subscriber</i>-- implements the analysis interface.</p><p>Will invoke the <i>write(T)</i> method in the parent component.&nbsp; The implementation of the <i>write(T)</i> method must not modify the value passed to it.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">sb</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <span class="sv-uvm-type">uvm_analysis_imp</span><span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">,</span> <span class="sv-ident">sb</span><span class="sv-op">)</span> <span class="sv-ident">ap</span><span class="sv-op">;</span>
 
-  function new(string name = &quot;sb&quot;, uvm_component parent = null);
-     super.new(name, parent);
-     ap = new(&quot;ap&quot;, this);
-  endfunction
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;sb&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-ident">ap</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ap&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-  function void write(trans t);
-      ...
-  endfunction
-endclass</pre></blockquote>
+  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">trans</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+      <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+  <span class="sv-keyword">endfunction</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div>
 
 <!--START_ND_SUMMARY index=4-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -172,17 +199,17 @@ endclass</pre></blockquote>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_analysis_imp #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>IMP</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_analysis_imp</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">IMP</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_port_base #(uvm_tlm_if_base #(T,T))</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_port_base #(uvm_tlm_if_base #(T,T))</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -220,13 +247,13 @@ endclass</pre></blockquote>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_analysis_export #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_analysis_export</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_port_base #(uvm_tlm_if_base #(T,T))</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_port_base #(uvm_tlm_if_base #(T,T))</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -252,17 +279,17 @@ endclass</pre></blockquote>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_analysis_export.new" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L56" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="56">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>parent</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">parent</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Instantiate the export.</p></div></div></div>
@@ -276,6 +303,29 @@ endclass</pre></blockquote>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

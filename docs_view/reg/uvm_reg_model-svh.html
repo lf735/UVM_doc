@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Global Declarations for the Register Layer | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -141,7 +144,19 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_path_slice" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">uvm_hdl_path_slice</a></h3><div class=CBody><p>Slice of an HDL path</p><p>Struct that specifies the HDL variable that corresponds to all or a portion of a register.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>path</td><td class=CDLDescription>Path to the HDL variable.</td></tr><tr><td class=CDLEntry>offset</td><td class=CDLDescription>Offset of the LSB in the register that this variable implements</td></tr><tr><td class=CDLEntry>size</td><td class=CDLDescription>Number of bits (toward the MSB) that this variable implements</td></tr></table><p>If the HDL variable implements all of the register, <i>offset</i> and <i>size</i> are specified as -1.&nbsp; For example:</p><blockquote><pre>r1.add_hdl_path('{ '{&quot;r1&quot;, -1, -1} });</pre></blockquote></div></div></div>
+<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_path_slice" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">uvm_hdl_path_slice</a></h3><div class=CBody><p>Slice of an HDL path</p><p>Struct that specifies the HDL variable that corresponds to all or a portion of a register.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>path</td><td class=CDLDescription>Path to the HDL variable.</td></tr><tr><td class=CDLEntry>offset</td><td class=CDLDescription>Offset of the LSB in the register that this variable implements</td></tr><tr><td class=CDLEntry>size</td><td class=CDLDescription>Number of bits (toward the MSB) that this variable implements</td></tr></table><p>If the HDL variable implements all of the register, <i>offset</i> and <i>size</i> are specified as -1.&nbsp; For example:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">r1</span><span class="sv-op">.</span><span class="sv-method">add_hdl_path</span><span class="sv-op">(</span><span class="sv-string">&#x27;{ &#x27;</span><span class="sv-op">{</span><span class="sv-string">&quot;r1&quot;</span><span class="sv-op">,</span> <span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">}</span> <span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -219,11 +234,35 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_hdl_path_concat" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">uvm_hdl_path_concat</a></h2><div class=CBody><p>Concatenation of HDL variables</p><p>A dArray of <a href="#uvm_hdl_path_slice" class=LType id=link26  >uvm_hdl_path_slice</a> specifying a concatenation of HDL variables that implement a register in the HDL.</p><p>Slices must be specified in most-to-least significant order.&nbsp; Slices must not overlap.&nbsp; Gaps may exist in the concatenation if portions of the registers are not implemented.</p><p>For example, the following register</p><blockquote><pre>       1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
-Bits:  5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
-      +-+---+-------------+---+-------+
-      |A|xxx|      B      |xxx|   C   |
-      +-+---+-------------+---+-------+</pre></blockquote><p>If the register is implemented using a single HDL variable, The array should specify a single slice with its <i>offset</i> and <i>size</i> specified as -1.&nbsp; For example:</p><blockquote><pre>concat.set('{ '{&quot;r1&quot;, -1, -1} });</pre></blockquote>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_hdl_path_concat" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">uvm_hdl_path_concat</a></h2><div class=CBody><p>Concatenation of HDL variables</p><p>A dArray of <a href="#uvm_hdl_path_slice" class=LType id=link26  >uvm_hdl_path_slice</a> specifying a concatenation of HDL variables that implement a register in the HDL.</p><p>Slices must be specified in most-to-least significant order.&nbsp; Slices must not overlap.&nbsp; Gaps may exist in the concatenation if portions of the registers are not implemented.</p><p>For example, the following register</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code>       <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span>
+<span class="sv-ident">Bits</span><span class="sv-op">:</span>  <span class="sv-number">5</span> <span class="sv-number">4</span> <span class="sv-number">3</span> <span class="sv-number">2</span> <span class="sv-number">1</span> <span class="sv-number">0</span> <span class="sv-number">9</span> <span class="sv-number">8</span> <span class="sv-number">7</span> <span class="sv-number">6</span> <span class="sv-number">5</span> <span class="sv-number">4</span> <span class="sv-number">3</span> <span class="sv-number">2</span> <span class="sv-number">1</span> <span class="sv-number">0</span>
+      <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span>
+      <span class="sv-op">|</span><span class="sv-ident">A</span><span class="sv-op">|</span><span class="sv-ident">xxx</span><span class="sv-op">|</span>      <span class="sv-ident">B</span>      <span class="sv-op">|</span><span class="sv-ident">xxx</span><span class="sv-op">|</span>   <span class="sv-ident">C</span>   <span class="sv-op">|</span>
+      <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span></code></pre>
+</div><p>If the register is implemented using a single HDL variable, The array should specify a single slice with its <i>offset</i> and <i>size</i> specified as -1.&nbsp; For example:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">concat</span><span class="sv-op">.</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-string">&#x27;{ &#x27;</span><span class="sv-op">{</span><span class="sv-string">&quot;r1&quot;</span><span class="sv-op">,</span> <span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">}</span> <span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div>
 
 <!--START_ND_SUMMARY index=21-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -234,7 +273,7 @@ Bits:  5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_hdl_path_concat
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_hdl_path_concat</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=22 -->
@@ -268,8 +307,8 @@ Bits:  5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
 
  <!--CONTENT index=23 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_path_concat.slices" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">slices</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_hdl_path_slice slices[]
-  </td></tr></table></blockquote><div class=CBody><p>Array of individual slices, stored in most-to-least significant order</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_hdl_path_slice</span> <span class="sv-ident">slices</span><span class="sv-ident">[]
+  </span></td></tr></table></blockquote><div class=CBody><p>Array of individual slices, stored in most-to-least significant order</p></div></div></div>
 
 
 
@@ -284,11 +323,11 @@ Bits:  5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_path_concat.set" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">set</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void set(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_hdl_path_slice&nbsp;</td>
-      <td class=PParameter nowrap width=100%>t[]</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_hdl_path_slice</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span>[]</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Initialize the concatenation using an array literal</p></div></div></div>
@@ -300,11 +339,11 @@ Bits:  5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_path_concat.add_slice" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">add_slice</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function void add_slice(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_hdl_path_slice&nbsp;</td>
-      <td class=PParameter nowrap width=100%>slice</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add_slice</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_hdl_path_slice</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">slice</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Append the specified <i>slice</i> literal to the path concatenation</p></div></div></div>
@@ -316,24 +355,24 @@ Bits:  5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_hdl_path_concat.add_path" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">add_path</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>function void add_path(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>path,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>int&nbsp;</td>
-      <td class=PType nowrap>unsigned&nbsp;</td>
-      <td class=PParameter nowrap>offset</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> -1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>int&nbsp;</td>
-      <td class=PType nowrap>unsigned&nbsp;</td>
-      <td class=PParameter nowrap>size</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> -1</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add_path</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">path</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">offset</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> -1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">size</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> -1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Append the specified <i>path</i> to the path concatenation, for the specified number of bits at the specified <i>offset</i>.</p></div></div></div>
@@ -347,6 +386,29 @@ Bits:  5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

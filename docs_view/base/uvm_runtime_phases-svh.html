@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UVM Run-Time Phases | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -25,9 +28,21 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="UVM_Run-Time_Phases" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">UVM Run-Time Phases</a></h1><div class=CBody><p>The run-time schedule is the pre-defined phase schedule which runs concurrently to the <a href="uvm_common_phases-svh.html#uvm_run_phase" class=LClass id=link14  >uvm_run_phase</a> global run phase.&nbsp; By default, all <a href="uvm_component-svh.html#uvm_component" class=LClass id=link15  >uvm_component</a>s using the run-time schedule are synchronized with respect to the pre-defined phases in the schedule.&nbsp; It is possible for components to belong to different domains in which case their schedules can be unsynchronized.</p><p>The names of the UVM phases (which will be returned by get_name() for a phase instance) match the class names specified below with the &ldquo;uvm_&rdquo; and &ldquo;_phase&rdquo; removed.&nbsp;  For example, the main phase corresponds to the uvm_main_phase class below and has the name &ldquo;main&rdquo;, which means that the following can be used to call foo() at the start of main phase:</p><blockquote><pre>function void phase_started(uvm_phase phase) ;
-   if (phase.get_name()==&quot;main&quot;) foo() ;
-endfunction</pre></blockquote><p>The run-time phases are executed in the sequence they are specified below.</p>
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="UVM_Run-Time_Phases" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">UVM Run-Time Phases</a></h1><div class=CBody><p>The run-time schedule is the pre-defined phase schedule which runs concurrently to the <a href="uvm_common_phases-svh.html#uvm_run_phase" class=LClass id=link14  >uvm_run_phase</a> global run phase.&nbsp; By default, all <a href="uvm_component-svh.html#uvm_component" class=LClass id=link15  >uvm_component</a>s using the run-time schedule are synchronized with respect to the pre-defined phases in the schedule.&nbsp; It is possible for components to belong to different domains in which case their schedules can be unsynchronized.</p><p>The names of the UVM phases (which will be returned by get_name() for a phase instance) match the class names specified below with the &ldquo;uvm_&rdquo; and &ldquo;_phase&rdquo; removed.&nbsp;  For example, the main phase corresponds to the uvm_main_phase class below and has the name &ldquo;main&rdquo;, which means that the following can be used to call foo() at the start of main phase:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">phase_started</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span> <span class="sv-op">;</span>
+   <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">get_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">==</span><span class="sv-string">&quot;main&quot;</span><span class="sv-op">)</span> <span class="sv-method">foo</span><span class="sv-op">(</span><span class="sv-op">)</span> <span class="sv-op">;</span>
+<span class="sv-keyword">endfunction</span></code></pre>
+</div><p>The run-time phases are executed in the sequence they are specified below.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -104,7 +119,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_pre_reset_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_pre_reset_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=2 -->
@@ -126,7 +141,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=3 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_pre_reset_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_pre_reset_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_pre_reset_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -161,7 +176,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_reset_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_reset_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=5 -->
@@ -183,7 +198,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=6 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reset_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_reset_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_reset_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -218,7 +233,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_post_reset_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_post_reset_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=8 -->
@@ -240,7 +255,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=9 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_post_reset_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_post_reset_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_post_reset_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -275,7 +290,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_pre_configure_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_pre_configure_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=11 -->
@@ -297,7 +312,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=12 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_pre_configure_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_pre_configure_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_pre_configure_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -332,7 +347,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_configure_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_configure_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=14 -->
@@ -354,7 +369,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=15 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_configure_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_configure_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_configure_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -389,7 +404,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_post_configure_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_post_configure_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=17 -->
@@ -411,7 +426,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=18 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_post_configure_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_post_configure_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_post_configure_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -446,7 +461,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_pre_main_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_pre_main_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=20 -->
@@ -468,7 +483,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=21 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_pre_main_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_pre_main_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_pre_main_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -503,7 +518,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_main_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_main_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=23 -->
@@ -525,7 +540,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=24 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_main_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_main_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_main_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -560,7 +575,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_post_main_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_post_main_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=26 -->
@@ -582,7 +597,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=27 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_post_main_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_post_main_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_post_main_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -617,7 +632,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_pre_shutdown_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_pre_shutdown_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=29 -->
@@ -639,7 +654,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=30 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_pre_shutdown_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_pre_shutdown_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_pre_shutdown_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -674,7 +689,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_shutdown_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_shutdown_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=32 -->
@@ -696,7 +711,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=33 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_shutdown_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_shutdown_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_shutdown_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -731,7 +746,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_post_shutdown_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_post_shutdown_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=35 -->
@@ -753,7 +768,7 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
 
  <!--CONTENT index=36 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_post_shutdown_phase.get" href="../../src_view/base/uvm_runtime_phases.svh.html#L74" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="74">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_post_shutdown_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_post_shutdown_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 </div><!--Content-->
@@ -765,6 +780,29 @@ endfunction</pre></blockquote><p>The run-time phases are executed in the sequenc
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

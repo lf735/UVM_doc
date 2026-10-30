@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Explicit Register Predictor | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -69,13 +72,13 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_reg_predictor #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>BUSTYPE</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_reg_predictor</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">BUSTYPE</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_component</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_component</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -122,13 +125,13 @@
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.bus_in" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">bus_in</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>uvm_analysis_imp #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>&nbsp;</td>
-      <td class=PParameter nowrap width=100%>BUSTYPE,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_predictor&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(BUSTYPE)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-proto-name">uvm_analysis_imp</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">BUSTYPE</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_predictor</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">BUSTYPE</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>) bus_in</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">) bus_in</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Observed bus transactions of type <i>BUSTYPE</i> are received from this port and processed.</p><p>For each incoming transaction, the predictor will attempt to get the register or memory handle corresponding to the observed bus address.</p><p>If there is a match, the predictor calls the register or memory&rsquo;s predict method, passing in the observed bus data.&nbsp; The register or memory mirror will be updated with this data, subject to its configured access behavior--RW, RO, WO, etc.&nbsp; The predictor will also convert the bus transaction to a generic <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link18  >uvm_reg_item</a> and send it out the <i>reg_ap</i> analysis port.</p><p>If the register is wider than the bus, the predictor will collect the multiple bus transactions needed to determine the value being read or written.</p></div></div></div>
@@ -140,10 +143,10 @@
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.reg_ap" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">reg_ap</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=2>uvm_analysis_port #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%>uvm_reg_item</td>
+      <td class=PBeforeParameters colspan=2><span class="sv-proto-name">uvm_analysis_port</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">uvm_reg_item</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=2>) reg_ap</td></tr>
+      <td class=PAfterParameters colspan=2><span class="sv-op">) reg_ap</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Analysis output port that publishes <a href="uvm_reg_item-svh.html#uvm_reg_item" class=LClass id=link19  >uvm_reg_item</a> transactions converted from bus transactions received on <i>bus_in</i>.</p></div></div></div>
@@ -153,7 +156,7 @@
 
  <!--CONTENT index=5 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.map" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">map</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_map map
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_reg_map</span> <span class="sv-ident">map</span>
   </td></tr></table></blockquote><div class=CBody><p>The map used to convert a bus address to the corresponding register or memory handle.&nbsp; Must be configured before the run phase.</p></div></div></div>
 
 
@@ -161,7 +164,7 @@
 
  <!--CONTENT index=6 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.adapter" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">adapter</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg_adapter adapter
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_reg_adapter</span> <span class="sv-ident">adapter</span>
   </td></tr></table></blockquote><div class=CBody><p>The adapter used to convey the parameters of a bus operation in terms of a canonical <a href="uvm_reg_item-svh.html#uvm_reg_bus_op" class=LClass id=link20  >uvm_reg_bus_op</a> datum.&nbsp; The <a href="uvm_reg_adapter-svh.html#uvm_reg_adapter" class=LClass id=link21  >uvm_reg_adapter</a> must be configured before the run phase.</p></div></div></div>
 
 
@@ -177,13 +180,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.new" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>parent</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">parent</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Create a new instance of this type, giving it the optional <i>name</i> and <i>parent</i>.</p></div></div></div>
@@ -195,11 +198,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.pre_predict" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">pre_predict</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void pre_predict(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_item&nbsp;</td>
-      <td class=PParameter nowrap width=100%>rw</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">pre_predict</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_item</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">rw</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Override this method to change the value or re-direct the target register</p></div></div></div>
@@ -211,11 +214,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_predictor.check_phase" href="../../src_view/reg/uvm_reg_predictor.svh.html#L34" class="src-code-link" data-src-file="reg/uvm_reg_predictor.svh" data-src-line="34">check_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void check_phase(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_phase&nbsp;</td>
-      <td class=PParameter nowrap width=100%>phase</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">check_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">phase</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Checks that no pending register transactions are still queued.</p></div></div></div>
@@ -229,6 +232,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

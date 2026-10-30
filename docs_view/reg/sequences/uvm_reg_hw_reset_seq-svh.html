@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_reg_hw_reset_seq | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../css/style.css">
 </head>
 <body class="doc-body">
@@ -25,8 +28,20 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_reg_hw_reset_seq" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">uvm_reg_hw_reset_seq</a></h1><div class=CBody><p>Test the hard reset values of registers</p><p>The test sequence performs the following steps</p><p>1. resets the DUT and the block abstraction class associated with this sequence.</p><p>2. reads all of the registers in the block, via all of the available address maps, comparing the value read with the expected reset value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_HW_RESET_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block or register, the block or register is not tested.</p><blockquote><pre>uvm_resource_db#(bit)::set({&quot;REG::&quot;,regmodel.blk.get_full_name(),&quot;.*&quot;},
-                           &quot;NO_REG_TESTS&quot;, 1, this);</pre></blockquote><p>This is usually the first test executed on any DUT.</p>
+<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_reg_hw_reset_seq" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">uvm_reg_hw_reset_seq</a></h1><div class=CBody><p>Test the hard reset values of registers</p><p>The test sequence performs the following steps</p><p>1. resets the DUT and the block abstraction class associated with this sequence.</p><p>2. reads all of the registers in the block, via all of the available address maps, comparing the value read with the expected reset value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_HW_RESET_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block or register, the block or register is not tested.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-keyword">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;.*&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span>
+                           <span class="sv-string">&quot;NO_REG_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>This is usually the first test executed on any DUT.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -53,11 +68,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>class uvm_reg_hw_reset_seq extends uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(uvm_reg_item)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">class</span> uvm_reg_hw_reset_seq <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">uvm_reg_item</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -92,14 +107,26 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_hw_reset_seq.model" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">model</a></h3><div class=CBody><p>The block to be tested.&nbsp; Declared in the base class.</p><blockquote><pre>uvm_reg_block model;</pre></blockquote></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_hw_reset_seq.model" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">model</a></h3><div class=CBody><p>The block to be tested.&nbsp; Declared in the base class.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_reg_block</span> <span class="sv-ident">model</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_hw_reset_seq.body" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">body</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task body()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">body</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Executes the Hardware Reset sequence.&nbsp; Do not call directly.&nbsp; Use seq.start() instead.</p></div></div></div>
 
 
@@ -115,11 +142,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_hw_reset_seq.do_block" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">do_block</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual task do_block(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_block&nbsp;</td>
-      <td class=PParameter nowrap width=100%>blk</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">do_block</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_block</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">blk</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Test all of the registers in a given <i>block</i></p></div></div></div>
@@ -131,11 +158,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_hw_reset_seq.reset_blk" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">reset_blk</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task reset_blk(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_block&nbsp;</td>
-      <td class=PParameter nowrap width=100%>blk</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">reset_blk</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_block</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">blk</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Reset the DUT that corresponds to the specified block abstraction class.</p><p>Currently empty.&nbsp; Will rollback the environment&rsquo;s phase to the <i>reset</i> phase once the new phasing is available.</p><p>In the meantime, the DUT should be reset before executing this test sequence or this method should be implemented in an extension to reset the DUT.</p></div></div></div>
@@ -149,6 +176,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

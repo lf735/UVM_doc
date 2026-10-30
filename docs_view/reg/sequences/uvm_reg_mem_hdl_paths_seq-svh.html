@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HDL Paths Checking Test Sequence | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../css/style.css">
 </head>
 <body class="doc-body">
@@ -66,11 +69,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>class uvm_reg_mem_hdl_paths_seq extends uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(uvm_reg_item)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">class</span> uvm_reg_mem_hdl_paths_seq <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">uvm_reg_item</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -94,8 +97,8 @@
 
  <!--CONTENT index=3 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_hdl_paths_seq.abstractions" href="../../../src_view/reg/sequences/uvm_reg_mem_hdl_paths_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_hdl_paths_seq.svh" data-src-line="48">abstractions</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>string abstractions[$]
-  </td></tr></table></blockquote><div class=CBody><p>If set, check the HDL paths for the specified design abstractions.&nbsp; If empty, check the HDL path for the default design abstraction, as specified with <a href="../uvm_reg_block-svh.html#uvm_reg_block.set_default_hdl_path" class=LMethod id=link3  >uvm_reg_block::set_default_hdl_path()</a></p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">string</span> <span class="sv-ident">abstractions</span><span class="sv-ident">[$]
+  </span></td></tr></table></blockquote><div class=CBody><p>If set, check the HDL paths for the specified design abstractions.&nbsp; If empty, check the HDL path for the default design abstraction, as specified with <a href="../uvm_reg_block-svh.html#uvm_reg_block.set_default_hdl_path" class=LMethod id=link3  >uvm_reg_block::set_default_hdl_path()</a></p></div></div></div>
 
 </div><!--Content-->
 
@@ -106,6 +109,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

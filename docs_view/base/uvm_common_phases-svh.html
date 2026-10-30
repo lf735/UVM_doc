@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UVM Common Phases | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -25,9 +28,21 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="UVM_Common_Phases" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">UVM Common Phases</a></h1><div class=CBody><p>The common phases are the set of function and task phases that all <a href="uvm_component-svh.html#uvm_component" class=LClass id=link11  >uvm_component</a>s execute together.&nbsp; All <a href="uvm_component-svh.html#uvm_component" class=LClass id=link12  >uvm_component</a>s are always synchronized with respect to the common phases.</p><p>The names of the UVM phases (which will be returned by get_name() for a phase instance) match the class names specified below with the &ldquo;uvm_&rdquo; and &ldquo;_phase&rdquo; removed.&nbsp;  For example, the build phase corresponds to the uvm_build_phase class below and has the name &ldquo;build&rdquo;, which means that the following can be used to call foo() at the end of the build phase (after all lower levels have finished build):</p><blockquote><pre>function void phase_ended(uvm_phase phase) ;
-   if (phase.get_name()==&quot;build&quot;) foo() ;
-endfunction</pre></blockquote><p>The common phases are executed in the sequence they are specified below.</p>
+<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="UVM_Common_Phases" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">UVM Common Phases</a></h1><div class=CBody><p>The common phases are the set of function and task phases that all <a href="uvm_component-svh.html#uvm_component" class=LClass id=link11  >uvm_component</a>s execute together.&nbsp; All <a href="uvm_component-svh.html#uvm_component" class=LClass id=link12  >uvm_component</a>s are always synchronized with respect to the common phases.</p><p>The names of the UVM phases (which will be returned by get_name() for a phase instance) match the class names specified below with the &ldquo;uvm_&rdquo; and &ldquo;_phase&rdquo; removed.&nbsp;  For example, the build phase corresponds to the uvm_build_phase class below and has the name &ldquo;build&rdquo;, which means that the following can be used to call foo() at the end of the build phase (after all lower levels have finished build):</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">phase_ended</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span> <span class="sv-op">;</span>
+   <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">get_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">==</span><span class="sv-string">&quot;build&quot;</span><span class="sv-op">)</span> <span class="sv-method">foo</span><span class="sv-op">(</span><span class="sv-op">)</span> <span class="sv-op">;</span>
+<span class="sv-keyword">endfunction</span></code></pre>
+</div><p>The common phases are executed in the sequence they are specified below.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -95,7 +110,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_build_phase extends uvm_topdown_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_build_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_topdown_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=2 -->
@@ -117,7 +132,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=3 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_build_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_build_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_build_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -152,7 +167,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_connect_phase extends uvm_bottomup_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_connect_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_bottomup_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=5 -->
@@ -174,7 +189,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=6 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_connect_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_connect_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_connect_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -209,7 +224,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_end_of_elaboration_phase extends uvm_bottomup_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_end_of_elaboration_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_bottomup_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=8 -->
@@ -231,7 +246,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=9 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_end_of_elaboration_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_end_of_elaboration_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_end_of_elaboration_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -266,7 +281,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_start_of_simulation_phase extends uvm_bottomup_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_start_of_simulation_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_bottomup_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=11 -->
@@ -288,7 +303,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=12 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_start_of_simulation_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_start_of_simulation_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_start_of_simulation_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -323,7 +338,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_run_phase extends uvm_task_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_run_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_task_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=14 -->
@@ -345,7 +360,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=15 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_run_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_run_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_run_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -380,7 +395,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_extract_phase extends uvm_bottomup_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_extract_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_bottomup_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=17 -->
@@ -402,7 +417,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=18 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_extract_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_extract_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_extract_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -437,7 +452,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_check_phase extends uvm_bottomup_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_check_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_bottomup_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=20 -->
@@ -459,7 +474,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=21 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_check_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_check_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_check_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -494,7 +509,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_report_phase extends uvm_bottomup_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_report_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_bottomup_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=23 -->
@@ -516,7 +531,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=24 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_report_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_report_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 
@@ -551,7 +566,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_final_phase extends uvm_topdown_phase
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_final_phase</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_topdown_phase</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=26 -->
@@ -573,7 +588,7 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
 
  <!--CONTENT index=27 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_final_phase.get" href="../../src_view/base/uvm_common_phases.svh.html#L63" class="src-code-link" data-src-file="base/uvm_common_phases.svh" data-src-line="63">get</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_final_phase get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_final_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
 </div><!--Content-->
@@ -585,6 +600,29 @@ endfunction</pre></blockquote><p>The common phases are executed in the sequence 
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

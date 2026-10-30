@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_agent | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -53,7 +56,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual class uvm_agent extends uvm_component
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_agent</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=1 -->
@@ -80,23 +83,35 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_agent.new" href="../../src_view/comps/uvm_agent.svh.html#L39" class="src-code-link" data-src-file="comps/uvm_agent.svh" data-src-line="39">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>parent</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">parent</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Creates and initializes an instance of this class using the normal constructor arguments for <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link10  >uvm_component</a>: <i>name</i> is the name of the instance, and <i>parent</i> is the handle to the hierarchical parent, if any.</p><p>The int configuration parameter is_active is used to identify whether this agent should be acting in active or passive mode.&nbsp; This parameter can be set by doing:</p><blockquote><pre>uvm_config_int::set(this, &quot;&lt;relative_path_to_agent&gt;, &quot;is_active&quot;, UVM_ACTIVE);</pre></blockquote></div></div></div>
+<div class=CBody><p>Creates and initializes an instance of this class using the normal constructor arguments for <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link10  >uvm_component</a>: <i>name</i> is the name of the instance, and <i>parent</i> is the handle to the hierarchical parent, if any.</p><p>The int configuration parameter is_active is used to identify whether this agent should be acting in active or passive mode.&nbsp; This parameter can be set by doing:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_config_int</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;&lt;relative_path_to_agent&gt;, &quot;</span><span class="sv-ident">is_active</span>&quot;<span class="sv-op">,</span> <span class="sv-uvm-type">UVM_ACTIVE</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_agent.get_is_active" href="../../src_view/comps/uvm_agent.svh.html#L39" class="src-code-link" data-src-file="comps/uvm_agent.svh" data-src-line="39">get_is_active</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function uvm_active_passive_enum get_is_active()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_active_passive_enum</span> <span class="sv-proto-name">get_is_active</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns UVM_ACTIVE is the agent is acting as an active agent and UVM_PASSIVE if it is acting as a passive agent.&nbsp; The default implementation is to just return the is_active flag, but the component developer may override this behavior if a more complex algorithm is needed to determine the active/passive nature of the agent.</p></div></div></div>
 
 </div><!--Content-->
@@ -108,6 +123,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

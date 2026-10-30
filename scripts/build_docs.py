@@ -91,6 +91,217 @@ CLASS_DEF_REGEX = re.compile(r'^\s*(?:virtual\s+)?class\s+([a-zA-Z0-9_]+)')
 METHOD_DEF_REGEX = re.compile(r'^\s*(?:virtual\s+|local\s+|protected\s+|static\s+)*(task|function)\s+(?:[\w:\[\]\$]+\s+)?([a-zA-Z0-9_]+)\s*\(')
 MACRO_DEF_REGEX = re.compile(r'^\s*`define\s+([a-zA-Z0-9_]+)')
 
+DOC_TOKEN_REGEX = re.compile(
+    r'(?P<BLOCK_COMMENT>/\*[\s\S]*?\*/)|'
+    r'(?P<LINE_COMMENT>//[^\n]*)|'
+    r'(?P<STRING>"([^"\\]|\\.)*")|'
+    r'(?P<CHAR>\'([^\'\\]|\\.)*\')|'
+    r'(?P<MACRO>`[a-zA-Z_][a-zA-Z0-9_]*)|'
+    r'(?P<CMD_OPTION>\+[a-zA-Z0-9_]+(?:=[^\s,()]+)?)|'
+    r'(?P<NUMBER>\b\d+\'?[bBoOdDhH]?[0-9a-fA-F_xzXZ]*\b|\b\d+(?:ns|ps|us|ms|s)?\b)|'
+    r'(?P<IDENT>[a-zA-Z_][a-zA-Z0-9_]*)|'
+    r'(?P<OP>::|->|<=|>=|==|!=|\+=|-=|\*=|&=|\|=|\^=|&&|\|\||#\(|[#+\-*/%=&|~^!<>?:;.,()\[\]{}])'
+)
+
+def highlight_outside_tags(text, highlight_fn):
+    """Tokenize text outside HTML tags and HTML entity sequences."""
+    parts = re.split(r'(<[^>]+>|&[a-zA-Z0-9#]+;)', text)
+    for i in range(len(parts)):
+        if not parts[i].startswith('<') and not (parts[i].startswith('&') and parts[i].endswith(';')):
+            parts[i] = highlight_fn(parts[i])
+    return "".join(parts)
+
+def highlight_doc_code(raw_code):
+    """Highlight a block of code from documentation preserving indentation and newlines."""
+    code = html.unescape(raw_code)
+    pos = 0
+    code_len = len(code)
+    parts = []
+
+    while pos < code_len:
+        m = DOC_TOKEN_REGEX.search(code, pos)
+        if not m:
+            parts.append(html.escape(code[pos:]))
+            break
+        
+        start, end = m.span()
+        if start > pos:
+            parts.append(html.escape(code[pos:start]))
+            
+        kind = m.lastgroup
+        val = m.group(kind)
+        esc = html.escape(val)
+
+        if kind in ('BLOCK_COMMENT', 'LINE_COMMENT'):
+            parts.append(f'<span class="sv-comment">{esc}</span>')
+        elif kind in ('STRING', 'CHAR'):
+            parts.append(f'<span class="sv-string">{esc}</span>')
+        elif kind == 'MACRO':
+            parts.append(f'<span class="sv-macro">{esc}</span>')
+        elif kind == 'CMD_OPTION':
+            parts.append(f'<span class="sv-cmdline-opt">{esc}</span>')
+        elif kind == 'NUMBER':
+            parts.append(f'<span class="sv-number">{esc}</span>')
+        elif kind == 'IDENT':
+            if val in SV_KEYWORDS:
+                parts.append(f'<span class="sv-keyword">{esc}</span>')
+            elif val.startswith(('uvm_', 'UVM_')) or val in ('uvm_void', 'uvm_object', 'uvm_component', 'uvm_phase', 'uvm_report_object', 'uvm_driver', 'uvm_sequence', 'uvm_env', 'uvm_test', 'uvm_callbacks'):
+                parts.append(f'<span class="sv-uvm-type">{esc}</span>')
+            else:
+                rest = code[end:].lstrip()
+                if rest.startswith('(') and val not in ('if', 'for', 'while', 'case', 'return', 'super', 'this'):
+                    parts.append(f'<span class="sv-method">{esc}</span>')
+                else:
+                    parts.append(f'<span class="sv-ident">{esc}</span>')
+        elif kind == 'OP':
+            parts.append(f'<span class="sv-op">{esc}</span>')
+        else:
+            parts.append(esc)
+            
+        pos = end
+
+    return "".join(parts)
+
+def highlight_before_params(text):
+    def repl_text(t):
+        tokens = re.split(r'(\b[a-zA-Z_][a-zA-Z0-9_]*\b|\()', t)
+        words = [tok for tok in tokens if re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', tok)]
+        method_name = words[-1] if words else None
+        res = []
+        for tok in tokens:
+            if not tok:
+                continue
+            if tok in SV_KEYWORDS:
+                res.append(f'<span class="sv-keyword">{tok}</span>')
+            elif tok == method_name:
+                res.append(f'<span class="sv-proto-name">{tok}</span>')
+            elif tok == '(':
+                res.append(f'<span class="sv-op">(</span>')
+            else:
+                res.append(tok)
+        return "".join(res)
+    return highlight_outside_tags(text, repl_text)
+
+def highlight_type_cell(text):
+    def repl_text(t):
+        def repl(m):
+            w = m.group(0)
+            if w in SV_KEYWORDS:
+                return f'<span class="sv-keyword">{w}</span>'
+            elif w.startswith(('uvm_', 'UVM_')) or 'uvm' in w:
+                return f'<span class="sv-uvm-type">{w}</span>'
+            else:
+                return f'<span class="sv-type">{w}</span>'
+        return re.sub(r'\b[a-zA-Z_][a-zA-Z0-9_]*\b', repl, t)
+    return highlight_outside_tags(text, repl_text)
+
+def highlight_param_cell(text):
+    def repl_text(t):
+        def repl(m):
+            w = m.group(1)
+            punct = m.group(2) or ''
+            return f'<span class="sv-param-name">{w}</span>' + (f'<span class="sv-op">{punct}</span>' if punct else '')
+        return re.sub(r'\b([a-zA-Z_][a-zA-Z0-9_]*\b)([,;]?)', repl, t)
+    return highlight_outside_tags(text, repl_text)
+
+def highlight_prototype_table(proto_html):
+    if 'PBeforeParameters' in proto_html:
+        proto_html = re.sub(
+            r'(<td\b[^>]*class=["\']?PBeforeParameters[^>]*>)([\s\S]*?)(</td>)',
+            lambda m: m.group(1) + highlight_before_params(m.group(2)) + m.group(3),
+            proto_html
+        )
+        proto_html = re.sub(
+            r'(<td\b[^>]*class=["\']?PType[^>]*>)([\s\S]*?)(</td>)',
+            lambda m: m.group(1) + highlight_type_cell(m.group(2)) + m.group(3),
+            proto_html
+        )
+        proto_html = re.sub(
+            r'(<td\b[^>]*class=["\']?PParameter[^>]*>)([\s\S]*?)(</td>)',
+            lambda m: m.group(1) + highlight_param_cell(m.group(2)) + m.group(3),
+            proto_html
+        )
+        proto_html = re.sub(
+            r'(<td\b[^>]*class=["\']?PAfterParameters[^>]*>)([\s\S]*?)(</td>)',
+            lambda m: m.group(1) + f'<span class="sv-op">{m.group(2)}</span>' + m.group(3),
+            proto_html
+        )
+        proto_html = re.sub(
+            r'(<td\b[^>]*class=["\']?PDefaultValuePrefix\b[^>]*>)([\s\S]*?)(</td>)',
+            lambda m: m.group(1) + f'<span class="sv-op">{m.group(2)}</span>' + m.group(3),
+            proto_html
+        )
+        proto_html = re.sub(
+            r'(<td\b[^>]*class=["\']?PDefaultValue\b[^>]*>)([\s\S]*?)(</td>)',
+            lambda m: m.group(1) + f'<span class="sv-default-val">{m.group(2)}</span>' + m.group(3),
+            proto_html
+        )
+    else:
+        def highlight_simple_proto(inner):
+            def repl_text(t):
+                tokens = re.split(r'(\b[a-zA-Z_][a-zA-Z0-9_]*\b|[()=,;])', t)
+                parts = []
+                for idx, tok in enumerate(tokens):
+                    if not tok:
+                        continue
+                    if re.match(r'^\s+$', tok):
+                        parts.append(tok)
+                    elif tok in SV_KEYWORDS:
+                        parts.append(f'<span class="sv-keyword">{tok}</span>')
+                    elif tok.startswith(('uvm_', 'UVM_')):
+                        parts.append(f'<span class="sv-uvm-type">{tok}</span>')
+                    elif tok in '()=,;':
+                        parts.append(f'<span class="sv-op">{tok}</span>')
+                    else:
+                        next_tok = next((x for x in tokens[idx+1:] if x.strip()), '')
+                        if next_tok.startswith('('):
+                            parts.append(f'<span class="sv-proto-name">{tok}</span>')
+                        else:
+                            parts.append(f'<span class="sv-ident">{tok}</span>')
+                return "".join(parts)
+            return highlight_outside_tags(inner, repl_text)
+
+        proto_html = re.sub(
+            r'(<td\b[^>]*>)([\s\S]*?)(</td>)',
+            lambda m: m.group(1) + highlight_simple_proto(m.group(2)) + m.group(3),
+            proto_html
+        )
+    return proto_html
+
+def process_doc_code_blocks(html_text):
+    def replace_code_block(match):
+        raw_code = match.group(1)
+        clean_code = html.unescape(raw_code).strip('\r\n')
+        
+        # Determine language badge
+        if any(clean_code.startswith(x) for x in ('prompt>', '<sim command', 'SIM_COMMAND')) or '+UVM_' in clean_code or '+uvm_' in clean_code:
+            lang = "Command Line"
+        elif clean_code.startswith('#') or 'extern "C"' in clean_code:
+            lang = "C / DPI"
+        else:
+            lang = "SystemVerilog"
+        
+        highlighted = highlight_doc_code(clean_code)
+        
+        return f'''<div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>{lang}</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code>{highlighted}</code></pre>
+</div>'''
+
+    return re.sub(r'(?:<blockquote>\s*)?<pre>([\s\S]*?)</pre>(?:\s*</blockquote>)?', replace_code_block, html_text, flags=re.IGNORECASE)
+
+def process_doc_prototypes(html_text):
+    return re.sub(r'<table\b[^>]*class=["\']?Prototype["\']?[^>]*>[\s\S]*?</table>', lambda m: highlight_prototype_table(m.group(0)), html_text, flags=re.IGNORECASE)
+
 # Global Symbol Maps
 SYMBOL_MAP = {}
 FILE_SYMBOLS = {}
@@ -298,6 +509,9 @@ def generate_source_views():
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(rel_path)} | UVM 1.2 Source Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{root_rel}css/style.css">
 </head>
 <body class="src-viewer-body">
@@ -487,6 +701,12 @@ def modernize_doc_files():
             body_content = re.sub(r"onmouse(?:over|out)='[^']*'", '', body_content, flags=re.IGNORECASE)
             body_content = re.sub(r'class=FramedContentPage', 'class="doc-content-page"', body_content)
 
+            # Syntax highlight documentation code blocks (<pre>)
+            body_content = process_doc_code_blocks(body_content)
+
+            # Syntax highlight method/class/task prototypes (<table class=Prototype>)
+            body_content = process_doc_prototypes(body_content)
+
             # Injected "View Source Code" badge only if real source exists
             view_source_banner = ""
             if associated_src and (SRC_DIR / associated_src).exists():
@@ -510,6 +730,9 @@ def modernize_doc_files():
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(page_title)} | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{root_rel}css/style.css">
 </head>
 <body class="doc-body">
@@ -521,6 +744,29 @@ def modernize_doc_files():
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {{
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {{
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {{
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }}, 2000);
+      }}).catch(err => {{
+        console.error('Copy failed: ', err);
+      }});
+    }});
+
     // Theme sync
     window.addEventListener('message', function(e) {{
       if (e.data && e.data.theme) {{

@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TLM Channel Classes | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -74,17 +77,17 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_tlm_req_rsp_channel #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>REQ</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>RSP</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>REQ</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_tlm_req_rsp_channel</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">REQ</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">RSP</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">REQ</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_component</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_component</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -134,51 +137,123 @@
 
 
  <!--CONTENT index=3 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).put_request_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">put_request_export</a></h3><div class=CBody><p>The put_export provides both the blocking and non-blocking put interface methods to the request FIFO:</p><blockquote><pre>task put (input T t);
-function bit can_put ();
-function bit try_put (input T t);</pre></blockquote><p>Any put port variant can connect and send transactions to the request FIFO via this export, provided the transaction types match.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).put_request_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">put_request_export</a></h3><div class=CBody><p>The put_export provides both the blocking and non-blocking put interface methods to the request FIFO:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_put</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_put</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>Any put port variant can connect and send transactions to the request FIFO via this export, provided the transaction types match.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).get_peek_response_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">get_peek_response_export</a></h3><div class=CBody><p>The get_peek_response_export provides all the blocking and non-blocking get and peek interface methods to the response FIFO:</p><blockquote><pre>task get (output T t);
-function bit can_get ();
-function bit try_get (output T t);
-task peek (output T t);
-function bit can_peek ();
-function bit try_peek (output T t);</pre></blockquote><p>Any get or peek port variant can connect to and retrieve transactions from the response FIFO via this export, provided the transaction types match.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).get_peek_response_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">get_peek_response_export</a></h3><div class=CBody><p>The get_peek_response_export provides all the blocking and non-blocking get and peek interface methods to the response FIFO:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">get</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_get</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_get</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">task</span> <span class="sv-method">peek</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_peek</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_peek</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>Any get or peek port variant can connect to and retrieve transactions from the response FIFO via this export, provided the transaction types match.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).get_peek_request_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">get_peek_request_export</a></h3><div class=CBody><p>The get_peek_export provides all the blocking and non-blocking get and peek interface methods to the response FIFO:</p><blockquote><pre>task get (output T t);
-function bit can_get ();
-function bit try_get (output T t);
-task peek (output T t);
-function bit can_peek ();
-function bit try_peek (output T t);</pre></blockquote><p>Any get or peek port variant can connect to and retrieve transactions from the response FIFO via this export, provided the transaction types match.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).get_peek_request_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">get_peek_request_export</a></h3><div class=CBody><p>The get_peek_export provides all the blocking and non-blocking get and peek interface methods to the response FIFO:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">get</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_get</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_get</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">task</span> <span class="sv-method">peek</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_peek</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_peek</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>Any get or peek port variant can connect to and retrieve transactions from the response FIFO via this export, provided the transaction types match.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).put_response_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">put_response_export</a></h3><div class=CBody><p>The put_export provides both the blocking and non-blocking put interface methods to the response FIFO:</p><blockquote><pre>task put (input T t);
-function bit can_put ();
-function bit try_put (input T t);</pre></blockquote><p>Any put port variant can connect and send transactions to the response FIFO via this export, provided the transaction types match.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).put_response_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">put_response_export</a></h3><div class=CBody><p>The put_export provides both the blocking and non-blocking put interface methods to the response FIFO:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_put</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_put</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>Any put port variant can connect and send transactions to the response FIFO via this export, provided the transaction types match.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=7 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).request_ap" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">request_ap</a></h3><div class=CBody><p>Transactions passed via <i>put</i> or <i>try_put</i> (via any port connected to the put_request_export) are sent out this port via its write method.</p><blockquote><pre>function void write (T t);</pre></blockquote><p>All connected analysis exports and imps will receive these transactions.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).request_ap" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">request_ap</a></h3><div class=CBody><p>Transactions passed via <i>put</i> or <i>try_put</i> (via any port connected to the put_request_export) are sent out this port via its write method.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write</span> <span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>All connected analysis exports and imps will receive these transactions.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=8 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).response_ap" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">response_ap</a></h3><div class=CBody><p>Transactions passed via <i>put</i> or <i>try_put</i> (via any port connected to the put_response_export) are sent out this port via its write method.</p><blockquote><pre>function void write (T t);</pre></blockquote><p>All connected analysis exports and imps will receive these transactions.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).response_ap" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">response_ap</a></h3><div class=CBody><p>Transactions passed via <i>put</i> or <i>try_put</i> (via any port connected to the put_response_export) are sent out this port via its write method.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write</span> <span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>All connected analysis exports and imps will receive these transactions.</p></div></div></div>
 
 
 
@@ -205,25 +280,25 @@ function bit try_put (input T t);</pre></blockquote><p>Any put port variant can 
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).new" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>parent</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>request_fifo_size</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>response_fifo_size</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">parent</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">request_fifo_size</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">response_fifo_size</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link11  >uvm_component</a> constructor arguments.&nbsp; The <i>parent</i> must be <i>null</i> if this component is defined within a static component such as a module, program block, or interface.&nbsp; The last two arguments specify the request and response FIFO sizes, which have default values of 1.</p></div></div></div>
@@ -263,17 +338,17 @@ function bit try_put (input T t);</pre></blockquote><p>Any put port variant can 
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_tlm_transport_channel #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>REQ</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>RSP</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>REQ</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_tlm_transport_channel</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">REQ</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">RSP</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">REQ</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_tlm_req_rsp_channel #(REQ, RSP)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_tlm_req_rsp_channel #(REQ, RSP)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -302,8 +377,20 @@ function bit try_put (input T t);</pre></blockquote><p>Any put port variant can 
 
 
  <!--CONTENT index=15 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_transport_channel#(REQ,RSP).transport_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">transport_export</a></h3><div class=CBody><p>The put_export provides both the blocking and non-blocking transport interface methods to the response FIFO:</p><blockquote><pre>task transport(REQ request, output RSP response);
-function bit nb_transport(REQ request, output RSP response);</pre></blockquote><p>Any transport port variant can connect to and send requests and retrieve responses via this export, provided the transaction types match.&nbsp; Upon return, the response argument carries the response to the request.</p></div></div></div>
+<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_transport_channel#(REQ,RSP).transport_export" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">transport_export</a></h3><div class=CBody><p>The put_export provides both the blocking and non-blocking transport interface methods to the response FIFO:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">transport</span><span class="sv-op">(</span><span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">,</span> <span class="sv-keyword">output</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">nb_transport</span><span class="sv-op">(</span><span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">,</span> <span class="sv-keyword">output</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>Any transport port variant can connect to and send requests and retrieve responses via this export, provided the transaction types match.&nbsp; Upon return, the response argument carries the response to the request.</p></div></div></div>
 
 
 
@@ -318,17 +405,17 @@ function bit nb_transport(REQ request, output RSP response);</pre></blockquote><
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tlm_transport_channel#(REQ,RSP).new" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L46" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="46">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>parent</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">parent</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link22  >uvm_component</a> constructor arguments.&nbsp; The <i>parent</i> must be <i>null</i> if this component is defined within a statically elaborated construct such as a module, program block, or interface.</p></div></div></div>
@@ -342,6 +429,29 @@ function bit nb_transport(REQ request, output RSP response);</pre></blockquote><
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_event_callback | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -53,13 +56,13 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual class uvm_event_callback#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_object</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_event_callback</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_object</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_object</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_object</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -91,13 +94,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_event_callback.new" href="../../src_view/base/uvm_event_callback.svh.html#L40" class="src-code-link" data-src-file="base/uvm_event_callback.svh" data-src-line="40">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates a new callback object.</p></div></div></div>
@@ -109,13 +112,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_event_callback.pre_trigger" href="../../src_view/base/uvm_event_callback.svh.html#L40" class="src-code-link" data-src-file="base/uvm_event_callback.svh" data-src-line="40">pre_trigger</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function bit pre_trigger (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_event#(T)&nbsp;</td>
-      <td class=PParameter nowrap width=100%>e,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>data</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">pre_trigger</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_event</span>#(<span class="sv-type">T</span>)&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">e</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">data</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>This callback is called just before triggering the associated event.&nbsp; In a derived class, override this method to implement any pre-trigger functionality.</p><p>If your callback returns 1, then the event will not trigger and the post-trigger callback is not called.&nbsp; This provides a way for a callback to prevent the event from triggering.</p><p>In the function, <i>e</i> is the <a href="uvm_event-svh.html#uvm_event#(T)" class=LClass id=link11  >uvm_event#(T)</a> that is being triggered, and <i>data</i> is the optional data associated with the event trigger.</p></div></div></div>
@@ -127,13 +130,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_event_callback.post_trigger" href="../../src_view/base/uvm_event_callback.svh.html#L40" class="src-code-link" data-src-file="base/uvm_event_callback.svh" data-src-line="40">post_trigger</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void post_trigger (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_event#(T)&nbsp;</td>
-      <td class=PParameter nowrap width=100%>e,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>data</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">post_trigger</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_event</span>#(<span class="sv-type">T</span>)&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">e</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">data</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>This callback is called after triggering the associated event.&nbsp; In a derived class, override this method to implement any post-trigger functionality.</p><p>In the function, <i>e</i> is the <a href="uvm_event-svh.html#uvm_event#(T)" class=LClass id=link12  >uvm_event#(T)</a> that is being triggered, and <i>data</i> is the optional data associated with the event trigger.</p></div></div></div>
@@ -147,6 +150,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

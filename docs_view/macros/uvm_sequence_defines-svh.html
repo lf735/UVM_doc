@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sequence-Related Macros | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -114,45 +117,129 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_create" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_create</a></h3><div class=CBody><blockquote><pre>`uvm_create(SEQ_OR_ITEM)</pre></blockquote><p>This action creates the item or sequence using the factory.&nbsp;  It intentionally does zero processing.&nbsp;  After this action completes, the user can manually set values, manipulate rand_mode and constraint_mode, etc.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_create" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_create</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_create</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">)</span></code></pre>
+</div><p>This action creates the item or sequence using the factory.&nbsp;  It intentionally does zero processing.&nbsp;  After this action completes, the user can manually set values, manipulate rand_mode and constraint_mode, etc.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do</a></h3><div class=CBody><blockquote><pre>`uvm_do(SEQ_OR_ITEM)</pre></blockquote><p>This macro takes as an argument a uvm_sequence_item variable or object.&nbsp; The argument is created using <a href="#`uvm_create" class=LMacro >`uvm_create</a> if necessary, then randomized.&nbsp; In the case of an item, it is randomized after the call to <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.start_item" class=LMethod id=link3  >uvm_sequence_base::start_item()</a> returns.&nbsp; This is called late-randomization.&nbsp; In the case of a sequence, the sub-sequence is started using <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.start" class=LMethod id=link4  >uvm_sequence_base::start()</a> with <i>call_pre_post</i> set to 0.&nbsp; In the case of an item, the item is sent to the driver through the associated sequencer.</p><p>For a sequence item, the following are called, in order</p><blockquote><pre>`uvm_create(item)
-sequencer.wait_for_grant(prior) (task)
-this.pre_do(1)                  (task)
-item.randomize()
-this.mid_do(item)               (func)
-sequencer.send_request(item)    (func)
-sequencer.wait_for_item_done()  (task)
-this.post_do(item)              (func)</pre></blockquote><p>For a sequence, the following are called, in order</p><blockquote><pre>`uvm_create(sub_seq)
-sub_seq.randomize()
-sub_seq.pre_start()         (task)
-this.pre_do(0)              (task)
-this.mid_do(sub_seq)        (func)
-sub_seq.body()              (task)
-this.post_do(sub_seq)       (func)
-sub_seq.post_start()        (task)</pre></blockquote></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_do</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">)</span></code></pre>
+</div><p>This macro takes as an argument a uvm_sequence_item variable or object.&nbsp; The argument is created using <a href="#`uvm_create" class=LMacro >`uvm_create</a> if necessary, then randomized.&nbsp; In the case of an item, it is randomized after the call to <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.start_item" class=LMethod id=link3  >uvm_sequence_base::start_item()</a> returns.&nbsp; This is called late-randomization.&nbsp; In the case of a sequence, the sub-sequence is started using <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.start" class=LMethod id=link4  >uvm_sequence_base::start()</a> with <i>call_pre_post</i> set to 0.&nbsp; In the case of an item, the item is sent to the driver through the associated sequencer.</p><p>For a sequence item, the following are called, in order</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_create</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>
+<span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-method">wait_for_grant</span><span class="sv-op">(</span><span class="sv-ident">prior</span><span class="sv-op">)</span> <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
+<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">pre_do</span><span class="sv-op">(</span><span class="sv-number">1</span><span class="sv-op">)</span>                  <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
+<span class="sv-ident">item</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span>
+<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">mid_do</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>               <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
+<span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-method">send_request</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>    <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
+<span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-method">wait_for_item_done</span><span class="sv-op">(</span><span class="sv-op">)</span>  <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
+<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">post_do</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span></code></pre>
+</div><p>For a sequence, the following are called, in order</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_create</span><span class="sv-op">(</span><span class="sv-ident">sub_seq</span><span class="sv-op">)</span>
+<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span>
+<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">pre_start</span><span class="sv-op">(</span><span class="sv-op">)</span>         <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
+<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">pre_do</span><span class="sv-op">(</span><span class="sv-number">0</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
+<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">mid_do</span><span class="sv-op">(</span><span class="sv-ident">sub_seq</span><span class="sv-op">)</span>        <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
+<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">body</span><span class="sv-op">(</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
+<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">post_do</span><span class="sv-op">(</span><span class="sv-ident">sub_seq</span><span class="sv-op">)</span>       <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
+<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">post_start</span><span class="sv-op">(</span><span class="sv-op">)</span>        <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_pri" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_pri</a></h3><div class=CBody><blockquote><pre>`uvm_do_pri(SEQ_OR_ITEM, PRIORITY)</pre></blockquote><p>This is the same as `uvm_do except that the sequence item or sequence is executed with the priority specified in the argument</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_pri" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_pri</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_do_pri</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">PRIORITY</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as `uvm_do except that the sequence item or sequence is executed with the priority specified in the argument</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_with</a></h3><div class=CBody><blockquote><pre>`uvm_do_with(SEQ_OR_ITEM, CONSTRAINTS)</pre></blockquote><p>This is the same as `uvm_do except that the constraint block in the 2nd argument is applied to the item or sequence in a randomize with statement before execution.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_with</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_do_with</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">CONSTRAINTS</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as `uvm_do except that the constraint block in the 2nd argument is applied to the item or sequence in a randomize with statement before execution.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_pri_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_pri_with</a></h3><div class=CBody><blockquote><pre>`uvm_do_pri_with(SEQ_OR_ITEM, PRIORITY, CONSTRAINTS)</pre></blockquote><p>This is the same as `uvm_do_pri except that the given constraint block is applied to the item or sequence in a randomize with statement before execution.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_pri_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_pri_with</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_do_pri_with</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">PRIORITY</span><span class="sv-op">,</span> <span class="sv-ident">CONSTRAINTS</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as `uvm_do_pri except that the given constraint block is applied to the item or sequence in a randomize with statement before execution.</p></div></div></div>
 
 
 
@@ -164,31 +251,91 @@ sub_seq.post_start()        (task)</pre></blockquote></div></div></div>
 
 
  <!--CONTENT index=8 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_create_on" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_create_on</a></h3><div class=CBody><blockquote><pre>`uvm_create_on(SEQ_OR_ITEM, SEQR)</pre></blockquote><p>This is the same as <a href="#`uvm_create" class=LMacro >`uvm_create</a> except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_create_on" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_create_on</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_create_on</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">SEQR</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as <a href="#`uvm_create" class=LMacro >`uvm_create</a> except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=9 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_on" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_on</a></h3><div class=CBody><blockquote><pre>`uvm_do_on(SEQ_OR_ITEM, SEQR)</pre></blockquote><p>This is the same as <a href="#`uvm_do" class=LMacro >`uvm_do</a> except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_on" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_on</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_do_on</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">SEQR</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as <a href="#`uvm_do" class=LMacro >`uvm_do</a> except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=10 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_on_pri" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_on_pri</a></h3><div class=CBody><blockquote><pre>`uvm_do_on_pri(SEQ_OR_ITEM, SEQR, PRIORITY)</pre></blockquote><p>This is the same as <a href="#`uvm_do_pri" class=LMacro >`uvm_do_pri</a> except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_on_pri" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_on_pri</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_do_on_pri</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">SEQR</span><span class="sv-op">,</span> <span class="sv-ident">PRIORITY</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as <a href="#`uvm_do_pri" class=LMacro >`uvm_do_pri</a> except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=11 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_on_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_on_with</a></h3><div class=CBody><blockquote><pre>`uvm_do_on_with(SEQ_OR_ITEM, SEQR, CONSTRAINTS)</pre></blockquote><p>This is the same as <a href="#`uvm_do_with" class=LMacro >`uvm_do_with</a> except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.&nbsp; The user must supply brackets around the constraints.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_on_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_on_with</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_do_on_with</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">SEQR</span><span class="sv-op">,</span> <span class="sv-ident">CONSTRAINTS</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as <a href="#`uvm_do_with" class=LMacro >`uvm_do_with</a> except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.&nbsp; The user must supply brackets around the constraints.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=12 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_on_pri_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_on_pri_with</a></h3><div class=CBody><blockquote><pre>`uvm_do_on_pri_with(SEQ_OR_ITEM, SEQR, PRIORITY, CONSTRAINTS)</pre></blockquote><p>This is the same as `uvm_do_pri_with except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_do_on_pri_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_do_on_pri_with</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_do_on_pri_with</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">SEQR</span><span class="sv-op">,</span> <span class="sv-ident">PRIORITY</span><span class="sv-op">,</span> <span class="sv-ident">CONSTRAINTS</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as `uvm_do_pri_with except that it also sets the parent sequence to the sequence in which the macro is invoked, and it sets the sequencer to the specified <i>SEQR</i> argument.</p></div></div></div>
 
 
 
@@ -200,78 +347,198 @@ sub_seq.post_start()        (task)</pre></blockquote></div></div></div>
 
 
  <!--CONTENT index=14 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_send" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_send</a></h3><div class=CBody><blockquote><pre>`uvm_send(SEQ_OR_ITEM)</pre></blockquote><p>This macro processes the item or sequence that has been created using `uvm_create.&nbsp;  The processing is done without randomization.&nbsp;  Essentially, an `uvm_do without the create or randomization.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_send" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_send</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_send</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">)</span></code></pre>
+</div><p>This macro processes the item or sequence that has been created using `uvm_create.&nbsp;  The processing is done without randomization.&nbsp;  Essentially, an `uvm_do without the create or randomization.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=15 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_send_pri" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_send_pri</a></h3><div class=CBody><blockquote><pre>`uvm_send_pri(SEQ_OR_ITEM, PRIORITY)</pre></blockquote><p>This is the same as `uvm_send except that the sequence item or sequence is executed with the priority specified in the argument.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_send_pri" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_send_pri</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_send_pri</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">PRIORITY</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as `uvm_send except that the sequence item or sequence is executed with the priority specified in the argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=16 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_rand_send" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_rand_send</a></h3><div class=CBody><blockquote><pre>`uvm_rand_send(SEQ_OR_ITEM)</pre></blockquote><p>This macro processes the item or sequence that has been already been allocated (possibly with `uvm_create).&nbsp; The processing is done with randomization.&nbsp;  Essentially, an `uvm_do without the create.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_rand_send" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_rand_send</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_rand_send</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">)</span></code></pre>
+</div><p>This macro processes the item or sequence that has been already been allocated (possibly with `uvm_create).&nbsp; The processing is done with randomization.&nbsp;  Essentially, an `uvm_do without the create.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=17 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_rand_send_pri" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_rand_send_pri</a></h3><div class=CBody><blockquote><pre>`uvm_rand_send_pri(SEQ_OR_ITEM, PRIORITY)</pre></blockquote><p>This is the same as `uvm_rand_send except that the sequence item or sequence is executed with the priority specified in the argument.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_rand_send_pri" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_rand_send_pri</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_rand_send_pri</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">PRIORITY</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as `uvm_rand_send except that the sequence item or sequence is executed with the priority specified in the argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=18 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_rand_send_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_rand_send_with</a></h3><div class=CBody><blockquote><pre>`uvm_rand_send_with(SEQ_OR_ITEM, CONSTRAINTS)</pre></blockquote><p>This is the same as `uvm_rand_send except that the given constraint block is applied to the item or sequence in a randomize with statement before execution.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_rand_send_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_rand_send_with</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_rand_send_with</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">CONSTRAINTS</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as `uvm_rand_send except that the given constraint block is applied to the item or sequence in a randomize with statement before execution.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=19 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_rand_send_pri_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_rand_send_pri_with</a></h3><div class=CBody><blockquote><pre>`uvm_rand_send_pri_with(SEQ_OR_ITEM, PRIORITY, CONSTRAINTS)</pre></blockquote><p>This is the same as `uvm_rand_send_pri except that the given constraint block is applied to the item or sequence in a randomize with statement before execution.</p></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_rand_send_pri_with" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_rand_send_pri_with</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_rand_send_pri_with</span><span class="sv-op">(</span><span class="sv-ident">SEQ_OR_ITEM</span><span class="sv-op">,</span> <span class="sv-ident">PRIORITY</span><span class="sv-op">,</span> <span class="sv-ident">CONSTRAINTS</span><span class="sv-op">)</span></code></pre>
+</div><p>This is the same as `uvm_rand_send_pri except that the given constraint block is applied to the item or sequence in a randomize with statement before execution.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=20 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_add_to_sequence_library" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_add_to_sequence_library</a></h3><div class=CBody><p>Adds the given sequence <i>TYPE</i> to the given sequence library <i>LIBTYPE</i></p><blockquote><pre>`uvm_add_to_seq_lib(TYPE,LIBTYPE)</pre></blockquote><p>Invoke any number of times within a sequence declaration to statically add that sequence to one or more sequence library types.&nbsp; The sequence will then be available for selection and execution in all instances of the given sequencer types.</p><blockquote><pre>class seqA extends uvm_sequence_base #(simple_item);
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_add_to_sequence_library" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_add_to_sequence_library</a></h3><div class=CBody><p>Adds the given sequence <i>TYPE</i> to the given sequence library <i>LIBTYPE</i></p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_add_to_seq_lib</span><span class="sv-op">(</span><span class="sv-ident">TYPE</span><span class="sv-op">,</span><span class="sv-ident">LIBTYPE</span><span class="sv-op">)</span></code></pre>
+</div><p>Invoke any number of times within a sequence declaration to statically add that sequence to one or more sequence library types.&nbsp; The sequence will then be available for selection and execution in all instances of the given sequencer types.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">seqA</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_sequence_base</span> <span class="sv-op">#(</span><span class="sv-ident">simple_item</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-   function new(string name=`&quot;TYPE`&quot;);
-     super.new(name);
-   endfunction
+   <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>`<span class="sv-string">&quot;TYPE`&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+   <span class="sv-keyword">endfunction</span>
 
-   `uvm_object_utils(seqA)
+   <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">seqA</span><span class="sv-op">)</span>
 
-   `uvm_add_to_seq_lib(seqA, simple_seq_lib_RST)
-   `uvm_add_to_seq_lib(seqA, simple_seq_lib_CFG)
+   <span class="sv-macro">`uvm_add_to_seq_lib</span><span class="sv-op">(</span><span class="sv-ident">seqA</span><span class="sv-op">,</span> <span class="sv-ident">simple_seq_lib_RST</span><span class="sv-op">)</span>
+   <span class="sv-macro">`uvm_add_to_seq_lib</span><span class="sv-op">(</span><span class="sv-ident">seqA</span><span class="sv-op">,</span> <span class="sv-ident">simple_seq_lib_CFG</span><span class="sv-op">)</span>
 
-   virtual task body(); \
-     `uvm_info(&quot;SEQ_START&quot;, {&quot;Executing sequence '&quot;, get_full_name(),
-                            &quot;' (&quot;,get_type_name(),&quot;)&quot;},UVM_HIGH)
-     #10;
-   endtask
+   <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-method">body</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span> \
+     <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;SEQ_START&quot;</span><span class="sv-op">,</span> <span class="sv-op">{</span><span class="sv-string">&quot;Executing sequence &#x27;&quot;</span><span class="sv-op">,</span> <span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span>
+                            <span class="sv-string">&quot;&#x27; (&quot;</span><span class="sv-op">,</span><span class="sv-method">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;)&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span><span class="sv-uvm-type">UVM_HIGH</span><span class="sv-op">)</span>
+     <span class="sv-op">#</span><span class="sv-number">10</span><span class="sv-op">;</span>
+   <span class="sv-keyword">endtask</span>
 
- endclass</pre></blockquote></div></div></div>
+ <span class="sv-keyword">endclass</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=21 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_sequence_library_utils" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_sequence_library_utils</a></h3><div class=CBody><blockquote><pre>`uvm_sequence_library_utils(TYPE)</pre></blockquote><p>Declares the infrastructure needed to define extensions to the <a href="../seq/uvm_sequence_library-svh.html#uvm_sequence_library" class=LClass id=link5  >uvm_sequence_library</a> class.&nbsp; You define new sequence library subtypes to statically specify sequence membership from within sequence definitions.&nbsp; See also <a href="#`uvm_add_to_sequence_library" class=LMacro id=link6  >`uvm_add_to_sequence_library</a> for more information.</p><blockquote><pre>typedef simple_seq_lib uvm_sequence_library #(simple_item);
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_sequence_library_utils" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_sequence_library_utils</a></h3><div class=CBody><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_sequence_library_utils</span><span class="sv-op">(</span><span class="sv-ident">TYPE</span><span class="sv-op">)</span></code></pre>
+</div><p>Declares the infrastructure needed to define extensions to the <a href="../seq/uvm_sequence_library-svh.html#uvm_sequence_library" class=LClass id=link5  >uvm_sequence_library</a> class.&nbsp; You define new sequence library subtypes to statically specify sequence membership from within sequence definitions.&nbsp; See also <a href="#`uvm_add_to_sequence_library" class=LMacro id=link6  >`uvm_add_to_sequence_library</a> for more information.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">typedef</span> <span class="sv-ident">simple_seq_lib</span> <span class="sv-uvm-type">uvm_sequence_library</span> <span class="sv-op">#(</span><span class="sv-ident">simple_item</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-class simple_seq_lib_RST extends simple_seq_lib;
+<span class="sv-keyword">class</span> <span class="sv-ident">simple_seq_lib_RST</span> <span class="sv-keyword">extends</span> <span class="sv-ident">simple_seq_lib</span><span class="sv-op">;</span>
 
-  `uvm_object_utils(simple_seq_lib_RST)
+  <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">simple_seq_lib_RST</span><span class="sv-op">)</span>
 
-  `uvm_sequence_library_utils(simple_seq_lib_RST)
+  <span class="sv-macro">`uvm_sequence_library_utils</span><span class="sv-op">(</span><span class="sv-ident">simple_seq_lib_RST</span><span class="sv-op">)</span>
 
-  function new(string name=&quot;&quot;);
-    super.new(name);
-  endfunction
+  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword">endfunction</span>
 
-endclass</pre></blockquote><p>Each library, itself a sequence, can then be started independently on different sequencers or in different phases of the same sequencer.&nbsp; See <a href="../seq/uvm_sequencer_base-svh.html#uvm_sequencer_base.start_phase_sequence" class=LMethod id=link7  >uvm_sequencer_base::start_phase_sequence</a> for information on starting default sequences.</p></div></div></div>
+<span class="sv-keyword">endclass</span></code></pre>
+</div><p>Each library, itself a sequence, can then be started independently on different sequencers or in different phases of the same sequencer.&nbsp; See <a href="../seq/uvm_sequencer_base-svh.html#uvm_sequencer_base.start_phase_sequence" class=LMethod id=link7  >uvm_sequencer_base::start_phase_sequence</a> for information on starting default sequences.</p></div></div></div>
 
 
 
@@ -283,16 +550,40 @@ endclass</pre></blockquote><p>Each library, itself a sequence, can then be start
 
 
  <!--CONTENT index=23 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_declare_p_sequencer" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_declare_p_sequencer</a></h3><div class=CBody><p>This macro is used to declare a variable <i>p_sequencer</i> whose type is specified by <i>SEQUENCER</i>.</p><blockquote><pre>`uvm_declare_p_sequencer(SEQUENCER)</pre></blockquote><p>The example below shows using the `uvm_declare_p_sequencer macro along with the uvm_object_utils macros to set up the sequence but not register the sequence in the sequencer&rsquo;s library.</p><blockquote><pre>class mysequence extends uvm_sequence#(mydata);
-  `uvm_object_utils(mysequence)
-  `uvm_declare_p_sequencer(some_seqr_type)
-  task body;
-    //Access some variable in the user's custom sequencer
-    if(p_sequencer.some_variable) begin
-      ...
-    end
-  endtask
-endclass</pre></blockquote></div></div></div>
+<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_declare_p_sequencer" href="../../src_view/macros/uvm_sequence_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="1">`uvm_declare_p_sequencer</a></h3><div class=CBody><p>This macro is used to declare a variable <i>p_sequencer</i> whose type is specified by <i>SEQUENCER</i>.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-macro">`uvm_declare_p_sequencer</span><span class="sv-op">(</span><span class="sv-ident">SEQUENCER</span><span class="sv-op">)</span></code></pre>
+</div><p>The example below shows using the `uvm_declare_p_sequencer macro along with the uvm_object_utils macros to set up the sequence but not register the sequence in the sequencer&rsquo;s library.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mysequence</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_sequence</span><span class="sv-op">#(</span><span class="sv-ident">mydata</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">mysequence</span><span class="sv-op">)</span>
+  <span class="sv-macro">`uvm_declare_p_sequencer</span><span class="sv-op">(</span><span class="sv-ident">some_seqr_type</span><span class="sv-op">)</span>
+  <span class="sv-keyword">task</span> <span class="sv-ident">body</span><span class="sv-op">;</span>
+    <span class="sv-comment">//Access some variable in the user&#x27;s custom sequencer</span>
+    <span class="sv-keyword">if</span><span class="sv-op">(</span><span class="sv-ident">p_sequencer</span><span class="sv-op">.</span><span class="sv-ident">some_variable</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span>
+      <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
+    <span class="sv-keyword">end</span>
+  <span class="sv-keyword">endtask</span>
+<span class="sv-keyword">endclass</span></code></pre>
+</div></div></div></div>
 
 </div><!--Content-->
 
@@ -303,6 +594,29 @@ endclass</pre></blockquote></div></div></div>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

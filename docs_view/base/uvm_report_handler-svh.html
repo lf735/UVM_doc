@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_report_handler | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -51,7 +54,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_report_handler extends uvm_object
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_report_handler</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=1 -->
@@ -81,13 +84,13 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.new" href="../../src_view/base/uvm_report_handler.svh.html#L55" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> &quot;uvm_report_handler&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;uvm_report_handler&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates and initializes a new uvm_report_handler object.</p></div></div></div>
@@ -99,27 +102,39 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.print" href="../../src_view/base/uvm_report_handler.svh.html#L55" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">print</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void do_print (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_printer&nbsp;</td>
-      <td class=PParameter nowrap width=100%>printer</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_print</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_printer</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">printer</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The uvm_report_handler implements the <a href="uvm_object-svh.html#uvm_object.do_print" class=LMethod id=link15  >uvm_object::do_print()</a> such that <i>print</i> method provides UVM printer formatted output of the current configuration.&nbsp;  A snippet of example output is shown here:</p><blockquote><pre>uvm_test_top                uvm_report_handler  -     @555
-  max_verbosity_level       uvm_verbosity       32    UVM_FULL
-  id_verbosities            uvm_pool            3     -
-    [ID1]                   uvm_verbosity       32    UVM_LOW
-  severity_id_verbosities   array               4     -
-    [UVM_INFO:ID4]          int                 32    501
-  id_actions                uvm_pool            2     -
-    [ACT_ID]                uvm_action          32    DISPLAY LOG COUNT
-  severity_actions          array               4     -
-    [UVM_INFO]              uvm_action          32    DISPLAY
-    [UVM_WARNING]           uvm_action          32    DISPLAY RM_RECORD COUNT
-    [UVM_ERROR]             uvm_action          32    DISPLAY COUNT
-    [UVM_FATAL]             uvm_action          32    DISPLAY EXIT
-  default_file_handle       int                 32    'h1</pre></blockquote></div></div></div>
+<div class=CBody><p>The uvm_report_handler implements the <a href="uvm_object-svh.html#uvm_object.do_print" class=LMethod id=link15  >uvm_object::do_print()</a> such that <i>print</i> method provides UVM printer formatted output of the current configuration.&nbsp;  A snippet of example output is shown here:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_test_top</span>                <span class="sv-uvm-type">uvm_report_handler</span>  <span class="sv-op">-</span>     @<span class="sv-number">555</span>
+  <span class="sv-ident">max_verbosity_level</span>       <span class="sv-uvm-type">uvm_verbosity</span>       <span class="sv-number">32</span>    <span class="sv-uvm-type">UVM_FULL</span>
+  <span class="sv-ident">id_verbosities</span>            <span class="sv-uvm-type">uvm_pool</span>            <span class="sv-number">3</span>     <span class="sv-op">-</span>
+    <span class="sv-op">[</span><span class="sv-ident">ID1</span><span class="sv-op">]</span>                   <span class="sv-uvm-type">uvm_verbosity</span>       <span class="sv-number">32</span>    <span class="sv-uvm-type">UVM_LOW</span>
+  <span class="sv-ident">severity_id_verbosities</span>   <span class="sv-ident">array</span>               <span class="sv-number">4</span>     <span class="sv-op">-</span>
+    <span class="sv-op">[</span><span class="sv-uvm-type">UVM_INFO</span><span class="sv-op">:</span><span class="sv-ident">ID4</span><span class="sv-op">]</span>          <span class="sv-keyword">int</span>                 <span class="sv-number">32</span>    <span class="sv-number">501</span>
+  <span class="sv-ident">id_actions</span>                <span class="sv-uvm-type">uvm_pool</span>            <span class="sv-number">2</span>     <span class="sv-op">-</span>
+    <span class="sv-op">[</span><span class="sv-ident">ACT_ID</span><span class="sv-op">]</span>                <span class="sv-uvm-type">uvm_action</span>          <span class="sv-number">32</span>    <span class="sv-ident">DISPLAY</span> <span class="sv-ident">LOG</span> <span class="sv-ident">COUNT</span>
+  <span class="sv-ident">severity_actions</span>          <span class="sv-ident">array</span>               <span class="sv-number">4</span>     <span class="sv-op">-</span>
+    <span class="sv-op">[</span><span class="sv-uvm-type">UVM_INFO</span><span class="sv-op">]</span>              <span class="sv-uvm-type">uvm_action</span>          <span class="sv-number">32</span>    <span class="sv-ident">DISPLAY</span>
+    <span class="sv-op">[</span><span class="sv-uvm-type">UVM_WARNING</span><span class="sv-op">]</span>           <span class="sv-uvm-type">uvm_action</span>          <span class="sv-number">32</span>    <span class="sv-ident">DISPLAY</span> <span class="sv-ident">RM_RECORD</span> <span class="sv-ident">COUNT</span>
+    <span class="sv-op">[</span><span class="sv-uvm-type">UVM_ERROR</span><span class="sv-op">]</span>             <span class="sv-uvm-type">uvm_action</span>          <span class="sv-number">32</span>    <span class="sv-ident">DISPLAY</span> <span class="sv-ident">COUNT</span>
+    <span class="sv-op">[</span><span class="sv-uvm-type">UVM_FATAL</span><span class="sv-op">]</span>             <span class="sv-uvm-type">uvm_action</span>          <span class="sv-number">32</span>    <span class="sv-ident">DISPLAY</span> <span class="sv-ident">EXIT</span>
+  <span class="sv-ident">default_file_handle</span>       <span class="sv-keyword">int</span>                 <span class="sv-number">32</span>    &#x27;<span class="sv-ident">h1</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -134,11 +149,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.process_report_message" href="../../src_view/base/uvm_report_handler.svh.html#L55" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">process_report_message</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual function void process_report_message(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_report_message&nbsp;</td>
-      <td class=PParameter nowrap width=100%>report_message</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">process_report_message</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_report_message</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">report_message</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>This is the common handler method used by the four core reporting methods (e.g.&nbsp; <a href="uvm_globals-svh.html#uvm_report_error" class=LMethod id=link16  >uvm_report_error</a>) in <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link17  >uvm_report_object</a>.</p></div></div></div>
@@ -156,11 +171,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_handler.format_action" href="../../src_view/base/uvm_report_handler.svh.html#L55" class="src-code-link" data-src-file="base/uvm_report_handler.svh" data-src-line="55">format_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function string format_action(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_action&nbsp;</td>
-      <td class=PParameter nowrap width=100%>action</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">format_action</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_action</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">action</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns a string representation of the <i>action</i>, e.g., &ldquo;DISPLAY&rdquo;.</p></div></div></div>
@@ -174,6 +189,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

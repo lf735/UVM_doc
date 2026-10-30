@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shared Register and Memory Access Test Sequences | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../css/style.css">
 </head>
 <body class="doc-body">
@@ -47,8 +50,20 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the register, the register is not tested.</p><blockquote><pre>uvm_resource_db#(bit)::set({&quot;REG::&quot;,regmodel.blk.r0.get_full_name()},
-                           &quot;NO_REG_TESTS&quot;, 1, this);</pre></blockquote><p>Registers that contain fields with unknown access policies cannot be tested.</p><p>The DUT should be idle and not modify any register during this test.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the register, the register is not tested.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-keyword">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-ident">r0</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">,</span>
+                           <span class="sv-string">&quot;NO_REG_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>Registers that contain fields with unknown access policies cannot be tested.</p><p>The DUT should be idle and not modify any register during this test.</p>
 
 <!--START_ND_SUMMARY index=1-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -75,11 +90,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>class uvm_reg_shared_access_seq extends uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(uvm_reg_item)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">class</span> uvm_reg_shared_access_seq <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">uvm_reg_item</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -103,15 +118,27 @@
 
  <!--CONTENT index=3 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_shared_access_seq.rg" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">rg</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_reg rg
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_reg</span> <span class="sv-ident">rg</span>
   </td></tr></table></blockquote><div class=CBody><p>The register to be tested</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the memory, the memory is not tested.</p><blockquote><pre>uvm_resource_db#(bit)::set({&quot;REG::&quot;,regmodel.blk.mem0.get_full_name()},
-                           &quot;NO_MEM_TESTS&quot;, 1, this);</pre></blockquote><p>The DUT should be idle and not modify the memory during this test.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the memory, the memory is not tested.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-keyword">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-ident">mem0</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">,</span>
+                           <span class="sv-string">&quot;NO_MEM_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>The DUT should be idle and not modify the memory during this test.</p>
 
 <!--START_ND_SUMMARY index=4-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -138,11 +165,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>class uvm_mem_shared_access_seq extends uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(uvm_reg_item)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">class</span> uvm_mem_shared_access_seq <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">uvm_reg_item</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -166,15 +193,27 @@
 
  <!--CONTENT index=6 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_shared_access_seq.mem" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">mem</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_mem mem
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_mem</span> <span class="sv-ident">mem</span>
   </td></tr></table></blockquote><div class=CBody><p>The memory to be tested</p></div></div></div>
 
 
 
 
  <!--CONTENT index=7 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#uvm_reg_shared_access_seq" class=LClass id=link19  >uvm_reg_shared_access_seq</a> and <a href="#uvm_mem_shared_access_seq" class=LClass id=link20  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><blockquote><pre>uvm_resource_db#(bit)::set({&quot;REG::&quot;,regmodel.blk.get_full_name(),&quot;.*&quot;},
-                           &quot;NO_REG_TESTS&quot;, 1, this);</pre></blockquote>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#uvm_reg_shared_access_seq" class=LClass id=link19  >uvm_reg_shared_access_seq</a> and <a href="#uvm_mem_shared_access_seq" class=LClass id=link20  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-keyword">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;.*&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span>
+                           <span class="sv-string">&quot;NO_REG_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div>
 
 <!--START_ND_SUMMARY index=7-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -201,11 +240,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>class uvm_reg_mem_shared_access_seq extends uvm_reg_sequence #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_sequence&nbsp;</td>
-      <td class=PParameter nowrap width=100%>#(uvm_reg_item)</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">class</span> uvm_reg_mem_shared_access_seq <span class="sv-keyword">extends</span> <span class="sv-proto-name">uvm_reg_sequence</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_sequence</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%>#(<span class="sv-param-name">uvm_reg_item</span>)</td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -246,14 +285,26 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.model" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">model</a></h3><div class=CBody><p>The block to be tested</p><blockquote><pre>uvm_reg_block model;</pre></blockquote></div></div></div>
+<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.model" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">model</a></h3><div class=CBody><p>The block to be tested</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_reg_block</span> <span class="sv-ident">model</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=10 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.reg_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">reg_seq</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>protected uvm_reg_shared_access_seq reg_seq
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">protected</span> <span class="sv-uvm-type">uvm_reg_shared_access_seq</span> <span class="sv-ident">reg_seq</span>
   </td></tr></table></blockquote><div class=CBody><p>The sequence used to test one register</p></div></div></div>
 
 
@@ -261,7 +312,7 @@
 
  <!--CONTENT index=11 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.mem_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">mem_seq</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>protected uvm_mem_shared_access_seq mem_seq
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">protected</span> <span class="sv-uvm-type">uvm_mem_shared_access_seq</span> <span class="sv-ident">mem_seq</span>
   </td></tr></table></blockquote><div class=CBody><p>The sequence used to test one memory</p></div></div></div>
 
 
@@ -275,7 +326,7 @@
 
  <!--CONTENT index=13 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.body" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">body</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual task body()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">body</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Executes the Shared Register and Memory sequence</p></div></div></div>
 
 
@@ -285,11 +336,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.do_block" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">do_block</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>protected virtual task do_block(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_block&nbsp;</td>
-      <td class=PParameter nowrap width=100%>blk</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">do_block</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_block</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">blk</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Test all of the registers and memories in a block</p></div></div></div>
@@ -301,11 +352,11 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.reset_blk" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">reset_blk</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>virtual task reset_blk(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_reg_block&nbsp;</td>
-      <td class=PParameter nowrap width=100%>blk</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">reset_blk</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_block</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">blk</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Reset the DUT that corresponds to the specified block abstraction class.</p><p>Currently empty.&nbsp; Will rollback the environment&rsquo;s phase to the <i>reset</i> phase once the new phasing is available.</p><p>In the meantime, the DUT should be reset before executing this test sequence or this method should be implemented in an extension to reset the DUT.</p></div></div></div>
@@ -319,6 +370,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

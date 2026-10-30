@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>uvm_root | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -82,16 +85,28 @@
 
  <!--CONTENT index=1 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_root.get" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">get()</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>static function uvm_root get()
-  </td></tr></table></blockquote><div class=CBody><p>Static accessor for <a href="#uvm_root" class=LClass id=link18  >uvm_root</a>.</p><p>The static accessor is provided as a convenience wrapper around retrieving the root via the <a href="uvm_coreservice-svh.html#uvm_coreservice_t.get_root" class=LMethod id=link19  >uvm_coreservice_t::get_root</a> method.</p><blockquote><pre>// Using the uvm_coreservice_t:
-uvm_coreservice_t cs;
-uvm_root r;
-cs = uvm_coreservice_t::get();
-r = cs.get_root();
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_root</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
+  </td></tr></table></blockquote><div class=CBody><p>Static accessor for <a href="#uvm_root" class=LClass id=link18  >uvm_root</a>.</p><p>The static accessor is provided as a convenience wrapper around retrieving the root via the <a href="uvm_coreservice-svh.html#uvm_coreservice_t.get_root" class=LMethod id=link19  >uvm_coreservice_t::get_root</a> method.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-comment">// Using the uvm_coreservice_t:</span>
+<span class="sv-uvm-type">uvm_coreservice_t</span> <span class="sv-ident">cs</span><span class="sv-op">;</span>
+<span class="sv-uvm-type">uvm_root</span> <span class="sv-ident">r</span><span class="sv-op">;</span>
+<span class="sv-ident">cs</span> <span class="sv-op">=</span> <span class="sv-uvm-type">uvm_coreservice_t</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-ident">r</span> <span class="sv-op">=</span> <span class="sv-ident">cs</span><span class="sv-op">.</span><span class="sv-method">get_root</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-// Not using the uvm_coreservice_t:
-uvm_root r;
-r = uvm_root::get();</pre></blockquote></div></div></div>
+<span class="sv-comment">// Not using the uvm_coreservice_t:</span>
+<span class="sv-uvm-type">uvm_root</span> <span class="sv-ident">r</span><span class="sv-op">;</span>
+<span class="sv-ident">r</span> <span class="sv-op">=</span> <span class="sv-uvm-type">uvm_root</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -106,13 +121,13 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_root.run_test" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">run_test</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>virtual task run_test (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>test_name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">run_test</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">test_name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Phases all components through all registered phases.&nbsp; If the optional test_name argument is provided, or if a command-line plusarg, +UVM_TESTNAME=TEST_NAME, is found, then the specified component is created just prior to phasing.&nbsp; The test may contain new verification components or the entire testbench, in which case the test and testbench can be chosen from the command line without forcing recompilation.&nbsp; If the global (package) variable, finish_on_completion, is set, then $finish is called after phasing completes.</p></div></div></div>
@@ -122,7 +137,7 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 
  <!--CONTENT index=4 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_root.die" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">die</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function void die()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">die</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>This method is called by the report server if a report reaches the maximum quit count or has a UVM_EXIT action associated with it, e.g., as with fatal errors.</p><p>Calls the <a href="uvm_component-svh.html#uvm_component.pre_abort" class=LMethod id=link20  >uvm_component::pre_abort()</a> method on the entire <a href="uvm_component-svh.html#uvm_component" class=LClass id=link21  >uvm_component</a> hierarchy in a bottom-up fashion.&nbsp; It then calls <a href="uvm_report_server-svh.html#uvm_report_server.report_summarize" class=LMethod id=link22  >uvm_report_server::report_summarize</a> and terminates the simulation with <i>$finish</i>.</p></div></div></div>
 
 
@@ -132,17 +147,17 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_root.set_timeout" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">set_timeout</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void set_timeout(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>time&nbsp;</td>
-      <td class=PParameter nowrap>timeout,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>bit&nbsp;</td>
-      <td class=PParameter nowrap>overridable</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_timeout</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">timeout</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">overridable</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Specifies the timeout for the simulation.&nbsp; Default is <a href="../macros/uvm_global_defines-svh.html#`UVM_DEFAULT_TIMEOUT" class=LMacro id=link23  >`UVM_DEFAULT_TIMEOUT</a></p><p>The timeout is simply the maximum absolute simulation time allowed before a <i>FATAL</i> occurs.&nbsp;  If the timeout is set to 20ns, then the simulation must end before 20ns, or a <i>FATAL</i> timeout will occur.</p><p>This is provided so that the user can prevent the simulation from potentially consuming too many resources (Disk, Memory, CPU, etc) when the testbench is essentially hung.</p></div></div></div>
@@ -152,8 +167,8 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 
  <!--CONTENT index=6 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_root.finish_on_completion" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">finish_on_completion</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>bit finish_on_completion = 1
-  </td></tr></table></blockquote><div class=CBody><p>If set, then run_test will call $finish after all phases are executed.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">finish_on_completion</span> <span class="sv-op">=</span><span class="sv-ident"> 1
+  </span></td></tr></table></blockquote><div class=CBody><p>If set, then run_test will call $finish after all phases are executed.</p></div></div></div>
 
 
 
@@ -166,8 +181,8 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 
  <!--CONTENT index=8 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_root.top_levels" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">top_levels</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_component top_levels[$]
-  </td></tr></table></blockquote><div class=CBody><p>This variable is a list of all of the top level components in UVM.&nbsp; It includes the uvm_test_top component that is created by <a href="#uvm_root.run_test" class=LMethod id=link24  >run_test</a> as well as any other top level components that have been instantiated anywhere in the hierarchy.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">top_levels</span><span class="sv-ident">[$]
+  </span></td></tr></table></blockquote><div class=CBody><p>This variable is a list of all of the top level components in UVM.&nbsp; It includes the uvm_test_top component that is created by <a href="#uvm_root.run_test" class=LMethod id=link24  >run_test</a> as well as any other top level components that have been instantiated anywhere in the hierarchy.</p></div></div></div>
 
 
 
@@ -176,11 +191,11 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_root.find" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">find</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function uvm_component find (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>comp_match</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> uvm_component <span class="sv-proto-name">find</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">comp_match</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody></div></div></div>
@@ -192,24 +207,24 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_root.find_all" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">find_all</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=6>function void find_all (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
-      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>comp_match,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>comps[$],</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>comp</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">find_all</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
+      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">comp_match</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">comps</span>[$],</td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">comp</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=6>)</td></tr>
+      <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the component handle (find) or list of components handles (find_all) matching a given string.&nbsp; The string may contain the wildcards,</p><ul><li>and ?.&nbsp; Strings beginning with &lsquo;.&rsquo; are absolute path names.&nbsp; If the optional argument comp is provided, then search begins from that component down (default=all components).</li></ul></div></div></div>
@@ -221,13 +236,13 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_root.print_topology" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">print_topology</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function void print_topology (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_printer&nbsp;</td>
-      <td class=PParameter nowrap>printer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_topology</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_printer</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">printer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Print the verification environment&rsquo;s component topology.&nbsp; The <i>printer</i> is a <a href="uvm_printer-svh.html#uvm_printer" class=LClass id=link25  >uvm_printer</a> object that controls the format of the topology printout; a <i>null</i> printer prints with the default output.</p></div></div></div>
@@ -237,8 +252,8 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 
  <!--CONTENT index=12 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_root.enable_print_topology" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">enable_print_topology</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>bit enable_print_topology = 0
-  </td></tr></table></blockquote><div class=CBody><p>If set, then the entire testbench topology is printed just after completion of the end_of_elaboration phase.</p></div></div></div>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">enable_print_topology</span> <span class="sv-op">=</span><span class="sv-ident"> 0
+  </span></td></tr></table></blockquote><div class=CBody><p>If set, then the entire testbench topology is printed just after completion of the end_of_elaboration phase.</p></div></div></div>
 
 
 
@@ -251,7 +266,7 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
 
  <!--CONTENT index=14 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_root.uvm_top" href="../../src_view/base/uvm_root.svh.html#L71" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="71">uvm_top</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>const uvm_root uvm_top = uvm_root::get()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">const</span> <span class="sv-uvm-type">uvm_root</span> <span class="sv-uvm-type">uvm_top</span> <span class="sv-op">=</span> <span class="sv-uvm-type">uvm_root</span><span class="sv-ident">::</span><span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>This is the top-level that governs phase execution and provides component search interface.&nbsp; See <a href="#uvm_root" class=LClass id=link26  >uvm_root</a> for more information.</p></div></div></div>
 
 </div><!--Content-->
@@ -263,6 +278,29 @@ r = uvm_root::get();</pre></blockquote></div></div></div>
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

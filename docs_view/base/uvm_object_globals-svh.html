@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Types and Enumerations | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -243,10 +246,22 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CEnumeration"><div class=CTopic><h3 class=CTitle><a name="uvm_phase_state" href="../../src_view/base/uvm_object_globals.svh.html#L1" class="src-code-link" data-src-file="base/uvm_object_globals.svh" data-src-line="1">uvm_phase_state</a></h3><div class=CBody><p>The set of possible states of a phase.&nbsp; This is an attribute of a schedule node in the graph, not of a phase, to maintain independent per-domain state</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry><a name="UVM_PHASE_UNINITIALIZED"></a>UVM_PHASE_UNINITIALIZED</td><td class=CDLDescription>The state is uninitialized.&nbsp;  This is the default state for phases, and for nodes which have not yet been added to a schedule.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_DORMANT"></a>UVM_PHASE_DORMANT</td><td class=CDLDescription>The schedule is not currently operating on the phase node, however it will be scheduled at some point in the future.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_SCHEDULED"></a>UVM_PHASE_SCHEDULED</td><td class=CDLDescription>At least one immediate predecessor has completed.&nbsp; Scheduled phases block until all predecessors complete or until a jump is executed.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_SYNCING"></a>UVM_PHASE_SYNCING</td><td class=CDLDescription>All predecessors complete, checking that all synced phases (e.g. across domains) are at or beyond this point</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_STARTED"></a>UVM_PHASE_STARTED</td><td class=CDLDescription>phase ready to execute, running phase_started() callback</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_EXECUTING"></a>UVM_PHASE_EXECUTING</td><td class=CDLDescription>An executing phase is one where the phase callbacks are being executed.&nbsp; Its process is tracked by the phaser.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_READY_TO_END"></a>UVM_PHASE_READY_TO_END</td><td class=CDLDescription>no objections remain in this phase or in any predecessors of its successors or in any sync&rsquo;d phases.&nbsp; This state indicates an opportunity for any phase that needs extra time for a clean exit to raise an objection, thereby causing a return to UVM_PHASE_EXECUTING.&nbsp;  If no objection is raised, state will transition to UVM_PHASE_ENDED after a delta cycle.&nbsp; (An example of predecessors of successors: The successor to phase &lsquo;run&rsquo; is &lsquo;extract&rsquo;, whose predecessors are &lsquo;run&rsquo; and &lsquo;post_shutdown&rsquo;.&nbsp; Therefore, &lsquo;run&rsquo; will go to this state when both its objections and those of &lsquo;post_shutdown&rsquo; are all dropped.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_ENDED"></a>UVM_PHASE_ENDED</td><td class=CDLDescription>phase completed execution, now running phase_ended() callback</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_JUMPING"></a>UVM_PHASE_JUMPING</td><td class=CDLDescription>all processes related to phase are being killed and all predecessors are forced into the DONE state.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_CLEANUP"></a>UVM_PHASE_CLEANUP</td><td class=CDLDescription>all processes related to phase are being killed</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_DONE"></a>UVM_PHASE_DONE</td><td class=CDLDescription>A phase is done after it terminated execution.&nbsp;  Becoming done may enable a waiting successor phase to execute.</td></tr></table><h4 class=CHeading>The state transitions occur as follows</h4><blockquote><pre>UNINITIALIZED -&gt; DORMANT -&gt; SCHED -&gt; SYNC -&gt; START -&gt; EXEC -&gt; READY -&gt; END -+-&gt; CLEAN -&gt; DONE
-                    ^                                                       |
-                    |                      &lt;-- jump_to                      |
-                    +-------------------------------------------- JUMPING&lt; -+</pre></blockquote></div></div></div>
+<div class="CEnumeration"><div class=CTopic><h3 class=CTitle><a name="uvm_phase_state" href="../../src_view/base/uvm_object_globals.svh.html#L1" class="src-code-link" data-src-file="base/uvm_object_globals.svh" data-src-line="1">uvm_phase_state</a></h3><div class=CBody><p>The set of possible states of a phase.&nbsp; This is an attribute of a schedule node in the graph, not of a phase, to maintain independent per-domain state</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry><a name="UVM_PHASE_UNINITIALIZED"></a>UVM_PHASE_UNINITIALIZED</td><td class=CDLDescription>The state is uninitialized.&nbsp;  This is the default state for phases, and for nodes which have not yet been added to a schedule.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_DORMANT"></a>UVM_PHASE_DORMANT</td><td class=CDLDescription>The schedule is not currently operating on the phase node, however it will be scheduled at some point in the future.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_SCHEDULED"></a>UVM_PHASE_SCHEDULED</td><td class=CDLDescription>At least one immediate predecessor has completed.&nbsp; Scheduled phases block until all predecessors complete or until a jump is executed.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_SYNCING"></a>UVM_PHASE_SYNCING</td><td class=CDLDescription>All predecessors complete, checking that all synced phases (e.g. across domains) are at or beyond this point</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_STARTED"></a>UVM_PHASE_STARTED</td><td class=CDLDescription>phase ready to execute, running phase_started() callback</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_EXECUTING"></a>UVM_PHASE_EXECUTING</td><td class=CDLDescription>An executing phase is one where the phase callbacks are being executed.&nbsp; Its process is tracked by the phaser.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_READY_TO_END"></a>UVM_PHASE_READY_TO_END</td><td class=CDLDescription>no objections remain in this phase or in any predecessors of its successors or in any sync&rsquo;d phases.&nbsp; This state indicates an opportunity for any phase that needs extra time for a clean exit to raise an objection, thereby causing a return to UVM_PHASE_EXECUTING.&nbsp;  If no objection is raised, state will transition to UVM_PHASE_ENDED after a delta cycle.&nbsp; (An example of predecessors of successors: The successor to phase &lsquo;run&rsquo; is &lsquo;extract&rsquo;, whose predecessors are &lsquo;run&rsquo; and &lsquo;post_shutdown&rsquo;.&nbsp; Therefore, &lsquo;run&rsquo; will go to this state when both its objections and those of &lsquo;post_shutdown&rsquo; are all dropped.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_ENDED"></a>UVM_PHASE_ENDED</td><td class=CDLDescription>phase completed execution, now running phase_ended() callback</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_JUMPING"></a>UVM_PHASE_JUMPING</td><td class=CDLDescription>all processes related to phase are being killed and all predecessors are forced into the DONE state.</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_CLEANUP"></a>UVM_PHASE_CLEANUP</td><td class=CDLDescription>all processes related to phase are being killed</td></tr><tr><td class=CDLEntry><a name="UVM_PHASE_DONE"></a>UVM_PHASE_DONE</td><td class=CDLDescription>A phase is done after it terminated execution.&nbsp;  Becoming done may enable a waiting successor phase to execute.</td></tr></table><h4 class=CHeading>The state transitions occur as follows</h4><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">UNINITIALIZED</span> <span class="sv-op">-&gt;</span> <span class="sv-ident">DORMANT</span> <span class="sv-op">-&gt;</span> <span class="sv-ident">SCHED</span> <span class="sv-op">-&gt;</span> <span class="sv-ident">SYNC</span> <span class="sv-op">-&gt;</span> <span class="sv-ident">START</span> <span class="sv-op">-&gt;</span> <span class="sv-ident">EXEC</span> <span class="sv-op">-&gt;</span> <span class="sv-ident">READY</span> <span class="sv-op">-&gt;</span> <span class="sv-ident">END</span> <span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-&gt;</span> <span class="sv-ident">CLEAN</span> <span class="sv-op">-&gt;</span> <span class="sv-ident">DONE</span>
+                    <span class="sv-op">^</span>                                                       <span class="sv-op">|</span>
+                    <span class="sv-op">|</span>                      <span class="sv-op">&lt;</span><span class="sv-op">-</span><span class="sv-op">-</span> <span class="sv-ident">jump_to</span>                      <span class="sv-op">|</span>
+                    <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span> <span class="sv-ident">JUMPING</span><span class="sv-op">&lt;</span> <span class="sv-op">-</span><span class="sv-op">+</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -277,7 +292,7 @@
 
  <!--CONTENT index=25 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_default_table_printer" href="../../src_view/base/uvm_object_globals.svh.html#L1" class="src-code-link" data-src-file="base/uvm_object_globals.svh" data-src-line="1">uvm_default_table_printer</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_table_printer uvm_default_table_printer = new()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_table_printer</span> <span class="sv-uvm-type">uvm_default_table_printer</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>The table printer is a global object that can be used with <a href="uvm_object-svh.html#uvm_object.do_print" class=LMethod id=link55  >uvm_object::do_print</a> to get tabular style printing.</p></div></div></div>
 
 
@@ -285,7 +300,7 @@
 
  <!--CONTENT index=26 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_default_tree_printer" href="../../src_view/base/uvm_object_globals.svh.html#L1" class="src-code-link" data-src-file="base/uvm_object_globals.svh" data-src-line="1">uvm_default_tree_printer</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_tree_printer uvm_default_tree_printer = new()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_tree_printer</span> <span class="sv-uvm-type">uvm_default_tree_printer</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>The tree printer is a global object that can be used with <a href="uvm_object-svh.html#uvm_object.do_print" class=LMethod id=link56  >uvm_object::do_print</a> to get multi-line tree style printing.</p></div></div></div>
 
 
@@ -293,7 +308,7 @@
 
  <!--CONTENT index=27 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_default_line_printer" href="../../src_view/base/uvm_object_globals.svh.html#L1" class="src-code-link" data-src-file="base/uvm_object_globals.svh" data-src-line="1">uvm_default_line_printer</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_line_printer uvm_default_line_printer = new()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_line_printer</span> <span class="sv-uvm-type">uvm_default_line_printer</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>The line printer is a global object that can be used with <a href="uvm_object-svh.html#uvm_object.do_print" class=LMethod id=link57  >uvm_object::do_print</a> to get single-line style printing.</p></div></div></div>
 
 
@@ -301,7 +316,7 @@
 
  <!--CONTENT index=28 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_default_printer" href="../../src_view/base/uvm_object_globals.svh.html#L1" class="src-code-link" data-src-file="base/uvm_object_globals.svh" data-src-line="1">uvm_default_printer</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_printer uvm_default_printer = uvm_default_table_printer
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_printer</span> <span class="sv-uvm-type">uvm_default_printer</span> <span class="sv-op">=</span> <span class="sv-uvm-type">uvm_default_table_printer</span>
   </td></tr></table></blockquote><div class=CBody><p>The default printer policy.&nbsp; Used when calls to <a href="uvm_object-svh.html#uvm_object.print" class=LMethod id=link58  >uvm_object::print</a> or <a href="uvm_object-svh.html#uvm_object.sprint" class=LMethod id=link59  >uvm_object::sprint</a> do not specify a printer policy.</p><p>The default printer may be set to any legal <a href="uvm_printer-svh.html#uvm_printer" class=LClass id=link60  >uvm_printer</a> derived type, including the global line, tree, and table printers described above.</p></div></div></div>
 
 
@@ -309,7 +324,7 @@
 
  <!--CONTENT index=29 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_default_packer" href="../../src_view/base/uvm_object_globals.svh.html#L1" class="src-code-link" data-src-file="base/uvm_object_globals.svh" data-src-line="1">uvm_default_packer</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_packer uvm_default_packer = new()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_packer</span> <span class="sv-uvm-type">uvm_default_packer</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>The default packer policy.&nbsp; Used when calls to <a href="uvm_object-svh.html#uvm_object.pack" class=LMethod id=link61  >uvm_object::pack</a> and <a href="uvm_object-svh.html#uvm_object.unpack" class=LMethod id=link62  >uvm_object::unpack</a> do not specify a packer policy.</p></div></div></div>
 
 
@@ -317,7 +332,7 @@
 
  <!--CONTENT index=30 -->
 <div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_default_comparer" href="../../src_view/base/uvm_object_globals.svh.html#L1" class="src-code-link" data-src-file="base/uvm_object_globals.svh" data-src-line="1">uvm_default_comparer</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>uvm_comparer uvm_default_comparer = new()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_comparer</span> <span class="sv-uvm-type">uvm_default_comparer</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>The default compare policy.&nbsp; Used when calls to <a href="uvm_object-svh.html#uvm_object.compare" class=LMethod id=link63  >uvm_object::compare</a> do not specify a comparer policy.</p></div></div></div>
 
 </div><!--Content-->
@@ -329,6 +344,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

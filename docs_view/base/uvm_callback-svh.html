@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Callbacks Classes | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -74,17 +77,17 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_callbacks #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_object,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>CB</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>uvm_callback</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_callbacks</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_object,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">CB</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_callback</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_typed_callbacks#(T)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_typed_callbacks#(T)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -158,25 +161,37 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).add" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">add</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function void add(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap>obj,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_callback&nbsp;</td>
-      <td class=PParameter nowrap>cb,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_apprepend&nbsp;</td>
-      <td class=PParameter nowrap>ordering</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>UVM_APPEND</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_callback</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">cb</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_apprepend</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">ordering</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">UVM_APPEND</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Registers the given callback object, <i>cb</i>, with the given <i>obj</i> handle.&nbsp; The <i>obj</i> handle can be <i>null</i>, which allows registration of callbacks without an object context.&nbsp; If <i>ordering</i> is UVM_APPEND (default), the callback will be executed after previously added callbacks, else  the callback will be executed ahead of previously added callbacks.&nbsp; The <i>cb</i> is the callback handle; it must be non-<i>null</i>, and if the callback has already been added to the object instance then a warning is issued.&nbsp; Note that the CB parameter is optional.&nbsp; For example, the following are equivalent:</p><blockquote><pre>uvm_callbacks#(my_comp)::add(comp_a, cb);
-uvm_callbacks#(my_comp, my_callback)::add(comp_a,cb);</pre></blockquote></div></div></div>
+<div class=CBody><p>Registers the given callback object, <i>cb</i>, with the given <i>obj</i> handle.&nbsp; The <i>obj</i> handle can be <i>null</i>, which allows registration of callbacks without an object context.&nbsp; If <i>ordering</i> is UVM_APPEND (default), the callback will be executed after previously added callbacks, else  the callback will be executed ahead of previously added callbacks.&nbsp; The <i>cb</i> is the callback handle; it must be non-<i>null</i>, and if the callback has already been added to the object instance then a warning is issued.&nbsp; Note that the CB parameter is optional.&nbsp; For example, the following are equivalent:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_callbacks</span><span class="sv-op">#(</span><span class="sv-ident">my_comp</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">add</span><span class="sv-op">(</span><span class="sv-ident">comp_a</span><span class="sv-op">,</span> <span class="sv-ident">cb</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-uvm-type">uvm_callbacks</span><span class="sv-op">#(</span><span class="sv-ident">my_comp</span><span class="sv-op">,</span> <span class="sv-ident">my_callback</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">add</span><span class="sv-op">(</span><span class="sv-ident">comp_a</span><span class="sv-op">,</span><span class="sv-ident">cb</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -185,25 +200,25 @@ uvm_callbacks#(my_comp, my_callback)::add(comp_a,cb);</pre></blockquote></div></
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).add_by_name" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">add_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function void add_by_name(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_callback&nbsp;</td>
-      <td class=PParameter nowrap>cb,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>root,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_apprepend&nbsp;</td>
-      <td class=PParameter nowrap>ordering</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>UVM_APPEND</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_callback</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">cb</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">root</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_apprepend</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">ordering</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">UVM_APPEND</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Registers the given callback object, <i>cb</i>, with one or more uvm_components.&nbsp; The components must already exist and must be type T or a derivative.&nbsp; As with <a href="#uvm_callbacks#(T,CB).add" class=LMethod id=link17  >add</a> the CB parameter is optional.&nbsp; <i>root</i> specifies the location in the component hierarchy to start the search for <i>name</i>.&nbsp; See <a href="uvm_root-svh.html#uvm_root.find_all" class=LMethod id=link18  >uvm_root::find_all</a> for more details on searching by name.</p></div></div></div>
@@ -215,17 +230,29 @@ uvm_callbacks#(my_comp, my_callback)::add(comp_a,cb);</pre></blockquote></div></
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).delete" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">delete</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function void delete(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_callback&nbsp;</td>
-      <td class=PParameter nowrap width=100%>cb</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">delete</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_callback</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">cb</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Deletes the given callback object, <i>cb</i>, from the queue associated with the given <i>obj</i> handle.&nbsp; The <i>obj</i> handle can be <i>null</i>, which allows de-registration of callbacks without an object context.&nbsp; The <i>cb</i> is the callback handle; it must be non-<i>null</i>, and if the callback has already been removed from the object instance then a warning is issued.&nbsp; Note that the CB parameter is optional.&nbsp; For example, the following are equivalent:</p><blockquote><pre>uvm_callbacks#(my_comp)::delete(comp_a, cb);
-uvm_callbacks#(my_comp, my_callback)::delete(comp_a,cb);</pre></blockquote></div></div></div>
+<div class=CBody><p>Deletes the given callback object, <i>cb</i>, from the queue associated with the given <i>obj</i> handle.&nbsp; The <i>obj</i> handle can be <i>null</i>, which allows de-registration of callbacks without an object context.&nbsp; The <i>cb</i> is the callback handle; it must be non-<i>null</i>, and if the callback has already been removed from the object instance then a warning is issued.&nbsp; Note that the CB parameter is optional.&nbsp; For example, the following are equivalent:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_callbacks</span><span class="sv-op">#(</span><span class="sv-ident">my_comp</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">delete</span><span class="sv-op">(</span><span class="sv-ident">comp_a</span><span class="sv-op">,</span> <span class="sv-ident">cb</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-uvm-type">uvm_callbacks</span><span class="sv-op">#(</span><span class="sv-ident">my_comp</span><span class="sv-op">,</span> <span class="sv-ident">my_callback</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">delete</span><span class="sv-op">(</span><span class="sv-ident">comp_a</span><span class="sv-op">,</span><span class="sv-ident">cb</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div></div></div></div>
 
 
 
@@ -234,15 +261,15 @@ uvm_callbacks#(my_comp, my_callback)::delete(comp_a,cb);</pre></blockquote></div
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).delete_by_name" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">delete_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>static function void delete_by_name(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap width=100%>name,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_callback&nbsp;</td>
-      <td class=PParameter nowrap width=100%>cb,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap width=100%>root</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">delete_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_callback</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">cb</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">root</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Removes the given callback object, <i>cb</i>, associated with one or more uvm_component callback queues.&nbsp; As with <a href="#uvm_callbacks#(T,CB).delete" class=LMethod id=link19  >delete</a> the CB parameter is optional.&nbsp; <i>root</i> specifies the location in the component hierarchy to start the search for <i>name</i>.&nbsp; See <a href="uvm_root-svh.html#uvm_root.find_all" class=LMethod id=link20  >uvm_root::find_all</a> for more details on searching by name.</p></div></div></div>
@@ -260,15 +287,15 @@ uvm_callbacks#(my_comp, my_callback)::delete(comp_a,cb);</pre></blockquote></div
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_first" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_first</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>static function CB get_first (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>itr,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> CB <span class="sv-proto-name">get_first</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">itr</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the first enabled callback of type CB which resides in the queue for <i>obj</i>.&nbsp; If <i>obj</i> is <i>null</i> then the typewide queue for T is searched.&nbsp; <i>itr</i> is the iterator; it will be updated with a value that can be supplied to <a href="#uvm_callbacks#(T,CB).get_next" class=LMethod id=link22  >get_next</a> to get the next callback object.</p><p>If the queue is empty then <i>null</i> is returned.</p><p>The iterator class <a href="#uvm_callback_iter" class=LClass id=link23  >uvm_callback_iter</a> may be used as an alternative, simplified, iterator interface.</p></div></div></div>
@@ -280,15 +307,15 @@ uvm_callbacks#(my_comp, my_callback)::delete(comp_a,cb);</pre></blockquote></div
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_last" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_last</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>static function CB get_last (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>itr,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> CB <span class="sv-proto-name">get_last</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">itr</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the last enabled callback of type CB which resides in the queue for <i>obj</i>.&nbsp; If <i>obj</i> is <i>null</i> then the typewide queue for T is searched.&nbsp; <i>itr</i> is the iterator; it will be updated with a value that can be supplied to <a href="#uvm_callbacks#(T,CB).get_prev" class=LMethod id=link24  >get_prev</a> to get the previous callback object.</p><p>If the queue is empty then <i>null</i> is returned.</p><p>The iterator class <a href="#uvm_callback_iter" class=LClass id=link25  >uvm_callback_iter</a> may be used as an alternative, simplified, iterator interface.</p></div></div></div>
@@ -300,15 +327,15 @@ uvm_callbacks#(my_comp, my_callback)::delete(comp_a,cb);</pre></blockquote></div
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_next" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_next</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>static function CB get_next (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>itr,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> CB <span class="sv-proto-name">get_next</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">itr</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the next enabled callback of type CB which resides in the queue for <i>obj</i>, using <i>itr</i> as the starting point.&nbsp; If <i>obj</i> is <i>null</i> then the typewide queue for T is searched.&nbsp; <i>itr</i> is the iterator; it will be updated with a value that can be supplied to <a href="#uvm_callbacks#(T,CB).get_next" class=LMethod id=link26  >get_next</a> to get the next callback object.</p><p>If no more callbacks exist in the queue, then <i>null</i> is returned.&nbsp; <a href="#uvm_callbacks#(T,CB).get_next" class=LMethod id=link27  >get_next</a> will continue to return <i>null</i> in this case until <a href="#uvm_callbacks#(T,CB).get_first" class=LMethod id=link28  >get_first</a> or <a href="#uvm_callbacks#(T,CB).get_last" class=LMethod id=link29  >get_last</a> has been used to reset the iterator.</p><p>The iterator class <a href="#uvm_callback_iter" class=LClass id=link30  >uvm_callback_iter</a> may be used as an alternative, simplified, iterator interface.</p></div></div></div>
@@ -320,15 +347,15 @@ uvm_callbacks#(my_comp, my_callback)::delete(comp_a,cb);</pre></blockquote></div
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_prev" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_prev</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4>static function CB get_prev (</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>ref&nbsp;</td>
-      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap width=100%>itr,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap>input&nbsp;</td>
-      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> CB <span class="sv-proto-name">get_prev</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">itr</span><span class="sv-op">,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=4>)</td></tr>
+      <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Returns the previous enabled callback of type CB which resides in the queue for <i>obj</i>, using <i>itr</i> as the starting point.&nbsp; If <i>obj</i> is <i>null</i> then the typewide queue for T is searched.&nbsp; <i>itr</i> is the iterator; it will be updated with a value that can be supplied to <a href="#uvm_callbacks#(T,CB).get_prev" class=LMethod id=link31  >get_prev</a> to get the previous callback object.</p><p>If no more callbacks exist in the queue, then <i>null</i> is returned.&nbsp; <a href="#uvm_callbacks#(T,CB).get_prev" class=LMethod id=link32  >get_prev</a> will continue to return <i>null</i> in this case until <a href="#uvm_callbacks#(T,CB).get_first" class=LMethod id=link33  >get_first</a> or <a href="#uvm_callbacks#(T,CB).get_last" class=LMethod id=link34  >get_last</a> has been used to reset the iterator.</p><p>The iterator class <a href="#uvm_callback_iter" class=LClass id=link35  >uvm_callback_iter</a> may be used as an alternative, simplified, iterator interface.</p></div></div></div>
@@ -346,13 +373,13 @@ uvm_callbacks#(my_comp, my_callback)::delete(comp_a,cb);</pre></blockquote></div
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callbacks#(T,CB).display" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">display</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>static function void display(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap>obj</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">display</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">obj</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>This function displays callback information for <i>obj</i>.&nbsp; If <i>obj</i> is <i>null</i>, then it displays callback information for all objects of type <i>T</i>, including typewide callbacks.</p></div></div></div>
@@ -361,9 +388,21 @@ uvm_callbacks#(my_comp, my_callback)::delete(comp_a,cb);</pre></blockquote></div
 
 
  <!--CONTENT index=16 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_callback_iter" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">uvm_callback_iter</a></h2><div class=CBody><p>The <i>uvm_callback_iter</i> class is an iterator class for iterating over callback queues of a specific callback type.&nbsp; The typical usage of the class is:</p><blockquote><pre>uvm_callback_iter#(mycomp,mycb) iter = new(this);
-for(mycb cb = iter.first(); cb != null; cb = iter.next())
-   cb.dosomething();</pre></blockquote><p>The callback iteration macros, <a href="../macros/uvm_callback_defines-svh.html#`uvm_do_callbacks" class=LMacro >`uvm_do_callbacks</a> and <a href="../macros/uvm_callback_defines-svh.html#`uvm_do_callbacks_exit_on" class=LMacro >`uvm_do_callbacks_exit_on</a> provide a simple method for iterating callbacks and executing the callback methods.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_callback_iter" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">uvm_callback_iter</a></h2><div class=CBody><p>The <i>uvm_callback_iter</i> class is an iterator class for iterating over callback queues of a specific callback type.&nbsp; The typical usage of the class is:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_callback_iter</span><span class="sv-op">#(</span><span class="sv-ident">mycomp</span><span class="sv-op">,</span><span class="sv-ident">mycb</span><span class="sv-op">)</span> <span class="sv-ident">iter</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword">for</span><span class="sv-op">(</span><span class="sv-ident">mycb</span> <span class="sv-ident">cb</span> <span class="sv-op">=</span> <span class="sv-ident">iter</span><span class="sv-op">.</span><span class="sv-method">first</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-ident">cb</span> <span class="sv-op">!=</span> <span class="sv-keyword">null</span><span class="sv-op">;</span> <span class="sv-ident">cb</span> <span class="sv-op">=</span> <span class="sv-ident">iter</span><span class="sv-op">.</span><span class="sv-method">next</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span>
+   <span class="sv-ident">cb</span><span class="sv-op">.</span><span class="sv-method">dosomething</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>The callback iteration macros, <a href="../macros/uvm_callback_defines-svh.html#`uvm_do_callbacks" class=LMacro >`uvm_do_callbacks</a> and <a href="../macros/uvm_callback_defines-svh.html#`uvm_do_callbacks_exit_on" class=LMacro >`uvm_do_callbacks_exit_on</a> provide a simple method for iterating callbacks and executing the callback methods.</p>
 
 <!--START_ND_SUMMARY index=16-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -376,17 +415,17 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_callback_iter#(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>T</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> uvm_object,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>CB</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%> uvm_callback</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_callback_iter</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> uvm_object,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">CB</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"> uvm_callback</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -427,11 +466,11 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback_iter.new" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>T&nbsp;</td>
-      <td class=PParameter nowrap width=100%>obj</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PParameter nowrap width=100%><span class="sv-param-name">obj</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=3>)</td></tr>
+      <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates a new callback iterator object.&nbsp; It is required that the object context be provided.</p></div></div></div>
@@ -441,7 +480,7 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 
  <!--CONTENT index=19 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback_iter.first" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">first</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function CB first()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">first</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the first valid (enabled) callback of the callback type (or a derivative) that is in the queue of the context object.&nbsp; If the queue is empty then <i>null</i> is returned.</p></div></div></div>
 
 
@@ -449,7 +488,7 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 
  <!--CONTENT index=20 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback_iter.last" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">last</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function CB last()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">last</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the last valid (enabled) callback of the callback type (or a derivative) that is in the queue of the context object.&nbsp; If the queue is empty then <i>null</i> is returned.</p></div></div></div>
 
 
@@ -457,7 +496,7 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 
  <!--CONTENT index=21 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback_iter.next" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">next</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function CB next()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">next</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the next valid (enabled) callback of the callback type (or a derivative) that is in the queue of the context object.&nbsp; If there are no more valid callbacks in the queue, then <i>null</i> is returned.</p></div></div></div>
 
 
@@ -465,7 +504,7 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 
  <!--CONTENT index=22 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback_iter.prev" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">prev</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function CB prev()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">prev</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the previous valid (enabled) callback of the callback type (or a derivative) that is in the queue of the context object.&nbsp; If there are no more valid callbacks in the queue, then <i>null</i> is returned.</p></div></div></div>
 
 
@@ -473,7 +512,7 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 
  <!--CONTENT index=23 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback_iter.get_cb" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_cb</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function CB get_cb()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">get_cb</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the last callback accessed via a first() or next() call.</p></div></div></div>
 
 
@@ -506,7 +545,7 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>class uvm_callback extends uvm_object
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_callback</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=25 -->
@@ -539,13 +578,13 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback.new" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>&quot;uvm_callback&quot;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;uvm_callback&quot;</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates a new uvm_callback object, giving it an optional <i>name</i>.</p></div></div></div>
@@ -557,13 +596,13 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback.callback_mode" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">callback_mode</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function bit callback_mode(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>int&nbsp;</td>
-      <td class=PParameter nowrap>on</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>-1</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">callback_mode</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">on</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">-1</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Enable/disable callbacks (modeled like rand_mode and constraint_mode).</p></div></div></div>
@@ -573,7 +612,7 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 
  <!--CONTENT index=28 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback.is_enabled" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">is_enabled</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>function bit is_enabled()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_enabled</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if the callback is enabled, 0 otherwise.</p></div></div></div>
 
 
@@ -581,7 +620,7 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
 
  <!--CONTENT index=29 -->
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_callback.get_type_name" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_type_name</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td>virtual function string get_type_name()
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the type name of this callback object.</p></div></div></div>
 
 </div><!--Content-->
@@ -593,6 +632,29 @@ for(mycb cb = iter.first(); cb != null; cb = iter.next())
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

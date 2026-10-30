@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TLM Port Classes | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -44,21 +47,33 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_*_port#(T)" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">uvm_*_port #(T)</a></h2><div class=CBody><p>These unidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions.&nbsp; A port can be connected to any compatible port, export, or imp port.&nbsp; Unless its <i>min_size</i> is 0, a port <i>must</i> be connected to at least one implementation of its associated interface.</p><p>The asterisk in <i>uvm_*_port</i> is any of the following</p><blockquote><pre>blocking_put
-nonblocking_put
-put
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_*_port#(T)" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">uvm_*_port #(T)</a></h2><div class=CBody><p>These unidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions.&nbsp; A port can be connected to any compatible port, export, or imp port.&nbsp; Unless its <i>min_size</i> is 0, a port <i>must</i> be connected to at least one implementation of its associated interface.</p><p>The asterisk in <i>uvm_*_port</i> is any of the following</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">blocking_put</span>
+<span class="sv-ident">nonblocking_put</span>
+<span class="sv-ident">put</span>
 
-blocking_get
-nonblocking_get
-get
+<span class="sv-ident">blocking_get</span>
+<span class="sv-ident">nonblocking_get</span>
+<span class="sv-ident">get</span>
 
-blocking_peek
-nonblocking_peek
-peek
+<span class="sv-ident">blocking_peek</span>
+<span class="sv-ident">nonblocking_peek</span>
+<span class="sv-ident">peek</span>
 
-blocking_get_peek
-nonblocking_get_peek
-get_peek</pre></blockquote><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>T</td><td class=CDLDescription>The type of transaction to be communicated by the export.&nbsp; The type T is not restricted to class handles and may be a value type such as int,enum,struct or similar.</td></tr></table><p>Ports are connected to interface implementations directly via <a href="uvm_imps-svh.html#uvm_*_imp#(T,IMP)" class=LClass id=link2  >uvm_*_imp #(T,IMP)</a> ports or indirectly via hierarchical connections to <a href="#uvm_*_port#(T)" class=LClass id=link3  >uvm_*_port #(T)</a> and <a href="uvm_exports-svh.html#uvm_*_export#(T)" class=LClass id=link4  >uvm_*_export #(T)</a> ports.</p>
+<span class="sv-ident">blocking_get_peek</span>
+<span class="sv-ident">nonblocking_get_peek</span>
+<span class="sv-ident">get_peek</span></code></pre>
+</div><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>T</td><td class=CDLDescription>The type of transaction to be communicated by the export.&nbsp; The type T is not restricted to class handles and may be a value type such as int,enum,struct or similar.</td></tr></table><p>Ports are connected to interface implementations directly via <a href="uvm_imps-svh.html#uvm_*_imp#(T,IMP)" class=LClass id=link2  >uvm_*_imp #(T,IMP)</a> ports or indirectly via hierarchical connections to <a href="#uvm_*_port#(T)" class=LClass id=link3  >uvm_*_port #(T)</a> and <a href="uvm_exports-svh.html#uvm_*_export#(T)" class=LClass id=link4  >uvm_*_export #(T)</a> ports.</p>
 
 <!--START_ND_SUMMARY index=1-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -84,26 +99,50 @@ get_peek</pre></blockquote><p>Type parameters</p><table border=0 cellspacing=0 c
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_*_port#(T).new" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">new</a></h3><div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link5  >uvm_component</a> constructor arguments.&nbsp; The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of interfaces that must have been connected to this port by the end of elaboration.</p><blockquote><pre>function new (string name,
-              uvm_component parent,
-              int min_size=1,
-              int max_size=1)</pre></blockquote></div></div></div>
+<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_*_port#(T).new" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">new</a></h3><div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link5  >uvm_component</a> constructor arguments.&nbsp; The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of interfaces that must have been connected to this port by the end of elaboration.</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span>
+              <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">,</span>
+              <span class="sv-keyword">int</span> <span class="sv-ident">min_size</span><span class="sv-op">=</span><span class="sv-number">1</span><span class="sv-op">,</span>
+              <span class="sv-keyword">int</span> <span class="sv-ident">max_size</span><span class="sv-op">=</span><span class="sv-number">1</span><span class="sv-op">)</span></code></pre>
+</div></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_*_port#(REQ,RSP)" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">uvm_*_port #(REQ,RSP)</a></h2><div class=CBody><p>These bidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions.&nbsp; A port can be connected to any compatible port, export, or imp port.&nbsp; Unless its <i>min_size</i> is 0, a port <i>must</i> be connected to at least one implementation of its associated interface.</p><p>The asterisk in <i>uvm_*_port</i> is any of the following</p><blockquote><pre>blocking_transport
-nonblocking_transport
-transport
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_*_port#(REQ,RSP)" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">uvm_*_port #(REQ,RSP)</a></h2><div class=CBody><p>These bidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions.&nbsp; A port can be connected to any compatible port, export, or imp port.&nbsp; Unless its <i>min_size</i> is 0, a port <i>must</i> be connected to at least one implementation of its associated interface.</p><p>The asterisk in <i>uvm_*_port</i> is any of the following</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-ident">blocking_transport</span>
+<span class="sv-ident">nonblocking_transport</span>
+<span class="sv-ident">transport</span>
 
-blocking_master
-nonblocking_master
-master
+<span class="sv-ident">blocking_master</span>
+<span class="sv-ident">nonblocking_master</span>
+<span class="sv-ident">master</span>
 
-blocking_slave
-nonblocking_slave
-slave</pre></blockquote><p>Ports are connected to interface implementations directly via <a href="uvm_imps-svh.html#uvm_*_imp#(REQ,RSP,IMP,REQ_IMP,RSP_IMP)" class=LClass id=link7  >uvm_*_imp #(REQ,RSP,IMP,REQ_IMP,RSP_IMP)</a> ports or indirectly via hierarchical connections to <a href="#uvm_*_port#(REQ,RSP)" class=LClass id=link8  >uvm_*_port #(REQ,RSP)</a> and <a href="uvm_exports-svh.html#uvm_*_export#(REQ,RSP)" class=LClass id=link9  >uvm_*_export #(REQ,RSP)</a> ports.</p><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>REQ</td><td class=CDLDescription>The type of request transaction to be communicated by the export</td></tr><tr><td class=CDLEntry>RSP</td><td class=CDLDescription>The type of response transaction to be communicated by the export</td></tr></table>
+<span class="sv-ident">blocking_slave</span>
+<span class="sv-ident">nonblocking_slave</span>
+<span class="sv-ident">slave</span></code></pre>
+</div><p>Ports are connected to interface implementations directly via <a href="uvm_imps-svh.html#uvm_*_imp#(REQ,RSP,IMP,REQ_IMP,RSP_IMP)" class=LClass id=link7  >uvm_*_imp #(REQ,RSP,IMP,REQ_IMP,RSP_IMP)</a> ports or indirectly via hierarchical connections to <a href="#uvm_*_port#(REQ,RSP)" class=LClass id=link8  >uvm_*_port #(REQ,RSP)</a> and <a href="uvm_exports-svh.html#uvm_*_export#(REQ,RSP)" class=LClass id=link9  >uvm_*_export #(REQ,RSP)</a> ports.</p><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>REQ</td><td class=CDLDescription>The type of request transaction to be communicated by the export</td></tr><tr><td class=CDLEntry>RSP</td><td class=CDLDescription>The type of response transaction to be communicated by the export</td></tr></table>
 
 <!--START_ND_SUMMARY index=4-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -140,6 +179,29 @@ slave</pre></blockquote><p>Ports are connected to interface implementations dire
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {

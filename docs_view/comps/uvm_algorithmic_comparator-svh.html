@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Algorithmic Comparator | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="doc-body">
@@ -39,7 +42,19 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER)</a></h2><div class=CBody><p>Compares two streams of data objects of different types, <i>BEFORE</i> and <i>AFTER</i>.</p><p>The algorithmic comparator is a wrapper around <a href="uvm_in_order_comparator-svh.html#uvm_in_order_class_comparator#(T)" class=LClass id=link10  >uvm_in_order_class_comparator #(T)</a>.&nbsp; Like the in-order comparator, the algorithmic comparator compares two streams of transactions, the <i>BEFORE</i> stream and the <i>AFTER</i> stream.&nbsp; It is often the case when two streams of transactions need to be compared that the two streams are in different forms.&nbsp; That is, the type of the <i>BEFORE</i> transaction stream is different than the type of the <i>AFTER</i> transaction stream.</p><p>The uvm_algorithmic_comparator&rsquo;s <i>TRANSFORMER</i> type parameter specifies the class responsible for converting transactions of type <i>BEFORE</i> into those of type <i>AFTER</i>.&nbsp; This transformer class must provide a transform() method with the following prototype:</p><blockquote><pre>function AFTER transform (BEFORE b);</pre></blockquote><p>Matches and mismatches are reported in terms of the <i>AFTER</i> transactions.&nbsp; For more information, see the <a href="uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type)" class=LClass id=link11  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> class.</p>
+<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER)</a></h2><div class=CBody><p>Compares two streams of data objects of different types, <i>BEFORE</i> and <i>AFTER</i>.</p><p>The algorithmic comparator is a wrapper around <a href="uvm_in_order_comparator-svh.html#uvm_in_order_class_comparator#(T)" class=LClass id=link10  >uvm_in_order_class_comparator #(T)</a>.&nbsp; Like the in-order comparator, the algorithmic comparator compares two streams of transactions, the <i>BEFORE</i> stream and the <i>AFTER</i> stream.&nbsp; It is often the case when two streams of transactions need to be compared that the two streams are in different forms.&nbsp; That is, the type of the <i>BEFORE</i> transaction stream is different than the type of the <i>AFTER</i> transaction stream.</p><p>The uvm_algorithmic_comparator&rsquo;s <i>TRANSFORMER</i> type parameter specifies the class responsible for converting transactions of type <i>BEFORE</i> into those of type <i>AFTER</i>.&nbsp; This transformer class must provide a transform() method with the following prototype:</p><div class="code-block-container">
+  <div class="code-block-header">
+    <div class="code-block-lang">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>SystemVerilog</span>
+    </div>
+    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span class="copy-text">Copy</span>
+    </button>
+  </div>
+  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-ident">AFTER</span> <span class="sv-method">transform</span> <span class="sv-op">(</span><span class="sv-ident">BEFORE</span> <span class="sv-ident">b</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+</div><p>Matches and mismatches are reported in terms of the <i>AFTER</i> transactions.&nbsp; For more information, see the <a href="uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type)" class=LClass id=link11  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> class.</p>
 
 <!--START_ND_SUMMARY index=1-->
 <div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -69,21 +84,21 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>class uvm_algorithmic_comparator #(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>BEFORE</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>AFTER</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>type&nbsp;</td>
-      <td class=PParameter nowrap>TRANSFORMER</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>int</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_algorithmic_comparator</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">BEFORE</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">AFTER</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">TRANSFORMER</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>) extends uvm_component</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">) extends uvm_component</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 </td></tr>
@@ -136,21 +151,21 @@
 <div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5>function new(</td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>string&nbsp;</td>
-      <td class=PParameter nowrap>name,</td>
-      <td class=PDefaultValuePrefix>&nbsp;&nbsp;</td>
-      <td class=PDefaultValue width=100%></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>uvm_component&nbsp;</td>
-      <td class=PParameter nowrap>parent</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null,</td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap>TRANSFORMER&nbsp;</td>
-      <td class=PParameter nowrap>transformer</td>
-      <td class=PDefaultValuePrefix>&nbsp;=&nbsp;</td>
-      <td class=PDefaultValue width=100%>null</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">parent</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null,</span></td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">TRANSFORMER</span>&nbsp;</td>
+      <td class=PParameter nowrap><span class="sv-param-name">transformer</span></td>
+      <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
+      <td class=PDefaultValue width=100%><span class="sv-default-val">null</span></td>
     </tr>
     <tr>
-      <td class=PAfterParameters colspan=5>)</td></tr>
+      <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
 <div class=CBody><p>Creates an instance of a specialization of this class.&nbsp; In addition to the standard uvm_component constructor arguments, <i>name</i> and <i>parent</i>, the constructor takes a handle to a <i>transformer</i> object, which must already be allocated (handles can&rsquo;t be <i>null</i>) and must implement the transform() method.</p></div></div></div>
@@ -164,6 +179,29 @@
   </div>
 
   <script>
+    // Code snippet copy button handler
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('.code-copy-btn');
+      if (!btn) return;
+      const container = btn.closest('.code-block-container');
+      if (!container) return;
+      const codeEl = container.querySelector('code');
+      if (!codeEl) return;
+      const text = codeEl.innerText || codeEl.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const copyText = btn.querySelector('.copy-text');
+        const orig = copyText ? copyText.textContent : 'Copy';
+        btn.classList.add('copied');
+        if (copyText) copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          if (copyText) copyText.textContent = orig;
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
+      });
+    });
+
     // Theme sync
     window.addEventListener('message', function(e) {
       if (e.data && e.data.theme) {
