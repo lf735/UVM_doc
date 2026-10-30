@@ -42,24 +42,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function normalizeDocUrl(url) {
     if (!url) return 'docs_view/overviews/intro-txt.html';
-    let clean = url.replace(/^[./]+/, '');
+    const hashIdx = url.indexOf('#');
+    let pathPart = hashIdx !== -1 ? url.substring(0, hashIdx) : url;
+    let hashPart = hashIdx !== -1 ? url.substring(hashIdx) : '';
+    let clean = pathPart.replace(/^[./]+/, '');
     if (clean.includes('docs_view/')) {
       clean = clean.substring(clean.indexOf('docs_view/'));
     } else {
       clean = 'docs_view/' + clean;
     }
-    return clean;
+    return clean + hashPart;
   }
 
   function normalizeSrcUrl(url) {
     if (!url) return 'src_view/comps/uvm_driver.svh.html#L44';
-    let clean = url.replace(/^[./]+/, '');
+    const hashIdx = url.indexOf('#');
+    let pathPart = hashIdx !== -1 ? url.substring(0, hashIdx) : url;
+    let hashPart = hashIdx !== -1 ? url.substring(hashIdx) : '';
+    let clean = pathPart.replace(/^[./]+/, '');
     if (clean.includes('src_view/')) {
       clean = clean.substring(clean.indexOf('src_view/'));
     } else {
       clean = 'src_view/' + clean;
     }
-    return clean;
+    return clean + hashPart;
   }
 
   function setFrameSrc(frame, relUrl) {
@@ -351,13 +357,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateDocTitle(url) {
     if (!docPaneTitle) return;
-    const clean = url.replace('docs_view/', '').replace('.html', '');
+    const clean = url.replace('docs_view/', '').replace('.html', '').split('#')[0];
     docPaneTitle.textContent = clean;
   }
 
   function updateSrcTitle(url) {
     if (!srcPaneTitle) return;
-    const clean = url.replace('src_view/', '').replace('.html', '');
+    const clean = url.replace('src_view/', '').replace('.html', '').split('#')[0];
     srcPaneTitle.textContent = clean;
   }
 
@@ -585,11 +591,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function highlightActiveSidebar(url) {
+    const baseUrl = url ? url.split('#')[0] : '';
     sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item').forEach(el => {
       el.classList.remove('active');
       const docHref = el.getAttribute('data-doc-href');
       const srcHref = el.getAttribute('data-src-href');
-      if ((docHref && url.includes(docHref)) || (srcHref && url.includes(srcHref))) {
+      if ((docHref && baseUrl.includes(docHref)) || (srcHref && baseUrl.includes(srcHref))) {
         el.classList.add('active');
         let p = el.closest('.nav-group');
         while (p) {

@@ -29,7 +29,7 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Report_Macros" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">Report Macros</a></h1><div class=CBody><p>This set of macros provides wrappers around the uvm_report_* <a href="../base/uvm_object_globals-svh.html#Reporting" class=LGroup >Reporting</a> functions.&nbsp; The macros serve two essential purposes:</p><ul><li>To reduce the processing overhead associated with filtered out messages, a check is made against the report&rsquo;s verbosity setting and the action for the id/severity pair before any string formatting is performed.&nbsp; This affects only `uvm_info reports.</li><li>The `__FILE__ and `__LINE__ information is automatically provided to the underlying uvm_report_* call.&nbsp; Having the file and line number from where a report was issued aides in debug.&nbsp; You can disable display of file and line information in reports by defining UVM_REPORT_DISABLE_FILE_LINE on the command line.</li></ul><p>The macros also enforce a verbosity setting of UVM_NONE for warnings, errors and fatals so that they cannot be mistakenly turned off by setting the verbosity level too low (warning and errors can still be turned off by setting the actions appropriately).</p><p>To use the macros, replace the previous call to uvm_report_* with the corresponding macro.</p><div class="code-block-container">
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Report_Macros"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Report_Macros" id="Report_Macros" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">Report Macros</a></h1><div class=CBody><p>This set of macros provides wrappers around the uvm_report_* <a href="../base/uvm_object_globals-svh.html#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LGroup >Reporting</a> functions.&nbsp; The macros serve two essential purposes:</p><ul><li>To reduce the processing overhead associated with filtered out messages, a check is made against the report&rsquo;s verbosity setting and the action for the id/severity pair before any string formatting is performed.&nbsp; This affects only `uvm_info reports.</li><li>The `__FILE__ and `__LINE__ information is automatically provided to the underlying uvm_report_* call.&nbsp; Having the file and line number from where a report was issued aides in debug.&nbsp; You can disable display of file and line information in reports by defining UVM_REPORT_DISABLE_FILE_LINE on the command line.</li></ul><p>The macros also enforce a verbosity setting of UVM_NONE for warnings, errors and fatals so that they cannot be mistakenly turned off by setting the verbosity level too low (warning and errors can still be turned off by setting the actions appropriately).</p><p>To use the macros, replace the previous call to uvm_report_* with the corresponding macro.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -64,117 +64,117 @@
 </div><p>Macros represent text substitutions, not statements, so they should not be terminated with semi-colons.</p>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SMain"><td colspan=2 class=SEntry><a href="#Report_Macros" >Report Macros</a></td></tr>
-<tr class=SMain><td colspan=2 class=SWideDescription>This set of macros provides wrappers around the uvm_report_* <a href="../base/uvm_object_globals-svh.html#Reporting" class=LGroup >Reporting</a> functions. </td></tr>
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >Report Macros</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>This set of macros provides wrappers around the uvm_report_* <a href="../base/uvm_object_globals-svh.html#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LGroup >Reporting</a> functions. </td></tr>
   <!-- index=1 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#Basic_Messaging_Macros" >Basic Messaging Macros</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" >Basic Messaging Macros</a></td><td class=SDescription></td></tr>
   <!-- index=2 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_info" >`uvm_info</a></td><td class=SDescription>Calls uvm_report_info if <i>VERBOSITY</i> is lower than the configured verbosity of the associated reporter. </td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" >`uvm_info</a></td><td class=SDescription>Calls uvm_report_info if <i>VERBOSITY</i> is lower than the configured verbosity of the associated reporter. </td></tr>
   <!-- index=3 -->
 
-<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#`uvm_warning" >`uvm_warning</a></td><td class=SDescription>Calls uvm_report_warning with a verbosity of UVM_NONE. </td></tr>
+<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" >`uvm_warning</a></td><td class=SDescription>Calls uvm_report_warning with a verbosity of UVM_NONE. </td></tr>
   <!-- index=4 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_error" >`uvm_error</a></td><td class=SDescription>Calls uvm_report_error with a verbosity of UVM_NONE. </td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" >`uvm_error</a></td><td class=SDescription>Calls uvm_report_error with a verbosity of UVM_NONE. </td></tr>
   <!-- index=5 -->
 
-<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#`uvm_fatal" >`uvm_fatal</a></td><td class=SDescription>Calls uvm_report_fatal with a verbosity of UVM_NONE. </td></tr>
+<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" >`uvm_fatal</a></td><td class=SDescription>Calls uvm_report_fatal with a verbosity of UVM_NONE. </td></tr>
   <!-- index=6 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_info_context" >`uvm_info_context</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" >`uvm_info_context</a></td><td class=SDescription></td></tr>
   <!-- index=7 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_warning_context" >`uvm_warning_context</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" >`uvm_warning_context</a></td><td class=SDescription></td></tr>
   <!-- index=8 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_error_context" >`uvm_error_context</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" >`uvm_error_context</a></td><td class=SDescription></td></tr>
   <!-- index=9 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_fatal_context" >`uvm_fatal_context</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" >`uvm_fatal_context</a></td><td class=SDescription></td></tr>
   <!-- index=10 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#Message_Trace_Macros" >Message Trace Macros</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" >Message Trace Macros</a></td><td class=SDescription></td></tr>
   <!-- index=11 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_info_begin" >`uvm_info_begin</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" >`uvm_info_begin</a></td><td class=SDescription></td></tr>
   <!-- index=12 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_info_end" >`uvm_info_end</a></td><td class=SDescription>This macro pair provides the ability to add elements to messages.</td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" >`uvm_info_end</a></td><td class=SDescription>This macro pair provides the ability to add elements to messages.</td></tr>
   <!-- index=13 -->
 
-<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#`uvm_warning_begin" >`uvm_warning_begin</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" >`uvm_warning_begin</a></td><td class=SDescription></td></tr>
   <!-- index=14 -->
 
-<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#`uvm_warning_end" >`uvm_warning_end</a></td><td class=SDescription>This macro pair operates identically to <a href="#`uvm_info_begin" class=LMacro >`uvm_info_begin</a>/<a href="#`uvm_info_end" class=LMacro id=link1  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_WARNING" class=LConstant id=link2  >UVM_WARNING</a> and has no verbosity threshold.</td></tr>
+<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" >`uvm_warning_end</a></td><td class=SDescription>This macro pair operates identically to <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LMacro >`uvm_info_begin</a>/<a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link1  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_WARNING" class=LConstant id=link2  >UVM_WARNING</a> and has no verbosity threshold.</td></tr>
   <!-- index=15 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_error_begin" >`uvm_error_begin</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" >`uvm_error_begin</a></td><td class=SDescription></td></tr>
   <!-- index=16 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_error_end" >`uvm_error_end</a></td><td class=SDescription>This macro pair operates identically to <a href="#`uvm_info_begin" class=LMacro >`uvm_info_begin</a>/<a href="#`uvm_info_end" class=LMacro id=link3  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_ERROR" class=LConstant id=link4  >UVM_ERROR</a> and has no verbosity threshold.</td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-16" data-target-id="doc-nav-item-16" >`uvm_error_end</a></td><td class=SDescription>This macro pair operates identically to <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LMacro >`uvm_info_begin</a>/<a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link3  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_ERROR" class=LConstant id=link4  >UVM_ERROR</a> and has no verbosity threshold.</td></tr>
   <!-- index=17 -->
 
-<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#`uvm_fatal_begin" >`uvm_fatal_begin</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" >`uvm_fatal_begin</a></td><td class=SDescription></td></tr>
   <!-- index=18 -->
 
-<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#`uvm_fatal_end" >`uvm_fatal_end</a></td><td class=SDescription>This macro pair operates identically to <a href="#`uvm_info_begin" class=LMacro >`uvm_info_begin</a>/<a href="#`uvm_info_end" class=LMacro id=link5  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_FATAL" class=LConstant id=link6  >UVM_FATAL</a> and has no verbosity threshold.</td></tr>
+<tr class="SMacro SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-18" data-target-id="doc-nav-item-18" >`uvm_fatal_end</a></td><td class=SDescription>This macro pair operates identically to <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LMacro >`uvm_info_begin</a>/<a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link5  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_FATAL" class=LConstant id=link6  >UVM_FATAL</a> and has no verbosity threshold.</td></tr>
   <!-- index=19 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_info_context_begin" >`uvm_info_context_begin</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" >`uvm_info_context_begin</a></td><td class=SDescription></td></tr>
   <!-- index=20 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_info_context_end" >`uvm_info_context_end</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-20" data-target-id="doc-nav-item-20" >`uvm_info_context_end</a></td><td class=SDescription></td></tr>
   <!-- index=21 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_warning_context_begin" >`uvm_warning_context_begin</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-21" data-target-id="doc-nav-item-21" >`uvm_warning_context_begin</a></td><td class=SDescription></td></tr>
   <!-- index=22 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_warning_context_end" >`uvm_warning_context_end</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-22" data-target-id="doc-nav-item-22" >`uvm_warning_context_end</a></td><td class=SDescription></td></tr>
   <!-- index=23 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_error_context_begin" >`uvm_error_context_begin</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-23" data-target-id="doc-nav-item-23" >`uvm_error_context_begin</a></td><td class=SDescription></td></tr>
   <!-- index=24 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_error_context_end" >`uvm_error_context_end</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" >`uvm_error_context_end</a></td><td class=SDescription></td></tr>
   <!-- index=25 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_fatal_context_begin" >`uvm_fatal_context_begin</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-25" data-target-id="doc-nav-item-25" >`uvm_fatal_context_begin</a></td><td class=SDescription></td></tr>
   <!-- index=26 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_fatal_context_end" >`uvm_fatal_context_end</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-26" data-target-id="doc-nav-item-26" >`uvm_fatal_context_end</a></td><td class=SDescription></td></tr>
   <!-- index=27 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#Message_Element_Macros" >Message Element Macros</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" >Message Element Macros</a></td><td class=SDescription></td></tr>
   <!-- index=28 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_message_add_tag" >`uvm_message_add_tag</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-28" data-target-id="doc-nav-item-28" >`uvm_message_add_tag</a></td><td class=SDescription></td></tr>
   <!-- index=29 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_message_add_int" >`uvm_message_add_int</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" >`uvm_message_add_int</a></td><td class=SDescription></td></tr>
   <!-- index=30 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_message_add_string" >`uvm_message_add_string</a></td><td class=SDescription></td></tr>
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-30" data-target-id="doc-nav-item-30" >`uvm_message_add_string</a></td><td class=SDescription></td></tr>
   <!-- index=31 -->
 
-<tr class="SMacro SIndent2"><td class=SEntry><a href="#`uvm_message_add_object" >`uvm_message_add_object</a></td><td class=SDescription>These macros allow the user to provide elements that are associated with <a href="../base/uvm_report_message-svh.html#uvm_report_message" class=LClass id=link7  >uvm_report_message</a>s. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMacro SIndent2"><td class=SEntry><a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" >`uvm_message_add_object</a></td><td class=SDescription>These macros allow the user to provide elements that are associated with <a href="../base/uvm_report_message-svh.html#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LClass id=link7  >uvm_report_message</a>s. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=1 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Basic_Messaging_Macros" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">Basic Messaging Macros</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="Basic_Messaging_Macros"><div class="CTopic"><h3 class=CTitle><a name="Basic_Messaging_Macros" id="Basic_Messaging_Macros" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">Basic Messaging Macros</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_info" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info</a></h3><div class=CBody><p>Calls uvm_report_info if <i>VERBOSITY</i> is lower than the configured verbosity of the associated reporter.&nbsp; <i>ID</i> is given as the message tag and <i>MSG</i> is given as the message text.&nbsp; The file and line are also sent to the uvm_report_info call.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="`uvm_info"><div class="CTopic"><h3 class=CTitle><a name="`uvm_info" id="`uvm_info" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info</a></h3><div class=CBody><p>Calls uvm_report_info if <i>VERBOSITY</i> is lower than the configured verbosity of the associated reporter.&nbsp; <i>ID</i> is given as the message tag and <i>MSG</i> is given as the message text.&nbsp; The file and line are also sent to the uvm_report_info call.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -192,7 +192,7 @@
 
 
  <!--CONTENT index=3 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_warning" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning</a></h3><div class=CBody><p>Calls uvm_report_warning with a verbosity of UVM_NONE.&nbsp; The message cannot be turned off using the reporter&rsquo;s verbosity setting, but can be turned off by setting the action for the message.&nbsp;  <i>ID</i> is given as the message tag and <i>MSG</i> is given as the message text.&nbsp; The file and line are also sent to the uvm_report_warning call.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="`uvm_warning"><div class="CTopic"><h3 class=CTitle><a name="`uvm_warning" id="`uvm_warning" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning</a></h3><div class=CBody><p>Calls uvm_report_warning with a verbosity of UVM_NONE.&nbsp; The message cannot be turned off using the reporter&rsquo;s verbosity setting, but can be turned off by setting the action for the message.&nbsp;  <i>ID</i> is given as the message tag and <i>MSG</i> is given as the message text.&nbsp; The file and line are also sent to the uvm_report_warning call.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -210,7 +210,7 @@
 
 
  <!--CONTENT index=4 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_error" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error</a></h3><div class=CBody><p>Calls uvm_report_error with a verbosity of UVM_NONE.&nbsp; The message cannot be turned off using the reporter&rsquo;s verbosity setting, but can be turned off by setting the action for the message.&nbsp;  <i>ID</i> is given as the message tag and <i>MSG</i> is given as the message text.&nbsp; The file and line are also sent to the uvm_report_error call.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="`uvm_error"><div class="CTopic"><h3 class=CTitle><a name="`uvm_error" id="`uvm_error" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error</a></h3><div class=CBody><p>Calls uvm_report_error with a verbosity of UVM_NONE.&nbsp; The message cannot be turned off using the reporter&rsquo;s verbosity setting, but can be turned off by setting the action for the message.&nbsp;  <i>ID</i> is given as the message tag and <i>MSG</i> is given as the message text.&nbsp; The file and line are also sent to the uvm_report_error call.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -228,7 +228,7 @@
 
 
  <!--CONTENT index=5 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_fatal" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal</a></h3><div class=CBody><p>Calls uvm_report_fatal with a verbosity of UVM_NONE.&nbsp; The message cannot be turned off using the reporter&rsquo;s verbosity setting, but can be turned off by setting the action for the message.&nbsp;  <i>ID</i> is given as the message tag and <i>MSG</i> is given as the message text.&nbsp; The file and line are also sent to the uvm_report_fatal call.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="`uvm_fatal"><div class="CTopic"><h3 class=CTitle><a name="`uvm_fatal" id="`uvm_fatal" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal</a></h3><div class=CBody><p>Calls uvm_report_fatal with a verbosity of UVM_NONE.&nbsp; The message cannot be turned off using the reporter&rsquo;s verbosity setting, but can be turned off by setting the action for the message.&nbsp;  <i>ID</i> is given as the message tag and <i>MSG</i> is given as the message text.&nbsp; The file and line are also sent to the uvm_report_fatal call.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -246,7 +246,7 @@
 
 
  <!--CONTENT index=6 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_info_context" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_context</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="`uvm_info_context"><div class="CTopic"><h3 class=CTitle><a name="`uvm_info_context" id="`uvm_info_context" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_context</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -258,13 +258,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_info_context</span><span class="sv-op">(</span><span class="sv-ident">ID</span><span class="sv-op">,</span> <span class="sv-ident">MSG</span><span class="sv-op">,</span> <span class="sv-ident">VERBOSITY</span><span class="sv-op">,</span> <span class="sv-ident">RO</span><span class="sv-op">)</span></code></pre>
-</div><p>Operates identically to `uvm_info but requires that the context, or <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link8  >uvm_report_object</a>, in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
+</div><p>Operates identically to `uvm_info but requires that the context, or <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link8  >uvm_report_object</a>, in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=7 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_warning_context" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_context</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="`uvm_warning_context"><div class="CTopic"><h3 class=CTitle><a name="`uvm_warning_context" id="`uvm_warning_context" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_context</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -276,13 +276,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_warning_context</span><span class="sv-op">(</span><span class="sv-ident">ID</span><span class="sv-op">,</span> <span class="sv-ident">MSG</span><span class="sv-op">,</span> <span class="sv-ident">RO</span><span class="sv-op">)</span></code></pre>
-</div><p>Operates identically to `uvm_warning but requires that the context, or <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link9  >uvm_report_object</a>, in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
+</div><p>Operates identically to `uvm_warning but requires that the context, or <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link9  >uvm_report_object</a>, in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=8 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_error_context" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_context</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="`uvm_error_context"><div class="CTopic"><h3 class=CTitle><a name="`uvm_error_context" id="`uvm_error_context" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_context</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -294,13 +294,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_error_context</span><span class="sv-op">(</span><span class="sv-ident">ID</span><span class="sv-op">,</span> <span class="sv-ident">MSG</span><span class="sv-op">,</span> <span class="sv-ident">RO</span><span class="sv-op">)</span></code></pre>
-</div><p>Operates identically to `uvm_error but requires that the context, or <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link10  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
+</div><p>Operates identically to `uvm_error but requires that the context, or <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link10  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=9 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_fatal_context" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_context</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="`uvm_fatal_context"><div class="CTopic"><h3 class=CTitle><a name="`uvm_fatal_context" id="`uvm_fatal_context" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_context</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -312,19 +312,19 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_fatal_context</span><span class="sv-op">(</span><span class="sv-ident">ID</span><span class="sv-op">,</span> <span class="sv-ident">MSG</span><span class="sv-op">,</span> <span class="sv-ident">RO</span><span class="sv-op">)</span></code></pre>
-</div><p>Operates identically to `uvm_fatal but requires that the context, or <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link11  >uvm_report_object</a>, in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
+</div><p>Operates identically to `uvm_fatal but requires that the context, or <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link11  >uvm_report_object</a>, in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=10 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Message_Trace_Macros" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">Message Trace Macros</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="Message_Trace_Macros"><div class="CTopic"><h3 class=CTitle><a name="Message_Trace_Macros" id="Message_Trace_Macros" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">Message Trace Macros</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=11 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_info_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_begin</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="`uvm_info_begin"><div class="CTopic"><h3 class=CTitle><a name="`uvm_info_begin" id="`uvm_info_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_begin</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -342,7 +342,7 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_info_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_end</a></h3><div class=CBody><p>This macro pair provides the ability to add elements to messages.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="`uvm_info_end"><div class="CTopic"><h3 class=CTitle><a name="`uvm_info_end" id="`uvm_info_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_end</a></h3><div class=CBody><p>This macro pair provides the ability to add elements to messages.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -382,7 +382,7 @@
 
 
  <!--CONTENT index=13 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_warning_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_begin</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="`uvm_warning_begin"><div class="CTopic"><h3 class=CTitle><a name="`uvm_warning_begin" id="`uvm_warning_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_begin</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -400,7 +400,7 @@
 
 
  <!--CONTENT index=14 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_warning_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_end</a></h3><div class=CBody><p>This macro pair operates identically to <a href="#`uvm_info_begin" class=LMacro >`uvm_info_begin</a>/<a href="#`uvm_info_end" class=LMacro id=link12  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_WARNING" class=LConstant id=link13  >UVM_WARNING</a> and has no verbosity threshold.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="`uvm_warning_end"><div class="CTopic"><h3 class=CTitle><a name="`uvm_warning_end" id="`uvm_warning_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_end</a></h3><div class=CBody><p>This macro pair operates identically to <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LMacro >`uvm_info_begin</a>/<a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link12  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_WARNING" class=LConstant id=link13  >UVM_WARNING</a> and has no verbosity threshold.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -412,13 +412,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_warning_end</span></code></pre>
-</div><p>The usage shown in <a href="#`uvm_info_end" class=LMacro id=link14  >`uvm_info_end</a> works identically for this pair.</p></div></div></div>
+</div><p>The usage shown in <a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link14  >`uvm_info_end</a> works identically for this pair.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=15 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_error_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_begin</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="`uvm_error_begin"><div class="CTopic"><h3 class=CTitle><a name="`uvm_error_begin" id="`uvm_error_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_begin</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -436,7 +436,7 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_error_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_end</a></h3><div class=CBody><p>This macro pair operates identically to <a href="#`uvm_info_begin" class=LMacro >`uvm_info_begin</a>/<a href="#`uvm_info_end" class=LMacro id=link15  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_ERROR" class=LConstant id=link16  >UVM_ERROR</a> and has no verbosity threshold.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="`uvm_error_end"><div class="CTopic"><h3 class=CTitle><a name="`uvm_error_end" id="`uvm_error_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_end</a></h3><div class=CBody><p>This macro pair operates identically to <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LMacro >`uvm_info_begin</a>/<a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link15  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_ERROR" class=LConstant id=link16  >UVM_ERROR</a> and has no verbosity threshold.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -448,13 +448,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_error_end</span></code></pre>
-</div><p>The usage shown in <a href="#`uvm_info_end" class=LMacro id=link17  >`uvm_info_end</a> works identically for this pair.</p></div></div></div>
+</div><p>The usage shown in <a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link17  >`uvm_info_end</a> works identically for this pair.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=17 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_fatal_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_begin</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="`uvm_fatal_begin"><div class="CTopic"><h3 class=CTitle><a name="`uvm_fatal_begin" id="`uvm_fatal_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_begin</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -472,7 +472,7 @@
 
 
  <!--CONTENT index=18 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_fatal_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_end</a></h3><div class=CBody><p>This macro pair operates identically to <a href="#`uvm_info_begin" class=LMacro >`uvm_info_begin</a>/<a href="#`uvm_info_end" class=LMacro id=link18  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_FATAL" class=LConstant id=link19  >UVM_FATAL</a> and has no verbosity threshold.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="`uvm_fatal_end"><div class="CTopic"><h3 class=CTitle><a name="`uvm_fatal_end" id="`uvm_fatal_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_end</a></h3><div class=CBody><p>This macro pair operates identically to <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LMacro >`uvm_info_begin</a>/<a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link18  >`uvm_info_end</a> with exception that the message severity is <a href="../base/uvm_object_globals-svh.html#UVM_FATAL" class=LConstant id=link19  >UVM_FATAL</a> and has no verbosity threshold.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -484,13 +484,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_fatal_end</span></code></pre>
-</div><p>The usage shown in <a href="#`uvm_info_end" class=LMacro id=link20  >`uvm_info_end</a> works identically for this pair.</p></div></div></div>
+</div><p>The usage shown in <a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link20  >`uvm_info_end</a> works identically for this pair.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=19 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_info_context_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_context_begin</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="`uvm_info_context_begin"><div class="CTopic"><h3 class=CTitle><a name="`uvm_info_context_begin" id="`uvm_info_context_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_context_begin</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -508,7 +508,7 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_info_context_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_context_end</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="`uvm_info_context_end"><div class="CTopic"><h3 class=CTitle><a name="`uvm_info_context_end" id="`uvm_info_context_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_info_context_end</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -520,13 +520,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_info_context_end</span></code></pre>
-</div><p>This macro pair operates identically to <a href="#`uvm_info_begin" class=LMacro >`uvm_info_begin</a>/<a href="#`uvm_info_end" class=LMacro id=link21  >`uvm_info_end</a>, but requires that the context, or <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link22  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
+</div><p>This macro pair operates identically to <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LMacro >`uvm_info_begin</a>/<a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link21  >`uvm_info_end</a>, but requires that the context, or <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link22  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=21 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_warning_context_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_context_begin</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="`uvm_warning_context_begin"><div class="CTopic"><h3 class=CTitle><a name="`uvm_warning_context_begin" id="`uvm_warning_context_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_context_begin</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -544,7 +544,7 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_warning_context_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_context_end</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="`uvm_warning_context_end"><div class="CTopic"><h3 class=CTitle><a name="`uvm_warning_context_end" id="`uvm_warning_context_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_warning_context_end</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -556,13 +556,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_warning_context_end</span></code></pre>
-</div><p>This macro pair operates identically to <a href="#`uvm_warning_begin" class=LMacro >`uvm_warning_begin</a>/<a href="#`uvm_warning_end" class=LMacro id=link23  >`uvm_warning_end</a>, but requires that the context, or <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link24  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
+</div><p>This macro pair operates identically to <a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LMacro >`uvm_warning_begin</a>/<a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" class=LMacro id=link23  >`uvm_warning_end</a>, but requires that the context, or <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link24  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=23 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_error_context_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_context_begin</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="`uvm_error_context_begin"><div class="CTopic"><h3 class=CTitle><a name="`uvm_error_context_begin" id="`uvm_error_context_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_context_begin</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -580,7 +580,7 @@
 
 
  <!--CONTENT index=24 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_error_context_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_context_end</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="`uvm_error_context_end"><div class="CTopic"><h3 class=CTitle><a name="`uvm_error_context_end" id="`uvm_error_context_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_error_context_end</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -592,13 +592,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_error_context_end</span></code></pre>
-</div><p>This macro pair operates identically to <a href="#`uvm_error_begin" class=LMacro >`uvm_error_begin</a>/<a href="#`uvm_error_end" class=LMacro id=link25  >`uvm_error_end</a>, but requires that the context, or <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link26  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
+</div><p>This macro pair operates identically to <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMacro >`uvm_error_begin</a>/<a href="#doc-nav-item-16" data-target-id="doc-nav-item-16" class=LMacro id=link25  >`uvm_error_end</a>, but requires that the context, or <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link26  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=25 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_fatal_context_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_context_begin</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="`uvm_fatal_context_begin"><div class="CTopic"><h3 class=CTitle><a name="`uvm_fatal_context_begin" id="`uvm_fatal_context_begin" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_context_begin</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -616,7 +616,7 @@
 
 
  <!--CONTENT index=26 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_fatal_context_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_context_end</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="`uvm_fatal_context_end"><div class="CTopic"><h3 class=CTitle><a name="`uvm_fatal_context_end" id="`uvm_fatal_context_end" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_fatal_context_end</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -628,19 +628,19 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_fatal_context_end</span></code></pre>
-</div><p>This macro pair operates identically to <a href="#`uvm_fatal_begin" class=LMacro >`uvm_fatal_begin</a>/<a href="#`uvm_fatal_end" class=LMacro id=link27  >`uvm_fatal_end</a>, but requires that the context, or <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link28  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
+</div><p>This macro pair operates identically to <a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" class=LMacro >`uvm_fatal_begin</a>/<a href="#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMacro id=link27  >`uvm_fatal_end</a>, but requires that the context, or <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link28  >uvm_report_object</a> in which the message is printed be explicitly supplied as a macro argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=27 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="Message_Element_Macros" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">Message Element Macros</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="Message_Element_Macros"><div class="CTopic"><h3 class=CTitle><a name="Message_Element_Macros" id="Message_Element_Macros" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">Message Element Macros</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=28 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_message_add_tag" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_message_add_tag</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="`uvm_message_add_tag"><div class="CTopic"><h3 class=CTitle><a name="`uvm_message_add_tag" id="`uvm_message_add_tag" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_message_add_tag</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -658,7 +658,7 @@
 
 
  <!--CONTENT index=29 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_message_add_int" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_message_add_int</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="`uvm_message_add_int"><div class="CTopic"><h3 class=CTitle><a name="`uvm_message_add_int" id="`uvm_message_add_int" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_message_add_int</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -676,7 +676,7 @@
 
 
  <!--CONTENT index=30 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_message_add_string" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_message_add_string</a></h3><div class=CBody><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="`uvm_message_add_string"><div class="CTopic"><h3 class=CTitle><a name="`uvm_message_add_string" id="`uvm_message_add_string" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_message_add_string</a></h3><div class=CBody><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -694,7 +694,7 @@
 
 
  <!--CONTENT index=31 -->
-<div class="CMacro"><div class=CTopic><h3 class=CTitle><a name="`uvm_message_add_object" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_message_add_object</a></h3><div class=CBody><p>These macros allow the user to provide elements that are associated with <a href="../base/uvm_report_message-svh.html#uvm_report_message" class=LClass id=link29  >uvm_report_message</a>s.&nbsp;  Separate macros are provided such that the user can supply arbitrary string/string pairs using <a href="#`uvm_message_add_tag" class=LMacro >`uvm_message_add_tag</a>, integral types along with a radix using <a href="#`uvm_message_add_int" class=LMacro >`uvm_message_add_int</a>, string using <a href="#`uvm_message_add_string" class=LMacro >`uvm_message_add_string</a> and <a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link30  >uvm_object</a>s using <a href="#`uvm_message_add_object" class=LMacro id=link31  >`uvm_message_add_object</a>.</p><div class="code-block-container">
+<div class="CMacro" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="`uvm_message_add_object"><div class="CTopic"><h3 class=CTitle><a name="`uvm_message_add_object" id="`uvm_message_add_object" href="../../src_view/macros/uvm_message_defines.svh.html#L1" class="src-code-link" data-src-file="macros/uvm_message_defines.svh" data-src-line="1">`uvm_message_add_object</a></h3><div class=CBody><p>These macros allow the user to provide elements that are associated with <a href="../base/uvm_report_message-svh.html#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LClass id=link29  >uvm_report_message</a>s.&nbsp;  Separate macros are provided such that the user can supply arbitrary string/string pairs using <a href="#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LMacro >`uvm_message_add_tag</a>, integral types along with a radix using <a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" class=LMacro >`uvm_message_add_int</a>, string using <a href="#doc-nav-item-30" data-target-id="doc-nav-item-30" class=LMacro >`uvm_message_add_string</a> and <a href="../base/uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link30  >uvm_object</a>s using <a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" class=LMacro id=link31  >`uvm_message_add_object</a>.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -706,7 +706,7 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_message_add_object</span><span class="sv-op">(</span><span class="sv-ident">VAR</span><span class="sv-op">,</span> <span class="sv-ident">LABEL</span> <span class="sv-op">=</span> <span class="sv-string">&quot;&quot;</span><span class="sv-op">,</span> <span class="sv-ident">ACTION</span><span class="sv-op">=</span><span class="sv-op">(</span><span class="sv-uvm-type">UVM_LOG</span><span class="sv-op">|</span><span class="sv-uvm-type">UVM_RM_RECORD</span><span class="sv-op">)</span><span class="sv-op">)</span></code></pre>
-</div><p>Example usage is shown in <a href="#`uvm_info_end" class=LMacro id=link32  >`uvm_info_end</a>.</p></div></div></div>
+</div><p>Example usage is shown in <a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMacro id=link32  >`uvm_info_end</a>.</p></div></div></div>
 
 </div><!--Content-->
 
@@ -801,13 +801,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -1004,6 +1004,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -1162,15 +1215,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

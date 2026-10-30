@@ -29,26 +29,26 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="TLM_Port_Classes" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">TLM Port Classes</a></h1><div class=CBody><p>The following classes define the TLM port classes.</p>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="TLM_Port_Classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="TLM_Port_Classes" id="TLM_Port_Classes" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">TLM Port Classes</a></h1><div class=CBody><p>The following classes define the TLM port classes.</p>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SMain"><td class=SEntry><a href="#TLM_Port_Classes" >TLM Port Classes</a></td><td class=SDescription>The following classes define the TLM port classes.</td></tr>
+<tr class="SMain"><td class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >TLM Port Classes</a></td><td class=SDescription>The following classes define the TLM port classes.</td></tr>
   <!-- index=1 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_*_port#(T)" >uvm_*_port #(T)</a></td><td class=SDescription>These unidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions. </td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" >uvm_*_port #(T)</a></td><td class=SDescription>These unidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions. </td></tr>
   <!-- index=4 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_*_port#(REQ,RSP)" >uvm_*_port #(REQ,RSP)</a></td><td class=SDescription>These bidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" >uvm_*_port #(REQ,RSP)</a></td><td class=SDescription>These bidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_*_port#(T)" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">uvm_*_port #(T)</a></h2><div class=CBody><p>These unidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions.&nbsp; A port can be connected to any compatible port, export, or imp port.&nbsp; Unless its <i>min_size</i> is 0, a port <i>must</i> be connected to at least one implementation of its associated interface.</p><p>The asterisk in <i>uvm_*_port</i> is any of the following</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_*_port#(T)"><div class="CTopic"><h2 class=CTitle><a name="uvm_*_port#(T)" id="uvm_*_port#(T)" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">uvm_*_port #(T)</a></h2><div class=CBody><p>These unidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions.&nbsp; A port can be connected to any compatible port, export, or imp port.&nbsp; Unless its <i>min_size</i> is 0, a port <i>must</i> be connected to at least one implementation of its associated interface.</p><p>The asterisk in <i>uvm_*_port</i> is any of the following</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -74,33 +74,33 @@
 <span class="sv-ident">blocking_get_peek</span>
 <span class="sv-ident">nonblocking_get_peek</span>
 <span class="sv-ident">get_peek</span></code></pre>
-</div><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>T</td><td class=CDLDescription>The type of transaction to be communicated by the export.&nbsp; The type T is not restricted to class handles and may be a value type such as int,enum,struct or similar.</td></tr></table><p>Ports are connected to interface implementations directly via <a href="uvm_imps-svh.html#uvm_*_imp#(T,IMP)" class=LClass id=link2  >uvm_*_imp #(T,IMP)</a> ports or indirectly via hierarchical connections to <a href="#uvm_*_port#(T)" class=LClass id=link3  >uvm_*_port #(T)</a> and <a href="uvm_exports-svh.html#uvm_*_export#(T)" class=LClass id=link4  >uvm_*_export #(T)</a> ports.</p>
+</div><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>T</td><td class=CDLDescription>The type of transaction to be communicated by the export.&nbsp; The type T is not restricted to class handles and may be a value type such as int,enum,struct or similar.</td></tr></table><p>Ports are connected to interface implementations directly via <a href="uvm_imps-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link2  >uvm_*_imp #(T,IMP)</a> ports or indirectly via hierarchical connections to <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link3  >uvm_*_port #(T)</a> and <a href="uvm_exports-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link4  >uvm_*_export #(T)</a> ports.</p>
 
 <!--START_ND_SUMMARY index=1-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=1 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_*_port#(T)" >uvm_*_port #(T)</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" >uvm_*_port #(T)</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>These unidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions. </td></tr>
   <!-- index=2 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_*_port#(T).Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=3 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_*_port#(T).new" >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link1  >uvm_component</a> constructor arguments. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link1  >uvm_component</a> constructor arguments. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_*_port#(T).Methods" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_*_port#(T).Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_*_port#(T).Methods" id="uvm_*_port#(T).Methods" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_*_port#(T).new" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">new</a></h3><div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link5  >uvm_component</a> constructor arguments.&nbsp; The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of interfaces that must have been connected to this port by the end of elaboration.</p><div class="code-block-container">
+<div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_*_port#(T).new"><div class="CTopic"><h3 class=CTitle><a name="uvm_*_port#(T).new" id="uvm_*_port#(T).new" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">new</a></h3><div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_component</a> constructor arguments.&nbsp; The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of interfaces that must have been connected to this port by the end of elaboration.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -121,7 +121,7 @@
 
 
  <!--CONTENT index=4 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_*_port#(REQ,RSP)" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">uvm_*_port #(REQ,RSP)</a></h2><div class=CBody><p>These bidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions.&nbsp; A port can be connected to any compatible port, export, or imp port.&nbsp; Unless its <i>min_size</i> is 0, a port <i>must</i> be connected to at least one implementation of its associated interface.</p><p>The asterisk in <i>uvm_*_port</i> is any of the following</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_*_port#(REQ,RSP)"><div class="CTopic"><h2 class=CTitle><a name="uvm_*_port#(REQ,RSP)" id="uvm_*_port#(REQ,RSP)" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">uvm_*_port #(REQ,RSP)</a></h2><div class=CBody><p>These bidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions.&nbsp; A port can be connected to any compatible port, export, or imp port.&nbsp; Unless its <i>min_size</i> is 0, a port <i>must</i> be connected to at least one implementation of its associated interface.</p><p>The asterisk in <i>uvm_*_port</i> is any of the following</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -143,33 +143,33 @@
 <span class="sv-ident">blocking_slave</span>
 <span class="sv-ident">nonblocking_slave</span>
 <span class="sv-ident">slave</span></code></pre>
-</div><p>Ports are connected to interface implementations directly via <a href="uvm_imps-svh.html#uvm_*_imp#(REQ,RSP,IMP,REQ_IMP,RSP_IMP)" class=LClass id=link7  >uvm_*_imp #(REQ,RSP,IMP,REQ_IMP,RSP_IMP)</a> ports or indirectly via hierarchical connections to <a href="#uvm_*_port#(REQ,RSP)" class=LClass id=link8  >uvm_*_port #(REQ,RSP)</a> and <a href="uvm_exports-svh.html#uvm_*_export#(REQ,RSP)" class=LClass id=link9  >uvm_*_export #(REQ,RSP)</a> ports.</p><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>REQ</td><td class=CDLDescription>The type of request transaction to be communicated by the export</td></tr><tr><td class=CDLEntry>RSP</td><td class=CDLDescription>The type of response transaction to be communicated by the export</td></tr></table>
+</div><p>Ports are connected to interface implementations directly via <a href="uvm_imps-svh.html#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LClass id=link7  >uvm_*_imp #(REQ,RSP,IMP,REQ_IMP,RSP_IMP)</a> ports or indirectly via hierarchical connections to <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LClass id=link8  >uvm_*_port #(REQ,RSP)</a> and <a href="uvm_exports-svh.html#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LClass id=link9  >uvm_*_export #(REQ,RSP)</a> ports.</p><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>REQ</td><td class=CDLDescription>The type of request transaction to be communicated by the export</td></tr><tr><td class=CDLEntry>RSP</td><td class=CDLDescription>The type of response transaction to be communicated by the export</td></tr></table>
 
 <!--START_ND_SUMMARY index=4-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=4 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_*_port#(REQ,RSP)" >uvm_*_port #(REQ,RSP)</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" >uvm_*_port #(REQ,RSP)</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>These bidirectional ports are instantiated by components that <i>require</i>, or <i>use</i>, the associated interface to convey transactions. </td></tr>
   <!-- index=5 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_*_port#(REQ,RSP).Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=6 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_*_port#(REQ,RSP).new" >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link6  >uvm_component</a> constructor arguments. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link6  >uvm_component</a> constructor arguments. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_*_port#(REQ,RSP).Methods" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_*_port#(REQ,RSP).Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_*_port#(REQ,RSP).Methods" id="uvm_*_port#(REQ,RSP).Methods" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_*_port#(REQ,RSP).new" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">new</a></h3><div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link10  >uvm_component</a> constructor arguments.&nbsp; The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of interfaces that must have been supplied to this port by the end of elaboration.</p><p>function new (string name, uvm_component parent, int min_size=1, int max_size=1)</p></div></div></div>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_*_port#(REQ,RSP).new"><div class="CTopic"><h3 class=CTitle><a name="uvm_*_port#(REQ,RSP).new" id="uvm_*_port#(REQ,RSP).new" href="../../src_view/tlm1/uvm_ports.svh.html#L81" class="src-code-link" data-src-file="tlm1/uvm_ports.svh" data-src-line="81">new</a></h3><div class=CBody><p>The <i>name</i> and <i>parent</i> are the standard <a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link10  >uvm_component</a> constructor arguments.&nbsp; The <i>min_size</i> and <i>max_size</i> specify the minimum and maximum number of interfaces that must have been supplied to this port by the end of elaboration.</p><p>function new (string name, uvm_component parent, int min_size=1, int max_size=1)</p></div></div></div>
 
 </div><!--Content-->
 
@@ -264,13 +264,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -467,6 +467,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -625,15 +678,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

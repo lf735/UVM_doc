@@ -29,44 +29,44 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Resources" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Resources</a></h1><div class=CBody>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Resources"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Resources" id="Resources" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Resources</a></h1><div class=CBody>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SMain"><td class=SEntry><a href="#Resources" >Resources</a></td><td class=SDescription></td></tr>
+<tr class="SMain"><td class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >Resources</a></td><td class=SDescription></td></tr>
   <!-- index=1 -->
 
-<tr class="SGeneric"><td class=SEntry><a href="#Intro" >Intro</a></td><td class=SDescription>A resource is a parameterized container that holds arbitrary data. </td></tr>
+<tr class="SGeneric"><td class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" >Intro</a></td><td class=SDescription>A resource is a parameterized container that holds arbitrary data. </td></tr>
   <!-- index=2 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_resource_types" id=link1  >uvm_resource_types</a></td><td class=SDescription>Provides typedefs and enums used throughout the resources facility. </td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" id=link1  >uvm_resource_types</a></td><td class=SDescription>Provides typedefs and enums used throughout the resources facility. </td></tr>
   <!-- index=3 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_resource_options" >uvm_resource_options</a></td><td class=SDescription>Provides a namespace for managing options for the resources facility. </td></tr>
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" >uvm_resource_options</a></td><td class=SDescription>Provides a namespace for managing options for the resources facility. </td></tr>
   <!-- index=8 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_resource_base" id=link2  >uvm_resource_base</a></td><td class=SDescription>Non-parameterized base class for resources. </td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" id=link2  >uvm_resource_base</a></td><td class=SDescription>Non-parameterized base class for resources. </td></tr>
   <!-- index=31 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_resource_pool" id=link3  >uvm_resource_pool</a></td><td class=SDescription>The global (singleton) resource database.</td></tr>
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" id=link3  >uvm_resource_pool</a></td><td class=SDescription>The global (singleton) resource database.</td></tr>
   <!-- index=57 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_resource#(T)" id=link4  >uvm_resource #(T)</a></td><td class=SDescription>Parameterized resource. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-57" data-target-id="doc-nav-item-57" id=link4  >uvm_resource #(T)</a></td><td class=SDescription>Parameterized resource. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=1 -->
-<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="Intro" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Intro</a></h3><div class=CBody><p>A resource is a parameterized container that holds arbitrary data.&nbsp; Resources can be used to configure components, supply data to sequences, or enable sharing of information across disparate parts of a testbench.&nbsp;  They are stored using scoping information so their visibility can be constrained to certain parts of the testbench.&nbsp; Resource containers can hold any type of data, constrained only by the data types available in SystemVerilog.&nbsp;  Resources can contain scalar objects, class handles, queues, lists, or even virtual interfaces.</p><p>Resources are stored in a resource database so that each resource can be retrieved by name or by type.&nbsp; The database has both a name table and a type table and each resource is entered into both.&nbsp; The database is globally accessible.</p><p>Each resource has a set of scopes over which it is visible.&nbsp;  The set of scopes is represented as a regular expression.&nbsp;  When a resource is looked up the scope of the entity doing the looking up is supplied to the lookup function.&nbsp;  This is called the <i>current scope</i>.&nbsp;  If the current scope is in the set of scopes over which a resource is visible then the resource can be retuned in the lookup.</p><p>Resources can be looked up by name or by type.&nbsp; To support type lookup each resource has a static type handle that uniquely identifies the type of each specialized resource container.</p><p>Multiple resources that have the same name are stored in a queue.&nbsp; Each resource is pushed into a queue with the first one at the front of the queue and each subsequent one behind it.&nbsp;  The same happens for multiple resources that have the same type.&nbsp;  The resource queues are searched front to back, so those placed earlier in the queue have precedence over those placed later.</p><p>The precedence of resources with the same name or same type can be altered.&nbsp;  One way is to set the <i>precedence</i> member of the resource container to any arbitrary value.&nbsp;  The search algorithm will return the resource with the highest precedence.&nbsp;  In the case where there are multiple resources that match the search criteria and have the same (highest) precedence, the earliest one located in the queue will be one returned.&nbsp;  Another way to change the precedence is to use the set_priority function to move a resource to either the front or back of the queue.</p><p>The classes defined here form the low level layer of the resource database.&nbsp;  The classes include the resource container and the database that holds the containers.&nbsp;  The following set of classes are defined here:</p><p><a href="#uvm_resource_types" class=LClass id=link5  >uvm_resource_types</a>: A class without methods or members, only typedefs and enums.&nbsp; These types and enums are used throughout the resources facility.&nbsp;  Putting the types in a class keeps them confined to a specific name space.</p><p><a href="#uvm_resource_options" class=LClass id=link6  >uvm_resource_options</a>: policy class for setting options, such as auditing, which effect resources.</p><p><a href="#uvm_resource_base" class=LClass id=link7  >uvm_resource_base</a>: the base (untyped) resource class living in the resource database.&nbsp;  This class includes the interface for setting a resource as read-only, notification, scope management, altering search priority, and managing auditing.</p><p><a href="#uvm_resource#(T)" class=LClass id=link8  >uvm_resource#(T)</a>: parameterized resource container.&nbsp;  This class includes the interfaces for reading and writing each resource.&nbsp; Because the class is parameterized, all the access functions are type safe.</p><p><a href="#uvm_resource_pool" class=LClass id=link9  >uvm_resource_pool</a>: the resource database.&nbsp; This is a singleton class object.</p></div></div></div>
+<div class="CGeneric" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="Intro"><div class="CTopic"><h3 class=CTitle><a name="Intro" id="Intro" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Intro</a></h3><div class=CBody><p>A resource is a parameterized container that holds arbitrary data.&nbsp; Resources can be used to configure components, supply data to sequences, or enable sharing of information across disparate parts of a testbench.&nbsp;  They are stored using scoping information so their visibility can be constrained to certain parts of the testbench.&nbsp; Resource containers can hold any type of data, constrained only by the data types available in SystemVerilog.&nbsp;  Resources can contain scalar objects, class handles, queues, lists, or even virtual interfaces.</p><p>Resources are stored in a resource database so that each resource can be retrieved by name or by type.&nbsp; The database has both a name table and a type table and each resource is entered into both.&nbsp; The database is globally accessible.</p><p>Each resource has a set of scopes over which it is visible.&nbsp;  The set of scopes is represented as a regular expression.&nbsp;  When a resource is looked up the scope of the entity doing the looking up is supplied to the lookup function.&nbsp;  This is called the <i>current scope</i>.&nbsp;  If the current scope is in the set of scopes over which a resource is visible then the resource can be retuned in the lookup.</p><p>Resources can be looked up by name or by type.&nbsp; To support type lookup each resource has a static type handle that uniquely identifies the type of each specialized resource container.</p><p>Multiple resources that have the same name are stored in a queue.&nbsp; Each resource is pushed into a queue with the first one at the front of the queue and each subsequent one behind it.&nbsp;  The same happens for multiple resources that have the same type.&nbsp;  The resource queues are searched front to back, so those placed earlier in the queue have precedence over those placed later.</p><p>The precedence of resources with the same name or same type can be altered.&nbsp;  One way is to set the <i>precedence</i> member of the resource container to any arbitrary value.&nbsp;  The search algorithm will return the resource with the highest precedence.&nbsp;  In the case where there are multiple resources that match the search criteria and have the same (highest) precedence, the earliest one located in the queue will be one returned.&nbsp;  Another way to change the precedence is to use the set_priority function to move a resource to either the front or back of the queue.</p><p>The classes defined here form the low level layer of the resource database.&nbsp;  The classes include the resource container and the database that holds the containers.&nbsp;  The following set of classes are defined here:</p><p><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" class=LClass id=link5  >uvm_resource_types</a>: A class without methods or members, only typedefs and enums.&nbsp; These types and enums are used throughout the resources facility.&nbsp;  Putting the types in a class keeps them confined to a specific name space.</p><p><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LClass id=link6  >uvm_resource_options</a>: policy class for setting options, such as auditing, which effect resources.</p><p><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LClass id=link7  >uvm_resource_base</a>: the base (untyped) resource class living in the resource database.&nbsp;  This class includes the interface for setting a resource as read-only, notification, scope management, altering search priority, and managing auditing.</p><p><a href="#doc-nav-item-57" data-target-id="doc-nav-item-57" class=LClass id=link8  >uvm_resource#(T)</a>: parameterized resource container.&nbsp;  This class includes the interfaces for reading and writing each resource.&nbsp; Because the class is parameterized, all the access functions are type safe.</p><p><a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" class=LClass id=link9  >uvm_resource_pool</a>: the resource database.&nbsp; This is a singleton class object.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_resource_types" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource_types</a></h2><div class=CBody><p>Provides typedefs and enums used throughout the resources facility.&nbsp; This class has no members or methods, only typedefs.&nbsp;  It&rsquo;s used in lieu of package-scope types.&nbsp;  When needed, other classes can use these types by prefixing their usage with uvm_resource_types::.&nbsp;  E.g.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_resource_types"><div class="CTopic"><h2 class=CTitle><a name="uvm_resource_types" id="uvm_resource_types" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource_types</a></h2><div class=CBody><p>Provides typedefs and enums used throughout the resources facility.&nbsp; This class has no members or methods, only typedefs.&nbsp;  It&rsquo;s used in lieu of package-scope types.&nbsp;  When needed, other classes can use these types by prefixing their usage with uvm_resource_types::.&nbsp;  E.g.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -81,10 +81,10 @@
 </div>
 
 <!--START_ND_SUMMARY index=2-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=2 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_resource_types" id=link10  >uvm_resource_types</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" id=link10  >uvm_resource_types</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Provides typedefs and enums used throughout the resources facility. </td></tr>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
@@ -98,39 +98,39 @@
 
 
  <!--CONTENT index=3 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_resource_options" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource_options</a></h2><div class=CBody><p>Provides a namespace for managing options for the resources facility.&nbsp;  The only thing allowed in this class is static local data members and static functions for manipulating and retrieving the value of the data members.&nbsp;  The static local data members represent options and settings that control the behavior of the resources facility.</p>
+<div class="CClass" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_resource_options"><div class="CTopic"><h2 class=CTitle><a name="uvm_resource_options" id="uvm_resource_options" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource_options</a></h2><div class=CBody><p>Provides a namespace for managing options for the resources facility.&nbsp;  The only thing allowed in this class is static local data members and static functions for manipulating and retrieving the value of the data members.&nbsp;  The static local data members represent options and settings that control the behavior of the resources facility.</p>
 
 <!--START_ND_SUMMARY index=3-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=3 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_resource_options" >uvm_resource_options</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" >uvm_resource_options</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Provides a namespace for managing options for the resources facility. </td></tr>
   <!-- index=4 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_options.Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=5 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_options.turn_on_auditing" id=link11  >turn_on_auditing</a></td><td class=SDescription>Turn auditing on for the resource database. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" id=link11  >turn_on_auditing</a></td><td class=SDescription>Turn auditing on for the resource database. </td></tr>
   <!-- index=6 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_options.turn_off_auditing" id=link12  >turn_off_auditing</a></td><td class=SDescription>Turn auditing off for the resource database. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" id=link12  >turn_off_auditing</a></td><td class=SDescription>Turn auditing off for the resource database. </td></tr>
   <!-- index=7 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_options.is_auditing" id=link13  >is_auditing</a></td><td class=SDescription>Returns 1 if the auditing facility is on and 0 if it is off.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" id=link13  >is_auditing</a></td><td class=SDescription>Returns 1 if the auditing facility is on and 0 if it is off.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_options.Methods" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_resource_options.Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_options.Methods" id="uvm_resource_options.Methods" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_options.turn_on_auditing" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">turn_on_auditing</a></h3>
+<div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_resource_options.turn_on_auditing"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_options.turn_on_auditing" id="uvm_resource_options.turn_on_auditing" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">turn_on_auditing</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">turn_on_auditing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Turn auditing on for the resource database.&nbsp; This causes all reads and writes to the database to store information about the accesses.&nbsp; Auditing is turned on by default.</p></div></div></div>
 
@@ -138,7 +138,7 @@
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_options.turn_off_auditing" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">turn_off_auditing</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_resource_options.turn_off_auditing"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_options.turn_off_auditing" id="uvm_resource_options.turn_off_auditing" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">turn_off_auditing</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">turn_off_auditing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Turn auditing off for the resource database.&nbsp; If auditing is turned off, it is not possible to get extra information about resource database accesses.</p></div></div></div>
 
@@ -146,7 +146,7 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_options.is_auditing" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">is_auditing</a></h3>
+<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_resource_options.is_auditing"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_options.is_auditing" id="uvm_resource_options.is_auditing" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">is_auditing</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_auditing</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if the auditing facility is on and 0 if it is off.</p></div></div></div>
 
@@ -154,13 +154,13 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_resource_base" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource_base</a></h2><div class=CBody><p>Non-parameterized base class for resources.&nbsp;  Supports interfaces for scope matching, and virtual functions for printing the resource and for printing the accessor list</p>
+<div class="CClass" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_resource_base"><div class="CTopic"><h2 class=CTitle><a name="uvm_resource_base" id="uvm_resource_base" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource_base</a></h2><div class=CBody><p>Non-parameterized base class for resources.&nbsp;  Supports interfaces for scope matching, and virtual functions for printing the resource and for printing the accessor list</p>
 
 <!--START_ND_SUMMARY index=8-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=8 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_resource_base" id=link16  >uvm_resource_base</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" id=link16  >uvm_resource_base</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Non-parameterized base class for resources. </td></tr>
 
   <!-- HIERARCHY -->
@@ -168,8 +168,8 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link14  >uvm_void</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link15  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link14  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link15  >uvm_object</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_resource_base</div></div></td></tr>
         </table>
       </div>
@@ -185,85 +185,85 @@
 
   <!-- index=9 -->
 
-<tr class="SVariable SIndent1 SMarked"><td class=SEntry><a href="#uvm_resource_base.precedence" id=link17  >precedence</a></td><td class=SDescription>This variable is used to associate a precedence that a resource has with respect to other resources which match the same scope and name. </td></tr>
+<tr class="SVariable SIndent1 SMarked"><td class=SEntry><a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" id=link17  >precedence</a></td><td class=SDescription>This variable is used to associate a precedence that a resource has with respect to other resources which match the same scope and name. </td></tr>
   <!-- index=10 -->
 
-<tr class="SVariable SIndent1"><td class=SEntry><a href="#uvm_resource_base.default_precedence" id=link18  >default_precedence</a></td><td class=SDescription>The default precedence for an resource that has been created. </td></tr>
+<tr class="SVariable SIndent1"><td class=SEntry><a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" id=link18  >default_precedence</a></td><td class=SDescription>The default precedence for an resource that has been created. </td></tr>
   <!-- index=11 -->
 
-<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_resource_base.new" id=link19  >new</a></td><td class=SDescription>constructor for uvm_resource_base. </td></tr>
+<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" id=link19  >new</a></td><td class=SDescription>constructor for uvm_resource_base. </td></tr>
   <!-- index=12 -->
 
-<tr class="SMethod SIndent1"><td class=SEntry><a href="#uvm_resource_base.get_type_handle" id=link20  >get_type_handle</a></td><td class=SDescription>Pure virtual function that returns the type handle of the resource container.</td></tr>
+<tr class="SMethod SIndent1"><td class=SEntry><a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" id=link20  >get_type_handle</a></td><td class=SDescription>Pure virtual function that returns the type handle of the resource container.</td></tr>
   <!-- index=13 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_base.Read-only_Interface" >Read-only Interface</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" >Read-only Interface</a></td><td class=SDescription></td></tr>
   <!-- index=14 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_base.set_read_only" id=link21  >set_read_only</a></td><td class=SDescription>Establishes this resource as a read-only resource. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" id=link21  >set_read_only</a></td><td class=SDescription>Establishes this resource as a read-only resource. </td></tr>
   <!-- index=15 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_base.is_read_only" id=link22  >is_read_only</a></td><td class=SDescription>Returns one if this resource has been set to read-only, zero otherwise</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" id=link22  >is_read_only</a></td><td class=SDescription>Returns one if this resource has been set to read-only, zero otherwise</td></tr>
   <!-- index=16 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_base.Notification" >Notification</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-16" data-target-id="doc-nav-item-16" >Notification</a></td><td class=SDescription></td></tr>
   <!-- index=17 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_base.wait_modified" id=link23  >wait_modified</a></td><td class=SDescription>This task blocks until the resource has been modified -- that is, a <a href="#uvm_resource#(T).write" class=LMethod id=link24  >uvm_resource#(T)::write</a> operation has been performed. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" id=link23  >wait_modified</a></td><td class=SDescription>This task blocks until the resource has been modified -- that is, a <a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" class=LMethod id=link24  >uvm_resource#(T)::write</a> operation has been performed. </td></tr>
   <!-- index=18 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_base.Scope_Interface" >Scope Interface</a></td><td class=SDescription>Each resource has a name, a value and a set of scopes over which it is visible. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-18" data-target-id="doc-nav-item-18" >Scope Interface</a></td><td class=SDescription>Each resource has a name, a value and a set of scopes over which it is visible. </td></tr>
   <!-- index=19 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_base.set_scope" id=link25  >set_scope</a></td><td class=SDescription>Set the value of the regular expression that identifies the set of scopes over which this resource is visible. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" id=link25  >set_scope</a></td><td class=SDescription>Set the value of the regular expression that identifies the set of scopes over which this resource is visible. </td></tr>
   <!-- index=20 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_base.get_scope" id=link26  >get_scope</a></td><td class=SDescription>Retrieve the regular expression string that identifies the set of scopes over which this resource is visible.</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-20" data-target-id="doc-nav-item-20" id=link26  >get_scope</a></td><td class=SDescription>Retrieve the regular expression string that identifies the set of scopes over which this resource is visible.</td></tr>
   <!-- index=21 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_base.match_scope" id=link27  >match_scope</a></td><td class=SDescription>Using the regular expression facility, determine if this resource is visible in a scope. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-21" data-target-id="doc-nav-item-21" id=link27  >match_scope</a></td><td class=SDescription>Using the regular expression facility, determine if this resource is visible in a scope. </td></tr>
   <!-- index=22 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_base.Priority" >Priority</a></td><td class=SDescription>Functions for manipulating the search priority of resources. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-22" data-target-id="doc-nav-item-22" >Priority</a></td><td class=SDescription>Functions for manipulating the search priority of resources. </td></tr>
   <!-- index=23 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_base.set_priority" >set priority</a></td><td class=SDescription>Change the search priority of the resource based on the value of the priority enum argument.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-23" data-target-id="doc-nav-item-23" >set priority</a></td><td class=SDescription>Change the search priority of the resource based on the value of the priority enum argument.</td></tr>
   <!-- index=24 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_base.Utility_Functions" >Utility Functions</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" >Utility Functions</a></td><td class=SDescription></td></tr>
   <!-- index=25 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_base.do_print" id=link28  >do_print</a></td><td class=SDescription>Implementation of do_print which is called by print().</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-25" data-target-id="doc-nav-item-25" id=link28  >do_print</a></td><td class=SDescription>Implementation of do_print which is called by print().</td></tr>
   <!-- index=26 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_base.Audit_Trail" >Audit Trail</a></td><td class=SDescription>To find out what is happening as the simulation proceeds, an audit trail of each read and write is kept. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-26" data-target-id="doc-nav-item-26" >Audit Trail</a></td><td class=SDescription>To find out what is happening as the simulation proceeds, an audit trail of each read and write is kept. </td></tr>
   <!-- index=27 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_base.record_read_access" id=link29  >record_read_access</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" id=link29  >record_read_access</a></td><td class=SDescription></td></tr>
   <!-- index=28 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_base.record_write_access" id=link30  >record_write_access</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-28" data-target-id="doc-nav-item-28" id=link30  >record_write_access</a></td><td class=SDescription></td></tr>
   <!-- index=29 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_base.print_accessors" id=link31  >print_accessors</a></td><td class=SDescription>Dump the access records for this resource</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" id=link31  >print_accessors</a></td><td class=SDescription>Dump the access records for this resource</td></tr>
   <!-- index=30 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_base.init_access_record" id=link32  >init_access_record</a></td><td class=SDescription>Initialize a new access record</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-30" data-target-id="doc-nav-item-30" id=link32  >init_access_record</a></td><td class=SDescription>Initialize a new access record</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=9 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">precedence</a></h3>
+<div class="CVariable" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_resource_base.precedence"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.precedence" id="uvm_resource_base.precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">precedence</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">precedence</span>
-  </td></tr></table></blockquote><div class=CBody><p>This variable is used to associate a precedence that a resource has with respect to other resources which match the same scope and name.&nbsp; Resources are set to the <a href="#uvm_resource_base.default_precedence" class=LVariable id=link33  >default_precedence</a> initially, and may be set to a higher or lower precedence as desired.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>This variable is used to associate a precedence that a resource has with respect to other resources which match the same scope and name.&nbsp; Resources are set to the <a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LVariable id=link33  >default_precedence</a> initially, and may be set to a higher or lower precedence as desired.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=10 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.default_precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">default_precedence</a></h3>
+<div class="CVariable" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_resource_base.default_precedence"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.default_precedence" id="uvm_resource_base.default_precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">default_precedence</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">default_precedence</span> <span class="sv-op">=</span><span class="sv-ident"> 1000
   </span></td></tr></table></blockquote><div class=CBody><p>The default precedence for an resource that has been created.&nbsp; When two resources have the same precedence, the first resource found has precedence.</p></div></div></div>
 
@@ -271,7 +271,7 @@
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.new" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">new</a></h3>
+<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_resource_base.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.new" id="uvm_resource_base.new" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -293,7 +293,7 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.get_type_handle" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_type_handle</a></h3>
+<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_resource_base.get_type_handle"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.get_type_handle" id="uvm_resource_base.get_type_handle" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_type_handle</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_resource_base</span> <span class="sv-proto-name">get_type_handle</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Pure virtual function that returns the type handle of the resource container.</p></div></div></div>
 
@@ -301,21 +301,21 @@
 
 
  <!--CONTENT index=13 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.Read-only_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Read-only Interface</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_resource_base.Read-only_Interface"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.Read-only_Interface" id="uvm_resource_base.Read-only_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Read-only Interface</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.set_read_only" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_read_only</a></h3>
+<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_resource_base.set_read_only"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.set_read_only" id="uvm_resource_base.set_read_only" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_read_only</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_read_only</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Establishes this resource as a read-only resource.&nbsp;  An attempt to call <a href="#uvm_resource#(T).write" class=LMethod id=link34  >uvm_resource#(T)::write</a> on the resource will cause an error.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>Establishes this resource as a read-only resource.&nbsp;  An attempt to call <a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" class=LMethod id=link34  >uvm_resource#(T)::write</a> on the resource will cause an error.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.is_read_only" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">is_read_only</a></h3>
+<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_resource_base.is_read_only"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.is_read_only" id="uvm_resource_base.is_read_only" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">is_read_only</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_read_only</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns one if this resource has been set to read-only, zero otherwise</p></div></div></div>
 
@@ -323,21 +323,21 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.Notification" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Notification</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_resource_base.Notification"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.Notification" id="uvm_resource_base.Notification" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Notification</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=17 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.wait_modified" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">wait_modified</a></h3>
+<div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_resource_base.wait_modified"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.wait_modified" id="uvm_resource_base.wait_modified" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">wait_modified</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">task</span> <span class="sv-proto-name">wait_modified</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>This task blocks until the resource has been modified -- that is, a <a href="#uvm_resource#(T).write" class=LMethod id=link35  >uvm_resource#(T)::write</a> operation has been performed.&nbsp;  When a <a href="#uvm_resource#(T).write" class=LMethod id=link36  >uvm_resource#(T)::write</a> is performed the modified bit is set which releases the block.&nbsp;  Wait_modified() then clears the modified bit so it can be called repeatedly.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>This task blocks until the resource has been modified -- that is, a <a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" class=LMethod id=link35  >uvm_resource#(T)::write</a> operation has been performed.&nbsp;  When a <a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" class=LMethod id=link36  >uvm_resource#(T)::write</a> is performed the modified bit is set which releases the block.&nbsp;  Wait_modified() then clears the modified bit so it can be called repeatedly.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=18 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.Scope_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Scope Interface</a></h3><div class=CBody><p>Each resource has a name, a value and a set of scopes over which it is visible.&nbsp; A scope is a hierarchical entity or a context.&nbsp;  A scope name is a multi-element string that identifies a scope.&nbsp;  Each element refers to a scope context and the elements are separated by dots (.).</p><div class="code-block-container">
+<div class="CGroup" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_resource_base.Scope_Interface"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.Scope_Interface" id="uvm_resource_base.Scope_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Scope Interface</a></h3><div class=CBody><p>Each resource has a name, a value and a set of scopes over which it is visible.&nbsp; A scope is a hierarchical entity or a context.&nbsp;  A scope name is a multi-element string that identifies a scope.&nbsp;  Each element refers to a scope context and the elements are separated by dots (.).</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -419,7 +419,7 @@
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.set_scope" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_scope</a></h3>
+<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_resource_base.set_scope"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.set_scope" id="uvm_resource_base.set_scope" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_scope</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_scope</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -435,7 +435,7 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.get_scope" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_scope</a></h3>
+<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_resource_base.get_scope"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.get_scope" id="uvm_resource_base.get_scope" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_scope</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_scope</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Retrieve the regular expression string that identifies the set of scopes over which this resource is visible.</p></div></div></div>
 
@@ -443,7 +443,7 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.match_scope" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">match_scope</a></h3>
+<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_resource_base.match_scope"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.match_scope" id="uvm_resource_base.match_scope" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">match_scope</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">match_scope</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -459,25 +459,25 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.Priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Priority</a></h3><div class=CBody><p>Functions for manipulating the search priority of resources.&nbsp;  The function definitions here are pure virtual and are implemented in derived classes.&nbsp;  The definitons serve as a priority management interface.</p></div></div></div>
+<div class="CGroup" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_resource_base.Priority"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.Priority" id="uvm_resource_base.Priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Priority</a></h3><div class=CBody><p>Functions for manipulating the search priority of resources.&nbsp;  The function definitions here are pure virtual and are implemented in derived classes.&nbsp;  The definitons serve as a priority management interface.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=23 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.set_priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set priority</a></h3><div class=CBody><p>Change the search priority of the resource based on the value of the priority enum argument.</p></div></div></div>
+<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_resource_base.set_priority"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.set_priority" id="uvm_resource_base.set_priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set priority</a></h3><div class=CBody><p>Change the search priority of the resource based on the value of the priority enum argument.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=24 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.Utility_Functions" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Utility Functions</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_resource_base.Utility_Functions"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.Utility_Functions" id="uvm_resource_base.Utility_Functions" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Utility Functions</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=25 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.do_print" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">do_print</a></h3>
+<div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_resource_base.do_print"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.do_print" id="uvm_resource_base.do_print" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">do_print</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_print</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_printer</span>&nbsp;</td>
@@ -493,7 +493,7 @@
 
 
  <!--CONTENT index=26 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.Audit_Trail" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Audit Trail</a></h3><div class=CBody><p>To find out what is happening as the simulation proceeds, an audit trail of each read and write is kept.&nbsp; The <a href="#uvm_resource#(T).read" class=LMethod id=link37  >uvm_resource#(T)::read</a> and <a href="#uvm_resource#(T).write" class=LMethod id=link38  >uvm_resource#(T)::write</a> methods each take an accessor argument.&nbsp;  This is a handle to the object that performed that resource access.</p><div class="code-block-container">
+<div class="CGroup" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_resource_base.Audit_Trail"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.Audit_Trail" id="uvm_resource_base.Audit_Trail" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Audit Trail</a></h3><div class=CBody><p>To find out what is happening as the simulation proceeds, an audit trail of each read and write is kept.&nbsp; The <a href="#doc-nav-item-67" data-target-id="doc-nav-item-67" class=LMethod id=link37  >uvm_resource#(T)::read</a> and <a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" class=LMethod id=link38  >uvm_resource#(T)::write</a> methods each take an accessor argument.&nbsp;  This is a handle to the object that performed that resource access.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -522,13 +522,13 @@
 <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
 <span class="sv-ident">rint</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-number">7</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-ident">i</span> <span class="sv-op">=</span> <span class="sv-ident">rint</span><span class="sv-op">.</span><span class="sv-method">read</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>The accessor&rsquo;s <i>get_full_name()</i> is stored as part of the audit trail.&nbsp; This way you can find out what object performed each resource access.&nbsp; Each audit record also includes the time of the access (simulation time) and the particular operation performed (read or write).</p><p>Auditing is controlled through the <a href="#uvm_resource_options" class=LClass id=link39  >uvm_resource_options</a> class.</p></div></div></div>
+</div><p>The accessor&rsquo;s <i>get_full_name()</i> is stored as part of the audit trail.&nbsp; This way you can find out what object performed each resource access.&nbsp; Each audit record also includes the time of the access (simulation time) and the particular operation performed (read or write).</p><p>Auditing is controlled through the <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LClass id=link39  >uvm_resource_options</a> class.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=27 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.record_read_access" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">record_read_access</a></h3>
+<div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_resource_base.record_read_access"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.record_read_access" id="uvm_resource_base.record_read_access" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">record_read_access</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_read_access</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
@@ -546,7 +546,7 @@
 
 
  <!--CONTENT index=28 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.record_write_access" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">record_write_access</a></h3>
+<div class="CMethod" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_resource_base.record_write_access"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.record_write_access" id="uvm_resource_base.record_write_access" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">record_write_access</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">record_write_access</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
@@ -564,7 +564,7 @@
 
 
  <!--CONTENT index=29 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.print_accessors" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">print_accessors</a></h3>
+<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_resource_base.print_accessors"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.print_accessors" id="uvm_resource_base.print_accessors" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">print_accessors</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_accessors</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Dump the access records for this resource</p></div></div></div>
 
@@ -572,7 +572,7 @@
 
 
  <!--CONTENT index=30 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_base.init_access_record" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">init_access_record</a></h3>
+<div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_resource_base.init_access_record"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_base.init_access_record" id="uvm_resource_base.init_access_record" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">init_access_record</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">init_access_record</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">inout</span> <span class="sv-uvm-type">uvm_resource_types</span>::</td>
@@ -589,7 +589,7 @@
 
 
  <!--CONTENT index=31 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_resource_pool" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource_pool</a></h2><div class=CBody><p>The global (singleton) resource database.</p><p>Each resource is stored both by primary name and by type handle.&nbsp;  The resource pool contains two associative arrays, one with name as the key and one with the type handle as the key.&nbsp;  Each associative array contains a queue of resources.&nbsp;  Each resource has a regular expression that represents the set of scopes over which it is visible.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_resource_pool"><div class="CTopic"><h2 class=CTitle><a name="uvm_resource_pool" id="uvm_resource_pool" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource_pool</a></h2><div class=CBody><p>The global (singleton) resource database.</p><p>Each resource is stored both by primary name and by type handle.&nbsp;  The resource pool contains two associative arrays, one with name as the key and one with the type handle as the key.&nbsp;  Each associative array contains a queue of resources.&nbsp;  Each resource has a regular expression that represents the set of scopes over which it is visible.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -617,13 +617,13 @@
 <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span>            <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span>      <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span>
 <span class="sv-op">|</span>      <span class="sv-op">|</span>            <span class="sv-op">|</span>            <span class="sv-op">|</span> <span class="sv-ident">rsrc</span> <span class="sv-op">|</span>      <span class="sv-op">|</span>            <span class="sv-op">|</span>      <span class="sv-op">|</span>
 <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span>            <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span>      <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-op">+</span></code></pre>
-</div><p>The above diagrams illustrates how a resource whose name is A and type is T is stored in the pool.&nbsp;  The pool contains an entry in the type map for type T and an entry in the name map for name A.&nbsp;  The queues in each of the arrays each contain an entry for the resource A whose type is T.&nbsp;  The name map can contain in its queue other resources whose name is A which may or may not have the same type as our resource A.&nbsp;  Similarly, the type map can contain in its queue other resources whose type is T and whose name may or may not be A.</p><p>Resources are added to the pool by calling <a href="#uvm_resource_pool.set" class=LMethod id=link63  >set</a>; they are retrieved from the pool by calling <a href="#uvm_resource_pool.get_by_name" class=LMethod id=link64  >get_by_name</a> or <a href="#uvm_resource_pool.get_by_type" class=LMethod id=link65  >get_by_type</a>.&nbsp;  When an object creates a new resource and calls <a href="#uvm_resource_pool.set" class=LMethod id=link66  >set</a> the resource is made available to be retrieved by other objects outside of itself; an object gets a resource when it wants to access a resource not currently available in its scope.</p><p>The scope is stored in the resource itself (not in the pool) so whether you get by name or by type the resource&rsquo;s visibility is the same.</p><p>As an auditing capability, the pool contains a history of gets.&nbsp;  A record of each get, whether by <a href="#uvm_resource_pool.get_by_type" class=LMethod id=link67  >get_by_type</a> or <a href="#uvm_resource_pool.get_by_name" class=LMethod id=link68  >get_by_name</a>, is stored in the audit record.&nbsp;  Both successful and failed gets are recorded.&nbsp; At the end of simulation, or any time for that matter, you can dump the history list.&nbsp;  This will tell which resources were successfully located and which were not.&nbsp;  You can use this information to determine if there is some error in name, type, or scope that has caused a resource to not be located or to be incorrectly located (i.e. the wrong resource is located).</p>
+</div><p>The above diagrams illustrates how a resource whose name is A and type is T is stored in the pool.&nbsp;  The pool contains an entry in the type map for type T and an entry in the name map for name A.&nbsp;  The queues in each of the arrays each contain an entry for the resource A whose type is T.&nbsp;  The name map can contain in its queue other resources whose name is A which may or may not have the same type as our resource A.&nbsp;  Similarly, the type map can contain in its queue other resources whose type is T and whose name may or may not be A.</p><p>Resources are added to the pool by calling <a href="#doc-nav-item-35" data-target-id="doc-nav-item-35" class=LMethod id=link63  >set</a>; they are retrieved from the pool by calling <a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LMethod id=link64  >get_by_name</a> or <a href="#doc-nav-item-45" data-target-id="doc-nav-item-45" class=LMethod id=link65  >get_by_type</a>.&nbsp;  When an object creates a new resource and calls <a href="#doc-nav-item-35" data-target-id="doc-nav-item-35" class=LMethod id=link66  >set</a> the resource is made available to be retrieved by other objects outside of itself; an object gets a resource when it wants to access a resource not currently available in its scope.</p><p>The scope is stored in the resource itself (not in the pool) so whether you get by name or by type the resource&rsquo;s visibility is the same.</p><p>As an auditing capability, the pool contains a history of gets.&nbsp;  A record of each get, whether by <a href="#doc-nav-item-45" data-target-id="doc-nav-item-45" class=LMethod id=link67  >get_by_type</a> or <a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LMethod id=link68  >get_by_name</a>, is stored in the audit record.&nbsp;  Both successful and failed gets are recorded.&nbsp; At the end of simulation, or any time for that matter, you can dump the history list.&nbsp;  This will tell which resources were successfully located and which were not.&nbsp;  You can use this information to determine if there is some error in name, type, or scope that has caused a resource to not be located or to be incorrectly located (i.e. the wrong resource is located).</p>
 
 <!--START_ND_SUMMARY index=31-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=31 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_resource_pool" id=link40  >uvm_resource_pool</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" id=link40  >uvm_resource_pool</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The global (singleton) resource database.</td></tr>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
@@ -633,86 +633,86 @@
 
   <!-- index=32 -->
 
-<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_resource_pool.get" id=link41  >get</a></td><td class=SDescription>Returns the singleton handle to the resource pool</td></tr>
+<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link41  >get</a></td><td class=SDescription>Returns the singleton handle to the resource pool</td></tr>
   <!-- index=33 -->
 
-<tr class="SMethod SIndent1"><td class=SEntry><a href="#uvm_resource_pool.spell_check" id=link42  >spell_check</a></td><td class=SDescription>Invokes the spell checker for a string s. </td></tr>
+<tr class="SMethod SIndent1"><td class=SEntry><a href="#doc-nav-item-33" data-target-id="doc-nav-item-33" id=link42  >spell_check</a></td><td class=SDescription>Invokes the spell checker for a string s. </td></tr>
   <!-- index=34 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_pool.Set" >Set</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-34" data-target-id="doc-nav-item-34" >Set</a></td><td class=SDescription></td></tr>
   <!-- index=35 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.set" id=link43  >set</a></td><td class=SDescription>Add a new resource to the resource pool. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-35" data-target-id="doc-nav-item-35" id=link43  >set</a></td><td class=SDescription>Add a new resource to the resource pool. </td></tr>
   <!-- index=36 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.set_override" id=link44  >set_override</a></td><td class=SDescription>The resource provided as an argument will be entered into the pool and will override both by name and type.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-36" data-target-id="doc-nav-item-36" id=link44  >set_override</a></td><td class=SDescription>The resource provided as an argument will be entered into the pool and will override both by name and type.</td></tr>
   <!-- index=37 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.set_name_override" id=link45  >set_name_override</a></td><td class=SDescription>The resource provided as an argument will entered into the pool using normal precedence in the type map and will override the name.</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-37" data-target-id="doc-nav-item-37" id=link45  >set_name_override</a></td><td class=SDescription>The resource provided as an argument will entered into the pool using normal precedence in the type map and will override the name.</td></tr>
   <!-- index=38 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.set_type_override" id=link46  >set_type_override</a></td><td class=SDescription>The resource provided as an argument will be entered into the pool using normal precedence in the name map and will override the type.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-38" data-target-id="doc-nav-item-38" id=link46  >set_type_override</a></td><td class=SDescription>The resource provided as an argument will be entered into the pool using normal precedence in the name map and will override the type.</td></tr>
   <!-- index=39 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_pool.Lookup" >Lookup</a></td><td class=SDescription>This group of functions is for finding resources in the resource database.</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-39" data-target-id="doc-nav-item-39" >Lookup</a></td><td class=SDescription>This group of functions is for finding resources in the resource database.</td></tr>
   <!-- index=40 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.lookup_name" id=link47  >lookup_name</a></td><td class=SDescription>Lookup resources by <i>name</i>. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-40" data-target-id="doc-nav-item-40" id=link47  >lookup_name</a></td><td class=SDescription>Lookup resources by <i>name</i>. </td></tr>
   <!-- index=41 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.get_highest_precedence" id=link48  >get_highest_precedence</a></td><td class=SDescription>Traverse a queue, <i>q</i>, of resources and return the one with the highest precedence. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-41" data-target-id="doc-nav-item-41" id=link48  >get_highest_precedence</a></td><td class=SDescription>Traverse a queue, <i>q</i>, of resources and return the one with the highest precedence. </td></tr>
   <!-- index=42 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.sort_by_precedence" id=link49  >sort_by_precedence</a></td><td class=SDescription>Given a list of resources, obtained for example from <a href="#uvm_resource_pool.lookup_scope" class=LMethod id=link50  >lookup_scope</a>, sort the resources in  precedence order. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-42" data-target-id="doc-nav-item-42" id=link49  >sort_by_precedence</a></td><td class=SDescription>Given a list of resources, obtained for example from <a href="#doc-nav-item-48" data-target-id="doc-nav-item-48" class=LMethod id=link50  >lookup_scope</a>, sort the resources in  precedence order. </td></tr>
   <!-- index=43 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.get_by_name" id=link51  >get_by_name</a></td><td class=SDescription>Lookup a resource by <i>name</i>, <i>scope</i>, and <i>type_handle</i>. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" id=link51  >get_by_name</a></td><td class=SDescription>Lookup a resource by <i>name</i>, <i>scope</i>, and <i>type_handle</i>. </td></tr>
   <!-- index=44 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.lookup_type" id=link52  >lookup_type</a></td><td class=SDescription>Lookup resources by type. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-44" data-target-id="doc-nav-item-44" id=link52  >lookup_type</a></td><td class=SDescription>Lookup resources by type. </td></tr>
   <!-- index=45 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.get_by_type" id=link53  >get_by_type</a></td><td class=SDescription>Lookup a resource by <i>type_handle</i> and <i>scope</i>. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-45" data-target-id="doc-nav-item-45" id=link53  >get_by_type</a></td><td class=SDescription>Lookup a resource by <i>type_handle</i> and <i>scope</i>. </td></tr>
   <!-- index=46 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.lookup_regex_names" id=link54  >lookup_regex_names</a></td><td class=SDescription>This utility function answers the question, for a given <i>name</i>, <i>scope</i>, and <i>type_handle</i>, what are all of the resources with requested name, a matching scope (where the resource scope may be a regular expression), and a matching type?&nbsp; </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-46" data-target-id="doc-nav-item-46" id=link54  >lookup_regex_names</a></td><td class=SDescription>This utility function answers the question, for a given <i>name</i>, <i>scope</i>, and <i>type_handle</i>, what are all of the resources with requested name, a matching scope (where the resource scope may be a regular expression), and a matching type?&nbsp; </td></tr>
   <!-- index=47 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.lookup_regex" id=link55  >lookup_regex</a></td><td class=SDescription>Looks for all the resources whose name matches the regular expression argument and whose scope matches the current scope.</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-47" data-target-id="doc-nav-item-47" id=link55  >lookup_regex</a></td><td class=SDescription>Looks for all the resources whose name matches the regular expression argument and whose scope matches the current scope.</td></tr>
   <!-- index=48 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.lookup_scope" id=link56  >lookup_scope</a></td><td class=SDescription>This is a utility function that answers the question: For a given <i>scope</i>, what resources are visible to it?&nbsp; </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-48" data-target-id="doc-nav-item-48" id=link56  >lookup_scope</a></td><td class=SDescription>This is a utility function that answers the question: For a given <i>scope</i>, what resources are visible to it?&nbsp; </td></tr>
   <!-- index=49 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_pool.Set_Priority" >Set Priority</a></td><td class=SDescription>Functions for altering the search priority of resources. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-49" data-target-id="doc-nav-item-49" >Set Priority</a></td><td class=SDescription>Functions for altering the search priority of resources. </td></tr>
   <!-- index=50 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.set_priority_type" id=link57  >set_priority_type</a></td><td class=SDescription>Change the priority of the <i>rsrc</i> based on the value of <i>pri</i>, the priority enum argument. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-50" data-target-id="doc-nav-item-50" id=link57  >set_priority_type</a></td><td class=SDescription>Change the priority of the <i>rsrc</i> based on the value of <i>pri</i>, the priority enum argument. </td></tr>
   <!-- index=51 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.set_priority_name" id=link58  >set_priority_name</a></td><td class=SDescription>Change the priority of the <i>rsrc</i> based on the value of <i>pri</i>, the priority enum argument. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-51" data-target-id="doc-nav-item-51" id=link58  >set_priority_name</a></td><td class=SDescription>Change the priority of the <i>rsrc</i> based on the value of <i>pri</i>, the priority enum argument. </td></tr>
   <!-- index=52 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.set_priority" id=link59  >set_priority</a></td><td class=SDescription>Change the search priority of the <i>rsrc</i> based on the value of <i>pri</i>, the priority enum argument. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-52" data-target-id="doc-nav-item-52" id=link59  >set_priority</a></td><td class=SDescription>Change the search priority of the <i>rsrc</i> based on the value of <i>pri</i>, the priority enum argument. </td></tr>
   <!-- index=53 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource_pool.Debug" >Debug</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-53" data-target-id="doc-nav-item-53" >Debug</a></td><td class=SDescription></td></tr>
   <!-- index=54 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.find_unused_resources" id=link60  >find_unused_resources</a></td><td class=SDescription>Locate all the resources that have at least one write and no reads</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-54" data-target-id="doc-nav-item-54" id=link60  >find_unused_resources</a></td><td class=SDescription>Locate all the resources that have at least one write and no reads</td></tr>
   <!-- index=55 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource_pool.print_resources" id=link61  >print_resources</a></td><td class=SDescription>Print the resources that are in a single queue, <i>rq</i>. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-55" data-target-id="doc-nav-item-55" id=link61  >print_resources</a></td><td class=SDescription>Print the resources that are in a single queue, <i>rq</i>. </td></tr>
   <!-- index=56 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource_pool.dump" id=link62  >dump</a></td><td class=SDescription>dump the entire resource pool. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-56" data-target-id="doc-nav-item-56" id=link62  >dump</a></td><td class=SDescription>dump the entire resource pool. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=32 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.get" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get</a></h3>
+<div class="CMethod" id="doc-nav-item-32" data-doc-topic="doc-nav-item-32" data-anchor="uvm_resource_pool.get"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.get" id="uvm_resource_pool.get" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_resource_pool</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton handle to the resource pool</p></div></div></div>
 
@@ -720,7 +720,7 @@
 
 
  <!--CONTENT index=33 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.spell_check" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">spell_check</a></h3>
+<div class="CMethod" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_resource_pool.spell_check"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.spell_check" id="uvm_resource_pool.spell_check" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">spell_check</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">spell_check</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -736,13 +736,13 @@
 
 
  <!--CONTENT index=34 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.Set" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Set</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_resource_pool.Set"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.Set" id="uvm_resource_pool.Set" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Set</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=35 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.set" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set</a></h3>
+<div class="CMethod" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_resource_pool.set"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.set" id="uvm_resource_pool.set" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
@@ -760,13 +760,13 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Add a new resource to the resource pool.&nbsp;  The resource is inserted into both the name map and type map so it can be located by either.</p><p>An object creates a resources and <i>sets</i> it into the resource pool.&nbsp; Later, other objects that want to access the resource must <i>get</i> it from the pool</p><p>Overrides can be specified using this interface.&nbsp;  Either a name override, a type override or both can be specified.&nbsp;  If an override is specified then the resource is entered at the front of the queue instead of at the back.&nbsp;  It is not recommended that users specify the override parameter directly, rather they use the <a href="#uvm_resource_pool.set_override" class=LMethod id=link69  >set_override</a>, <a href="#uvm_resource_pool.set_name_override" class=LMethod id=link70  >set_name_override</a>, or <a href="#uvm_resource_pool.set_type_override" class=LMethod id=link71  >set_type_override</a> functions.</p></div></div></div>
+<div class=CBody><p>Add a new resource to the resource pool.&nbsp;  The resource is inserted into both the name map and type map so it can be located by either.</p><p>An object creates a resources and <i>sets</i> it into the resource pool.&nbsp; Later, other objects that want to access the resource must <i>get</i> it from the pool</p><p>Overrides can be specified using this interface.&nbsp;  Either a name override, a type override or both can be specified.&nbsp;  If an override is specified then the resource is entered at the front of the queue instead of at the back.&nbsp;  It is not recommended that users specify the override parameter directly, rather they use the <a href="#doc-nav-item-36" data-target-id="doc-nav-item-36" class=LMethod id=link69  >set_override</a>, <a href="#doc-nav-item-37" data-target-id="doc-nav-item-37" class=LMethod id=link70  >set_name_override</a>, or <a href="#doc-nav-item-38" data-target-id="doc-nav-item-38" class=LMethod id=link71  >set_type_override</a> functions.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=36 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.set_override" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_override</a></h3>
+<div class="CMethod" id="doc-nav-item-36" data-doc-topic="doc-nav-item-36" data-anchor="uvm_resource_pool.set_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.set_override" id="uvm_resource_pool.set_override" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_resource_base</span>&nbsp;</td>
@@ -782,7 +782,7 @@
 
 
  <!--CONTENT index=37 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.set_name_override" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_name_override</a></h3>
+<div class="CMethod" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_resource_pool.set_name_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.set_name_override" id="uvm_resource_pool.set_name_override" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_name_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_name_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_resource_base</span>&nbsp;</td>
@@ -798,7 +798,7 @@
 
 
  <!--CONTENT index=38 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.set_type_override" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_type_override</a></h3>
+<div class="CMethod" id="doc-nav-item-38" data-doc-topic="doc-nav-item-38" data-anchor="uvm_resource_pool.set_type_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.set_type_override" id="uvm_resource_pool.set_type_override" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_type_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_type_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_resource_base</span>&nbsp;</td>
@@ -814,13 +814,13 @@
 
 
  <!--CONTENT index=39 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.Lookup" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Lookup</a></h3><div class=CBody><p>This group of functions is for finding resources in the resource database.</p><p><a href="#uvm_resource_pool.lookup_name" class=LMethod id=link72  >lookup_name</a> and <a href="#uvm_resource_pool.lookup_type" class=LMethod id=link73  >lookup_type</a> locate the set of resources that matches the name or type (respectively) and is visible in the current scope.&nbsp;  These functions return a queue of resources.</p><p><a href="#uvm_resource_pool.get_highest_precedence" class=LMethod id=link74  >get_highest_precedence</a> traverse a queue of resources and returns the one with the highest precedence -- i.e. the one whose precedence member has the highest value.</p><p><a href="#uvm_resource_pool.get_by_name" class=LMethod id=link75  >get_by_name</a> and <a href="#uvm_resource_pool.get_by_type" class=LMethod id=link76  >get_by_type</a> use <a href="#uvm_resource_pool.lookup_name" class=LMethod id=link77  >lookup_name</a> and <a href="#uvm_resource_pool.lookup_type" class=LMethod id=link78  >lookup_type</a> (respectively) and <a href="#uvm_resource_pool.get_highest_precedence" class=LMethod id=link79  >get_highest_precedence</a> to find the resource with the highest priority that matches the other search criteria.</p></div></div></div>
+<div class="CGroup" id="doc-nav-item-39" data-doc-topic="doc-nav-item-39" data-anchor="uvm_resource_pool.Lookup"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.Lookup" id="uvm_resource_pool.Lookup" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Lookup</a></h3><div class=CBody><p>This group of functions is for finding resources in the resource database.</p><p><a href="#doc-nav-item-40" data-target-id="doc-nav-item-40" class=LMethod id=link72  >lookup_name</a> and <a href="#doc-nav-item-44" data-target-id="doc-nav-item-44" class=LMethod id=link73  >lookup_type</a> locate the set of resources that matches the name or type (respectively) and is visible in the current scope.&nbsp;  These functions return a queue of resources.</p><p><a href="#doc-nav-item-41" data-target-id="doc-nav-item-41" class=LMethod id=link74  >get_highest_precedence</a> traverse a queue of resources and returns the one with the highest precedence -- i.e. the one whose precedence member has the highest value.</p><p><a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LMethod id=link75  >get_by_name</a> and <a href="#doc-nav-item-45" data-target-id="doc-nav-item-45" class=LMethod id=link76  >get_by_type</a> use <a href="#doc-nav-item-40" data-target-id="doc-nav-item-40" class=LMethod id=link77  >lookup_name</a> and <a href="#doc-nav-item-44" data-target-id="doc-nav-item-44" class=LMethod id=link78  >lookup_type</a> (respectively) and <a href="#doc-nav-item-41" data-target-id="doc-nav-item-41" class=LMethod id=link79  >get_highest_precedence</a> to find the resource with the highest priority that matches the other search criteria.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=40 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.lookup_name" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_name</a></h3>
+<div class="CMethod" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_resource_pool.lookup_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.lookup_name" id="uvm_resource_pool.lookup_name" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_resource_types::rsrc_q_t <span class="sv-proto-name">lookup_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -850,7 +850,7 @@
 
 
  <!--CONTENT index=41 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.get_highest_precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_highest_precedence</a></h3>
+<div class="CMethod" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_resource_pool.get_highest_precedence"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.get_highest_precedence" id="uvm_resource_pool.get_highest_precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_highest_precedence</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> uvm_resource_base <span class="sv-proto-name">get_highest_precedence</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-uvm-type">uvm_resource_types</span>::</td>
@@ -867,7 +867,7 @@
 
 
  <!--CONTENT index=42 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.sort_by_precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">sort_by_precedence</a></h3>
+<div class="CMethod" id="doc-nav-item-42" data-doc-topic="doc-nav-item-42" data-anchor="uvm_resource_pool.sort_by_precedence"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.sort_by_precedence" id="uvm_resource_pool.sort_by_precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">sort_by_precedence</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">sort_by_precedence</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-uvm-type">uvm_resource_types</span>::</td>
@@ -878,13 +878,13 @@
       <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Given a list of resources, obtained for example from <a href="#uvm_resource_pool.lookup_scope" class=LMethod id=link80  >lookup_scope</a>, sort the resources in  precedence order.&nbsp; The highest precedence resource will be first in the list and the lowest precedence will be last.&nbsp; Resources that have the same precedence and the same name will be ordered by most recently set first.</p></div></div></div>
+<div class=CBody><p>Given a list of resources, obtained for example from <a href="#doc-nav-item-48" data-target-id="doc-nav-item-48" class=LMethod id=link80  >lookup_scope</a>, sort the resources in  precedence order.&nbsp; The highest precedence resource will be first in the list and the lowest precedence will be last.&nbsp; Resources that have the same precedence and the same name will be ordered by most recently set first.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=43 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.get_by_name" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_by_name</a></h3>
+<div class="CMethod" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_resource_pool.get_by_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.get_by_name" id="uvm_resource_pool.get_by_name" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_resource_base <span class="sv-proto-name">get_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -914,7 +914,7 @@
 
 
  <!--CONTENT index=44 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.lookup_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_type</a></h3>
+<div class="CMethod" id="doc-nav-item-44" data-doc-topic="doc-nav-item-44" data-anchor="uvm_resource_pool.lookup_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.lookup_type" id="uvm_resource_pool.lookup_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_resource_types::rsrc_q_t <span class="sv-proto-name">lookup_type</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -936,7 +936,7 @@
 
 
  <!--CONTENT index=45 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.get_by_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_by_type</a></h3>
+<div class="CMethod" id="doc-nav-item-45" data-doc-topic="doc-nav-item-45" data-anchor="uvm_resource_pool.get_by_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.get_by_type" id="uvm_resource_pool.get_by_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_by_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_resource_base <span class="sv-proto-name">get_by_type</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -958,7 +958,7 @@
 
 
  <!--CONTENT index=46 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.lookup_regex_names" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_regex_names</a></h3>
+<div class="CMethod" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_resource_pool.lookup_regex_names"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.lookup_regex_names" id="uvm_resource_pool.lookup_regex_names" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_regex_names</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_resource_types::rsrc_q_t <span class="sv-proto-name">lookup_regex_names</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -984,7 +984,7 @@
 
 
  <!--CONTENT index=47 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.lookup_regex" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_regex</a></h3>
+<div class="CMethod" id="doc-nav-item-47" data-doc-topic="doc-nav-item-47" data-anchor="uvm_resource_pool.lookup_regex"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.lookup_regex" id="uvm_resource_pool.lookup_regex" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_regex</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> uvm_resource_types::rsrc_q_t <span class="sv-proto-name">lookup_regex</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1002,7 +1002,7 @@
 
 
  <!--CONTENT index=48 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.lookup_scope" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_scope</a></h3>
+<div class="CMethod" id="doc-nav-item-48" data-doc-topic="doc-nav-item-48" data-anchor="uvm_resource_pool.lookup_scope"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.lookup_scope" id="uvm_resource_pool.lookup_scope" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">lookup_scope</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> uvm_resource_types::rsrc_q_t <span class="sv-proto-name">lookup_scope</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1018,13 +1018,13 @@
 
 
  <!--CONTENT index=49 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.Set_Priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Set Priority</a></h3><div class=CBody><p>Functions for altering the search priority of resources.&nbsp;  Resources are stored in queues in the type and name maps.&nbsp;  When retrieving resources, either by type or by name, the resource queue is search from front to back.&nbsp;  The first one that matches the search criteria is the one that is returned.&nbsp;  The <i>set_priority</i> functions let you change the order in which resources are searched.&nbsp;  For any particular resource, you can set its priority to UVM_HIGH, in which case the resource is moved to the front of the queue, or to UVM_LOW in which case the resource is moved to the back of the queue.</p></div></div></div>
+<div class="CGroup" id="doc-nav-item-49" data-doc-topic="doc-nav-item-49" data-anchor="uvm_resource_pool.Set_Priority"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.Set_Priority" id="uvm_resource_pool.Set_Priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Set Priority</a></h3><div class=CBody><p>Functions for altering the search priority of resources.&nbsp;  Resources are stored in queues in the type and name maps.&nbsp;  When retrieving resources, either by type or by name, the resource queue is search from front to back.&nbsp;  The first one that matches the search criteria is the one that is returned.&nbsp;  The <i>set_priority</i> functions let you change the order in which resources are searched.&nbsp;  For any particular resource, you can set its priority to UVM_HIGH, in which case the resource is moved to the front of the queue, or to UVM_LOW in which case the resource is moved to the back of the queue.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=50 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.set_priority_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_priority_type</a></h3>
+<div class="CMethod" id="doc-nav-item-50" data-doc-topic="doc-nav-item-50" data-anchor="uvm_resource_pool.set_priority_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.set_priority_type" id="uvm_resource_pool.set_priority_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_priority_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_priority_type</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
@@ -1044,7 +1044,7 @@
 
 
  <!--CONTENT index=51 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.set_priority_name" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_priority_name</a></h3>
+<div class="CMethod" id="doc-nav-item-51" data-doc-topic="doc-nav-item-51" data-anchor="uvm_resource_pool.set_priority_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.set_priority_name" id="uvm_resource_pool.set_priority_name" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_priority_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_priority_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
@@ -1064,7 +1064,7 @@
 
 
  <!--CONTENT index=52 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.set_priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_priority</a></h3>
+<div class="CMethod" id="doc-nav-item-52" data-doc-topic="doc-nav-item-52" data-anchor="uvm_resource_pool.set_priority"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.set_priority" id="uvm_resource_pool.set_priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_priority</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_priority</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap></td>
@@ -1084,13 +1084,13 @@
 
 
  <!--CONTENT index=53 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.Debug" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Debug</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-53" data-doc-topic="doc-nav-item-53" data-anchor="uvm_resource_pool.Debug"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.Debug" id="uvm_resource_pool.Debug" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Debug</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=54 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.find_unused_resources" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">find_unused_resources</a></h3>
+<div class="CMethod" id="doc-nav-item-54" data-doc-topic="doc-nav-item-54" data-anchor="uvm_resource_pool.find_unused_resources"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.find_unused_resources" id="uvm_resource_pool.find_unused_resources" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">find_unused_resources</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_resource_types</span><span class="sv-ident">::</span><span class="sv-ident">rsrc_q_t</span> <span class="sv-proto-name">find_unused_resources</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Locate all the resources that have at least one write and no reads</p></div></div></div>
 
@@ -1098,7 +1098,7 @@
 
 
  <!--CONTENT index=55 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.print_resources" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">print_resources</a></h3>
+<div class="CMethod" id="doc-nav-item-55" data-doc-topic="doc-nav-item-55" data-anchor="uvm_resource_pool.print_resources"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.print_resources" id="uvm_resource_pool.print_resources" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">print_resources</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_resources</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-uvm-type">uvm_resource_types</span>::</td>
@@ -1122,7 +1122,7 @@
 
 
  <!--CONTENT index=56 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource_pool.dump" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">dump</a></h3>
+<div class="CMethod" id="doc-nav-item-56" data-doc-topic="doc-nav-item-56" data-anchor="uvm_resource_pool.dump"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource_pool.dump" id="uvm_resource_pool.dump" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">dump</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">dump</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -1140,13 +1140,13 @@
 
 
  <!--CONTENT index=57 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_resource#(T)" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource #(T)</a></h2><div class=CBody><p>Parameterized resource.&nbsp;  Provides essential access methods to read from and write to the resource database.</p>
+<div class="CClass" id="doc-nav-item-57" data-doc-topic="doc-nav-item-57" data-anchor="uvm_resource#(T)"><div class="CTopic"><h2 class=CTitle><a name="uvm_resource#(T)" id="uvm_resource#(T)" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">uvm_resource #(T)</a></h2><div class=CBody><p>Parameterized resource.&nbsp;  Provides essential access methods to read from and write to the resource database.</p>
 
 <!--START_ND_SUMMARY index=57-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=57 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_resource#(T)" id=link84  >uvm_resource #(T)</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-57" data-target-id="doc-nav-item-57" id=link84  >uvm_resource #(T)</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Parameterized resource. </td></tr>
 
   <!-- HIERARCHY -->
@@ -1154,9 +1154,9 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link81  >uvm_void</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link82  >uvm_object</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#uvm_resource_base" class=LClass id=link83  >uvm_resource_base</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link81  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link82  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LClass id=link83  >uvm_resource_base</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_resource#(T)</div></div></td></tr>
         </table>
       </div>
@@ -1182,59 +1182,59 @@
 
   <!-- index=58 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource#(T).Type_Interface" >Type Interface</a></td><td class=SDescription>Resources can be identified by type using a static type handle. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-58" data-target-id="doc-nav-item-58" >Type Interface</a></td><td class=SDescription>Resources can be identified by type using a static type handle. </td></tr>
   <!-- index=59 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource#(T).get_type" id=link85  >get_type</a></td><td class=SDescription>Static function that returns the static type handle. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-59" data-target-id="doc-nav-item-59" id=link85  >get_type</a></td><td class=SDescription>Static function that returns the static type handle. </td></tr>
   <!-- index=60 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource#(T).get_type_handle" id=link86  >get_type_handle</a></td><td class=SDescription>Returns the static type handle of this resource in a polymorphic fashion. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-60" data-target-id="doc-nav-item-60" id=link86  >get_type_handle</a></td><td class=SDescription>Returns the static type handle of this resource in a polymorphic fashion. </td></tr>
   <!-- index=61 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource#(T).Set/Get_Interface" >Set/<span class=HB> </span>Get Interface</a></td><td class=SDescription>uvm_resource#(T) provides an interface for setting and getting a resources. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-61" data-target-id="doc-nav-item-61" >Set/<span class=HB> </span>Get Interface</a></td><td class=SDescription>uvm_resource#(T) provides an interface for setting and getting a resources. </td></tr>
   <!-- index=62 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource#(T).set" id=link87  >set</a></td><td class=SDescription>Simply put this resource into the global resource pool</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-62" data-target-id="doc-nav-item-62" id=link87  >set</a></td><td class=SDescription>Simply put this resource into the global resource pool</td></tr>
   <!-- index=63 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource#(T).set_override" id=link88  >set_override</a></td><td class=SDescription>Put a resource into the global resource pool as an override. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-63" data-target-id="doc-nav-item-63" id=link88  >set_override</a></td><td class=SDescription>Put a resource into the global resource pool as an override. </td></tr>
   <!-- index=64 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource#(T).get_by_name" id=link89  >get_by_name</a></td><td class=SDescription>looks up a resource by <i>name</i> in the name map. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-64" data-target-id="doc-nav-item-64" id=link89  >get_by_name</a></td><td class=SDescription>looks up a resource by <i>name</i> in the name map. </td></tr>
   <!-- index=65 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource#(T).get_by_type" id=link90  >get_by_type</a></td><td class=SDescription>looks up a resource by <i>type_handle</i> in the type map. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-65" data-target-id="doc-nav-item-65" id=link90  >get_by_type</a></td><td class=SDescription>looks up a resource by <i>type_handle</i> in the type map. </td></tr>
   <!-- index=66 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource#(T).Read/Write_Interface" >Read/<span class=HB> </span>Write Interface</a></td><td class=SDescription><a href="#uvm_resource#(T).read" class=LMethod id=link91  >read</a> and <a href="#uvm_resource#(T).write" class=LMethod id=link92  >write</a> provide a type-safe interface for getting and setting the object in the resource container. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-66" data-target-id="doc-nav-item-66" >Read/<span class=HB> </span>Write Interface</a></td><td class=SDescription><a href="#doc-nav-item-67" data-target-id="doc-nav-item-67" class=LMethod id=link91  >read</a> and <a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" class=LMethod id=link92  >write</a> provide a type-safe interface for getting and setting the object in the resource container. </td></tr>
   <!-- index=67 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource#(T).read" id=link93  >read</a></td><td class=SDescription>Return the object stored in the resource container. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-67" data-target-id="doc-nav-item-67" id=link93  >read</a></td><td class=SDescription>Return the object stored in the resource container. </td></tr>
   <!-- index=68 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource#(T).write" id=link94  >write</a></td><td class=SDescription>Modify the object stored in this resource container. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" id=link94  >write</a></td><td class=SDescription>Modify the object stored in this resource container. </td></tr>
   <!-- index=69 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_resource#(T).Priority" >Priority</a></td><td class=SDescription>Functions for manipulating the search priority of resources. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-69" data-target-id="doc-nav-item-69" >Priority</a></td><td class=SDescription>Functions for manipulating the search priority of resources. </td></tr>
   <!-- index=70 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_resource#(T).set_priority" >set priority</a></td><td class=SDescription>Change the search priority of the resource based on the value of the priority enum argument, <i>pri</i>.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-70" data-target-id="doc-nav-item-70" >set priority</a></td><td class=SDescription>Change the search priority of the resource based on the value of the priority enum argument, <i>pri</i>.</td></tr>
   <!-- index=71 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_resource#(T).get_highest_precedence" id=link95  >get_highest_precedence</a></td><td class=SDescription>In a queue of resources, locate the first one with the highest precedence whose type is T. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-71" data-target-id="doc-nav-item-71" id=link95  >get_highest_precedence</a></td><td class=SDescription>In a queue of resources, locate the first one with the highest precedence whose type is T. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=58 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).Type_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Type Interface</a></h3><div class=CBody><p>Resources can be identified by type using a static type handle.&nbsp; The parent class provides the virtual function interface <a href="#uvm_resource#(T).get_type_handle" class=LMethod id=link96  >get_type_handle</a>.&nbsp;  Here we implement it by returning the static type handle.</p></div></div></div>
+<div class="CGroup" id="doc-nav-item-58" data-doc-topic="doc-nav-item-58" data-anchor="uvm_resource#(T).Type_Interface"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).Type_Interface" id="uvm_resource#(T).Type_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Type Interface</a></h3><div class=CBody><p>Resources can be identified by type using a static type handle.&nbsp; The parent class provides the virtual function interface <a href="#doc-nav-item-60" data-target-id="doc-nav-item-60" class=LMethod id=link96  >get_type_handle</a>.&nbsp;  Here we implement it by returning the static type handle.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=59 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).get_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_type</a></h3>
+<div class="CMethod" id="doc-nav-item-59" data-doc-topic="doc-nav-item-59" data-anchor="uvm_resource#(T).get_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).get_type" id="uvm_resource#(T).get_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-ident">this_type</span> <span class="sv-proto-name">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Static function that returns the static type handle.&nbsp;  The return type is this_type, which is the type of the parameterized class.</p></div></div></div>
 
@@ -1242,7 +1242,7 @@
 
 
  <!--CONTENT index=60 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).get_type_handle" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_type_handle</a></h3>
+<div class="CMethod" id="doc-nav-item-60" data-doc-topic="doc-nav-item-60" data-anchor="uvm_resource#(T).get_type_handle"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).get_type_handle" id="uvm_resource#(T).get_type_handle" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_type_handle</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_resource_base</span> <span class="sv-proto-name">get_type_handle</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the static type handle of this resource in a polymorphic fashion.&nbsp;  The return type of get_type_handle() is uvm_resource_base.&nbsp;  This function is not static and therefore can only be used by instances of a parameterized resource.</p></div></div></div>
 
@@ -1250,13 +1250,13 @@
 
 
  <!--CONTENT index=61 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).Set/Get_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Set/<span class=HB> </span>Get Interface</a></h3><div class=CBody><p>uvm_resource#(T) provides an interface for setting and getting a resources.&nbsp;  Specifically, a resource can insert itself into the resource pool.&nbsp;  It doesn&rsquo;t make sense for a resource to get itself, since you can&rsquo;t call a function on a handle you don&rsquo;t have.&nbsp; However, a static get interface is provided as a convenience.&nbsp;  This obviates the need for the user to get a handle to the global resource pool as this is done for him here.</p></div></div></div>
+<div class="CGroup" id="doc-nav-item-61" data-doc-topic="doc-nav-item-61" data-anchor="uvm_resource#(T).Set/Get_Interface"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).Set/Get_Interface" id="uvm_resource#(T).Set/Get_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Set/<span class=HB> </span>Get Interface</a></h3><div class=CBody><p>uvm_resource#(T) provides an interface for setting and getting a resources.&nbsp;  Specifically, a resource can insert itself into the resource pool.&nbsp;  It doesn&rsquo;t make sense for a resource to get itself, since you can&rsquo;t call a function on a handle you don&rsquo;t have.&nbsp; However, a static get interface is provided as a convenience.&nbsp;  This obviates the need for the user to get a handle to the global resource pool as this is done for him here.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=62 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).set" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set</a></h3>
+<div class="CMethod" id="doc-nav-item-62" data-doc-topic="doc-nav-item-62" data-anchor="uvm_resource#(T).set"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).set" id="uvm_resource#(T).set" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Simply put this resource into the global resource pool</p></div></div></div>
 
@@ -1264,7 +1264,7 @@
 
 
  <!--CONTENT index=63 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).set_override" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_override</a></h3>
+<div class="CMethod" id="doc-nav-item-63" data-doc-topic="doc-nav-item-63" data-anchor="uvm_resource#(T).set_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).set_override" id="uvm_resource#(T).set_override" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_override</span><span class="sv-op">(</span>
   </td></tr></table></blockquote><div class=CBody><p>Put a resource into the global resource pool as an override.&nbsp;  This means it gets put at the head of the list and is searched before other existing resources that occupy the same position in the name map or the type map.&nbsp;  The default is to override both the name and type maps.&nbsp;  However, using the <i>override</i> argument you can specify that either the name map or type map is overridden.</p></div></div></div>
 
@@ -1272,7 +1272,7 @@
 
 
  <!--CONTENT index=64 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).get_by_name" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_by_name</a></h3>
+<div class="CMethod" id="doc-nav-item-64" data-doc-topic="doc-nav-item-64" data-anchor="uvm_resource#(T).get_by_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).get_by_name" id="uvm_resource#(T).get_by_name" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> this_type <span class="sv-proto-name">get_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1298,7 +1298,7 @@
 
 
  <!--CONTENT index=65 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).get_by_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_by_type</a></h3>
+<div class="CMethod" id="doc-nav-item-65" data-doc-topic="doc-nav-item-65" data-anchor="uvm_resource#(T).get_by_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).get_by_type" id="uvm_resource#(T).get_by_type" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_by_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> this_type <span class="sv-proto-name">get_by_type</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1320,13 +1320,13 @@
 
 
  <!--CONTENT index=66 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).Read/Write_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Read/<span class=HB> </span>Write Interface</a></h3><div class=CBody><p><a href="#uvm_resource#(T).read" class=LMethod id=link97  >read</a> and <a href="#uvm_resource#(T).write" class=LMethod id=link98  >write</a> provide a type-safe interface for getting and setting the object in the resource container.&nbsp;  The interface is type safe because the value argument for <a href="#uvm_resource#(T).write" class=LMethod id=link99  >write</a> and the return value of <a href="#uvm_resource#(T).read" class=LMethod id=link100  >read</a> are T, the type supplied in the class parameter.&nbsp; If either of these functions is used in an incorrect type context the compiler will complain.</p></div></div></div>
+<div class="CGroup" id="doc-nav-item-66" data-doc-topic="doc-nav-item-66" data-anchor="uvm_resource#(T).Read/Write_Interface"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).Read/Write_Interface" id="uvm_resource#(T).Read/Write_Interface" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Read/<span class=HB> </span>Write Interface</a></h3><div class=CBody><p><a href="#doc-nav-item-67" data-target-id="doc-nav-item-67" class=LMethod id=link97  >read</a> and <a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" class=LMethod id=link98  >write</a> provide a type-safe interface for getting and setting the object in the resource container.&nbsp;  The interface is type safe because the value argument for <a href="#doc-nav-item-68" data-target-id="doc-nav-item-68" class=LMethod id=link99  >write</a> and the return value of <a href="#doc-nav-item-67" data-target-id="doc-nav-item-67" class=LMethod id=link100  >read</a> are T, the type supplied in the class parameter.&nbsp; If either of these functions is used in an incorrect type context the compiler will complain.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=67 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).read" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">read</a></h3>
+<div class="CMethod" id="doc-nav-item-67" data-doc-topic="doc-nav-item-67" data-anchor="uvm_resource#(T).read"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).read" id="uvm_resource#(T).read" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">read</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> T <span class="sv-proto-name">read</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
@@ -1344,7 +1344,7 @@
 
 
  <!--CONTENT index=68 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).write" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">write</a></h3>
+<div class="CMethod" id="doc-nav-item-68" data-doc-topic="doc-nav-item-68" data-anchor="uvm_resource#(T).write"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).write" id="uvm_resource#(T).write" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">write</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">write</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
@@ -1360,25 +1360,25 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Modify the object stored in this resource container.&nbsp;  If the resource is read-only then issue an error message and return without modifying the object in the container.&nbsp;  If the resource is not read-only and an <i>accessor</i> object has been supplied then also update the accessor record.&nbsp;  Lastly, replace the object value in the container with the value supplied as the argument, <i>t</i>, and release any processes blocked on <a href="#uvm_resource_base.wait_modified" class=LMethod id=link101  >uvm_resource_base::wait_modified</a>.&nbsp;  If the value to be written is the same as the value already present in the resource then the write is not done.&nbsp;  That also means that the accessor record is not updated and the modified bit is not set.</p></div></div></div>
+<div class=CBody><p>Modify the object stored in this resource container.&nbsp;  If the resource is read-only then issue an error message and return without modifying the object in the container.&nbsp;  If the resource is not read-only and an <i>accessor</i> object has been supplied then also update the accessor record.&nbsp;  Lastly, replace the object value in the container with the value supplied as the argument, <i>t</i>, and release any processes blocked on <a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" class=LMethod id=link101  >uvm_resource_base::wait_modified</a>.&nbsp;  If the value to be written is the same as the value already present in the resource then the write is not done.&nbsp;  That also means that the accessor record is not updated and the modified bit is not set.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=69 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).Priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Priority</a></h3><div class=CBody><p>Functions for manipulating the search priority of resources.&nbsp;  These implementations of the interface defined in the base class delegate to the resource pool.</p></div></div></div>
+<div class="CGroup" id="doc-nav-item-69" data-doc-topic="doc-nav-item-69" data-anchor="uvm_resource#(T).Priority"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).Priority" id="uvm_resource#(T).Priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">Priority</a></h3><div class=CBody><p>Functions for manipulating the search priority of resources.&nbsp;  These implementations of the interface defined in the base class delegate to the resource pool.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=70 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).set_priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set priority</a></h3><div class=CBody><p>Change the search priority of the resource based on the value of the priority enum argument, <i>pri</i>.</p></div></div></div>
+<div class="CMethod" id="doc-nav-item-70" data-doc-topic="doc-nav-item-70" data-anchor="uvm_resource#(T).set_priority"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).set_priority" id="uvm_resource#(T).set_priority" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">set priority</a></h3><div class=CBody><p>Change the search priority of the resource based on the value of the priority enum argument, <i>pri</i>.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=71 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_resource#(T).get_highest_precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_highest_precedence</a></h3>
+<div class="CMethod" id="doc-nav-item-71" data-doc-topic="doc-nav-item-71" data-anchor="uvm_resource#(T).get_highest_precedence"><div class="CTopic"><h3 class=CTitle><a name="uvm_resource#(T).get_highest_precedence" id="uvm_resource#(T).get_highest_precedence" href="../../src_view/base/uvm_resource.svh.html#L111" class="src-code-link" data-src-file="base/uvm_resource.svh" data-src-line="111">get_highest_precedence</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> this_type <span class="sv-proto-name">get_highest_precedence</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-uvm-type">uvm_resource_types</span>::</td>
@@ -1484,13 +1484,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -1687,6 +1687,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -1845,15 +1898,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

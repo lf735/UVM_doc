@@ -29,41 +29,41 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Factory_Component_and_Object_Wrappers" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Factory Component and Object Wrappers</a></h1><div class=CBody>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Factory_Component_and_Object_Wrappers"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Factory_Component_and_Object_Wrappers" id="Factory_Component_and_Object_Wrappers" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Factory Component and Object Wrappers</a></h1><div class=CBody>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SMain"><td class=SEntry><a href="#Factory_Component_and_Object_Wrappers" >Factory Component and Object Wrappers</a></td><td class=SDescription></td></tr>
+<tr class="SMain"><td class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >Factory Component and Object Wrappers</a></td><td class=SDescription></td></tr>
   <!-- index=1 -->
 
-<tr class="SGeneric"><td class=SEntry><a href="#Intro" >Intro</a></td><td class=SDescription>This section defines the proxy component and object classes used by the factory. </td></tr>
+<tr class="SGeneric"><td class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" >Intro</a></td><td class=SDescription>This section defines the proxy component and object classes used by the factory. </td></tr>
   <!-- index=2 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_component_registry#(T,Tname)" id=link1  >uvm_component_registry #(T,Tname)</a></td><td class=SDescription>The uvm_component_registry serves as a lightweight proxy for a component of type <i>T</i> and type name <i>Tname</i>, a string. </td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" id=link1  >uvm_component_registry #(T,Tname)</a></td><td class=SDescription>The uvm_component_registry serves as a lightweight proxy for a component of type <i>T</i> and type name <i>Tname</i>, a string. </td></tr>
   <!-- index=10 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_object_registry#(T,Tname)" id=link2  >uvm_object_registry #(T,Tname)</a></td><td class=SDescription>The uvm_object_registry serves as a lightweight proxy for a <a href="uvm_object-svh.html#uvm_object" class=LClass id=link3  >uvm_object</a> of type <i>T</i> and type name <i>Tname</i>, a string. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" id=link2  >uvm_object_registry #(T,Tname)</a></td><td class=SDescription>The uvm_object_registry serves as a lightweight proxy for a <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link3  >uvm_object</a> of type <i>T</i> and type name <i>Tname</i>, a string. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=1 -->
-<div class="CGeneric"><div class=CTopic><h3 class=CTitle><a name="Intro" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Intro</a></h3><div class=CBody><p>This section defines the proxy component and object classes used by the factory.&nbsp; To avoid the overhead of creating an instance of every component and object that get registered, the factory holds lightweight wrappers, or proxies.&nbsp; When a request for a new object is made, the factory calls upon the proxy to create the object it represents.</p></div></div></div>
+<div class="CGeneric" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="Intro"><div class="CTopic"><h3 class=CTitle><a name="Intro" id="Intro" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Intro</a></h3><div class=CBody><p>This section defines the proxy component and object classes used by the factory.&nbsp; To avoid the overhead of creating an instance of every component and object that get registered, the factory holds lightweight wrappers, or proxies.&nbsp; When a request for a new object is made, the factory calls upon the proxy to create the object it represents.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_component_registry#(T,Tname)" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">uvm_component_registry #(T,Tname)</a></h2><div class=CBody><p>The uvm_component_registry serves as a lightweight proxy for a component of type <i>T</i> and type name <i>Tname</i>, a string.&nbsp; The proxy enables efficient registration with the <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link12  >uvm_factory</a>.&nbsp; Without it, registration would require an instance of the component itself.</p><p>See <a href="../overviews/tlm1-txt.html#Usage" class=LGroup id=link13  >Usage</a> section below for information on using uvm_component_registry.</p>
+<div class="CClass" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_component_registry#(T,Tname)"><div class="CTopic"><h2 class=CTitle><a name="uvm_component_registry#(T,Tname)" id="uvm_component_registry#(T,Tname)" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">uvm_component_registry #(T,Tname)</a></h2><div class=CBody><p>The uvm_component_registry serves as a lightweight proxy for a component of type <i>T</i> and type name <i>Tname</i>, a string.&nbsp; The proxy enables efficient registration with the <a href="uvm_factory-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link12  >uvm_factory</a>.&nbsp; Without it, registration would require an instance of the component itself.</p><p>See <a href="../overviews/tlm1-txt.html#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LGroup id=link13  >Usage</a> section below for information on using uvm_component_registry.</p>
 
 <!--START_ND_SUMMARY index=2-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=2 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_component_registry#(T,Tname)" id=link5  >uvm_component_registry #(T,Tname)</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" id=link5  >uvm_component_registry #(T,Tname)</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The uvm_component_registry serves as a lightweight proxy for a component of type <i>T</i> and type name <i>Tname</i>, a string. </td></tr>
 
   <!-- HIERARCHY -->
@@ -71,7 +71,7 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link4  >uvm_object_wrapper</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_factory-svh.html#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LClass id=link4  >uvm_object_wrapper</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_component_registry#(T,Tname)</div></div></td></tr>
         </table>
       </div>
@@ -101,38 +101,38 @@
 
   <!-- index=3 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_component_registry#(T,Tname).Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=4 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_component_registry#(T,Tname).create_component" id=link6  >create_component</a></td><td class=SDescription>Creates a component of type T having the provided <i>name</i> and <i>parent</i>. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" id=link6  >create_component</a></td><td class=SDescription>Creates a component of type T having the provided <i>name</i> and <i>parent</i>. </td></tr>
   <!-- index=5 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_component_registry#(T,Tname).get_type_name" id=link7  >get_type_name</a></td><td class=SDescription>Returns the value given by the string parameter, <i>Tname</i>. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" id=link7  >get_type_name</a></td><td class=SDescription>Returns the value given by the string parameter, <i>Tname</i>. </td></tr>
   <!-- index=6 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_component_registry#(T,Tname).get" id=link8  >get</a></td><td class=SDescription>Returns the singleton instance of this type. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" id=link8  >get</a></td><td class=SDescription>Returns the singleton instance of this type. </td></tr>
   <!-- index=7 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_component_registry#(T,Tname).create" id=link9  >create</a></td><td class=SDescription>Returns an instance of the component type, <i>T</i>, represented by this proxy, subject to any factory overrides based on the context provided by the <i>parent</i>&rsquo;s full name. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" id=link9  >create</a></td><td class=SDescription>Returns an instance of the component type, <i>T</i>, represented by this proxy, subject to any factory overrides based on the context provided by the <i>parent</i>&rsquo;s full name. </td></tr>
   <!-- index=8 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_component_registry#(T,Tname).set_type_override" id=link10  >set_type_override</a></td><td class=SDescription>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type, <i>T</i>, represented by this proxy, provided no instance override applies. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" id=link10  >set_type_override</a></td><td class=SDescription>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type, <i>T</i>, represented by this proxy, provided no instance override applies. </td></tr>
   <!-- index=9 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_component_registry#(T,Tname).set_inst_override" id=link11  >set_inst_override</a></td><td class=SDescription>Configures the factory to create a component of the type represented by <i>override_type</i> whenever a request is made to create an object of the type, <i>T</i>, represented by this proxy,  with matching instance paths. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" id=link11  >set_inst_override</a></td><td class=SDescription>Configures the factory to create a component of the type represented by <i>override_type</i> whenever a request is made to create an object of the type, <i>T</i>, represented by this proxy,  with matching instance paths. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).Methods" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_component_registry#(T,Tname).Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).Methods" id="uvm_component_registry#(T,Tname).Methods" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).create_component" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create_component</a></h3>
+<div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_component_registry#(T,Tname).create_component"><div class="CTopic"><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).create_component" id="uvm_component_registry#(T,Tname).create_component" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create_component</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_component <span class="sv-proto-name">create_component</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -144,21 +144,21 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Creates a component of type T having the provided <i>name</i> and <i>parent</i>.&nbsp; This is an override of the method in <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link14  >uvm_object_wrapper</a>.&nbsp; It is called by the factory after determining the type of object to create.&nbsp; You should not call this method directly.&nbsp; Call <a href="#uvm_component_registry#(T,Tname).create" class=LMethod id=link15  >create</a> instead.</p></div></div></div>
+<div class=CBody><p>Creates a component of type T having the provided <i>name</i> and <i>parent</i>.&nbsp; This is an override of the method in <a href="uvm_factory-svh.html#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LClass id=link14  >uvm_object_wrapper</a>.&nbsp; It is called by the factory after determining the type of object to create.&nbsp; You should not call this method directly.&nbsp; Call <a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" class=LMethod id=link15  >create</a> instead.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).get_type_name" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get_type_name</a></h3>
+<div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_component_registry#(T,Tname).get_type_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).get_type_name" id="uvm_component_registry#(T,Tname).get_type_name" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get_type_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Returns the value given by the string parameter, <i>Tname</i>.&nbsp; This method overrides the method in <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link16  >uvm_object_wrapper</a>.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the value given by the string parameter, <i>Tname</i>.&nbsp; This method overrides the method in <a href="uvm_factory-svh.html#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LClass id=link16  >uvm_object_wrapper</a>.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).get" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_component_registry#(T,Tname).get"><div class="CTopic"><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).get" id="uvm_component_registry#(T,Tname).get" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-ident">this_type</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton instance of this type.&nbsp; Type-based factory operation depends on there being a single proxy instance for each registered type.</p></div></div></div>
 
@@ -166,7 +166,7 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).create" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create</a></h3>
+<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_component_registry#(T,Tname).create"><div class="CTopic"><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).create" id="uvm_component_registry#(T,Tname).create" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> T <span class="sv-proto-name">create</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -192,7 +192,7 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).set_type_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_type_override</a></h3>
+<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_component_registry#(T,Tname).set_type_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).set_type_override" id="uvm_component_registry#(T,Tname).set_type_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_type_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_type_override</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
@@ -214,7 +214,7 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).set_inst_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_inst_override</a></h3>
+<div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_component_registry#(T,Tname).set_inst_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_component_registry#(T,Tname).set_inst_override" id="uvm_component_registry#(T,Tname).set_inst_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_inst_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_inst_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
@@ -240,21 +240,21 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_object_registry#(T,Tname)" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">uvm_object_registry #(T,Tname)</a></h2><div class=CBody><p>The uvm_object_registry serves as a lightweight proxy for a <a href="uvm_object-svh.html#uvm_object" class=LClass id=link27  >uvm_object</a> of type <i>T</i> and type name <i>Tname</i>, a string.&nbsp; The proxy enables efficient registration with the <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link28  >uvm_factory</a>.&nbsp; Without it, registration would require an instance of the object itself.</p><p>See <a href="#uvm_object_registry#(T,Tname).Usage" class=LGroup id=link29  >Usage</a> section below for information on using uvm_component_registry.</p>
+<div class="CClass" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_object_registry#(T,Tname)"><div class="CTopic"><h2 class=CTitle><a name="uvm_object_registry#(T,Tname)" id="uvm_object_registry#(T,Tname)" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">uvm_object_registry #(T,Tname)</a></h2><div class=CBody><p>The uvm_object_registry serves as a lightweight proxy for a <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link27  >uvm_object</a> of type <i>T</i> and type name <i>Tname</i>, a string.&nbsp; The proxy enables efficient registration with the <a href="uvm_factory-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link28  >uvm_factory</a>.&nbsp; Without it, registration would require an instance of the object itself.</p><p>See <a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" class=LGroup id=link29  >Usage</a> section below for information on using uvm_component_registry.</p>
 
 <!--START_ND_SUMMARY index=10-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=10 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_object_registry#(T,Tname)" id=link18  >uvm_object_registry #(T,Tname)</a></td></tr>
-<tr class=SMain><td colspan=2 class=SWideDescription>The uvm_object_registry serves as a lightweight proxy for a <a href="uvm_object-svh.html#uvm_object" class=LClass id=link19  >uvm_object</a> of type <i>T</i> and type name <i>Tname</i>, a string. </td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" id=link18  >uvm_object_registry #(T,Tname)</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>The uvm_object_registry serves as a lightweight proxy for a <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link19  >uvm_object</a> of type <i>T</i> and type name <i>Tname</i>, a string. </td></tr>
 
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link17  >uvm_object_wrapper</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_factory-svh.html#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LClass id=link17  >uvm_object_wrapper</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_object_registry#(T,Tname)</div></div></td></tr>
         </table>
       </div>
@@ -284,32 +284,32 @@
 
   <!-- index=11 -->
 
-<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_object_registry#(T,Tname).create_object" id=link20  >create_object</a></td><td class=SDescription>Creates an object of type <i>T</i> and returns it as a handle to a <a href="uvm_object-svh.html#uvm_object" class=LClass id=link21  >uvm_object</a>. </td></tr>
+<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" id=link20  >create_object</a></td><td class=SDescription>Creates an object of type <i>T</i> and returns it as a handle to a <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link21  >uvm_object</a>. </td></tr>
   <!-- index=12 -->
 
-<tr class="SMethod SIndent1"><td class=SEntry><a href="#uvm_object_registry#(T,Tname).get_type_name" id=link22  >get_type_name</a></td><td class=SDescription>Returns the value given by the string parameter, <i>Tname</i>. </td></tr>
+<tr class="SMethod SIndent1"><td class=SEntry><a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" id=link22  >get_type_name</a></td><td class=SDescription>Returns the value given by the string parameter, <i>Tname</i>. </td></tr>
   <!-- index=13 -->
 
-<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_object_registry#(T,Tname).get" id=link23  >get</a></td><td class=SDescription>Returns the singleton instance of this type. </td></tr>
+<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" id=link23  >get</a></td><td class=SDescription>Returns the singleton instance of this type. </td></tr>
   <!-- index=14 -->
 
-<tr class="SMethod SIndent1"><td class=SEntry><a href="#uvm_object_registry#(T,Tname).create" id=link24  >create</a></td><td class=SDescription>Returns an instance of the object type, <i>T</i>, represented by this proxy, subject to any factory overrides based on the context provided by the <i>parent</i>&rsquo;s full name. </td></tr>
+<tr class="SMethod SIndent1"><td class=SEntry><a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" id=link24  >create</a></td><td class=SDescription>Returns an instance of the object type, <i>T</i>, represented by this proxy, subject to any factory overrides based on the context provided by the <i>parent</i>&rsquo;s full name. </td></tr>
   <!-- index=15 -->
 
-<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_object_registry#(T,Tname).set_type_override" id=link25  >set_type_override</a></td><td class=SDescription>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type represented by this proxy, provided no instance override applies. </td></tr>
+<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" id=link25  >set_type_override</a></td><td class=SDescription>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type represented by this proxy, provided no instance override applies. </td></tr>
   <!-- index=16 -->
 
-<tr class="SMethod SIndent1"><td class=SEntry><a href="#uvm_object_registry#(T,Tname).set_inst_override" id=link26  >set_inst_override</a></td><td class=SDescription>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type represented by this proxy, with matching instance paths. </td></tr>
+<tr class="SMethod SIndent1"><td class=SEntry><a href="#doc-nav-item-16" data-target-id="doc-nav-item-16" id=link26  >set_inst_override</a></td><td class=SDescription>Configures the factory to create an object of the type represented by <i>override_type</i> whenever a request is made to create an object of the type represented by this proxy, with matching instance paths. </td></tr>
   <!-- index=17 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_object_registry#(T,Tname).Usage" >Usage</a></td><td class=SDescription>This section describes usage for the uvm_*_registry classes.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" >Usage</a></td><td class=SDescription>This section describes usage for the uvm_*_registry classes.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).create_object" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create_object</a></h3>
+<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_object_registry#(T,Tname).create_object"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).create_object" id="uvm_object_registry#(T,Tname).create_object" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_object <span class="sv-proto-name">create_object</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -321,21 +321,21 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Creates an object of type <i>T</i> and returns it as a handle to a <a href="uvm_object-svh.html#uvm_object" class=LClass id=link30  >uvm_object</a>.&nbsp; This is an override of the method in <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link31  >uvm_object_wrapper</a>.&nbsp; It is called by the factory after determining the type of object to create.&nbsp; You should not call this method directly.&nbsp; Call <a href="#uvm_object_registry#(T,Tname).create" class=LMethod id=link32  >create</a> instead.</p></div></div></div>
+<div class=CBody><p>Creates an object of type <i>T</i> and returns it as a handle to a <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link30  >uvm_object</a>.&nbsp; This is an override of the method in <a href="uvm_factory-svh.html#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LClass id=link31  >uvm_object_wrapper</a>.&nbsp; It is called by the factory after determining the type of object to create.&nbsp; You should not call this method directly.&nbsp; Call <a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" class=LMethod id=link32  >create</a> instead.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).get_type_name" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get_type_name</a></h3>
+<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_object_registry#(T,Tname).get_type_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).get_type_name" id="uvm_object_registry#(T,Tname).get_type_name" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get_type_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Returns the value given by the string parameter, <i>Tname</i>.&nbsp; This method overrides the method in <a href="uvm_factory-svh.html#uvm_object_wrapper" class=LClass id=link33  >uvm_object_wrapper</a>.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the value given by the string parameter, <i>Tname</i>.&nbsp; This method overrides the method in <a href="uvm_factory-svh.html#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LClass id=link33  >uvm_object_wrapper</a>.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=13 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).get" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get</a></h3>
+<div class="CMethod" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_object_registry#(T,Tname).get"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).get" id="uvm_object_registry#(T,Tname).get" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">get</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-ident">this_type</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton instance of this type.&nbsp; Type-based factory operation depends on there being a single proxy instance for each registered type.</p></div></div></div>
 
@@ -343,7 +343,7 @@
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).create" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create</a></h3>
+<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_object_registry#(T,Tname).create"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).create" id="uvm_object_registry#(T,Tname).create" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">create</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> T <span class="sv-proto-name">create</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -369,7 +369,7 @@
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).set_type_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_type_override</a></h3>
+<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_object_registry#(T,Tname).set_type_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).set_type_override" id="uvm_object_registry#(T,Tname).set_type_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_type_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_type_override</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
@@ -391,7 +391,7 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).set_inst_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_inst_override</a></h3>
+<div class="CMethod" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_object_registry#(T,Tname).set_inst_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).set_inst_override" id="uvm_object_registry#(T,Tname).set_inst_override" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">set_inst_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_inst_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
@@ -417,7 +417,7 @@
 
 
  <!--CONTENT index=17 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).Usage" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Usage</a></h3><div class=CBody><p>This section describes usage for the uvm_*_registry classes.</p><p>The wrapper classes are used to register lightweight proxies of objects and components.</p><p>To register a particular component type, you need only typedef a specialization of its proxy class, which is typically done inside the class.</p><p>For example, to register a UVM component of type <i>mycomp</i></p><div class="code-block-container">
+<div class="CGroup" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_object_registry#(T,Tname).Usage"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).Usage" id="uvm_object_registry#(T,Tname).Usage" href="../../src_view/base/uvm_registry.svh.html#L51" class="src-code-link" data-src-file="base/uvm_registry.svh" data-src-line="51">Usage</a></h3><div class=CBody><p>This section describes usage for the uvm_*_registry classes.</p><p>The wrapper classes are used to register lightweight proxies of objects and components.</p><p>To register a particular component type, you need only typedef a specialization of its proxy class, which is typically done inside the class.</p><p>For example, to register a UVM component of type <i>mycomp</i></p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -446,7 +446,7 @@
   <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">mycomp</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
 <span class="sv-keyword">endclass</span></code></pre>
-</div><p>The <a href="../macros/uvm_object_defines-svh.html#`uvm_component_utils" class=LMacro >`uvm_component_utils</a> macro is for non-parameterized classes.&nbsp; In this example, the typedef underlying the macro specifies the <i>Tname</i> parameter as &ldquo;mycomp&rdquo;, and <i>mycomp</i>&rsquo;s get_type_name() is defined to return the same.&nbsp; With <i>Tname</i> defined, you can use the factory&rsquo;s name-based methods to set overrides and create objects and components of non-parameterized types.</p><p>For parameterized types, the type name changes with each specialization, so you cannot specify a <i>Tname</i> inside a parameterized class and get the behavior you want; the same type name string would be registered for all specializations of the class!&nbsp; (The factory would produce warnings for each specialization beyond the first.)&nbsp; To avoid the warnings and simulator interoperability issues with parameterized classes, you must register parameterized classes with a different macro.</p><p>For example, to register a UVM component of type driver #(T), you would write:</p><div class="code-block-container">
+</div><p>The <a href="../macros/uvm_object_defines-svh.html#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LMacro >`uvm_component_utils</a> macro is for non-parameterized classes.&nbsp; In this example, the typedef underlying the macro specifies the <i>Tname</i> parameter as &ldquo;mycomp&rdquo;, and <i>mycomp</i>&rsquo;s get_type_name() is defined to return the same.&nbsp; With <i>Tname</i> defined, you can use the factory&rsquo;s name-based methods to set overrides and create objects and components of non-parameterized types.</p><p>For parameterized types, the type name changes with each specialization, so you cannot specify a <i>Tname</i> inside a parameterized class and get the behavior you want; the same type name string would be registered for all specializations of the class!&nbsp; (The factory would produce warnings for each specialization beyond the first.)&nbsp; To avoid the warnings and simulator interoperability issues with parameterized classes, you must register parameterized classes with a different macro.</p><p>For example, to register a UVM component of type driver #(T), you would write:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -461,7 +461,7 @@
   <span class="sv-macro">`uvm_component_param_utils</span><span class="sv-op">(</span><span class="sv-ident">driver</span> <span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
 <span class="sv-keyword">endclass</span></code></pre>
-</div><p>The <a href="../macros/uvm_object_defines-svh.html#`uvm_component_param_utils" class=LMacro >`uvm_component_param_utils</a> and <a href="../macros/uvm_object_defines-svh.html#`uvm_object_param_utils" class=LMacro >`uvm_object_param_utils</a> macros are used to register parameterized classes with the factory.&nbsp; Unlike the non-param versions, these macros do not specify the <i>Tname</i> parameter in the underlying uvm_component_registry typedef, and they do not define the get_type_name method for the user class.&nbsp; Consequently, you will not be able to use the factory&rsquo;s name-based methods for parameterized classes.</p><p>The primary purpose for adding the factory&rsquo;s type-based methods was to accommodate registration of parameterized types and eliminate the many sources of errors associated with string-based factory usage.&nbsp; Thus, use of name-based lookup in <a href="uvm_factory-svh.html#uvm_factory" class=LClass id=link34  >uvm_factory</a> is no longer recommended.</p></div></div></div>
+</div><p>The <a href="../macros/uvm_object_defines-svh.html#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LMacro >`uvm_component_param_utils</a> and <a href="../macros/uvm_object_defines-svh.html#doc-nav-item-5" data-target-id="doc-nav-item-5" class=LMacro >`uvm_object_param_utils</a> macros are used to register parameterized classes with the factory.&nbsp; Unlike the non-param versions, these macros do not specify the <i>Tname</i> parameter in the underlying uvm_component_registry typedef, and they do not define the get_type_name method for the user class.&nbsp; Consequently, you will not be able to use the factory&rsquo;s name-based methods for parameterized classes.</p><p>The primary purpose for adding the factory&rsquo;s type-based methods was to accommodate registration of parameterized types and eliminate the many sources of errors associated with string-based factory usage.&nbsp; Thus, use of name-based lookup in <a href="uvm_factory-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link34  >uvm_factory</a> is no longer recommended.</p></div></div></div>
 
 </div><!--Content-->
 
@@ -556,13 +556,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -759,6 +759,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -917,15 +970,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

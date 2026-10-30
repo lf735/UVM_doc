@@ -29,13 +29,13 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CFile"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Algorithmic_Comparator" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Algorithmic Comparator</a></h1><div class=CBody><p>A common function of testbenches is to compare streams of transactions for equivalence.&nbsp; For example, a testbench may compare a stream of transactions from a DUT with expected results.</p><p>The UVM library provides a base class called <a href="uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type)" class=LClass id=link1  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> and two derived classes, which are <a href="uvm_in_order_comparator-svh.html#uvm_in_order_built_in_comparator#(T)" class=LClass id=link2  >uvm_in_order_built_in_comparator #(T)</a> for comparing streams of built-in types and <a href="uvm_in_order_comparator-svh.html#uvm_in_order_class_comparator#(T)" class=LClass id=link3  >uvm_in_order_class_comparator #(T)</a> for comparing streams of class objects.</p><p>The uvm_algorithmic_comparator also compares two streams of transactions; however, the transaction streams might be of different type objects.&nbsp; This device will use a user-written transformation function to convert one type to another before performing a comparison.</p>
+<div class="CFile" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Algorithmic_Comparator"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Algorithmic_Comparator" id="Algorithmic_Comparator" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Algorithmic Comparator</a></h1><div class=CBody><p>A common function of testbenches is to compare streams of transactions for equivalence.&nbsp; For example, a testbench may compare a stream of transactions from a DUT with expected results.</p><p>The UVM library provides a base class called <a href="uvm_in_order_comparator-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link1  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> and two derived classes, which are <a href="uvm_in_order_comparator-svh.html#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LClass id=link2  >uvm_in_order_built_in_comparator #(T)</a> for comparing streams of built-in types and <a href="uvm_in_order_comparator-svh.html#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LClass id=link3  >uvm_in_order_class_comparator #(T)</a> for comparing streams of class objects.</p><p>The uvm_algorithmic_comparator also compares two streams of transactions; however, the transaction streams might be of different type objects.&nbsp; This device will use a user-written transformation function to convert one type to another before performing a comparison.</p>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SMain"><td colspan=2 class=SEntry><a href="#Algorithmic_Comparator" >Algorithmic Comparator</a></td></tr>
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >Algorithmic Comparator</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>A common function of testbenches is to compare streams of transactions for equivalence. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
@@ -43,7 +43,7 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER)</a></h2><div class=CBody><p>Compares two streams of data objects of different types, <i>BEFORE</i> and <i>AFTER</i>.</p><p>The algorithmic comparator is a wrapper around <a href="uvm_in_order_comparator-svh.html#uvm_in_order_class_comparator#(T)" class=LClass id=link10  >uvm_in_order_class_comparator #(T)</a>.&nbsp; Like the in-order comparator, the algorithmic comparator compares two streams of transactions, the <i>BEFORE</i> stream and the <i>AFTER</i> stream.&nbsp; It is often the case when two streams of transactions need to be compared that the two streams are in different forms.&nbsp; That is, the type of the <i>BEFORE</i> transaction stream is different than the type of the <i>AFTER</i> transaction stream.</p><p>The uvm_algorithmic_comparator&rsquo;s <i>TRANSFORMER</i> type parameter specifies the class responsible for converting transactions of type <i>BEFORE</i> into those of type <i>AFTER</i>.&nbsp; This transformer class must provide a transform() method with the following prototype:</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)"><div class="CTopic"><h2 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)" id="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER)</a></h2><div class=CBody><p>Compares two streams of data objects of different types, <i>BEFORE</i> and <i>AFTER</i>.</p><p>The algorithmic comparator is a wrapper around <a href="uvm_in_order_comparator-svh.html#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LClass id=link10  >uvm_in_order_class_comparator #(T)</a>.&nbsp; Like the in-order comparator, the algorithmic comparator compares two streams of transactions, the <i>BEFORE</i> stream and the <i>AFTER</i> stream.&nbsp; It is often the case when two streams of transactions need to be compared that the two streams are in different forms.&nbsp; That is, the type of the <i>BEFORE</i> transaction stream is different than the type of the <i>AFTER</i> transaction stream.</p><p>The uvm_algorithmic_comparator&rsquo;s <i>TRANSFORMER</i> type parameter specifies the class responsible for converting transactions of type <i>BEFORE</i> into those of type <i>AFTER</i>.&nbsp; This transformer class must provide a transform() method with the following prototype:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -55,13 +55,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-ident">AFTER</span> <span class="sv-method">transform</span> <span class="sv-op">(</span><span class="sv-ident">BEFORE</span> <span class="sv-ident">b</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>Matches and mismatches are reported in terms of the <i>AFTER</i> transactions.&nbsp; For more information, see the <a href="uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type)" class=LClass id=link11  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> class.</p>
+</div><p>Matches and mismatches are reported in terms of the <i>AFTER</i> transactions.&nbsp; For more information, see the <a href="uvm_in_order_comparator-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link11  >uvm_in_order_comparator #(T,comp_type,convert,pair_type)</a> class.</p>
 
 <!--START_ND_SUMMARY index=1-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=1 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)" id=link8  >uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER)</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" id=link8  >uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER)</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Compares two streams of data objects of different types, <i>BEFORE</i> and <i>AFTER</i>.</td></tr>
 
   <!-- HIERARCHY -->
@@ -69,10 +69,10 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_misc-svh.html#uvm_void" class=LClass id=link4  >uvm_void</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_object-svh.html#uvm_object" class=LClass id=link5  >uvm_object</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link6  >uvm_report_object</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link7  >uvm_component</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_misc-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link4  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link6  >uvm_report_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link7  >uvm_component</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)</div></div></td></tr>
         </table>
       </div>
@@ -106,50 +106,50 @@
 
   <!-- index=2 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Ports" >Ports</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" >Ports</a></td><td class=SDescription></td></tr>
   <!-- index=3 -->
 
-<tr class="SPort SIndent2"><td class=SEntry><a href="#uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).before_export" >before_export</a></td><td class=SDescription>The export to which a data stream of type BEFORE is sent via a connected analysis port. </td></tr>
+<tr class="SPort SIndent2"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" >before_export</a></td><td class=SDescription>The export to which a data stream of type BEFORE is sent via a connected analysis port. </td></tr>
   <!-- index=4 -->
 
-<tr class="SPort SIndent2 SMarked"><td class=SEntry><a href="#uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).after_export" >after_export</a></td><td class=SDescription>The export to which a data stream of type AFTER is sent via a connected analysis port. </td></tr>
+<tr class="SPort SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" >after_export</a></td><td class=SDescription>The export to which a data stream of type AFTER is sent via a connected analysis port. </td></tr>
   <!-- index=5 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=6 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new" id=link9  >new</a></td><td class=SDescription>Creates an instance of a specialization of this class. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" id=link9  >new</a></td><td class=SDescription>Creates an instance of a specialization of this class. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Ports" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Ports</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Ports"><div class="CTopic"><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Ports" id="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Ports" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Ports</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).before_export" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">before_export</a></h3><div class=CBody><p>The export to which a data stream of type BEFORE is sent via a connected analysis port.&nbsp; Publishers (monitors) can send in an ordered stream of transactions against which the transformed BEFORE transactions will (be compared.</p></div></div></div>
+<div class="CPort" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).before_export"><div class="CTopic"><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).before_export" id="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).before_export" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">before_export</a></h3><div class=CBody><p>The export to which a data stream of type BEFORE is sent via a connected analysis port.&nbsp; Publishers (monitors) can send in an ordered stream of transactions against which the transformed BEFORE transactions will (be compared.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CPort"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).after_export" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">after_export</a></h3><div class=CBody><p>The export to which a data stream of type AFTER is sent via a connected analysis port.&nbsp; Publishers (monitors) can send in an ordered stream of transactions to be transformed and compared to the AFTER transactions.</p></div></div></div>
+<div class="CPort" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).after_export"><div class="CTopic"><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).after_export" id="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).after_export" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">after_export</a></h3><div class=CBody><p>The export to which a data stream of type AFTER is sent via a connected analysis port.&nbsp; Publishers (monitors) can send in an ordered stream of transactions to be transformed and compared to the AFTER transactions.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Methods" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Methods" id="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).Methods" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">new</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new"><div class="CTopic"><h3 class=CTitle><a name="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new" id="uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new" href="../../src_view/comps/uvm_algorithmic_comparator.svh.html#L68" class="src-code-link" data-src-file="comps/uvm_algorithmic_comparator.svh" data-src-line="68">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -264,13 +264,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -467,6 +467,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -625,15 +678,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

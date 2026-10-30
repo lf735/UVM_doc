@@ -18,13 +18,13 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CGroup"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Reporting_Classes" href="#">Reporting Classes</a></h1><div class=CBody><p>The reporting classes provide a facility for issuing reports with consistent formatting.&nbsp; Users can configure what actions to take and what files to send output to based on report severity, ID, or both severity and ID.&nbsp; Users can also filter messages based on their verbosity settings.</p><p>The primary interface to the UVM reporting facility is the <a href="../base/uvm_report_object-svh.html#uvm_report_object" class=LClass id=link1  >uvm_report_object</a> from which all <a href="../base/uvm_component-svh.html#uvm_component" class=LClass id=link2  >uvm_components</a> extend.&nbsp; The uvm_report_object delegates most tasks to its internal <a href="../base/uvm_report_handler-svh.html#uvm_report_handler" class=LClass id=link3  >uvm_report_handler</a>.&nbsp; If the report handler determines the report is not filtered based the configured verbosity setting, it sends the report to the central <a href="../base/uvm_report_server-svh.html#uvm_report_server" class=LClass id=link4  >uvm_report_server</a> for formatting and processing.</p><img src="../../images/uvm_ref_reporting.gif" width="433" height="232">
+<div class="CGroup" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Reporting_Classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Reporting_Classes" id="Reporting_Classes" href="#">Reporting Classes</a></h1><div class=CBody><p>The reporting classes provide a facility for issuing reports with consistent formatting.&nbsp; Users can configure what actions to take and what files to send output to based on report severity, ID, or both severity and ID.&nbsp; Users can also filter messages based on their verbosity settings.</p><p>The primary interface to the UVM reporting facility is the <a href="../base/uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link1  >uvm_report_object</a> from which all <a href="../base/uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_components</a> extend.&nbsp; The uvm_report_object delegates most tasks to its internal <a href="../base/uvm_report_handler-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link3  >uvm_report_handler</a>.&nbsp; If the report handler determines the report is not filtered based the configured verbosity setting, it sends the report to the central <a href="../base/uvm_report_server-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link4  >uvm_report_server</a> for formatting and processing.</p><img src="../../images/uvm_ref_reporting.gif" width="433" height="232">
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SMain"><td colspan=2 class=SEntry><a href="#Reporting_Classes" >Reporting Classes</a></td></tr>
+<tr class="SMain"><td colspan=2 class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >Reporting Classes</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The reporting classes provide a facility for issuing reports with consistent formatting. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
@@ -121,13 +121,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -324,6 +324,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -482,15 +535,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

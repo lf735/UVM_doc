@@ -29,32 +29,32 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_printer</a></h1><div class=CBody><p>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#uvm_object" class=LClass id=link8  >uvm_objects</a> in various formats.&nbsp; Subtypes of uvm_printer implement different print formats, or policies.</p><p>A user-defined printer format can be created, or one of the following four built-in printers can be used:</p><ul><li><a href="#uvm_printer" class=LClass id=link9  >uvm_printer</a> - provides base printer functionality; must be overridden.</li><li><a href="#uvm_table_printer" class=LClass id=link10  >uvm_table_printer</a> - prints the object in a tabular form.</li><li><a href="#uvm_tree_printer" class=LClass id=link11  >uvm_tree_printer</a> - prints the object in a tree form.</li><li><a href="#uvm_line_printer" class=LClass id=link12  >uvm_line_printer</a> - prints the information on a single line, but uses the same object separators as the tree printer.</li></ul><p>Printers have knobs that you use to control what and how information is printed.&nbsp; These knobs are contained in a separate knob class:</p><ul><li><a href="#uvm_printer_knobs" class=LClass id=link13  >uvm_printer_knobs</a> - common printer settings</li></ul><p>For convenience, global instances of each printer type are available for direct reference in your testbenches.</p><ul><li><a href="uvm_object_globals-svh.html#uvm_default_tree_printer" class=LVariable id=link14  >uvm_default_tree_printer</a></li><li><a href="uvm_object_globals-svh.html#uvm_default_line_printer" class=LVariable id=link15  >uvm_default_line_printer</a></li><li><a href="uvm_object_globals-svh.html#uvm_default_table_printer" class=LVariable id=link16  >uvm_default_table_printer</a></li><li><a href="uvm_object_globals-svh.html#uvm_default_printer" class=LVariable id=link17  >uvm_default_printer</a> (set to default_table_printer by default)</li></ul><p>When <a href="uvm_object-svh.html#uvm_object.print" class=LMethod id=link18  >uvm_object::print</a> and <a href="uvm_object-svh.html#uvm_object.sprint" class=LMethod id=link19  >uvm_object::sprint</a> are called without specifying a printer, the <a href="uvm_object_globals-svh.html#uvm_default_printer" class=LVariable id=link20  >uvm_default_printer</a> is used.</p>
+<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_printer"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_printer" id="uvm_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_printer</a></h1><div class=CBody><p>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link8  >uvm_objects</a> in various formats.&nbsp; Subtypes of uvm_printer implement different print formats, or policies.</p><p>A user-defined printer format can be created, or one of the following four built-in printers can be used:</p><ul><li><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link9  >uvm_printer</a> - provides base printer functionality; must be overridden.</li><li><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" class=LClass id=link10  >uvm_table_printer</a> - prints the object in a tabular form.</li><li><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link11  >uvm_tree_printer</a> - prints the object in a tree form.</li><li><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" class=LClass id=link12  >uvm_line_printer</a> - prints the information on a single line, but uses the same object separators as the tree printer.</li></ul><p>Printers have knobs that you use to control what and how information is printed.&nbsp; These knobs are contained in a separate knob class:</p><ul><li><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" class=LClass id=link13  >uvm_printer_knobs</a> - common printer settings</li></ul><p>For convenience, global instances of each printer type are available for direct reference in your testbenches.</p><ul><li><a href="uvm_object_globals-svh.html#doc-nav-item-26" data-target-id="doc-nav-item-26" class=LVariable id=link14  >uvm_default_tree_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-27" data-target-id="doc-nav-item-27" class=LVariable id=link15  >uvm_default_line_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-25" data-target-id="doc-nav-item-25" class=LVariable id=link16  >uvm_default_table_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LVariable id=link17  >uvm_default_printer</a> (set to default_table_printer by default)</li></ul><p>When <a href="uvm_object-svh.html#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link18  >uvm_object::print</a> and <a href="uvm_object-svh.html#doc-nav-item-19" data-target-id="doc-nav-item-19" class=LMethod id=link19  >uvm_object::sprint</a> are called without specifying a printer, the <a href="uvm_object_globals-svh.html#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LVariable id=link20  >uvm_default_printer</a> is used.</p>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_printer" id=link1  >uvm_printer</a></td><td class=SDescription>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#uvm_object" class=LClass id=link2  >uvm_objects</a> in various formats. </td></tr>
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" id=link1  >uvm_printer</a></td><td class=SDescription>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_objects</a> in various formats. </td></tr>
   <!-- index=19 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_table_printer" id=link3  >uvm_table_printer</a></td><td class=SDescription>The table printer prints output in a tabular format.</td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" id=link3  >uvm_table_printer</a></td><td class=SDescription>The table printer prints output in a tabular format.</td></tr>
   <!-- index=24 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_tree_printer" id=link4  >uvm_tree_printer</a></td><td class=SDescription>By overriding various methods of the <a href="#uvm_printer" class=LClass id=link5  >uvm_printer</a> super class, the tree printer prints output in a tree format.</td></tr>
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" id=link4  >uvm_tree_printer</a></td><td class=SDescription>By overriding various methods of the <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_printer</a> super class, the tree printer prints output in a tree format.</td></tr>
   <!-- index=29 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_line_printer" id=link6  >uvm_line_printer</a></td><td class=SDescription>The line printer prints output in a line format.</td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" id=link6  >uvm_line_printer</a></td><td class=SDescription>The line printer prints output in a line format.</td></tr>
   <!-- index=32 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_printer_knobs" id=link7  >uvm_printer_knobs</a></td><td class=SDescription>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link7  >uvm_printer_knobs</a></td><td class=SDescription>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=1 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.knobs" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">knobs</a></h3>
+<div class="CVariable" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_printer.knobs"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.knobs" id="uvm_printer.knobs" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">knobs</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_printer_knobs</span> <span class="sv-ident">knobs</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span>
   </td></tr></table></blockquote><div class=CBody><p>The knob object provides access to the variety of knobs associated with a specific printer instance.</p></div></div></div>
 
@@ -62,13 +62,13 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.Methods_for_printer_usage" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods for printer usage</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_printer.Methods_for_printer_usage"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.Methods_for_printer_usage" id="uvm_printer.Methods_for_printer_usage" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods for printer usage</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_field" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_field</a></h3>
+<div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_printer.print_field"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_field" id="uvm_printer.print_field" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_field</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_field</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -106,7 +106,7 @@
 
 
  <!--CONTENT index=4 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_field_int" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_field_int</a></h3>
+<div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_printer.print_field_int"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_field_int" id="uvm_printer.print_field_int" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_field_int</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_field_int</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -144,7 +144,7 @@
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_object" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_object</a></h3>
+<div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_printer.print_object"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_object" id="uvm_printer.print_object" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_object</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -164,13 +164,13 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Prints an object.&nbsp; Whether the object is recursed depends on a variety of knobs, such as the depth knob; if the current depth is at or below the depth setting, then the object is not recursed.</p><p>By default, the children of <a href="uvm_component-svh.html#uvm_component" class=LClass id=link21  >uvm_components</a> are printed.&nbsp; To turn this behavior off, you must set the <a href="uvm_component-svh.html#uvm_component.print_enabled" class=LVariable id=link22  >uvm_component::print_enabled</a> bit to 0 for the specific children you do not want automatically printed.</p></div></div></div>
+<div class=CBody><p>Prints an object.&nbsp; Whether the object is recursed depends on a variety of knobs, such as the depth knob; if the current depth is at or below the depth setting, then the object is not recursed.</p><p>By default, the children of <a href="uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link21  >uvm_components</a> are printed.&nbsp; To turn this behavior off, you must set the <a href="uvm_component-svh.html#doc-nav-item-88" data-target-id="doc-nav-item-88" class=LVariable id=link22  >uvm_component::print_enabled</a> bit to 0 for the specific children you do not want automatically printed.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_string" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_string</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_printer.print_string"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_string" id="uvm_printer.print_string" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_string</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_string</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -196,7 +196,7 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_time" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_time</a></h3>
+<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_printer.print_time"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_time" id="uvm_printer.print_time" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_time</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_time</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -222,7 +222,7 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_real" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_real</a></h3>
+<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_printer.print_real"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_real" id="uvm_printer.print_real" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_real</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_real</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -248,7 +248,7 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_generic" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_generic</a></h3>
+<div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_printer.print_generic"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_generic" id="uvm_printer.print_generic" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_generic</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_generic</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -282,13 +282,13 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.Methods_for_printer_subtyping" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods for printer subtyping</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_printer.Methods_for_printer_subtyping"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.Methods_for_printer_subtyping" id="uvm_printer.Methods_for_printer_subtyping" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods for printer subtyping</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.emit" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">emit</a></h3>
+<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_printer.emit"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.emit" id="uvm_printer.emit" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">emit</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">emit</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Emits a string representing the contents of an object in a format defined by an extension of this object.</p></div></div></div>
 
@@ -296,7 +296,7 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.format_row" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">format_row</a></h3>
+<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_printer.format_row"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.format_row" id="uvm_printer.format_row" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">format_row</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">format_row</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_printer_row_info</span>&nbsp;</td>
@@ -312,7 +312,7 @@
 
 
  <!--CONTENT index=13 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.format_header" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">format_header</a></h3>
+<div class="CMethod" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_printer.format_header"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.format_header" id="uvm_printer.format_header" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">format_header</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">format_header</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Hook to override base header with a custom header.</p></div></div></div>
 
@@ -320,7 +320,7 @@
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.format_footer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">format_footer</a></h3>
+<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_printer.format_footer"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.format_footer" id="uvm_printer.format_footer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">format_footer</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">format_footer</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Hook to override base footer with a custom footer.</p></div></div></div>
 
@@ -328,7 +328,7 @@
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.adjust_name" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">adjust_name</a></h3>
+<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_printer.adjust_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.adjust_name" id="uvm_printer.adjust_name" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">adjust_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">adjust_name</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -350,7 +350,7 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_array_header" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_array_header</a></h3>
+<div class="CMethod" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_printer.print_array_header"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_array_header" id="uvm_printer.print_array_header" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_array_header</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_array_header</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -374,13 +374,13 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Prints the header of an array.&nbsp; This function is called before each individual element is printed.&nbsp; <a href="#uvm_printer.print_array_footer" class=LMethod id=link23  >print_array_footer</a> is called to mark the completion of array printing.</p></div></div></div>
+<div class=CBody><p>Prints the header of an array.&nbsp; This function is called before each individual element is printed.&nbsp; <a href="#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link23  >print_array_footer</a> is called to mark the completion of array printing.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=17 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_array_range" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_array_range</a></h3>
+<div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_printer.print_array_range"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_array_range" id="uvm_printer.print_array_range" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_array_range</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_array_range</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
@@ -392,13 +392,13 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Prints a range using ellipses for values.&nbsp; This method is used when honoring the array knobs for partial printing of large arrays, <a href="#uvm_printer_knobs.begin_elements" class=LVariable id=link24  >uvm_printer_knobs::begin_elements</a> and <a href="#uvm_printer_knobs.end_elements" class=LVariable id=link25  >uvm_printer_knobs::end_elements</a>.</p><p>This function should be called after begin_elements have been printed and before end_elements have been printed.</p></div></div></div>
+<div class=CBody><p>Prints a range using ellipses for values.&nbsp; This method is used when honoring the array knobs for partial printing of large arrays, <a href="#doc-nav-item-42" data-target-id="doc-nav-item-42" class=LVariable id=link24  >uvm_printer_knobs::begin_elements</a> and <a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LVariable id=link25  >uvm_printer_knobs::end_elements</a>.</p><p>This function should be called after begin_elements have been printed and before end_elements have been printed.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=18 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer.print_array_footer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_array_footer</a></h3>
+<div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_printer.print_array_footer"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer.print_array_footer" id="uvm_printer.print_array_footer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">print_array_footer</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_array_footer</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
@@ -416,7 +416,7 @@
 
 
  <!--CONTENT index=19 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_table_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_table_printer</a></h2><div class=CBody><p>The table printer prints output in a tabular format.</p><p>The following shows sample output from the table printer.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_table_printer"><div class="CTopic"><h2 class=CTitle><a name="uvm_table_printer" id="uvm_table_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_table_printer</a></h2><div class=CBody><p>The table printer prints output in a tabular format.</p><p>The following shows sample output from the table printer.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -440,10 +440,10 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 </div>
 
 <!--START_ND_SUMMARY index=19-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=19 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_table_printer" id=link27  >uvm_table_printer</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" id=link27  >uvm_table_printer</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The table printer prints output in a tabular format.</td></tr>
 
   <!-- HIERARCHY -->
@@ -451,7 +451,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#uvm_printer" class=LClass id=link26  >uvm_printer</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link26  >uvm_printer</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_table_printer</div></div></td></tr>
         </table>
       </div>
@@ -467,29 +467,29 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
   <!-- index=20 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_table_printer.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-20" data-target-id="doc-nav-item-20" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=21 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_table_printer.new" id=link28  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_table_printer</i>.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-21" data-target-id="doc-nav-item-21" id=link28  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_table_printer</i>.</td></tr>
   <!-- index=22 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_table_printer.Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-22" data-target-id="doc-nav-item-22" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=23 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_table_printer.emit" id=link29  >emit</a></td><td class=SDescription>Formats the collected information from prior calls to <i>print_*</i> into table format.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-23" data-target-id="doc-nav-item-23" id=link29  >emit</a></td><td class=SDescription>Formats the collected information from prior calls to <i>print_*</i> into table format.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=20 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_table_printer.Variables" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_table_printer.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_table_printer.Variables" id="uvm_table_printer.Variables" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=21 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_table_printer.new" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">new</a></h3>
+<div class="CVariable" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_table_printer.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_table_printer.new" id="uvm_table_printer.new" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Creates a new instance of <i>uvm_table_printer</i>.</p></div></div></div>
 
@@ -497,13 +497,13 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=22 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_table_printer.Methods" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_table_printer.Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_table_printer.Methods" id="uvm_table_printer.Methods" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=23 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_table_printer.emit" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">emit</a></h3>
+<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_table_printer.emit"><div class="CTopic"><h3 class=CTitle><a name="uvm_table_printer.emit" id="uvm_table_printer.emit" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">emit</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">emit</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Formats the collected information from prior calls to <i>print_*</i> into table format.</p></div></div></div>
 
@@ -511,7 +511,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=24 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_tree_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_tree_printer</a></h2><div class=CBody><p>By overriding various methods of the <a href="#uvm_printer" class=LClass id=link35  >uvm_printer</a> super class, the tree printer prints output in a tree format.</p><p>The following shows sample output from the tree printer.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_tree_printer"><div class="CTopic"><h2 class=CTitle><a name="uvm_tree_printer" id="uvm_tree_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_tree_printer</a></h2><div class=CBody><p>By overriding various methods of the <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link35  >uvm_printer</a> super class, the tree printer prints output in a tree format.</p><p>The following shows sample output from the tree printer.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -533,18 +533,18 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 </div>
 
 <!--START_ND_SUMMARY index=24-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=24 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tree_printer" id=link31  >uvm_tree_printer</a></td></tr>
-<tr class=SMain><td colspan=2 class=SWideDescription>By overriding various methods of the <a href="#uvm_printer" class=LClass id=link32  >uvm_printer</a> super class, the tree printer prints output in a tree format.</td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" id=link31  >uvm_tree_printer</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>By overriding various methods of the <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link32  >uvm_printer</a> super class, the tree printer prints output in a tree format.</td></tr>
 
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#uvm_printer" class=LClass id=link30  >uvm_printer</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link30  >uvm_printer</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tree_printer</div></div></td></tr>
         </table>
       </div>
@@ -560,29 +560,29 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
   <!-- index=25 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tree_printer.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-25" data-target-id="doc-nav-item-25" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=26 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_tree_printer.new" id=link33  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_tree_printer</i>.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-26" data-target-id="doc-nav-item-26" id=link33  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_tree_printer</i>.</td></tr>
   <!-- index=27 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tree_printer.Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=28 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tree_printer.emit" id=link34  >emit</a></td><td class=SDescription>Formats the collected information from prior calls to <i>print_*</i> into hierarchical tree format.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-28" data-target-id="doc-nav-item-28" id=link34  >emit</a></td><td class=SDescription>Formats the collected information from prior calls to <i>print_*</i> into hierarchical tree format.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=25 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tree_printer.Variables" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_tree_printer.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_tree_printer.Variables" id="uvm_tree_printer.Variables" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=26 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_tree_printer.new" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">new</a></h3>
+<div class="CVariable" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_tree_printer.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_tree_printer.new" id="uvm_tree_printer.new" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Creates a new instance of <i>uvm_tree_printer</i>.</p></div></div></div>
 
@@ -590,13 +590,13 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=27 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_tree_printer.Methods" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_tree_printer.Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_tree_printer.Methods" id="uvm_tree_printer.Methods" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=28 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_tree_printer.emit" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">emit</a></h3>
+<div class="CMethod" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_tree_printer.emit"><div class="CTopic"><h3 class=CTitle><a name="uvm_tree_printer.emit" id="uvm_tree_printer.emit" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">emit</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">emit</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Formats the collected information from prior calls to <i>print_*</i> into hierarchical tree format.</p></div></div></div>
 
@@ -604,7 +604,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=29 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_line_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_line_printer</a></h2><div class=CBody><p>The line printer prints output in a line format.</p><p>The following shows sample output from the line printer.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_line_printer"><div class="CTopic"><h2 class=CTitle><a name="uvm_line_printer" id="uvm_line_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_line_printer</a></h2><div class=CBody><p>The line printer prints output in a line format.</p><p>The following shows sample output from the line printer.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -619,10 +619,10 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 </div>
 
 <!--START_ND_SUMMARY index=29-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=29 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_line_printer" id=link38  >uvm_line_printer</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" id=link38  >uvm_line_printer</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The line printer prints output in a line format.</td></tr>
 
   <!-- HIERARCHY -->
@@ -630,8 +630,8 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#uvm_printer" class=LClass id=link36  >uvm_printer</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#uvm_tree_printer" class=LClass id=link37  >uvm_tree_printer</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link36  >uvm_printer</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link37  >uvm_tree_printer</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_line_printer</div></div></td></tr>
         </table>
       </div>
@@ -647,37 +647,37 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
   <!-- index=30 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_line_printer.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-30" data-target-id="doc-nav-item-30" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=31 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_line_printer.new" id=link39  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_line_printer</i>. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" id=link39  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_line_printer</i>. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=30 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_line_printer.Variables" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_line_printer.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_line_printer.Variables" id="uvm_line_printer.Variables" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=31 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_line_printer.new" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">new</a></h3>
+<div class="CVariable" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_line_printer.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_line_printer.new" id="uvm_line_printer.new" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Creates a new instance of <i>uvm_line_printer</i>.&nbsp; It differs from the <a href="#uvm_tree_printer" class=LClass id=link40  >uvm_tree_printer</a> only in that the output contains no line-feeds and indentation.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>Creates a new instance of <i>uvm_line_printer</i>.&nbsp; It differs from the <a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link40  >uvm_tree_printer</a> only in that the output contains no line-feeds and indentation.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=32 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_printer_knobs" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_printer_knobs</a></h2><div class=CBody><p>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</p>
+<div class="CClass" id="doc-nav-item-32" data-doc-topic="doc-nav-item-32" data-anchor="uvm_printer_knobs"><div class="CTopic"><h2 class=CTitle><a name="uvm_printer_knobs" id="uvm_printer_knobs" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_printer_knobs</a></h2><div class=CBody><p>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</p>
 
 <!--START_ND_SUMMARY index=32-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=32 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_printer_knobs" id=link41  >uvm_printer_knobs</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link41  >uvm_printer_knobs</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</td></tr>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
@@ -687,124 +687,124 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
   <!-- index=33 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_printer_knobs.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-33" data-target-id="doc-nav-item-33" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=34 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.header" id=link42  >header</a></td><td class=SDescription>Indicates whether the <a href="#uvm_printer.format_header" class=LMethod id=link43  >uvm_printer::format_header</a> function should be called when printing an object.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-34" data-target-id="doc-nav-item-34" id=link42  >header</a></td><td class=SDescription>Indicates whether the <a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LMethod id=link43  >uvm_printer::format_header</a> function should be called when printing an object.</td></tr>
   <!-- index=35 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.footer" id=link44  >footer</a></td><td class=SDescription>Indicates whether the <a href="#uvm_printer.format_footer" class=LMethod id=link45  >uvm_printer::format_footer</a> function should be called when printing an object.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-35" data-target-id="doc-nav-item-35" id=link44  >footer</a></td><td class=SDescription>Indicates whether the <a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" class=LMethod id=link45  >uvm_printer::format_footer</a> function should be called when printing an object.</td></tr>
   <!-- index=36 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.full_name" id=link46  >full_name</a></td><td class=SDescription>Indicates whether <a href="#uvm_printer.adjust_name" class=LMethod id=link47  >uvm_printer::adjust_name</a> should print the full name of an identifier or just the leaf name.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-36" data-target-id="doc-nav-item-36" id=link46  >full_name</a></td><td class=SDescription>Indicates whether <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link47  >uvm_printer::adjust_name</a> should print the full name of an identifier or just the leaf name.</td></tr>
   <!-- index=37 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.identifier" id=link48  >identifier</a></td><td class=SDescription>Indicates whether <a href="#uvm_printer.adjust_name" class=LMethod id=link49  >uvm_printer::adjust_name</a> should print the identifier. </td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-37" data-target-id="doc-nav-item-37" id=link48  >identifier</a></td><td class=SDescription>Indicates whether <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link49  >uvm_printer::adjust_name</a> should print the identifier. </td></tr>
   <!-- index=38 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.type_name" id=link50  >type_name</a></td><td class=SDescription>Controls whether to print a field&rsquo;s type name.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-38" data-target-id="doc-nav-item-38" id=link50  >type_name</a></td><td class=SDescription>Controls whether to print a field&rsquo;s type name.</td></tr>
   <!-- index=39 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.size" id=link51  >size</a></td><td class=SDescription>Controls whether to print a field&rsquo;s size.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-39" data-target-id="doc-nav-item-39" id=link51  >size</a></td><td class=SDescription>Controls whether to print a field&rsquo;s size.</td></tr>
   <!-- index=40 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.depth" id=link52  >depth</a></td><td class=SDescription>Indicates how deep to recurse when printing objects. </td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-40" data-target-id="doc-nav-item-40" id=link52  >depth</a></td><td class=SDescription>Indicates how deep to recurse when printing objects. </td></tr>
   <!-- index=41 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.reference" id=link53  >reference</a></td><td class=SDescription>Controls whether to print a unique reference ID for object handles. </td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-41" data-target-id="doc-nav-item-41" id=link53  >reference</a></td><td class=SDescription>Controls whether to print a unique reference ID for object handles. </td></tr>
   <!-- index=42 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.begin_elements" id=link54  >begin_elements</a></td><td class=SDescription>Defines the number of elements at the head of a list to print. </td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-42" data-target-id="doc-nav-item-42" id=link54  >begin_elements</a></td><td class=SDescription>Defines the number of elements at the head of a list to print. </td></tr>
   <!-- index=43 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.end_elements" id=link55  >end_elements</a></td><td class=SDescription>This defines the number of elements at the end of a list that should be printed.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" id=link55  >end_elements</a></td><td class=SDescription>This defines the number of elements at the end of a list that should be printed.</td></tr>
   <!-- index=44 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.prefix" id=link56  >prefix</a></td><td class=SDescription>Specifies the string prepended to each output line</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-44" data-target-id="doc-nav-item-44" id=link56  >prefix</a></td><td class=SDescription>Specifies the string prepended to each output line</td></tr>
   <!-- index=45 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.indent" id=link57  >indent</a></td><td class=SDescription>This knob specifies the number of spaces to use for level indentation. </td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-45" data-target-id="doc-nav-item-45" id=link57  >indent</a></td><td class=SDescription>This knob specifies the number of spaces to use for level indentation. </td></tr>
   <!-- index=46 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.show_root" id=link58  >show_root</a></td><td class=SDescription>This setting indicates whether or not the initial object that is printed (when current depth is 0) prints the full path name. </td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-46" data-target-id="doc-nav-item-46" id=link58  >show_root</a></td><td class=SDescription>This setting indicates whether or not the initial object that is printed (when current depth is 0) prints the full path name. </td></tr>
   <!-- index=47 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.mcd" id=link59  >mcd</a></td><td class=SDescription>This is a file descriptor, or multi-channel descriptor, that specifies where the print output should be directed.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-47" data-target-id="doc-nav-item-47" id=link59  >mcd</a></td><td class=SDescription>This is a file descriptor, or multi-channel descriptor, that specifies where the print output should be directed.</td></tr>
   <!-- index=48 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.separator" id=link60  >separator</a></td><td class=SDescription>For tree printers only, determines the opening and closing separators used for nested objects.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-48" data-target-id="doc-nav-item-48" id=link60  >separator</a></td><td class=SDescription>For tree printers only, determines the opening and closing separators used for nested objects.</td></tr>
   <!-- index=49 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.show_radix" id=link61  >show_radix</a></td><td class=SDescription>Indicates whether the radix string (&lsquo;h, and so on) should be prepended to an integral value when one is printed.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-49" data-target-id="doc-nav-item-49" id=link61  >show_radix</a></td><td class=SDescription>Indicates whether the radix string (&lsquo;h, and so on) should be prepended to an integral value when one is printed.</td></tr>
   <!-- index=50 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.default_radix" id=link62  >default_radix</a></td><td class=SDescription>This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the <a href="#uvm_printer.print_field" class=LMethod id=link63  >uvm_printer::print_field</a> or <a href="#uvm_printer.print_field_int" class=LMethod id=link64  >uvm_printer::print_field_int</a> methods.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-50" data-target-id="doc-nav-item-50" id=link62  >default_radix</a></td><td class=SDescription>This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link63  >uvm_printer::print_field</a> or <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LMethod id=link64  >uvm_printer::print_field_int</a> methods.</td></tr>
   <!-- index=51 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.dec_radix" id=link65  >dec_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_DEC" class=LConstant id=link66  >UVM_DEC</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-51" data-target-id="doc-nav-item-51" id=link65  >dec_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_DEC" class=LConstant id=link66  >UVM_DEC</a> is used for the radix of the integral object.</td></tr>
   <!-- index=52 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.bin_radix" id=link67  >bin_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_BIN" class=LConstant id=link68  >UVM_BIN</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-52" data-target-id="doc-nav-item-52" id=link67  >bin_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_BIN" class=LConstant id=link68  >UVM_BIN</a> is used for the radix of the integral object.</td></tr>
   <!-- index=53 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.oct_radix" id=link69  >oct_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_OCT" class=LConstant id=link70  >UVM_OCT</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-53" data-target-id="doc-nav-item-53" id=link69  >oct_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_OCT" class=LConstant id=link70  >UVM_OCT</a> is used for the radix of the integral object.</td></tr>
   <!-- index=54 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.unsigned_radix" id=link71  >unsigned_radix</a></td><td class=SDescription>This is the string which should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_UNSIGNED" class=LConstant id=link72  >UVM_UNSIGNED</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-54" data-target-id="doc-nav-item-54" id=link71  >unsigned_radix</a></td><td class=SDescription>This is the string which should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_UNSIGNED" class=LConstant id=link72  >UVM_UNSIGNED</a> is used for the radix of the integral object.</td></tr>
   <!-- index=55 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.hex_radix" id=link73  >hex_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_HEX" class=LConstant id=link74  >UVM_HEX</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-55" data-target-id="doc-nav-item-55" id=link73  >hex_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_HEX" class=LConstant id=link74  >UVM_HEX</a> is used for the radix of the integral object.</td></tr>
   <!-- index=56 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_printer_knobs.Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-56" data-target-id="doc-nav-item-56" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=57 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.get_radix_str" id=link75  >get_radix_str</a></td><td class=SDescription>Converts the radix from an enumerated to a printable radix according to the radix printing knobs (bin_radix, and so on).</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-57" data-target-id="doc-nav-item-57" id=link75  >get_radix_str</a></td><td class=SDescription>Converts the radix from an enumerated to a printable radix according to the radix printing knobs (bin_radix, and so on).</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=33 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.Variables" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_printer_knobs.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.Variables" id="uvm_printer_knobs.Variables" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=34 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.header" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">header</a></h3>
+<div class="CVariable" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_printer_knobs.header"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.header" id="uvm_printer_knobs.header" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">header</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">header</span> <span class="sv-op">=</span><span class="sv-ident"> 1
-  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the <a href="#uvm_printer.format_header" class=LMethod id=link76  >uvm_printer::format_header</a> function should be called when printing an object.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the <a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LMethod id=link76  >uvm_printer::format_header</a> function should be called when printing an object.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=35 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.footer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">footer</a></h3>
+<div class="CVariable" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_printer_knobs.footer"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.footer" id="uvm_printer_knobs.footer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">footer</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">footer</span> <span class="sv-op">=</span><span class="sv-ident"> 1
-  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the <a href="#uvm_printer.format_footer" class=LMethod id=link77  >uvm_printer::format_footer</a> function should be called when printing an object.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the <a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" class=LMethod id=link77  >uvm_printer::format_footer</a> function should be called when printing an object.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=36 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.full_name" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">full_name</a></h3>
+<div class="CVariable" id="doc-nav-item-36" data-doc-topic="doc-nav-item-36" data-anchor="uvm_printer_knobs.full_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.full_name" id="uvm_printer_knobs.full_name" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">full_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">full_name</span> <span class="sv-op">=</span><span class="sv-ident"> 0
-  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether <a href="#uvm_printer.adjust_name" class=LMethod id=link78  >uvm_printer::adjust_name</a> should print the full name of an identifier or just the leaf name.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link78  >uvm_printer::adjust_name</a> should print the full name of an identifier or just the leaf name.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=37 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.identifier" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">identifier</a></h3>
+<div class="CVariable" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_printer_knobs.identifier"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.identifier" id="uvm_printer_knobs.identifier" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">identifier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">identifier</span> <span class="sv-op">=</span><span class="sv-ident"> 1
-  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether <a href="#uvm_printer.adjust_name" class=LMethod id=link79  >uvm_printer::adjust_name</a> should print the identifier.&nbsp; This is useful in cases where you just want the values of an object, but no identifiers.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link79  >uvm_printer::adjust_name</a> should print the identifier.&nbsp; This is useful in cases where you just want the values of an object, but no identifiers.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=38 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.type_name" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">type_name</a></h3>
+<div class="CVariable" id="doc-nav-item-38" data-doc-topic="doc-nav-item-38" data-anchor="uvm_printer_knobs.type_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.type_name" id="uvm_printer_knobs.type_name" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">type_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">type_name</span> <span class="sv-op">=</span><span class="sv-ident"> 1
   </span></td></tr></table></blockquote><div class=CBody><p>Controls whether to print a field&rsquo;s type name.</p></div></div></div>
 
@@ -812,7 +812,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=39 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.size" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">size</a></h3>
+<div class="CVariable" id="doc-nav-item-39" data-doc-topic="doc-nav-item-39" data-anchor="uvm_printer_knobs.size"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.size" id="uvm_printer_knobs.size" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">size</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">size</span> <span class="sv-op">=</span><span class="sv-ident"> 1
   </span></td></tr></table></blockquote><div class=CBody><p>Controls whether to print a field&rsquo;s size.</p></div></div></div>
 
@@ -820,7 +820,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=40 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.depth" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">depth</a></h3>
+<div class="CVariable" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_printer_knobs.depth"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.depth" id="uvm_printer_knobs.depth" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">depth</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">int</span> <span class="sv-ident">depth</span> <span class="sv-op">=</span><span class="sv-ident"> -1
   </span></td></tr></table></blockquote><div class=CBody><p>Indicates how deep to recurse when printing objects.&nbsp; A depth of -1 means to print everything.</p></div></div></div>
 
@@ -828,7 +828,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=41 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.reference" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">reference</a></h3>
+<div class="CVariable" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_printer_knobs.reference"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.reference" id="uvm_printer_knobs.reference" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">reference</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">reference</span> <span class="sv-op">=</span><span class="sv-ident"> 1
   </span></td></tr></table></blockquote><div class=CBody><p>Controls whether to print a unique reference ID for object handles.&nbsp; The behavior of this knob is simulator-dependent.</p></div></div></div>
 
@@ -836,7 +836,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=42 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.begin_elements" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">begin_elements</a></h3>
+<div class="CVariable" id="doc-nav-item-42" data-doc-topic="doc-nav-item-42" data-anchor="uvm_printer_knobs.begin_elements"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.begin_elements" id="uvm_printer_knobs.begin_elements" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">begin_elements</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">int</span> <span class="sv-ident">begin_elements</span> <span class="sv-op">=</span><span class="sv-ident"> 5
   </span></td></tr></table></blockquote><div class=CBody><p>Defines the number of elements at the head of a list to print.&nbsp; Use -1 for no max.</p></div></div></div>
 
@@ -844,7 +844,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=43 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.end_elements" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">end_elements</a></h3>
+<div class="CVariable" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_printer_knobs.end_elements"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.end_elements" id="uvm_printer_knobs.end_elements" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">end_elements</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">int</span> <span class="sv-ident">end_elements</span> <span class="sv-op">=</span><span class="sv-ident"> 5
   </span></td></tr></table></blockquote><div class=CBody><p>This defines the number of elements at the end of a list that should be printed.</p></div></div></div>
 
@@ -852,7 +852,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=44 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.prefix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">prefix</a></h3>
+<div class="CVariable" id="doc-nav-item-44" data-doc-topic="doc-nav-item-44" data-anchor="uvm_printer_knobs.prefix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.prefix" id="uvm_printer_knobs.prefix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">prefix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">string</span> <span class="sv-ident">prefix</span> <span class="sv-op">=</span> &quot;&quot;
   </td></tr></table></blockquote><div class=CBody><p>Specifies the string prepended to each output line</p></div></div></div>
 
@@ -860,7 +860,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=45 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.indent" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">indent</a></h3>
+<div class="CVariable" id="doc-nav-item-45" data-doc-topic="doc-nav-item-45" data-anchor="uvm_printer_knobs.indent"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.indent" id="uvm_printer_knobs.indent" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">indent</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">int</span> <span class="sv-ident">indent</span> <span class="sv-op">=</span><span class="sv-ident"> 2
   </span></td></tr></table></blockquote><div class=CBody><p>This knob specifies the number of spaces to use for level indentation.&nbsp; The default level indentation is two spaces.</p></div></div></div>
 
@@ -868,7 +868,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=46 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.show_root" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">show_root</a></h3>
+<div class="CVariable" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_printer_knobs.show_root"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.show_root" id="uvm_printer_knobs.show_root" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">show_root</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">show_root</span> <span class="sv-op">=</span><span class="sv-ident"> 0
   </span></td></tr></table></blockquote><div class=CBody><p>This setting indicates whether or not the initial object that is printed (when current depth is 0) prints the full path name.&nbsp; By default, the first object is treated like all other objects and only the leaf name is printed.</p></div></div></div>
 
@@ -876,7 +876,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=47 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.mcd" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">mcd</a></h3>
+<div class="CVariable" id="doc-nav-item-47" data-doc-topic="doc-nav-item-47" data-anchor="uvm_printer_knobs.mcd"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.mcd" id="uvm_printer_knobs.mcd" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">mcd</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">int</span> <span class="sv-ident">mcd</span> <span class="sv-op">=</span> <span class="sv-uvm-type">UVM_STDOUT</span>
   </td></tr></table></blockquote><div class=CBody><p>This is a file descriptor, or multi-channel descriptor, that specifies where the print output should be directed.</p><p>By default, the output goes to the standard output of the simulator.</p></div></div></div>
 
@@ -884,7 +884,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=48 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.separator" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">separator</a></h3>
+<div class="CVariable" id="doc-nav-item-48" data-doc-topic="doc-nav-item-48" data-anchor="uvm_printer_knobs.separator"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.separator" id="uvm_printer_knobs.separator" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">separator</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">string</span> <span class="sv-ident">separator</span> <span class="sv-op">=</span> &quot;<span class="sv-ident">{}</span>&quot;
   </td></tr></table></blockquote><div class=CBody><p>For tree printers only, determines the opening and closing separators used for nested objects.</p></div></div></div>
 
@@ -892,7 +892,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=49 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.show_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">show_radix</a></h3>
+<div class="CVariable" id="doc-nav-item-49" data-doc-topic="doc-nav-item-49" data-anchor="uvm_printer_knobs.show_radix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.show_radix" id="uvm_printer_knobs.show_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">show_radix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">show_radix</span> <span class="sv-op">=</span><span class="sv-ident"> 1
   </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the radix string (&lsquo;h, and so on) should be prepended to an integral value when one is printed.</p></div></div></div>
 
@@ -900,15 +900,15 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=50 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.default_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">default_radix</a></h3>
+<div class="CVariable" id="doc-nav-item-50" data-doc-topic="doc-nav-item-50" data-anchor="uvm_printer_knobs.default_radix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.default_radix" id="uvm_printer_knobs.default_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">default_radix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_radix_enum</span> <span class="sv-ident">default_radix</span> <span class="sv-op">=</span> <span class="sv-uvm-type">UVM_HEX</span>
-  </td></tr></table></blockquote><div class=CBody><p>This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the <a href="#uvm_printer.print_field" class=LMethod id=link80  >uvm_printer::print_field</a> or <a href="#uvm_printer.print_field_int" class=LMethod id=link81  >uvm_printer::print_field_int</a> methods.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link80  >uvm_printer::print_field</a> or <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LMethod id=link81  >uvm_printer::print_field_int</a> methods.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=51 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.dec_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">dec_radix</a></h3>
+<div class="CVariable" id="doc-nav-item-51" data-doc-topic="doc-nav-item-51" data-anchor="uvm_printer_knobs.dec_radix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.dec_radix" id="uvm_printer_knobs.dec_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">dec_radix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">string</span> <span class="sv-ident">dec_radix</span> <span class="sv-op">=</span> &quot;<span class="sv-ident">'</span><span class="sv-ident">d</span>&quot;
   </td></tr></table></blockquote><div class=CBody><p>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_DEC" class=LConstant id=link82  >UVM_DEC</a> is used for the radix of the integral object.</p><p>When a negative number is printed, the radix is not printed since only signed decimal values can print as negative.</p></div></div></div>
 
@@ -916,7 +916,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=52 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.bin_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">bin_radix</a></h3>
+<div class="CVariable" id="doc-nav-item-52" data-doc-topic="doc-nav-item-52" data-anchor="uvm_printer_knobs.bin_radix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.bin_radix" id="uvm_printer_knobs.bin_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">bin_radix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">string</span> <span class="sv-ident">bin_radix</span> <span class="sv-op">=</span> &quot;<span class="sv-ident">'</span><span class="sv-ident">b</span>&quot;
   </td></tr></table></blockquote><div class=CBody><p>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_BIN" class=LConstant id=link83  >UVM_BIN</a> is used for the radix of the integral object.</p></div></div></div>
 
@@ -924,7 +924,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=53 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.oct_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">oct_radix</a></h3>
+<div class="CVariable" id="doc-nav-item-53" data-doc-topic="doc-nav-item-53" data-anchor="uvm_printer_knobs.oct_radix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.oct_radix" id="uvm_printer_knobs.oct_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">oct_radix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">string</span> <span class="sv-ident">oct_radix</span> <span class="sv-op">=</span> &quot;<span class="sv-ident">'</span><span class="sv-ident">o</span>&quot;
   </td></tr></table></blockquote><div class=CBody><p>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_OCT" class=LConstant id=link84  >UVM_OCT</a> is used for the radix of the integral object.</p></div></div></div>
 
@@ -932,7 +932,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=54 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.unsigned_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">unsigned_radix</a></h3>
+<div class="CVariable" id="doc-nav-item-54" data-doc-topic="doc-nav-item-54" data-anchor="uvm_printer_knobs.unsigned_radix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.unsigned_radix" id="uvm_printer_knobs.unsigned_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">unsigned_radix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">string</span> <span class="sv-ident">unsigned_radix</span> <span class="sv-op">=</span> &quot;<span class="sv-ident">'</span><span class="sv-ident">d</span>&quot;
   </td></tr></table></blockquote><div class=CBody><p>This is the string which should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_UNSIGNED" class=LConstant id=link85  >UVM_UNSIGNED</a> is used for the radix of the integral object.</p></div></div></div>
 
@@ -940,7 +940,7 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=55 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.hex_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">hex_radix</a></h3>
+<div class="CVariable" id="doc-nav-item-55" data-doc-topic="doc-nav-item-55" data-anchor="uvm_printer_knobs.hex_radix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.hex_radix" id="uvm_printer_knobs.hex_radix" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">hex_radix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">string</span> <span class="sv-ident">hex_radix</span> <span class="sv-op">=</span> &quot;<span class="sv-ident">'</span><span class="sv-ident">h</span>&quot;
   </td></tr></table></blockquote><div class=CBody><p>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_HEX" class=LConstant id=link86  >UVM_HEX</a> is used for the radix of the integral object.</p></div></div></div>
 
@@ -948,13 +948,13 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
 
 
  <!--CONTENT index=56 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.Methods" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-56" data-doc-topic="doc-nav-item-56" data-anchor="uvm_printer_knobs.Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.Methods" id="uvm_printer_knobs.Methods" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=57 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_printer_knobs.get_radix_str" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">get_radix_str</a></h3>
+<div class="CMethod" id="doc-nav-item-57" data-doc-topic="doc-nav-item-57" data-anchor="uvm_printer_knobs.get_radix_str"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.get_radix_str" id="uvm_printer_knobs.get_radix_str" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">get_radix_str</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_radix_str</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_radix_enum</span>&nbsp;</td>
@@ -1059,13 +1059,13 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -1262,6 +1262,59 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -1420,15 +1473,23 @@ value       integral        12          &#x27;</span><span class="sv-ident">h2d<
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

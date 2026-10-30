@@ -29,29 +29,29 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Shared_Register_and_Memory_Access_Test_Sequences" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Shared Register and Memory Access Test Sequences</a></h1><div class=CBody><p>This section defines sequences for testing registers and memories that are shared between two or more physical interfaces, i.e. are associated with more than one <a href="../uvm_reg_map-svh.html#uvm_reg_map" class=LClass id=link6  >uvm_reg_map</a> instance.</p>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Shared_Register_and_Memory_Access_Test_Sequences"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Shared_Register_and_Memory_Access_Test_Sequences" id="Shared_Register_and_Memory_Access_Test_Sequences" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Shared Register and Memory Access Test Sequences</a></h1><div class=CBody><p>This section defines sequences for testing registers and memories that are shared between two or more physical interfaces, i.e. are associated with more than one <a href="../uvm_reg_map-svh.html#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LClass id=link6  >uvm_reg_map</a> instance.</p>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SMain"><td class=SEntry><a href="#Shared_Register_and_Memory_Access_Test_Sequences" >Shared Register and Memory Access Test Sequences</a></td><td class=SDescription>This section defines sequences for testing registers and memories that are shared between two or more physical interfaces, i.e. </td></tr>
+<tr class="SMain"><td class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >Shared Register and Memory Access Test Sequences</a></td><td class=SDescription>This section defines sequences for testing registers and memories that are shared between two or more physical interfaces, i.e. </td></tr>
   <!-- index=1 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_reg_shared_access_seq" id=link1  >uvm_reg_shared_access_seq</a></td><td class=SDescription>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" id=link1  >uvm_reg_shared_access_seq</a></td><td class=SDescription>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</td></tr>
   <!-- index=4 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_mem_shared_access_seq" id=link2  >uvm_mem_shared_access_seq</a></td><td class=SDescription>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</td></tr>
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" id=link2  >uvm_mem_shared_access_seq</a></td><td class=SDescription>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</td></tr>
   <!-- index=7 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq" id=link3  >uvm_reg_mem_shared_access_seq</a></td><td class=SDescription>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#uvm_reg_shared_access_seq" class=LClass id=link4  >uvm_reg_shared_access_seq</a> and <a href="#uvm_mem_shared_access_seq" class=LClass id=link5  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" id=link3  >uvm_reg_mem_shared_access_seq</a></td><td class=SDescription>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link4  >uvm_reg_shared_access_seq</a> and <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LClass id=link5  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the register, the register is not tested.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_reg_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_shared_access_seq" id="uvm_reg_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the register, the register is not tested.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -67,10 +67,10 @@
 </div><p>Registers that contain fields with unknown access policies cannot be tested.</p><p>The DUT should be idle and not modify any register during this test.</p>
 
 <!--START_ND_SUMMARY index=1-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=1 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_reg_shared_access_seq" id=link7  >uvm_reg_shared_access_seq</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" id=link7  >uvm_reg_shared_access_seq</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</td></tr>
 
   <!-- HIERARCHY -->
@@ -102,23 +102,23 @@
 
   <!-- index=2 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_shared_access_seq.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=3 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_shared_access_seq.rg" id=link8  >rg</a></td><td class=SDescription>The register to be tested</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" id=link8  >rg</a></td><td class=SDescription>The register to be tested</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_shared_access_seq.Variables" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_reg_shared_access_seq.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_shared_access_seq.Variables" id="uvm_reg_shared_access_seq.Variables" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_shared_access_seq.rg" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">rg</a></h3>
+<div class="CVariable" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_reg_shared_access_seq.rg"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_shared_access_seq.rg" id="uvm_reg_shared_access_seq.rg" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">rg</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_reg</span> <span class="sv-ident">rg</span>
   </td></tr></table></blockquote><div class=CBody><p>The register to be tested</p></div></div></div>
 
@@ -126,7 +126,7 @@
 
 
  <!--CONTENT index=4 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the memory, the memory is not tested.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_mem_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_mem_shared_access_seq" id="uvm_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the memory, the memory is not tested.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -142,10 +142,10 @@
 </div><p>The DUT should be idle and not modify the memory during this test.</p>
 
 <!--START_ND_SUMMARY index=4-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=4 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_mem_shared_access_seq" id=link9  >uvm_mem_shared_access_seq</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" id=link9  >uvm_mem_shared_access_seq</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</td></tr>
 
   <!-- HIERARCHY -->
@@ -177,23 +177,23 @@
 
   <!-- index=5 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_mem_shared_access_seq.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=6 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_mem_shared_access_seq.mem" id=link10  >mem</a></td><td class=SDescription>The memory to be tested</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" id=link10  >mem</a></td><td class=SDescription>The memory to be tested</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_shared_access_seq.Variables" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_mem_shared_access_seq.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_shared_access_seq.Variables" id="uvm_mem_shared_access_seq.Variables" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=6 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_shared_access_seq.mem" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">mem</a></h3>
+<div class="CVariable" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_mem_shared_access_seq.mem"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_shared_access_seq.mem" id="uvm_mem_shared_access_seq.mem" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">mem</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_mem</span> <span class="sv-ident">mem</span>
   </td></tr></table></blockquote><div class=CBody><p>The memory to be tested</p></div></div></div>
 
@@ -201,7 +201,7 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_reg_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#uvm_reg_shared_access_seq" class=LClass id=link19  >uvm_reg_shared_access_seq</a> and <a href="#uvm_mem_shared_access_seq" class=LClass id=link20  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_reg_mem_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_mem_shared_access_seq" id="uvm_reg_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link19  >uvm_reg_shared_access_seq</a> and <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LClass id=link20  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -217,11 +217,11 @@
 </div>
 
 <!--START_ND_SUMMARY index=7-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=7 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_reg_mem_shared_access_seq" id=link11  >uvm_reg_mem_shared_access_seq</a></td></tr>
-<tr class=SMain><td colspan=2 class=SWideDescription>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#uvm_reg_shared_access_seq" class=LClass id=link12  >uvm_reg_shared_access_seq</a> and <a href="#uvm_mem_shared_access_seq" class=LClass id=link13  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" id=link11  >uvm_reg_mem_shared_access_seq</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link12  >uvm_reg_shared_access_seq</a> and <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LClass id=link13  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</td></tr>
 
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
@@ -252,41 +252,41 @@
 
   <!-- index=8 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=9 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq.model" >model</a></td><td class=SDescription>The block to be tested</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" >model</a></td><td class=SDescription>The block to be tested</td></tr>
   <!-- index=10 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq.reg_seq" id=link14  >reg_seq</a></td><td class=SDescription>The sequence used to test one register</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" id=link14  >reg_seq</a></td><td class=SDescription>The sequence used to test one register</td></tr>
   <!-- index=11 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq.mem_seq" id=link15  >mem_seq</a></td><td class=SDescription>The sequence used to test one memory</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" id=link15  >mem_seq</a></td><td class=SDescription>The sequence used to test one memory</td></tr>
   <!-- index=12 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq.Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=13 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq.body" id=link16  >body</a></td><td class=SDescription>Executes the Shared Register and Memory sequence</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" id=link16  >body</a></td><td class=SDescription>Executes the Shared Register and Memory sequence</td></tr>
   <!-- index=14 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq.do_block" id=link17  >do_block</a></td><td class=SDescription>Test all of the registers and memories in a block</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" id=link17  >do_block</a></td><td class=SDescription>Test all of the registers and memories in a block</td></tr>
   <!-- index=15 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_mem_shared_access_seq.reset_blk" id=link18  >reset_blk</a></td><td class=SDescription>Reset the DUT that corresponds to the specified block abstraction class.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" id=link18  >reset_blk</a></td><td class=SDescription>Reset the DUT that corresponds to the specified block abstraction class.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=8 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.Variables" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_reg_mem_shared_access_seq.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.Variables" id="uvm_reg_mem_shared_access_seq.Variables" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=9 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.model" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">model</a></h3><div class=CBody><p>The block to be tested</p><div class="code-block-container">
+<div class="CVariable" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_reg_mem_shared_access_seq.model"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.model" id="uvm_reg_mem_shared_access_seq.model" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">model</a></h3><div class=CBody><p>The block to be tested</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -304,7 +304,7 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.reg_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">reg_seq</a></h3>
+<div class="CVariable" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_reg_mem_shared_access_seq.reg_seq"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.reg_seq" id="uvm_reg_mem_shared_access_seq.reg_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">reg_seq</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">protected</span> <span class="sv-uvm-type">uvm_reg_shared_access_seq</span> <span class="sv-ident">reg_seq</span>
   </td></tr></table></blockquote><div class=CBody><p>The sequence used to test one register</p></div></div></div>
 
@@ -312,7 +312,7 @@
 
 
  <!--CONTENT index=11 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.mem_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">mem_seq</a></h3>
+<div class="CVariable" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_reg_mem_shared_access_seq.mem_seq"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.mem_seq" id="uvm_reg_mem_shared_access_seq.mem_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">mem_seq</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">protected</span> <span class="sv-uvm-type">uvm_mem_shared_access_seq</span> <span class="sv-ident">mem_seq</span>
   </td></tr></table></blockquote><div class=CBody><p>The sequence used to test one memory</p></div></div></div>
 
@@ -320,13 +320,13 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.Methods" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_reg_mem_shared_access_seq.Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.Methods" id="uvm_reg_mem_shared_access_seq.Methods" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=13 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.body" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">body</a></h3>
+<div class="CMethod" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_reg_mem_shared_access_seq.body"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.body" id="uvm_reg_mem_shared_access_seq.body" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">body</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">body</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Executes the Shared Register and Memory sequence</p></div></div></div>
 
@@ -334,7 +334,7 @@
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.do_block" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">do_block</a></h3>
+<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_reg_mem_shared_access_seq.do_block"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.do_block" id="uvm_reg_mem_shared_access_seq.do_block" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">do_block</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">do_block</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_block</span>&nbsp;</td>
@@ -350,7 +350,7 @@
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.reset_blk" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">reset_blk</a></h3>
+<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_reg_mem_shared_access_seq.reset_blk"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.reset_blk" id="uvm_reg_mem_shared_access_seq.reset_blk" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">reset_blk</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">reset_blk</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_reg_block</span>&nbsp;</td>
@@ -455,13 +455,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -658,6 +658,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -816,15 +869,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

@@ -29,38 +29,38 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="Memory_Allocation_Manager" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Memory Allocation Manager</a></h1><div class=CBody><p>Manages the exclusive allocation of consecutive memory locations called <i>regions</i>.&nbsp; The regions can subsequently be accessed like little memories of their own, without knowing in which memory or offset they are actually located.</p><p>The memory allocation manager should be used by any application-level process that requires reserved space in the memory, such as DMA buffers.</p><p>A region will remain reserved until it is explicitly released.</p>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Memory_Allocation_Manager"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Memory_Allocation_Manager" id="Memory_Allocation_Manager" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Memory Allocation Manager</a></h1><div class=CBody><p>Manages the exclusive allocation of consecutive memory locations called <i>regions</i>.&nbsp; The regions can subsequently be accessed like little memories of their own, without knowing in which memory or offset they are actually located.</p><p>The memory allocation manager should be used by any application-level process that requires reserved space in the memory, such as DMA buffers.</p><p>A region will remain reserved until it is explicitly released.</p>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SMain"><td class=SEntry><a href="#Memory_Allocation_Manager" >Memory Allocation Manager</a></td><td class=SDescription>Manages the exclusive allocation of consecutive memory locations called <i>regions</i>. </td></tr>
+<tr class="SMain"><td class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >Memory Allocation Manager</a></td><td class=SDescription>Manages the exclusive allocation of consecutive memory locations called <i>regions</i>. </td></tr>
   <!-- index=1 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_mem_mam" id=link1  >uvm_mem_mam</a></td><td class=SDescription>Memory allocation manager</td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" id=link1  >uvm_mem_mam</a></td><td class=SDescription>Memory allocation manager</td></tr>
   <!-- index=17 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_mem_region" id=link2  >uvm_mem_region</a></td><td class=SDescription>Allocated memory region descriptor</td></tr>
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" id=link2  >uvm_mem_region</a></td><td class=SDescription>Allocated memory region descriptor</td></tr>
   <!-- index=32 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_mem_mam_policy" id=link3  >uvm_mem_mam_policy</a></td><td class=SDescription>An instance of this class is randomized to determine the starting offset of a randomly allocated memory region. </td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link3  >uvm_mem_mam_policy</a></td><td class=SDescription>An instance of this class is randomized to determine the starting offset of a randomly allocated memory region. </td></tr>
   <!-- index=39 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#uvm_mem_mam_cfg" id=link4  >uvm_mem_mam_cfg</a></td><td class=SDescription>Specifies the memory managed by an instance of a <a href="#uvm_mem_mam" class=LClass id=link5  >uvm_mem_mam</a> memory allocation manager class.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-39" data-target-id="doc-nav-item-39" id=link4  >uvm_mem_mam_cfg</a></td><td class=SDescription>Specifies the memory managed by an instance of a <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link5  >uvm_mem_mam</a> memory allocation manager class.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=1 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_mam" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">uvm_mem_mam</a></h2><div class=CBody><p>Memory allocation manager</p><p>Memory allocation management utility class similar to C&rsquo;s malloc() and free().&nbsp; A single instance of this class is used to manage a single, contiguous address space.</p>
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_mem_mam"><div class="CTopic"><h2 class=CTitle><a name="uvm_mem_mam" id="uvm_mem_mam" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">uvm_mem_mam</a></h2><div class=CBody><p>Memory allocation manager</p><p>Memory allocation management utility class similar to C&rsquo;s malloc() and free().&nbsp; A single instance of this class is used to manage a single, contiguous address space.</p>
 
 <!--START_ND_SUMMARY index=1-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=1 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_mem_mam" id=link6  >uvm_mem_mam</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" id=link6  >uvm_mem_mam</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Memory allocation manager</td></tr>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
@@ -70,74 +70,74 @@
 
   <!-- index=2 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_mem_mam.Initialization" >Initialization</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" >Initialization</a></td><td class=SDescription></td></tr>
   <!-- index=3 -->
 
-<tr class="SType SIndent2"><td class=SEntry><a href="#uvm_mem_mam.alloc_mode_e" >alloc_mode_e</a></td><td class=SDescription>Memory allocation mode</td></tr>
+<tr class="SType SIndent2"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" >alloc_mode_e</a></td><td class=SDescription>Memory allocation mode</td></tr>
   <!-- index=4 -->
 
-<tr class="SType SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam.locality_e" >locality_e</a></td><td class=SDescription>Location of memory regions</td></tr>
+<tr class="SType SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" >locality_e</a></td><td class=SDescription>Location of memory regions</td></tr>
   <!-- index=5 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_mem_mam.default_alloc" id=link7  >default_alloc</a></td><td class=SDescription>Region allocation policy</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" id=link7  >default_alloc</a></td><td class=SDescription>Region allocation policy</td></tr>
   <!-- index=6 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam.new" id=link8  >new</a></td><td class=SDescription>Create a new manager instance</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" id=link8  >new</a></td><td class=SDescription>Create a new manager instance</td></tr>
   <!-- index=7 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_mam.reconfigure" id=link9  >reconfigure</a></td><td class=SDescription>Reconfigure the manager</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" id=link9  >reconfigure</a></td><td class=SDescription>Reconfigure the manager</td></tr>
   <!-- index=8 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_mem_mam.Memory_Management" >Memory Management</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" >Memory Management</a></td><td class=SDescription></td></tr>
   <!-- index=9 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_mam.reserve_region" id=link10  >reserve_region</a></td><td class=SDescription>Reserve a specific memory region</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" id=link10  >reserve_region</a></td><td class=SDescription>Reserve a specific memory region</td></tr>
   <!-- index=10 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam.request_region" id=link11  >request_region</a></td><td class=SDescription>Request and reserve a memory region</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" id=link11  >request_region</a></td><td class=SDescription>Request and reserve a memory region</td></tr>
   <!-- index=11 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_mam.release_region" id=link12  >release_region</a></td><td class=SDescription>Release the specified region</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" id=link12  >release_region</a></td><td class=SDescription>Release the specified region</td></tr>
   <!-- index=12 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam.release_all_regions" id=link13  >release_all_regions</a></td><td class=SDescription>Forcibly release all allocated memory regions.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" id=link13  >release_all_regions</a></td><td class=SDescription>Forcibly release all allocated memory regions.</td></tr>
   <!-- index=13 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_mem_mam.Introspection" >Introspection</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" >Introspection</a></td><td class=SDescription></td></tr>
   <!-- index=14 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_mam.convert2string" id=link14  >convert2string</a></td><td class=SDescription>Image of the state of the manager</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" id=link14  >convert2string</a></td><td class=SDescription>Image of the state of the manager</td></tr>
   <!-- index=15 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam.for_each" id=link15  >for_each</a></td><td class=SDescription>Iterate over all currently allocated regions</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" id=link15  >for_each</a></td><td class=SDescription>Iterate over all currently allocated regions</td></tr>
   <!-- index=16 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_mam.get_memory" id=link16  >get_memory</a></td><td class=SDescription>Get the managed memory implementation</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-16" data-target-id="doc-nav-item-16" id=link16  >get_memory</a></td><td class=SDescription>Get the managed memory implementation</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.Initialization" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Initialization</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_mem_mam.Initialization"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.Initialization" id="uvm_mem_mam.Initialization" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Initialization</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.alloc_mode_e" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">alloc_mode_e</a></h3><div class=CBody><p>Memory allocation mode</p><p>Specifies how to allocate a memory region</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>GREEDY</td><td class=CDLDescription>Consume new, previously unallocated memory</td></tr><tr><td class=CDLEntry>THRIFTY</td><td class=CDLDescription>Reused previously released memory as much as possible (not yet implemented)</td></tr></table></div></div></div>
+<div class="CType" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_mem_mam.alloc_mode_e"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.alloc_mode_e" id="uvm_mem_mam.alloc_mode_e" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">alloc_mode_e</a></h3><div class=CBody><p>Memory allocation mode</p><p>Specifies how to allocate a memory region</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>GREEDY</td><td class=CDLDescription>Consume new, previously unallocated memory</td></tr><tr><td class=CDLEntry>THRIFTY</td><td class=CDLDescription>Reused previously released memory as much as possible (not yet implemented)</td></tr></table></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CType"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.locality_e" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">locality_e</a></h3><div class=CBody><p>Location of memory regions</p><p>Specifies where to locate new memory regions</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BROAD</td><td class=CDLDescription>Locate new regions randomly throughout the address space</td></tr><tr><td class=CDLEntry>NEARBY</td><td class=CDLDescription>Locate new regions adjacent to existing regions</td></tr></table></div></div></div>
+<div class="CType" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_mem_mam.locality_e"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.locality_e" id="uvm_mem_mam.locality_e" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">locality_e</a></h3><div class=CBody><p>Location of memory regions</p><p>Specifies where to locate new memory regions</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>BROAD</td><td class=CDLDescription>Locate new regions randomly throughout the address space</td></tr><tr><td class=CDLEntry>NEARBY</td><td class=CDLDescription>Locate new regions adjacent to existing regions</td></tr></table></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.default_alloc" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">default_alloc</a></h3>
+<div class="CVariable" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_mem_mam.default_alloc"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.default_alloc" id="uvm_mem_mam.default_alloc" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">default_alloc</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_mem_mam_policy</span> <span class="sv-ident">default_alloc</span>
   </td></tr></table></blockquote><div class=CBody><p>Region allocation policy</p><p>This object is repeatedly randomized when allocating new regions.</p></div></div></div>
 
@@ -145,7 +145,7 @@
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.new" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">new</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_mem_mam.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.new" id="uvm_mem_mam.new" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -165,13 +165,13 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Create a new manager instance</p><p>Create an instance of a memory allocation manager with the specified name and configuration.&nbsp; This instance manages all memory region allocation within the address range specified in the configuration descriptor.</p><p>If a reference to a memory abstraction class is provided, the memory locations within the regions can be accessed through the region descriptor, using the <a href="#uvm_mem_region.read" class=LMethod id=link17  >uvm_mem_region::read()</a> and <a href="#uvm_mem_region.write" class=LMethod id=link18  >uvm_mem_region::write()</a> methods.</p></div></div></div>
+<div class=CBody><p>Create a new manager instance</p><p>Create an instance of a memory allocation manager with the specified name and configuration.&nbsp; This instance manages all memory region allocation within the address range specified in the configuration descriptor.</p><p>If a reference to a memory abstraction class is provided, the memory locations within the regions can be accessed through the region descriptor, using the <a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" class=LMethod id=link17  >uvm_mem_region::read()</a> and <a href="#doc-nav-item-26" data-target-id="doc-nav-item-26" class=LMethod id=link18  >uvm_mem_region::write()</a> methods.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.reconfigure" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">reconfigure</a></h3>
+<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_mem_mam.reconfigure"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.reconfigure" id="uvm_mem_mam.reconfigure" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">reconfigure</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_mem_mam_cfg <span class="sv-proto-name">reconfigure</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_mem_mam_cfg</span>&nbsp;</td>
@@ -189,13 +189,13 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.Memory_Management" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Memory Management</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_mem_mam.Memory_Management"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.Memory_Management" id="uvm_mem_mam.Memory_Management" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Memory Management</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.reserve_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">reserve_region</a></h3>
+<div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_mem_mam.reserve_region"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.reserve_region" id="uvm_mem_mam.reserve_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">reserve_region</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> uvm_mem_region <span class="sv-proto-name">reserve_region</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -229,7 +229,7 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.request_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">request_region</a></h3>
+<div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_mem_mam.request_region"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.request_region" id="uvm_mem_mam.request_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">request_region</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">function</span> uvm_mem_region <span class="sv-proto-name">request_region</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">int</span>&nbsp;</td>
@@ -257,13 +257,13 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Request and reserve a memory region</p><p>Request and reserve a memory region of the specified number of bytes starting at a random location.&nbsp; If an policy is specified, it is randomized to determine the start offset of the region.&nbsp; If no policy is specified, the policy found in the <a href="#uvm_mem_mam.default_alloc" class=LVariable id=link19  >uvm_mem_mam::default_alloc</a> class property is randomized.</p><p>A descriptor of the allocated region is returned.&nbsp; If no region can be allocated, <i>null</i> is returned.</p><p>It may not be possible to allocate a region because there is no area in the memory with enough consecutive locations to meet the size requirements or because there is another contradiction when randomizing the policy.</p><p>If the memory allocation is configured to <i>THRIFTY</i> or <i>NEARBY</i>, a suitable region is first sought procedurally.</p></div></div></div>
+<div class=CBody><p>Request and reserve a memory region</p><p>Request and reserve a memory region of the specified number of bytes starting at a random location.&nbsp; If an policy is specified, it is randomized to determine the start offset of the region.&nbsp; If no policy is specified, the policy found in the <a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" class=LVariable id=link19  >uvm_mem_mam::default_alloc</a> class property is randomized.</p><p>A descriptor of the allocated region is returned.&nbsp; If no region can be allocated, <i>null</i> is returned.</p><p>It may not be possible to allocate a region because there is no area in the memory with enough consecutive locations to meet the size requirements or because there is another contradiction when randomizing the policy.</p><p>If the memory allocation is configured to <i>THRIFTY</i> or <i>NEARBY</i>, a suitable region is first sought procedurally.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.release_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">release_region</a></h3>
+<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_mem_mam.release_region"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.release_region" id="uvm_mem_mam.release_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">release_region</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">release_region</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_mem_region</span>&nbsp;</td>
@@ -279,7 +279,7 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.release_all_regions" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">release_all_regions</a></h3>
+<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_mem_mam.release_all_regions"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.release_all_regions" id="uvm_mem_mam.release_all_regions" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">release_all_regions</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">release_all_regions</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Forcibly release all allocated memory regions.</p></div></div></div>
 
@@ -287,13 +287,13 @@
 
 
  <!--CONTENT index=13 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.Introspection" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Introspection</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_mem_mam.Introspection"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.Introspection" id="uvm_mem_mam.Introspection" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Introspection</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.convert2string" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">convert2string</a></h3>
+<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_mem_mam.convert2string"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.convert2string" id="uvm_mem_mam.convert2string" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">convert2string</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Image of the state of the manager</p><p>Create a human-readable description of the state of the memory manager and the currently allocated regions.</p></div></div></div>
 
@@ -301,7 +301,7 @@
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.for_each" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">for_each</a></h3>
+<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_mem_mam.for_each"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.for_each" id="uvm_mem_mam.for_each" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">for_each</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_mem_region <span class="sv-proto-name">for_each</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -319,7 +319,7 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam.get_memory" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_memory</a></h3>
+<div class="CMethod" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_mem_mam.get_memory"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam.get_memory" id="uvm_mem_mam.get_memory" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_memory</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_mem</span> <span class="sv-proto-name">get_memory</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the managed memory implementation</p><p>Return the reference to the memory abstraction class for the memory implementing the locations managed by this instance of the allocation manager.&nbsp; Returns <i>null</i> if no memory abstraction class was specified at construction time.</p></div></div></div>
 
@@ -327,13 +327,13 @@
 
 
  <!--CONTENT index=17 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">uvm_mem_region</a></h2><div class=CBody><p>Allocated memory region descriptor</p><p>Each instance of this class describes an allocated memory region.&nbsp; Instances of this class are created only by the memory manager, and returned by the <a href="#uvm_mem_mam.reserve_region" class=LMethod id=link34  >uvm_mem_mam::reserve_region()</a> and <a href="#uvm_mem_mam.request_region" class=LMethod id=link35  >uvm_mem_mam::request_region()</a> methods.</p>
+<div class="CClass" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_mem_region"><div class="CTopic"><h2 class=CTitle><a name="uvm_mem_region" id="uvm_mem_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">uvm_mem_region</a></h2><div class=CBody><p>Allocated memory region descriptor</p><p>Each instance of this class describes an allocated memory region.&nbsp; Instances of this class are created only by the memory manager, and returned by the <a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LMethod id=link34  >uvm_mem_mam::reserve_region()</a> and <a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LMethod id=link35  >uvm_mem_mam::request_region()</a> methods.</p>
 
 <!--START_ND_SUMMARY index=17-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=17 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_mem_region" id=link20  >uvm_mem_region</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" id=link20  >uvm_mem_region</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>Allocated memory region descriptor</td></tr>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
@@ -343,59 +343,59 @@
 
   <!-- index=18 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_mem_region.Methods" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-18" data-target-id="doc-nav-item-18" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=19 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_region.get_start_offset" id=link21  >get_start_offset</a></td><td class=SDescription>Get the start offset of the region</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" id=link21  >get_start_offset</a></td><td class=SDescription>Get the start offset of the region</td></tr>
   <!-- index=20 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_region.get_end_offset" id=link22  >get_end_offset</a></td><td class=SDescription>Get the end offset of the region</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-20" data-target-id="doc-nav-item-20" id=link22  >get_end_offset</a></td><td class=SDescription>Get the end offset of the region</td></tr>
   <!-- index=21 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_region.get_len" id=link23  >get_len</a></td><td class=SDescription>Size of the memory region</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-21" data-target-id="doc-nav-item-21" id=link23  >get_len</a></td><td class=SDescription>Size of the memory region</td></tr>
   <!-- index=22 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_region.get_n_bytes" id=link24  >get_n_bytes</a></td><td class=SDescription>Number of bytes in the region</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-22" data-target-id="doc-nav-item-22" id=link24  >get_n_bytes</a></td><td class=SDescription>Number of bytes in the region</td></tr>
   <!-- index=23 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_region.release_region" id=link25  >release_region</a></td><td class=SDescription>Release this region</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-23" data-target-id="doc-nav-item-23" id=link25  >release_region</a></td><td class=SDescription>Release this region</td></tr>
   <!-- index=24 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_region.get_memory" id=link26  >get_memory</a></td><td class=SDescription>Get the memory where the region resides</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" id=link26  >get_memory</a></td><td class=SDescription>Get the memory where the region resides</td></tr>
   <!-- index=25 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_region.get_virtual_registers" id=link27  >get_virtual_registers</a></td><td class=SDescription>Get the virtual register array in this region</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-25" data-target-id="doc-nav-item-25" id=link27  >get_virtual_registers</a></td><td class=SDescription>Get the virtual register array in this region</td></tr>
   <!-- index=26 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_region.write" id=link28  >write</a></td><td class=SDescription>Write to a memory location in the region.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-26" data-target-id="doc-nav-item-26" id=link28  >write</a></td><td class=SDescription>Write to a memory location in the region.</td></tr>
   <!-- index=27 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_region.read" id=link29  >read</a></td><td class=SDescription>Read from a memory location in the region.</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" id=link29  >read</a></td><td class=SDescription>Read from a memory location in the region.</td></tr>
   <!-- index=28 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_region.burst_write" id=link30  >burst_write</a></td><td class=SDescription>Write to a set of memory location in the region.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-28" data-target-id="doc-nav-item-28" id=link30  >burst_write</a></td><td class=SDescription>Write to a set of memory location in the region.</td></tr>
   <!-- index=29 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_region.burst_read" id=link31  >burst_read</a></td><td class=SDescription>Read from a set of memory location in the region.</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" id=link31  >burst_read</a></td><td class=SDescription>Read from a set of memory location in the region.</td></tr>
   <!-- index=30 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_region.poke" id=link32  >poke</a></td><td class=SDescription>Deposit in a memory location in the region.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-30" data-target-id="doc-nav-item-30" id=link32  >poke</a></td><td class=SDescription>Deposit in a memory location in the region.</td></tr>
   <!-- index=31 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_mem_region.peek" id=link33  >peek</a></td><td class=SDescription>Sample a memory location in the region.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" id=link33  >peek</a></td><td class=SDescription>Sample a memory location in the region.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=18 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.Methods" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Methods</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_mem_region.Methods"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.Methods" id="uvm_mem_region.Methods" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Methods</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.get_start_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_start_offset</a></h3>
+<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_mem_region.get_start_offset"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.get_start_offset" id="uvm_mem_region.get_start_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_start_offset</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-proto-name">get_start_offset</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the start offset of the region</p><p>Return the address offset, within the memory, where this memory region starts.</p></div></div></div>
 
@@ -403,7 +403,7 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.get_end_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_end_offset</a></h3>
+<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_mem_region.get_end_offset"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.get_end_offset" id="uvm_mem_region.get_end_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_end_offset</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-proto-name">get_end_offset</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the end offset of the region</p><p>Return the address offset, within the memory, where this memory region ends.</p></div></div></div>
 
@@ -411,7 +411,7 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.get_len" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_len</a></h3>
+<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_mem_region.get_len"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.get_len" id="uvm_mem_region.get_len" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_len</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-proto-name">get_len</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Size of the memory region</p><p>Return the number of consecutive memory locations (not necessarily bytes) in the allocated region.</p></div></div></div>
 
@@ -419,7 +419,7 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.get_n_bytes" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_n_bytes</a></h3>
+<div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_mem_region.get_n_bytes"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.get_n_bytes" id="uvm_mem_region.get_n_bytes" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_n_bytes</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-proto-name">get_n_bytes</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Number of bytes in the region</p><p>Return the number of consecutive bytes in the allocated region.&nbsp; If the managed memory contains more than one byte per address, the number of bytes in an allocated region may be greater than the number of requested or reserved bytes.</p></div></div></div>
 
@@ -427,7 +427,7 @@
 
 
  <!--CONTENT index=23 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.release_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">release_region</a></h3>
+<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_mem_region.release_region"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.release_region" id="uvm_mem_region.release_region" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">release_region</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">release_region</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Release this region</p></div></div></div>
 
@@ -435,7 +435,7 @@
 
 
  <!--CONTENT index=24 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.get_memory" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_memory</a></h3>
+<div class="CMethod" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_mem_region.get_memory"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.get_memory" id="uvm_mem_region.get_memory" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_memory</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_mem</span> <span class="sv-proto-name">get_memory</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the memory where the region resides</p><p>Return a reference to the memory abstraction class for the memory implementing this allocated memory region.&nbsp; Returns <i>null</i> if no memory abstraction class was specified for the allocation manager that allocated this region.</p></div></div></div>
 
@@ -443,7 +443,7 @@
 
 
  <!--CONTENT index=25 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.get_virtual_registers" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_virtual_registers</a></h3>
+<div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_mem_region.get_virtual_registers"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.get_virtual_registers" id="uvm_mem_region.get_virtual_registers" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">get_virtual_registers</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_vreg</span> <span class="sv-proto-name">get_virtual_registers</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the virtual register array in this region</p><p>Return a reference to the virtual register array abstraction class implemented in this region.&nbsp; Returns <i>null</i> if the memory region is not known to implement virtual registers.</p></div></div></div>
 
@@ -451,7 +451,7 @@
 
 
  <!--CONTENT index=26 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.write" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">write</a></h3>
+<div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_mem_region.write"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.write" id="uvm_mem_region.write" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">write</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">task</span> <span class="sv-proto-name">write</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
@@ -509,13 +509,13 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Write to a memory location in the region.</p><p>Write to the memory location that corresponds to the specified <i>offset</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#uvm_mem.write" class=LMethod id=link36  >uvm_mem::write()</a> for more details.</p></div></div></div>
+<div class=CBody><p>Write to a memory location in the region.</p><p>Write to the memory location that corresponds to the specified <i>offset</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#doc-nav-item-29" data-target-id="doc-nav-item-29" class=LMethod id=link36  >uvm_mem::write()</a> for more details.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=27 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.read" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">read</a></h3>
+<div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_mem_region.read"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.read" id="uvm_mem_region.read" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">read</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">task</span> <span class="sv-proto-name">read</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
@@ -573,13 +573,13 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Read from a memory location in the region.</p><p>Read from the memory location that corresponds to the specified <i>offset</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#uvm_mem.read" class=LMethod id=link37  >uvm_mem::read()</a> for more details.</p></div></div></div>
+<div class=CBody><p>Read from a memory location in the region.</p><p>Read from the memory location that corresponds to the specified <i>offset</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#doc-nav-item-30" data-target-id="doc-nav-item-30" class=LMethod id=link37  >uvm_mem::read()</a> for more details.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=28 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.burst_write" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">burst_write</a></h3>
+<div class="CMethod" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_mem_region.burst_write"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.burst_write" id="uvm_mem_region.burst_write" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">burst_write</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">task</span> <span class="sv-proto-name">burst_write</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
@@ -637,13 +637,13 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Write to a set of memory location in the region.</p><p>Write to the memory locations that corresponds to the specified <i>burst</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#uvm_mem.burst_write" class=LMethod id=link38  >uvm_mem::burst_write()</a> for more details.</p></div></div></div>
+<div class=CBody><p>Write to a set of memory location in the region.</p><p>Write to the memory locations that corresponds to the specified <i>burst</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#doc-nav-item-31" data-target-id="doc-nav-item-31" class=LMethod id=link38  >uvm_mem::burst_write()</a> for more details.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=29 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.burst_read" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">burst_read</a></h3>
+<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_mem_region.burst_read"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.burst_read" id="uvm_mem_region.burst_read" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">burst_read</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">task</span> <span class="sv-proto-name">burst_read</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
@@ -701,13 +701,13 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Read from a set of memory location in the region.</p><p>Read from the memory locations that corresponds to the specified <i>burst</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#uvm_mem.burst_read" class=LMethod id=link39  >uvm_mem::burst_read()</a> for more details.</p></div></div></div>
+<div class=CBody><p>Read from a set of memory location in the region.</p><p>Read from the memory locations that corresponds to the specified <i>burst</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#doc-nav-item-32" data-target-id="doc-nav-item-32" class=LMethod id=link39  >uvm_mem::burst_read()</a> for more details.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=30 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.poke" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">poke</a></h3>
+<div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_mem_region.poke"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.poke" id="uvm_mem_region.poke" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">poke</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">task</span> <span class="sv-proto-name">poke</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
@@ -750,13 +750,13 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Deposit in a memory location in the region.</p><p>Deposit the specified value in the memory location that corresponds to the specified <i>offset</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#uvm_mem.poke" class=LMethod id=link40  >uvm_mem::poke()</a> for more details.</p></div></div></div>
+<div class=CBody><p>Deposit in a memory location in the region.</p><p>Deposit the specified value in the memory location that corresponds to the specified <i>offset</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#doc-nav-item-33" data-target-id="doc-nav-item-33" class=LMethod id=link40  >uvm_mem::poke()</a> for more details.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=31 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_region.peek" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">peek</a></h3>
+<div class="CMethod" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_mem_region.peek"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_region.peek" id="uvm_mem_region.peek" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">peek</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=6><span class="sv-keyword">task</span> <span class="sv-proto-name">peek</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
@@ -799,19 +799,19 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Sample a memory location in the region.</p><p>Sample the memory location that corresponds to the specified <i>offset</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#uvm_mem.peek" class=LMethod id=link41  >uvm_mem::peek()</a> for more details.</p></div></div></div>
+<div class=CBody><p>Sample a memory location in the region.</p><p>Sample the memory location that corresponds to the specified <i>offset</i> within this region.&nbsp; Requires that the memory abstraction class be associated with the memory allocation manager that allocated this region.</p><p>See <a href="uvm_mem-svh.html#doc-nav-item-34" data-target-id="doc-nav-item-34" class=LMethod id=link41  >uvm_mem::peek()</a> for more details.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=32 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_mam_policy" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">uvm_mem_mam_policy</a></h2><div class=CBody><p>An instance of this class is randomized to determine the starting offset of a randomly allocated memory region.&nbsp; This class can be extended to provide additional constraints on the starting offset, such as word alignment or location of the region within a memory page.&nbsp; If a procedural region allocation policy is required, it can be implemented in the pre/post_randomize() method.</p>
+<div class="CClass" id="doc-nav-item-32" data-doc-topic="doc-nav-item-32" data-anchor="uvm_mem_mam_policy"><div class="CTopic"><h2 class=CTitle><a name="uvm_mem_mam_policy" id="uvm_mem_mam_policy" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">uvm_mem_mam_policy</a></h2><div class=CBody><p>An instance of this class is randomized to determine the starting offset of a randomly allocated memory region.&nbsp; This class can be extended to provide additional constraints on the starting offset, such as word alignment or location of the region within a memory page.&nbsp; If a procedural region allocation policy is required, it can be implemented in the pre/post_randomize() method.</p>
 
 <!--START_ND_SUMMARY index=32-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=32 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_mem_mam_policy" id=link42  >uvm_mem_mam_policy</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link42  >uvm_mem_mam_policy</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>An instance of this class is randomized to determine the starting offset of a randomly allocated memory region. </td></tr>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
@@ -821,35 +821,35 @@
 
   <!-- index=33 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_mem_mam_policy.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-33" data-target-id="doc-nav-item-33" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=34 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_mem_mam_policy.len" id=link43  >len</a></td><td class=SDescription>Number of addresses required</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-34" data-target-id="doc-nav-item-34" id=link43  >len</a></td><td class=SDescription>Number of addresses required</td></tr>
   <!-- index=35 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam_policy.start_offset" id=link44  >start_offset</a></td><td class=SDescription>The starting offset of the region</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-35" data-target-id="doc-nav-item-35" id=link44  >start_offset</a></td><td class=SDescription>The starting offset of the region</td></tr>
   <!-- index=36 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_mem_mam_policy.min_offset" id=link45  >min_offset</a></td><td class=SDescription>Minimum address offset in the managed address space</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-36" data-target-id="doc-nav-item-36" id=link45  >min_offset</a></td><td class=SDescription>Minimum address offset in the managed address space</td></tr>
   <!-- index=37 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam_policy.max_offset" id=link46  >max_offset</a></td><td class=SDescription>Maximum address offset in the managed address space</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-37" data-target-id="doc-nav-item-37" id=link46  >max_offset</a></td><td class=SDescription>Maximum address offset in the managed address space</td></tr>
   <!-- index=38 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_mem_mam_policy.in_use" id=link47  >in_use</a></td><td class=SDescription>Regions already allocated in the managed address space</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-38" data-target-id="doc-nav-item-38" id=link47  >in_use</a></td><td class=SDescription>Regions already allocated in the managed address space</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=33 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_policy.Variables" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_mem_mam_policy.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_policy.Variables" id="uvm_mem_mam_policy.Variables" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=34 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_policy.len" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">len</a></h3>
+<div class="CVariable" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_mem_mam_policy.len"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_policy.len" id="uvm_mem_mam_policy.len" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">len</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">len</span>
   </td></tr></table></blockquote><div class=CBody><p>Number of addresses required</p></div></div></div>
 
@@ -857,7 +857,7 @@
 
 
  <!--CONTENT index=35 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_policy.start_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">start_offset</a></h3>
+<div class="CVariable" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_mem_mam_policy.start_offset"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_policy.start_offset" id="uvm_mem_mam_policy.start_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">start_offset</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-ident">start_offset</span>
   </td></tr></table></blockquote><div class=CBody><p>The starting offset of the region</p></div></div></div>
 
@@ -865,7 +865,7 @@
 
 
  <!--CONTENT index=36 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_policy.min_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">min_offset</a></h3>
+<div class="CVariable" id="doc-nav-item-36" data-doc-topic="doc-nav-item-36" data-anchor="uvm_mem_mam_policy.min_offset"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_policy.min_offset" id="uvm_mem_mam_policy.min_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">min_offset</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-ident">min_offset</span>
   </td></tr></table></blockquote><div class=CBody><p>Minimum address offset in the managed address space</p></div></div></div>
 
@@ -873,7 +873,7 @@
 
 
  <!--CONTENT index=37 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_policy.max_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">max_offset</a></h3>
+<div class="CVariable" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_mem_mam_policy.max_offset"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_policy.max_offset" id="uvm_mem_mam_policy.max_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">max_offset</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-ident">max_offset</span>
   </td></tr></table></blockquote><div class=CBody><p>Maximum address offset in the managed address space</p></div></div></div>
 
@@ -881,7 +881,7 @@
 
 
  <!--CONTENT index=38 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_policy.in_use" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">in_use</a></h3>
+<div class="CVariable" id="doc-nav-item-38" data-doc-topic="doc-nav-item-38" data-anchor="uvm_mem_mam_policy.in_use"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_policy.in_use" id="uvm_mem_mam_policy.in_use" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">in_use</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_mem_region</span> <span class="sv-ident">in_use</span><span class="sv-ident">[$]
   </span></td></tr></table></blockquote><div class=CBody><p>Regions already allocated in the managed address space</p></div></div></div>
 
@@ -889,14 +889,14 @@
 
 
  <!--CONTENT index=39 -->
-<div class="CClass"><div class=CTopic><h2 class=CTitle><a name="uvm_mem_mam_cfg" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">uvm_mem_mam_cfg</a></h2><div class=CBody><p>Specifies the memory managed by an instance of a <a href="#uvm_mem_mam" class=LClass id=link54  >uvm_mem_mam</a> memory allocation manager class.</p>
+<div class="CClass" id="doc-nav-item-39" data-doc-topic="doc-nav-item-39" data-anchor="uvm_mem_mam_cfg"><div class="CTopic"><h2 class=CTitle><a name="uvm_mem_mam_cfg" id="uvm_mem_mam_cfg" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">uvm_mem_mam_cfg</a></h2><div class=CBody><p>Specifies the memory managed by an instance of a <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link54  >uvm_mem_mam</a> memory allocation manager class.</p>
 
 <!--START_ND_SUMMARY index=39-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=39 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_mem_mam_cfg" id=link48  >uvm_mem_mam_cfg</a></td></tr>
-<tr class=SMain><td colspan=2 class=SWideDescription>Specifies the memory managed by an instance of a <a href="#uvm_mem_mam" class=LClass id=link49  >uvm_mem_mam</a> memory allocation manager class.</td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-39" data-target-id="doc-nav-item-39" id=link48  >uvm_mem_mam_cfg</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>Specifies the memory managed by an instance of a <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link49  >uvm_mem_mam</a> memory allocation manager class.</td></tr>
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
@@ -905,32 +905,32 @@
 
   <!-- index=40 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_mem_mam_cfg.Variables" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-40" data-target-id="doc-nav-item-40" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=41 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_mem_mam_cfg.n_bytes" id=link50  >n_bytes</a></td><td class=SDescription>Number of bytes in each memory location</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-41" data-target-id="doc-nav-item-41" id=link50  >n_bytes</a></td><td class=SDescription>Number of bytes in each memory location</td></tr>
   <!-- index=42 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam_cfg.end_offset" id=link51  >end_offset</a></td><td class=SDescription>Last address of managed space</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-42" data-target-id="doc-nav-item-42" id=link51  >end_offset</a></td><td class=SDescription>Last address of managed space</td></tr>
   <!-- index=43 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_mem_mam_cfg.mode" id=link52  >mode</a></td><td class=SDescription>Region allocation mode</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" id=link52  >mode</a></td><td class=SDescription>Region allocation mode</td></tr>
   <!-- index=44 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_mem_mam_cfg.locality" id=link53  >locality</a></td><td class=SDescription>Region location mode</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-44" data-target-id="doc-nav-item-44" id=link53  >locality</a></td><td class=SDescription>Region location mode</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=40 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_cfg.Variables" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Variables</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_mem_mam_cfg.Variables"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_cfg.Variables" id="uvm_mem_mam_cfg.Variables" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">Variables</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=41 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_cfg.n_bytes" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">n_bytes</a></h3>
+<div class="CVariable" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_mem_mam_cfg.n_bytes"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_cfg.n_bytes" id="uvm_mem_mam_cfg.n_bytes" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">n_bytes</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">n_bytes</span>
   </td></tr></table></blockquote><div class=CBody><p>Number of bytes in each memory location</p></div></div></div>
 
@@ -938,7 +938,7 @@
 
 
  <!--CONTENT index=42 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_cfg.end_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">end_offset</a></h3>
+<div class="CVariable" id="doc-nav-item-42" data-doc-topic="doc-nav-item-42" data-anchor="uvm_mem_mam_cfg.end_offset"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_cfg.end_offset" id="uvm_mem_mam_cfg.end_offset" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">end_offset</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-ident">end_offset</span>
   </td></tr></table></blockquote><div class=CBody><p>Last address of managed space</p></div></div></div>
 
@@ -946,7 +946,7 @@
 
 
  <!--CONTENT index=43 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_cfg.mode" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">mode</a></h3>
+<div class="CVariable" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_mem_mam_cfg.mode"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_cfg.mode" id="uvm_mem_mam_cfg.mode" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">mode</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-uvm-type">uvm_mem_mam</span><span class="sv-ident">::</span><span class="sv-ident">alloc_mode_e</span> <span class="sv-ident">mode</span>
   </td></tr></table></blockquote><div class=CBody><p>Region allocation mode</p></div></div></div>
 
@@ -954,7 +954,7 @@
 
 
  <!--CONTENT index=44 -->
-<div class="CVariable"><div class=CTopic><h3 class=CTitle><a name="uvm_mem_mam_cfg.locality" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">locality</a></h3>
+<div class="CVariable" id="doc-nav-item-44" data-doc-topic="doc-nav-item-44" data-anchor="uvm_mem_mam_cfg.locality"><div class="CTopic"><h3 class=CTitle><a name="uvm_mem_mam_cfg.locality" id="uvm_mem_mam_cfg.locality" href="../../src_view/reg/uvm_mem_mam.svh.html#L66" class="src-code-link" data-src-file="reg/uvm_mem_mam.svh" data-src-line="66">locality</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-uvm-type">uvm_mem_mam</span><span class="sv-ident">::</span><span class="sv-ident">locality_e</span> <span class="sv-ident">locality</span>
   </td></tr></table></blockquote><div class=CBody><p>Region location mode</p></div></div></div>
 
@@ -1051,13 +1051,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -1254,6 +1254,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -1412,15 +1465,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();

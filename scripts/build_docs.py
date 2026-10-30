@@ -13,6 +13,7 @@ import re
 import html
 import json
 import shutil
+import posixpath
 from pathlib import Path
 
 # Paths
@@ -721,12 +722,62 @@ def generate_source_views():
 
     print(f"Generated {count} syntax-highlighted source views in {OUTPUT_SRC_VIEW}.")
 
+def resolve_cross_doc_path(current_rel_path, target_rel_href):
+    """Resolve a relative doc link against current doc file path."""
+    cur_dir = posixpath.dirname(current_rel_path)
+    combined = posixpath.join(cur_dir, target_rel_href) if cur_dir else target_rel_href
+    return posixpath.normpath(combined)
+
 def modernize_doc_files():
     """Modernize all 146 doc files from uvm-1.2/docs/html/files/ into docs_view/."""
     print("Modernizing UVM documentation pages...")
     if OUTPUT_DOCS_VIEW.exists():
         shutil.rmtree(OUTPUT_DOCS_VIEW)
     OUTPUT_DOCS_VIEW.mkdir(parents=True, exist_ok=True)
+
+    # Pass 1: Build anchor to ID maps for all doc files
+    global_doc_anchor_maps = {}
+    for root, dirs, files in os.walk(DOCS_FILES_DIR):
+        for f in sorted(files):
+            if not f.endswith('.html'):
+                continue
+            doc_file = Path(root) / f
+            rel_path = doc_file.relative_to(DOCS_FILES_DIR).as_posix()
+            try:
+                with open(doc_file, 'r', encoding='latin-1') as df:
+                    raw_html = df.read()
+            except Exception:
+                continue
+
+            content_start = raw_html.find('<div id=Content>')
+            content_end = raw_html.find('<!--START_ND_TOOLTIPS-->', content_start)
+            if content_end == -1: content_end = raw_html.find('</div><!--Content-->', content_start)
+            if content_end == -1: content_end = raw_html.find('</body>', content_start)
+            body = raw_html[content_start:content_end] if content_start != -1 else raw_html
+
+            a_map = {}
+            main_m = re.search(r'<div\s+class=["\']?CTopic["\']?\s+id=["\']?MainTopic["\']?[^>]*>[\s\S]*?<a\s+name=["\']([^"\']+)["\']', body)
+            if main_m:
+                a_map[main_m.group(1)] = 'doc-nav-main'
+                a_map['MainTopic'] = 'doc-nav-main'
+            if '<div class=Summary>' in body or '<div class="Summary">' in body:
+                a_map['Summary'] = 'doc-nav-summary'
+
+            parts = re.split(r'(<div class=["\']C[A-Za-z0-9_]+["\']\s*>\s*<div class=["\']?CTopic["\']?[^>]*>)', body)
+            seq = 0
+            for i in range(1, len(parts), 2):
+                w_start = parts[i]
+                w_body = parts[i+1]
+                is_main = ('id=MainTopic' in w_start or 'id="MainTopic"' in w_start)
+                a_m = re.search(r'<a\s+name=["\']([^"\']+)["\']', w_body)
+                a_name = a_m.group(1) if a_m else None
+                if is_main:
+                    if a_name: a_map[a_name] = 'doc-nav-main'
+                else:
+                    seq += 1
+                    if a_name: a_map[a_name] = f"doc-nav-item-{seq}"
+
+            global_doc_anchor_maps[rel_path] = a_map
 
     count = 0
     for root, dirs, files in os.walk(DOCS_FILES_DIR):
@@ -794,6 +845,61 @@ def modernize_doc_files():
             body_content = re.sub(r'onmouse(?:over|out)="[^"]*"', '', body_content, flags=re.IGNORECASE)
             body_content = re.sub(r"onmouse(?:over|out)='[^']*'", '', body_content, flags=re.IGNORECASE)
             body_content = re.sub(r'class=FramedContentPage', 'class="doc-content-page"', body_content)
+
+            # Inject static IDs and data-anchor into topic blocks
+            parts = re.split(r'(<div class=["\']C[A-Za-z0-9_]+["\']\s*>\s*<div class=["\']?CTopic["\']?[^>]*>)', body_content)
+            new_parts = [parts[0]]
+            seq = 0
+            local_map = global_doc_anchor_maps.get(rel_path, {})
+
+            for i in range(1, len(parts), 2):
+                w_start = parts[i]
+                w_body = parts[i+1]
+                is_main = ('id=MainTopic' in w_start or 'id="MainTopic"' in w_start)
+                a_m = re.search(r'<a\s+name=["\']([^"\']+)["\']', w_body)
+                a_name = a_m.group(1) if a_m else None
+                cls_m = re.search(r'class=["\'](C[A-Za-z0-9_]+)["\']', w_start)
+                cls_name = cls_m.group(1) if cls_m else 'CTopicWrap'
+
+                if is_main:
+                    safe_id = 'doc-nav-main'
+                    if a_name:
+                        w_body = re.sub(r'<a\s+name=["\']' + re.escape(a_name) + r'["\']', f'<a name="{a_name}" id="{a_name}"', w_body, count=1)
+                    mod_start = f'<div class="{cls_name}" id="{safe_id}" data-doc-topic="{safe_id}"' + (f' data-anchor="{a_name}"' if a_name else '') + '><div class="CTopic" id="MainTopic">'
+                else:
+                    seq += 1
+                    safe_id = f"doc-nav-item-{seq}"
+                    if a_name:
+                        w_body = re.sub(r'<a\s+name=["\']' + re.escape(a_name) + r'["\']', f'<a name="{a_name}" id="{a_name}"', w_body, count=1)
+                        mod_start = f'<div class="{cls_name}" id="{safe_id}" data-doc-topic="{safe_id}" data-anchor="{a_name}"><div class="CTopic">'
+                    else:
+                        mod_start = f'<div class="{cls_name}" id="{safe_id}" data-doc-topic="{safe_id}"><div class="CTopic">'
+                new_parts.append(mod_start)
+                new_parts.append(w_body)
+
+            body_content = "".join(new_parts)
+            body_content = body_content.replace('<div class=Summary>', '<div class="Summary" id="doc-nav-summary" data-anchor="Summary">')
+            body_content = body_content.replace('<div class="Summary">', '<div class="Summary" id="doc-nav-summary" data-anchor="Summary">')
+
+            # Rewrite all internal href links to use the exact destination element IDs
+            def rewrite_doc_href(m):
+                full_match = m.group(0)
+                href_val = m.group(1)
+                if href_val.startswith('#'):
+                    anchor_target = href_val[1:]
+                    if anchor_target in local_map:
+                        dest_id = local_map[anchor_target]
+                        return f'href="#{dest_id}" data-target-id="{dest_id}"'
+                elif '#' in href_val and not href_val.startswith(('http://', 'https://', 'javascript:')) and 'src_view' not in href_val and 'src/' not in href_val:
+                    file_part, anchor_target = href_val.split('#', 1)
+                    target_rel_file = resolve_cross_doc_path(rel_path, file_part)
+                    target_map = global_doc_anchor_maps.get(target_rel_file, {})
+                    if anchor_target in target_map:
+                        dest_id = target_map[anchor_target]
+                        return f'href="{file_part}#{dest_id}" data-target-id="{dest_id}"'
+                return full_match
+
+            body_content = re.sub(r'href=["\']([^"\']+)["\']', rewrite_doc_href, body_content)
 
             # Syntax highlight documentation code blocks (<pre>)
             body_content = process_doc_code_blocks(body_content)
@@ -927,13 +1033,13 @@ def modernize_doc_files():
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {{
           wrap.setAttribute('data-anchor', aName);
         }}
@@ -1130,6 +1236,59 @@ def modernize_doc_files():
         }});
       }});
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {{
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {{
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {{
+            try {{
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            }} catch (err) {{}}
+          }}
+          if (target && target.tagName === 'A' && target.closest) {{
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }}
+          if (target) {{
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {{
+              isManualScrolling = false;
+            }}, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {{
+              history.replaceState(null, null, '#' + realId);
+            }} catch (err) {{}}
+
+            if (tocNav && realId) {{
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {{
+                tocLinks.forEach(function(l) {{ l.classList.remove('active'); }});
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {{
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }}
+              }}
+            }}
+          }}
+        }}
+      }});
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {{
@@ -1288,15 +1447,23 @@ def modernize_doc_files():
         }}
       }});
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {{
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {{
-          setTimeout(function() {{
-            window.postMessage({{ type: 'scrollToSection', anchor: initHash }}, '*');
-          }}, 160);
-        }}
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {{
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {{
+          window.postMessage({{ type: 'scrollToSection', anchor: raw, id: raw }}, '*');
+        }}, 160);
       }}
+
+      if (window.location.hash) {{
+        handleHashNav(window.location.hash);
+      }}
+
+      window.addEventListener('hashchange', function() {{
+        handleHashNav(window.location.hash);
+      }});
 
       setTimeout(updateScrollSpy, 120);
     }})();

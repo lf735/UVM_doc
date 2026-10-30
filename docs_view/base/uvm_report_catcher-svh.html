@@ -29,7 +29,7 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass"><div class=CTopic id=MainTopic><h1 class=CTitle><a name="uvm_report_catcher" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_catcher</a></h1><div class=CBody><p>The uvm_report_catcher is used to catch messages issued by the uvm report server.&nbsp; Catchers are uvm_callbacks#(<a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link39  >uvm_report_object</a>,uvm_report_catcher) objects, so all facilities in the <a href="uvm_callback-svh.html#uvm_callback" class=LClass id=link40  >uvm_callback</a> and <a href="uvm_callback-svh.html#uvm_callbacks#(T,CB)" class=LClass id=link41  >uvm_callbacks#(T,CB)</a> classes are available for registering catchers and controlling catcher state.&nbsp; The uvm_callbacks#(<a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link42  >uvm_report_object</a>,uvm_report_catcher) class is aliased to <i>uvm_report_cb</i> to make it easier to use.&nbsp; Multiple report catchers can be registered with a report object.&nbsp; The catchers can be registered as default catchers which catch all reports on all <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link43  >uvm_report_object</a> reporters, or catchers can be attached to specific report objects (i.e. components).</p><p>User extensions of <a href="#uvm_report_catcher" class=LClass id=link44  >uvm_report_catcher</a> must implement the <a href="#uvm_report_catcher.catch" class=LMethod id=link45  >catch</a> method in which the action to be taken on catching the report is specified.&nbsp; The catch method can return <i>CAUGHT</i>, in which case further processing of the report is immediately stopped, or return <i>THROW</i> in which case the (possibly modified) report is passed on to other registered catchers.&nbsp; The catchers are processed in the order in which they are registered.</p><p>On catching a report, the <a href="#uvm_report_catcher.catch" class=LMethod id=link46  >catch</a> method can modify the severity, id, action, verbosity or the report string itself before the report is finally issued by the report server.&nbsp; The report can be immediately issued from within the catcher class by calling the <a href="#uvm_report_catcher.issue" class=LMethod id=link47  >issue</a> method.</p><p>The catcher maintains a count of all reports with FATAL,ERROR or WARNING severity and a count of all reports with FATAL, ERROR or WARNING severity whose severity was lowered.&nbsp; These statistics are reported in the summary of the <a href="uvm_report_server-svh.html#uvm_report_server" class=LClass id=link48  >uvm_report_server</a>.</p><p>This example shows the basic concept of creating a report catching callback and attaching it to all messages that get emitted:</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_report_catcher"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_report_catcher" id="uvm_report_catcher" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_catcher</a></h1><div class=CBody><p>The uvm_report_catcher is used to catch messages issued by the uvm report server.&nbsp; Catchers are uvm_callbacks#(<a href="uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link39  >uvm_report_object</a>,uvm_report_catcher) objects, so all facilities in the <a href="uvm_callback-svh.html#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link40  >uvm_callback</a> and <a href="uvm_callback-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link41  >uvm_callbacks#(T,CB)</a> classes are available for registering catchers and controlling catcher state.&nbsp; The uvm_callbacks#(<a href="uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link42  >uvm_report_object</a>,uvm_report_catcher) class is aliased to <i>uvm_report_cb</i> to make it easier to use.&nbsp; Multiple report catchers can be registered with a report object.&nbsp; The catchers can be registered as default catchers which catch all reports on all <a href="uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link43  >uvm_report_object</a> reporters, or catchers can be attached to specific report objects (i.e. components).</p><p>User extensions of <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link44  >uvm_report_catcher</a> must implement the <a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" class=LMethod id=link45  >catch</a> method in which the action to be taken on catching the report is specified.&nbsp; The catch method can return <i>CAUGHT</i>, in which case further processing of the report is immediately stopped, or return <i>THROW</i> in which case the (possibly modified) report is passed on to other registered catchers.&nbsp; The catchers are processed in the order in which they are registered.</p><p>On catching a report, the <a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" class=LMethod id=link46  >catch</a> method can modify the severity, id, action, verbosity or the report string itself before the report is finally issued by the report server.&nbsp; The report can be immediately issued from within the catcher class by calling the <a href="#doc-nav-item-34" data-target-id="doc-nav-item-34" class=LMethod id=link47  >issue</a> method.</p><p>The catcher maintains a count of all reports with FATAL,ERROR or WARNING severity and a count of all reports with FATAL, ERROR or WARNING severity whose severity was lowered.&nbsp; These statistics are reported in the summary of the <a href="uvm_report_server-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link48  >uvm_report_server</a>.</p><p>This example shows the basic concept of creating a report catching callback and attaching it to all messages that get emitted:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -70,10 +70,10 @@
 </div>
 
 <!--START_ND_SUMMARY index=0-->
-<div class=Summary><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_report_catcher" id=link4  >uvm_report_catcher</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" id=link4  >uvm_report_catcher</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The uvm_report_catcher is used to catch messages issued by the uvm report server. </td></tr>
 
   <!-- HIERARCHY -->
@@ -81,9 +81,9 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
       <div class=ClassHierarchy>
         <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#uvm_void" class=LClass id=link1  >uvm_void</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#uvm_object" class=LClass id=link2  >uvm_object</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_callback-svh.html#uvm_callback" class=LClass id=link3  >uvm_callback</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link1  >uvm_void</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_object</a></div></div></td></tr>
+          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_callback-svh.html#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link3  >uvm_callback</a></div></div></td></tr>
           <tr><td><div class=CHCurrent><div class=CHEntry>uvm_report_catcher</div></div></td></tr>
         </table>
       </div>
@@ -99,116 +99,116 @@
 
   <!-- index=1 -->
 
-<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_report_catcher.new" id=link5  >new</a></td><td class=SDescription>Create a new report catcher. </td></tr>
+<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" id=link5  >new</a></td><td class=SDescription>Create a new report catcher. </td></tr>
   <!-- index=2 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_report_catcher.Current_Message_State" >Current Message State</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" >Current Message State</a></td><td class=SDescription></td></tr>
   <!-- index=3 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.get_client" id=link6  >get_client</a></td><td class=SDescription>Returns the <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link7  >uvm_report_object</a> that has generated the message that is currently being processed.</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" id=link6  >get_client</a></td><td class=SDescription>Returns the <a href="uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link7  >uvm_report_object</a> that has generated the message that is currently being processed.</td></tr>
   <!-- index=4 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.get_severity" id=link8  >get_severity</a></td><td class=SDescription>Returns the <a href="uvm_object_globals-svh.html#uvm_severity" class=LType id=link9  >uvm_severity</a> of the message that is currently being processed. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" id=link8  >get_severity</a></td><td class=SDescription>Returns the <a href="uvm_object_globals-svh.html#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LType id=link9  >uvm_severity</a> of the message that is currently being processed. </td></tr>
   <!-- index=5 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.get_context" id=link10  >get_context</a></td><td class=SDescription>Returns the context name of the message that is currently being processed. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" id=link10  >get_context</a></td><td class=SDescription>Returns the context name of the message that is currently being processed. </td></tr>
   <!-- index=6 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.get_verbosity" id=link11  >get_verbosity</a></td><td class=SDescription>Returns the verbosity of the message that is currently being processed. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" id=link11  >get_verbosity</a></td><td class=SDescription>Returns the verbosity of the message that is currently being processed. </td></tr>
   <!-- index=7 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.get_id" id=link12  >get_id</a></td><td class=SDescription>Returns the string id of the message that is currently being processed. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" id=link12  >get_id</a></td><td class=SDescription>Returns the string id of the message that is currently being processed. </td></tr>
   <!-- index=8 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.get_message" id=link13  >get_message</a></td><td class=SDescription>Returns the string message of the message that is currently being processed. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" id=link13  >get_message</a></td><td class=SDescription>Returns the string message of the message that is currently being processed. </td></tr>
   <!-- index=9 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.get_action" id=link14  >get_action</a></td><td class=SDescription>Returns the <a href="uvm_object_globals-svh.html#uvm_action" class=LType id=link15  >uvm_action</a> of the message that is currently being processed. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" id=link14  >get_action</a></td><td class=SDescription>Returns the <a href="uvm_object_globals-svh.html#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LType id=link15  >uvm_action</a> of the message that is currently being processed. </td></tr>
   <!-- index=10 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.get_fname" id=link16  >get_fname</a></td><td class=SDescription>Returns the file name of the message.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" id=link16  >get_fname</a></td><td class=SDescription>Returns the file name of the message.</td></tr>
   <!-- index=11 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.get_line" id=link17  >get_line</a></td><td class=SDescription>Returns the line number of the message.</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" id=link17  >get_line</a></td><td class=SDescription>Returns the line number of the message.</td></tr>
   <!-- index=12 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.get_element_container" id=link18  >get_element_container</a></td><td class=SDescription>Returns the element container of the message.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" id=link18  >get_element_container</a></td><td class=SDescription>Returns the element container of the message.</td></tr>
   <!-- index=13 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_report_catcher.Change_Message_State" >Change Message State</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" >Change Message State</a></td><td class=SDescription></td></tr>
   <!-- index=14 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.set_severity" id=link19  >set_severity</a></td><td class=SDescription>Change the severity of the message to <i>severity</i>. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" id=link19  >set_severity</a></td><td class=SDescription>Change the severity of the message to <i>severity</i>. </td></tr>
   <!-- index=15 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.set_verbosity" id=link20  >set_verbosity</a></td><td class=SDescription>Change the verbosity of the message to <i>verbosity</i>. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" id=link20  >set_verbosity</a></td><td class=SDescription>Change the verbosity of the message to <i>verbosity</i>. </td></tr>
   <!-- index=16 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.set_id" id=link21  >set_id</a></td><td class=SDescription>Change the id of the message to <i>id</i>. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-16" data-target-id="doc-nav-item-16" id=link21  >set_id</a></td><td class=SDescription>Change the id of the message to <i>id</i>. </td></tr>
   <!-- index=17 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.set_message" id=link22  >set_message</a></td><td class=SDescription>Change the text of the message to <i>message</i>. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" id=link22  >set_message</a></td><td class=SDescription>Change the text of the message to <i>message</i>. </td></tr>
   <!-- index=18 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.set_action" id=link23  >set_action</a></td><td class=SDescription>Change the action of the message to <i>action</i>. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-18" data-target-id="doc-nav-item-18" id=link23  >set_action</a></td><td class=SDescription>Change the action of the message to <i>action</i>. </td></tr>
   <!-- index=19 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.set_context" id=link24  >set_context</a></td><td class=SDescription>Change the context of the message to <i>context_str</i>. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" id=link24  >set_context</a></td><td class=SDescription>Change the context of the message to <i>context_str</i>. </td></tr>
   <!-- index=20 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.add_int" id=link25  >add_int</a></td><td class=SDescription>Add an integral type of the name <i>name</i> and value <i>value</i> to the message. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-20" data-target-id="doc-nav-item-20" id=link25  >add_int</a></td><td class=SDescription>Add an integral type of the name <i>name</i> and value <i>value</i> to the message. </td></tr>
   <!-- index=21 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.add_string" id=link26  >add_string</a></td><td class=SDescription>Adds a string of the name <i>name</i> and value <i>value</i> to the message. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-21" data-target-id="doc-nav-item-21" id=link26  >add_string</a></td><td class=SDescription>Adds a string of the name <i>name</i> and value <i>value</i> to the message. </td></tr>
   <!-- index=22 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.add_object" id=link27  >add_object</a></td><td class=SDescription>Adds a uvm_object of the name <i>name</i> and reference <i>obj</i> to the message. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-22" data-target-id="doc-nav-item-22" id=link27  >add_object</a></td><td class=SDescription>Adds a uvm_object of the name <i>name</i> and reference <i>obj</i> to the message. </td></tr>
   <!-- index=23 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_report_catcher.Debug" >Debug</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-23" data-target-id="doc-nav-item-23" >Debug</a></td><td class=SDescription></td></tr>
   <!-- index=24 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.get_report_catcher" id=link28  >get_report_catcher</a></td><td class=SDescription>Returns the first report catcher that has <i>name</i>.</td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" id=link28  >get_report_catcher</a></td><td class=SDescription>Returns the first report catcher that has <i>name</i>.</td></tr>
   <!-- index=25 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.print_catcher" id=link29  >print_catcher</a></td><td class=SDescription>Prints information about all of the report catchers that are registered. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-25" data-target-id="doc-nav-item-25" id=link29  >print_catcher</a></td><td class=SDescription>Prints information about all of the report catchers that are registered. </td></tr>
   <!-- index=26 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_report_catcher.Callback_Interface" >Callback Interface</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-26" data-target-id="doc-nav-item-26" >Callback Interface</a></td><td class=SDescription></td></tr>
   <!-- index=27 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.catch" id=link30  >catch</a></td><td class=SDescription>This is the method that is called for each registered report catcher. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" id=link30  >catch</a></td><td class=SDescription>This is the method that is called for each registered report catcher. </td></tr>
   <!-- index=28 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_report_catcher.Reporting" >Reporting</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-28" data-target-id="doc-nav-item-28" >Reporting</a></td><td class=SDescription></td></tr>
   <!-- index=29 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.uvm_report_fatal" id=link31  >uvm_report_fatal</a></td><td class=SDescription>Issues a fatal message using the current message&rsquo;s report object. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" id=link31  >uvm_report_fatal</a></td><td class=SDescription>Issues a fatal message using the current message&rsquo;s report object. </td></tr>
   <!-- index=30 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.uvm_report_error" id=link32  >uvm_report_error</a></td><td class=SDescription>Issues an error message using the current message&rsquo;s report object. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-30" data-target-id="doc-nav-item-30" id=link32  >uvm_report_error</a></td><td class=SDescription>Issues an error message using the current message&rsquo;s report object. </td></tr>
   <!-- index=31 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.uvm_report_warning" id=link33  >uvm_report_warning</a></td><td class=SDescription>Issues a warning message using the current message&rsquo;s report object. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" id=link33  >uvm_report_warning</a></td><td class=SDescription>Issues a warning message using the current message&rsquo;s report object. </td></tr>
   <!-- index=32 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.uvm_report_info" id=link34  >uvm_report_info</a></td><td class=SDescription>Issues a info message using the current message&rsquo;s report object. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link34  >uvm_report_info</a></td><td class=SDescription>Issues a info message using the current message&rsquo;s report object. </td></tr>
   <!-- index=33 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.uvm_report" id=link35  >uvm_report</a></td><td class=SDescription>Issues a message using the current message&rsquo;s report object. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-33" data-target-id="doc-nav-item-33" id=link35  >uvm_report</a></td><td class=SDescription>Issues a message using the current message&rsquo;s report object. </td></tr>
   <!-- index=34 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_catcher.issue" id=link36  >issue</a></td><td class=SDescription>Immediately issues the message which is currently being processed. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-34" data-target-id="doc-nav-item-34" id=link36  >issue</a></td><td class=SDescription>Immediately issues the message which is currently being processed. </td></tr>
   <!-- index=35 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_catcher.summarize" id=link37  >summarize</a></td><td class=SDescription>This function is called automatically by <a href="uvm_report_server-svh.html#uvm_report_server.report_summarize" class=LMethod id=link38  >uvm_report_server::report_summarize()</a>. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-35" data-target-id="doc-nav-item-35" id=link37  >summarize</a></td><td class=SDescription>This function is called automatically by <a href="uvm_report_server-svh.html#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link38  >uvm_report_server::report_summarize()</a>. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
 
 
  <!--CONTENT index=1 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.new" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">new</a></h3>
+<div class="CMethod" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_report_catcher.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.new" id="uvm_report_catcher.new" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -226,29 +226,29 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.Current_Message_State" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Current Message State</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_report_catcher.Current_Message_State"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.Current_Message_State" id="uvm_report_catcher.Current_Message_State" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Current Message State</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_client" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_client</a></h3>
+<div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_report_catcher.get_client"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_client" id="uvm_report_catcher.get_client" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_client</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_report_object</span> <span class="sv-proto-name">get_client</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Returns the <a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link49  >uvm_report_object</a> that has generated the message that is currently being processed.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the <a href="uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link49  >uvm_report_object</a> that has generated the message that is currently being processed.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=4 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_severity" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_severity</a></h3>
+<div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_report_catcher.get_severity"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_severity" id="uvm_report_catcher.get_severity" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_severity</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_severity</span> <span class="sv-proto-name">get_severity</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Returns the <a href="uvm_object_globals-svh.html#uvm_severity" class=LType id=link50  >uvm_severity</a> of the message that is currently being processed.&nbsp; If the severity was modified by a previously executed catcher object (which re-threw the message), then the returned severity is the modified value.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the <a href="uvm_object_globals-svh.html#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LType id=link50  >uvm_severity</a> of the message that is currently being processed.&nbsp; If the severity was modified by a previously executed catcher object (which re-threw the message), then the returned severity is the modified value.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_context" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_context</a></h3>
+<div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_report_catcher.get_context"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_context" id="uvm_report_catcher.get_context" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_context</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_context</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the context name of the message that is currently being processed.&nbsp; This is typically the full hierarchical name of the component that issued the message.&nbsp; However, if user-defined context is set from a uvm_report_message, the user-defined context will be returned.</p></div></div></div>
 
@@ -256,7 +256,7 @@
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_verbosity" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_verbosity</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_report_catcher.get_verbosity"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_verbosity" id="uvm_report_catcher.get_verbosity" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_verbosity</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_verbosity</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the verbosity of the message that is currently being processed.&nbsp; If the verbosity was modified by a previously executed catcher (which re-threw the message), then the returned verbosity is the modified value.</p></div></div></div>
 
@@ -264,7 +264,7 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_id" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_id</a></h3>
+<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_report_catcher.get_id"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_id" id="uvm_report_catcher.get_id" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_id</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_id</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the string id of the message that is currently being processed.&nbsp; If the id was modified by a previously executed catcher (which re-threw the message), then the returned id is the modified value.</p></div></div></div>
 
@@ -272,7 +272,7 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_message" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_message</a></h3>
+<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_report_catcher.get_message"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_message" id="uvm_report_catcher.get_message" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_message</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_message</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the string message of the message that is currently being processed.&nbsp; If the message was modified by a previously executed catcher (which re-threw the message), then the returned message is the modified value.</p></div></div></div>
 
@@ -280,15 +280,15 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_action" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_action</a></h3>
+<div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_report_catcher.get_action"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_action" id="uvm_report_catcher.get_action" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_action</span> <span class="sv-proto-name">get_action</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Returns the <a href="uvm_object_globals-svh.html#uvm_action" class=LType id=link51  >uvm_action</a> of the message that is currently being processed.&nbsp; If the action was modified by a previously executed catcher (which re-threw the message), then the returned action is the modified value.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the <a href="uvm_object_globals-svh.html#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LType id=link51  >uvm_action</a> of the message that is currently being processed.&nbsp; If the action was modified by a previously executed catcher (which re-threw the message), then the returned action is the modified value.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=10 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_fname" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_fname</a></h3>
+<div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_report_catcher.get_fname"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_fname" id="uvm_report_catcher.get_fname" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_fname</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_fname</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the file name of the message.</p></div></div></div>
 
@@ -296,7 +296,7 @@
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_line" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_line</a></h3>
+<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_report_catcher.get_line"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_line" id="uvm_report_catcher.get_line" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_line</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_line</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the line number of the message.</p></div></div></div>
 
@@ -304,7 +304,7 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_element_container" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_element_container</a></h3>
+<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_report_catcher.get_element_container"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_element_container" id="uvm_report_catcher.get_element_container" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_element_container</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_report_message_element_container</span> <span class="sv-proto-name">get_element_container</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the element container of the message.</p></div></div></div>
 
@@ -312,13 +312,13 @@
 
 
  <!--CONTENT index=13 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.Change_Message_State" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Change Message State</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_report_catcher.Change_Message_State"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.Change_Message_State" id="uvm_report_catcher.Change_Message_State" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Change Message State</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.set_severity" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_severity</a></h3>
+<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_report_catcher.set_severity"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.set_severity" id="uvm_report_catcher.set_severity" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_severity</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_severity</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
@@ -334,7 +334,7 @@
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.set_verbosity" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_verbosity</a></h3>
+<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_report_catcher.set_verbosity"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.set_verbosity" id="uvm_report_catcher.set_verbosity" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_verbosity</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_verbosity</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
@@ -350,7 +350,7 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.set_id" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_id</a></h3>
+<div class="CMethod" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_report_catcher.set_id"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.set_id" id="uvm_report_catcher.set_id" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_id</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_id</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -366,7 +366,7 @@
 
 
  <!--CONTENT index=17 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.set_message" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_message</a></h3>
+<div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_report_catcher.set_message"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.set_message" id="uvm_report_catcher.set_message" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_message</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_message</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -382,7 +382,7 @@
 
 
  <!--CONTENT index=18 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.set_action" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_action</a></h3>
+<div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_report_catcher.set_action"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.set_action" id="uvm_report_catcher.set_action" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_action</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_action</span>&nbsp;</td>
@@ -398,7 +398,7 @@
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.set_context" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_context</a></h3>
+<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_report_catcher.set_context"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.set_context" id="uvm_report_catcher.set_context" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">set_context</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_context</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -414,7 +414,7 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.add_int" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">add_int</a></h3>
+<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_report_catcher.add_int"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.add_int" id="uvm_report_catcher.add_int" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">add_int</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add_int</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -448,7 +448,7 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.add_string" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">add_string</a></h3>
+<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_report_catcher.add_string"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.add_string" id="uvm_report_catcher.add_string" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">add_string</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add_string</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -474,7 +474,7 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.add_object" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">add_object</a></h3>
+<div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_report_catcher.add_object"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.add_object" id="uvm_report_catcher.add_object" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">add_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add_object</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -500,13 +500,13 @@
 
 
  <!--CONTENT index=23 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.Debug" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Debug</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_report_catcher.Debug"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.Debug" id="uvm_report_catcher.Debug" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Debug</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=24 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.get_report_catcher" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_report_catcher</a></h3>
+<div class="CMethod" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_report_catcher.get_report_catcher"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.get_report_catcher" id="uvm_report_catcher.get_report_catcher" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">get_report_catcher</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> uvm_report_catcher <span class="sv-proto-name">get_report_catcher</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -522,7 +522,7 @@
 
 
  <!--CONTENT index=25 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.print_catcher" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">print_catcher</a></h3>
+<div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_report_catcher.print_catcher"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.print_catcher" id="uvm_report_catcher.print_catcher" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">print_catcher</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_catcher</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">UVM_FILE</span>&nbsp;</td>
@@ -534,33 +534,33 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Prints information about all of the report catchers that are registered.&nbsp; For finer grained detail, the <a href="uvm_callback-svh.html#uvm_callbacks#(T,CB).display" class=LMethod id=link52  >uvm_callbacks #(T,CB)::display</a> method can be used by calling uvm_report_cb::display(<a href="uvm_report_object-svh.html#uvm_report_object" class=LClass id=link53  >uvm_report_object</a>).</p></div></div></div>
+<div class=CBody><p>Prints information about all of the report catchers that are registered.&nbsp; For finer grained detail, the <a href="uvm_callback-svh.html#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link52  >uvm_callbacks #(T,CB)::display</a> method can be used by calling uvm_report_cb::display(<a href="uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link53  >uvm_report_object</a>).</p></div></div></div>
 
 
 
 
  <!--CONTENT index=26 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.Callback_Interface" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Callback Interface</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_report_catcher.Callback_Interface"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.Callback_Interface" id="uvm_report_catcher.Callback_Interface" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Callback Interface</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=27 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.catch" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">catch</a></h3>
+<div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_report_catcher.catch"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.catch" id="uvm_report_catcher.catch" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">catch</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-ident">action_e</span> <span class="sv-proto-name">catch</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>This is the method that is called for each registered report catcher.&nbsp; There are no arguments to this function.&nbsp; The <a href="#uvm_report_catcher.Current_Message_State" class=LGroup >Current Message State</a> interface methods can be used to access information about the current message being processed.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>This is the method that is called for each registered report catcher.&nbsp; There are no arguments to this function.&nbsp; The <a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" class=LGroup >Current Message State</a> interface methods can be used to access information about the current message being processed.</p></div></div></div>
 
 
 
 
  <!--CONTENT index=28 -->
-<div class="CGroup"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.Reporting" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Reporting</a></h3></div></div>
+<div class="CGroup" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_report_catcher.Reporting"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.Reporting" id="uvm_report_catcher.Reporting" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">Reporting</a></h3></div></div>
 
 
 
 
  <!--CONTENT index=29 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.uvm_report_fatal" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_fatal</a></h3>
+<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_report_catcher.uvm_report_fatal"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.uvm_report_fatal" id="uvm_report_catcher.uvm_report_fatal" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_fatal</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report_fatal</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -602,7 +602,7 @@
 
 
  <!--CONTENT index=30 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.uvm_report_error" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_error</a></h3>
+<div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_report_catcher.uvm_report_error"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.uvm_report_error" id="uvm_report_catcher.uvm_report_error" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_error</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report_error</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -644,7 +644,7 @@
 
 
  <!--CONTENT index=31 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.uvm_report_warning" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_warning</a></h3>
+<div class="CMethod" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_report_catcher.uvm_report_warning"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.uvm_report_warning" id="uvm_report_catcher.uvm_report_warning" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_warning</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report_warning</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -686,7 +686,7 @@
 
 
  <!--CONTENT index=32 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.uvm_report_info" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_info</a></h3>
+<div class="CMethod" id="doc-nav-item-32" data-doc-topic="doc-nav-item-32" data-anchor="uvm_report_catcher.uvm_report_info"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.uvm_report_info" id="uvm_report_catcher.uvm_report_info" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report_info</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report_info</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -728,7 +728,7 @@
 
 
  <!--CONTENT index=33 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.uvm_report" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report</a></h3>
+<div class="CMethod" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_report_catcher.uvm_report"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.uvm_report" id="uvm_report_catcher.uvm_report" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">uvm_report</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
@@ -774,7 +774,7 @@
 
 
  <!--CONTENT index=34 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.issue" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">issue</a></h3>
+<div class="CMethod" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_report_catcher.issue"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.issue" id="uvm_report_catcher.issue" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">issue</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">issue</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Immediately issues the message which is currently being processed.&nbsp; This is useful if the message is being <i>CAUGHT</i> but should still be emitted.</p><p>Issuing a message will update the report_server stats, possibly multiple times if the message is not <i>CAUGHT</i>.</p></div></div></div>
 
@@ -782,9 +782,9 @@
 
 
  <!--CONTENT index=35 -->
-<div class="CMethod"><div class=CTopic><h3 class=CTitle><a name="uvm_report_catcher.summarize" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">summarize</a></h3>
+<div class="CMethod" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_report_catcher.summarize"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_catcher.summarize" id="uvm_report_catcher.summarize" href="../../src_view/base/uvm_report_catcher.svh.html#L34" class="src-code-link" data-src-file="base/uvm_report_catcher.svh" data-src-line="34">summarize</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">summarize</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>This function is called automatically by <a href="uvm_report_server-svh.html#uvm_report_server.report_summarize" class=LMethod id=link54  >uvm_report_server::report_summarize()</a>.&nbsp; It prints the statistics for the active catchers.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>This function is called automatically by <a href="uvm_report_server-svh.html#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link54  >uvm_report_server::report_summarize()</a>.&nbsp; It prints the statistics for the active catchers.</p></div></div></div>
 
 </div><!--Content-->
 
@@ -879,13 +879,13 @@
         const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
         if (!rawTitle) return;
 
-        const safeId = 'doc-nav-item-' + (++topicSeq);
+        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
         wrap.id = safeId;
         wrap.setAttribute('data-doc-topic', safeId);
         if (topic) topic.id = topic.id || (safeId + '-topic');
 
         const aTag = wrap.querySelector('a[name]');
-        const aName = aTag ? aTag.getAttribute('name') : '';
+        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
         if (aName) {
           wrap.setAttribute('data-anchor', aName);
         }
@@ -1082,6 +1082,59 @@
         });
       });
 
+      // Unified click handler for internal anchor/topic links in #Content
+      contentEl.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href*="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+        // If it's a source code link, let the source code link handler deal with it
+        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
+
+        // Check if link is an in-page anchor link (starts with #)
+        if (href.startsWith('#')) {
+          const targetId = link.getAttribute('data-target-id') || href.substring(1);
+          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+          if (!target) {
+            try {
+              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
+            } catch (err) {}
+          }
+          if (target && target.tagName === 'A' && target.closest) {
+            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          }
+          if (target) {
+            e.preventDefault();
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+            scrollToElement(target);
+            manualScrollTimer = setTimeout(function() {
+              isManualScrolling = false;
+            }, 800);
+
+            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+            try {
+              history.replaceState(null, null, '#' + realId);
+            } catch (err) {}
+
+            if (tocNav && realId) {
+              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+              if (mLink) {
+                tocLinks.forEach(function(l) { l.classList.remove('active'); });
+                mLink.classList.add('active');
+                const pB = mLink.closest('.doc-toc-group-block');
+                if (pB && pB.classList.contains('collapsed')) {
+                  pB.classList.remove('collapsed');
+                  updateToggleAllBtn();
+                }
+              }
+            }
+          }
+        }
+      });
+
       // Group chevron expand/collapse toggles
       const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
       chevronBtns.forEach(function(btn) {
@@ -1240,15 +1293,23 @@
         }
       });
 
-      // Handle direct hash navigation on initial load
-      if (window.location.hash) {
-        const initHash = decodeURIComponent(window.location.hash.substring(1));
-        if (initHash) {
-          setTimeout(function() {
-            window.postMessage({ type: 'scrollToSection', anchor: initHash }, '*');
-          }, 160);
-        }
+      // Handle direct hash navigation on initial load or hashchange
+      function handleHashNav(hashVal) {
+        if (!hashVal) return;
+        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
+        if (!raw) return;
+        setTimeout(function() {
+          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        }, 160);
       }
+
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
+
+      window.addEventListener('hashchange', function() {
+        handleHashNav(window.location.hash);
+      });
 
       setTimeout(updateScrollSpy, 120);
     })();
