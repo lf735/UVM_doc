@@ -112,7 +112,7 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
 ### Règle 1 : Zéro Dépendance Runtime Externe
 - **Principe** : L'application finale doit pouvoir être ouverte directement en double-cliquant sur `index.html` sur une machine isolée sans accès Internet.
 - **Interdiction** : Pas de CDN obligatoire au runtime, pas de bundler runtime lourd (Webpack/Vite requis pour lire le site), pas d'appels API AJAX bloquants vers un serveur distant.
-- **Conséquence** : Toutes les données d'indexation sont compilées statiquement dans [`js/search_data.js`](file:///c:/Users/uf755lfr/Perso/UVM_doc/js/search_data.js) sous forme d'un objet global `window.UVM_DATA`.
+- **Conséquence** : Toutes les données d'indexation sont compilées statiquement dans [`js/search_data.js`](file:///c:/Dev/UVM_doc/js/search_data.js) sous forme d'un objet global `window.UVM_DATA`. Ce fichier volumineux (~1,5 Mo) est exclu du versionnement Git (`.gitignore`) pour éviter le bloat de l'historique et est régénéré automatiquement lors du déploiement GitHub Pages ou localement via `python scripts/build_docs.py --search-only`.
 
 ### Règle 2 : Génération en Deux Passes pour les Liens Entrecroisés
 - Lors de l'analyse et de la transformation de documents structurés :

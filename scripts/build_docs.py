@@ -13,6 +13,7 @@ import re
 import html
 import json
 import shutil
+import argparse
 import posixpath
 from pathlib import Path
 
@@ -760,7 +761,7 @@ def generate_source_views():
 </body>
 </html>'''
 
-            with open(out_file, 'w', encoding='utf-8') as of:
+            with open(out_file, 'w', encoding='utf-8', newline='\n') as of:
                 of.write(html_content)
             count += 1
 
@@ -1703,7 +1704,7 @@ def modernize_doc_files():
 </body>
 </html>'''
 
-            with open(out_file, 'w', encoding='utf-8') as of:
+            with open(out_file, 'w', encoding='utf-8', newline='\n') as of:
                 of.write(modern_html)
             count += 1
 
@@ -2078,6 +2079,30 @@ def build_search_index(categories):
 
     return search_items
 
+def populate_doc_headings_from_docs_view():
+    """Populate DOC_HEADINGS_MAP from existing files in OUTPUT_DOCS_VIEW for fast search-only generation."""
+    print("Reading headings from existing docs_view...")
+    if not OUTPUT_DOCS_VIEW.exists():
+        print(f"Warning: {OUTPUT_DOCS_VIEW} does not exist. DOC_HEADINGS_MAP will be empty.")
+        return
+
+    count = 0
+    for root, dirs, files in os.walk(OUTPUT_DOCS_VIEW):
+        for f in files:
+            if not f.endswith('.html'):
+                continue
+            full_path = Path(root) / f
+            rel_path = full_path.relative_to(OUTPUT_DOCS_VIEW).as_posix()
+            doc_key = f"docs_view/{rel_path}"
+            try:
+                with open(full_path, 'r', encoding='utf-8') as df:
+                    txt = df.read()
+                DOC_HEADINGS_MAP[doc_key] = extract_doc_headings(txt, rel_path)
+                count += 1
+            except Exception as e:
+                print(f"Error reading {full_path}: {e}")
+    print(f"Extracted headings from {count} documentation pages.")
+
 def generate_search_and_nav_data():
     """Generate js/search_data.js for client-side search and menu tree."""
     print("Generating search index and navigation data...")
@@ -2114,21 +2139,30 @@ def generate_search_and_nav_data():
  */
 const UVM_DATA = {json.dumps(payload, indent=2)};
 """
-    with open(out_file, 'w', encoding='utf-8') as f:
+    with open(out_file, 'w', encoding='utf-8', newline='\n') as f:
         f.write(js_content)
     print(f"Generated {out_file} with {len(search_items)} searchable items.")
 
 def main():
+    parser = argparse.ArgumentParser(description="UVM 1.2 Documentation & Web Source Viewer Generator")
+    parser.add_argument("--search-only", action="store_true", help="Only regenerate js/search_data.js without re-rendering HTML views")
+    args = parser.parse_args()
+
     print("=" * 60)
     print("  UVM 1.2 Documentation & Web Source Viewer Generator")
     print("=" * 60)
 
     index_source_symbols()
     map_docs_to_sources()
-    generate_source_views()
-    modernize_doc_files()
-    copy_assets()
-    generate_search_and_nav_data()
+
+    if args.search_only:
+        populate_doc_headings_from_docs_view()
+        generate_search_and_nav_data()
+    else:
+        generate_source_views()
+        modernize_doc_files()
+        copy_assets()
+        generate_search_and_nav_data()
 
     print("=" * 60)
     print("  Documentation build complete successfully!")

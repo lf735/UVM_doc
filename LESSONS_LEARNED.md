@@ -208,3 +208,19 @@ Dans le générateur de documentation [`scripts/build_docs.py`](file:///c:/Users
 | **Architecture SPA** | Shell parent source de vérité unique (Hash URL, Thème, Modales). | Synchronisation décentralisée ou modification directe du hash depuis les iframes. |
 | **Outillage Python** | Scripts autonomes `.py` dans un dossier scratch. | Lignes de commande inline complexes `python -c "..."` sous PowerShell. |
 
+---
+
+## 8. Gestion des Gros Fichiers Générés et CI/CD (GitHub Pages)
+
+### Le Problème du Fichier `js/search_data.js`
+Le fichier de données de recherche [`js/search_data.js`](file:///c:/Dev/UVM_doc/js/search_data.js) regroupe l'ensemble des index, catégories et symboles, pour un poids d'environ 1,5 Mo.
+- À chaque mise à jour de la documentation ou des sources, ce fichier volumineux change dans son intégralité.
+- Versionner un tel fichier dans Git produit un encombrement rapide de l'historique (.git bloat) et un churn de commit inutile.
+
+### La Solution Mise en Œuvre
+1. **Exclusion Git** : `js/search_data.js` est retiré de l'index (`git rm --cached`) et ignoré dans [`.gitignore`](file:///c:/Dev/UVM_doc/.gitignore).
+2. **Génération au Déploiement** : Le workflow GitHub Actions ([`.github/workflows/deploy.yml`](file:///c:/Dev/UVM_doc/.github/workflows/deploy.yml)) configure Python et exécute [`scripts/build_docs.py`](file:///c:/Dev/UVM_doc/scripts/build_docs.py) sur le runner Ubuntu juste avant le packaging et le déploiement sur GitHub Pages.
+3. **Fins de ligne déterministes (`LF`)** : En spécifiant `open(..., 'w', encoding='utf-8', newline='\n')`, Python sous Windows écrit systématiquement des retours chariot Unix `\n`, éliminant les diffs fantômes causés par CRLF.
+4. **Mode Rapide `--search-only`** : Pour le développement local, une option `--search-only` permet de regénérer uniquement `search_data.js` en moins d'une seconde en lisant les en-têtes directement depuis `docs_view` sans devoir réécrire l'ensemble des 300+ pages HTML.
+5. **Résilience Frontend** : Si un développeur ouvre `index.html` en local sans avoir généré l'index, la barre latérale affiche un message d'aide explicite indiquant la commande à lancer.
+

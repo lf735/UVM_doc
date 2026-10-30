@@ -23,12 +23,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate search data and views
+        run: python scripts/build_docs.py
+
+      - name: Verify search data was generated
+        run: |
+          test -f js/search_data.js || { echo "::error::js/search_data.js not found!" ; exit 1; }
+          ls -lh js/search_data.js
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

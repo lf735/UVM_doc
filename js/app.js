@@ -776,7 +776,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       function renderSidebar() {
-        if (!sidebarContent || typeof UVM_DATA === 'undefined') return;
+        if (!sidebarContent) return;
+        if (typeof UVM_DATA === 'undefined') {
+          sidebarContent.innerHTML = `
+            <div style="padding: 1.5rem; text-align: center; color: var(--color-text-muted, #64748b);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 0.75rem; display: block; opacity: 0.6;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--color-text-primary, #1e293b);">Search data not loaded</p>
+              <p style="font-size: 0.85rem; line-height: 1.4;">Run <code>python scripts/build_docs.py --search-only</code> to generate <code>js/search_data.js</code>.</p>
+            </div>
+          `;
+          return;
+        }
         const rawQuery = sidebarFilter ? sidebarFilter.value : '';
 
         if (activeSidebarTab === 'docs') {
@@ -1312,7 +1326,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       function executeSearch(query) {
-        if (!searchResults || typeof UVM_DATA === 'undefined') return;
+        if (!searchResults) return;
+        if (typeof UVM_DATA === 'undefined') {
+          searchResults.innerHTML = `<li style="padding:1.5rem; text-align:center; color:var(--text-muted, #64748b); font-size:0.875rem">
+            <strong>Search index not available</strong><br>
+            <span style="font-size:0.775rem;">Run <code>python scripts/build_docs.py --search-only</code> to generate search data.</span>
+          </li>`;
+          return;
+        }
         const items = UVM_DATA.searchIndex || [];
         const matcher = getQueryMatcher(query, modalRegexEnabled, modalCaseSensitive, modalSearchHeader);
 

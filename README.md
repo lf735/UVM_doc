@@ -34,7 +34,7 @@ UVM_doc/
 │   └── style.css             # Unified stylesheet (theme variables, syntax colors, layout)
 ├── js/
 │   ├── app.js                # Core SPA application (router, search, theme, split view)
-│   └── search_data.js        # Generated index of categories, source tree, and symbols
+│   └── search_data.js        # Generated index (untracked, built at deployment & locally)
 ├── scripts/
 │   └── build_docs.py         # Python build script generating docs_view and src_view
 ├── docs_view/                # Modernized, responsive UVM 1.2 reference HTML pages
@@ -68,7 +68,11 @@ Then open your browser at **[http://localhost:8000](http://localhost:8000)**.
 If you modify or update any files in `uvm-1.2/src` or `uvm-1.2/docs`, you can regenerate the entire documentation site with a single command:
 
 ```bash
+# Full rebuild: parses sources, regenerates HTML views, modernizes docs, and builds search index
 python scripts/build_docs.py
+
+# Fast search-only build (< 1s): regenerates js/search_data.js from existing views
+python scripts/build_docs.py --search-only
 ```
 
 The build script will:
@@ -77,6 +81,8 @@ The build script will:
 3. Map every class, method, and macro to its definition line number.
 4. Modernize all 146 documentation files in `docs_view/` and inject **"View Source"** deep links.
 5. Generate `js/search_data.js` containing category trees, source directory trees, and search indices.
+
+> **Note on version control:** `js/search_data.js` (~1.5 MB) is excluded from Git tracking (`.gitignore`) to avoid repository bloat and diff churn. The GitHub Actions deployment workflow automatically builds this file upon deployment.
 
 ---
 
