@@ -1177,10 +1177,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // Instant Search Engine & Modal
       // =========================================================================
 
+      function adjustSearchInputHeight() {
+        if (!searchInput) return;
+        searchInput.style.height = 'auto';
+        const newHeight = Math.min(Math.max(searchInput.scrollHeight, 26), 120);
+        searchInput.style.height = `${newHeight}px`;
+      }
+
       function openSearchModal() {
         if (!searchModal) return;
         searchModal.classList.add('open');
         searchInput.value = '';
+        adjustSearchInputHeight();
         if (modalSearchClear) modalSearchClear.style.display = 'none';
         if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
         if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
@@ -1240,6 +1248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const query = chip.getAttribute('data-query');
             if (searchInput) {
               searchInput.value = query;
+              adjustSearchInputHeight();
               if (modalSearchClear) modalSearchClear.style.display = 'inline-flex';
               if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
               searchInput.focus();
@@ -1510,6 +1519,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (searchInput && searchInput.value.length > 0) {
             e.preventDefault();
             searchInput.value = '';
+            adjustSearchInputHeight();
             if (modalSearchClear) modalSearchClear.style.display = 'none';
             if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
             if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
@@ -1520,34 +1530,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      if (searchModal) {
-        searchModal.addEventListener('click', (e) => {
-          if (e.target === searchModal) {
-            closeSearchModal();
+      // Close modal ONLY when mousedown AND mouseup both occur outside on the backdrop
+      // Prevents accidental closing when user selects text or drags cursor outside
+      function bindModalOutsideClick(modalElement, closeFn) {
+        if (!modalElement) return;
+        let isMouseDownOnBackdrop = false;
+        modalElement.addEventListener('mousedown', (e) => {
+          isMouseDownOnBackdrop = (e.target === modalElement);
+        });
+        modalElement.addEventListener('mouseup', (e) => {
+          if (isMouseDownOnBackdrop && e.target === modalElement) {
+            closeFn();
           }
+          isMouseDownOnBackdrop = false;
         });
       }
 
-      if (aiConsentModal) {
-        aiConsentModal.addEventListener('click', (e) => {
-          if (e.target === aiConsentModal) {
-            closeAiConsentModal();
-          }
-        });
-      }
-
-      if (searchSettingsModal) {
-        searchSettingsModal.addEventListener('click', (e) => {
-          if (e.target === searchSettingsModal) {
-            closeSearchSettingsModal();
-          }
-        });
-      }
+      bindModalOutsideClick(searchModal, closeSearchModal);
+      bindModalOutsideClick(aiConsentModal, closeAiConsentModal);
+      bindModalOutsideClick(searchSettingsModal, closeSearchSettingsModal);
 
       if (modalSearchClear) {
         modalSearchClear.addEventListener('click', () => {
           if (searchInput) {
             searchInput.value = '';
+            adjustSearchInputHeight();
             modalSearchClear.style.display = 'none';
             if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
             if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
@@ -1582,12 +1589,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (searchInput) {
-        searchInput.addEventListener('input', debounce((e) => {
+        const debouncedExecuteSearch = debounce((val) => {
+          executeSearch(val);
+        }, 150);
+
+        searchInput.addEventListener('input', (e) => {
+          adjustSearchInputHeight();
           if (modalSearchClear) {
             modalSearchClear.style.display = e.target.value.length > 0 ? 'inline-flex' : 'none';
           }
-          executeSearch(e.target.value);
-        }, 150));
+          debouncedExecuteSearch(e.target.value);
+        });
 
         searchInput.addEventListener('keydown', (e) => {
           const items = searchResults.querySelectorAll('.search-result-item');
@@ -1604,6 +1616,10 @@ document.addEventListener('DOMContentLoaded', () => {
               updateSelectedSearchItem(items);
             }
           } else if (e.key === 'Enter') {
+            if (e.shiftKey) {
+              setTimeout(adjustSearchInputHeight, 0);
+              return;
+            }
             e.preventDefault();
             if (searchSelectedIndex >= 0 && searchSelectedIndex < filteredSearchResults.length) {
               selectSearchResult(filteredSearchResults[searchSelectedIndex].item);
@@ -1630,6 +1646,7 @@ document.addEventListener('DOMContentLoaded', () => {
               e.preventDefault();
               e.stopPropagation();
               searchInput.value = '';
+              adjustSearchInputHeight();
               if (modalSearchClear) modalSearchClear.style.display = 'none';
               if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
               if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');

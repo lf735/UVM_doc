@@ -1934,7 +1934,7 @@ body.src-viewer-body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 10vh;
+  padding-top: 6vh;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1948,8 +1948,8 @@ body.src-viewer-body {
 }
 
 .search-modal-card {
-  width: 100%;
-  max-width: 620px;
+  width: 94%;
+  max-width: 860px;
   background: var(--surface-color);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -1957,15 +1957,20 @@ body.src-viewer-body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 70vh;
+  max-height: 82vh;
 }
 
 .modal-search-header {
   padding: 0.85rem 1.25rem;
   border-bottom: 1px solid var(--border-color);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
+}
+
+.modal-search-header > svg {
+  margin-top: 0.25rem;
+  flex-shrink: 0;
 }
 
 .modal-search-input {
@@ -1973,9 +1978,24 @@ body.src-viewer-body {
   border: none;
   outline: none;
   background: transparent;
+  font-family: inherit;
   font-size: 1rem;
+  line-height: 1.45;
   color: var(--text-main);
   min-width: 0;
+  resize: none;
+  overflow-y: auto;
+  min-height: 26px;
+  max-height: 120px;
+  padding: 0.15rem 0;
+  box-sizing: border-box;
+}
+
+.modal-search-header .search-clear-btn,
+.modal-search-header .search-option-btn,
+.modal-search-header .search-kbd {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
 }
 
 .search-clear-btn {
