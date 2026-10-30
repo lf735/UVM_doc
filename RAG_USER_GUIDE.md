@@ -75,29 +75,43 @@ Vous pouvez saisir des questions complètes en anglais technique ou en français
 
 ---
 
-## 4. Comprendre les Résultats
+## 4. Comprendre les Résultats & Navigation Multi-Sections
 
-Chaque résultat de recherche est structuré pour vous faire gagner un temps précieux :
+Chaque résultat de recherche est structuré pour vous donner une vision complète d'un coup d'œil, combinant le concept général et la méthode concrète :
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
-│ Base > uvm_config_db   [🎯 Section: set]              [92% match] [class]│
+│ Base > uvm_config_db                                 [95% match] [class]│
 │                                                                        │
 │ uvm_config_db                                                          │
 │                                                                        │
-│ Create a new or update an existing configuration setting for field_name│
-│ in inst_name from cntxt... Settings from hierarchically higher levels  │
-│ have higher precedence.                                                │
+│ [Intro] The uvm_config_db class provides a convenience interface on    │
+│ top of the uvm_resource_db to simplify the basic interface...         │
+│ [set] Create a new or update an existing configuration setting...      │
+│                                                                        │
+│ 🎯 Sections: [📖 Intro] [🎯 set] [🎯 get]                              │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
 1. **Fil d'Ariane & Classe Parent** : Indique la catégorie (`Base`, `Comps`, `Seq`, `TLM1`, `Reg`...) et la classe principale.
-2. **Badge de Section Ciblée (`🎯 Section: ...`)** : Vous indique immédiatement quelle méthode, tâche ou sous-section de la page répond précisément à votre question (ex: `🎯 Section: set`).
-3. **Pourcentage de Match (`% match`)** :
+2. **Synthèse Multi-Localisations (*Smart Snippet*)** :
+   - Combine la phrase clé de l'**Introduction** (`[Intro]`) expliquant le rôle conceptuel de la classe.
+   - Et la phrase explicative de la **Méthode d'action** (`[set]`, `[raise_objection]`...) répondant à la question.
+3. **Badges Multi-Sections Interactifs (`🎯 Sections:`)** :
+   - `📖 Intro` : Un clic ouvre la page directement sur son introduction et ses principes architecturaux (`#MainTopic`).
+   - `🎯 <nom_méthode>` : Un clic vous transporte instantanément à la méthode ou à la sous-section exacte dans la documentation.
+4. **Pourcentage de Match (`% match`)** :
    - 🟢 **$\ge 80\%$** : Forte corrélation sémantique directe.
    - 🟡 **$65\% - 79\%$** : Bonne pertinence contextuelle.
    - ⚪ **$< 65\%$** : Référence connexe ou d'arrière-plan.
-4. **Smart Snippet (Extrait Intelligent)** : Extrait automatiquement les 1 à 2 phrases du document qui répondent à votre question, avec surbrillance jaune des concepts clés.
+
+---
+
+## 5. Ergonomie de la Fenêtre de Recherche
+
+- **Fenêtre Agrandie & Confortable** : La modale occupe jusqu'à 860px de largeur et 82vh de hauteur pour une lecture claire des snippets.
+- **Champ Multi-Lignes Automatique** : Le champ de saisie s'élargit verticalement à mesure que vous tapez des questions longues ou collez du texte. Vous pouvez insérer des sauts de ligne avec <kbd>Shift</kbd> + <kbd>Entrée</kbd>.
+- **Sécurité Anti-Fermeture Accidentelle** : La modale ne se ferme que si un clic complet (appui et relâchement) est effectué à l'extérieur. Si vous sélectionnez du texte à la souris et relâchez le curseur en dehors, la modale reste ouverte.
 5. **Navigation au Clic** :
    - Cliquer sur un résultat ouvre la page documentaire **directement positionnée sur la méthode ciblée**.
    - En mode **Split View**, le code source SystemVerilog correspondant s'ouvre simultanément à droite à la bonne ligne de code !

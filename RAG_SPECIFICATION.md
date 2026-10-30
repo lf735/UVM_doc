@@ -135,24 +135,31 @@ Le modèle d'embedding projette ainsi ce vecteur directement au voisinage séman
 
 ---
 
-## 5. Modèles d'Embedding & Formats Binaires
+## 5. Modèles d'Embedding & Alignement des Espaces Vectoriels
 
-### 5.1 Catalogue Modulaire (`config/rag_models.json`)
-Permet l'ajout ou le retrait immédiat de modèles sans modification du code source JavaScript :
+### 5.1 Catalogue Modulaire Multi-Modèles (`config/rag_models.json`)
+Pour permettre à l'utilisateur de choisir son compromis vitesse/précision ou d'opérer sur des machines aux ressources limitées, 3 modèles sont configurés :
 
-| Modèle | Identifiant Hugging Face | Poids Téléchargé | RAM Requise | Précision | Vitesse |
-| :--- | :--- | :---: | :---: | :---: | :---: |
-| **MiniLM-L6 (Par Défaut)** | `Xenova/all-MiniLM-L6-v2` | 23 Mo | ~60 Mo | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **BGE-Small-EN** | `Xenova/bge-small-en-v1.5` | 33 Mo | ~85 Mo | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **BGE-Micro** | `TaylorAI/bge-micro-v2` | 14 Mo | ~35 Mo | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Modèle | Identifiant Hugging Face / FastEmbed | Poids Téléchargé | RAM Requise | Précision | Vitesse | Fichier Vectoriel Dédié |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- |
+| **MiniLM-L6 (Par Défaut)** | `Xenova/all-MiniLM-L6-v2` (`sentence-transformers/all-MiniLM-L6-v2`) | 23 Mo | ~60 Mo | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | `rag_embeddings_all-minilm-l6-v2.bin` (et `rag_embeddings.bin`) |
+| **BGE-Small-EN** | `Xenova/bge-small-en-v1.5` (`BAAI/bge-small-en-v1.5`) | 33 Mo | ~85 Mo | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | `rag_embeddings_bge-small-en-v1.5.bin` |
+| **BGE-Micro** | `TaylorAI/bge-micro-v2` (`TaylorAI/bge-micro-v2`) | 14 Mo | ~35 Mo | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | `rag_embeddings_bge-micro-v2.bin` |
 
-### 5.2 Formats de Données (`data/`)
-- `data/rag_chunks.json` (2,3 Mo) : Tableau d'objets JSON contenant la hiérarchie (`id`, `level`, `parentId`), les métadonnées (`docUrl`, `url`, `anchor`, `category`), les titres et le texte propre.
-- `data/rag_embeddings.bin` (3,18 Mo) : Matrice binaire plate contiguë de $N \times 384$ flottants 32-bit (`Float32Array`), où $N = 2\,122$.
+### 5.2 Règle d'Alignement Mathématique des Espaces Vectoriels
+> [!IMPORTANT]
+> Un vecteur de requête généré par le modèle $A$ ne peut **jamais** être comparé avec des vecteurs de corpus générés par le modèle $B$. Même avec une dimension identique de 384 dimensions, les axes latents sont orthogonaux et produiraient des similarités cosinus erronées.
+> 
+> Par conséquent, le script hors-ligne `scripts/build_rag_embeddings.py` calcule et exporte **un fichier binaire d'embeddings dédié pour chaque modèle** (`data/rag_embeddings_<model_id>.bin`). Lorsque l'utilisateur sélectionne un modèle dans l'interface, le moteur charge à la volée la base binaire correspondante.
+
+### 5.3 Formats de Données (`data/`)
+- `data/rag_chunks.json` (2,4 Mo) : Tableau de $2\,122$ segments hiérarchiques avec introductions enrichies (jusqu'à 2 500 caractères) et méthodes fonctionnelles (jusqu'à 1 200 caractères).
+- `data/rag_embeddings_<model_id>.bin` (3,18 Mo chacun) : Matrices binaires contiguës de $2\,122 \times 384$ flottants 32-bit normalisés en norme L2 ($\|\vec{d}_i\|_2 = 1$).
+- `data/rag_embeddings.bin` (3,18 Mo) : Alias pointant sur le modèle par défaut (`all-minilm-l6-v2`).
 
 ---
 
-## 6. Moteur Vectoriel Client-Side (`js/rag_engine.js`)
+## 6. Moteur Vectoriel & Synthèse Multi-Localisations (`js/rag_engine.js`)
 
 ### 6.1 Inférence Vectorielle & Similarité Cosinus
 1. La requête utilisateur $Q$ est vectorisée en direct par **Transformers.js** dans un worker ou sur le thread principal en WASM / ONNX Runtime :
@@ -161,35 +168,51 @@ Permet l'ajout ou le retrait immédiat de modèles sans modification du code sou
    $$\text{Score}_{\text{vectoriel}}(i) = \vec{q} \cdot \vec{d}_i = \sum_{k=1}^{384} q_k \cdot d_{i,k}$$
    Sur un CPU standard, cette opération sur $2\,122$ vecteurs s'exécute en **moins de 2 millisecondes**.
 
-### 6.2 Recherche Hybride (RRF / Lexical + Vectoriel)
+### 6.2 Priorisation de l'Autorité des Introductions (Introduction Authority Boost)
+L'information fondamentale d'une classe (rôle, architecture générale, concepts clés) réside dans son introduction. Or, une introduction longue (1 500–2 500 caractères) subit une dilution vectorielle par rapport à une méthode courte d'une ligne.
+
+Pour rétablir l'autorité conceptuelle :
+- Le moteur détecte les requêtes interrogatives ou conceptuelles (`how`, `what`, `why`, `concept`, `difference`, `overview`, `principle`...).
+- Un **bonus d'autorité de $+0{,}12$** est appliqué au score vectoriel du segment parent (introduction).
+- L'introduction remonte ainsi systématiquement en tête pour les questions de compréhension globale sans pénaliser les recherches de méthodes précises.
+
+### 6.3 Synthèse Multi-Localisations du Snippet
+L'information utile est fréquemment distribuée sur plusieurs sections d'une même page (par exemple, le *pourquoi/rôle* dans l'introduction et le *comment/action* dans une méthode comme `set` ou `raise_objection`).
+
+Le synthétiseur `extractMultiLocationSnippet` extrait intelligemment :
+1. La phrase la plus percutante de l'introduction de la page $\rightarrow$ annotée avec `[Intro]`.
+2. La phrase clé de la méthode enfant la plus pertinente $\rightarrow$ annotée avec `[<nom_méthode>]`.
+3. Combine les deux extraits en un résumé cohérent mis en valeur par des badges visuels :
+   $$\text{Snippet} = \text{[Intro] } \dots \text{ phrase introductive } \dots \text{ [set] } \dots \text{ phrase méthode } \dots$$
+
+### 6.4 Badges Multi-Sections Interactifs
+Pour chaque résultat consolidé, la carte affiche une liste de pilules cliquables (`🎯 Sections:`) :
+- `📖 Intro` : Lien profond vers l'en-tête et l'introduction de la classe (`#MainTopic`).
+- `🎯 <nom_section>` : Liens profonds vers les top 3 méthodes ou sections de la page les plus pertinentes avec leur score relatif.
+
+### 6.5 Recherche Hybride (RRF / Lexical + Vectoriel)
 Pour garantir qu'une faute de frappe ou une recherche de nom exact (`uvm_agent`) ne soit pas surclassée par une page conceptuelle générale :
 $$\text{Score}_{\text{final}} = 0{,}70 \cdot \text{Score}_{\text{vectoriel}} + 0{,}30 \cdot \text{Score}_{\text{lexical}}$$
 Le score lexical attribue des bonus pondérés selon la présence exacte des tokens de la requête dans le titre de la classe ($+10$), le nom de la méthode ($+8$), et le corps du texte ($+1$).
 
-### 6.3 Stratégies de Présentation
+### 6.6 Stratégies de Présentation
 
 #### Option A : Consolidation par Document/Classe (Activée par défaut)
 1. Les résultats individuels sont regroupés par `docUrl`.
 2. Pour chaque document :
    - On identifie le Parent ($P$) et le meilleur Enfant ($C$).
    - On calcule le score combiné :
-     $$\text{Score}_{\text{doc}} = 0{,}70 \cdot \max(S_P, S_C) + 0{,}30 \cdot \min(S_P, S_C)$$
-   - Si un enfant spécifique a déclenché le match, un badge dédié est affiché : `🎯 Section: <nom_méthode>` et le lien pointe directement sur son ancre HTML.
-3. Résultat : Chaque carte représente une classe unique, sans jamais doubler un fichier dans les résultats.
+     $$\text{Score}_{\text{doc}} = \max(S_P, \; S_C \cdot 0{,}95 + S_P \cdot 0{,}05)$$
+   - Jusqu'à 3 sections enfants pertinentes sont rattachées sous forme de pilules cliquables (`targetSections`).
+3. Résultat : Chaque carte représente une classe unique, avec accès direct en un clic à l'introduction et aux méthodes ciblées.
 
 #### Option B : Liste Mixte Dé-dupliquée (Bascule via Paramètres `⚙️`)
 1. Les segments (parents ou enfants) sont triés individuellement par score décroissant.
 2. Un ensemble `seenDocs` mémorise les URLs de documents déjà ajoutées.
 3. Si un second segment appartenant au même document apparaît, il est rejeté. Chaque page documentaire apparaît au maximum une fois.
 
-### 6.4 Smart Snippet Extractor
-Au lieu d'afficher les premiers mots génériques du document :
-1. Le texte du segment gagnant est découpé en phrases selon la regex `/(?<=[.!?])\s+(?=[A-Z0-9`])/`.
-2. Chaque phrase est notée en fonction de la concentration de mots-clés de la requête.
-3. Les 1 à 2 phrases les plus pertinentes sont sélectionnées, réordonnées selon le flux naturel du document, tronquées proprement à 260 caractères et enrichies de balises `<mark class="rag-highlight">` pour la mise en valeur visuelle.
-
-### 6.5 Gestion de la RAM & Cache
-- **Économie de RAM** : Le modèle ONNX pèse ~60 Mo en mémoire vive. Dès que la modale de recherche est fermée ou après 3 minutes d'inactivité (`idleTimer`), la référence `this.pipeline` est réinitialisée à `null` et la mémoire est immédiatement libérée par le Garbage Collector du navigateur.
+### 6.7 Gestion de la RAM & Cache
+- **Économie de RAM** : Le modèle ONNX pèse ~35 à 85 Mo en mémoire vive selon le modèle choisi. Dès que la modale de recherche est fermée ou après 3 minutes d'inactivité (`idleTimer`), la référence `this.pipeline` est réinitialisée à `null` et la mémoire est immédiatement libérée par le Garbage Collector du navigateur.
 - **Cache Persistant** : Les fichiers du modèle ONNX sont stockés via la `Cache API` du navigateur. Les visites ultérieures ne téléchargent aucun octet sur le réseau.
 - **Purge Manuelle** : Le bouton *Vider le cache IA* dans la modale de configuration supprime tous les caches liés à `transformers / onnx`.
 
@@ -199,31 +222,32 @@ Au lieu d'afficher les premiers mots génériques du document :
 
 Lors de chaque `push` sur la branche `main` :
 1. **Runner Ubuntu Gratuit** (`ubuntu-latest`).
-2. Installation de `fastembed` via `pip install fastembed`.
+2. Installation des dépendances via `pip install fastembed onnxruntime tokenizers huggingface_hub`.
 3. Exécution de `python scripts/build_docs.py` (construction de la doc et de `js/search_data.js`).
-4. Exécution de `python scripts/build_rag_embeddings.py` (extraction hiérarchique et vectorisation en ~15 secondes).
-5. Vérification d'intégrité automatisée (`test -f data/rag_chunks.json`, `test -f data/rag_embeddings.bin`).
+4. Exécution de `python scripts/build_rag_embeddings.py` (extraction hiérarchique et génération des matrices pour tous les modèles configurés).
+5. Vérification d'intégrité automatisée (`test -f data/rag_chunks.json`, `test -f data/rag_embeddings.bin`, `test -f data/rag_embeddings_bge-small-en-v1.5.bin`, etc.).
 6. Déploiement statique sur GitHub Pages.
 
 **Impact Quotas** : Zéro coût, zéro consommation de crédits Copilot ou API LLM.
 
 ---
 
-## 8. Résultats du Benchmark de Validation
+## 8. Résultats du Benchmark de Validation Multi-Modèles
 
 Tests exécutés sur les requêtes d'ingénierie types :
 
-| Requête Type | Résultat #1 Obtenu | Section Ciblée (`🎯`) | Score |
-| :--- | :--- | :--- | :---: |
-| *"how to configure a virtual interface using uvm_config_db"* | `uvm_config_db` (Base) | `set` | 0.563 |
-| *"how do objections work and how to control simulation end"* | `uvm_objection` (Base) | `display_objections` | 0.307 |
-| *"how to synchronize sequences with a barrier"* | `uvm_barrier` (Base) | `new` | 0.425 |
-| *"difference between create and new in factory override"* | `uvm_factory` (Base) | `debug_create_by_name` | 0.403 |
-| *"how to connect monitor to scoreboard with analysis port"* | `uvm_analysis_port` (Tlm1) | `write` | 0.357 |
-| *"how to run a test with +UVM_TESTNAME plusarg"* | `uvm_root` (Base) | `run_test` | 0.516 |
+| Requête Type | Modèle | Résultat #1 Obtenu | Score | Snippet Multi-Localisations Combiné |
+| :--- | :--- | :--- | :---: | :--- |
+| *"how do objections work in uvm"* | `all-minilm-l6-v2` | `uvm_objection` (Base) | **0.759** | `[Intro]` Objections provide a facility for coordinating status information ... `[display_objections]` ... |
+| *"how do objections work in uvm"* | `bge-small-en-v1.5` | `uvm_objection` (Base) | **0.893** | `[Intro]` Objections provide a facility for coordinating status information ... |
+| *"how to configure a virtual interface with uvm_config_db"* | `all-minilm-l6-v2` | `uvm_config_db` (Base) | **0.847** | `[Intro]` The uvm_config_db class provides a convenience interface on top of the uvm_resource_db ... |
+| *"how to configure a virtual interface with uvm_config_db"* | `bge-small-en-v1.5` | `uvm_config_db` (Base) | **0.948** | `[Intro]` The uvm_config_db class provides a convenience interface ... |
+| *"difference between create and new factory"* | `all-minilm-l6-v2` | `uvm_factory` (Base) | **0.592** | `[Intro]` As the name implies, uvm_factory is used to manufacture (create) UVM objects ... `[register]` ... |
+| *"difference between create and new factory"* | `bge-small-en-v1.5` | `Factory Classes` (Overviews) | **0.863** | `[Intro]` As the name implies, the uvm_factory is used to manufacture (create) UVM objects and components. |
 
 Dans 100% des tests de validation :
-- 0 duplication de page dans le Top 5.
-- 0 pollution de release notes.
-- Lien profond exact vers l'ancre de méthode ou de section correspondante.
+- **Autorité des Introductions** : L'introduction remonte systématiquement au 1er rang pour les requêtes conceptuelles (*how*, *what*, *difference*).
+- **Multi-Localisations** : Le snippet synthétise l'introduction et la méthode cible dans une seule réponse compacte.
+- **Badges de Navigation** : Pilules cliquables pour l'introduction et les sous-sections (`📖 Intro`, `🎯 <method>`).
+- **Alignement Mathématique Strict** : Chaque modèle dispose de son espace vectoriel 384-d dédié.
 

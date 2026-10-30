@@ -1734,6 +1734,8 @@ document.addEventListener('DOMContentLoaded', () => {
               matchPct: r.matchPct,
               snippet: r.snippet,
               chunk: r.chunk,
+              targetUrl: r.targetUrl,
+              targetSections: r.targetSections || [],
               targetSectionTitle: r.targetSectionTitle,
               targetType: r.targetType,
               highlightedTitle: r.highlightedTitle,
@@ -1760,18 +1762,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     (displayType === 'task' ? 'badge-task' :
                       (displayType === 'method' ? 'badge-method' : 'badge-file'))));
 
-              const sectionBadge = res.targetSectionTitle ?
-                `<span class="rag-section-badge" title="Section ciblée dans ce document">🎯 Section: ${escapeHtml(res.targetSectionTitle)}</span>` : '';
+              let sectionsPillsHtml = '';
+              if (res.targetSections && res.targetSections.length > 0) {
+                sectionsPillsHtml = `<div class="rag-sections-list">
+                  ${res.targetSections.map(s => {
+                    const isIntro = s.isIntro;
+                    const pillClass = isIntro ? 'rag-section-pill intro-pill' : 'rag-section-pill';
+                    const pillLabel = isIntro ? '📖 Intro' : `🎯 ${escapeHtml(s.title)}`;
+                    return `<button type="button" class="${pillClass}" data-section-url="${escapeHtml(s.url)}" title="Accéder directement à : ${escapeHtml(s.title)}">${pillLabel}</button>`;
+                  }).join('')}
+                </div>`;
+              } else if (res.targetSectionTitle) {
+                sectionsPillsHtml = `<span class="rag-section-badge" title="Section ciblée dans ce document">🎯 Section: ${escapeHtml(res.targetSectionTitle)}</span>`;
+              }
 
               html += `<li class="search-result-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}">
                 <div class="res-main">
                   <div class="res-title-row" style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
                     <span style="color:var(--text-muted); font-size:0.775rem;">${escapeHtml(res.breadcrumb)}</span>
-                    ${sectionBadge}
                   </div>
                   <div style="font-weight:600; font-size:0.925rem; color:var(--text-main); margin-top:0.15rem;">
                     ${res.highlightedTitle || escapeHtml(res.title)}
                   </div>
+                  ${sectionsPillsHtml}
                   <div class="rag-snippet">${res.snippet}</div>
                 </div>
                 <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.35rem; flex-shrink:0;">
@@ -1782,6 +1795,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             searchResults.innerHTML = html;
+
+            // Bind section pills
+            searchResults.querySelectorAll('.rag-section-pill').forEach(pill => {
+              pill.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const targetUrl = pill.getAttribute('data-section-url');
+                const parentItem = pill.closest('.search-result-item');
+                const idx = parentItem ? parseInt(parentItem.getAttribute('data-index'), 10) : 0;
+                const baseItem = filteredSearchResults[idx].item;
+                selectSearchResult({
+                  name: baseItem.name,
+                  category: baseItem.category,
+                  type: baseItem.type,
+                  doc: targetUrl,
+                  src: baseItem.src,
+                  desc: baseItem.desc
+                });
+              });
+            });
+
+            // Bind main result card
             searchResults.querySelectorAll('.search-result-item').forEach(el => {
               el.addEventListener('click', () => {
                 const idx = parseInt(el.getAttribute('data-index'), 10);

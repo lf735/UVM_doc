@@ -83,6 +83,7 @@
       this.prompts = [];
       this.chunks = null;
       this.embeddings = null;
+      this.loadedModelId = null;
       this.pipeline = null;
       this.isModelLoading = false;
       this.isDataLoading = false;
@@ -132,8 +133,10 @@
       if (this.currentModelId !== modelId) {
         this.currentModelId = modelId;
         localStorage.setItem(STORAGE_KEYS.SELECTED_MODEL, modelId);
-        // Force unload old pipeline so new model loads on demand
+        // Force unload old pipeline and old vectors so the exact matching vector space is loaded
         this.unloadPipeline();
+        this.embeddings = null;
+        this.loadedModelId = null;
       }
     }
 
@@ -171,7 +174,9 @@
     }
 
     async loadData() {
-      if (this.chunks && this.embeddings) return;
+      const modelId = this.currentModelId;
+      if (this.chunks && this.embeddings && this.loadedModelId === modelId) return;
+
       if (this.isDataLoading) {
         while (this.isDataLoading) {
           await new Promise(r => setTimeout(r, 50));
@@ -181,19 +186,25 @@
 
       this.isDataLoading = true;
       try {
+        const binFile = `data/rag_embeddings_${modelId}.bin`;
         const [chunksRes, embRes] = await Promise.all([
-          fetch('data/rag_chunks.json'),
-          fetch('data/rag_embeddings.bin')
+          this.chunks ? Promise.resolve(null) : fetch('data/rag_chunks.json'),
+          fetch(binFile).then(r => r.ok ? r : fetch('data/rag_embeddings.bin'))
         ]);
 
-        if (!chunksRes.ok || !embRes.ok) {
-          throw new Error('Failed to load rag_chunks.json or rag_embeddings.bin. Ensure build_rag_embeddings.py has run.');
+        if (chunksRes && !this.chunks) {
+          if (!chunksRes.ok) throw new Error('Failed to load rag_chunks.json.');
+          this.chunks = await chunksRes.json();
         }
 
-        this.chunks = await chunksRes.json();
+        if (!embRes || !embRes.ok) {
+          throw new Error(`Failed to load vector database for model '${modelId}'. Ensure build_rag_embeddings.py has run.`);
+        }
+
         const buffer = await embRes.arrayBuffer();
         this.embeddings = new Float32Array(buffer);
-        console.log(`[RAG] Loaded ${this.chunks.length} chunks and vector database (${(buffer.byteLength / 1024 / 1024).toFixed(2)} MB).`);
+        this.loadedModelId = modelId;
+        console.log(`[RAG] Loaded ${this.chunks.length} chunks and vector database for model '${modelId}' (${(buffer.byteLength / 1024 / 1024).toFixed(2)} MB).`);
       } finally {
         this.isDataLoading = false;
       }
@@ -261,6 +272,80 @@
       } finally {
         this.isModelLoading = false;
       }
+    }
+
+    /**
+     * Multi-Location Smart Snippet Extractor
+     * Evaluates sentences across the entire document (Introduction + top matching child methods).
+     * Synthesizes a unified response combining the overarching concept (Intro) with practical mechanics (Method).
+     */
+    extractMultiLocationSnippet(parentText, childChunks, query) {
+      if (!parentText && (!childChunks || childChunks.length === 0)) return '';
+
+      const queryTokens = (query || '').toLowerCase()
+        .replace(/[^a-z0-9_`]/g, ' ')
+        .split(/\s+/)
+        .filter(t => t.length > 2);
+
+      const scoreSentences = (text, sourceTag) => {
+        if (!text) return [];
+        const raw = text.trim().split(/(?<=[.!?])\s+(?=[A-Z0-9`])/);
+        const list = [];
+        raw.forEach((sentence, idx) => {
+          const clean = sentence.trim();
+          if (clean.length < 25) return;
+          const lower = clean.toLowerCase();
+          let score = 0;
+          queryTokens.forEach(t => {
+            if (lower.includes(t)) {
+              score += 2;
+              if (new RegExp(`\\b${t}\\b`, 'i').test(clean)) score += 3;
+            }
+          });
+          // Reward early introductory sentences
+          if (sourceTag === 'Intro' && idx < 3) score += 1.5;
+          list.push({ sentence: clean, score, idx, sourceTag });
+        });
+        return list;
+      };
+
+      const introSentences = scoreSentences(parentText, 'Intro');
+      introSentences.sort((a, b) => b.score - a.score);
+      const bestIntro = introSentences.length > 0 ? introSentences[0] : null;
+
+      // Score child candidates
+      const childCandidates = [];
+      if (childChunks && childChunks.length > 0) {
+        childChunks.forEach(c => {
+          const rawName = c.rawTitle || (c.title ? c.title.split('::').pop() : 'Section');
+          const sents = scoreSentences(c.text, rawName);
+          childCandidates.push(...sents);
+        });
+        childCandidates.sort((a, b) => b.score - a.score);
+      }
+      const bestChild = childCandidates.length > 0 ? childCandidates[0] : null;
+
+      // Case 1: Both Intro and Method have relevant sentences
+      if (bestIntro && bestChild && bestIntro.sentence !== bestChild.sentence) {
+        const hIntro = this.highlightSnippet(bestIntro.sentence.slice(0, 190), query);
+        const hChild = this.highlightSnippet(bestChild.sentence.slice(0, 190), query);
+        return `<span class="snippet-source-tag">[Intro]</span> ${hIntro} ` +
+               `<span class="snippet-source-tag">[${this.escapeHtml(bestChild.sourceTag)}]</span> ${hChild}`;
+      }
+
+      // Case 2: Only Intro matches or no child
+      if (bestIntro) {
+        const topIntro = introSentences.slice(0, 2).sort((a, b) => a.idx - b.idx);
+        const combined = topIntro.map(s => s.sentence).join(' ');
+        return `<span class="snippet-source-tag">[Intro]</span> ${this.highlightSnippet(combined.slice(0, 280), query)}`;
+      }
+
+      // Case 3: Only Child matches
+      if (bestChild) {
+        return `<span class="snippet-source-tag">[${this.escapeHtml(bestChild.sourceTag)}]</span> ${this.highlightSnippet(bestChild.sentence.slice(0, 280), query)}`;
+      }
+
+      return this.highlightSnippet((parentText || '').slice(0, 220), query);
     }
 
     /**
@@ -424,13 +509,14 @@
     /**
      * Option A: Hierarchical Parent-Child Consolidation
      * Groups matches under authoritative Parent documents (Classes/Guides)
-     * Highlights the most relevant child method/section with a dedicated deep-link badge.
+     * Prioritizes introductions for conceptual questions and highlights multi-section badges.
      */
     formatConsolidatedResults(scored, query, topK) {
       const docsMap = new Map();
+      const isConceptualQuery = /^(how|what|why|where|can|is|when|explain|overview|describe|difference|understanding|comment|pourquoi|qu'est|quelle?)/i.test(query.trim());
 
-      // Take top 150 items to ensure comprehensive document matching
-      const poolLimit = Math.min(scored.length, 150);
+      // Take top 300 items to ensure comprehensive document matching
+      const poolLimit = Math.min(scored.length, 300);
       for (let i = 0; i < poolLimit; i++) {
         const item = scored[i];
         const chunk = item.chunk;
@@ -443,8 +529,6 @@
             parentScore: chunk.level === 'parent' ? item.score : null,
             parentVectorScore: chunk.level === 'parent' ? item.vectorScore : null,
             children: [],
-            bestChild: null,
-            bestChildScore: -Infinity,
             topScore: item.score
           });
         }
@@ -456,10 +540,6 @@
           entry.parentVectorScore = item.vectorScore;
         } else if (chunk.level === 'child') {
           entry.children.push(item);
-          if (item.score > entry.bestChildScore) {
-            entry.bestChildScore = item.score;
-            entry.bestChild = item;
-          }
         }
         if (item.score > entry.topScore) {
           entry.topScore = item.score;
@@ -478,31 +558,63 @@
         }
         if (!pChunk) continue;
 
-        const pScore = entry.parentScore !== null ? entry.parentScore : (entry.topScore * 0.75);
-        const cScore = entry.bestChildScore !== -Infinity ? entry.bestChildScore : pScore;
+        // Introduction authority boost:
+        // When the query is conceptual, parent overview has high intrinsic authority
+        let effectiveParentScore = (entry.parentScore !== null) ? entry.parentScore : (entry.topScore * 0.75);
+        if (isConceptualQuery) {
+          effectiveParentScore += 0.12; // Boost Introduction for conceptual queries
+        }
 
-        // Composite document score: weighted combination
-        const combinedScore = (Math.max(pScore, cScore) * 0.70) + (Math.min(pScore, cScore) * 0.30);
-        const bestTargetItem = (entry.bestChild && entry.bestChild.score >= (pScore - 0.05)) ? entry.bestChild : { chunk: pChunk, score: pScore, vectorScore: pScore };
+        // Sort child methods by score
+        entry.children.sort((a, b) => b.score - a.score);
+        const topChildren = entry.children.slice(0, 3);
+        const bestChild = topChildren.length > 0 ? topChildren[0] : null;
+        const cScore = bestChild ? bestChild.score : effectiveParentScore;
 
-        // Snippet chosen from the best matching text
-        const snippetText = bestTargetItem.chunk.text || pChunk.text;
-        const snippet = this.extractSmartSnippet(snippetText, query);
+        // Composite document score giving heavy weight to introduction
+        const combinedScore = (Math.max(effectiveParentScore, cScore) * 0.65) + (Math.min(effectiveParentScore, cScore) * 0.35);
+
+        // Gather relevant target sections for multi-badges
+        const targetSections = [];
+        // Add Intro badge if parent introduction is relevant
+        if (effectiveParentScore >= (cScore - 0.12)) {
+          targetSections.push({
+            title: 'Intro',
+            url: pChunk.url,
+            type: 'overview',
+            isIntro: true
+          });
+        }
+
+        // Add matching methods (score >= 72% of best child)
+        const childThreshold = bestChild ? bestChild.score * 0.72 : 0;
+        topChildren.forEach(childItem => {
+          if (childItem.score >= childThreshold) {
+            targetSections.push({
+              title: childItem.chunk.rawTitle || (childItem.chunk.title ? childItem.chunk.title.split('::').pop() : 'Section'),
+              url: childItem.chunk.url,
+              type: childItem.chunk.type,
+              isIntro: false
+            });
+          }
+        });
+
+        // Determine primary click target
+        const targetUrl = (bestChild && bestChild.score > (effectiveParentScore + 0.08)) ? bestChild.chunk.url : pChunk.url;
+
+        // Multi-location synthesized snippet (combines Intro + matching methods)
+        const childChunks = topChildren.map(c => c.chunk);
+        const snippet = this.extractMultiLocationSnippet(pChunk.text, childChunks, query);
         const matchPct = Math.round(Math.max(0, Math.min(1, (combinedScore + 0.2) / 1.1)) * 100);
-
-        const isChildTarget = bestTargetItem.chunk.id !== pChunk.id;
-        const targetSectionTitle = isChildTarget ? (bestTargetItem.chunk.rawTitle || bestTargetItem.chunk.title) : null;
 
         results.push({
           mode: 'consolidated',
           score: combinedScore,
-          vectorScore: bestTargetItem.vectorScore,
+          vectorScore: entry.parentVectorScore || (bestChild ? bestChild.vectorScore : combinedScore),
           matchPct,
           chunk: pChunk,
-          targetChunk: bestTargetItem.chunk,
-          targetUrl: bestTargetItem.chunk.url,
-          targetSectionTitle,
-          targetType: bestTargetItem.chunk.type,
+          targetUrl,
+          targetSections,
           title: pChunk.title,
           pageHeading: pChunk.pageHeading || pChunk.title,
           category: pChunk.category,
