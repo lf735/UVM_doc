@@ -145,10 +145,23 @@ document.addEventListener('DOMContentLoaded', () => {
             updateDocTitle(pairedDoc);
           }
         }
+      } else if (mode === 'source') {
+        switchSidebarTab('source');
+      } else if (mode === 'docs') {
+        switchSidebarTab('docs');
       }
       setViewMode(mode, true);
     });
   });
+
+  function switchSidebarTab(tabName) {
+    if (activeSidebarTab === tabName) return;
+    activeSidebarTab = tabName;
+    tabBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
+    });
+    renderSidebar();
+  }
 
   function setViewMode(mode, updateHistory = true) {
     currentMode = mode;
@@ -461,30 +474,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderSourceTree(query) {
     const root = UVM_DATA.sourceTree || {};
-    let html = '';
 
     function renderNode(node, depth) {
       if (node.type === 'file') {
-        if (!query || node.name.toLowerCase().includes(query) || node.path.toLowerCase().includes(query)) {
+        if (!query || node.name.toLowerCase().includes(query) || (node.path && node.path.toLowerCase().includes(query))) {
           const isActive = currentSrcUrl.includes(node.url);
-          html += `<div class="file-tree-item ${isActive ? 'active' : ''}" data-src-href="${node.url}" style="padding-left: ${depth * 14 + 10}px">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          return `<div class="file-tree-item ${isActive ? 'active' : ''}" data-src-href="${node.url}" style="padding-left: ${depth * 12 + 10}px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             <span>${node.name}</span>
           </div>`;
         }
+        return '';
       } else if (node.type === 'dir') {
-        const hasMatchingChild = hasMatch(node, query);
-        if (hasMatchingChild) {
-          html += `<div class="nav-group">
-            <div class="nav-group-header" style="padding-left: ${depth * 14 + 10}px">
-              <span style="font-family:var(--font-mono)">📁 ${node.name}</span>
+        if (hasMatch(node, query)) {
+          const childrenHtml = (node.children || []).map(child => renderNode(child, depth + 1)).join('');
+          return `<div class="nav-group">
+            <div class="nav-group-header" style="padding-left: ${depth * 12 + 8}px">
+              <span style="display:flex;align-items:center;gap:0.35rem;font-family:var(--font-mono)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                ${node.name}
+              </span>
               <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
             <div class="nav-group-items" style="padding:0">
-              ${(node.children || []).map(child => renderNode(child, depth + 1)).join('')}
+              ${childrenHtml}
             </div>
           </div>`;
         }
+        return '';
       }
       return '';
     }
@@ -492,13 +509,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function hasMatch(node, q) {
       if (!q) return true;
       if (node.name.toLowerCase().includes(q)) return true;
+      if (node.path && node.path.toLowerCase().includes(q)) return true;
       if (node.children) {
         return node.children.some(c => hasMatch(c, q));
       }
       return false;
     }
 
-    (root.children || []).forEach(child => renderNode(child, 0));
+    const html = (root.children || []).map(child => renderNode(child, 0)).join('');
     sidebarContent.innerHTML = html || '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem">No matching files</div>';
     attachSidebarListeners();
   }
@@ -513,9 +531,9 @@ document.addEventListener('DOMContentLoaded', () => {
       .sort((a, b) => a.name.localeCompare(b.name))
       .forEach(item => {
         const badgeClass = item.type === 'class' ? 'badge-class' : 'badge-macro';
-        html += `<div class="nav-single-item" style="padding: 0.2rem 0.5rem">
-          <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" class="nav-item-link" style="justify-content:space-between">
-            <span style="font-family:var(--font-mono)">${item.name}</span>
+        html += `<div class="nav-single-item">
+          <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" class="nav-item-link az-index-link">
+            <span class="az-symbol-name">${item.name}</span>
             <span class="res-badge ${badgeClass}">${item.type}</span>
           </a>
         </div>`;
@@ -533,14 +551,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Doc links
-    sidebarContent.querySelectorAll('[data-doc-href]').forEach(link => {
+    // Navigation links (doc & src)
+    sidebarContent.querySelectorAll('[data-doc-href], [data-src-href]').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const docHref = link.getAttribute('data-doc-href');
         const srcHref = link.getAttribute('data-src-href');
-        if (docHref) {
+        if (activeSidebarTab === 'source' || (!docHref && srcHref)) {
+          if (srcHref) loadSource(srcHref);
+        } else if (docHref) {
           loadDoc(docHref);
+          if (currentMode === 'split' && srcHref) {
+            loadSource(srcHref);
+          }
         } else if (srcHref) {
           loadSource(srcHref);
         }
@@ -550,19 +573,15 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Source links
-    sidebarContent.querySelectorAll('[data-src-href]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const srcHref = link.getAttribute('data-src-href');
-        if (srcHref) {
-          loadSource(srcHref);
-        }
-        if (window.innerWidth <= 860 && sidebar) {
-          sidebar.classList.remove('open');
-        }
-      });
-    });
+    // Ensure parent groups of active doc item are expanded so it is visible
+    const activeItem = sidebarContent.querySelector('.nav-item-link.active');
+    if (activeItem) {
+      let p = activeItem.closest('.nav-group');
+      while (p) {
+        p.classList.remove('collapsed');
+        p = p.parentElement ? p.parentElement.closest('.nav-group') : null;
+      }
+    }
   }
 
   function highlightActiveSidebar(url) {
@@ -572,6 +591,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const srcHref = el.getAttribute('data-src-href');
       if ((docHref && url.includes(docHref)) || (srcHref && url.includes(srcHref))) {
         el.classList.add('active');
+        let p = el.closest('.nav-group');
+        while (p) {
+          p.classList.remove('collapsed');
+          p = p.parentElement ? p.parentElement.closest('.nav-group') : null;
+        }
       }
     });
   }
