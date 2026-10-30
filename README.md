@@ -97,6 +97,15 @@ This repository is pre-configured with a GitHub Actions workflow (`.github/workf
 
 ---
 
+## 📚 Product Specification & Engineering Guidelines
+
+For comprehensive reverse-engineered architecture, protocol catalogs, development rules, and post-mortem lessons learned:
+
+- **[Product Specification & Engineering Methodology](PRODUCT_SPEC_AND_METHODOLOGY.md)**: Reverse-engineered specification, `postMessage` protocol catalog, 5 golden development rules, and 3-level verification strategy.
+- **[Lessons Learned & Technical Traps Guide](LESSONS_LEARNED.md)**: Real-world post-mortem analysis of CSS pointer-events modal bugs, smooth scrolling race conditions, legacy HTML ID mapping, search engine regex error handling, and cross-frame event capture.
+
+---
+
 ## 📄 License & Attribution
 
 This project is licensed under the **[Apache License 2.0](LICENSE)**.
