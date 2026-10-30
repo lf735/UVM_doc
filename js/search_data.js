@@ -9178,6 +9178,17214 @@ const UVM_DATA = {
       "src": "src_view/uvm_pkg.sv.html",
       "doc": null,
       "desc": "Source file in src/uvm_pkg.sv"
+    },
+    {
+      "name": "accept",
+      "type": "function",
+      "category": "uvm_visitor_adapter#(STRUCTURE,uvm_visitor#(STRUCTURE))",
+      "src": "src_view/base/uvm_traversal.svh.html#L120",
+      "doc": "docs_view/base/uvm_traversal-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_visitor_adapter#(STRUCTURE,uvm_visitor#(STRUCTURE))"
+    },
+    {
+      "name": "accept_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-77",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "accept_tr",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L590",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "uvm_heartbeat",
+      "src": "src_view/base/uvm_heartbeat.svh.html#L141",
+      "doc": "docs_view/base/uvm_heartbeat-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_heartbeat"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L100",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "uvm_reg_read_only_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L413",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_reg_read_only_cbs"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "uvm_reg_write_only_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L413",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_reg_write_only_cbs"
+    },
+    {
+      "name": "add_by_name",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L706",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "add_callback",
+      "type": "function",
+      "category": "uvm_event#(T)",
+      "src": "src_view/base/uvm_event.svh.html#L348",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_event#(T)"
+    },
+    {
+      "name": "add_coverage",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-58",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "add_coverage",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-59",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "add_coverage",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "add_hdl_path",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-42",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "add_hdl_path",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "add_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-54",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "add_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "add_hdl_path_slice",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "add_hdl_path_slice",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "add_int",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L322",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "add_int",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L352",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-61",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "add_int",
+      "type": "function",
+      "category": "uvm_report_message_element_container",
+      "src": "src_view/base/uvm_report_message.svh.html#L352",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_report_message_element_container"
+    },
+    {
+      "name": "add_mem",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "add_object",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L352",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "add_object",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L407",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-63",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "add_object",
+      "type": "function",
+      "category": "uvm_report_message_element_container",
+      "src": "src_view/base/uvm_report_message.svh.html#L407",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_report_message_element_container"
+    },
+    {
+      "name": "add_path",
+      "type": "function",
+      "category": "uvm_hdl_path_concat",
+      "src": "src_view/reg/uvm_reg_model.svh.html#L369",
+      "doc": "docs_view/reg/uvm_reg_model-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_hdl_path_concat"
+    },
+    {
+      "name": "add_reg",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "add_sequence",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "add_sequences",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "add_slice",
+      "type": "function",
+      "category": "uvm_hdl_path_concat",
+      "src": "src_view/reg/uvm_reg_model.svh.html#L361",
+      "doc": "docs_view/reg/uvm_reg_model-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_hdl_path_concat"
+    },
+    {
+      "name": "add_string",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L338",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "add_string",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L380",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-62",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "add_string",
+      "type": "function",
+      "category": "uvm_report_message_element_container",
+      "src": "src_view/base/uvm_report_message.svh.html#L380",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_report_message_element_container"
+    },
+    {
+      "name": "add_submap",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "add_typewide_sequence",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "add_typewide_sequences",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "add_uvm_phases",
+      "type": "function",
+      "category": "uvm_domain",
+      "src": "src_view/base/uvm_domain.svh.html#L146",
+      "doc": "docs_view/base/uvm_domain-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_domain"
+    },
+    {
+      "name": "adjust_name",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "all_dropped",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L1072",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-55",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "all_dropped",
+      "type": "task",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L861",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-14",
+      "desc": "Task in uvm_objection"
+    },
+    {
+      "name": "all_dropped",
+      "type": "task",
+      "category": "uvm_objection_callback",
+      "src": "src_view/base/uvm_objection.svh.html#L861",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-26",
+      "desc": "Task in uvm_objection_callback"
+    },
+    {
+      "name": "allocate",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "apply_config_settings",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "b_transport",
+      "type": "task",
+      "category": "uvm_tlm_if",
+      "src": "src_view/tlm2/uvm_tlm2_ifs.svh.html#L172",
+      "doc": "docs_view/tlm2/uvm_tlm2_ifs-svh.html#doc-nav-item-11",
+      "desc": "Task in uvm_tlm_if"
+    },
+    {
+      "name": "backdoor",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L113",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "backdoor_read",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-48",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "backdoor_read",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-52",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "backdoor_read_func",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-50",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "backdoor_read_func",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-54",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "backdoor_watch",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L915",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-55",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "backdoor_write",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-49",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "backdoor_write",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-53",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "begin_child_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-80",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "begin_child_tr",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "begin_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-79",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "begin_tr",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "begin_v",
+      "type": "function",
+      "category": "uvm_visitor#(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L38",
+      "doc": "docs_view/base/uvm_traversal-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_visitor#(NODE)"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_mem_access_seq",
+      "src": "src_view/reg/sequences/uvm_mem_access_seq.svh.html#L64",
+      "doc": "docs_view/reg/sequences/uvm_mem_access_seq-svh.html#doc-nav-item-9",
+      "desc": "Task in uvm_mem_access_seq"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_mem_single_walk_seq",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L86",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#doc-nav-item-6",
+      "desc": "Task in uvm_mem_single_walk_seq"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_mem_walk_seq",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L86",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#doc-nav-item-12",
+      "desc": "Task in uvm_mem_walk_seq"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_reg_access_seq",
+      "src": "src_view/reg/sequences/uvm_reg_access_seq.svh.html#L74",
+      "doc": "docs_view/reg/sequences/uvm_reg_access_seq-svh.html#doc-nav-item-9",
+      "desc": "Task in uvm_reg_access_seq"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_reg_bit_bash_seq",
+      "src": "src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L66",
+      "doc": "docs_view/reg/sequences/uvm_reg_bit_bash_seq-svh.html#doc-nav-item-9",
+      "desc": "Task in uvm_reg_bit_bash_seq"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_reg_mem_built_in_seq",
+      "src": "src_view/reg/sequences/uvm_reg_mem_built_in_seq.svh.html#L58",
+      "doc": "docs_view/reg/sequences/uvm_reg_mem_built_in_seq-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_reg_mem_built_in_seq"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_reg_mem_shared_access_seq",
+      "src": "src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L70",
+      "doc": "docs_view/reg/sequences/uvm_reg_mem_shared_access_seq-svh.html#doc-nav-item-13",
+      "desc": "Task in uvm_reg_mem_shared_access_seq"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L131",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-7",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L457",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-13",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "build_coverage",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-57",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "build_coverage",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-58",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "build_coverage",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "build_phase",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "burst_read",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-32",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "burst_read",
+      "type": "task",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-29",
+      "desc": "Task in uvm_mem_region"
+    },
+    {
+      "name": "burst_write",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-31",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "burst_write",
+      "type": "task",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-28",
+      "desc": "Task in uvm_mem_region"
+    },
+    {
+      "name": "bus2reg",
+      "type": "function",
+      "category": "uvm_reg_adapter",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L218",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_reg_adapter"
+    },
+    {
+      "name": "bus2reg",
+      "type": "function",
+      "category": "uvm_reg_tlm_adapter",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L218",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_reg_tlm_adapter"
+    },
+    {
+      "name": "callback_mode",
+      "type": "function",
+      "category": "uvm_callback",
+      "src": "src_view/base/uvm_callback.svh.html#L1159",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_callback"
+    },
+    {
+      "name": "can_get",
+      "type": "function",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L145",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "can_peek",
+      "type": "function",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L172",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "can_put",
+      "type": "function",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L118",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "cancel",
+      "type": "function",
+      "category": "uvm_barrier",
+      "src": "src_view/base/uvm_barrier.svh.html#L164",
+      "doc": "docs_view/base/uvm_barrier-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_barrier"
+    },
+    {
+      "name": "cancel",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L195",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_event_base"
+    },
+    {
+      "name": "capacity",
+      "type": "function",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L35",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_reg_fifo"
+    },
+    {
+      "name": "catch",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L34",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "check_config_usage",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "check_data_width",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "check_phase",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "check_phase",
+      "type": "function",
+      "category": "uvm_reg_predictor",
+      "src": "src_view/reg/uvm_reg_predictor.svh.html#L248",
+      "doc": "docs_view/reg/uvm_reg_predictor-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_reg_predictor"
+    },
+    {
+      "name": "clear",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L620",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "clear_extension",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L888",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "clear_extensions",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L900",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "clear_hdl_path",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "clear_hdl_path",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-45",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "clear_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-53",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "clear_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "clear_response_queue",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1184",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-50",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "clone",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "close",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L180",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "close",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L176",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "close_db",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L98",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "compare",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "compare_field",
+      "type": "function",
+      "category": "uvm_comparer",
+      "src": "src_view/base/uvm_comparer.svh.html#L142",
+      "doc": "docs_view/base/uvm_comparer-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_comparer"
+    },
+    {
+      "name": "compare_field_int",
+      "type": "function",
+      "category": "uvm_comparer",
+      "src": "src_view/base/uvm_comparer.svh.html#L202",
+      "doc": "docs_view/base/uvm_comparer-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_comparer"
+    },
+    {
+      "name": "compare_field_real",
+      "type": "function",
+      "category": "uvm_comparer",
+      "src": "src_view/base/uvm_comparer.svh.html#L257",
+      "doc": "docs_view/base/uvm_comparer-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_comparer"
+    },
+    {
+      "name": "compare_object",
+      "type": "function",
+      "category": "uvm_comparer",
+      "src": "src_view/base/uvm_comparer.svh.html#L285",
+      "doc": "docs_view/base/uvm_comparer-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_comparer"
+    },
+    {
+      "name": "compare_string",
+      "type": "function",
+      "category": "uvm_comparer",
+      "src": "src_view/base/uvm_comparer.svh.html#L318",
+      "doc": "docs_view/base/uvm_comparer-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_comparer"
+    },
+    {
+      "name": "compose_report_message",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L749",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-50",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "compose_report_message",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L749",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_reg_indirect_data",
+      "src": "src_view/reg/uvm_reg_indirect.svh.html#L73",
+      "doc": "docs_view/reg/uvm_reg_indirect-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_reg_indirect_data"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_vreg_field"
+    },
+    {
+      "name": "configure_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-23",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "connect",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L432",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "connect",
+      "type": "function",
+      "category": "uvm_tlm_nb_passthrough_target_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L68",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_tlm_nb_passthrough_target_socket"
+    },
+    {
+      "name": "connect",
+      "type": "function",
+      "category": "uvm_tlm_nb_target_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L68",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_tlm_nb_target_socket"
+    },
+    {
+      "name": "Connect",
+      "type": "function",
+      "category": "uvm_tlm_b_initiator_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L56",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_tlm_b_initiator_socket"
+    },
+    {
+      "name": "Connect",
+      "type": "function",
+      "category": "uvm_tlm_b_target_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L56",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_tlm_b_target_socket"
+    },
+    {
+      "name": "Connect",
+      "type": "function",
+      "category": "uvm_tlm_nb_initiator_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L56",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_tlm_nb_initiator_socket"
+    },
+    {
+      "name": "connect_phase",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "convert2string",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "convert2string",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "convert2string",
+      "type": "function",
+      "category": "uvm_reg_item",
+      "src": "src_view/reg/uvm_reg_item.svh.html#L183",
+      "doc": "docs_view/reg/uvm_reg_item-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_reg_item"
+    },
+    {
+      "name": "copy",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "create",
+      "type": "function",
+      "category": "uvm_component_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L109",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_component_registry#(T,Tname)"
+    },
+    {
+      "name": "create",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L240",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "create",
+      "type": "function",
+      "category": "uvm_object_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L109",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_object_registry#(T,Tname)"
+    },
+    {
+      "name": "create",
+      "type": "function",
+      "category": "uvm_tlm_extension_base",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L976",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-56",
+      "desc": "Function in uvm_tlm_extension_base"
+    },
+    {
+      "name": "create_component",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-57",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "create_component",
+      "type": "function",
+      "category": "uvm_component_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L63",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_component_registry#(T,Tname)"
+    },
+    {
+      "name": "create_component",
+      "type": "function",
+      "category": "uvm_object_wrapper",
+      "src": "src_view/base/uvm_factory.svh.html#L829",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_object_wrapper"
+    },
+    {
+      "name": "create_component_by_name",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "create_component_by_name",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "create_component_by_type",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "create_component_by_type",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "create_item",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L939",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "create_map",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "create_object",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-58",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "create_object",
+      "type": "function",
+      "category": "uvm_object_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L200",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_object_registry#(T,Tname)"
+    },
+    {
+      "name": "create_object",
+      "type": "function",
+      "category": "uvm_object_wrapper",
+      "src": "src_view/base/uvm_factory.svh.html#L818",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-45",
+      "desc": "Function in uvm_object_wrapper"
+    },
+    {
+      "name": "create_object_by_name",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "create_object_by_name",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "create_object_by_type",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "create_object_by_type",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "current_grabber",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "debug_connected_to",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L499",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "debug_create_by_name",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "debug_create_by_name",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "debug_create_by_type",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "debug_create_by_type",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "debug_provided_to",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L563",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "decode",
+      "type": "function",
+      "category": "uvm_reg_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L264",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_reg_cbs"
+    },
+    {
+      "name": "decr",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L147",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "define_access",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "define_domain",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L751",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "uvm_object_string_pool#(T)",
+      "src": "src_view/base/uvm_pool.svh.html#L118",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_object_string_pool#(T)"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L118",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L125",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "uvm_report_message_element_container",
+      "src": "src_view/base/uvm_report_message.svh.html#L317",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_report_message_element_container"
+    },
+    {
+      "name": "delete_by_name",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L790",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "delete_callback",
+      "type": "function",
+      "category": "uvm_event#(T)",
+      "src": "src_view/base/uvm_event.svh.html#L366",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_event#(T)"
+    },
+    {
+      "name": "delete_elements",
+      "type": "function",
+      "category": "uvm_report_message_element_container",
+      "src": "src_view/base/uvm_report_message.svh.html#L327",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_report_message_element_container"
+    },
+    {
+      "name": "die",
+      "type": "function",
+      "category": "uvm_root",
+      "src": "src_view/base/uvm_root.svh.html#L129",
+      "doc": "docs_view/base/uvm_root-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_root"
+    },
+    {
+      "name": "disable_auto_item_recording",
+      "type": "function",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L240",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "disable_recording",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "display",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L321",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "display_objections",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L1070",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "do_accept_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-78",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "do_accept_tr",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "do_begin_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L1480",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-81",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "do_begin_tr",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "uvm_mem_access_seq",
+      "src": "src_view/reg/sequences/uvm_mem_access_seq.svh.html#L243",
+      "doc": "docs_view/reg/sequences/uvm_mem_access_seq-svh.html#doc-nav-item-10",
+      "desc": "Task in uvm_mem_access_seq"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "uvm_mem_walk_seq",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L246",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#doc-nav-item-13",
+      "desc": "Task in uvm_mem_walk_seq"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "uvm_reg_access_seq",
+      "src": "src_view/reg/sequences/uvm_reg_access_seq.svh.html#L244",
+      "doc": "docs_view/reg/sequences/uvm_reg_access_seq-svh.html#doc-nav-item-10",
+      "desc": "Task in uvm_reg_access_seq"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "uvm_reg_bit_bash_seq",
+      "src": "src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L252",
+      "doc": "docs_view/reg/sequences/uvm_reg_bit_bash_seq-svh.html#doc-nav-item-10",
+      "desc": "Task in uvm_reg_bit_bash_seq"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "uvm_reg_hw_reset_seq",
+      "src": "src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L87",
+      "doc": "docs_view/reg/sequences/uvm_reg_hw_reset_seq-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_reg_hw_reset_seq"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "uvm_reg_mem_shared_access_seq",
+      "src": "src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L410",
+      "doc": "docs_view/reg/sequences/uvm_reg_mem_shared_access_seq-svh.html#doc-nav-item-14",
+      "desc": "Task in uvm_reg_mem_shared_access_seq"
+    },
+    {
+      "name": "do_bus_read",
+      "type": "task",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-43",
+      "desc": "Task in uvm_reg_map"
+    },
+    {
+      "name": "do_bus_write",
+      "type": "task",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-42",
+      "desc": "Task in uvm_reg_map"
+    },
+    {
+      "name": "do_close",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L555",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_close",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L555",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_close",
+      "type": "function",
+      "category": "uvm_text_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L478",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_text_tr_stream"
+    },
+    {
+      "name": "do_close",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L478",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "do_close_db",
+      "type": "function",
+      "category": "uvm_text_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L350",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_text_tr_database"
+    },
+    {
+      "name": "do_close_db",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L350",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "do_compare",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "do_copy",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "do_copy",
+      "type": "function",
+      "category": "uvm_reg_item",
+      "src": "src_view/reg/uvm_reg_item.svh.html#L212",
+      "doc": "docs_view/reg/uvm_reg_item-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_reg_item"
+    },
+    {
+      "name": "do_copy",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L110",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "do_end_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-83",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "do_end_tr",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "do_establish_link",
+      "type": "function",
+      "category": "uvm_text_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L376",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_text_tr_database"
+    },
+    {
+      "name": "do_establish_link",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L376",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "do_free",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L564",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_free",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L564",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-45",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_free",
+      "type": "function",
+      "category": "uvm_text_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L487",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_text_tr_stream"
+    },
+    {
+      "name": "do_free",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L487",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "do_get_lhs",
+      "type": "function",
+      "category": "uvm_cause_effect_link",
+      "src": "src_view/base/uvm_links.svh.html#L192",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_cause_effect_link"
+    },
+    {
+      "name": "do_get_lhs",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L192",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "do_get_lhs",
+      "type": "function",
+      "category": "uvm_parent_child_link",
+      "src": "src_view/base/uvm_links.svh.html#L192",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_parent_child_link"
+    },
+    {
+      "name": "do_get_lhs",
+      "type": "function",
+      "category": "uvm_related_link",
+      "src": "src_view/base/uvm_links.svh.html#L192",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_related_link"
+    },
+    {
+      "name": "do_get_rhs",
+      "type": "function",
+      "category": "uvm_cause_effect_link",
+      "src": "src_view/base/uvm_links.svh.html#L206",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_cause_effect_link"
+    },
+    {
+      "name": "do_get_rhs",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L206",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "do_get_rhs",
+      "type": "function",
+      "category": "uvm_parent_child_link",
+      "src": "src_view/base/uvm_links.svh.html#L206",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_parent_child_link"
+    },
+    {
+      "name": "do_get_rhs",
+      "type": "function",
+      "category": "uvm_related_link",
+      "src": "src_view/base/uvm_links.svh.html#L206",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_related_link"
+    },
+    {
+      "name": "do_kill",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L910",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "do_open",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L544",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_open",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L544",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_open",
+      "type": "function",
+      "category": "uvm_text_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L467",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_text_tr_stream"
+    },
+    {
+      "name": "do_open",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L467",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "do_open_db",
+      "type": "function",
+      "category": "uvm_text_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L332",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_text_tr_database"
+    },
+    {
+      "name": "do_open_db",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L332",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "do_open_recorder",
+      "type": "function",
+      "category": "uvm_text_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L494",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_text_tr_stream"
+    },
+    {
+      "name": "do_open_recorder",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L494",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "do_open_stream",
+      "type": "function",
+      "category": "uvm_text_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L365",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_text_tr_database"
+    },
+    {
+      "name": "do_open_stream",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L365",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "do_pack",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "do_post_read",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L72",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-4",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "do_post_write",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L104",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-6",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "do_pre_read",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L58",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-3",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "do_pre_write",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L88",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "do_predict",
+      "type": "function",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L226",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_reg_fifo"
+    },
+    {
+      "name": "do_print",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "do_print",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L443",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "do_read",
+      "type": "task",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-45",
+      "desc": "Task in uvm_reg_map"
+    },
+    {
+      "name": "do_record",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "do_record_field",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L805",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_record_field",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L805",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_record_field_int",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L825",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_record_field_int",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L825",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_record_field_real",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L845",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_record_field_real",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L845",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-48",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_record_generic",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L929",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_record_generic",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L929",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-52",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_record_object",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L864",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_record_object",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L864",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-49",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_record_string",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L897",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_record_string",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L897",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-50",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_record_time",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L916",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "do_record_time",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L916",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-51",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "do_reg_item",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L170",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-8",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "do_set_lhs",
+      "type": "function",
+      "category": "uvm_cause_effect_link",
+      "src": "src_view/base/uvm_links.svh.html#L185",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_cause_effect_link"
+    },
+    {
+      "name": "do_set_lhs",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L185",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "do_set_lhs",
+      "type": "function",
+      "category": "uvm_parent_child_link",
+      "src": "src_view/base/uvm_links.svh.html#L185",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_parent_child_link"
+    },
+    {
+      "name": "do_set_lhs",
+      "type": "function",
+      "category": "uvm_related_link",
+      "src": "src_view/base/uvm_links.svh.html#L185",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_related_link"
+    },
+    {
+      "name": "do_set_rhs",
+      "type": "function",
+      "category": "uvm_cause_effect_link",
+      "src": "src_view/base/uvm_links.svh.html#L199",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_cause_effect_link"
+    },
+    {
+      "name": "do_set_rhs",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L199",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "do_set_rhs",
+      "type": "function",
+      "category": "uvm_parent_child_link",
+      "src": "src_view/base/uvm_links.svh.html#L199",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_parent_child_link"
+    },
+    {
+      "name": "do_set_rhs",
+      "type": "function",
+      "category": "uvm_related_link",
+      "src": "src_view/base/uvm_links.svh.html#L199",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_related_link"
+    },
+    {
+      "name": "do_unpack",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "do_write",
+      "type": "task",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-44",
+      "desc": "Task in uvm_reg_map"
+    },
+    {
+      "name": "drop_objection",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L524",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "drop_objection",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "dropped",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L1058",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-54",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "dropped",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L841",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "dropped",
+      "type": "function",
+      "category": "uvm_objection_callback",
+      "src": "src_view/base/uvm_objection.svh.html#L841",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_objection_callback"
+    },
+    {
+      "name": "dump",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L324",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "dump",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1342",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-56",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "emit",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "emit",
+      "type": "function",
+      "category": "uvm_table_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_table_printer"
+    },
+    {
+      "name": "emit",
+      "type": "function",
+      "category": "uvm_tree_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_tree_printer"
+    },
+    {
+      "name": "enable_recording",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "encode",
+      "type": "function",
+      "category": "uvm_reg_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L245",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_reg_cbs"
+    },
+    {
+      "name": "end_of_elaboration_phase",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "end_prematurely",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "end_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-82",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "end_tr",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "end_v",
+      "type": "function",
+      "category": "uvm_visitor#(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L44",
+      "doc": "docs_view/base/uvm_traversal-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_visitor#(NODE)"
+    },
+    {
+      "name": "establish_link",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L205",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "exec_func",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L232",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "exec_task",
+      "type": "task",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L241",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-15",
+      "desc": "Task in uvm_phase"
+    },
+    {
+      "name": "execute",
+      "type": "function",
+      "category": "uvm_bottomup_phase",
+      "src": "src_view/base/uvm_bottomup_phase.svh.html#L101",
+      "doc": "docs_view/base/uvm_bottomup_phase-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_bottomup_phase"
+    },
+    {
+      "name": "execute",
+      "type": "task",
+      "category": "uvm_task_phase",
+      "src": "src_view/base/uvm_task_phase.svh.html#L139",
+      "doc": "docs_view/base/uvm_task_phase-svh.html#doc-nav-item-4",
+      "desc": "Task in uvm_task_phase"
+    },
+    {
+      "name": "execute",
+      "type": "function",
+      "category": "uvm_topdown_phase",
+      "src": "src_view/base/uvm_topdown_phase.svh.html#L104",
+      "doc": "docs_view/base/uvm_topdown_phase-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_topdown_phase"
+    },
+    {
+      "name": "execute_item",
+      "type": "task",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_sequencer_base"
+    },
+    {
+      "name": "execute_report_message",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L647",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-49",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "execute_report_message",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L647",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "exists",
+      "type": "function",
+      "category": "uvm_config_db",
+      "src": "src_view/base/uvm_config_db.svh.html#L248",
+      "doc": "docs_view/base/uvm_config_db-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_config_db"
+    },
+    {
+      "name": "exists",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L133",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "extract_phase",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "final_phase",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "find",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "find",
+      "type": "function",
+      "category": "uvm_root",
+      "src": "src_view/base/uvm_root.svh.html#L71",
+      "doc": "docs_view/base/uvm_root-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_root"
+    },
+    {
+      "name": "find_all",
+      "type": "function",
+      "category": "uvm_root",
+      "src": "src_view/base/uvm_root.svh.html#L71",
+      "doc": "docs_view/base/uvm_root-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_root"
+    },
+    {
+      "name": "find_all",
+      "type": "function",
+      "category": "uvm_utils#(TYPE,FIELD)",
+      "src": "src_view/base/uvm_misc.svh.html#L649",
+      "doc": "docs_view/base/uvm_misc-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_utils#(TYPE,FIELD)"
+    },
+    {
+      "name": "find_block",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "find_blocks",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "find_by_name",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "find_override_by_name",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "find_override_by_name",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "find_override_by_type",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "find_override_by_type",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "find_unused_resources",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1269",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-54",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "find_wrapper_by_name",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L306",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "finish_item",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1015",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-38",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "first",
+      "type": "function",
+      "category": "uvm_callback_iter",
+      "src": "src_view/base/uvm_callback.svh.html#L1058",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_callback_iter"
+    },
+    {
+      "name": "first",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L147",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "flush",
+      "type": "function",
+      "category": "uvm_in_order_comparator#(T,comp_type,convert,pair_type)",
+      "src": "src_view/comps/uvm_in_order_comparator.svh.html#L194",
+      "doc": "docs_view/comps/uvm_in_order_comparator-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_in_order_comparator#(T,comp_type,convert,pair_type)"
+    },
+    {
+      "name": "flush",
+      "type": "function",
+      "category": "uvm_tlm_fifo#(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L172",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_tlm_fifo#(T)"
+    },
+    {
+      "name": "for_each",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "format_action",
+      "type": "function",
+      "category": "uvm_report_handler",
+      "src": "src_view/base/uvm_report_handler.svh.html#L347",
+      "doc": "docs_view/base/uvm_report_handler-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_report_handler"
+    },
+    {
+      "name": "format_footer",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L226",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "format_header",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L218",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "format_row",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "free",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L208",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "free",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L199",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "free_tr_stream",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-87",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "from_name",
+      "type": "function",
+      "category": "uvm_enum_wrapper#(T)",
+      "src": "src_view/base/uvm_globals.svh.html#L532",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_enum_wrapper#(T)"
+    },
+    {
+      "name": "generate_stimulus",
+      "type": "task",
+      "category": "uvm_random_stimulus#(T)",
+      "src": "src_view/comps/uvm_random_stimulus.svh.html#L96",
+      "doc": "docs_view/comps/uvm_random_stimulus-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_random_stimulus#(T)"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_build_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_build_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_check_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_check_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_component_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L90",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_component_registry#(T,Tname)"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_config_db",
+      "src": "src_view/base/uvm_config_db.svh.html#L89",
+      "doc": "docs_view/base/uvm_config_db-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_config_db"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_configure_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_configure_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_connect_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_connect_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L106",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_end_of_elaboration_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_end_of_elaboration_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_extract_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_extract_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L97",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_final_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_final_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_get_to_lock_dap",
+      "src": "src_view/dap/uvm_get_to_lock_dap.svh.html#L94",
+      "doc": "docs_view/dap/uvm_get_to_lock_dap-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_get_to_lock_dap"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_main_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_main_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_object_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L90",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_object_registry#(T,Tname)"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_object_string_pool#(T)",
+      "src": "src_view/base/uvm_pool.svh.html#L86",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_object_string_pool#(T)"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L86",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_post_configure_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_post_configure_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_post_main_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_post_main_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_post_reset_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_post_reset_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_post_shutdown_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_post_shutdown_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_pre_configure_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_pre_configure_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_pre_main_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_pre_main_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_pre_reset_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_pre_reset_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_pre_shutdown_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_pre_shutdown_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L86",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L204",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_reg_fifo"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_report_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_report_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_reset_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reset_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L674",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_root",
+      "src": "src_view/base/uvm_root.svh.html#L71",
+      "doc": "docs_view/base/uvm_root-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_root"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_run_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_run_phase"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-9",
+      "desc": "Task in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_set_before_get_dap",
+      "src": "src_view/dap/uvm_set_before_get_dap.svh.html#L113",
+      "doc": "docs_view/dap/uvm_set_before_get_dap-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_set_before_get_dap"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_set_get_dap_base",
+      "src": "src_view/dap/uvm_set_get_dap_base.svh.html#L32",
+      "doc": "docs_view/dap/uvm_set_get_dap_base-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_set_get_dap_base"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_shutdown_phase",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_shutdown_phase"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_simple_lock_dap",
+      "src": "src_view/dap/uvm_simple_lock_dap.svh.html#L92",
+      "doc": "docs_view/dap/uvm_simple_lock_dap-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_simple_lock_dap"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L160",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-7",
+      "desc": "Task in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "get",
+      "type": "function",
+      "category": "uvm_start_of_simulation_phase",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_start_of_simulation_phase"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L76",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-4",
+      "desc": "Task in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "get_abstime",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L176",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "get_accept_time",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "get_access",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_access",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_access",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_access",
+      "type": "function",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_vreg_field"
+    },
+    {
+      "name": "get_action",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L227",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_action",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L65",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-54",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_action",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L65",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_report_message_element_base"
+    },
+    {
+      "name": "get_adapter",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_addr_unit_bytes",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_address",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_address",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_address",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_address",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_addresses",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_addresses",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_adjacent_predecessor_nodes",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_adjacent_successor_nodes",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_arbitration",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "get_arg_matches",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L128",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_arg_value",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L169",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_arg_values",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L206",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_args",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L79",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_auto_predict",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L577",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_automatic_phase_objection",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L669",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "get_backdoor",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_backdoor",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_backdoor",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-51",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_base_addr",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_begin_time",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "get_block_by_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_blocks",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_by_name",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L982",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-64",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "get_by_name",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L78",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "get_by_name",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L982",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "get_by_type",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L1038",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-65",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "get_by_type",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L67",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "get_by_type",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1038",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-45",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "get_byte_enable",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L740",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_byte_enable_length",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_cb",
+      "type": "function",
+      "category": "uvm_callback_iter",
+      "src": "src_view/base/uvm_callback.svh.html#L1101",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_callback_iter"
+    },
+    {
+      "name": "get_check_on_read",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L612",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_child",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_children",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_client",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L153",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_close_time",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L267",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "get_command",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L626",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_common_domain",
+      "type": "function",
+      "category": "uvm_domain",
+      "src": "src_view/base/uvm_domain.svh.html#L100",
+      "doc": "docs_view/base/uvm_domain-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_domain"
+    },
+    {
+      "name": "get_comp",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L285",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "get_compare",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_component_visitor",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L49",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "get_component_visitor",
+      "type": "function",
+      "category": "uvm_default_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L49",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_default_coreservice_t"
+    },
+    {
+      "name": "get_config",
+      "type": "function",
+      "category": "uvm_utils#(TYPE,FIELD)",
+      "src": "src_view/base/uvm_misc.svh.html#L702",
+      "doc": "docs_view/base/uvm_misc-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_utils#(TYPE,FIELD)"
+    },
+    {
+      "name": "get_connected_to",
+      "type": "function",
+      "category": "uvm_port_component_base",
+      "src": "src_view/base/uvm_port_base.svh.html#L137",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_port_component_base"
+    },
+    {
+      "name": "get_context",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L175",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_context",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L767",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-52",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_coverage",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-61",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_coverage",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-62",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_coverage",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_current_item",
+      "type": "function",
+      "category": "uvm_sequence#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequence.svh.html#L93",
+      "doc": "docs_view/seq/uvm_sequence-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_sequence#(REQ,RSP)"
+    },
+    {
+      "name": "get_current_item",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L81",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "get_data",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L693",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_data_length",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_db",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L106",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "get_default_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-59",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_default_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "get_default_path",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_default_tr_database",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L153",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "get_default_tr_database",
+      "type": "function",
+      "category": "uvm_default_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L153",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_default_coreservice_t"
+    },
+    {
+      "name": "get_depth",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_depth",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L217",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "get_domain",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_domain",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_domain_name",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_domains",
+      "type": "function",
+      "category": "uvm_domain",
+      "src": "src_view/base/uvm_domain.svh.html#L77",
+      "doc": "docs_view/base/uvm_domain-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_domain"
+    },
+    {
+      "name": "get_drain_time",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L970",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "get_element_container",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L251",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_element_container",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L820",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-58",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_elements",
+      "type": "function",
+      "category": "uvm_report_message_element_container",
+      "src": "src_view/base/uvm_report_message.svh.html#L338",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_report_message_element_container"
+    },
+    {
+      "name": "get_end_offset",
+      "type": "function",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_mem_region"
+    },
+    {
+      "name": "get_end_time",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "get_event_pool",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "get_extension",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L877",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-45",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_factory",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L129",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "get_factory",
+      "type": "function",
+      "category": "uvm_default_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L129",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_default_coreservice_t"
+    },
+    {
+      "name": "get_field_by_name",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_field_by_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_field_by_name",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_fields",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_fields",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_fields",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_fields",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_file",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L801",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-56",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_filename",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L735",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-48",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_first",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L849",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "get_first_child",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_fname",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L235",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_frontdoor",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_frontdoor",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_full_hdl_path",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_full_hdl_path",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-51",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_full_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-57",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_full_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L263",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_vreg_field"
+    },
+    {
+      "name": "get_global",
+      "type": "function",
+      "category": "uvm_object_string_pool#(T)",
+      "src": "src_view/base/uvm_pool.svh.html#L72",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_object_string_pool#(T)"
+    },
+    {
+      "name": "get_global",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L72",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "get_global",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L72",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "get_global_pool",
+      "type": "function",
+      "category": "uvm_object_string_pool#(T)",
+      "src": "src_view/base/uvm_pool.svh.html#L61",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_object_string_pool#(T)"
+    },
+    {
+      "name": "get_global_pool",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L61",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "get_global_queue",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L61",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "get_handle",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L338",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "get_handle",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L394",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "get_hdl_path",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-45",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_hdl_path",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-49",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-56",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "get_hdl_path_kinds",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_hdl_path_kinds",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-50",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_highest_precedence",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L919",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-71",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "get_highest_precedence",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L919",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "get_id",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L205",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_id",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L685",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-42",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_id_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L485",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-42",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "get_id_count",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L485",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "get_id_set",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L537",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "get_if",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L51",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "get_immediate_children",
+      "type": "function",
+      "category": "uvm_structure_proxy#(STRUCTURE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L215",
+      "doc": "docs_view/base/uvm_traversal-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_structure_proxy#(STRUCTURE)"
+    },
+    {
+      "name": "get_imp",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_incr",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_initiator",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "get_inst",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L60",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_inst_count",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "get_inst_id",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "get_is_active",
+      "type": "function",
+      "category": "uvm_agent",
+      "src": "src_view/comps/uvm_agent.svh.html#L131",
+      "doc": "docs_view/comps/uvm_agent-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_agent"
+    },
+    {
+      "name": "get_item",
+      "type": "function",
+      "category": "uvm_reg_adapter",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L113",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_reg_adapter"
+    },
+    {
+      "name": "get_jump_target",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_last",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L872",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "get_len",
+      "type": "function",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_mem_region"
+    },
+    {
+      "name": "get_lhs",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L84",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "get_line",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L243",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_line",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L751",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-50",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_link",
+      "type": "function",
+      "category": "uvm_cause_effect_link",
+      "src": "src_view/base/uvm_links.svh.html#L172",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_cause_effect_link"
+    },
+    {
+      "name": "get_link",
+      "type": "function",
+      "category": "uvm_parent_child_link",
+      "src": "src_view/base/uvm_links.svh.html#L172",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_parent_child_link"
+    },
+    {
+      "name": "get_link",
+      "type": "function",
+      "category": "uvm_related_link",
+      "src": "src_view/base/uvm_links.svh.html#L172",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_related_link"
+    },
+    {
+      "name": "get_lsb_pos",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_lsb_pos_in_register",
+      "type": "function",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_vreg_field"
+    },
+    {
+      "name": "get_map_by_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_maps",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_maps",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_maps",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_maps",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_max_quit_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L380",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "get_max_quit_count",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L380",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "get_max_size",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_max_size",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_max_size",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_mem_by_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_mem_by_offset",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_memories",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_memories",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_memory",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "get_memory",
+      "type": "function",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_mem_region"
+    },
+    {
+      "name": "get_memory",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_message",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L216",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_message",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L703",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_message_database",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L526",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "get_message_database",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L526",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "get_mirrored_value",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_mirrored_value",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_n_bits",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_n_bits",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_n_bits",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_n_bits",
+      "type": "function",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_vreg_field"
+    },
+    {
+      "name": "get_n_bytes",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_n_bytes",
+      "type": "function",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_mem_region"
+    },
+    {
+      "name": "get_n_bytes",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_n_bytes",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_n_bytes",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_n_maps",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_n_maps",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_n_maps",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_n_memlocs",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L254",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L48",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_report_message_element_base"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L71",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_vreg_field"
+    },
+    {
+      "name": "get_name_constraint",
+      "type": "function",
+      "category": "uvm_component_name_check_visitor",
+      "src": "src_view/base/uvm_traversal.svh.html#L251",
+      "doc": "docs_view/base/uvm_traversal-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_component_name_check_visitor"
+    },
+    {
+      "name": "get_next",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L898",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "get_next_child",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_next_item",
+      "type": "task",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "get_next_item",
+      "type": "task",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L59",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-2",
+      "desc": "Task in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "get_num_children",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_num_extensions",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L867",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_num_last_reqs",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "get_num_last_rsps",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "get_num_reqs_sent",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "get_num_rsps_received",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "get_num_waiters",
+      "type": "function",
+      "category": "uvm_barrier",
+      "src": "src_view/base/uvm_barrier.svh.html#L154",
+      "doc": "docs_view/base/uvm_barrier-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_barrier"
+    },
+    {
+      "name": "get_num_waiters",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L205",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_event_base"
+    },
+    {
+      "name": "get_object_type",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "get_objection",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L357",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_objection_count",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L938",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "get_objection_count",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_objection_total",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L953",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "get_objectors",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L885",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "get_offset",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_offset",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_offset_in_memory",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_open_time",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L252",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "get_packed_size",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L272",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_vreg_field"
+    },
+    {
+      "name": "get_parent_map",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_parent_sequence",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L194",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "get_phase_type",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_physical_addresses",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_plusargs",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L93",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_port",
+      "type": "function",
+      "category": "uvm_port_component#(PORT)",
+      "src": "src_view/base/uvm_port_base.svh.html#L133",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_port_component#(PORT)"
+    },
+    {
+      "name": "get_prev",
+      "type": "function",
+      "category": "uvm_callbacks#(T,CB)",
+      "src": "src_view/base/uvm_callback.svh.html#L924",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_callbacks#(T,CB)"
+    },
+    {
+      "name": "get_prev_state",
+      "type": "function",
+      "category": "uvm_phase_state_change",
+      "src": "src_view/base/uvm_phase.svh.html#L701",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_phase_state_change"
+    },
+    {
+      "name": "get_priority",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L711",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "get_propagate_mode",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L307",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "get_provided_to",
+      "type": "function",
+      "category": "uvm_port_component_base",
+      "src": "src_view/base/uvm_port_base.svh.html#L141",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_port_component_base"
+    },
+    {
+      "name": "get_quit_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L404",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "get_quit_count",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L404",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "get_radix_str",
+      "type": "function",
+      "category": "uvm_printer_knobs",
+      "src": "src_view/base/uvm_printer.svh.html#L604",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-57",
+      "desc": "Function in uvm_printer_knobs"
+    },
+    {
+      "name": "get_realtime",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "get_record_attribute_handle",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L532",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "get_recorder_from_handle",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L372",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "get_recorders",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L371",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "get_reg_by_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_reg_by_offset",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_regfile",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_regfile",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "get_region",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_registers",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_registers",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_report_action",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L328",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "get_report_catcher",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L365",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_report_file_handle",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L373",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "get_report_handler",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L631",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_report_handler",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L462",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "get_report_max_verbosity_level",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L278",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "get_report_object",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L616",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_report_server",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L181",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "get_report_server",
+      "type": "function",
+      "category": "uvm_default_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L181",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_default_coreservice_t"
+    },
+    {
+      "name": "get_report_server",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L647",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_report_verbosity_level",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L267",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "get_reset",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_reset",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "get_response",
+      "type": "task",
+      "category": "uvm_sequence#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequence.svh.html#L118",
+      "doc": "docs_view/seq/uvm_sequence-svh.html#doc-nav-item-8",
+      "desc": "Task in uvm_sequence#(REQ,RSP)"
+    },
+    {
+      "name": "get_response_queue_depth",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1175",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-49",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "get_response_queue_error_report_disabled",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1153",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "get_response_status",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L789",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_response_string",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L824",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_rhs",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L100",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "get_rights",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_rights",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "get_rights",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_root",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L197",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "get_root_blocks",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_root_map",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_root_sequence",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L289",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "get_root_sequence_name",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L266",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "get_run_count",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_schedule",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_schedule_name",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_scope",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L394",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "get_scope",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L124",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "get_sequence_id",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L101",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "get_sequence_path",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L309",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "get_sequence_state",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L200",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "get_sequencer",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_sequencer",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L174",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "get_sequences",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "get_server",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L232",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "get_severity",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L164",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_severity",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L668",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_severity_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L446",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "get_severity_count",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L446",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "get_severity_set",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L531",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "get_size",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_size",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "get_start_offset",
+      "type": "function",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_mem_region"
+    },
+    {
+      "name": "get_starting_phase",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L552",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "get_state",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L693",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "get_state",
+      "type": "function",
+      "category": "uvm_phase_state_change",
+      "src": "src_view/base/uvm_phase.svh.html#L693",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_phase_state_change"
+    },
+    {
+      "name": "get_stream",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L149",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "get_stream_from_handle",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L429",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "get_stream_type_name",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L143",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "get_streaming_width",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "get_streams",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L186",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "get_submap_offset",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_submaps",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_threshold",
+      "type": "function",
+      "category": "uvm_barrier",
+      "src": "src_view/base/uvm_barrier.svh.html#L145",
+      "doc": "docs_view/base/uvm_barrier-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_barrier"
+    },
+    {
+      "name": "get_tool_name",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L226",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_tool_version",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L235",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_tr_handle",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L223",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "get_tr_handle",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "get_tr_stream",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-86",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "get_transaction_id",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "get_transaction_order_policy",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L670",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_trigger_data",
+      "type": "function",
+      "category": "uvm_event#(T)",
+      "src": "src_view/base/uvm_event.svh.html#L329",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_event#(T)"
+    },
+    {
+      "name": "get_trigger_time",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L134",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_event_base"
+    },
+    {
+      "name": "get_type",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "get_type",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L1449",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-59",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "get_type_handle",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L1462",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-60",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "get_type_handle",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L1462",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "get_type_handle",
+      "type": "function",
+      "category": "uvm_tlm_extension_base",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1039",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-54",
+      "desc": "Function in uvm_tlm_extension_base"
+    },
+    {
+      "name": "get_type_handle_name",
+      "type": "function",
+      "category": "uvm_tlm_extension_base",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1043",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-55",
+      "desc": "Function in uvm_tlm_extension_base"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "uvm_callback",
+      "src": "src_view/base/uvm_callback.svh.html#L1189",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_callback"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "uvm_component_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L78",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_component_registry#(T,Tname)"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L220",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "uvm_object_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L78",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_object_registry#(T,Tname)"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "uvm_object_string_pool#(T)",
+      "src": "src_view/base/uvm_pool.svh.html#L202",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_object_string_pool#(T)"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "uvm_object_wrapper",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_object_wrapper"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L120",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "get_use_response_handler",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1120",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "get_use_sequence_info",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L138",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "get_uvm_domain",
+      "type": "function",
+      "category": "uvm_domain",
+      "src": "src_view/base/uvm_domain.svh.html#L168",
+      "doc": "docs_view/base/uvm_domain-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_domain"
+    },
+    {
+      "name": "get_uvm_schedule",
+      "type": "function",
+      "category": "uvm_domain",
+      "src": "src_view/base/uvm_domain.svh.html#L87",
+      "doc": "docs_view/base/uvm_domain-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_domain"
+    },
+    {
+      "name": "get_uvmargs",
+      "type": "function",
+      "category": "uvm_cmdline_processor",
+      "src": "src_view/base/uvm_cmdline_processor.svh.html#L27",
+      "doc": "docs_view/base/uvm_cmdline_processor-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_cmdline_processor"
+    },
+    {
+      "name": "get_value",
+      "type": "function",
+      "category": "uvm_report_message_int_element",
+      "src": "src_view/base/uvm_report_message.svh.html#L120",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_report_message_int_element"
+    },
+    {
+      "name": "get_value",
+      "type": "function",
+      "category": "uvm_report_message_object_element",
+      "src": "src_view/base/uvm_report_message.svh.html#L120",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_report_message_object_element"
+    },
+    {
+      "name": "get_value",
+      "type": "function",
+      "category": "uvm_report_message_string_element",
+      "src": "src_view/base/uvm_report_message.svh.html#L120",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_report_message_string_element"
+    },
+    {
+      "name": "get_verbosity",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L194",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "get_verbosity",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L718",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "get_vfield_by_name",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_vfield_by_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_virtual_fields",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_virtual_fields",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_virtual_fields",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_virtual_registers",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_virtual_registers",
+      "type": "function",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_mem_region"
+    },
+    {
+      "name": "get_virtual_registers",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_virtual_registers",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "get_vreg_by_name",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "get_vreg_by_name",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "get_vreg_by_offset",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "grab",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L799",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-28",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "grab",
+      "type": "task",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-13",
+      "desc": "Task in uvm_sequencer_base"
+    },
+    {
+      "name": "has_child",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "has_coverage",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-59",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "has_coverage",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-60",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "has_coverage",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "has_do_available",
+      "type": "function",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "has_do_available",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "has_do_available",
+      "type": "function",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L130",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "has_hdl_path",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "has_hdl_path",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-48",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "has_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-55",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "has_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "has_lock",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L863",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "has_lock",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "has_reset",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "has_reset",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "ID",
+      "type": "function",
+      "category": "uvm_tlm_extension",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1033",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-60",
+      "desc": "Function in uvm_tlm_extension"
+    },
+    {
+      "name": "implement",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "include_coverage",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-57",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "incr",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L121",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "incr_id_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L501",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "incr_quit_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L416",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "incr_severity_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L458",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "init_access_record",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L573",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "init_sequence_library",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "insert",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L110",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "is",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "is_active",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "is_after",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "is_auditing",
+      "type": "function",
+      "category": "uvm_resource_options",
+      "src": "src_view/base/uvm_resource.svh.html#L186",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_resource_options"
+    },
+    {
+      "name": "is_auto_item_recording_enabled",
+      "type": "function",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L248",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "is_auto_updated",
+      "type": "function",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_reg_backdoor"
+    },
+    {
+      "name": "is_before",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "is_blocked",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L850",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "is_blocked",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "is_busy",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "is_child",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "is_closed",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L260",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "is_closed",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L290",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "is_dmi_allowed",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L781",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "is_empty",
+      "type": "function",
+      "category": "uvm_tlm_fifo#(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L97",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_tlm_fifo#(T)"
+    },
+    {
+      "name": "is_enabled",
+      "type": "function",
+      "category": "uvm_callback",
+      "src": "src_view/base/uvm_callback.svh.html#L1178",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_callback"
+    },
+    {
+      "name": "is_export",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L149",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "is_export",
+      "type": "function",
+      "category": "uvm_port_component_base",
+      "src": "src_view/base/uvm_port_base.svh.html#L149",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_port_component_base"
+    },
+    {
+      "name": "is_full",
+      "type": "function",
+      "category": "uvm_tlm_fifo#(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L107",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_tlm_fifo#(T)"
+    },
+    {
+      "name": "is_grabbed",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "is_hdl_path_root",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-61",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "is_imp",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L153",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "is_imp",
+      "type": "function",
+      "category": "uvm_port_component_base",
+      "src": "src_view/base/uvm_port_base.svh.html#L153",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_port_component_base"
+    },
+    {
+      "name": "is_in_map",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "is_in_map",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "is_in_map",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "is_indv_accessible",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "is_item",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L188",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "is_item",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L240",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "is_known_access",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "is_locked",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "is_locked",
+      "type": "function",
+      "category": "uvm_simple_lock_dap",
+      "src": "src_view/dap/uvm_simple_lock_dap.svh.html#L128",
+      "doc": "docs_view/dap/uvm_simple_lock_dap-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_simple_lock_dap"
+    },
+    {
+      "name": "is_null",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "is_off",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L160",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_event_base"
+    },
+    {
+      "name": "is_on",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L149",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_event_base"
+    },
+    {
+      "name": "is_open",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L245",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "is_open",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L112",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "is_open",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L282",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "is_port",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L145",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "is_port",
+      "type": "function",
+      "category": "uvm_port_component_base",
+      "src": "src_view/base/uvm_port_base.svh.html#L145",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_port_component_base"
+    },
+    {
+      "name": "is_quit_count_reached",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L434",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "is_read",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L643",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "is_read_only",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L277",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "is_recording_enabled",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "is_relevant",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L736",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "is_response_error",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L815",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "is_response_ok",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L806",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "is_tracing",
+      "type": "function",
+      "category": "uvm_config_db_options",
+      "src": "src_view/base/uvm_config_db.svh.html#L391",
+      "doc": "docs_view/base/uvm_config_db-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_config_db_options"
+    },
+    {
+      "name": "is_tracing",
+      "type": "function",
+      "category": "uvm_resource_db_options",
+      "src": "src_view/base/uvm_resource_db.svh.html#L380",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_resource_db_options"
+    },
+    {
+      "name": "is_unbounded",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L331",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "is_volatile",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "is_write",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L661",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "issue",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L558",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "item_done",
+      "type": "function",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "item_done",
+      "type": "function",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L106",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "jump",
+      "type": "function",
+      "category": "uvm_domain",
+      "src": "src_view/base/uvm_domain.svh.html#L194",
+      "doc": "docs_view/base/uvm_domain-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_domain"
+    },
+    {
+      "name": "jump",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "jump_to",
+      "type": "function",
+      "category": "uvm_phase_state_change",
+      "src": "src_view/base/uvm_phase.svh.html#L711",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-45",
+      "desc": "Function in uvm_phase_state_change"
+    },
+    {
+      "name": "kill",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L880",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "last",
+      "type": "function",
+      "category": "uvm_callback_iter",
+      "src": "src_view/base/uvm_callback.svh.html#L1069",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_callback_iter"
+    },
+    {
+      "name": "last",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L161",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "last_req",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L122",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "last_rsp",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L188",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "lock",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L777",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-27",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "lock",
+      "type": "task",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-12",
+      "desc": "Task in uvm_sequencer_base"
+    },
+    {
+      "name": "lock",
+      "type": "function",
+      "category": "uvm_simple_lock_dap",
+      "src": "src_view/dap/uvm_simple_lock_dap.svh.html#L111",
+      "doc": "docs_view/dap/uvm_simple_lock_dap-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_simple_lock_dap"
+    },
+    {
+      "name": "lock_model",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "lookup",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "lookup_name",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L868",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "lookup_regex",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1076",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "lookup_regex_names",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1065",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "lookup_scope",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1109",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-48",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "lookup_type",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1010",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "main_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-26",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "match_scope",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L403",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "max_size",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L310",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "mid_do",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L447",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "min_size",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L320",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "mirror",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-36",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "mirror",
+      "type": "task",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-45",
+      "desc": "Task in uvm_reg_block"
+    },
+    {
+      "name": "mirror",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-31",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "mirror",
+      "type": "function",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L35",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_reg_fifo"
+    },
+    {
+      "name": "mirror_reg",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L358",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-15",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "nb_transport",
+      "type": "function",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L200",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "nb_transport_bw",
+      "type": "function",
+      "category": "uvm_tlm_if",
+      "src": "src_view/tlm2/uvm_tlm2_ifs.svh.html#L149",
+      "doc": "docs_view/tlm2/uvm_tlm2_ifs-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_tlm_if"
+    },
+    {
+      "name": "nb_transport_fw",
+      "type": "function",
+      "category": "uvm_tlm_if",
+      "src": "src_view/tlm2/uvm_tlm2_ifs.svh.html#L107",
+      "doc": "docs_view/tlm2/uvm_tlm2_ifs-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_tlm_if"
+    },
+    {
+      "name": "needs_update",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "needs_update",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "needs_update",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_*_export#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_exports.svh.html#L80",
+      "doc": "docs_view/tlm1/uvm_exports-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_*_export#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_*_export#(T)",
+      "src": "src_view/tlm1/uvm_exports.svh.html#L80",
+      "doc": "docs_view/tlm1/uvm_exports-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_*_export#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_*_imp#(REQ,RSP,IMP,REQ_IMP,RSP_IMP)",
+      "src": "src_view/tlm1/uvm_imps.svh.html#L82",
+      "doc": "docs_view/tlm1/uvm_imps-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_*_imp#(REQ,RSP,IMP,REQ_IMP,RSP_IMP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_*_imp#(T,IMP)",
+      "src": "src_view/tlm1/uvm_imps.svh.html#L82",
+      "doc": "docs_view/tlm1/uvm_imps-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_*_imp#(T,IMP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_*_port#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_ports.svh.html#L81",
+      "doc": "docs_view/tlm1/uvm_ports-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_*_port#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_*_port#(T)",
+      "src": "src_view/tlm1/uvm_ports.svh.html#L81",
+      "doc": "docs_view/tlm1/uvm_ports-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_*_port#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_agent",
+      "src": "src_view/comps/uvm_agent.svh.html#L54",
+      "doc": "docs_view/comps/uvm_agent-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_agent"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)",
+      "src": "src_view/comps/uvm_algorithmic_comparator.svh.html#L111",
+      "doc": "docs_view/comps/uvm_algorithmic_comparator-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_analysis_export",
+      "src": "src_view/tlm1/uvm_analysis_port.svh.html#L59",
+      "doc": "docs_view/tlm1/uvm_analysis_port-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_analysis_export"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_barrier",
+      "src": "src_view/base/uvm_barrier.svh.html#L47",
+      "doc": "docs_view/base/uvm_barrier-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_barrier"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_bottomup_phase",
+      "src": "src_view/base/uvm_bottomup_phase.svh.html#L42",
+      "doc": "docs_view/base/uvm_bottomup_phase-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_bottomup_phase"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_built_in_pair#(T1,T2)",
+      "src": "src_view/comps/uvm_pair.svh.html#L62",
+      "doc": "docs_view/comps/uvm_pair-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_built_in_pair#(T1,T2)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_callback",
+      "src": "src_view/base/uvm_callback.svh.html#L1048",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_callback"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_callback_iter",
+      "src": "src_view/base/uvm_callback.svh.html#L1048",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_callback_iter"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_cause_effect_link",
+      "src": "src_view/base/uvm_links.svh.html#L66",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_cause_effect_link"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_class_pair#(T1,T2)",
+      "src": "src_view/comps/uvm_pair.svh.html#L62",
+      "doc": "docs_view/comps/uvm_pair-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_class_pair#(T1,T2)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L52",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_domain",
+      "src": "src_view/base/uvm_domain.svh.html#L183",
+      "doc": "docs_view/base/uvm_domain-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_domain"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_driver#(REQ,RSP)",
+      "src": "src_view/comps/uvm_driver.svh.html#L74",
+      "doc": "docs_view/comps/uvm_driver-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_driver#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_env",
+      "src": "src_view/comps/uvm_env.svh.html#L41",
+      "doc": "docs_view/comps/uvm_env-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_env"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_event#(T)",
+      "src": "src_view/base/uvm_event.svh.html#L46",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_event#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L46",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_event_base"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_event_callback",
+      "src": "src_view/base/uvm_event_callback.svh.html#L46",
+      "doc": "docs_view/base/uvm_event_callback-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_event_callback"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_get_to_lock_dap",
+      "src": "src_view/dap/uvm_get_to_lock_dap.svh.html#L51",
+      "doc": "docs_view/dap/uvm_get_to_lock_dap-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_get_to_lock_dap"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_heartbeat",
+      "src": "src_view/base/uvm_heartbeat.svh.html#L80",
+      "doc": "docs_view/base/uvm_heartbeat-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_heartbeat"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L66",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_mem_single_walk_seq",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L76",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_mem_single_walk_seq"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_monitor",
+      "src": "src_view/comps/uvm_monitor.svh.html#L42",
+      "doc": "docs_view/comps/uvm_monitor-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_monitor"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_object_string_pool#(T)",
+      "src": "src_view/base/uvm_pool.svh.html#L49",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_object_string_pool#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L127",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_parent_child_link",
+      "src": "src_view/base/uvm_links.svh.html#L66",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_parent_child_link"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L683",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_phase_cb",
+      "src": "src_view/base/uvm_phase.svh.html#L683",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-48",
+      "desc": "Function in uvm_phase_cb"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L49",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L53",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_push_driver#(REQ,RSP)",
+      "src": "src_view/comps/uvm_push_driver.svh.html#L67",
+      "doc": "docs_view/comps/uvm_push_driver-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_push_driver#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_push_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_push_sequencer.svh.html#L48",
+      "doc": "docs_view/seq/uvm_push_sequencer-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_push_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L49",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_random_stimulus#(T)",
+      "src": "src_view/comps/uvm_random_stimulus.svh.html#L67",
+      "doc": "docs_view/comps/uvm_random_stimulus-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_random_stimulus#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_adapter",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L45",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_reg_adapter"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L46",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_reg_backdoor"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L63",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_reg_fifo"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_frontdoor",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L116",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_reg_frontdoor"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_indirect_data",
+      "src": "src_view/reg/uvm_reg_indirect.svh.html#L51",
+      "doc": "docs_view/reg/uvm_reg_indirect-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_reg_indirect_data"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_item",
+      "src": "src_view/reg/uvm_reg_item.svh.html#L173",
+      "doc": "docs_view/reg/uvm_reg_item-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_reg_item"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_predictor",
+      "src": "src_view/reg/uvm_reg_predictor.svh.html#L109",
+      "doc": "docs_view/reg/uvm_reg_predictor-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_reg_predictor"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L116",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reg_sequence"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_related_link",
+      "src": "src_view/base/uvm_links.svh.html#L66",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_related_link"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L141",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_report_handler",
+      "src": "src_view/base/uvm_report_handler.svh.html#L88",
+      "doc": "docs_view/base/uvm_report_handler-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_report_handler"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L297",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_report_message_element_container",
+      "src": "src_view/base/uvm_report_message.svh.html#L297",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_report_message_element_container"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L91",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L231",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_scoreboard",
+      "src": "src_view/comps/uvm_scoreboard.svh.html#L44",
+      "doc": "docs_view/comps/uvm_scoreboard-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_scoreboard"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_seq_item_pull_imp#(REQ,RSP,IMP)",
+      "src": "src_view/tlm1/uvm_sqr_connections.svh.html#L42",
+      "doc": "docs_view/tlm1/uvm_sqr_connections-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_seq_item_pull_imp#(REQ,RSP,IMP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequence#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequence.svh.html#L58",
+      "doc": "docs_view/seq/uvm_sequence-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_sequence#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L174",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L52",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L373",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_set_before_get_dap",
+      "src": "src_view/dap/uvm_set_before_get_dap.svh.html#L84",
+      "doc": "docs_view/dap/uvm_set_before_get_dap-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_set_before_get_dap"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_set_get_dap_base",
+      "src": "src_view/dap/uvm_set_get_dap_base.svh.html#L39",
+      "doc": "docs_view/dap/uvm_set_get_dap_base-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_set_get_dap_base"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_simple_lock_dap",
+      "src": "src_view/dap/uvm_simple_lock_dap.svh.html#L51",
+      "doc": "docs_view/dap/uvm_simple_lock_dap-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_simple_lock_dap"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_subscriber",
+      "src": "src_view/comps/uvm_subscriber.svh.html#L53",
+      "doc": "docs_view/comps/uvm_subscriber-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_subscriber"
+    },
+    {
+      "name": "new",
+      "type": "task",
+      "category": "uvm_task_phase",
+      "src": "src_view/base/uvm_task_phase.svh.html#L65",
+      "doc": "docs_view/base/uvm_task_phase-svh.html#doc-nav-item-2",
+      "desc": "Task in uvm_task_phase"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_test",
+      "src": "src_view/comps/uvm_test.svh.html#L70",
+      "doc": "docs_view/comps/uvm_test-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_test"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L134",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_text_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L67",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_text_tr_database"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_text_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L83",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_text_tr_stream"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_analysis_fifo#(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L62",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_tlm_analysis_fifo#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_b_initiator_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L61",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_tlm_b_initiator_socket"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_b_target_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L61",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_tlm_b_target_socket"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_extension",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L372",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-59",
+      "desc": "Function in uvm_tlm_extension"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_extension_base",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L372",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-53",
+      "desc": "Function in uvm_tlm_extension_base"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_fifo#(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L62",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_tlm_fifo#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_fifo_base#(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifo_base.svh.html#L143",
+      "doc": "docs_view/tlm1/uvm_tlm_fifo_base-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_tlm_fifo_base#(T)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L372",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_nb_initiator_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L61",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_tlm_nb_initiator_socket"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_nb_target_socket",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L61",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_tlm_nb_target_socket"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_nb_transport_bw_export",
+      "src": "src_view/tlm2/uvm_tlm2_exports.svh.html#L33",
+      "doc": "docs_view/tlm2/uvm_tlm2_exports-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_tlm_nb_transport_bw_export"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_nb_transport_bw_port",
+      "src": "src_view/tlm2/uvm_tlm2_ports.svh.html#L34",
+      "doc": "docs_view/tlm2/uvm_tlm2_ports-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_tlm_nb_transport_bw_port"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_tlm_req_rsp.svh.html#L203",
+      "doc": "docs_view/tlm1/uvm_tlm_req_rsp-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_tlm_req_rsp_channel#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L61",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_transport_channel#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_tlm_req_rsp.svh.html#L203",
+      "doc": "docs_view/tlm1/uvm_tlm_req_rsp-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_tlm_transport_channel#(REQ,RSP)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_topdown_phase",
+      "src": "src_view/base/uvm_topdown_phase.svh.html#L42",
+      "doc": "docs_view/base/uvm_topdown_phase-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_topdown_phase"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L67",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L83",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L622",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L382",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_vreg_field"
+    },
+    {
+      "name": "new_report_message",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L511",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "next",
+      "type": "function",
+      "category": "uvm_callback_iter",
+      "src": "src_view/base/uvm_callback.svh.html#L1080",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_callback_iter"
+    },
+    {
+      "name": "next",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L176",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "num",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L109",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "open_db",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L81",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "open_recorder",
+      "type": "function",
+      "category": "uvm_tr_stream",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L320",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_tr_stream"
+    },
+    {
+      "name": "open_stream",
+      "type": "function",
+      "category": "uvm_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L139",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_tr_database"
+    },
+    {
+      "name": "order",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_reg_transaction_order_policy"
+    },
+    {
+      "name": "pack",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "pack_bits",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "pack_bytes",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "pack_bytes",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "pack_field",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "pack_field_int",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "pack_ints",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "pack_ints",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "pack_object",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "pack_real",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "pack_string",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "pack_time",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-34",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-31",
+      "desc": "Task in uvm_mem_region"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-34",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-30",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-10",
+      "desc": "Task in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L184",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-8",
+      "desc": "Task in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L94",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-6",
+      "desc": "Task in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-31",
+      "desc": "Task in uvm_vreg"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-16",
+      "desc": "Task in uvm_vreg_field"
+    },
+    {
+      "name": "peek_mem",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L472",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-19",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "peek_reg",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L305",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-13",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "phase_ended",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "phase_ready_to_end",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "phase_started",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "phase_state_change",
+      "type": "function",
+      "category": "uvm_phase_cb",
+      "src": "src_view/base/uvm_phase.svh.html#L753",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-49",
+      "desc": "Function in uvm_phase_cb"
+    },
+    {
+      "name": "poke",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-33",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "poke",
+      "type": "task",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-30",
+      "desc": "Task in uvm_mem_region"
+    },
+    {
+      "name": "poke",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-33",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "poke",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-29",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "poke",
+      "type": "task",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-30",
+      "desc": "Task in uvm_vreg"
+    },
+    {
+      "name": "poke",
+      "type": "task",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-15",
+      "desc": "Task in uvm_vreg_field"
+    },
+    {
+      "name": "poke_mem",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L445",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-18",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "poke_reg",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L279",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-12",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "pop_back",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L153",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "pop_front",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L143",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "post_body",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L485",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-15",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "post_configure_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-24",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "post_do",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L470",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "post_main_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-27",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "post_predict",
+      "type": "function",
+      "category": "uvm_reg_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L225",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_reg_cbs"
+    },
+    {
+      "name": "post_randomize",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L920",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-49",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L798",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-55",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L1149",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-69",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L195",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-13",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_reg_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L213",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-6",
+      "desc": "Task in uvm_reg_cbs"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L768",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-40",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L590",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-37",
+      "desc": "Task in uvm_vreg"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_vreg_cbs",
+      "src": "src_view/reg/uvm_vreg.svh.html#L590",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-43",
+      "desc": "Task in uvm_vreg_cbs"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L351",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-21",
+      "desc": "Task in uvm_vreg_field"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "uvm_vreg_field_cbs",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L351",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-27",
+      "desc": "Task in uvm_vreg_field_cbs"
+    },
+    {
+      "name": "post_reset_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-21",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "post_shutdown_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-30",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "post_start",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L496",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-16",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "post_trigger",
+      "type": "function",
+      "category": "uvm_event_callback",
+      "src": "src_view/base/uvm_event_callback.svh.html#L79",
+      "doc": "docs_view/base/uvm_event_callback-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_event_callback"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L768",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-53",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L1115",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-67",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L218",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-15",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_reg_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L131",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-4",
+      "desc": "Task in uvm_reg_cbs"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L734",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-38",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L548",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-35",
+      "desc": "Task in uvm_vreg"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_vreg_cbs",
+      "src": "src_view/reg/uvm_vreg.svh.html#L548",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-41",
+      "desc": "Task in uvm_vreg_cbs"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L309",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-19",
+      "desc": "Task in uvm_vreg_field"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "uvm_vreg_field_cbs",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L309",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-25",
+      "desc": "Task in uvm_vreg_field_cbs"
+    },
+    {
+      "name": "pre_abort",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-75",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "pre_body",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L419",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-10",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "pre_configure_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-22",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "pre_do",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L436",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-11",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "pre_main_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-25",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "pre_predict",
+      "type": "function",
+      "category": "uvm_reg_predictor",
+      "src": "src_view/reg/uvm_reg_predictor.svh.html#L131",
+      "doc": "docs_view/reg/uvm_reg_predictor-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_reg_predictor"
+    },
+    {
+      "name": "pre_randomize",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L908",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-48",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L784",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-54",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L1133",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-68",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L185",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-12",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_reg_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L175",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_reg_cbs"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L752",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-39",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L296",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-18",
+      "desc": "Task in uvm_reg_fifo"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_reg_write_only_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L175",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-27",
+      "desc": "Task in uvm_reg_write_only_cbs"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L570",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-36",
+      "desc": "Task in uvm_vreg"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_vreg_cbs",
+      "src": "src_view/reg/uvm_vreg.svh.html#L570",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-42",
+      "desc": "Task in uvm_vreg_cbs"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L331",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-20",
+      "desc": "Task in uvm_vreg_field"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "uvm_vreg_field_cbs",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L331",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-26",
+      "desc": "Task in uvm_vreg_field_cbs"
+    },
+    {
+      "name": "pre_reset_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-19",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "pre_shutdown_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-28",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "pre_start",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L406",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-9",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "pre_trigger",
+      "type": "function",
+      "category": "uvm_event_callback",
+      "src": "src_view/base/uvm_event_callback.svh.html#L64",
+      "doc": "docs_view/base/uvm_event_callback-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_event_callback"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L755",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-52",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L1099",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-66",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L208",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-14",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_reg_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L92",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-3",
+      "desc": "Task in uvm_reg_cbs"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L718",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-37",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L274",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-17",
+      "desc": "Task in uvm_reg_fifo"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_reg_read_only_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L92",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-22",
+      "desc": "Task in uvm_reg_read_only_cbs"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L527",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-34",
+      "desc": "Task in uvm_vreg"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_vreg_cbs",
+      "src": "src_view/reg/uvm_vreg.svh.html#L527",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-40",
+      "desc": "Task in uvm_vreg_cbs"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L288",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-18",
+      "desc": "Task in uvm_vreg_field"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "uvm_vreg_field_cbs",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L288",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-24",
+      "desc": "Task in uvm_vreg_field_cbs"
+    },
+    {
+      "name": "predict",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "predict",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "prev",
+      "type": "function",
+      "category": "uvm_callback_iter",
+      "src": "src_view/base/uvm_callback.svh.html#L1091",
+      "doc": "docs_view/base/uvm_callback-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_callback_iter"
+    },
+    {
+      "name": "prev",
+      "type": "function",
+      "category": "uvm_pool#(KEY,T)",
+      "src": "src_view/base/uvm_pool.svh.html#L191",
+      "doc": "docs_view/base/uvm_pool-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_pool#(KEY,T)"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L48",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "uvm_report_handler",
+      "src": "src_view/base/uvm_report_handler.svh.html#L55",
+      "doc": "docs_view/base/uvm_report_handler-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_report_handler"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L79",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "print_accessors",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L545",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "print_array_footer",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_array_header",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_array_range",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_catcher",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L383",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "print_config",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-49",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "print_config_settings",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-48",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "print_config_with_audit",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-50",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "print_field",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_field_int",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_generic",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_msg",
+      "type": "function",
+      "category": "uvm_comparer",
+      "src": "src_view/base/uvm_comparer.svh.html#L342",
+      "doc": "docs_view/base/uvm_comparer-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_comparer"
+    },
+    {
+      "name": "print_object",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_override_info",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-63",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "print_real",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_resources",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1308",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-55",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "print_string",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_time",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L74",
+      "doc": "docs_view/base/uvm_printer-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_printer"
+    },
+    {
+      "name": "print_topology",
+      "type": "function",
+      "category": "uvm_root",
+      "src": "src_view/base/uvm_root.svh.html#L71",
+      "doc": "docs_view/base/uvm_root-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_root"
+    },
+    {
+      "name": "process_report_message",
+      "type": "function",
+      "category": "uvm_report_handler",
+      "src": "src_view/base/uvm_report_handler.svh.html#L310",
+      "doc": "docs_view/base/uvm_report_handler-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_report_handler"
+    },
+    {
+      "name": "push_back",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L171",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "push_front",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L162",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "put",
+      "type": "task",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-8",
+      "desc": "Task in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "put",
+      "type": "task",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L205",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-9",
+      "desc": "Task in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "put",
+      "type": "task",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L59",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-2",
+      "desc": "Task in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "put_response",
+      "type": "function",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L220",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "raise_objection",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L329",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "raise_objection",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "raised",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L1044",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-53",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "raised",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L823",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "raised",
+      "type": "function",
+      "category": "uvm_objection_callback",
+      "src": "src_view/base/uvm_objection.svh.html#L823",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_objection_callback"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-30",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-27",
+      "desc": "Task in uvm_mem_region"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-32",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-8",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-28",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L35",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-10",
+      "desc": "Task in uvm_reg_fifo"
+    },
+    {
+      "name": "read",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L1587",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-67",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-29",
+      "desc": "Task in uvm_vreg"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-14",
+      "desc": "Task in uvm_vreg_field"
+    },
+    {
+      "name": "read_by_name",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L218",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "read_by_type",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L242",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "read_func",
+      "type": "function",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_reg_backdoor"
+    },
+    {
+      "name": "read_mem",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L415",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-17",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "read_mem_by_name",
+      "type": "task",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-49",
+      "desc": "Task in uvm_reg_block"
+    },
+    {
+      "name": "read_reg",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L250",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-11",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "read_reg_by_name",
+      "type": "task",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-47",
+      "desc": "Task in uvm_reg_block"
+    },
+    {
+      "name": "reconfigure",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "record",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "record_error_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-84",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "record_event_tr",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-85",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "record_field",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L394",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "record_field_int",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L417",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "record_field_real",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L435",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "record_generic",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L503",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "record_object",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L452",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "record_read_access",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L480",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "record_string",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L468",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "record_time",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L484",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "record_write_access",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L516",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "reg2bus",
+      "type": "function",
+      "category": "uvm_reg_adapter",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L182",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reg_adapter"
+    },
+    {
+      "name": "reg2bus",
+      "type": "function",
+      "category": "uvm_reg_tlm_adapter",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L182",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_reg_tlm_adapter"
+    },
+    {
+      "name": "register",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "register",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "release_all_regions",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "release_region",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "release_region",
+      "type": "function",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_mem_region"
+    },
+    {
+      "name": "release_region",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "remove",
+      "type": "function",
+      "category": "uvm_heartbeat",
+      "src": "src_view/base/uvm_heartbeat.svh.html#L154",
+      "doc": "docs_view/base/uvm_heartbeat-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_heartbeat"
+    },
+    {
+      "name": "remove",
+      "type": "function",
+      "category": "uvm_reg_read_only_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L428",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_reg_read_only_cbs"
+    },
+    {
+      "name": "remove",
+      "type": "function",
+      "category": "uvm_reg_write_only_cbs",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L428",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_reg_write_only_cbs"
+    },
+    {
+      "name": "remove_sequence",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "report_phase",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "report_summarize",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L821",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-51",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "report_summarize",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L821",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "request_region",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "reseed",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "reserve_region",
+      "type": "function",
+      "category": "uvm_mem_mam",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_mem_mam"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_barrier",
+      "src": "src_view/base/uvm_barrier.svh.html#L92",
+      "doc": "docs_view/base/uvm_barrier-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_barrier"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L172",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_event_base"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-42",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L78",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_vreg"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "uvm_mem_access_seq",
+      "src": "src_view/reg/sequences/uvm_mem_access_seq.svh.html#L301",
+      "doc": "docs_view/reg/sequences/uvm_mem_access_seq-svh.html#doc-nav-item-11",
+      "desc": "Task in uvm_mem_access_seq"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "uvm_mem_walk_seq",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L296",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#doc-nav-item-14",
+      "desc": "Task in uvm_mem_walk_seq"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "uvm_reg_access_seq",
+      "src": "src_view/reg/sequences/uvm_reg_access_seq.svh.html#L297",
+      "doc": "docs_view/reg/sequences/uvm_reg_access_seq-svh.html#doc-nav-item-11",
+      "desc": "Task in uvm_reg_access_seq"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "uvm_reg_bit_bash_seq",
+      "src": "src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L298",
+      "doc": "docs_view/reg/sequences/uvm_reg_bit_bash_seq-svh.html#doc-nav-item-11",
+      "desc": "Task in uvm_reg_bit_bash_seq"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "uvm_reg_hw_reset_seq",
+      "src": "src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L166",
+      "doc": "docs_view/reg/sequences/uvm_reg_hw_reset_seq-svh.html#doc-nav-item-6",
+      "desc": "Task in uvm_reg_hw_reset_seq"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "uvm_reg_mem_shared_access_seq",
+      "src": "src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L480",
+      "doc": "docs_view/reg/sequences/uvm_reg_mem_shared_access_seq-svh.html#doc-nav-item-15",
+      "desc": "Task in uvm_reg_mem_shared_access_seq"
+    },
+    {
+      "name": "reset_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-20",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "reset_quit_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L425",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "reset_report_handler",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L81",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "reset_severity_counts",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L467",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "resolve_bindings",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "resolve_bindings",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L125",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "response_handler",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1130",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-45",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "resume",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-43",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "run_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-18",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "run_phase",
+      "type": "task",
+      "category": "uvm_push_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_push_sequencer.svh.html#L63",
+      "doc": "docs_view/seq/uvm_push_sequencer-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_push_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "run_test",
+      "type": "task",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L38",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-2",
+      "desc": "Task in Global"
+    },
+    {
+      "name": "run_test",
+      "type": "task",
+      "category": "uvm_root",
+      "src": "src_view/base/uvm_root.svh.html#L71",
+      "doc": "docs_view/base/uvm_root-svh.html#doc-nav-item-3",
+      "desc": "Task in uvm_root"
+    },
+    {
+      "name": "sample",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L900",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-62",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "sample",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L1047",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-63",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "sample",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L573",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "sample_values",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L1067",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-64",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "sample_values",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "select_sequence",
+      "type": "function",
+      "category": "uvm_sequence_library",
+      "src": "src_view/seq/uvm_sequence_library.svh.html#L64",
+      "doc": "docs_view/seq/uvm_sequence_library-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_sequence_library"
+    },
+    {
+      "name": "send_request",
+      "type": "function",
+      "category": "uvm_sequence#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequence.svh.html#L69",
+      "doc": "docs_view/seq/uvm_sequence-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_sequence#(REQ,RSP)"
+    },
+    {
+      "name": "send_request",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1067",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "send_request",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "send_request",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_config_db",
+      "src": "src_view/base/uvm_config_db.svh.html#L152",
+      "doc": "docs_view/base/uvm_config_db-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_config_db"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_get_to_lock_dap",
+      "src": "src_view/dap/uvm_get_to_lock_dap.svh.html#L63",
+      "doc": "docs_view/dap/uvm_get_to_lock_dap-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_get_to_lock_dap"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_hdl_path_concat",
+      "src": "src_view/reg/uvm_reg_model.svh.html#L355",
+      "doc": "docs_view/reg/uvm_reg_model-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_hdl_path_concat"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L108",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L147",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_reg_fifo"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L714",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-62",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L129",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L714",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_set_before_get_dap",
+      "src": "src_view/dap/uvm_set_before_get_dap.svh.html#L94",
+      "doc": "docs_view/dap/uvm_set_before_get_dap-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_set_before_get_dap"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_set_get_dap_base",
+      "src": "src_view/dap/uvm_set_get_dap_base.svh.html#L32",
+      "doc": "docs_view/dap/uvm_set_get_dap_base-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_set_get_dap_base"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "uvm_simple_lock_dap",
+      "src": "src_view/dap/uvm_simple_lock_dap.svh.html#L63",
+      "doc": "docs_view/dap/uvm_simple_lock_dap-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_simple_lock_dap"
+    },
+    {
+      "name": "set priority",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L111",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-70",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "set priority",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L111",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "set_abstime",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L191",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "set_access",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "set_action",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L299",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "set_action",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L74",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-55",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_action",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L74",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_report_message_element_base"
+    },
+    {
+      "name": "set_address",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L677",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_anonymous",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L146",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "set_arbitration",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "set_auto_predict",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L570",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "set_auto_reset",
+      "type": "function",
+      "category": "uvm_barrier",
+      "src": "src_view/base/uvm_barrier.svh.html#L115",
+      "doc": "docs_view/base/uvm_barrier-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_barrier"
+    },
+    {
+      "name": "set_automatic_phase_objection",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L656",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "set_backdoor",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "set_backdoor",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "set_backdoor",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-52",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "set_base_addr",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "set_byte_enable",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L748",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_byte_enable_length",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L765",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_check_on_read",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L600",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "set_command",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L634",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_compare",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "set_compare",
+      "type": "function",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L90",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_reg_fifo"
+    },
+    {
+      "name": "set_component_visitor",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L206",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "set_component_visitor",
+      "type": "function",
+      "category": "uvm_default_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L206",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_default_coreservice_t"
+    },
+    {
+      "name": "set_context",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L309",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "set_context",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L777",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-53",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_coverage",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-60",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "set_coverage",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-61",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "set_coverage",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "set_data",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L701",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_data_length",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L716",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_default",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L91",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "set_default_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-58",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "set_default_hdl_path",
+      "type": "function",
+      "category": "uvm_reg_file",
+      "src": "src_view/reg/uvm_reg_file.svh.html#L34",
+      "doc": "docs_view/reg/uvm_reg_file-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_reg_file"
+    },
+    {
+      "name": "set_default_index",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L387",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "set_default_map",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "set_default_tr_database",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L172",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "set_default_tr_database",
+      "type": "function",
+      "category": "uvm_default_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L172",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_default_coreservice_t"
+    },
+    {
+      "name": "set_depth",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L206",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "set_dmi_allowed",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L773",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_domain",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_drain_time",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L807",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "set_extension",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L853",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_factory",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L143",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "set_factory",
+      "type": "function",
+      "category": "uvm_default_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L143",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_default_coreservice_t"
+    },
+    {
+      "name": "set_file",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L811",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-57",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_file_name",
+      "type": "function",
+      "category": "uvm_text_tr_database",
+      "src": "src_view/base/uvm_tr_database.svh.html#L417",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_text_tr_database"
+    },
+    {
+      "name": "set_filename",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L744",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-49",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_frontdoor",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "set_frontdoor",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-40",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "set_hdl_path_root",
+      "type": "function",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-60",
+      "desc": "Function in uvm_reg_block"
+    },
+    {
+      "name": "set_heartbeat",
+      "type": "function",
+      "category": "uvm_heartbeat",
+      "src": "src_view/base/uvm_heartbeat.svh.html#L120",
+      "doc": "docs_view/base/uvm_heartbeat-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_heartbeat"
+    },
+    {
+      "name": "set_id",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L281",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "set_id",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L696",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_id_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L493",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "set_id_count",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L493",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "set_id_info",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L149",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "set_initiator",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "set_inst_override",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-62",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_inst_override",
+      "type": "function",
+      "category": "uvm_component_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L157",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_component_registry#(T,Tname)"
+    },
+    {
+      "name": "set_inst_override",
+      "type": "function",
+      "category": "uvm_object_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L157",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_object_registry#(T,Tname)"
+    },
+    {
+      "name": "set_inst_override_by_name",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-28",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "set_inst_override_by_name",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "set_inst_override_by_type",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-60",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_inst_override_by_type",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "set_inst_override_by_type",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "set_int_local",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-42",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "set_item_context",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L110",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "set_jump_phase",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "set_lhs",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L76",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "set_line",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L760",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-51",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_max_quit_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L390",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "set_max_quit_count",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L390",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "set_max_zero_time_wait_relevant_count",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "set_message",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L290",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "set_message",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L711",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-45",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_message_database",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L519",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "set_message_database",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L519",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "set_mode",
+      "type": "function",
+      "category": "uvm_heartbeat",
+      "src": "src_view/base/uvm_heartbeat.svh.html#L101",
+      "doc": "docs_view/base/uvm_heartbeat-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_heartbeat"
+    },
+    {
+      "name": "set_name",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "set_name",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L57",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_report_message_element_base"
+    },
+    {
+      "name": "set_name_override",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L779",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "set_num_last_reqs",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "set_num_last_rsps",
+      "type": "function",
+      "category": "uvm_sequencer_param_base#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_sequencer_param_base#(REQ,RSP)"
+    },
+    {
+      "name": "set_object_local",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-44",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "set_offset",
+      "type": "function",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_mem"
+    },
+    {
+      "name": "set_offset",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "set_override",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L768",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-63",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "set_override",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L768",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "set_parent_sequence",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L184",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "set_phase_imp",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_priority",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1255",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-52",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "set_priority",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L702",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-23",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "set_priority_name",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1224",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-51",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "set_priority_type",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L1194",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-50",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "set_propagate_mode",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L293",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "set_quit_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L410",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "set_quit_count",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L410",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "set_read",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L652",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_read_only",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L256",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "set_report_default_file",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L380",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-24",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_default_file_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-70",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_handler",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L640",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-36",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_report_handler",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L452",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_id_action",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L342",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_id_action_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-68",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_id_file",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L386",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_id_file_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-72",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_id_verbosity",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L295",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_id_verbosity_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-65",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_message",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L830",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-59",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_report_object",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L624",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_report_server",
+      "type": "function",
+      "category": "uvm_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L193",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_coreservice_t"
+    },
+    {
+      "name": "set_report_server",
+      "type": "function",
+      "category": "uvm_default_coreservice_t",
+      "src": "src_view/base/uvm_coreservice.svh.html#L193",
+      "doc": "docs_view/base/uvm_coreservice-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_default_coreservice_t"
+    },
+    {
+      "name": "set_report_server",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L656",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_report_severity_action",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L335",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_severity_action_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-67",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_severity_file",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L392",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-26",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_severity_file_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-71",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_severity_id_action",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L357",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_severity_id_action_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-69",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_severity_id_file",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L412",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_severity_id_file_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-73",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_severity_id_override",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L436",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_severity_id_verbosity",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L312",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_severity_id_verbosity_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-66",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_report_severity_override",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L425",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_verbosity_level",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L289",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "set_report_verbosity_level_hier",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-74",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_reset",
+      "type": "function",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_reg"
+    },
+    {
+      "name": "set_reset",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "set_response_queue_depth",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1166",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-48",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "set_response_queue_error_report_disabled",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1142",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "set_response_status",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L797",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_rhs",
+      "type": "function",
+      "category": "uvm_link_base",
+      "src": "src_view/base/uvm_links.svh.html#L92",
+      "doc": "docs_view/base/uvm_links-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_link_base"
+    },
+    {
+      "name": "set_scope",
+      "type": "function",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L385",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_resource_base"
+    },
+    {
+      "name": "set_sequencer",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "set_sequencer",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L164",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "set_server",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L206",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "set_severity",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L263",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "set_severity",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L678",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-41",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_severity_count",
+      "type": "function",
+      "category": "uvm_default_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L452",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_default_report_server"
+    },
+    {
+      "name": "set_severity_count",
+      "type": "function",
+      "category": "uvm_report_server",
+      "src": "src_view/base/uvm_report_server.svh.html#L452",
+      "doc": "docs_view/base/uvm_report_server-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_report_server"
+    },
+    {
+      "name": "set_starting_phase",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L590",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "set_streaming_width",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L733",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "set_string_local",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "set_submap_offset",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "set_threshold",
+      "type": "function",
+      "category": "uvm_barrier",
+      "src": "src_view/base/uvm_barrier.svh.html#L134",
+      "doc": "docs_view/base/uvm_barrier-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_barrier"
+    },
+    {
+      "name": "set_time_resolution",
+      "type": "function",
+      "category": "uvm_tlm_time",
+      "src": "src_view/tlm2/uvm_tlm2_time.svh.html#L48",
+      "doc": "docs_view/tlm2/uvm_tlm2_time-svh.html#doc-nav-item-1",
+      "desc": "Function in uvm_tlm_time"
+    },
+    {
+      "name": "set_timeout",
+      "type": "function",
+      "category": "uvm_root",
+      "src": "src_view/base/uvm_root.svh.html#L71",
+      "doc": "docs_view/base/uvm_root-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_root"
+    },
+    {
+      "name": "set_transaction_id",
+      "type": "function",
+      "category": "uvm_transaction",
+      "src": "src_view/base/uvm_transaction.svh.html#L124",
+      "doc": "docs_view/base/uvm_transaction-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_transaction"
+    },
+    {
+      "name": "set_transaction_order_policy",
+      "type": "function",
+      "category": "uvm_reg_map",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L664",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#doc-nav-item-46",
+      "desc": "Function in uvm_reg_map"
+    },
+    {
+      "name": "set_type_override",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-61",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_type_override",
+      "type": "function",
+      "category": "uvm_component_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L134",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_component_registry#(T,Tname)"
+    },
+    {
+      "name": "set_type_override",
+      "type": "function",
+      "category": "uvm_object_registry#(T,Tname)",
+      "src": "src_view/base/uvm_registry.svh.html#L134",
+      "doc": "docs_view/base/uvm_registry-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_object_registry#(T,Tname)"
+    },
+    {
+      "name": "set_type_override",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L789",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "set_type_override_by_name",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "set_type_override_by_name",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "set_type_override_by_type",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-59",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "set_type_override_by_type",
+      "type": "function",
+      "category": "uvm_default_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_default_factory"
+    },
+    {
+      "name": "set_type_override_by_type",
+      "type": "function",
+      "category": "uvm_factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_factory"
+    },
+    {
+      "name": "set_use_sequence_info",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L124",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "set_value",
+      "type": "function",
+      "category": "uvm_report_message_int_element",
+      "src": "src_view/base/uvm_report_message.svh.html#L133",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_report_message_int_element"
+    },
+    {
+      "name": "set_value",
+      "type": "function",
+      "category": "uvm_report_message_object_element",
+      "src": "src_view/base/uvm_report_message.svh.html#L133",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_report_message_object_element"
+    },
+    {
+      "name": "set_value",
+      "type": "function",
+      "category": "uvm_report_message_string_element",
+      "src": "src_view/base/uvm_report_message.svh.html#L133",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_report_message_string_element"
+    },
+    {
+      "name": "set_verbosity",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L272",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "set_verbosity",
+      "type": "function",
+      "category": "uvm_report_message",
+      "src": "src_view/base/uvm_report_message.svh.html#L728",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-47",
+      "desc": "Function in uvm_report_message"
+    },
+    {
+      "name": "set_volatility",
+      "type": "function",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_reg_field"
+    },
+    {
+      "name": "set_write",
+      "type": "function",
+      "category": "uvm_tlm_generic_payload",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L670",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_tlm_generic_payload"
+    },
+    {
+      "name": "shutdown_phase",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-29",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "uvm_port_base#(IF)",
+      "src": "src_view/base/uvm_port_base.svh.html#L364",
+      "doc": "docs_view/base/uvm_port_base-svh.html#doc-nav-item-25",
+      "desc": "Function in uvm_port_base#(IF)"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "uvm_queue#(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L101",
+      "doc": "docs_view/base/uvm_queue-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_queue#(T)"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L35",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_reg_fifo"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "uvm_report_message_element_container",
+      "src": "src_view/base/uvm_report_message.svh.html#L307",
+      "doc": "docs_view/base/uvm_report_message-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_report_message_element_container"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "uvm_tlm_fifo#(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L79",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_tlm_fifo#(T)"
+    },
+    {
+      "name": "sort_by_precedence",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L954",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-42",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "spell_check",
+      "type": "function",
+      "category": "uvm_resource_pool",
+      "src": "src_view/base/uvm_resource.svh.html#L687",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_resource_pool"
+    },
+    {
+      "name": "sprint",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "start",
+      "type": "function",
+      "category": "uvm_heartbeat",
+      "src": "src_view/base/uvm_heartbeat.svh.html#L169",
+      "doc": "docs_view/base/uvm_heartbeat-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_heartbeat"
+    },
+    {
+      "name": "start",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L258",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-8",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "start_item",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L959",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-37",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "start_of_simulation_phase",
+      "type": "function",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_component"
+    },
+    {
+      "name": "start_phase_sequence",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "stop",
+      "type": "function",
+      "category": "uvm_heartbeat",
+      "src": "src_view/base/uvm_heartbeat.svh.html#L193",
+      "doc": "docs_view/base/uvm_heartbeat-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_heartbeat"
+    },
+    {
+      "name": "stop_phase_sequence",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "stop_sequences",
+      "type": "function",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-2",
+      "desc": "Function in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "stop_sequences",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "stop_stimulus_generation",
+      "type": "function",
+      "category": "uvm_random_stimulus#(T)",
+      "src": "src_view/comps/uvm_random_stimulus.svh.html#L45",
+      "doc": "docs_view/comps/uvm_random_stimulus-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_random_stimulus#(T)"
+    },
+    {
+      "name": "summarize",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L693",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-35",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "suspend",
+      "type": "task",
+      "category": "uvm_component",
+      "src": "src_view/base/uvm_component.svh.html#L60",
+      "doc": "docs_view/base/uvm_component-svh.html#doc-nav-item-42",
+      "desc": "Task in uvm_component"
+    },
+    {
+      "name": "sync",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "trace_mode",
+      "type": "function",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L154",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_objection"
+    },
+    {
+      "name": "transport",
+      "type": "task",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L185",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-17",
+      "desc": "Task in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "traverse",
+      "type": "function",
+      "category": "uvm_bottomup_phase",
+      "src": "src_view/base/uvm_bottomup_phase.svh.html#L52",
+      "doc": "docs_view/base/uvm_bottomup_phase-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_bottomup_phase"
+    },
+    {
+      "name": "traverse",
+      "type": "function",
+      "category": "uvm_task_phase",
+      "src": "src_view/base/uvm_task_phase.svh.html#L77",
+      "doc": "docs_view/base/uvm_task_phase-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_task_phase"
+    },
+    {
+      "name": "traverse",
+      "type": "function",
+      "category": "uvm_topdown_phase",
+      "src": "src_view/base/uvm_topdown_phase.svh.html#L52",
+      "doc": "docs_view/base/uvm_topdown_phase-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_topdown_phase"
+    },
+    {
+      "name": "trigger",
+      "type": "function",
+      "category": "uvm_event#(T)",
+      "src": "src_view/base/uvm_event.svh.html#L300",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_event#(T)"
+    },
+    {
+      "name": "try_get",
+      "type": "function",
+      "category": "uvm_get_to_lock_dap",
+      "src": "src_view/dap/uvm_get_to_lock_dap.svh.html#L103",
+      "doc": "docs_view/dap/uvm_get_to_lock_dap-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_get_to_lock_dap"
+    },
+    {
+      "name": "try_get",
+      "type": "function",
+      "category": "uvm_set_before_get_dap",
+      "src": "src_view/dap/uvm_set_before_get_dap.svh.html#L128",
+      "doc": "docs_view/dap/uvm_set_before_get_dap-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_set_before_get_dap"
+    },
+    {
+      "name": "try_get",
+      "type": "function",
+      "category": "uvm_set_get_dap_base",
+      "src": "src_view/dap/uvm_set_get_dap_base.svh.html#L32",
+      "doc": "docs_view/dap/uvm_set_get_dap_base-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_set_get_dap_base"
+    },
+    {
+      "name": "try_get",
+      "type": "function",
+      "category": "uvm_simple_lock_dap",
+      "src": "src_view/dap/uvm_simple_lock_dap.svh.html#L100",
+      "doc": "docs_view/dap/uvm_simple_lock_dap-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_simple_lock_dap"
+    },
+    {
+      "name": "try_get",
+      "type": "function",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L134",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "try_next_item",
+      "type": "task",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-6",
+      "desc": "Task in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "try_next_item",
+      "type": "task",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L83",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-3",
+      "desc": "Task in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "try_peek",
+      "type": "function",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L162",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "try_put",
+      "type": "function",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L108",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "try_set",
+      "type": "function",
+      "category": "uvm_get_to_lock_dap",
+      "src": "src_view/dap/uvm_get_to_lock_dap.svh.html#L80",
+      "doc": "docs_view/dap/uvm_get_to_lock_dap-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_get_to_lock_dap"
+    },
+    {
+      "name": "try_set",
+      "type": "function",
+      "category": "uvm_set_before_get_dap",
+      "src": "src_view/dap/uvm_set_before_get_dap.svh.html#L103",
+      "doc": "docs_view/dap/uvm_set_before_get_dap-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_set_before_get_dap"
+    },
+    {
+      "name": "try_set",
+      "type": "function",
+      "category": "uvm_set_get_dap_base",
+      "src": "src_view/dap/uvm_set_get_dap_base.svh.html#L32",
+      "doc": "docs_view/dap/uvm_set_get_dap_base-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_set_get_dap_base"
+    },
+    {
+      "name": "try_set",
+      "type": "function",
+      "category": "uvm_simple_lock_dap",
+      "src": "src_view/dap/uvm_simple_lock_dap.svh.html#L80",
+      "doc": "docs_view/dap/uvm_simple_lock_dap-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_simple_lock_dap"
+    },
+    {
+      "name": "turn_off_auditing",
+      "type": "function",
+      "category": "uvm_resource_options",
+      "src": "src_view/base/uvm_resource.svh.html#L178",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_resource_options"
+    },
+    {
+      "name": "turn_off_tracing",
+      "type": "function",
+      "category": "uvm_config_db_options",
+      "src": "src_view/base/uvm_config_db.svh.html#L382",
+      "doc": "docs_view/base/uvm_config_db-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_config_db_options"
+    },
+    {
+      "name": "turn_off_tracing",
+      "type": "function",
+      "category": "uvm_resource_db_options",
+      "src": "src_view/base/uvm_resource_db.svh.html#L371",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_resource_db_options"
+    },
+    {
+      "name": "turn_on_auditing",
+      "type": "function",
+      "category": "uvm_resource_options",
+      "src": "src_view/base/uvm_resource.svh.html#L168",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_resource_options"
+    },
+    {
+      "name": "turn_on_tracing",
+      "type": "function",
+      "category": "uvm_config_db_options",
+      "src": "src_view/base/uvm_config_db.svh.html#L373",
+      "doc": "docs_view/base/uvm_config_db-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_config_db_options"
+    },
+    {
+      "name": "turn_on_tracing",
+      "type": "function",
+      "category": "uvm_resource_db_options",
+      "src": "src_view/base/uvm_resource_db.svh.html#L362",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_resource_db_options"
+    },
+    {
+      "name": "ungrab",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L836",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "ungrab",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "unlock",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L818",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "unlock",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "unlock",
+      "type": "function",
+      "category": "uvm_simple_lock_dap",
+      "src": "src_view/dap/uvm_simple_lock_dap.svh.html#L118",
+      "doc": "docs_view/dap/uvm_simple_lock_dap-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_simple_lock_dap"
+    },
+    {
+      "name": "unpack",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-37",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "unpack_bits",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-15",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unpack_bytes",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-38",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "unpack_bytes",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-16",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unpack_field",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-13",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unpack_field_int",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-14",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unpack_ints",
+      "type": "function",
+      "category": "uvm_object",
+      "src": "src_view/base/uvm_object.svh.html#L46",
+      "doc": "docs_view/base/uvm_object-svh.html#doc-nav-item-39",
+      "desc": "Function in uvm_object"
+    },
+    {
+      "name": "unpack_ints",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-17",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unpack_object",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unpack_real",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unpack_string",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unpack_time",
+      "type": "function",
+      "category": "uvm_packer",
+      "src": "src_view/base/uvm_packer.svh.html#L39",
+      "doc": "docs_view/base/uvm_packer-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_packer"
+    },
+    {
+      "name": "unsync",
+      "type": "function",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-34",
+      "desc": "Function in uvm_phase"
+    },
+    {
+      "name": "update",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-35",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "update",
+      "type": "task",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-44",
+      "desc": "Task in uvm_reg_block"
+    },
+    {
+      "name": "update",
+      "type": "task",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L168",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-12",
+      "desc": "Task in uvm_reg_fifo"
+    },
+    {
+      "name": "update_reg",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L331",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-14",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "use_record_attribute",
+      "type": "function",
+      "category": "uvm_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L521",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-27",
+      "desc": "Function in uvm_recorder"
+    },
+    {
+      "name": "use_response_handler",
+      "type": "function",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1111",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-43",
+      "desc": "Function in uvm_sequence_base"
+    },
+    {
+      "name": "used",
+      "type": "function",
+      "category": "uvm_tlm_fifo#(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L88",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_tlm_fifo#(T)"
+    },
+    {
+      "name": "user_priority_arbitration",
+      "type": "function",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_sequencer_base"
+    },
+    {
+      "name": "uvm_get_report_object",
+      "type": "function",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L112",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-4",
+      "desc": "Function in Global"
+    },
+    {
+      "name": "uvm_get_report_object",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L108",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "uvm_process_report_message",
+      "type": "function",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L259",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-11",
+      "desc": "Function in Global"
+    },
+    {
+      "name": "uvm_process_report_message",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L249",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-10",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "uvm_report",
+      "type": "function",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L144",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-6",
+      "desc": "Function in Global"
+    },
+    {
+      "name": "uvm_report",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L508",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-33",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "uvm_report",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L129",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "uvm_report",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L352",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-18",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "uvm_report_enabled",
+      "type": "function",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L133",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-5",
+      "desc": "Function in Global"
+    },
+    {
+      "name": "uvm_report_enabled",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L120",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "uvm_report_error",
+      "type": "function",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L209",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-9",
+      "desc": "Function in Global"
+    },
+    {
+      "name": "uvm_report_error",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L455",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-30",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "uvm_report_error",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L180",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-8",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "uvm_report_error",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L403",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "uvm_report_fatal",
+      "type": "function",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L236",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-10",
+      "desc": "Function in Global"
+    },
+    {
+      "name": "uvm_report_fatal",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L437",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-29",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "uvm_report_fatal",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L231",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-9",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "uvm_report_fatal",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L422",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-22",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "uvm_report_info",
+      "type": "function",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L173",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-7",
+      "desc": "Function in Global"
+    },
+    {
+      "name": "uvm_report_info",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L491",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-32",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "uvm_report_info",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L152",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-6",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "uvm_report_info",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L375",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-19",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "uvm_report_warning",
+      "type": "function",
+      "category": "Global",
+      "src": "src_view/base/uvm_globals.svh.html#L191",
+      "doc": "docs_view/base/uvm_globals-svh.html#doc-nav-item-8",
+      "desc": "Function in Global"
+    },
+    {
+      "name": "uvm_report_warning",
+      "type": "function",
+      "category": "uvm_report_catcher",
+      "src": "src_view/base/uvm_report_catcher.svh.html#L473",
+      "doc": "docs_view/base/uvm_report_catcher-svh.html#doc-nav-item-31",
+      "desc": "Function in uvm_report_catcher"
+    },
+    {
+      "name": "uvm_report_warning",
+      "type": "function",
+      "category": "uvm_report_object",
+      "src": "src_view/base/uvm_report_object.svh.html#L166",
+      "doc": "docs_view/base/uvm_report_object-svh.html#doc-nav-item-7",
+      "desc": "Function in uvm_report_object"
+    },
+    {
+      "name": "uvm_report_warning",
+      "type": "function",
+      "category": "uvm_sequence_item",
+      "src": "src_view/seq/uvm_sequence_item.svh.html#L389",
+      "doc": "docs_view/seq/uvm_sequence_item-svh.html#doc-nav-item-20",
+      "desc": "Function in uvm_sequence_item"
+    },
+    {
+      "name": "visit",
+      "type": "function",
+      "category": "uvm_visitor#(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L255",
+      "doc": "docs_view/base/uvm_traversal-svh.html#doc-nav-item-4",
+      "desc": "Function in uvm_visitor#(NODE)"
+    },
+    {
+      "name": "wait_for",
+      "type": "task",
+      "category": "uvm_barrier",
+      "src": "src_view/base/uvm_barrier.svh.html#L63",
+      "doc": "docs_view/base/uvm_barrier-svh.html#doc-nav-item-3",
+      "desc": "Task in uvm_barrier"
+    },
+    {
+      "name": "wait_for",
+      "type": "task",
+      "category": "uvm_objection",
+      "src": "src_view/base/uvm_objection.svh.html#L897",
+      "doc": "docs_view/base/uvm_objection-svh.html#doc-nav-item-17",
+      "desc": "Task in uvm_objection"
+    },
+    {
+      "name": "wait_for_change",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-11",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "wait_for_grant",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1052",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-39",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "wait_for_grant",
+      "type": "task",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-8",
+      "desc": "Task in uvm_sequencer_base"
+    },
+    {
+      "name": "wait_for_item_done",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L1088",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-41",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "wait_for_item_done",
+      "type": "task",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-9",
+      "desc": "Task in uvm_sequencer_base"
+    },
+    {
+      "name": "wait_for_relevant",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L756",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-26",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "wait_for_sequence_state",
+      "type": "task",
+      "category": "uvm_sequence_base",
+      "src": "src_view/seq/uvm_sequence_base.svh.html#L212",
+      "doc": "docs_view/seq/uvm_sequence_base-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_sequence_base"
+    },
+    {
+      "name": "wait_for_sequences",
+      "type": "task",
+      "category": "uvm_sequencer#(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#doc-nav-item-11",
+      "desc": "Task in uvm_sequencer#(REQ,RSP)"
+    },
+    {
+      "name": "wait_for_sequences",
+      "type": "task",
+      "category": "uvm_sequencer_base",
+      "src": "src_view/seq/uvm_sequencer_base.svh.html#L27",
+      "doc": "docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-item-22",
+      "desc": "Task in uvm_sequencer_base"
+    },
+    {
+      "name": "wait_for_sequences",
+      "type": "task",
+      "category": "uvm_sqr_if_base#(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L120",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_sqr_if_base#(REQ,RSP)"
+    },
+    {
+      "name": "wait_for_state",
+      "type": "task",
+      "category": "uvm_phase",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#doc-nav-item-35",
+      "desc": "Task in uvm_phase"
+    },
+    {
+      "name": "wait_modified",
+      "type": "task",
+      "category": "uvm_config_db",
+      "src": "src_view/base/uvm_config_db.svh.html#L269",
+      "doc": "docs_view/base/uvm_config_db-svh.html#doc-nav-item-7",
+      "desc": "Task in uvm_config_db"
+    },
+    {
+      "name": "wait_modified",
+      "type": "task",
+      "category": "uvm_resource_base",
+      "src": "src_view/base/uvm_resource.svh.html#L294",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-17",
+      "desc": "Task in uvm_resource_base"
+    },
+    {
+      "name": "wait_off",
+      "type": "task",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L87",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-4",
+      "desc": "Task in uvm_event_base"
+    },
+    {
+      "name": "wait_on",
+      "type": "task",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L66",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-3",
+      "desc": "Task in uvm_event_base"
+    },
+    {
+      "name": "wait_ptrigger",
+      "type": "task",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L121",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-6",
+      "desc": "Task in uvm_event_base"
+    },
+    {
+      "name": "wait_ptrigger_data",
+      "type": "task",
+      "category": "uvm_event#(T)",
+      "src": "src_view/base/uvm_event.svh.html#L283",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-17",
+      "desc": "Task in uvm_event#(T)"
+    },
+    {
+      "name": "wait_trigger",
+      "type": "task",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L108",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-5",
+      "desc": "Task in uvm_event_base"
+    },
+    {
+      "name": "wait_trigger_data",
+      "type": "task",
+      "category": "uvm_event#(T)",
+      "src": "src_view/base/uvm_event.svh.html#L273",
+      "doc": "docs_view/base/uvm_event-svh.html#doc-nav-item-16",
+      "desc": "Task in uvm_event#(T)"
+    },
+    {
+      "name": "write",
+      "type": "function",
+      "category": "uvm_analysis_port",
+      "src": "src_view/tlm1/uvm_analysis_port.svh.html#L70",
+      "doc": "docs_view/tlm1/uvm_analysis_port-svh.html#doc-nav-item-3",
+      "desc": "Function in uvm_analysis_port"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_mem",
+      "src": "src_view/reg/uvm_mem.svh.html#L40",
+      "doc": "docs_view/reg/uvm_mem-svh.html#doc-nav-item-29",
+      "desc": "Task in uvm_mem"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_mem_region",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#doc-nav-item-26",
+      "desc": "Task in uvm_mem_region"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_reg",
+      "src": "src_view/reg/uvm_reg.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg-svh.html#doc-nav-item-31",
+      "desc": "Task in uvm_reg"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_reg_backdoor",
+      "src": "src_view/reg/uvm_reg_backdoor.svh.html#L37",
+      "doc": "docs_view/reg/uvm_reg_backdoor-svh.html#doc-nav-item-7",
+      "desc": "Task in uvm_reg_backdoor"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_reg_field",
+      "src": "src_view/reg/uvm_reg_field.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_field-svh.html#doc-nav-item-27",
+      "desc": "Task in uvm_reg_field"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_reg_fifo",
+      "src": "src_view/reg/uvm_reg_fifo.svh.html#L35",
+      "doc": "docs_view/reg/uvm_reg_fifo-svh.html#doc-nav-item-9",
+      "desc": "Task in uvm_reg_fifo"
+    },
+    {
+      "name": "write",
+      "type": "function",
+      "category": "uvm_resource#(T)",
+      "src": "src_view/base/uvm_resource.svh.html#L1605",
+      "doc": "docs_view/base/uvm_resource-svh.html#doc-nav-item-68",
+      "desc": "Function in uvm_resource#(T)"
+    },
+    {
+      "name": "write",
+      "type": "function",
+      "category": "uvm_subscriber",
+      "src": "src_view/comps/uvm_subscriber.svh.html#L36",
+      "doc": "docs_view/comps/uvm_subscriber-svh.html#doc-nav-item-5",
+      "desc": "Function in uvm_subscriber"
+    },
+    {
+      "name": "write",
+      "type": "function",
+      "category": "uvm_tlm_if_base#(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L213",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#doc-nav-item-21",
+      "desc": "Function in uvm_tlm_if_base#(T1,T2)"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_vreg",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#doc-nav-item-28",
+      "desc": "Task in uvm_vreg"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_vreg_field",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#doc-nav-item-13",
+      "desc": "Task in uvm_vreg_field"
+    },
+    {
+      "name": "write_attribute",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L949",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-54",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "write_attribute_int",
+      "type": "function",
+      "category": "uvm_text_recorder",
+      "src": "src_view/base/uvm_recorder.svh.html#L973",
+      "doc": "docs_view/base/uvm_recorder-svh.html#doc-nav-item-55",
+      "desc": "Function in uvm_text_recorder"
+    },
+    {
+      "name": "write_by_name",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L272",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-11",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "write_by_type",
+      "type": "function",
+      "category": "uvm_resource_db",
+      "src": "src_view/base/uvm_resource_db.svh.html#L301",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#doc-nav-item-12",
+      "desc": "Function in uvm_resource_db"
+    },
+    {
+      "name": "write_mem",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L386",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-16",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "write_mem_by_name",
+      "type": "task",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-48",
+      "desc": "Task in uvm_reg_block"
+    },
+    {
+      "name": "write_reg",
+      "type": "task",
+      "category": "uvm_reg_sequence",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L222",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#doc-nav-item-10",
+      "desc": "Task in uvm_reg_sequence"
+    },
+    {
+      "name": "write_reg_by_name",
+      "type": "task",
+      "category": "uvm_reg_block",
+      "src": "src_view/reg/uvm_reg_block.svh.html#L38",
+      "doc": "docs_view/reg/uvm_reg_block-svh.html#doc-nav-item-46",
+      "desc": "Task in uvm_reg_block"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L590",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).add",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "add_by_name",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L706",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).add_by_name",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L751",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).delete",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "delete_by_name",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L790",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).delete_by_name",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "get_first",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L849",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).get_first",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "get_last",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L872",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).get_last",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "get_next",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L898",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).get_next",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "get_prev",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L924",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).get_prev",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "display",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L321",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callbacks#(T,CB).display",
+      "desc": "Function in Callbacks Classes (uvm_callbacks #(T,CB))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1048",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback_iter.new",
+      "desc": "Function in Callbacks Classes (uvm_callback_iter)"
+    },
+    {
+      "name": "first",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1058",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback_iter.first",
+      "desc": "Function in Callbacks Classes (uvm_callback_iter)"
+    },
+    {
+      "name": "last",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1069",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback_iter.last",
+      "desc": "Function in Callbacks Classes (uvm_callback_iter)"
+    },
+    {
+      "name": "next",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1080",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback_iter.next",
+      "desc": "Function in Callbacks Classes (uvm_callback_iter)"
+    },
+    {
+      "name": "prev",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1091",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback_iter.prev",
+      "desc": "Function in Callbacks Classes (uvm_callback_iter)"
+    },
+    {
+      "name": "get_cb",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1101",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback_iter.get_cb",
+      "desc": "Function in Callbacks Classes (uvm_callback_iter)"
+    },
+    {
+      "name": "callback_mode",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1159",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback.callback_mode",
+      "desc": "Function in Callbacks Classes (uvm_callback)"
+    },
+    {
+      "name": "is_enabled",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1178",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback.is_enabled",
+      "desc": "Function in Callbacks Classes (uvm_callback)"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "Callbacks Classes",
+      "src": "src_view/base/uvm_callback.svh.html#L1189",
+      "doc": "docs_view/base/uvm_callback-svh.html#uvm_callback.get_type_name",
+      "desc": "Function in Callbacks Classes (uvm_callback)"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "UVM Common Phases",
+      "src": "src_view/base/uvm_common_phases.svh.html#L73",
+      "doc": "docs_view/base/uvm_common_phases-svh.html#uvm_build_phase.get",
+      "desc": "Task in UVM Common Phases (uvm_build_phase)"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "UVM Configuration Database",
+      "src": "src_view/base/uvm_config_db.svh.html#L89",
+      "doc": "docs_view/base/uvm_config_db-svh.html#uvm_config_db.get",
+      "desc": "Task in UVM Configuration Database (uvm_config_db)"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "UVM Configuration Database",
+      "src": "src_view/base/uvm_config_db.svh.html#L152",
+      "doc": "docs_view/base/uvm_config_db-svh.html#uvm_config_db.set",
+      "desc": "Function in UVM Configuration Database (uvm_config_db)"
+    },
+    {
+      "name": "exists",
+      "type": "function",
+      "category": "UVM Configuration Database",
+      "src": "src_view/base/uvm_config_db.svh.html#L248",
+      "doc": "docs_view/base/uvm_config_db-svh.html#uvm_config_db.exists",
+      "desc": "Function in UVM Configuration Database (uvm_config_db)"
+    },
+    {
+      "name": "wait_modified",
+      "type": "task",
+      "category": "UVM Configuration Database",
+      "src": "src_view/base/uvm_config_db.svh.html#L269",
+      "doc": "docs_view/base/uvm_config_db-svh.html#uvm_config_db.wait_modified",
+      "desc": "Task in UVM Configuration Database (uvm_config_db)"
+    },
+    {
+      "name": "turn_on_tracing",
+      "type": "function",
+      "category": "UVM Configuration Database",
+      "src": "src_view/base/uvm_config_db.svh.html#L373",
+      "doc": "docs_view/base/uvm_config_db-svh.html#uvm_config_db_options.turn_on_tracing",
+      "desc": "Function in UVM Configuration Database (uvm_config_db_options)"
+    },
+    {
+      "name": "turn_off_tracing",
+      "type": "function",
+      "category": "UVM Configuration Database",
+      "src": "src_view/base/uvm_config_db.svh.html#L382",
+      "doc": "docs_view/base/uvm_config_db-svh.html#uvm_config_db_options.turn_off_tracing",
+      "desc": "Function in UVM Configuration Database (uvm_config_db_options)"
+    },
+    {
+      "name": "is_tracing",
+      "type": "function",
+      "category": "UVM Configuration Database",
+      "src": "src_view/base/uvm_config_db.svh.html#L391",
+      "doc": "docs_view/base/uvm_config_db-svh.html#uvm_config_db_options.is_tracing",
+      "desc": "Function in UVM Configuration Database (uvm_config_db_options)"
+    },
+    {
+      "name": "wait_trigger_data",
+      "type": "task",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L273",
+      "doc": "docs_view/base/uvm_event-svh.html#uvm_event#(T).wait_trigger_data",
+      "desc": "Task in uvm_event_base (uvm_event#(T))"
+    },
+    {
+      "name": "wait_ptrigger_data",
+      "type": "task",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L283",
+      "doc": "docs_view/base/uvm_event-svh.html#uvm_event#(T).wait_ptrigger_data",
+      "desc": "Task in uvm_event_base (uvm_event#(T))"
+    },
+    {
+      "name": "trigger",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L300",
+      "doc": "docs_view/base/uvm_event-svh.html#uvm_event#(T).trigger",
+      "desc": "Function in uvm_event_base (uvm_event#(T))"
+    },
+    {
+      "name": "get_trigger_data",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L329",
+      "doc": "docs_view/base/uvm_event-svh.html#uvm_event#(T).get_trigger_data",
+      "desc": "Function in uvm_event_base (uvm_event#(T))"
+    },
+    {
+      "name": "add_callback",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L348",
+      "doc": "docs_view/base/uvm_event-svh.html#uvm_event#(T).add_callback",
+      "desc": "Function in uvm_event_base (uvm_event#(T))"
+    },
+    {
+      "name": "delete_callback",
+      "type": "function",
+      "category": "uvm_event_base",
+      "src": "src_view/base/uvm_event.svh.html#L366",
+      "doc": "docs_view/base/uvm_event-svh.html#uvm_event#(T).delete_callback",
+      "desc": "Function in uvm_event_base (uvm_event#(T))"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L97",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.get",
+      "desc": "Task in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "register",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.register",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "set_inst_override_by_type",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.set_inst_override_by_type",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "set_inst_override_by_name",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.set_inst_override_by_name",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "set_type_override_by_type",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.set_type_override_by_type",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "set_type_override_by_name",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.set_type_override_by_name",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "create_object_by_type",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.create_object_by_type",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "create_component_by_type",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.create_component_by_type",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "create_object_by_name",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.create_object_by_name",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "create_component_by_name",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.create_component_by_name",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "debug_create_by_type",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.debug_create_by_type",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "debug_create_by_name",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.debug_create_by_name",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "find_override_by_type",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.find_override_by_type",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "find_override_by_name",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.find_override_by_name",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "find_wrapper_by_name",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L306",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.find_wrapper_by_name",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_factory.print",
+      "desc": "Function in UVM Factory (uvm_factory)"
+    },
+    {
+      "name": "create_object",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L818",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_object_wrapper.create_object",
+      "desc": "Function in UVM Factory (uvm_object_wrapper)"
+    },
+    {
+      "name": "create_component",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L829",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_object_wrapper.create_component",
+      "desc": "Function in UVM Factory (uvm_object_wrapper)"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "UVM Factory",
+      "src": "src_view/base/uvm_factory.svh.html#L32",
+      "doc": "docs_view/base/uvm_factory-svh.html#uvm_object_wrapper.get_type_name",
+      "desc": "Function in UVM Factory (uvm_object_wrapper)"
+    },
+    {
+      "name": "run_test",
+      "type": "task",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L38",
+      "doc": "docs_view/base/uvm_globals-svh.html#run_test",
+      "desc": "Task in Globals"
+    },
+    {
+      "name": "uvm_get_report_object",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L112",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_get_report_object",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_report_enabled",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L133",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_report_enabled",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_report",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L144",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_report",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_report_info",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L173",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_report_info",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_report_warning",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L191",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_report_warning",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_report_error",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L209",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_report_error",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_report_fatal",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L236",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_report_fatal",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_process_report_message",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L259",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_process_report_message",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_is_match",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L400",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_is_match",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_string_to_bits",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L421",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_string_to_bits",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_bits_to_string",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L434",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_bits_to_string",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_wait_for_nba_region",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L502",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_wait_for_nba_region",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "uvm_split_string",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L502",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_split_string",
+      "desc": "Function in Globals"
+    },
+    {
+      "name": "from_name",
+      "type": "function",
+      "category": "Globals",
+      "src": "src_view/base/uvm_globals.svh.html#L532",
+      "doc": "docs_view/base/uvm_globals-svh.html#uvm_enum_wrapper#(T).from_name",
+      "desc": "Function in Globals (uvm_enum_wrapper#(T))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L66",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.new",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "set_lhs",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L76",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.set_lhs",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "get_lhs",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L84",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.get_lhs",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "set_rhs",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L92",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.set_rhs",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "get_rhs",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L100",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.get_rhs",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L108",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.set",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "do_set_lhs",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L185",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.do_set_lhs",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "do_get_lhs",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L192",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.do_get_lhs",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "do_set_rhs",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L199",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.do_set_rhs",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "do_get_rhs",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L206",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_link_base.do_get_rhs",
+      "desc": "Function in UVM Links (uvm_link_base)"
+    },
+    {
+      "name": "get_link",
+      "type": "function",
+      "category": "UVM Links",
+      "src": "src_view/base/uvm_links.svh.html#L172",
+      "doc": "docs_view/base/uvm_links-svh.html#uvm_parent_child_link.get_link",
+      "desc": "Function in UVM Links (uvm_parent_child_link)"
+    },
+    {
+      "name": "find_all",
+      "type": "function",
+      "category": "Miscellaneous Structures",
+      "src": "src_view/base/uvm_misc.svh.html#L649",
+      "doc": "docs_view/base/uvm_misc-svh.html#uvm_utils#(TYPE,FIELD).find_all",
+      "desc": "Function in Miscellaneous Structures (uvm_utils #(TYPE,FIELD))"
+    },
+    {
+      "name": "get_config",
+      "type": "function",
+      "category": "Miscellaneous Structures",
+      "src": "src_view/base/uvm_misc.svh.html#L702",
+      "doc": "docs_view/base/uvm_misc-svh.html#uvm_utils#(TYPE,FIELD).get_config",
+      "desc": "Function in Miscellaneous Structures (uvm_utils #(TYPE,FIELD))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L127",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.new",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "trace_mode",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L154",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.trace_mode",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "set_propagate_mode",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L293",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.set_propagate_mode",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "get_propagate_mode",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L307",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.get_propagate_mode",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "raise_objection",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L329",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.raise_objection",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "drop_objection",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L524",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.drop_objection",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "clear",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L620",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.clear",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "set_drain_time",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L807",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.set_drain_time",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "raised",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L823",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.raised",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "dropped",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L841",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.dropped",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "all_dropped",
+      "type": "task",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L861",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.all_dropped",
+      "desc": "Task in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "get_objectors",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L885",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.get_objectors",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "wait_for",
+      "type": "task",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L897",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.wait_for",
+      "desc": "Task in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "get_objection_count",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L938",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.get_objection_count",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "get_objection_total",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L953",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.get_objection_total",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "get_drain_time",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L970",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.get_drain_time",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "display_objections",
+      "type": "function",
+      "category": "Objection Mechanism",
+      "src": "src_view/base/uvm_objection.svh.html#L1070",
+      "doc": "docs_view/base/uvm_objection-svh.html#uvm_objection.display_objections",
+      "desc": "Function in Objection Mechanism (uvm_objection)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L683",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.new",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_phase_type",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_phase_type",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_state",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L693",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_state",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_run_count",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_run_count",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "find_by_name",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.find_by_name",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "find",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.find",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "is",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.is",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "is_before",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.is_before",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "is_after",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.is_after",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "exec_func",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L232",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.exec_func",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "exec_task",
+      "type": "task",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L241",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.exec_task",
+      "desc": "Task in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.add",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_parent",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_full_name",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_schedule",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_schedule",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_schedule_name",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_schedule_name",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_domain",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_domain",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_imp",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_imp",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_domain_name",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_domain_name",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_adjacent_predecessor_nodes",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_adjacent_predecessor_nodes",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_adjacent_successor_nodes",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_adjacent_successor_nodes",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_objection",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L357",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_objection",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "raise_objection",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.raise_objection",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "drop_objection",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.drop_objection",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_objection_count",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_objection_count",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "sync",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.sync",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "unsync",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.unsync",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "wait_for_state",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.wait_for_state",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "jump",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.jump",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "set_jump_phase",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.set_jump_phase",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "end_prematurely",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.end_prematurely",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_jump_target",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase.get_jump_target",
+      "desc": "Function in Phasing Definition classes (uvm_phase)"
+    },
+    {
+      "name": "get_state()",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase_state_change.get_state",
+      "desc": "Function in Phasing Definition classes (uvm_phase_state_change)"
+    },
+    {
+      "name": "get_prev_state()",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase_state_change.get_prev_state",
+      "desc": "Function in Phasing Definition classes (uvm_phase_state_change)"
+    },
+    {
+      "name": "jump_to()",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L134",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase_state_change.jump_to",
+      "desc": "Function in Phasing Definition classes (uvm_phase_state_change)"
+    },
+    {
+      "name": "phase_state_change",
+      "type": "function",
+      "category": "Phasing Definition classes",
+      "src": "src_view/base/uvm_phase.svh.html#L753",
+      "doc": "docs_view/base/uvm_phase-svh.html#uvm_phase_cb.phase_state_change",
+      "desc": "Function in Phasing Definition classes (uvm_phase_cb)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L49",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).new",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "get_global_pool",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L61",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).get_global_pool",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "get_global",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L72",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).get_global",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L86",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).get",
+      "desc": "Task in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L100",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).add",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "num",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L109",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).num",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L118",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).delete",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "exists",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L133",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).exists",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "first",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L147",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).first",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "last",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L161",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).last",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "next",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L176",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).next",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "prev",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L191",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_pool#(KEY,T).prev",
+      "desc": "Function in Pool Classes (uvm_pool #(KEY,T))"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "Pool Classes",
+      "src": "src_view/base/uvm_pool.svh.html#L202",
+      "doc": "docs_view/base/uvm_pool-svh.html#uvm_object_string_pool#(T).get_type_name",
+      "desc": "Function in Pool Classes (uvm_object_string_pool #(T))"
+    },
+    {
+      "name": "get_connected_to",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L137",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_component_base.get_connected_to",
+      "desc": "Function in Port Base Classes (uvm_port_component_base)"
+    },
+    {
+      "name": "get_provided_to",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L141",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_component_base.get_provided_to",
+      "desc": "Function in Port Base Classes (uvm_port_component_base)"
+    },
+    {
+      "name": "is_port",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L145",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_component_base.is_port",
+      "desc": "Function in Port Base Classes (uvm_port_component_base)"
+    },
+    {
+      "name": "is_export",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L149",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_component_base.is_export",
+      "desc": "Function in Port Base Classes (uvm_port_component_base)"
+    },
+    {
+      "name": "is_imp",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L153",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_component_base.is_imp",
+      "desc": "Function in Port Base Classes (uvm_port_component_base)"
+    },
+    {
+      "name": "get_port",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L133",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_component#(PORT).get_port",
+      "desc": "Function in Port Base Classes (uvm_port_component #(PORT))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L53",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).new",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L254",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).get_name",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L263",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).get_full_name",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L272",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).get_parent",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "get_comp",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L285",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).get_comp",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L120",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).get_type_name",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "min_size",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L320",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).min_size",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "max_size",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L310",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).max_size",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "is_unbounded",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L331",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).is_unbounded",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L364",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).size",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "set_default_index",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L387",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).set_default_index",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "connect",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L432",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).connect",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "debug_connected_to",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L499",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).debug_connected_to",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "debug_provided_to",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L563",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).debug_provided_to",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "resolve_bindings",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L125",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).resolve_bindings",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "get_if",
+      "type": "function",
+      "category": "Port Base Classes",
+      "src": "src_view/base/uvm_port_base.svh.html#L51",
+      "doc": "docs_view/base/uvm_port_base-svh.html#uvm_port_base#(IF).get_if",
+      "desc": "Function in Port Base Classes (uvm_port_base #(IF))"
+    },
+    {
+      "name": "get_radix_str",
+      "type": "function",
+      "category": "uvm_printer",
+      "src": "src_view/base/uvm_printer.svh.html#L604",
+      "doc": "docs_view/base/uvm_printer-svh.html#uvm_printer_knobs.get_radix_str",
+      "desc": "Function in uvm_printer (uvm_printer_knobs)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L49",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).new",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "get_global_queue",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L61",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).get_global_queue",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "get_global",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L72",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).get_global",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L86",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).get",
+      "desc": "Task in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L101",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).size",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "insert",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L110",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).insert",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L125",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).delete",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "pop_front",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L143",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).pop_front",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "pop_back",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L153",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).pop_back",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "push_front",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L162",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).push_front",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "push_back",
+      "type": "function",
+      "category": "uvm_queue #(T)",
+      "src": "src_view/base/uvm_queue.svh.html#L171",
+      "doc": "docs_view/base/uvm_queue-svh.html#uvm_queue#(T).push_back",
+      "desc": "Function in uvm_queue #(T) (Methods)"
+    },
+    {
+      "name": "get_stream",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L149",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.get_stream",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "close",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L180",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.close",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "free",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L208",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.free",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "is_open",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L245",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.is_open",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "get_open_time",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L252",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.get_open_time",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "is_closed",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L260",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.is_closed",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "get_close_time",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L267",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.get_close_time",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "get_handle",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L338",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.get_handle",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "get_recorder_from_handle",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L372",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.get_recorder_from_handle",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "record_field",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L394",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.record_field",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "record_field_int",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L417",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.record_field_int",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "record_field_real",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L435",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.record_field_real",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "record_object",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L452",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.record_object",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "record_string",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L468",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.record_string",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "record_time",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L484",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.record_time",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "record_generic",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L503",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.record_generic",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "use_record_attribute",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L521",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.use_record_attribute",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "get_record_attribute_handle",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L532",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.get_record_attribute_handle",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_open",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L544",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_open",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_close",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L555",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_close",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_free",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L564",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_free",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_record_field",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L805",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_record_field",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_record_field_int",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L825",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_record_field_int",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_record_field_real",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L845",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_record_field_real",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_record_object",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L864",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_record_object",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_record_string",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L897",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_record_string",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_record_time",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L916",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_record_time",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "do_record_generic",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L929",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_recorder.do_record_generic",
+      "desc": "Function in UVM Recorders (uvm_recorder)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L134",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_text_recorder.new",
+      "desc": "Function in UVM Recorders (uvm_text_recorder)"
+    },
+    {
+      "name": "write_attribute",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L949",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_text_recorder.write_attribute",
+      "desc": "Function in UVM Recorders (uvm_text_recorder)"
+    },
+    {
+      "name": "write_attribute_int",
+      "type": "function",
+      "category": "UVM Recorders",
+      "src": "src_view/base/uvm_recorder.svh.html#L973",
+      "doc": "docs_view/base/uvm_recorder-svh.html#uvm_text_recorder.write_attribute_int",
+      "desc": "Function in UVM Recorders (uvm_text_recorder)"
+    },
+    {
+      "name": "create_component",
+      "type": "function",
+      "category": "Factory Component and Object Wrappers",
+      "src": "src_view/base/uvm_registry.svh.html#L63",
+      "doc": "docs_view/base/uvm_registry-svh.html#uvm_component_registry#(T,Tname).create_component",
+      "desc": "Function in Factory Component and Object Wrappers (uvm_component_registry #(T,Tname))"
+    },
+    {
+      "name": "get_type_name",
+      "type": "function",
+      "category": "Factory Component and Object Wrappers",
+      "src": "src_view/base/uvm_registry.svh.html#L78",
+      "doc": "docs_view/base/uvm_registry-svh.html#uvm_component_registry#(T,Tname).get_type_name",
+      "desc": "Function in Factory Component and Object Wrappers (uvm_component_registry #(T,Tname))"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "Factory Component and Object Wrappers",
+      "src": "src_view/base/uvm_registry.svh.html#L90",
+      "doc": "docs_view/base/uvm_registry-svh.html#uvm_component_registry#(T,Tname).get",
+      "desc": "Task in Factory Component and Object Wrappers (uvm_component_registry #(T,Tname))"
+    },
+    {
+      "name": "create",
+      "type": "function",
+      "category": "Factory Component and Object Wrappers",
+      "src": "src_view/base/uvm_registry.svh.html#L109",
+      "doc": "docs_view/base/uvm_registry-svh.html#uvm_component_registry#(T,Tname).create",
+      "desc": "Function in Factory Component and Object Wrappers (uvm_component_registry #(T,Tname))"
+    },
+    {
+      "name": "set_type_override",
+      "type": "function",
+      "category": "Factory Component and Object Wrappers",
+      "src": "src_view/base/uvm_registry.svh.html#L134",
+      "doc": "docs_view/base/uvm_registry-svh.html#uvm_component_registry#(T,Tname).set_type_override",
+      "desc": "Function in Factory Component and Object Wrappers (uvm_component_registry #(T,Tname))"
+    },
+    {
+      "name": "set_inst_override",
+      "type": "function",
+      "category": "Factory Component and Object Wrappers",
+      "src": "src_view/base/uvm_registry.svh.html#L157",
+      "doc": "docs_view/base/uvm_registry-svh.html#uvm_component_registry#(T,Tname).set_inst_override",
+      "desc": "Function in Factory Component and Object Wrappers (uvm_component_registry #(T,Tname))"
+    },
+    {
+      "name": "create_object",
+      "type": "function",
+      "category": "Factory Component and Object Wrappers",
+      "src": "src_view/base/uvm_registry.svh.html#L200",
+      "doc": "docs_view/base/uvm_registry-svh.html#uvm_object_registry#(T,Tname).create_object",
+      "desc": "Function in Factory Component and Object Wrappers (uvm_object_registry #(T,Tname))"
+    },
+    {
+      "name": "get_value",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L120",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_int_element.get_value",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_int_element)"
+    },
+    {
+      "name": "set_value",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L133",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_int_element.set_value",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_int_element)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L297",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_element_container.new",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_element_container)"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L307",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_element_container.size",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_element_container)"
+    },
+    {
+      "name": "delete",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L317",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_element_container.delete",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_element_container)"
+    },
+    {
+      "name": "delete_elements",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L327",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_element_container.delete_elements",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_element_container)"
+    },
+    {
+      "name": "get_elements",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L338",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_element_container.get_elements",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_element_container)"
+    },
+    {
+      "name": "add_int",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L352",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_element_container.add_int",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_element_container)"
+    },
+    {
+      "name": "add_string",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L380",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_element_container.add_string",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_element_container)"
+    },
+    {
+      "name": "add_object",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L407",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message_element_container.add_object",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message_element_container)"
+    },
+    {
+      "name": "new_report_message",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L511",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.new_report_message",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L79",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.print",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_report_object",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L616",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_report_object",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_report_object",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L624",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_report_object",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_report_handler",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L631",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_report_handler",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_report_handler",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L640",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_report_handler",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_report_server",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L647",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_report_server",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_report_server",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L656",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_report_server",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_severity",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L668",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_severity",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_severity",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L678",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_severity",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_id",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L685",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_id",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_id",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L696",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_id",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_message",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L703",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_message",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_message",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L711",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_message",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_verbosity",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L718",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_verbosity",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_verbosity",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L728",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_verbosity",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_filename",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L735",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_filename",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_filename",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L744",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_filename",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_line",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L751",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_line",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_line",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L760",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_line",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_context",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L767",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_context",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_context",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L777",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_context",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_file",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L801",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_file",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_file",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L811",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_file",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "get_element_container",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L820",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.get_element_container",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_report_message",
+      "type": "function",
+      "category": "uvm_report_message_element_base",
+      "src": "src_view/base/uvm_report_message.svh.html#L830",
+      "doc": "docs_view/base/uvm_report_message-svh.html#uvm_report_message.set_report_message",
+      "desc": "Function in uvm_report_message_element_base (uvm_report_message)"
+    },
+    {
+      "name": "set_max_quit_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L390",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.set_max_quit_count",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "get_max_quit_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L380",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.get_max_quit_count",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "set_quit_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L410",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.set_quit_count",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "get_quit_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L404",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.get_quit_count",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "set_severity_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L452",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.set_severity_count",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "get_severity_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L446",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.get_severity_count",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "set_id_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L493",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.set_id_count",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "get_id_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L485",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.get_id_count",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "get_id_set",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L537",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.get_id_set",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "get_severity_set",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L531",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.get_severity_set",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "set_message_database",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L519",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.set_message_database",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "get_message_database",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L526",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.get_message_database",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "do_copy",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L110",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.do_copy",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "execute_report_message",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L647",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.execute_report_message",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "compose_report_message",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L749",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.compose_report_message",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "report_summarize",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L821",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.report_summarize",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "set_server",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L206",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.set_server",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "get_server",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L232",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_report_server.get_server",
+      "desc": "Function in UVM Report Server (uvm_report_server)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L52",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_default_report_server.new",
+      "desc": "Function in UVM Report Server (uvm_default_report_server)"
+    },
+    {
+      "name": "print",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L48",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_default_report_server.print",
+      "desc": "Function in UVM Report Server (uvm_default_report_server)"
+    },
+    {
+      "name": "incr_quit_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L416",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_default_report_server.incr_quit_count",
+      "desc": "Function in UVM Report Server (uvm_default_report_server)"
+    },
+    {
+      "name": "reset_quit_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L425",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_default_report_server.reset_quit_count",
+      "desc": "Function in UVM Report Server (uvm_default_report_server)"
+    },
+    {
+      "name": "is_quit_count_reached",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L434",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_default_report_server.is_quit_count_reached",
+      "desc": "Function in UVM Report Server (uvm_default_report_server)"
+    },
+    {
+      "name": "incr_severity_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L458",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_default_report_server.incr_severity_count",
+      "desc": "Function in UVM Report Server (uvm_default_report_server)"
+    },
+    {
+      "name": "reset_severity_counts",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L467",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_default_report_server.reset_severity_counts",
+      "desc": "Function in UVM Report Server (uvm_default_report_server)"
+    },
+    {
+      "name": "incr_id_count",
+      "type": "function",
+      "category": "UVM Report Server",
+      "src": "src_view/base/uvm_report_server.svh.html#L501",
+      "doc": "docs_view/base/uvm_report_server-svh.html#uvm_default_report_server.incr_id_count",
+      "desc": "Function in UVM Report Server (uvm_default_report_server)"
+    },
+    {
+      "name": "turn_on_auditing",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L168",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_options.turn_on_auditing",
+      "desc": "Function in Resources (uvm_resource_options)"
+    },
+    {
+      "name": "turn_off_auditing",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L178",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_options.turn_off_auditing",
+      "desc": "Function in Resources (uvm_resource_options)"
+    },
+    {
+      "name": "is_auditing",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L186",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_options.is_auditing",
+      "desc": "Function in Resources (uvm_resource_options)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L231",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.new",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "get_type_handle",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1462",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.get_type_handle",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "set_read_only",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L256",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.set_read_only",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "is_read_only",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L277",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.is_read_only",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "wait_modified",
+      "type": "task",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L294",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.wait_modified",
+      "desc": "Task in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "set_scope",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L385",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.set_scope",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "get_scope",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L394",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.get_scope",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "match_scope",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L403",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.match_scope",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "set priority",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L111",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.set_priority",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "do_print",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L443",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.do_print",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "record_read_access",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L480",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.record_read_access",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "record_write_access",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L516",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.record_write_access",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "print_accessors",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L545",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.print_accessors",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "init_access_record",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L573",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_base.init_access_record",
+      "desc": "Function in Resources (uvm_resource_base)"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L674",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.get",
+      "desc": "Task in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "spell_check",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L687",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.spell_check",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L714",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.set",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "set_override",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L768",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.set_override",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "set_name_override",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L779",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.set_name_override",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "set_type_override",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L789",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.set_type_override",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "lookup_name",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L868",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.lookup_name",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "get_highest_precedence",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L919",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.get_highest_precedence",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "sort_by_precedence",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L954",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.sort_by_precedence",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "get_by_name",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L982",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.get_by_name",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "lookup_type",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1010",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.lookup_type",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "get_by_type",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1038",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.get_by_type",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "lookup_regex_names",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1065",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.lookup_regex_names",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "lookup_regex",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1076",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.lookup_regex",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "lookup_scope",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1109",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.lookup_scope",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "set_priority_type",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1194",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.set_priority_type",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "set_priority_name",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1224",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.set_priority_name",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "set_priority",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1255",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.set_priority",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "find_unused_resources",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1269",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.find_unused_resources",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "print_resources",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1308",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.print_resources",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "dump",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1342",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource_pool.dump",
+      "desc": "Function in Resources (uvm_resource_pool)"
+    },
+    {
+      "name": "get_type",
+      "type": "function",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1449",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource#(T).get_type",
+      "desc": "Function in Resources (uvm_resource #(T))"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1587",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource#(T).read",
+      "desc": "Task in Resources (uvm_resource #(T))"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "Resources",
+      "src": "src_view/base/uvm_resource.svh.html#L1605",
+      "doc": "docs_view/base/uvm_resource-svh.html#uvm_resource#(T).write",
+      "desc": "Task in Resources (uvm_resource #(T))"
+    },
+    {
+      "name": "get_by_type",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L67",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.get_by_type",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "get_by_name",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L78",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.get_by_name",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "set_default",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L91",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.set_default",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L129",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.set",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "set_anonymous",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L146",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.set_anonymous",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "read_by_name",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L218",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.read_by_name",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "read_by_type",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L242",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.read_by_type",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "write_by_name",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L272",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.write_by_name",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "write_by_type",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L301",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.write_by_type",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "dump",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L324",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db.dump",
+      "desc": "Function in UVM Resource Database (uvm_resource_db)"
+    },
+    {
+      "name": "turn_on_tracing",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L362",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db_options.turn_on_tracing",
+      "desc": "Function in UVM Resource Database (uvm_resource_db_options)"
+    },
+    {
+      "name": "turn_off_tracing",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L371",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db_options.turn_off_tracing",
+      "desc": "Function in UVM Resource Database (uvm_resource_db_options)"
+    },
+    {
+      "name": "is_tracing",
+      "type": "function",
+      "category": "UVM Resource Database",
+      "src": "src_view/base/uvm_resource_db.svh.html#L380",
+      "doc": "docs_view/base/uvm_resource_db-svh.html#uvm_resource_db_options.is_tracing",
+      "desc": "Function in UVM Resource Database (uvm_resource_db_options)"
+    },
+    {
+      "name": "get()",
+      "type": "function",
+      "category": "uvm_root",
+      "src": "src_view/base/uvm_root.svh.html#L71",
+      "doc": "docs_view/base/uvm_root-svh.html#uvm_root.get",
+      "desc": "Function in uvm_root"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "UVM Run-Time Phases",
+      "src": "src_view/base/uvm_runtime_phases.svh.html#L83",
+      "doc": "docs_view/base/uvm_runtime_phases-svh.html#uvm_pre_reset_phase.get",
+      "desc": "Task in UVM Run-Time Phases (uvm_pre_reset_phase)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L67",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.new",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "open_db",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L81",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.open_db",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "close_db",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L98",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.close_db",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "is_open",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L112",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.is_open",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "open_stream",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L139",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.open_stream",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "get_streams",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L186",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.get_streams",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "establish_link",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L205",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.establish_link",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "do_open_db",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L332",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.do_open_db",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "do_close_db",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L350",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.do_close_db",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "do_open_stream",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L365",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.do_open_stream",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "do_establish_link",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L376",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_tr_database.do_establish_link",
+      "desc": "Function in Transaction Recording Databases (uvm_tr_database)"
+    },
+    {
+      "name": "set_file_name",
+      "type": "function",
+      "category": "Transaction Recording Databases",
+      "src": "src_view/base/uvm_tr_database.svh.html#L417",
+      "doc": "docs_view/base/uvm_tr_database-svh.html#uvm_text_tr_database.set_file_name",
+      "desc": "Function in Transaction Recording Databases (uvm_text_tr_database)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L83",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.new",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "get_db",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L106",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.get_db",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "get_scope",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L124",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.get_scope",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "get_stream_type_name",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L143",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.get_stream_type_name",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "close",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L176",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.close",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "free",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L199",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.free",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "is_open",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L282",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.is_open",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "is_closed",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L290",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.is_closed",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "open_recorder",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L320",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.open_recorder",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "get_recorders",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L371",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.get_recorders",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "get_handle",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L394",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.get_handle",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "get_stream_from_handle",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L429",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.get_stream_from_handle",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "do_open",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L467",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.do_open",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "do_close",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L478",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.do_close",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "do_free",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L487",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.do_free",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "do_open_recorder",
+      "type": "function",
+      "category": "Transaction Recording Streams",
+      "src": "src_view/base/uvm_tr_stream.svh.html#L494",
+      "doc": "docs_view/base/uvm_tr_stream-svh.html#uvm_tr_stream.do_open_recorder",
+      "desc": "Function in Transaction Recording Streams (uvm_tr_stream)"
+    },
+    {
+      "name": "begin_v",
+      "type": "function",
+      "category": "uvm_visitor #(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L38",
+      "doc": "docs_view/base/uvm_traversal-svh.html#uvm_visitor#(NODE).begin_v",
+      "desc": "Function in uvm_visitor #(NODE)"
+    },
+    {
+      "name": "end_v",
+      "type": "function",
+      "category": "uvm_visitor #(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L44",
+      "doc": "docs_view/base/uvm_traversal-svh.html#uvm_visitor#(NODE).end_v",
+      "desc": "Function in uvm_visitor #(NODE)"
+    },
+    {
+      "name": "visit",
+      "type": "function",
+      "category": "uvm_visitor #(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L255",
+      "doc": "docs_view/base/uvm_traversal-svh.html#uvm_visitor#(NODE).visit",
+      "desc": "Function in uvm_visitor #(NODE)"
+    },
+    {
+      "name": "get_immediate_children",
+      "type": "function",
+      "category": "uvm_visitor #(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L215",
+      "doc": "docs_view/base/uvm_traversal-svh.html#uvm_structure_proxy#(STRUCTURE).get_immediate_children",
+      "desc": "Function in uvm_visitor #(NODE) (uvm_structure_proxy #(STRUCTURE))"
+    },
+    {
+      "name": "accept()",
+      "type": "function",
+      "category": "uvm_visitor #(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L30",
+      "doc": "docs_view/base/uvm_traversal-svh.html#uvm_visitor_adapter#(STRUCTURE,uvm_visitor#(STRUCTURE)).accept",
+      "desc": "Function in uvm_visitor #(NODE) (uvm_visitor_adapter #(STRUCTURE,uvm_visitor#(STRUCTURE)))"
+    },
+    {
+      "name": "get_name_constraint",
+      "type": "function",
+      "category": "uvm_visitor #(NODE)",
+      "src": "src_view/base/uvm_traversal.svh.html#L251",
+      "doc": "docs_view/base/uvm_traversal-svh.html#uvm_component_name_check_visitor.get_name_constraint",
+      "desc": "Function in uvm_visitor #(NODE) (uvm_component_name_check_visitor)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Algorithmic Comparator",
+      "src": "src_view/comps/uvm_algorithmic_comparator.svh.html#L111",
+      "doc": "docs_view/comps/uvm_algorithmic_comparator-svh.html#uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER).new",
+      "desc": "Function in Algorithmic Comparator (uvm_algorithmic_comparator #(BEFORE,AFTER,TRANSFORMER))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_driver #(REQ,RSP)",
+      "src": "src_view/comps/uvm_driver.svh.html#L74",
+      "doc": "docs_view/comps/uvm_driver-svh.html#uvm_driver#(REQ,RSP).new",
+      "desc": "Function in uvm_driver #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "flush",
+      "type": "function",
+      "category": "Comparators",
+      "src": "src_view/comps/uvm_in_order_comparator.svh.html#L194",
+      "doc": "docs_view/comps/uvm_in_order_comparator-svh.html#uvm_in_order_comparator#(T,comp_type,convert,pair_type).flush",
+      "desc": "Function in Comparators (uvm_in_order_comparator #(T,comp_type,convert,pair_type))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_pair classes",
+      "src": "src_view/comps/uvm_pair.svh.html#L62",
+      "doc": "docs_view/comps/uvm_pair-svh.html#uvm_class_pair#(T1,T2).new",
+      "desc": "Function in uvm_pair classes (uvm_class_pair #(T1,T2))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_push_driver #(REQ,RSP)",
+      "src": "src_view/comps/uvm_push_driver.svh.html#L67",
+      "doc": "docs_view/comps/uvm_push_driver-svh.html#uvm_push_driver#(REQ,RSP).new",
+      "desc": "Function in uvm_push_driver #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_random_stimulus #(T)",
+      "src": "src_view/comps/uvm_random_stimulus.svh.html#L67",
+      "doc": "docs_view/comps/uvm_random_stimulus-svh.html#uvm_random_stimulus#(T).new",
+      "desc": "Function in uvm_random_stimulus #(T) (Methods)"
+    },
+    {
+      "name": "generate_stimulus",
+      "type": "task",
+      "category": "uvm_random_stimulus #(T)",
+      "src": "src_view/comps/uvm_random_stimulus.svh.html#L96",
+      "doc": "docs_view/comps/uvm_random_stimulus-svh.html#uvm_random_stimulus#(T).generate_stimulus",
+      "desc": "Task in uvm_random_stimulus #(T) (Methods)"
+    },
+    {
+      "name": "stop_stimulus_generation",
+      "type": "function",
+      "category": "uvm_random_stimulus #(T)",
+      "src": "src_view/comps/uvm_random_stimulus.svh.html#L45",
+      "doc": "docs_view/comps/uvm_random_stimulus-svh.html#uvm_random_stimulus#(T).stop_stimulus_generation",
+      "desc": "Function in uvm_random_stimulus #(T) (Methods)"
+    },
+    {
+      "name": "uvm_hdl_check_path",
+      "type": "function",
+      "category": "UVM HDL Backdoor Access support routines.",
+      "src": "src_view/dpi/uvm_hdl.svh.html#L125",
+      "doc": "docs_view/dpi/uvm_hdl-svh.html#uvm_hdl_check_path",
+      "desc": "Function in UVM HDL Backdoor Access support routines. (Methods)"
+    },
+    {
+      "name": "uvm_hdl_deposit",
+      "type": "function",
+      "category": "UVM HDL Backdoor Access support routines.",
+      "src": "src_view/dpi/uvm_hdl.svh.html#L131",
+      "doc": "docs_view/dpi/uvm_hdl-svh.html#uvm_hdl_deposit",
+      "desc": "Function in UVM HDL Backdoor Access support routines. (Methods)"
+    },
+    {
+      "name": "uvm_hdl_force",
+      "type": "function",
+      "category": "UVM HDL Backdoor Access support routines.",
+      "src": "src_view/dpi/uvm_hdl.svh.html#L137",
+      "doc": "docs_view/dpi/uvm_hdl-svh.html#uvm_hdl_force",
+      "desc": "Function in UVM HDL Backdoor Access support routines. (Methods)"
+    },
+    {
+      "name": "uvm_hdl_force_time",
+      "type": "task",
+      "category": "UVM HDL Backdoor Access support routines.",
+      "src": "src_view/dpi/uvm_hdl.svh.html#L83",
+      "doc": "docs_view/dpi/uvm_hdl-svh.html#uvm_hdl_force_time",
+      "desc": "Task in UVM HDL Backdoor Access support routines. (Methods)"
+    },
+    {
+      "name": "uvm_hdl_release_and_read",
+      "type": "function",
+      "category": "UVM HDL Backdoor Access support routines.",
+      "src": "src_view/dpi/uvm_hdl.svh.html#L1",
+      "doc": "docs_view/dpi/uvm_hdl-svh.html#uvm_hdl_release_and_read",
+      "desc": "Function in UVM HDL Backdoor Access support routines. (Methods)"
+    },
+    {
+      "name": "uvm_hdl_release",
+      "type": "function",
+      "category": "UVM HDL Backdoor Access support routines.",
+      "src": "src_view/dpi/uvm_hdl.svh.html#L148",
+      "doc": "docs_view/dpi/uvm_hdl-svh.html#uvm_hdl_release",
+      "desc": "Function in UVM HDL Backdoor Access support routines. (Methods)"
+    },
+    {
+      "name": "uvm_hdl_read()",
+      "type": "function",
+      "category": "UVM HDL Backdoor Access support routines.",
+      "src": "src_view/dpi/uvm_hdl.svh.html#L1",
+      "doc": "docs_view/dpi/uvm_hdl-svh.html#uvm_hdl_read",
+      "desc": "Function in UVM HDL Backdoor Access support routines. (Methods)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.new",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "reconfigure",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.reconfigure",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "reserve_region",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.reserve_region",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "request_region",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.request_region",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "release_region",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.release_region",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "release_all_regions",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.release_all_regions",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "convert2string",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.convert2string",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "for_each",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.for_each",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "get_memory",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_mam.get_memory",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_mam)"
+    },
+    {
+      "name": "get_start_offset",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.get_start_offset",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "get_end_offset",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.get_end_offset",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "get_len",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.get_len",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "get_n_bytes",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.get_n_bytes",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "get_virtual_registers",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.get_virtual_registers",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.write",
+      "desc": "Task in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.read",
+      "desc": "Task in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "burst_write",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.burst_write",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "burst_read",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.burst_read",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "poke",
+      "type": "function",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.poke",
+      "desc": "Function in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "Memory Allocation Manager",
+      "src": "src_view/reg/uvm_mem_mam.svh.html#L66",
+      "doc": "docs_view/reg/uvm_mem_mam-svh.html#uvm_mem_region.peek",
+      "desc": "Task in Memory Allocation Manager (uvm_mem_region)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Classes for Adapting Between Register and Bus Operations",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L45",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#uvm_reg_adapter.new",
+      "desc": "Function in Classes for Adapting Between Register and Bus Operations (uvm_reg_adapter)"
+    },
+    {
+      "name": "reg2bus",
+      "type": "function",
+      "category": "Classes for Adapting Between Register and Bus Operations",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L182",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#uvm_reg_adapter.reg2bus",
+      "desc": "Function in Classes for Adapting Between Register and Bus Operations (uvm_reg_adapter)"
+    },
+    {
+      "name": "bus2reg",
+      "type": "function",
+      "category": "Classes for Adapting Between Register and Bus Operations",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L218",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#uvm_reg_adapter.bus2reg",
+      "desc": "Function in Classes for Adapting Between Register and Bus Operations (uvm_reg_adapter)"
+    },
+    {
+      "name": "get_item",
+      "type": "function",
+      "category": "Classes for Adapting Between Register and Bus Operations",
+      "src": "src_view/reg/uvm_reg_adapter.svh.html#L113",
+      "doc": "docs_view/reg/uvm_reg_adapter-svh.html#uvm_reg_adapter.get_item",
+      "desc": "Function in Classes for Adapting Between Register and Bus Operations (uvm_reg_adapter)"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L92",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_cbs.pre_write",
+      "desc": "Task in Register Callbacks (uvm_reg_cbs)"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L131",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_cbs.post_write",
+      "desc": "Task in Register Callbacks (uvm_reg_cbs)"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L175",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_cbs.pre_read",
+      "desc": "Task in Register Callbacks (uvm_reg_cbs)"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L213",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_cbs.post_read",
+      "desc": "Task in Register Callbacks (uvm_reg_cbs)"
+    },
+    {
+      "name": "post_predict",
+      "type": "function",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L225",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_cbs.post_predict",
+      "desc": "Function in Register Callbacks (uvm_reg_cbs)"
+    },
+    {
+      "name": "encode",
+      "type": "function",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L245",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_cbs.encode",
+      "desc": "Function in Register Callbacks (uvm_reg_cbs)"
+    },
+    {
+      "name": "decode",
+      "type": "function",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L264",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_cbs.decode",
+      "desc": "Function in Register Callbacks (uvm_reg_cbs)"
+    },
+    {
+      "name": "add",
+      "type": "function",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L413",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_read_only_cbs.add",
+      "desc": "Function in Register Callbacks (uvm_reg_read_only_cbs)"
+    },
+    {
+      "name": "remove",
+      "type": "function",
+      "category": "Register Callbacks",
+      "src": "src_view/reg/uvm_reg_cbs.svh.html#L428",
+      "doc": "docs_view/reg/uvm_reg_cbs-svh.html#uvm_reg_read_only_cbs.remove",
+      "desc": "Function in Register Callbacks (uvm_reg_read_only_cbs)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Generic Register Operation Descriptors",
+      "src": "src_view/reg/uvm_reg_item.svh.html#L173",
+      "doc": "docs_view/reg/uvm_reg_item-svh.html#uvm_reg_item.new",
+      "desc": "Function in Generic Register Operation Descriptors (uvm_reg_item)"
+    },
+    {
+      "name": "convert2string",
+      "type": "function",
+      "category": "Generic Register Operation Descriptors",
+      "src": "src_view/reg/uvm_reg_item.svh.html#L183",
+      "doc": "docs_view/reg/uvm_reg_item-svh.html#uvm_reg_item.convert2string",
+      "desc": "Function in Generic Register Operation Descriptors (uvm_reg_item)"
+    },
+    {
+      "name": "do_copy",
+      "type": "function",
+      "category": "Generic Register Operation Descriptors",
+      "src": "src_view/reg/uvm_reg_item.svh.html#L212",
+      "doc": "docs_view/reg/uvm_reg_item-svh.html#uvm_reg_item.do_copy",
+      "desc": "Function in Generic Register Operation Descriptors (uvm_reg_item)"
+    },
+    {
+      "name": "backdoor",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L113",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.backdoor",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L39",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.new",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.configure",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "add_reg",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.add_reg",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "add_mem",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.add_mem",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "add_submap",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.add_submap",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "set_sequencer",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.set_sequencer",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "set_submap_offset",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.set_submap_offset",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_submap_offset",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_submap_offset",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "set_base_addr",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.set_base_addr",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.reset",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_name",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_full_name",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_root_map",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_root_map",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_parent",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_parent_map",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_parent_map",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_base_addr",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_base_addr",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_n_bytes",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_n_bytes",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_addr_unit_bytes",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_addr_unit_bytes",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_sequencer",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_sequencer",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_adapter",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_adapter",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_submaps",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_submaps",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_registers",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_registers",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_fields",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_fields",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_memories",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_memories",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_virtual_registers",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_virtual_registers",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_virtual_fields",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_virtual_fields",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_physical_addresses",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_physical_addresses",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_reg_by_offset",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_reg_by_offset",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_mem_by_offset",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_mem_by_offset",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "set_auto_predict",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L570",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.set_auto_predict",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_auto_predict",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L577",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_auto_predict",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "set_check_on_read",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L600",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.set_check_on_read",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_check_on_read",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L612",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_check_on_read",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "do_bus_write",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.do_bus_write",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "do_bus_read",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.do_bus_read",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "do_write",
+      "type": "task",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.do_write",
+      "desc": "Task in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "do_read",
+      "type": "task",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L23",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.do_read",
+      "desc": "Task in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "set_transaction_order_policy",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L664",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.set_transaction_order_policy",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "get_transaction_order_policy",
+      "type": "function",
+      "category": "uvm_reg_transaction_order_policy",
+      "src": "src_view/reg/uvm_reg_map.svh.html#L670",
+      "doc": "docs_view/reg/uvm_reg_map-svh.html#uvm_reg_map.get_transaction_order_policy",
+      "desc": "Function in uvm_reg_transaction_order_policy (uvm_reg_map)"
+    },
+    {
+      "name": "set",
+      "type": "function",
+      "category": "Global Declarations for the Register Layer",
+      "src": "src_view/reg/uvm_reg_model.svh.html#L355",
+      "doc": "docs_view/reg/uvm_reg_model-svh.html#uvm_hdl_path_concat.set",
+      "desc": "Function in Global Declarations for the Register Layer (uvm_hdl_path_concat)"
+    },
+    {
+      "name": "add_slice",
+      "type": "function",
+      "category": "Global Declarations for the Register Layer",
+      "src": "src_view/reg/uvm_reg_model.svh.html#L361",
+      "doc": "docs_view/reg/uvm_reg_model-svh.html#uvm_hdl_path_concat.add_slice",
+      "desc": "Function in Global Declarations for the Register Layer (uvm_hdl_path_concat)"
+    },
+    {
+      "name": "add_path",
+      "type": "function",
+      "category": "Global Declarations for the Register Layer",
+      "src": "src_view/reg/uvm_reg_model.svh.html#L369",
+      "doc": "docs_view/reg/uvm_reg_model-svh.html#uvm_hdl_path_concat.add_path",
+      "desc": "Function in Global Declarations for the Register Layer (uvm_hdl_path_concat)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Explicit Register Predictor",
+      "src": "src_view/reg/uvm_reg_predictor.svh.html#L109",
+      "doc": "docs_view/reg/uvm_reg_predictor-svh.html#uvm_reg_predictor.new",
+      "desc": "Function in Explicit Register Predictor (uvm_reg_predictor)"
+    },
+    {
+      "name": "pre_predict",
+      "type": "function",
+      "category": "Explicit Register Predictor",
+      "src": "src_view/reg/uvm_reg_predictor.svh.html#L131",
+      "doc": "docs_view/reg/uvm_reg_predictor-svh.html#uvm_reg_predictor.pre_predict",
+      "desc": "Function in Explicit Register Predictor (uvm_reg_predictor)"
+    },
+    {
+      "name": "check_phase",
+      "type": "function",
+      "category": "Explicit Register Predictor",
+      "src": "src_view/reg/uvm_reg_predictor.svh.html#L248",
+      "doc": "docs_view/reg/uvm_reg_predictor-svh.html#uvm_reg_predictor.check_phase",
+      "desc": "Function in Explicit Register Predictor (uvm_reg_predictor)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L116",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.new",
+      "desc": "Function in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L131",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.body",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "do_reg_item",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L170",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.do_reg_item",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "write_reg",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L222",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.write_reg",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "read_reg",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L250",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.read_reg",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "poke_reg",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L279",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.poke_reg",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "peek_reg",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L305",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.peek_reg",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "update_reg",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L331",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.update_reg",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "mirror_reg",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L358",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.mirror_reg",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "write_mem",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L386",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.write_mem",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "read_mem",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L415",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.read_mem",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "poke_mem",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L445",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.poke_mem",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "peek_mem",
+      "type": "task",
+      "category": "Register Sequence Classes",
+      "src": "src_view/reg/uvm_reg_sequence.svh.html#L472",
+      "doc": "docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence.peek_mem",
+      "desc": "Task in Register Sequence Classes (uvm_reg_sequence)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L622",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.new",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.configure",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "implement",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.implement",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "allocate",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.allocate",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_region",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_region",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "release_region",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.release_region",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_name",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_full_name",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_parent",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_memory",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_memory",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_n_maps",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_n_maps",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "is_in_map",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.is_in_map",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_maps",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_maps",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_rights",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_rights",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_access",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_access",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_size",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_size",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_n_bytes",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_n_bytes",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_n_memlocs",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_n_memlocs",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_incr",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_incr",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_fields",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_fields",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_field_by_name",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_field_by_name",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_offset_in_memory",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_offset_in_memory",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "get_address",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.get_address",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.write",
+      "desc": "Task in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.read",
+      "desc": "Task in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "poke",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.poke",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.peek",
+      "desc": "Task in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "reset",
+      "type": "function",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L57",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.reset",
+      "desc": "Function in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L527",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.pre_write",
+      "desc": "Task in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L548",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.post_write",
+      "desc": "Task in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L570",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.pre_read",
+      "desc": "Task in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "Virtual Registers",
+      "src": "src_view/reg/uvm_vreg.svh.html#L590",
+      "doc": "docs_view/reg/uvm_vreg-svh.html#uvm_vreg.post_read",
+      "desc": "Task in Virtual Registers (uvm_vreg)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L382",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.new",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "configure",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.configure",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "get_name",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.get_name",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "get_full_name",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.get_full_name",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "get_parent",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.get_parent",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "get_lsb_pos_in_register",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.get_lsb_pos_in_register",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "get_n_bits",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.get_n_bits",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "get_access",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.get_access",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.write",
+      "desc": "Task in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "read",
+      "type": "task",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.read",
+      "desc": "Task in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "poke",
+      "type": "function",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.poke",
+      "desc": "Function in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L49",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.peek",
+      "desc": "Task in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "pre_write",
+      "type": "task",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L288",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.pre_write",
+      "desc": "Task in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "post_write",
+      "type": "task",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L309",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.post_write",
+      "desc": "Task in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "pre_read",
+      "type": "task",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L331",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.pre_read",
+      "desc": "Task in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "post_read",
+      "type": "task",
+      "category": "Virtual Register Field Classes",
+      "src": "src_view/reg/uvm_vreg_field.svh.html#L351",
+      "doc": "docs_view/reg/uvm_vreg_field-svh.html#uvm_vreg_field.post_read",
+      "desc": "Task in Virtual Register Field Classes (uvm_vreg_field)"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "Memory Access Test Sequence",
+      "src": "src_view/reg/sequences/uvm_mem_access_seq.svh.html#L64",
+      "doc": "docs_view/reg/sequences/uvm_mem_access_seq-svh.html#uvm_mem_access_seq.body",
+      "desc": "Task in Memory Access Test Sequence (uvm_mem_access_seq)"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "Memory Access Test Sequence",
+      "src": "src_view/reg/sequences/uvm_mem_access_seq.svh.html#L243",
+      "doc": "docs_view/reg/sequences/uvm_mem_access_seq-svh.html#uvm_mem_access_seq.do_block",
+      "desc": "Task in Memory Access Test Sequence (uvm_mem_access_seq)"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "Memory Access Test Sequence",
+      "src": "src_view/reg/sequences/uvm_mem_access_seq.svh.html#L301",
+      "doc": "docs_view/reg/sequences/uvm_mem_access_seq-svh.html#uvm_mem_access_seq.reset_blk",
+      "desc": "Task in Memory Access Test Sequence (uvm_mem_access_seq)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Memory Walking-Ones Test Sequences",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L76",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#uvm_mem_single_walk_seq.new",
+      "desc": "Function in Memory Walking-Ones Test Sequences (uvm_mem_single_walk_seq)"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "Memory Walking-Ones Test Sequences",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L86",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#uvm_mem_single_walk_seq.body",
+      "desc": "Task in Memory Walking-Ones Test Sequences (uvm_mem_single_walk_seq)"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "Memory Walking-Ones Test Sequences",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L246",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#uvm_mem_walk_seq.do_block",
+      "desc": "Task in Memory Walking-Ones Test Sequences (uvm_mem_walk_seq)"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "Memory Walking-Ones Test Sequences",
+      "src": "src_view/reg/sequences/uvm_mem_walk_seq.svh.html#L296",
+      "doc": "docs_view/reg/sequences/uvm_mem_walk_seq-svh.html#uvm_mem_walk_seq.reset_blk",
+      "desc": "Task in Memory Walking-Ones Test Sequences (uvm_mem_walk_seq)"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "Register Access Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_access_seq.svh.html#L74",
+      "doc": "docs_view/reg/sequences/uvm_reg_access_seq-svh.html#uvm_reg_access_seq.body",
+      "desc": "Task in Register Access Test Sequences (uvm_reg_access_seq)"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "Register Access Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_access_seq.svh.html#L244",
+      "doc": "docs_view/reg/sequences/uvm_reg_access_seq-svh.html#uvm_reg_access_seq.do_block",
+      "desc": "Task in Register Access Test Sequences (uvm_reg_access_seq)"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "Register Access Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_access_seq.svh.html#L297",
+      "doc": "docs_view/reg/sequences/uvm_reg_access_seq-svh.html#uvm_reg_access_seq.reset_blk",
+      "desc": "Task in Register Access Test Sequences (uvm_reg_access_seq)"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "Bit Bashing Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L66",
+      "doc": "docs_view/reg/sequences/uvm_reg_bit_bash_seq-svh.html#uvm_reg_bit_bash_seq.body",
+      "desc": "Task in Bit Bashing Test Sequences (uvm_reg_bit_bash_seq)"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "Bit Bashing Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L252",
+      "doc": "docs_view/reg/sequences/uvm_reg_bit_bash_seq-svh.html#uvm_reg_bit_bash_seq.do_block",
+      "desc": "Task in Bit Bashing Test Sequences (uvm_reg_bit_bash_seq)"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "Bit Bashing Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L298",
+      "doc": "docs_view/reg/sequences/uvm_reg_bit_bash_seq-svh.html#uvm_reg_bit_bash_seq.reset_blk",
+      "desc": "Task in Bit Bashing Test Sequences (uvm_reg_bit_bash_seq)"
+    },
+    {
+      "name": "body",
+      "type": "task",
+      "category": "Shared Register and Memory Access Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L70",
+      "doc": "docs_view/reg/sequences/uvm_reg_mem_shared_access_seq-svh.html#uvm_reg_mem_shared_access_seq.body",
+      "desc": "Task in Shared Register and Memory Access Test Sequences (uvm_reg_mem_shared_access_seq)"
+    },
+    {
+      "name": "do_block",
+      "type": "task",
+      "category": "Shared Register and Memory Access Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L410",
+      "doc": "docs_view/reg/sequences/uvm_reg_mem_shared_access_seq-svh.html#uvm_reg_mem_shared_access_seq.do_block",
+      "desc": "Task in Shared Register and Memory Access Test Sequences (uvm_reg_mem_shared_access_seq)"
+    },
+    {
+      "name": "reset_blk",
+      "type": "task",
+      "category": "Shared Register and Memory Access Test Sequences",
+      "src": "src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L480",
+      "doc": "docs_view/reg/sequences/uvm_reg_mem_shared_access_seq-svh.html#uvm_reg_mem_shared_access_seq.reset_blk",
+      "desc": "Task in Shared Register and Memory Access Test Sequences (uvm_reg_mem_shared_access_seq)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_push_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_push_sequencer.svh.html#L48",
+      "doc": "docs_view/seq/uvm_push_sequencer-svh.html#uvm_push_sequencer#(REQ,RSP).new",
+      "desc": "Function in uvm_push_sequencer #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "run_phase",
+      "type": "task",
+      "category": "uvm_push_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_push_sequencer.svh.html#L63",
+      "doc": "docs_view/seq/uvm_push_sequencer-svh.html#uvm_push_sequencer#(REQ,RSP).run_phase",
+      "desc": "Task in uvm_push_sequencer #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequence #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequence.svh.html#L58",
+      "doc": "docs_view/seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP).new",
+      "desc": "Function in uvm_sequence #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "send_request",
+      "type": "function",
+      "category": "uvm_sequence #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequence.svh.html#L69",
+      "doc": "docs_view/seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP).send_request",
+      "desc": "Function in uvm_sequence #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "get_current_item",
+      "type": "function",
+      "category": "uvm_sequence #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequence.svh.html#L93",
+      "doc": "docs_view/seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP).get_current_item",
+      "desc": "Function in uvm_sequence #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "get_response",
+      "type": "task",
+      "category": "uvm_sequence #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequence.svh.html#L118",
+      "doc": "docs_view/seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP).get_response",
+      "desc": "Task in uvm_sequence #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).new",
+      "desc": "Function in uvm_sequencer #(REQ,RSP)"
+    },
+    {
+      "name": "stop_sequences",
+      "type": "function",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).stop_sequences",
+      "desc": "Function in uvm_sequencer #(REQ,RSP)"
+    },
+    {
+      "name": "get_next_item",
+      "type": "task",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).get_next_item",
+      "desc": "Task in uvm_sequencer #(REQ,RSP) (Sequencer Interface)"
+    },
+    {
+      "name": "try_next_item",
+      "type": "task",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).try_next_item",
+      "desc": "Task in uvm_sequencer #(REQ,RSP) (Sequencer Interface)"
+    },
+    {
+      "name": "item_done",
+      "type": "task",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).item_done",
+      "desc": "Task in uvm_sequencer #(REQ,RSP) (Sequencer Interface)"
+    },
+    {
+      "name": "put",
+      "type": "task",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).put",
+      "desc": "Task in uvm_sequencer #(REQ,RSP) (Sequencer Interface)"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).get",
+      "desc": "Task in uvm_sequencer #(REQ,RSP) (Sequencer Interface)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).peek",
+      "desc": "Task in uvm_sequencer #(REQ,RSP) (Sequencer Interface)"
+    },
+    {
+      "name": "wait_for_sequences",
+      "type": "task",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).wait_for_sequences",
+      "desc": "Task in uvm_sequencer #(REQ,RSP) (Sequencer Interface)"
+    },
+    {
+      "name": "has_do_available",
+      "type": "function",
+      "category": "uvm_sequencer #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer.svh.html#L30",
+      "doc": "docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer#(REQ,RSP).has_do_available",
+      "desc": "Function in uvm_sequencer #(REQ,RSP) (Sequencer Interface)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).new",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP)"
+    },
+    {
+      "name": "send_request",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).send_request",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP)"
+    },
+    {
+      "name": "get_current_item",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L81",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).get_current_item",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP)"
+    },
+    {
+      "name": "get_num_reqs_sent",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).get_num_reqs_sent",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP) (Requests)"
+    },
+    {
+      "name": "set_num_last_reqs",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).set_num_last_reqs",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP) (Requests)"
+    },
+    {
+      "name": "get_num_last_reqs",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).get_num_last_reqs",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP) (Requests)"
+    },
+    {
+      "name": "last_req",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L122",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).last_req",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP) (Requests)"
+    },
+    {
+      "name": "get_num_rsps_received",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).get_num_rsps_received",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP) (Responses)"
+    },
+    {
+      "name": "set_num_last_rsps",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).set_num_last_rsps",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP) (Responses)"
+    },
+    {
+      "name": "get_num_last_rsps",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L31",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).get_num_last_rsps",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP) (Responses)"
+    },
+    {
+      "name": "last_rsp",
+      "type": "function",
+      "category": "uvm_sequencer_param_base #(REQ,RSP)",
+      "src": "src_view/seq/uvm_sequencer_param_base.svh.html#L188",
+      "doc": "docs_view/seq/uvm_sequencer_param_base-svh.html#uvm_sequencer_param_base#(REQ,RSP).last_rsp",
+      "desc": "Function in uvm_sequencer_param_base #(REQ,RSP) (Responses)"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "Analysis Ports",
+      "src": "src_view/tlm1/uvm_analysis_port.svh.html#L70",
+      "doc": "docs_view/tlm1/uvm_analysis_port-svh.html#uvm_analysis_port.write",
+      "desc": "Task in Analysis Ports (uvm_analysis_port)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Analysis Ports",
+      "src": "src_view/tlm1/uvm_analysis_port.svh.html#L59",
+      "doc": "docs_view/tlm1/uvm_analysis_port-svh.html#uvm_analysis_export.new",
+      "desc": "Function in Analysis Ports (uvm_analysis_export)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "TLM Export Classes",
+      "src": "src_view/tlm1/uvm_exports.svh.html#L80",
+      "doc": "docs_view/tlm1/uvm_exports-svh.html#uvm_*_export#(T).new",
+      "desc": "Function in TLM Export Classes (uvm_*_export #(T))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_*_imp ports",
+      "src": "src_view/tlm1/uvm_imps.svh.html#L82",
+      "doc": "docs_view/tlm1/uvm_imps-svh.html#uvm_*_imp#(T,IMP).new",
+      "desc": "Function in uvm_*_imp ports (uvm_*_imp #(T,IMP))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "TLM Port Classes",
+      "src": "src_view/tlm1/uvm_ports.svh.html#L81",
+      "doc": "docs_view/tlm1/uvm_ports-svh.html#uvm_*_port#(T).new",
+      "desc": "Function in TLM Port Classes (uvm_*_port #(T))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "Sequence Item Pull Ports",
+      "src": "src_view/tlm1/uvm_sqr_connections.svh.html#L42",
+      "doc": "docs_view/tlm1/uvm_sqr_connections-svh.html#uvm_seq_item_pull_imp#(REQ,RSP,IMP).new",
+      "desc": "Function in Sequence Item Pull Ports (uvm_seq_item_pull_imp #(REQ,RSP,IMP))"
+    },
+    {
+      "name": "get_next_item",
+      "type": "task",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L59",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).get_next_item",
+      "desc": "Task in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "try_next_item",
+      "type": "task",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L83",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).try_next_item",
+      "desc": "Task in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "item_done",
+      "type": "task",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L106",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).item_done",
+      "desc": "Task in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "wait_for_sequences",
+      "type": "task",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L120",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).wait_for_sequences",
+      "desc": "Task in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "has_do_available",
+      "type": "function",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L130",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).has_do_available",
+      "desc": "Function in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L160",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).get",
+      "desc": "Task in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L184",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).peek",
+      "desc": "Task in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "put",
+      "type": "task",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L205",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).put",
+      "desc": "Task in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "put_response",
+      "type": "function",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L220",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).put_response",
+      "desc": "Function in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "disable_auto_item_recording",
+      "type": "function",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L240",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).disable_auto_item_recording",
+      "desc": "Function in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "is_auto_item_recording_enabled",
+      "type": "function",
+      "category": "uvm_sqr_if_base #(REQ,RSP)",
+      "src": "src_view/tlm1/uvm_sqr_ifs.svh.html#L248",
+      "doc": "docs_view/tlm1/uvm_sqr_ifs-svh.html#uvm_sqr_if_base#(REQ,RSP).is_auto_item_recording_enabled",
+      "desc": "Function in uvm_sqr_if_base #(REQ,RSP) (Methods)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "uvm_tlm_fifo_base #(T)",
+      "src": "src_view/tlm1/uvm_tlm_fifo_base.svh.html#L143",
+      "doc": "docs_view/tlm1/uvm_tlm_fifo_base-svh.html#uvm_tlm_fifo_base#(T).new",
+      "desc": "Function in uvm_tlm_fifo_base #(T) (Methods)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "TLM FIFO Classes",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L62",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#uvm_tlm_fifo#(T).new",
+      "desc": "Function in TLM FIFO Classes (uvm_tlm_fifo#(T))"
+    },
+    {
+      "name": "size",
+      "type": "function",
+      "category": "TLM FIFO Classes",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L79",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#uvm_tlm_fifo#(T).size",
+      "desc": "Function in TLM FIFO Classes (uvm_tlm_fifo#(T))"
+    },
+    {
+      "name": "used",
+      "type": "function",
+      "category": "TLM FIFO Classes",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L88",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#uvm_tlm_fifo#(T).used",
+      "desc": "Function in TLM FIFO Classes (uvm_tlm_fifo#(T))"
+    },
+    {
+      "name": "is_empty",
+      "type": "function",
+      "category": "TLM FIFO Classes",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L97",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#uvm_tlm_fifo#(T).is_empty",
+      "desc": "Function in TLM FIFO Classes (uvm_tlm_fifo#(T))"
+    },
+    {
+      "name": "is_full",
+      "type": "function",
+      "category": "TLM FIFO Classes",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L107",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#uvm_tlm_fifo#(T).is_full",
+      "desc": "Function in TLM FIFO Classes (uvm_tlm_fifo#(T))"
+    },
+    {
+      "name": "flush",
+      "type": "function",
+      "category": "TLM FIFO Classes",
+      "src": "src_view/tlm1/uvm_tlm_fifos.svh.html#L172",
+      "doc": "docs_view/tlm1/uvm_tlm_fifos-svh.html#uvm_tlm_fifo#(T).flush",
+      "desc": "Function in TLM FIFO Classes (uvm_tlm_fifo#(T))"
+    },
+    {
+      "name": "put",
+      "type": "task",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L59",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).put",
+      "desc": "Task in uvm_tlm_if_base #(T1,T2) (Blocking put)"
+    },
+    {
+      "name": "get",
+      "type": "task",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L76",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).get",
+      "desc": "Task in uvm_tlm_if_base #(T1,T2) (Blocking get)"
+    },
+    {
+      "name": "peek",
+      "type": "task",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L94",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).peek",
+      "desc": "Task in uvm_tlm_if_base #(T1,T2) (Blocking peek)"
+    },
+    {
+      "name": "try_put",
+      "type": "function",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L108",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).try_put",
+      "desc": "Function in uvm_tlm_if_base #(T1,T2) (Non-blocking put)"
+    },
+    {
+      "name": "can_put",
+      "type": "function",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L118",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).can_put",
+      "desc": "Function in uvm_tlm_if_base #(T1,T2) (Non-blocking put)"
+    },
+    {
+      "name": "try_get",
+      "type": "function",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L134",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).try_get",
+      "desc": "Function in uvm_tlm_if_base #(T1,T2) (Non-blocking get)"
+    },
+    {
+      "name": "can_get",
+      "type": "function",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L145",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).can_get",
+      "desc": "Function in uvm_tlm_if_base #(T1,T2) (Non-blocking get)"
+    },
+    {
+      "name": "try_peek",
+      "type": "function",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L162",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).try_peek",
+      "desc": "Function in uvm_tlm_if_base #(T1,T2) (Non-blocking peek)"
+    },
+    {
+      "name": "can_peek",
+      "type": "function",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L172",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).can_peek",
+      "desc": "Function in uvm_tlm_if_base #(T1,T2) (Non-blocking peek)"
+    },
+    {
+      "name": "transport",
+      "type": "task",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L185",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).transport",
+      "desc": "Task in uvm_tlm_if_base #(T1,T2) (Blocking transport)"
+    },
+    {
+      "name": "nb_transport",
+      "type": "function",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L200",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).nb_transport",
+      "desc": "Function in uvm_tlm_if_base #(T1,T2) (Non-blocking transport)"
+    },
+    {
+      "name": "write",
+      "type": "task",
+      "category": "uvm_tlm_if_base #(T1,T2)",
+      "src": "src_view/tlm1/uvm_tlm_ifs.svh.html#L213",
+      "doc": "docs_view/tlm1/uvm_tlm_ifs-svh.html#uvm_tlm_if_base#(T1,T2).write",
+      "desc": "Task in uvm_tlm_if_base #(T1,T2) (Analysis)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "TLM Channel Classes",
+      "src": "src_view/tlm1/uvm_tlm_req_rsp.svh.html#L203",
+      "doc": "docs_view/tlm1/uvm_tlm_req_rsp-svh.html#uvm_tlm_req_rsp_channel#(REQ,RSP).new",
+      "desc": "Function in TLM Channel Classes (uvm_tlm_req_rsp_channel #(REQ,RSP))"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "TLM2 Export Classes",
+      "src": "src_view/tlm2/uvm_tlm2_exports.svh.html#L33",
+      "doc": "docs_view/tlm2/uvm_tlm2_exports-svh.html#uvm_tlm_nb_transport_bw_export.new",
+      "desc": "Function in TLM2 Export Classes (uvm_tlm_nb_transport_bw_export)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L372",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.new",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_command",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L626",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_command",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_command",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L634",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_command",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "is_read",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L643",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.is_read",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_read",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L652",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_read",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "is_write",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L661",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.is_write",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_write",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L670",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_write",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_address",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L677",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_address",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_address",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_address",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_data",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L693",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_data",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_data",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L701",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_data",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_data_length",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_data_length",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_data_length",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L716",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_data_length",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_streaming_width",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_streaming_width",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_streaming_width",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L733",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_streaming_width",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_byte_enable",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L740",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_byte_enable",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_byte_enable",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L748",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_byte_enable",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_byte_enable_length",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_byte_enable_length",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_byte_enable_length",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L765",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_byte_enable_length",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_dmi_allowed",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L773",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_dmi_allowed",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "is_dmi_allowed",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L781",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.is_dmi_allowed",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_response_status",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L789",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_response_status",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_response_status",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L797",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_response_status",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "is_response_ok",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L806",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.is_response_ok",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "is_response_error",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L815",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.is_response_error",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_response_string",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L824",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_response_string",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "set_extension",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L853",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.set_extension",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_num_extensions",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L867",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_num_extensions",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_extension",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L877",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.get_extension",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "clear_extension",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L888",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.clear_extension",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "clear_extensions",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L900",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.clear_extensions",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "pre_randomize()",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.pre_randomize",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "post_randomize()",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_generic_payload.post_randomize",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_generic_payload)"
+    },
+    {
+      "name": "get_type_handle",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1039",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_extension_base.get_type_handle",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_extension_base)"
+    },
+    {
+      "name": "get_type_handle_name",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1043",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_extension_base.get_type_handle_name",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_extension_base)"
+    },
+    {
+      "name": "create",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L976",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_extension_base.create",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_extension_base)"
+    },
+    {
+      "name": "ID()",
+      "type": "function",
+      "category": "TLM Generic Payload &amp; Extensions",
+      "src": "src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103",
+      "doc": "docs_view/tlm2/uvm_tlm2_generic_payload-svh.html#uvm_tlm_extension.ID",
+      "desc": "Function in TLM Generic Payload &amp; Extensions (uvm_tlm_extension)"
+    },
+    {
+      "name": "nb_transport_fw",
+      "type": "function",
+      "category": "TLM2 Types",
+      "src": "src_view/tlm2/uvm_tlm2_ifs.svh.html#L107",
+      "doc": "docs_view/tlm2/uvm_tlm2_ifs-svh.html#uvm_tlm_if.nb_transport_fw",
+      "desc": "Function in TLM2 Types (uvm_tlm_if)"
+    },
+    {
+      "name": "nb_transport_bw",
+      "type": "function",
+      "category": "TLM2 Types",
+      "src": "src_view/tlm2/uvm_tlm2_ifs.svh.html#L149",
+      "doc": "docs_view/tlm2/uvm_tlm2_ifs-svh.html#uvm_tlm_if.nb_transport_bw",
+      "desc": "Function in TLM2 Types (uvm_tlm_if)"
+    },
+    {
+      "name": "b_transport",
+      "type": "task",
+      "category": "TLM2 Types",
+      "src": "src_view/tlm2/uvm_tlm2_ifs.svh.html#L172",
+      "doc": "docs_view/tlm2/uvm_tlm2_ifs-svh.html#uvm_tlm_if.b_transport",
+      "desc": "Task in TLM2 Types (uvm_tlm_if)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "TLM2 ports",
+      "src": "src_view/tlm2/uvm_tlm2_ports.svh.html#L34",
+      "doc": "docs_view/tlm2/uvm_tlm2_ports-svh.html#uvm_tlm_nb_transport_bw_port.new",
+      "desc": "Function in TLM2 ports (uvm_tlm_nb_transport_bw_port)"
+    },
+    {
+      "name": "new",
+      "type": "function",
+      "category": "TLM Sockets",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L61",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#uvm_tlm_b_initiator_socket.new",
+      "desc": "Function in TLM Sockets (uvm_tlm_b_initiator_socket)"
+    },
+    {
+      "name": "Connect",
+      "type": "function",
+      "category": "TLM Sockets",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L56",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#uvm_tlm_b_initiator_socket.Connect",
+      "desc": "Function in TLM Sockets (uvm_tlm_b_initiator_socket)"
+    },
+    {
+      "name": "connect",
+      "type": "function",
+      "category": "TLM Sockets",
+      "src": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L68",
+      "doc": "docs_view/tlm2/uvm_tlm2_sockets-svh.html#uvm_tlm_nb_target_socket.connect",
+      "desc": "Function in TLM Sockets (uvm_tlm_nb_target_socket)"
     }
   ],
   "docToSrc": {

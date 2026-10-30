@@ -309,6 +309,7 @@ FILE_SYMBOLS = {}
 SRC_TO_DOC_MAP = {}
 DOC_TO_SRC_MAP = {}
 DOC_HEADINGS_MAP = {}
+GLOBAL_DOC_ANCHOR_MAPS = {}
 
 def extract_doc_headings(html_text, rel_doc_path):
     """Extract ordered headings, methods, and groups for a documentation page."""
@@ -736,7 +737,9 @@ def modernize_doc_files():
     OUTPUT_DOCS_VIEW.mkdir(parents=True, exist_ok=True)
 
     # Pass 1: Build anchor to ID maps for all doc files
-    global_doc_anchor_maps = {}
+    global GLOBAL_DOC_ANCHOR_MAPS
+    GLOBAL_DOC_ANCHOR_MAPS = {}
+    global_doc_anchor_maps = GLOBAL_DOC_ANCHOR_MAPS
     for root, dirs, files in os.walk(DOCS_FILES_DIR):
         for f in sorted(files):
             if not f.endswith('.html'):
@@ -1818,6 +1821,177 @@ def build_search_index(categories):
                     'doc': f"docs_view/{clean_link}",
                     'src': src_link,
                     'desc': f"UVM Class Reference: {name}"
+                })
+
+    # 5. Extract methods from Methods*.html index files
+    method_index_files = sorted((DOCS_DIR / "index").glob("Methods*.html"))
+    tip_to_kind = {}
+    for mf in method_index_files:
+        try:
+            with open(mf, 'r', encoding='latin-1') as f:
+                m_html = f.read()
+        except Exception:
+            continue
+        for m in re.finditer(r'<div class=CToolTip id="?([^">]+)"?>([\s\S]*?)</div>\s*</div>', m_html):
+            tid = m.group(1).replace('"', '').strip()
+            body = m.group(2)
+            clean = re.sub(r'<[^>]+>', ' ', body)
+            if re.search(r'\btask\b', clean, re.IGNORECASE):
+                tip_to_kind[(mf.name, tid)] = 'task'
+            elif re.search(r'\bfunction\b', clean, re.IGNORECASE):
+                tip_to_kind[(mf.name, tid)] = 'function'
+
+    known_tasks = {
+        'run_phase', 'pre_reset_phase', 'reset_phase', 'post_reset_phase',
+        'pre_configure_phase', 'configure_phase', 'post_configure_phase',
+        'pre_main_phase', 'main_phase', 'post_main_phase',
+        'pre_shutdown_phase', 'shutdown_phase', 'post_shutdown_phase',
+        'body', 'pre_body', 'post_body', 'pre_do', 'mid_do', 'post_do',
+        'wait_for', 'wait_for_relevant', 'get_next_item', 'try_next_item', 'item_done',
+        'wait_for_sequences', 'do_read', 'do_write', 'read', 'write', 'get', 'put', 'peek',
+        'transport', 'b_transport', 'execute', 'run', 'wait_trigger', 'wait_ptrigger'
+    }
+
+    seen_methods = set()
+    for mf in method_index_files:
+        try:
+            with open(mf, 'r', encoding='latin-1') as f:
+                c_html = f.read()
+        except Exception:
+            continue
+
+        matches = re.finditer(r'<span class=ISymbol>([^<]+)</span>\s*<div class=ISubIndex>([\s\S]*?)</div>', c_html)
+        for m in matches:
+            mname = m.group(1).strip()
+            sub_html = m.group(2)
+            link_matches = re.finditer(r'<a\s+href="([^"]+)"(?:[^>]*onMouseOver="ShowTip\(event,\s*\'([^\']+)\'[^"]*")?[^>]*class=IParent>([^<]+)</a>', sub_html)
+            for lm in link_matches:
+                href = lm.group(1)
+                tt_id = lm.group(2)
+                parent_class = lm.group(3).strip()
+                clean_link = href.replace('../files/', '')
+                parts = clean_link.split('#', 1)
+                file_part = parts[0]
+                raw_anchor = parts[1] if len(parts) > 1 else ''
+
+                if not (OUTPUT_DOCS_VIEW / file_part).exists():
+                    continue
+
+                dedup_key = (mname, parent_class)
+                if dedup_key in seen_methods:
+                    continue
+                seen_methods.add(dedup_key)
+
+                # Determine whether it is a task or a function
+                mkind = None
+                if tt_id and (mf.name, tt_id) in tip_to_kind:
+                    mkind = tip_to_kind[(mf.name, tt_id)]
+
+                target_id = raw_anchor
+                doc_map = GLOBAL_DOC_ANCHOR_MAPS.get(file_part, {})
+                if raw_anchor in doc_map:
+                    target_id = doc_map[raw_anchor]
+                else:
+                    clean_anchor = re.sub(r'#\([^)]*\)', '', raw_anchor)
+                    if clean_anchor in doc_map:
+                        target_id = doc_map[clean_anchor]
+                    else:
+                        suffix = f".{mname}"
+                        found_id = None
+                        for a_key, a_val in doc_map.items():
+                            if a_key == mname or a_key.endswith(suffix):
+                                found_id = a_val
+                                break
+                        if found_id:
+                            target_id = found_id
+
+                doc_link = f"docs_view/{file_part}#{target_id}" if target_id else f"docs_view/{file_part}"
+
+                src_link = None
+                src_rel = DOC_TO_SRC_MAP.get(file_part)
+                if src_rel:
+                    syms = FILE_SYMBOLS.get(src_rel, [])
+                    sym_match = next((s for s in syms if s['name'] == mname and s['type'] in ('task', 'function')), None)
+                    if not sym_match:
+                        sym_match = next((s for s in syms if s['name'] == mname), None)
+                    if sym_match:
+                        src_link = f"src_view/{src_rel}.html#L{sym_match['line']}"
+                        if not mkind or mkind == 'unknown':
+                            if sym_match['type'] in ('task', 'function'):
+                                mkind = sym_match['type']
+                    else:
+                        cls_match = next((s for s in syms if s['type'] == 'class'), None)
+                        line_no = cls_match['line'] if cls_match else 1
+                        src_link = f"src_view/{src_rel}.html#L{line_no}"
+
+                if not mkind or mkind == 'unknown':
+                    if mname in known_tasks:
+                        mkind = 'task'
+                    else:
+                        mkind = 'function'
+
+                desc_label = 'Task' if mkind == 'task' else 'Function'
+                search_items.append({
+                    'name': mname,
+                    'type': mkind,
+                    'category': parent_class,
+                    'src': src_link,
+                    'doc': doc_link,
+                    'desc': f"{desc_label} in {parent_class}"
+                })
+
+    # 6. Complement with any methods from DOC_HEADINGS_MAP not yet indexed
+    for doc_key, headings in DOC_HEADINGS_MAP.items():
+        doc_rel = doc_key.replace("docs_view/", "")
+        class_name = None
+        for h in headings:
+            if h.get('type') == 'main':
+                class_name = h.get('title')
+                break
+        if not class_name:
+            class_name = doc_rel.split('/')[-1].replace('-svh.html', '').replace('-txt.html', '')
+
+        for h in headings:
+            if h.get('type') == 'method':
+                mname = h.get('title')
+                if not mname:
+                    continue
+                dedup_key = (mname, class_name)
+                if dedup_key in seen_methods:
+                    continue
+                seen_methods.add(dedup_key)
+
+                anchor = h.get('anchor', '')
+                doc_link = f"{doc_key}#{anchor}" if anchor else doc_key
+
+                mkind = 'function'
+                src_link = None
+                src_rel = DOC_TO_SRC_MAP.get(doc_rel)
+                if src_rel:
+                    syms = FILE_SYMBOLS.get(src_rel, [])
+                    sym_match = next((s for s in syms if s['name'] == mname and s['type'] in ('task', 'function')), None)
+                    if not sym_match:
+                        sym_match = next((s for s in syms if s['name'] == mname), None)
+                    if sym_match:
+                        src_link = f"src_view/{src_rel}.html#L{sym_match['line']}"
+                        if sym_match['type'] in ('task', 'function'):
+                            mkind = sym_match['type']
+                    else:
+                        cls_match = next((s for s in syms if s['type'] == 'class'), None)
+                        line_no = cls_match['line'] if cls_match else 1
+                        src_link = f"src_view/{src_rel}.html#L{line_no}"
+
+                if mkind == 'function' and mname in known_tasks:
+                    mkind = 'task'
+
+                desc_label = 'Task' if mkind == 'task' else 'Function'
+                search_items.append({
+                    'name': mname,
+                    'type': mkind,
+                    'category': class_name,
+                    'src': src_link,
+                    'doc': doc_link,
+                    'desc': f"{desc_label} in {class_name}" + (f" ({h['group']})" if h.get('group') else "")
                 })
 
     return search_items
