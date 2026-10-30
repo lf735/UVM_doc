@@ -582,18 +582,90 @@
       // Smooth scroll helper
       let isManualScrolling = false;
       let manualScrollTimer = null;
+      let pendingTargetEl = null;
+
+      function onManualScrollDone() {
+        isManualScrolling = false;
+        pendingTargetEl = null;
+        updateScrollSpy();
+      }
+
+      function startManualScroll(duration) {
+        isManualScrolling = true;
+        clearTimeout(manualScrollTimer);
+        manualScrollTimer = setTimeout(checkAndCorrectScroll, duration || 1800);
+      }
+
+      function getTargetScrollY(targetEl) {
+        if (!targetEl) return 0;
+        const rect = targetEl.getBoundingClientRect();
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        return Math.max(0, currentScroll + rect.top - 24);
+      }
+
+      function performScroll(targetY) {
+        const scrollEl = document.scrollingElement || document.documentElement || document.body;
+        try {
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+        } catch (e) {
+          window.scrollTo(0, targetY);
+        }
+        if (scrollEl && Math.abs(scrollEl.scrollTop - targetY) > 5) {
+          try {
+            scrollEl.scrollTo({ top: targetY, behavior: 'smooth' });
+          } catch (e) {
+            scrollEl.scrollTop = targetY;
+          }
+        }
+      }
+
+      function checkAndCorrectScroll() {
+        if (!pendingTargetEl) {
+          onManualScrollDone();
+          return;
+        }
+        const targetEl = pendingTargetEl;
+        const rect = targetEl.getBoundingClientRect();
+        // If still more than 6px away from top: 24px, perform an instant/exact scroll to lock it in
+        if (Math.abs(rect.top - 24) > 6) {
+          const adjustedY = getTargetScrollY(targetEl);
+          performScroll(adjustedY);
+          pendingTargetEl = null;
+          setTimeout(onManualScrollDone, 100);
+        } else {
+          onManualScrollDone();
+        }
+      }
 
       function scrollToElement(targetEl) {
         if (!targetEl) return;
-        try {
-          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } catch (e) {
-          targetEl.scrollIntoView(true);
-        }
+        const targetY = getTargetScrollY(targetEl);
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const distance = Math.abs(currentScroll - targetY);
+
+        pendingTargetEl = targetEl;
+        startManualScroll(Math.min(2400, Math.max(600, distance * 0.15 + 400)));
+        performScroll(targetY);
+
         targetEl.classList.add('doc-target-highlight');
         setTimeout(function() {
           targetEl.classList.remove('doc-target-highlight');
         }, 1600);
+      }
+
+      function scrollTocToItem(linkEl) {
+        if (!linkEl || !tocSidebar) return;
+        const sidebarRect = tocSidebar.getBoundingClientRect();
+        const linkRect = linkEl.getBoundingClientRect();
+        if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
+          const currentScroll = tocSidebar.scrollTop;
+          const targetOffset = linkRect.top - sidebarRect.top + currentScroll - (sidebarRect.height / 2);
+          try {
+            tocSidebar.scrollTo({ top: Math.max(0, targetOffset), behavior: 'smooth' });
+          } catch (e) {
+            tocSidebar.scrollTop = Math.max(0, targetOffset);
+          }
+        }
       }
 
       // Click on any TOC link
@@ -601,8 +673,6 @@
       tocLinks.forEach(function(link) {
         link.addEventListener('click', function(e) {
           e.preventDefault();
-          isManualScrolling = true;
-          clearTimeout(manualScrollTimer);
 
           const targetId = link.getAttribute('data-target-id');
           const target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
@@ -621,10 +691,6 @@
           if (target) {
             scrollToElement(target);
           }
-
-          manualScrollTimer = setTimeout(function() {
-            isManualScrolling = false;
-          }, 800);
         });
       });
 
@@ -653,12 +719,7 @@
           }
           if (target) {
             e.preventDefault();
-            isManualScrolling = true;
-            clearTimeout(manualScrollTimer);
             scrollToElement(target);
-            manualScrollTimer = setTimeout(function() {
-              isManualScrolling = false;
-            }, 800);
 
             const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
             try {
@@ -675,6 +736,7 @@
                   pB.classList.remove('collapsed');
                   updateToggleAllBtn();
                 }
+                scrollTocToItem(mLink);
               }
             }
           }
@@ -759,7 +821,7 @@
             updateToggleAllBtn();
           }
 
-          activeItem.link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          scrollTocToItem(activeItem.link);
 
           // Sync active section to parent window (left sidebar navigation)
           if (window.parent && window.parent !== window) {
@@ -775,7 +837,19 @@
         }
       }
 
+      window.addEventListener('scrollend', function() {
+        if (isManualScrolling) {
+          clearTimeout(manualScrollTimer);
+          checkAndCorrectScroll();
+        }
+      });
+
       window.addEventListener('scroll', function() {
+        if (isManualScrolling) {
+          clearTimeout(manualScrollTimer);
+          manualScrollTimer = setTimeout(checkAndCorrectScroll, 160);
+          return;
+        }
         if (scrollTimer) return;
         scrollTimer = requestAnimationFrame(function() {
           updateScrollSpy();
@@ -818,10 +892,7 @@
             target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
           }
           if (target) {
-            isManualScrolling = true;
-            clearTimeout(manualScrollTimer);
             scrollToElement(target);
-            manualScrollTimer = setTimeout(function() { isManualScrolling = false; }, 800);
             const targetNavId = target.id || target.getAttribute('data-doc-topic');
             if (tocNav && targetNavId) {
               const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]');
@@ -833,6 +904,7 @@
                   pB.classList.remove('collapsed');
                   updateToggleAllBtn();
                 }
+                scrollTocToItem(mLink);
               }
             }
           }
