@@ -109,7 +109,7 @@ Chaque résultat de recherche est structuré pour vous donner une vision complè
 
 ## 5. Ergonomie de la Fenêtre de Recherche
 
-- **Fenêtre Agrandie & Confortable** : La modale occupe jusqu'à 860px de largeur et 82vh de hauteur pour une lecture claire des snippets.
+- **Fenêtre Agrandie & Confortable** : La modale occupe jusqu'à 860px de largeur et 90vh de hauteur pour une lecture claire et aérée des snippets et des sections.
 - **Champ Multi-Lignes Automatique** : Le champ de saisie s'élargit verticalement à mesure que vous tapez des questions longues ou collez du texte. Vous pouvez insérer des sauts de ligne avec <kbd>Shift</kbd> + <kbd>Entrée</kbd>.
 - **Sécurité Anti-Fermeture Accidentelle** : La modale ne se ferme que si un clic complet (appui et relâchement) est effectué à l'extérieur. Si vous sélectionnez du texte à la souris et relâchez le curseur en dehors, la modale reste ouverte.
 5. **Navigation au Clic** :

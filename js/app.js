@@ -1194,9 +1194,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
         if (modalAiEnabled) {
           renderPromptChips();
-          if (modalSearchPrompts) modalSearchPrompts.style.display = 'block';
+          if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
+          if (searchResults) searchResults.style.display = 'none';
         } else {
           if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+          if (searchResults) searchResults.style.display = 'block';
         }
         searchInput.focus();
         searchSelectedIndex = -1;
@@ -1208,6 +1210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchModal.classList.remove('open');
         if (modalAiLoading) modalAiLoading.style.display = 'none';
         if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+        if (searchResults) searchResults.style.display = 'block';
         if (window.UVMRagEngine) {
           window.UVMRagEngine.unloadPipeline();
         }
@@ -1238,9 +1241,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let html = '';
         prompts.slice(0, 15).forEach(p => {
-          html += `<button type="button" class="prompt-chip" data-query="${escapeHtml(p.query)}" title="${escapeHtml(p.category)} : cliquer pour poser la question">
-            <span>${escapeHtml(p.query)}</span>
-          </button>`;
+          html += `
+            <button type="button" class="prompt-chip" data-query="${escapeHtml(p.query)}" title="${escapeHtml(p.category)} : cliquer pour poser cette question">
+              <div class="prompt-chip-top">
+                <span class="prompt-chip-cat">${escapeHtml(p.category)}</span>
+                <span class="prompt-chip-icon">↗</span>
+              </div>
+              <span class="prompt-chip-text">${escapeHtml(p.query)}</span>
+            </button>
+          `;
         });
         promptsChips.innerHTML = html;
         promptsChips.querySelectorAll('.prompt-chip').forEach(chip => {
@@ -1251,6 +1260,7 @@ document.addEventListener('DOMContentLoaded', () => {
               adjustSearchInputHeight();
               if (modalSearchClear) modalSearchClear.style.display = 'inline-flex';
               if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+              if (searchResults) searchResults.style.display = 'block';
               searchInput.focus();
               executeSearch(query);
             }
@@ -1385,9 +1395,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const query = searchInput ? searchInput.value.trim() : '';
         if (modalAiEnabled && !query) {
           renderPromptChips();
-          if (modalSearchPrompts) modalSearchPrompts.style.display = 'block';
+          if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
+          if (searchResults) searchResults.style.display = 'none';
         } else {
           if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+          if (searchResults) searchResults.style.display = 'block';
         }
 
         executeSearch(searchInput ? searchInput.value : '');
@@ -1684,7 +1696,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const trimmed = (query || '').trim();
           if (!trimmed) {
             renderPromptChips();
-            if (modalSearchPrompts) modalSearchPrompts.style.display = 'block';
+            if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
+            if (searchResults) searchResults.style.display = 'none';
             searchResults.innerHTML = '';
             filteredSearchResults = [];
             searchSelectedIndex = -1;
@@ -1692,6 +1705,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+          if (searchResults) searchResults.style.display = 'block';
 
           const searchId = ++activeAiSearchId;
 
@@ -1838,6 +1852,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mode 2: Standard Exact / Regex / Case Search
         // ==========================================
         if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+        if (searchResults) searchResults.style.display = 'block';
         if (modalAiLoading) modalAiLoading.style.display = 'none';
 
         if (typeof UVM_DATA === 'undefined') {
