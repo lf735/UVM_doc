@@ -110,7 +110,18 @@
 
       <div class="sidebar-filter">
         <div class="sidebar-filter-row">
-          <input type="text" id="sidebar-filter" class="filter-input" placeholder="Filter current view...">
+          <div class="sidebar-input-wrapper">
+            <input type="text" id="sidebar-filter" class="filter-input" placeholder="Filter current view..." autocomplete="off">
+            <button type="button" id="sidebar-filter-clear" class="search-clear-btn" title="Clear filter (Esc)" aria-label="Clear filter" style="display:none">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+            <button type="button" id="sidebar-filter-regex" class="search-option-btn" title="Use Regular Expression (Alt+R)" aria-label="Use Regular Expression">
+              <span>.*</span>
+            </button>
+          </div>
           <button type="button" id="sidebar-toggle-all" class="sidebar-toggle-all-btn" title="Collapse all sections">
             <svg class="sidebar-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2">
@@ -118,6 +129,13 @@
             </svg>
             <span class="sidebar-toggle-text">Collapse all</span>
           </button>
+        </div>
+        <div class="sidebar-filter-pills" id="sidebar-filter-pills">
+          <button class="sidebar-pill active" data-type="all">All</button>
+          <button class="sidebar-pill" data-type="class">Classes</button>
+          <button class="sidebar-pill" data-type="function">Functions</button>
+          <button class="sidebar-pill" data-type="task">Tasks</button>
+          <button class="sidebar-pill" data-type="macro">Macros</button>
         </div>
       </div>
 
@@ -192,7 +210,19 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2" />
         </svg>
         <input type="text" id="modal-search-input" class="modal-search-input"
-          placeholder="Search classes, methods, macros, source files..." autocomplete="off">
+          placeholder="Search classes, functions, tasks, macros, files..." autocomplete="off">
+        <button type="button" id="modal-search-clear" class="search-clear-btn" title="Clear search (Esc)" aria-label="Clear search" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <button type="button" id="modal-search-case" class="search-option-btn" title="Match Case (Alt+C)" aria-label="Match Case">
+          <span>Aa</span>
+        </button>
+        <button type="button" id="modal-search-regex" class="search-option-btn" title="Use Regular Expression (Alt+R)" aria-label="Use Regular Expression">
+          <span>.*</span>
+        </button>
         <kbd class="search-kbd">ESC</kbd>
       </div>
 

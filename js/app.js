@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const sidebar = document.getElementById('sidebar');
   const sidebarContent = document.getElementById('sidebar-content');
   const sidebarFilter = document.getElementById('sidebar-filter');
+  const sidebarFilterClear = document.getElementById('sidebar-filter-clear');
+  const sidebarFilterRegex = document.getElementById('sidebar-filter-regex');
+  const sidebarPills = document.querySelectorAll('.sidebar-pill');
   const sidebarToggleAll = document.getElementById('sidebar-toggle-all');
   const splitDivider = document.getElementById('split-divider');
 
@@ -27,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('modal-search-input');
   const searchResults = document.getElementById('modal-search-results');
   const searchFilterPills = document.querySelectorAll('.filter-pill');
+  const modalSearchClear = document.getElementById('modal-search-clear');
+  const modalSearchCase = document.getElementById('modal-search-case');
+  const modalSearchRegex = document.getElementById('modal-search-regex');
+  const modalSearchHeader = document.querySelector('.modal-search-header');
 
   // State
   let currentMode = 'docs'; // 'docs' | 'source' | 'split'
@@ -34,6 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentSrcUrl = 'src_view/comps/uvm_driver.svh.html#L44';
   let activeSidebarTab = 'docs'; // 'docs' | 'source' | 'index'
   let searchFilterType = 'all';
+  let sidebarFilterType = 'all';
+  let modalRegexEnabled = false;
+  let modalCaseSensitive = false;
+  let sidebarRegexEnabled = false;
   let searchSelectedIndex = -1;
   let filteredSearchResults = [];
 
@@ -402,6 +413,193 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // =========================================================================
+      // Matcher & Multi-word / Regex Search Utilities
+      // =========================================================================
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+
+      function getQueryMatcher(rawQuery, isRegex, isCaseSensitive, errorTargetEl) {
+        if (!rawQuery) {
+          if (errorTargetEl) errorTargetEl.classList.remove('regex-error');
+          return null;
+        }
+        if (isRegex) {
+          try {
+            const flags = isCaseSensitive ? '' : 'i';
+            const re = new RegExp(rawQuery, flags);
+            if (errorTargetEl) errorTargetEl.classList.remove('regex-error');
+            return { type: 'regex', regex: re, valid: true, raw: rawQuery, isCaseSensitive };
+          } catch (err) {
+            if (errorTargetEl) errorTargetEl.classList.add('regex-error');
+            return { type: 'regex', regex: null, valid: false, error: err.message, raw: rawQuery, isCaseSensitive };
+          }
+        }
+        if (errorTargetEl) errorTargetEl.classList.remove('regex-error');
+        const clean = isCaseSensitive ? rawQuery.trim() : rawQuery.toLowerCase().trim();
+        const words = clean.split(/[\s:.]+/).filter(Boolean);
+        return { type: 'words', words, clean, isCaseSensitive, raw: rawQuery, valid: true };
+      }
+
+      function matchSymbolItem(item, matcher) {
+        if (!matcher) return { match: true, score: 0 };
+        const name = item.name || '';
+        const cat = item.category || '';
+        const desc = item.desc || '';
+
+        if (matcher.type === 'regex') {
+          if (!matcher.valid || !matcher.regex) return { match: false, score: 0 };
+          const re = matcher.regex;
+          const fullColon = cat ? `${cat}::${name}` : name;
+          const fullDot = cat ? `${cat}.${name}` : name;
+          const fullSpace = cat ? `${cat} ${name}` : name;
+
+          if (re.test(name)) return { match: true, score: 1000 };
+          if (re.test(fullColon) || re.test(fullDot)) return { match: true, score: 900 };
+          if (re.test(fullSpace)) return { match: true, score: 800 };
+          if (re.test(cat)) return { match: true, score: 600 };
+          if (re.test(desc)) return { match: true, score: 300 };
+          return { match: false, score: 0 };
+        }
+
+        // Multi-word mode: matches name, class (category), or two parts of expression
+        const words = matcher.words;
+        if (words.length === 0) return { match: true, score: 0 };
+
+        const targetName = matcher.isCaseSensitive ? name : name.toLowerCase();
+        const targetCat = matcher.isCaseSensitive ? cat : cat.toLowerCase();
+        const targetDesc = matcher.isCaseSensitive ? desc : desc.toLowerCase();
+        const cleanQuery = matcher.clean;
+
+        // Check if every word appears in name, category, or description
+        const combined = `${targetName} ${targetCat} ${targetDesc}`;
+        const allFound = words.every(w => combined.includes(w));
+        if (!allFound) return { match: false, score: 0 };
+
+        // Calculate score based on where words were matched
+        let score = 0;
+        if (targetName === cleanQuery) {
+          score = 1000; // Exact match
+        } else if (targetName.startsWith(cleanQuery)) {
+          score = 900; // Prefix match
+        } else if (words.every(w => targetName.includes(w))) {
+          // 2 parties de la même expression (ex: "get" & "data" dans "get_trigger_data")
+          score = 800;
+        } else if (words.every(w => targetName.includes(w) || targetCat.includes(w))) {
+          // Mots répartis entre la classe et la méthode (ex: "component" et "build")
+          score = 700;
+        } else if (words.every(w => targetCat.includes(w))) {
+          // Tous les mots dans la classe
+          score = 500;
+        } else {
+          // Mots trouvés dans la description
+          score = 300;
+        }
+
+        return { match: true, score };
+      }
+
+      function highlightMatch(text, matcher) {
+        if (!text) return '';
+        const safeText = escapeHtml(text);
+        if (!matcher) return safeText;
+
+        if (matcher.type === 'regex') {
+          if (!matcher.valid || !matcher.regex) return safeText;
+          try {
+            const gFlags = (matcher.regex.flags || '') + (matcher.regex.flags.includes('g') ? '' : 'g');
+            const re = new RegExp(matcher.regex.source, gFlags);
+            return safeText.replace(re, m => `<strong style="color:var(--primary); text-decoration:underline">${m}</strong>`);
+          } catch (e) {
+            return safeText;
+          }
+        }
+
+        const words = matcher.words;
+        if (!words || words.length === 0) return safeText;
+        const escaped = words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).filter(Boolean);
+        if (escaped.length === 0) return safeText;
+        const pattern = new RegExp(`(${escaped.join('|')})`, matcher.isCaseSensitive ? 'g' : 'gi');
+        return safeText.replace(pattern, '<strong style="color:var(--primary); text-decoration:underline">$1</strong>');
+      }
+
+      function docItemMatchesMatcher(item, matcher) {
+        if (!matcher) {
+          if (sidebarFilterType === 'all') return true;
+          if (sidebarFilterType === 'class') {
+            return item.title && !item.title.includes('Package') && !item.title.includes('Overview');
+          }
+          if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docHeadings && item.href) {
+            const headings = UVM_DATA.docHeadings[item.href] || [];
+            return headings.some(h => {
+              if (sidebarFilterType === 'function' || sidebarFilterType === 'task') return h.type === 'method';
+              if (sidebarFilterType === 'macro') return h.type === 'macro';
+              return true;
+            });
+          }
+          return true;
+        }
+
+        const title = item.title || '';
+        if (matcher.type === 'regex') {
+          if (!matcher.valid || !matcher.regex) return false;
+          if (matcher.regex.test(title)) return true;
+          if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docHeadings && item.href) {
+            const headings = UVM_DATA.docHeadings[item.href] || [];
+            return headings.some(h => {
+              const hTitle = h.title || '';
+              const hGroup = h.group || '';
+              return matcher.regex.test(hTitle) || matcher.regex.test(`${title}::${hTitle}`) || matcher.regex.test(`${title} ${hTitle}`) || matcher.regex.test(hGroup);
+            });
+          }
+          return false;
+        }
+
+        // Multi-word mode:
+        const words = matcher.words;
+        if (words.length === 0) return true;
+        const lowerTitle = matcher.isCaseSensitive ? title : title.toLowerCase();
+
+        // If all words match in doc title (e.g. "uvm component")
+        if (words.every(w => lowerTitle.includes(w))) return true;
+
+        // If words match across title and method headings (e.g. "component build")
+        if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docHeadings && item.href) {
+          const headings = UVM_DATA.docHeadings[item.href] || [];
+          return headings.some(h => {
+            const hTitle = matcher.isCaseSensitive ? (h.title || '') : (h.title || '').toLowerCase();
+            const hGroup = matcher.isCaseSensitive ? (h.group || '') : (h.group || '').toLowerCase();
+            const combined = `${lowerTitle} ${hTitle} ${hGroup}`;
+            return words.every(w => combined.includes(w));
+          });
+        }
+
+        return false;
+      }
+
+      function sourceNodeMatches(node, matcher) {
+        if (!matcher) return true;
+        const name = node.name || '';
+        const path = node.path || '';
+
+        if (matcher.type === 'regex') {
+          if (!matcher.valid || !matcher.regex) return false;
+          return matcher.regex.test(name) || matcher.regex.test(path);
+        }
+
+        const words = matcher.words;
+        if (words.length === 0) return true;
+        const combined = (matcher.isCaseSensitive ? `${name} ${path}` : `${name} ${path}`.toLowerCase());
+        return words.every(w => combined.includes(w));
+      }
+
+      // =========================================================================
       // Sidebar Tabs & Navigation Rendering
       // =========================================================================
 
@@ -416,59 +614,100 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (sidebarFilter) {
-        sidebarFilter.addEventListener('input', () => {
+        sidebarFilter.addEventListener('input', (e) => {
+          if (sidebarFilterClear) {
+            sidebarFilterClear.style.display = e.target.value.length > 0 ? 'inline-flex' : 'none';
+          }
+          renderSidebar();
+        });
+
+        sidebarFilter.addEventListener('keydown', (e) => {
+          if (e.key === 'r' && e.altKey) {
+            e.preventDefault();
+            sidebarRegexEnabled = !sidebarRegexEnabled;
+            if (sidebarFilterRegex) sidebarFilterRegex.classList.toggle('active', sidebarRegexEnabled);
+            renderSidebar();
+          } else if (e.key === 'Escape') {
+            if (sidebarFilter.value.length > 0) {
+              e.preventDefault();
+              sidebarFilter.value = '';
+              if (sidebarFilterClear) sidebarFilterClear.style.display = 'none';
+              sidebarFilter.classList.remove('regex-error');
+              renderSidebar();
+            }
+          }
+        });
+      }
+
+      if (sidebarFilterClear) {
+        sidebarFilterClear.addEventListener('click', () => {
+          if (sidebarFilter) {
+            sidebarFilter.value = '';
+            sidebarFilterClear.style.display = 'none';
+            sidebarFilter.classList.remove('regex-error');
+            sidebarFilter.focus();
+            renderSidebar();
+          }
+        });
+      }
+
+      if (sidebarFilterRegex) {
+        sidebarFilterRegex.addEventListener('click', () => {
+          sidebarRegexEnabled = !sidebarRegexEnabled;
+          sidebarFilterRegex.classList.toggle('active', sidebarRegexEnabled);
           renderSidebar();
         });
       }
 
+      sidebarPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          sidebarPills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          sidebarFilterType = pill.getAttribute('data-type');
+          renderSidebar();
+        });
+      });
+
       function renderSidebar() {
         if (!sidebarContent || typeof UVM_DATA === 'undefined') return;
-        const query = (sidebarFilter ? sidebarFilter.value : '').toLowerCase().trim();
+        const rawQuery = sidebarFilter ? sidebarFilter.value : '';
 
         if (activeSidebarTab === 'docs') {
-          renderDocsMenu(query);
+          renderDocsMenu(rawQuery);
         } else if (activeSidebarTab === 'source') {
-          renderSourceTree(query);
+          renderSourceTree(rawQuery);
         } else if (activeSidebarTab === 'index') {
-          renderAlphabeticalIndex(query);
+          renderAlphabeticalIndex(rawQuery);
         }
       }
 
-      function itemMatchesQuery(item, query) {
-        if (!query) return true;
-        if (item.title && item.title.toLowerCase().includes(query)) return true;
-        if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docHeadings && item.href) {
-          const headings = UVM_DATA.docHeadings[item.href] || [];
-          return headings.some(h => (h.type === 'method' || h.type === 'group') && h.title && h.title.toLowerCase().includes(query));
-        }
-        return false;
-      }
-
-      function renderDocsMenu(query) {
+      function renderDocsMenu(rawQuery) {
         const categories = UVM_DATA.categories || [];
+        const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
         let html = '';
 
         categories.forEach(cat => {
           if (cat.type === 'file' || cat.type === 'index') {
-            const matches = itemMatchesQuery(cat, query);
+            const matches = docItemMatchesMatcher(cat, matcher);
             if (matches) {
               const isActive = currentDocUrl.includes(cat.href);
               html += `<div class="nav-single-item">
             <a href="#" data-doc-href="${cat.href}" class="nav-item-link ${isActive ? 'active' : ''}">
-              ${cat.title}
+              ${highlightMatch(cat.title, matcher)}
             </a>
           </div>`;
             }
           } else if (cat.type === 'group') {
-            const subItems = filterGroupItems(cat.children || [], query);
-            if (subItems.length > 0 || cat.title.toLowerCase().includes(query)) {
+            const subItems = filterGroupItems(cat.children || [], matcher);
+            const groupTitleMatches = matcher && matcher.type === 'words' && matcher.words.every(w => cat.title.toLowerCase().includes(w));
+            if (subItems.length > 0 || groupTitleMatches) {
               html += `<div class="nav-group">
             <div class="nav-group-header">
-              <span>${cat.title}</span>
+              <span>${highlightMatch(cat.title, matcher)}</span>
               <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
             <ul class="nav-group-items">
-              ${renderGroupItemsHtml(subItems)}
+              ${renderGroupItemsHtml(subItems, matcher)}
             </ul>
           </div>`;
             }
@@ -479,17 +718,20 @@ document.addEventListener('DOMContentLoaded', () => {
         attachSidebarListeners();
       }
 
-      function filterGroupItems(items, query) {
-        if (!query) return items;
+      function filterGroupItems(items, matcher) {
+        if (!matcher) {
+          if (sidebarFilterType === 'all') return items;
+        }
         const res = [];
         items.forEach(item => {
           if (item.type === 'file' || item.type === 'index') {
-            if (itemMatchesQuery(item, query)) {
+            if (docItemMatchesMatcher(item, matcher)) {
               res.push(item);
             }
           } else if (item.type === 'group') {
-            const subs = filterGroupItems(item.children || [], query);
-            if (subs.length > 0 || item.title.toLowerCase().includes(query)) {
+            const subs = filterGroupItems(item.children || [], matcher);
+            const titleMatches = matcher && matcher.type === 'words' && matcher.words.every(w => item.title.toLowerCase().includes(w));
+            if (subs.length > 0 || titleMatches) {
               res.push({ ...item, children: subs });
             }
           }
@@ -497,24 +739,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return res;
       }
 
-      function renderGroupItemsHtml(items) {
+      function renderGroupItemsHtml(items, matcher) {
         let out = '';
         items.forEach(item => {
           if (item.type === 'file' || item.type === 'index') {
             const isActive = currentDocUrl.includes(item.href);
             out += `<li>
           <a href="#" data-doc-href="${item.href}" class="nav-item-link ${isActive ? 'active' : ''}">
-            ${item.title}
+            ${highlightMatch(item.title, matcher)}
           </a>
         </li>`;
           } else if (item.type === 'group') {
             out += `<div class="nav-group" style="margin-left: 0.5rem">
           <div class="nav-group-header" style="font-size:0.775rem;">
-            <span>${item.title}</span>
+            <span>${highlightMatch(item.title, matcher)}</span>
             <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <ul class="nav-group-items">
-            ${renderGroupItemsHtml(item.children || [])}
+            ${renderGroupItemsHtml(item.children || [], matcher)}
           </ul>
         </div>`;
           }
@@ -522,27 +764,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return out;
       }
 
-      function renderSourceTree(query) {
+      function renderSourceTree(rawQuery) {
         const root = UVM_DATA.sourceTree || {};
+        const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
 
         function renderNode(node, depth) {
           if (node.type === 'file') {
-            if (!query || node.name.toLowerCase().includes(query) || (node.path && node.path.toLowerCase().includes(query))) {
+            if (sourceNodeMatches(node, matcher)) {
               const isActive = currentSrcUrl.includes(node.url);
               return `<div class="file-tree-item ${isActive ? 'active' : ''}" data-src-href="${node.url}" style="padding-left: ${depth * 12 + 10}px">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            <span>${node.name}</span>
+            <span>${highlightMatch(node.name, matcher)}</span>
           </div>`;
             }
             return '';
           } else if (node.type === 'dir') {
-            if (hasMatch(node, query)) {
+            if (hasMatch(node, matcher)) {
               const childrenHtml = (node.children || []).map(child => renderNode(child, depth + 1)).join('');
               return `<div class="nav-group">
             <div class="nav-group-header" style="padding-left: ${depth * 12 + 8}px">
               <span style="display:flex;align-items:center;gap:0.35rem;font-family:var(--font-mono)">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                ${node.name}
+                ${highlightMatch(node.name, matcher)}
               </span>
               <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
@@ -556,12 +799,11 @@ document.addEventListener('DOMContentLoaded', () => {
           return '';
         }
 
-        function hasMatch(node, q) {
-          if (!q) return true;
-          if (node.name.toLowerCase().includes(q)) return true;
-          if (node.path && node.path.toLowerCase().includes(q)) return true;
+        function hasMatch(node, matcher) {
+          if (!matcher) return true;
+          if (sourceNodeMatches(node, matcher)) return true;
           if (node.children) {
-            return node.children.some(c => hasMatch(c, q));
+            return node.children.some(c => hasMatch(c, matcher));
           }
           return false;
         }
@@ -571,33 +813,45 @@ document.addEventListener('DOMContentLoaded', () => {
         attachSidebarListeners();
       }
 
-      function renderAlphabeticalIndex(query) {
+      function renderAlphabeticalIndex(rawQuery) {
         const items = UVM_DATA.searchIndex || [];
-        const allSymbols = items.filter(x => x.type === 'class' || x.type === 'macro' || x.type === 'function' || x.type === 'task' || x.type === 'method');
-        let html = '';
+        const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
 
-        allSymbols
-          .filter(x => {
-            if (!query) return true;
-            return x.name.toLowerCase().includes(query) || (x.category && x.category.toLowerCase().includes(query));
-          })
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .forEach(item => {
-        const badgeClass = item.type === 'class' ? 'badge-class' :
-              (item.type === 'macro' ? 'badge-macro' :
-                (item.type === 'function' ? 'badge-function' :
-                  (item.type === 'task' ? 'badge-task' : 'badge-method')));
-            const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method';
-            const ownerInfo = item.category && isMethodLike ?
-              `<span class="az-symbol-owner" style="font-size:0.68rem; color:var(--text-muted); margin-left:auto; margin-right:0.35rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px;">${item.category}</span>` : '';
-            html += `<div class="nav-single-item">
-          <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" class="nav-item-link az-index-link" title="${item.desc || item.name}">
-            <span class="az-symbol-name">${item.name}</span>
-            ${ownerInfo}
-            <span class="res-badge ${badgeClass}">${item.type}</span>
-          </a>
-        </div>`;
-          });
+        const allSymbols = items.filter(x => {
+          if (sidebarFilterType !== 'all' && x.type !== sidebarFilterType) return false;
+          return x.type === 'class' || x.type === 'macro' || x.type === 'function' || x.type === 'task' || x.type === 'method';
+        });
+
+        const matchedSymbols = [];
+        allSymbols.forEach(item => {
+          const matchRes = matchSymbolItem(item, matcher);
+          if (matchRes.match) {
+            matchedSymbols.push({ item, score: matchRes.score });
+          }
+        });
+
+        matchedSymbols.sort((a, b) => {
+          if (b.score !== a.score) return b.score - a.score;
+          return a.item.name.localeCompare(b.item.name);
+        });
+
+        let html = '';
+        matchedSymbols.forEach(({ item }) => {
+          const badgeClass = item.type === 'class' ? 'badge-class' :
+            (item.type === 'macro' ? 'badge-macro' :
+              (item.type === 'function' ? 'badge-function' :
+                (item.type === 'task' ? 'badge-task' : 'badge-method')));
+          const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method';
+          const ownerInfo = item.category && isMethodLike ?
+            `<span class="az-symbol-owner" style="font-size:0.68rem; color:var(--text-muted); margin-left:auto; margin-right:0.35rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px;">${highlightMatch(item.category, matcher)}</span>` : '';
+          html += `<div class="nav-single-item">
+            <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" class="nav-item-link az-index-link" title="${item.desc || item.name}">
+              <span class="az-symbol-name">${highlightMatch(item.name, matcher)}</span>
+              ${ownerInfo}
+              <span class="res-badge ${badgeClass}">${item.type}</span>
+            </a>
+          </div>`;
+        });
 
         sidebarContent.innerHTML = html || '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem">No matching symbols</div>';
         attachSidebarListeners();
@@ -774,6 +1028,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!searchModal) return;
         searchModal.classList.add('open');
         searchInput.value = '';
+        if (modalSearchClear) modalSearchClear.style.display = 'none';
+        if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
+        if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
         searchInput.focus();
         searchSelectedIndex = -1;
         executeSearch('');
@@ -795,7 +1052,16 @@ document.addEventListener('DOMContentLoaded', () => {
           e.preventDefault();
           openSearchModal();
         } else if (e.key === 'Escape' && searchModal && searchModal.classList.contains('open')) {
-          closeSearchModal();
+          if (searchInput && searchInput.value.length > 0) {
+            e.preventDefault();
+            searchInput.value = '';
+            if (modalSearchClear) modalSearchClear.style.display = 'none';
+            if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
+            if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
+            executeSearch('');
+          } else {
+            closeSearchModal();
+          }
         }
       });
 
@@ -804,6 +1070,35 @@ document.addEventListener('DOMContentLoaded', () => {
           if (e.target === searchModal) {
             closeSearchModal();
           }
+        });
+      }
+
+      if (modalSearchClear) {
+        modalSearchClear.addEventListener('click', () => {
+          if (searchInput) {
+            searchInput.value = '';
+            modalSearchClear.style.display = 'none';
+            if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
+            if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
+            searchInput.focus();
+            executeSearch('');
+          }
+        });
+      }
+
+      if (modalSearchCase) {
+        modalSearchCase.addEventListener('click', () => {
+          modalCaseSensitive = !modalCaseSensitive;
+          modalSearchCase.classList.toggle('active', modalCaseSensitive);
+          executeSearch(searchInput ? searchInput.value : '');
+        });
+      }
+
+      if (modalSearchRegex) {
+        modalSearchRegex.addEventListener('click', () => {
+          modalRegexEnabled = !modalRegexEnabled;
+          modalSearchRegex.classList.toggle('active', modalRegexEnabled);
+          executeSearch(searchInput ? searchInput.value : '');
         });
       }
 
@@ -818,6 +1113,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
+          if (modalSearchClear) {
+            modalSearchClear.style.display = e.target.value.length > 0 ? 'inline-flex' : 'none';
+          }
           executeSearch(e.target.value);
         });
 
@@ -825,16 +1123,40 @@ document.addEventListener('DOMContentLoaded', () => {
           const items = searchResults.querySelectorAll('.search-result-item');
           if (e.key === 'ArrowDown') {
             e.preventDefault();
-            searchSelectedIndex = (searchSelectedIndex + 1) % items.length;
-            updateSelectedSearchItem(items);
+            if (items.length > 0) {
+              searchSelectedIndex = (searchSelectedIndex + 1) % items.length;
+              updateSelectedSearchItem(items);
+            }
           } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            searchSelectedIndex = (searchSelectedIndex - 1 + items.length) % items.length;
-            updateSelectedSearchItem(items);
+            if (items.length > 0) {
+              searchSelectedIndex = (searchSelectedIndex - 1 + items.length) % items.length;
+              updateSelectedSearchItem(items);
+            }
           } else if (e.key === 'Enter') {
             e.preventDefault();
             if (searchSelectedIndex >= 0 && searchSelectedIndex < filteredSearchResults.length) {
-              selectSearchResult(filteredSearchResults[searchSelectedIndex]);
+              selectSearchResult(filteredSearchResults[searchSelectedIndex].item);
+            }
+          } else if (e.key === 'r' && e.altKey) {
+            e.preventDefault();
+            modalRegexEnabled = !modalRegexEnabled;
+            if (modalSearchRegex) modalSearchRegex.classList.toggle('active', modalRegexEnabled);
+            executeSearch(searchInput.value);
+          } else if (e.key === 'c' && e.altKey) {
+            e.preventDefault();
+            modalCaseSensitive = !modalCaseSensitive;
+            if (modalSearchCase) modalSearchCase.classList.toggle('active', modalCaseSensitive);
+            executeSearch(searchInput.value);
+          } else if (e.key === 'Escape') {
+            if (searchInput.value.length > 0) {
+              e.preventDefault();
+              e.stopPropagation();
+              searchInput.value = '';
+              if (modalSearchClear) modalSearchClear.style.display = 'none';
+              if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
+              if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
+              executeSearch('');
             }
           }
         });
@@ -852,82 +1174,82 @@ document.addEventListener('DOMContentLoaded', () => {
       function executeSearch(query) {
         if (!searchResults || typeof UVM_DATA === 'undefined') return;
         const items = UVM_DATA.searchIndex || [];
-        const q = query.toLowerCase().trim();
-        const words = q.split(/[\s:.]+/).filter(Boolean);
+        const matcher = getQueryMatcher(query, modalRegexEnabled, modalCaseSensitive, modalSearchHeader);
 
-        filteredSearchResults = items.filter(item => {
+        if (modalSearchRegex) {
+          modalSearchRegex.classList.toggle('regex-error', matcher && matcher.type === 'regex' && !matcher.valid);
+        }
+
+        filteredSearchResults = [];
+        if (matcher && matcher.type === 'regex' && !matcher.valid) {
+          searchResults.innerHTML = `<li style="padding:1.5rem; text-align:center; color:#ef4444; font-size:0.875rem">
+            <strong>Invalid Regular Expression</strong><br>
+            <span style="font-size:0.775rem; color:var(--text-muted)">${escapeHtml(matcher.error)}</span>
+          </li>`;
+          searchSelectedIndex = -1;
+          return;
+        }
+
+        items.forEach(item => {
           if (searchFilterType !== 'all' && item.type !== searchFilterType) {
-            return false;
+            return;
           }
-          if (words.length === 0) return true;
-          const name = (item.name || '').toLowerCase();
-          const desc = (item.desc || '').toLowerCase();
-          const cat = (item.category || '').toLowerCase();
-          const combined = `${name} ${cat} ${desc}`;
-          return words.every(w => combined.includes(w));
-        }).sort((a, b) => {
-          if (!q) return 0;
-          const aname = (a.name || '').toLowerCase();
-          const bname = (b.name || '').toLowerCase();
-          // Exact name match first
-          if (aname === q && bname !== q) return -1;
-          if (bname === q && aname !== q) return 1;
-          // Prefix match on name second
-          if (aname.startsWith(q) && !bname.startsWith(q)) return -1;
-          if (bname.startsWith(q) && !aname.startsWith(q)) return 1;
-          // Classes before methods if exact name collision
-          const aIsMethod = a.type === 'function' || a.type === 'task' || a.type === 'method';
-          const bIsMethod = b.type === 'function' || b.type === 'task' || b.type === 'method';
-          if (a.type === 'class' && bIsMethod && aname === bname) return -1;
-          if (b.type === 'class' && aIsMethod && aname === bname) return 1;
-          return 0;
-        }).slice(0, 80); // limit to top 80 matches for performance
+          const res = matchSymbolItem(item, matcher);
+          if (res.match) {
+            filteredSearchResults.push({ item, score: res.score });
+          }
+        });
 
-        searchSelectedIndex = filteredSearchResults.length > 0 ? 0 : -1;
+        filteredSearchResults.sort((a, b) => {
+          if (b.score !== a.score) return b.score - a.score;
+          const aname = (a.item.name || '').toLowerCase();
+          const bname = (b.item.name || '').toLowerCase();
+          const aIsMethod = a.item.type === 'function' || a.item.type === 'task' || a.item.type === 'method';
+          const bIsMethod = b.item.type === 'function' || b.item.type === 'task' || b.item.type === 'method';
+          if (a.item.type === 'class' && bIsMethod && aname === bname) return -1;
+          if (b.item.type === 'class' && aIsMethod && aname === bname) return 1;
+          return aname.localeCompare(bname);
+        });
+
+        const displayResults = filteredSearchResults.slice(0, 80);
+        searchSelectedIndex = displayResults.length > 0 ? 0 : -1;
 
         let html = '';
-        filteredSearchResults.forEach((item, idx) => {
+        displayResults.forEach(({ item }, idx) => {
           const badgeClass = item.type === 'class' ? 'badge-class' :
             (item.type === 'macro' ? 'badge-macro' :
-          (item.type === 'function' ? 'badge-function' :
-            (item.type === 'task' ? 'badge-task' :
-              (item.type === 'method' ? 'badge-method' : 'badge-file'))));
-        html += `<li class="search-result-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}">
-        <div class="res-main">
-          <span class="res-name">${highlightMatch(item.name, q)}</span>
-          <span class="res-desc">${item.desc || ''}</span>
-        </div>
-        <div style="display:flex; align-items:center; gap:0.5rem">
-          <span class="res-badge ${badgeClass}">${item.type}</span>
-          ${item.src ? '<span style="color:var(--text-muted); font-size:0.75rem;">Source ↗</span>' : ''}
-        </div>
-      </li>`;
-      });
+              (item.type === 'function' ? 'badge-function' :
+                (item.type === 'task' ? 'badge-task' :
+                  (item.type === 'method' ? 'badge-method' : 'badge-file'))));
 
-searchResults.innerHTML = html || '<li style="padding:2rem; text-align:center; color:var(--text-muted); font-size:0.875rem">No matching items found</li>';
+          const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method';
+          const categoryTag = item.category && isMethodLike ?
+            `<span style="color:var(--text-muted); font-size:0.8rem; margin-right:0.35rem">${highlightMatch(item.category, matcher)} ::</span>` : '';
 
-searchResults.querySelectorAll('.search-result-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const idx = parseInt(item.getAttribute('data-index'), 10);
-    selectSearchResult(filteredSearchResults[idx]);
-  });
-});
-  }
+          html += `<li class="search-result-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}">
+            <div class="res-main">
+              <div class="res-title-row" style="display:flex; align-items:center;">
+                ${categoryTag}
+                <span class="res-name">${highlightMatch(item.name, matcher)}</span>
+              </div>
+              <span class="res-desc">${highlightMatch(item.desc || '', matcher)}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem">
+              <span class="res-badge ${badgeClass}">${item.type}</span>
+              ${item.src ? '<span style="color:var(--text-muted); font-size:0.75rem;">Source ↗</span>' : ''}
+            </div>
+          </li>`;
+        });
 
-function highlightMatch(text, query) {
-  if (!query || !text) return text;
-  const words = query.toLowerCase().split(/[\s:.]+/).filter(Boolean);
-  if (words.length === 0) return text;
-  for (const w of words) {
-    const idx = text.toLowerCase().indexOf(w);
-    if (idx !== -1) {
-      return text.substring(0, idx) +
-        `<strong style="color:var(--primary); text-decoration:underline">${text.substring(idx, idx + w.length)}</strong>` +
-        text.substring(idx + w.length);
-    }
-  }
-  return text;
-}
+        searchResults.innerHTML = html || '<li style="padding:2rem; text-align:center; color:var(--text-muted); font-size:0.875rem">No matching items found</li>';
+
+        searchResults.querySelectorAll('.search-result-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const idx = parseInt(item.getAttribute('data-index'), 10);
+            selectSearchResult(displayResults[idx].item);
+          });
+        });
+      }
 
 function selectSearchResult(item) {
   if (!item) return;
