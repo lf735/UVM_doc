@@ -496,16 +496,20 @@
       if (!e.data || typeof e.data !== 'object') return;
       if (e.data.type === 'scrollToSection') {
         const anchor = e.data.anchor;
-        const targetId = e.data.id;
+        const targetId = e.data.id || anchor;
         let target = null;
-        if (anchor) {
-          if (anchor === 'MainTopic' || anchor === 'Overview') {
+        if (targetId) {
+          target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+        }
+        if (!target && anchor) {
+          if (anchor === 'MainTopic' || anchor === 'Overview' || anchor === 'doc-nav-main') {
             target = document.getElementById('doc-nav-main') || document.getElementById('MainTopic');
-          } else if (anchor === 'Summary') {
+          } else if (anchor === 'Summary' || anchor === 'doc-nav-summary') {
             target = document.getElementById('doc-nav-summary') || document.querySelector('.Summary');
           } else {
             try {
-              target = document.querySelector('[data-anchor="' + CSS.escape(anchor) + '"]') ||
+              target = document.getElementById(anchor) ||
+                document.querySelector('[data-anchor="' + CSS.escape(anchor) + '"]') ||
                 document.querySelector('a[name="' + CSS.escape(anchor) + '"]');
             } catch (err) { }
             if (!target) {
@@ -517,13 +521,10 @@
                 }
               }
             }
-            if (target && target.tagName === 'A' && target.closest) {
-              target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-            }
           }
         }
-        if (!target && targetId) {
-          target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
+        if (target && target.tagName === 'A' && target.closest) {
+          target = target.closest('#Content > div') || target.closest('.CTopic') || target;
         }
         if (target) {
           scrollToElement(target);
@@ -560,6 +561,12 @@
 
     window.addEventListener('hashchange', function () {
       handleHashNav(window.location.hash);
+    });
+
+    window.addEventListener('load', function () {
+      if (window.location.hash) {
+        handleHashNav(window.location.hash);
+      }
     });
 
     setTimeout(updateScrollSpy, 120);
@@ -614,17 +621,52 @@
     }
   } catch (e) { }
 
-  // Inform parent that doc is loaded
+  // Inform parent that doc is loaded (including exact anchor hash)
   try {
     if (window.parent && window.parent !== window) {
       const match = window.location.pathname.match(/(docs_view\/.*)$/);
-      const docRel = match ? match[1] : '';
+      const docRel = match ? (match[1] + (window.location.hash || '')) : '';
       window.parent.postMessage({
         type: 'docNavigated',
         url: docRel
       }, '*');
     }
   } catch (e) { }
+
+  // Handle click on derived-class-pill for exact in-page or cross-page jump
+  document.addEventListener('click', function (e) {
+    const pill = e.target.closest('.derived-class-pill');
+    if (!pill) return;
+    const href = pill.getAttribute('href');
+    if (!href || pill.classList.contains('src-code-link')) return;
+
+    try {
+      const targetUrl = new URL(href, window.location.href);
+      const isSamePage = targetUrl.pathname === window.location.pathname;
+      const hash = targetUrl.hash;
+
+      if (isSamePage && hash) {
+        e.preventDefault();
+        history.pushState(null, '', hash);
+        const raw = decodeURIComponent(hash.replace(/^#/, ''));
+        window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
+        return;
+      }
+
+      if (window.parent && window.parent !== window) {
+        e.preventDefault();
+        const match = targetUrl.pathname.match(/(docs_view\/.*)$/);
+        if (match) {
+          const fullDocRel = match[1] + hash;
+          window.parent.postMessage({
+            type: 'openDocView',
+            url: fullDocRel
+          }, '*');
+          return;
+        }
+      }
+    } catch (err) { }
+  });
 
   // Breadcrumb home navigation (prevent recursive iframe embedding)
   document.addEventListener('click', function (e) {

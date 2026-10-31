@@ -767,7 +767,8 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
                 for child in sorted(children):
                     if child in CLASS_TO_DOC_MAP:
                         ch_doc = CLASS_TO_DOC_MAP[child]
-                        pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#doc-nav-main" class="derived-class-pill" title="Documentation for {child}">{child}</a>')
+                        target_id = GLOBAL_DOC_ANCHOR_MAPS.get(ch_doc, {}).get(child, 'doc-nav-main')
+                        pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#{target_id}" class="derived-class-pill" data-target-id="{target_id}" title="Documentation for {child}">{child}</a>')
                     elif child in UVM_DB.get('classes', {}):
                         ch_f = UVM_DB['classes'][child]['file']
                         ch_l = UVM_DB['classes'][child]['start_line']
@@ -1046,13 +1047,14 @@ def modernize_doc_files():
                 src_view_url = f"{root_rel}src_view/{associated_src}.html#L{target_line}"
                 view_source_banner = f'''<div class="doc-source-banner">
                   <div class="banner-info">
-                    <span class="file-label">Source File:</span>
-                    <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}"><code>src/{html.escape(associated_src)}</code></a>
+                    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <span class="file-label">Source:</span>
+                    <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}" title="Open source code at line {target_line}"><code>src/{html.escape(associated_src)}</code></a>
+                    <span class="banner-line-badge">L{target_line}</span>
                   </div>
                   <div class="banner-actions">
-                    <a href="{src_view_url}" class="btn btn-primary btn-sm src-code-link" data-src-url="{src_view_url}" title="Open source code with syntax highlighting at line {target_line}">
+                    <a href="{src_view_url}" class="banner-icon-btn src-code-link" data-src-url="{src_view_url}" title="Open source code at line {target_line}" aria-label="Open source code at line {target_line}">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                      <span>View Source (Line {target_line})</span>
                     </a>
                   </div>
                 </div>'''
@@ -1139,13 +1141,14 @@ def generate_orphan_doc_pages():
 
         banner = f'''<div class="doc-source-banner">
   <div class="banner-info">
-    <span class="file-label">Source File:</span>
-    <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}"><code>src/{html.escape(src_rel)}</code></a>
+    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <span class="file-label">Source:</span>
+    <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}" title="Open source code at line {first_line}"><code>src/{html.escape(src_rel)}</code></a>
+    <span class="banner-line-badge">L{first_line}</span>
   </div>
   <div class="banner-actions">
-    <a href="{src_view_url}" class="btn btn-primary btn-sm src-code-link" data-src-url="{src_view_url}" title="Open source code with syntax highlighting at line {first_line}">
+    <a href="{src_view_url}" class="banner-icon-btn src-code-link" data-src-url="{src_view_url}" title="Open source code at line {first_line}" aria-label="Open source code at line {first_line}">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>View Source (Line {first_line})</span>
     </a>
   </div>
 </div>'''
@@ -1173,7 +1176,8 @@ def generate_orphan_doc_pages():
             for child in sorted(children):
                 if child in CLASS_TO_DOC_MAP:
                     ch_doc = CLASS_TO_DOC_MAP[child]
-                    pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#doc-nav-main" class="derived-class-pill" title="Documentation for {child}">{child}</a>')
+                    target_id = GLOBAL_DOC_ANCHOR_MAPS.get(ch_doc, {}).get(child, 'doc-nav-main')
+                    pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#{target_id}" class="derived-class-pill" data-target-id="{target_id}" title="Documentation for {child}">{child}</a>')
                 elif child in UVM_DB.get('classes', {}):
                     ch_f = UVM_DB['classes'][child]['file']
                     ch_l = UVM_DB['classes'][child]['start_line']
@@ -1404,7 +1408,29 @@ def parse_navigation_and_categories():
     menu_start = html_text.find('<div id=Menu>')
     menu_end = html_text.find('<script', menu_start)
     menu_content = html_text[menu_start + len('<div id=Menu>'):menu_end]
-    return parse_snippet(menu_content)
+    categories = parse_snippet(menu_content)
+
+    # Register orphan doc pages in navigation menu tree
+    for cat in categories:
+        if cat.get('title') == 'Base':
+            cat['children'].extend([
+                {'type': 'file', 'title': 'uvm_spell_chkr', 'href': 'docs_view/base/uvm_spell_chkr-svh.html'},
+                {'type': 'file', 'title': 'uvm_resource_specializations', 'href': 'docs_view/base/uvm_resource_specializations-svh.html'}
+            ])
+        elif cat.get('title') == 'Sequences':
+            cat['children'].extend([
+                {'type': 'file', 'title': 'uvm_sequence_builtin', 'href': 'docs_view/seq/uvm_sequence_builtin-svh.html'},
+                {'type': 'file', 'title': 'uvm_sequencer_analysis_fifo', 'href': 'docs_view/seq/uvm_sequencer_analysis_fifo-svh.html'}
+            ])
+
+    categories.append({
+        'type': 'group',
+        'title': 'Deprecated',
+        'children': [
+            {'type': 'file', 'title': 'uvm_resource_converter', 'href': 'docs_view/deprecated/uvm_resource_converter-svh.html'}
+        ]
+    })
+    return categories
 
 def build_source_tree():
     """Build JSON tree structure for browsing src_view files."""
@@ -1442,12 +1468,14 @@ def build_search_index(categories):
         if info['type'] == 'class':
             src_file = info['file']
             doc_file = SRC_TO_DOC_MAP.get(src_file)
+            doc_anchor = GLOBAL_DOC_ANCHOR_MAPS.get(doc_file, {}).get(cname) if doc_file else None
+            doc_url = f"docs_view/{doc_file}#{doc_anchor}" if (doc_file and doc_anchor) else (f"docs_view/{doc_file}" if doc_file else None)
             search_items.append({
                 'name': cname,
                 'type': 'class',
                 'category': src_file.split('/')[0].capitalize(),
                 'src': f"src_view/{src_file}.html#L{info['line']}",
-                'doc': f"docs_view/{doc_file}" if doc_file else None,
+                'doc': doc_url,
                 'desc': f"UVM Class defined in src/{src_file}:{info['line']}"
             })
 
@@ -1759,6 +1787,7 @@ def main():
     else:
         generate_source_views()
         modernize_doc_files()
+        generate_orphan_doc_pages()
         copy_assets()
         generate_search_and_nav_data()
 

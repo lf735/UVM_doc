@@ -20,13 +20,14 @@
 </nav>
     <div class="doc-source-banner">
                   <div class="banner-info">
-                    <span class="file-label">Source File:</span>
-                    <a href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="banner-file-link src-code-link" data-src-url="../../src_view/seq/uvm_sequence_base.svh.html#L134"><code>src/seq/uvm_sequence_base.svh</code></a>
+                    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <span class="file-label">Source:</span>
+                    <a href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="banner-file-link src-code-link" data-src-url="../../src_view/seq/uvm_sequence_base.svh.html#L134" title="Open source code at line 134"><code>src/seq/uvm_sequence_base.svh</code></a>
+                    <span class="banner-line-badge">L134</span>
                   </div>
                   <div class="banner-actions">
-                    <a href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="btn btn-primary btn-sm src-code-link" data-src-url="../../src_view/seq/uvm_sequence_base.svh.html#L134" title="Open source code with syntax highlighting at line 134">
+                    <a href="../../src_view/seq/uvm_sequence_base.svh.html#L134" class="banner-icon-btn src-code-link" data-src-url="../../src_view/seq/uvm_sequence_base.svh.html#L134" title="Open source code at line 134" aria-label="Open source code at line 134">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                      <span>View Source (Line 134)</span>
                     </a>
                   </div>
                 </div>
@@ -41,7 +42,7 @@
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     <span>Direct Subclasses (1)</span>
   </div>
-  <div class="derived-classes-list"><a href="../../docs_view/seq/uvm_sequence-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_sequence">uvm_sequence</a></div>
+  <div class="derived-classes-list"><a href="../../docs_view/seq/uvm_sequence-svh.html#doc-nav-main" class="derived-class-pill" data-target-id="doc-nav-main" title="Documentation for uvm_sequence">uvm_sequence</a></div>
 </div><div class=CBody><p>The uvm_sequence_base class provides the interfaces needed to create streams of sequence items and/or other sequences.</p><p>A sequence is executed by calling its <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LMethod id=link58  >start</a> method, either directly or invocation of any of the `uvm_do_* macros.</p><h4 class=CHeading>Executing sequences via <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LMethod id=link59  >start</a></h4><p>A sequence&rsquo;s <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LMethod id=link60  >start</a> method has a <i>parent_sequence</i> argument that controls whether <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LMethod id=link61  >pre_do</a>, <a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LMethod id=link62  >mid_do</a>, and <a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" class=LMethod id=link63  >post_do</a> are called <b>in the parent</b> sequence.&nbsp; It also has a <i>call_pre_post</i> argument that controls whether its <a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LMethod id=link64  >pre_body</a> and <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link65  >post_body</a> methods are called.&nbsp; In all cases, its <a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LMethod id=link66  >pre_start</a> and <a href="#doc-nav-item-16" data-target-id="doc-nav-item-16" class=LMethod id=link67  >post_start</a> methods are always called.</p><p>When <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LMethod id=link68  >start</a> is called directly, you can provide the appropriate arguments according to your application.</p><p>The sequence execution flow looks like this</p><p>User code</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">

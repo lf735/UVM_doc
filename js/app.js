@@ -313,8 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setFrameSrc(docFrame, fullDoc);
         updateDocTitle(fullDoc);
 
-        // Switch to split view so user sees both doc and source!
-        if (currentMode !== 'split') {
+        // Preserve doc mode if user is already in doc mode; switch to split only if in source mode
+        if (currentMode === 'source') {
           setViewMode('split', true);
         } else {
           updateHash();
