@@ -37,18 +37,24 @@
       });
     }
 
-    // 2. Check summary
-    const summaryEl = contentEl.querySelector('.Summary');
-    if (summaryEl) {
-      const safeId = 'doc-nav-summary';
-      summaryEl.id = safeId;
-      summaryEl.setAttribute('data-anchor', 'Summary');
+    // 2. Check top-level summary or contents
+    const topSummaryEl = contentEl.querySelector('#MainTopic .Summary, #doc-nav-main .Summary, .Summary');
+    if (topSummaryEl) {
+      const sTitleEl = topSummaryEl.querySelector('.STitle');
+      const sTitleText = (sTitleEl ? (sTitleEl.innerText || sTitleEl.textContent || '') : '').trim();
+      const isContents = sTitleText.toLowerCase() === 'contents';
+      const safeId = isContents ? 'doc-nav-contents' : 'doc-nav-summary';
+      const safeAnchor = isContents ? 'Contents' : 'Summary';
+      const label = isContents ? 'Contents' : 'Summary';
+
+      topSummaryEl.id = topSummaryEl.id || safeId;
+      topSummaryEl.setAttribute('data-anchor', safeAnchor);
       topItems.push({
-        id: safeId,
-        anchor: 'Summary',
-        title: 'Summary',
-        type: 'summary',
-        el: summaryEl
+        id: topSummaryEl.id,
+        anchor: safeAnchor,
+        title: label,
+        type: isContents ? 'contents' : 'summary',
+        el: topSummaryEl
       });
     }
 
@@ -504,8 +510,10 @@
         if (!target && anchor) {
           if (anchor === 'MainTopic' || anchor === 'Overview' || anchor === 'doc-nav-main') {
             target = document.getElementById('doc-nav-main') || document.getElementById('MainTopic');
+          } else if (anchor === 'Contents' || anchor === 'doc-nav-contents') {
+            target = document.getElementById('doc-nav-contents') || document.querySelector('.ContentsSummary');
           } else if (anchor === 'Summary' || anchor === 'doc-nav-summary') {
-            target = document.getElementById('doc-nav-summary') || document.querySelector('.Summary');
+            target = document.getElementById('doc-nav-summary') || document.querySelector('.ClassSummary, .Summary');
           } else {
             try {
               target = document.getElementById(anchor) ||

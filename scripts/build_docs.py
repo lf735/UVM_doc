@@ -393,8 +393,24 @@ def extract_doc_headings(html_text, rel_doc_path):
             'level': 1
         })
 
-    # 2. Check Summary
-    if 'class="Summary"' in html_text or 'class=Summary' in html_text:
+    # 2. Extract Headings and Summaries from Topics
+    topic_matches = list(re.finditer(
+        r'<div class=["\']?(C[A-Za-z0-9_]+)["\']?[^>]*>\s*<div class=["\']?CTopic["\']?[^>]*>([\s\S]*?)<(h[1-4])\b[^>]*class=["\']?CTitle["\']?[^>]*>([\s\S]*?)</\3>',
+        html_text
+    ))
+
+    # Also check if MainTopic or first section has Contents or Summary
+    main_summary_m = re.search(r'id=["\']?MainTopic["\']?[\s\S]*?<div class=["\']?Summary["\']?[^>]*>[\s\S]*?<div class=["\']?STitle["\']?>([^<]+)<', html_text)
+    if main_summary_m:
+        stitle = main_summary_m.group(1).strip()
+        is_contents = (stitle.lower() == 'contents')
+        headings.append({
+            'title': 'Contents' if is_contents else 'Summary',
+            'anchor': 'Contents' if is_contents else 'Summary',
+            'type': 'contents' if is_contents else 'summary',
+            'level': 1
+        })
+    elif ('class="Summary"' in html_text or 'class=Summary' in html_text) and not topic_matches:
         headings.append({
             'title': 'Summary',
             'anchor': 'Summary',
@@ -402,19 +418,13 @@ def extract_doc_headings(html_text, rel_doc_path):
             'level': 1
         })
 
-    # 3. Scan CTopic divs in #Content
-    topic_matches = list(re.finditer(
-        r'<div class=["\']?(C[A-Za-z0-9_]+)["\']?[^>]*>\s*<div class=["\']?CTopic["\']?[^>]*>[\s\S]*?<(h[1-4])\b[^>]*class=["\']?CTitle["\']?[^>]*>([\s\S]*?)</\2>',
-        html_text
-    ))
-
-    has_h2 = any(m.group(2).upper() == 'H2' for m in topic_matches)
+    has_h2 = any(m.group(3).upper() == 'H2' for m in topic_matches)
     current_group = None
 
     for m in topic_matches:
         cls = m.group(1)
-        tag = m.group(2).upper()
-        inner = m.group(3)
+        tag = m.group(3).upper()
+        inner = m.group(4)
         title = re.sub(r'<[^>]+>', '', inner).strip()
         if not title:
             continue
@@ -877,6 +887,8 @@ def modernize_doc_files():
                 a_map['MainTopic'] = 'doc-nav-main'
             if '<div class=Summary>' in body or '<div class="Summary">' in body:
                 a_map['Summary'] = 'doc-nav-summary'
+            if 'class=STitle>Contents<' in body or 'class="STitle">Contents<' in body:
+                a_map['Contents'] = 'doc-nav-contents'
 
             parts = re.split(r'(<div class=["\']C[A-Za-z0-9_]+["\']\s*>\s*<div class=["\']?CTopic["\']?[^>]*>)', body)
             seq = 0
@@ -1001,12 +1013,24 @@ def modernize_doc_files():
                         mod_start = f'<div class="{cls_name}" id="{safe_id}" data-doc-topic="{safe_id}" data-anchor="{a_name}"><div class="CTopic">'
                     else:
                         mod_start = f'<div class="{cls_name}" id="{safe_id}" data-doc-topic="{safe_id}"><div class="CTopic">'
+                # Differentiate Contents vs Summary for each topic wrapper
+                def tag_summary_block(m):
+                    block = m.group(0)
+                    st_m = re.search(r'class=["\']?STitle["\']?>([^<]+)<', block)
+                    st_title = st_m.group(1).strip() if st_m else 'Summary'
+                    if st_title.lower() == 'contents':
+                        return f'<div class="Summary ContentsSummary" id="doc-nav-contents" data-anchor="Contents"><div class="STitle">Contents</div>'
+                    else:
+                        sum_id = f"doc-nav-summary-{safe_id}" if not is_main else "doc-nav-summary"
+                        sum_anchor = f"Summary-{safe_id}" if not is_main else "Summary"
+                        return f'<div class="Summary ClassSummary" id="{sum_id}" data-anchor="{sum_anchor}"><div class="STitle">{st_title}</div>'
+
+                w_body = re.sub(r'<div class=["\']?Summary["\']?>[\s\S]*?<div class=["\']?STitle["\']?>[\s\S]*?</div>', tag_summary_block, w_body)
+
                 new_parts.append(mod_start)
                 new_parts.append(w_body)
 
             body_content = "".join(new_parts)
-            body_content = body_content.replace('<div class=Summary>', '<div class="Summary" id="doc-nav-summary" data-anchor="Summary">')
-            body_content = body_content.replace('<div class="Summary">', '<div class="Summary" id="doc-nav-summary" data-anchor="Summary">')
 
             # Rewrite all internal href links to use the exact destination element IDs
             def rewrite_doc_href(m):

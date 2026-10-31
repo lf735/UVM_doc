@@ -40,7 +40,7 @@
 <div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_*_imp_ports"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_*_imp_ports" id="uvm_*_imp_ports" href="../../src_view/tlm1/uvm_imps.svh.html#L82" class="src-code-link" data-src-file="tlm1/uvm_imps.svh" data-src-line="82">uvm_*_imp ports</a></h1><div class=CBody><p>The following defines the TLM implementation (imp) classes.</p>
 
 <!--START_ND_SUMMARY index=0-->
-<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary ContentsSummary" id="doc-nav-contents" data-anchor="Contents"><div class="STitle">Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
 <tr class="SMain"><td class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >uvm_*_imp ports</a></td><td class=SDescription>The following defines the TLM implementation (imp) classes.</td></tr>
@@ -85,7 +85,7 @@
 </div><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>T</td><td class=CDLDescription>The type of transaction to be communicated by the imp</td></tr><tr><td class=CDLEntry>IMP</td><td class=CDLDescription>The type of the component implementing the interface.&nbsp; That is, the class to which this imp will delegate.</td></tr></table><p>The interface methods are implemented in a component of type <i>IMP</i>, a handle to which is passed in a constructor argument.&nbsp;  The imp port delegates all interface calls to this component.</p>
 
 <!--START_ND_SUMMARY index=1-->
-<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-1" data-anchor="Summary-doc-nav-item-1"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=1 -->
 
 <tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" >uvm_*_imp #(T,IMP)</a></td></tr>
@@ -151,7 +151,7 @@
 </div><p>Type parameters</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>REQ</td><td class=CDLDescription>Request transaction type</td></tr><tr><td class=CDLEntry>RSP</td><td class=CDLDescription>Response transaction type</td></tr><tr><td class=CDLEntry>IMP</td><td class=CDLDescription>Component type that implements the interface methods, typically the the parent of this imp port.</td></tr><tr><td class=CDLEntry>REQ_IMP</td><td class=CDLDescription>Component type that implements the request side of the interface.&nbsp; Defaults to IMP.&nbsp; For master and slave imps only.</td></tr><tr><td class=CDLEntry>RSP_IMP</td><td class=CDLDescription>Component type that implements the response side of the interface.&nbsp; Defaults to IMP.&nbsp; For master and slave imps only.</td></tr></table><p>The interface methods are implemented in a component of type <i>IMP</i>, a handle to which is passed in a constructor argument.&nbsp;  The imp port delegates all interface calls to this component.</p><p>The master and slave imps have two modes of operation.</p><ul><li>A single component of type IMP implements the entire interface for both requests and responses.</li><li>Two sibling components of type REQ_IMP and RSP_IMP implement the request and response interfaces, respectively.&nbsp;  In this case, the IMP parent instantiates this imp port <i>and</i> the REQ_IMP and RSP_IMP components.</li></ul><p>The second mode is needed when a component instantiates more than one imp port, as in the <a href="uvm_tlm_req_rsp-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link1  >uvm_tlm_req_rsp_channel #(REQ,RSP)</a> channel.</p>
 
 <!--START_ND_SUMMARY index=4-->
-<div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
+<div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-4" data-anchor="Summary-doc-nav-item-4"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=4 -->
 
 <tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" >uvm_*_imp #(REQ, RSP, IMP, REQ_IMP, RSP_IMP)</a></td></tr>
