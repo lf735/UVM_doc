@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UVM 1.2 Source Code & Hierarchy Database Explorer</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Explorer specific overrides & layout enhancements */
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      overflow: hidden;
+    }
+
+    .explorer-header {
+      height: 60px;
+      background: var(--surface-color);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+      z-index: 10;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-uvm {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      background: var(--surface-active);
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+      border-color: rgba(26, 115, 232, 0.2);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stats-pill {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: var(--surface-alt);
+      border: 1px solid var(--border-subtle);
+      padding: 4px 10px;
+      border-radius: 16px;
+    }
+
+    .theme-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 10px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    /* Content Area */
+    .explorer-content {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .tab-view {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .tab-view.active {
+      display: flex;
+    }
+
+    /* View 1: Classes & Methods */
+    .class-tree-pane {
+      width: 380px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .tree-filter-bar {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      gap: 8px;
+    }
+
+    .tree-filter-input {
+      flex: 1;
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .tree-filter-input:focus {
+      border-color: var(--primary);
+    }
+
+    .tree-btn {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .tree-btn:hover {
+      background: var(--surface-active);
+      color: var(--text-main);
+    }
+
+    .tree-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 8px;
+    }
+
+    .tree-node {
+      margin: 2px 0;
+    }
+
+    .tree-row {
+      display: flex;
+      align-items: center;
+      padding: 4px 6px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      user-select: none;
+      gap: 6px;
+      font-size: 0.85rem;
+      transition: background 0.1s;
+    }
+
+    .tree-row:hover {
+      background: var(--surface-active);
+    }
+
+    .tree-row.selected {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .tree-expander {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: var(--text-subtle);
+      transition: transform 0.15s;
+    }
+
+    .tree-expander.open {
+      transform: rotate(90deg);
+    }
+
+    .tree-expander.empty {
+      visibility: hidden;
+    }
+
+    .tree-badge {
+      font-size: 0.7rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: var(--surface-alt);
+      color: var(--text-subtle);
+      margin-left: auto;
+    }
+
+    .tree-children {
+      margin-left: 18px;
+      border-left: 1px dashed var(--border-color);
+      padding-left: 4px;
+      display: none;
+    }
+
+    .tree-children.open {
+      display: block;
+    }
+
+    .class-inspector-pane {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px;
+      background: var(--bg-color);
+    }
+
+    .inspector-header {
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+    }
+
+    .inspector-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .inspector-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .inspector-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+    }
+
+    .inspector-link:hover {
+      text-decoration: underline;
+    }
+
+    .lineage-chain {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin: 12px 0;
+      padding: 10px 14px;
+      background: var(--surface-alt);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+    }
+
+    .lineage-pill {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .lineage-pill:hover {
+      background: var(--primary-light);
+    }
+
+    .lineage-pill.current {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .class-doc-box {
+      margin: 16px 0;
+      padding: 14px 18px;
+      background: var(--surface-alt);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .methods-section {
+      margin-top: 24px;
+    }
+
+    .methods-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+
+    .method-filter-pills {
+      display: flex;
+      gap: 6px;
+    }
+
+    .m-pill {
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .m-pill.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .methods-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .methods-table th {
+      text-align: left;
+      padding: 8px 12px;
+      background: var(--surface-alt);
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .methods-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+
+    .methods-table tr:hover td {
+      background: var(--surface-active);
+    }
+
+    .method-signature {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-main);
+    }
+
+    .badge-kind {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge-function { background: #e8f0fe; color: #1a73e8; }
+    .badge-task { background: #fef7e0; color: #b06000; }
+    .badge-override { background: #e6f4ea; color: #137333; font-size: 0.7rem; }
+    .badge-pure { background: #fce8e6; color: #c5221f; font-size: 0.7rem; }
+    .badge-macro { background: #f3e8fd; color: #9334e6; }
+
+    /* View 2: Overrides Matrix */
+    .overrides-view {
+      flex: 1;
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
+
+    .matrix-search-bar {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .matrix-search-input {
+      width: 400px;
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+      gap: 16px;
+    }
+
+    .matrix-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .matrix-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .matrix-card-root {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    .matrix-card-list {
+      font-size: 0.83rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .matrix-card-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 6px;
+      background: var(--surface-alt);
+      border-radius: var(--radius-sm);
+    }
+
+    /* View 3: Macros */
+    .macros-view {
+      flex: 1;
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
+
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .cat-pill {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .cat-pill.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .macro-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .macro-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .macro-name {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 600;
+      color: #af00db;
+    }
+
+    .macro-body-snippet {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      background: var(--surface-alt);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      margin-top: 8px;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
+    /* View 4: Files */
+    .files-view {
+      flex: 1;
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
+
+    /* View 5: DPI */
+    .dpi-view {
+      flex: 1;
+      padding: 24px 32px;
+      overflow-y: auto;
+    }
+
+    .dpi-card {
+      background: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .dpi-title {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .c-impl-box {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: var(--surface-alt);
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 40px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Header -->
+  <header class="explorer-header">
+    <div class="header-left">
+      <div class="header-title">
+        <span>⚡ UVM 1.2 Database Explorer</span>
+        <span class="badge-uvm">IEEE 1800.2 Ready</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <button class="tab-btn active" data-tab="tab-classes">🏛 Classes & Hierarchy</button>
+      <button class="tab-btn" data-tab="tab-overrides">🔄 Method Overrides</button>
+      <button class="tab-btn" data-tab="tab-macros">⚡ Macro Catalog</button>
+      <button class="tab-btn" data-tab="tab-files">📁 Files & Includes</button>
+      <button class="tab-btn" data-tab="tab-dpi">🔌 DPI-C Interfaces</button>
+    </div>
+
+    <div class="header-right">
+      <span class="stats-pill" id="stats-pill-classes">0 Classes</span>
+      <span class="stats-pill" id="stats-pill-methods">0 Methods</span>
+      <span class="stats-pill" id="stats-pill-macros">0 Macros</span>
+      <button class="theme-toggle-btn" id="theme-toggle">🌓 Theme</button>
+    </div>
+  </header>
+
+  <!-- Content Switcher -->
+  <main class="explorer-content">
+
+    <!-- TAB 1: Classes & Hierarchy -->
+    <div class="tab-view active" id="tab-classes">
+      <aside class="class-tree-pane">
+        <div class="tree-filter-bar">
+          <input type="text" class="tree-filter-input" id="class-search-input" placeholder="Filter classes... (/)" />
+          <button class="tree-btn" id="btn-tree-expand-all" title="Expand All">Expand</button>
+          <button class="tree-btn" id="btn-tree-collapse-all" title="Collapse All">Collapse</button>
+        </div>
+        <div class="tree-container" id="class-tree-root">
+          <!-- Tree injected by JS -->
+        </div>
+      </aside>
+
+      <section class="class-inspector-pane" id="class-inspector">
+        <div class="empty-state">Select a class from the tree on the left to inspect its hierarchy and methods.</div>
+      </section>
+    </div>
+
+    <!-- TAB 2: Method Overrides Matrix -->
+    <div class="tab-view" id="tab-overrides">
+      <div class="overrides-view">
+        <div class="matrix-search-bar">
+          <input type="text" class="matrix-search-input" id="overrides-search-input" placeholder="Search overridden method (e.g. build_phase, run_phase, do_copy, create)..." />
+          <span class="stats-pill" id="overrides-count-pill" style="align-self: center;">0 Overridden Methods</span>
+        </div>
+        <div class="card-grid" id="overrides-grid">
+          <!-- Cards injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Macros Catalog -->
+    <div class="tab-view" id="tab-macros">
+      <div class="macros-view">
+        <div class="category-pills" id="macro-category-pills">
+          <!-- Injected by JS -->
+        </div>
+        <div style="margin-bottom: 16px;">
+          <input type="text" class="matrix-search-input" id="macro-search-input" placeholder="Filter macros by name or description..." style="width: 100%; max-width: 500px;" />
+        </div>
+        <div id="macros-list">
+          <!-- Cards injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Files & Includes -->
+    <div class="tab-view" id="tab-files">
+      <div class="files-view">
+        <div class="category-pills" id="file-subsystem-pills">
+          <!-- Injected by JS -->
+        </div>
+        <div style="margin-bottom: 16px;">
+          <input type="text" class="matrix-search-input" id="file-search-input" placeholder="Filter files by path or description..." style="width: 100%; max-width: 500px;" />
+        </div>
+        <table class="methods-table" id="files-table">
+          <thead>
+            <tr>
+              <th>File Path</th>
+              <th>Subsystem</th>
+              <th>Lines (Code / Comm / Blank)</th>
+              <th>Classes</th>
+              <th>Macros</th>
+              <th>Includes</th>
+            </tr>
+          </thead>
+          <tbody id="files-table-body">
+            <!-- Injected by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 5: DPI-C Interfaces -->
+    <div class="tab-view" id="tab-dpi">
+      <div class="dpi-view">
+        <h2 style="font-size: 1.2rem; margin-bottom: 16px;">SystemVerilog DPI-C Imports & Simulator C Implementations</h2>
+        <div id="dpi-list">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Load database script (works directly under file://) -->
+  <script src="data/uvm_source_database.js"></script>
+
+  <script>
+    // State
+    let db = window.UVM_SOURCE_DATABASE || null;
+    let selectedClassName = "uvm_component";
+    let currentMethodFilter = "all";
+    let selectedMacroCategory = "all";
+    let selectedSubsystem = "all";
+
+    // Fallback if data was not loaded synchronously
+    async function initDatabase() {
+      if (!db) {
+        try {
+          const res = await fetch('data/uvm_source_database.json');
+          db = await res.json();
+        } catch (e) {
+          console.error("Failed to load database via fetch:", e);
+          document.body.innerHTML = `
+            <div style="padding: 40px; text-align: center; color: red;">
+              <h2>Failed to load database</h2>
+              <p>Please make sure <code>data/uvm_source_database.json</code> exists or run <code>python scripts/build_uvm_source_db.py</code>.</p>
+            </div>
+          `;
+          return;
+        }
+      }
+
+      setupStats();
+      renderClassTree();
+      selectClass(selectedClassName);
+      renderOverridesMatrix();
+      renderMacroCategories();
+      renderMacrosList();
+      renderFileSubsystems();
+      renderFilesTable();
+      renderDpiList();
+    }
+
+    function setupStats() {
+      const meta = db.metadata;
+      document.getElementById('stats-pill-classes').textContent = `${meta.total_classes} Classes`;
+      document.getElementById('stats-pill-methods').textContent = `${meta.total_methods} Methods (${meta.total_overrides} Overrides)`;
+      document.getElementById('stats-pill-macros').textContent = `${meta.total_macros} Macros`;
+      document.getElementById('overrides-count-pill').textContent = `${Object.keys(db.overrides_index).length} Overridden Methods`;
+    }
+
+    // --- Tab Switching ---
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-view').forEach(v => v.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-tab');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+
+    // --- Theme Toggle ---
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const cur = html.getAttribute('data-theme') || 'dark';
+      const next = cur === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+    });
+
+    // --- Tree View Construction ---
+    function renderClassTree(filterText = "") {
+      const rootContainer = document.getElementById('class-tree-root');
+      rootContainer.innerHTML = "";
+
+      const classes = db.classes;
+      const q = filterText.toLowerCase().trim();
+
+      // Find root classes (no parent or parent not in db)
+      const rootNames = Object.keys(classes).filter(c => !classes[c].parent || !classes[classes[c].parent]);
+      rootNames.sort();
+
+      function matchesFilter(cname) {
+        if (!q) return true;
+        if (cname.toLowerCase().includes(q)) return true;
+        const c = classes[cname];
+        if (c.descendants && c.descendants.some(d => d.toLowerCase().includes(q))) return true;
+        return false;
+      }
+
+      function createNode(cname) {
+        if (!matchesFilter(cname)) return null;
+
+        const c = classes[cname];
+        const hasChildren = c.children && c.children.length > 0;
+
+        const node = document.createElement('div');
+        node.className = 'tree-node';
+
+        const row = document.createElement('div');
+        row.className = `tree-row ${cname === selectedClassName ? 'selected' : ''}`;
+        row.dataset.class = cname;
+
+        const expander = document.createElement('span');
+        expander.className = `tree-expander ${hasChildren ? 'open' : 'empty'}`;
+        expander.textContent = '▶';
+
+        const label = document.createElement('span');
+        label.textContent = cname;
+
+        const badge = document.createElement('span');
+        badge.className = 'tree-badge';
+        badge.textContent = Object.keys(c.methods).length;
+        badge.title = `${Object.keys(c.methods).length} methods`;
+
+        row.appendChild(expander);
+        row.appendChild(label);
+        row.appendChild(badge);
+        node.appendChild(row);
+
+        let childrenContainer = null;
+        if (hasChildren) {
+          childrenContainer = document.createElement('div');
+          childrenContainer.className = 'tree-children open';
+
+          c.children.forEach(ch => {
+            const childNode = createNode(ch);
+            if (childNode) childrenContainer.appendChild(childNode);
+          });
+          node.appendChild(childrenContainer);
+        }
+
+        expander.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (childrenContainer) {
+            const isOpen = childrenContainer.classList.contains('open');
+            if (isOpen) {
+              childrenContainer.classList.remove('open');
+              expander.classList.remove('open');
+            } else {
+              childrenContainer.classList.add('open');
+              expander.classList.add('open');
+            }
+          }
+        });
+
+        row.addEventListener('click', () => {
+          document.querySelectorAll('.tree-row').forEach(r => r.classList.remove('selected'));
+          row.classList.add('selected');
+          selectClass(cname);
+        });
+
+        return node;
+      }
+
+      rootNames.forEach(r => {
+        const n = createNode(r);
+        if (n) rootContainer.appendChild(n);
+      });
+    }
+
+    // --- Class Inspector ---
+    function selectClass(cname) {
+      selectedClassName = cname;
+      const c = db.classes[cname];
+      if (!c) return;
+
+      const inspector = document.getElementById('class-inspector');
+      const methods = Object.values(c.methods);
+
+      // Lineage breadcrumbs
+      const lineageHtml = [
+        ...c.ancestors.slice().reverse().map(a => `<span class="lineage-pill" onclick="jumpToClass('${a}')">${a}</span>`),
+        `<span class="lineage-pill current">${c.name}</span>`
+      ].join(' <span style="color: var(--text-subtle);">&gt;</span> ');
+
+      // Subclasses
+      const subclassesHtml = c.children.length > 0
+        ? c.children.map(ch => `<span class="lineage-pill" onclick="jumpToClass('${ch}')">${ch}</span>`).join(' ')
+        : '<span style="color: var(--text-subtle);">None (Leaf class)</span>';
+
+      inspector.innerHTML = `
+        <div class="inspector-header">
+          <div class="inspector-title">
+            <span>${c.name}</span>
+            <span class="badge-kind ${c.is_virtual ? 'badge-pure' : 'badge-function'}">
+              ${c.is_virtual ? 'virtual class' : 'class'}
+            </span>
+            ${c.is_deprecated ? '<span class="badge-kind badge-pure">Deprecated</span>' : ''}
+          </div>
+          <div class="inspector-meta">
+            <span><strong>File:</strong> <a class="inspector-link" href="src_view/${c.file}.html#L${c.start_line}" target="_blank">${c.file}#L${c.start_line}-L${c.end_line}</a></span>
+            <span><strong>Extends:</strong> ${c.extends_raw ? `<a class="inspector-link" onclick="jumpToClass('${c.extends_base}')" style="cursor: pointer;">${c.extends_raw}</a>` : 'None (Root class)'}</span>
+            <span><strong>Depth:</strong> ${c.depth}</span>
+            <span><strong>Methods:</strong> ${methods.length}</span>
+          </div>
+          <div class="lineage-chain">
+            <strong style="margin-right: 6px;">Inheritance:</strong> ${lineageHtml}
+          </div>
+          <div style="margin-top: 8px; font-size: 0.85rem;">
+            <strong>Direct Subclasses:</strong> ${subclassesHtml}
+          </div>
+        </div>
+
+        ${c.doc && c.doc.summary ? `
+          <div class="class-doc-box">
+            <strong>Description:</strong><br>${c.doc.summary}
+          </div>
+        ` : ''}
+
+        <div class="methods-section">
+          <div class="methods-header">
+            <h3 style="margin: 0; font-size: 1.1rem;">Methods</h3>
+            <div class="method-filter-pills">
+              <button class="m-pill ${currentMethodFilter === 'all' ? 'active' : ''}" onclick="filterMethods('all')">All (${methods.length})</button>
+              <button class="m-pill ${currentMethodFilter === 'defined' ? 'active' : ''}" onclick="filterMethods('defined')">Defined (${methods.filter(m => !m.overrides).length})</button>
+              <button class="m-pill ${currentMethodFilter === 'overridden' ? 'active' : ''}" onclick="filterMethods('overridden')">Overridden (${methods.filter(m => m.overrides).length})</button>
+            </div>
+          </div>
+          <table class="methods-table">
+            <thead>
+              <tr>
+                <th style="width: 100px;">Kind</th>
+                <th>Name & Signature</th>
+                <th>Status / Inheritance</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody id="class-methods-body">
+              <!-- Methods rows -->
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      renderMethodRows();
+    }
+
+    function renderMethodRows() {
+      const c = db.classes[selectedClassName];
+      const tbody = document.getElementById('class-methods-body');
+      if (!tbody || !c) return;
+
+      let list = Object.values(c.methods);
+      if (currentMethodFilter === 'defined') list = list.filter(m => !m.overrides);
+      if (currentMethodFilter === 'overridden') list = list.filter(m => m.overrides);
+
+      list.sort((a, b) => a.name.localeCompare(b.name));
+
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 20px;">No methods matching filter.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(m => {
+        const kindBadge = `<span class="badge-kind ${m.kind === 'task' ? 'badge-task' : 'badge-function'}">${m.kind}</span>`;
+        const overrideBadge = m.overrides ? `<span class="badge-kind badge-override">overrides ${m.overridden_from}</span>` : '';
+        const pureBadge = m.is_pure_virtual ? `<span class="badge-kind badge-pure">pure virtual</span>` : (m.is_override_of_pure_virtual ? `<span class="badge-kind badge-pure">implements pure</span>` : '');
+        const retType = m.return_type ? `<span style="color: var(--primary);">${m.return_type}</span> ` : '';
+
+        const declLink = `<a class="inspector-link" href="src_view/${m.decl.file}.html#L${m.decl.start_line}" target="_blank">decl L${m.decl.start_line}</a>`;
+        const implLink = m.impl ? `<a class="inspector-link" href="src_view/${m.impl.file}.html#L${m.impl.start_line}" target="_blank">impl L${m.impl.start_line}</a>` : '';
+
+        return `
+          <tr>
+            <td>${kindBadge}</td>
+            <td>
+              <div class="method-signature">
+                ${m.modifiers.join(' ')} ${retType}<strong>${m.name}</strong>${m.parameters_raw || '()'}
+              </div>
+              ${m.doc && m.doc.summary ? `<div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">${m.doc.summary}</div>` : ''}
+            </td>
+            <td>
+              ${overrideBadge} ${pureBadge}
+            </td>
+            <td>
+              ${declLink} ${implLink ? ' | ' + implLink : ''}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function filterMethods(f) {
+      currentMethodFilter = f;
+      document.querySelectorAll('.m-pill').forEach(p => p.classList.remove('active'));
+      event.target.classList.add('active');
+      renderMethodRows();
+    }
+
+    window.jumpToClass = function(cname) {
+      selectedClassName = cname;
+      renderClassTree();
+      selectClass(cname);
+      // Switch to classes tab if not already on it
+      document.querySelector('[data-tab="tab-classes"]').click();
+    };
+
+    // --- Tree Filter ---
+    const classSearchInput = document.getElementById('class-search-input');
+    classSearchInput.addEventListener('input', (e) => {
+      renderClassTree(e.target.value);
+    });
+
+    document.getElementById('btn-tree-expand-all').addEventListener('click', () => {
+      document.querySelectorAll('.tree-children').forEach(el => el.classList.add('open'));
+      document.querySelectorAll('.tree-expander:not(.empty)').forEach(el => el.classList.add('open'));
+    });
+
+    document.getElementById('btn-tree-collapse-all').addEventListener('click', () => {
+      document.querySelectorAll('.tree-children').forEach(el => el.classList.remove('open'));
+      document.querySelectorAll('.tree-expander:not(.empty)').forEach(el => el.classList.remove('open'));
+    });
+
+    // --- TAB 2: Overrides Matrix ---
+    function renderOverridesMatrix(filterText = "") {
+      const grid = document.getElementById('overrides-grid');
+      const q = filterText.toLowerCase().trim();
+      const overridesIdx = db.overrides_index;
+
+      const keys = Object.keys(overridesIdx).filter(k => {
+        if (!q) return true;
+        if (k.toLowerCase().includes(q)) return true;
+        return overridesIdx[k].overridden_in.some(o => o.class.toLowerCase().includes(q));
+      });
+      keys.sort();
+
+      grid.innerHTML = keys.map(k => {
+        const item = overridesIdx[k];
+        const roots = item.declared_in.map(d => `<a class="inspector-link" onclick="jumpToClass('${d.class}')" style="cursor: pointer;">${d.class}</a>`).join(', ');
+        const derived = item.overridden_in.map(o => `
+          <div class="matrix-card-item">
+            <span style="font-weight: 500; cursor: pointer; color: var(--primary);" onclick="jumpToClass('${o.class}')">${o.class}</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">(from ${o.overridden_from}) <a class="inspector-link" href="src_view/${o.file}.html#L${o.line}" target="_blank">L${o.line}</a></span>
+          </div>
+        `).join('');
+
+        return `
+          <div class="matrix-card">
+            <div class="matrix-card-title">${k}</div>
+            <div class="matrix-card-root">Introduced in: ${roots || 'Base'}</div>
+            <div class="matrix-card-list">
+              <strong>Overridden in ${item.overridden_in.length} classes:</strong>
+              ${derived}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    document.getElementById('overrides-search-input').addEventListener('input', (e) => {
+      renderOverridesMatrix(e.target.value);
+    });
+
+    // --- TAB 3: Macros ---
+    function renderMacroCategories() {
+      const container = document.getElementById('macro-category-pills');
+      const catCounts = { all: Object.keys(db.macros).length };
+      Object.values(db.macros).forEach(m => {
+        catCounts[m.category] = (catCounts[m.category] || 0) + 1;
+      });
+
+      const categories = ['all', 'reporting', 'object_utils', 'field_automation', 'sequence', 'tlm', 'callbacks', 'reg', 'version', 'deprecated', 'misc'];
+      container.innerHTML = categories.map(cat => `
+        <button class="cat-pill ${selectedMacroCategory === cat ? 'active' : ''}" onclick="selectMacroCat('${cat}')">
+          ${cat} (${catCounts[cat] || 0})
+        </button>
+      `).join('');
+    }
+
+    window.selectMacroCat = function(cat) {
+      selectedMacroCategory = cat;
+      document.querySelectorAll('#macro-category-pills .cat-pill').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      renderMacrosList();
+    };
+
+    function renderMacrosList() {
+      const container = document.getElementById('macros-list');
+      const q = document.getElementById('macro-search-input').value.toLowerCase().trim();
+
+      let list = Object.values(db.macros);
+      if (selectedMacroCategory !== 'all') {
+        list = list.filter(m => m.category === selectedMacroCategory);
+      }
+      if (q) {
+        list = list.filter(m => m.name.toLowerCase().includes(q) || (m.doc && m.doc.summary && m.doc.summary.toLowerCase().includes(q)));
+      }
+      list.sort((a, b) => a.name.localeCompare(b.name));
+
+      container.innerHTML = list.map(m => `
+        <div class="macro-card">
+          <div class="macro-card-header">
+            <div>
+              <span class="macro-name">\`${m.name}</span>
+              <span class="badge-kind badge-macro">${m.category}</span>
+              ${m.is_deprecated ? '<span class="badge-kind badge-pure">Deprecated</span>' : ''}
+            </div>
+            <div>
+              <a class="inspector-link" href="src_view/${m.file}.html#L${m.start_line}" target="_blank">${m.file}#L${m.start_line}</a>
+            </div>
+          </div>
+          ${m.parameters && m.parameters.length ? `<div style="font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 6px;">Params: (${m.parameters.join(', ')})</div>` : ''}
+          ${m.doc && m.doc.summary ? `<div style="font-size: 0.85rem; color: var(--text-main); margin: 6px 0;">${m.doc.summary}</div>` : ''}
+          ${m.body_snippet ? `<div class="macro-body-snippet">${escapeHtml(m.body_snippet)}</div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('macro-search-input').addEventListener('input', () => {
+      renderMacrosList();
+    });
+
+    // --- TAB 4: Files ---
+    function renderFileSubsystems() {
+      const container = document.getElementById('file-subsystem-pills');
+      const subCounts = { all: Object.keys(db.files).length };
+      Object.values(db.files).forEach(f => {
+        subCounts[f.subsystem] = (subCounts[f.subsystem] || 0) + 1;
+      });
+
+      const subsystems = ['all', 'base', 'comps', 'seq', 'reg', 'tlm1', 'tlm2', 'dpi', 'macros', 'dap', 'root', 'deprecated'];
+      container.innerHTML = subsystems.map(s => `
+        <button class="cat-pill ${selectedSubsystem === s ? 'active' : ''}" onclick="selectSubsystem('${s}')">
+          ${s} (${subCounts[s] || 0})
+        </button>
+      `).join('');
+    }
+
+    window.selectSubsystem = function(s) {
+      selectedSubsystem = s;
+      document.querySelectorAll('#file-subsystem-pills .cat-pill').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      renderFilesTable();
+    };
+
+    function renderFilesTable() {
+      const tbody = document.getElementById('files-table-body');
+      const q = document.getElementById('file-search-input').value.toLowerCase().trim();
+
+      let list = Object.values(db.files);
+      if (selectedSubsystem !== 'all') {
+        list = list.filter(f => f.subsystem === selectedSubsystem);
+      }
+      if (q) {
+        list = list.filter(f => f.path.toLowerCase().includes(q) || (f.header_doc && f.header_doc.summary && f.header_doc.summary.toLowerCase().includes(q)));
+      }
+      list.sort((a, b) => a.path.localeCompare(b.path));
+
+      tbody.innerHTML = list.map(f => `
+        <tr>
+          <td>
+            <a class="inspector-link" href="src_view/${f.path}.html" target="_blank" style="font-weight: 600;">${f.path}</a>
+            ${f.header_doc && f.header_doc.summary ? `<div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 3px;">${f.header_doc.summary}</div>` : ''}
+          </td>
+          <td><span class="badge-kind badge-function">${f.subsystem}</span></td>
+          <td style="font-family: var(--font-mono); font-size: 0.8rem;">${f.lines_total} (${f.lines_code} / ${f.lines_comment} / ${f.lines_blank})</td>
+          <td>${f.classes.map(c => `<a class="inspector-link" onclick="jumpToClass('${c}')" style="cursor: pointer;">${c}</a>`).join(', ') || '-'}</td>
+          <td>${f.macros.length}</td>
+          <td style="font-size: 0.78rem;">${f.includes.length} out, ${f.included_by.length} in</td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('file-search-input').addEventListener('input', () => {
+      renderFilesTable();
+    });
+
+    // --- TAB 5: DPI ---
+    function renderDpiList() {
+      const container = document.getElementById('dpi-list');
+      const bindings = db.dpi.bindings;
+
+      container.innerHTML = bindings.map(b => {
+        const sv = b.sv_import;
+        const cImpls = b.c_implementations.map(c => `
+          <div style="margin: 4px 0;">
+            <strong>${c.name}</strong> in <a class="inspector-link" href="src_view/${c.file}.html#L${c.line}" target="_blank">${c.file}#L${c.line}</a> (${c.return_type}) [target: ${c.simulator_target}]
+          </div>
+        `).join('');
+
+        return `
+          <div class="dpi-card">
+            <div class="dpi-title">import "DPI-C" ${sv.kind} ${sv.return_type || 'void'} ${sv.name}(${sv.parameters_raw})</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">
+              SystemVerilog: <a class="inspector-link" href="src_view/${sv.file}.html#L${sv.line}" target="_blank">${sv.file}#L${sv.line}</a>
+            </div>
+            ${sv.doc && sv.doc.summary ? `<div style="font-size: 0.85rem; margin-bottom: 8px;">${sv.doc.summary}</div>` : ''}
+            <div class="c-impl-box">
+              <div style="font-weight: 600; margin-bottom: 4px;">C Implementation(s):</div>
+              ${cImpls || '<div style="color: var(--text-muted);">External runtime symbol / simulator core.</div>'}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Keyboard shortcut / for search
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+        e.preventDefault();
+        const activeTab = document.querySelector('.tab-btn.active').getAttribute('data-tab');
+        if (activeTab === 'tab-classes') classSearchInput.focus();
+        else if (activeTab === 'tab-overrides') document.getElementById('overrides-search-input').focus();
+        else if (activeTab === 'tab-macros') document.getElementById('macro-search-input').focus();
+        else if (activeTab === 'tab-files') document.getElementById('file-search-input').focus();
+      }
+    });
+
+    // Start
+    initDatabase();
+  </script>
+</body>
+</html>
+

@@ -42,13 +42,23 @@ UVM_doc/
 │   └── search_data.js        # Generated index (untracked, built at deployment & locally)
 ├── scripts/
 │   ├── build_docs.py         # Python build script generating docs_view and src_view
-│   └── build_rag_embeddings.py # Generates intelligent chunks & dense vector embeddings
+│   ├── build_rag_embeddings.py # Generates intelligent chunks & dense vector embeddings
+│   ├── build_uvm_source_db.py # Python parser extracting classes, methods, overrides, and macros
+│   └── query_uvm_db.py       # Interactive CLI explorer tool for terminal navigation
+├── data/
+│   ├── uvm_source_database.json # Complete hierarchical, bidirectional & indexed database (5.55 MB)
+│   ├── uvm_source_database.sqlite # Relational 3NF SQLite database with indexes (2.11 MB)
+│   ├── uvm_source_database.js   # Browser JS bundle for offline file:// execution (5.59 MB)
+│   └── uvm_dpi_database.json    # Dedicated DPI SystemVerilog <-> C bindings database (24 KB)
 ├── docs_view/                # Modernized, responsive UVM 1.2 reference HTML pages
 ├── src_view/                 # Syntax-highlighted HTML views of all 155 source files
 ├── uvm-1.2/                  # Official Accellera UVM 1.2 distribution
 │   ├── src/                  # Raw SystemVerilog and C source tree
 │   └── docs/                 # Original reference documentation assets
 ├── index.html                # Main application portal shell
+├── uvm_database_explorer.html # Standalone interactive web explorer for class hierarchy & overrides
+├── UVM_DATABASE_SPECIFICATION.md # Technical specification & formal data model
+├── UVM_DATABASE_USER_GUIDE.md    # End-user handbook, CLI commands & SQL query cookbook
 ├── LICENSE                   # Apache 2.0 open-source license
 ├── NOTICE                    # Legal attributions and third-party notices
 └── README.md                 # Project documentation
@@ -128,6 +138,8 @@ This repository is pre-configured with a GitHub Actions workflow (`.github/workf
 
 For comprehensive technical specifications, user guides, reverse-engineered architecture, protocol catalogs, development rules, and post-mortem lessons learned:
 
+- **[UVM Source Database Technical Specification](UVM_DATABASE_SPECIFICATION.md)**: Architecture, data models (JSON, SQLite 3NF, JS, DPI), parsing rules for SystemVerilog multi-line definitions, bidirectional inheritance, method overrides resolution, and inclusion guard filters.
+- **[UVM Source Database User Guide](UVM_DATABASE_USER_GUIDE.md)**: Comprehensive user manual covering the CLI query tool (`scripts/query_uvm_db.py`), SQL cookbook recipes for `data/uvm_source_database.sqlite`, regeneration instructions, and the interactive web explorer.
 - **[RAG Technical Specification & Architecture](RAG_SPECIFICATION.md)**: Comprehensive specification of the client-side 2-level hierarchical RAG, intent catalog embedding enrichment, vector cosine similarity pipeline, and hybrid ranking.
 - **[RAG User Guide (Recherche en Langage Naturel)](RAG_USER_GUIDE.md)**: End-user handbook on using the AI natural language search, query examples by verification domain, interpreting deep-link results, and settings customization.
 - **[Product Specification & Engineering Methodology](PRODUCT_SPEC_AND_METHODOLOGY.md)**: Reverse-engineered specification, `postMessage` protocol catalog, 5 golden development rules, and 3-level verification strategy.

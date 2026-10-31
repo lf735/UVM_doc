@@ -1,0 +1,1695 @@
+{
+  "metadata": {
+    "title": "UVM 1.2 DPI (Direct Programming Interface) Database",
+    "total_sv_imports": 15,
+    "total_c_functions": 62,
+    "total_bindings": 15
+  },
+  "sv_imports": [
+    {
+      "file": "dpi/uvm_hdl.svh",
+      "line": 59,
+      "name": "uvm_hdl_check_path",
+      "kind": "function",
+      "return_type": "int",
+      "parameters_raw": "string path",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "path",
+          "default": null
+        }
+      ],
+      "doc": {
+        "title": "uvm_hdl_check_path",
+        "summary": "Checks that the given HDL ~path~ exists. Returns 0 if NOT found, 1 otherwise.",
+        "full_text": "Checks that the given HDL ~path~ exists. Returns 0 if NOT found, 1 otherwise."
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl.svh",
+      "line": 67,
+      "name": "uvm_hdl_deposit",
+      "kind": "function",
+      "return_type": "int",
+      "parameters_raw": "string path, uvm_hdl_data_t value",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "path",
+          "default": null
+        },
+        {
+          "direction": "input",
+          "type": "uvm_hdl_data_t",
+          "name": "value",
+          "default": null
+        }
+      ],
+      "doc": {
+        "title": "uvm_hdl_deposit",
+        "summary": "Sets the given HDL ~path~ to the specified ~value~. Returns 1 if the call succeeded, 0 otherwise.",
+        "full_text": "Sets the given HDL ~path~ to the specified ~value~.\nReturns 1 if the call succeeded, 0 otherwise."
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl.svh",
+      "line": 74,
+      "name": "uvm_hdl_force",
+      "kind": "function",
+      "return_type": "int",
+      "parameters_raw": "string path, uvm_hdl_data_t value",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "path",
+          "default": null
+        },
+        {
+          "direction": "input",
+          "type": "uvm_hdl_data_t",
+          "name": "value",
+          "default": null
+        }
+      ],
+      "doc": {
+        "title": "uvm_hdl_force",
+        "summary": "Forces the ~value~ on the given ~path~. Returns 1 if the call succeeded, 0 otherwise.",
+        "full_text": "Forces the ~value~ on the given ~path~. Returns 1 if the call succeeded, 0 otherwise."
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl.svh",
+      "line": 105,
+      "name": "uvm_hdl_release_and_read",
+      "kind": "function",
+      "return_type": "int",
+      "parameters_raw": "string path, inout uvm_hdl_data_t value",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "path",
+          "default": null
+        },
+        {
+          "direction": "inout",
+          "type": "uvm_hdl_data_t",
+          "name": "value",
+          "default": null
+        }
+      ],
+      "doc": {
+        "title": "uvm_hdl_release_and_read",
+        "summary": "Releases a value previously set with <uvm_hdl_force>. Returns 1 if the call succeeded, 0 otherwise. ~value~ is set to the HDL value after the release. For 'reg', the value will still be the forced value until it has been procedurally reassigned. For 'wire', the value will change immediately to the resolved value of its continuous drivers, if any. If none, its value remains as forced until the next direct assignment.",
+        "full_text": "Releases a value previously set with <uvm_hdl_force>.\nReturns 1 if the call succeeded, 0 otherwise. ~value~ is set to\nthe HDL value after the release. For 'reg', the value will still be\nthe forced value until it has been procedurally reassigned. For 'wire',\nthe value will change immediately to the resolved value of its\ncontinuous drivers, if any. If none, its value remains as forced until\nthe next direct assignment."
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl.svh",
+      "line": 113,
+      "name": "uvm_hdl_release",
+      "kind": "function",
+      "return_type": "int",
+      "parameters_raw": "string path",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "path",
+          "default": null
+        }
+      ],
+      "doc": {
+        "title": "uvm_hdl_release",
+        "summary": "Releases a value previously set with <uvm_hdl_force>. Returns 1 if the call succeeded, 0 otherwise.",
+        "full_text": "Releases a value previously set with <uvm_hdl_force>.\nReturns 1 if the call succeeded, 0 otherwise."
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl.svh",
+      "line": 121,
+      "name": "uvm_hdl_read",
+      "kind": "function",
+      "return_type": "int",
+      "parameters_raw": "string path, output uvm_hdl_data_t value",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "path",
+          "default": null
+        },
+        {
+          "direction": "output",
+          "type": "uvm_hdl_data_t",
+          "name": "value",
+          "default": null
+        }
+      ],
+      "doc": {
+        "title": "uvm_hdl_read()",
+        "summary": "Gets the value at the given ~path~. Returns 1 if the call succeeded, 0 otherwise.",
+        "full_text": "Gets the value at the given ~path~.\nReturns 1 if the call succeeded, 0 otherwise."
+      }
+    },
+    {
+      "file": "dpi/uvm_regex.svh",
+      "line": 23,
+      "name": "uvm_re_match",
+      "kind": "function",
+      "return_type": "int",
+      "parameters_raw": "string re, string str",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "re",
+          "default": null
+        },
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "str",
+          "default": null
+        }
+      ],
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_regex.svh",
+      "line": 24,
+      "name": "uvm_dump_re_cache",
+      "kind": "function",
+      "return_type": "void",
+      "parameters_raw": "",
+      "parameters": [],
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_regex.svh",
+      "line": 25,
+      "name": "uvm_glob_to_re",
+      "kind": "function",
+      "return_type": "string",
+      "parameters_raw": "string glob",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "glob",
+          "default": null
+        }
+      ],
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.svh",
+      "line": 27,
+      "name": "uvm_dpi_get_next_arg_c",
+      "kind": "function",
+      "return_type": "string",
+      "parameters_raw": "int init",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "int",
+          "name": "init",
+          "default": null
+        }
+      ],
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.svh",
+      "line": 28,
+      "name": "uvm_dpi_get_tool_name_c",
+      "kind": "function",
+      "return_type": "string",
+      "parameters_raw": "",
+      "parameters": [],
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.svh",
+      "line": 29,
+      "name": "uvm_dpi_get_tool_version_c",
+      "kind": "function",
+      "return_type": "string",
+      "parameters_raw": "",
+      "parameters": [],
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.svh",
+      "line": 43,
+      "name": "uvm_dpi_regcomp",
+      "kind": "function",
+      "return_type": "chandle",
+      "parameters_raw": "string regex",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "regex",
+          "default": null
+        }
+      ],
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.svh",
+      "line": 44,
+      "name": "uvm_dpi_regexec",
+      "kind": "function",
+      "return_type": "int",
+      "parameters_raw": "chandle preg, string str",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "chandle",
+          "name": "preg",
+          "default": null
+        },
+        {
+          "direction": "input",
+          "type": "string",
+          "name": "str",
+          "default": null
+        }
+      ],
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.svh",
+      "line": 45,
+      "name": "uvm_dpi_regfree",
+      "kind": "function",
+      "return_type": "void",
+      "parameters_raw": "chandle preg",
+      "parameters": [
+        {
+          "direction": "input",
+          "type": "chandle",
+          "name": "preg",
+          "default": null
+        }
+      ],
+      "doc": null
+    }
+  ],
+  "c_functions": [
+    {
+      "file": "dpi/uvm_common.c",
+      "line": 24,
+      "name": "m__uvm_report_dpi",
+      "return_type": "void",
+      "parameters": "int,const char*,const char*,int,const char*, int",
+      "simulator_target": "generic",
+      "doc": {
+        "title": "",
+        "summary": "Copyright 2010 Synopsys, Inc. Copyright 2011 Mentor Graphics Corporation Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
+        "full_text": "Copyright 2010 Synopsys, Inc.\n  Copyright 2011 Mentor Graphics Corporation\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\nImplementation of common methods for DPI"
+      }
+    },
+    {
+      "file": "dpi/uvm_common.c",
+      "line": 44,
+      "name": "int_str_max",
+      "return_type": "int",
+      "parameters": "int radix_bits",
+      "simulator_target": "generic",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_dpi.h",
+      "line": 62,
+      "name": "int_str_max",
+      "return_type": "int",
+      "parameters": "int",
+      "simulator_target": "generic",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 32,
+      "name": "m_uvm_error",
+      "return_type": "void",
+      "parameters": "const char *ID, const char *msg, ...",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 33,
+      "name": "uvm_hdl_set_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 34,
+      "name": "m_uvm_get_object_handle",
+      "return_type": "void",
+      "parameters": "const char* path, vhpiHandleT *handle,int *language",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 35,
+      "name": "uvm_hdl_get_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 36,
+      "name": "uvm_hdl_max_width",
+      "return_type": "int",
+      "parameters": "",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 45,
+      "name": "m_uvm_get_object_handle",
+      "return_type": "void",
+      "parameters": "const char* path, vhpiHandleT *handle,int *language",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "UVM HDL access C code.",
+        "full_text": "UVM HDL access C code.\n\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 55,
+      "name": "is_valid_path_slice",
+      "return_type": "int",
+      "parameters": "const char* path",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "returns 0 if the name is NOT a slice returns 1 if the name is a slice",
+        "full_text": "returns 0 if the name is NOT a slice\nreturns 1 if the name is a slice"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 84,
+      "name": "uvm_hdl_set_vlog_partsel",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 142,
+      "name": "uvm_hdl_get_vlog_partsel",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path with part-select, break into individual bit accesses path = pointer to user string value = pointer to logic vector flag = deposit vs force/release options, etc /",
+        "full_text": "Given a path with part-select, break into individual bit accesses\npath = pointer to user string\nvalue = pointer to logic vector\nflag = deposit vs force/release options, etc\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 197,
+      "name": "clear_value",
+      "return_type": "void",
+      "parameters": "p_vpi_vecval value",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 216,
+      "name": "uvm_hdl_max_width",
+      "return_type": "int",
+      "parameters": "",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 233,
+      "name": "uvm_hdl_set_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI,\nand set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 275,
+      "name": "vhpi2val",
+      "return_type": "vhpiEnumT",
+      "parameters": "int aval,int bval",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 280,
+      "name": "uvm_hdl_set_vhdl",
+      "return_type": "int",
+      "parameters": "char* path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 356,
+      "name": "uvm_hdl_get_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI and return its 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nand return its 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 406,
+      "name": "uvm_hdl_get_vhdl",
+      "return_type": "int",
+      "parameters": "char* path, p_vpi_vecval value",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 549,
+      "name": "uvm_hdl_check_path",
+      "return_type": "int",
+      "parameters": "char *path",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI, but don't set or get. Just check.",
+        "full_text": "Given a path, look the path name up using the PLI,\nbut don't set or get. Just check.\n\nReturn 0 if NOT found.\nReturn 1 if found.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 559,
+      "name": "m_uvm_error",
+      "return_type": "void",
+      "parameters": "const char *id, const char *msg, ...",
+      "simulator_target": "inca",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 575,
+      "name": "uvm_hdl_read",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and return its 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and return its 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 597,
+      "name": "uvm_hdl_deposit",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 618,
+      "name": "uvm_hdl_force",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 639,
+      "name": "uvm_hdl_release_and_read",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and release it. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and release it.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_inca.c",
+      "line": 662,
+      "name": "uvm_hdl_release",
+      "return_type": "int",
+      "parameters": "char *path",
+      "simulator_target": "inca",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and release it. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and release it.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 41,
+      "name": "uvm_hdl_max_width",
+      "return_type": "int",
+      "parameters": "",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "UVM HDL access C code.",
+        "full_text": "UVM HDL access C code.\n\n/\n\n\nThis C code checks to see if there is PLI handle\nwith a value set to define the maximum bit width.\n\nIf no such variable is found, then the default\nwidth of 1024 is used.\n\nThis function should only get called once or twice,\nits return value is cached in the caller.\n\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 55,
+      "name": "uvm_hdl_set_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "questa",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 56,
+      "name": "uvm_hdl_get_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "questa",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 65,
+      "name": "uvm_hdl_set_vlog_partsel",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path with part-select, break into individual bit accesses path = pointer to user string value = pointer to logic vector flag = deposit vs force/release options, etc /",
+        "full_text": "Given a path with part-select, break into individual bit accesses\npath = pointer to user string\nvalue = pointer to logic vector\nflag = deposit vs force/release options, etc\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 120,
+      "name": "uvm_hdl_get_vlog_partsel",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path with part-select, break into individual bit accesses path = pointer to user string value = pointer to logic vector flag = deposit vs force/release options, etc /",
+        "full_text": "Given a path with part-select, break into individual bit accesses\npath = pointer to user string\nvalue = pointer to logic vector\nflag = deposit vs force/release options, etc\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 180,
+      "name": "uvm_hdl_set_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI,\nand set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 246,
+      "name": "uvm_hdl_get_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI and return its 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nand return its 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 339,
+      "name": "uvm_hdl_check_path",
+      "return_type": "int",
+      "parameters": "char *path",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI, but don't set or get. Just check.",
+        "full_text": "Given a path, look the path name up using the PLI,\nbut don't set or get. Just check.\n\nReturn 0 if NOT found.\nReturn 1 if found.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 362,
+      "name": "uvm_hdl_read",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and return its 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and return its 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 371,
+      "name": "uvm_hdl_deposit",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 381,
+      "name": "uvm_hdl_force",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 391,
+      "name": "uvm_hdl_release_and_read",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and release it. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and release it.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_questa.c",
+      "line": 400,
+      "name": "uvm_hdl_release",
+      "return_type": "int",
+      "parameters": "char *path",
+      "simulator_target": "questa",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the FLI, and release it. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and release it.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 50,
+      "name": "uvm_hdl_max_width",
+      "return_type": "int",
+      "parameters": "",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "UVM HDL access C code.",
+        "full_text": "UVM HDL access C code.\n\n/\n\n\nThis C code checks to see if there is PLI handle\nwith a value set to define the maximum bit width.\n\nIf no such variable is found, then the default\nwidth of 1024 is used.\n\nThis function should only get called once or twice,\nits return value is cached in the caller.\n\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 67,
+      "name": "uvm_hdl_set_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI,\nand set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 118,
+      "name": "uvm_hdl_get_vlog",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, PLI_INT32 flag",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI and return its 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nand return its 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 184,
+      "name": "uvm_hdl_check_path",
+      "return_type": "int",
+      "parameters": "char *path",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI, but don't set or get. Just check.",
+        "full_text": "Given a path, look the path name up using the PLI,\nbut don't set or get. Just check.\n\nReturn 0 if NOT found.\nReturn 1 if found.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 219,
+      "name": "uvm_hdl_dtob",
+      "return_type": "char *",
+      "parameters": "long int decimalNumber",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "decimal to hex conversion /",
+        "full_text": "decimal to hex conversion\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 246,
+      "name": "uvm_hdl_get_mhdl",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "vcs",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 286,
+      "name": "uvm_hdl_read",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the VHPI, and return its 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and return its 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 310,
+      "name": "uvm_hdl_set_mhdl",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value, mhpiPutValueFlagsT flags",
+      "simulator_target": "vcs",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 335,
+      "name": "uvm_hdl_deposit",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the VHPI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 361,
+      "name": "uvm_hdl_force",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the VHPI, and set it to 'value'. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and set it to 'value'.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 389,
+      "name": "uvm_hdl_release_and_read",
+      "return_type": "int",
+      "parameters": "char *path, p_vpi_vecval value",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the VHPI, and release it. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and release it.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_hdl_vcs.c",
+      "line": 398,
+      "name": "uvm_hdl_release",
+      "return_type": "int",
+      "parameters": "char *path",
+      "simulator_target": "vcs",
+      "doc": {
+        "title": "",
+        "summary": "Given a path, look the path name up using the PLI or the VHPI, and release it. /",
+        "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and release it.\n/"
+      }
+    },
+    {
+      "file": "dpi/uvm_regex.cc",
+      "line": 40,
+      "name": "uvm_re_match",
+      "return_type": "int",
+      "parameters": "const char * re, const char *str",
+      "simulator_target": "generic",
+      "doc": {
+        "title": "",
+        "summary": "uvm_re_match",
+        "full_text": "uvm_re_match\n\nMatch a string to a regular expression.  The regex is first lookup\nup in the regex cache to see if it has already been compiled.  If\nso, the compile version is retrieved from the cache.  Otherwise, it\nis compiled and cached for future use.  After compilation the\nmatching is done using regexec()."
+      }
+    },
+    {
+      "file": "dpi/uvm_regex.cc",
+      "line": 121,
+      "name": "uvm_glob_to_re",
+      "return_type": "const char *",
+      "parameters": "const char *glob",
+      "simulator_target": "generic",
+      "doc": {
+        "title": "",
+        "summary": "uvm_glob_to_re",
+        "full_text": "uvm_glob_to_re\n\nConvert a glob expression to a normal regular expression."
+      }
+    },
+    {
+      "file": "dpi/uvm_regex.cc",
+      "line": 247,
+      "name": "uvm_dump_re_cache",
+      "return_type": "void",
+      "parameters": "",
+      "simulator_target": "generic",
+      "doc": {
+        "title": "",
+        "summary": "uvm_dump_re_cache",
+        "full_text": "uvm_dump_re_cache\n\nDumps the set of regular expressions stored in the cache"
+      }
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.c",
+      "line": 36,
+      "name": "push_data",
+      "return_type": "void",
+      "parameters": "int lvl,char *entry, int cmd",
+      "simulator_target": "generic",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.c",
+      "line": 44,
+      "name": "walk_level",
+      "return_type": "void",
+      "parameters": "int lvl, int argc, char**argv,int cmd",
+      "simulator_target": "generic",
+      "doc": {
+        "title": "",
+        "summary": "walk one level (potentially recursive)",
+        "full_text": "walk one level (potentially recursive)"
+      }
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.c",
+      "line": 58,
+      "name": "uvm_dpi_get_next_arg_c",
+      "return_type": "const char *",
+      "parameters": "int init",
+      "simulator_target": "generic",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.c",
+      "line": 84,
+      "name": "uvm_dpi_get_tool_name_c",
+      "return_type": "char*",
+      "parameters": "",
+      "simulator_target": "generic",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.c",
+      "line": 91,
+      "name": "uvm_dpi_get_tool_version_c",
+      "return_type": "char*",
+      "parameters": "",
+      "simulator_target": "generic",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.c",
+      "line": 98,
+      "name": "uvm_dpi_regcomp",
+      "return_type": "regex_t*",
+      "parameters": "char* pattern",
+      "simulator_target": "generic",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.c",
+      "line": 120,
+      "name": "uvm_dpi_regexec",
+      "return_type": "int",
+      "parameters": "regex_t* re, char* str",
+      "simulator_target": "generic",
+      "doc": null
+    },
+    {
+      "file": "dpi/uvm_svcmd_dpi.c",
+      "line": 129,
+      "name": "uvm_dpi_regfree",
+      "return_type": "void",
+      "parameters": "regex_t* re",
+      "simulator_target": "generic",
+      "doc": null
+    }
+  ],
+  "bindings": [
+    {
+      "sv_import": {
+        "file": "dpi/uvm_hdl.svh",
+        "line": 59,
+        "name": "uvm_hdl_check_path",
+        "kind": "function",
+        "return_type": "int",
+        "parameters_raw": "string path",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "path",
+            "default": null
+          }
+        ],
+        "doc": {
+          "title": "uvm_hdl_check_path",
+          "summary": "Checks that the given HDL ~path~ exists. Returns 0 if NOT found, 1 otherwise.",
+          "full_text": "Checks that the given HDL ~path~ exists. Returns 0 if NOT found, 1 otherwise."
+        }
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_hdl_inca.c",
+          "line": 549,
+          "name": "uvm_hdl_check_path",
+          "return_type": "int",
+          "parameters": "char *path",
+          "simulator_target": "inca",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI, but don't set or get. Just check.",
+            "full_text": "Given a path, look the path name up using the PLI,\nbut don't set or get. Just check.\n\nReturn 0 if NOT found.\nReturn 1 if found.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_questa.c",
+          "line": 339,
+          "name": "uvm_hdl_check_path",
+          "return_type": "int",
+          "parameters": "char *path",
+          "simulator_target": "questa",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI, but don't set or get. Just check.",
+            "full_text": "Given a path, look the path name up using the PLI,\nbut don't set or get. Just check.\n\nReturn 0 if NOT found.\nReturn 1 if found.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_vcs.c",
+          "line": 184,
+          "name": "uvm_hdl_check_path",
+          "return_type": "int",
+          "parameters": "char *path",
+          "simulator_target": "vcs",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI, but don't set or get. Just check.",
+            "full_text": "Given a path, look the path name up using the PLI,\nbut don't set or get. Just check.\n\nReturn 0 if NOT found.\nReturn 1 if found.\n/"
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_hdl.svh",
+        "line": 67,
+        "name": "uvm_hdl_deposit",
+        "kind": "function",
+        "return_type": "int",
+        "parameters_raw": "string path, uvm_hdl_data_t value",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "path",
+            "default": null
+          },
+          {
+            "direction": "input",
+            "type": "uvm_hdl_data_t",
+            "name": "value",
+            "default": null
+          }
+        ],
+        "doc": {
+          "title": "uvm_hdl_deposit",
+          "summary": "Sets the given HDL ~path~ to the specified ~value~. Returns 1 if the call succeeded, 0 otherwise.",
+          "full_text": "Sets the given HDL ~path~ to the specified ~value~.\nReturns 1 if the call succeeded, 0 otherwise."
+        }
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_hdl_inca.c",
+          "line": 597,
+          "name": "uvm_hdl_deposit",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "inca",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and set it to 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and set it to 'value'.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_questa.c",
+          "line": 371,
+          "name": "uvm_hdl_deposit",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "questa",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and set it to 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and set it to 'value'.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_vcs.c",
+          "line": 335,
+          "name": "uvm_hdl_deposit",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "vcs",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the VHPI, and set it to 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and set it to 'value'.\n/"
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_hdl.svh",
+        "line": 74,
+        "name": "uvm_hdl_force",
+        "kind": "function",
+        "return_type": "int",
+        "parameters_raw": "string path, uvm_hdl_data_t value",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "path",
+            "default": null
+          },
+          {
+            "direction": "input",
+            "type": "uvm_hdl_data_t",
+            "name": "value",
+            "default": null
+          }
+        ],
+        "doc": {
+          "title": "uvm_hdl_force",
+          "summary": "Forces the ~value~ on the given ~path~. Returns 1 if the call succeeded, 0 otherwise.",
+          "full_text": "Forces the ~value~ on the given ~path~. Returns 1 if the call succeeded, 0 otherwise."
+        }
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_hdl_inca.c",
+          "line": 618,
+          "name": "uvm_hdl_force",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "inca",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and set it to 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and set it to 'value'.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_questa.c",
+          "line": 381,
+          "name": "uvm_hdl_force",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "questa",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and set it to 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and set it to 'value'.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_vcs.c",
+          "line": 361,
+          "name": "uvm_hdl_force",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "vcs",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the VHPI, and set it to 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and set it to 'value'.\n/"
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_hdl.svh",
+        "line": 105,
+        "name": "uvm_hdl_release_and_read",
+        "kind": "function",
+        "return_type": "int",
+        "parameters_raw": "string path, inout uvm_hdl_data_t value",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "path",
+            "default": null
+          },
+          {
+            "direction": "inout",
+            "type": "uvm_hdl_data_t",
+            "name": "value",
+            "default": null
+          }
+        ],
+        "doc": {
+          "title": "uvm_hdl_release_and_read",
+          "summary": "Releases a value previously set with <uvm_hdl_force>. Returns 1 if the call succeeded, 0 otherwise. ~value~ is set to the HDL value after the release. For 'reg', the value will still be the forced value until it has been procedurally reassigned. For 'wire', the value will change immediately to the resolved value of its continuous drivers, if any. If none, its value remains as forced until the next direct assignment.",
+          "full_text": "Releases a value previously set with <uvm_hdl_force>.\nReturns 1 if the call succeeded, 0 otherwise. ~value~ is set to\nthe HDL value after the release. For 'reg', the value will still be\nthe forced value until it has been procedurally reassigned. For 'wire',\nthe value will change immediately to the resolved value of its\ncontinuous drivers, if any. If none, its value remains as forced until\nthe next direct assignment."
+        }
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_hdl_inca.c",
+          "line": 639,
+          "name": "uvm_hdl_release_and_read",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "inca",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and release it. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and release it.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_questa.c",
+          "line": 391,
+          "name": "uvm_hdl_release_and_read",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "questa",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and release it. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and release it.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_vcs.c",
+          "line": 389,
+          "name": "uvm_hdl_release_and_read",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "vcs",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the VHPI, and release it. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and release it.\n/"
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_hdl.svh",
+        "line": 113,
+        "name": "uvm_hdl_release",
+        "kind": "function",
+        "return_type": "int",
+        "parameters_raw": "string path",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "path",
+            "default": null
+          }
+        ],
+        "doc": {
+          "title": "uvm_hdl_release",
+          "summary": "Releases a value previously set with <uvm_hdl_force>. Returns 1 if the call succeeded, 0 otherwise.",
+          "full_text": "Releases a value previously set with <uvm_hdl_force>.\nReturns 1 if the call succeeded, 0 otherwise."
+        }
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_hdl_inca.c",
+          "line": 662,
+          "name": "uvm_hdl_release",
+          "return_type": "int",
+          "parameters": "char *path",
+          "simulator_target": "inca",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and release it. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and release it.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_questa.c",
+          "line": 400,
+          "name": "uvm_hdl_release",
+          "return_type": "int",
+          "parameters": "char *path",
+          "simulator_target": "questa",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and release it. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and release it.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_vcs.c",
+          "line": 398,
+          "name": "uvm_hdl_release",
+          "return_type": "int",
+          "parameters": "char *path",
+          "simulator_target": "vcs",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the VHPI, and release it. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and release it.\n/"
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_hdl.svh",
+        "line": 121,
+        "name": "uvm_hdl_read",
+        "kind": "function",
+        "return_type": "int",
+        "parameters_raw": "string path, output uvm_hdl_data_t value",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "path",
+            "default": null
+          },
+          {
+            "direction": "output",
+            "type": "uvm_hdl_data_t",
+            "name": "value",
+            "default": null
+          }
+        ],
+        "doc": {
+          "title": "uvm_hdl_read()",
+          "summary": "Gets the value at the given ~path~. Returns 1 if the call succeeded, 0 otherwise.",
+          "full_text": "Gets the value at the given ~path~.\nReturns 1 if the call succeeded, 0 otherwise."
+        }
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_hdl_inca.c",
+          "line": 575,
+          "name": "uvm_hdl_read",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "inca",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and return its 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and return its 'value'.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_questa.c",
+          "line": 362,
+          "name": "uvm_hdl_read",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "questa",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the FLI, and return its 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the FLI, and return its 'value'.\n/"
+          }
+        },
+        {
+          "file": "dpi/uvm_hdl_vcs.c",
+          "line": 286,
+          "name": "uvm_hdl_read",
+          "return_type": "int",
+          "parameters": "char *path, p_vpi_vecval value",
+          "simulator_target": "vcs",
+          "doc": {
+            "title": "",
+            "summary": "Given a path, look the path name up using the PLI or the VHPI, and return its 'value'. /",
+            "full_text": "Given a path, look the path name up using the PLI\nor the VHPI, and return its 'value'.\n/"
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_regex.svh",
+        "line": 23,
+        "name": "uvm_re_match",
+        "kind": "function",
+        "return_type": "int",
+        "parameters_raw": "string re, string str",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "re",
+            "default": null
+          },
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "str",
+            "default": null
+          }
+        ],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_regex.cc",
+          "line": 40,
+          "name": "uvm_re_match",
+          "return_type": "int",
+          "parameters": "const char * re, const char *str",
+          "simulator_target": "generic",
+          "doc": {
+            "title": "",
+            "summary": "uvm_re_match",
+            "full_text": "uvm_re_match\n\nMatch a string to a regular expression.  The regex is first lookup\nup in the regex cache to see if it has already been compiled.  If\nso, the compile version is retrieved from the cache.  Otherwise, it\nis compiled and cached for future use.  After compilation the\nmatching is done using regexec()."
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_regex.svh",
+        "line": 24,
+        "name": "uvm_dump_re_cache",
+        "kind": "function",
+        "return_type": "void",
+        "parameters_raw": "",
+        "parameters": [],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_regex.cc",
+          "line": 247,
+          "name": "uvm_dump_re_cache",
+          "return_type": "void",
+          "parameters": "",
+          "simulator_target": "generic",
+          "doc": {
+            "title": "",
+            "summary": "uvm_dump_re_cache",
+            "full_text": "uvm_dump_re_cache\n\nDumps the set of regular expressions stored in the cache"
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_regex.svh",
+        "line": 25,
+        "name": "uvm_glob_to_re",
+        "kind": "function",
+        "return_type": "string",
+        "parameters_raw": "string glob",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "glob",
+            "default": null
+          }
+        ],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_regex.cc",
+          "line": 121,
+          "name": "uvm_glob_to_re",
+          "return_type": "const char *",
+          "parameters": "const char *glob",
+          "simulator_target": "generic",
+          "doc": {
+            "title": "",
+            "summary": "uvm_glob_to_re",
+            "full_text": "uvm_glob_to_re\n\nConvert a glob expression to a normal regular expression."
+          }
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_svcmd_dpi.svh",
+        "line": 27,
+        "name": "uvm_dpi_get_next_arg_c",
+        "kind": "function",
+        "return_type": "string",
+        "parameters_raw": "int init",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "int",
+            "name": "init",
+            "default": null
+          }
+        ],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_svcmd_dpi.c",
+          "line": 58,
+          "name": "uvm_dpi_get_next_arg_c",
+          "return_type": "const char *",
+          "parameters": "int init",
+          "simulator_target": "generic",
+          "doc": null
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_svcmd_dpi.svh",
+        "line": 28,
+        "name": "uvm_dpi_get_tool_name_c",
+        "kind": "function",
+        "return_type": "string",
+        "parameters_raw": "",
+        "parameters": [],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_svcmd_dpi.c",
+          "line": 84,
+          "name": "uvm_dpi_get_tool_name_c",
+          "return_type": "char*",
+          "parameters": "",
+          "simulator_target": "generic",
+          "doc": null
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_svcmd_dpi.svh",
+        "line": 29,
+        "name": "uvm_dpi_get_tool_version_c",
+        "kind": "function",
+        "return_type": "string",
+        "parameters_raw": "",
+        "parameters": [],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_svcmd_dpi.c",
+          "line": 91,
+          "name": "uvm_dpi_get_tool_version_c",
+          "return_type": "char*",
+          "parameters": "",
+          "simulator_target": "generic",
+          "doc": null
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_svcmd_dpi.svh",
+        "line": 43,
+        "name": "uvm_dpi_regcomp",
+        "kind": "function",
+        "return_type": "chandle",
+        "parameters_raw": "string regex",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "regex",
+            "default": null
+          }
+        ],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_svcmd_dpi.c",
+          "line": 98,
+          "name": "uvm_dpi_regcomp",
+          "return_type": "regex_t*",
+          "parameters": "char* pattern",
+          "simulator_target": "generic",
+          "doc": null
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_svcmd_dpi.svh",
+        "line": 44,
+        "name": "uvm_dpi_regexec",
+        "kind": "function",
+        "return_type": "int",
+        "parameters_raw": "chandle preg, string str",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "chandle",
+            "name": "preg",
+            "default": null
+          },
+          {
+            "direction": "input",
+            "type": "string",
+            "name": "str",
+            "default": null
+          }
+        ],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_svcmd_dpi.c",
+          "line": 120,
+          "name": "uvm_dpi_regexec",
+          "return_type": "int",
+          "parameters": "regex_t* re, char* str",
+          "simulator_target": "generic",
+          "doc": null
+        }
+      ]
+    },
+    {
+      "sv_import": {
+        "file": "dpi/uvm_svcmd_dpi.svh",
+        "line": 45,
+        "name": "uvm_dpi_regfree",
+        "kind": "function",
+        "return_type": "void",
+        "parameters_raw": "chandle preg",
+        "parameters": [
+          {
+            "direction": "input",
+            "type": "chandle",
+            "name": "preg",
+            "default": null
+          }
+        ],
+        "doc": null
+      },
+      "c_implementations": [
+        {
+          "file": "dpi/uvm_svcmd_dpi.c",
+          "line": 129,
+          "name": "uvm_dpi_regfree",
+          "return_type": "void",
+          "parameters": "regex_t* re",
+          "simulator_target": "generic",
+          "doc": null
+        }
+      ]
+    }
+  ]
+}
