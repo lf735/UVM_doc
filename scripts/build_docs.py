@@ -1115,6 +1115,82 @@ def modernize_doc_files():
 
     print(f"Modernized {count} documentation pages in {OUTPUT_DOCS_VIEW}.")
 
+def modernize_index_pages():
+    """Modernize NaturalDocs index pages (Classes.html, General*.html, etc.) into docs_view/index/."""
+    index_src_dir = DOCS_DIR / "index"
+    if not index_src_dir.exists():
+        return
+    output_index_dir = OUTPUT_DOCS_VIEW / "index"
+    output_index_dir.mkdir(parents=True, exist_ok=True)
+    print("Modernizing NaturalDocs index pages...")
+
+    count = 0
+    for f in sorted(index_src_dir.glob("*.html")):
+        raw_html = f.read_text(encoding="latin-1")
+        page_name = f.stem
+        title = f"{page_name} Index" if not page_name.startswith("General") else f"General Index ({page_name})"
+
+        content_start = raw_html.find('<div id=Index>')
+        if content_start == -1: content_start = raw_html.find('<div id="Index">')
+        content_end = raw_html.find('<!--START_ND_TOOLTIPS-->')
+        if content_end == -1: content_end = raw_html.find('</div><!--Index-->')
+        if content_end == -1: content_end = raw_html.find('</body>')
+
+        body = raw_html[content_start:content_end] if content_start != -1 else raw_html
+
+        def repl_href(m):
+            url = m.group(1)
+            if url.startswith('../files/'):
+                doc_part = url[len('../files/'):]
+                f_part, _, a_part = doc_part.partition('#')
+                if a_part:
+                    target_id = GLOBAL_DOC_ANCHOR_MAPS.get(f_part, {}).get(a_part, a_part)
+                    return f'href="../{f_part}#{target_id}"'
+                return f'href="../{f_part}"'
+            return f'href="{url}"'
+
+        body = re.sub(r'href="([^"]+)"', repl_href, body)
+
+        breadcrumbs_html = f'''<nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="../../index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">Index</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">{html.escape(page_name)}</span>
+</nav>'''
+
+        modern_html = f'''<!DOCTYPE html>
+<html lang="en" data-theme="light" class="doc-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{html.escape(title)} | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    {breadcrumbs_html}
+    <div class="doc-layout-wrapper">
+      <div class="doc-main-content">
+        <div id="Content">
+          {body}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../../js/doc_page.js"></script>
+</body>
+</html>'''
+
+        out_file = output_index_dir / f.name
+        out_file.write_text(modern_html, encoding='utf-8', newline='\n')
+        count += 1
+
+    print(f"Modernized {count} index pages in {output_index_dir}.")
+
 def generate_orphan_doc_pages():
     """Generate modern doc pages for the 15 classes across 5 files lacking legacy Accellera docs."""
     print("Generating documentation pages for orphan UVM classes...")
@@ -1397,6 +1473,8 @@ def parse_navigation_and_categories():
                     norm_href = raw_href
                     if raw_href.startswith('files/'):
                         norm_href = 'docs_view/' + raw_href[len('files/'):]
+                    elif raw_href.startswith('index/'):
+                        norm_href = 'docs_view/' + raw_href
                     entries.append({
                         'type': 'index' if is_index else 'file',
                         'title': m.group(2).strip(),
@@ -1787,6 +1865,7 @@ def main():
     else:
         generate_source_views()
         modernize_doc_files()
+        modernize_index_pages()
         generate_orphan_doc_pages()
         copy_assets()
         generate_search_and_nav_data()
