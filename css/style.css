@@ -1547,15 +1547,16 @@ code {
   font-weight: 600;
 }
 
-/* Derived Subclasses Card (Identifiable & Discrete) */
+/* Derived Subclasses Card (Identifiable, Discrete & Collapsible) */
 .derived-classes-card {
   margin: 0.6rem 0 1rem 0;
-  padding: 0.55rem 0.85rem;
+  padding: 0.45rem 0.85rem;
   background: var(--surface-alt);
   border: 1px solid var(--border-color);
   border-left: 3px solid var(--primary);
   border-radius: var(--radius-sm);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
 }
 
 .derived-classes-header {
@@ -1567,18 +1568,36 @@ code {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--text-muted);
-  margin-bottom: 0.45rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 2px 0;
 }
 
-.derived-classes-header svg {
+.derived-classes-header:hover {
+  color: var(--text-color);
+}
+
+.derived-classes-header .derived-classes-chevron {
   color: var(--primary);
   flex-shrink: 0;
+  transition: transform 0.2s ease;
+  transform: rotate(0deg);
+}
+
+.derived-classes-card.collapsed .derived-classes-header .derived-classes-chevron {
+  transform: rotate(-90deg);
 }
 
 .derived-classes-list {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.derived-classes-card.collapsed .derived-classes-list {
+  display: none;
 }
 
 .derived-class-pill {

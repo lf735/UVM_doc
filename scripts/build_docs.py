@@ -383,7 +383,7 @@ def extract_doc_headings(html_text, rel_doc_path):
     main_m = re.search(r'id=["\']?MainTopic["\']?[\s\S]*?<h[1-4] class=["\']?CTitle["\']?>([\s\S]*?)</h[1-4]>', html_text)
     main_title = None
     if main_m:
-        main_title = re.sub(r'<[^>]+>', '', main_m.group(1)).strip()
+        main_title = html.unescape(re.sub(r'<[^>]+>', '', main_m.group(1)).strip())
         a_m = re.search(r'name=["\']([^"\']+)["\']', main_m.group(1))
         anchor = a_m.group(1) if a_m else 'MainTopic'
         headings.append({
@@ -402,7 +402,7 @@ def extract_doc_headings(html_text, rel_doc_path):
     # Also check if MainTopic or first section has Contents or Summary
     main_summary_m = re.search(r'id=["\']?MainTopic["\']?[\s\S]*?<div class=["\']?Summary["\']?[^>]*>[\s\S]*?<div class=["\']?STitle["\']?>([^<]+)<', html_text)
     if main_summary_m:
-        stitle = main_summary_m.group(1).strip()
+        stitle = html.unescape(main_summary_m.group(1).strip())
         is_contents = (stitle.lower() == 'contents')
         headings.append({
             'title': 'Contents' if is_contents else 'Summary',
@@ -425,7 +425,7 @@ def extract_doc_headings(html_text, rel_doc_path):
         cls = m.group(1)
         tag = m.group(3).upper()
         inner = m.group(4)
-        title = re.sub(r'<[^>]+>', '', inner).strip()
+        title = html.unescape(re.sub(r'<[^>]+>', '', inner).strip())
         if not title:
             continue
 
@@ -786,9 +786,9 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
                     else:
                         pills.append(f'<span class="derived-class-pill">{child}</span>')
 
-                derived_box = f'''<div class="derived-classes-card">
-  <div class="derived-classes-header">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                derived_box = f'''<div class="derived-classes-card collapsed">
+  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
+    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     <span>Direct Subclasses ({len(children)})</span>
   </div>
   <div class="derived-classes-list">{"".join(pills)}</div>
@@ -1285,9 +1285,9 @@ def generate_orphan_doc_pages():
                 else:
                     pills.append(f'<span class="derived-class-pill">{child}</span>')
 
-            derived_box = f'''<div class="derived-classes-card">
-  <div class="derived-classes-header">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            derived_box = f'''<div class="derived-classes-card collapsed">
+  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
+    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     <span>Direct Subclasses ({len(children)})</span>
   </div>
   <div class="derived-classes-list">{"".join(pills)}</div>
@@ -1467,7 +1467,7 @@ def parse_navigation_and_categories():
 
             if '<div class=MGroup>' in entry_html:
                 m_title = re.search(r'<div class=MGroup><a [^>]*>([^<]+)</a>', entry_html)
-                title = m_title.group(1).strip() if m_title else "Group"
+                title = html.unescape(m_title.group(1).strip()) if m_title else "Group"
                 content_start = entry_html.find('<div class=MGroupContent')
                 if content_start != -1:
                     inner_depth = 0
@@ -1501,7 +1501,7 @@ def parse_navigation_and_categories():
                         norm_href = 'docs_view/' + raw_href
                     entries.append({
                         'type': 'index' if is_index else 'file',
-                        'title': m.group(2).strip(),
+                        'title': html.unescape(m.group(2).strip()),
                         'href': norm_href
                     })
             i = end_pos
@@ -1673,13 +1673,13 @@ def build_search_index(categories):
 
         matches = re.finditer(r'<span class=ISymbol>([^<]+)</span>\s*<div class=ISubIndex>([\s\S]*?)</div>', c_html)
         for m in matches:
-            mname = m.group(1).strip()
+            mname = html.unescape(m.group(1).strip())
             sub_html = m.group(2)
             link_matches = re.finditer(r'<a\s+href="([^"]+)"(?:[^>]*onMouseOver="ShowTip\(event,\s*\'([^\']+)\'[^"]*")?[^>]*class=IParent>([^<]+)</a>', sub_html)
             for lm in link_matches:
                 href = lm.group(1)
                 tt_id = lm.group(2)
-                parent_class = lm.group(3).strip()
+                parent_class = html.unescape(lm.group(3).strip())
                 clean_link = href.replace('../files/', '')
                 parts = clean_link.split('#', 1)
                 file_part = parts[0]

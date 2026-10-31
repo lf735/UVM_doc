@@ -824,6 +824,30 @@
     } catch (err) { }
   });
 
+  // Derived classes card collapse / expand toggle
+  document.addEventListener('click', function (e) {
+    const header = e.target.closest('.derived-classes-header');
+    if (header) {
+      const card = header.closest('.derived-classes-card');
+      if (card) {
+        card.classList.toggle('collapsed');
+      }
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const header = e.target.closest('.derived-classes-header');
+      if (header) {
+        e.preventDefault();
+        const card = header.closest('.derived-classes-card');
+        if (card) {
+          card.classList.toggle('collapsed');
+        }
+      }
+    }
+  });
+
   // Breadcrumb home navigation (prevent recursive iframe embedding)
   document.addEventListener('click', function (e) {
     const homeLink = e.target.closest('.doc-breadcrumb-home');
