@@ -11,6 +11,13 @@
 </head>
 <body class="doc-body">
   <div class="doc-page-container">
+    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="../../index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">Base</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">Callbacks Classes</span>
+</nav>
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
@@ -29,7 +36,13 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Callbacks_Classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Callbacks_Classes" id="Callbacks_Classes" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">Callbacks Classes</a></h1><div class=CBody><p>This section defines the classes used for callback registration, management, and user-defined callbacks.</p>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Callbacks_Classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Callbacks_Classes" id="Callbacks_Classes" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">Callbacks Classes</a></h1><div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses (1)</span>
+  </div>
+  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_callback-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_typeid">uvm_typeid</a></div>
+</div><div class=CBody><p>This section defines the classes used for callback registration, management, and user-defined callbacks.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -51,7 +64,13 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_callbacks#(T,CB)"><div class="CTopic"><h2 class=CTitle><a name="uvm_callbacks#(T,CB)" id="uvm_callbacks#(T,CB)" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">uvm_callbacks #(T,CB)</a></h2><div class=CBody><p>The <i>uvm_callbacks</i> class provides a base class for implementing callbacks, which are typically used to modify or augment component behavior without changing the component class.&nbsp; To work effectively, the developer of the component class defines a set of &ldquo;hook&rdquo; methods that enable users to customize certain behaviors of the component in a manner that is controlled by the component developer.&nbsp; The integrity of the component&rsquo;s overall behavior is intact, while still allowing certain customizable actions by the user.</p><p>To enable compile-time type-safety, the class is parameterized on both the user-defined callback interface implementation as well as the object type associated with the callback.&nbsp; The object type-callback type pair are associated together using the <a href="../macros/uvm_callback_defines-svh.html#doc-nav-item-2" data-target-id="doc-nav-item-2" class=LMacro >`uvm_register_cb</a> macro to define a valid pairing; valid pairings are checked when a user attempts to add a callback to an object.</p><p>To provide the most flexibility for end-user customization and reuse, it is recommended that the component developer also define a corresponding set of virtual method hooks in the component itself.&nbsp; This affords users the ability to customize via inheritance/factory overrides as well as callback object registration.&nbsp; The implementation of each virtual method would provide the default traversal algorithm for the particular callback being called.&nbsp; Being virtual, users can define subtypes that override the default algorithm, perform tasks before and/or after calling super.&lt;method&gt; to execute any registered callbacks, or to not call the base implementation, effectively disabling that particular hook.&nbsp; A demonstration of this methodology is provided in an example included in the kit.</p>
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_callbacks#(T,CB)"><div class="CTopic"><h2 class=CTitle><a name="uvm_callbacks#(T,CB)" id="uvm_callbacks#(T,CB)" href="../../src_view/base/uvm_callback.svh.html#L469" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="469">uvm_callbacks #(T,CB)</a></h2><div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses (1)</span>
+  </div>
+  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_callback-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_derived_callbacks">uvm_derived_callbacks</a></div>
+</div><div class=CBody><p>The <i>uvm_callbacks</i> class provides a base class for implementing callbacks, which are typically used to modify or augment component behavior without changing the component class.&nbsp; To work effectively, the developer of the component class defines a set of &ldquo;hook&rdquo; methods that enable users to customize certain behaviors of the component in a manner that is controlled by the component developer.&nbsp; The integrity of the component&rsquo;s overall behavior is intact, while still allowing certain customizable actions by the user.</p><p>To enable compile-time type-safety, the class is parameterized on both the user-defined callback interface implementation as well as the object type associated with the callback.&nbsp; The object type-callback type pair are associated together using the <a href="../macros/uvm_callback_defines-svh.html#doc-nav-item-2" data-target-id="doc-nav-item-2" class=LMacro >`uvm_register_cb</a> macro to define a valid pairing; valid pairings are checked when a user attempts to add a callback to an object.</p><p>To provide the most flexibility for end-user customization and reuse, it is recommended that the component developer also define a corresponding set of virtual method hooks in the component itself.&nbsp; This affords users the ability to customize via inheritance/factory overrides as well as callback object registration.&nbsp; The implementation of each virtual method would provide the default traversal algorithm for the particular callback being called.&nbsp; Being virtual, users can define subtypes that override the default algorithm, perform tasks before and/or after calling super.&lt;method&gt; to execute any registered callbacks, or to not call the base implementation, effectively disabling that particular hook.&nbsp; A demonstration of this methodology is provided in an example included in the kit.</p>
 
 <!--START_ND_SUMMARY index=1-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -159,7 +178,7 @@
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_callbacks#(T,CB).add"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).add" id="uvm_callbacks#(T,CB).add" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">add</a></h3>
+<div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_callbacks#(T,CB).add"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).add" id="uvm_callbacks#(T,CB).add" href="../../src_view/base/uvm_callback.svh.html#L590" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="590">add</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
@@ -198,7 +217,7 @@
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_callbacks#(T,CB).add_by_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).add_by_name" id="uvm_callbacks#(T,CB).add_by_name" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">add_by_name</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_callbacks#(T,CB).add_by_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).add_by_name" id="uvm_callbacks#(T,CB).add_by_name" href="../../src_view/base/uvm_callback.svh.html#L706" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="706">add_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -228,7 +247,7 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_callbacks#(T,CB).delete"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).delete" id="uvm_callbacks#(T,CB).delete" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">delete</a></h3>
+<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_callbacks#(T,CB).delete"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).delete" id="uvm_callbacks#(T,CB).delete" href="../../src_view/base/uvm_callback.svh.html#L751" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="751">delete</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">delete</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
@@ -259,7 +278,7 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_callbacks#(T,CB).delete_by_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).delete_by_name" id="uvm_callbacks#(T,CB).delete_by_name" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">delete_by_name</a></h3>
+<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_callbacks#(T,CB).delete_by_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).delete_by_name" id="uvm_callbacks#(T,CB).delete_by_name" href="../../src_view/base/uvm_callback.svh.html#L790" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="790">delete_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">delete_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -285,7 +304,7 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_callbacks#(T,CB).get_first"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_first" id="uvm_callbacks#(T,CB).get_first" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_first</a></h3>
+<div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_callbacks#(T,CB).get_first"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_first" id="uvm_callbacks#(T,CB).get_first" href="../../src_view/base/uvm_callback.svh.html#L849" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="849">get_first</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> CB <span class="sv-proto-name">get_first</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -305,7 +324,7 @@
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_callbacks#(T,CB).get_last"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_last" id="uvm_callbacks#(T,CB).get_last" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_last</a></h3>
+<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_callbacks#(T,CB).get_last"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_last" id="uvm_callbacks#(T,CB).get_last" href="../../src_view/base/uvm_callback.svh.html#L872" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="872">get_last</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> CB <span class="sv-proto-name">get_last</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -325,7 +344,7 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_callbacks#(T,CB).get_next"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_next" id="uvm_callbacks#(T,CB).get_next" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_next</a></h3>
+<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_callbacks#(T,CB).get_next"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_next" id="uvm_callbacks#(T,CB).get_next" href="../../src_view/base/uvm_callback.svh.html#L898" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="898">get_next</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> CB <span class="sv-proto-name">get_next</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -345,7 +364,7 @@
 
 
  <!--CONTENT index=13 -->
-<div class="CMethod" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_callbacks#(T,CB).get_prev"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_prev" id="uvm_callbacks#(T,CB).get_prev" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_prev</a></h3>
+<div class="CMethod" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_callbacks#(T,CB).get_prev"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).get_prev" id="uvm_callbacks#(T,CB).get_prev" href="../../src_view/base/uvm_callback.svh.html#L924" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="924">get_prev</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> CB <span class="sv-proto-name">get_prev</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -371,7 +390,7 @@
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_callbacks#(T,CB).display"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).display" id="uvm_callbacks#(T,CB).display" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">display</a></h3>
+<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_callbacks#(T,CB).display"><div class="CTopic"><h3 class=CTitle><a name="uvm_callbacks#(T,CB).display" id="uvm_callbacks#(T,CB).display" href="../../src_view/base/uvm_callback.svh.html#L946" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="946">display</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_typed_callbacks">Overrides uvm_typed_callbacks</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">display</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
@@ -389,7 +408,7 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CClass" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_callback_iter"><div class="CTopic"><h2 class=CTitle><a name="uvm_callback_iter" id="uvm_callback_iter" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">uvm_callback_iter</a></h2><div class=CBody><p>The <i>uvm_callback_iter</i> class is an iterator class for iterating over callback queues of a specific callback type.&nbsp; The typical usage of the class is:</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_callback_iter"><div class="CTopic"><h2 class=CTitle><a name="uvm_callback_iter" id="uvm_callback_iter" href="../../src_view/base/uvm_callback.svh.html#L1037" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1037">uvm_callback_iter</a></h2><div class=CBody><p>The <i>uvm_callback_iter</i> class is an iterator class for iterating over callback queues of a specific callback type.&nbsp; The typical usage of the class is:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -464,7 +483,7 @@
 
 
  <!--CONTENT index=18 -->
-<div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_callback_iter.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.new" id="uvm_callback_iter.new" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">new</a></h3>
+<div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_callback_iter.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.new" id="uvm_callback_iter.new" href="../../src_view/base/uvm_callback.svh.html#L1048" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1048">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
@@ -480,7 +499,7 @@
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_callback_iter.first"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.first" id="uvm_callback_iter.first" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">first</a></h3>
+<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_callback_iter.first"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.first" id="uvm_callback_iter.first" href="../../src_view/base/uvm_callback.svh.html#L1058" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1058">first</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">first</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the first valid (enabled) callback of the callback type (or a derivative) that is in the queue of the context object.&nbsp; If the queue is empty then <i>null</i> is returned.</p></div></div></div>
 
@@ -488,7 +507,7 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_callback_iter.last"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.last" id="uvm_callback_iter.last" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">last</a></h3>
+<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_callback_iter.last"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.last" id="uvm_callback_iter.last" href="../../src_view/base/uvm_callback.svh.html#L1069" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1069">last</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">last</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the last valid (enabled) callback of the callback type (or a derivative) that is in the queue of the context object.&nbsp; If the queue is empty then <i>null</i> is returned.</p></div></div></div>
 
@@ -496,7 +515,7 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_callback_iter.next"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.next" id="uvm_callback_iter.next" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">next</a></h3>
+<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_callback_iter.next"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.next" id="uvm_callback_iter.next" href="../../src_view/base/uvm_callback.svh.html#L1080" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1080">next</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">next</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the next valid (enabled) callback of the callback type (or a derivative) that is in the queue of the context object.&nbsp; If there are no more valid callbacks in the queue, then <i>null</i> is returned.</p></div></div></div>
 
@@ -504,7 +523,7 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_callback_iter.prev"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.prev" id="uvm_callback_iter.prev" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">prev</a></h3>
+<div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_callback_iter.prev"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.prev" id="uvm_callback_iter.prev" href="../../src_view/base/uvm_callback.svh.html#L1091" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1091">prev</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">prev</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the previous valid (enabled) callback of the callback type (or a derivative) that is in the queue of the context object.&nbsp; If there are no more valid callbacks in the queue, then <i>null</i> is returned.</p></div></div></div>
 
@@ -512,7 +531,7 @@
 
 
  <!--CONTENT index=23 -->
-<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_callback_iter.get_cb"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.get_cb" id="uvm_callback_iter.get_cb" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_cb</a></h3>
+<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_callback_iter.get_cb"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback_iter.get_cb" id="uvm_callback_iter.get_cb" href="../../src_view/base/uvm_callback.svh.html#L1101" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1101">get_cb</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-ident">CB</span> <span class="sv-proto-name">get_cb</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the last callback accessed via a first() or next() call.</p></div></div></div>
 
@@ -520,7 +539,13 @@
 
 
  <!--CONTENT index=24 -->
-<div class="CClass" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_callback"><div class="CTopic"><h2 class=CTitle><a name="uvm_callback" id="uvm_callback" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">uvm_callback</a></h2><div class=CBody><p>The <i>uvm_callback</i> class is the base class for user-defined callback classes.&nbsp; Typically, the component developer defines an application-specific callback class that extends from this class.&nbsp; In it, he defines one or more virtual methods, called a <i>callback interface</i>, that represent the hooks available for user override.</p><p>Methods intended for optional override should not be declared <i>pure.</i>&nbsp; Usually, all the callback methods are defined with empty implementations so users have the option of overriding any or all of them.</p><p>The prototypes for each hook method are completely application specific with no restrictions.</p>
+<div class="CClass" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_callback"><div class="CTopic"><h2 class=CTitle><a name="uvm_callback" id="uvm_callback" href="../../src_view/base/uvm_callback.svh.html#L1140" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1140">uvm_callback</a></h2><div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses (6)</span>
+  </div>
+  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_objection-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_objection_callback">uvm_objection_callback</a><a href="../../docs_view/base/uvm_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_phase_cb">uvm_phase_cb</a><a href="../../docs_view/reg/uvm_reg_cbs-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_reg_cbs">uvm_reg_cbs</a><a href="../../docs_view/base/uvm_report_catcher-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_report_catcher">uvm_report_catcher</a><a href="../../docs_view/reg/uvm_vreg-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_vreg_cbs">uvm_vreg_cbs</a><a href="../../docs_view/reg/uvm_vreg_field-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_vreg_field_cbs">uvm_vreg_field_cbs</a></div>
+</div><div class=CBody><p>The <i>uvm_callback</i> class is the base class for user-defined callback classes.&nbsp; Typically, the component developer defines an application-specific callback class that extends from this class.&nbsp; In it, he defines one or more virtual methods, called a <i>callback interface</i>, that represent the hooks available for user override.</p><p>Methods intended for optional override should not be declared <i>pure.</i>&nbsp; Usually, all the callback methods are defined with empty implementations so users have the option of overriding any or all of them.</p><p>The prototypes for each hook method are completely application specific with no restrictions.</p>
 
 <!--START_ND_SUMMARY index=24-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -576,7 +601,7 @@
 
 
  <!--CONTENT index=26 -->
-<div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_callback.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback.new" id="uvm_callback.new" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">new</a></h3>
+<div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_callback.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback.new" id="uvm_callback.new" href="../../src_view/base/uvm_callback.svh.html#L1150" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1150">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 6 derived class(es)">Overridden in 6 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -594,7 +619,7 @@
 
 
  <!--CONTENT index=27 -->
-<div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_callback.callback_mode"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback.callback_mode" id="uvm_callback.callback_mode" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">callback_mode</a></h3>
+<div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_callback.callback_mode"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback.callback_mode" id="uvm_callback.callback_mode" href="../../src_view/base/uvm_callback.svh.html#L1159" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1159">callback_mode</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">callback_mode</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
@@ -612,7 +637,7 @@
 
 
  <!--CONTENT index=28 -->
-<div class="CMethod" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_callback.is_enabled"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback.is_enabled" id="uvm_callback.is_enabled" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">is_enabled</a></h3>
+<div class="CMethod" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_callback.is_enabled"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback.is_enabled" id="uvm_callback.is_enabled" href="../../src_view/base/uvm_callback.svh.html#L1178" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1178">is_enabled</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_enabled</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if the callback is enabled, 0 otherwise.</p></div></div></div>
 
@@ -620,7 +645,7 @@
 
 
  <!--CONTENT index=29 -->
-<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_callback.get_type_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback.get_type_name" id="uvm_callback.get_type_name" href="../../src_view/base/uvm_callback.svh.html#L50" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="50">get_type_name</a></h3>
+<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_callback.get_type_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_callback.get_type_name" id="uvm_callback.get_type_name" href="../../src_view/base/uvm_callback.svh.html#L1189" class="src-code-link" data-src-file="base/uvm_callback.svh" data-src-line="1189">get_type_name</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the type name of this callback object.</p></div></div></div>
 
@@ -646,693 +671,6 @@
       </aside>
     </div>
   </div>
-
-  <script>
-    // In-page Table of Contents (On this page) generator & Scrollspy
-    (function initDocTOC() {
-      const contentEl = document.getElementById('Content');
-      const tocSidebar = document.getElementById('doc-toc-sidebar');
-      const tocNav = document.getElementById('doc-toc-nav');
-      const toggleAllBtn = document.getElementById('doc-toc-toggle-all');
-      if (!contentEl || !tocSidebar || !tocNav) return;
-
-      const topItems = [];
-      const groups = [];
-      const standaloneItems = [];
-      let currentGroup = null;
-      let topicSeq = 0;
-
-      // 1. Check main topic
-      const mainTopic = contentEl.querySelector('#MainTopic .CTitle, #MainTopic h1, #MainTopic h2');
-      if (mainTopic) {
-        const safeId = 'doc-nav-main';
-        mainTopic.id = safeId;
-        const mainA = mainTopic.querySelector('a[name]');
-        const mainAnchor = mainA ? mainA.getAttribute('name') : 'MainTopic';
-        mainTopic.setAttribute('data-anchor', mainAnchor);
-        topItems.push({
-          id: safeId,
-          anchor: mainAnchor,
-          title: (mainTopic.innerText || mainTopic.textContent || 'Overview').trim(),
-          type: 'main',
-          el: mainTopic
-        });
-      }
-
-      // 2. Check summary
-      const summaryEl = contentEl.querySelector('.Summary');
-      if (summaryEl) {
-        const safeId = 'doc-nav-summary';
-        summaryEl.id = safeId;
-        summaryEl.setAttribute('data-anchor', 'Summary');
-        topItems.push({
-          id: safeId,
-          anchor: 'Summary',
-          title: 'Summary',
-          type: 'summary',
-          el: summaryEl
-        });
-      }
-
-      // 3. Scan all topics in #Content
-      const topicWrappers = contentEl.querySelectorAll('#Content > div');
-
-      // Check if page contains H2 topics
-      let hasH2 = false;
-      for (let i = 0; i < topicWrappers.length; i++) {
-        const topic = topicWrappers[i].querySelector('.CTopic');
-        if (!topic || topic.id === 'MainTopic') continue;
-        const titleEl = topic.querySelector('.CTitle');
-        if (titleEl && titleEl.tagName.toUpperCase() === 'H2') {
-          hasH2 = true;
-          break;
-        }
-      }
-
-      topicWrappers.forEach(function(wrap) {
-        const topic = wrap.querySelector('.CTopic');
-        if (!topic || topic.id === 'MainTopic') return;
-        const titleEl = topic.querySelector('.CTitle');
-        if (!titleEl) return;
-        const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
-        if (!rawTitle) return;
-
-        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
-        wrap.id = safeId;
-        wrap.setAttribute('data-doc-topic', safeId);
-        if (topic) topic.id = topic.id || (safeId + '-topic');
-
-        const aTag = wrap.querySelector('a[name]');
-        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
-        if (aName) {
-          wrap.setAttribute('data-anchor', aName);
-        }
-
-        const cls = wrap.className || '';
-        const tag = titleEl.tagName.toUpperCase();
-        const isH2 = tag === 'H2';
-        const isCGroup = cls.indexOf('CGroup') !== -1;
-
-        if (hasH2) {
-          if (isH2) {
-            currentGroup = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              items: []
-            };
-            groups.push(currentGroup);
-          } else {
-            const itemObj = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              isGroupHeader: isCGroup,
-              type: 'subitem'
-            };
-            if (currentGroup) {
-              currentGroup.items.push(itemObj);
-            } else {
-              standaloneItems.push(itemObj);
-            }
-          }
-        } else {
-          if (isCGroup) {
-            currentGroup = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              items: []
-            };
-            groups.push(currentGroup);
-          } else {
-            const itemObj = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              isGroupHeader: false,
-              type: 'subitem'
-            };
-            if (currentGroup) {
-              currentGroup.items.push(itemObj);
-            } else {
-              standaloneItems.push(itemObj);
-            }
-          }
-        }
-      });
-
-      const totalItemsCount = topItems.length + standaloneItems.length + groups.length + groups.reduce(function(acc, g) { return acc + g.items.length; }, 0);
-      if (totalItemsCount <= 1) {
-        tocSidebar.style.display = 'none';
-        return;
-      }
-
-      // Show/hide the "toggle all" button depending on whether groups exist
-      if (toggleAllBtn) {
-        if (groups.length === 0) {
-          toggleAllBtn.style.display = 'none';
-        } else {
-          toggleAllBtn.style.display = 'inline-flex';
-        }
-      }
-
-      // Render TOC Tree HTML
-      let html = '';
-
-      // Top-level / standalone items (Overview, Summary, early methods)
-      const initialItems = topItems.concat(standaloneItems);
-      if (initialItems.length > 0) {
-        html += '<ul class="doc-toc-list">';
-        initialItems.forEach(function(item) {
-          const cleanTitle = item.title.replace(/"/g, '&quot;');
-          html += '<li class="doc-toc-item">';
-          html += '<a href="#' + item.id + '" data-target-id="' + item.id + '" class="doc-toc-link" title="' + cleanTitle + '">';
-          html += cleanTitle;
-          html += '</a></li>';
-        });
-        html += '</ul>';
-      }
-
-      // Collapsible Groups
-      groups.forEach(function(group) {
-        const cleanGroupTitle = group.title.replace(/"/g, '&quot;');
-        const hasSubItems = group.items.length > 0;
-        html += '<div class="doc-toc-group-block' + (hasSubItems ? '' : ' no-children') + '" id="block-' + group.id + '">';
-        html += '<div class="doc-toc-group-header">';
-        if (hasSubItems) {
-          html += '<button class="doc-toc-chevron-btn" type="button" aria-label="Toggle group ' + cleanGroupTitle + '" title="Toggle group">';
-          html += '<svg class="doc-toc-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
-          html += '</button>';
-        } else {
-          html += '<span class="doc-toc-dot-indicator"></span>';
-        }
-        html += '<a href="#' + group.id + '" data-target-id="' + group.id + '" class="doc-toc-link doc-toc-group-title" title="' + cleanGroupTitle + '">';
-        html += cleanGroupTitle;
-        html += '</a>';
-        if (hasSubItems) {
-          html += '<span class="doc-toc-badge">' + group.items.length + '</span>';
-        }
-        html += '</div>';
-
-        if (hasSubItems) {
-          html += '<ul class="doc-toc-subitems">';
-          group.items.forEach(function(sub) {
-            const cleanSubTitle = sub.title.replace(/"/g, '&quot;');
-            const extraCls = sub.isGroupHeader ? ' doc-toc-subgroup-header' : '';
-            html += '<li class="doc-toc-item doc-toc-subitem' + extraCls + '">';
-            html += '<a href="#' + sub.id + '" data-target-id="' + sub.id + '" class="doc-toc-link' + (sub.isGroupHeader ? ' doc-toc-subgroup-link' : '') + '" title="' + cleanSubTitle + '">';
-            html += cleanSubTitle;
-            html += '</a></li>';
-          });
-          html += '</ul>';
-        }
-        html += '</div>';
-      });
-
-      tocNav.innerHTML = html;
-
-      // Flatten list of all navigable items for scrollspy & lookup
-      const allNavItems = [];
-      initialItems.forEach(function(item) {
-        const link = tocNav.querySelector('.doc-toc-link[data-target-id="' + item.id + '"]');
-        allNavItems.push({ id: item.id, anchor: item.anchor || item.id, title: item.title, el: item.el, link: link });
-      });
-      groups.forEach(function(group) {
-        const groupLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + group.id + '"]');
-        allNavItems.push({ id: group.id, anchor: group.anchor || group.id, title: group.title, el: group.el, link: groupLink });
-        group.items.forEach(function(sub) {
-          const subLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + sub.id + '"]');
-          allNavItems.push({ id: sub.id, anchor: sub.anchor || sub.id, title: sub.title, el: sub.el, link: subLink });
-        });
-      });
-
-      // Smooth scroll helper
-      let isManualScrolling = false;
-      let manualScrollTimer = null;
-      let pendingTargetEl = null;
-
-      function onManualScrollDone() {
-        isManualScrolling = false;
-        pendingTargetEl = null;
-        updateScrollSpy();
-      }
-
-      function startManualScroll(duration) {
-        isManualScrolling = true;
-        clearTimeout(manualScrollTimer);
-        manualScrollTimer = setTimeout(checkAndCorrectScroll, duration || 1800);
-      }
-
-      function getTargetScrollY(targetEl) {
-        if (!targetEl) return 0;
-        const rect = targetEl.getBoundingClientRect();
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        return Math.max(0, currentScroll + rect.top - 24);
-      }
-
-      function performScroll(targetY) {
-        const scrollEl = document.scrollingElement || document.documentElement || document.body;
-        try {
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-        } catch (e) {
-          window.scrollTo(0, targetY);
-        }
-        if (scrollEl && Math.abs(scrollEl.scrollTop - targetY) > 5) {
-          try {
-            scrollEl.scrollTo({ top: targetY, behavior: 'smooth' });
-          } catch (e) {
-            scrollEl.scrollTop = targetY;
-          }
-        }
-      }
-
-      function checkAndCorrectScroll() {
-        if (!pendingTargetEl) {
-          onManualScrollDone();
-          return;
-        }
-        const targetEl = pendingTargetEl;
-        const rect = targetEl.getBoundingClientRect();
-        // If still more than 6px away from top: 24px, perform an instant/exact scroll to lock it in
-        if (Math.abs(rect.top - 24) > 6) {
-          const adjustedY = getTargetScrollY(targetEl);
-          performScroll(adjustedY);
-          pendingTargetEl = null;
-          setTimeout(onManualScrollDone, 100);
-        } else {
-          onManualScrollDone();
-        }
-      }
-
-      function scrollToElement(targetEl) {
-        if (!targetEl) return;
-        const targetY = getTargetScrollY(targetEl);
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const distance = Math.abs(currentScroll - targetY);
-
-        pendingTargetEl = targetEl;
-        startManualScroll(Math.min(2400, Math.max(600, distance * 0.15 + 400)));
-        performScroll(targetY);
-
-        targetEl.classList.add('doc-target-highlight');
-        setTimeout(function() {
-          targetEl.classList.remove('doc-target-highlight');
-        }, 1600);
-      }
-
-      function scrollTocToItem(linkEl) {
-        if (!linkEl || !tocSidebar) return;
-        const sidebarRect = tocSidebar.getBoundingClientRect();
-        const linkRect = linkEl.getBoundingClientRect();
-        if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
-          const currentScroll = tocSidebar.scrollTop;
-          const targetOffset = linkRect.top - sidebarRect.top + currentScroll - (sidebarRect.height / 2);
-          try {
-            tocSidebar.scrollTo({ top: Math.max(0, targetOffset), behavior: 'smooth' });
-          } catch (e) {
-            tocSidebar.scrollTop = Math.max(0, targetOffset);
-          }
-        }
-      }
-
-      // Click on any TOC link
-      const tocLinks = tocNav.querySelectorAll('.doc-toc-link');
-      tocLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-
-          const targetId = link.getAttribute('data-target-id');
-          const target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-
-          // Highlight clicked link immediately
-          tocLinks.forEach(function(l) { l.classList.remove('active'); });
-          link.classList.add('active');
-
-          // If inside a collapsed group, un-collapse it so it is visible
-          const parentGroupBlock = link.closest('.doc-toc-group-block');
-          if (parentGroupBlock && parentGroupBlock.classList.contains('collapsed')) {
-            parentGroupBlock.classList.remove('collapsed');
-            updateToggleAllBtn();
-          }
-
-          if (target) {
-            scrollToElement(target);
-          }
-        });
-      });
-
-      // Unified click handler for internal anchor/topic links in #Content
-      contentEl.addEventListener('click', function(e) {
-        const link = e.target.closest('a[href*="#"]');
-        if (!link) return;
-        const href = link.getAttribute('href');
-        if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-        // If it's a source code link, let the source code link handler deal with it
-        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
-
-        // Check if link is an in-page anchor link (starts with #)
-        if (href.startsWith('#')) {
-          const targetId = link.getAttribute('data-target-id') || href.substring(1);
-          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          if (!target) {
-            try {
-              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
-                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
-            } catch (err) {}
-          }
-          if (target && target.tagName === 'A' && target.closest) {
-            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-          }
-          if (target) {
-            e.preventDefault();
-            scrollToElement(target);
-
-            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
-            try {
-              history.replaceState(null, null, '#' + realId);
-            } catch (err) {}
-
-            if (tocNav && realId) {
-              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
-              if (mLink) {
-                tocLinks.forEach(function(l) { l.classList.remove('active'); });
-                mLink.classList.add('active');
-                const pB = mLink.closest('.doc-toc-group-block');
-                if (pB && pB.classList.contains('collapsed')) {
-                  pB.classList.remove('collapsed');
-                  updateToggleAllBtn();
-                }
-                scrollTocToItem(mLink);
-              }
-            }
-          }
-        }
-      });
-
-      // Group chevron expand/collapse toggles
-      const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
-      chevronBtns.forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const block = btn.closest('.doc-toc-group-block');
-          if (block) {
-            block.classList.toggle('collapsed');
-            updateToggleAllBtn();
-          }
-        });
-      });
-
-      // Toggle all button logic
-      function updateToggleAllBtn() {
-        if (!toggleAllBtn) return;
-        const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
-        if (allBlocks.length === 0) return;
-        const allCollapsed = Array.from(allBlocks).every(function(b) { return b.classList.contains('collapsed'); });
-        const textSpan = toggleAllBtn.querySelector('.toc-toggle-text');
-        const icon = toggleAllBtn.querySelector('.toc-toggle-icon');
-        if (allCollapsed) {
-          if (textSpan) textSpan.textContent = 'Expand all';
-          if (icon) icon.innerHTML = '<polyline points="4 6 12 14 20 6"/>';
-        } else {
-          if (textSpan) textSpan.textContent = 'Collapse all';
-          if (icon) icon.innerHTML = '<polyline points="4 14 12 6 20 14"/>';
-        }
-      }
-
-      if (toggleAllBtn) {
-        toggleAllBtn.addEventListener('click', function() {
-          const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
-          const anyExpanded = Array.from(allBlocks).some(function(b) { return !b.classList.contains('collapsed'); });
-          if (anyExpanded) {
-            // Collapse all
-            allBlocks.forEach(function(b) { b.classList.add('collapsed'); });
-          } else {
-            // Expand all
-            allBlocks.forEach(function(b) { b.classList.remove('collapsed'); });
-          }
-          updateToggleAllBtn();
-        });
-      }
-
-      // ScrollSpy: highlight active link and expand parent group if needed
-      let scrollTimer = null;
-      function updateScrollSpy() {
-        if (isManualScrolling) return;
-
-        let activeItem = null;
-        for (let i = 0; i < allNavItems.length; i++) {
-          const item = allNavItems[i];
-          if (!item.el) continue;
-          const rect = item.el.getBoundingClientRect();
-          if (rect.top <= 100) {
-            activeItem = item;
-          } else {
-            break;
-          }
-        }
-
-        if (!activeItem && allNavItems.length > 0) {
-          activeItem = allNavItems[0];
-        }
-
-        if (activeItem && activeItem.link) {
-          tocLinks.forEach(function(link) {
-            link.classList.toggle('active', link === activeItem.link);
-          });
-
-          // Auto-expand group if active method is inside a collapsed group
-          const parentBlock = activeItem.link.closest('.doc-toc-group-block');
-          if (parentBlock && parentBlock.classList.contains('collapsed')) {
-            parentBlock.classList.remove('collapsed');
-            updateToggleAllBtn();
-          }
-
-          scrollTocToItem(activeItem.link);
-
-          // Sync active section to parent window (left sidebar navigation)
-          if (window.parent && window.parent !== window) {
-            try {
-              window.parent.postMessage({
-                type: 'docSectionChanged',
-                anchor: activeItem.anchor || activeItem.id,
-                id: activeItem.id,
-                title: activeItem.title
-              }, '*');
-            } catch (err) {}
-          }
-        }
-      }
-
-      window.addEventListener('scrollend', function() {
-        if (isManualScrolling) {
-          clearTimeout(manualScrollTimer);
-          checkAndCorrectScroll();
-        }
-      });
-
-      window.addEventListener('scroll', function() {
-        if (isManualScrolling) {
-          clearTimeout(manualScrollTimer);
-          manualScrollTimer = setTimeout(checkAndCorrectScroll, 160);
-          return;
-        }
-        if (scrollTimer) return;
-        scrollTimer = requestAnimationFrame(function() {
-          updateScrollSpy();
-          scrollTimer = null;
-        });
-      }, { passive: true });
-
-      // Cross-frame listener to scroll directly to anchor/topic from left sidebar
-      window.addEventListener('message', function(e) {
-        if (!e.data || typeof e.data !== 'object') return;
-        if (e.data.type === 'scrollToSection') {
-          const anchor = e.data.anchor;
-          const targetId = e.data.id;
-          let target = null;
-          if (anchor) {
-            if (anchor === 'MainTopic' || anchor === 'Overview') {
-              target = document.getElementById('doc-nav-main') || document.getElementById('MainTopic');
-            } else if (anchor === 'Summary') {
-              target = document.getElementById('doc-nav-summary') || document.querySelector('.Summary');
-            } else {
-              try {
-                target = document.querySelector('[data-anchor="' + CSS.escape(anchor) + '"]') ||
-                         document.querySelector('a[name="' + CSS.escape(anchor) + '"]');
-              } catch (err) { }
-              if (!target) {
-                const allA = document.querySelectorAll('[data-anchor], a[name]');
-                for (let i = 0; i < allA.length; i++) {
-                  if (allA[i].getAttribute('data-anchor') === anchor || allA[i].getAttribute('name') === anchor) {
-                    target = allA[i];
-                    break;
-                  }
-                }
-              }
-              if (target && target.tagName === 'A' && target.closest) {
-                target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-              }
-            }
-          }
-          if (!target && targetId) {
-            target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          }
-          if (target) {
-            scrollToElement(target);
-            const targetNavId = target.id || target.getAttribute('data-doc-topic');
-            if (tocNav && targetNavId) {
-              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]');
-              if (mLink) {
-                tocLinks.forEach(function(l) { l.classList.remove('active'); });
-                mLink.classList.add('active');
-                const pB = mLink.closest('.doc-toc-group-block');
-                if (pB && pB.classList.contains('collapsed')) {
-                  pB.classList.remove('collapsed');
-                  updateToggleAllBtn();
-                }
-                scrollTocToItem(mLink);
-              }
-            }
-          }
-        }
-      });
-
-      // Handle direct hash navigation on initial load or hashchange
-      function handleHashNav(hashVal) {
-        if (!hashVal) return;
-        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
-        if (!raw) return;
-        setTimeout(function() {
-          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
-        }, 160);
-      }
-
-      if (window.location.hash) {
-        handleHashNav(window.location.hash);
-      }
-
-      window.addEventListener('hashchange', function() {
-        handleHashNav(window.location.hash);
-      });
-
-      setTimeout(updateScrollSpy, 120);
-    })();
-
-    // Code snippet copy button handler
-    document.addEventListener('click', function(e) {
-      const btn = e.target.closest('.code-copy-btn');
-      if (!btn) return;
-      const container = btn.closest('.code-block-container');
-      if (!container) return;
-      const codeEl = container.querySelector('code');
-      if (!codeEl) return;
-      const text = codeEl.innerText || codeEl.textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        const copyText = btn.querySelector('.copy-text');
-        const orig = copyText ? copyText.textContent : 'Copy';
-        btn.classList.add('copied');
-        if (copyText) copyText.textContent = 'Copied!';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          if (copyText) copyText.textContent = orig;
-        }, 2000);
-      }).catch(err => {
-        console.error('Copy failed: ', err);
-      });
-    });
-
-    // Theme sync
-    window.addEventListener('message', function(e) {
-      if (e.data && e.data.theme) {
-        document.documentElement.setAttribute('data-theme', e.data.theme);
-      }
-    });
-    try {
-      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-      if (parentTheme) {
-        document.documentElement.setAttribute('data-theme', parentTheme);
-      }
-    } catch (e) {}
-
-    // Auto-restore into main app if opened directly outside iframe
-    try {
-      if (window.self === window.top) {
-        window.location.replace('../../index.html#/doc/base/uvm_callback-svh.html' + window.location.hash);
-      }
-    } catch (e) {}
-
-    // Inform parent that doc is loaded
-    try {
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage({
-          type: 'docNavigated',
-          url: 'docs_view/base/uvm_callback-svh.html'
-        }, '*');
-      }
-    } catch (e) {}
-
-    // Intercept clicks on source code links
-    document.addEventListener('click', function(e) {
-      const link = e.target.closest('a');
-      if (!link) return;
-      const href = link.getAttribute('href');
-      if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        e.preventDefault();
-        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage({
-            type: 'openSourceView',
-            url: targetHref
-          }, '*');
-        }
-        try {
-          if (window.parent && window.parent.openSourceView) {
-            window.parent.openSourceView(targetHref);
-          }
-        } catch (err) {}
-      }
-    });
-
-    // Diagram enlarge & zoom lightbox triggers
-    document.addEventListener('click', function(e) {
-      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
-      const img = e.target.closest('.doc-diagram-img');
-      if (zoomBtn || img) {
-        e.preventDefault();
-        e.stopPropagation();
-        const card = (zoomBtn || img).closest('.doc-diagram-card');
-        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
-        if (targetImg) {
-          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
-          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
-          const fullSrc = targetImg.src;
-          if (window.parent && window.parent !== window) {
-            window.parent.postMessage({
-              type: 'openImageModal',
-              src: fullSrc,
-              title: title
-            }, '*');
-          } else {
-            window.open(fullSrc, '_blank');
-          }
-        }
-      }
-    });
-
-    // Forward Escape key to parent to close modals if iframe has focus
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && window.parent && window.parent !== window) {
-        window.parent.postMessage({ type: 'closeImageModal' }, '*');
-      }
-    });
-  </script>
+  <script src="../../js/doc_page.js"></script>
 </body>
 </html>

@@ -11,6 +11,13 @@
 </head>
 <body class="doc-body">
   <div class="doc-page-container">
+    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="../../index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">Base</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">uvm_component</span>
+</nav>
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
@@ -29,7 +36,13 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_component"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_component" id="uvm_component" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">uvm_component</a></h1><div class=CBody><p>The uvm_component class is the root base class for UVM components.&nbsp; In addition to the features inherited from <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link127  >uvm_object</a> and <a href="uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link128  >uvm_report_object</a>, uvm_component provides the following interfaces:</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Hierarchy</td><td class=CDLDescription>provides methods for searching and traversing the component hierarchy.</td></tr><tr><td class=CDLEntry>Phasing</td><td class=CDLDescription>defines a phased test flow that all components follow, with a group of standard phase methods and an API for custom phases and multiple independent phasing domains to mirror DUT behavior e.g. power</td></tr><tr><td class=CDLEntry>Reporting</td><td class=CDLDescription>provides a convenience interface to the <a href="uvm_report_handler-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link129  >uvm_report_handler</a>.&nbsp; All messages, warnings, and errors are processed through this interface.</td></tr><tr><td class=CDLEntry>Transaction recording</td><td class=CDLDescription>provides methods for recording the transactions produced or consumed by the component to a transaction database (vendor specific).</td></tr><tr><td class=CDLEntry>Factory</td><td class=CDLDescription>provides a convenience interface to the <a href="uvm_factory-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link130  >uvm_factory</a>.&nbsp; The factory is used to create new components and other objects based on type-wide and instance-specific configuration.</td></tr></table><p>The uvm_component is automatically seeded during construction using UVM seeding, if enabled.&nbsp; All other objects must be manually reseeded, if appropriate.&nbsp; See <a href="uvm_object-svh.html#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LMethod id=link131  >uvm_object::reseed</a> for more information.</p>
+<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_component"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_component" id="uvm_component" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">uvm_component</a></h1><div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses (17)</span>
+  </div>
+  <div class="derived-classes-list"><a href="../../docs_view/comps/uvm_agent-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_agent">uvm_agent</a><a href="../../docs_view/comps/uvm_algorithmic_comparator-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_algorithmic_comparator">uvm_algorithmic_comparator</a><a href="../../docs_view/comps/uvm_driver-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_driver">uvm_driver</a><a href="../../docs_view/comps/uvm_env-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_env">uvm_env</a><a href="../../docs_view/comps/uvm_in_order_comparator-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_in_order_comparator">uvm_in_order_comparator</a><a href="../../docs_view/comps/uvm_monitor-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_monitor">uvm_monitor</a><a href="../../docs_view/base/uvm_port_base-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_port_component_base">uvm_port_component_base</a><a href="../../docs_view/comps/uvm_push_driver-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_push_driver">uvm_push_driver</a><a href="../../docs_view/comps/uvm_random_stimulus-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_random_stimulus">uvm_random_stimulus</a><a href="../../docs_view/reg/uvm_reg_predictor-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_reg_predictor">uvm_reg_predictor</a><a href="../../docs_view/base/uvm_root-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_root">uvm_root</a><a href="../../docs_view/comps/uvm_scoreboard-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_scoreboard">uvm_scoreboard</a><a href="../../docs_view/seq/uvm_sequencer_base-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_sequencer_base">uvm_sequencer_base</a><a href="../../docs_view/comps/uvm_subscriber-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_subscriber">uvm_subscriber</a><a href="../../docs_view/comps/uvm_test-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_test">uvm_test</a><a href="../../docs_view/tlm1/uvm_tlm_fifo_base-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_tlm_fifo_base">uvm_tlm_fifo_base</a><a href="../../docs_view/tlm1/uvm_tlm_req_rsp-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_tlm_req_rsp_channel">uvm_tlm_req_rsp_channel</a></div>
+</div><div class=CBody><p>The uvm_component class is the root base class for UVM components.&nbsp; In addition to the features inherited from <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link127  >uvm_object</a> and <a href="uvm_report_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link128  >uvm_report_object</a>, uvm_component provides the following interfaces:</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Hierarchy</td><td class=CDLDescription>provides methods for searching and traversing the component hierarchy.</td></tr><tr><td class=CDLEntry>Phasing</td><td class=CDLDescription>defines a phased test flow that all components follow, with a group of standard phase methods and an API for custom phases and multiple independent phasing domains to mirror DUT behavior e.g. power</td></tr><tr><td class=CDLEntry>Reporting</td><td class=CDLDescription>provides a convenience interface to the <a href="uvm_report_handler-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link129  >uvm_report_handler</a>.&nbsp; All messages, warnings, and errors are processed through this interface.</td></tr><tr><td class=CDLEntry>Transaction recording</td><td class=CDLDescription>provides methods for recording the transactions produced or consumed by the component to a transaction database (vendor specific).</td></tr><tr><td class=CDLEntry>Factory</td><td class=CDLDescription>provides a convenience interface to the <a href="uvm_factory-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link130  >uvm_factory</a>.&nbsp; The factory is used to create new components and other objects based on type-wide and instance-specific configuration.</td></tr></table><p>The uvm_component is automatically seeded during construction using UVM seeding, if enabled.&nbsp; All other objects must be manually reseeded, if appropriate.&nbsp; See <a href="uvm_object-svh.html#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LMethod id=link131  >uvm_object::reseed</a> for more information.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -332,7 +345,7 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CMethod" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_component.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.new" id="uvm_component.new" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">new</a></h3>
+<div class="CMethod" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_component.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.new" id="uvm_component.new" href="../../src_view/base/uvm_component.svh.html#L76" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="76">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_report_object">Overrides uvm_report_object</span><span class="badge-subclass" title="Overridden in 17 derived class(es)">Overridden in 17 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -356,7 +369,7 @@
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_component.get_parent"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_parent" id="uvm_component.get_parent" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_parent</a></h3>
+<div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_component.get_parent"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_parent" id="uvm_component.get_parent" href="../../src_view/base/uvm_component.svh.html#L92" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="92">get_parent</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-proto-name">get_parent</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns a handle to this component&rsquo;s parent, or <i>null</i> if it has no parent.</p></div></div></div>
 
@@ -364,7 +377,7 @@
 
 
  <!--CONTENT index=4 -->
-<div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_component.get_full_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_full_name" id="uvm_component.get_full_name" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_full_name</a></h3>
+<div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_component.get_full_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_full_name" id="uvm_component.get_full_name" href="../../src_view/base/uvm_component.svh.html#L101" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="101">get_full_name</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_full_name</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the full hierarchical name of this object.&nbsp; The default implementation concatenates the hierarchical name of the parent, if any, with the leaf name of this object, as given by <a href="uvm_object-svh.html#doc-nav-item-7" data-target-id="doc-nav-item-7" class=LMethod id=link132  >uvm_object::get_name</a>.</p></div></div></div>
 
@@ -372,7 +385,7 @@
 
 
  <!--CONTENT index=5 -->
-<div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_component.get_children"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_children" id="uvm_component.get_children" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_children</a></h3>
+<div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_component.get_children"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_children" id="uvm_component.get_children" href="../../src_view/base/uvm_component.svh.html#L114" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="114">get_children</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">get_children</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -404,7 +417,7 @@
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_component.get_child"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_child" id="uvm_component.get_child" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_child</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_component.get_child"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_child" id="uvm_component.get_child" href="../../src_view/base/uvm_component.svh.html#L118" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="118">get_child</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> uvm_component <span class="sv-proto-name">get_child</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -420,7 +433,7 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_component.get_next_child"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_next_child" id="uvm_component.get_next_child" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_next_child</a></h3>
+<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_component.get_next_child"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_next_child" id="uvm_component.get_next_child" href="../../src_view/base/uvm_component.svh.html#L121" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="121">get_next_child</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_next_child</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -437,7 +450,7 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_component.get_first_child"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_first_child" id="uvm_component.get_first_child" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_first_child</a></h3>
+<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_component.get_first_child"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_first_child" id="uvm_component.get_first_child" href="../../src_view/base/uvm_component.svh.html#L137" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="137">get_first_child</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_first_child</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -472,7 +485,7 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_component.get_num_children"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_num_children" id="uvm_component.get_num_children" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_num_children</a></h3>
+<div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_component.get_num_children"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_num_children" id="uvm_component.get_num_children" href="../../src_view/base/uvm_component.svh.html#L144" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="144">get_num_children</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_num_children</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the number of this component&rsquo;s children.</p></div></div></div>
 
@@ -480,7 +493,7 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_component.has_child"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.has_child" id="uvm_component.has_child" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">has_child</a></h3>
+<div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_component.has_child"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.has_child" id="uvm_component.has_child" href="../../src_view/base/uvm_component.svh.html#L151" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="151">has_child</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">has_child</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -496,7 +509,7 @@
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_component.lookup"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.lookup" id="uvm_component.lookup" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">lookup</a></h3>
+<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_component.lookup"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.lookup" id="uvm_component.lookup" href="../../src_view/base/uvm_component.svh.html#L170" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="170">lookup</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> uvm_component <span class="sv-proto-name">lookup</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -512,7 +525,7 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_component.get_depth"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_depth" id="uvm_component.get_depth" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_depth</a></h3>
+<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_component.get_depth"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_depth" id="uvm_component.get_depth" href="../../src_view/base/uvm_component.svh.html#L179" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="179">get_depth</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-proto-name">get_depth</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the component&rsquo;s depth from the root level. uvm_top has a depth of 0.&nbsp; The test and any other top level components have a depth of 1, and so on.</p></div></div></div>
 
@@ -526,7 +539,7 @@
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_component.build_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.build_phase" id="uvm_component.build_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">build_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_component.build_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.build_phase" id="uvm_component.build_phase" href="../../src_view/base/uvm_component.svh.html#L211" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="211">build_phase</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 5 derived class(es)">Overridden in 5 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">build_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -542,7 +555,7 @@
 
 
  <!--CONTENT index=15 -->
-<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_component.connect_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.connect_phase" id="uvm_component.connect_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">connect_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_component.connect_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.connect_phase" id="uvm_component.connect_phase" href="../../src_view/base/uvm_component.svh.html#L223" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="223">connect_phase</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 4 derived class(es)">Overridden in 4 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">connect_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -558,7 +571,7 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CMethod" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_component.end_of_elaboration_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.end_of_elaboration_phase" id="uvm_component.end_of_elaboration_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">end_of_elaboration_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_component.end_of_elaboration_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.end_of_elaboration_phase" id="uvm_component.end_of_elaboration_phase" href="../../src_view/base/uvm_component.svh.html#L234" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="234">end_of_elaboration_phase</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 2 derived class(es)">Overridden in 2 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">end_of_elaboration_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -574,7 +587,7 @@
 
 
  <!--CONTENT index=17 -->
-<div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_component.start_of_simulation_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.start_of_simulation_phase" id="uvm_component.start_of_simulation_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">start_of_simulation_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_component.start_of_simulation_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.start_of_simulation_phase" id="uvm_component.start_of_simulation_phase" href="../../src_view/base/uvm_component.svh.html#L245" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="245">start_of_simulation_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">start_of_simulation_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -590,7 +603,7 @@
 
 
  <!--CONTENT index=18 -->
-<div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_component.run_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.run_phase" id="uvm_component.run_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">run_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_component.run_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.run_phase" id="uvm_component.run_phase" href="../../src_view/base/uvm_component.svh.html#L265" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="265">run_phase</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 3 derived class(es)">Overridden in 3 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">run_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -606,7 +619,7 @@
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_component.pre_reset_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_reset_phase" id="uvm_component.pre_reset_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">pre_reset_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_component.pre_reset_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_reset_phase" id="uvm_component.pre_reset_phase" href="../../src_view/base/uvm_component.svh.html#L288" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="288">pre_reset_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">pre_reset_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -622,7 +635,7 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_component.reset_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.reset_phase" id="uvm_component.reset_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">reset_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_component.reset_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.reset_phase" id="uvm_component.reset_phase" href="../../src_view/base/uvm_component.svh.html#L308" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="308">reset_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">reset_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -638,7 +651,7 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_component.post_reset_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.post_reset_phase" id="uvm_component.post_reset_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">post_reset_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_component.post_reset_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.post_reset_phase" id="uvm_component.post_reset_phase" href="../../src_view/base/uvm_component.svh.html#L328" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="328">post_reset_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">post_reset_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -654,7 +667,7 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_component.pre_configure_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_configure_phase" id="uvm_component.pre_configure_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">pre_configure_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_component.pre_configure_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_configure_phase" id="uvm_component.pre_configure_phase" href="../../src_view/base/uvm_component.svh.html#L348" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="348">pre_configure_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">pre_configure_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -670,7 +683,7 @@
 
 
  <!--CONTENT index=23 -->
-<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_component.configure_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.configure_phase" id="uvm_component.configure_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">configure_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_component.configure_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.configure_phase" id="uvm_component.configure_phase" href="../../src_view/base/uvm_component.svh.html#L368" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="368">configure_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">configure_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -686,7 +699,7 @@
 
 
  <!--CONTENT index=24 -->
-<div class="CMethod" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_component.post_configure_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.post_configure_phase" id="uvm_component.post_configure_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">post_configure_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_component.post_configure_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.post_configure_phase" id="uvm_component.post_configure_phase" href="../../src_view/base/uvm_component.svh.html#L388" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="388">post_configure_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">post_configure_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -702,7 +715,7 @@
 
 
  <!--CONTENT index=25 -->
-<div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_component.pre_main_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_main_phase" id="uvm_component.pre_main_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">pre_main_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_component.pre_main_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_main_phase" id="uvm_component.pre_main_phase" href="../../src_view/base/uvm_component.svh.html#L408" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="408">pre_main_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">pre_main_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -718,7 +731,7 @@
 
 
  <!--CONTENT index=26 -->
-<div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_component.main_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.main_phase" id="uvm_component.main_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">main_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_component.main_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.main_phase" id="uvm_component.main_phase" href="../../src_view/base/uvm_component.svh.html#L428" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="428">main_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">main_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -734,7 +747,7 @@
 
 
  <!--CONTENT index=27 -->
-<div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_component.post_main_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.post_main_phase" id="uvm_component.post_main_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">post_main_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_component.post_main_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.post_main_phase" id="uvm_component.post_main_phase" href="../../src_view/base/uvm_component.svh.html#L448" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="448">post_main_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">post_main_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -750,7 +763,7 @@
 
 
  <!--CONTENT index=28 -->
-<div class="CMethod" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_component.pre_shutdown_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_shutdown_phase" id="uvm_component.pre_shutdown_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">pre_shutdown_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_component.pre_shutdown_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_shutdown_phase" id="uvm_component.pre_shutdown_phase" href="../../src_view/base/uvm_component.svh.html#L468" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="468">pre_shutdown_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">pre_shutdown_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -766,7 +779,7 @@
 
 
  <!--CONTENT index=29 -->
-<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_component.shutdown_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.shutdown_phase" id="uvm_component.shutdown_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">shutdown_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_component.shutdown_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.shutdown_phase" id="uvm_component.shutdown_phase" href="../../src_view/base/uvm_component.svh.html#L488" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="488">shutdown_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">shutdown_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -782,7 +795,7 @@
 
 
  <!--CONTENT index=30 -->
-<div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_component.post_shutdown_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.post_shutdown_phase" id="uvm_component.post_shutdown_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">post_shutdown_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_component.post_shutdown_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.post_shutdown_phase" id="uvm_component.post_shutdown_phase" href="../../src_view/base/uvm_component.svh.html#L508" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="508">post_shutdown_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">post_shutdown_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -798,7 +811,7 @@
 
 
  <!--CONTENT index=31 -->
-<div class="CMethod" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_component.extract_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.extract_phase" id="uvm_component.extract_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">extract_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_component.extract_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.extract_phase" id="uvm_component.extract_phase" href="../../src_view/base/uvm_component.svh.html#L516" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="516">extract_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">extract_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -814,7 +827,7 @@
 
 
  <!--CONTENT index=32 -->
-<div class="CMethod" id="doc-nav-item-32" data-doc-topic="doc-nav-item-32" data-anchor="uvm_component.check_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.check_phase" id="uvm_component.check_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">check_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-32" data-doc-topic="doc-nav-item-32" data-anchor="uvm_component.check_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.check_phase" id="uvm_component.check_phase" href="../../src_view/base/uvm_component.svh.html#L527" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="527">check_phase</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">check_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -830,7 +843,7 @@
 
 
  <!--CONTENT index=33 -->
-<div class="CMethod" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_component.report_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.report_phase" id="uvm_component.report_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">report_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_component.report_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.report_phase" id="uvm_component.report_phase" href="../../src_view/base/uvm_component.svh.html#L538" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="538">report_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">report_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -846,7 +859,7 @@
 
 
  <!--CONTENT index=34 -->
-<div class="CMethod" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_component.final_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.final_phase" id="uvm_component.final_phase" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">final_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_component.final_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.final_phase" id="uvm_component.final_phase" href="../../src_view/base/uvm_component.svh.html#L549" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="549">final_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">final_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -862,7 +875,7 @@
 
 
  <!--CONTENT index=35 -->
-<div class="CMethod" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_component.phase_started"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.phase_started" id="uvm_component.phase_started" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">phase_started</a></h3>
+<div class="CMethod" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_component.phase_started"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.phase_started" id="uvm_component.phase_started" href="../../src_view/base/uvm_component.svh.html#L557" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="557">phase_started</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">phase_started</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -878,7 +891,7 @@
 
 
  <!--CONTENT index=36 -->
-<div class="CMethod" id="doc-nav-item-36" data-doc-topic="doc-nav-item-36" data-anchor="uvm_component.phase_ready_to_end"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.phase_ready_to_end" id="uvm_component.phase_ready_to_end" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">phase_ready_to_end</a></h3>
+<div class="CMethod" id="doc-nav-item-36" data-doc-topic="doc-nav-item-36" data-anchor="uvm_component.phase_ready_to_end"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.phase_ready_to_end" id="uvm_component.phase_ready_to_end" href="../../src_view/base/uvm_component.svh.html#L581" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="581">phase_ready_to_end</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">phase_ready_to_end</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -906,7 +919,7 @@
 
 
  <!--CONTENT index=37 -->
-<div class="CMethod" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_component.phase_ended"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.phase_ended" id="uvm_component.phase_ended" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">phase_ended</a></h3>
+<div class="CMethod" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_component.phase_ended"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.phase_ended" id="uvm_component.phase_ended" href="../../src_view/base/uvm_component.svh.html#L590" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="590">phase_ended</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">phase_ended</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -922,7 +935,7 @@
 
 
  <!--CONTENT index=38 -->
-<div class="CMethod" id="doc-nav-item-38" data-doc-topic="doc-nav-item-38" data-anchor="uvm_component.set_domain"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_domain" id="uvm_component.set_domain" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_domain</a></h3>
+<div class="CMethod" id="doc-nav-item-38" data-doc-topic="doc-nav-item-38" data-anchor="uvm_component.set_domain"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_domain" id="uvm_component.set_domain" href="../../src_view/base/uvm_component.svh.html#L607" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="607">set_domain</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_domain</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_domain</span>&nbsp;</td>
@@ -944,7 +957,7 @@
 
 
  <!--CONTENT index=39 -->
-<div class="CMethod" id="doc-nav-item-39" data-doc-topic="doc-nav-item-39" data-anchor="uvm_component.get_domain"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_domain" id="uvm_component.get_domain" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_domain</a></h3>
+<div class="CMethod" id="doc-nav-item-39" data-doc-topic="doc-nav-item-39" data-anchor="uvm_component.get_domain"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_domain" id="uvm_component.get_domain" href="../../src_view/base/uvm_component.svh.html#L614" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="614">get_domain</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_domain</span> <span class="sv-proto-name">get_domain</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return handle to the phase domain set on this component</p></div></div></div>
 
@@ -952,7 +965,7 @@
 
 
  <!--CONTENT index=40 -->
-<div class="CMethod" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_component.define_domain"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.define_domain" id="uvm_component.define_domain" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">define_domain</a></h3>
+<div class="CMethod" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_component.define_domain"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.define_domain" id="uvm_component.define_domain" href="../../src_view/base/uvm_component.svh.html#L647" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="647">define_domain</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">define_domain</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_domain</span>&nbsp;</td>
@@ -968,7 +981,7 @@
 
 
  <!--CONTENT index=41 -->
-<div class="CMethod" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_component.set_phase_imp"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_phase_imp" id="uvm_component.set_phase_imp" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_phase_imp</a></h3>
+<div class="CMethod" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_component.set_phase_imp"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_phase_imp" id="uvm_component.set_phase_imp" href="../../src_view/base/uvm_component.svh.html#L659" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="659">set_phase_imp</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_phase_imp</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -994,7 +1007,7 @@
 
 
  <!--CONTENT index=42 -->
-<div class="CMethod" id="doc-nav-item-42" data-doc-topic="doc-nav-item-42" data-anchor="uvm_component.suspend"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.suspend" id="uvm_component.suspend" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">suspend</a></h3>
+<div class="CMethod" id="doc-nav-item-42" data-doc-topic="doc-nav-item-42" data-anchor="uvm_component.suspend"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.suspend" id="uvm_component.suspend" href="../../src_view/base/uvm_component.svh.html#L670" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="670">suspend</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">suspend</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Suspend this component.</p><p>This method must be implemented by the user to suspend the component according to the protocol and functionality it implements.&nbsp; A suspended component can be subsequently resumed using <a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LMethod id=link166  >resume()</a>.</p></div></div></div>
 
@@ -1002,7 +1015,7 @@
 
 
  <!--CONTENT index=43 -->
-<div class="CMethod" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_component.resume"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.resume" id="uvm_component.resume" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">resume</a></h3>
+<div class="CMethod" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_component.resume"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.resume" id="uvm_component.resume" href="../../src_view/base/uvm_component.svh.html#L682" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="682">resume</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">resume</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Resume this component.</p><p>This method must be implemented by the user to resume a component that was previously suspended using <a href="#doc-nav-item-42" data-target-id="doc-nav-item-42" class=LMethod id=link167  >suspend()</a>.&nbsp; Some component may start in the suspended state and may need to be explicitly resumed.</p></div></div></div>
 
@@ -1010,7 +1023,7 @@
 
 
  <!--CONTENT index=44 -->
-<div class="CMethod" id="doc-nav-item-44" data-doc-topic="doc-nav-item-44" data-anchor="uvm_component.resolve_bindings"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.resolve_bindings" id="uvm_component.resolve_bindings" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">resolve_bindings</a></h3>
+<div class="CMethod" id="doc-nav-item-44" data-doc-topic="doc-nav-item-44" data-anchor="uvm_component.resolve_bindings"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.resolve_bindings" id="uvm_component.resolve_bindings" href="../../src_view/base/uvm_component.svh.html#L772" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="772">resolve_bindings</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">resolve_bindings</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Processes all port, export, and imp connections.&nbsp; Checks whether each port&rsquo;s min and max connection requirements are met.</p><p>It is called just before the end_of_elaboration phase.</p><p>Users should not call directly.</p></div></div></div>
 
@@ -1024,7 +1037,7 @@
 
 
  <!--CONTENT index=46 -->
-<div class="CMethod" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_component.check_config_usage"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.check_config_usage" id="uvm_component.check_config_usage" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">check_config_usage</a></h3>
+<div class="CMethod" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_component.check_config_usage"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.check_config_usage" id="uvm_component.check_config_usage" href="../../src_view/base/uvm_component.svh.html#L936" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="936">check_config_usage</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">check_config_usage</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -1056,7 +1069,7 @@
 
 
  <!--CONTENT index=47 -->
-<div class="CMethod" id="doc-nav-item-47" data-doc-topic="doc-nav-item-47" data-anchor="uvm_component.apply_config_settings"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.apply_config_settings" id="uvm_component.apply_config_settings" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">apply_config_settings</a></h3>
+<div class="CMethod" id="doc-nav-item-47" data-doc-topic="doc-nav-item-47" data-anchor="uvm_component.apply_config_settings"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.apply_config_settings" id="uvm_component.apply_config_settings" href="../../src_view/base/uvm_component.svh.html#L966" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="966">apply_config_settings</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">apply_config_settings</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -1074,7 +1087,7 @@
 
 
  <!--CONTENT index=48 -->
-<div class="CMethod" id="doc-nav-item-48" data-doc-topic="doc-nav-item-48" data-anchor="uvm_component.print_config_settings"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.print_config_settings" id="uvm_component.print_config_settings" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">print_config_settings</a></h3>
+<div class="CMethod" id="doc-nav-item-48" data-doc-topic="doc-nav-item-48" data-anchor="uvm_component.print_config_settings"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.print_config_settings" id="uvm_component.print_config_settings" href="../../src_view/base/uvm_component.svh.html#L987" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="987">print_config_settings</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_config_settings</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1100,7 +1113,7 @@
 
 
  <!--CONTENT index=49 -->
-<div class="CMethod" id="doc-nav-item-49" data-doc-topic="doc-nav-item-49" data-anchor="uvm_component.print_config"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.print_config" id="uvm_component.print_config" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">print_config</a></h3>
+<div class="CMethod" id="doc-nav-item-49" data-doc-topic="doc-nav-item-49" data-anchor="uvm_component.print_config"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.print_config" id="uvm_component.print_config" href="../../src_view/base/uvm_component.svh.html#L1004" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1004">print_config</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_config</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -1122,7 +1135,7 @@
 
 
  <!--CONTENT index=50 -->
-<div class="CMethod" id="doc-nav-item-50" data-doc-topic="doc-nav-item-50" data-anchor="uvm_component.print_config_with_audit"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.print_config_with_audit" id="uvm_component.print_config_with_audit" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">print_config_with_audit</a></h3>
+<div class="CMethod" id="doc-nav-item-50" data-doc-topic="doc-nav-item-50" data-anchor="uvm_component.print_config_with_audit"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.print_config_with_audit" id="uvm_component.print_config_with_audit" href="../../src_view/base/uvm_component.svh.html#L1015" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1015">print_config_with_audit</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_config_with_audit</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -1154,7 +1167,7 @@
 
 
  <!--CONTENT index=53 -->
-<div class="CMethod" id="doc-nav-item-53" data-doc-topic="doc-nav-item-53" data-anchor="uvm_component.raised"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.raised" id="uvm_component.raised" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">raised</a></h3>
+<div class="CMethod" id="doc-nav-item-53" data-doc-topic="doc-nav-item-53" data-anchor="uvm_component.raised"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.raised" id="uvm_component.raised" href="../../src_view/base/uvm_component.svh.html#L1044" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1044">raised</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">raised</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_objection</span>&nbsp;</td>
@@ -1176,7 +1189,7 @@
 
 
  <!--CONTENT index=54 -->
-<div class="CMethod" id="doc-nav-item-54" data-doc-topic="doc-nav-item-54" data-anchor="uvm_component.dropped"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.dropped" id="uvm_component.dropped" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">dropped</a></h3>
+<div class="CMethod" id="doc-nav-item-54" data-doc-topic="doc-nav-item-54" data-anchor="uvm_component.dropped"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.dropped" id="uvm_component.dropped" href="../../src_view/base/uvm_component.svh.html#L1058" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1058">dropped</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">dropped</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_objection</span>&nbsp;</td>
@@ -1198,7 +1211,7 @@
 
 
  <!--CONTENT index=55 -->
-<div class="CMethod" id="doc-nav-item-55" data-doc-topic="doc-nav-item-55" data-anchor="uvm_component.all_dropped"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.all_dropped" id="uvm_component.all_dropped" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">all_dropped</a></h3>
+<div class="CMethod" id="doc-nav-item-55" data-doc-topic="doc-nav-item-55" data-anchor="uvm_component.all_dropped"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.all_dropped" id="uvm_component.all_dropped" href="../../src_view/base/uvm_component.svh.html#L1072" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1072">all_dropped</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">all_dropped</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_objection</span>&nbsp;</td>
@@ -1226,7 +1239,7 @@
 
 
  <!--CONTENT index=57 -->
-<div class="CMethod" id="doc-nav-item-57" data-doc-topic="doc-nav-item-57" data-anchor="uvm_component.create_component"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.create_component" id="uvm_component.create_component" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">create_component</a></h3>
+<div class="CMethod" id="doc-nav-item-57" data-doc-topic="doc-nav-item-57" data-anchor="uvm_component.create_component"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.create_component" id="uvm_component.create_component" href="../../src_view/base/uvm_component.svh.html#L1105" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1105">create_component</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> uvm_component <span class="sv-proto-name">create_component</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1257,7 +1270,7 @@
 
 
  <!--CONTENT index=58 -->
-<div class="CMethod" id="doc-nav-item-58" data-doc-topic="doc-nav-item-58" data-anchor="uvm_component.create_object"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.create_object" id="uvm_component.create_object" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">create_object</a></h3>
+<div class="CMethod" id="doc-nav-item-58" data-doc-topic="doc-nav-item-58" data-anchor="uvm_component.create_object"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.create_object" id="uvm_component.create_object" href="../../src_view/base/uvm_component.svh.html#L1124" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1124">create_object</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_object <span class="sv-proto-name">create_object</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1292,7 +1305,7 @@
 
 
  <!--CONTENT index=59 -->
-<div class="CMethod" id="doc-nav-item-59" data-doc-topic="doc-nav-item-59" data-anchor="uvm_component.set_type_override_by_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_type_override_by_type" id="uvm_component.set_type_override_by_type" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_type_override_by_type</a></h3>
+<div class="CMethod" id="doc-nav-item-59" data-doc-topic="doc-nav-item-59" data-anchor="uvm_component.set_type_override_by_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_type_override_by_type" id="uvm_component.set_type_override_by_type" href="../../src_view/base/uvm_component.svh.html#L1147" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1147">set_type_override_by_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_type_override_by_type</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object_wrapper</span>&nbsp;</td>
@@ -1330,7 +1343,7 @@
 
 
  <!--CONTENT index=60 -->
-<div class="CMethod" id="doc-nav-item-60" data-doc-topic="doc-nav-item-60" data-anchor="uvm_component.set_inst_override_by_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_inst_override_by_type" id="uvm_component.set_inst_override_by_type" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_inst_override_by_type</a></h3>
+<div class="CMethod" id="doc-nav-item-60" data-doc-topic="doc-nav-item-60" data-anchor="uvm_component.set_inst_override_by_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_inst_override_by_type" id="uvm_component.set_inst_override_by_type" href="../../src_view/base/uvm_component.svh.html#L1204" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1204">set_inst_override_by_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_inst_override_by_type</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1395,7 +1408,7 @@
 
 
  <!--CONTENT index=61 -->
-<div class="CMethod" id="doc-nav-item-61" data-doc-topic="doc-nav-item-61" data-anchor="uvm_component.set_type_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_type_override" id="uvm_component.set_type_override" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_type_override</a></h3>
+<div class="CMethod" id="doc-nav-item-61" data-doc-topic="doc-nav-item-61" data-anchor="uvm_component.set_type_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_type_override" id="uvm_component.set_type_override" href="../../src_view/base/uvm_component.svh.html#L1225" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1225">set_type_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_type_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1434,7 +1447,7 @@
 
 
  <!--CONTENT index=62 -->
-<div class="CMethod" id="doc-nav-item-62" data-doc-topic="doc-nav-item-62" data-anchor="uvm_component.set_inst_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_inst_override" id="uvm_component.set_inst_override" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_inst_override</a></h3>
+<div class="CMethod" id="doc-nav-item-62" data-doc-topic="doc-nav-item-62" data-anchor="uvm_component.set_inst_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_inst_override" id="uvm_component.set_inst_override" href="../../src_view/base/uvm_component.svh.html#L1249" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1249">set_inst_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_inst_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1470,7 +1483,7 @@
 
 
  <!--CONTENT index=63 -->
-<div class="CMethod" id="doc-nav-item-63" data-doc-topic="doc-nav-item-63" data-anchor="uvm_component.print_override_info"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.print_override_info" id="uvm_component.print_override_info" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">print_override_info</a></h3>
+<div class="CMethod" id="doc-nav-item-63" data-doc-topic="doc-nav-item-63" data-anchor="uvm_component.print_override_info"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.print_override_info" id="uvm_component.print_override_info" href="../../src_view/base/uvm_component.svh.html#L1261" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1261">print_override_info</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">print_override_info</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1498,7 +1511,7 @@
 
 
  <!--CONTENT index=65 -->
-<div class="CMethod" id="doc-nav-item-65" data-doc-topic="doc-nav-item-65" data-anchor="uvm_component.set_report_id_verbosity_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_id_verbosity_hier" id="uvm_component.set_report_id_verbosity_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_id_verbosity_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-65" data-doc-topic="doc-nav-item-65" data-anchor="uvm_component.set_report_id_verbosity_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_id_verbosity_hier" id="uvm_component.set_report_id_verbosity_hier" href="../../src_view/base/uvm_component.svh.html#L1279" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1279">set_report_id_verbosity_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_id_verbosity_hier</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1516,7 +1529,7 @@
 
 
  <!--CONTENT index=66 -->
-<div class="CMethod" id="doc-nav-item-66" data-doc-topic="doc-nav-item-66" data-anchor="uvm_component.set_report_severity_id_verbosity_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_id_verbosity_hier" id="uvm_component.set_report_severity_id_verbosity_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_severity_id_verbosity_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-66" data-doc-topic="doc-nav-item-66" data-anchor="uvm_component.set_report_severity_id_verbosity_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_id_verbosity_hier" id="uvm_component.set_report_severity_id_verbosity_hier" href="../../src_view/base/uvm_component.svh.html#L1293" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1293">set_report_severity_id_verbosity_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_id_verbosity_hier</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
@@ -1536,7 +1549,7 @@
 
 
  <!--CONTENT index=67 -->
-<div class="CMethod" id="doc-nav-item-67" data-doc-topic="doc-nav-item-67" data-anchor="uvm_component.set_report_severity_action_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_action_hier" id="uvm_component.set_report_severity_action_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_severity_action_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-67" data-doc-topic="doc-nav-item-67" data-anchor="uvm_component.set_report_severity_action_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_action_hier" id="uvm_component.set_report_severity_action_hier" href="../../src_view/base/uvm_component.svh.html#L1300" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1300">set_report_severity_action_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_action_hier</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
@@ -1554,7 +1567,7 @@
 
 
  <!--CONTENT index=68 -->
-<div class="CMethod" id="doc-nav-item-68" data-doc-topic="doc-nav-item-68" data-anchor="uvm_component.set_report_id_action_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_id_action_hier" id="uvm_component.set_report_id_action_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_id_action_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-68" data-doc-topic="doc-nav-item-68" data-anchor="uvm_component.set_report_id_action_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_id_action_hier" id="uvm_component.set_report_id_action_hier" href="../../src_view/base/uvm_component.svh.html#L1306" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1306">set_report_id_action_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_id_action_hier</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1572,7 +1585,7 @@
 
 
  <!--CONTENT index=69 -->
-<div class="CMethod" id="doc-nav-item-69" data-doc-topic="doc-nav-item-69" data-anchor="uvm_component.set_report_severity_id_action_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_id_action_hier" id="uvm_component.set_report_severity_id_action_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_severity_id_action_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-69" data-doc-topic="doc-nav-item-69" data-anchor="uvm_component.set_report_severity_id_action_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_id_action_hier" id="uvm_component.set_report_severity_id_action_hier" href="../../src_view/base/uvm_component.svh.html#L1320" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1320">set_report_severity_id_action_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_id_action_hier</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
@@ -1592,7 +1605,7 @@
 
 
  <!--CONTENT index=70 -->
-<div class="CMethod" id="doc-nav-item-70" data-doc-topic="doc-nav-item-70" data-anchor="uvm_component.set_report_default_file_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_default_file_hier" id="uvm_component.set_report_default_file_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_default_file_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-70" data-doc-topic="doc-nav-item-70" data-anchor="uvm_component.set_report_default_file_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_default_file_hier" id="uvm_component.set_report_default_file_hier" href="../../src_view/base/uvm_component.svh.html#L1328" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1328">set_report_default_file_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_default_file_hier</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">UVM_FILE</span>&nbsp;</td>
@@ -1608,7 +1621,7 @@
 
 
  <!--CONTENT index=71 -->
-<div class="CMethod" id="doc-nav-item-71" data-doc-topic="doc-nav-item-71" data-anchor="uvm_component.set_report_severity_file_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_file_hier" id="uvm_component.set_report_severity_file_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_severity_file_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-71" data-doc-topic="doc-nav-item-71" data-anchor="uvm_component.set_report_severity_file_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_file_hier" id="uvm_component.set_report_severity_file_hier" href="../../src_view/base/uvm_component.svh.html#L1332" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1332">set_report_severity_file_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_file_hier</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
@@ -1626,7 +1639,7 @@
 
 
  <!--CONTENT index=72 -->
-<div class="CMethod" id="doc-nav-item-72" data-doc-topic="doc-nav-item-72" data-anchor="uvm_component.set_report_id_file_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_id_file_hier" id="uvm_component.set_report_id_file_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_id_file_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-72" data-doc-topic="doc-nav-item-72" data-anchor="uvm_component.set_report_id_file_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_id_file_hier" id="uvm_component.set_report_id_file_hier" href="../../src_view/base/uvm_component.svh.html#L1337" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1337">set_report_id_file_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_id_file_hier</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1644,7 +1657,7 @@
 
 
  <!--CONTENT index=73 -->
-<div class="CMethod" id="doc-nav-item-73" data-doc-topic="doc-nav-item-73" data-anchor="uvm_component.set_report_severity_id_file_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_id_file_hier" id="uvm_component.set_report_severity_id_file_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_severity_id_file_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-73" data-doc-topic="doc-nav-item-73" data-anchor="uvm_component.set_report_severity_id_file_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_severity_id_file_hier" id="uvm_component.set_report_severity_id_file_hier" href="../../src_view/base/uvm_component.svh.html#L1351" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1351">set_report_severity_id_file_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_id_file_hier</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
@@ -1664,7 +1677,7 @@
 
 
  <!--CONTENT index=74 -->
-<div class="CMethod" id="doc-nav-item-74" data-doc-topic="doc-nav-item-74" data-anchor="uvm_component.set_report_verbosity_level_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_verbosity_level_hier" id="uvm_component.set_report_verbosity_level_hier" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">set_report_verbosity_level_hier</a></h3>
+<div class="CMethod" id="doc-nav-item-74" data-doc-topic="doc-nav-item-74" data-anchor="uvm_component.set_report_verbosity_level_hier"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.set_report_verbosity_level_hier" id="uvm_component.set_report_verbosity_level_hier" href="../../src_view/base/uvm_component.svh.html#L1365" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1365">set_report_verbosity_level_hier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_verbosity_level_hier</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
@@ -1708,7 +1721,7 @@
 
 
  <!--CONTENT index=77 -->
-<div class="CMethod" id="doc-nav-item-77" data-doc-topic="doc-nav-item-77" data-anchor="uvm_component.accept_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.accept_tr" id="uvm_component.accept_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">accept_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-77" data-doc-topic="doc-nav-item-77" data-anchor="uvm_component.accept_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.accept_tr" id="uvm_component.accept_tr" href="../../src_view/base/uvm_component.svh.html#L1413" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1413">accept_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-keyword">accept_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_transaction</span>&nbsp;</td>
@@ -1730,7 +1743,7 @@
 
 
  <!--CONTENT index=78 -->
-<div class="CMethod" id="doc-nav-item-78" data-doc-topic="doc-nav-item-78" data-anchor="uvm_component.do_accept_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.do_accept_tr" id="uvm_component.do_accept_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">do_accept_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-78" data-doc-topic="doc-nav-item-78" data-anchor="uvm_component.do_accept_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.do_accept_tr" id="uvm_component.do_accept_tr" href="../../src_view/base/uvm_component.svh.html#L1422" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1422">do_accept_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_accept_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_transaction</span>&nbsp;</td>
@@ -1746,7 +1759,7 @@
 
 
  <!--CONTENT index=79 -->
-<div class="CMethod" id="doc-nav-item-79" data-doc-topic="doc-nav-item-79" data-anchor="uvm_component.begin_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.begin_tr" id="uvm_component.begin_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">begin_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-79" data-doc-topic="doc-nav-item-79" data-anchor="uvm_component.begin_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.begin_tr" id="uvm_component.begin_tr" href="../../src_view/base/uvm_component.svh.html#L1450" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1450">begin_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">begin_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_transaction</span>&nbsp;</td>
@@ -1784,7 +1797,7 @@
 
 
  <!--CONTENT index=80 -->
-<div class="CMethod" id="doc-nav-item-80" data-doc-topic="doc-nav-item-80" data-anchor="uvm_component.begin_child_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.begin_child_tr" id="uvm_component.begin_child_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">begin_child_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-80" data-doc-topic="doc-nav-item-80" data-anchor="uvm_component.begin_child_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.begin_child_tr" id="uvm_component.begin_child_tr" href="../../src_view/base/uvm_component.svh.html#L1465" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1465">begin_child_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">begin_child_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_transaction</span>&nbsp;</td>
@@ -1822,7 +1835,7 @@
 
 
  <!--CONTENT index=81 -->
-<div class="CMethod" id="doc-nav-item-81" data-doc-topic="doc-nav-item-81" data-anchor="uvm_component.do_begin_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.do_begin_tr" id="uvm_component.do_begin_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">do_begin_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-81" data-doc-topic="doc-nav-item-81" data-anchor="uvm_component.do_begin_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.do_begin_tr" id="uvm_component.do_begin_tr" href="../../src_view/base/uvm_component.svh.html#L1479" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1479">do_begin_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_begin_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_transaction</span>&nbsp;</td>
@@ -1842,7 +1855,7 @@
 
 
  <!--CONTENT index=82 -->
-<div class="CMethod" id="doc-nav-item-82" data-doc-topic="doc-nav-item-82" data-anchor="uvm_component.end_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.end_tr" id="uvm_component.end_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">end_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-82" data-doc-topic="doc-nav-item-82" data-anchor="uvm_component.end_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.end_tr" id="uvm_component.end_tr" href="../../src_view/base/uvm_component.svh.html#L1509" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1509">end_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">end_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_transaction</span>&nbsp;</td>
@@ -1868,7 +1881,7 @@
 
 
  <!--CONTENT index=83 -->
-<div class="CMethod" id="doc-nav-item-83" data-doc-topic="doc-nav-item-83" data-anchor="uvm_component.do_end_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.do_end_tr" id="uvm_component.do_end_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">do_end_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-83" data-doc-topic="doc-nav-item-83" data-anchor="uvm_component.do_end_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.do_end_tr" id="uvm_component.do_end_tr" href="../../src_view/base/uvm_component.svh.html#L1520" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1520">do_end_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_end_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_transaction</span>&nbsp;</td>
@@ -1886,7 +1899,7 @@
 
 
  <!--CONTENT index=84 -->
-<div class="CMethod" id="doc-nav-item-84" data-doc-topic="doc-nav-item-84" data-anchor="uvm_component.record_error_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.record_error_tr" id="uvm_component.record_error_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">record_error_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-84" data-doc-topic="doc-nav-item-84" data-anchor="uvm_component.record_error_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.record_error_tr" id="uvm_component.record_error_tr" href="../../src_view/base/uvm_component.svh.html#L1538" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1538">record_error_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">record_error_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1924,7 +1937,7 @@
 
 
  <!--CONTENT index=85 -->
-<div class="CMethod" id="doc-nav-item-85" data-doc-topic="doc-nav-item-85" data-anchor="uvm_component.record_event_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.record_event_tr" id="uvm_component.record_event_tr" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">record_event_tr</a></h3>
+<div class="CMethod" id="doc-nav-item-85" data-doc-topic="doc-nav-item-85" data-anchor="uvm_component.record_event_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.record_event_tr" id="uvm_component.record_event_tr" href="../../src_view/base/uvm_component.svh.html#L1558" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1558">record_event_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">record_event_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1962,7 +1975,7 @@
 
 
  <!--CONTENT index=86 -->
-<div class="CMethod" id="doc-nav-item-86" data-doc-topic="doc-nav-item-86" data-anchor="uvm_component.get_tr_stream"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_tr_stream" id="uvm_component.get_tr_stream" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">get_tr_stream</a></h3>
+<div class="CMethod" id="doc-nav-item-86" data-doc-topic="doc-nav-item-86" data-anchor="uvm_component.get_tr_stream"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.get_tr_stream" id="uvm_component.get_tr_stream" href="../../src_view/base/uvm_component.svh.html#L1578" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1578">get_tr_stream</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_tr_stream <span class="sv-proto-name">get_tr_stream</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -1984,7 +1997,7 @@
 
 
  <!--CONTENT index=87 -->
-<div class="CMethod" id="doc-nav-item-87" data-doc-topic="doc-nav-item-87" data-anchor="uvm_component.free_tr_stream"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.free_tr_stream" id="uvm_component.free_tr_stream" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">free_tr_stream</a></h3>
+<div class="CMethod" id="doc-nav-item-87" data-doc-topic="doc-nav-item-87" data-anchor="uvm_component.free_tr_stream"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.free_tr_stream" id="uvm_component.free_tr_stream" href="../../src_view/base/uvm_component.svh.html#L1587" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="1587">free_tr_stream</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">free_tr_stream</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tr_stream</span>&nbsp;</td>
@@ -2034,693 +2047,6 @@
       </aside>
     </div>
   </div>
-
-  <script>
-    // In-page Table of Contents (On this page) generator & Scrollspy
-    (function initDocTOC() {
-      const contentEl = document.getElementById('Content');
-      const tocSidebar = document.getElementById('doc-toc-sidebar');
-      const tocNav = document.getElementById('doc-toc-nav');
-      const toggleAllBtn = document.getElementById('doc-toc-toggle-all');
-      if (!contentEl || !tocSidebar || !tocNav) return;
-
-      const topItems = [];
-      const groups = [];
-      const standaloneItems = [];
-      let currentGroup = null;
-      let topicSeq = 0;
-
-      // 1. Check main topic
-      const mainTopic = contentEl.querySelector('#MainTopic .CTitle, #MainTopic h1, #MainTopic h2');
-      if (mainTopic) {
-        const safeId = 'doc-nav-main';
-        mainTopic.id = safeId;
-        const mainA = mainTopic.querySelector('a[name]');
-        const mainAnchor = mainA ? mainA.getAttribute('name') : 'MainTopic';
-        mainTopic.setAttribute('data-anchor', mainAnchor);
-        topItems.push({
-          id: safeId,
-          anchor: mainAnchor,
-          title: (mainTopic.innerText || mainTopic.textContent || 'Overview').trim(),
-          type: 'main',
-          el: mainTopic
-        });
-      }
-
-      // 2. Check summary
-      const summaryEl = contentEl.querySelector('.Summary');
-      if (summaryEl) {
-        const safeId = 'doc-nav-summary';
-        summaryEl.id = safeId;
-        summaryEl.setAttribute('data-anchor', 'Summary');
-        topItems.push({
-          id: safeId,
-          anchor: 'Summary',
-          title: 'Summary',
-          type: 'summary',
-          el: summaryEl
-        });
-      }
-
-      // 3. Scan all topics in #Content
-      const topicWrappers = contentEl.querySelectorAll('#Content > div');
-
-      // Check if page contains H2 topics
-      let hasH2 = false;
-      for (let i = 0; i < topicWrappers.length; i++) {
-        const topic = topicWrappers[i].querySelector('.CTopic');
-        if (!topic || topic.id === 'MainTopic') continue;
-        const titleEl = topic.querySelector('.CTitle');
-        if (titleEl && titleEl.tagName.toUpperCase() === 'H2') {
-          hasH2 = true;
-          break;
-        }
-      }
-
-      topicWrappers.forEach(function(wrap) {
-        const topic = wrap.querySelector('.CTopic');
-        if (!topic || topic.id === 'MainTopic') return;
-        const titleEl = topic.querySelector('.CTitle');
-        if (!titleEl) return;
-        const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
-        if (!rawTitle) return;
-
-        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
-        wrap.id = safeId;
-        wrap.setAttribute('data-doc-topic', safeId);
-        if (topic) topic.id = topic.id || (safeId + '-topic');
-
-        const aTag = wrap.querySelector('a[name]');
-        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
-        if (aName) {
-          wrap.setAttribute('data-anchor', aName);
-        }
-
-        const cls = wrap.className || '';
-        const tag = titleEl.tagName.toUpperCase();
-        const isH2 = tag === 'H2';
-        const isCGroup = cls.indexOf('CGroup') !== -1;
-
-        if (hasH2) {
-          if (isH2) {
-            currentGroup = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              items: []
-            };
-            groups.push(currentGroup);
-          } else {
-            const itemObj = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              isGroupHeader: isCGroup,
-              type: 'subitem'
-            };
-            if (currentGroup) {
-              currentGroup.items.push(itemObj);
-            } else {
-              standaloneItems.push(itemObj);
-            }
-          }
-        } else {
-          if (isCGroup) {
-            currentGroup = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              items: []
-            };
-            groups.push(currentGroup);
-          } else {
-            const itemObj = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              isGroupHeader: false,
-              type: 'subitem'
-            };
-            if (currentGroup) {
-              currentGroup.items.push(itemObj);
-            } else {
-              standaloneItems.push(itemObj);
-            }
-          }
-        }
-      });
-
-      const totalItemsCount = topItems.length + standaloneItems.length + groups.length + groups.reduce(function(acc, g) { return acc + g.items.length; }, 0);
-      if (totalItemsCount <= 1) {
-        tocSidebar.style.display = 'none';
-        return;
-      }
-
-      // Show/hide the "toggle all" button depending on whether groups exist
-      if (toggleAllBtn) {
-        if (groups.length === 0) {
-          toggleAllBtn.style.display = 'none';
-        } else {
-          toggleAllBtn.style.display = 'inline-flex';
-        }
-      }
-
-      // Render TOC Tree HTML
-      let html = '';
-
-      // Top-level / standalone items (Overview, Summary, early methods)
-      const initialItems = topItems.concat(standaloneItems);
-      if (initialItems.length > 0) {
-        html += '<ul class="doc-toc-list">';
-        initialItems.forEach(function(item) {
-          const cleanTitle = item.title.replace(/"/g, '&quot;');
-          html += '<li class="doc-toc-item">';
-          html += '<a href="#' + item.id + '" data-target-id="' + item.id + '" class="doc-toc-link" title="' + cleanTitle + '">';
-          html += cleanTitle;
-          html += '</a></li>';
-        });
-        html += '</ul>';
-      }
-
-      // Collapsible Groups
-      groups.forEach(function(group) {
-        const cleanGroupTitle = group.title.replace(/"/g, '&quot;');
-        const hasSubItems = group.items.length > 0;
-        html += '<div class="doc-toc-group-block' + (hasSubItems ? '' : ' no-children') + '" id="block-' + group.id + '">';
-        html += '<div class="doc-toc-group-header">';
-        if (hasSubItems) {
-          html += '<button class="doc-toc-chevron-btn" type="button" aria-label="Toggle group ' + cleanGroupTitle + '" title="Toggle group">';
-          html += '<svg class="doc-toc-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
-          html += '</button>';
-        } else {
-          html += '<span class="doc-toc-dot-indicator"></span>';
-        }
-        html += '<a href="#' + group.id + '" data-target-id="' + group.id + '" class="doc-toc-link doc-toc-group-title" title="' + cleanGroupTitle + '">';
-        html += cleanGroupTitle;
-        html += '</a>';
-        if (hasSubItems) {
-          html += '<span class="doc-toc-badge">' + group.items.length + '</span>';
-        }
-        html += '</div>';
-
-        if (hasSubItems) {
-          html += '<ul class="doc-toc-subitems">';
-          group.items.forEach(function(sub) {
-            const cleanSubTitle = sub.title.replace(/"/g, '&quot;');
-            const extraCls = sub.isGroupHeader ? ' doc-toc-subgroup-header' : '';
-            html += '<li class="doc-toc-item doc-toc-subitem' + extraCls + '">';
-            html += '<a href="#' + sub.id + '" data-target-id="' + sub.id + '" class="doc-toc-link' + (sub.isGroupHeader ? ' doc-toc-subgroup-link' : '') + '" title="' + cleanSubTitle + '">';
-            html += cleanSubTitle;
-            html += '</a></li>';
-          });
-          html += '</ul>';
-        }
-        html += '</div>';
-      });
-
-      tocNav.innerHTML = html;
-
-      // Flatten list of all navigable items for scrollspy & lookup
-      const allNavItems = [];
-      initialItems.forEach(function(item) {
-        const link = tocNav.querySelector('.doc-toc-link[data-target-id="' + item.id + '"]');
-        allNavItems.push({ id: item.id, anchor: item.anchor || item.id, title: item.title, el: item.el, link: link });
-      });
-      groups.forEach(function(group) {
-        const groupLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + group.id + '"]');
-        allNavItems.push({ id: group.id, anchor: group.anchor || group.id, title: group.title, el: group.el, link: groupLink });
-        group.items.forEach(function(sub) {
-          const subLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + sub.id + '"]');
-          allNavItems.push({ id: sub.id, anchor: sub.anchor || sub.id, title: sub.title, el: sub.el, link: subLink });
-        });
-      });
-
-      // Smooth scroll helper
-      let isManualScrolling = false;
-      let manualScrollTimer = null;
-      let pendingTargetEl = null;
-
-      function onManualScrollDone() {
-        isManualScrolling = false;
-        pendingTargetEl = null;
-        updateScrollSpy();
-      }
-
-      function startManualScroll(duration) {
-        isManualScrolling = true;
-        clearTimeout(manualScrollTimer);
-        manualScrollTimer = setTimeout(checkAndCorrectScroll, duration || 1800);
-      }
-
-      function getTargetScrollY(targetEl) {
-        if (!targetEl) return 0;
-        const rect = targetEl.getBoundingClientRect();
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        return Math.max(0, currentScroll + rect.top - 24);
-      }
-
-      function performScroll(targetY) {
-        const scrollEl = document.scrollingElement || document.documentElement || document.body;
-        try {
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-        } catch (e) {
-          window.scrollTo(0, targetY);
-        }
-        if (scrollEl && Math.abs(scrollEl.scrollTop - targetY) > 5) {
-          try {
-            scrollEl.scrollTo({ top: targetY, behavior: 'smooth' });
-          } catch (e) {
-            scrollEl.scrollTop = targetY;
-          }
-        }
-      }
-
-      function checkAndCorrectScroll() {
-        if (!pendingTargetEl) {
-          onManualScrollDone();
-          return;
-        }
-        const targetEl = pendingTargetEl;
-        const rect = targetEl.getBoundingClientRect();
-        // If still more than 6px away from top: 24px, perform an instant/exact scroll to lock it in
-        if (Math.abs(rect.top - 24) > 6) {
-          const adjustedY = getTargetScrollY(targetEl);
-          performScroll(adjustedY);
-          pendingTargetEl = null;
-          setTimeout(onManualScrollDone, 100);
-        } else {
-          onManualScrollDone();
-        }
-      }
-
-      function scrollToElement(targetEl) {
-        if (!targetEl) return;
-        const targetY = getTargetScrollY(targetEl);
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const distance = Math.abs(currentScroll - targetY);
-
-        pendingTargetEl = targetEl;
-        startManualScroll(Math.min(2400, Math.max(600, distance * 0.15 + 400)));
-        performScroll(targetY);
-
-        targetEl.classList.add('doc-target-highlight');
-        setTimeout(function() {
-          targetEl.classList.remove('doc-target-highlight');
-        }, 1600);
-      }
-
-      function scrollTocToItem(linkEl) {
-        if (!linkEl || !tocSidebar) return;
-        const sidebarRect = tocSidebar.getBoundingClientRect();
-        const linkRect = linkEl.getBoundingClientRect();
-        if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
-          const currentScroll = tocSidebar.scrollTop;
-          const targetOffset = linkRect.top - sidebarRect.top + currentScroll - (sidebarRect.height / 2);
-          try {
-            tocSidebar.scrollTo({ top: Math.max(0, targetOffset), behavior: 'smooth' });
-          } catch (e) {
-            tocSidebar.scrollTop = Math.max(0, targetOffset);
-          }
-        }
-      }
-
-      // Click on any TOC link
-      const tocLinks = tocNav.querySelectorAll('.doc-toc-link');
-      tocLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-
-          const targetId = link.getAttribute('data-target-id');
-          const target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-
-          // Highlight clicked link immediately
-          tocLinks.forEach(function(l) { l.classList.remove('active'); });
-          link.classList.add('active');
-
-          // If inside a collapsed group, un-collapse it so it is visible
-          const parentGroupBlock = link.closest('.doc-toc-group-block');
-          if (parentGroupBlock && parentGroupBlock.classList.contains('collapsed')) {
-            parentGroupBlock.classList.remove('collapsed');
-            updateToggleAllBtn();
-          }
-
-          if (target) {
-            scrollToElement(target);
-          }
-        });
-      });
-
-      // Unified click handler for internal anchor/topic links in #Content
-      contentEl.addEventListener('click', function(e) {
-        const link = e.target.closest('a[href*="#"]');
-        if (!link) return;
-        const href = link.getAttribute('href');
-        if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-        // If it's a source code link, let the source code link handler deal with it
-        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
-
-        // Check if link is an in-page anchor link (starts with #)
-        if (href.startsWith('#')) {
-          const targetId = link.getAttribute('data-target-id') || href.substring(1);
-          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          if (!target) {
-            try {
-              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
-                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
-            } catch (err) {}
-          }
-          if (target && target.tagName === 'A' && target.closest) {
-            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-          }
-          if (target) {
-            e.preventDefault();
-            scrollToElement(target);
-
-            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
-            try {
-              history.replaceState(null, null, '#' + realId);
-            } catch (err) {}
-
-            if (tocNav && realId) {
-              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
-              if (mLink) {
-                tocLinks.forEach(function(l) { l.classList.remove('active'); });
-                mLink.classList.add('active');
-                const pB = mLink.closest('.doc-toc-group-block');
-                if (pB && pB.classList.contains('collapsed')) {
-                  pB.classList.remove('collapsed');
-                  updateToggleAllBtn();
-                }
-                scrollTocToItem(mLink);
-              }
-            }
-          }
-        }
-      });
-
-      // Group chevron expand/collapse toggles
-      const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
-      chevronBtns.forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const block = btn.closest('.doc-toc-group-block');
-          if (block) {
-            block.classList.toggle('collapsed');
-            updateToggleAllBtn();
-          }
-        });
-      });
-
-      // Toggle all button logic
-      function updateToggleAllBtn() {
-        if (!toggleAllBtn) return;
-        const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
-        if (allBlocks.length === 0) return;
-        const allCollapsed = Array.from(allBlocks).every(function(b) { return b.classList.contains('collapsed'); });
-        const textSpan = toggleAllBtn.querySelector('.toc-toggle-text');
-        const icon = toggleAllBtn.querySelector('.toc-toggle-icon');
-        if (allCollapsed) {
-          if (textSpan) textSpan.textContent = 'Expand all';
-          if (icon) icon.innerHTML = '<polyline points="4 6 12 14 20 6"/>';
-        } else {
-          if (textSpan) textSpan.textContent = 'Collapse all';
-          if (icon) icon.innerHTML = '<polyline points="4 14 12 6 20 14"/>';
-        }
-      }
-
-      if (toggleAllBtn) {
-        toggleAllBtn.addEventListener('click', function() {
-          const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
-          const anyExpanded = Array.from(allBlocks).some(function(b) { return !b.classList.contains('collapsed'); });
-          if (anyExpanded) {
-            // Collapse all
-            allBlocks.forEach(function(b) { b.classList.add('collapsed'); });
-          } else {
-            // Expand all
-            allBlocks.forEach(function(b) { b.classList.remove('collapsed'); });
-          }
-          updateToggleAllBtn();
-        });
-      }
-
-      // ScrollSpy: highlight active link and expand parent group if needed
-      let scrollTimer = null;
-      function updateScrollSpy() {
-        if (isManualScrolling) return;
-
-        let activeItem = null;
-        for (let i = 0; i < allNavItems.length; i++) {
-          const item = allNavItems[i];
-          if (!item.el) continue;
-          const rect = item.el.getBoundingClientRect();
-          if (rect.top <= 100) {
-            activeItem = item;
-          } else {
-            break;
-          }
-        }
-
-        if (!activeItem && allNavItems.length > 0) {
-          activeItem = allNavItems[0];
-        }
-
-        if (activeItem && activeItem.link) {
-          tocLinks.forEach(function(link) {
-            link.classList.toggle('active', link === activeItem.link);
-          });
-
-          // Auto-expand group if active method is inside a collapsed group
-          const parentBlock = activeItem.link.closest('.doc-toc-group-block');
-          if (parentBlock && parentBlock.classList.contains('collapsed')) {
-            parentBlock.classList.remove('collapsed');
-            updateToggleAllBtn();
-          }
-
-          scrollTocToItem(activeItem.link);
-
-          // Sync active section to parent window (left sidebar navigation)
-          if (window.parent && window.parent !== window) {
-            try {
-              window.parent.postMessage({
-                type: 'docSectionChanged',
-                anchor: activeItem.anchor || activeItem.id,
-                id: activeItem.id,
-                title: activeItem.title
-              }, '*');
-            } catch (err) {}
-          }
-        }
-      }
-
-      window.addEventListener('scrollend', function() {
-        if (isManualScrolling) {
-          clearTimeout(manualScrollTimer);
-          checkAndCorrectScroll();
-        }
-      });
-
-      window.addEventListener('scroll', function() {
-        if (isManualScrolling) {
-          clearTimeout(manualScrollTimer);
-          manualScrollTimer = setTimeout(checkAndCorrectScroll, 160);
-          return;
-        }
-        if (scrollTimer) return;
-        scrollTimer = requestAnimationFrame(function() {
-          updateScrollSpy();
-          scrollTimer = null;
-        });
-      }, { passive: true });
-
-      // Cross-frame listener to scroll directly to anchor/topic from left sidebar
-      window.addEventListener('message', function(e) {
-        if (!e.data || typeof e.data !== 'object') return;
-        if (e.data.type === 'scrollToSection') {
-          const anchor = e.data.anchor;
-          const targetId = e.data.id;
-          let target = null;
-          if (anchor) {
-            if (anchor === 'MainTopic' || anchor === 'Overview') {
-              target = document.getElementById('doc-nav-main') || document.getElementById('MainTopic');
-            } else if (anchor === 'Summary') {
-              target = document.getElementById('doc-nav-summary') || document.querySelector('.Summary');
-            } else {
-              try {
-                target = document.querySelector('[data-anchor="' + CSS.escape(anchor) + '"]') ||
-                         document.querySelector('a[name="' + CSS.escape(anchor) + '"]');
-              } catch (err) { }
-              if (!target) {
-                const allA = document.querySelectorAll('[data-anchor], a[name]');
-                for (let i = 0; i < allA.length; i++) {
-                  if (allA[i].getAttribute('data-anchor') === anchor || allA[i].getAttribute('name') === anchor) {
-                    target = allA[i];
-                    break;
-                  }
-                }
-              }
-              if (target && target.tagName === 'A' && target.closest) {
-                target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-              }
-            }
-          }
-          if (!target && targetId) {
-            target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          }
-          if (target) {
-            scrollToElement(target);
-            const targetNavId = target.id || target.getAttribute('data-doc-topic');
-            if (tocNav && targetNavId) {
-              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]');
-              if (mLink) {
-                tocLinks.forEach(function(l) { l.classList.remove('active'); });
-                mLink.classList.add('active');
-                const pB = mLink.closest('.doc-toc-group-block');
-                if (pB && pB.classList.contains('collapsed')) {
-                  pB.classList.remove('collapsed');
-                  updateToggleAllBtn();
-                }
-                scrollTocToItem(mLink);
-              }
-            }
-          }
-        }
-      });
-
-      // Handle direct hash navigation on initial load or hashchange
-      function handleHashNav(hashVal) {
-        if (!hashVal) return;
-        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
-        if (!raw) return;
-        setTimeout(function() {
-          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
-        }, 160);
-      }
-
-      if (window.location.hash) {
-        handleHashNav(window.location.hash);
-      }
-
-      window.addEventListener('hashchange', function() {
-        handleHashNav(window.location.hash);
-      });
-
-      setTimeout(updateScrollSpy, 120);
-    })();
-
-    // Code snippet copy button handler
-    document.addEventListener('click', function(e) {
-      const btn = e.target.closest('.code-copy-btn');
-      if (!btn) return;
-      const container = btn.closest('.code-block-container');
-      if (!container) return;
-      const codeEl = container.querySelector('code');
-      if (!codeEl) return;
-      const text = codeEl.innerText || codeEl.textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        const copyText = btn.querySelector('.copy-text');
-        const orig = copyText ? copyText.textContent : 'Copy';
-        btn.classList.add('copied');
-        if (copyText) copyText.textContent = 'Copied!';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          if (copyText) copyText.textContent = orig;
-        }, 2000);
-      }).catch(err => {
-        console.error('Copy failed: ', err);
-      });
-    });
-
-    // Theme sync
-    window.addEventListener('message', function(e) {
-      if (e.data && e.data.theme) {
-        document.documentElement.setAttribute('data-theme', e.data.theme);
-      }
-    });
-    try {
-      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-      if (parentTheme) {
-        document.documentElement.setAttribute('data-theme', parentTheme);
-      }
-    } catch (e) {}
-
-    // Auto-restore into main app if opened directly outside iframe
-    try {
-      if (window.self === window.top) {
-        window.location.replace('../../index.html#/doc/base/uvm_component-svh.html' + window.location.hash);
-      }
-    } catch (e) {}
-
-    // Inform parent that doc is loaded
-    try {
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage({
-          type: 'docNavigated',
-          url: 'docs_view/base/uvm_component-svh.html'
-        }, '*');
-      }
-    } catch (e) {}
-
-    // Intercept clicks on source code links
-    document.addEventListener('click', function(e) {
-      const link = e.target.closest('a');
-      if (!link) return;
-      const href = link.getAttribute('href');
-      if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        e.preventDefault();
-        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage({
-            type: 'openSourceView',
-            url: targetHref
-          }, '*');
-        }
-        try {
-          if (window.parent && window.parent.openSourceView) {
-            window.parent.openSourceView(targetHref);
-          }
-        } catch (err) {}
-      }
-    });
-
-    // Diagram enlarge & zoom lightbox triggers
-    document.addEventListener('click', function(e) {
-      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
-      const img = e.target.closest('.doc-diagram-img');
-      if (zoomBtn || img) {
-        e.preventDefault();
-        e.stopPropagation();
-        const card = (zoomBtn || img).closest('.doc-diagram-card');
-        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
-        if (targetImg) {
-          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
-          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
-          const fullSrc = targetImg.src;
-          if (window.parent && window.parent !== window) {
-            window.parent.postMessage({
-              type: 'openImageModal',
-              src: fullSrc,
-              title: title
-            }, '*');
-          } else {
-            window.open(fullSrc, '_blank');
-          }
-        }
-      }
-    });
-
-    // Forward Escape key to parent to close modals if iframe has focus
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && window.parent && window.parent !== window) {
-        window.parent.postMessage({ type: 'closeImageModal' }, '*');
-      }
-    });
-  </script>
+  <script src="../../js/doc_page.js"></script>
 </body>
 </html>

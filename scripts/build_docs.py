@@ -28,6 +28,17 @@ OUTPUT_DOCS_VIEW = BASE_DIR / "docs_view"
 OUTPUT_JS_DIR = BASE_DIR / "js"
 OUTPUT_IMAGES_DIR = BASE_DIR / "images"
 
+# AST Database Path & Cache
+DB_JSON_PATH = BASE_DIR / "data" / "uvm_source_database.json"
+UVM_DB = {}
+if DB_JSON_PATH.exists():
+    try:
+        with open(DB_JSON_PATH, 'r', encoding='utf-8') as f:
+            UVM_DB = json.load(f)
+        print(f"Loaded UVM AST Database: {len(UVM_DB.get('classes', {}))} classes, {len(UVM_DB.get('macros', {}))} macros.")
+    except Exception as e:
+        print(f"Warning: Could not load {DB_JSON_PATH}: {e}")
+
 # SystemVerilog keywords (IEEE 1800)
 SV_KEYWORDS = set([
     'accept_tr', 'alias', 'always', 'always_comb', 'always_ff', 'always_latch',
@@ -328,19 +339,19 @@ def wrap_doc_diagrams(body_html):
       <span>{html.escape(title)}</span>
     </span>
     <div class="doc-diagram-actions">
-      <button type="button" class="doc-img-zoom-btn" title="Agrandir et zoomer le diagramme" aria-label="Agrandir et zoomer">
+      <button type="button" class="doc-img-zoom-btn" title="Enlarge and zoom diagram" aria-label="Enlarge and zoom">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="8"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           <line x1="11" y1="8" x2="11" y2="14"/>
           <line x1="8" y1="11" x2="14" y2="11"/>
         </svg>
-        <span>Agrandir</span>
+        <span>Zoom</span>
       </button>
     </div>
   </div>
   <div class="doc-diagram-body">
-    <img src="{src}" class="doc-diagram-img" alt="{html.escape(title)}" title="Cliquer pour agrandir et zoomer" loading="lazy">
+    <img src="{src}" class="doc-diagram-img" alt="{html.escape(title)}" title="Click to zoom diagram" loading="lazy">
   </div>
 </figure>'''
 
@@ -351,8 +362,18 @@ SYMBOL_MAP = {}
 FILE_SYMBOLS = {}
 SRC_TO_DOC_MAP = {}
 DOC_TO_SRC_MAP = {}
+CLASS_TO_DOC_MAP = {}
 DOC_HEADINGS_MAP = {}
 GLOBAL_DOC_ANCHOR_MAPS = {}
+
+# Orphan doc files (classes in UVM 1.2 src without Accellera legacy HTML doc pages)
+ORPHAN_DOC_FILES = [
+    ("base/uvm_spell_chkr-svh.html", "base/uvm_spell_chkr.svh", "uvm_spell_chkr", "Spell Checker Utility"),
+    ("base/uvm_resource_specializations-svh.html", "base/uvm_resource_specializations.svh", "uvm_resource_specializations", "Specialized Resource Types"),
+    ("seq/uvm_sequence_builtin-svh.html", "seq/uvm_sequence_builtin.svh", "uvm_sequence_builtin", "Builtin Sequences"),
+    ("seq/uvm_sequencer_analysis_fifo-svh.html", "seq/uvm_sequencer_analysis_fifo.svh", "uvm_sequencer_analysis_fifo", "Sequencer Analysis FIFO"),
+    ("deprecated/uvm_resource_converter-svh.html", "deprecated/uvm_resource_converter.svh", "uvm_resource_converter", "Resource Converter (Deprecated)")
+]
 
 def extract_doc_headings(html_text, rel_doc_path):
     """Extract ordered headings, methods, and groups for a documentation page."""
@@ -572,7 +593,7 @@ def index_source_symbols():
     print(f"Total symbols indexed: {len(SYMBOL_MAP)} across {len(FILE_SYMBOLS)} files.")
 
 def map_docs_to_sources():
-    """Identify which doc file corresponds to which source file."""
+    """Identify which doc file corresponds to which source file and map classes to docs."""
     for root, dirs, files in os.walk(DOCS_FILES_DIR):
         for f in files:
             if not f.endswith('.html'):
@@ -594,7 +615,22 @@ def map_docs_to_sources():
                     DOC_TO_SRC_MAP[doc_rel] = src_rel
                     SRC_TO_DOC_MAP[src_rel] = doc_rel
 
-    print(f"Mapped {len(DOC_TO_SRC_MAP)} doc files to source files.")
+    # Register orphan doc files
+    for doc_rel, src_rel, _, _ in ORPHAN_DOC_FILES:
+        if (SRC_DIR / src_rel).exists():
+            DOC_TO_SRC_MAP[doc_rel] = src_rel
+            SRC_TO_DOC_MAP[src_rel] = doc_rel
+
+    # Populate CLASS_TO_DOC_MAP
+    for doc_rel, src_rel in DOC_TO_SRC_MAP.items():
+        if src_rel in UVM_DB.get('files', {}):
+            for cname in UVM_DB['files'][src_rel].get('classes', []):
+                CLASS_TO_DOC_MAP[cname] = doc_rel
+        for sym_name, sym_info in SYMBOL_MAP.items():
+            if sym_info.get('type') == 'class' and sym_info.get('file') == src_rel:
+                CLASS_TO_DOC_MAP[sym_name] = doc_rel
+
+    print(f"Mapped {len(DOC_TO_SRC_MAP)} doc files to source files ({len(CLASS_TO_DOC_MAP)} classes mapped to docs).")
 
 def generate_source_views():
     """Generate syntax-highlighted HTML views in src_view/ for all 155 source files."""
@@ -686,78 +722,7 @@ def generate_source_views():
   </div>
 
   <textarea id="raw-source-text" style="display:none">{html.escape(code)}</textarea>
-
-  <script>
-    document.getElementById('copy-src-btn').addEventListener('click', function() {{
-      const text = document.getElementById('raw-source-text').value;
-      navigator.clipboard.writeText(text).then(() => {{
-        const btn = document.getElementById('copy-src-btn');
-        const span = btn.querySelector('span');
-        const orig = span.textContent;
-        span.textContent = 'Copied!';
-        btn.classList.add('btn-success');
-        setTimeout(() => {{ span.textContent = orig; btn.classList.remove('btn-success'); }}, 2000);
-      }});
-    }});
-
-    function highlightTargetLine() {{
-      const hash = window.location.hash;
-      document.querySelectorAll('.sv-code-table tr.active-line').forEach(el => el.classList.remove('active-line'));
-      if (hash && hash.startsWith('#L')) {{
-        const target = document.querySelector(hash);
-        if (target) {{
-          target.classList.add('active-line');
-          target.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
-        }}
-      }}
-    }}
-    window.addEventListener('hashchange', highlightTargetLine);
-    window.addEventListener('DOMContentLoaded', highlightTargetLine);
-
-    // Theme sync
-    window.addEventListener('message', function(e) {{
-      if (e.data && e.data.theme) {{
-        document.documentElement.setAttribute('data-theme', e.data.theme);
-      }}
-    }});
-    try {{
-      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-      if (parentTheme) {{
-        document.documentElement.setAttribute('data-theme', parentTheme);
-      }}
-    }} catch (e) {{}}
-
-    // Auto-restore into main app if opened directly outside iframe
-    try {{
-      if (window.self === window.top) {{
-        window.location.replace('{root_rel}index.html#/src/{rel_path}.html' + window.location.hash);
-      }}
-    }} catch (e) {{}}
-
-    // Intercept clicks on doc button or doc links
-    document.addEventListener('click', function(e) {{
-      const link = e.target.closest('a');
-      if (!link) return;
-      const href = link.getAttribute('href');
-      if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-      if (link.classList.contains('src-to-doc-btn') || href.includes('docs_view/')) {{
-        e.preventDefault();
-        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
-        if (window.parent && window.parent !== window) {{
-          window.parent.postMessage({{
-            type: 'openDocView',
-            url: targetHref
-          }}, '*');
-        }}
-        try {{
-          if (window.parent && window.parent.openDocView) {{
-            window.parent.openDocView(targetHref);
-          }}
-        }} catch (err) {{}}
-      }}
-    }});
-  </script>
+  <script src="{root_rel}js/src_page.js"></script>
 </body>
 </html>'''
 
@@ -772,6 +737,107 @@ def resolve_cross_doc_path(current_rel_path, target_rel_href):
     cur_dir = posixpath.dirname(current_rel_path)
     combined = posixpath.join(cur_dir, target_rel_href) if cur_dir else target_rel_href
     return posixpath.normpath(combined)
+
+def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src, root_rel):
+    """Enrich topic HTML with exact AST source links, decl/impl buttons, derived classes, and badges."""
+    clean_a = re.sub(r'#\([^)]*\)', '', a_name) if a_name else None
+    cls_m = re.search(r'class=["\'](C[A-Za-z0-9_]+)["\']', w_start)
+    cls_name = cls_m.group(1) if cls_m else 'CTopicWrap'
+
+    if is_main or cls_name == 'CClass':
+        target_cname = None
+        if clean_a and clean_a in UVM_DB.get('classes', {}):
+            target_cname = clean_a
+        elif associated_src and associated_src in UVM_DB.get('files', {}):
+            f_classes = UVM_DB['files'][associated_src].get('classes', [])
+            if f_classes:
+                target_cname = f_classes[0]
+
+        if target_cname and target_cname in UVM_DB.get('classes', {}):
+            c_info = UVM_DB['classes'][target_cname]
+            decl_f = c_info['file']
+            start_l = c_info['start_line']
+            w_body = re.sub(r'href=["\'][^"\']*src_view/[^"\']*["\']', f'href="{root_rel}src_view/{decl_f}.html#L{start_l}"', w_body, count=1)
+            w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{start_l}"', w_body, count=1)
+            w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{decl_f}"', w_body, count=1)
+
+            children = c_info.get('children', [])
+            if children:
+                pills = []
+                for child in sorted(children):
+                    if child in CLASS_TO_DOC_MAP:
+                        ch_doc = CLASS_TO_DOC_MAP[child]
+                        pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#doc-nav-main" class="derived-class-pill" title="Documentation for {child}">{child}</a>')
+                    elif child in UVM_DB.get('classes', {}):
+                        ch_f = UVM_DB['classes'][child]['file']
+                        ch_l = UVM_DB['classes'][child]['start_line']
+                        pills.append(f'<a href="{root_rel}src_view/{ch_f}.html#L{ch_l}" class="derived-class-pill src-code-link" data-src-file="{ch_f}" data-src-line="{ch_l}" title="Source for {child}">{child}</a>')
+                    else:
+                        pills.append(f'<span class="derived-class-pill">{child}</span>')
+
+                derived_box = f'''<div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses ({len(children)})</span>
+  </div>
+  <div class="derived-classes-list">{"".join(pills)}</div>
+</div>'''
+                w_body = re.sub(r'(</h[123]>)', r'\1' + derived_box, w_body, count=1)
+
+    elif cls_name in ('CMethod', 'CFunction', 'CTask'):
+        decl_f = None
+        decl_l = None
+        impl_f = None
+        impl_l = None
+        overridden_from = None
+        overridden_by = []
+
+        if clean_a and '.' in clean_a:
+            cn, mn = clean_a.split('.', 1)
+            if cn in UVM_DB.get('classes', {}) and mn in UVM_DB['classes'][cn].get('methods', {}):
+                minfo = UVM_DB['classes'][cn]['methods'][mn]
+                decl_f = minfo['decl']['file']
+                decl_l = minfo['decl']['start_line']
+                impl = minfo.get('impl')
+                if impl:
+                    impl_f = impl['file']
+                    impl_l = impl['start_line']
+                overridden_from = minfo.get('overridden_from')
+                overridden_by = minfo.get('overridden_by', [])
+        elif clean_a and associated_src and associated_src in FILE_SYMBOLS:
+            for sym in FILE_SYMBOLS[associated_src]:
+                if sym['name'] == clean_a and sym['type'] in ('function', 'task'):
+                    decl_f = associated_src
+                    decl_l = sym['line']
+                    break
+
+        if decl_f and decl_l:
+            w_body = re.sub(r'href=["\'][^"\']*src_view/[^"\']*["\']', f'href="{root_rel}src_view/{decl_f}.html#L{decl_l}"', w_body, count=1)
+            w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{decl_l}"', w_body, count=1)
+            w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{decl_f}"', w_body, count=1)
+
+            badges = []
+            if overridden_from:
+                badges.append(f'<span class="badge-override" title="Overrides base method from {overridden_from}">Overrides {overridden_from}</span>')
+            if overridden_by:
+                badges.append(f'<span class="badge-subclass" title="Overridden in {len(overridden_by)} derived class(es)">Overridden in {len(overridden_by)} subclasses</span>')
+
+            if badges:
+                meta_bar = f'<div class="method-meta-bar">{"".join(badges)}</div>'
+                w_body = re.sub(r'(</h[23]>)', r'\1' + meta_bar, w_body, count=1)
+
+    elif cls_name == 'CMacro':
+        m_key = clean_a.lstrip('`').split('.')[-1] if clean_a else None
+        if m_key and m_key in UVM_DB.get('macros', {}):
+            minfo = UVM_DB['macros'][m_key]
+            mf = minfo['file']
+            ml = minfo['start_line']
+            w_body = re.sub(r'href=["\'][^"\']*src_view/[^"\']*["\']', f'href="{root_rel}src_view/{mf}.html#L{ml}"', w_body, count=1)
+            w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{ml}"', w_body, count=1)
+            w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{mf}"', w_body, count=1)
+            pass
+
+    return w_body
 
 def modernize_doc_files():
     """Modernize all 146 doc files from uvm-1.2/docs/html/files/ into docs_view/."""
@@ -820,10 +886,19 @@ def modernize_doc_files():
                 a_m = re.search(r'<a\s+name=["\']([^"\']+)["\']', w_body)
                 a_name = a_m.group(1) if a_m else None
                 if is_main:
-                    if a_name: a_map[a_name] = 'doc-nav-main'
+                    if a_name:
+                        a_map[a_name] = 'doc-nav-main'
+                        clean_a = re.sub(r'#\([^)]*\)', '', a_name)
+                        if clean_a != a_name:
+                            a_map[clean_a] = 'doc-nav-main'
                 else:
                     seq += 1
-                    if a_name: a_map[a_name] = f"doc-nav-item-{seq}"
+                    if a_name:
+                        target_id = f"doc-nav-item-{seq}"
+                        a_map[a_name] = target_id
+                        clean_a = re.sub(r'#\([^)]*\)', '', a_name)
+                        if clean_a != a_name:
+                            a_map[clean_a] = target_id
 
             global_doc_anchor_maps[rel_path] = a_map
 
@@ -909,6 +984,9 @@ def modernize_doc_files():
                 cls_m = re.search(r'class=["\'](C[A-Za-z0-9_]+)["\']', w_start)
                 cls_name = cls_m.group(1) if cls_m else 'CTopicWrap'
 
+                # Enrich topic body with AST links, decl/impl buttons, derived classes, and badges
+                w_body = enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src, root_rel)
+
                 if is_main:
                     safe_id = 'doc-nav-main'
                     if a_name:
@@ -979,6 +1057,17 @@ def modernize_doc_files():
                   </div>
                 </div>'''
 
+            # Breadcrumb navigation
+            subsys = rel_path.split('/')[0].capitalize()
+            clean_t = page_title.split(' - ')[0].replace('UVM Reference', '').strip() or Path(rel_path).stem
+            breadcrumbs_html = f'''<nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="{root_rel}index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">{subsys}</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">{html.escape(clean_t)}</span>
+</nav>'''
+
             modern_html = f'''<!DOCTYPE html>
 <html lang="en" data-theme="light" class="doc-page">
 <head>
@@ -992,6 +1081,7 @@ def modernize_doc_files():
 </head>
 <body class="doc-body">
   <div class="doc-page-container">
+    {breadcrumbs_html}
     {view_source_banner}
     <div class="doc-layout-wrapper">
       <div class="doc-main-content">
@@ -1013,694 +1103,7 @@ def modernize_doc_files():
       </aside>
     </div>
   </div>
-
-  <script>
-    // In-page Table of Contents (On this page) generator & Scrollspy
-    (function initDocTOC() {{
-      const contentEl = document.getElementById('Content');
-      const tocSidebar = document.getElementById('doc-toc-sidebar');
-      const tocNav = document.getElementById('doc-toc-nav');
-      const toggleAllBtn = document.getElementById('doc-toc-toggle-all');
-      if (!contentEl || !tocSidebar || !tocNav) return;
-
-      const topItems = [];
-      const groups = [];
-      const standaloneItems = [];
-      let currentGroup = null;
-      let topicSeq = 0;
-
-      // 1. Check main topic
-      const mainTopic = contentEl.querySelector('#MainTopic .CTitle, #MainTopic h1, #MainTopic h2');
-      if (mainTopic) {{
-        const safeId = 'doc-nav-main';
-        mainTopic.id = safeId;
-        const mainA = mainTopic.querySelector('a[name]');
-        const mainAnchor = mainA ? mainA.getAttribute('name') : 'MainTopic';
-        mainTopic.setAttribute('data-anchor', mainAnchor);
-        topItems.push({{
-          id: safeId,
-          anchor: mainAnchor,
-          title: (mainTopic.innerText || mainTopic.textContent || 'Overview').trim(),
-          type: 'main',
-          el: mainTopic
-        }});
-      }}
-
-      // 2. Check summary
-      const summaryEl = contentEl.querySelector('.Summary');
-      if (summaryEl) {{
-        const safeId = 'doc-nav-summary';
-        summaryEl.id = safeId;
-        summaryEl.setAttribute('data-anchor', 'Summary');
-        topItems.push({{
-          id: safeId,
-          anchor: 'Summary',
-          title: 'Summary',
-          type: 'summary',
-          el: summaryEl
-        }});
-      }}
-
-      // 3. Scan all topics in #Content
-      const topicWrappers = contentEl.querySelectorAll('#Content > div');
-
-      // Check if page contains H2 topics
-      let hasH2 = false;
-      for (let i = 0; i < topicWrappers.length; i++) {{
-        const topic = topicWrappers[i].querySelector('.CTopic');
-        if (!topic || topic.id === 'MainTopic') continue;
-        const titleEl = topic.querySelector('.CTitle');
-        if (titleEl && titleEl.tagName.toUpperCase() === 'H2') {{
-          hasH2 = true;
-          break;
-        }}
-      }}
-
-      topicWrappers.forEach(function(wrap) {{
-        const topic = wrap.querySelector('.CTopic');
-        if (!topic || topic.id === 'MainTopic') return;
-        const titleEl = topic.querySelector('.CTitle');
-        if (!titleEl) return;
-        const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
-        if (!rawTitle) return;
-
-        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
-        wrap.id = safeId;
-        wrap.setAttribute('data-doc-topic', safeId);
-        if (topic) topic.id = topic.id || (safeId + '-topic');
-
-        const aTag = wrap.querySelector('a[name]');
-        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
-        if (aName) {{
-          wrap.setAttribute('data-anchor', aName);
-        }}
-
-        const cls = wrap.className || '';
-        const tag = titleEl.tagName.toUpperCase();
-        const isH2 = tag === 'H2';
-        const isCGroup = cls.indexOf('CGroup') !== -1;
-
-        if (hasH2) {{
-          if (isH2) {{
-            currentGroup = {{
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              items: []
-            }};
-            groups.push(currentGroup);
-          }} else {{
-            const itemObj = {{
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              isGroupHeader: isCGroup,
-              type: 'subitem'
-            }};
-            if (currentGroup) {{
-              currentGroup.items.push(itemObj);
-            }} else {{
-              standaloneItems.push(itemObj);
-            }}
-          }}
-        }} else {{
-          if (isCGroup) {{
-            currentGroup = {{
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              items: []
-            }};
-            groups.push(currentGroup);
-          }} else {{
-            const itemObj = {{
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              isGroupHeader: false,
-              type: 'subitem'
-            }};
-            if (currentGroup) {{
-              currentGroup.items.push(itemObj);
-            }} else {{
-              standaloneItems.push(itemObj);
-            }}
-          }}
-        }}
-      }});
-
-      const totalItemsCount = topItems.length + standaloneItems.length + groups.length + groups.reduce(function(acc, g) {{ return acc + g.items.length; }}, 0);
-      if (totalItemsCount <= 1) {{
-        tocSidebar.style.display = 'none';
-        return;
-      }}
-
-      // Show/hide the "toggle all" button depending on whether groups exist
-      if (toggleAllBtn) {{
-        if (groups.length === 0) {{
-          toggleAllBtn.style.display = 'none';
-        }} else {{
-          toggleAllBtn.style.display = 'inline-flex';
-        }}
-      }}
-
-      // Render TOC Tree HTML
-      let html = '';
-
-      // Top-level / standalone items (Overview, Summary, early methods)
-      const initialItems = topItems.concat(standaloneItems);
-      if (initialItems.length > 0) {{
-        html += '<ul class="doc-toc-list">';
-        initialItems.forEach(function(item) {{
-          const cleanTitle = item.title.replace(/"/g, '&quot;');
-          html += '<li class="doc-toc-item">';
-          html += '<a href="#' + item.id + '" data-target-id="' + item.id + '" class="doc-toc-link" title="' + cleanTitle + '">';
-          html += cleanTitle;
-          html += '</a></li>';
-        }});
-        html += '</ul>';
-      }}
-
-      // Collapsible Groups
-      groups.forEach(function(group) {{
-        const cleanGroupTitle = group.title.replace(/"/g, '&quot;');
-        const hasSubItems = group.items.length > 0;
-        html += '<div class="doc-toc-group-block' + (hasSubItems ? '' : ' no-children') + '" id="block-' + group.id + '">';
-        html += '<div class="doc-toc-group-header">';
-        if (hasSubItems) {{
-          html += '<button class="doc-toc-chevron-btn" type="button" aria-label="Toggle group ' + cleanGroupTitle + '" title="Toggle group">';
-          html += '<svg class="doc-toc-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
-          html += '</button>';
-        }} else {{
-          html += '<span class="doc-toc-dot-indicator"></span>';
-        }}
-        html += '<a href="#' + group.id + '" data-target-id="' + group.id + '" class="doc-toc-link doc-toc-group-title" title="' + cleanGroupTitle + '">';
-        html += cleanGroupTitle;
-        html += '</a>';
-        if (hasSubItems) {{
-          html += '<span class="doc-toc-badge">' + group.items.length + '</span>';
-        }}
-        html += '</div>';
-
-        if (hasSubItems) {{
-          html += '<ul class="doc-toc-subitems">';
-          group.items.forEach(function(sub) {{
-            const cleanSubTitle = sub.title.replace(/"/g, '&quot;');
-            const extraCls = sub.isGroupHeader ? ' doc-toc-subgroup-header' : '';
-            html += '<li class="doc-toc-item doc-toc-subitem' + extraCls + '">';
-            html += '<a href="#' + sub.id + '" data-target-id="' + sub.id + '" class="doc-toc-link' + (sub.isGroupHeader ? ' doc-toc-subgroup-link' : '') + '" title="' + cleanSubTitle + '">';
-            html += cleanSubTitle;
-            html += '</a></li>';
-          }});
-          html += '</ul>';
-        }}
-        html += '</div>';
-      }});
-
-      tocNav.innerHTML = html;
-
-      // Flatten list of all navigable items for scrollspy & lookup
-      const allNavItems = [];
-      initialItems.forEach(function(item) {{
-        const link = tocNav.querySelector('.doc-toc-link[data-target-id="' + item.id + '"]');
-        allNavItems.push({{ id: item.id, anchor: item.anchor || item.id, title: item.title, el: item.el, link: link }});
-      }});
-      groups.forEach(function(group) {{
-        const groupLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + group.id + '"]');
-        allNavItems.push({{ id: group.id, anchor: group.anchor || group.id, title: group.title, el: group.el, link: groupLink }});
-        group.items.forEach(function(sub) {{
-          const subLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + sub.id + '"]');
-          allNavItems.push({{ id: sub.id, anchor: sub.anchor || sub.id, title: sub.title, el: sub.el, link: subLink }});
-        }});
-      }});
-
-      // Smooth scroll helper
-      let isManualScrolling = false;
-      let manualScrollTimer = null;
-      let pendingTargetEl = null;
-
-      function onManualScrollDone() {{
-        isManualScrolling = false;
-        pendingTargetEl = null;
-        updateScrollSpy();
-      }}
-
-      function startManualScroll(duration) {{
-        isManualScrolling = true;
-        clearTimeout(manualScrollTimer);
-        manualScrollTimer = setTimeout(checkAndCorrectScroll, duration || 1800);
-      }}
-
-      function getTargetScrollY(targetEl) {{
-        if (!targetEl) return 0;
-        const rect = targetEl.getBoundingClientRect();
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        return Math.max(0, currentScroll + rect.top - 24);
-      }}
-
-      function performScroll(targetY) {{
-        const scrollEl = document.scrollingElement || document.documentElement || document.body;
-        try {{
-          window.scrollTo({{ top: targetY, behavior: 'smooth' }});
-        }} catch (e) {{
-          window.scrollTo(0, targetY);
-        }}
-        if (scrollEl && Math.abs(scrollEl.scrollTop - targetY) > 5) {{
-          try {{
-            scrollEl.scrollTo({{ top: targetY, behavior: 'smooth' }});
-          }} catch (e) {{
-            scrollEl.scrollTop = targetY;
-          }}
-        }}
-      }}
-
-      function checkAndCorrectScroll() {{
-        if (!pendingTargetEl) {{
-          onManualScrollDone();
-          return;
-        }}
-        const targetEl = pendingTargetEl;
-        const rect = targetEl.getBoundingClientRect();
-        // If still more than 6px away from top: 24px, perform an instant/exact scroll to lock it in
-        if (Math.abs(rect.top - 24) > 6) {{
-          const adjustedY = getTargetScrollY(targetEl);
-          performScroll(adjustedY);
-          pendingTargetEl = null;
-          setTimeout(onManualScrollDone, 100);
-        }} else {{
-          onManualScrollDone();
-        }}
-      }}
-
-      function scrollToElement(targetEl) {{
-        if (!targetEl) return;
-        const targetY = getTargetScrollY(targetEl);
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const distance = Math.abs(currentScroll - targetY);
-
-        pendingTargetEl = targetEl;
-        startManualScroll(Math.min(2400, Math.max(600, distance * 0.15 + 400)));
-        performScroll(targetY);
-
-        targetEl.classList.add('doc-target-highlight');
-        setTimeout(function() {{
-          targetEl.classList.remove('doc-target-highlight');
-        }}, 1600);
-      }}
-
-      function scrollTocToItem(linkEl) {{
-        if (!linkEl || !tocSidebar) return;
-        const sidebarRect = tocSidebar.getBoundingClientRect();
-        const linkRect = linkEl.getBoundingClientRect();
-        if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {{
-          const currentScroll = tocSidebar.scrollTop;
-          const targetOffset = linkRect.top - sidebarRect.top + currentScroll - (sidebarRect.height / 2);
-          try {{
-            tocSidebar.scrollTo({{ top: Math.max(0, targetOffset), behavior: 'smooth' }});
-          }} catch (e) {{
-            tocSidebar.scrollTop = Math.max(0, targetOffset);
-          }}
-        }}
-      }}
-
-      // Click on any TOC link
-      const tocLinks = tocNav.querySelectorAll('.doc-toc-link');
-      tocLinks.forEach(function(link) {{
-        link.addEventListener('click', function(e) {{
-          e.preventDefault();
-
-          const targetId = link.getAttribute('data-target-id');
-          const target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-
-          // Highlight clicked link immediately
-          tocLinks.forEach(function(l) {{ l.classList.remove('active'); }});
-          link.classList.add('active');
-
-          // If inside a collapsed group, un-collapse it so it is visible
-          const parentGroupBlock = link.closest('.doc-toc-group-block');
-          if (parentGroupBlock && parentGroupBlock.classList.contains('collapsed')) {{
-            parentGroupBlock.classList.remove('collapsed');
-            updateToggleAllBtn();
-          }}
-
-          if (target) {{
-            scrollToElement(target);
-          }}
-        }});
-      }});
-
-      // Unified click handler for internal anchor/topic links in #Content
-      contentEl.addEventListener('click', function(e) {{
-        const link = e.target.closest('a[href*="#"]');
-        if (!link) return;
-        const href = link.getAttribute('href');
-        if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-        // If it's a source code link, let the source code link handler deal with it
-        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
-
-        // Check if link is an in-page anchor link (starts with #)
-        if (href.startsWith('#')) {{
-          const targetId = link.getAttribute('data-target-id') || href.substring(1);
-          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          if (!target) {{
-            try {{
-              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
-                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
-            }} catch (err) {{}}
-          }}
-          if (target && target.tagName === 'A' && target.closest) {{
-            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-          }}
-          if (target) {{
-            e.preventDefault();
-            scrollToElement(target);
-
-            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
-            try {{
-              history.replaceState(null, null, '#' + realId);
-            }} catch (err) {{}}
-
-            if (tocNav && realId) {{
-              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
-              if (mLink) {{
-                tocLinks.forEach(function(l) {{ l.classList.remove('active'); }});
-                mLink.classList.add('active');
-                const pB = mLink.closest('.doc-toc-group-block');
-                if (pB && pB.classList.contains('collapsed')) {{
-                  pB.classList.remove('collapsed');
-                  updateToggleAllBtn();
-                }}
-                scrollTocToItem(mLink);
-              }}
-            }}
-          }}
-        }}
-      }});
-
-      // Group chevron expand/collapse toggles
-      const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
-      chevronBtns.forEach(function(btn) {{
-        btn.addEventListener('click', function(e) {{
-          e.stopPropagation();
-          const block = btn.closest('.doc-toc-group-block');
-          if (block) {{
-            block.classList.toggle('collapsed');
-            updateToggleAllBtn();
-          }}
-        }});
-      }});
-
-      // Toggle all button logic
-      function updateToggleAllBtn() {{
-        if (!toggleAllBtn) return;
-        const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
-        if (allBlocks.length === 0) return;
-        const allCollapsed = Array.from(allBlocks).every(function(b) {{ return b.classList.contains('collapsed'); }});
-        const textSpan = toggleAllBtn.querySelector('.toc-toggle-text');
-        const icon = toggleAllBtn.querySelector('.toc-toggle-icon');
-        if (allCollapsed) {{
-          if (textSpan) textSpan.textContent = 'Expand all';
-          if (icon) icon.innerHTML = '<polyline points="4 6 12 14 20 6"/>';
-        }} else {{
-          if (textSpan) textSpan.textContent = 'Collapse all';
-          if (icon) icon.innerHTML = '<polyline points="4 14 12 6 20 14"/>';
-        }}
-      }}
-
-      if (toggleAllBtn) {{
-        toggleAllBtn.addEventListener('click', function() {{
-          const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
-          const anyExpanded = Array.from(allBlocks).some(function(b) {{ return !b.classList.contains('collapsed'); }});
-          if (anyExpanded) {{
-            // Collapse all
-            allBlocks.forEach(function(b) {{ b.classList.add('collapsed'); }});
-          }} else {{
-            // Expand all
-            allBlocks.forEach(function(b) {{ b.classList.remove('collapsed'); }});
-          }}
-          updateToggleAllBtn();
-        }});
-      }}
-
-      // ScrollSpy: highlight active link and expand parent group if needed
-      let scrollTimer = null;
-      function updateScrollSpy() {{
-        if (isManualScrolling) return;
-
-        let activeItem = null;
-        for (let i = 0; i < allNavItems.length; i++) {{
-          const item = allNavItems[i];
-          if (!item.el) continue;
-          const rect = item.el.getBoundingClientRect();
-          if (rect.top <= 100) {{
-            activeItem = item;
-          }} else {{
-            break;
-          }}
-        }}
-
-        if (!activeItem && allNavItems.length > 0) {{
-          activeItem = allNavItems[0];
-        }}
-
-        if (activeItem && activeItem.link) {{
-          tocLinks.forEach(function(link) {{
-            link.classList.toggle('active', link === activeItem.link);
-          }});
-
-          // Auto-expand group if active method is inside a collapsed group
-          const parentBlock = activeItem.link.closest('.doc-toc-group-block');
-          if (parentBlock && parentBlock.classList.contains('collapsed')) {{
-            parentBlock.classList.remove('collapsed');
-            updateToggleAllBtn();
-          }}
-
-          scrollTocToItem(activeItem.link);
-
-          // Sync active section to parent window (left sidebar navigation)
-          if (window.parent && window.parent !== window) {{
-            try {{
-              window.parent.postMessage({{
-                type: 'docSectionChanged',
-                anchor: activeItem.anchor || activeItem.id,
-                id: activeItem.id,
-                title: activeItem.title
-              }}, '*');
-            }} catch (err) {{}}
-          }}
-        }}
-      }}
-
-      window.addEventListener('scrollend', function() {{
-        if (isManualScrolling) {{
-          clearTimeout(manualScrollTimer);
-          checkAndCorrectScroll();
-        }}
-      }});
-
-      window.addEventListener('scroll', function() {{
-        if (isManualScrolling) {{
-          clearTimeout(manualScrollTimer);
-          manualScrollTimer = setTimeout(checkAndCorrectScroll, 160);
-          return;
-        }}
-        if (scrollTimer) return;
-        scrollTimer = requestAnimationFrame(function() {{
-          updateScrollSpy();
-          scrollTimer = null;
-        }});
-      }}, {{ passive: true }});
-
-      // Cross-frame listener to scroll directly to anchor/topic from left sidebar
-      window.addEventListener('message', function(e) {{
-        if (!e.data || typeof e.data !== 'object') return;
-        if (e.data.type === 'scrollToSection') {{
-          const anchor = e.data.anchor;
-          const targetId = e.data.id;
-          let target = null;
-          if (anchor) {{
-            if (anchor === 'MainTopic' || anchor === 'Overview') {{
-              target = document.getElementById('doc-nav-main') || document.getElementById('MainTopic');
-            }} else if (anchor === 'Summary') {{
-              target = document.getElementById('doc-nav-summary') || document.querySelector('.Summary');
-            }} else {{
-              try {{
-                target = document.querySelector('[data-anchor="' + CSS.escape(anchor) + '"]') ||
-                         document.querySelector('a[name="' + CSS.escape(anchor) + '"]');
-              }} catch (err) {{ }}
-              if (!target) {{
-                const allA = document.querySelectorAll('[data-anchor], a[name]');
-                for (let i = 0; i < allA.length; i++) {{
-                  if (allA[i].getAttribute('data-anchor') === anchor || allA[i].getAttribute('name') === anchor) {{
-                    target = allA[i];
-                    break;
-                  }}
-                }}
-              }}
-              if (target && target.tagName === 'A' && target.closest) {{
-                target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-              }}
-            }}
-          }}
-          if (!target && targetId) {{
-            target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          }}
-          if (target) {{
-            scrollToElement(target);
-            const targetNavId = target.id || target.getAttribute('data-doc-topic');
-            if (tocNav && targetNavId) {{
-              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]');
-              if (mLink) {{
-                tocLinks.forEach(function(l) {{ l.classList.remove('active'); }});
-                mLink.classList.add('active');
-                const pB = mLink.closest('.doc-toc-group-block');
-                if (pB && pB.classList.contains('collapsed')) {{
-                  pB.classList.remove('collapsed');
-                  updateToggleAllBtn();
-                }}
-                scrollTocToItem(mLink);
-              }}
-            }}
-          }}
-        }}
-      }});
-
-      // Handle direct hash navigation on initial load or hashchange
-      function handleHashNav(hashVal) {{
-        if (!hashVal) return;
-        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
-        if (!raw) return;
-        setTimeout(function() {{
-          window.postMessage({{ type: 'scrollToSection', anchor: raw, id: raw }}, '*');
-        }}, 160);
-      }}
-
-      if (window.location.hash) {{
-        handleHashNav(window.location.hash);
-      }}
-
-      window.addEventListener('hashchange', function() {{
-        handleHashNav(window.location.hash);
-      }});
-
-      setTimeout(updateScrollSpy, 120);
-    }})();
-
-    // Code snippet copy button handler
-    document.addEventListener('click', function(e) {{
-      const btn = e.target.closest('.code-copy-btn');
-      if (!btn) return;
-      const container = btn.closest('.code-block-container');
-      if (!container) return;
-      const codeEl = container.querySelector('code');
-      if (!codeEl) return;
-      const text = codeEl.innerText || codeEl.textContent;
-      navigator.clipboard.writeText(text).then(() => {{
-        const copyText = btn.querySelector('.copy-text');
-        const orig = copyText ? copyText.textContent : 'Copy';
-        btn.classList.add('copied');
-        if (copyText) copyText.textContent = 'Copied!';
-        setTimeout(() => {{
-          btn.classList.remove('copied');
-          if (copyText) copyText.textContent = orig;
-        }}, 2000);
-      }}).catch(err => {{
-        console.error('Copy failed: ', err);
-      }});
-    }});
-
-    // Theme sync
-    window.addEventListener('message', function(e) {{
-      if (e.data && e.data.theme) {{
-        document.documentElement.setAttribute('data-theme', e.data.theme);
-      }}
-    }});
-    try {{
-      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-      if (parentTheme) {{
-        document.documentElement.setAttribute('data-theme', parentTheme);
-      }}
-    }} catch (e) {{}}
-
-    // Auto-restore into main app if opened directly outside iframe
-    try {{
-      if (window.self === window.top) {{
-        window.location.replace('{root_rel}index.html#/doc/{rel_path}' + window.location.hash);
-      }}
-    }} catch (e) {{}}
-
-    // Inform parent that doc is loaded
-    try {{
-      if (window.parent && window.parent !== window) {{
-        window.parent.postMessage({{
-          type: 'docNavigated',
-          url: 'docs_view/{rel_path}'
-        }}, '*');
-      }}
-    }} catch (e) {{}}
-
-    // Intercept clicks on source code links
-    document.addEventListener('click', function(e) {{
-      const link = e.target.closest('a');
-      if (!link) return;
-      const href = link.getAttribute('href');
-      if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {{
-        e.preventDefault();
-        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
-        if (window.parent && window.parent !== window) {{
-          window.parent.postMessage({{
-            type: 'openSourceView',
-            url: targetHref
-          }}, '*');
-        }}
-        try {{
-          if (window.parent && window.parent.openSourceView) {{
-            window.parent.openSourceView(targetHref);
-          }}
-        }} catch (err) {{}}
-      }}
-    }});
-
-    // Diagram enlarge & zoom lightbox triggers
-    document.addEventListener('click', function(e) {{
-      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
-      const img = e.target.closest('.doc-diagram-img');
-      if (zoomBtn || img) {{
-        e.preventDefault();
-        e.stopPropagation();
-        const card = (zoomBtn || img).closest('.doc-diagram-card');
-        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
-        if (targetImg) {{
-          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
-          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
-          const fullSrc = targetImg.src;
-          if (window.parent && window.parent !== window) {{
-            window.parent.postMessage({{
-              type: 'openImageModal',
-              src: fullSrc,
-              title: title
-            }}, '*');
-          }} else {{
-            window.open(fullSrc, '_blank');
-          }}
-        }}
-      }}
-    }});
-
-    // Forward Escape key to parent to close modals if iframe has focus
-    window.addEventListener('keydown', function(e) {{
-      if (e.key === 'Escape' && window.parent && window.parent !== window) {{
-        window.parent.postMessage({{ type: 'closeImageModal' }}, '*');
-      }}
-    }});
-  </script>
+  <script src="{root_rel}js/doc_page.js"></script>
 </body>
 </html>'''
 
@@ -1709,6 +1112,201 @@ def modernize_doc_files():
             count += 1
 
     print(f"Modernized {count} documentation pages in {OUTPUT_DOCS_VIEW}.")
+
+def generate_orphan_doc_pages():
+    """Generate modern doc pages for the 15 classes across 5 files lacking legacy Accellera docs."""
+    print("Generating documentation pages for orphan UVM classes...")
+    count = 0
+    for doc_rel, src_rel, main_cname, page_title in ORPHAN_DOC_FILES:
+        out_file = OUTPUT_DOCS_VIEW / doc_rel
+        out_file.parent.mkdir(parents=True, exist_ok=True)
+        depth = len(doc_rel.split('/'))
+        root_rel = get_rel_root(depth)
+        subsys = doc_rel.split('/')[0].capitalize()
+
+        classes_in_file = UVM_DB.get('files', {}).get(src_rel, {}).get('classes', [])
+        first_cname = classes_in_file[0] if classes_in_file else main_cname
+        first_line = UVM_DB.get('classes', {}).get(first_cname, {}).get('start_line', 1)
+
+        src_view_url = f"{root_rel}src_view/{src_rel}.html#L{first_line}"
+        breadcrumbs = f'''<nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="{root_rel}index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">{subsys}</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">{html.escape(page_title)}</span>
+</nav>'''
+
+        banner = f'''<div class="doc-source-banner">
+  <div class="banner-info">
+    <span class="file-label">Source File:</span>
+    <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}"><code>src/{html.escape(src_rel)}</code></a>
+  </div>
+  <div class="banner-actions">
+    <a href="{src_view_url}" class="btn btn-primary btn-sm src-code-link" data-src-url="{src_view_url}" title="Open source code with syntax highlighting at line {first_line}">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span>View Source (Line {first_line})</span>
+    </a>
+  </div>
+</div>'''
+
+        body_parts = ['<div id="Content">']
+        seq = 0
+        a_map = {}
+
+        for c_idx, cname in enumerate(classes_in_file):
+            c_info = UVM_DB.get('classes', {}).get(cname, {})
+            c_line = c_info.get('start_line', 1)
+            c_doc = c_info.get('doc', {}).get('summary', '') or f"Class {cname} defined in src/{src_rel}."
+            c_params = c_info.get('parameters_raw')
+            c_parent = c_info.get('parent')
+            children = c_info.get('children', [])
+
+            is_main = (c_idx == 0)
+            topic_id = 'doc-nav-main' if is_main else f'doc-nav-item-{c_idx}'
+            a_map[cname] = topic_id
+            if is_main:
+                a_map['MainTopic'] = 'doc-nav-main'
+
+            # Pills for derived classes if any
+            pills = []
+            for child in sorted(children):
+                if child in CLASS_TO_DOC_MAP:
+                    ch_doc = CLASS_TO_DOC_MAP[child]
+                    pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#doc-nav-main" class="derived-class-pill" title="Documentation for {child}">{child}</a>')
+                elif child in UVM_DB.get('classes', {}):
+                    ch_f = UVM_DB['classes'][child]['file']
+                    ch_l = UVM_DB['classes'][child]['start_line']
+                    pills.append(f'<a href="{root_rel}src_view/{ch_f}.html#L{ch_l}" class="derived-class-pill src-code-link" data-src-file="{ch_f}" data-src-line="{ch_l}" title="Source for {child}">{child}</a>')
+                else:
+                    pills.append(f'<span class="derived-class-pill">{child}</span>')
+
+            derived_box = f'''<div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses ({len(children)})</span>
+  </div>
+  <div class="derived-classes-list">{"".join(pills)}</div>
+</div>''' if pills else ""
+
+            body_parts.append(f'''<div class="CClass" id="{topic_id}" data-doc-topic="{topic_id}" data-anchor="{cname}">
+<div class="CTopic" {"id='MainTopic'" if is_main else ""}>
+  <h1 class="CTitle"><a href="{root_rel}src_view/{src_rel}.html#L{c_line}" class="src-code-link" data-src-file="{src_rel}" data-src-line="{c_line}">{cname}</a></h1>
+  {derived_box}
+  <div class="CBody">
+    <p>{html.escape(c_doc)}</p>
+    {f"<p><b>Base Class:</b> <code>{c_parent}</code></p>" if c_parent else ""}
+    {f"<p><b>Parameters:</b> <code>#({c_params})</code></p>" if c_params else ""}
+  </div>
+</div>
+</div>''')
+
+            # Summary table of methods
+            methods = c_info.get('methods', {})
+            if methods:
+                sum_id = f"doc-nav-summary-{cname}"
+                body_parts.append(f'''<div class="Summary" id="{sum_id}" data-anchor="Summary-{cname}">
+<div class="STitle">Methods Summary: {cname}</div>
+<div class="SBody">
+<table border="0" cellspacing="0" cellpadding="0" class="STable">''')
+                for mname, minfo in methods.items():
+                    seq += 1
+                    m_item_id = f"doc-nav-item-m-{seq}"
+                    minfo['_nav_id'] = m_item_id
+                    a_map[f"{cname}.{mname}"] = m_item_id
+                    a_map[mname] = m_item_id
+                    m_ret = minfo.get('return_type') or ''
+                    m_params = minfo.get("parameters_raw", "()")
+                    body_parts.append(f'''<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#{m_item_id}" data-target-id="{m_item_id}">{mname}</a></td>
+  <td class="SDescription"><code>{m_ret} {mname}{m_params}</code></td>
+</tr>''')
+                body_parts.append('</table></div></div>')
+
+                # Method definitions
+                body_parts.append(f'''<div class="CGroup"><div class="CTopic"><h2 class="CTitle">Methods: {cname}</h2></div></div>''')
+                for mname, minfo in methods.items():
+                    m_id = minfo.get('_nav_id', f"doc-nav-item-m-{seq}")
+                    decl_l = minfo['decl']['start_line']
+                    impl = minfo.get('impl')
+                    impl_l = impl['start_line'] if impl else None
+                    m_kind = minfo.get('kind', 'function')
+                    m_ret = minfo.get('return_type') or 'void'
+                    m_params = minfo.get('parameters_raw', '()')
+                    overridden_from = minfo.get('overridden_from')
+                    overridden_by = minfo.get('overridden_by', [])
+
+                    badges = []
+                    if overridden_from:
+                        badges.append(f'<span class="badge-override" title="Overrides base method from {overridden_from}">Overrides {overridden_from}</span>')
+                    if overridden_by:
+                        badges.append(f'<span class="badge-subclass" title="Overridden in {len(overridden_by)} derived class(es)">Overridden in {len(overridden_by)} subclasses</span>')
+
+                    meta_bar = f'<div class="method-meta-bar">{"".join(badges)}</div>' if badges else ''
+                    proto_html = f'<table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">{m_kind}</span> <span class="sv-type">{m_ret}</span> <span class="sv-proto-name">{mname}</span> <span class="sv-params">{m_params}</span></td></tr></table>'
+                    m_doc = minfo.get('doc', {}).get('summary', '') if minfo.get('doc') else f"Method <code>{mname}</code> of class <code>{cname}</code>."
+
+                    body_parts.append(f'''<div class="CMethod" id="{m_id}" data-doc-topic="{m_id}" data-anchor="{cname}.{mname}">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="{cname}.{mname}" id="{cname}.{mname}" href="{root_rel}src_view/{src_rel}.html#L{decl_l}" class="src-code-link" data-src-file="{src_rel}" data-src-line="{decl_l}">{mname}</a></h3>
+  {meta_bar}
+  <blockquote>{proto_html}</blockquote>
+  <div class="CBody"><p>{m_doc}</p></div>
+</div>
+</div>''')
+
+        body_parts.append('</div>')
+        body_content = "\n".join(body_parts)
+
+        # Update global maps
+        GLOBAL_DOC_ANCHOR_MAPS[doc_rel] = a_map
+        doc_key = f"docs_view/{doc_rel}"
+        DOC_HEADINGS_MAP[doc_key] = extract_doc_headings(body_content, doc_rel)
+
+        page_html = f'''<!DOCTYPE html>
+<html lang="en" data-theme="light" class="doc-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{html.escape(page_title)} | UVM 1.2 Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{root_rel}css/style.css">
+</head>
+<body class="doc-body">
+  <div class="doc-page-container">
+    {breadcrumbs}
+    {banner}
+    <div class="doc-layout-wrapper">
+      <div class="doc-main-content">
+        {body_content}
+      </div>
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+        <div class="doc-toc-inner">
+          <div class="doc-toc-header">
+            <span class="doc-toc-title">On this page</span>
+            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 14 12 6 20 14"/>
+              </svg>
+              <span class="toc-toggle-text">Collapse all</span>
+            </button>
+          </div>
+          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="{root_rel}js/doc_page.js"></script>
+</body>
+</html>'''
+
+        with open(out_file, 'w', encoding='utf-8', newline='\n') as of:
+            of.write(page_html)
+        count += 1
+
+    print(f"Generated {count} orphan documentation pages in {OUTPUT_DOCS_VIEW}.")
 
 def copy_assets():
     """Copy documentation images and diagram assets to images/ and docs_view/images/."""

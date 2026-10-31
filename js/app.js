@@ -1276,7 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         models.forEach(m => {
           const isSelected = m.id === currentId;
-          const recBadge = m.recommended ? `<span class="ai-badge-rec">Recommandé</span>` : '';
+          const recBadge = m.recommended ? `<span class="ai-badge-rec">Recommended</span>` : '';
           const radioName = isConsent ? 'consent-model-radio' : 'settings-model-radio';
           html += `
             <label class="ai-model-card ${isSelected ? 'selected' : ''}" data-model-id="${m.id}" tabindex="0" role="radio" aria-checked="${isSelected}">
@@ -1288,9 +1288,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="ai-model-desc">${escapeHtml(m.description)}</div>
                 <div class="ai-model-metrics">
-                  <span class="ai-metric-item"><strong>Vitesse:</strong> <span class="ai-stars">${renderStarRating(m.speedRating)}</span></span>
-                  <span class="ai-metric-item"><strong>Précision:</strong> <span class="ai-stars">${renderStarRating(m.accuracyRating)}</span></span>
-                  <span class="ai-metric-item"><strong>Poids:</strong> ${escapeHtml(m.downloadSize)} (${escapeHtml(m.ramUsage)})</span>
+                  <span class="ai-metric-item"><strong>Speed:</strong> <span class="ai-stars">${renderStarRating(m.speedRating)}</span></span>
+                  <span class="ai-metric-item"><strong>Accuracy:</strong> <span class="ai-stars">${renderStarRating(m.accuracyRating)}</span></span>
+                  <span class="ai-metric-item"><strong>Size:</strong> ${escapeHtml(m.downloadSize)} (${escapeHtml(m.ramUsage)})</span>
                 </div>
               </div>
             </label>
@@ -1327,10 +1327,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!settingsCacheStatus || !window.UVMRagEngine) return;
         window.UVMRagEngine.getCacheInfo().then(({ count, sizeMB }) => {
           if (settingsCacheStatus) {
-            settingsCacheStatus.textContent = sizeMB > 0 ? `Stockage utilisé : ~${sizeMB} Mo (${count} fichiers en cache)` : 'Aucun modèle en cache';
+            settingsCacheStatus.textContent = sizeMB > 0 ? `Cached models storage: ~${sizeMB} MB (${count} files cached)` : 'No cached models';
           }
         }).catch(() => {
-          if (settingsCacheStatus) settingsCacheStatus.textContent = 'Information de cache non disponible';
+          if (settingsCacheStatus) settingsCacheStatus.textContent = 'Cache status unavailable';
         });
       }
 
@@ -1462,7 +1462,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (settingsClearCache) {
         settingsClearCache.addEventListener('click', async () => {
-          if (confirm('Voulez-vous vraiment effacer les modèles d\'IA mis en cache localement ?')) {
+          if (confirm('Are you sure you want to clear locally cached AI models?')) {
             if (window.UVMRagEngine) {
               await window.UVMRagEngine.clearCache();
               updateCacheStatusUI();
@@ -1712,7 +1712,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Show progress / loading state
           if (modalAiLoading) {
             modalAiLoading.style.display = 'flex';
-            if (aiLoadingText) aiLoadingText.textContent = "Calcul de similarité sémantique...";
+            if (aiLoadingText) aiLoadingText.textContent = "Computing semantic similarity...";
             if (aiLoadingPct) aiLoadingPct.textContent = "";
             if (aiLoadingBarFill) aiLoadingBarFill.style.width = "30%";
           }
@@ -1761,7 +1761,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchSelectedIndex = filteredSearchResults.length > 0 ? 0 : -1;
 
             if (filteredSearchResults.length === 0) {
-              searchResults.innerHTML = '<li style="padding:2rem; text-align:center; color:var(--text-muted); font-size:0.875rem">Aucun résultat sémantique trouvé pour cette question. Essayez de reformuler.</li>';
+              searchResults.innerHTML = '<li style="padding:2rem; text-align:center; color:var(--text-muted); font-size:0.875rem">No semantic matches found for this query. Try rephrasing.</li>';
               return;
             }
 
@@ -1783,11 +1783,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const isIntro = s.isIntro;
                     const pillClass = isIntro ? 'rag-section-pill intro-pill' : 'rag-section-pill';
                     const pillLabel = isIntro ? '📖 Intro' : `🎯 ${escapeHtml(s.title)}`;
-                    return `<button type="button" class="${pillClass}" data-section-url="${escapeHtml(s.url)}" title="Accéder directement à : ${escapeHtml(s.title)}">${pillLabel}</button>`;
+                    return `<button type="button" class="${pillClass}" data-section-url="${escapeHtml(s.url)}" title="Jump directly to: ${escapeHtml(s.title)}">${pillLabel}</button>`;
                   }).join('')}
                 </div>`;
               } else if (res.targetSectionTitle) {
-                sectionsPillsHtml = `<span class="rag-section-badge" title="Section ciblée dans ce document">🎯 Section: ${escapeHtml(res.targetSectionTitle)}</span>`;
+                sectionsPillsHtml = `<span class="rag-section-badge" title="Target section in this document">🎯 Section: ${escapeHtml(res.targetSectionTitle)}</span>`;
               }
 
               html += `<li class="search-result-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}">
@@ -1841,7 +1841,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('[RAG] Search error:', err);
             if (modalAiLoading) modalAiLoading.style.display = 'none';
             searchResults.innerHTML = `<li style="padding:1.5rem; text-align:center; color:#ef4444; font-size:0.875rem">
-              <strong>Erreur lors du calcul IA</strong><br>
+              <strong>AI Search Error</strong><br>
               <span style="font-size:0.775rem; color:var(--text-muted)">${escapeHtml(err.message)}</span>
             </li>`;
           }
@@ -2030,7 +2030,7 @@ function fitImageToViewport() {
 function openImageZoomModal(src, title) {
   if (!imageZoomModal || !imageModalImg) return;
   if (imageModalTitle) {
-    imageModalTitle.textContent = title || 'Diagramme UVM';
+    imageModalTitle.textContent = title || 'UVM Diagram';
   }
   imageModalImg.src = src;
   imageModalImg.onload = () => {

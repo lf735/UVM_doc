@@ -2,11 +2,11 @@ window.UVM_SOURCE_DATABASE = {
   "metadata": {
     "version": "UVM 1.2",
     "total_files": 155,
-    "total_classes": 325,
+    "total_classes": 327,
     "total_macros": 373,
-    "total_methods": 2130,
-    "total_overrides": 507,
-    "total_symbols": 2828,
+    "total_methods": 2213,
+    "total_overrides": 531,
+    "total_symbols": 2913,
     "generated_at": "2026-10-31"
   },
   "files": {
@@ -645,6 +645,8 @@ window.UVM_SOURCE_DATABASE = {
       "classes": [
         "uvm_factory_queue_class",
         "uvm_factory",
+        "uvm_default_factory",
+        "uvm_object_wrapper",
         "uvm_factory_override"
       ],
       "macros": []
@@ -6279,7 +6281,43 @@ window.UVM_SOURCE_DATABASE = {
         "summary": "Class - uvm_typeid#(T)",
         "full_text": "Class - uvm_typeid#(T)"
       },
-      "methods": {}
+      "methods": {
+        "get": {
+          "name": "get",
+          "class": "uvm_typeid",
+          "kind": "function",
+          "return_type": "uvm_typeid#(T)",
+          "modifiers": [
+            "static"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": true,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "base/uvm_callback.svh",
+            "start_line": 66,
+            "end_line": 66
+          },
+          "impl": {
+            "file": "base/uvm_callback.svh",
+            "start_line": 66,
+            "end_line": 70,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        }
+      }
     },
     "uvm_callbacks_base": {
       "name": "uvm_callbacks_base",
@@ -6503,6 +6541,55 @@ window.UVM_SOURCE_DATABASE = {
               "file": "base/uvm_callback.svh",
               "line": 560,
               "impl_line": 560
+            }
+          ]
+        },
+        "m_get_tw_cb_q": {
+          "name": "m_get_tw_cb_q",
+          "class": "uvm_callbacks_base",
+          "kind": "function",
+          "return_type": "uvm_queue#(uvm_callback)",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "base/uvm_callback.svh",
+            "start_line": 124,
+            "end_line": 124
+          },
+          "impl": {
+            "file": "base/uvm_callback.svh",
+            "start_line": 124,
+            "end_line": 126,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object",
+              "name": "obj",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object obj)",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_typed_callbacks",
+              "file": "base/uvm_callback.svh",
+              "line": 208,
+              "impl_line": 208
             }
           ]
         },
@@ -6773,6 +6860,53 @@ window.UVM_SOURCE_DATABASE = {
             "class": "uvm_callbacks_base",
             "file": "base/uvm_callback.svh",
             "line": 112
+          }
+        },
+        "m_get_tw_cb_q": {
+          "name": "m_get_tw_cb_q",
+          "class": "uvm_typed_callbacks",
+          "kind": "function",
+          "return_type": "uvm_queue#(uvm_callback)",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "base/uvm_callback.svh",
+            "start_line": 208,
+            "end_line": 208
+          },
+          "impl": {
+            "file": "base/uvm_callback.svh",
+            "start_line": 208,
+            "end_line": 223,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object",
+              "name": "obj",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object obj)",
+          "doc": null,
+          "overrides": true,
+          "overridden_from": "uvm_callbacks_base",
+          "root_ancestor": "uvm_callbacks_base",
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_callbacks_base",
+            "file": "base/uvm_callback.svh",
+            "line": 124
           }
         },
         "m_cb_find": {
@@ -11755,6 +11889,45 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_depth": {
+          "name": "get_depth",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 179,
+            "end_line": 179
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2001,
+            "end_line": 2006,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "get_depth",
+            "full_text": "get_depth"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "build_phase": {
           "name": "build_phase",
           "class": "uvm_component",
@@ -14562,6 +14735,53 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "set_type_override_by_type": {
+          "name": "set_type_override_by_type",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "static"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": true,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1147,
+            "end_line": 1150
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2133,
+            "end_line": 2139,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "original_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper original_type,)",
+          "doc": {
+            "title": "set_type_override_by_type",
+            "summary": "A convenience function for <uvm_factory::set_type_override_by_type>, this method registers a factory override for components and objects created at this level of hierarchy or below. This method is equivalent to:",
+            "full_text": "A convenience function for <uvm_factory::set_type_override_by_type>, this\nmethod registers a factory override for components and objects created at\nthis level of hierarchy or below. This method is equivalent to:\n\n|  factory.set_type_override_by_type(original_type, override_type,replace);\n\nThe ~relative_inst_path~ is relative to this component and may include\nwildcards. The ~original_type~ represents the type that is being overridden.\nIn subsequent calls to <uvm_factory::create_object_by_type> or\n<uvm_factory::create_component_by_type>, if the requested_type matches the\n~original_type~ and the instance paths match, the factory will produce\nthe ~override_type~.\n\nThe original and override type arguments are lightweight proxies to the\ntypes they represent. See <set_inst_override_by_type> for information"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "set_inst_override_by_type": {
           "name": "set_inst_override_by_type",
           "class": "uvm_component",
@@ -15404,16 +15624,20 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_component",
           "kind": "function",
           "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
+          "modifiers": [
+            "extern",
+            "virtual",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": true,
           "is_pure_virtual": false,
           "is_static": false,
-          "is_extern": false,
-          "is_inline": true,
+          "is_extern": true,
+          "is_inline": false,
           "decl": {
             "file": "base/uvm_component.svh",
-            "start_line": 1480,
+            "start_line": 1479,
             "end_line": 1482
           },
           "impl": {
@@ -15434,14 +15658,932 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "(uvm_transaction tr,)",
           "doc": {
             "title": "do_begin_tr",
-            "summary": "The <begin_tr> and <begin_child_tr> methods call this function to accommodate any user-defined post-begin action. Implementations should call super.do_begin_tr to ensure correct operation.",
-            "full_text": "The <begin_tr> and <begin_child_tr> methods call this function to\naccommodate any user-defined post-begin action. Implementations should call\nsuper.do_begin_tr to ensure correct operation."
+            "summary": "The <begin_tr> and <begin_child_tr> methods call this function to accommodate any user-defined post-begin action. Implementations should call",
+            "full_text": "The <begin_tr> and <begin_child_tr> methods call this function to\naccommodate any user-defined post-begin action. Implementations should call"
           },
           "overrides": false,
           "overridden_from": null,
           "root_ancestor": null,
           "is_override_of_pure_virtual": false,
           "overridden_by": []
+        },
+        "end_tr": {
+          "name": "end_tr",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1509,
+            "end_line": 1511
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2785,
+            "end_line": 2825,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_transaction",
+              "name": "tr",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_transaction tr,)",
+          "doc": {
+            "title": "end_tr",
+            "summary": "This function marks the end of a transaction, ~tr~, by this component. Specifically, it performs the following actions:",
+            "full_text": "This function marks the end of a transaction, ~tr~, by this component.\nSpecifically, it performs the following actions:\n\n- Calls ~tr~'s <uvm_transaction::end_tr> method, passing to it the\n  ~end_time~ argument. The ~end_time~ must at least be greater than the\n  begin time. By default, when ~end_time~ = 0, the current simulation time\n  is used.\n\n  The transaction's properties are recorded to the database-transaction on\n  which it was started, and then the transaction is ended. Only those\n  properties handled by the transaction's do_record method (and optional\n  `uvm_*_field macros) are recorded.\n\n- Calls the component's <do_end_tr> method to accommodate any post-end\n  action in derived classes.\n\n- Triggers the component's internal end_tr event. Any processes waiting on\n  this event will resume in the next delta cycle.\n\nThe ~free_handle~ bit indicates that this transaction is no longer needed.\nThe implementation of free_handle is vendor-specific."
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "do_end_tr": {
+          "name": "do_end_tr",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1520,
+            "end_line": 1521
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2963,
+            "end_line": 2966,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_transaction",
+              "name": "tr",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_transaction tr,)",
+          "doc": {
+            "title": "do_end_tr",
+            "summary": "The <end_tr> method calls this function to accommodate any user-defined post-end action. Implementations should call super.do_end_tr to ensure correct operation.",
+            "full_text": "The <end_tr> method calls this function to accommodate any user-defined\npost-end action. Implementations should call super.do_end_tr to ensure\ncorrect operation."
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "record_error_tr": {
+          "name": "record_error_tr",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "integer",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1538,
+            "end_line": 1543
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2831,
+            "end_line": 2883,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "stream_name",
+              "default": "\"main\""
+            }
+          ],
+          "parameters_raw": "(string stream_name=\"main\",)",
+          "doc": {
+            "title": "record_error_tr",
+            "summary": "This function marks an error transaction by a component. Properties of the given uvm_object, ~info~, as implemented in its <uvm_object::do_record> method, are recorded to the transaction database.",
+            "full_text": "This function marks an error transaction by a component. Properties of the\ngiven uvm_object, ~info~, as implemented in its <uvm_object::do_record> method,\nare recorded to the transaction database.\n\nAn ~error_time~ of 0 indicates to use the current simulation time. The\n~keep_active~ bit determines if the handle should remain active. If 0,\nthen a zero-length error transaction is recorded. A handle to the\ndatabase-transaction is returned."
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "record_event_tr": {
+          "name": "record_event_tr",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "integer",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1558,
+            "end_line": 1563
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2889,
+            "end_line": 2940,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "stream_name",
+              "default": "\"main\""
+            }
+          ],
+          "parameters_raw": "(string stream_name=\"main\",)",
+          "doc": {
+            "title": "record_event_tr",
+            "summary": "This function marks an event transaction by a component.",
+            "full_text": "This function marks an event transaction by a component.\n\nAn ~event_time~ of 0 indicates to use the current simulation time.\n\nA handle to the transaction is returned. The ~keep_active~ bit determines\nif the handle may be used for other vendor-specific purposes."
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_tr_stream": {
+          "name": "get_tr_stream",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "uvm_tr_stream",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1578,
+            "end_line": 1579
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2649,
+            "end_line": 2655,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string name,)",
+          "doc": {
+            "title": "get_tr_stream",
+            "summary": "Returns a tr stream with ~this~ component's full name as a scope.",
+            "full_text": "Returns a tr stream with ~this~ component's full name as a scope.\n\nStreams which are retrieved via this method will be stored internally,\nsuch that later calls to ~get_tr_stream~ will return the same stream\nreference.\n\nThe stream can be removed from the internal storage via a call\nto <free_tr_stream>.\n\nParameters:\nname - Name for the stream\nstream_type_name - Type name for the stream (Default = \"\")"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "free_tr_stream": {
+          "name": "free_tr_stream",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1587,
+            "end_line": 1587
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2659,
+            "end_line": 2682,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_tr_stream",
+              "name": "stream",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_tr_stream stream)",
+          "doc": {
+            "title": "",
+            "summary": "free_tr_stream",
+            "full_text": "free_tr_stream"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_get_tr_database": {
+          "name": "m_get_tr_database",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "uvm_tr_database",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1605,
+            "end_line": 1605
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2639,
+            "end_line": 2645,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "m_get_tr_database",
+            "full_text": "m_get_tr_database"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "set_int_local": {
+          "name": "set_int_local",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1633,
+            "end_line": 1635
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 3344,
+            "end_line": 3355,
+            "is_inline": false,
+            "calls_super": true
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "field_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string field_name,)",
+          "doc": {
+            "title": "",
+            "summary": "protected*/ bit  m_build_done; protected*/ int  m_phasing_active;",
+            "full_text": "protected*/ bit  m_build_done;\nprotected*/ int  m_phasing_active;"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_add_child": {
+          "name": "m_add_child",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "bit",
+          "modifiers": [
+            "extern",
+            "protected",
+            "virtual"
+          ],
+          "visibility": "protected",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1640,
+            "end_line": 1640
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1822,
+            "end_line": 1844,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_component",
+              "name": "child",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_component child)",
+          "doc": {
+            "title": "",
+            "summary": "m_add_child",
+            "full_text": "m_add_child"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_root",
+              "file": "base/uvm_root.svh",
+              "line": 227,
+              "impl_line": 624
+            }
+          ]
+        },
+        "m_set_full_name": {
+          "name": "m_set_full_name",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "local",
+            "virtual"
+          ],
+          "visibility": "local",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1641,
+            "end_line": 1641
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1946,
+            "end_line": 1960,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "m_set_full_name",
+            "full_text": "m_set_full_name"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "do_resolve_bindings": {
+          "name": "do_resolve_bindings",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1643,
+            "end_line": 1643
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2586,
+            "end_line": 2590,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "do_resolve_bindings",
+            "full_text": "do_resolve_bindings"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "do_flush": {
+          "name": "do_flush",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1644,
+            "end_line": 1644
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2049,
+            "end_line": 2053,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "do_flush  (flush_hier?)",
+            "full_text": "do_flush  (flush_hier?)"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "flush": {
+          "name": "flush",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1646,
+            "end_line": 1646
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2041,
+            "end_line": 2043,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "flush",
+            "full_text": "flush"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_in_order_comparator",
+              "file": "comps/uvm_in_order_comparator.svh",
+              "line": 194,
+              "impl_line": 194
+            },
+            {
+              "class": "uvm_tlm_fifo_base",
+              "file": "tlm1/uvm_tlm_fifo_base.svh",
+              "line": 171,
+              "impl_line": 171
+            }
+          ]
+        },
+        "m_extract_name": {
+          "name": "m_extract_name",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "local"
+          ],
+          "visibility": "local",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1648,
+            "end_line": 1650
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2012,
+            "end_line": 2035,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string name ,)",
+          "doc": {
+            "title": "",
+            "summary": "m_extract_name",
+            "full_text": "m_extract_name"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "create": {
+          "name": "create",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "uvm_object",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1653,
+            "end_line": 1653
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2067,
+            "end_line": 2071,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "name",
+              "default": "\"\""
+            }
+          ],
+          "parameters_raw": "(string name=\"\")",
+          "doc": {
+            "title": "",
+            "summary": "Factory Methods",
+            "full_text": "Factory Methods\n\n\n\ncreate"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_tlm_req_rsp_channel",
+              "file": "tlm1/uvm_tlm_req_rsp.svh",
+              "line": 282,
+              "impl_line": 282
+            }
+          ]
+        },
+        "clone": {
+          "name": "clone",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "uvm_object",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1654,
+            "end_line": 1654
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2077,
+            "end_line": 2080,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "clone",
+            "full_text": "clone"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_begin_tr": {
+          "name": "m_begin_tr",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "integer",
+          "modifiers": [
+            "extern",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1659,
+            "end_line": 1662
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 2687,
+            "end_line": 2779,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_transaction",
+              "name": "tr",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_transaction tr,)",
+          "doc": {
+            "title": "",
+            "summary": "m_begin_tr",
+            "full_text": "m_begin_tr"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_type_name": {
+          "name": "get_type_name",
+          "class": "uvm_component",
+          "kind": "function",
+          "return_type": "string",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1667,
+            "end_line": 1667
+          },
+          "impl": {
+            "file": "base/uvm_component.svh",
+            "start_line": 1667,
+            "end_line": 1669,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": true,
+          "overridden_from": "uvm_object",
+          "root_ancestor": "uvm_object",
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_port_component",
+              "file": "base/uvm_port_base.svh",
+              "line": 120,
+              "impl_line": 120
+            },
+            {
+              "class": "uvm_root",
+              "file": "base/uvm_root.svh",
+              "line": 94,
+              "impl_line": 94
+            },
+            {
+              "class": "uvm_agent",
+              "file": "comps/uvm_agent.svh",
+              "line": 119,
+              "impl_line": 119
+            },
+            {
+              "class": "uvm_algorithmic_comparator",
+              "file": "comps/uvm_algorithmic_comparator.svh",
+              "line": 122,
+              "impl_line": 122
+            },
+            {
+              "class": "uvm_driver",
+              "file": "comps/uvm_driver.svh",
+              "line": 83,
+              "impl_line": 83
+            },
+            {
+              "class": "uvm_env",
+              "file": "comps/uvm_env.svh",
+              "line": 47,
+              "impl_line": 47
+            },
+            {
+              "class": "uvm_in_order_comparator",
+              "file": "comps/uvm_in_order_comparator.svh",
+              "line": 129,
+              "impl_line": 129
+            },
+            {
+              "class": "uvm_monitor",
+              "file": "comps/uvm_monitor.svh",
+              "line": 48,
+              "impl_line": 48
+            },
+            {
+              "class": "uvm_push_driver",
+              "file": "comps/uvm_push_driver.svh",
+              "line": 91,
+              "impl_line": 91
+            },
+            {
+              "class": "uvm_random_stimulus",
+              "file": "comps/uvm_random_stimulus.svh",
+              "line": 127,
+              "impl_line": 127
+            },
+            {
+              "class": "uvm_scoreboard",
+              "file": "comps/uvm_scoreboard.svh",
+              "line": 50,
+              "impl_line": 50
+            },
+            {
+              "class": "uvm_test",
+              "file": "comps/uvm_test.svh",
+              "line": 76,
+              "impl_line": 76
+            },
+            {
+              "class": "uvm_reg_predictor",
+              "file": "reg/uvm_reg_predictor.svh",
+              "line": 117,
+              "impl_line": 117
+            },
+            {
+              "class": "uvm_sequencer",
+              "file": "seq/uvm_sequencer.svh",
+              "line": 59,
+              "impl_line": 176
+            },
+            {
+              "class": "uvm_tlm_fifo",
+              "file": "tlm1/uvm_tlm_fifos.svh",
+              "line": 68,
+              "impl_line": 68
+            },
+            {
+              "class": "uvm_tlm_req_rsp_channel",
+              "file": "tlm1/uvm_tlm_req_rsp.svh",
+              "line": 274,
+              "impl_line": 274
+            }
+          ],
+          "ancestor_decl": {
+            "class": "uvm_object",
+            "file": "base/uvm_object.svh",
+            "line": 220
+          }
         },
         "do_print": {
           "name": "do_print",
@@ -15535,699 +16677,6 @@ window.UVM_SOURCE_DATABASE = {
             "title": "",
             "summary": "m_apply_verbosity_settings",
             "full_text": "m_apply_verbosity_settings"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "m_add_child": {
-          "name": "m_add_child",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "bit",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 1822,
-            "end_line": 1822
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 1822,
-            "end_line": 1844,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_add_child",
-            "full_text": "m_add_child"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": [
-            {
-              "class": "uvm_root",
-              "file": "base/uvm_root.svh",
-              "line": 227,
-              "impl_line": 624
-            }
-          ]
-        },
-        "m_set_full_name": {
-          "name": "m_set_full_name",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 1946,
-            "end_line": 1946
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 1946,
-            "end_line": 1960,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_set_full_name",
-            "full_text": "m_set_full_name"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "m_extract_name": {
-          "name": "m_extract_name",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2012,
-            "end_line": 2012
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2012,
-            "end_line": 2035,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_extract_name",
-            "full_text": "m_extract_name"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "flush": {
-          "name": "flush",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2041,
-            "end_line": 2041
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2041,
-            "end_line": 2043,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "flush",
-            "full_text": "flush"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": [
-            {
-              "class": "uvm_in_order_comparator",
-              "file": "comps/uvm_in_order_comparator.svh",
-              "line": 194,
-              "impl_line": 194
-            },
-            {
-              "class": "uvm_tlm_fifo_base",
-              "file": "tlm1/uvm_tlm_fifo_base.svh",
-              "line": 171,
-              "impl_line": 171
-            }
-          ]
-        },
-        "do_flush": {
-          "name": "do_flush",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2049,
-            "end_line": 2049
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2049,
-            "end_line": 2053,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "do_flush  (flush_hier?)",
-            "full_text": "do_flush  (flush_hier?)"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "create": {
-          "name": "create",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "uvm_object",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2067,
-            "end_line": 2067
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2067,
-            "end_line": 2071,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "Factory Methods",
-            "full_text": "Factory Methods\n\n\n\ncreate"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": [
-            {
-              "class": "uvm_tlm_req_rsp_channel",
-              "file": "tlm1/uvm_tlm_req_rsp.svh",
-              "line": 282,
-              "impl_line": 282
-            }
-          ]
-        },
-        "clone": {
-          "name": "clone",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "uvm_object",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2077,
-            "end_line": 2077
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2077,
-            "end_line": 2080,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "clone",
-            "full_text": "clone"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "set_type_override_by_type": {
-          "name": "set_type_override_by_type",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2133,
-            "end_line": 2133
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2133,
-            "end_line": 2139,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "set_type_override_by_type (static)",
-            "full_text": "set_type_override_by_type (static)"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "do_resolve_bindings": {
-          "name": "do_resolve_bindings",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2586,
-            "end_line": 2586
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2586,
-            "end_line": 2590,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "do_resolve_bindings",
-            "full_text": "do_resolve_bindings"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "m_get_tr_database": {
-          "name": "m_get_tr_database",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "uvm_tr_database",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2639,
-            "end_line": 2639
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2639,
-            "end_line": 2645,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_get_tr_database",
-            "full_text": "m_get_tr_database"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "get_tr_stream": {
-          "name": "get_tr_stream",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "uvm_tr_stream",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2649,
-            "end_line": 2649
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2649,
-            "end_line": 2655,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "get_tr_stream",
-            "full_text": "get_tr_stream"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "free_tr_stream": {
-          "name": "free_tr_stream",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2659,
-            "end_line": 2659
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2659,
-            "end_line": 2682,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "free_tr_stream",
-            "full_text": "free_tr_stream"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "m_begin_tr": {
-          "name": "m_begin_tr",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "integer",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2687,
-            "end_line": 2687
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2687,
-            "end_line": 2779,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_begin_tr",
-            "full_text": "m_begin_tr"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "end_tr": {
-          "name": "end_tr",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2785,
-            "end_line": 2785
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2785,
-            "end_line": 2825,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "end_tr",
-            "full_text": "end_tr"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "record_error_tr": {
-          "name": "record_error_tr",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "integer",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2831,
-            "end_line": 2831
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2831,
-            "end_line": 2883,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "record_error_tr",
-            "full_text": "record_error_tr"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "record_event_tr": {
-          "name": "record_event_tr",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "integer",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2889,
-            "end_line": 2889
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2889,
-            "end_line": 2940,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "record_event_tr",
-            "full_text": "record_event_tr"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "do_end_tr": {
-          "name": "do_end_tr",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2963,
-            "end_line": 2963
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 2963,
-            "end_line": 2966,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "do_end_tr",
-            "full_text": "do_end_tr"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "set_int_local": {
-          "name": "set_int_local",
-          "class": "uvm_component",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 3344,
-            "end_line": 3344
-          },
-          "impl": {
-            "file": "base/uvm_component.svh",
-            "start_line": 3344,
-            "end_line": 3355,
-            "is_inline": false,
-            "calls_super": true
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "set_int_local (override)",
-            "full_text": "set_int_local (override)"
           },
           "overrides": false,
           "overridden_from": null,
@@ -17030,6 +17479,43 @@ window.UVM_SOURCE_DATABASE = {
             }
           ]
         },
+        "get_component_visitor": {
+          "name": "get_component_visitor",
+          "class": "uvm_coreservice_t",
+          "kind": "function",
+          "return_type": "uvm_visitor#(uvm_component)",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_coreservice.svh",
+            "start_line": 86,
+            "end_line": 86
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_coreservice_t",
+              "file": "base/uvm_coreservice.svh",
+              "line": 213,
+              "impl_line": 213
+            }
+          ]
+        },
         "get_root": {
           "name": "get_root",
           "class": "uvm_coreservice_t",
@@ -17473,6 +17959,46 @@ window.UVM_SOURCE_DATABASE = {
             "class": "uvm_coreservice_t",
             "file": "base/uvm_coreservice.svh",
             "line": 81
+          }
+        },
+        "get_component_visitor": {
+          "name": "get_component_visitor",
+          "class": "uvm_default_coreservice_t",
+          "kind": "function",
+          "return_type": "uvm_visitor#(uvm_component)",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "base/uvm_coreservice.svh",
+            "start_line": 213,
+            "end_line": 213
+          },
+          "impl": {
+            "file": "base/uvm_coreservice.svh",
+            "start_line": 213,
+            "end_line": 219,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": true,
+          "overridden_from": "uvm_coreservice_t",
+          "root_ancestor": "uvm_coreservice_t",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_coreservice_t",
+            "file": "base/uvm_coreservice.svh",
+            "line": 86
           }
         }
       }
@@ -19144,15 +19670,19 @@ window.UVM_SOURCE_DATABASE = {
       "name": "uvm_factory",
       "file": "base/uvm_factory.svh",
       "start_line": 75,
-      "end_line": 843,
+      "end_line": 320,
       "is_virtual": true,
       "parameters_raw": null,
       "extends_raw": null,
       "extends_base": null,
       "parent": null,
       "ancestors": [],
-      "children": [],
-      "descendants": [],
+      "children": [
+        "uvm_default_factory"
+      ],
+      "descendants": [
+        "uvm_default_factory"
+      ],
       "depth": 0,
       "is_deprecated": false,
       "doc": {
@@ -19231,30 +19761,1397 @@ window.UVM_SOURCE_DATABASE = {
           "overridden_from": null,
           "root_ancestor": null,
           "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 338,
+              "impl_line": 884
+            }
+          ]
+        },
+        "set_inst_override_by_type": {
+          "name": "set_inst_override_by_type",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 125,
+            "end_line": 128
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "original_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper original_type,)",
+          "doc": {
+            "title": "Type & Instance Overrides",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 345,
+              "impl_line": 1094
+            }
+          ]
+        },
+        "set_inst_override_by_name": {
+          "name": "set_inst_override_by_name",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 157,
+            "end_line": 160
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "original_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string original_type_name,)",
+          "doc": {
+            "title": "set_inst_override_by_name",
+            "summary": "Configures the factory to create an object of the override's type whenever a request is made to create an object of the original type using a context that matches ~full_inst_path~. The original type is typically a super class of the override type.",
+            "full_text": "Configures the factory to create an object of the override's type whenever\na request is made to create an object of the original type using a context\nthat matches ~full_inst_path~. The original type is typically a super class\nof the override type.\n\nWhen overriding by type, the ~original_type~ and ~override_type~ are\nhandles to the types' proxy objects. Preregistration is not required.\n\nWhen overriding by name, the ~original_type_name~ typically refers to a\npreregistered type in the factory. It may, however, be any arbitrary\nstring. Future calls to any of the ~create_*~ methods with the same string\nand matching instance path will produce the type represented by\n~override_type_name~, which must be preregistered with the factory.\n\nThe ~full_inst_path~ is matched against the concatenation of\n{~parent_inst_path~, \".\", ~name~} provided in future create requests. The\n~full_inst_path~ may include wildcards (* and ?) such that a single\ninstance override can be applied in multiple contexts. A ~full_inst_path~\nof \"*\" is effectively a type override, as it will match all contexts.\n\nWhen the factory processes instance overrides, the instance queue is\nprocessed in order of override registrations, and the first override\nmatch prevails. Thus, more specific overrides should be registered"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 355,
+              "impl_line": 1127
+            }
+          ]
+        },
+        "set_type_override_by_type": {
+          "name": "set_type_override_by_type",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 165,
+            "end_line": 168
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "original_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper original_type,)",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 363,
+              "impl_line": 931
+            }
+          ]
+        },
+        "set_type_override_by_name": {
+          "name": "set_type_override_by_name",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 189,
+            "end_line": 192
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "original_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string original_type_name,)",
+          "doc": {
+            "title": "set_type_override_by_name",
+            "summary": "Configures the factory to create an object of the override's type whenever a request is made to create an object of the original type, provided no instance override applies. The original type is typically a super class of the override type.",
+            "full_text": "Configures the factory to create an object of the override's type whenever\na request is made to create an object of the original type, provided no\ninstance override applies. The original type is typically a super class of\nthe override type.\n\nWhen overriding by type, the ~original_type~ and ~override_type~ are\nhandles to the types' proxy objects. Preregistration is not required.\n\nWhen overriding by name, the ~original_type_name~ typically refers to a\npreregistered type in the factory. It may, however, be any arbitrary\nstring. Future calls to any of the ~create_*~ methods with the same string\nand matching instance path will produce the type represented by\n~override_type_name~, which must be preregistered with the factory.\n\nWhen ~replace~ is 1, a previous override on ~original_type_name~ is"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 374,
+              "impl_line": 998
+            }
+          ]
+        },
+        "create_object_by_type": {
+          "name": "create_object_by_type",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "uvm_object",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 199,
+            "end_line": 202
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "requested_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper requested_type,)",
+          "doc": {
+            "title": "Creation",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 384,
+              "impl_line": 1227
+            }
+          ]
+        },
+        "create_component_by_type": {
+          "name": "create_component_by_type",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "uvm_component",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 206,
+            "end_line": 210
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "requested_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper requested_type,)",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 391,
+              "impl_line": 1288
+            }
+          ]
+        },
+        "create_object_by_name": {
+          "name": "create_object_by_name",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "uvm_object",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 214,
+            "end_line": 217
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 399,
+              "impl_line": 1191
+            }
+          ]
+        },
+        "create_component_by_name": {
+          "name": "create_component_by_name",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "uvm_component",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 255,
+            "end_line": 259
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "create_component_by_name",
+            "summary": "Creates and returns a component or object of the requested type, which may be specified by type or by name. A requested component must be derived from the <uvm_component> base class, and a requested object must be derived from the <uvm_object> base class.",
+            "full_text": "Creates and returns a component or object of the requested type, which may\nbe specified by type or by name. A requested component must be derived\nfrom the <uvm_component> base class, and a requested object must be derived\nfrom the <uvm_object> base class.\n\nWhen requesting by type, the ~requested_type~ is a handle to the type's\nproxy object. Preregistration is not required.\n\nWhen requesting by name, the ~request_type_name~ is a string representing\nthe requested type, which must have been registered with the factory with\nthat name prior to the request. If the factory does not recognize the\n~requested_type_name~, an error is produced and a ~null~ handle returned.\n\nIf the optional ~parent_inst_path~ is provided, then the concatenation,\n{~parent_inst_path~, \".\",~name~}, forms an instance path (context) that\nis used to search for an instance override. The ~parent_inst_path~ is\ntypically obtained by calling the <uvm_component::get_full_name> on the\nparent.\n\nIf no instance override is found, the factory then searches for a type\noverride.\n\nOnce the final override is found, an instance of that component or object\nis returned in place of the requested type. New components will have the\ngiven ~name~ and ~parent~. New objects will have the given ~name~, if\nprovided.\n\nOverride searches are recursively applied, with instance overrides taking\nprecedence over type overrides. If ~foo~ overrides ~bar~, and ~xyz~\noverrides ~foo~, then a request for ~bar~ will produce ~xyz~. Recursive\nloops will result in an error, in which case the type returned will be"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 409,
+              "impl_line": 1252
+            }
+          ]
+        },
+        "debug_create_by_type": {
+          "name": "debug_create_by_type",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 265,
+            "end_line": 268
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "requested_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper requested_type,)",
+          "doc": {
+            "title": "Debug",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 419,
+              "impl_line": 1663
+            }
+          ]
+        },
+        "debug_create_by_name": {
+          "name": "debug_create_by_name",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 278,
+            "end_line": 281
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "debug_create_by_name",
+            "summary": "These methods perform the same search algorithm as the ~create_*~ methods, but they do not create new objects. Instead, they provide detailed information about what type of object it would return, listing each override that was applied to arrive at the result. Interpretation of the",
+            "full_text": "These methods perform the same search algorithm as the ~create_*~ methods,\nbut they do not create new objects. Instead, they provide detailed\ninformation about what type of object it would return, listing each\noverride that was applied to arrive at the result. Interpretation of the"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 428,
+              "impl_line": 1653
+            }
+          ]
+        },
+        "find_override_by_type": {
+          "name": "find_override_by_type",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "uvm_object_wrapper",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 286,
+            "end_line": 288
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "requested_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper requested_type,)",
+          "doc": {
+            "title": "find_override_by_type",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 436,
+              "impl_line": 1424
+            }
+          ]
+        },
+        "find_override_by_name": {
+          "name": "find_override_by_name",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "uvm_object_wrapper",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 297,
+            "end_line": 299
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "find_override_by_name",
+            "summary": "These methods return the proxy to the object that would be created given the arguments. The ~full_inst_path~ is typically derived from the parent's instance path and the leaf name of the object to be created, i.e. { parent.get_full_name(), \".\", name }.",
+            "full_text": "These methods return the proxy to the object that would be created given\nthe arguments. The ~full_inst_path~ is typically derived from the parent's\ninstance path and the leaf name of the object to be created, i.e.\n{ parent.get_full_name(), \".\", name }."
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 445,
+              "impl_line": 1328
+            }
+          ]
         },
         "find_wrapper_by_name": {
           "name": "find_wrapper_by_name",
           "class": "uvm_factory",
           "kind": "function",
           "return_type": "uvm_object_wrapper",
-          "modifiers": [],
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
           "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
+          "is_virtual": true,
+          "is_pure_virtual": true,
           "is_static": false,
           "is_extern": false,
-          "is_inline": true,
+          "is_inline": false,
           "decl": {
             "file": "base/uvm_factory.svh",
-            "start_line": 306,
+            "start_line": 305,
             "end_line": 306
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string type_name)",
+          "doc": {
+            "title": "find_wrapper_by_name",
+            "summary": "This method returns the <uvm_object_wrapper> associated with a given ~type_name~.",
+            "full_text": "This method returns the <uvm_object_wrapper> associated with a given\n~type_name~."
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 449,
+              "impl_line": 1314
+            }
+          ]
+        },
+        "print": {
+          "name": "print",
+          "class": "uvm_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "pure",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": true,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 319,
+            "end_line": 319
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "int",
+              "name": "all_types",
+              "default": "1"
+            }
+          ],
+          "parameters_raw": "(int all_types=1)",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_default_factory",
+              "file": "base/uvm_factory.svh",
+              "line": 457,
+              "impl_line": 1521
+            }
+          ]
+        }
+      }
+    },
+    "uvm_default_factory": {
+      "name": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "start_line": 330,
+      "end_line": 494,
+      "is_virtual": false,
+      "parameters_raw": null,
+      "extends_raw": "uvm_factory",
+      "extends_base": "uvm_factory",
+      "parent": "uvm_factory",
+      "ancestors": [
+        "uvm_factory"
+      ],
+      "children": [],
+      "descendants": [],
+      "depth": 1,
+      "is_deprecated": false,
+      "doc": {
+        "title": "uvm_default_factory",
+        "summary": "Default implementation of the UVM factory.",
+        "full_text": "Default implementation of the UVM factory."
+      },
+      "methods": {
+        "register": {
+          "name": "register",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 338,
+            "end_line": 338
           },
           "impl": {
             "file": "base/uvm_factory.svh",
-            "start_line": 306,
-            "end_line": 820,
-            "is_inline": true,
+            "start_line": 884,
+            "end_line": 925,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "obj",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper obj)",
+          "doc": {
+            "title": "",
+            "summary": "IMPLEMENTATION",
+            "full_text": "IMPLEMENTATION\n\nregister"
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 118
+          }
+        },
+        "set_inst_override_by_type": {
+          "name": "set_inst_override_by_type",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 345,
+            "end_line": 348
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1094,
+            "end_line": 1121,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "original_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper original_type,)",
+          "doc": {
+            "title": "Type & Instance Overrides",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 125
+          }
+        },
+        "set_inst_override_by_name": {
+          "name": "set_inst_override_by_name",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 355,
+            "end_line": 358
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1127,
+            "end_line": 1180,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "original_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string original_type_name,)",
+          "doc": {
+            "title": "set_inst_override_by_name",
+            "summary": "Configures the factory to create an object of the override's type whenever",
+            "full_text": "Configures the factory to create an object of the override's type whenever"
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 157
+          }
+        },
+        "set_type_override_by_type": {
+          "name": "set_type_override_by_type",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 363,
+            "end_line": 366
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 931,
+            "end_line": 992,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "original_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper original_type,)",
+          "doc": {
+            "title": "",
+            "summary": "set_type_override_by_type",
+            "full_text": "set_type_override_by_type"
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 165
+          }
+        },
+        "set_type_override_by_name": {
+          "name": "set_type_override_by_name",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 374,
+            "end_line": 377
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 998,
+            "end_line": 1058,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "original_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string original_type_name,)",
+          "doc": {
+            "title": "set_type_override_by_name",
+            "summary": "Configures the factory to create an object of the override's type whenever a request is made to create an object of the original type, provided no",
+            "full_text": "Configures the factory to create an object of the override's type whenever\na request is made to create an object of the original type, provided no"
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 189
+          }
+        },
+        "create_object_by_type": {
+          "name": "create_object_by_type",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "uvm_object",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 384,
+            "end_line": 387
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1227,
+            "end_line": 1246,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "requested_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper requested_type,)",
+          "doc": {
+            "title": "Creation",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 199
+          }
+        },
+        "create_component_by_type": {
+          "name": "create_component_by_type",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "uvm_component",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 391,
+            "end_line": 395
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1288,
+            "end_line": 1307,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "requested_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper requested_type,)",
+          "doc": {
+            "title": "",
+            "summary": "create_component_by_type",
+            "full_text": "create_component_by_type"
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 206
+          }
+        },
+        "create_object_by_name": {
+          "name": "create_object_by_name",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "uvm_object",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 399,
+            "end_line": 402
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1191,
+            "end_line": 1221,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "",
+            "summary": "create_object_by_name",
+            "full_text": "create_object_by_name"
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 214
+          }
+        },
+        "create_component_by_name": {
+          "name": "create_component_by_name",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "uvm_component",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 409,
+            "end_line": 413
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1252,
+            "end_line": 1282,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "create_component_by_name",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 255
+          }
+        },
+        "debug_create_by_type": {
+          "name": "debug_create_by_type",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 419,
+            "end_line": 422
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1663,
+            "end_line": 1667,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "requested_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper requested_type,)",
+          "doc": {
+            "title": "Debug",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 265
+          }
+        },
+        "debug_create_by_name": {
+          "name": "debug_create_by_name",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 428,
+            "end_line": 431
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1653,
+            "end_line": 1657,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "debug_create_by_name",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 278
+          }
+        },
+        "find_override_by_type": {
+          "name": "find_override_by_type",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "uvm_object_wrapper",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 436,
+            "end_line": 438
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1424,
+            "end_line": 1515,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "requested_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper requested_type,)",
+          "doc": {
+            "title": "find_override_by_type",
+            "summary": "",
+            "full_text": ""
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 286
+          }
+        },
+        "find_override_by_name": {
+          "name": "find_override_by_name",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "uvm_object_wrapper",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 445,
+            "end_line": 447
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1328,
+            "end_line": 1418,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "find_override_by_name",
+            "summary": "These methods return the proxy to the object that would be created given the arguments.",
+            "full_text": "These methods return the proxy to the object that would be created given\nthe arguments."
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 297
+          }
+        },
+        "find_wrapper_by_name": {
+          "name": "find_wrapper_by_name",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "uvm_object_wrapper",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 449,
+            "end_line": 450
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1314,
+            "end_line": 1322,
+            "is_inline": false,
             "calls_super": false
           },
           "parameters": [
@@ -19266,6 +21163,203 @@ window.UVM_SOURCE_DATABASE = {
             }
           ],
           "parameters_raw": "(string type_name)",
+          "doc": {
+            "title": "",
+            "summary": "find_wrapper_by_name",
+            "full_text": "find_wrapper_by_name"
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 305
+          }
+        },
+        "print": {
+          "name": "print",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 457,
+            "end_line": 457
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1521,
+            "end_line": 1647,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "int",
+              "name": "all_types",
+              "default": "1"
+            }
+          ],
+          "parameters_raw": "(int all_types=1)",
+          "doc": {
+            "title": "",
+            "summary": "print",
+            "full_text": "print"
+          },
+          "overrides": true,
+          "overridden_from": "uvm_factory",
+          "root_ancestor": "uvm_factory",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_factory",
+            "file": "base/uvm_factory.svh",
+            "line": 319
+          }
+        },
+        "m_debug_create": {
+          "name": "m_debug_create",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 463,
+            "end_line": 467
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1673,
+            "end_line": 1716,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "",
+            "summary": "m_debug_create",
+            "full_text": "m_debug_create"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_debug_display": {
+          "name": "m_debug_display",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 469,
+            "end_line": 472
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1722,
+            "end_line": 1787,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "requested_type_name",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string requested_type_name,)",
+          "doc": {
+            "title": "",
+            "summary": "m_debug_display",
+            "full_text": "m_debug_display"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_has_wildcard": {
+          "name": "m_has_wildcard",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "bit",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 487,
+            "end_line": 487
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1182,
+            "end_line": 1186,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "nm",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(string nm)",
           "doc": null,
           "overrides": false,
           "overridden_from": null,
@@ -19273,9 +21367,133 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "check_inst_override_exists": {
+          "name": "check_inst_override_exists",
+          "class": "uvm_default_factory",
+          "kind": "function",
+          "return_type": "bit",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 489,
+            "end_line": 492
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 1063,
+            "end_line": 1089,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_object_wrapper",
+              "name": "original_type",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_object_wrapper original_type,)",
+          "doc": {
+            "title": "",
+            "summary": "check_inst_override_exists",
+            "full_text": "check_inst_override_exists"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        }
+      }
+    },
+    "uvm_object_wrapper": {
+      "name": "uvm_object_wrapper",
+      "file": "base/uvm_factory.svh",
+      "start_line": 810,
+      "end_line": 843,
+      "is_virtual": true,
+      "parameters_raw": null,
+      "extends_raw": null,
+      "extends_base": null,
+      "parent": null,
+      "ancestors": [],
+      "children": [
+        "uvm_component_registry",
+        "uvm_object_registry"
+      ],
+      "descendants": [
+        "uvm_component_registry",
+        "uvm_object_registry"
+      ],
+      "depth": 0,
+      "is_deprecated": false,
+      "doc": {
+        "title": "Usage",
+        "summary": "Using the factory involves three basic operations",
+        "full_text": "Using the factory involves three basic operations\n\n1 - Registering objects and components types with the factory\n2 - Designing components to use the factory to create objects or components\n3 - Configuring the factory with type and instance overrides, both within and\n    outside components\n\nWe'll briefly cover each of these steps here. More reference information can\nbe found at <Utility Macros>, <uvm_component_registry #(T,Tname)>,\n<uvm_object_registry #(T,Tname)>, <uvm_component>.\n\n1 -- Registering objects and component types with the factory:\n\nWhen defining <uvm_object> and <uvm_component>-based classes, simply invoke\nthe appropriate macro. Use of macros are required to ensure portability\nacross different vendors' simulators.\n\nObjects that are not parameterized are declared as\n\n|  class packet extends uvm_object;\n|    `uvm_object_utils(packet)\n|  endclass\n|\n|  class packetD extends packet;\n|    `uvm_object_utils(packetD)\n|  endclass\n\nObjects that are parameterized are declared as\n\n|  class packet #(type T=int, int WIDTH=32) extends uvm_object;\n|    `uvm_object_param_utils(packet #(T,WIDTH))\n|   endclass\n\nComponents that are not parameterized are declared as\n\n|  class comp extends uvm_component;\n|    `uvm_component_utils(comp)\n|  endclass\n\nComponents that are parameterized are declared as\n\n|  class comp #(type T=int, int WIDTH=32) extends uvm_component;\n|    `uvm_component_param_utils(comp #(T,WIDTH))\n|  endclass\n\nThe `uvm_*_utils macros for simple, non-parameterized classes will register\nthe type with the factory and define the get_type, get_type_name, and create\nvirtual methods inherited from <uvm_object>. It will also define a static\ntype_name variable in the class, which will allow you to determine the type\nwithout having to allocate an instance.\n\nThe `uvm_*_param_utils macros for parameterized classes differ from\n`uvm_*_utils classes in the following ways:\n\n- The ~get_type_name~ method and static type_name variable are not defined. You\n  will need to implement these manually.\n\n- A type name is not associated with the type when registering with the\n  factory, so the factory's *_by_name operations will not work with\n  parameterized classes.\n\n- The factory's <print>, <debug_create_by_type>, and <debug_create_by_name>\n  methods, which depend on type names to convey information, will list\n  parameterized types as '<unknown>'.\n\nIt is worth noting that environments that exclusively use the type-based\nfactory methods (*_by_type) do not require type registration. The factory's\ntype-based methods will register the types involved \"on the fly,\" when first\nused. However, registering with the `uvm_*_utils macros enables name-based\nfactory usage and implements some useful utility functions.\n\n\n2 -- Designing components that defer creation to the factory:\n\nHaving registered your objects and components with the factory, you can now\nmake requests for new objects and components via the factory. Using the factory\ninstead of allocating them directly (via new) allows different objects to be\nsubstituted for the original without modifying the requesting class. The\nfollowing code defines a driver class that is parameterized.\n\n|  class driverB #(type T=uvm_object) extends uvm_driver;\n|\n|    // parameterized classes must use the _param_utils version\n|    `uvm_component_param_utils(driverB #(T))\n|\n|    // our packet type; this can be overridden via the factory\n|    T pkt;\n|\n|    // standard component constructor\n|    function new(string name, uvm_component parent=null);\n|      super.new(name,parent);\n|    endfunction\n|\n|    // get_type_name not implemented by macro for parameterized classes\n|    const static string type_name = {\"driverB #(\",T::type_name,\")\"};\n|    virtual function string get_type_name();\n|      return type_name;\n|    endfunction\n|\n|    // using the factory allows pkt overrides from outside the class\n|    virtual function void build_phase(uvm_phase phase);\n|      pkt = packet::type_id::create(\"pkt\",this);\n|    endfunction\n|\n|    // print the packet so we can confirm its type when printing\n|    virtual function void do_print(uvm_printer printer);\n|      printer.print_object(\"pkt\",pkt);\n|    endfunction\n|\n|  endclass\n\nFor purposes of illustrating type and instance overrides, we define two\nsubtypes of the ~driverB~ class. The subtypes are also parameterized, so\nwe must again provide an implementation for <uvm_object::get_type_name>,\nwhich we recommend writing in terms of a static string constant.\n\n|  class driverD1 #(type T=uvm_object) extends driverB #(T);\n|\n|    `uvm_component_param_utils(driverD1 #(T))\n|\n|    function new(string name, uvm_component parent=null);\n|      super.new(name,parent);\n|    endfunction\n|\n|    const static string type_name = {\"driverD1 #(\",T::type_name,\")\"};\n|    virtual function string get_type_name();\n|      ...return type_name;\n|    endfunction\n|\n|  endclass\n|\n|  class driverD2 #(type T=uvm_object) extends driverB #(T);\n|\n|    `uvm_component_param_utils(driverD2 #(T))\n|\n|    function new(string name, uvm_component parent=null);\n|      super.new(name,parent);\n|    endfunction\n|\n|    const static string type_name = {\"driverD2 #(\",T::type_name,\")\"};\n|    virtual function string get_type_name();\n|      return type_name;\n|    endfunction\n|\n|  endclass\n|\n|  // typedef some specializations for convenience\n|  typedef driverB  #(packet) B_driver;   // the base driver\n|  typedef driverD1 #(packet) D1_driver;  // a derived driver\n|  typedef driverD2 #(packet) D2_driver;  // another derived driver\n\nNext, we'll define a agent component, which requires a utils macro for\nnon-parameterized types. Before creating the drivers using the factory, we\noverride ~driver0~'s packet type to be ~packetD~.\n\n|  class agent extends uvm_agent;\n|\n|    `uvm_component_utils(agent)\n|    ...\n|    B_driver driver0;\n|    B_driver driver1;\n|\n|    function new(string name, uvm_component parent=null);\n|      super.new(name,parent);\n|    endfunction\n|\n|    virtual function void build_phase(uvm_phase phase);\n|\n|      // override the packet type for driver0 and below\n|      packet::type_id::set_inst_override(packetD::get_type(),\"driver0.*\");\n|\n|      // create using the factory; actual driver types may be different\n|      driver0 = B_driver::type_id::create(\"driver0\",this);\n|      driver1 = B_driver::type_id::create(\"driver1\",this);\n|\n|    endfunction\n|\n|  endclass\n\nFinally we define an environment class, also not parameterized. Its ~build_phase~\nmethod shows three methods for setting an instance override on a grandchild\ncomponent with relative path name, ~agent1.driver1~, all equivalent.\n\n|  class env extends uvm_env;\n|\n|    `uvm_component_utils(env)\n|\n|    agent agent0;\n|    agent agent1;\n|\n|    function new(string name, uvm_component parent=null);\n|      super.new(name,parent);\n|    endfunction\n|\n|    virtual function void build_phase(uvm_phase phase);\n|\n|      // three methods to set an instance override for agent1.driver1\n|      // - via component convenience method...\n|      set_inst_override_by_type(\"agent1.driver1\",\n|                                B_driver::get_type(),\n|                                D2_driver::get_type());\n|\n|      // - via the component's proxy (same approach as create)...\n|      B_driver::type_id::set_inst_override(D2_driver::get_type(),\n|                                           \"agent1.driver1\",this);\n|\n|      // - via a direct call to a factory method...\n|      factory.set_inst_override_by_type(B_driver::get_type(),\n|                                        D2_driver::get_type(),\n|                                        {get_full_name(),\".agent1.driver1\"});\n|\n|      // create agents using the factory; actual agent types may be different\n|      agent0 = agent::type_id::create(\"agent0\",this);\n|      agent1 = agent::type_id::create(\"agent1\",this);\n|\n|    endfunction\n|\n|    // at end_of_elaboration, print topology and factory state to verify\n|    virtual function void end_of_elaboration_phase(uvm_phase phase);\n|      uvm_top.print_topology();\n|    endfunction\n|\n|    virtual task run_phase(uvm_phase phase);\n|      #100 global_stop_request();\n|    endfunction\n|\n|  endclass\n\n\n3 -- Configuring the factory with type and instance overrides:\n\nIn the previous step, we demonstrated setting instance overrides and creating\ncomponents using the factory within component classes. Here, we will\ndemonstrate setting overrides from outside components, as when initializing\nthe environment prior to running the test.\n\n|  module top;\n|\n|    env env0;\n|\n|    initial begin\n|\n|      // Being registered first, the following overrides take precedence\n|      // over any overrides made within env0's construction & build.\n|\n|      // Replace all base drivers with derived drivers...\n|      B_driver::type_id::set_type_override(D_driver::get_type());\n|\n|      // ...except for agent0.driver0, whose type remains a base driver.\n|      //     (Both methods below have the equivalent result.)\n|\n|      // - via the component's proxy (preferred)\n|      B_driver::type_id::set_inst_override(B_driver::get_type(),\n|                                           \"env0.agent0.driver0\");\n|\n|      // - via a direct call to a factory method\n|      factory.set_inst_override_by_type(B_driver::get_type(),\n|                                        B_driver::get_type(),\n|                                    {get_full_name(),\"env0.agent0.driver0\"});\n|\n|      // now, create the environment; our factory configuration will\n|      // govern what topology gets created\n|      env0 = new(\"env0\");\n|\n|      // run the test (will execute build phase)\n|      run_test();\n|\n|    end\n|\n|  endmodule\n\nWhen the above example is run, the resulting topology (displayed via a call to\n<uvm_root::print_topology> in env's <uvm_component::end_of_elaboration_phase> method)\nis similar to the following:\n\n| # UVM_INFO @ 0 [RNTST] Running test ...\n| # UVM_INFO @ 0 [UVMTOP] UVM testbench topology:\n| # Name                     Type                Size                Value\n| # env0                     env                 -                  env0@2\n| #   agent0                 agent               -                agent0@4\n| #     driver0              driverB #(packet)   -               driver0@8\n| #       pkt                packet              -                  pkt@21\n| #     driver1              driverD #(packet)   -              driver1@14\n| #       pkt                packet              -                  pkt@23\n| #   agent1                 agent               -                agent1@6\n| #     driver0              driverD #(packet)   -              driver0@24\n| #       pkt                packet              -                  pkt@37\n| #     driver1              driverD2 #(packet)  -              driver1@30\n| #       pkt                packet              -                  pkt@39\n\n\n\n\nCLASS: uvm_object_wrapper\n\nThe uvm_object_wrapper provides an abstract interface for creating object and\ncomponent proxies. Instances of these lightweight proxies, representing every\n<uvm_object>-based and <uvm_component>-based object available in the test\nenvironment, are registered with the <uvm_factory>. When the factory is\ncalled upon to create an object or component, it finds and delegates the\nrequest to the appropriate proxy."
+      },
+      "methods": {
+        "create_object": {
+          "name": "create_object",
+          "class": "uvm_object_wrapper",
+          "kind": "function",
+          "return_type": "uvm_object",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 818,
+            "end_line": 818
+          },
+          "impl": {
+            "file": "base/uvm_factory.svh",
+            "start_line": 818,
+            "end_line": 820,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "name",
+              "default": "\"\""
+            }
+          ],
+          "parameters_raw": "(string name=\"\")",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_object_registry",
+              "file": "base/uvm_registry.svh",
+              "line": 200,
+              "impl_line": 200
+            }
+          ]
+        },
         "create_component": {
           "name": "create_component",
-          "class": "uvm_factory",
+          "class": "uvm_object_wrapper",
           "kind": "function",
           "return_type": "uvm_component",
           "modifiers": [
@@ -19317,11 +21535,18 @@ window.UVM_SOURCE_DATABASE = {
           "overridden_from": null,
           "root_ancestor": null,
           "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overridden_by": [
+            {
+              "class": "uvm_component_registry",
+              "file": "base/uvm_registry.svh",
+              "line": 63,
+              "impl_line": 63
+            }
+          ]
         },
         "get_type_name": {
           "name": "get_type_name",
-          "class": "uvm_factory",
+          "class": "uvm_object_wrapper",
           "kind": "function",
           "return_type": "string",
           "modifiers": [
@@ -19347,7 +21572,20 @@ window.UVM_SOURCE_DATABASE = {
           "overridden_from": null,
           "root_ancestor": null,
           "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overridden_by": [
+            {
+              "class": "uvm_component_registry",
+              "file": "base/uvm_registry.svh",
+              "line": 78,
+              "impl_line": 78
+            },
+            {
+              "class": "uvm_object_registry",
+              "file": "base/uvm_registry.svh",
+              "line": 220,
+              "impl_line": 220
+            }
+          ]
         }
       }
     },
@@ -23424,6 +25662,12 @@ window.UVM_SOURCE_DATABASE = {
               "impl_line": 448
             },
             {
+              "class": "uvm_component",
+              "file": "base/uvm_component.svh",
+              "line": 1667,
+              "impl_line": 1667
+            },
+            {
               "class": "uvm_event_base",
               "file": "base/uvm_event.svh",
               "line": 210,
@@ -23442,12 +25686,6 @@ window.UVM_SOURCE_DATABASE = {
               "impl_line": 202
             },
             {
-              "class": "uvm_port_component",
-              "file": "base/uvm_port_base.svh",
-              "line": 120,
-              "impl_line": 120
-            },
-            {
               "class": "uvm_queue",
               "file": "base/uvm_queue.svh",
               "line": 182,
@@ -23458,12 +25696,6 @@ window.UVM_SOURCE_DATABASE = {
               "file": "base/uvm_report_server.svh",
               "line": 49,
               "impl_line": 49
-            },
-            {
-              "class": "uvm_root",
-              "file": "base/uvm_root.svh",
-              "line": 94,
-              "impl_line": 94
             },
             {
               "class": "uvm_pre_reset_phase",
@@ -23538,42 +25770,6 @@ window.UVM_SOURCE_DATABASE = {
               "impl_line": 552
             },
             {
-              "class": "uvm_agent",
-              "file": "comps/uvm_agent.svh",
-              "line": 119,
-              "impl_line": 119
-            },
-            {
-              "class": "uvm_algorithmic_comparator",
-              "file": "comps/uvm_algorithmic_comparator.svh",
-              "line": 122,
-              "impl_line": 122
-            },
-            {
-              "class": "uvm_driver",
-              "file": "comps/uvm_driver.svh",
-              "line": 83,
-              "impl_line": 83
-            },
-            {
-              "class": "uvm_env",
-              "file": "comps/uvm_env.svh",
-              "line": 47,
-              "impl_line": 47
-            },
-            {
-              "class": "uvm_in_order_comparator",
-              "file": "comps/uvm_in_order_comparator.svh",
-              "line": 129,
-              "impl_line": 129
-            },
-            {
-              "class": "uvm_monitor",
-              "file": "comps/uvm_monitor.svh",
-              "line": 48,
-              "impl_line": 48
-            },
-            {
               "class": "uvm_class_pair",
               "file": "comps/uvm_pair.svh",
               "line": 78,
@@ -23586,58 +25782,10 @@ window.UVM_SOURCE_DATABASE = {
               "impl_line": 144
             },
             {
-              "class": "uvm_push_driver",
-              "file": "comps/uvm_push_driver.svh",
-              "line": 91,
-              "impl_line": 91
-            },
-            {
-              "class": "uvm_random_stimulus",
-              "file": "comps/uvm_random_stimulus.svh",
-              "line": 127,
-              "impl_line": 127
-            },
-            {
-              "class": "uvm_scoreboard",
-              "file": "comps/uvm_scoreboard.svh",
-              "line": 50,
-              "impl_line": 50
-            },
-            {
-              "class": "uvm_test",
-              "file": "comps/uvm_test.svh",
-              "line": 76,
-              "impl_line": 76
-            },
-            {
-              "class": "uvm_reg_predictor",
-              "file": "reg/uvm_reg_predictor.svh",
-              "line": 117,
-              "impl_line": 117
-            },
-            {
               "class": "uvm_sequence_item",
               "file": "seq/uvm_sequence_item.svh",
               "line": 56,
               "impl_line": 56
-            },
-            {
-              "class": "uvm_sequencer",
-              "file": "seq/uvm_sequencer.svh",
-              "line": 59,
-              "impl_line": 176
-            },
-            {
-              "class": "uvm_tlm_fifo",
-              "file": "tlm1/uvm_tlm_fifos.svh",
-              "line": 68,
-              "impl_line": 68
-            },
-            {
-              "class": "uvm_tlm_req_rsp_channel",
-              "file": "tlm1/uvm_tlm_req_rsp.svh",
-              "line": 274,
-              "impl_line": 274
             }
           ]
         }
@@ -27036,6 +29184,147 @@ window.UVM_SOURCE_DATABASE = {
             "title": "",
             "summary": "get_packed_bits",
             "full_text": "get_packed_bits"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_bit": {
+          "name": "get_bit",
+          "class": "uvm_packer",
+          "kind": "function",
+          "return_type": "bit  unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_packer.svh",
+            "start_line": 382,
+            "end_line": 382
+          },
+          "impl": {
+            "file": "base/uvm_packer.svh",
+            "start_line": 603,
+            "end_line": 607,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "int unsigned",
+              "name": "index",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(int unsigned index)",
+          "doc": {
+            "title": "",
+            "summary": "get_bit",
+            "full_text": "get_bit"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_byte": {
+          "name": "get_byte",
+          "class": "uvm_packer",
+          "kind": "function",
+          "return_type": "byte unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_packer.svh",
+            "start_line": 383,
+            "end_line": 383
+          },
+          "impl": {
+            "file": "base/uvm_packer.svh",
+            "start_line": 613,
+            "end_line": 617,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "int unsigned",
+              "name": "index",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(int unsigned index)",
+          "doc": {
+            "title": "",
+            "summary": "get_byte",
+            "full_text": "get_byte"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_int": {
+          "name": "get_int",
+          "class": "uvm_packer",
+          "kind": "function",
+          "return_type": "int  unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "base/uvm_packer.svh",
+            "start_line": 384,
+            "end_line": 384
+          },
+          "impl": {
+            "file": "base/uvm_packer.svh",
+            "start_line": 623,
+            "end_line": 627,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "int unsigned",
+              "name": "index",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(int unsigned index)",
+          "doc": {
+            "title": "",
+            "summary": "get_int",
+            "full_text": "get_int"
           },
           "overrides": false,
           "overridden_from": null,
@@ -31681,14 +33970,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "resolve_bindings": {
@@ -33189,6 +35478,46 @@ window.UVM_SOURCE_DATABASE = {
           },
           "parameters": [],
           "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_if": {
+          "name": "get_if",
+          "class": "uvm_port_base",
+          "kind": "function",
+          "return_type": "uvm_port_base #(IF)",
+          "modifiers": [],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "base/uvm_port_base.svh",
+            "start_line": 772,
+            "end_line": 772
+          },
+          "impl": {
+            "file": "base/uvm_port_base.svh",
+            "start_line": 772,
+            "end_line": 789,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "int",
+              "name": "index",
+              "default": "0"
+            }
+          ],
+          "parameters_raw": "(int index=0)",
           "doc": null,
           "overrides": false,
           "overridden_from": null,
@@ -38115,11 +40444,16 @@ window.UVM_SOURCE_DATABASE = {
             "summary": "Creates a component of type T having the provided ~name~ and ~parent~. This is an override of the method in <uvm_object_wrapper>. It is called by the factory after determining the type of object to create. You should not call this method directly. Call <create> instead.",
             "full_text": "Creates a component of type T having the provided ~name~ and ~parent~.\nThis is an override of the method in <uvm_object_wrapper>. It is\ncalled by the factory after determining the type of object to create.\nYou should not call this method directly. Call <create> instead."
           },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
+          "overrides": true,
+          "overridden_from": "uvm_object_wrapper",
+          "root_ancestor": "uvm_object_wrapper",
           "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_object_wrapper",
+            "file": "base/uvm_factory.svh",
+            "line": 829
+          }
         },
         "get_type_name": {
           "name": "get_type_name",
@@ -38150,11 +40484,16 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": null,
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overrides": true,
+          "overridden_from": "uvm_object_wrapper",
+          "root_ancestor": "uvm_object_wrapper",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_object_wrapper",
+            "file": "base/uvm_factory.svh",
+            "line": 841
+          }
         },
         "get": {
           "name": "get",
@@ -38398,11 +40737,16 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string name=\"\")",
           "doc": null,
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
+          "overrides": true,
+          "overridden_from": "uvm_object_wrapper",
+          "root_ancestor": "uvm_object_wrapper",
           "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_object_wrapper",
+            "file": "base/uvm_factory.svh",
+            "line": 818
+          }
         },
         "get_type_name": {
           "name": "get_type_name",
@@ -38433,11 +40777,16 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": null,
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overrides": true,
+          "overridden_from": "uvm_object_wrapper",
+          "root_ancestor": "uvm_object_wrapper",
+          "is_override_of_pure_virtual": true,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_object_wrapper",
+            "file": "base/uvm_factory.svh",
+            "line": 841
+          }
         },
         "get": {
           "name": "get",
@@ -49814,6 +52163,41 @@ window.UVM_SOURCE_DATABASE = {
         "full_text": "Parameterized resource.  Provides essential access methods to read\nfrom and write to the resource database."
       },
       "methods": {
+        "m_get_converter": {
+          "name": "m_get_converter",
+          "class": "uvm_resource",
+          "kind": "function",
+          "return_type": "m_uvm_resource_converter#(T)",
+          "modifiers": [
+            "static"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": true,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "base/uvm_resource.svh",
+            "start_line": 1390,
+            "end_line": 1390
+          },
+          "impl": {
+            "file": "base/uvm_resource.svh",
+            "start_line": 1390,
+            "end_line": 1393,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "m_set_converter": {
           "name": "m_set_converter",
           "class": "uvm_resource",
@@ -51815,14 +54199,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "run_test": {
@@ -52243,7 +54627,7 @@ window.UVM_SOURCE_DATABASE = {
           "ancestor_decl": {
             "class": "uvm_component",
             "file": "base/uvm_component.svh",
-            "line": 1822
+            "line": 1640
           }
         },
         "build_phase": {
@@ -60401,14 +62785,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "get_is_active": {
@@ -60561,14 +62945,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "connect_phase": {
@@ -60767,14 +63151,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         }
       }
@@ -60886,14 +63270,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         }
       }
@@ -61024,7 +63408,7 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [
@@ -61042,9 +63426,9 @@ window.UVM_SOURCE_DATABASE = {
             }
           ],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "connect_phase": {
@@ -61178,7 +63562,7 @@ window.UVM_SOURCE_DATABASE = {
           "ancestor_decl": {
             "class": "uvm_component",
             "file": "base/uvm_component.svh",
-            "line": 2041
+            "line": 1646
           }
         }
       }
@@ -61530,14 +63914,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         }
       }
@@ -62585,14 +64969,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         }
       }
@@ -62752,14 +65136,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         }
       }
@@ -62871,14 +65255,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         }
       }
@@ -63106,14 +65490,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         }
       }
@@ -68368,6 +70752,123 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_size": {
+          "name": "get_size",
+          "class": "uvm_mem",
+          "kind": "function",
+          "return_type": "longint unsigned",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_mem.svh",
+            "start_line": 243,
+            "end_line": 243
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_n_bytes": {
+          "name": "get_n_bytes",
+          "class": "uvm_mem",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_mem.svh",
+            "start_line": 250,
+            "end_line": 250
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_n_bits": {
+          "name": "get_n_bits",
+          "class": "uvm_mem",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_mem.svh",
+            "start_line": 257,
+            "end_line": 257
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_max_size": {
+          "name": "get_max_size",
+          "class": "uvm_mem",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "static"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": true,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_mem.svh",
+            "start_line": 264,
+            "end_line": 264
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "get_virtual_registers": {
           "name": "get_virtual_registers",
           "class": "uvm_mem",
@@ -70026,6 +72527,146 @@ window.UVM_SOURCE_DATABASE = {
         "full_text": "Allocated memory region descriptor\n\nEach instance of this class describes an allocated memory region.\nInstances of this class are created only by\nthe memory manager, and returned by the\n<uvm_mem_mam::reserve_region()> and <uvm_mem_mam::request_region()>\nmethods."
       },
       "methods": {
+        "get_start_offset": {
+          "name": "get_start_offset",
+          "class": "uvm_mem_region",
+          "kind": "function",
+          "return_type": "bit [63:0]",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_mem_mam.svh",
+            "start_line": 304,
+            "end_line": 304
+          },
+          "impl": {
+            "file": "reg/uvm_mem_mam.svh",
+            "start_line": 612,
+            "end_line": 614,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_end_offset": {
+          "name": "get_end_offset",
+          "class": "uvm_mem_region",
+          "kind": "function",
+          "return_type": "bit [63:0]",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_mem_mam.svh",
+            "start_line": 314,
+            "end_line": 314
+          },
+          "impl": {
+            "file": "reg/uvm_mem_mam.svh",
+            "start_line": 617,
+            "end_line": 619,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_len": {
+          "name": "get_len",
+          "class": "uvm_mem_region",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_mem_mam.svh",
+            "start_line": 324,
+            "end_line": 324
+          },
+          "impl": {
+            "file": "reg/uvm_mem_mam.svh",
+            "start_line": 622,
+            "end_line": 624,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_n_bytes": {
+          "name": "get_n_bytes",
+          "class": "uvm_mem_region",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_mem_mam.svh",
+            "start_line": 336,
+            "end_line": 336
+          },
+          "impl": {
+            "file": "reg/uvm_mem_mam.svh",
+            "start_line": 627,
+            "end_line": 629,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "release_region": {
           "name": "release_region",
           "class": "uvm_mem_region",
@@ -70966,6 +73607,96 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_n_bits": {
+          "name": "get_n_bits",
+          "class": "uvm_reg",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg.svh",
+            "start_line": 220,
+            "end_line": 220
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_n_bytes": {
+          "name": "get_n_bytes",
+          "class": "uvm_reg",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg.svh",
+            "start_line": 228,
+            "end_line": 228
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_max_size": {
+          "name": "get_max_size",
+          "class": "uvm_reg",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "static"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": true,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg.svh",
+            "start_line": 235,
+            "end_line": 235
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "get_fields": {
           "name": "get_fields",
           "class": "uvm_reg",
@@ -71378,6 +74109,47 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_reset": {
+          "name": "get_reset",
+          "class": "uvm_reg",
+          "kind": "function",
+          "return_type": "uvm_reg_data_t",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg.svh",
+            "start_line": 433,
+            "end_line": 434
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "kind",
+              "default": "\"HARD\""
+            }
+          ],
+          "parameters_raw": "(string kind = \"HARD\")",
+          "doc": {
+            "title": "get_reset",
+            "summary": "Get the specified reset value for this register",
+            "full_text": "Get the specified reset value for this register\n\nReturn the reset value for this register\nfor the specified reset ~kind~."
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "has_reset": {
           "name": "has_reset",
           "class": "uvm_reg",
@@ -71412,6 +74184,47 @@ window.UVM_SOURCE_DATABASE = {
             "title": "has_reset",
             "summary": "Check if any field in the register has a reset value specified for the specified reset ~kind~. If ~delete~ is TRUE, removes the reset value, if any.",
             "full_text": "Check if any field in the register has a reset value specified\nfor the specified reset ~kind~.\nIf ~delete~ is TRUE, removes the reset value, if any."
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "set_reset": {
+          "name": "set_reset",
+          "class": "uvm_reg",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg.svh",
+            "start_line": 454,
+            "end_line": 456
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_reg_data_t",
+              "name": "value",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_reg_data_t value,)",
+          "doc": {
+            "title": "set_reset",
+            "summary": "Specify or modify the reset value for this register",
+            "full_text": "Specify or modify the reset value for this register\n\nSpecify or modify the reset value for all the fields in the register\ncorresponding to the cause specified by ~kind~."
           },
           "overrides": false,
           "overridden_from": null,
@@ -71897,6 +74710,56 @@ window.UVM_SOURCE_DATABASE = {
           "root_ancestor": null,
           "is_override_of_pure_virtual": false,
           "overridden_by": []
+        },
+        "do_predict": {
+          "name": "do_predict",
+          "class": "uvm_reg",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg.svh",
+            "start_line": 679,
+            "end_line": 682
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_reg_item",
+              "name": "rw",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_reg_item      rw,)",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_reg_fifo",
+              "file": "reg/uvm_reg_fifo.svh",
+              "line": 226,
+              "impl_line": 226
+            },
+            {
+              "class": "uvm_reg_indirect_data",
+              "file": "reg/uvm_reg_indirect.svh",
+              "line": 114,
+              "impl_line": 114
+            }
+          ]
         },
         "set_frontdoor": {
           "name": "set_frontdoor",
@@ -77277,6 +80140,96 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_lsb_pos": {
+          "name": "get_lsb_pos",
+          "class": "uvm_reg_field",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg_field.svh",
+            "start_line": 162,
+            "end_line": 162
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_n_bits": {
+          "name": "get_n_bits",
+          "class": "uvm_reg_field",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg_field.svh",
+            "start_line": 169,
+            "end_line": 169
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_max_size": {
+          "name": "get_max_size",
+          "class": "uvm_reg_field",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "static"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": true,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg_field.svh",
+            "start_line": 175,
+            "end_line": 175
+          },
+          "impl": null,
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "set_access": {
           "name": "set_access",
           "class": "uvm_reg_field",
@@ -78359,6 +81312,43 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "do_predict": {
+          "name": "do_predict",
+          "class": "uvm_reg_field",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg_field.svh",
+            "start_line": 686,
+            "end_line": 689
+          },
+          "impl": null,
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_reg_item",
+              "name": "rw",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_reg_item rw,)",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "pre_randomize": {
           "name": "pre_randomize",
           "class": "uvm_reg_field",
@@ -78610,6 +81600,72 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "size": {
+          "name": "size",
+          "class": "uvm_reg_fifo",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "reg/uvm_reg_fifo.svh",
+            "start_line": 103,
+            "end_line": 103
+          },
+          "impl": {
+            "file": "reg/uvm_reg_fifo.svh",
+            "start_line": 103,
+            "end_line": 105,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "capacity": {
+          "name": "capacity",
+          "class": "uvm_reg_fifo",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "reg/uvm_reg_fifo.svh",
+            "start_line": 112,
+            "end_line": 112
+          },
+          "impl": {
+            "file": "reg/uvm_reg_fifo.svh",
+            "start_line": 112,
+            "end_line": 114,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "set": {
           "name": "set",
           "class": "uvm_reg_fifo",
@@ -78805,11 +81861,16 @@ window.UVM_SOURCE_DATABASE = {
             "summary": "Updates the abstract (mirror) FIFO based on <write()> and <read()> operations.  When auto-prediction is on, this method is called before each read, write, peek, or poke operation returns. When auto-prediction is off, this method is called by a <uvm_reg_predictor> upon receipt and conversion of an observed bus operation to this register.",
             "full_text": "Updates the abstract (mirror) FIFO based on <write()> and\n<read()> operations.  When auto-prediction is on, this method\nis called before each read, write, peek, or poke operation returns.\nWhen auto-prediction is off, this method is called by a\n<uvm_reg_predictor> upon receipt and conversion of an observed bus\noperation to this register.\n\nIf a write prediction, the observed\nwrite value is pushed to the abstract FIFO as long as it is\nnot full and the operation did not originate from an <update()>.\nIf a read prediction, the observed read value is compared\nwith the frontmost value in the abstract FIFO if <set_compare()>\nenabled comparison and the FIFO is not empty."
           },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
+          "overrides": true,
+          "overridden_from": "uvm_reg",
+          "root_ancestor": "uvm_reg",
           "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_reg",
+            "file": "reg/uvm_reg.svh",
+            "line": 679
+          }
         },
         "pre_write": {
           "name": "pre_write",
@@ -80096,11 +83157,16 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_reg_item      rw,)",
           "doc": null,
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
+          "overrides": true,
+          "overridden_from": "uvm_reg",
+          "root_ancestor": "uvm_reg",
           "is_override_of_pure_virtual": false,
-          "overridden_by": []
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_reg",
+            "file": "reg/uvm_reg.svh",
+            "line": 679
+          }
         },
         "get_local_map": {
           "name": "get_local_map",
@@ -81789,6 +84855,93 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_n_bytes": {
+          "name": "get_n_bytes",
+          "class": "uvm_reg_map",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg_map.svh",
+            "start_line": 375,
+            "end_line": 375
+          },
+          "impl": {
+            "file": "reg/uvm_reg_map.svh",
+            "start_line": 1143,
+            "end_line": 1147,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_hier_e",
+              "name": "hier",
+              "default": "UVM_HIER"
+            }
+          ],
+          "parameters_raw": "(uvm_hier_e hier=UVM_HIER)",
+          "doc": {
+            "title": "",
+            "summary": "get_n_bytes",
+            "full_text": "get_n_bytes"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_addr_unit_bytes": {
+          "name": "get_addr_unit_bytes",
+          "class": "uvm_reg_map",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg_map.svh",
+            "start_line": 384,
+            "end_line": 384
+          },
+          "impl": {
+            "file": "reg/uvm_reg_map.svh",
+            "start_line": 1152,
+            "end_line": 1154,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "get_addr_unit_bytes",
+            "full_text": "get_addr_unit_bytes"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "get_endian": {
           "name": "get_endian",
           "class": "uvm_reg_map",
@@ -82311,6 +85464,46 @@ window.UVM_SOURCE_DATABASE = {
             "title": "",
             "summary": "get_mem_map_info",
             "full_text": "get_mem_map_info"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_size": {
+          "name": "get_size",
+          "class": "uvm_reg_map",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_reg_map.svh",
+            "start_line": 488,
+            "end_line": 488
+          },
+          "impl": {
+            "file": "reg/uvm_reg_map.svh",
+            "start_line": 1342,
+            "end_line": 1370,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "get_size",
+            "full_text": "get_size"
           },
           "overrides": false,
           "overridden_from": null,
@@ -83357,14 +86550,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "pre_predict": {
@@ -85098,6 +88291,150 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_size": {
+          "name": "get_size",
+          "class": "uvm_vreg",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_vreg.svh",
+            "start_line": 316,
+            "end_line": 316
+          },
+          "impl": {
+            "file": "reg/uvm_vreg.svh",
+            "start_line": 1092,
+            "end_line": 1100,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_n_bytes": {
+          "name": "get_n_bytes",
+          "class": "uvm_vreg",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_vreg.svh",
+            "start_line": 327,
+            "end_line": 327
+          },
+          "impl": {
+            "file": "reg/uvm_vreg.svh",
+            "start_line": 1103,
+            "end_line": 1105,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_n_memlocs": {
+          "name": "get_n_memlocs",
+          "class": "uvm_vreg",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_vreg.svh",
+            "start_line": 334,
+            "end_line": 334
+          },
+          "impl": {
+            "file": "reg/uvm_vreg.svh",
+            "start_line": 1108,
+            "end_line": 1116,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_incr": {
+          "name": "get_incr",
+          "class": "uvm_vreg",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_vreg.svh",
+            "start_line": 341,
+            "end_line": 341
+          },
+          "impl": {
+            "file": "reg/uvm_vreg.svh",
+            "start_line": 1119,
+            "end_line": 1127,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "get_fields": {
           "name": "get_fields",
           "class": "uvm_vreg",
@@ -86596,6 +89933,78 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_lsb_pos_in_register": {
+          "name": "get_lsb_pos_in_register",
+          "class": "uvm_vreg_field",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_vreg_field.svh",
+            "start_line": 126,
+            "end_line": 126
+          },
+          "impl": {
+            "file": "reg/uvm_vreg_field.svh",
+            "start_line": 531,
+            "end_line": 533,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_n_bits": {
+          "name": "get_n_bits",
+          "class": "uvm_vreg_field",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "reg/uvm_vreg_field.svh",
+            "start_line": 132,
+            "end_line": 132
+          },
+          "impl": {
+            "file": "reg/uvm_vreg_field.svh",
+            "start_line": 536,
+            "end_line": 538,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "get_access": {
           "name": "get_access",
           "class": "uvm_vreg_field",
@@ -87719,7 +91128,7 @@ window.UVM_SOURCE_DATABASE = {
           "ancestor_decl": {
             "class": "uvm_sequencer_base",
             "file": "seq/uvm_sequencer_base.svh",
-            "line": 595
+            "line": 416
           }
         }
       }
@@ -90537,6 +93946,39 @@ window.UVM_SOURCE_DATABASE = {
         "full_text": "Title- Predefined Sequences\n\nThis section defines several sequences that ship with the UVM library.\n\n\nCLASS- uvm_random_sequence\n\nThis sequence randomly selects and executes a sequence from the sequencer's\nsequence library, excluding uvm_random_sequence itself, and\nuvm_exhaustive_sequence.\n\nThe uvm_random_sequence class is a built-in sequence that is preloaded into\nevery sequencer's sequence library with the name \"uvm_random_sequence\".\n\nThe number of selections and executions is determined by the count property\nof the sequencer (or virtual sequencer) on which uvm_random_sequence is\noperating. See <uvm_sequencer_base> for more information."
       },
       "methods": {
+        "get_count": {
+          "name": "get_count",
+          "class": "uvm_random_sequence",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "seq/uvm_sequence_builtin.svh",
+            "start_line": 67,
+            "end_line": 67
+          },
+          "impl": {
+            "file": "seq/uvm_sequence_builtin.svh",
+            "start_line": 67,
+            "end_line": 71,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "new": {
           "name": "new",
           "class": "uvm_random_sequence",
@@ -93143,6 +96585,53 @@ window.UVM_SOURCE_DATABASE = {
             "line": 56
           }
         },
+        "select_sequence": {
+          "name": "select_sequence",
+          "class": "uvm_sequence_library",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern",
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequence_library.svh",
+            "start_line": 243,
+            "end_line": 243
+          },
+          "impl": {
+            "file": "seq/uvm_sequence_library.svh",
+            "start_line": 478,
+            "end_line": 484,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "int unsigned",
+              "name": "max",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(int unsigned max)",
+          "doc": {
+            "title": "",
+            "summary": "select_sequence",
+            "full_text": "select_sequence"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "add_typewide_sequence": {
           "name": "add_typewide_sequence",
           "class": "uvm_sequence_library",
@@ -94112,14 +97601,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "get_next_item": {
@@ -94524,7 +98013,7 @@ window.UVM_SOURCE_DATABASE = {
           "ancestor_decl": {
             "class": "uvm_sequencer_base",
             "file": "seq/uvm_sequencer_base.svh",
-            "line": 595
+            "line": 416
           }
         }
       }
@@ -96490,17 +99979,19 @@ window.UVM_SOURCE_DATABASE = {
           "kind": "function",
           "return_type": "void",
           "modifiers": [
+            "extern",
+            "protected",
             "virtual"
           ],
-          "visibility": "public",
+          "visibility": "protected",
           "is_virtual": true,
           "is_pure_virtual": false,
           "is_static": false,
-          "is_extern": false,
-          "is_inline": true,
+          "is_extern": true,
+          "is_inline": false,
           "decl": {
             "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 410,
+            "start_line": 409,
             "end_line": 410
           },
           "impl": {
@@ -96524,6 +100015,348 @@ window.UVM_SOURCE_DATABASE = {
             "summary": "m_unregister_sequence",
             "full_text": "m_unregister_sequence"
           },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_find_sequence": {
+          "name": "m_find_sequence",
+          "class": "uvm_sequencer_base",
+          "kind": "function",
+          "return_type": "uvm_sequence_base",
+          "modifiers": [
+            "extern",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 411,
+            "end_line": 412
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 617,
+            "end_line": 633,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "int",
+              "name": "sequence_id",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(int sequence_id)",
+          "doc": {
+            "title": "",
+            "summary": "m_find_sequence",
+            "full_text": "m_find_sequence"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_update_lists": {
+          "name": "m_update_lists",
+          "class": "uvm_sequencer_base",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "extern",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 414,
+            "end_line": 414
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 568,
+            "end_line": 570,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "m_update_lists",
+            "full_text": "m_update_lists"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "convert2string": {
+          "name": "convert2string",
+          "class": "uvm_sequencer_base",
+          "kind": "function",
+          "return_type": "string",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 415,
+            "end_line": 415
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 576,
+            "end_line": 588,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "convert2string",
+            "full_text": "convert2string"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_find_number_driver_connections": {
+          "name": "m_find_number_driver_connections",
+          "class": "uvm_sequencer_base",
+          "kind": "function",
+          "return_type": "int",
+          "modifiers": [
+            "extern",
+            "protected",
+            "virtual"
+          ],
+          "visibility": "protected",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 416,
+            "end_line": 417
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 595,
+            "end_line": 597,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "m_find_number_driver_connections",
+            "full_text": "m_find_number_driver_connections"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [
+            {
+              "class": "uvm_push_sequencer",
+              "file": "seq/uvm_push_sequencer.svh",
+              "line": 80,
+              "impl_line": 80
+            },
+            {
+              "class": "uvm_sequencer",
+              "file": "seq/uvm_sequencer.svh",
+              "line": 137,
+              "impl_line": 192
+            }
+          ]
+        },
+        "m_wait_arb_not_equal": {
+          "name": "m_wait_arb_not_equal",
+          "class": "uvm_sequencer_base",
+          "kind": "task",
+          "return_type": null,
+          "modifiers": [
+            "extern",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 418,
+            "end_line": 418
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 876,
+            "end_line": 878,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "m_wait_arb_not_equal",
+            "full_text": "m_wait_arb_not_equal"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_wait_for_available_sequence": {
+          "name": "m_wait_for_available_sequence",
+          "class": "uvm_sequencer_base",
+          "kind": "task",
+          "return_type": null,
+          "modifiers": [
+            "extern",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 419,
+            "end_line": 419
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 884,
+            "end_line": 951,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "m_wait_for_available_sequence",
+            "full_text": "m_wait_for_available_sequence"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "m_get_seq_item_priority": {
+          "name": "m_get_seq_item_priority",
+          "class": "uvm_sequencer_base",
+          "kind": "function",
+          "return_type": "int",
+          "modifiers": [
+            "extern",
+            "protected"
+          ],
+          "visibility": "protected",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 420,
+            "end_line": 420
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 957,
+            "end_line": 976,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "uvm_sequence_request",
+              "name": "seq_q_entry",
+              "default": null
+            }
+          ],
+          "parameters_raw": "(uvm_sequence_request seq_q_entry)",
+          "doc": {
+            "title": "",
+            "summary": "m_get_seq_item_priority",
+            "full_text": "m_get_seq_item_priority"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "disable_auto_item_recording": {
+          "name": "disable_auto_item_recording",
+          "class": "uvm_sequencer_base",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 434,
+            "end_line": 434
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_base.svh",
+            "start_line": 434,
+            "end_line": 436,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
           "overrides": false,
           "overridden_from": null,
           "root_ancestor": null,
@@ -96979,278 +100812,6 @@ window.UVM_SOURCE_DATABASE = {
             "file": "base/uvm_component.svh",
             "line": 265
           }
-        },
-        "m_update_lists": {
-          "name": "m_update_lists",
-          "class": "uvm_sequencer_base",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 568,
-            "end_line": 568
-          },
-          "impl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 568,
-            "end_line": 570,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_update_lists",
-            "full_text": "m_update_lists"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "convert2string": {
-          "name": "convert2string",
-          "class": "uvm_sequencer_base",
-          "kind": "function",
-          "return_type": "string",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 576,
-            "end_line": 576
-          },
-          "impl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 576,
-            "end_line": 588,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "convert2string",
-            "full_text": "convert2string"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "m_find_number_driver_connections": {
-          "name": "m_find_number_driver_connections",
-          "class": "uvm_sequencer_base",
-          "kind": "function",
-          "return_type": "int",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 595,
-            "end_line": 595
-          },
-          "impl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 595,
-            "end_line": 597,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_find_number_driver_connections",
-            "full_text": "m_find_number_driver_connections"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": [
-            {
-              "class": "uvm_push_sequencer",
-              "file": "seq/uvm_push_sequencer.svh",
-              "line": 80,
-              "impl_line": 80
-            },
-            {
-              "class": "uvm_sequencer",
-              "file": "seq/uvm_sequencer.svh",
-              "line": 137,
-              "impl_line": 192
-            }
-          ]
-        },
-        "m_find_sequence": {
-          "name": "m_find_sequence",
-          "class": "uvm_sequencer_base",
-          "kind": "function",
-          "return_type": "uvm_sequence_base",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 617,
-            "end_line": 617
-          },
-          "impl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 617,
-            "end_line": 633,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_find_sequence",
-            "full_text": "m_find_sequence"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "m_wait_arb_not_equal": {
-          "name": "m_wait_arb_not_equal",
-          "class": "uvm_sequencer_base",
-          "kind": "task",
-          "return_type": null,
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 876,
-            "end_line": 876
-          },
-          "impl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 876,
-            "end_line": 878,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_wait_arb_not_equal",
-            "full_text": "m_wait_arb_not_equal"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "m_wait_for_available_sequence": {
-          "name": "m_wait_for_available_sequence",
-          "class": "uvm_sequencer_base",
-          "kind": "task",
-          "return_type": null,
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 884,
-            "end_line": 884
-          },
-          "impl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 884,
-            "end_line": 951,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_wait_for_available_sequence",
-            "full_text": "m_wait_for_available_sequence"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
-        },
-        "m_get_seq_item_priority": {
-          "name": "m_get_seq_item_priority",
-          "class": "uvm_sequencer_base",
-          "kind": "function",
-          "return_type": "int",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": true,
-          "is_inline": false,
-          "decl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 957,
-            "end_line": 957
-          },
-          "impl": {
-            "file": "seq/uvm_sequencer_base.svh",
-            "start_line": 957,
-            "end_line": 976,
-            "is_inline": false,
-            "calls_super": false
-          },
-          "parameters": [],
-          "parameters_raw": "",
-          "doc": {
-            "title": "",
-            "summary": "m_get_seq_item_priority",
-            "full_text": "m_get_seq_item_priority"
-          },
-          "overrides": false,
-          "overridden_from": null,
-          "root_ancestor": null,
-          "is_override_of_pure_virtual": false,
-          "overridden_by": []
         }
       }
     },
@@ -97549,6 +101110,45 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_num_last_reqs": {
+          "name": "get_num_last_reqs",
+          "class": "uvm_sequencer_param_base",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_param_base.svh",
+            "start_line": 113,
+            "end_line": 113
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_param_base.svh",
+            "start_line": 399,
+            "end_line": 401,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "get_num_last_reqs",
+            "full_text": "get_num_last_reqs"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "last_req": {
           "name": "last_req",
           "class": "uvm_sequencer_param_base",
@@ -97667,6 +101267,45 @@ window.UVM_SOURCE_DATABASE = {
             "title": "",
             "summary": "set_num_last_rsps",
             "full_text": "set_num_last_rsps"
+          },
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_num_last_rsps": {
+          "name": "get_num_last_rsps",
+          "class": "uvm_sequencer_param_base",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "extern"
+          ],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": true,
+          "is_inline": false,
+          "decl": {
+            "file": "seq/uvm_sequencer_param_base.svh",
+            "start_line": 179,
+            "end_line": 179
+          },
+          "impl": {
+            "file": "seq/uvm_sequencer_param_base.svh",
+            "start_line": 441,
+            "end_line": 443,
+            "is_inline": false,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": {
+            "title": "",
+            "summary": "get_num_last_rsps",
+            "full_text": "get_num_last_rsps"
           },
           "overrides": false,
           "overridden_from": null,
@@ -100447,7 +104086,7 @@ window.UVM_SOURCE_DATABASE = {
           "ancestor_decl": {
             "class": "uvm_component",
             "file": "base/uvm_component.svh",
-            "line": 2041
+            "line": 1646
           }
         },
         "size": {
@@ -101278,7 +104917,7 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [
@@ -101290,9 +104929,9 @@ window.UVM_SOURCE_DATABASE = {
             }
           ],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "size": {
@@ -102778,14 +106417,14 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "()",
           "doc": null,
           "overrides": true,
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "root_ancestor": "uvm_object",
           "is_override_of_pure_virtual": false,
           "overridden_by": [],
           "ancestor_decl": {
-            "class": "uvm_object",
-            "file": "base/uvm_object.svh",
-            "line": 220
+            "class": "uvm_component",
+            "file": "base/uvm_component.svh",
+            "line": 1667
           }
         },
         "create": {
@@ -102830,7 +106469,7 @@ window.UVM_SOURCE_DATABASE = {
           "ancestor_decl": {
             "class": "uvm_component",
             "file": "base/uvm_component.svh",
-            "line": 2067
+            "line": 1653
           }
         }
       }
@@ -103706,6 +107345,41 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_address": {
+          "name": "get_address",
+          "class": "uvm_tlm_generic_payload",
+          "kind": "function",
+          "return_type": "bit [63:0]",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "tlm2/uvm_tlm2_generic_payload.svh",
+            "start_line": 685,
+            "end_line": 685
+          },
+          "impl": {
+            "file": "tlm2/uvm_tlm2_generic_payload.svh",
+            "start_line": 685,
+            "end_line": 687,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "get_data": {
           "name": "get_data",
           "class": "uvm_tlm_generic_payload",
@@ -103790,6 +107464,41 @@ window.UVM_SOURCE_DATABASE = {
           "is_override_of_pure_virtual": false,
           "overridden_by": []
         },
+        "get_data_length": {
+          "name": "get_data_length",
+          "class": "uvm_tlm_generic_payload",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "tlm2/uvm_tlm2_generic_payload.svh",
+            "start_line": 709,
+            "end_line": 709
+          },
+          "impl": {
+            "file": "tlm2/uvm_tlm2_generic_payload.svh",
+            "start_line": 709,
+            "end_line": 711,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
         "set_data_length": {
           "name": "set_data_length",
           "class": "uvm_tlm_generic_payload",
@@ -103825,6 +107534,41 @@ window.UVM_SOURCE_DATABASE = {
             }
           ],
           "parameters_raw": "(int unsigned length)",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_streaming_width": {
+          "name": "get_streaming_width",
+          "class": "uvm_tlm_generic_payload",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "tlm2/uvm_tlm2_generic_payload.svh",
+            "start_line": 724,
+            "end_line": 724
+          },
+          "impl": {
+            "file": "tlm2/uvm_tlm2_generic_payload.svh",
+            "start_line": 724,
+            "end_line": 726,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
           "doc": null,
           "overrides": false,
           "overridden_from": null,
@@ -103951,6 +107695,41 @@ window.UVM_SOURCE_DATABASE = {
             }
           ],
           "parameters_raw": "(ref byte unsigned p[])",
+          "doc": null,
+          "overrides": false,
+          "overridden_from": null,
+          "root_ancestor": null,
+          "is_override_of_pure_virtual": false,
+          "overridden_by": []
+        },
+        "get_byte_enable_length": {
+          "name": "get_byte_enable_length",
+          "class": "uvm_tlm_generic_payload",
+          "kind": "function",
+          "return_type": "int unsigned",
+          "modifiers": [
+            "virtual"
+          ],
+          "visibility": "public",
+          "is_virtual": true,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "tlm2/uvm_tlm2_generic_payload.svh",
+            "start_line": 756,
+            "end_line": 756
+          },
+          "impl": {
+            "file": "tlm2/uvm_tlm2_generic_payload.svh",
+            "start_line": 756,
+            "end_line": 758,
+            "is_inline": true,
+            "calls_super": false
+          },
+          "parameters": [],
+          "parameters_raw": "()",
           "doc": null,
           "overrides": false,
           "overridden_from": null,
@@ -115320,7 +119099,7 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "uvm_object",
         "file": "base/uvm_component.svh",
-        "line": 2067,
+        "line": 1653,
         "overrides": false
       },
       {
@@ -115526,6 +119305,14 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": true
       },
       {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "string",
+        "file": "base/uvm_component.svh",
+        "line": 1667,
+        "overrides": true
+      },
+      {
         "class": "uvm_event_base",
         "kind": "function",
         "return_type": "string",
@@ -115542,7 +119329,7 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": true
       },
       {
-        "class": "uvm_factory",
+        "class": "uvm_object_wrapper",
         "kind": "function",
         "return_type": "string",
         "file": "base/uvm_factory.svh",
@@ -115619,7 +119406,7 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "string",
         "file": "base/uvm_registry.svh",
         "line": 78,
-        "overrides": false
+        "overrides": true
       },
       {
         "class": "uvm_object_registry",
@@ -115627,7 +119414,7 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "string",
         "file": "base/uvm_registry.svh",
         "line": 220,
-        "overrides": false
+        "overrides": true
       },
       {
         "class": "uvm_report_server",
@@ -116528,163 +120315,15 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
-    "m_initialize": [
-      {
-        "class": "uvm_callbacks_base",
-        "kind": "function",
-        "return_type": "this_type",
-        "file": "base/uvm_callback.svh",
-        "line": 99,
-        "overrides": false
-      },
-      {
-        "class": "uvm_typed_callbacks",
-        "kind": "function",
-        "return_type": "this_type",
-        "file": "base/uvm_callback.svh",
-        "line": 190,
-        "overrides": true
-      }
-    ],
-    "m_am_i_a": [
-      {
-        "class": "uvm_callbacks_base",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 112,
-        "overrides": false
-      },
-      {
-        "class": "uvm_typed_callbacks",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 200,
-        "overrides": true
-      }
-    ],
-    "m_is_for_me": [
-      {
-        "class": "uvm_callbacks_base",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 116,
-        "overrides": false
-      },
-      {
-        "class": "uvm_callbacks",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 567,
-        "overrides": true
-      }
-    ],
-    "m_is_registered": [
-      {
-        "class": "uvm_callbacks_base",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 120,
-        "overrides": false
-      },
-      {
-        "class": "uvm_callbacks",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 560,
-        "overrides": true
-      }
-    ],
-    "m_add_tw_cbs": [
-      {
-        "class": "uvm_callbacks_base",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_callback.svh",
-        "line": 128,
-        "overrides": false
-      },
-      {
-        "class": "uvm_typed_callbacks",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_callback.svh",
-        "line": 246,
-        "overrides": true
-      }
-    ],
-    "m_delete_tw_cbs": [
-      {
-        "class": "uvm_callbacks_base",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 131,
-        "overrides": false
-      },
-      {
-        "class": "uvm_typed_callbacks",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 288,
-        "overrides": true
-      }
-    ],
-    "check_registration": [
-      {
-        "class": "uvm_callbacks_base",
-        "kind": "function",
-        "return_type": "bit",
-        "file": "base/uvm_callback.svh",
-        "line": 138,
-        "overrides": false
-      }
-    ],
-    "m_cb_find": [
-      {
-        "class": "uvm_typed_callbacks",
-        "kind": "function",
-        "return_type": "int",
-        "file": "base/uvm_callback.svh",
-        "line": 225,
-        "overrides": false
-      }
-    ],
-    "m_cb_find_name": [
-      {
-        "class": "uvm_typed_callbacks",
-        "kind": "function",
-        "return_type": "int",
-        "file": "base/uvm_callback.svh",
-        "line": 232,
-        "overrides": false
-      }
-    ],
-    "display": [
-      {
-        "class": "uvm_typed_callbacks",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_callback.svh",
-        "line": 321,
-        "overrides": false
-      },
-      {
-        "class": "uvm_callbacks",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_callback.svh",
-        "line": 946,
-        "overrides": true
-      }
-    ],
     "get": [
+      {
+        "class": "uvm_typeid",
+        "kind": "function",
+        "return_type": "uvm_typeid#(T)",
+        "file": "base/uvm_callback.svh",
+        "line": 66,
+        "overrides": false
+      },
       {
         "class": "uvm_callbacks",
         "kind": "function",
@@ -117084,6 +120723,180 @@ window.UVM_SOURCE_DATABASE = {
         "file": "tlm1/uvm_tlm_ifs.svh",
         "line": 76,
         "overrides": false
+      }
+    ],
+    "m_initialize": [
+      {
+        "class": "uvm_callbacks_base",
+        "kind": "function",
+        "return_type": "this_type",
+        "file": "base/uvm_callback.svh",
+        "line": 99,
+        "overrides": false
+      },
+      {
+        "class": "uvm_typed_callbacks",
+        "kind": "function",
+        "return_type": "this_type",
+        "file": "base/uvm_callback.svh",
+        "line": 190,
+        "overrides": true
+      }
+    ],
+    "m_am_i_a": [
+      {
+        "class": "uvm_callbacks_base",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 112,
+        "overrides": false
+      },
+      {
+        "class": "uvm_typed_callbacks",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 200,
+        "overrides": true
+      }
+    ],
+    "m_is_for_me": [
+      {
+        "class": "uvm_callbacks_base",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 116,
+        "overrides": false
+      },
+      {
+        "class": "uvm_callbacks",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 567,
+        "overrides": true
+      }
+    ],
+    "m_is_registered": [
+      {
+        "class": "uvm_callbacks_base",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 120,
+        "overrides": false
+      },
+      {
+        "class": "uvm_callbacks",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 560,
+        "overrides": true
+      }
+    ],
+    "m_get_tw_cb_q": [
+      {
+        "class": "uvm_callbacks_base",
+        "kind": "function",
+        "return_type": "uvm_queue#(uvm_callback)",
+        "file": "base/uvm_callback.svh",
+        "line": 124,
+        "overrides": false
+      },
+      {
+        "class": "uvm_typed_callbacks",
+        "kind": "function",
+        "return_type": "uvm_queue#(uvm_callback)",
+        "file": "base/uvm_callback.svh",
+        "line": 208,
+        "overrides": true
+      }
+    ],
+    "m_add_tw_cbs": [
+      {
+        "class": "uvm_callbacks_base",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_callback.svh",
+        "line": 128,
+        "overrides": false
+      },
+      {
+        "class": "uvm_typed_callbacks",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_callback.svh",
+        "line": 246,
+        "overrides": true
+      }
+    ],
+    "m_delete_tw_cbs": [
+      {
+        "class": "uvm_callbacks_base",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 131,
+        "overrides": false
+      },
+      {
+        "class": "uvm_typed_callbacks",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 288,
+        "overrides": true
+      }
+    ],
+    "check_registration": [
+      {
+        "class": "uvm_callbacks_base",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_callback.svh",
+        "line": 138,
+        "overrides": false
+      }
+    ],
+    "m_cb_find": [
+      {
+        "class": "uvm_typed_callbacks",
+        "kind": "function",
+        "return_type": "int",
+        "file": "base/uvm_callback.svh",
+        "line": 225,
+        "overrides": false
+      }
+    ],
+    "m_cb_find_name": [
+      {
+        "class": "uvm_typed_callbacks",
+        "kind": "function",
+        "return_type": "int",
+        "file": "base/uvm_callback.svh",
+        "line": 232,
+        "overrides": false
+      }
+    ],
+    "display": [
+      {
+        "class": "uvm_typed_callbacks",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_callback.svh",
+        "line": 321,
+        "overrides": false
+      },
+      {
+        "class": "uvm_callbacks",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_callback.svh",
+        "line": 946,
+        "overrides": true
       }
     ],
     "m_register_pair": [
@@ -118055,6 +121868,24 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "uvm_component",
         "file": "base/uvm_component.svh",
         "line": 170,
+        "overrides": false
+      }
+    ],
+    "get_depth": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "base/uvm_component.svh",
+        "line": 179,
+        "overrides": false
+      },
+      {
+        "class": "uvm_sequence_item",
+        "kind": "function",
+        "return_type": "int",
+        "file": "seq/uvm_sequence_item.svh",
+        "line": 217,
         "overrides": false
       }
     ],
@@ -119034,7 +122865,7 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       },
       {
-        "class": "uvm_factory",
+        "class": "uvm_object_wrapper",
         "kind": "function",
         "return_type": "uvm_component",
         "file": "base/uvm_factory.svh",
@@ -119047,7 +122878,7 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "uvm_component",
         "file": "base/uvm_registry.svh",
         "line": 63,
-        "overrides": false
+        "overrides": true
       }
     ],
     "create_object": [
@@ -119060,12 +122891,46 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       },
       {
+        "class": "uvm_object_wrapper",
+        "kind": "function",
+        "return_type": "uvm_object",
+        "file": "base/uvm_factory.svh",
+        "line": 818,
+        "overrides": false
+      },
+      {
         "class": "uvm_object_registry",
         "kind": "function",
         "return_type": "uvm_object",
         "file": "base/uvm_registry.svh",
         "line": 200,
+        "overrides": true
+      }
+    ],
+    "set_type_override_by_type": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_component.svh",
+        "line": 1147,
         "overrides": false
+      },
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 165,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 363,
+        "overrides": true
       }
     ],
     "set_inst_override_by_type": [
@@ -119076,6 +122941,22 @@ window.UVM_SOURCE_DATABASE = {
         "file": "base/uvm_component.svh",
         "line": 1204,
         "overrides": false
+      },
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 125,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 345,
+        "overrides": true
       }
     ],
     "set_type_override": [
@@ -119342,7 +123223,7 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "void",
         "file": "base/uvm_component.svh",
-        "line": 1480,
+        "line": 1479,
         "overrides": false
       },
       {
@@ -119354,13 +123235,115 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
-    "m_apply_verbosity_settings": [
+    "end_tr": [
       {
         "class": "uvm_component",
         "kind": "function",
         "return_type": "void",
         "file": "base/uvm_component.svh",
-        "line": 1681,
+        "line": 1509,
+        "overrides": false
+      },
+      {
+        "class": "uvm_recorder",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_recorder.svh",
+        "line": 699,
+        "overrides": false
+      },
+      {
+        "class": "uvm_text_recorder",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_recorder.svh",
+        "line": 1103,
+        "overrides": true
+      },
+      {
+        "class": "uvm_transaction",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_transaction.svh",
+        "line": 284,
+        "overrides": false
+      }
+    ],
+    "do_end_tr": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_component.svh",
+        "line": 1520,
+        "overrides": false
+      },
+      {
+        "class": "uvm_transaction",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_transaction.svh",
+        "line": 293,
+        "overrides": false
+      }
+    ],
+    "record_error_tr": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "integer",
+        "file": "base/uvm_component.svh",
+        "line": 1538,
+        "overrides": false
+      }
+    ],
+    "record_event_tr": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "integer",
+        "file": "base/uvm_component.svh",
+        "line": 1558,
+        "overrides": false
+      }
+    ],
+    "get_tr_stream": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "uvm_tr_stream",
+        "file": "base/uvm_component.svh",
+        "line": 1578,
+        "overrides": false
+      }
+    ],
+    "free_tr_stream": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_component.svh",
+        "line": 1587,
+        "overrides": false
+      }
+    ],
+    "m_get_tr_database": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "uvm_tr_database",
+        "file": "base/uvm_component.svh",
+        "line": 1605,
+        "overrides": false
+      }
+    ],
+    "set_int_local": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_component.svh",
+        "line": 1633,
         "overrides": false
       }
     ],
@@ -119370,7 +123353,7 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "bit",
         "file": "base/uvm_component.svh",
-        "line": 1822,
+        "line": 1640,
         "overrides": false
       },
       {
@@ -119388,17 +123371,27 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "void",
         "file": "base/uvm_component.svh",
-        "line": 1946,
+        "line": 1641,
         "overrides": false
       }
     ],
-    "m_extract_name": [
+    "do_resolve_bindings": [
       {
         "class": "uvm_component",
         "kind": "function",
         "return_type": "void",
         "file": "base/uvm_component.svh",
-        "line": 2012,
+        "line": 1643,
+        "overrides": false
+      }
+    ],
+    "do_flush": [
+      {
+        "class": "uvm_component",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_component.svh",
+        "line": 1644,
         "overrides": false
       }
     ],
@@ -119408,7 +123401,7 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "void",
         "file": "base/uvm_component.svh",
-        "line": 2041,
+        "line": 1646,
         "overrides": false
       },
       {
@@ -119436,13 +123429,13 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": true
       }
     ],
-    "do_flush": [
+    "m_extract_name": [
       {
         "class": "uvm_component",
         "kind": "function",
         "return_type": "void",
         "file": "base/uvm_component.svh",
-        "line": 2049,
+        "line": 1648,
         "overrides": false
       }
     ],
@@ -119452,7 +123445,7 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "uvm_object",
         "file": "base/uvm_component.svh",
-        "line": 2077,
+        "line": 1654,
         "overrides": false
       },
       {
@@ -119520,63 +123513,13 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
-    "set_type_override_by_type": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_component.svh",
-        "line": 2133,
-        "overrides": false
-      }
-    ],
-    "do_resolve_bindings": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_component.svh",
-        "line": 2586,
-        "overrides": false
-      }
-    ],
-    "m_get_tr_database": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "uvm_tr_database",
-        "file": "base/uvm_component.svh",
-        "line": 2639,
-        "overrides": false
-      }
-    ],
-    "get_tr_stream": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "uvm_tr_stream",
-        "file": "base/uvm_component.svh",
-        "line": 2649,
-        "overrides": false
-      }
-    ],
-    "free_tr_stream": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_component.svh",
-        "line": 2659,
-        "overrides": false
-      }
-    ],
     "m_begin_tr": [
       {
         "class": "uvm_component",
         "kind": "function",
         "return_type": "integer",
         "file": "base/uvm_component.svh",
-        "line": 2687,
+        "line": 1659,
         "overrides": false
       },
       {
@@ -119588,85 +123531,13 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
-    "end_tr": [
+    "m_apply_verbosity_settings": [
       {
         "class": "uvm_component",
         "kind": "function",
         "return_type": "void",
         "file": "base/uvm_component.svh",
-        "line": 2785,
-        "overrides": false
-      },
-      {
-        "class": "uvm_recorder",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_recorder.svh",
-        "line": 699,
-        "overrides": false
-      },
-      {
-        "class": "uvm_text_recorder",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_recorder.svh",
-        "line": 1103,
-        "overrides": true
-      },
-      {
-        "class": "uvm_transaction",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_transaction.svh",
-        "line": 284,
-        "overrides": false
-      }
-    ],
-    "record_error_tr": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "integer",
-        "file": "base/uvm_component.svh",
-        "line": 2831,
-        "overrides": false
-      }
-    ],
-    "record_event_tr": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "integer",
-        "file": "base/uvm_component.svh",
-        "line": 2889,
-        "overrides": false
-      }
-    ],
-    "do_end_tr": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_component.svh",
-        "line": 2963,
-        "overrides": false
-      },
-      {
-        "class": "uvm_transaction",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_transaction.svh",
-        "line": 293,
-        "overrides": false
-      }
-    ],
-    "set_int_local": [
-      {
-        "class": "uvm_component",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_component.svh",
-        "line": 3344,
+        "line": 1681,
         "overrides": false
       }
     ],
@@ -120032,6 +123903,24 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": true
       }
     ],
+    "get_component_visitor": [
+      {
+        "class": "uvm_coreservice_t",
+        "kind": "function",
+        "return_type": "uvm_visitor#(uvm_component)",
+        "file": "base/uvm_coreservice.svh",
+        "line": 86,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_coreservice_t",
+        "kind": "function",
+        "return_type": "uvm_visitor#(uvm_component)",
+        "file": "base/uvm_coreservice.svh",
+        "line": 213,
+        "overrides": true
+      }
+    ],
     "get_root": [
       {
         "class": "uvm_coreservice_t",
@@ -120296,6 +124185,14 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       },
       {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 338,
+        "overrides": true
+      },
+      {
         "class": "m_uvm_resource_default_converter",
         "kind": "function",
         "return_type": "bit",
@@ -120328,13 +124225,267 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "set_inst_override_by_name": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 157,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 355,
+        "overrides": true
+      }
+    ],
+    "set_type_override_by_name": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 189,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 374,
+        "overrides": true
+      }
+    ],
+    "create_object_by_type": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "uvm_object",
+        "file": "base/uvm_factory.svh",
+        "line": 199,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "uvm_object",
+        "file": "base/uvm_factory.svh",
+        "line": 384,
+        "overrides": true
+      }
+    ],
+    "create_component_by_type": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "uvm_component",
+        "file": "base/uvm_factory.svh",
+        "line": 206,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "uvm_component",
+        "file": "base/uvm_factory.svh",
+        "line": 391,
+        "overrides": true
+      }
+    ],
+    "create_object_by_name": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "uvm_object",
+        "file": "base/uvm_factory.svh",
+        "line": 214,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "uvm_object",
+        "file": "base/uvm_factory.svh",
+        "line": 399,
+        "overrides": true
+      }
+    ],
+    "create_component_by_name": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "uvm_component",
+        "file": "base/uvm_factory.svh",
+        "line": 255,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "uvm_component",
+        "file": "base/uvm_factory.svh",
+        "line": 409,
+        "overrides": true
+      }
+    ],
+    "debug_create_by_type": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 265,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 419,
+        "overrides": true
+      }
+    ],
+    "debug_create_by_name": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 278,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 428,
+        "overrides": true
+      }
+    ],
+    "find_override_by_type": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "uvm_object_wrapper",
+        "file": "base/uvm_factory.svh",
+        "line": 286,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "uvm_object_wrapper",
+        "file": "base/uvm_factory.svh",
+        "line": 436,
+        "overrides": true
+      }
+    ],
+    "find_override_by_name": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "uvm_object_wrapper",
+        "file": "base/uvm_factory.svh",
+        "line": 297,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "uvm_object_wrapper",
+        "file": "base/uvm_factory.svh",
+        "line": 445,
+        "overrides": true
+      }
+    ],
     "find_wrapper_by_name": [
       {
         "class": "uvm_factory",
         "kind": "function",
         "return_type": "uvm_object_wrapper",
         "file": "base/uvm_factory.svh",
-        "line": 306,
+        "line": 305,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "uvm_object_wrapper",
+        "file": "base/uvm_factory.svh",
+        "line": 449,
+        "overrides": true
+      }
+    ],
+    "print": [
+      {
+        "class": "uvm_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 319,
+        "overrides": false
+      },
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 457,
+        "overrides": true
+      },
+      {
+        "class": "uvm_report_message_element_base",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_report_message.svh",
+        "line": 79,
+        "overrides": false
+      }
+    ],
+    "m_debug_create": [
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 463,
+        "overrides": false
+      }
+    ],
+    "m_debug_display": [
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "void",
+        "file": "base/uvm_factory.svh",
+        "line": 469,
+        "overrides": false
+      }
+    ],
+    "m_has_wildcard": [
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_factory.svh",
+        "line": 487,
+        "overrides": false
+      }
+    ],
+    "check_inst_override_exists": [
+      {
+        "class": "uvm_default_factory",
+        "kind": "function",
+        "return_type": "bit",
+        "file": "base/uvm_factory.svh",
+        "line": 489,
         "overrides": false
       }
     ],
@@ -121416,7 +125567,7 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "string",
         "file": "seq/uvm_sequencer_base.svh",
-        "line": 576,
+        "line": 415,
         "overrides": false
       },
       {
@@ -121713,6 +125864,36 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "uvm_pack_bitstream_t",
         "file": "base/uvm_packer.svh",
         "line": 380,
+        "overrides": false
+      }
+    ],
+    "get_bit": [
+      {
+        "class": "uvm_packer",
+        "kind": "function",
+        "return_type": "bit  unsigned",
+        "file": "base/uvm_packer.svh",
+        "line": 382,
+        "overrides": false
+      }
+    ],
+    "get_byte": [
+      {
+        "class": "uvm_packer",
+        "kind": "function",
+        "return_type": "byte unsigned",
+        "file": "base/uvm_packer.svh",
+        "line": 383,
+        "overrides": false
+      }
+    ],
+    "get_int": [
+      {
+        "class": "uvm_packer",
+        "kind": "function",
+        "return_type": "int  unsigned",
+        "file": "base/uvm_packer.svh",
+        "line": 384,
         "overrides": false
       }
     ],
@@ -122494,6 +126675,14 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       },
       {
+        "class": "uvm_reg_fifo",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg_fifo.svh",
+        "line": 103,
+        "overrides": false
+      },
+      {
         "class": "uvm_tlm_fifo_base",
         "kind": "function",
         "return_type": "int",
@@ -122577,6 +126766,16 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "void",
         "file": "base/uvm_port_base.svh",
         "line": 705,
+        "overrides": false
+      }
+    ],
+    "get_if": [
+      {
+        "class": "uvm_port_base",
+        "kind": "function",
+        "return_type": "uvm_port_base #(IF)",
+        "file": "base/uvm_port_base.svh",
+        "line": 772,
         "overrides": false
       }
     ],
@@ -124338,16 +128537,6 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
-    "print": [
-      {
-        "class": "uvm_report_message_element_base",
-        "kind": "function",
-        "return_type": "void",
-        "file": "base/uvm_report_message.svh",
-        "line": 79,
-        "overrides": false
-      }
-    ],
     "record": [
       {
         "class": "uvm_report_message_element_base",
@@ -125737,6 +129926,16 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "void",
         "file": "base/uvm_resource_db.svh",
         "line": 324,
+        "overrides": false
+      }
+    ],
+    "m_get_converter": [
+      {
+        "class": "uvm_resource",
+        "kind": "function",
+        "return_type": "m_uvm_resource_converter#(T)",
+        "file": "base/uvm_resource.svh",
+        "line": 1390,
         "overrides": false
       }
     ],
@@ -127796,6 +131995,134 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "get_size": [
+      {
+        "class": "uvm_mem",
+        "kind": "function",
+        "return_type": "longint unsigned",
+        "file": "reg/uvm_mem.svh",
+        "line": 243,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg_map",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg_map.svh",
+        "line": 488,
+        "overrides": false
+      },
+      {
+        "class": "uvm_vreg",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_vreg.svh",
+        "line": 316,
+        "overrides": false
+      }
+    ],
+    "get_n_bytes": [
+      {
+        "class": "uvm_mem",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_mem.svh",
+        "line": 250,
+        "overrides": false
+      },
+      {
+        "class": "uvm_mem_region",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_mem_mam.svh",
+        "line": 336,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg.svh",
+        "line": 228,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg_map",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg_map.svh",
+        "line": 375,
+        "overrides": false
+      },
+      {
+        "class": "uvm_vreg",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_vreg.svh",
+        "line": 327,
+        "overrides": false
+      }
+    ],
+    "get_n_bits": [
+      {
+        "class": "uvm_mem",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_mem.svh",
+        "line": 257,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg.svh",
+        "line": 220,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg_field",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg_field.svh",
+        "line": 169,
+        "overrides": false
+      },
+      {
+        "class": "uvm_vreg_field",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_vreg_field.svh",
+        "line": 132,
+        "overrides": false
+      }
+    ],
+    "get_max_size": [
+      {
+        "class": "uvm_mem",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_mem.svh",
+        "line": 264,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg.svh",
+        "line": 235,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg_field",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg_field.svh",
+        "line": 175,
+        "overrides": false
+      }
+    ],
     "get_virtual_registers": [
       {
         "class": "uvm_mem",
@@ -127943,6 +132270,14 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "uvm_reg_addr_t",
         "file": "reg/uvm_vreg.svh",
         "line": 391,
+        "overrides": false
+      },
+      {
+        "class": "uvm_tlm_generic_payload",
+        "kind": "function",
+        "return_type": "bit [63:0]",
+        "file": "tlm2/uvm_tlm2_generic_payload.svh",
+        "line": 685,
         "overrides": false
       }
     ],
@@ -128758,6 +133093,36 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "get_start_offset": [
+      {
+        "class": "uvm_mem_region",
+        "kind": "function",
+        "return_type": "bit [63:0]",
+        "file": "reg/uvm_mem_mam.svh",
+        "line": 304,
+        "overrides": false
+      }
+    ],
+    "get_end_offset": [
+      {
+        "class": "uvm_mem_region",
+        "kind": "function",
+        "return_type": "bit [63:0]",
+        "file": "reg/uvm_mem_mam.svh",
+        "line": 314,
+        "overrides": false
+      }
+    ],
+    "get_len": [
+      {
+        "class": "uvm_mem_region",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_mem_mam.svh",
+        "line": 324,
+        "overrides": false
+      }
+    ],
     "get_regfile": [
       {
         "class": "uvm_reg",
@@ -128888,6 +133253,24 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": true
       }
     ],
+    "get_reset": [
+      {
+        "class": "uvm_reg",
+        "kind": "function",
+        "return_type": "uvm_reg_data_t",
+        "file": "reg/uvm_reg.svh",
+        "line": 433,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg_field",
+        "kind": "function",
+        "return_type": "uvm_reg_data_t",
+        "file": "reg/uvm_reg_field.svh",
+        "line": 403,
+        "overrides": false
+      }
+    ],
     "has_reset": [
       {
         "class": "uvm_reg",
@@ -128903,6 +133286,24 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "bit",
         "file": "reg/uvm_reg_field.svh",
         "line": 414,
+        "overrides": false
+      }
+    ],
+    "set_reset": [
+      {
+        "class": "uvm_reg",
+        "kind": "function",
+        "return_type": "void",
+        "file": "reg/uvm_reg.svh",
+        "line": 454,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg_field",
+        "kind": "function",
+        "return_type": "void",
+        "file": "reg/uvm_reg_field.svh",
+        "line": 425,
         "overrides": false
       }
     ],
@@ -129010,6 +133411,40 @@ window.UVM_SOURCE_DATABASE = {
         "file": "reg/uvm_reg.svh",
         "line": 671,
         "overrides": false
+      }
+    ],
+    "do_predict": [
+      {
+        "class": "uvm_reg",
+        "kind": "function",
+        "return_type": "void",
+        "file": "reg/uvm_reg.svh",
+        "line": 679,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg_field",
+        "kind": "function",
+        "return_type": "void",
+        "file": "reg/uvm_reg_field.svh",
+        "line": 686,
+        "overrides": false
+      },
+      {
+        "class": "uvm_reg_fifo",
+        "kind": "function",
+        "return_type": "void",
+        "file": "reg/uvm_reg_fifo.svh",
+        "line": 226,
+        "overrides": true
+      },
+      {
+        "class": "uvm_reg_indirect_data",
+        "kind": "function",
+        "return_type": "void",
+        "file": "reg/uvm_reg_indirect.svh",
+        "line": 114,
+        "overrides": true
       }
     ],
     "backdoor_watch": [
@@ -129690,6 +134125,16 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "get_lsb_pos": [
+      {
+        "class": "uvm_reg_field",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg_field.svh",
+        "line": 162,
+        "overrides": false
+      }
+    ],
     "set_access": [
       {
         "class": "uvm_reg_field",
@@ -129747,26 +134192,6 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "bit",
         "file": "reg/uvm_reg_field.svh",
         "line": 298,
-        "overrides": false
-      }
-    ],
-    "get_reset": [
-      {
-        "class": "uvm_reg_field",
-        "kind": "function",
-        "return_type": "uvm_reg_data_t",
-        "file": "reg/uvm_reg_field.svh",
-        "line": 403,
-        "overrides": false
-      }
-    ],
-    "set_reset": [
-      {
-        "class": "uvm_reg_field",
-        "kind": "function",
-        "return_type": "void",
-        "file": "reg/uvm_reg_field.svh",
-        "line": 425,
         "overrides": false
       }
     ],
@@ -129880,21 +134305,13 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
-    "do_predict": [
+    "capacity": [
       {
         "class": "uvm_reg_fifo",
         "kind": "function",
-        "return_type": "void",
+        "return_type": "int unsigned",
         "file": "reg/uvm_reg_fifo.svh",
-        "line": 226,
-        "overrides": false
-      },
-      {
-        "class": "uvm_reg_indirect_data",
-        "kind": "function",
-        "return_type": "void",
-        "file": "reg/uvm_reg_indirect.svh",
-        "line": 114,
+        "line": 112,
         "overrides": false
       }
     ],
@@ -130051,6 +134468,16 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "uvm_reg_addr_t",
         "file": "reg/uvm_reg_map.svh",
         "line": 364,
+        "overrides": false
+      }
+    ],
+    "get_addr_unit_bytes": [
+      {
+        "class": "uvm_reg_map",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_reg_map.svh",
+        "line": 384,
         "overrides": false
       }
     ],
@@ -130474,6 +134901,26 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "get_n_memlocs": [
+      {
+        "class": "uvm_vreg",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_vreg.svh",
+        "line": 334,
+        "overrides": false
+      }
+    ],
+    "get_incr": [
+      {
+        "class": "uvm_vreg",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_vreg.svh",
+        "line": 341,
+        "overrides": false
+      }
+    ],
     "get_offset_in_memory": [
       {
         "class": "uvm_vreg",
@@ -130572,6 +135019,16 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "get_lsb_pos_in_register": [
+      {
+        "class": "uvm_vreg_field",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "reg/uvm_vreg_field.svh",
+        "line": 126,
+        "overrides": false
+      }
+    ],
     "m_find_number_driver_connections": [
       {
         "class": "uvm_push_sequencer",
@@ -130594,7 +135051,7 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "int",
         "file": "seq/uvm_sequencer_base.svh",
-        "line": 595,
+        "line": 416,
         "overrides": false
       }
     ],
@@ -131278,6 +135735,16 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "get_count": [
+      {
+        "class": "uvm_random_sequence",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "seq/uvm_sequence_builtin.svh",
+        "line": 67,
+        "overrides": false
+      }
+    ],
     "set_sequence_id": [
       {
         "class": "uvm_sequence_item",
@@ -131368,16 +135835,6 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
-    "get_depth": [
-      {
-        "class": "uvm_sequence_item",
-        "kind": "function",
-        "return_type": "int",
-        "file": "seq/uvm_sequence_item.svh",
-        "line": 217,
-        "overrides": false
-      }
-    ],
     "get_root_sequence_name": [
       {
         "class": "uvm_sequence_item",
@@ -131415,6 +135872,16 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "string",
         "file": "seq/uvm_sequence_item.svh",
         "line": 309,
+        "overrides": false
+      }
+    ],
+    "select_sequence": [
+      {
+        "class": "uvm_sequence_library",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "seq/uvm_sequence_library.svh",
+        "line": 243,
         "overrides": false
       }
     ],
@@ -131916,7 +136383,75 @@ window.UVM_SOURCE_DATABASE = {
         "kind": "function",
         "return_type": "void",
         "file": "seq/uvm_sequencer_base.svh",
-        "line": 410,
+        "line": 409,
+        "overrides": false
+      }
+    ],
+    "m_find_sequence": [
+      {
+        "class": "uvm_sequencer_base",
+        "kind": "function",
+        "return_type": "uvm_sequence_base",
+        "file": "seq/uvm_sequencer_base.svh",
+        "line": 411,
+        "overrides": false
+      }
+    ],
+    "m_update_lists": [
+      {
+        "class": "uvm_sequencer_base",
+        "kind": "function",
+        "return_type": "void",
+        "file": "seq/uvm_sequencer_base.svh",
+        "line": 414,
+        "overrides": false
+      }
+    ],
+    "m_wait_arb_not_equal": [
+      {
+        "class": "uvm_sequencer_base",
+        "kind": "task",
+        "return_type": null,
+        "file": "seq/uvm_sequencer_base.svh",
+        "line": 418,
+        "overrides": false
+      }
+    ],
+    "m_wait_for_available_sequence": [
+      {
+        "class": "uvm_sequencer_base",
+        "kind": "task",
+        "return_type": null,
+        "file": "seq/uvm_sequencer_base.svh",
+        "line": 419,
+        "overrides": false
+      }
+    ],
+    "m_get_seq_item_priority": [
+      {
+        "class": "uvm_sequencer_base",
+        "kind": "function",
+        "return_type": "int",
+        "file": "seq/uvm_sequencer_base.svh",
+        "line": 420,
+        "overrides": false
+      }
+    ],
+    "disable_auto_item_recording": [
+      {
+        "class": "uvm_sequencer_base",
+        "kind": "function",
+        "return_type": "void",
+        "file": "seq/uvm_sequencer_base.svh",
+        "line": 434,
+        "overrides": false
+      },
+      {
+        "class": "uvm_sqr_if_base",
+        "kind": "function",
+        "return_type": "void",
+        "file": "tlm1/uvm_sqr_ifs.svh",
+        "line": 240,
         "overrides": false
       }
     ],
@@ -131968,56 +136503,6 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
-    "m_update_lists": [
-      {
-        "class": "uvm_sequencer_base",
-        "kind": "function",
-        "return_type": "void",
-        "file": "seq/uvm_sequencer_base.svh",
-        "line": 568,
-        "overrides": false
-      }
-    ],
-    "m_find_sequence": [
-      {
-        "class": "uvm_sequencer_base",
-        "kind": "function",
-        "return_type": "uvm_sequence_base",
-        "file": "seq/uvm_sequencer_base.svh",
-        "line": 617,
-        "overrides": false
-      }
-    ],
-    "m_wait_arb_not_equal": [
-      {
-        "class": "uvm_sequencer_base",
-        "kind": "task",
-        "return_type": null,
-        "file": "seq/uvm_sequencer_base.svh",
-        "line": 876,
-        "overrides": false
-      }
-    ],
-    "m_wait_for_available_sequence": [
-      {
-        "class": "uvm_sequencer_base",
-        "kind": "task",
-        "return_type": null,
-        "file": "seq/uvm_sequencer_base.svh",
-        "line": 884,
-        "overrides": false
-      }
-    ],
-    "m_get_seq_item_priority": [
-      {
-        "class": "uvm_sequencer_base",
-        "kind": "function",
-        "return_type": "int",
-        "file": "seq/uvm_sequencer_base.svh",
-        "line": 957,
-        "overrides": false
-      }
-    ],
     "get_num_reqs_sent": [
       {
         "class": "uvm_sequencer_param_base",
@@ -132035,6 +136520,16 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "void",
         "file": "seq/uvm_sequencer_param_base.svh",
         "line": 106,
+        "overrides": false
+      }
+    ],
+    "get_num_last_reqs": [
+      {
+        "class": "uvm_sequencer_param_base",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "seq/uvm_sequencer_param_base.svh",
+        "line": 113,
         "overrides": false
       }
     ],
@@ -132068,6 +136563,16 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "get_num_last_rsps": [
+      {
+        "class": "uvm_sequencer_param_base",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "seq/uvm_sequencer_param_base.svh",
+        "line": 179,
+        "overrides": false
+      }
+    ],
     "last_rsp": [
       {
         "class": "uvm_sequencer_param_base",
@@ -132095,16 +136600,6 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "void",
         "file": "seq/uvm_sequencer_param_base.svh",
         "line": 449,
-        "overrides": false
-      }
-    ],
-    "disable_auto_item_recording": [
-      {
-        "class": "uvm_sqr_if_base",
-        "kind": "function",
-        "return_type": "void",
-        "file": "tlm1/uvm_sqr_ifs.svh",
-        "line": 240,
         "overrides": false
       }
     ],
@@ -132458,6 +136953,16 @@ window.UVM_SOURCE_DATABASE = {
         "overrides": false
       }
     ],
+    "get_data_length": [
+      {
+        "class": "uvm_tlm_generic_payload",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "tlm2/uvm_tlm2_generic_payload.svh",
+        "line": 709,
+        "overrides": false
+      }
+    ],
     "set_data_length": [
       {
         "class": "uvm_tlm_generic_payload",
@@ -132465,6 +136970,16 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "void",
         "file": "tlm2/uvm_tlm2_generic_payload.svh",
         "line": 716,
+        "overrides": false
+      }
+    ],
+    "get_streaming_width": [
+      {
+        "class": "uvm_tlm_generic_payload",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "tlm2/uvm_tlm2_generic_payload.svh",
+        "line": 724,
         "overrides": false
       }
     ],
@@ -132495,6 +137010,16 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "void",
         "file": "tlm2/uvm_tlm2_generic_payload.svh",
         "line": 748,
+        "overrides": false
+      }
+    ],
+    "get_byte_enable_length": [
+      {
+        "class": "uvm_tlm_generic_payload",
+        "kind": "function",
+        "return_type": "int unsigned",
+        "file": "tlm2/uvm_tlm2_generic_payload.svh",
+        "line": 756,
         "overrides": false
       }
     ],
@@ -134019,7 +138544,7 @@ window.UVM_SOURCE_DATABASE = {
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 2067
+          "line": 1653
         },
         {
           "class": "uvm_event",
@@ -134101,7 +138626,7 @@ window.UVM_SOURCE_DATABASE = {
     "get_type_name": {
       "declared_in": [
         {
-          "class": "uvm_factory",
+          "class": "uvm_object_wrapper",
           "file": "base/uvm_factory.svh",
           "line": 841
         },
@@ -134114,16 +138639,6 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_port_base",
           "file": "base/uvm_port_base.svh",
           "line": 296
-        },
-        {
-          "class": "uvm_component_registry",
-          "file": "base/uvm_registry.svh",
-          "line": 78
-        },
-        {
-          "class": "uvm_object_registry",
-          "file": "base/uvm_registry.svh",
-          "line": 220
         }
       ],
       "overridden_in": [
@@ -134194,6 +138709,12 @@ window.UVM_SOURCE_DATABASE = {
           "line": 448
         },
         {
+          "class": "uvm_component",
+          "overridden_from": "uvm_object",
+          "file": "base/uvm_component.svh",
+          "line": 1667
+        },
+        {
           "class": "uvm_event_base",
           "overridden_from": "uvm_object",
           "file": "base/uvm_event.svh",
@@ -134231,7 +138752,7 @@ window.UVM_SOURCE_DATABASE = {
         },
         {
           "class": "uvm_port_component",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "base/uvm_port_base.svh",
           "line": 120
         },
@@ -134240,6 +138761,18 @@ window.UVM_SOURCE_DATABASE = {
           "overridden_from": "uvm_object",
           "file": "base/uvm_queue.svh",
           "line": 182
+        },
+        {
+          "class": "uvm_component_registry",
+          "overridden_from": "uvm_object_wrapper",
+          "file": "base/uvm_registry.svh",
+          "line": 78
+        },
+        {
+          "class": "uvm_object_registry",
+          "overridden_from": "uvm_object_wrapper",
+          "file": "base/uvm_registry.svh",
+          "line": 220
         },
         {
           "class": "uvm_report_server",
@@ -134255,7 +138788,7 @@ window.UVM_SOURCE_DATABASE = {
         },
         {
           "class": "uvm_root",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "base/uvm_root.svh",
           "line": 94
         },
@@ -134333,31 +138866,31 @@ window.UVM_SOURCE_DATABASE = {
         },
         {
           "class": "uvm_agent",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_agent.svh",
           "line": 119
         },
         {
           "class": "uvm_algorithmic_comparator",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_algorithmic_comparator.svh",
           "line": 122
         },
         {
           "class": "uvm_driver",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_driver.svh",
           "line": 83
         },
         {
           "class": "uvm_env",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_env.svh",
           "line": 47
         },
         {
           "class": "uvm_in_order_comparator",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_in_order_comparator.svh",
           "line": 129
         },
@@ -134375,7 +138908,7 @@ window.UVM_SOURCE_DATABASE = {
         },
         {
           "class": "uvm_monitor",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_monitor.svh",
           "line": 48
         },
@@ -134393,31 +138926,31 @@ window.UVM_SOURCE_DATABASE = {
         },
         {
           "class": "uvm_push_driver",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_push_driver.svh",
           "line": 91
         },
         {
           "class": "uvm_random_stimulus",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_random_stimulus.svh",
           "line": 127
         },
         {
           "class": "uvm_scoreboard",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_scoreboard.svh",
           "line": 50
         },
         {
           "class": "uvm_test",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "comps/uvm_test.svh",
           "line": 76
         },
         {
           "class": "uvm_reg_predictor",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "reg/uvm_reg_predictor.svh",
           "line": 117
         },
@@ -134453,7 +138986,7 @@ window.UVM_SOURCE_DATABASE = {
         },
         {
           "class": "uvm_sequencer",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "seq/uvm_sequencer.svh",
           "line": 59
         },
@@ -134471,7 +139004,7 @@ window.UVM_SOURCE_DATABASE = {
         },
         {
           "class": "uvm_tlm_fifo",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "tlm1/uvm_tlm_fifos.svh",
           "line": 68
         },
@@ -134483,7 +139016,7 @@ window.UVM_SOURCE_DATABASE = {
         },
         {
           "class": "uvm_tlm_req_rsp_channel",
-          "overridden_from": "uvm_object",
+          "overridden_from": "uvm_component",
           "file": "tlm1/uvm_tlm_req_rsp.svh",
           "line": 274
         }
@@ -134891,157 +139424,13 @@ window.UVM_SOURCE_DATABASE = {
         }
       ]
     },
-    "m_initialize": {
-      "declared_in": [
-        {
-          "class": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 99
-        }
-      ],
-      "overridden_in": [
-        {
-          "class": "uvm_typed_callbacks",
-          "overridden_from": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 190
-        }
-      ]
-    },
-    "m_am_i_a": {
-      "declared_in": [
-        {
-          "class": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 112
-        }
-      ],
-      "overridden_in": [
-        {
-          "class": "uvm_typed_callbacks",
-          "overridden_from": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 200
-        }
-      ]
-    },
-    "m_is_for_me": {
-      "declared_in": [
-        {
-          "class": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 116
-        }
-      ],
-      "overridden_in": [
-        {
-          "class": "uvm_callbacks",
-          "overridden_from": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 567
-        }
-      ]
-    },
-    "m_is_registered": {
-      "declared_in": [
-        {
-          "class": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 120
-        }
-      ],
-      "overridden_in": [
-        {
-          "class": "uvm_callbacks",
-          "overridden_from": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 560
-        }
-      ]
-    },
-    "m_add_tw_cbs": {
-      "declared_in": [
-        {
-          "class": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 128
-        }
-      ],
-      "overridden_in": [
-        {
-          "class": "uvm_typed_callbacks",
-          "overridden_from": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 246
-        }
-      ]
-    },
-    "m_delete_tw_cbs": {
-      "declared_in": [
-        {
-          "class": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 131
-        }
-      ],
-      "overridden_in": [
-        {
-          "class": "uvm_typed_callbacks",
-          "overridden_from": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 288
-        }
-      ]
-    },
-    "check_registration": {
-      "declared_in": [
-        {
-          "class": "uvm_callbacks_base",
-          "file": "base/uvm_callback.svh",
-          "line": 138
-        }
-      ],
-      "overridden_in": []
-    },
-    "m_cb_find": {
-      "declared_in": [
-        {
-          "class": "uvm_typed_callbacks",
-          "file": "base/uvm_callback.svh",
-          "line": 225
-        }
-      ],
-      "overridden_in": []
-    },
-    "m_cb_find_name": {
-      "declared_in": [
-        {
-          "class": "uvm_typed_callbacks",
-          "file": "base/uvm_callback.svh",
-          "line": 232
-        }
-      ],
-      "overridden_in": []
-    },
-    "display": {
-      "declared_in": [
-        {
-          "class": "uvm_typed_callbacks",
-          "file": "base/uvm_callback.svh",
-          "line": 321
-        }
-      ],
-      "overridden_in": [
-        {
-          "class": "uvm_callbacks",
-          "overridden_from": "uvm_typed_callbacks",
-          "file": "base/uvm_callback.svh",
-          "line": 946
-        }
-      ]
-    },
     "get": {
       "declared_in": [
+        {
+          "class": "uvm_typeid",
+          "file": "base/uvm_callback.svh",
+          "line": 66
+        },
         {
           "class": "uvm_callbacks",
           "file": "base/uvm_callback.svh",
@@ -135302,6 +139691,172 @@ window.UVM_SOURCE_DATABASE = {
           "overridden_from": "uvm_tlm_fifo_base",
           "file": "tlm1/uvm_tlm_fifos.svh",
           "line": 118
+        }
+      ]
+    },
+    "m_initialize": {
+      "declared_in": [
+        {
+          "class": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 99
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_typed_callbacks",
+          "overridden_from": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 190
+        }
+      ]
+    },
+    "m_am_i_a": {
+      "declared_in": [
+        {
+          "class": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 112
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_typed_callbacks",
+          "overridden_from": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 200
+        }
+      ]
+    },
+    "m_is_for_me": {
+      "declared_in": [
+        {
+          "class": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 116
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_callbacks",
+          "overridden_from": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 567
+        }
+      ]
+    },
+    "m_is_registered": {
+      "declared_in": [
+        {
+          "class": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 120
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_callbacks",
+          "overridden_from": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 560
+        }
+      ]
+    },
+    "m_get_tw_cb_q": {
+      "declared_in": [
+        {
+          "class": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 124
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_typed_callbacks",
+          "overridden_from": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 208
+        }
+      ]
+    },
+    "m_add_tw_cbs": {
+      "declared_in": [
+        {
+          "class": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 128
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_typed_callbacks",
+          "overridden_from": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 246
+        }
+      ]
+    },
+    "m_delete_tw_cbs": {
+      "declared_in": [
+        {
+          "class": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 131
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_typed_callbacks",
+          "overridden_from": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 288
+        }
+      ]
+    },
+    "check_registration": {
+      "declared_in": [
+        {
+          "class": "uvm_callbacks_base",
+          "file": "base/uvm_callback.svh",
+          "line": 138
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_cb_find": {
+      "declared_in": [
+        {
+          "class": "uvm_typed_callbacks",
+          "file": "base/uvm_callback.svh",
+          "line": 225
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_cb_find_name": {
+      "declared_in": [
+        {
+          "class": "uvm_typed_callbacks",
+          "file": "base/uvm_callback.svh",
+          "line": 232
+        }
+      ],
+      "overridden_in": []
+    },
+    "display": {
+      "declared_in": [
+        {
+          "class": "uvm_typed_callbacks",
+          "file": "base/uvm_callback.svh",
+          "line": 321
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_callbacks",
+          "overridden_from": "uvm_typed_callbacks",
+          "file": "base/uvm_callback.svh",
+          "line": 946
         }
       ]
     },
@@ -136123,6 +140678,21 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
           "line": 170
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_depth": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 179
+        },
+        {
+          "class": "uvm_sequence_item",
+          "file": "seq/uvm_sequence_item.svh",
+          "line": 217
         }
       ],
       "overridden_in": []
@@ -137003,17 +141573,19 @@ window.UVM_SOURCE_DATABASE = {
           "line": 1105
         },
         {
-          "class": "uvm_factory",
+          "class": "uvm_object_wrapper",
           "file": "base/uvm_factory.svh",
           "line": 829
-        },
+        }
+      ],
+      "overridden_in": [
         {
           "class": "uvm_component_registry",
+          "overridden_from": "uvm_object_wrapper",
           "file": "base/uvm_registry.svh",
           "line": 63
         }
-      ],
-      "overridden_in": []
+      ]
     },
     "create_object": {
       "declared_in": [
@@ -137023,12 +141595,41 @@ window.UVM_SOURCE_DATABASE = {
           "line": 1124
         },
         {
+          "class": "uvm_object_wrapper",
+          "file": "base/uvm_factory.svh",
+          "line": 818
+        }
+      ],
+      "overridden_in": [
+        {
           "class": "uvm_object_registry",
+          "overridden_from": "uvm_object_wrapper",
           "file": "base/uvm_registry.svh",
           "line": 200
         }
+      ]
+    },
+    "set_type_override_by_type": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1147
+        },
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 165
+        }
       ],
-      "overridden_in": []
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 363
+        }
+      ]
     },
     "set_inst_override_by_type": {
       "declared_in": [
@@ -137036,9 +141637,21 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
           "line": 1204
+        },
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 125
         }
       ],
-      "overridden_in": []
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 345
+        }
+      ]
     },
     "set_type_override": {
       "declared_in": [
@@ -137272,7 +141885,7 @@ window.UVM_SOURCE_DATABASE = {
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 1480
+          "line": 1479
         },
         {
           "class": "uvm_transaction",
@@ -137282,12 +141895,104 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
-    "m_apply_verbosity_settings": {
+    "end_tr": {
       "declared_in": [
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 1681
+          "line": 1509
+        },
+        {
+          "class": "uvm_recorder",
+          "file": "base/uvm_recorder.svh",
+          "line": 699
+        },
+        {
+          "class": "uvm_transaction",
+          "file": "base/uvm_transaction.svh",
+          "line": 284
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_text_recorder",
+          "overridden_from": "uvm_recorder",
+          "file": "base/uvm_recorder.svh",
+          "line": 1103
+        }
+      ]
+    },
+    "do_end_tr": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1520
+        },
+        {
+          "class": "uvm_transaction",
+          "file": "base/uvm_transaction.svh",
+          "line": 293
+        }
+      ],
+      "overridden_in": []
+    },
+    "record_error_tr": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1538
+        }
+      ],
+      "overridden_in": []
+    },
+    "record_event_tr": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1558
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_tr_stream": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1578
+        }
+      ],
+      "overridden_in": []
+    },
+    "free_tr_stream": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1587
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_get_tr_database": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1605
+        }
+      ],
+      "overridden_in": []
+    },
+    "set_int_local": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1633
         }
       ],
       "overridden_in": []
@@ -137297,7 +142002,7 @@ window.UVM_SOURCE_DATABASE = {
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 1822
+          "line": 1640
         }
       ],
       "overridden_in": [
@@ -137314,17 +142019,27 @@ window.UVM_SOURCE_DATABASE = {
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 1946
+          "line": 1641
         }
       ],
       "overridden_in": []
     },
-    "m_extract_name": {
+    "do_resolve_bindings": {
       "declared_in": [
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 2012
+          "line": 1643
+        }
+      ],
+      "overridden_in": []
+    },
+    "do_flush": {
+      "declared_in": [
+        {
+          "class": "uvm_component",
+          "file": "base/uvm_component.svh",
+          "line": 1644
         }
       ],
       "overridden_in": []
@@ -137334,7 +142049,7 @@ window.UVM_SOURCE_DATABASE = {
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 2041
+          "line": 1646
         }
       ],
       "overridden_in": [
@@ -137358,12 +142073,12 @@ window.UVM_SOURCE_DATABASE = {
         }
       ]
     },
-    "do_flush": {
+    "m_extract_name": {
       "declared_in": [
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 2049
+          "line": 1648
         }
       ],
       "overridden_in": []
@@ -137373,7 +142088,7 @@ window.UVM_SOURCE_DATABASE = {
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 2077
+          "line": 1654
         },
         {
           "class": "uvm_report_message_element_base",
@@ -137418,62 +142133,12 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
-    "set_type_override_by_type": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 2133
-        }
-      ],
-      "overridden_in": []
-    },
-    "do_resolve_bindings": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 2586
-        }
-      ],
-      "overridden_in": []
-    },
-    "m_get_tr_database": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 2639
-        }
-      ],
-      "overridden_in": []
-    },
-    "get_tr_stream": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 2649
-        }
-      ],
-      "overridden_in": []
-    },
-    "free_tr_stream": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 2659
-        }
-      ],
-      "overridden_in": []
-    },
     "m_begin_tr": {
       "declared_in": [
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 2687
+          "line": 1659
         },
         {
           "class": "uvm_transaction",
@@ -137483,74 +142148,12 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
-    "end_tr": {
+    "m_apply_verbosity_settings": {
       "declared_in": [
         {
           "class": "uvm_component",
           "file": "base/uvm_component.svh",
-          "line": 2785
-        },
-        {
-          "class": "uvm_recorder",
-          "file": "base/uvm_recorder.svh",
-          "line": 699
-        },
-        {
-          "class": "uvm_transaction",
-          "file": "base/uvm_transaction.svh",
-          "line": 284
-        }
-      ],
-      "overridden_in": [
-        {
-          "class": "uvm_text_recorder",
-          "overridden_from": "uvm_recorder",
-          "file": "base/uvm_recorder.svh",
-          "line": 1103
-        }
-      ]
-    },
-    "record_error_tr": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 2831
-        }
-      ],
-      "overridden_in": []
-    },
-    "record_event_tr": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 2889
-        }
-      ],
-      "overridden_in": []
-    },
-    "do_end_tr": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 2963
-        },
-        {
-          "class": "uvm_transaction",
-          "file": "base/uvm_transaction.svh",
-          "line": 293
-        }
-      ],
-      "overridden_in": []
-    },
-    "set_int_local": {
-      "declared_in": [
-        {
-          "class": "uvm_component",
-          "file": "base/uvm_component.svh",
-          "line": 3344
+          "line": 1681
         }
       ],
       "overridden_in": []
@@ -137851,6 +142454,23 @@ window.UVM_SOURCE_DATABASE = {
         }
       ]
     },
+    "get_component_visitor": {
+      "declared_in": [
+        {
+          "class": "uvm_coreservice_t",
+          "file": "base/uvm_coreservice.svh",
+          "line": 86
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_coreservice_t",
+          "overridden_from": "uvm_coreservice_t",
+          "file": "base/uvm_coreservice.svh",
+          "line": 213
+        }
+      ]
+    },
     "get_root": {
       "declared_in": [
         {
@@ -138130,14 +142750,260 @@ window.UVM_SOURCE_DATABASE = {
           "line": 170
         }
       ],
-      "overridden_in": []
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 338
+        }
+      ]
+    },
+    "set_inst_override_by_name": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 157
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 355
+        }
+      ]
+    },
+    "set_type_override_by_name": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 189
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 374
+        }
+      ]
+    },
+    "create_object_by_type": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 199
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 384
+        }
+      ]
+    },
+    "create_component_by_type": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 206
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 391
+        }
+      ]
+    },
+    "create_object_by_name": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 214
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 399
+        }
+      ]
+    },
+    "create_component_by_name": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 255
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 409
+        }
+      ]
+    },
+    "debug_create_by_type": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 265
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 419
+        }
+      ]
+    },
+    "debug_create_by_name": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 278
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 428
+        }
+      ]
+    },
+    "find_override_by_type": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 286
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 436
+        }
+      ]
+    },
+    "find_override_by_name": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 297
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 445
+        }
+      ]
     },
     "find_wrapper_by_name": {
       "declared_in": [
         {
           "class": "uvm_factory",
           "file": "base/uvm_factory.svh",
-          "line": 306
+          "line": 305
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 449
+        }
+      ]
+    },
+    "print": {
+      "declared_in": [
+        {
+          "class": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 319
+        },
+        {
+          "class": "uvm_report_message_element_base",
+          "file": "base/uvm_report_message.svh",
+          "line": 79
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_default_factory",
+          "overridden_from": "uvm_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 457
+        }
+      ]
+    },
+    "m_debug_create": {
+      "declared_in": [
+        {
+          "class": "uvm_default_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 463
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_debug_display": {
+      "declared_in": [
+        {
+          "class": "uvm_default_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 469
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_has_wildcard": {
+      "declared_in": [
+        {
+          "class": "uvm_default_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 487
+        }
+      ],
+      "overridden_in": []
+    },
+    "check_inst_override_exists": {
+      "declared_in": [
+        {
+          "class": "uvm_default_factory",
+          "file": "base/uvm_factory.svh",
+          "line": 489
         }
       ],
       "overridden_in": []
@@ -139028,7 +143894,7 @@ window.UVM_SOURCE_DATABASE = {
         {
           "class": "uvm_sequencer_base",
           "file": "seq/uvm_sequencer_base.svh",
-          "line": 576
+          "line": 415
         },
         {
           "class": "uvm_tlm_generic_payload",
@@ -139368,6 +144234,36 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_packer",
           "file": "base/uvm_packer.svh",
           "line": 380
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_bit": {
+      "declared_in": [
+        {
+          "class": "uvm_packer",
+          "file": "base/uvm_packer.svh",
+          "line": 382
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_byte": {
+      "declared_in": [
+        {
+          "class": "uvm_packer",
+          "file": "base/uvm_packer.svh",
+          "line": 383
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_int": {
+      "declared_in": [
+        {
+          "class": "uvm_packer",
+          "file": "base/uvm_packer.svh",
+          "line": 384
         }
       ],
       "overridden_in": []
@@ -140114,6 +145010,11 @@ window.UVM_SOURCE_DATABASE = {
           "line": 307
         },
         {
+          "class": "uvm_reg_fifo",
+          "file": "reg/uvm_reg_fifo.svh",
+          "line": 103
+        },
+        {
           "class": "uvm_tlm_fifo_base",
           "file": "tlm1/uvm_tlm_fifo_base.svh",
           "line": 175
@@ -140194,6 +145095,16 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_port_base",
           "file": "base/uvm_port_base.svh",
           "line": 705
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_if": {
+      "declared_in": [
+        {
+          "class": "uvm_port_base",
+          "file": "base/uvm_port_base.svh",
+          "line": 772
         }
       ],
       "overridden_in": []
@@ -141785,16 +146696,6 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
-    "print": {
-      "declared_in": [
-        {
-          "class": "uvm_report_message_element_base",
-          "file": "base/uvm_report_message.svh",
-          "line": 79
-        }
-      ],
-      "overridden_in": []
-    },
     "record": {
       "declared_in": [
         {
@@ -143084,6 +147985,16 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_resource_db",
           "file": "base/uvm_resource_db.svh",
           "line": 324
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_get_converter": {
+      "declared_in": [
+        {
+          "class": "uvm_resource",
+          "file": "base/uvm_resource.svh",
+          "line": 1390
         }
       ],
       "overridden_in": []
@@ -144790,6 +149701,101 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
+    "get_size": {
+      "declared_in": [
+        {
+          "class": "uvm_mem",
+          "file": "reg/uvm_mem.svh",
+          "line": 243
+        },
+        {
+          "class": "uvm_reg_map",
+          "file": "reg/uvm_reg_map.svh",
+          "line": 488
+        },
+        {
+          "class": "uvm_vreg",
+          "file": "reg/uvm_vreg.svh",
+          "line": 316
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_n_bytes": {
+      "declared_in": [
+        {
+          "class": "uvm_mem",
+          "file": "reg/uvm_mem.svh",
+          "line": 250
+        },
+        {
+          "class": "uvm_mem_region",
+          "file": "reg/uvm_mem_mam.svh",
+          "line": 336
+        },
+        {
+          "class": "uvm_reg",
+          "file": "reg/uvm_reg.svh",
+          "line": 228
+        },
+        {
+          "class": "uvm_reg_map",
+          "file": "reg/uvm_reg_map.svh",
+          "line": 375
+        },
+        {
+          "class": "uvm_vreg",
+          "file": "reg/uvm_vreg.svh",
+          "line": 327
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_n_bits": {
+      "declared_in": [
+        {
+          "class": "uvm_mem",
+          "file": "reg/uvm_mem.svh",
+          "line": 257
+        },
+        {
+          "class": "uvm_reg",
+          "file": "reg/uvm_reg.svh",
+          "line": 220
+        },
+        {
+          "class": "uvm_reg_field",
+          "file": "reg/uvm_reg_field.svh",
+          "line": 169
+        },
+        {
+          "class": "uvm_vreg_field",
+          "file": "reg/uvm_vreg_field.svh",
+          "line": 132
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_max_size": {
+      "declared_in": [
+        {
+          "class": "uvm_mem",
+          "file": "reg/uvm_mem.svh",
+          "line": 264
+        },
+        {
+          "class": "uvm_reg",
+          "file": "reg/uvm_reg.svh",
+          "line": 235
+        },
+        {
+          "class": "uvm_reg_field",
+          "file": "reg/uvm_reg_field.svh",
+          "line": 175
+        }
+      ],
+      "overridden_in": []
+    },
     "get_virtual_registers": {
       "declared_in": [
         {
@@ -144906,6 +149912,11 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_vreg",
           "file": "reg/uvm_vreg.svh",
           "line": 391
+        },
+        {
+          "class": "uvm_tlm_generic_payload",
+          "file": "tlm2/uvm_tlm2_generic_payload.svh",
+          "line": 685
         }
       ],
       "overridden_in": []
@@ -145535,6 +150546,36 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
+    "get_start_offset": {
+      "declared_in": [
+        {
+          "class": "uvm_mem_region",
+          "file": "reg/uvm_mem_mam.svh",
+          "line": 304
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_end_offset": {
+      "declared_in": [
+        {
+          "class": "uvm_mem_region",
+          "file": "reg/uvm_mem_mam.svh",
+          "line": 314
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_len": {
+      "declared_in": [
+        {
+          "class": "uvm_mem_region",
+          "file": "reg/uvm_mem_mam.svh",
+          "line": 324
+        }
+      ],
+      "overridden_in": []
+    },
     "get_regfile": {
       "declared_in": [
         {
@@ -145637,6 +150678,21 @@ window.UVM_SOURCE_DATABASE = {
         }
       ]
     },
+    "get_reset": {
+      "declared_in": [
+        {
+          "class": "uvm_reg",
+          "file": "reg/uvm_reg.svh",
+          "line": 433
+        },
+        {
+          "class": "uvm_reg_field",
+          "file": "reg/uvm_reg_field.svh",
+          "line": 403
+        }
+      ],
+      "overridden_in": []
+    },
     "has_reset": {
       "declared_in": [
         {
@@ -145648,6 +150704,21 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_reg_field",
           "file": "reg/uvm_reg_field.svh",
           "line": 414
+        }
+      ],
+      "overridden_in": []
+    },
+    "set_reset": {
+      "declared_in": [
+        {
+          "class": "uvm_reg",
+          "file": "reg/uvm_reg.svh",
+          "line": 454
+        },
+        {
+          "class": "uvm_reg_field",
+          "file": "reg/uvm_reg_field.svh",
+          "line": 425
         }
       ],
       "overridden_in": []
@@ -145741,6 +150812,34 @@ window.UVM_SOURCE_DATABASE = {
         }
       ],
       "overridden_in": []
+    },
+    "do_predict": {
+      "declared_in": [
+        {
+          "class": "uvm_reg",
+          "file": "reg/uvm_reg.svh",
+          "line": 679
+        },
+        {
+          "class": "uvm_reg_field",
+          "file": "reg/uvm_reg_field.svh",
+          "line": 686
+        }
+      ],
+      "overridden_in": [
+        {
+          "class": "uvm_reg_fifo",
+          "overridden_from": "uvm_reg",
+          "file": "reg/uvm_reg_fifo.svh",
+          "line": 226
+        },
+        {
+          "class": "uvm_reg_indirect_data",
+          "overridden_from": "uvm_reg",
+          "file": "reg/uvm_reg_indirect.svh",
+          "line": 114
+        }
+      ]
     },
     "backdoor_watch": {
       "declared_in": [
@@ -146376,6 +151475,16 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
+    "get_lsb_pos": {
+      "declared_in": [
+        {
+          "class": "uvm_reg_field",
+          "file": "reg/uvm_reg_field.svh",
+          "line": 162
+        }
+      ],
+      "overridden_in": []
+    },
     "set_access": {
       "declared_in": [
         {
@@ -146432,26 +151541,6 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_reg_field",
           "file": "reg/uvm_reg_field.svh",
           "line": 298
-        }
-      ],
-      "overridden_in": []
-    },
-    "get_reset": {
-      "declared_in": [
-        {
-          "class": "uvm_reg_field",
-          "file": "reg/uvm_reg_field.svh",
-          "line": 403
-        }
-      ],
-      "overridden_in": []
-    },
-    "set_reset": {
-      "declared_in": [
-        {
-          "class": "uvm_reg_field",
-          "file": "reg/uvm_reg_field.svh",
-          "line": 425
         }
       ],
       "overridden_in": []
@@ -146551,17 +151640,12 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
-    "do_predict": {
+    "capacity": {
       "declared_in": [
         {
           "class": "uvm_reg_fifo",
           "file": "reg/uvm_reg_fifo.svh",
-          "line": 226
-        },
-        {
-          "class": "uvm_reg_indirect_data",
-          "file": "reg/uvm_reg_indirect.svh",
-          "line": 114
+          "line": 112
         }
       ],
       "overridden_in": []
@@ -146712,6 +151796,16 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_reg_map",
           "file": "reg/uvm_reg_map.svh",
           "line": 364
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_addr_unit_bytes": {
+      "declared_in": [
+        {
+          "class": "uvm_reg_map",
+          "file": "reg/uvm_reg_map.svh",
+          "line": 384
         }
       ],
       "overridden_in": []
@@ -147123,6 +152217,26 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
+    "get_n_memlocs": {
+      "declared_in": [
+        {
+          "class": "uvm_vreg",
+          "file": "reg/uvm_vreg.svh",
+          "line": 334
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_incr": {
+      "declared_in": [
+        {
+          "class": "uvm_vreg",
+          "file": "reg/uvm_vreg.svh",
+          "line": 341
+        }
+      ],
+      "overridden_in": []
+    },
     "get_offset_in_memory": {
       "declared_in": [
         {
@@ -147203,12 +152317,22 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
+    "get_lsb_pos_in_register": {
+      "declared_in": [
+        {
+          "class": "uvm_vreg_field",
+          "file": "reg/uvm_vreg_field.svh",
+          "line": 126
+        }
+      ],
+      "overridden_in": []
+    },
     "m_find_number_driver_connections": {
       "declared_in": [
         {
           "class": "uvm_sequencer_base",
           "file": "seq/uvm_sequencer_base.svh",
-          "line": 595
+          "line": 416
         }
       ],
       "overridden_in": [
@@ -147862,6 +152986,16 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
+    "get_count": {
+      "declared_in": [
+        {
+          "class": "uvm_random_sequence",
+          "file": "seq/uvm_sequence_builtin.svh",
+          "line": 67
+        }
+      ],
+      "overridden_in": []
+    },
     "set_sequence_id": {
       "declared_in": [
         {
@@ -147952,16 +153086,6 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
-    "get_depth": {
-      "declared_in": [
-        {
-          "class": "uvm_sequence_item",
-          "file": "seq/uvm_sequence_item.svh",
-          "line": 217
-        }
-      ],
-      "overridden_in": []
-    },
     "get_root_sequence_name": {
       "declared_in": [
         {
@@ -147998,6 +153122,16 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_sequence_item",
           "file": "seq/uvm_sequence_item.svh",
           "line": 309
+        }
+      ],
+      "overridden_in": []
+    },
+    "select_sequence": {
+      "declared_in": [
+        {
+          "class": "uvm_sequence_library",
+          "file": "seq/uvm_sequence_library.svh",
+          "line": 243
         }
       ],
       "overridden_in": []
@@ -148476,7 +153610,72 @@ window.UVM_SOURCE_DATABASE = {
         {
           "class": "uvm_sequencer_base",
           "file": "seq/uvm_sequencer_base.svh",
-          "line": 410
+          "line": 409
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_find_sequence": {
+      "declared_in": [
+        {
+          "class": "uvm_sequencer_base",
+          "file": "seq/uvm_sequencer_base.svh",
+          "line": 411
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_update_lists": {
+      "declared_in": [
+        {
+          "class": "uvm_sequencer_base",
+          "file": "seq/uvm_sequencer_base.svh",
+          "line": 414
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_wait_arb_not_equal": {
+      "declared_in": [
+        {
+          "class": "uvm_sequencer_base",
+          "file": "seq/uvm_sequencer_base.svh",
+          "line": 418
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_wait_for_available_sequence": {
+      "declared_in": [
+        {
+          "class": "uvm_sequencer_base",
+          "file": "seq/uvm_sequencer_base.svh",
+          "line": 419
+        }
+      ],
+      "overridden_in": []
+    },
+    "m_get_seq_item_priority": {
+      "declared_in": [
+        {
+          "class": "uvm_sequencer_base",
+          "file": "seq/uvm_sequencer_base.svh",
+          "line": 420
+        }
+      ],
+      "overridden_in": []
+    },
+    "disable_auto_item_recording": {
+      "declared_in": [
+        {
+          "class": "uvm_sequencer_base",
+          "file": "seq/uvm_sequencer_base.svh",
+          "line": 434
+        },
+        {
+          "class": "uvm_sqr_if_base",
+          "file": "tlm1/uvm_sqr_ifs.svh",
+          "line": 240
         }
       ],
       "overridden_in": []
@@ -148526,56 +153725,6 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
-    "m_update_lists": {
-      "declared_in": [
-        {
-          "class": "uvm_sequencer_base",
-          "file": "seq/uvm_sequencer_base.svh",
-          "line": 568
-        }
-      ],
-      "overridden_in": []
-    },
-    "m_find_sequence": {
-      "declared_in": [
-        {
-          "class": "uvm_sequencer_base",
-          "file": "seq/uvm_sequencer_base.svh",
-          "line": 617
-        }
-      ],
-      "overridden_in": []
-    },
-    "m_wait_arb_not_equal": {
-      "declared_in": [
-        {
-          "class": "uvm_sequencer_base",
-          "file": "seq/uvm_sequencer_base.svh",
-          "line": 876
-        }
-      ],
-      "overridden_in": []
-    },
-    "m_wait_for_available_sequence": {
-      "declared_in": [
-        {
-          "class": "uvm_sequencer_base",
-          "file": "seq/uvm_sequencer_base.svh",
-          "line": 884
-        }
-      ],
-      "overridden_in": []
-    },
-    "m_get_seq_item_priority": {
-      "declared_in": [
-        {
-          "class": "uvm_sequencer_base",
-          "file": "seq/uvm_sequencer_base.svh",
-          "line": 957
-        }
-      ],
-      "overridden_in": []
-    },
     "get_num_reqs_sent": {
       "declared_in": [
         {
@@ -148592,6 +153741,16 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_sequencer_param_base",
           "file": "seq/uvm_sequencer_param_base.svh",
           "line": 106
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_num_last_reqs": {
+      "declared_in": [
+        {
+          "class": "uvm_sequencer_param_base",
+          "file": "seq/uvm_sequencer_param_base.svh",
+          "line": 113
         }
       ],
       "overridden_in": []
@@ -148626,6 +153785,16 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
+    "get_num_last_rsps": {
+      "declared_in": [
+        {
+          "class": "uvm_sequencer_param_base",
+          "file": "seq/uvm_sequencer_param_base.svh",
+          "line": 179
+        }
+      ],
+      "overridden_in": []
+    },
     "last_rsp": {
       "declared_in": [
         {
@@ -148652,16 +153821,6 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_sequencer_param_base",
           "file": "seq/uvm_sequencer_param_base.svh",
           "line": 449
-        }
-      ],
-      "overridden_in": []
-    },
-    "disable_auto_item_recording": {
-      "declared_in": [
-        {
-          "class": "uvm_sqr_if_base",
-          "file": "tlm1/uvm_sqr_ifs.svh",
-          "line": 240
         }
       ],
       "overridden_in": []
@@ -148987,12 +154146,32 @@ window.UVM_SOURCE_DATABASE = {
       ],
       "overridden_in": []
     },
+    "get_data_length": {
+      "declared_in": [
+        {
+          "class": "uvm_tlm_generic_payload",
+          "file": "tlm2/uvm_tlm2_generic_payload.svh",
+          "line": 709
+        }
+      ],
+      "overridden_in": []
+    },
     "set_data_length": {
       "declared_in": [
         {
           "class": "uvm_tlm_generic_payload",
           "file": "tlm2/uvm_tlm2_generic_payload.svh",
           "line": 716
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_streaming_width": {
+      "declared_in": [
+        {
+          "class": "uvm_tlm_generic_payload",
+          "file": "tlm2/uvm_tlm2_generic_payload.svh",
+          "line": 724
         }
       ],
       "overridden_in": []
@@ -149023,6 +154202,16 @@ window.UVM_SOURCE_DATABASE = {
           "class": "uvm_tlm_generic_payload",
           "file": "tlm2/uvm_tlm2_generic_payload.svh",
           "line": 748
+        }
+      ],
+      "overridden_in": []
+    },
+    "get_byte_enable_length": {
+      "declared_in": [
+        {
+          "class": "uvm_tlm_generic_payload",
+          "file": "tlm2/uvm_tlm2_generic_payload.svh",
+          "line": 756
         }
       ],
       "overridden_in": []
@@ -149463,6 +154652,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "Class - uvm_typeid#(T)"
     },
     {
+      "name": "uvm_typeid::get",
+      "short_name": "get",
+      "type": "function",
+      "class": "uvm_typeid",
+      "file": "base/uvm_callback.svh",
+      "line": 66,
+      "summary": ""
+    },
+    {
       "name": "uvm_callbacks_base",
       "type": "class",
       "class": null,
@@ -149504,6 +154702,15 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_callbacks_base",
       "file": "base/uvm_callback.svh",
       "line": 120,
+      "summary": ""
+    },
+    {
+      "name": "uvm_callbacks_base::m_get_tw_cb_q",
+      "short_name": "m_get_tw_cb_q",
+      "type": "function",
+      "class": "uvm_callbacks_base",
+      "file": "base/uvm_callback.svh",
+      "line": 124,
       "summary": ""
     },
     {
@@ -149557,6 +154764,15 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_typed_callbacks",
       "file": "base/uvm_callback.svh",
       "line": 200,
+      "summary": ""
+    },
+    {
+      "name": "uvm_typed_callbacks::m_get_tw_cb_q",
+      "short_name": "m_get_tw_cb_q",
+      "type": "function",
+      "class": "uvm_typed_callbacks",
+      "file": "base/uvm_callback.svh",
+      "line": 208,
       "summary": ""
     },
     {
@@ -150587,6 +155803,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "lookup"
     },
     {
+      "name": "uvm_component::get_depth",
+      "short_name": "get_depth",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 179,
+      "summary": "get_depth"
+    },
+    {
       "name": "uvm_component::build_phase",
       "short_name": "build_phase",
       "type": "function",
@@ -151136,6 +156361,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "A convenience function for <uvm_factory::create_object_by_name>, this method calls upon the factory to create a new object whose type corresponds to the preregistered type name, ~requested_type_name~, and instance name, ~name~. This method is equivalent to:"
     },
     {
+      "name": "uvm_component::set_type_override_by_type",
+      "short_name": "set_type_override_by_type",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1147,
+      "summary": "A convenience function for <uvm_factory::set_type_override_by_type>, this method registers a factory override for components and objects created at this level of hierarchy or below. This method is equivalent to:"
+    },
+    {
       "name": "uvm_component::set_inst_override_by_type",
       "short_name": "set_inst_override_by_type",
       "type": "function",
@@ -151303,8 +156537,170 @@ window.UVM_SOURCE_DATABASE = {
       "type": "function",
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
-      "line": 1480,
-      "summary": "The <begin_tr> and <begin_child_tr> methods call this function to accommodate any user-defined post-begin action. Implementations should call super.do_begin_tr to ensure correct operation."
+      "line": 1479,
+      "summary": "The <begin_tr> and <begin_child_tr> methods call this function to accommodate any user-defined post-begin action. Implementations should call"
+    },
+    {
+      "name": "uvm_component::end_tr",
+      "short_name": "end_tr",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1509,
+      "summary": "This function marks the end of a transaction, ~tr~, by this component. Specifically, it performs the following actions:"
+    },
+    {
+      "name": "uvm_component::do_end_tr",
+      "short_name": "do_end_tr",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1520,
+      "summary": "The <end_tr> method calls this function to accommodate any user-defined post-end action. Implementations should call super.do_end_tr to ensure correct operation."
+    },
+    {
+      "name": "uvm_component::record_error_tr",
+      "short_name": "record_error_tr",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1538,
+      "summary": "This function marks an error transaction by a component. Properties of the given uvm_object, ~info~, as implemented in its <uvm_object::do_record> method, are recorded to the transaction database."
+    },
+    {
+      "name": "uvm_component::record_event_tr",
+      "short_name": "record_event_tr",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1558,
+      "summary": "This function marks an event transaction by a component."
+    },
+    {
+      "name": "uvm_component::get_tr_stream",
+      "short_name": "get_tr_stream",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1578,
+      "summary": "Returns a tr stream with ~this~ component's full name as a scope."
+    },
+    {
+      "name": "uvm_component::free_tr_stream",
+      "short_name": "free_tr_stream",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1587,
+      "summary": "free_tr_stream"
+    },
+    {
+      "name": "uvm_component::m_get_tr_database",
+      "short_name": "m_get_tr_database",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1605,
+      "summary": "m_get_tr_database"
+    },
+    {
+      "name": "uvm_component::set_int_local",
+      "short_name": "set_int_local",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1633,
+      "summary": "protected*/ bit  m_build_done; protected*/ int  m_phasing_active;"
+    },
+    {
+      "name": "uvm_component::m_add_child",
+      "short_name": "m_add_child",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1640,
+      "summary": "m_add_child"
+    },
+    {
+      "name": "uvm_component::m_set_full_name",
+      "short_name": "m_set_full_name",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1641,
+      "summary": "m_set_full_name"
+    },
+    {
+      "name": "uvm_component::do_resolve_bindings",
+      "short_name": "do_resolve_bindings",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1643,
+      "summary": "do_resolve_bindings"
+    },
+    {
+      "name": "uvm_component::do_flush",
+      "short_name": "do_flush",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1644,
+      "summary": "do_flush  (flush_hier?)"
+    },
+    {
+      "name": "uvm_component::flush",
+      "short_name": "flush",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1646,
+      "summary": "flush"
+    },
+    {
+      "name": "uvm_component::m_extract_name",
+      "short_name": "m_extract_name",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1648,
+      "summary": "m_extract_name"
+    },
+    {
+      "name": "uvm_component::create",
+      "short_name": "create",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1653,
+      "summary": "Factory Methods"
+    },
+    {
+      "name": "uvm_component::clone",
+      "short_name": "clone",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1654,
+      "summary": "clone"
+    },
+    {
+      "name": "uvm_component::m_begin_tr",
+      "short_name": "m_begin_tr",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1659,
+      "summary": "m_begin_tr"
+    },
+    {
+      "name": "uvm_component::get_type_name",
+      "short_name": "get_type_name",
+      "type": "function",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1667,
+      "summary": ""
     },
     {
       "name": "uvm_component::do_print",
@@ -151323,168 +156719,6 @@ window.UVM_SOURCE_DATABASE = {
       "file": "base/uvm_component.svh",
       "line": 1681,
       "summary": "m_apply_verbosity_settings"
-    },
-    {
-      "name": "uvm_component::m_add_child",
-      "short_name": "m_add_child",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 1822,
-      "summary": "m_add_child"
-    },
-    {
-      "name": "uvm_component::m_set_full_name",
-      "short_name": "m_set_full_name",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 1946,
-      "summary": "m_set_full_name"
-    },
-    {
-      "name": "uvm_component::m_extract_name",
-      "short_name": "m_extract_name",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2012,
-      "summary": "m_extract_name"
-    },
-    {
-      "name": "uvm_component::flush",
-      "short_name": "flush",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2041,
-      "summary": "flush"
-    },
-    {
-      "name": "uvm_component::do_flush",
-      "short_name": "do_flush",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2049,
-      "summary": "do_flush  (flush_hier?)"
-    },
-    {
-      "name": "uvm_component::create",
-      "short_name": "create",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2067,
-      "summary": "Factory Methods"
-    },
-    {
-      "name": "uvm_component::clone",
-      "short_name": "clone",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2077,
-      "summary": "clone"
-    },
-    {
-      "name": "uvm_component::set_type_override_by_type",
-      "short_name": "set_type_override_by_type",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2133,
-      "summary": "set_type_override_by_type (static)"
-    },
-    {
-      "name": "uvm_component::do_resolve_bindings",
-      "short_name": "do_resolve_bindings",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2586,
-      "summary": "do_resolve_bindings"
-    },
-    {
-      "name": "uvm_component::m_get_tr_database",
-      "short_name": "m_get_tr_database",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2639,
-      "summary": "m_get_tr_database"
-    },
-    {
-      "name": "uvm_component::get_tr_stream",
-      "short_name": "get_tr_stream",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2649,
-      "summary": "get_tr_stream"
-    },
-    {
-      "name": "uvm_component::free_tr_stream",
-      "short_name": "free_tr_stream",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2659,
-      "summary": "free_tr_stream"
-    },
-    {
-      "name": "uvm_component::m_begin_tr",
-      "short_name": "m_begin_tr",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2687,
-      "summary": "m_begin_tr"
-    },
-    {
-      "name": "uvm_component::end_tr",
-      "short_name": "end_tr",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2785,
-      "summary": "end_tr"
-    },
-    {
-      "name": "uvm_component::record_error_tr",
-      "short_name": "record_error_tr",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2831,
-      "summary": "record_error_tr"
-    },
-    {
-      "name": "uvm_component::record_event_tr",
-      "short_name": "record_event_tr",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2889,
-      "summary": "record_event_tr"
-    },
-    {
-      "name": "uvm_component::do_end_tr",
-      "short_name": "do_end_tr",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 2963,
-      "summary": "do_end_tr"
-    },
-    {
-      "name": "uvm_component::set_int_local",
-      "short_name": "set_int_local",
-      "type": "function",
-      "class": "uvm_component",
-      "file": "base/uvm_component.svh",
-      "line": 3344,
-      "summary": "set_int_local (override)"
     },
     {
       "name": "uvm_config_object_wrapper",
@@ -151671,6 +156905,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_coreservice_t::get_component_visitor",
+      "short_name": "get_component_visitor",
+      "type": "function",
+      "class": "uvm_coreservice_t",
+      "file": "base/uvm_coreservice.svh",
+      "line": 86,
+      "summary": ""
+    },
+    {
       "name": "uvm_coreservice_t::get_root",
       "short_name": "get_root",
       "type": "function",
@@ -151766,6 +157009,15 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_default_coreservice_t",
       "file": "base/uvm_coreservice.svh",
       "line": 206,
+      "summary": ""
+    },
+    {
+      "name": "uvm_default_coreservice_t::get_component_visitor",
+      "short_name": "get_component_visitor",
+      "type": "function",
+      "class": "uvm_default_coreservice_t",
+      "file": "base/uvm_coreservice.svh",
+      "line": 213,
       "summary": ""
     },
     {
@@ -152168,28 +157420,341 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_factory::set_inst_override_by_type",
+      "short_name": "set_inst_override_by_type",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 125,
+      "summary": ""
+    },
+    {
+      "name": "uvm_factory::set_inst_override_by_name",
+      "short_name": "set_inst_override_by_name",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 157,
+      "summary": "Configures the factory to create an object of the override's type whenever a request is made to create an object of the original type using a context that matches ~full_inst_path~. The original type is typically a super class of the override type."
+    },
+    {
+      "name": "uvm_factory::set_type_override_by_type",
+      "short_name": "set_type_override_by_type",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 165,
+      "summary": ""
+    },
+    {
+      "name": "uvm_factory::set_type_override_by_name",
+      "short_name": "set_type_override_by_name",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 189,
+      "summary": "Configures the factory to create an object of the override's type whenever a request is made to create an object of the original type, provided no instance override applies. The original type is typically a super class of the override type."
+    },
+    {
+      "name": "uvm_factory::create_object_by_type",
+      "short_name": "create_object_by_type",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 199,
+      "summary": ""
+    },
+    {
+      "name": "uvm_factory::create_component_by_type",
+      "short_name": "create_component_by_type",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 206,
+      "summary": ""
+    },
+    {
+      "name": "uvm_factory::create_object_by_name",
+      "short_name": "create_object_by_name",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 214,
+      "summary": ""
+    },
+    {
+      "name": "uvm_factory::create_component_by_name",
+      "short_name": "create_component_by_name",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 255,
+      "summary": "Creates and returns a component or object of the requested type, which may be specified by type or by name. A requested component must be derived from the <uvm_component> base class, and a requested object must be derived from the <uvm_object> base class."
+    },
+    {
+      "name": "uvm_factory::debug_create_by_type",
+      "short_name": "debug_create_by_type",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 265,
+      "summary": ""
+    },
+    {
+      "name": "uvm_factory::debug_create_by_name",
+      "short_name": "debug_create_by_name",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 278,
+      "summary": "These methods perform the same search algorithm as the ~create_*~ methods, but they do not create new objects. Instead, they provide detailed information about what type of object it would return, listing each override that was applied to arrive at the result. Interpretation of the"
+    },
+    {
+      "name": "uvm_factory::find_override_by_type",
+      "short_name": "find_override_by_type",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 286,
+      "summary": ""
+    },
+    {
+      "name": "uvm_factory::find_override_by_name",
+      "short_name": "find_override_by_name",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 297,
+      "summary": "These methods return the proxy to the object that would be created given the arguments. The ~full_inst_path~ is typically derived from the parent's instance path and the leaf name of the object to be created, i.e. { parent.get_full_name(), \".\", name }."
+    },
+    {
       "name": "uvm_factory::find_wrapper_by_name",
       "short_name": "find_wrapper_by_name",
       "type": "function",
       "class": "uvm_factory",
       "file": "base/uvm_factory.svh",
-      "line": 306,
+      "line": 305,
+      "summary": "This method returns the <uvm_object_wrapper> associated with a given ~type_name~."
+    },
+    {
+      "name": "uvm_factory::print",
+      "short_name": "print",
+      "type": "function",
+      "class": "uvm_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 319,
       "summary": ""
     },
     {
-      "name": "uvm_factory::create_component",
+      "name": "uvm_default_factory",
+      "type": "class",
+      "class": null,
+      "file": "base/uvm_factory.svh",
+      "line": 330,
+      "summary": "Default implementation of the UVM factory."
+    },
+    {
+      "name": "uvm_default_factory::register",
+      "short_name": "register",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 338,
+      "summary": "IMPLEMENTATION"
+    },
+    {
+      "name": "uvm_default_factory::set_inst_override_by_type",
+      "short_name": "set_inst_override_by_type",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 345,
+      "summary": ""
+    },
+    {
+      "name": "uvm_default_factory::set_inst_override_by_name",
+      "short_name": "set_inst_override_by_name",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 355,
+      "summary": "Configures the factory to create an object of the override's type whenever"
+    },
+    {
+      "name": "uvm_default_factory::set_type_override_by_type",
+      "short_name": "set_type_override_by_type",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 363,
+      "summary": "set_type_override_by_type"
+    },
+    {
+      "name": "uvm_default_factory::set_type_override_by_name",
+      "short_name": "set_type_override_by_name",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 374,
+      "summary": "Configures the factory to create an object of the override's type whenever a request is made to create an object of the original type, provided no"
+    },
+    {
+      "name": "uvm_default_factory::create_object_by_type",
+      "short_name": "create_object_by_type",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 384,
+      "summary": ""
+    },
+    {
+      "name": "uvm_default_factory::create_component_by_type",
+      "short_name": "create_component_by_type",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 391,
+      "summary": "create_component_by_type"
+    },
+    {
+      "name": "uvm_default_factory::create_object_by_name",
+      "short_name": "create_object_by_name",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 399,
+      "summary": "create_object_by_name"
+    },
+    {
+      "name": "uvm_default_factory::create_component_by_name",
+      "short_name": "create_component_by_name",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 409,
+      "summary": ""
+    },
+    {
+      "name": "uvm_default_factory::debug_create_by_type",
+      "short_name": "debug_create_by_type",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 419,
+      "summary": ""
+    },
+    {
+      "name": "uvm_default_factory::debug_create_by_name",
+      "short_name": "debug_create_by_name",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 428,
+      "summary": ""
+    },
+    {
+      "name": "uvm_default_factory::find_override_by_type",
+      "short_name": "find_override_by_type",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 436,
+      "summary": ""
+    },
+    {
+      "name": "uvm_default_factory::find_override_by_name",
+      "short_name": "find_override_by_name",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 445,
+      "summary": "These methods return the proxy to the object that would be created given the arguments."
+    },
+    {
+      "name": "uvm_default_factory::find_wrapper_by_name",
+      "short_name": "find_wrapper_by_name",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 449,
+      "summary": "find_wrapper_by_name"
+    },
+    {
+      "name": "uvm_default_factory::print",
+      "short_name": "print",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 457,
+      "summary": "print"
+    },
+    {
+      "name": "uvm_default_factory::m_debug_create",
+      "short_name": "m_debug_create",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 463,
+      "summary": "m_debug_create"
+    },
+    {
+      "name": "uvm_default_factory::m_debug_display",
+      "short_name": "m_debug_display",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 469,
+      "summary": "m_debug_display"
+    },
+    {
+      "name": "uvm_default_factory::m_has_wildcard",
+      "short_name": "m_has_wildcard",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 487,
+      "summary": ""
+    },
+    {
+      "name": "uvm_default_factory::check_inst_override_exists",
+      "short_name": "check_inst_override_exists",
+      "type": "function",
+      "class": "uvm_default_factory",
+      "file": "base/uvm_factory.svh",
+      "line": 489,
+      "summary": "check_inst_override_exists"
+    },
+    {
+      "name": "uvm_object_wrapper",
+      "type": "class",
+      "class": null,
+      "file": "base/uvm_factory.svh",
+      "line": 810,
+      "summary": "Using the factory involves three basic operations"
+    },
+    {
+      "name": "uvm_object_wrapper::create_object",
+      "short_name": "create_object",
+      "type": "function",
+      "class": "uvm_object_wrapper",
+      "file": "base/uvm_factory.svh",
+      "line": 818,
+      "summary": ""
+    },
+    {
+      "name": "uvm_object_wrapper::create_component",
       "short_name": "create_component",
       "type": "function",
-      "class": "uvm_factory",
+      "class": "uvm_object_wrapper",
       "file": "base/uvm_factory.svh",
       "line": 829,
       "summary": "Creates a new component, passing to its constructor the given ~name~ and ~parent~. A component proxy (e.g. <uvm_component_registry #(T,Tname)>) implements this method to create a component of a specific type, T."
     },
     {
-      "name": "uvm_factory::get_type_name",
+      "name": "uvm_object_wrapper::get_type_name",
       "short_name": "get_type_name",
       "type": "function",
-      "class": "uvm_factory",
+      "class": "uvm_object_wrapper",
       "file": "base/uvm_factory.svh",
       "line": 841,
       "summary": ""
@@ -153668,6 +159233,33 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "get_packed_bits"
     },
     {
+      "name": "uvm_packer::get_bit",
+      "short_name": "get_bit",
+      "type": "function",
+      "class": "uvm_packer",
+      "file": "base/uvm_packer.svh",
+      "line": 382,
+      "summary": "get_bit"
+    },
+    {
+      "name": "uvm_packer::get_byte",
+      "short_name": "get_byte",
+      "type": "function",
+      "class": "uvm_packer",
+      "file": "base/uvm_packer.svh",
+      "line": 383,
+      "summary": "get_byte"
+    },
+    {
+      "name": "uvm_packer::get_int",
+      "short_name": "get_int",
+      "type": "function",
+      "class": "uvm_packer",
+      "file": "base/uvm_packer.svh",
+      "line": 384,
+      "summary": "get_int"
+    },
+    {
       "name": "uvm_packer::get_bits",
       "short_name": "get_bits",
       "type": "function",
@@ -154935,6 +160527,15 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_port_base",
       "file": "base/uvm_port_base.svh",
       "line": 729,
+      "summary": ""
+    },
+    {
+      "name": "uvm_port_base::get_if",
+      "short_name": "get_if",
+      "type": "function",
+      "class": "uvm_port_base",
+      "file": "base/uvm_port_base.svh",
+      "line": 772,
       "summary": ""
     },
     {
@@ -158508,6 +164109,15 @@ window.UVM_SOURCE_DATABASE = {
       "file": "base/uvm_resource.svh",
       "line": 1371,
       "summary": "Parameterized resource.  Provides essential access methods to read from and write to the resource database."
+    },
+    {
+      "name": "uvm_resource::m_get_converter",
+      "short_name": "m_get_converter",
+      "type": "function",
+      "class": "uvm_resource",
+      "file": "base/uvm_resource.svh",
+      "line": 1390,
+      "summary": ""
     },
     {
       "name": "uvm_resource::m_set_converter",
@@ -162505,6 +168115,42 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_mem::get_size",
+      "short_name": "get_size",
+      "type": "function",
+      "class": "uvm_mem",
+      "file": "reg/uvm_mem.svh",
+      "line": 243,
+      "summary": ""
+    },
+    {
+      "name": "uvm_mem::get_n_bytes",
+      "short_name": "get_n_bytes",
+      "type": "function",
+      "class": "uvm_mem",
+      "file": "reg/uvm_mem.svh",
+      "line": 250,
+      "summary": ""
+    },
+    {
+      "name": "uvm_mem::get_n_bits",
+      "short_name": "get_n_bits",
+      "type": "function",
+      "class": "uvm_mem",
+      "file": "reg/uvm_mem.svh",
+      "line": 257,
+      "summary": ""
+    },
+    {
+      "name": "uvm_mem::get_max_size",
+      "short_name": "get_max_size",
+      "type": "function",
+      "class": "uvm_mem",
+      "file": "reg/uvm_mem.svh",
+      "line": 264,
+      "summary": ""
+    },
+    {
       "name": "uvm_mem::get_virtual_registers",
       "short_name": "get_virtual_registers",
       "type": "function",
@@ -162890,6 +168536,42 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "Allocated memory region descriptor"
     },
     {
+      "name": "uvm_mem_region::get_start_offset",
+      "short_name": "get_start_offset",
+      "type": "function",
+      "class": "uvm_mem_region",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 304,
+      "summary": ""
+    },
+    {
+      "name": "uvm_mem_region::get_end_offset",
+      "short_name": "get_end_offset",
+      "type": "function",
+      "class": "uvm_mem_region",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 314,
+      "summary": ""
+    },
+    {
+      "name": "uvm_mem_region::get_len",
+      "short_name": "get_len",
+      "type": "function",
+      "class": "uvm_mem_region",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 324,
+      "summary": ""
+    },
+    {
+      "name": "uvm_mem_region::get_n_bytes",
+      "short_name": "get_n_bytes",
+      "type": "function",
+      "class": "uvm_mem_region",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 336,
+      "summary": ""
+    },
+    {
       "name": "uvm_mem_region::release_region",
       "short_name": "release_region",
       "type": "function",
@@ -163112,6 +168794,33 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_reg::get_n_bits",
+      "short_name": "get_n_bits",
+      "type": "function",
+      "class": "uvm_reg",
+      "file": "reg/uvm_reg.svh",
+      "line": 220,
+      "summary": ""
+    },
+    {
+      "name": "uvm_reg::get_n_bytes",
+      "short_name": "get_n_bytes",
+      "type": "function",
+      "class": "uvm_reg",
+      "file": "reg/uvm_reg.svh",
+      "line": 228,
+      "summary": ""
+    },
+    {
+      "name": "uvm_reg::get_max_size",
+      "short_name": "get_max_size",
+      "type": "function",
+      "class": "uvm_reg",
+      "file": "reg/uvm_reg.svh",
+      "line": 235,
+      "summary": ""
+    },
+    {
       "name": "uvm_reg::get_fields",
       "short_name": "get_fields",
       "type": "function",
@@ -163202,6 +168911,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_reg::get_reset",
+      "short_name": "get_reset",
+      "type": "function",
+      "class": "uvm_reg",
+      "file": "reg/uvm_reg.svh",
+      "line": 433,
+      "summary": "Get the specified reset value for this register"
+    },
+    {
       "name": "uvm_reg::has_reset",
       "short_name": "has_reset",
       "type": "function",
@@ -163209,6 +168927,15 @@ window.UVM_SOURCE_DATABASE = {
       "file": "reg/uvm_reg.svh",
       "line": 443,
       "summary": "Check if any field in the register has a reset value specified for the specified reset ~kind~. If ~delete~ is TRUE, removes the reset value, if any."
+    },
+    {
+      "name": "uvm_reg::set_reset",
+      "short_name": "set_reset",
+      "type": "function",
+      "class": "uvm_reg",
+      "file": "reg/uvm_reg.svh",
+      "line": 454,
+      "summary": "Specify or modify the reset value for this register"
     },
     {
       "name": "uvm_reg::write",
@@ -163307,6 +169034,15 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_reg",
       "file": "reg/uvm_reg.svh",
       "line": 677,
+      "summary": ""
+    },
+    {
+      "name": "uvm_reg::do_predict",
+      "short_name": "do_predict",
+      "type": "function",
+      "class": "uvm_reg",
+      "file": "reg/uvm_reg.svh",
+      "line": 679,
       "summary": ""
     },
     {
@@ -164446,6 +170182,33 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_reg_field::get_lsb_pos",
+      "short_name": "get_lsb_pos",
+      "type": "function",
+      "class": "uvm_reg_field",
+      "file": "reg/uvm_reg_field.svh",
+      "line": 162,
+      "summary": ""
+    },
+    {
+      "name": "uvm_reg_field::get_n_bits",
+      "short_name": "get_n_bits",
+      "type": "function",
+      "class": "uvm_reg_field",
+      "file": "reg/uvm_reg_field.svh",
+      "line": 169,
+      "summary": ""
+    },
+    {
+      "name": "uvm_reg_field::get_max_size",
+      "short_name": "get_max_size",
+      "type": "function",
+      "class": "uvm_reg_field",
+      "file": "reg/uvm_reg_field.svh",
+      "line": 175,
+      "summary": ""
+    },
+    {
       "name": "uvm_reg_field::set_access",
       "short_name": "set_access",
       "type": "function",
@@ -164707,6 +170470,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_reg_field::do_predict",
+      "short_name": "do_predict",
+      "type": "function",
+      "class": "uvm_reg_field",
+      "file": "reg/uvm_reg_field.svh",
+      "line": 686,
+      "summary": ""
+    },
+    {
       "name": "uvm_reg_field::pre_randomize",
       "short_name": "pre_randomize",
       "type": "function",
@@ -164766,6 +170538,24 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_reg_fifo",
       "file": "reg/uvm_reg_fifo.svh",
       "line": 90,
+      "summary": ""
+    },
+    {
+      "name": "uvm_reg_fifo::size",
+      "short_name": "size",
+      "type": "function",
+      "class": "uvm_reg_fifo",
+      "file": "reg/uvm_reg_fifo.svh",
+      "line": 103,
+      "summary": ""
+    },
+    {
+      "name": "uvm_reg_fifo::capacity",
+      "short_name": "capacity",
+      "type": "function",
+      "class": "uvm_reg_fifo",
+      "file": "reg/uvm_reg_fifo.svh",
+      "line": 112,
       "summary": ""
     },
     {
@@ -165428,6 +171218,24 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "get_base_addr"
     },
     {
+      "name": "uvm_reg_map::get_n_bytes",
+      "short_name": "get_n_bytes",
+      "type": "function",
+      "class": "uvm_reg_map",
+      "file": "reg/uvm_reg_map.svh",
+      "line": 375,
+      "summary": "get_n_bytes"
+    },
+    {
+      "name": "uvm_reg_map::get_addr_unit_bytes",
+      "short_name": "get_addr_unit_bytes",
+      "type": "function",
+      "class": "uvm_reg_map",
+      "file": "reg/uvm_reg_map.svh",
+      "line": 384,
+      "summary": "get_addr_unit_bytes"
+    },
+    {
       "name": "uvm_reg_map::get_endian",
       "short_name": "get_endian",
       "type": "function",
@@ -165525,6 +171333,15 @@ window.UVM_SOURCE_DATABASE = {
       "file": "reg/uvm_reg_map.svh",
       "line": 487,
       "summary": "get_mem_map_info"
+    },
+    {
+      "name": "uvm_reg_map::get_size",
+      "short_name": "get_size",
+      "type": "function",
+      "class": "uvm_reg_map",
+      "file": "reg/uvm_reg_map.svh",
+      "line": 488,
+      "summary": "get_size"
     },
     {
       "name": "uvm_reg_map::get_physical_addresses",
@@ -166097,6 +171914,42 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_vreg::get_size",
+      "short_name": "get_size",
+      "type": "function",
+      "class": "uvm_vreg",
+      "file": "reg/uvm_vreg.svh",
+      "line": 316,
+      "summary": ""
+    },
+    {
+      "name": "uvm_vreg::get_n_bytes",
+      "short_name": "get_n_bytes",
+      "type": "function",
+      "class": "uvm_vreg",
+      "file": "reg/uvm_vreg.svh",
+      "line": 327,
+      "summary": ""
+    },
+    {
+      "name": "uvm_vreg::get_n_memlocs",
+      "short_name": "get_n_memlocs",
+      "type": "function",
+      "class": "uvm_vreg",
+      "file": "reg/uvm_vreg.svh",
+      "line": 334,
+      "summary": ""
+    },
+    {
+      "name": "uvm_vreg::get_incr",
+      "short_name": "get_incr",
+      "type": "function",
+      "class": "uvm_vreg",
+      "file": "reg/uvm_vreg.svh",
+      "line": 341,
+      "summary": ""
+    },
+    {
       "name": "uvm_vreg::get_fields",
       "short_name": "get_fields",
       "type": "function",
@@ -166416,6 +172269,24 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_vreg_field",
       "file": "reg/uvm_vreg_field.svh",
       "line": 115,
+      "summary": ""
+    },
+    {
+      "name": "uvm_vreg_field::get_lsb_pos_in_register",
+      "short_name": "get_lsb_pos_in_register",
+      "type": "function",
+      "class": "uvm_vreg_field",
+      "file": "reg/uvm_vreg_field.svh",
+      "line": 126,
+      "summary": ""
+    },
+    {
+      "name": "uvm_vreg_field::get_n_bits",
+      "short_name": "get_n_bits",
+      "type": "function",
+      "class": "uvm_vreg_field",
+      "file": "reg/uvm_vreg_field.svh",
+      "line": 132,
       "summary": ""
     },
     {
@@ -167260,6 +173131,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "Title- Predefined Sequences"
     },
     {
+      "name": "uvm_random_sequence::get_count",
+      "short_name": "get_count",
+      "type": "function",
+      "class": "uvm_random_sequence",
+      "file": "seq/uvm_sequence_builtin.svh",
+      "line": 67,
+      "summary": ""
+    },
+    {
       "name": "uvm_random_sequence::new",
       "short_name": "new",
       "type": "function",
@@ -167812,6 +173692,15 @@ window.UVM_SOURCE_DATABASE = {
       "file": "seq/uvm_sequence_library.svh",
       "line": 77,
       "summary": "get_type_name"
+    },
+    {
+      "name": "uvm_sequence_library::select_sequence",
+      "short_name": "select_sequence",
+      "type": "function",
+      "class": "uvm_sequence_library",
+      "file": "seq/uvm_sequence_library.svh",
+      "line": 243,
+      "summary": "select_sequence"
     },
     {
       "name": "uvm_sequence_library::add_typewide_sequence",
@@ -168480,8 +174369,80 @@ window.UVM_SOURCE_DATABASE = {
       "type": "function",
       "class": "uvm_sequencer_base",
       "file": "seq/uvm_sequencer_base.svh",
-      "line": 410,
+      "line": 409,
       "summary": "m_unregister_sequence"
+    },
+    {
+      "name": "uvm_sequencer_base::m_find_sequence",
+      "short_name": "m_find_sequence",
+      "type": "function",
+      "class": "uvm_sequencer_base",
+      "file": "seq/uvm_sequencer_base.svh",
+      "line": 411,
+      "summary": "m_find_sequence"
+    },
+    {
+      "name": "uvm_sequencer_base::m_update_lists",
+      "short_name": "m_update_lists",
+      "type": "function",
+      "class": "uvm_sequencer_base",
+      "file": "seq/uvm_sequencer_base.svh",
+      "line": 414,
+      "summary": "m_update_lists"
+    },
+    {
+      "name": "uvm_sequencer_base::convert2string",
+      "short_name": "convert2string",
+      "type": "function",
+      "class": "uvm_sequencer_base",
+      "file": "seq/uvm_sequencer_base.svh",
+      "line": 415,
+      "summary": "convert2string"
+    },
+    {
+      "name": "uvm_sequencer_base::m_find_number_driver_connections",
+      "short_name": "m_find_number_driver_connections",
+      "type": "function",
+      "class": "uvm_sequencer_base",
+      "file": "seq/uvm_sequencer_base.svh",
+      "line": 416,
+      "summary": "m_find_number_driver_connections"
+    },
+    {
+      "name": "uvm_sequencer_base::m_wait_arb_not_equal",
+      "short_name": "m_wait_arb_not_equal",
+      "type": "task",
+      "class": "uvm_sequencer_base",
+      "file": "seq/uvm_sequencer_base.svh",
+      "line": 418,
+      "summary": "m_wait_arb_not_equal"
+    },
+    {
+      "name": "uvm_sequencer_base::m_wait_for_available_sequence",
+      "short_name": "m_wait_for_available_sequence",
+      "type": "task",
+      "class": "uvm_sequencer_base",
+      "file": "seq/uvm_sequencer_base.svh",
+      "line": 419,
+      "summary": "m_wait_for_available_sequence"
+    },
+    {
+      "name": "uvm_sequencer_base::m_get_seq_item_priority",
+      "short_name": "m_get_seq_item_priority",
+      "type": "function",
+      "class": "uvm_sequencer_base",
+      "file": "seq/uvm_sequencer_base.svh",
+      "line": 420,
+      "summary": "m_get_seq_item_priority"
+    },
+    {
+      "name": "uvm_sequencer_base::disable_auto_item_recording",
+      "short_name": "disable_auto_item_recording",
+      "type": "function",
+      "class": "uvm_sequencer_base",
+      "file": "seq/uvm_sequencer_base.svh",
+      "line": 434,
+      "summary": ""
     },
     {
       "name": "uvm_sequencer_base::is_auto_item_recording_enabled",
@@ -168574,69 +174535,6 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "run_phase"
     },
     {
-      "name": "uvm_sequencer_base::m_update_lists",
-      "short_name": "m_update_lists",
-      "type": "function",
-      "class": "uvm_sequencer_base",
-      "file": "seq/uvm_sequencer_base.svh",
-      "line": 568,
-      "summary": "m_update_lists"
-    },
-    {
-      "name": "uvm_sequencer_base::convert2string",
-      "short_name": "convert2string",
-      "type": "function",
-      "class": "uvm_sequencer_base",
-      "file": "seq/uvm_sequencer_base.svh",
-      "line": 576,
-      "summary": "convert2string"
-    },
-    {
-      "name": "uvm_sequencer_base::m_find_number_driver_connections",
-      "short_name": "m_find_number_driver_connections",
-      "type": "function",
-      "class": "uvm_sequencer_base",
-      "file": "seq/uvm_sequencer_base.svh",
-      "line": 595,
-      "summary": "m_find_number_driver_connections"
-    },
-    {
-      "name": "uvm_sequencer_base::m_find_sequence",
-      "short_name": "m_find_sequence",
-      "type": "function",
-      "class": "uvm_sequencer_base",
-      "file": "seq/uvm_sequencer_base.svh",
-      "line": 617,
-      "summary": "m_find_sequence"
-    },
-    {
-      "name": "uvm_sequencer_base::m_wait_arb_not_equal",
-      "short_name": "m_wait_arb_not_equal",
-      "type": "task",
-      "class": "uvm_sequencer_base",
-      "file": "seq/uvm_sequencer_base.svh",
-      "line": 876,
-      "summary": "m_wait_arb_not_equal"
-    },
-    {
-      "name": "uvm_sequencer_base::m_wait_for_available_sequence",
-      "short_name": "m_wait_for_available_sequence",
-      "type": "task",
-      "class": "uvm_sequencer_base",
-      "file": "seq/uvm_sequencer_base.svh",
-      "line": 884,
-      "summary": "m_wait_for_available_sequence"
-    },
-    {
-      "name": "uvm_sequencer_base::m_get_seq_item_priority",
-      "short_name": "m_get_seq_item_priority",
-      "type": "function",
-      "class": "uvm_sequencer_base",
-      "file": "seq/uvm_sequencer_base.svh",
-      "line": 957,
-      "summary": "m_get_seq_item_priority"
-    },
-    {
       "name": "uvm_sequence_request",
       "type": "class",
       "class": null,
@@ -168698,6 +174596,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": "set_num_last_reqs"
     },
     {
+      "name": "uvm_sequencer_param_base::get_num_last_reqs",
+      "short_name": "get_num_last_reqs",
+      "type": "function",
+      "class": "uvm_sequencer_param_base",
+      "file": "seq/uvm_sequencer_param_base.svh",
+      "line": 113,
+      "summary": "get_num_last_reqs"
+    },
+    {
       "name": "uvm_sequencer_param_base::last_req",
       "short_name": "last_req",
       "type": "function",
@@ -168723,6 +174630,15 @@ window.UVM_SOURCE_DATABASE = {
       "file": "seq/uvm_sequencer_param_base.svh",
       "line": 171,
       "summary": "set_num_last_rsps"
+    },
+    {
+      "name": "uvm_sequencer_param_base::get_num_last_rsps",
+      "short_name": "get_num_last_rsps",
+      "type": "function",
+      "class": "uvm_sequencer_param_base",
+      "file": "seq/uvm_sequencer_param_base.svh",
+      "line": 179,
+      "summary": "get_num_last_rsps"
     },
     {
       "name": "uvm_sequencer_param_base::last_rsp",
@@ -170264,6 +176180,15 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_tlm_generic_payload::get_address",
+      "short_name": "get_address",
+      "type": "function",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 685,
+      "summary": ""
+    },
+    {
       "name": "uvm_tlm_generic_payload::get_data",
       "short_name": "get_data",
       "type": "function",
@@ -170282,12 +176207,30 @@ window.UVM_SOURCE_DATABASE = {
       "summary": ""
     },
     {
+      "name": "uvm_tlm_generic_payload::get_data_length",
+      "short_name": "get_data_length",
+      "type": "function",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 709,
+      "summary": ""
+    },
+    {
       "name": "uvm_tlm_generic_payload::set_data_length",
       "short_name": "set_data_length",
       "type": "function",
       "class": "uvm_tlm_generic_payload",
       "file": "tlm2/uvm_tlm2_generic_payload.svh",
       "line": 716,
+      "summary": ""
+    },
+    {
+      "name": "uvm_tlm_generic_payload::get_streaming_width",
+      "short_name": "get_streaming_width",
+      "type": "function",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 724,
       "summary": ""
     },
     {
@@ -170315,6 +176258,15 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_tlm_generic_payload",
       "file": "tlm2/uvm_tlm2_generic_payload.svh",
       "line": 748,
+      "summary": ""
+    },
+    {
+      "name": "uvm_tlm_generic_payload::get_byte_enable_length",
+      "short_name": "get_byte_enable_length",
+      "type": "function",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 756,
       "summary": ""
     },
     {

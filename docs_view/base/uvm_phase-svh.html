@@ -11,6 +11,13 @@
 </head>
 <body class="doc-body">
   <div class="doc-page-container">
+    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="../../index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">Base</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">Phasing Definition classes</span>
+</nav>
     <div class="doc-source-banner">
                   <div class="banner-info">
                     <span class="file-label">Source File:</span>
@@ -29,7 +36,13 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Phasing_Definition_classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Phasing_Definition_classes" id="Phasing_Definition_classes" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">Phasing Definition classes</a></h1><div class=CBody><p>The following class are used to specify a phase and its implied functionality.</p>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="Phasing_Definition_classes"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="Phasing_Definition_classes" id="Phasing_Definition_classes" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">Phasing Definition classes</a></h1><div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses (4)</span>
+  </div>
+  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_bottomup_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_bottomup_phase">uvm_bottomup_phase</a><a href="../../docs_view/base/uvm_domain-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_domain">uvm_domain</a><a href="../../docs_view/base/uvm_task_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_task_phase">uvm_task_phase</a><a href="../../docs_view/base/uvm_topdown_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_topdown_phase">uvm_topdown_phase</a></div>
+</div><div class=CBody><p>The following class are used to specify a phase and its implied functionality.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -54,7 +67,13 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase" id="uvm_phase" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">uvm_phase</a></h2><div class=CBody><p>This base class defines everything about a phase: behavior, state, and context.</p><p>To define behavior, it is extended by UVM or the user to create singleton objects which capture the definition of what the phase does and how it does it.&nbsp; These are then cloned to produce multiple nodes which are hooked up in a graph structure to provide context: which phases follow which, and to hold the state of the phase throughout its lifetime.&nbsp; UVM provides default extensions of this class for the standard runtime phases.&nbsp; VIP Providers can likewise extend this class to define the phase functor for a particular component context as required.</p><p>This base class defines everything about a phase: behavior, state, and context.</p><p>To define behavior, it is extended by UVM or the user to create singleton objects which capture the definition of what the phase does and how it does it.&nbsp; These are then cloned to produce multiple nodes which are hooked up in a graph structure to provide context: which phases follow which, and to hold the state of the phase throughout its lifetime.&nbsp; UVM provides default extensions of this class for the standard runtime phases.&nbsp; VIP Providers can likewise extend this class to define the phase functor for a particular component context as required.</p><p><b>Phase Definition</b></p><p>Singleton instances of those extensions are provided as package variables.&nbsp; These instances define the attributes of the phase (not what state it is in) They are then cloned into schedule nodes which point back to one of these implementations, and calls its virtual task or function methods on each participating component.&nbsp; It is the base class for phase functors, for both predefined and user-defined phases.&nbsp; Per-component overrides can use a customized imp.</p><p>To create custom phases, do not extend uvm_phase directly: see the three predefined extended classes below which encapsulate behavior for different phase types: task, bottom-up function and top-down function.</p><p>Extend the appropriate one of these to create a uvm_YOURNAME_phase class (or YOURPREFIX_NAME_phase class) for each phase, containing the default implementation of the new phase, which must be a uvm_component-compatible delegate, and which may be a <i>null</i> implementation.&nbsp; Instantiate a singleton instance of that class for your code to use when a phase handle is required.&nbsp; If your custom phase depends on methods that are not in uvm_component, but are within an extended class, then extend the base YOURPREFIX_NAME_phase class with parameterized component class context as required, to create a specialized functor which calls your extended component class methods.&nbsp; This scheme ensures compile-safety for your extended component classes while providing homogeneous base types for APIs and underlying data structures.</p><p><b>Phase Context</b></p><p>A schedule is a coherent group of one or mode phase/state nodes linked together by a graph structure, allowing arbitrary linear/parallel relationships to be specified, and executed by stepping through them in the graph order.&nbsp; Each schedule node points to a phase and holds the execution state of that phase, and has optional links to other nodes for synchronization.</p><p>The main operations are: construct, add phases, and instantiate hierarchically within another schedule.</p><p>Structure is a DAG (Directed Acyclic Graph).&nbsp; Each instance is a node connected to others to form the graph.&nbsp; Hierarchy is overlaid with m_parent.&nbsp; Each node in the graph has zero or more successors, and zero or more predecessors.&nbsp; No nodes are completely isolated from others.&nbsp; Exactly one node has zero predecessors.&nbsp; This is the root node.&nbsp; Also the graph is acyclic, meaning for all nodes in the graph, by following the forward arrows you will never end up back where you started but you will eventually reach a node that has no successors.</p><p><b>Phase State</b></p><p>A given phase may appear multiple times in the complete phase graph, due to the multiple independent domain feature, and the ability for different VIP to customize their own phase schedules perhaps reusing existing phases.&nbsp; Each node instance in the graph maintains its own state of execution.</p><p><b>Phase Handle</b></p><p>Handles of this type uvm_phase are used frequently in the API, both by the user, to access phasing-specific API, and also as a parameter to some APIs.&nbsp; In many cases, the singleton phase handles can be used (eg.&nbsp; <a href="uvm_common_phases-svh.html#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link44  >uvm_run_phase::get()</a>) in APIs.&nbsp; For those APIs that need to look up that phase in the graph, this is done automatically.</p>
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase" id="uvm_phase" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">uvm_phase</a></h2><div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses (4)</span>
+  </div>
+  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_bottomup_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_bottomup_phase">uvm_bottomup_phase</a><a href="../../docs_view/base/uvm_domain-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_domain">uvm_domain</a><a href="../../docs_view/base/uvm_task_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_task_phase">uvm_task_phase</a><a href="../../docs_view/base/uvm_topdown_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_topdown_phase">uvm_topdown_phase</a></div>
+</div><div class=CBody><p>This base class defines everything about a phase: behavior, state, and context.</p><p>To define behavior, it is extended by UVM or the user to create singleton objects which capture the definition of what the phase does and how it does it.&nbsp; These are then cloned to produce multiple nodes which are hooked up in a graph structure to provide context: which phases follow which, and to hold the state of the phase throughout its lifetime.&nbsp; UVM provides default extensions of this class for the standard runtime phases.&nbsp; VIP Providers can likewise extend this class to define the phase functor for a particular component context as required.</p><p>This base class defines everything about a phase: behavior, state, and context.</p><p>To define behavior, it is extended by UVM or the user to create singleton objects which capture the definition of what the phase does and how it does it.&nbsp; These are then cloned to produce multiple nodes which are hooked up in a graph structure to provide context: which phases follow which, and to hold the state of the phase throughout its lifetime.&nbsp; UVM provides default extensions of this class for the standard runtime phases.&nbsp; VIP Providers can likewise extend this class to define the phase functor for a particular component context as required.</p><p><b>Phase Definition</b></p><p>Singleton instances of those extensions are provided as package variables.&nbsp; These instances define the attributes of the phase (not what state it is in) They are then cloned into schedule nodes which point back to one of these implementations, and calls its virtual task or function methods on each participating component.&nbsp; It is the base class for phase functors, for both predefined and user-defined phases.&nbsp; Per-component overrides can use a customized imp.</p><p>To create custom phases, do not extend uvm_phase directly: see the three predefined extended classes below which encapsulate behavior for different phase types: task, bottom-up function and top-down function.</p><p>Extend the appropriate one of these to create a uvm_YOURNAME_phase class (or YOURPREFIX_NAME_phase class) for each phase, containing the default implementation of the new phase, which must be a uvm_component-compatible delegate, and which may be a <i>null</i> implementation.&nbsp; Instantiate a singleton instance of that class for your code to use when a phase handle is required.&nbsp; If your custom phase depends on methods that are not in uvm_component, but are within an extended class, then extend the base YOURPREFIX_NAME_phase class with parameterized component class context as required, to create a specialized functor which calls your extended component class methods.&nbsp; This scheme ensures compile-safety for your extended component classes while providing homogeneous base types for APIs and underlying data structures.</p><p><b>Phase Context</b></p><p>A schedule is a coherent group of one or mode phase/state nodes linked together by a graph structure, allowing arbitrary linear/parallel relationships to be specified, and executed by stepping through them in the graph order.&nbsp; Each schedule node points to a phase and holds the execution state of that phase, and has optional links to other nodes for synchronization.</p><p>The main operations are: construct, add phases, and instantiate hierarchically within another schedule.</p><p>Structure is a DAG (Directed Acyclic Graph).&nbsp; Each instance is a node connected to others to form the graph.&nbsp; Hierarchy is overlaid with m_parent.&nbsp; Each node in the graph has zero or more successors, and zero or more predecessors.&nbsp; No nodes are completely isolated from others.&nbsp; Exactly one node has zero predecessors.&nbsp; This is the root node.&nbsp; Also the graph is acyclic, meaning for all nodes in the graph, by following the forward arrows you will never end up back where you started but you will eventually reach a node that has no successors.</p><p><b>Phase State</b></p><p>A given phase may appear multiple times in the complete phase graph, due to the multiple independent domain feature, and the ability for different VIP to customize their own phase schedules perhaps reusing existing phases.&nbsp; Each node instance in the graph maintains its own state of execution.</p><p><b>Phase Handle</b></p><p>Handles of this type uvm_phase are used frequently in the API, both by the user, to access phasing-specific API, and also as a parameter to some APIs.&nbsp; In many cases, the singleton phase handles can be used (eg.&nbsp; <a href="uvm_common_phases-svh.html#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link44  >uvm_run_phase::get()</a>) in APIs.&nbsp; For those APIs that need to look up that phase in the graph, this is done automatically.</p>
 
 <!--START_ND_SUMMARY index=1-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -212,7 +231,7 @@
 
 
  <!--CONTENT index=3 -->
-<div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_phase.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.new" id="uvm_phase.new" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">new</a></h3>
+<div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_phase.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.new" id="uvm_phase.new" href="../../src_view/base/uvm_phase.svh.html#L151" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="151">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 4 derived class(es)">Overridden in 4 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -238,7 +257,7 @@
 
 
  <!--CONTENT index=4 -->
-<div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_phase.get_phase_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_phase_type" id="uvm_phase.get_phase_type" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_phase_type</a></h3>
+<div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_phase.get_phase_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_phase_type" id="uvm_phase.get_phase_type" href="../../src_view/base/uvm_phase.svh.html#L159" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="159">get_phase_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase_type</span> <span class="sv-proto-name">get_phase_type</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the phase type as defined by <a href="uvm_object_globals-svh.html#doc-nav-item-19" data-target-id="doc-nav-item-19" class=LType id=link46  >uvm_phase_type</a></p></div></div></div>
 
@@ -252,7 +271,7 @@
 
 
  <!--CONTENT index=6 -->
-<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_phase.get_state"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_state" id="uvm_phase.get_state" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_state</a></h3>
+<div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_phase.get_state"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_state" id="uvm_phase.get_state" href="../../src_view/base/uvm_phase.svh.html#L170" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="170">get_state</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase_state</span> <span class="sv-proto-name">get_state</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Accessor to return current state of this phase</p></div></div></div>
 
@@ -260,7 +279,7 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_phase.get_run_count"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_run_count" id="uvm_phase.get_run_count" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_run_count</a></h3>
+<div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_phase.get_run_count"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_run_count" id="uvm_phase.get_run_count" href="../../src_view/base/uvm_phase.svh.html#L177" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="177">get_run_count</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_run_count</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Accessor to return the integer number of times this phase has executed</p></div></div></div>
 
@@ -268,7 +287,7 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_phase.find_by_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.find_by_name" id="uvm_phase.find_by_name" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">find_by_name</a></h3>
+<div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_phase.find_by_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.find_by_name" id="uvm_phase.find_by_name" href="../../src_view/base/uvm_phase.svh.html#L186" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="186">find_by_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_phase <span class="sv-proto-name">find_by_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -290,7 +309,7 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_phase.find"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.find" id="uvm_phase.find" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">find</a></h3>
+<div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_phase.find"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.find" id="uvm_phase.find" href="../../src_view/base/uvm_phase.svh.html#L195" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="195">find</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_phase <span class="sv-proto-name">find</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -312,7 +331,7 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_phase.is"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.is" id="uvm_phase.is" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">is</a></h3>
+<div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_phase.is"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.is" id="uvm_phase.is" href="../../src_view/base/uvm_phase.svh.html#L203" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="203">is</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -328,7 +347,7 @@
 
 
  <!--CONTENT index=11 -->
-<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_phase.is_before"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.is_before" id="uvm_phase.is_before" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">is_before</a></h3>
+<div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_phase.is_before"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.is_before" id="uvm_phase.is_before" href="../../src_view/base/uvm_phase.svh.html#L211" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="211">is_before</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_before</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -344,7 +363,7 @@
 
 
  <!--CONTENT index=12 -->
-<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_phase.is_after"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.is_after" id="uvm_phase.is_after" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">is_after</a></h3>
+<div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_phase.is_after"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.is_after" id="uvm_phase.is_after" href="../../src_view/base/uvm_phase.svh.html#L219" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="219">is_after</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_after</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -366,7 +385,7 @@
 
 
  <!--CONTENT index=14 -->
-<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_phase.exec_func"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.exec_func" id="uvm_phase.exec_func" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">exec_func</a></h3>
+<div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_phase.exec_func"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.exec_func" id="uvm_phase.exec_func" href="../../src_view/base/uvm_phase.svh.html#L232" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="232">exec_func</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 8 derived class(es)">Overridden in 8 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">exec_func</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
@@ -408,7 +427,7 @@
 
 
  <!--CONTENT index=17 -->
-<div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_phase.add"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.add" id="uvm_phase.add" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">add</a></h3>
+<div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_phase.add"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.add" id="uvm_phase.add" href="../../src_view/base/uvm_phase.svh.html#L829" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="829">add</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">add</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -438,7 +457,7 @@
 
 
  <!--CONTENT index=18 -->
-<div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_phase.get_parent"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_parent" id="uvm_phase.get_parent" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_parent</a></h3>
+<div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_phase.get_parent"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_parent" id="uvm_phase.get_parent" href="../../src_view/base/uvm_phase.svh.html#L1000" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1000">get_parent</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-proto-name">get_parent</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the parent schedule node, if any, for hierarchical graph traversal</p></div></div></div>
 
@@ -446,7 +465,7 @@
 
 
  <!--CONTENT index=19 -->
-<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_phase.get_full_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_full_name" id="uvm_phase.get_full_name" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_full_name</a></h3>
+<div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_phase.get_full_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_full_name" id="uvm_phase.get_full_name" href="../../src_view/base/uvm_phase.svh.html#L1080" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1080">get_full_name</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the full path from the enclosing domain down to this node.&nbsp; The singleton IMP phases have no hierarchy.</p></div></div></div>
 
@@ -454,7 +473,7 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_phase.get_schedule"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_schedule" id="uvm_phase.get_schedule" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_schedule</a></h3>
+<div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_phase.get_schedule"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_schedule" id="uvm_phase.get_schedule" href="../../src_view/base/uvm_phase.svh.html#L1016" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1016">get_schedule</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> uvm_phase <span class="sv-proto-name">get_schedule</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -472,7 +491,7 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_phase.get_schedule_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_schedule_name" id="uvm_phase.get_schedule_name" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_schedule_name</a></h3>
+<div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_phase.get_schedule_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_schedule_name" id="uvm_phase.get_schedule_name" href="../../src_view/base/uvm_phase.svh.html#L1061" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1061">get_schedule_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_schedule_name</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
@@ -490,7 +509,7 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_phase.get_domain"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_domain" id="uvm_phase.get_domain" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_domain</a></h3>
+<div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_phase.get_domain"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_domain" id="uvm_phase.get_domain" href="../../src_view/base/uvm_phase.svh.html#L1034" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1034">get_domain</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_domain</span> <span class="sv-proto-name">get_domain</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the enclosing domain</p></div></div></div>
 
@@ -498,7 +517,7 @@
 
 
  <!--CONTENT index=23 -->
-<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_phase.get_imp"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_imp" id="uvm_phase.get_imp" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_imp</a></h3>
+<div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_phase.get_imp"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_imp" id="uvm_phase.get_imp" href="../../src_view/base/uvm_phase.svh.html#L1008" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1008">get_imp</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-proto-name">get_imp</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the phase implementation for this this node.&nbsp; Returns <i>null</i> if this phase type is not a UVM_PHASE_LEAF_NODE.</p></div></div></div>
 
@@ -506,7 +525,7 @@
 
 
  <!--CONTENT index=24 -->
-<div class="CMethod" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_phase.get_domain_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_domain_name" id="uvm_phase.get_domain_name" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_domain_name</a></h3>
+<div class="CMethod" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_phase.get_domain_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_domain_name" id="uvm_phase.get_domain_name" href="../../src_view/base/uvm_phase.svh.html#L1049" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1049">get_domain_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_domain_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the domain name associated with this phase node</p></div></div></div>
 
@@ -514,7 +533,7 @@
 
 
  <!--CONTENT index=25 -->
-<div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_phase.get_adjacent_predecessor_nodes"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_adjacent_predecessor_nodes" id="uvm_phase.get_adjacent_predecessor_nodes" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_adjacent_predecessor_nodes</a></h3>
+<div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_phase.get_adjacent_predecessor_nodes"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_adjacent_predecessor_nodes" id="uvm_phase.get_adjacent_predecessor_nodes" href="../../src_view/base/uvm_phase.svh.html#L1662" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1662">get_adjacent_predecessor_nodes</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">get_adjacent_predecessor_nodes</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -531,7 +550,7 @@
 
 
  <!--CONTENT index=26 -->
-<div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_phase.get_adjacent_successor_nodes"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_adjacent_successor_nodes" id="uvm_phase.get_adjacent_successor_nodes" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_adjacent_successor_nodes</a></h3>
+<div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_phase.get_adjacent_successor_nodes"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_adjacent_successor_nodes" id="uvm_phase.get_adjacent_successor_nodes" href="../../src_view/base/uvm_phase.svh.html#L1691" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1691">get_adjacent_successor_nodes</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">get_adjacent_successor_nodes</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span>&nbsp;</td>
@@ -562,7 +581,7 @@
 
 
  <!--CONTENT index=29 -->
-<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_phase.raise_objection"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.raise_objection" id="uvm_phase.raise_objection" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">raise_objection</a></h3>
+<div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_phase.raise_objection"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.raise_objection" id="uvm_phase.raise_objection" href="../../src_view/base/uvm_phase.svh.html#L1842" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1842">raise_objection</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">raise_objection</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
@@ -605,7 +624,7 @@
 
 
  <!--CONTENT index=30 -->
-<div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_phase.drop_objection"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.drop_objection" id="uvm_phase.drop_objection" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">drop_objection</a></h3>
+<div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_phase.drop_objection"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.drop_objection" id="uvm_phase.drop_objection" href="../../src_view/base/uvm_phase.svh.html#L1855" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1855">drop_objection</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">drop_objection</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
@@ -631,7 +650,7 @@
 
 
  <!--CONTENT index=31 -->
-<div class="CMethod" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_phase.get_objection_count"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_objection_count" id="uvm_phase.get_objection_count" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_objection_count</a></h3>
+<div class="CMethod" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_phase.get_objection_count"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_objection_count" id="uvm_phase.get_objection_count" href="../../src_view/base/uvm_phase.svh.html#L1867" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1867">get_objection_count</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_objection_count</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_object</span>&nbsp;</td>
@@ -670,7 +689,7 @@
 
 
  <!--CONTENT index=33 -->
-<div class="CMethod" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_phase.sync"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.sync" id="uvm_phase.sync" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">sync</a></h3>
+<div class="CMethod" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_phase.sync"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.sync" id="uvm_phase.sync" href="../../src_view/base/uvm_phase.svh.html#L1879" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1879">sync</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">sync</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_domain</span>&nbsp;</td>
@@ -696,7 +715,7 @@
 
 
  <!--CONTENT index=34 -->
-<div class="CMethod" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_phase.unsync"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.unsync" id="uvm_phase.unsync" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">unsync</a></h3>
+<div class="CMethod" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_phase.unsync"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.unsync" id="uvm_phase.unsync" href="../../src_view/base/uvm_phase.svh.html#L1933" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1933">unsync</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">unsync</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_domain</span>&nbsp;</td>
@@ -722,7 +741,7 @@
 
 
  <!--CONTENT index=35 -->
-<div class="CMethod" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_phase.wait_for_state"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.wait_for_state" id="uvm_phase.wait_for_state" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">wait_for_state</a></h3>
+<div class="CMethod" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_phase.wait_for_state"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.wait_for_state" id="uvm_phase.wait_for_state" href="../../src_view/base/uvm_phase.svh.html#L1981" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1981">wait_for_state</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">task</span> <span class="sv-proto-name">wait_for_state</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase_state</span>&nbsp;</td>
@@ -774,7 +793,7 @@
 
 
  <!--CONTENT index=37 -->
-<div class="CMethod" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_phase.jump"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.jump" id="uvm_phase.jump" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">jump</a></h3>
+<div class="CMethod" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_phase.jump"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.jump" id="uvm_phase.jump" href="../../src_view/base/uvm_phase.svh.html#L2071" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2071">jump</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">jump</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -790,7 +809,7 @@
 
 
  <!--CONTENT index=38 -->
-<div class="CMethod" id="doc-nav-item-38" data-doc-topic="doc-nav-item-38" data-anchor="uvm_phase.set_jump_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.set_jump_phase" id="uvm_phase.set_jump_phase" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">set_jump_phase</a></h3>
+<div class="CMethod" id="doc-nav-item-38" data-doc-topic="doc-nav-item-38" data-anchor="uvm_phase.set_jump_phase"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.set_jump_phase" id="uvm_phase.set_jump_phase" href="../../src_view/base/uvm_phase.svh.html#L2002" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2002">set_jump_phase</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_jump_phase</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -806,7 +825,7 @@
 
 
  <!--CONTENT index=39 -->
-<div class="CMethod" id="doc-nav-item-39" data-doc-topic="doc-nav-item-39" data-anchor="uvm_phase.end_prematurely"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.end_prematurely" id="uvm_phase.end_prematurely" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">end_prematurely</a></h3>
+<div class="CMethod" id="doc-nav-item-39" data-doc-topic="doc-nav-item-39" data-anchor="uvm_phase.end_prematurely"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.end_prematurely" id="uvm_phase.end_prematurely" href="../../src_view/base/uvm_phase.svh.html#L2059" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2059">end_prematurely</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">end_prematurely</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Set a flag to cause the phase to end prematurely.&nbsp; Note that this function is part of what jump() does; unlike jump() it does not set a jump_phase to go to after the phase ends.</p></div></div></div>
 
@@ -814,7 +833,7 @@
 
 
  <!--CONTENT index=40 -->
-<div class="CMethod" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_phase.get_jump_target"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_jump_target" id="uvm_phase.get_jump_target" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_jump_target</a></h3>
+<div class="CMethod" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_phase.get_jump_target"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase.get_jump_target" id="uvm_phase.get_jump_target" href="../../src_view/base/uvm_phase.svh.html#L2087" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2087">get_jump_target</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-proto-name">get_jump_target</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return handle to the target phase of the current jump, or <i>null</i> if no jump is in progress.&nbsp; Valid for use during the phase_ended() callback</p></div></div></div>
 
@@ -822,7 +841,7 @@
 
 
  <!--CONTENT index=41 -->
-<div class="CClass" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_phase_state_change"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_state_change" id="uvm_phase_state_change" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">uvm_phase_state_change</a></h2><div class=CBody><p>Phase state transition descriptor.&nbsp; Used to describe the phase transition that caused a &lt;uvm_phase_cb::phase_state_changed()&gt; callback to be invoked.</p>
+<div class="CClass" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_phase_state_change"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_state_change" id="uvm_phase_state_change" href="../../src_view/base/uvm_phase.svh.html#L674" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="674">uvm_phase_state_change</a></h2><div class=CBody><p>Phase state transition descriptor.&nbsp; Used to describe the phase transition that caused a &lt;uvm_phase_cb::phase_state_changed()&gt; callback to be invoked.</p>
 
 <!--START_ND_SUMMARY index=41-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -875,7 +894,7 @@
 
 
  <!--CONTENT index=43 -->
-<div class="CMethod" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_phase_state_change.get_state"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_state_change.get_state" id="uvm_phase_state_change.get_state" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_state()</a></h3>
+<div class="CMethod" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_phase_state_change.get_state"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_state_change.get_state" id="uvm_phase_state_change.get_state" href="../../src_view/base/uvm_phase.svh.html#L693" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="693">get_state()</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase_state</span> <span class="sv-proto-name">get_state</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the state the phase just transitioned to.&nbsp; Functionally equivalent to <a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" class=LMethod id=link58  >uvm_phase::get_state()</a>.</p></div></div></div>
 
@@ -883,7 +902,7 @@
 
 
  <!--CONTENT index=44 -->
-<div class="CMethod" id="doc-nav-item-44" data-doc-topic="doc-nav-item-44" data-anchor="uvm_phase_state_change.get_prev_state"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_state_change.get_prev_state" id="uvm_phase_state_change.get_prev_state" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">get_prev_state()</a></h3>
+<div class="CMethod" id="doc-nav-item-44" data-doc-topic="doc-nav-item-44" data-anchor="uvm_phase_state_change.get_prev_state"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_state_change.get_prev_state" id="uvm_phase_state_change.get_prev_state" href="../../src_view/base/uvm_phase.svh.html#L701" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="701">get_prev_state()</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase_state</span> <span class="sv-proto-name">get_prev_state</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the state the phase just transitioned from.</p></div></div></div>
 
@@ -891,7 +910,7 @@
 
 
  <!--CONTENT index=45 -->
-<div class="CMethod" id="doc-nav-item-45" data-doc-topic="doc-nav-item-45" data-anchor="uvm_phase_state_change.jump_to"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_state_change.jump_to" id="uvm_phase_state_change.jump_to" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">jump_to()</a></h3>
+<div class="CMethod" id="doc-nav-item-45" data-doc-topic="doc-nav-item-45" data-anchor="uvm_phase_state_change.jump_to"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_state_change.jump_to" id="uvm_phase_state_change.jump_to" href="../../src_view/base/uvm_phase.svh.html#L711" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="711">jump_to()</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-proto-name">jump_to</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>If the current state is <i>UVM_PHASE_ENDED</i> or <i>UVM_PHASE_JUMPING</i> because of a phase jump, returns the phase that is the target of jump.&nbsp; Returns <i>null</i> otherwise.</p></div></div></div>
 
@@ -899,7 +918,7 @@
 
 
  <!--CONTENT index=46 -->
-<div class="CClass" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_phase_cb"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_cb" id="uvm_phase_cb" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">uvm_phase_cb</a></h2><div class=CBody><p>This class defines a callback method that is invoked by the phaser during the execution of a specific node in the phase graph or all phase nodes.&nbsp; User-defined callback extensions can be used to integrate data types that are not natively phase-aware with the UVM phasing.</p>
+<div class="CClass" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_phase_cb"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_cb" id="uvm_phase_cb" href="../../src_view/base/uvm_phase.svh.html#L730" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="730">uvm_phase_cb</a></h2><div class=CBody><p>This class defines a callback method that is invoked by the phaser during the execution of a specific node in the phase graph or all phase nodes.&nbsp; User-defined callback extensions can be used to integrate data types that are not natively phase-aware with the UVM phasing.</p>
 
 <!--START_ND_SUMMARY index=46-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -950,7 +969,7 @@
 
 
  <!--CONTENT index=48 -->
-<div class="CMethod" id="doc-nav-item-48" data-doc-topic="doc-nav-item-48" data-anchor="uvm_phase_cb.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_cb.new" id="uvm_phase_cb.new" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">new</a></h3>
+<div class="CMethod" id="doc-nav-item-48" data-doc-topic="doc-nav-item-48" data-anchor="uvm_phase_cb.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_cb.new" id="uvm_phase_cb.new" href="../../src_view/base/uvm_phase.svh.html#L734" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="734">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_callback">Overrides uvm_callback</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
@@ -968,7 +987,7 @@
 
 
  <!--CONTENT index=49 -->
-<div class="CMethod" id="doc-nav-item-49" data-doc-topic="doc-nav-item-49" data-anchor="uvm_phase_cb.phase_state_change"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_cb.phase_state_change" id="uvm_phase_cb.phase_state_change" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">phase_state_change</a></h3>
+<div class="CMethod" id="doc-nav-item-49" data-doc-topic="doc-nav-item-49" data-anchor="uvm_phase_cb.phase_state_change"><div class="CTopic"><h3 class=CTitle><a name="uvm_phase_cb.phase_state_change" id="uvm_phase_cb.phase_state_change" href="../../src_view/base/uvm_phase.svh.html#L753" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="753">phase_state_change</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
       <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">phase_state_change</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_phase</span>&nbsp;</td>
@@ -986,7 +1005,13 @@
 
 
  <!--CONTENT index=50 -->
-<div class="CClass" id="doc-nav-item-50" data-doc-topic="doc-nav-item-50" data-anchor="uvm_phase_cb_pool"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_cb_pool" id="uvm_phase_cb_pool" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">uvm_phase_cb_pool</a></h2><div class=CBody><p>Convenience type for the uvm_callbacks#(uvm_phase, uvm_phase_cb) class.</p>
+<div class="CClass" id="doc-nav-item-50" data-doc-topic="doc-nav-item-50" data-anchor="uvm_phase_cb_pool"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_cb_pool" id="uvm_phase_cb_pool" href="../../src_view/base/uvm_phase.svh.html#L134" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="134">uvm_phase_cb_pool</a></h2><div class="derived-classes-card">
+  <div class="derived-classes-header">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    <span>Direct Subclasses (4)</span>
+  </div>
+  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_bottomup_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_bottomup_phase">uvm_bottomup_phase</a><a href="../../docs_view/base/uvm_domain-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_domain">uvm_domain</a><a href="../../docs_view/base/uvm_task_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_task_phase">uvm_task_phase</a><a href="../../docs_view/base/uvm_topdown_phase-svh.html#doc-nav-main" class="derived-class-pill" title="Documentation for uvm_topdown_phase">uvm_topdown_phase</a></div>
+</div><div class=CBody><p>Convenience type for the uvm_callbacks#(uvm_phase, uvm_phase_cb) class.</p>
 
 <!--START_ND_SUMMARY index=50-->
 <div class="Summary" id="doc-nav-summary" data-anchor="Summary"><div class=STitle>Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -1032,693 +1057,6 @@
       </aside>
     </div>
   </div>
-
-  <script>
-    // In-page Table of Contents (On this page) generator & Scrollspy
-    (function initDocTOC() {
-      const contentEl = document.getElementById('Content');
-      const tocSidebar = document.getElementById('doc-toc-sidebar');
-      const tocNav = document.getElementById('doc-toc-nav');
-      const toggleAllBtn = document.getElementById('doc-toc-toggle-all');
-      if (!contentEl || !tocSidebar || !tocNav) return;
-
-      const topItems = [];
-      const groups = [];
-      const standaloneItems = [];
-      let currentGroup = null;
-      let topicSeq = 0;
-
-      // 1. Check main topic
-      const mainTopic = contentEl.querySelector('#MainTopic .CTitle, #MainTopic h1, #MainTopic h2');
-      if (mainTopic) {
-        const safeId = 'doc-nav-main';
-        mainTopic.id = safeId;
-        const mainA = mainTopic.querySelector('a[name]');
-        const mainAnchor = mainA ? mainA.getAttribute('name') : 'MainTopic';
-        mainTopic.setAttribute('data-anchor', mainAnchor);
-        topItems.push({
-          id: safeId,
-          anchor: mainAnchor,
-          title: (mainTopic.innerText || mainTopic.textContent || 'Overview').trim(),
-          type: 'main',
-          el: mainTopic
-        });
-      }
-
-      // 2. Check summary
-      const summaryEl = contentEl.querySelector('.Summary');
-      if (summaryEl) {
-        const safeId = 'doc-nav-summary';
-        summaryEl.id = safeId;
-        summaryEl.setAttribute('data-anchor', 'Summary');
-        topItems.push({
-          id: safeId,
-          anchor: 'Summary',
-          title: 'Summary',
-          type: 'summary',
-          el: summaryEl
-        });
-      }
-
-      // 3. Scan all topics in #Content
-      const topicWrappers = contentEl.querySelectorAll('#Content > div');
-
-      // Check if page contains H2 topics
-      let hasH2 = false;
-      for (let i = 0; i < topicWrappers.length; i++) {
-        const topic = topicWrappers[i].querySelector('.CTopic');
-        if (!topic || topic.id === 'MainTopic') continue;
-        const titleEl = topic.querySelector('.CTitle');
-        if (titleEl && titleEl.tagName.toUpperCase() === 'H2') {
-          hasH2 = true;
-          break;
-        }
-      }
-
-      topicWrappers.forEach(function(wrap) {
-        const topic = wrap.querySelector('.CTopic');
-        if (!topic || topic.id === 'MainTopic') return;
-        const titleEl = topic.querySelector('.CTitle');
-        if (!titleEl) return;
-        const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
-        if (!rawTitle) return;
-
-        const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
-        wrap.id = safeId;
-        wrap.setAttribute('data-doc-topic', safeId);
-        if (topic) topic.id = topic.id || (safeId + '-topic');
-
-        const aTag = wrap.querySelector('a[name]');
-        const aName = wrap.getAttribute('data-anchor') || (aTag ? aTag.getAttribute('name') : '');
-        if (aName) {
-          wrap.setAttribute('data-anchor', aName);
-        }
-
-        const cls = wrap.className || '';
-        const tag = titleEl.tagName.toUpperCase();
-        const isH2 = tag === 'H2';
-        const isCGroup = cls.indexOf('CGroup') !== -1;
-
-        if (hasH2) {
-          if (isH2) {
-            currentGroup = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              items: []
-            };
-            groups.push(currentGroup);
-          } else {
-            const itemObj = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              isGroupHeader: isCGroup,
-              type: 'subitem'
-            };
-            if (currentGroup) {
-              currentGroup.items.push(itemObj);
-            } else {
-              standaloneItems.push(itemObj);
-            }
-          }
-        } else {
-          if (isCGroup) {
-            currentGroup = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              items: []
-            };
-            groups.push(currentGroup);
-          } else {
-            const itemObj = {
-              id: safeId,
-              anchor: aName || safeId,
-              title: rawTitle,
-              el: wrap,
-              isGroupHeader: false,
-              type: 'subitem'
-            };
-            if (currentGroup) {
-              currentGroup.items.push(itemObj);
-            } else {
-              standaloneItems.push(itemObj);
-            }
-          }
-        }
-      });
-
-      const totalItemsCount = topItems.length + standaloneItems.length + groups.length + groups.reduce(function(acc, g) { return acc + g.items.length; }, 0);
-      if (totalItemsCount <= 1) {
-        tocSidebar.style.display = 'none';
-        return;
-      }
-
-      // Show/hide the "toggle all" button depending on whether groups exist
-      if (toggleAllBtn) {
-        if (groups.length === 0) {
-          toggleAllBtn.style.display = 'none';
-        } else {
-          toggleAllBtn.style.display = 'inline-flex';
-        }
-      }
-
-      // Render TOC Tree HTML
-      let html = '';
-
-      // Top-level / standalone items (Overview, Summary, early methods)
-      const initialItems = topItems.concat(standaloneItems);
-      if (initialItems.length > 0) {
-        html += '<ul class="doc-toc-list">';
-        initialItems.forEach(function(item) {
-          const cleanTitle = item.title.replace(/"/g, '&quot;');
-          html += '<li class="doc-toc-item">';
-          html += '<a href="#' + item.id + '" data-target-id="' + item.id + '" class="doc-toc-link" title="' + cleanTitle + '">';
-          html += cleanTitle;
-          html += '</a></li>';
-        });
-        html += '</ul>';
-      }
-
-      // Collapsible Groups
-      groups.forEach(function(group) {
-        const cleanGroupTitle = group.title.replace(/"/g, '&quot;');
-        const hasSubItems = group.items.length > 0;
-        html += '<div class="doc-toc-group-block' + (hasSubItems ? '' : ' no-children') + '" id="block-' + group.id + '">';
-        html += '<div class="doc-toc-group-header">';
-        if (hasSubItems) {
-          html += '<button class="doc-toc-chevron-btn" type="button" aria-label="Toggle group ' + cleanGroupTitle + '" title="Toggle group">';
-          html += '<svg class="doc-toc-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>';
-          html += '</button>';
-        } else {
-          html += '<span class="doc-toc-dot-indicator"></span>';
-        }
-        html += '<a href="#' + group.id + '" data-target-id="' + group.id + '" class="doc-toc-link doc-toc-group-title" title="' + cleanGroupTitle + '">';
-        html += cleanGroupTitle;
-        html += '</a>';
-        if (hasSubItems) {
-          html += '<span class="doc-toc-badge">' + group.items.length + '</span>';
-        }
-        html += '</div>';
-
-        if (hasSubItems) {
-          html += '<ul class="doc-toc-subitems">';
-          group.items.forEach(function(sub) {
-            const cleanSubTitle = sub.title.replace(/"/g, '&quot;');
-            const extraCls = sub.isGroupHeader ? ' doc-toc-subgroup-header' : '';
-            html += '<li class="doc-toc-item doc-toc-subitem' + extraCls + '">';
-            html += '<a href="#' + sub.id + '" data-target-id="' + sub.id + '" class="doc-toc-link' + (sub.isGroupHeader ? ' doc-toc-subgroup-link' : '') + '" title="' + cleanSubTitle + '">';
-            html += cleanSubTitle;
-            html += '</a></li>';
-          });
-          html += '</ul>';
-        }
-        html += '</div>';
-      });
-
-      tocNav.innerHTML = html;
-
-      // Flatten list of all navigable items for scrollspy & lookup
-      const allNavItems = [];
-      initialItems.forEach(function(item) {
-        const link = tocNav.querySelector('.doc-toc-link[data-target-id="' + item.id + '"]');
-        allNavItems.push({ id: item.id, anchor: item.anchor || item.id, title: item.title, el: item.el, link: link });
-      });
-      groups.forEach(function(group) {
-        const groupLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + group.id + '"]');
-        allNavItems.push({ id: group.id, anchor: group.anchor || group.id, title: group.title, el: group.el, link: groupLink });
-        group.items.forEach(function(sub) {
-          const subLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + sub.id + '"]');
-          allNavItems.push({ id: sub.id, anchor: sub.anchor || sub.id, title: sub.title, el: sub.el, link: subLink });
-        });
-      });
-
-      // Smooth scroll helper
-      let isManualScrolling = false;
-      let manualScrollTimer = null;
-      let pendingTargetEl = null;
-
-      function onManualScrollDone() {
-        isManualScrolling = false;
-        pendingTargetEl = null;
-        updateScrollSpy();
-      }
-
-      function startManualScroll(duration) {
-        isManualScrolling = true;
-        clearTimeout(manualScrollTimer);
-        manualScrollTimer = setTimeout(checkAndCorrectScroll, duration || 1800);
-      }
-
-      function getTargetScrollY(targetEl) {
-        if (!targetEl) return 0;
-        const rect = targetEl.getBoundingClientRect();
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        return Math.max(0, currentScroll + rect.top - 24);
-      }
-
-      function performScroll(targetY) {
-        const scrollEl = document.scrollingElement || document.documentElement || document.body;
-        try {
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-        } catch (e) {
-          window.scrollTo(0, targetY);
-        }
-        if (scrollEl && Math.abs(scrollEl.scrollTop - targetY) > 5) {
-          try {
-            scrollEl.scrollTo({ top: targetY, behavior: 'smooth' });
-          } catch (e) {
-            scrollEl.scrollTop = targetY;
-          }
-        }
-      }
-
-      function checkAndCorrectScroll() {
-        if (!pendingTargetEl) {
-          onManualScrollDone();
-          return;
-        }
-        const targetEl = pendingTargetEl;
-        const rect = targetEl.getBoundingClientRect();
-        // If still more than 6px away from top: 24px, perform an instant/exact scroll to lock it in
-        if (Math.abs(rect.top - 24) > 6) {
-          const adjustedY = getTargetScrollY(targetEl);
-          performScroll(adjustedY);
-          pendingTargetEl = null;
-          setTimeout(onManualScrollDone, 100);
-        } else {
-          onManualScrollDone();
-        }
-      }
-
-      function scrollToElement(targetEl) {
-        if (!targetEl) return;
-        const targetY = getTargetScrollY(targetEl);
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        const distance = Math.abs(currentScroll - targetY);
-
-        pendingTargetEl = targetEl;
-        startManualScroll(Math.min(2400, Math.max(600, distance * 0.15 + 400)));
-        performScroll(targetY);
-
-        targetEl.classList.add('doc-target-highlight');
-        setTimeout(function() {
-          targetEl.classList.remove('doc-target-highlight');
-        }, 1600);
-      }
-
-      function scrollTocToItem(linkEl) {
-        if (!linkEl || !tocSidebar) return;
-        const sidebarRect = tocSidebar.getBoundingClientRect();
-        const linkRect = linkEl.getBoundingClientRect();
-        if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
-          const currentScroll = tocSidebar.scrollTop;
-          const targetOffset = linkRect.top - sidebarRect.top + currentScroll - (sidebarRect.height / 2);
-          try {
-            tocSidebar.scrollTo({ top: Math.max(0, targetOffset), behavior: 'smooth' });
-          } catch (e) {
-            tocSidebar.scrollTop = Math.max(0, targetOffset);
-          }
-        }
-      }
-
-      // Click on any TOC link
-      const tocLinks = tocNav.querySelectorAll('.doc-toc-link');
-      tocLinks.forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-
-          const targetId = link.getAttribute('data-target-id');
-          const target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-
-          // Highlight clicked link immediately
-          tocLinks.forEach(function(l) { l.classList.remove('active'); });
-          link.classList.add('active');
-
-          // If inside a collapsed group, un-collapse it so it is visible
-          const parentGroupBlock = link.closest('.doc-toc-group-block');
-          if (parentGroupBlock && parentGroupBlock.classList.contains('collapsed')) {
-            parentGroupBlock.classList.remove('collapsed');
-            updateToggleAllBtn();
-          }
-
-          if (target) {
-            scrollToElement(target);
-          }
-        });
-      });
-
-      // Unified click handler for internal anchor/topic links in #Content
-      contentEl.addEventListener('click', function(e) {
-        const link = e.target.closest('a[href*="#"]');
-        if (!link) return;
-        const href = link.getAttribute('href');
-        if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-        // If it's a source code link, let the source code link handler deal with it
-        if (link.classList.contains('src-code-link') || href.includes('src_view/')) return;
-
-        // Check if link is an in-page anchor link (starts with #)
-        if (href.startsWith('#')) {
-          const targetId = link.getAttribute('data-target-id') || href.substring(1);
-          let target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          if (!target) {
-            try {
-              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
-                       document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
-            } catch (err) {}
-          }
-          if (target && target.tagName === 'A' && target.closest) {
-            target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-          }
-          if (target) {
-            e.preventDefault();
-            scrollToElement(target);
-
-            const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
-            try {
-              history.replaceState(null, null, '#' + realId);
-            } catch (err) {}
-
-            if (tocNav && realId) {
-              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
-              if (mLink) {
-                tocLinks.forEach(function(l) { l.classList.remove('active'); });
-                mLink.classList.add('active');
-                const pB = mLink.closest('.doc-toc-group-block');
-                if (pB && pB.classList.contains('collapsed')) {
-                  pB.classList.remove('collapsed');
-                  updateToggleAllBtn();
-                }
-                scrollTocToItem(mLink);
-              }
-            }
-          }
-        }
-      });
-
-      // Group chevron expand/collapse toggles
-      const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
-      chevronBtns.forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const block = btn.closest('.doc-toc-group-block');
-          if (block) {
-            block.classList.toggle('collapsed');
-            updateToggleAllBtn();
-          }
-        });
-      });
-
-      // Toggle all button logic
-      function updateToggleAllBtn() {
-        if (!toggleAllBtn) return;
-        const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
-        if (allBlocks.length === 0) return;
-        const allCollapsed = Array.from(allBlocks).every(function(b) { return b.classList.contains('collapsed'); });
-        const textSpan = toggleAllBtn.querySelector('.toc-toggle-text');
-        const icon = toggleAllBtn.querySelector('.toc-toggle-icon');
-        if (allCollapsed) {
-          if (textSpan) textSpan.textContent = 'Expand all';
-          if (icon) icon.innerHTML = '<polyline points="4 6 12 14 20 6"/>';
-        } else {
-          if (textSpan) textSpan.textContent = 'Collapse all';
-          if (icon) icon.innerHTML = '<polyline points="4 14 12 6 20 14"/>';
-        }
-      }
-
-      if (toggleAllBtn) {
-        toggleAllBtn.addEventListener('click', function() {
-          const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
-          const anyExpanded = Array.from(allBlocks).some(function(b) { return !b.classList.contains('collapsed'); });
-          if (anyExpanded) {
-            // Collapse all
-            allBlocks.forEach(function(b) { b.classList.add('collapsed'); });
-          } else {
-            // Expand all
-            allBlocks.forEach(function(b) { b.classList.remove('collapsed'); });
-          }
-          updateToggleAllBtn();
-        });
-      }
-
-      // ScrollSpy: highlight active link and expand parent group if needed
-      let scrollTimer = null;
-      function updateScrollSpy() {
-        if (isManualScrolling) return;
-
-        let activeItem = null;
-        for (let i = 0; i < allNavItems.length; i++) {
-          const item = allNavItems[i];
-          if (!item.el) continue;
-          const rect = item.el.getBoundingClientRect();
-          if (rect.top <= 100) {
-            activeItem = item;
-          } else {
-            break;
-          }
-        }
-
-        if (!activeItem && allNavItems.length > 0) {
-          activeItem = allNavItems[0];
-        }
-
-        if (activeItem && activeItem.link) {
-          tocLinks.forEach(function(link) {
-            link.classList.toggle('active', link === activeItem.link);
-          });
-
-          // Auto-expand group if active method is inside a collapsed group
-          const parentBlock = activeItem.link.closest('.doc-toc-group-block');
-          if (parentBlock && parentBlock.classList.contains('collapsed')) {
-            parentBlock.classList.remove('collapsed');
-            updateToggleAllBtn();
-          }
-
-          scrollTocToItem(activeItem.link);
-
-          // Sync active section to parent window (left sidebar navigation)
-          if (window.parent && window.parent !== window) {
-            try {
-              window.parent.postMessage({
-                type: 'docSectionChanged',
-                anchor: activeItem.anchor || activeItem.id,
-                id: activeItem.id,
-                title: activeItem.title
-              }, '*');
-            } catch (err) {}
-          }
-        }
-      }
-
-      window.addEventListener('scrollend', function() {
-        if (isManualScrolling) {
-          clearTimeout(manualScrollTimer);
-          checkAndCorrectScroll();
-        }
-      });
-
-      window.addEventListener('scroll', function() {
-        if (isManualScrolling) {
-          clearTimeout(manualScrollTimer);
-          manualScrollTimer = setTimeout(checkAndCorrectScroll, 160);
-          return;
-        }
-        if (scrollTimer) return;
-        scrollTimer = requestAnimationFrame(function() {
-          updateScrollSpy();
-          scrollTimer = null;
-        });
-      }, { passive: true });
-
-      // Cross-frame listener to scroll directly to anchor/topic from left sidebar
-      window.addEventListener('message', function(e) {
-        if (!e.data || typeof e.data !== 'object') return;
-        if (e.data.type === 'scrollToSection') {
-          const anchor = e.data.anchor;
-          const targetId = e.data.id;
-          let target = null;
-          if (anchor) {
-            if (anchor === 'MainTopic' || anchor === 'Overview') {
-              target = document.getElementById('doc-nav-main') || document.getElementById('MainTopic');
-            } else if (anchor === 'Summary') {
-              target = document.getElementById('doc-nav-summary') || document.querySelector('.Summary');
-            } else {
-              try {
-                target = document.querySelector('[data-anchor="' + CSS.escape(anchor) + '"]') ||
-                         document.querySelector('a[name="' + CSS.escape(anchor) + '"]');
-              } catch (err) { }
-              if (!target) {
-                const allA = document.querySelectorAll('[data-anchor], a[name]');
-                for (let i = 0; i < allA.length; i++) {
-                  if (allA[i].getAttribute('data-anchor') === anchor || allA[i].getAttribute('name') === anchor) {
-                    target = allA[i];
-                    break;
-                  }
-                }
-              }
-              if (target && target.tagName === 'A' && target.closest) {
-                target = target.closest('#Content > div') || target.closest('.CTopic') || target;
-              }
-            }
-          }
-          if (!target && targetId) {
-            target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          }
-          if (target) {
-            scrollToElement(target);
-            const targetNavId = target.id || target.getAttribute('data-doc-topic');
-            if (tocNav && targetNavId) {
-              const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]');
-              if (mLink) {
-                tocLinks.forEach(function(l) { l.classList.remove('active'); });
-                mLink.classList.add('active');
-                const pB = mLink.closest('.doc-toc-group-block');
-                if (pB && pB.classList.contains('collapsed')) {
-                  pB.classList.remove('collapsed');
-                  updateToggleAllBtn();
-                }
-                scrollTocToItem(mLink);
-              }
-            }
-          }
-        }
-      });
-
-      // Handle direct hash navigation on initial load or hashchange
-      function handleHashNav(hashVal) {
-        if (!hashVal) return;
-        const raw = decodeURIComponent(hashVal.replace(/^#/, ''));
-        if (!raw) return;
-        setTimeout(function() {
-          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
-        }, 160);
-      }
-
-      if (window.location.hash) {
-        handleHashNav(window.location.hash);
-      }
-
-      window.addEventListener('hashchange', function() {
-        handleHashNav(window.location.hash);
-      });
-
-      setTimeout(updateScrollSpy, 120);
-    })();
-
-    // Code snippet copy button handler
-    document.addEventListener('click', function(e) {
-      const btn = e.target.closest('.code-copy-btn');
-      if (!btn) return;
-      const container = btn.closest('.code-block-container');
-      if (!container) return;
-      const codeEl = container.querySelector('code');
-      if (!codeEl) return;
-      const text = codeEl.innerText || codeEl.textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        const copyText = btn.querySelector('.copy-text');
-        const orig = copyText ? copyText.textContent : 'Copy';
-        btn.classList.add('copied');
-        if (copyText) copyText.textContent = 'Copied!';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          if (copyText) copyText.textContent = orig;
-        }, 2000);
-      }).catch(err => {
-        console.error('Copy failed: ', err);
-      });
-    });
-
-    // Theme sync
-    window.addEventListener('message', function(e) {
-      if (e.data && e.data.theme) {
-        document.documentElement.setAttribute('data-theme', e.data.theme);
-      }
-    });
-    try {
-      const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-      if (parentTheme) {
-        document.documentElement.setAttribute('data-theme', parentTheme);
-      }
-    } catch (e) {}
-
-    // Auto-restore into main app if opened directly outside iframe
-    try {
-      if (window.self === window.top) {
-        window.location.replace('../../index.html#/doc/base/uvm_phase-svh.html' + window.location.hash);
-      }
-    } catch (e) {}
-
-    // Inform parent that doc is loaded
-    try {
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage({
-          type: 'docNavigated',
-          url: 'docs_view/base/uvm_phase-svh.html'
-        }, '*');
-      }
-    } catch (e) {}
-
-    // Intercept clicks on source code links
-    document.addEventListener('click', function(e) {
-      const link = e.target.closest('a');
-      if (!link) return;
-      const href = link.getAttribute('href');
-      if (!href || href === '#' || href.startsWith('javascript:')) return;
-
-      if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
-        e.preventDefault();
-        const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage({
-            type: 'openSourceView',
-            url: targetHref
-          }, '*');
-        }
-        try {
-          if (window.parent && window.parent.openSourceView) {
-            window.parent.openSourceView(targetHref);
-          }
-        } catch (err) {}
-      }
-    });
-
-    // Diagram enlarge & zoom lightbox triggers
-    document.addEventListener('click', function(e) {
-      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
-      const img = e.target.closest('.doc-diagram-img');
-      if (zoomBtn || img) {
-        e.preventDefault();
-        e.stopPropagation();
-        const card = (zoomBtn || img).closest('.doc-diagram-card');
-        const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
-        if (targetImg) {
-          const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
-          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'Diagramme UVM');
-          const fullSrc = targetImg.src;
-          if (window.parent && window.parent !== window) {
-            window.parent.postMessage({
-              type: 'openImageModal',
-              src: fullSrc,
-              title: title
-            }, '*');
-          } else {
-            window.open(fullSrc, '_blank');
-          }
-        }
-      }
-    });
-
-    // Forward Escape key to parent to close modals if iframe has focus
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && window.parent && window.parent !== window) {
-        window.parent.postMessage({ type: 'closeImageModal' }, '*');
-      }
-    });
-  </script>
+  <script src="../../js/doc_page.js"></script>
 </body>
 </html>

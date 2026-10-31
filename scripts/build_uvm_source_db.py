@@ -413,10 +413,10 @@ def build_database():
                     })
 
             # D. Out-of-body method implementations: function/task [return_type] ClassName::MethodName(...)
-            m_impl = re.match(r'^\s*(function|task)\s+(?:([\w:\[\]\$]+)\s+)?([a-zA-Z0-9_]+)::([a-zA-Z0-9_]+)\s*\(([\s\S]*?)(?:\)|$)', line)
+            m_impl = re.match(r'^\s*(function|task)\s+(.*?)\b([a-zA-Z0-9_]+)::([a-zA-Z0-9_]+)\s*\(([\s\S]*?)(?:\)|$)', line)
             if m_impl and not stripped.startswith('//'):
                 m_kind = m_impl.group(1)
-                m_ret = m_impl.group(2) or ("void" if m_kind == "function" else None)
+                m_ret = m_impl.group(2).strip() or ("void" if m_kind == "function" else None)
                 c_name = m_impl.group(3)
                 meth_name = m_impl.group(4)
                 
@@ -499,20 +499,32 @@ def build_database():
                             endclass_line = k_no
                             break
 
-                    # Methods declared inside class
+                    # Methods declared inside class (handling single and multi-line declarations)
+                    combined_decl = k_line
+                    look_idx = k
+                    if not k_strip.startswith('//') and not k_strip.startswith('*'):
+                        while ('function' not in combined_decl and 'task' not in combined_decl) and (
+                            any(mod in combined_decl.split() for mod in ('pure', 'virtual', 'extern', 'static', 'protected', 'local'))
+                        ) and look_idx < min(len(lines) - 1, k + 3):
+                            look_idx += 1
+                            combined_decl = combined_decl.rstrip() + " " + lines[look_idx].strip()
+                        if ('function' in combined_decl or 'task' in combined_decl) and '(' not in combined_decl:
+                            while '(' not in combined_decl and ';' not in combined_decl and look_idx < min(len(lines) - 1, k + 4):
+                                look_idx += 1
+                                combined_decl = combined_decl.rstrip() + " " + lines[look_idx].strip()
+
                     m_mth = re.match(
                         r'^\s*(?:(extern|pure|virtual|local|protected|static)\s+)*'
-                        r'(task|function)\s+'
-                        r'(?:([\w:\[\]\$]+)\s+)?'
-                        r'([a-zA-Z0-9_]+)\s*\(([\s\S]*?)(?:\)|$)',
-                        k_line
+                        r'(task|function)\b'
+                        r'(.*?)\b([a-zA-Z0-9_]+)\s*\(([\s\S]*?)(?:\)|$)',
+                        combined_decl
                     )
-                    if m_mth and not k_strip.startswith('//') and not k_strip.startswith('*') and '::' not in k_line:
+                    if m_mth and not k_strip.startswith('//') and not k_strip.startswith('*') and '::' not in combined_decl:
                         # Extract modifiers
-                        prefix = k_line[:m_mth.start(2)]
+                        prefix = combined_decl[:m_mth.start(2)]
                         modifiers = re.findall(r'\b(extern|pure|virtual|local|protected|static)\b', prefix)
                         m_kind = m_mth.group(2)
-                        m_ret = m_mth.group(3) or ("void" if m_kind == "function" else None)
+                        m_ret = m_mth.group(3).strip() or ("void" if m_kind == "function" else None)
                         m_name = m_mth.group(4)
                         m_args = m_mth.group(5)
 
@@ -560,6 +572,8 @@ def build_database():
                                     break
                                 sub_k += 1
                             k = sub_k  # advance
+                        else:
+                            k = max(decl_k, look_idx)
 
                         m_doc = parse_doc_above(lines, k_no - (len(full_decl_lines) - 1))
 
