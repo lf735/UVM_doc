@@ -572,6 +572,154 @@
     setTimeout(updateScrollSpy, 120);
   })();
 
+  // =========================================================================
+  // Heading Anchor Link Copy Feature (Google Apps Script / Cloud style)
+  // =========================================================================
+  (function initHeadingAnchors() {
+    const LINK_ICON_SVG = '<svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>';
+    const CHECK_ICON_SVG = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+    function getHeadingAnchor(headingEl) {
+      if (!headingEl) return '';
+
+      // 1. Check data-anchor or id on heading itself
+      if (headingEl.id && headingEl.id !== 'IFirstHeading') return headingEl.id;
+
+      // 2. Check anchor tag inside heading
+      const aTag = headingEl.querySelector('a[name], a[id]');
+      if (aTag) {
+        const name = aTag.getAttribute('name') || aTag.getAttribute('id');
+        if (name && !name.startsWith('link')) return name;
+      }
+
+      // 3. Check closest parent topic container
+      const wrap = headingEl.closest('[data-anchor], [data-doc-topic], .CClass, .CMethod, .CGroup, .Summary');
+      if (wrap) {
+        const topicId = wrap.id || wrap.getAttribute('data-doc-topic');
+        if (topicId) return topicId;
+        const anchor = wrap.getAttribute('data-anchor');
+        if (anchor) return anchor;
+      }
+
+      // 4. Check heading text fallback (for index headers like <a name="A">A</a>)
+      const cleanText = headingEl.textContent.trim();
+      if (cleanText) return encodeURIComponent(cleanText);
+
+      return '';
+    }
+
+    function setupHeading(heading) {
+      if (heading.querySelector('.heading-anchor-btn')) return;
+
+      const anchor = getHeadingAnchor(heading);
+      if (!anchor) return;
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'heading-anchor-btn';
+      btn.setAttribute('aria-label', 'Copy link to this section');
+      btn.setAttribute('title', 'Copy link to this section');
+      btn.setAttribute('data-anchor', anchor);
+      btn.innerHTML = LINK_ICON_SVG;
+
+      // Tooltip element
+      const tip = document.createElement('span');
+      tip.className = 'anchor-copy-tooltip';
+      tip.textContent = 'Link copied!';
+      btn.appendChild(tip);
+
+      heading.appendChild(btn);
+    }
+
+    function scanHeadings() {
+      // Document pages headings (.CTitle, .STitle) and index headings (.IHeading)
+      const selector = '.CTitle, .STitle, .IHeading';
+      document.querySelectorAll(selector).forEach(setupHeading);
+    }
+
+    // Run scan on ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', scanHeadings);
+    } else {
+      scanHeadings();
+    }
+    // Re-verify after TOC initialization
+    setTimeout(scanHeadings, 150);
+
+    // Click event delegation for heading anchor button
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest('.heading-anchor-btn');
+      if (!btn) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const anchor = btn.getAttribute('data-anchor');
+      if (!anchor) return;
+
+      const hash = '#' + anchor;
+
+      // 1. Update window hash locally
+      try {
+        history.pushState(null, '', hash);
+      } catch (err) {
+        window.location.hash = hash;
+      }
+
+      // 2. Compute canonical URL to copy
+      let fullUrl = '';
+      const docMatch = window.location.pathname.match(/(docs_view\/.*)$/);
+      const docRel = docMatch ? docMatch[1] : '';
+
+      if (window.parent && window.parent !== window) {
+        try {
+          // Inside portail iframe -> generate full parent URL
+          const parentBase = window.parent.location.origin + window.parent.location.pathname;
+          fullUrl = `${parentBase}#/doc/${docRel}${hash}`;
+
+          // Update parent state & URL
+          window.parent.location.hash = `#/doc/${docRel}${hash}`;
+          window.parent.postMessage({
+            type: 'docNavigated',
+            url: docRel + hash
+          }, '*');
+        } catch (err) {
+          fullUrl = window.location.href;
+        }
+      } else {
+        // Direct standalone page view
+        fullUrl = window.location.href;
+      }
+
+      // 3. Copy to clipboard
+      const tip = btn.querySelector('.anchor-copy-tooltip');
+      const copyPromise = navigator.clipboard && navigator.clipboard.writeText
+        ? navigator.clipboard.writeText(fullUrl)
+        : Promise.resolve();
+
+      copyPromise.then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = CHECK_ICON_SVG;
+        if (tip) {
+          tip.textContent = 'Link copied!';
+          btn.appendChild(tip);
+          tip.classList.add('show');
+        }
+
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = LINK_ICON_SVG;
+          if (tip) {
+            btn.appendChild(tip);
+            tip.classList.remove('show');
+          }
+        }, 1800);
+      }).catch(err => {
+        console.error('Failed to copy link:', err);
+      });
+    });
+  })();
+
   // Code snippet copy button handler
   document.addEventListener('click', function (e) {
     const btn = e.target.closest('.code-copy-btn');

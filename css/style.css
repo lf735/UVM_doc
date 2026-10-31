@@ -3495,3 +3495,115 @@ body.src-viewer-body {
   text-decoration: underline;
 }
 
+/* =========================================================================
+   Heading Anchor Link Copy Button (Google Apps Script / Cloud style)
+   ========================================================================= */
+
+.heading-anchor-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 100%;
+}
+
+.heading-anchor-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.15s ease, transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  vertical-align: middle;
+  flex-shrink: 0;
+  position: relative;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.heading-anchor-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  transition: transform 0.15s ease;
+}
+
+/* Show on hover of heading or heading container */
+.CTitle:hover .heading-anchor-btn,
+.STitle:hover .heading-anchor-btn,
+.IHeading:hover .heading-anchor-btn,
+.heading-anchor-btn:focus-visible {
+  opacity: 0.65;
+  transform: scale(1);
+}
+
+.heading-anchor-btn:hover {
+  opacity: 1 !important;
+  color: var(--primary);
+  background: var(--surface-alt);
+}
+
+/* Copied state */
+.heading-anchor-btn.copied {
+  opacity: 1 !important;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  transform: scale(1.05);
+}
+
+/* Floating tooltip */
+.anchor-copy-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #1f2937;
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 1000;
+}
+
+.anchor-copy-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -4px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: #1f2937 transparent transparent transparent;
+}
+
+.anchor-copy-tooltip.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="dark"] .anchor-copy-tooltip {
+  background: #374151;
+}
+
+[data-theme="dark"] .anchor-copy-tooltip::after {
+  border-color: #374151 transparent transparent transparent;
+}
+
