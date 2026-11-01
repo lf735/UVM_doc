@@ -1561,7 +1561,17 @@ def parse_navigation_and_categories():
                     tag_close = entry_html.find('>', content_start) + 1
                     sub_html = entry_html[tag_close:gc_end - 6] if gc_end != -1 else ""
                     children = parse_snippet(sub_html)
-                    entries.append({'type': 'group', 'title': title, 'children': children})
+                    # Check if the first child is an Overview page:
+                    # If so, link it to the group (overviewHref) and remove it from children
+                    overview_href = None
+                    if children and children[0].get('type') == 'file' and children[0].get('title', '').strip().lower() == 'overview':
+                        overview_href = children[0]['href']
+                        children = children[1:]
+
+                    entry_dict = {'type': 'group', 'title': title, 'children': children}
+                    if overview_href:
+                        entry_dict['overviewHref'] = overview_href
+                    entries.append(entry_dict)
             elif '<div class=MFile>' in entry_html or '<div class=MIndex>' in entry_html:
                 is_index = '<div class=MIndex>' in entry_html
                 m = re.search(r'<a href="([^"]+)">([^<]+)</a>', entry_html)

@@ -1116,11 +1116,19 @@ document.addEventListener('DOMContentLoaded', () => {
           } else if (cat.type === 'group') {
             const subItems = filterGroupItems(cat.children || [], matcher);
             const groupTitleMatches = matcher && matcher.type === 'words' && matcher.words.every(w => cat.title.toLowerCase().includes(w));
-            if (subItems.length > 0 || groupTitleMatches) {
-              html += `<div class="nav-group">
+            if (subItems.length > 0 || groupTitleMatches || (cat.overviewHref && (!matcher || groupTitleMatches))) {
+              const hasOverview = !!cat.overviewHref;
+              const isOverviewActive = hasOverview && currentDocUrl.includes(cat.overviewHref);
+              const titleHtml = hasOverview
+                ? `<a href="#" data-doc-href="${cat.overviewHref}" class="nav-group-title-link nav-item-link ${isOverviewActive ? 'active' : ''}" title="View ${escapeHtml(cat.title)} Overview">${highlightMatch(cat.title, matcher)}</a>`
+                : `<span class="nav-group-title-text">${highlightMatch(cat.title, matcher)}</span>`;
+
+              html += `<div class="nav-group ${hasOverview ? 'has-overview' : ''}">
             <div class="nav-group-header">
-              <span>${highlightMatch(cat.title, matcher)}</span>
-              <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              ${titleHtml}
+              <button type="button" class="nav-group-chevron-btn" title="Toggle section" aria-label="Toggle ${escapeHtml(cat.title)} section">
+                <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
             </div>
             <ul class="nav-group-items">
               ${renderGroupItemsHtml(subItems, matcher)}
@@ -1166,10 +1174,18 @@ document.addEventListener('DOMContentLoaded', () => {
           </a>
         </li>`;
           } else if (item.type === 'group') {
-            out += `<div class="nav-group" style="margin-left: 0.5rem">
+            const hasOverview = !!item.overviewHref;
+            const isOverviewActive = hasOverview && currentDocUrl.includes(item.overviewHref);
+            const titleHtml = hasOverview
+              ? `<a href="#" data-doc-href="${item.overviewHref}" class="nav-group-title-link nav-item-link ${isOverviewActive ? 'active' : ''}" title="View ${escapeHtml(item.title)} Overview">${highlightMatch(item.title, matcher)}</a>`
+              : `<span class="nav-group-title-text">${highlightMatch(item.title, matcher)}</span>`;
+
+            out += `<div class="nav-group ${hasOverview ? 'has-overview' : ''}" style="margin-left: 0.5rem">
           <div class="nav-group-header" style="font-size:0.775rem;">
-            <span>${highlightMatch(item.title, matcher)}</span>
-            <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            ${titleHtml}
+            <button type="button" class="nav-group-chevron-btn" title="Toggle section" aria-label="Toggle ${escapeHtml(item.title)} section">
+              <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
           </div>
           <ul class="nav-group-items">
             ${renderGroupItemsHtml(item.children || [], matcher)}
@@ -1321,20 +1337,42 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       function attachSidebarListeners() {
-        // Collapsible group headers
+        // Collapsible group headers: Clicking chevron button toggles expand/collapse
+        sidebarContent.querySelectorAll('.nav-group-chevron-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const group = btn.closest('.nav-group');
+            if (group) group.classList.toggle('collapsed');
+            updateSidebarToggleAllBtn();
+          });
+        });
+
+        // Clicking on header (when it doesn't have an overview link) toggles expand/collapse
         sidebarContent.querySelectorAll('.nav-group-header').forEach(header => {
-          header.addEventListener('click', () => {
+          header.addEventListener('click', (e) => {
+            if (e.target.closest('a') || e.target.closest('.nav-group-chevron-btn')) {
+              return;
+            }
             header.closest('.nav-group').classList.toggle('collapsed');
             updateSidebarToggleAllBtn();
           });
         });
 
-        // Navigation links (doc & src)
+        // Navigation links (doc & src & group overview title links)
         sidebarContent.querySelectorAll('[data-doc-href], [data-src-href]').forEach(link => {
           link.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
             const docHref = link.getAttribute('data-doc-href');
             const srcHref = link.getAttribute('data-src-href');
+
+            // If it's a group overview title link, also make sure the group is expanded
+            const parentGroup = link.closest('.nav-group');
+            if (parentGroup && link.classList.contains('nav-group-title-link')) {
+              parentGroup.classList.remove('collapsed');
+              updateSidebarToggleAllBtn();
+            }
+
             if (activeSidebarTab === 'source' || (!docHref && srcHref)) {
               if (srcHref) loadSource(srcHref);
             } else if (docHref) {

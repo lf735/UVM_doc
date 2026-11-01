@@ -573,7 +573,6 @@ body.is-resizing iframe {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
   user-select: none;
   font-size: 0.8rem;
   line-height: 1.3;
@@ -588,11 +587,60 @@ body.is-resizing iframe {
   background-color: var(--surface-alt);
 }
 
+.nav-group-title-link {
+  color: var(--text-main);
+  text-decoration: none;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0.1rem 0;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s ease;
+}
+
+.nav-group-title-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.nav-group-title-link.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.nav-group-title-text {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.nav-group-chevron-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  margin-left: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.nav-group-chevron-btn:hover {
+  color: var(--primary);
+  background: var(--surface-active);
+}
+
 .nav-group-chevron {
   width: 13px;
   height: 13px;
   transition: transform 0.2s ease;
-  color: var(--text-muted);
+  color: currentColor;
 }
 
 .nav-group.collapsed .nav-group-chevron {
