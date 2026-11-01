@@ -1395,7 +1395,10 @@ def generate_orphan_doc_pages():
         for c_idx, cname in enumerate(classes_in_file):
             c_info = UVM_DB.get('classes', {}).get(cname, {})
             c_line = c_info.get('start_line', 1)
-            c_doc = c_info.get('doc', {}).get('summary', '') or f"Class {cname} defined in src/{src_rel}."
+            raw_doc = c_info.get('doc', {}).get('summary', '') if c_info.get('doc') else ''
+            if raw_doc and ('copyright' in raw_doc.lower() or 'all rights reserved' in raw_doc.lower()):
+                raw_doc = ''
+            c_doc = raw_doc or f"Class {cname} defined in src/{src_rel}."
             c_params = c_info.get('parameters_raw')
             c_parent = c_info.get('parent')
             children = c_info.get('children', [])

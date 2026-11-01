@@ -47,11 +47,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 37,
       "lines_blank": 23,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "base/uvm_coreservice.svh",
@@ -325,11 +321,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 329,
       "lines_blank": 198,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "uvm_macros.svh",
@@ -365,11 +357,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 268,
       "lines_blank": 68,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2011 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2011 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -455,11 +443,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 1472,
       "lines_blank": 727,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2013      NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2013      NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "base/uvm_root.svh",
@@ -489,11 +473,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 174,
       "lines_blank": 68,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2011 Cypress Semiconductor Copyright 2010-2011 Mentor Graphics Corporation Copyright 2014 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2011 Cypress Semiconductor\n  Copyright 2010-2011 Mentor Graphics Corporation\n  Copyright 2014 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -518,11 +498,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 101,
       "lines_blank": 33,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2013 Cadence Design Inc All Rights Reserved Worldwide",
-        "full_text": "Copyright 2013 Cadence Design Inc\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -548,11 +524,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 65,
       "lines_blank": 38,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -603,11 +575,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 58,
       "lines_blank": 16,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -630,11 +598,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 661,
       "lines_blank": 293,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2013      NVIDIA Corporation Copyright 2013      Verilab, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2013      NVIDIA Corporation\n  Copyright 2013      Verilab, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -688,11 +652,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 94,
       "lines_blank": 41,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2009 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2009 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -778,11 +738,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 684,
       "lines_blank": 278,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -805,11 +761,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 364,
       "lines_blank": 103,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010-2013 Synopsys, Inc. Copyright 2013      NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010-2013 Synopsys, Inc.\n  Copyright 2013      NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nThis bit marks where filtering should occur to remove uvm stuff from a\nscope"
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -830,11 +782,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 464,
       "lines_blank": 257,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2013      NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2013      NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -888,11 +836,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 737,
       "lines_blank": 379,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010-2013 Synopsys, Inc. Copyright 2013      NVIDIA Corporation Copyright 2013      Cisco Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010-2013 Synopsys, Inc.\n  Copyright 2013      NVIDIA Corporation\n  Copyright 2013      Cisco Systems, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -947,11 +891,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 265,
       "lines_blank": 149,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 Cisco Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 Cisco Systems, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the \"License\"); you may not\n  use this file except in compliance with the License.  You may obtain a copy\n  of the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in writing, software\n  distributed under the License is distributed on an \"AS IS\" BASIS, WITHOUT\n  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the\n  License for the specific language governing permissions and limitations\n  under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -976,11 +916,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 398,
       "lines_blank": 297,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License or the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1007,11 +943,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 71,
       "lines_blank": 49,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1034,11 +966,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 472,
       "lines_blank": 174,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1062,11 +990,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 197,
       "lines_blank": 53,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1090,11 +1014,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 253,
       "lines_blank": 137,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "$Id: uvm_report_catcher.svh,v 1.1.2.10 2010/04/09 15:03:25 janick Exp $ Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2009 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "$Id: uvm_report_catcher.svh,v 1.1.2.10 2010/04/09 15:03:25 janick Exp $\n  Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2009 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1118,11 +1038,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 162,
       "lines_blank": 155,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1145,11 +1061,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 288,
       "lines_blank": 231,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1177,11 +1089,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 333,
       "lines_blank": 122,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1204,11 +1112,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 300,
       "lines_blank": 195,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2014 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2014 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1292,11 +1196,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 66,
       "lines_blank": 34,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010 Mentor Graphics Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Mentor Graphics Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nmacro - UVM_RESOURCE_GET_FCNS\nWhen specicializing resources the get_by_name and get_by_type\nfunctions must be redefined.  The reason is that the version of these\nfunctions in the base class (uvm_resource#(T)) returns an object of\ntype uvm_resource#(T).  In the specializations we must return an\nobject of the type of the specialization.  So, we call the base_class\nimplementation of these functions and then downcast to the subtype.\n\nThis macro is invokved once in each where a resource specialization\nis a class defined as:\n\n|  class <resource_specialization> extends uvm_resource#(T)\n\nwhere <resource_specialization> is the name of the derived class.\nThe argument to this macro is T, the type of the uvm_resource#(T)\nspecialization.  The class in which the macro is defined must supply\na typedef of the specialized class of the form:\n\n|  typedef <resource_specialization> this_subtype;"
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1390,11 +1290,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 93,
       "lines_blank": 38,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2011 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2011 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nclass uvm_spell_chkr"
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1471,11 +1367,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 187,
       "lines_blank": 56,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nFile: Transaction Recording Databases\n\nThe UVM \"Transaction Recording Database\" classes are an abstract representation\nof the backend tool which is recording information for the user.  Usually this\ntool would be dumping information such that it can be viewed with the ~waves~\nof the DUT."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1500,9 +1392,9 @@ window.UVM_SOURCE_DATABASE = {
       "lines_blank": 74,
       "is_deprecated": false,
       "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nFile: Transaction Recording Streams\n\nclass- m_uvm_tr_stream_cfg\nUndocumented helper class for storing stream\ninitialization values."
+        "title": "m_uvm_tr_stream_cfg",
+        "summary": "Undocumented helper class for storing stream initialization values.",
+        "full_text": "Undocumented helper class for storing stream\ninitialization values."
       },
       "includes": [],
       "included_by": [
@@ -1528,11 +1420,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 407,
       "lines_blank": 162,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1588,11 +1476,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 21,
       "lines_blank": 4,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2013-2014 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2013-2014 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1640,11 +1524,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 80,
       "lines_blank": 25,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nFile: Algorithmic Comparator\n\nA common function of testbenches is to compare streams of transactions for\nequivalence. For example, a testbench may compare a stream of transactions\nfrom a DUT with expected results.\n\nThe UVM library provides a base class called\n<uvm_in_order_comparator #(T,comp_type,convert,pair_type)> and two\nderived classes, which are <uvm_in_order_built_in_comparator #(T)> for comparing\nstreams of built-in types and <uvm_in_order_class_comparator #(T)> for comparing\nstreams of class objects.\n\nThe uvm_algorithmic_comparator also compares two streams of transactions;\nhowever, the transaction streams might be of different type objects. This\ndevice will use a user-written transformation function to convert one type\nto another before performing a comparison."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -1667,11 +1547,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 21,
       "lines_blank": 2,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "comps/uvm_pair.svh",
@@ -1758,11 +1634,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 53,
       "lines_blank": 16,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2063,11 +1935,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 23,
       "lines_blank": 4,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2013      NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2013      NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "dap/uvm_set_get_dap_base.svh",
@@ -2217,11 +2085,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 20,
       "lines_blank": 5,
       "is_deprecated": true,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2011 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2011 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2238,9 +2102,9 @@ window.UVM_SOURCE_DATABASE = {
       "lines_blank": 29,
       "is_deprecated": true,
       "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\nCLASS- uvm_resource_converter#(T)\n\nThe uvm_resource_converter class provides a policy object for doing\nconvertion from resource value to string."
+        "title": "uvm_resource_converter#(T)",
+        "summary": "The uvm_resource_converter class provides a policy object for doing convertion from resource value to string.",
+        "full_text": "The uvm_resource_converter class provides a policy object for doing\nconvertion from resource value to string."
       },
       "includes": [],
       "included_by": [
@@ -2268,11 +2132,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 21,
       "lines_blank": 6,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010 Synopsys, Inc. Copyright 2011 Mentor Graphics Corporation Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Synopsys, Inc.\n  Copyright 2011 Mentor Graphics Corporation\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nImplementation of common methods for DPI"
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2288,11 +2148,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 26,
       "lines_blank": 5,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010 Synopsys, Inc. Copyright 2011 Mentor Graphics Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Synopsys, Inc.\n  Copyright 2011 Mentor Graphics Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\nTop-level file that includes all of the C/C++ files required\nby UVM\n\nThe C code may be compiled by compiling this top file only,\nor by compiling individual files then linking them together."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2308,11 +2164,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 27,
       "lines_blank": 9,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010 Synopsys, Inc. Copyright 2011 Mentor Graphics Corporation Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Synopsys, Inc.\n  Copyright 2011 Mentor Graphics Corporation\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\nTop level header filke that wraps all requirements which\nare common to the various C/C++ files in UVM."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2328,11 +2180,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 26,
       "lines_blank": 5,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010 Synopsys, Inc. Copyright 2011 Mentor Graphics Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Synopsys, Inc.\n  Copyright 2011 Mentor Graphics Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "dpi/uvm_hdl.svh",
@@ -2373,11 +2221,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 21,
       "lines_blank": 2,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2013 Cadence Design Systems, Inc. Copyright 2009-2010 Mentor Graphics Corporation Copyright 2010-2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2013 Cadence Design Systems, Inc.\n  Copyright 2009-2010 Mentor Graphics Corporation\n  Copyright 2010-2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nhdl vendor backends are defined for VCS,QUESTA,INCA"
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2420,11 +2264,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 93,
       "lines_blank": 95,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2013 Cadence Design Systems, Inc. Copyright 2009-2010 Mentor Graphics Corporation Copyright 2010-2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2013 Cadence Design Systems, Inc.\n  Copyright 2009-2010 Mentor Graphics Corporation\n  Copyright 2010-2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nuse -DINCA_EXTENDED_PARTSEL_SUPPORT to use extended support for vpi_handle_by_name"
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2440,11 +2280,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 96,
       "lines_blank": 53,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2009-2010 Mentor Graphics Corporation Copyright 2010-2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2009-2010 Mentor Graphics Corporation\n  Copyright 2010-2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2460,11 +2296,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 92,
       "lines_blank": 57,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2009-2010 Mentor Graphics Corporation Copyright 2010-2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2009-2010 Mentor Graphics Corporation\n  Copyright 2010-2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2480,11 +2312,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 57,
       "lines_blank": 45,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2500,11 +2328,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 24,
       "lines_blank": 12,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010-2011 Mentor Graphics Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010-2011 Mentor Graphics Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2525,11 +2349,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 26,
       "lines_blank": 18,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2011 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2011 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -2545,11 +2365,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 23,
       "lines_blank": 12,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2011 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2011 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nImport DPI functions used by the interface to generate the\nlists."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2570,11 +2386,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 213,
       "lines_blank": 33,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2606,11 +2418,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 136,
       "lines_blank": 40,
       "is_deprecated": true,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010-2011 Mentor Graphics Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010-2011 Mentor Graphics Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2647,11 +2455,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 40,
       "lines_blank": 9,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2014 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2014 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2676,11 +2480,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 290,
       "lines_blank": 111,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2742,11 +2542,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 1136,
       "lines_blank": 325,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2013-2014 NVIDIA Corporation Copyright 2013      Cisco Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2013-2014 NVIDIA Corporation\n  Copyright 2013      Cisco Systems, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2928,11 +2724,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 33,
       "lines_blank": 15,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nuvm_root.svh uses these macros to simplify creation of all the phases.\nthey are only to be used for UVM builtin phases, because they are simple\ndelegate imps that call the corresponding methods on uvm_component.\nAlso, they declare classes (uvm_XXXXX_phase) and singleton instances (XXXXX_ph)\nIf you require more complex phase functors for your custom phase, code your\nown imp class extending uvm_task/topdown/bottomup_phase base classes, following\nthe pattern of the macros below, but customize the exec_task() or exec_func()\ncontents to suit your enhanced functionality or derived component type/methods.\nThe uvm_user_xxx_phase() macros are provided for your convenience."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -2963,11 +2755,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 62,
       "lines_blank": 52,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\nMACROS for uvm_printer usage\n\nProvides a set of printing macros that will call appropriate print methods\ninside of a uvm_printer object. All macros have two versions: one assumes\na printer named printer is available in scope; the other takes a printer\nargument."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -3204,11 +2992,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 22,
       "lines_blank": 1,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nThis file undefs all macros that are defined by the UVM library. This can\nbe used to load uvm into multiple scopes using a single compilation."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [],
       "classes": [],
@@ -3224,11 +3008,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 113,
       "lines_blank": 20,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2010 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2014      NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2010 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2014      NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -3540,11 +3320,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 945,
       "lines_blank": 658,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2004-2009 Synopsys, Inc. Copyright 2010-2011 Mentor Graphics Corporation Copyright 2010-2011 Cadence Design Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2004-2009 Synopsys, Inc.\n   Copyright 2010-2011 Mentor Graphics Corporation\n   Copyright 2010-2011 Cadence Design Systems, Inc.\n   All Rights Reserved Worldwide\n\n   Licensed under the Apache License, Version 2.0 (the\n   \"License\"); you may not use this file except in\n   compliance with the License.  You may obtain a copy of\n   the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in\n   writing, software distributed under the License is\n   distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n   CONDITIONS OF ANY KIND, either express or implied.  See\n   the License for the specific language governing\n   permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -3595,11 +3371,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 159,
       "lines_blank": 70,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2004-2009 Synopsys, Inc. Copyright 2010-2011 Mentor Graphics Corporation Copyright 2010 Cadence Design Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2004-2009 Synopsys, Inc.\n   Copyright 2010-2011 Mentor Graphics Corporation\n   Copyright 2010 Cadence Design Systems, Inc.\n   All Rights Reserved Worldwide\n\n   Licensed under the Apache License, Version 2.0 (the\n   \"License\"); you may not use this file except in\n   compliance with the License.  You may obtain a copy of\n   the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in\n   writing, software distributed under the License is\n   distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n   CONDITIONS OF ANY KIND, either express or implied.  See\n   the License for the specific language governing\n   permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -3649,11 +3421,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 322,
       "lines_blank": 78,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2004-2009 Synopsys, Inc. Copyright 2010 Mentor Graphics Corporation Copyright 2010 Cadence Design Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2004-2009 Synopsys, Inc.\n   Copyright 2010 Mentor Graphics Corporation\n   Copyright 2010 Cadence Design Systems, Inc.\n   All Rights Reserved Worldwide\n\n   Licensed under the Apache License, Version 2.0 (the\n   \"License\"); you may not use this file except in\n   compliance with the License.  You may obtain a copy of\n   the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in\n   writing, software distributed under the License is\n   distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n   CONDITIONS OF ANY KIND, either express or implied.  See\n   the License for the specific language governing\n   permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -3677,11 +3445,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 625,
       "lines_blank": 395,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2004-2009 Synopsys, Inc. Copyright 2010-2011 Mentor Graphics Corporation Copyright 2010-2011 Cadence Design Systems, Inc. Copyright 2013 Semifore, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2004-2009 Synopsys, Inc.\n   Copyright 2010-2011 Mentor Graphics Corporation\n   Copyright 2010-2011 Cadence Design Systems, Inc.\n   Copyright 2013 Semifore, Inc.\n   All Rights Reserved Worldwide\n\n   Licensed under the Apache License, Version 2.0 (the\n   \"License\"); you may not use this file except in\n   compliance with the License.  You may obtain a copy of\n   the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in\n   writing, software distributed under the License is\n   distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n   CONDITIONS OF ANY KIND, either express or implied.  See\n   the License for the specific language governing\n   permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -3758,11 +3522,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 63,
       "lines_blank": 53,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010 Synopsys, Inc. Copyright 2010 Cadence Design Systems, Inc. Copyright 2011 Mentor Graphics Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Synopsys, Inc.\n   Copyright 2010 Cadence Design Systems, Inc.\n   Copyright 2011 Mentor Graphics Corporation\n   All Rights Reserved Worldwide\n\n   Licensed under the Apache License, Version 2.0 (the\n   \"License\"); you may not use this file except in\n   compliance with the License.  You may obtain a copy of\n   the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in\n   writing, software distributed under the License is\n   distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n   CONDITIONS OF ANY KIND, either express or implied.  See\n   the License for the specific language governing\n   permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -3813,11 +3573,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 532,
       "lines_blank": 470,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2004-2011 Synopsys, Inc. Copyright 2010-2011 Mentor Graphics Corporation Copyright 2010-2011 Cadence Design Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2004-2011 Synopsys, Inc.\n   Copyright 2010-2011 Mentor Graphics Corporation\n   Copyright 2010-2011 Cadence Design Systems, Inc.\n   All Rights Reserved Worldwide\n\n   Licensed under the Apache License, Version 2.0 (the\n   \"License\"); you may not use this file except in\n   compliance with the License.  You may obtain a copy of\n   the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in\n   writing, software distributed under the License is\n   distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n   CONDITIONS OF ANY KIND, either express or implied.  See\n   the License for the specific language governing\n   permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4134,11 +3890,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 21,
       "lines_blank": 4,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "seq/uvm_sequence_item.svh",
@@ -4264,11 +4016,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 104,
       "lines_blank": 56,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2010 Paradigm-works, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2010 Paradigm-works, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4293,11 +4041,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 155,
       "lines_blank": 97,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4320,11 +4064,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 301,
       "lines_blank": 169,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010-2011 Mentor Graphics Corporation Copyright 2011 Synopsys, Inc. Copyright 2013 Cadence Design Inc Copyright 2014 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010-2011 Mentor Graphics Corporation\n  Copyright 2011 Synopsys, Inc.\n  Copyright 2013 Cadence Design Inc\n  Copyright 2014 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4375,11 +4115,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 20,
       "lines_blank": 5,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4402,11 +4138,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 483,
       "lines_blank": 376,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2013-2014 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2013-2014 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4657,11 +4389,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 178,
       "lines_blank": 35,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013-2014 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013-2014 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4687,11 +4415,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 21,
       "lines_blank": 6,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "tlm1/uvm_tlm_ifs.svh",
@@ -4773,11 +4497,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 96,
       "lines_blank": 49,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4804,11 +4524,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 91,
       "lines_blank": 54,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4832,11 +4548,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 123,
       "lines_blank": 48,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4862,11 +4574,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 31,
       "lines_blank": 32,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -4943,11 +4651,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 19,
       "lines_blank": 1,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010 Mentor Graphics Corporation Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Mentor Graphics Corporation\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "tlm2/uvm_tlm2_defines.svh",
@@ -5101,11 +4805,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 130,
       "lines_blank": 17,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2010-2011 Mentor Graphics Corporation Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010-2011 Mentor Graphics Corporation\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\nFile: TLM2 Types\nEnum: uvm_tlm_phase_e\n\nNonblocking transport synchronization state values between\nan initiator and a target.\n\n UNINITIALIZED_PHASE  - Defaults for constructor\n BEGIN_REQ            - Beginning of request phase\n END_REQ              - End of request phase\n BEGIN_RESP           - Beginning of response phase\n END_RESP             - End of response phase"
-      },
+      "header_doc": null,
       "includes": [],
       "included_by": [
         {
@@ -5288,11 +4988,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 21,
       "lines_blank": 2,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "uvm_pkg.sv",
@@ -5314,11 +5010,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 32,
       "lines_blank": 14,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "macros/uvm_version_defines.svh",
@@ -5406,11 +5098,7 @@ window.UVM_SOURCE_DATABASE = {
       "lines_comment": 22,
       "lines_blank": 6,
       "is_deprecated": false,
-      "header_doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010-2011 Synopsys, Inc. Copyright 2013      NVIDIA, Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010-2011 Synopsys, Inc.\n  Copyright 2013      NVIDIA, Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "header_doc": null,
       "includes": [
         {
           "target": "uvm_macros.svh",
@@ -7869,9 +7557,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 5,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "Class- uvm_derived_callbacks #(T,ST,CB)",
-        "full_text": "Class- uvm_derived_callbacks #(T,ST,CB)\n\nThis type is not really expected to be used directly by the user, instead they are\nexpected to use the macro `uvm_set_super_type. The sole purpose of this type is to\nallow for setting up of the derived_type/super_type mapping."
+        "title": "uvm_derived_callbacks #(T,ST,CB)",
+        "summary": "This type is not really expected to be used directly by the user, instead they are expected to use the macro `uvm_set_super_type. The sole purpose of this type is to allow for setting up of the derived_type/super_type mapping.",
+        "full_text": "This type is not really expected to be used directly by the user, instead they are\nexpected to use the macro `uvm_set_super_type. The sole purpose of this type is to\nallow for setting up of the derived_type/super_type mapping."
       },
       "methods": {
         "get": {
@@ -11319,9 +11007,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string name, uvm_component parent)",
           "doc": {
-            "title": "",
-            "summary": "IMPLEMENTATION",
-            "full_text": "IMPLEMENTATION\n\n\nCLASS- uvm_component\n\n\n\nnew"
+            "title": "uvm_component",
+            "summary": "new",
+            "full_text": "new"
           },
           "overrides": true,
           "overridden_from": "uvm_report_object",
@@ -14005,9 +13693,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string inst_name,)",
           "doc": {
-            "title": "",
-            "summary": "Function- set_config_int",
-            "full_text": "Function- set_config_int"
+            "title": "set_config_int",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -14052,9 +13740,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string inst_name,)",
           "doc": {
-            "title": "",
-            "summary": "Function- set_config_string",
-            "full_text": "Function- set_config_string"
+            "title": "set_config_string",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -14099,9 +13787,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string inst_name,)",
           "doc": {
-            "title": "",
-            "summary": "Function- set_config_object",
-            "full_text": "Function- set_config_object\n\nCalling set_config_* causes configuration settings to be created and\nplaced in a table internal to this component. There are similar global\nmethods that store settings in a global table. Each setting stores the\nsupplied ~inst_name~, ~field_name~, and ~value~ for later use by descendent\ncomponents during their construction. (The global table applies to\nall components and takes precedence over the component tables.)\n\nWhen a descendant component calls a get_config_* method, the ~inst_name~\nand ~field_name~ provided in the get call are matched against all the\nconfiguration settings stored in the global table and then in each\ncomponent in the parent hierarchy, top-down. Upon the first match, the\nvalue stored in the configuration setting is returned. Thus, precedence is\nglobal, following by the top-level component, and so on down to the\ndescendent component's parent.\n\nThese methods work in conjunction with the get_config_* methods to\nprovide a configuration setting mechanism for integral, string, and\nuvm_object-based types. Settings of other types, such as virtual interfaces\nand arrays, can be indirectly supported by defining a class that contains\nthem.\n\nBoth ~inst_name~ and ~field_name~ may contain wildcards.\n\n- For set_config_int, ~value~ is an integral value that can be anything\n  from 1 bit to 4096 bits.\n\n- For set_config_string, ~value~ is a string.\n\n- For set_config_object, ~value~ must be an <uvm_object>-based object or\n  ~null~.  Its clone argument specifies whether the object should be cloned.\n  If set, the object is cloned both going into the table (during the set)\n  and coming out of the table (during the get), so that multiple components\n  matched to the same setting (by way of wildcards) do not end up sharing\n  the same object.\n\n\nSee <get_config_int>, <get_config_string>, and <get_config_object> for\ninformation on getting the configurations set by these methods."
+            "title": "set_config_object",
+            "summary": "Calling set_config_* causes configuration settings to be created and placed in a table internal to this component. There are similar global methods that store settings in a global table. Each setting stores the supplied ~inst_name~, ~field_name~, and ~value~ for later use by descendent components during their construction. (The global table applies to all components and takes precedence over the component tables.)",
+            "full_text": "Calling set_config_* causes configuration settings to be created and\nplaced in a table internal to this component. There are similar global\nmethods that store settings in a global table. Each setting stores the\nsupplied ~inst_name~, ~field_name~, and ~value~ for later use by descendent\ncomponents during their construction. (The global table applies to\nall components and takes precedence over the component tables.)\n\nWhen a descendant component calls a get_config_* method, the ~inst_name~\nand ~field_name~ provided in the get call are matched against all the\nconfiguration settings stored in the global table and then in each\ncomponent in the parent hierarchy, top-down. Upon the first match, the\nvalue stored in the configuration setting is returned. Thus, precedence is\nglobal, following by the top-level component, and so on down to the\ndescendent component's parent.\n\nThese methods work in conjunction with the get_config_* methods to\nprovide a configuration setting mechanism for integral, string, and\nuvm_object-based types. Settings of other types, such as virtual interfaces\nand arrays, can be indirectly supported by defining a class that contains\nthem.\n\nBoth ~inst_name~ and ~field_name~ may contain wildcards.\n\n- For set_config_int, ~value~ is an integral value that can be anything\n  from 1 bit to 4096 bits.\n\n- For set_config_string, ~value~ is a string.\n\n- For set_config_object, ~value~ must be an <uvm_object>-based object or\n  ~null~.  Its clone argument specifies whether the object should be cloned.\n  If set, the object is cloned both going into the table (during the set)\n  and coming out of the table (during the get), so that multiple components\n  matched to the same setting (by way of wildcards) do not end up sharing\n  the same object.\n\n\nSee <get_config_int>, <get_config_string>, and <get_config_object> for\ninformation on getting the configurations set by these methods."
           },
           "overrides": false,
           "overridden_from": null,
@@ -14146,9 +13834,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string field_name,)",
           "doc": {
-            "title": "",
-            "summary": "Function- get_config_int",
-            "full_text": "Function- get_config_int"
+            "title": "get_config_int",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -14193,9 +13881,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string field_name,)",
           "doc": {
-            "title": "",
-            "summary": "Function- get_config_string",
-            "full_text": "Function- get_config_string"
+            "title": "get_config_string",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -14240,9 +13928,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string field_name,)",
           "doc": {
-            "title": "",
-            "summary": "Function- get_config_object",
-            "full_text": "Function- get_config_object\n\nThese methods retrieve configuration settings made by previous calls to\ntheir set_config_* counterparts. As the methods' names suggest, there is\ndirect support for integral types, strings, and objects.  Settings of other\ntypes can be indirectly supported by defining an object to contain them.\n\nConfiguration settings are stored in a global table and in each component\ninstance. With each call to a get_config_* method, a top-down search is\nmade for a setting that matches this component's full name and the given\n~field_name~. For example, say this component's full instance name is\ntop.u1.u2. First, the global configuration table is searched. If that\nfails, then it searches the configuration table in component 'top',\nfollowed by top.u1.\n\nThe first instance/field that matches causes ~value~ to be written with the\nvalue of the configuration setting and 1 is returned. If no match\nis found, then ~value~ is unchanged and the 0 returned.\n\nCalling the get_config_object method requires special handling. Because\n~value~ is an output of type <uvm_object>, you must provide a uvm_object\nhandle to assign to (_not_ a derived class handle). After the call, you can\nthen $cast to the actual type.\n\nFor example, the following code illustrates how a component designer might\ncall upon the configuration mechanism to assign its ~data~ object property,\nwhose type myobj_t derives from uvm_object.\n\n|  class mycomponent extends uvm_component;\n|\n|    local myobj_t data;\n|\n|    function void build_phase(uvm_phase phase);\n|      uvm_object tmp;\n|      super.build_phase(phase);\n|      if(get_config_object(\"data\", tmp))\n|        if (!$cast(data, tmp))\n|          `uvm_error(\"CFGERR\",\"error! config setting for 'data' not of type myobj_t\")\n|        endfunction\n|      ...\n\nThe above example overrides the <build_phase> method. If you want to retain\nany base functionality, you must call super.build_phase(uvm_phase phase).\n\nThe ~clone~ bit clones the data inbound. The get_config_object method can\nalso clone the data outbound.\n\nSee Members for information on setting the global configuration table."
+            "title": "get_config_object",
+            "summary": "These methods retrieve configuration settings made by previous calls to their set_config_* counterparts. As the methods' names suggest, there is direct support for integral types, strings, and objects.  Settings of other types can be indirectly supported by defining an object to contain them.",
+            "full_text": "These methods retrieve configuration settings made by previous calls to\ntheir set_config_* counterparts. As the methods' names suggest, there is\ndirect support for integral types, strings, and objects.  Settings of other\ntypes can be indirectly supported by defining an object to contain them.\n\nConfiguration settings are stored in a global table and in each component\ninstance. With each call to a get_config_* method, a top-down search is\nmade for a setting that matches this component's full name and the given\n~field_name~. For example, say this component's full instance name is\ntop.u1.u2. First, the global configuration table is searched. If that\nfails, then it searches the configuration table in component 'top',\nfollowed by top.u1.\n\nThe first instance/field that matches causes ~value~ to be written with the\nvalue of the configuration setting and 1 is returned. If no match\nis found, then ~value~ is unchanged and the 0 returned.\n\nCalling the get_config_object method requires special handling. Because\n~value~ is an output of type <uvm_object>, you must provide a uvm_object\nhandle to assign to (_not_ a derived class handle). After the call, you can\nthen $cast to the actual type.\n\nFor example, the following code illustrates how a component designer might\ncall upon the configuration mechanism to assign its ~data~ object property,\nwhose type myobj_t derives from uvm_object.\n\n|  class mycomponent extends uvm_component;\n|\n|    local myobj_t data;\n|\n|    function void build_phase(uvm_phase phase);\n|      uvm_object tmp;\n|      super.build_phase(phase);\n|      if(get_config_object(\"data\", tmp))\n|        if (!$cast(data, tmp))\n|          `uvm_error(\"CFGERR\",\"error! config setting for 'data' not of type myobj_t\")\n|        endfunction\n|      ...\n\nThe above example overrides the <build_phase> method. If you want to retain\nany base functionality, you must call super.build_phase(uvm_phase phase).\n\nThe ~clone~ bit clones the data inbound. The get_config_object method can\nalso clone the data outbound.\n\nSee Members for information on setting the global configuration table."
           },
           "overrides": false,
           "overridden_from": null,
@@ -21605,9 +21293,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 0,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "CLASS- uvm_factory_override",
-        "full_text": "CLASS- uvm_factory_override\n\nInternal class."
+        "title": "uvm_factory_override",
+        "summary": "Internal class.",
+        "full_text": "Internal class."
       },
       "methods": {
         "new": {
@@ -23867,9 +23555,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 0,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "CLASS- uvm_scope_stack",
-        "full_text": "CLASS- uvm_scope_stack"
+        "title": "uvm_scope_stack",
+        "summary": "",
+        "full_text": ""
       },
       "methods": {
         "depth": {
@@ -24308,9 +23996,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 0,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "CLASS- uvm_status_container",
-        "full_text": "CLASS- uvm_status_container\n\nInternal class to contain status information for automation methods."
+        "title": "uvm_status_container",
+        "summary": "Internal class to contain status information for automation methods.",
+        "full_text": "Internal class to contain status information for automation methods."
       },
       "methods": {
         "do_field_check": {
@@ -24490,9 +24178,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 0,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "Class- uvm_seed_map",
-        "full_text": "Class- uvm_seed_map\n\nThis map is a seed map that can be used to update seeds. The update\nis done automatically by the seed hashing routine. The seed_table_lookup\nuses an instance name lookup and the seed_table inside a given map\nuses a type name for the lookup."
+        "title": "uvm_seed_map",
+        "summary": "This map is a seed map that can be used to update seeds. The update is done automatically by the seed hashing routine. The seed_table_lookup uses an instance name lookup and the seed_table inside a given map uses a type name for the lookup.",
+        "full_text": "This map is a seed map that can be used to update seeds. The update\nis done automatically by the seed hashing routine. The seed_table_lookup\nuses an instance name lookup and the seed_table inside a given map\nuses a type name for the lookup."
       },
       "methods": {}
     },
@@ -26068,9 +25756,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_object obj,)",
           "doc": {
-            "title": "",
-            "summary": "Function- m_propagate",
-            "full_text": "Function- m_propagate\n\nPropagate the objection to the objects parent. If the object is a\ncomponent, the parent is just the hierarchical parent. If the object is\na sequence, the parent is the parent sequence if one exists, or\nit is the attached sequencer if there is no parent sequence.\n\nobj : the uvm_object on which the objection is being raised or lowered\nsource_obj : the root object on which the end user raised/lowered the\n  objection (as opposed to an anscestor of the end user object)a"
+            "title": "m_propagate",
+            "summary": "Propagate the objection to the objects parent. If the object is a component, the parent is just the hierarchical parent. If the object is a sequence, the parent is the parent sequence if one exists, or it is the attached sequencer if there is no parent sequence.",
+            "full_text": "Propagate the objection to the objects parent. If the object is a\ncomponent, the parent is just the hierarchical parent. If the object is\na sequence, the parent is the parent sequence if one exists, or\nit is the attached sequencer if there is no parent sequence.\n\nobj : the uvm_object on which the objection is being raised or lowered\nsource_obj : the root object on which the end user raised/lowered the\n  objection (as opposed to an anscestor of the end user object)a"
           },
           "overrides": false,
           "overridden_from": null,
@@ -27263,9 +26951,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 4,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "Class- uvm_test_done_objection DEPRECATED",
-        "full_text": "Class- uvm_test_done_objection DEPRECATED\n\nProvides built-in end-of-test coordination"
+        "title": "uvm_test_done_objection DEPRECATED",
+        "summary": "Provides built-in end-of-test coordination",
+        "full_text": "Provides built-in end-of-test coordination"
       },
       "methods": {
         "new": {
@@ -27349,9 +27037,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_object obj=null,)",
           "doc": {
-            "title": "",
-            "summary": "Function- qualify DEPRECATED",
-            "full_text": "Function- qualify DEPRECATED\n\nChecks that the given ~object~ is derived from either <uvm_component> or\n<uvm_sequence_base>."
+            "title": "qualify DEPRECATED",
+            "summary": "Checks that the given ~object~ is derived from either <uvm_component> or <uvm_sequence_base>.",
+            "full_text": "Checks that the given ~object~ is derived from either <uvm_component> or\n<uvm_sequence_base>."
           },
           "overrides": false,
           "overridden_from": null,
@@ -27501,9 +27189,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_object obj,)",
           "doc": {
-            "title": "",
-            "summary": "Task- all_dropped DEPRECATED",
-            "full_text": "Task- all_dropped DEPRECATED\n\nThis callback is called when the given ~object's~ objection count reaches\nzero; if the ~object~ is the implicit top-level, <uvm_root> then it means\nthere are no more objections raised for the ~uvm_test_done~ objection.\nThus, after calling <uvm_objection::all_dropped>, this method will call"
+            "title": "all_dropped DEPRECATED",
+            "summary": "This callback is called when the given ~object's~ objection count reaches zero; if the ~object~ is the implicit top-level, <uvm_root> then it means there are no more objections raised for the ~uvm_test_done~ objection. Thus, after calling <uvm_objection::all_dropped>, this method will call",
+            "full_text": "This callback is called when the given ~object's~ objection count reaches\nzero; if the ~object~ is the implicit top-level, <uvm_root> then it means\nthere are no more objections raised for the ~uvm_test_done~ objection.\nThus, after calling <uvm_objection::all_dropped>, this method will call"
           },
           "overrides": true,
           "overridden_from": "uvm_objection",
@@ -27552,9 +27240,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_object obj=null,)",
           "doc": {
-            "title": "",
-            "summary": "Function- raise_objection DEPRECATED",
-            "full_text": "Function- raise_objection DEPRECATED\n\nCalls <uvm_objection::raise_objection> after calling <qualify>.\nIf the ~object~ is not provided or is ~null~, then the implicit top-level\ncomponent, ~uvm_top~, is chosen."
+            "title": "raise_objection DEPRECATED",
+            "summary": "Calls <uvm_objection::raise_objection> after calling <qualify>. If the ~object~ is not provided or is ~null~, then the implicit top-level component, ~uvm_top~, is chosen.",
+            "full_text": "Calls <uvm_objection::raise_objection> after calling <qualify>.\nIf the ~object~ is not provided or is ~null~, then the implicit top-level\ncomponent, ~uvm_top~, is chosen."
           },
           "overrides": true,
           "overridden_from": "uvm_objection",
@@ -27603,9 +27291,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_object obj=null,)",
           "doc": {
-            "title": "",
-            "summary": "Function- drop_objection DEPRECATED",
-            "full_text": "Function- drop_objection DEPRECATED\n\nCalls <uvm_objection::drop_objection> after calling <qualify>.\nIf the ~object~ is not provided or is ~null~, then the implicit top-level\ncomponent, ~uvm_top~, is chosen."
+            "title": "drop_objection DEPRECATED",
+            "summary": "Calls <uvm_objection::drop_objection> after calling <qualify>. If the ~object~ is not provided or is ~null~, then the implicit top-level component, ~uvm_top~, is chosen.",
+            "full_text": "Calls <uvm_objection::drop_objection> after calling <qualify>.\nIf the ~object~ is not provided or is ~null~, then the implicit top-level\ncomponent, ~uvm_top~, is chosen."
           },
           "overrides": true,
           "overridden_from": "uvm_objection",
@@ -36483,9 +36171,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Class- uvm_table_printer",
-            "full_text": "Class- uvm_table_printer\n\nnew"
+            "title": "uvm_table_printer",
+            "summary": "new",
+            "full_text": "new"
           },
           "overrides": false,
           "overridden_from": null,
@@ -36635,9 +36323,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Class- uvm_tree_printer",
-            "full_text": "Class- uvm_tree_printer\n\n\nnew"
+            "title": "uvm_tree_printer",
+            "summary": "new",
+            "full_text": "new"
           },
           "overrides": false,
           "overridden_from": null,
@@ -38894,9 +38582,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string name,)",
           "doc": {
-            "title": "",
-            "summary": "Function- create_stream",
-            "full_text": "Function- create_stream"
+            "title": "create_stream",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -38947,9 +38635,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(integer txh,)",
           "doc": {
-            "title": "",
-            "summary": "Function- m_set_attribute",
-            "full_text": "Function- m_set_attribute"
+            "title": "m_set_attribute",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -39208,9 +38896,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(integer h1,)",
           "doc": {
-            "title": "",
-            "summary": "Function- link_tr",
-            "full_text": "Function- link_tr"
+            "title": "link_tr",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -40015,9 +39703,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(string name,)",
           "doc": {
-            "title": "",
-            "summary": "Function- create_stream",
-            "full_text": "Function- create_stream"
+            "title": "create_stream",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": true,
           "overridden_from": "uvm_recorder",
@@ -40066,9 +39754,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(integer txh,)",
           "doc": {
-            "title": "",
-            "summary": "Function- m_set_attribute",
-            "full_text": "Function- m_set_attribute"
+            "title": "m_set_attribute",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": true,
           "overridden_from": "uvm_recorder",
@@ -40317,9 +40005,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(integer h1,)",
           "doc": {
-            "title": "",
-            "summary": "Function- link_tr",
-            "full_text": "Function- link_tr"
+            "title": "link_tr",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": true,
           "overridden_from": "uvm_recorder",
@@ -42826,9 +42514,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(input uvm_severity severity,)",
           "doc": {
-            "title": "",
-            "summary": "Function- set_severity_action Function- set_id_action Function- set_severity_id_action Function- set_id_verbosity Function- set_severity_id_verbosity",
-            "full_text": "Function- set_severity_action\nFunction- set_id_action\nFunction- set_severity_id_action\nFunction- set_id_verbosity\nFunction- set_severity_id_verbosity\n\nInternal methods called by uvm_report_object."
+            "title": "set_severity_action",
+            "summary": "Function- set_id_action Function- set_severity_id_action Function- set_id_verbosity Function- set_severity_id_verbosity",
+            "full_text": "Function- set_id_action\nFunction- set_severity_id_action\nFunction- set_id_verbosity\nFunction- set_severity_id_verbosity\n\nInternal methods called by uvm_report_object."
           },
           "overrides": false,
           "overridden_from": null,
@@ -43331,9 +43019,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_report_object client,)",
           "doc": {
-            "title": "",
-            "summary": "Function- run_hooks",
-            "full_text": "Function- run_hooks"
+            "title": "run_hooks",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -48039,9 +47727,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Group- Callbacks",
-            "full_text": "Group- Callbacks\n\n\nFunction- report_info_hook"
+            "title": "Callbacks",
+            "summary": "Function- report_info_hook",
+            "full_text": "Function- report_info_hook"
           },
           "overrides": false,
           "overridden_from": null,
@@ -48078,9 +47766,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Function- report_error_hook",
-            "full_text": "Function- report_error_hook"
+            "title": "report_error_hook",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -48117,9 +47805,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Function- report_warning_hook",
-            "full_text": "Function- report_warning_hook"
+            "title": "report_warning_hook",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -48156,9 +47844,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Function- report_fatal_hook",
-            "full_text": "Function- report_fatal_hook"
+            "title": "report_fatal_hook",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -48195,9 +47883,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Function- report_hook",
-            "full_text": "Function- report_hook\n\nThese hook methods can be defined in derived classes to perform additional\nactions when reports are issued. They are called only if the <UVM_CALL_HOOK>\nbit is specified in the action associated with the report. The default\nimplementations return 1, which allows the report to be processed. If an\noverride returns 0, then the report is not processed.\n\nFirst, the ~report_hook~ method is called, followed by the severity-specific\nhook (<report_info_hook>, etc.). If either hook method\nreturns 0 then the report is not processed further."
+            "title": "report_hook",
+            "summary": "These hook methods can be defined in derived classes to perform additional actions when reports are issued. They are called only if the <UVM_CALL_HOOK> bit is specified in the action associated with the report. The default implementations return 1, which allows the report to be processed. If an override returns 0, then the report is not processed.",
+            "full_text": "These hook methods can be defined in derived classes to perform additional\nactions when reports are issued. They are called only if the <UVM_CALL_HOOK>\nbit is specified in the action associated with the report. The default\nimplementations return 1, which allows the report to be processed. If an\noverride returns 0, then the report is not processed.\n\nFirst, the ~report_hook~ method is called, followed by the severity-specific\nhook (<report_info_hook>, etc.). If either hook method\nreturns 0 then the report is not processed further."
           },
           "overrides": false,
           "overridden_from": null,
@@ -50686,9 +50374,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Function- compose_message",
-            "full_text": "Function- compose_message"
+            "title": "compose_message",
+            "summary": "",
+            "full_text": ""
           },
           "overrides": false,
           "overridden_from": null,
@@ -57805,11 +57493,7 @@ window.UVM_SOURCE_DATABASE = {
       "descendants": [],
       "depth": 0,
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "Copyright 2011 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2011 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\n\n\nclass uvm_spell_chkr"
-      },
+      "doc": null,
       "methods": {
         "check": {
           "name": "check",
@@ -59294,9 +58978,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 0,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\nFile: Transaction Recording Streams\n\n\nclass- m_uvm_tr_stream_cfg\nUndocumented helper class for storing stream\ninitialization values."
+        "title": "m_uvm_tr_stream_cfg",
+        "summary": "Undocumented helper class for storing stream initialization values.",
+        "full_text": "Undocumented helper class for storing stream\ninitialization values."
       },
       "methods": {}
     },
@@ -59579,9 +59263,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_tr_database db,)",
           "doc": {
-            "title": "",
-            "summary": "Function- m_do_open Initializes the state of the stream",
-            "full_text": "Function- m_do_open\nInitializes the state of the stream\n\nParameters-\ndb - Database which the stream belongs to\nscope - Optional scope\nstream_type_name - Optional type name for the stream\n\nThis method will trigger a <do_open> call.\n\nAn error will be asserted if-\n- m_do_open is called more than once without the stream\n  being ~freed~ between."
+            "title": "m_do_open",
+            "summary": "Initializes the state of the stream",
+            "full_text": "Initializes the state of the stream\n\nParameters-\ndb - Database which the stream belongs to\nscope - Optional scope\nstream_type_name - Optional type name for the stream\n\nThis method will trigger a <do_open> call.\n\nAn error will be asserted if-\n- m_do_open is called more than once without the stream\n  being ~freed~ between."
           },
           "overrides": false,
           "overridden_from": null,
@@ -67308,9 +66992,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 0,
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "Copyright 2010 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Mentor Graphics Corporation\n  Copyright 2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\n\n\nCLASS- uvm_resource_converter#(T)\n\nThe uvm_resource_converter class provides a policy object for doing\nconvertion from resource value to string."
+        "title": "uvm_resource_converter#(T)",
+        "summary": "The uvm_resource_converter class provides a policy object for doing convertion from resource value to string.",
+        "full_text": "The uvm_resource_converter class provides a policy object for doing\nconvertion from resource value to string."
       },
       "methods": {
         "convert2string": {
@@ -67394,9 +67078,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 1,
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "CLASS- uvm_resource_default_converter Define a default resource value converter using '%p'.",
-        "full_text": "CLASS- uvm_resource_default_converter\nDefine a default resource value converter using '%p'.\n\nMay be used for almost all types, except virtual interfaces.\nDefault resource converters are already defined for the\nbuilt-in singular types using the <uvm_resource_default_converters>\nclass."
+        "title": "uvm_resource_default_converter",
+        "summary": "Define a default resource value converter using '%p'.",
+        "full_text": "Define a default resource value converter using '%p'.\n\nMay be used for almost all types, except virtual interfaces.\nDefault resource converters are already defined for the\nbuilt-in singular types using the <uvm_resource_default_converters>\nclass."
       },
       "methods": {
         "convert2string": {
@@ -67543,9 +67227,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 1,
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "CLASS- uvm_resource_convert2string_converter Define a default resource value converter using convert2string() method",
-        "full_text": "CLASS- uvm_resource_convert2string_converter\nDefine a default resource value converter using convert2string() method\n\nMay be used for all class types that contain a ~convert2string()~ method,\nsuch as <uvm_object>."
+        "title": "uvm_resource_convert2string_converter",
+        "summary": "Define a default resource value converter using convert2string() method",
+        "full_text": "Define a default resource value converter using convert2string() method\n\nMay be used for all class types that contain a ~convert2string()~ method,\nsuch as <uvm_object>."
       },
       "methods": {
         "convert2string": {
@@ -67685,9 +67369,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 1,
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "CLASS- uvm_resource_sprint_converter Define a default resource value converter using sprint() method",
-        "full_text": "CLASS- uvm_resource_sprint_converter\nDefine a default resource value converter using sprint() method\n\nMay be used for all class types that contain a ~sprint()~ method,\nsuch as <uvm_object>."
+        "title": "uvm_resource_sprint_converter",
+        "summary": "Define a default resource value converter using sprint() method",
+        "full_text": "Define a default resource value converter using sprint() method\n\nMay be used for all class types that contain a ~sprint()~ method,\nsuch as <uvm_object>."
       },
       "methods": {
         "convert2string": {
@@ -67825,9 +67509,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 0,
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "CLASS- m_uvm_resource_default_converters Singleton used to register default resource value converters for the built-in singular types.",
-        "full_text": "CLASS- m_uvm_resource_default_converters\nSingleton used to register default resource value converters\nfor the built-in singular types."
+        "title": "m_uvm_resource_default_converters",
+        "summary": "Singleton used to register default resource value converters for the built-in singular types.",
+        "full_text": "Singleton used to register default resource value converters\nfor the built-in singular types."
       },
       "methods": {
         "new": {
@@ -78882,9 +78566,9 @@ window.UVM_SOURCE_DATABASE = {
           ],
           "parameters_raw": "(uvm_printer printer)",
           "doc": {
-            "title": "",
-            "summary": "Group- Basic Object Operations",
-            "full_text": "Group- Basic Object Operations\n\ndo_print"
+            "title": "Basic Object Operations",
+            "summary": "do_print",
+            "full_text": "do_print"
           },
           "overrides": false,
           "overridden_from": null,
@@ -83996,11 +83680,7 @@ window.UVM_SOURCE_DATABASE = {
       "descendants": [],
       "depth": 0,
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "Copyright 2004-2011 Synopsys, Inc. Copyright 2010-2011 Mentor Graphics Corporation Copyright 2010-2011 Cadence Design Systems, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2004-2011 Synopsys, Inc.\n   Copyright 2010-2011 Mentor Graphics Corporation\n   Copyright 2010-2011 Cadence Design Systems, Inc.\n   All Rights Reserved Worldwide\n\n   Licensed under the Apache License, Version 2.0 (the\n   \"License\"); you may not use this file except in\n   compliance with the License.  You may obtain a copy of\n   the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in\n   writing, software distributed under the License is\n   distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n   CONDITIONS OF ANY KIND, either express or implied.  See\n   the License for the specific language governing\n   permissions and limitations under the License."
-      },
+      "doc": null,
       "methods": {}
     },
     "uvm_reg_transaction_order_policy": {
@@ -93941,9 +93621,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 6,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "Title- Predefined Sequences",
-        "full_text": "Title- Predefined Sequences\n\nThis section defines several sequences that ship with the UVM library.\n\n\nCLASS- uvm_random_sequence\n\nThis sequence randomly selects and executes a sequence from the sequencer's\nsequence library, excluding uvm_random_sequence itself, and\nuvm_exhaustive_sequence.\n\nThe uvm_random_sequence class is a built-in sequence that is preloaded into\nevery sequencer's sequence library with the name \"uvm_random_sequence\".\n\nThe number of selections and executions is determined by the count property\nof the sequencer (or virtual sequencer) on which uvm_random_sequence is\noperating. See <uvm_sequencer_base> for more information."
+        "title": "Predefined Sequences",
+        "summary": "This section defines several sequences that ship with the UVM library.",
+        "full_text": "This section defines several sequences that ship with the UVM library.\n\n\nCLASS- uvm_random_sequence\n\nThis sequence randomly selects and executes a sequence from the sequencer's\nsequence library, excluding uvm_random_sequence itself, and\nuvm_exhaustive_sequence.\n\nThe uvm_random_sequence class is a built-in sequence that is preloaded into\nevery sequencer's sequence library with the name \"uvm_random_sequence\".\n\nThe number of selections and executions is determined by the count property\nof the sequencer (or virtual sequencer) on which uvm_random_sequence is\noperating. See <uvm_sequencer_base> for more information."
       },
       "methods": {
         "get_count": {
@@ -94348,9 +94028,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 6,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "CLASS- uvm_exhaustive_sequence",
-        "full_text": "CLASS- uvm_exhaustive_sequence\n\nThis sequence randomly selects and executes each sequence from the\nsequencer's sequence library once, excluding itself and uvm_random_sequence.\n\nThe uvm_exhaustive_sequence class is a built-in sequence that is preloaded\ninto every sequencer's sequence library with the name\n\"uvm_exaustive_sequence\"."
+        "title": "uvm_exhaustive_sequence",
+        "summary": "This sequence randomly selects and executes each sequence from the sequencer's sequence library once, excluding itself and uvm_random_sequence.",
+        "full_text": "This sequence randomly selects and executes each sequence from the\nsequencer's sequence library once, excluding itself and uvm_random_sequence.\n\nThe uvm_exhaustive_sequence class is a built-in sequence that is preloaded\ninto every sequencer's sequence library with the name\n\"uvm_exaustive_sequence\"."
       },
       "methods": {
         "new": {
@@ -94722,9 +94402,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 6,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "CLASS- uvm_simple_sequence",
-        "full_text": "CLASS- uvm_simple_sequence\n\nThis sequence simply executes a single sequence item.\n\nThe item parameterization of the sequencer on which the uvm_simple_sequence\nis executed defines the actual type of the item executed.\n\nThe uvm_simple_sequence class is a built-in sequence that is preloaded into\nevery sequencer's sequence library with the name \"uvm_simple_sequence\".\n\nSee <uvm_sequencer #(REQ,RSP)> for more information on running sequences."
+        "title": "uvm_simple_sequence",
+        "summary": "This sequence simply executes a single sequence item.",
+        "full_text": "This sequence simply executes a single sequence item.\n\nThe item parameterization of the sequencer on which the uvm_simple_sequence\nis executed defines the actual type of the item executed.\n\nThe uvm_simple_sequence class is a built-in sequence that is preloaded into\nevery sequencer's sequence library with the name \"uvm_simple_sequence\".\n\nSee <uvm_sequencer #(REQ,RSP)> for more information on running sequences."
       },
       "methods": {
         "new": {
@@ -97555,9 +97235,9 @@ window.UVM_SOURCE_DATABASE = {
           "parameters": [],
           "parameters_raw": "()",
           "doc": {
-            "title": "",
-            "summary": "Function- stop_sequences",
-            "full_text": "Function- stop_sequences\n\nTells the sequencer to kill all sequences and child sequences currently\noperating on the sequencer, and remove all requests, locks and responses\nthat are currently queued.  This essentially resets the sequencer to an\nidle state."
+            "title": "stop_sequences",
+            "summary": "Tells the sequencer to kill all sequences and child sequences currently operating on the sequencer, and remove all requests, locks and responses that are currently queued.  This essentially resets the sequencer to an idle state.",
+            "full_text": "Tells the sequencer to kill all sequences and child sequences currently\noperating on the sequencer, and remove all requests, locks and responses\nthat are currently queued.  This essentially resets the sequencer to an\nidle state."
           },
           "overrides": true,
           "overridden_from": "uvm_sequencer_base",
@@ -98040,11 +97720,7 @@ window.UVM_SOURCE_DATABASE = {
       "descendants": [],
       "depth": 6,
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      },
+      "doc": null,
       "methods": {
         "new": {
           "name": "new",
@@ -100831,9 +100507,9 @@ window.UVM_SOURCE_DATABASE = {
       "depth": 0,
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "Class- uvm_sequence_request",
-        "full_text": "Class- uvm_sequence_request"
+        "title": "uvm_sequence_request",
+        "summary": "",
+        "full_text": ""
       },
       "methods": {}
     },
@@ -111141,11 +110817,7 @@ window.UVM_SOURCE_DATABASE = {
       "category": "misc",
       "body_snippet": "static function this_subtype get_by_name(string scope, string name, bit rpterr = 1);\nthis_subtype t;\nuvm_resource_base b = uvm_resource#(base_type)::get_by_name(scope, name, rpterr);\nif(!$cast(t, b))\n`uvm_fatal(\"BADCAST\", \"cannot cast resource to resource subtype\");\nreturn t;\nendfunction\n\nstatic fun",
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "Copyright 2010 Mentor Graphics Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2010 Mentor Graphics Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\nmacro - UVM_RESOURCE_GET_FCNS\n\nWhen specicializing resources the get_by_name and get_by_type\nfunctions must be redefined.  The reason is that the version of these\nfunctions in the base class (uvm_resource#(T)) returns an object of\ntype uvm_resource#(T).  In the specializations we must return an\nobject of the type of the specialization.  So, we call the base_class\nimplementation of these functions and then downcast to the subtype.\n\nThis macro is invokved once in each where a resource specialization\nis a class defined as:\n\n|  class <resource_specialization> extends uvm_resource#(T)\n\nwhere <resource_specialization> is the name of the derived class.\nThe argument to this macro is T, the type of the uvm_resource#(T)\nspecialization.  The class in which the macro is defined must supply\na typedef of the specialized class of the form:\n\n|  typedef <resource_specialization> this_subtype;\n\nwhere <resource_specialization> is the same as above.  The macro\ngenerates the get_by_name() and get_by_type() functions for the\nspecialized resource (i.e. resource subtype)."
-      }
+      "doc": null
     },
     "UVM_HDL_NO_DPI": {
       "name": "UVM_HDL_NO_DPI",
@@ -111366,9 +111038,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "static bit is_registered_with_sequencer = SEQUENCER``::add_typewide_sequence(`\"TYPE_NAME`\");",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "*** DEPRECATED *** Group- Sequence Registration Macros",
-        "full_text": "*** DEPRECATED ***\nGroup- Sequence Registration Macros\n\nThe sequence-specific macros perform the same function as the set of\n`uvm_object_*_utils macros, except they also set the default sequencer type\nthe sequence will run on."
+        "title": "Sequence Registration Macros",
+        "summary": "The sequence-specific macros perform the same function as the set of `uvm_object_*_utils macros, except they also set the default sequencer type the sequence will run on.",
+        "full_text": "The sequence-specific macros perform the same function as the set of\n`uvm_object_*_utils macros, except they also set the default sequencer type\nthe sequence will run on."
       }
     },
     "uvm_sequence_utils_begin": {
@@ -111385,9 +111057,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "`m_uvm_register_sequence(TYPE_NAME, SEQUENCER)\n`uvm_declare_p_sequencer(SEQUENCER)\n`uvm_object_utils_begin(TYPE_NAME)",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequence_utils_begin",
-        "full_text": "MACRO- `uvm_sequence_utils_begin"
+        "title": "`uvm_sequence_utils_begin",
+        "summary": "",
+        "full_text": ""
       }
     },
     "uvm_sequence_utils_end": {
@@ -111401,9 +111073,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "`uvm_object_utils_end",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequence_utils_end",
-        "full_text": "MACRO- `uvm_sequence_utils_end"
+        "title": "`uvm_sequence_utils_end",
+        "summary": "",
+        "full_text": ""
       }
     },
     "uvm_sequence_utils": {
@@ -111420,9 +111092,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "`uvm_sequence_utils_begin(TYPE_NAME,SEQUENCER)\n`uvm_sequence_utils_end",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequence_utils",
-        "full_text": "MACRO- `uvm_sequence_utils\n\nThe sequence macros can be used in non-parameterized <uvm_sequence #(REQ,RSP)>\nextensions to pre-register the sequence with a given <uvm_sequencer #(REQ,RSP)>\ntype.\n\nFor sequences that do not use any `uvm_field macros:\n\n|  `uvm_sequence_utils(TYPE_NAME,SQR_TYPE_NAME)\n\nFor sequences employing with field macros:\n\n|  `uvm_sequence_utils_begin(TYPE_NAME,SQR_TYPE_NAME)\n|    `uvm_field_* macro invocations here\n|  `uvm_sequence_utils_end\n\nThe sequence-specific macros perform the same function as the set of\n`uvm_object_*_utils macros except that they also register the sequence's\ntype, TYPE_NAME, with the given sequencer type, SQR_TYPE_NAME, and define\nthe p_sequencer variable and m_set_p_sequencer method.\n\nUse `uvm_sequence_utils[_begin] for non-parameterized classes and\n`uvm_sequence_param_utils[_begin] for parameterized classes."
+        "title": "`uvm_sequence_utils",
+        "summary": "The sequence macros can be used in non-parameterized <uvm_sequence #(REQ,RSP)> extensions to pre-register the sequence with a given <uvm_sequencer #(REQ,RSP)> type.",
+        "full_text": "The sequence macros can be used in non-parameterized <uvm_sequence #(REQ,RSP)>\nextensions to pre-register the sequence with a given <uvm_sequencer #(REQ,RSP)>\ntype.\n\nFor sequences that do not use any `uvm_field macros:\n\n|  `uvm_sequence_utils(TYPE_NAME,SQR_TYPE_NAME)\n\nFor sequences employing with field macros:\n\n|  `uvm_sequence_utils_begin(TYPE_NAME,SQR_TYPE_NAME)\n|    `uvm_field_* macro invocations here\n|  `uvm_sequence_utils_end\n\nThe sequence-specific macros perform the same function as the set of\n`uvm_object_*_utils macros except that they also register the sequence's\ntype, TYPE_NAME, with the given sequencer type, SQR_TYPE_NAME, and define\nthe p_sequencer variable and m_set_p_sequencer method.\n\nUse `uvm_sequence_utils[_begin] for non-parameterized classes and\n`uvm_sequence_param_utils[_begin] for parameterized classes."
       }
     },
     "uvm_declare_sequence_lib": {
@@ -111436,9 +111108,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "protected bit m_set_sequences_called = 1;\nstatic protected string m_static_sequences[$];\nstatic protected string m_static_remove_sequences[$];\n\nstatic function bit add_typewide_sequence(string type_name);\nm_static_sequences.push_back(type_name);\nreturn 1;\nendfunction\n\nstatic function bit remove_type",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "*** DEPRECATED ***",
-        "full_text": "*** DEPRECATED ***\n\nGroup- Sequencer Registration Macros\n\nThe sequencer-specific macros perform the same function as the set of\n`uvm_componenent_*utils macros except that they also declare the plumbing\nnecessary for creating the sequencer's sequence library."
+        "title": "Sequencer Registration Macros",
+        "summary": "The sequencer-specific macros perform the same function as the set of `uvm_componenent_*utils macros except that they also declare the plumbing necessary for creating the sequencer's sequence library.",
+        "full_text": "The sequencer-specific macros perform the same function as the set of\n`uvm_componenent_*utils macros except that they also declare the plumbing\nnecessary for creating the sequencer's sequence library."
       }
     },
     "uvm_update_sequence_lib": {
@@ -111452,9 +111124,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "m_add_builtin_seqs(0);\nuvm_update_sequence_lib();",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_update_sequence_lib",
-        "full_text": "MACRO- `uvm_update_sequence_lib\n\nThis macro populates the instance-specific sequence library for a sequencer.\nIt should be invoked inside the sequencerï¿½ï¿½s constructor."
+        "title": "`uvm_update_sequence_lib",
+        "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencerï¿½ï¿½s constructor.",
+        "full_text": "This macro populates the instance-specific sequence library for a sequencer.\nIt should be invoked inside the sequencerï¿½ï¿½s constructor."
       }
     },
     "uvm_update_sequence_lib_and_item": {
@@ -111470,9 +111142,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "begin   uvm_coreservice_t cs = uvm_coreservice_t::get(); uvm_factory factory=cs.get_factory();\nfactory.set_inst_override_by_type(\nuvm_sequence_item::get_type(), USER_ITEM::get_type(),\n{get_full_name(), \"*.item\"}); end\nm_add_builtin_seqs(1);\nuvm_update_sequence_lib();",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_update_sequence_lib_and_item",
-        "full_text": "MACRO- `uvm_update_sequence_lib_and_item\n\nThis macro populates the instance specific sequence library for a sequencer,\nand it registers the given ~USER_ITEM~ as an instance override for the simple\nsequence's item variable.\n\nThe macro should be invoked inside the sequencer's constructor."
+        "title": "`uvm_update_sequence_lib_and_item",
+        "summary": "This macro populates the instance specific sequence library for a sequencer, and it registers the given ~USER_ITEM~ as an instance override for the simple sequence's item variable.",
+        "full_text": "This macro populates the instance specific sequence library for a sequencer,\nand it registers the given ~USER_ITEM~ as an instance override for the simple\nsequence's item variable.\n\nThe macro should be invoked inside the sequencer's constructor."
       }
     },
     "uvm_sequencer_utils": {
@@ -111488,9 +111160,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "`uvm_sequencer_utils_begin(TYPE_NAME)\n`uvm_sequencer_utils_end",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequencer_utils",
-        "full_text": "MACRO- `uvm_sequencer_utils"
+        "title": "`uvm_sequencer_utils",
+        "summary": "",
+        "full_text": ""
       }
     },
     "uvm_sequencer_utils_begin": {
@@ -111506,9 +111178,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "`uvm_declare_sequence_lib\n`uvm_component_utils_begin(TYPE_NAME)",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequencer_utils_begin",
-        "full_text": "MACRO- `uvm_sequencer_utils_begin"
+        "title": "`uvm_sequencer_utils_begin",
+        "summary": "",
+        "full_text": ""
       }
     },
     "uvm_sequencer_param_utils": {
@@ -111524,9 +111196,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "`uvm_sequencer_param_utils_begin(TYPE_NAME)\n`uvm_sequencer_utils_end",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequencer_param_utils",
-        "full_text": "MACRO- `uvm_sequencer_param_utils"
+        "title": "`uvm_sequencer_param_utils",
+        "summary": "",
+        "full_text": ""
       }
     },
     "uvm_sequencer_param_utils_begin": {
@@ -111542,9 +111214,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "`uvm_declare_sequence_lib\n`uvm_component_param_utils_begin(TYPE_NAME)",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequencer_param_utils_begin",
-        "full_text": "MACRO- `uvm_sequencer_param_utils_begin"
+        "title": "`uvm_sequencer_param_utils_begin",
+        "summary": "",
+        "full_text": ""
       }
     },
     "uvm_sequencer_utils_end": {
@@ -111558,9 +111230,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "`uvm_component_utils_end",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequencer_utils_end",
-        "full_text": "MACRO- `uvm_sequencer_utils_end\n\nThe sequencer macros are used in uvm_sequencer-based class declarations\nin one of four ways.\n\nFor simple sequencers, no field macros\n\n  `uvm_sequencer_utils(SQR_TYPE_NAME)\n\nFor simple sequencers, with field macros\n\n  `uvm_sequencer_utils_begin(SQR_TYPE_NAME)\n    `uvm_field_* macros here\n  `uvm_sequencer_utils_end\n\nFor parameterized sequencers, no field macros\n\n  `uvm_sequencer_param_utils(SQR_TYPE_NAME)\n\nFor parameterized sequencers, with field macros\n\n  `uvm_sequencer_param_utils_begin(SQR_TYPE_NAME)\n    `uvm_field_* macros here\n  `uvm_sequencer_utils_end\n\nThe sequencer-specific macros perform the same function as the set of\n`uvm_componenent_*utils macros except that they also declare the plumbing\nnecessary for creating the sequencer's sequence library. This includes:\n\n1. Declaring the type-based static queue of strings registered on the\n   sequencer type.\n\n2. Declaring the static function to add strings to item #1 above.\n\n3. Declaring the static function to remove strings to item #1 above.\n\n4. Declaring the function to populate the instance specific sequence library\n   for a sequencer.\n\nUse `uvm_sequencer_utils[_begin] for non-parameterized classes and\n`uvm_sequencer_param_utils[_begin] for parameterized classes."
+        "title": "`uvm_sequencer_utils_end",
+        "summary": "The sequencer macros are used in uvm_sequencer-based class declarations in one of four ways.",
+        "full_text": "The sequencer macros are used in uvm_sequencer-based class declarations\nin one of four ways.\n\nFor simple sequencers, no field macros\n\n  `uvm_sequencer_utils(SQR_TYPE_NAME)\n\nFor simple sequencers, with field macros\n\n  `uvm_sequencer_utils_begin(SQR_TYPE_NAME)\n    `uvm_field_* macros here\n  `uvm_sequencer_utils_end\n\nFor parameterized sequencers, no field macros\n\n  `uvm_sequencer_param_utils(SQR_TYPE_NAME)\n\nFor parameterized sequencers, with field macros\n\n  `uvm_sequencer_param_utils_begin(SQR_TYPE_NAME)\n    `uvm_field_* macros here\n  `uvm_sequencer_utils_end\n\nThe sequencer-specific macros perform the same function as the set of\n`uvm_componenent_*utils macros except that they also declare the plumbing\nnecessary for creating the sequencer's sequence library. This includes:\n\n1. Declaring the type-based static queue of strings registered on the\n   sequencer type.\n\n2. Declaring the static function to add strings to item #1 above.\n\n3. Declaring the static function to remove strings to item #1 above.\n\n4. Declaring the function to populate the instance specific sequence library\n   for a sequencer.\n\nUse `uvm_sequencer_utils[_begin] for non-parameterized classes and\n`uvm_sequencer_param_utils[_begin] for parameterized classes."
       }
     },
     "uvm_package": {
@@ -111576,9 +111248,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "package PKG;\nclass uvm_bogus_class extends uvm::uvm_sequence;\nendclass",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_package",
-        "full_text": "MACRO- `uvm_package\n\nUse `uvm_package to define the SV package and to create a bogus type to help\nautomate triggering the static initializers of the package.\nUse uvm_end_package to endpackage."
+        "title": "`uvm_package",
+        "summary": "Use `uvm_package to define the SV package and to create a bogus type to help automate triggering the static initializers of the package. Use uvm_end_package to endpackage.",
+        "full_text": "Use `uvm_package to define the SV package and to create a bogus type to help\nautomate triggering the static initializers of the package.\nUse uvm_end_package to endpackage."
       }
     },
     "uvm_end_package": {
@@ -111606,9 +111278,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "import PKG_NAME``::*;\nPKG_NAME``::uvm_bogus_class M_``PKG_NAME``uvm_bogus_class",
       "is_deprecated": true,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_sequence_library_package",
-        "full_text": "MACRO- `uvm_sequence_library_package\n\nThis macro is used to trigger static initializers in packages. `uvm_package\ncreates a bogus type which gets referred to by uvm_sequence_library_package\nto make a package-based variable of the bogus type."
+        "title": "`uvm_sequence_library_package",
+        "summary": "This macro is used to trigger static initializers in packages. `uvm_package creates a bogus type which gets referred to by uvm_sequence_library_package to make a package-based variable of the bogus type.",
+        "full_text": "This macro is used to trigger static initializers in packages. `uvm_package\ncreates a bogus type which gets referred to by uvm_sequence_library_package\nto make a package-based variable of the bogus type."
       }
     },
     "UVM_MAX_STREAMBITS": {
@@ -111916,9 +111588,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "uvm_process_report_message(__uvm_msg);\nend\nend",
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_message_end",
-        "full_text": "MACRO- `uvm_message_end\n\nUndocumented. Library internal use."
+        "title": "`uvm_message_end",
+        "summary": "Undocumented. Library internal use.",
+        "full_text": "Undocumented. Library internal use."
       }
     },
     "uvm_message_context_begin": {
@@ -111941,9 +111613,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "begin\nuvm_report_object __report_object;\n__report_object = RO;\nif (__report_object.uvm_report_enabled(VERBOSITY,SEVERITY,ID)) begin\nuvm_report_message __uvm_msg;\nif (RM == null) RM = uvm_report_message::new_report_message();\n__uvm_msg = RM;\n__uvm_msg.set_report_message(SEVERITY, ID, MSG, VERBOSITY, ",
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_message_context_begin",
-        "full_text": "MACRO- `uvm_message_context_begin\n\nUndocumented. Library internal use."
+        "title": "`uvm_message_context_begin",
+        "summary": "Undocumented. Library internal use.",
+        "full_text": "Undocumented. Library internal use."
       }
     },
     "uvm_message_context_end": {
@@ -111957,9 +111629,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "__report_object.uvm_process_report_message(__uvm_msg);\nend\nend",
       "is_deprecated": false,
       "doc": {
-        "title": "",
-        "summary": "MACRO- `uvm_message_context_end",
-        "full_text": "MACRO- `uvm_message_context_end\n\nUndocumented. Library internal use."
+        "title": "`uvm_message_context_end",
+        "summary": "Undocumented. Library internal use.",
+        "full_text": "Undocumented. Library internal use."
       }
     },
     "uvm_info_begin": {
@@ -114415,11 +114087,7 @@ window.UVM_SOURCE_DATABASE = {
       "category": "phase",
       "body_snippet": "class PREFIX``PHASE``_phase extends uvm_task_phase;\nvirtual task exec_task(uvm_component comp, uvm_phase phase);\nCOMP comp_;\nif ($cast(comp_,comp))\ncomp_.``PHASE``_phase(phase);\nendtask\nlocal static PREFIX``PHASE``_phase m_inst;\nstatic const string type_name = `\"PREFIX``PHASE``_phase`\";\nstatic funct",
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2011 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\n\nuvm_root.svh uses these macros to simplify creation of all the phases.\nthey are only to be used for UVM builtin phases, because they are simple\ndelegate imps that call the corresponding methods on uvm_component.\nAlso, they declare classes (uvm_XXXXX_phase) and singleton instances (XXXXX_ph)\n\nIf you require more complex phase functors for your custom phase, code your\nown imp class extending uvm_task/topdown/bottomup_phase base classes, following\nthe pattern of the macros below, but customize the exec_task() or exec_func()\ncontents to suit your enhanced functionality or derived component type/methods.\nThe uvm_user_xxx_phase() macros are provided for your convenience."
-      }
+      "doc": null
     },
     "m_uvm_topdown_phase": {
       "name": "m_uvm_topdown_phase",
@@ -115569,9 +115237,9 @@ window.UVM_SOURCE_DATABASE = {
       "body_snippet": "static bit add_``TYPE``_to_seq_lib_``LIBTYPE =\nLIBTYPE::m_add_typewide_sequence(TYPE::get_type());",
       "is_deprecated": false,
       "doc": {
-        "title": "`uvm_add_to_sequence_library",
-        "summary": "Adds the given sequence ~TYPE~ to the given sequence library ~LIBTYPE~",
-        "full_text": "Adds the given sequence ~TYPE~ to the given sequence library ~LIBTYPE~\n\n| `uvm_add_to_seq_lib(TYPE,LIBTYPE)\n\nInvoke any number of times within a sequence declaration to statically add\nthat sequence to one or more sequence library types. The sequence will then\nbe available for selection and execution in all instances of the given\nsequencer types.\n\n| class seqA extends uvm_sequence_base #(simple_item);\n|\n|    function new(string name=`\"TYPE`\");\n|      super.new(name);\n|    endfunction\n|\n|    `uvm_object_utils(seqA)\n|\n|    `uvm_add_to_seq_lib(seqA, simple_seq_lib_RST)\n|    `uvm_add_to_seq_lib(seqA, simple_seq_lib_CFG)\n|\n|    virtual task body(); \\\n|      `uvm_info(\"SEQ_START\", {\"Executing sequence '\", get_full_name(),\n|                             \"' (\",get_type_name(),\")\"},UVM_HIGH)\n|      #10;\n|    endtask\n|\n|  endclass"
+        "title": "Sequence Library",
+        "summary": "MACRO: `uvm_add_to_sequence_library",
+        "full_text": "MACRO: `uvm_add_to_sequence_library\n\nAdds the given sequence ~TYPE~ to the given sequence library ~LIBTYPE~\n\n| `uvm_add_to_seq_lib(TYPE,LIBTYPE)\n\nInvoke any number of times within a sequence declaration to statically add\nthat sequence to one or more sequence library types. The sequence will then\nbe available for selection and execution in all instances of the given\nsequencer types.\n\n| class seqA extends uvm_sequence_base #(simple_item);\n|\n|    function new(string name=`\"TYPE`\");\n|      super.new(name);\n|    endfunction\n|\n|    `uvm_object_utils(seqA)\n|\n|    `uvm_add_to_seq_lib(seqA, simple_seq_lib_RST)\n|    `uvm_add_to_seq_lib(seqA, simple_seq_lib_CFG)\n|\n|    virtual task body(); \\\n|      `uvm_info(\"SEQ_START\", {\"Executing sequence '\", get_full_name(),\n|                             \"' (\",get_type_name(),\")\"},UVM_HIGH)\n|      #10;\n|    endtask\n|\n|  endclass"
       }
     },
     "uvm_sequence_library_utils": {
@@ -116776,11 +116444,7 @@ window.UVM_SOURCE_DATABASE = {
       "category": "misc",
       "body_snippet": "\"Sequencer interface task not implemented\"",
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013-2014 NVIDIA Corporation All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  Copyright 2013-2014 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      }
+      "doc": null
     },
     "UVM_SEQ_ITEM_FUNCTION_ERROR": {
       "name": "UVM_SEQ_ITEM_FUNCTION_ERROR",
@@ -116804,11 +116468,7 @@ window.UVM_SOURCE_DATABASE = {
       "category": "tlm",
       "body_snippet": "\"fifo channel task not implemented\"",
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2011 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      }
+      "doc": null
     },
     "UVM_TLM_FIFO_FUNCTION_ERROR": {
       "name": "UVM_TLM_FIFO_FUNCTION_ERROR",
@@ -116832,11 +116492,7 @@ window.UVM_SOURCE_DATABASE = {
       "category": "misc",
       "body_snippet": "\"TLM interface task not implemented\"",
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide",
-        "full_text": "Copyright 2007-2011 Mentor Graphics Corporation\n  Copyright 2007-2010 Cadence Design Systems, Inc.\n  Copyright 2010 Synopsys, Inc.\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License."
-      }
+      "doc": null
     },
     "UVM_FUNCTION_ERROR": {
       "name": "UVM_FUNCTION_ERROR",
@@ -154960,7 +154616,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_callback.svh",
       "line": 966,
-      "summary": "Class- uvm_derived_callbacks #(T,ST,CB)"
+      "summary": "This type is not really expected to be used directly by the user, instead they are expected to use the macro `uvm_set_super_type. The sole purpose of this type is to allow for setting up of the derived_type/super_type mapping."
     },
     {
       "name": "uvm_derived_callbacks::get",
@@ -155710,7 +155366,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
       "line": 76,
-      "summary": "IMPLEMENTATION"
+      "summary": "new"
     },
     {
       "name": "uvm_component::get_parent",
@@ -156223,7 +155879,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
       "line": 799,
-      "summary": "Function- set_config_int"
+      "summary": ""
     },
     {
       "name": "uvm_component::set_config_string",
@@ -156232,7 +155888,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
       "line": 805,
-      "summary": "Function- set_config_string"
+      "summary": ""
     },
     {
       "name": "uvm_component::set_config_object",
@@ -156241,7 +155897,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
       "line": 851,
-      "summary": "Function- set_config_object"
+      "summary": "Calling set_config_* causes configuration settings to be created and placed in a table internal to this component. There are similar global methods that store settings in a global table. Each setting stores the supplied ~inst_name~, ~field_name~, and ~value~ for later use by descendent components during their construction. (The global table applies to all components and takes precedence over the component tables.)"
     },
     {
       "name": "uvm_component::get_config_int",
@@ -156250,7 +155906,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
       "line": 859,
-      "summary": "Function- get_config_int"
+      "summary": ""
     },
     {
       "name": "uvm_component::get_config_string",
@@ -156259,7 +155915,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
       "line": 864,
-      "summary": "Function- get_config_string"
+      "summary": ""
     },
     {
       "name": "uvm_component::get_config_object",
@@ -156268,7 +155924,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
       "line": 916,
-      "summary": "Function- get_config_object"
+      "summary": "These methods retrieve configuration settings made by previous calls to their set_config_* counterparts. As the methods' names suggest, there is direct support for integral types, strings, and objects.  Settings of other types can be indirectly supported by defining an object to contain them."
     },
     {
       "name": "uvm_component::check_config_usage",
@@ -157765,7 +157421,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_factory.svh",
       "line": 853,
-      "summary": "CLASS- uvm_factory_override"
+      "summary": "Internal class."
     },
     {
       "name": "uvm_factory_override::new",
@@ -158224,7 +157880,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_misc.svh",
       "line": 63,
-      "summary": "CLASS- uvm_scope_stack"
+      "summary": ""
     },
     {
       "name": "uvm_scope_stack::depth",
@@ -158331,7 +157987,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_misc.svh",
       "line": 206,
-      "summary": "CLASS- uvm_status_container"
+      "summary": "Internal class to contain status information for automation methods."
     },
     {
       "name": "uvm_status_container::do_field_check",
@@ -158375,7 +158031,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_misc.svh",
       "line": 323,
-      "summary": "Class- uvm_seed_map"
+      "summary": "This map is a seed map that can be used to update seeds. The update is done automatically by the seed hashing routine. The seed_table_lookup uses an instance name lookup and the seed_table inside a given map uses a type name for the lookup."
     },
     {
       "name": "uvm_utils",
@@ -158595,7 +158251,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_objection",
       "file": "base/uvm_objection.svh",
       "line": 235,
-      "summary": "Function- m_propagate"
+      "summary": "Propagate the objection to the objects parent. If the object is a component, the parent is just the hierarchical parent. If the object is a sequence, the parent is the parent sequence if one exists, or it is the attached sequencer if there is no parent sequence."
     },
     {
       "name": "uvm_objection::set_propagate_mode",
@@ -158846,7 +158502,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_objection.svh",
       "line": 1118,
-      "summary": "Class- uvm_test_done_objection DEPRECATED"
+      "summary": "Provides built-in end-of-test coordination"
     },
     {
       "name": "uvm_test_done_objection::new",
@@ -158864,7 +158520,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_test_done_objection",
       "file": "base/uvm_objection.svh",
       "line": 1143,
-      "summary": "Function- qualify DEPRECATED"
+      "summary": "Checks that the given ~object~ is derived from either <uvm_component> or <uvm_sequence_base>."
     },
     {
       "name": "uvm_test_done_objection::m_do_stop_all",
@@ -158900,7 +158556,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_test_done_objection",
       "file": "base/uvm_objection.svh",
       "line": 1231,
-      "summary": "Task- all_dropped DEPRECATED"
+      "summary": "This callback is called when the given ~object's~ objection count reaches zero; if the ~object~ is the implicit top-level, <uvm_root> then it means there are no more objections raised for the ~uvm_test_done~ objection. Thus, after calling <uvm_objection::all_dropped>, this method will call"
     },
     {
       "name": "uvm_test_done_objection::raise_objection",
@@ -158909,7 +158565,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_test_done_objection",
       "file": "base/uvm_objection.svh",
       "line": 1288,
-      "summary": "Function- raise_objection DEPRECATED"
+      "summary": "Calls <uvm_objection::raise_objection> after calling <qualify>. If the ~object~ is not provided or is ~null~, then the implicit top-level component, ~uvm_top~, is chosen."
     },
     {
       "name": "uvm_test_done_objection::drop_objection",
@@ -158918,7 +158574,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_test_done_objection",
       "file": "base/uvm_objection.svh",
       "line": 1315,
-      "summary": "Function- drop_objection DEPRECATED"
+      "summary": "Calls <uvm_objection::drop_objection> after calling <qualify>. If the ~object~ is not provided or is ~null~, then the implicit top-level component, ~uvm_top~, is chosen."
     },
     {
       "name": "uvm_test_done_objection::force_stop",
@@ -160732,7 +160388,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_table_printer",
       "file": "base/uvm_printer.svh",
       "line": 315,
-      "summary": "Class- uvm_table_printer"
+      "summary": "new"
     },
     {
       "name": "uvm_table_printer::emit",
@@ -160767,7 +160423,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_tree_printer",
       "file": "base/uvm_printer.svh",
       "line": 366,
-      "summary": "Class- uvm_tree_printer"
+      "summary": "new"
     },
     {
       "name": "uvm_tree_printer::emit",
@@ -161258,7 +160914,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_recorder",
       "file": "base/uvm_recorder.svh",
       "line": 649,
-      "summary": "Function- create_stream"
+      "summary": ""
     },
     {
       "name": "uvm_recorder::m_set_attribute",
@@ -161267,7 +160923,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_recorder",
       "file": "base/uvm_recorder.svh",
       "line": 659,
-      "summary": "Function- m_set_attribute"
+      "summary": ""
     },
     {
       "name": "uvm_recorder::set_attribute",
@@ -161312,7 +160968,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_recorder",
       "file": "base/uvm_recorder.svh",
       "line": 706,
-      "summary": "Function- link_tr"
+      "summary": ""
     },
     {
       "name": "uvm_recorder::free_tr",
@@ -161464,7 +161120,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_text_recorder",
       "file": "base/uvm_recorder.svh",
       "line": 1019,
-      "summary": "Function- create_stream"
+      "summary": ""
     },
     {
       "name": "uvm_text_recorder::m_set_attribute",
@@ -161473,7 +161129,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_text_recorder",
       "file": "base/uvm_recorder.svh",
       "line": 1034,
-      "summary": "Function- m_set_attribute"
+      "summary": ""
     },
     {
       "name": "uvm_text_recorder::set_attribute",
@@ -161518,7 +161174,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_text_recorder",
       "file": "base/uvm_recorder.svh",
       "line": 1116,
-      "summary": "Function- link_tr"
+      "summary": ""
     },
     {
       "name": "uvm_text_recorder::free_tr",
@@ -162080,7 +161736,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_report_handler",
       "file": "base/uvm_report_handler.svh",
       "line": 523,
-      "summary": "Function- set_severity_action Function- set_id_action Function- set_severity_id_action Function- set_id_verbosity Function- set_severity_id_verbosity"
+      "summary": "Function- set_id_action Function- set_severity_id_action Function- set_id_verbosity Function- set_severity_id_verbosity"
     },
     {
       "name": "uvm_report_handler::set_id_action",
@@ -162188,7 +161844,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_report_handler",
       "file": "base/uvm_report_handler.svh",
       "line": 642,
-      "summary": "Function- run_hooks"
+      "summary": ""
     },
     {
       "name": "uvm_report_handler::dump_state",
@@ -163198,7 +162854,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_report_object",
       "file": "base/uvm_report_object.svh",
       "line": 489,
-      "summary": "Group- Callbacks"
+      "summary": "Function- report_info_hook"
     },
     {
       "name": "uvm_report_object::report_error_hook",
@@ -163207,7 +162863,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_report_object",
       "file": "base/uvm_report_object.svh",
       "line": 498,
-      "summary": "Function- report_error_hook"
+      "summary": ""
     },
     {
       "name": "uvm_report_object::report_warning_hook",
@@ -163216,7 +162872,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_report_object",
       "file": "base/uvm_report_object.svh",
       "line": 507,
-      "summary": "Function- report_warning_hook"
+      "summary": ""
     },
     {
       "name": "uvm_report_object::report_fatal_hook",
@@ -163225,7 +162881,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_report_object",
       "file": "base/uvm_report_object.svh",
       "line": 516,
-      "summary": "Function- report_fatal_hook"
+      "summary": ""
     },
     {
       "name": "uvm_report_object::report_hook",
@@ -163234,7 +162890,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_report_object",
       "file": "base/uvm_report_object.svh",
       "line": 533,
-      "summary": "Function- report_hook"
+      "summary": "These hook methods can be defined in derived classes to perform additional actions when reports are issued. They are called only if the <UVM_CALL_HOOK> bit is specified in the action associated with the report. The default implementations return 1, which allows the report to be processed. If an override returns 0, then the report is not processed."
     },
     {
       "name": "uvm_report_object::report_header",
@@ -163763,7 +163419,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_default_report_server",
       "file": "base/uvm_report_server.svh",
       "line": 897,
-      "summary": "Function- compose_message"
+      "summary": ""
     },
     {
       "name": "uvm_resource_types",
@@ -165320,7 +164976,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_spell_chkr.svh",
       "line": 28,
-      "summary": "Copyright 2011 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide"
+      "summary": ""
     },
     {
       "name": "uvm_spell_chkr::check",
@@ -165612,7 +165268,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_tr_stream.svh",
       "line": 31,
-      "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide"
+      "summary": "Undocumented helper class for storing stream initialization values."
     },
     {
       "name": "uvm_tr_stream",
@@ -165683,7 +165339,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_tr_stream",
       "file": "base/uvm_tr_stream.svh",
       "line": 246,
-      "summary": "Function- m_do_open Initializes the state of the stream"
+      "summary": "Initializes the state of the stream"
     },
     {
       "name": "uvm_tr_stream::is_open",
@@ -167313,7 +166969,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "deprecated/uvm_resource_converter.svh",
       "line": 31,
-      "summary": "Copyright 2010 Mentor Graphics Corporation Copyright 2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide"
+      "summary": "The uvm_resource_converter class provides a policy object for doing convertion from resource value to string."
     },
     {
       "name": "m_uvm_resource_converter::convert2string",
@@ -167330,7 +166986,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "deprecated/uvm_resource_converter.svh",
       "line": 55,
-      "summary": "CLASS- uvm_resource_default_converter Define a default resource value converter using '%p'."
+      "summary": "Define a default resource value converter using '%p'."
     },
     {
       "name": "m_uvm_resource_default_converter::convert2string",
@@ -167365,7 +167021,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "deprecated/uvm_resource_converter.svh",
       "line": 97,
-      "summary": "CLASS- uvm_resource_convert2string_converter Define a default resource value converter using convert2string() method"
+      "summary": "Define a default resource value converter using convert2string() method"
     },
     {
       "name": "m_uvm_resource_convert2string_converter::convert2string",
@@ -167400,7 +167056,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "deprecated/uvm_resource_converter.svh",
       "line": 131,
-      "summary": "CLASS- uvm_resource_sprint_converter Define a default resource value converter using sprint() method"
+      "summary": "Define a default resource value converter using sprint() method"
     },
     {
       "name": "m_uvm_resource_sprint_converter::convert2string",
@@ -167435,7 +167091,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "deprecated/uvm_resource_converter.svh",
       "line": 161,
-      "summary": "CLASS- m_uvm_resource_default_converters Singleton used to register default resource value converters for the built-in singular types."
+      "summary": "Singleton used to register default resource value converters for the built-in singular types."
     },
     {
       "name": "m_uvm_resource_default_converters::new",
@@ -169903,7 +169559,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_reg_block",
       "file": "reg/uvm_reg_block.svh",
       "line": 921,
-      "summary": "Group- Basic Object Operations"
+      "summary": "do_print"
     },
     {
       "name": "uvm_reg_block::do_copy",
@@ -171037,7 +170693,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "reg/uvm_reg_map.svh",
       "line": 23,
-      "summary": "Copyright 2004-2011 Synopsys, Inc. Copyright 2010-2011 Mentor Graphics Corporation Copyright 2010-2011 Cadence Design Systems, Inc. All Rights Reserved Worldwide"
+      "summary": ""
     },
     {
       "name": "uvm_reg_transaction_order_policy",
@@ -173128,7 +172784,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "seq/uvm_sequence_builtin.svh",
       "line": 49,
-      "summary": "Title- Predefined Sequences"
+      "summary": "This section defines several sequences that ship with the UVM library."
     },
     {
       "name": "uvm_random_sequence::get_count",
@@ -173217,7 +172873,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "seq/uvm_sequence_builtin.svh",
       "line": 160,
-      "summary": "CLASS- uvm_exhaustive_sequence"
+      "summary": "This sequence randomly selects and executes each sequence from the sequencer's sequence library once, excluding itself and uvm_random_sequence."
     },
     {
       "name": "uvm_exhaustive_sequence::new",
@@ -173297,7 +172953,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "seq/uvm_sequence_builtin.svh",
       "line": 264,
-      "summary": "CLASS- uvm_simple_sequence"
+      "summary": "This sequence simply executes a single sequence item."
     },
     {
       "name": "uvm_simple_sequence::new",
@@ -173887,7 +173543,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_sequencer",
       "file": "seq/uvm_sequencer.svh",
       "line": 57,
-      "summary": "Function- stop_sequences"
+      "summary": "Tells the sequencer to kill all sequences and child sequences currently operating on the sequencer, and remove all requests, locks and responses that are currently queued.  This essentially resets the sequencer to an idle state."
     },
     {
       "name": "uvm_sequencer::get_type_name",
@@ -173985,7 +173641,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "seq/uvm_sequencer_analysis_fifo.svh",
       "line": 23,
-      "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide"
+      "summary": ""
     },
     {
       "name": "uvm_sequencer_analysis_fifo::new",
@@ -174540,7 +174196,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "seq/uvm_sequencer_base.svh",
       "line": 1765,
-      "summary": "Class- uvm_sequence_request"
+      "summary": ""
     },
     {
       "name": "uvm_sequencer_param_base",
@@ -177030,7 +176686,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "base/uvm_resource_specializations.svh",
       "line": 45,
-      "summary": "Copyright 2010 Mentor Graphics Corporation All Rights Reserved Worldwide"
+      "summary": ""
     },
     {
       "name": "UVM_HDL_NO_DPI",
@@ -177134,7 +176790,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 33,
-      "summary": "*** DEPRECATED *** Group- Sequence Registration Macros"
+      "summary": "The sequence-specific macros perform the same function as the set of `uvm_object_*_utils macros, except they also set the default sequencer type the sequence will run on."
     },
     {
       "name": "uvm_sequence_utils_begin",
@@ -177142,7 +176798,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 39,
-      "summary": "MACRO- `uvm_sequence_utils_begin"
+      "summary": ""
     },
     {
       "name": "uvm_sequence_utils_end",
@@ -177150,7 +176806,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 46,
-      "summary": "MACRO- `uvm_sequence_utils_end"
+      "summary": ""
     },
     {
       "name": "uvm_sequence_utils",
@@ -177158,7 +176814,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 73,
-      "summary": "MACRO- `uvm_sequence_utils"
+      "summary": "The sequence macros can be used in non-parameterized <uvm_sequence #(REQ,RSP)> extensions to pre-register the sequence with a given <uvm_sequencer #(REQ,RSP)> type."
     },
     {
       "name": "uvm_declare_sequence_lib",
@@ -177166,7 +176822,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 89,
-      "summary": "*** DEPRECATED ***"
+      "summary": "The sequencer-specific macros perform the same function as the set of `uvm_componenent_*utils macros except that they also declare the plumbing necessary for creating the sequencer's sequence library."
     },
     {
       "name": "uvm_update_sequence_lib",
@@ -177174,7 +176830,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 125,
-      "summary": "MACRO- `uvm_update_sequence_lib"
+      "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencerï¿½ï¿½s constructor."
     },
     {
       "name": "uvm_update_sequence_lib_and_item",
@@ -177182,7 +176838,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 138,
-      "summary": "MACRO- `uvm_update_sequence_lib_and_item"
+      "summary": "This macro populates the instance specific sequence library for a sequencer, and it registers the given ~USER_ITEM~ as an instance override for the simple sequence's item variable."
     },
     {
       "name": "uvm_sequencer_utils",
@@ -177190,7 +176846,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 149,
-      "summary": "MACRO- `uvm_sequencer_utils"
+      "summary": ""
     },
     {
       "name": "uvm_sequencer_utils_begin",
@@ -177198,7 +176854,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 155,
-      "summary": "MACRO- `uvm_sequencer_utils_begin"
+      "summary": ""
     },
     {
       "name": "uvm_sequencer_param_utils",
@@ -177206,7 +176862,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 161,
-      "summary": "MACRO- `uvm_sequencer_param_utils"
+      "summary": ""
     },
     {
       "name": "uvm_sequencer_param_utils_begin",
@@ -177214,7 +176870,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 167,
-      "summary": "MACRO- `uvm_sequencer_param_utils_begin"
+      "summary": ""
     },
     {
       "name": "uvm_sequencer_utils_end",
@@ -177222,7 +176878,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 214,
-      "summary": "MACRO- `uvm_sequencer_utils_end"
+      "summary": "The sequencer macros are used in uvm_sequencer-based class declarations in one of four ways."
     },
     {
       "name": "uvm_package",
@@ -177230,7 +176886,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 228,
-      "summary": "MACRO- `uvm_package"
+      "summary": "Use `uvm_package to define the SV package and to create a bogus type to help automate triggering the static initializers of the package. Use uvm_end_package to endpackage."
     },
     {
       "name": "uvm_end_package",
@@ -177246,7 +176902,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 246,
-      "summary": "MACRO- `uvm_sequence_library_package"
+      "summary": "This macro is used to trigger static initializers in packages. `uvm_package creates a bogus type which gets referred to by uvm_sequence_library_package to make a package-based variable of the bogus type."
     },
     {
       "name": "UVM_MAX_STREAMBITS",
@@ -177398,7 +177054,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_message_defines.svh",
       "line": 257,
-      "summary": "MACRO- `uvm_message_end"
+      "summary": "Undocumented. Library internal use."
     },
     {
       "name": "uvm_message_context_begin",
@@ -177406,7 +177062,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_message_defines.svh",
       "line": 267,
-      "summary": "MACRO- `uvm_message_context_begin"
+      "summary": "Undocumented. Library internal use."
     },
     {
       "name": "uvm_message_context_end",
@@ -177414,7 +177070,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_message_defines.svh",
       "line": 284,
-      "summary": "MACRO- `uvm_message_context_end"
+      "summary": "Undocumented. Library internal use."
     },
     {
       "name": "uvm_info_begin",
@@ -178486,7 +178142,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_phase_defines.svh",
       "line": 38,
-      "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2011 Synopsys, Inc. All Rights Reserved Worldwide"
+      "summary": ""
     },
     {
       "name": "m_uvm_topdown_phase",
@@ -179038,7 +178694,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_sequence_defines.svh",
       "line": 356,
-      "summary": "Adds the given sequence ~TYPE~ to the given sequence library ~LIBTYPE~"
+      "summary": "MACRO: `uvm_add_to_sequence_library"
     },
     {
       "name": "uvm_sequence_library_utils",
@@ -179678,7 +179334,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "tlm1/uvm_sqr_ifs.svh",
       "line": 25,
-      "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. Copyright 2013-2014 NVIDIA Corporation All Rights Reserved Worldwide"
+      "summary": ""
     },
     {
       "name": "UVM_SEQ_ITEM_FUNCTION_ERROR",
@@ -179694,7 +179350,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "tlm1/uvm_tlm_fifo_base.svh",
       "line": 23,
-      "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2011 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide"
+      "summary": ""
     },
     {
       "name": "UVM_TLM_FIFO_FUNCTION_ERROR",
@@ -179710,7 +179366,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "tlm1/uvm_tlm_ifs.svh",
       "line": 23,
-      "summary": "Copyright 2007-2011 Mentor Graphics Corporation Copyright 2007-2010 Cadence Design Systems, Inc. Copyright 2010 Synopsys, Inc. All Rights Reserved Worldwide"
+      "summary": ""
     },
     {
       "name": "UVM_FUNCTION_ERROR",
@@ -180304,11 +179960,7 @@ window.UVM_SOURCE_DATABASE = {
         "return_type": "void",
         "parameters": "int,const char*,const char*,int,const char*, int",
         "simulator_target": "generic",
-        "doc": {
-          "title": "",
-          "summary": "Copyright 2010 Synopsys, Inc. Copyright 2011 Mentor Graphics Corporation Copyright 2013 NVIDIA Corporation All Rights Reserved Worldwide",
-          "full_text": "Copyright 2010 Synopsys, Inc.\n  Copyright 2011 Mentor Graphics Corporation\n  Copyright 2013 NVIDIA Corporation\n  All Rights Reserved Worldwide\n\n  Licensed under the Apache License, Version 2.0 (the\n  \"License\"); you may not use this file except in\n  compliance with the License.  You may obtain a copy of\n  the License at\n\n      http://www.apache.org/licenses/LICENSE-2.0\n\n  Unless required by applicable law or agreed to in\n  writing, software distributed under the License is\n  distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR\n  CONDITIONS OF ANY KIND, either express or implied.  See\n  the License for the specific language governing\n  permissions and limitations under the License.\n\nImplementation of common methods for DPI"
-        }
+        "doc": null
       },
       {
         "file": "dpi/uvm_common.c",

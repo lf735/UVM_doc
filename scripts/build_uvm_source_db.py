@@ -48,10 +48,30 @@ def clean_doc_comment(raw_lines):
     if not meaningful:
         return None
 
+    # Filter out top-of-file copyright and license header blocks
+    is_legal_header = False
+    first_non_empty = [l for l in meaningful if l.strip()]
+    if first_non_empty:
+        header_sample = " ".join(first_non_empty[:5]).lower()
+        if "copyright" in header_sample or "licensed under the apache license" in header_sample or "all rights reserved" in header_sample:
+            is_legal_header = True
+
+    if is_legal_header:
+        # Search if there is a real doc tag afterwards (e.g. CLASS-, Function-, etc.)
+        doc_tag_idx = -1
+        for idx, l in enumerate(meaningful):
+            if re.match(r'^(?:CLASS|Function|Task|MACRO|Group|Variable|Topic|TITLE)[:\-]\s*', l, re.IGNORECASE):
+                doc_tag_idx = idx
+                break
+        if doc_tag_idx != -1:
+            meaningful = meaningful[doc_tag_idx:]
+        else:
+            return None
+
     title = ""
     start_idx = 0
     for idx, l in enumerate(meaningful):
-        m = re.match(r'^(?:CLASS|Function|Task|MACRO|Group|Variable|Topic|TITLE):\s*(.*)', l, re.IGNORECASE)
+        m = re.match(r'^(?:CLASS|Function|Task|MACRO|Group|Variable|Topic|TITLE)[:\-]\s*(.*)', l, re.IGNORECASE)
         if m:
             title = m.group(1).strip()
             start_idx = idx + 1
