@@ -294,5 +294,44 @@ Le fichier de données de recherche [`js/search_data.js`](file:///c:/Dev/UVM_doc
   1. Copie de l'URL complète avec le hash profond correspondant (`location.origin + location.pathname + '#' + targetId`).
   2. Remplacement temporaire (1,5 s) de l'icône par un checkmark vert accompagné d'un tooltip *"Link copied!"* avec classe `.copied`.
 
+---
+
+## 11. Leçons Tirées sur l'Architecture d'Arborescence & Navigation Multi-Onglets
+
+### Piège 11.1 : L'Infiltration des En-Têtes de Licence / Copyright dans l'AST et les Pages Générées
+- **Symptôme** : Dans les fichiers sources sans bloc de documentation NaturalDocs formel (ex. `uvm_sequencer_analysis_fifo.svh`, `uvm_spell_chkr.svh`, `uvm_resource_converter.svh`), le résumé de classe affichait le texte brut de la licence Apache et du copyright (`Copyright 2007-2011 Mentor Graphics... All Rights Reserved Worldwide`).
+- **Cause racine** : L'analyseur AST Python (`build_uvm_source_db.py:parse_doc_above`) cherchait les commentaires immédiatement au-dessus de la ligne de déclaration `class ...`. Lorsque aucun commentaire de doc n'était présent, la remontée atteignait l'en-tête de fichier de licence/copyright et le capturait comme docstring de la classe.
+- **Solution architecturale pérenne** :
+  1. Détection systématique des en-têtes légaux dans `clean_doc_comment()` : si le bloc commence par `copyright`, `all rights reserved` ou `licensed under the apache license`, le bloc entier est ignoré sauf si une vraie balise de doc (`CLASS:`, `Function:`) apparaît plus bas.
+  2. Garde-fou défensif dans le générateur HTML (`build_docs.py`) : toute description contenant des mentions légales est interceptée et remplacée par une description technique propre (`Class <name> defined in src/<file>`).
+  3. Résultat : 0 mention de copyright parasite résiduelle dans les bases de données et les pages générées.
+
+### Piège 11.2 : Les Titres de Groupes comme Pages d'Accueil de Sections (Section Overviews)
+- **Symptôme** : Cliquer sur le titre d'une grande section dans le menu de gauche ne faisait que déplier/replier la liste, forçant l'utilisateur à chercher et cliquer sur un élément enfant nommé "Overview".
+- **Solution architecturale** :
+  - Lors de l'analyse du menu (`build_docs.py:parse_snippet`), si le premier enfant d'un groupe est un fichier d'aperçu (`Overview`), son URL est attachée directement à l'en-tête du groupe sous la propriété `overviewHref`, et cet enfant est retiré de la liste des sous-éléments pour éviter la redondance.
+  - L'en-tête du groupe dans le menu combine un lien cliquable (`.nav-group-title-link`) qui ouvre la page d'overview, et un bouton chevron distinct (`.nav-group-chevron-btn`) dédié au dépliement/repliement.
+
+### Piège 11.3 : Les Fils d'Ariane Intermédiaires Cliquables & Élimination du Segment Technique "Overviews"
+- **Symptôme** : Les fils d'Ariane (`doc-breadcrumbs`) affichaient des catégories intermédiaires non cliquables (`<span>`) ou inséraient un segment technique `Overviews` sans valeur ajoutée pour l'utilisateur (`Home / Overviews / Core Base Classes`).
+- **Solution** :
+  - Construction d'un index ascendant hiérarchique reliant chaque page à la chaîne de ses groupes parents et à leurs pages d'overview respectives.
+  - Suppression automatique du préfixe de dossier physique `overviews/` dans la hiérarchie affichée : les aperçus de premier niveau affichent `Home / Nom de la section`, tandis que les sous-groupes affichent `Home / Section Parente / Sous-Section`.
+  - Clics interceptés dans `doc_page.js` pour communiquer via `window.parent.location.hash` sans recharger les iframes.
+
+### Piège 11.4 : Alignement et Hiérarchie de l'Arborescence dans la Barre Latérale
+- **Symptôme** : Les sous-groupes imbriqués (comme `TLM1`, `TLM2`, `Register Model`) subissaient un décalage horizontal inline arbitraire (`margin-left: 0.5rem; font-size: 0.775rem`) causant un désalignement avec les éléments frères et parents.
+- **Solution** :
+  - Standardisation de la taille et de la structure de tous les en-têtes de groupes.
+  - Utilisation d'un guide visuel d'arborescence CSS moderne : chaque conteneur de sous-éléments (`.nav-group-items`) possède une bordure fine à gauche (`border-left: 1px solid var(--border-subtle);`) avec une indentation maîtrisée (`0.85rem`).
+  - Alignement au pixel près des éléments racine uniques (`.nav-single-item`) avec les en-têtes de groupes.
+
+### Piège 11.5 : La Sous-Barre de Navigation Pleine Largeur (Full-Width Navigation Sub-Bar)
+- **Symptôme** : L'intégration des 4 onglets majeurs de navigation (`Documentation`, `Source Tree`, `Examples`, `Index A-Z`) dans la colonne latérale restreinte (320px) créait un encombrement visuel et comprimait les libellés.
+- **Solution** :
+  - Déplacement de ces 4 sections dans une sous-barre horizontale dédiée (`<nav class="app-subbar">`) occupant 100% de la largeur de l'écran directement sous le header principal.
+  - Chaque section dispose d'une icône vectorielle explicite et d'un grand confort de lecture, tout en libérant l'intégralité de la hauteur de la barre latérale pour la recherche et l'arbre de navigation.
+
+
 
 

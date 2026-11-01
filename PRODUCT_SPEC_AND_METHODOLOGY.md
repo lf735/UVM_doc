@@ -19,23 +19,27 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 
 | Domaine | Fonctionnalité | Description Détaillée |
 | :--- | :--- | :--- |
-| **Shell & Layout** | **Architecture SPA** | Portail unique ([index.html](file:///c:/Users/uf755lfr/Perso/UVM_doc/index.html)) hébergeant la barre d'outils, la navigation latérale et un viewport double iframe. |
+| **Shell & Layout** | **Architecture SPA** | Portail unique ([index.html](file:///c:/Dev/UVM_doc/index.html)) hébergeant la barre d'outils, la sous-barre globale et un viewport double iframe. |
+| | **Sous-Barre de Navigation Pleine Largeur** | Bandeau horizontal supérieur à 100% de la largeur (`.app-subbar`) hébergeant les 4 sections majeures (**Documentation**, **Source Tree**, **Examples**, **Index A-Z**) avec icônes SVG et sélection active. |
 | | **Modes de Vue (View Switcher)** | **Docs** (documentation seule), **Source** (code SystemVerilog seul) et **Split** (vue côte à côte). |
 | | **Split-View Redimensionnable** | Séparateur draggable (`#split-divider`) avec redimensionnement interactif et double-clic pour restaurer le ratio 50/50. |
-| | **Routage par Hash** | URLs avec état profond : `#/doc/<path>#<id>`, `#/src/<path>#L<line>`, `#/split?doc=<path>&src=<path>`. |
+| | **Routage par Hash** | URLs avec état profond : `#/doc/<path>#<id>`, `#/src/<path>#L<line>`, `#/example/<path>`, `#/split?doc=<path>&src=<path>`. |
 | | **Thème Clair / Sombre** | Palette Google Developers (Light / Dark) avec bascule instantanée et propagation `postMessage` synchrone dans les iframes. |
-| **Navigation Latérale** | **Multi-onglets** | 3 onglets contextuels : **Documentation** (par paquetage), **Source Tree** (arborescence des fichiers), **Index A-Z** (liste alphabétique des symboles). |
+| **Navigation Latérale** | **Arborescence Hiérarchique Structurée** | Affichage en arbre avec guide visuel vertical (`border-left: 1px solid var(--border-subtle)`) et alignement harmonisé sans décalage arbitraire. |
+| | **Titres de Groupes avec Aperçu Clignotant** | Titres de sections cliquables (`overviewHref`) ouvrant la page de synthèse de la section, doublés d'un bouton chevron dédié au dépliement/repliement. |
 | | **Bouton Expand / Collapse All** | Bouton `#sidebar-toggle-all` permettant de déplier ou replier d'un clic tous les dossiers ou catégories visibles. |
-| | **Filtre Temps Réel de Barre** | Filtrage instantané des éléments avec champ dédié, bouton effacer (`×`), mode Regex (`.*`) et pilules multi-filtres. |
-| **Moteur de Recherche** | **Recherche Modale Globale** | Déclenchement via `/` ou `Ctrl+K` / `Cmd+K` couvrant 3 038 symboles et fichiers. |
+| | **Filtre Temps Réel de Barre** | Filtrage instantané avec champ dédié, effacement rapide (`×`), mode Regex (`.*`) et pilules multi-filtres enveloppantes (`flex-wrap`). |
+| **Moteur de Recherche** | **Recherche Modale Globale** | Déclenchement via `/` ou `Ctrl+K` / `Cmd+K` couvrant 3 096 symboles, fichiers et exemples interactifs. |
 | | **Distinction Function / Task** | Typage strict identifiant clairement les `functions` (non-temporelles) et les `tasks` (consommatrices de temps de simulation). |
 | | **Affichage de la Classe Parente** | Présentation explicite `Classe :: Méthode` dans les résultats pour lever toute ambiguïté (ex. `uvm_driver :: run_phase`). |
 | | **Recherche Multi-Mots Intelligente** | Scoring pondéré associant des termes répartis entre le nom du symbole, sa classe et sa description. |
 | | **Support Regex Avancé** | Recherche par expressions régulières (`Alt+R`) avec contour d'avertissement ambre/rouge non bloquant en cas de syntaxe incomplète. |
 | | **Respect de la Casse** | Bascule `Aa` (`Alt+C`) pour différencier les identifiants sensibles à la casse. |
-| | **Filtres Multi-Sélection Non Exclusifs**| Pilules (`All`, `Classes`, `Functions`, `Tasks`, `Macros`, `Files`) activables simultanément sans repli forcé. |
+| | **Filtres Multi-Sélection Multi-Lignes**| Pilules (`All`, `Classes`, `Functions`, `Tasks`, `Macros`, `Files`, `Examples`, `Beginner`, `Intermediate`, `Advanced`) réparties sur plusieurs lignes (`flex-wrap`). |
 | | **Bouton Effacer (`Clear / ×`)** | Nettoyage instantané du champ au clic ou via une première pression sur la touche `Escape`. |
-| **Documentation (`docs_view`)** | **Bannière "View Source" Discrète** | En-tête injecté avec bouton compact iconique (`.banner-icon-btn`) et badge de ligne, discret et sans bouton verbeux encombrant. |
+| **Documentation (`docs_view`)** | **Fil d'Ariane Cliquable Hiérarchique** | Navigation ascendant complète reliant la page courante à ses sections parentes avec aperçu direct, sans insertion du dossier technique `Overviews`. |
+| | **Bannière "View Source" Discrète** | En-tête injecté avec bouton compact iconique (`.banner-icon-btn`) et badge de ligne, discret et sans bouton verbeux encombrant. |
+| | **Nettoyage des En-têtes Légaux** | Élimination totale des mentions parasites de copyright dans les descriptions de classes et méthodes orphelines. |
 | | **Hiérarchie Polymorphique Directe** | Boîte repliable `.derived-classes-card` listant les sous-classes directes sous forme de pilules cliquables, repliée par défaut (`.collapsed`) pour économiser l'espace. |
 | | **Routage Précis des Liens Dérivés** | Redirection vers l'ancre exacte de la classe au sein de la page cible (`#doc-nav-item-X`) au lieu du haut de page générique. |
 | | **Bouton Copie d'Ancre au Survol** | Icône de chaîne de lien apparaissant au survol de chaque titre (`.doc-anchor-link-btn`) copiant le lien direct avec feedback "Link copied!". |
@@ -47,6 +51,10 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | | **Sommaire Interne ("On this page")** | Barre latérale droite dynamique avec défilement espion (Scrollspy) et repli par groupes. |
 | | **Défilement Précis des Liens** | Compensation de la marge supérieure (`scroll-margin-top`), suppression des conflits `scrollIntoView`, micro-ajustement géométrique. |
 | | **Syntax Highlighting & Copie** | Coloration SystemVerilog des blocs `<pre>` et prototypes de méthodes avec bouton de copie en un clic. |
+| **Exemples Interactifs (`examples_view`)** | **Studio Multi-Fichiers en 2 Barres** | Barre d'outils supérieure (`.studio-toolbar` : saut direct de fichier, copie de code, téléchargement de fichier brut, copie de lien) + Barre d'onglets de fichiers pleine largeur inférieure avec défilement horizontal fluide. |
+| | **Console d'Exécution Multi-Simulateurs** | Sorties réelles d'exécution pour Questa, VCS et Xcelium avec onglets interactifs et bannière de résumé UVM (0 errors / 0 fatals). |
+| | **Archive ZIP Client-Side 1-Clic** | Téléchargement instantané de l'intégralité des fichiers de chaque exemple sans dépendance serveur via encodage binaire natif. |
+| | **Visual Flow Stepper** | Progression pas-à-pas interactive avec frise chronologique sur les 5 piliers clés UVM. |
 | **Diagrammes & Médias** | **Suppression des Sauts au Survol** | Neutralisation stricte de l'effet `transform: translateY(-2px)` sur toutes les images. |
 | | **Cadrage Haute Lisibilité** | Encapsulation dans `<figure class="doc-diagram-card">` avec canevas `#ffffff` garantissant le contraste en mode sombre. |
 | | **Visionneuse Zoom Plein Écran** | Modale Lightbox (`#image-zoom-modal`) avec zoom molette, déplacement drag & drop, boutons (+, -, 1:1, Fit) et raccourcis clavier. |
