@@ -321,6 +321,106 @@ def extract_chunks():
                 chunks.append(child_chunk)
                 child_count += 1
 
+    # 3. Process Interactive Example Studios (examples_view/)
+    examples_view_dir = BASE_DIR / "examples_view"
+    sys.path.insert(0, str(BASE_DIR / "scripts"))
+    try:
+        import build_examples
+        suites_meta = getattr(build_examples, "SUITES_METADATA", {})
+        stepper_data = getattr(build_examples, "STEPPER_DATA", {})
+    except Exception as e:
+        print(f"Warning: could not import build_examples: {e}")
+        suites_meta = {}
+        stepper_data = {}
+
+    if examples_view_dir.exists() and suites_meta:
+        print(f"Extracting RAG chunks from {len(suites_meta)} interactive example studios...")
+        for suite_key, meta in suites_meta.items():
+            cat_slug = meta["category"].lower()
+            file_name = f"{Path(suite_key).name}.html"
+            rel_file = f"examples_view/{cat_slug}/{file_name}"
+            full_file = examples_view_dir / cat_slug / file_name
+            if not full_file.exists():
+                continue
+
+            title = meta["title"]
+            cat_title = meta["category_title"]
+            scope = meta["scope"]
+            diff = meta["difficulty"]
+            summary = meta["summary"]
+            apis = meta.get("apis", [])
+
+            intents, synonyms = match_intents(f"{title} {' '.join(apis)} {meta['category']} example testbench", catalog)
+            intent_suffix = ""
+            if intents or synonyms:
+                intent_suffix = f" [Intents: {', '.join(intents)}] [Keywords: {', '.join(synonyms)}]"
+
+            # Level 1: Parent Example Chunk
+            parent_id = len(chunks)
+            parent_chunk = {
+                "id": parent_id,
+                "level": "parent",
+                "parentId": None,
+                "docUrl": rel_file,
+                "url": f"{rel_file}#MainTopic",
+                "anchor": "MainTopic",
+                "title": f"Interactive Example: {title}",
+                "pageHeading": title,
+                "class": title,
+                "category": f"Examples - {cat_title}",
+                "type": "example",
+                "breadcrumb": f"Examples > {cat_title} > {title}",
+                "text": f"{summary} Practical UVM 1.2 interactive example demonstrating {', '.join(apis)}. Scope: {scope}. Difficulty: {diff}. Complete multi-file SystemVerilog testbench with simulator execution log.",
+                "context_header": f"[UVM 1.2 Practical Example & Testbench Architecture] [Example: {title}] [Category: {cat_title}] [Scope: {scope}] [Difficulty: {diff}] [Key APIs: {', '.join(apis)}]{intent_suffix}"
+            }
+            chunks.append(parent_chunk)
+            parent_count += 1
+
+            # Level 2: Child Stepper Chunk (for key pillar examples)
+            stepper_list = stepper_data.get(suite_key, [])
+            if stepper_list:
+                stepper_text = " ".join([f"Step {s['step']}: {s['title']} ({s['component']}) - {s['desc']} Expected log: {s['log_snippet']}." for s in stepper_list])
+                child_chunk = {
+                    "id": len(chunks),
+                    "level": "child",
+                    "parentId": parent_id,
+                    "docUrl": rel_file,
+                    "url": f"{rel_file}#FlowStepper",
+                    "anchor": "FlowStepper",
+                    "title": f"{title} > Simulation Flow Stepper",
+                    "rawTitle": "Simulation Flow Stepper",
+                    "class": title,
+                    "category": f"Examples - {cat_title}",
+                    "type": "stepper",
+                    "breadcrumb": f"Examples > {cat_title} > {title} > Simulation Flow Stepper",
+                    "text": stepper_text[:1200],
+                    "context_header": f"[UVM 1.2 Simulation Flow Stepper Walkthrough] [Example: {title}] [Execution Lifecycle Steps]"
+                }
+                chunks.append(child_chunk)
+                child_count += 1
+
+            # Level 2: Child Topology & Code Studio Chunk
+            topo_nodes = meta.get("topology", [])
+            topo_str = " ".join([f"{n.get('name')} ({n.get('type')}{': ' + n.get('details') if n.get('details') else ''})" for n in topo_nodes])
+            studio_chunk = {
+                "id": len(chunks),
+                "level": "child",
+                "parentId": parent_id,
+                "docUrl": rel_file,
+                "url": f"{rel_file}#Studio",
+                "anchor": "Studio",
+                "title": f"{title} > Multi-File Code Studio & Topology",
+                "rawTitle": "Testbench Topology & Code Studio",
+                "class": title,
+                "category": f"Examples - {cat_title}",
+                "type": "studio",
+                "breadcrumb": f"Examples > {cat_title} > {title} > Multi-File Code Studio",
+                "text": f"Testbench architecture components: {topo_str}. Multi-file Code Studio includes runnable SystemVerilog code, testbench modules, and makefiles for Questa, VCS, and Xcelium.",
+                "context_header": f"[UVM 1.2 Testbench Architecture & Code] [Example: {title}]"
+            }
+            chunks.append(studio_chunk)
+            child_count += 1
+
     print(f"Hierarchical extraction complete: {len(chunks)} total chunks ({parent_count} parents, {child_count} children).")
     return chunks
 

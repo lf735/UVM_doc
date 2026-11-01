@@ -1915,6 +1915,7 @@ def generate_search_and_nav_data():
     examples_catalog = build_examples.generate_all_examples()
     search_items.extend(examples_catalog.get("searchItems", []))
     examples_tree = examples_catalog.get("examplesTree", [])
+    example_to_src = examples_catalog.get("exampleToSrc", {})
 
     # Pre-calculate Doc <-> Source cross-referencing maps
     def get_target_line(src):
@@ -1937,6 +1938,7 @@ def generate_search_and_nav_data():
         "searchIndex": search_items,
         "docToSrc": doc_to_src,
         "srcToDoc": src_to_doc,
+        "exampleToSrc": example_to_src,
         "docHeadings": DOC_HEADINGS_MAP
     }
 

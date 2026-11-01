@@ -607,14 +607,23 @@
         const snippet = this.extractMultiLocationSnippet(pChunk.text, childChunks, query);
         const matchPct = Math.round(Math.max(0, Math.min(1, (combinedScore + 0.2) / 1.1)) * 100);
 
+        const pType = pChunk.type || (pChunk.url && pChunk.url.includes('examples_view/') ? 'example' : 'class');
+        let tType = pType;
+        if (bestChild && bestChild.chunk && bestChild.chunk.type) {
+          tType = bestChild.chunk.type;
+        }
+
         results.push({
           mode: 'consolidated',
           score: combinedScore,
           vectorScore: entry.parentVectorScore || (bestChild ? bestChild.vectorScore : combinedScore),
           matchPct,
           chunk: pChunk,
+          children: entry.children,
           targetUrl,
           targetSections,
+          targetType: tType,
+          type: pType,
           title: pChunk.title,
           pageHeading: pChunk.pageHeading || pChunk.title,
           category: pChunk.category,
@@ -649,6 +658,7 @@
 
         const snippet = this.extractSmartSnippet(chunk.text, query);
         const matchPct = Math.round(Math.max(0, Math.min(1, (item.score + 0.2) / 1.1)) * 100);
+        const chunkType = chunk.type || (chunk.url && chunk.url.includes('examples_view/') ? 'example' : 'class');
 
         results.push({
           mode: 'mixed',
@@ -659,7 +669,8 @@
           targetChunk: chunk,
           targetUrl: chunk.url,
           targetSectionTitle: null,
-          targetType: chunk.type,
+          targetType: chunkType,
+          type: chunkType,
           title: chunk.title,
           pageHeading: chunk.title,
           category: chunk.category,

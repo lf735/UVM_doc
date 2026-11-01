@@ -152,6 +152,41 @@ def main():
     assert_test('openExampleView' in app_js, "js/app.js handles openExampleView postMessage")
     assert_test('badge-example' in app_js, "js/app.js styles example search results with badge-example")
 
+    # Test 8: Split View source pairing in search_data.js
+    ex_to_src = uvm_data.get("exampleToSrc", {})
+    assert_test(len(ex_to_src) >= 38, f"exampleToSrc contains canonical source pairings ({len(ex_to_src)} mapped)")
+
+    # Test 9: Studio Tab Bar overflow & navigation controls in all 39 suites
+    all_have_tab_controls = True
+    for hf in html_files:
+        with open(hf, 'r', encoding='utf-8') as f:
+            c = f.read()
+        if "studio-tab-bar-wrapper" not in c or "studio-tab-scroll-btn" not in c or "studio-file-select" not in c:
+            all_have_tab_controls = False
+            print(f"Missing tab controls in: {hf}")
+    assert_test(all_have_tab_controls, "All 39 suites possess Tab Bar scroll controls and quick file dropdown selector")
+
+    # Test 10: Code Studio internal scroll & trace sync in example_page.js
+    with open(BASE_DIR / "js" / "example_page.js", 'r', encoding='utf-8') as f:
+        ex_page_js = f.read()
+    assert_test('studioCodeContainer.scrollTo' in ex_page_js, "example_page.js scrolls studio internally without jumping window")
+    assert_test('studio-file-select' in ex_page_js, "example_page.js binds quick file dropdown selector")
+    assert_test('studio-tab-scroll-left' in ex_page_js, "example_page.js binds horizontal tab scroll buttons")
+
+    # Test 11: RAG chunks include example suites
+    rag_chunks_file = BASE_DIR / "data" / "rag_chunks.json"
+    if rag_chunks_file.exists():
+        with open(rag_chunks_file, 'r', encoding='utf-8') as f:
+            rag_chunks = json.load(f)
+        ex_chunks = [c for c in rag_chunks if c.get("type") == "example"]
+        assert_test(len(ex_chunks) >= 38, f"data/rag_chunks.json indexes all example suites ({len(ex_chunks)} found)")
+    else:
+        assert_test(False, "data/rag_chunks.json exists")
+
+    # Test 12: Visual Flow Stepper user documentation
+    stepper_guide_file = BASE_DIR / "docs" / "visual_flow_stepper_guide.md"
+    assert_test(stepper_guide_file.exists(), "docs/visual_flow_stepper_guide.md exists and is documented")
+
     print("=" * 60)
     print(f"  Test Results: {PASSED_TESTS}/{TOTAL_TESTS} passed ({FAILED_TESTS} failed)")
     print("=" * 60)

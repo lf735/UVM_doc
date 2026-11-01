@@ -11,6 +11,10 @@
   const studioTabs = document.querySelectorAll('.studio-tab');
   const codePanes = document.querySelectorAll('.file-code-pane');
   const studioFileInfo = document.getElementById('studio-file-info');
+  const studioTabScrollLeft = document.getElementById('studio-tab-scroll-left');
+  const studioTabScrollRight = document.getElementById('studio-tab-scroll-right');
+  const studioFileSelect = document.getElementById('studio-file-select');
+  const studioCodeContainer = document.getElementById('studio-code-container');
   const btnCopyCode = document.getElementById('btn-copy-code');
   const btnCopyCodeText = document.getElementById('btn-copy-code-text');
   const btnDownloadRaw = document.getElementById('btn-download-raw');
@@ -79,6 +83,18 @@
       pane.classList.toggle('active', i === idx);
     });
 
+    if (studioFileSelect) {
+      studioFileSelect.value = String(idx);
+    }
+
+    if (studioTabs[idx]) {
+      try {
+        studioTabs[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      } catch (e) {
+        studioTabs[idx].scrollIntoView(false);
+      }
+    }
+
     if (filesList[idx] && studioFileInfo) {
       const lineCount = (filesList[idx].content.match(/\n/g) || []).length + 1;
       const sizeKb = (new TextEncoder().encode(filesList[idx].content).length / 1024).toFixed(1);
@@ -89,6 +105,36 @@
   studioTabs.forEach((tab, idx) => {
     tab.addEventListener('click', () => switchFileTab(idx));
   });
+
+  // Scroll tab bar left/right buttons
+  if (studioTabScrollLeft && studioTabBar) {
+    studioTabScrollLeft.addEventListener('click', () => {
+      studioTabBar.scrollBy({ left: -220, behavior: 'smooth' });
+    });
+  }
+  if (studioTabScrollRight && studioTabBar) {
+    studioTabScrollRight.addEventListener('click', () => {
+      studioTabBar.scrollBy({ left: 220, behavior: 'smooth' });
+    });
+  }
+
+  // Quick file selector dropdown
+  if (studioFileSelect) {
+    studioFileSelect.addEventListener('change', (e) => {
+      const idx = parseInt(e.target.value, 10);
+      if (!isNaN(idx)) switchFileTab(idx);
+    });
+  }
+
+  // Mouse wheel horizontal scrolling on tab bar
+  if (studioTabBar) {
+    studioTabBar.addEventListener('wheel', (e) => {
+      if (e.deltaY !== 0 && studioTabBar.scrollWidth > studioTabBar.clientWidth) {
+        studioTabBar.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }
+    }, { passive: false });
+  }
 
   // Copy Active File Code
   if (btnCopyCode) {
@@ -336,11 +382,31 @@
         switchFileTab(fileIndex);
       }
       if (step.highlight_line) {
-        const targetRow = document.querySelector(`#file-pane-${currentFileIdx} #L${step.highlight_line}`);
+        const activePane = document.getElementById(`file-pane-${currentFileIdx}`);
+        const targetRow = activePane ? activePane.querySelector(`tr[data-line="${step.highlight_line}"], tr#L${step.highlight_line}`) : null;
         if (targetRow) {
           document.querySelectorAll('.file-code-pane tr.stepper-highlight').forEach(tr => tr.classList.remove('stepper-highlight'));
           targetRow.classList.add('stepper-highlight');
-          targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (studioCodeContainer) {
+            const rowTop = targetRow.offsetTop;
+            studioCodeContainer.scrollTo({
+              top: Math.max(0, rowTop - (studioCodeContainer.clientHeight / 2)),
+              behavior: 'smooth'
+            });
+          }
+        }
+      }
+    }
+
+    // Scroll simulation log to the relevant trace snippet
+    if (terminalBody && step.log_snippet) {
+      const logText = terminalBody.textContent || '';
+      const needle = step.log_snippet.split('[')[0].trim();
+      if (needle) {
+        const pos = logText.indexOf(needle);
+        if (pos !== -1) {
+          const lineNo = logText.substring(0, pos).split('\n').length;
+          terminalBody.scrollTo({ top: Math.max(0, (lineNo - 2) * 19), behavior: 'smooth' });
         }
       }
     }
@@ -415,10 +481,11 @@
   // Split View button
   if (btnSplitSource) {
     btnSplitSource.addEventListener('click', () => {
+      const targetSrc = btnSplitSource.getAttribute('data-src-url') || 'src_view/base/uvm_component.svh.html#L44';
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({
           type: 'openSourceView',
-          url: 'src_view/comps/uvm_component.svh.html#L44'
+          url: targetSrc
         }, '*');
       }
     });

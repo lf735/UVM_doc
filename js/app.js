@@ -252,13 +252,24 @@ document.addEventListener('DOMContentLoaded', () => {
           const mode = btn.getAttribute('data-mode');
           if (mode === 'split') {
             if (currentMode === 'docs') {
-              // Auto pair with corresponding source code if available
-              const docClean = currentDocUrl.replace(/^docs_view\//, '');
-              if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
-                const pairedSrc = UVM_DATA.docToSrc[docClean];
-                currentSrcUrl = pairedSrc;
-                setFrameSrc(srcFrame, pairedSrc);
-                updateSrcTitle(pairedSrc);
+              if (currentDocUrl.includes('examples_view/')) {
+                // Auto pair example with corresponding UVM source code
+                const exClean = currentDocUrl.replace(/^examples_view\//, '');
+                if (typeof UVM_DATA !== 'undefined' && UVM_DATA.exampleToSrc && UVM_DATA.exampleToSrc[exClean]) {
+                  const pairedSrc = UVM_DATA.exampleToSrc[exClean];
+                  currentSrcUrl = pairedSrc;
+                  setFrameSrc(srcFrame, pairedSrc);
+                  updateSrcTitle(pairedSrc);
+                }
+              } else {
+                // Auto pair with corresponding source code if available
+                const docClean = currentDocUrl.replace(/^docs_view\//, '');
+                if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
+                  const pairedSrc = UVM_DATA.docToSrc[docClean];
+                  currentSrcUrl = pairedSrc;
+                  setFrameSrc(srcFrame, pairedSrc);
+                  updateSrcTitle(pairedSrc);
+                }
               }
             } else if (currentMode === 'source') {
               // Auto pair with corresponding doc if available
@@ -411,7 +422,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const rawDoc = params.get('doc');
           const rawSrc = params.get('src');
 
-          const fullDoc = rawDoc ? normalizeDocUrl(rawDoc) : currentDocUrl;
+          const exampleCategories = ['basics/', 'infrastructure/', 'phasing/', 'sequences/', 'tlm-1/', 'tlm-2/', 'registers/', 'integrated/'];
+          const isEx = rawDoc && (rawDoc.includes('examples_view/') || exampleCategories.some(cat => rawDoc.startsWith(cat) || rawDoc.includes('/' + cat)));
+
+          const fullDoc = rawDoc ? (isEx ? normalizeExampleUrl(rawDoc) : normalizeDocUrl(rawDoc)) : currentDocUrl;
           const fullSrc = rawSrc ? normalizeSrcUrl(rawSrc) : currentSrcUrl;
 
           currentDocUrl = fullDoc;
@@ -425,6 +439,9 @@ document.addEventListener('DOMContentLoaded', () => {
           updateDocTitle(fullDoc);
           updateSrcTitle(fullSrc);
           highlightActiveSidebar(fullDoc);
+          if (isEx || fullDoc.includes('examples_view/')) {
+            switchSidebarTab('examples');
+          }
         } else if (hash.startsWith('#/src/')) {
           const srcPath = normalizeSrcUrl(hash.substring(6));
           currentSrcUrl = srcPath;
@@ -462,8 +479,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       function updateHash() {
         if (currentMode === 'split') {
-          const doc = currentDocUrl.includes('examples_view/') 
-            ? currentDocUrl.replace(/^examples_view\//, '') 
+          const isExample = currentDocUrl.includes('examples_view/');
+          const doc = isExample 
+            ? 'examples_view/' + currentDocUrl.replace(/^examples_view\//, '') 
             : currentDocUrl.replace(/^docs_view\//, '');
           const src = currentSrcUrl.replace(/^src_view\//, '');
           window.location.hash = `#/split?doc=${encodeURIComponent(doc)}&src=${encodeURIComponent(src)}`;
@@ -688,10 +706,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
       function isItemTypeAllowed(itemType, filterSet) {
         if (!filterSet || filterSet.has('all') || filterSet.size === 0) return true;
+        if (!itemType) return false;
         if (itemType === 'method') {
           return filterSet.has('function') || filterSet.has('task') || filterSet.has('method');
         }
+        if (itemType === 'studio' || itemType === 'stepper' || itemType === 'example') {
+          return filterSet.has('example');
+        }
+        if (itemType === 'overview') {
+          return filterSet.has('class') || filterSet.has('file');
+        }
         return filterSet.has(itemType);
+      }
+
+      function isRagResultAllowed(r, filterSet) {
+        if (!filterSet || filterSet.has('all') || filterSet.size === 0) return true;
+
+        const url = (r.targetUrl || (r.chunk && r.chunk.url) || '').toLowerCase();
+        const isExample = url.includes('examples_view/') || r.type === 'example' || r.type === 'studio' || r.type === 'stepper' || r.targetType === 'example';
+
+        // 1. Example Filter
+        if (filterSet.has('example')) {
+          if (isExample) return true;
+        }
+        if (filterSet.size === 1 && filterSet.has('example') && !isExample) {
+          return false;
+        }
+        if (isExample && !filterSet.has('example')) {
+          return false;
+        }
+
+        // 2. Class Filter
+        if (filterSet.has('class')) {
+          if (r.type === 'class' || r.targetType === 'class' || r.type === 'overview') return true;
+        }
+
+        // 3. Functions & Tasks Filter
+        if (filterSet.has('function') || filterSet.has('task')) {
+          if (r.type === 'method' || r.type === 'function' || r.type === 'task' ||
+              r.targetType === 'method' || r.targetType === 'function' || r.targetType === 'task') {
+            return true;
+          }
+          if (r.targetSections && r.targetSections.some(s => s.type === 'method' || s.type === 'function' || s.type === 'task')) {
+            return true;
+          }
+          if (r.children && r.children.some(c => c.chunk && (c.chunk.type === 'method' || c.chunk.type === 'function' || c.chunk.type === 'task'))) {
+            return true;
+          }
+        }
+
+        // 4. Macro Filter
+        if (filterSet.has('macro')) {
+          if (r.type === 'macro' || r.targetType === 'macro') return true;
+          if (r.targetSections && r.targetSections.some(s => s.type === 'macro')) return true;
+          if (r.children && r.children.some(c => c.chunk && c.chunk.type === 'macro')) return true;
+        }
+
+        // 5. Source File Filter
+        if (filterSet.has('file')) {
+          if (r.type === 'file' || r.targetType === 'file') return true;
+          const docPath = url.split('#')[0];
+          if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docPath]) {
+            return true;
+          }
+          if (r.type === 'overview') return true;
+        }
+
+        return false;
       }
 
       function handleMultiFilterPillClick(clickedPill, allPills, filterSet, onFilterChange) {
@@ -1339,6 +1420,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // RAG State & Helpers
       let modalAiEnabled = false;
       let activeAiSearchId = 0;
+      let lastAiRawResults = null;
+      let lastAiQuery = null;
 
       function renderStarRating(rating) {
         let stars = '';
@@ -1431,6 +1514,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (radio) radio.checked = true;
             const modelId = card.getAttribute('data-model-id');
             window.UVMRagEngine.setModel(modelId);
+            lastAiRawResults = null;
+            lastAiQuery = null;
           };
 
           card.addEventListener('click', selectCard);
@@ -1556,6 +1641,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (settingsToggleHybrid) {
         settingsToggleHybrid.addEventListener('change', (e) => {
           if (window.UVMRagEngine) window.UVMRagEngine.setHybrid(e.target.checked);
+          lastAiRawResults = null;
+          lastAiQuery = null;
           executeSearch(searchInput ? searchInput.value : '');
         });
       }
@@ -1568,6 +1655,8 @@ document.addEventListener('DOMContentLoaded', () => {
         settingsModeConsolidated.addEventListener('change', (e) => {
           if (e.target.checked && window.UVMRagEngine) {
             window.UVMRagEngine.setDisplayMode('consolidated');
+            lastAiRawResults = null;
+            lastAiQuery = null;
             if (modalAiEnabled && searchInput) executeSearch(searchInput.value);
           }
         });
@@ -1576,6 +1665,8 @@ document.addEventListener('DOMContentLoaded', () => {
         settingsModeMixed.addEventListener('change', (e) => {
           if (e.target.checked && window.UVMRagEngine) {
             window.UVMRagEngine.setDisplayMode('mixed');
+            lastAiRawResults = null;
+            lastAiQuery = null;
             if (modalAiEnabled && searchInput) executeSearch(searchInput.value);
           }
         });
@@ -1815,6 +1906,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalAiEnabled) {
           const trimmed = (query || '').trim();
           if (!trimmed) {
+            lastAiRawResults = null;
+            lastAiQuery = null;
             renderPromptChips();
             if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
             if (searchResults) searchResults.style.display = 'none';
@@ -1827,145 +1920,176 @@ document.addEventListener('DOMContentLoaded', () => {
           if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
           if (searchResults) searchResults.style.display = 'block';
 
-          const searchId = ++activeAiSearchId;
+          let results = null;
 
-          // Show progress / loading state
-          if (modalAiLoading) {
-            modalAiLoading.style.display = 'flex';
-            if (aiLoadingText) aiLoadingText.textContent = "Computing semantic similarity...";
-            if (aiLoadingPct) aiLoadingPct.textContent = "";
-            if (aiLoadingBarFill) aiLoadingBarFill.style.width = "30%";
-          }
+          // Fast cache path: if the query didn't change and we already computed RAG vectors, filter immediately
+          if (trimmed === lastAiQuery && lastAiRawResults !== null) {
+            results = lastAiRawResults;
+          } else {
+            const searchId = ++activeAiSearchId;
 
-          try {
-            const results = await window.UVMRagEngine.search(trimmed, {
-              topK: 30,
-              onProgress: (prog) => {
-                if (searchId !== activeAiSearchId) return;
-                if (modalAiLoading) modalAiLoading.style.display = 'flex';
-                if (aiLoadingText && prog.message) aiLoadingText.textContent = prog.message;
-                if (aiLoadingPct && prog.progress !== undefined) aiLoadingPct.textContent = `${prog.progress}%`;
-                if (aiLoadingBarFill && prog.progress !== undefined) aiLoadingBarFill.style.width = `${prog.progress}%`;
-              }
-            });
-
-            if (searchId !== activeAiSearchId) return; // Discard superseded search
-            if (modalAiLoading) modalAiLoading.style.display = 'none';
-
-            // Filter results by active pills if any
-            const filtered = results.filter(r => isItemTypeAllowed(r.targetType || r.type, searchFilterTypes) || isItemTypeAllowed(r.type, searchFilterTypes));
-
-            filteredSearchResults = filtered.map(r => ({
-              item: {
-                name: r.title,
-                type: r.targetType || r.type,
-                category: r.category,
-                doc: r.targetUrl || r.chunk.url,
-                src: (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc) ? UVM_DATA.docToSrc[(r.targetUrl || r.chunk.url).split('#')[0]] : null,
-                desc: r.snippet
-              },
-              score: r.score,
-              matchPct: r.matchPct,
-              snippet: r.snippet,
-              chunk: r.chunk,
-              targetUrl: r.targetUrl,
-              targetSections: r.targetSections || [],
-              targetSectionTitle: r.targetSectionTitle,
-              targetType: r.targetType,
-              highlightedTitle: r.highlightedTitle,
-              title: r.title,
-              breadcrumb: r.breadcrumb,
-              type: r.type
-            }));
-
-            searchSelectedIndex = filteredSearchResults.length > 0 ? 0 : -1;
-
-            if (filteredSearchResults.length === 0) {
-              searchResults.innerHTML = '<li style="padding:2rem; text-align:center; color:var(--text-muted); font-size:0.875rem">No semantic matches found for this query. Try rephrasing.</li>';
-              return;
+            // Show progress / loading state
+            if (modalAiLoading) {
+              modalAiLoading.style.display = 'flex';
+              if (aiLoadingText) aiLoadingText.textContent = "Computing semantic similarity...";
+              if (aiLoadingPct) aiLoadingPct.textContent = "";
+              if (aiLoadingBarFill) aiLoadingBarFill.style.width = "30%";
             }
 
-            let html = '';
-            filteredSearchResults.forEach((res, idx) => {
-              const pct = res.matchPct;
-              const badgeClass = pct >= 80 ? 'rag-match-high' : (pct >= 65 ? 'rag-match-med' : 'rag-match-low');
-              const displayType = res.targetType || res.type;
-              const typeBadgeClass = displayType === 'class' ? 'badge-class' :
-                (displayType === 'macro' ? 'badge-macro' :
-                  (displayType === 'function' ? 'badge-function' :
-                    (displayType === 'task' ? 'badge-task' :
-                      (displayType === 'example' ? 'badge-example' :
-                        (displayType === 'method' ? 'badge-method' : 'badge-file')))));
+            try {
+              results = await window.UVMRagEngine.search(trimmed, {
+                topK: 40,
+                onProgress: (prog) => {
+                  if (searchId !== activeAiSearchId) return;
+                  if (modalAiLoading) modalAiLoading.style.display = 'flex';
+                  if (aiLoadingText && prog.message) aiLoadingText.textContent = prog.message;
+                  if (aiLoadingPct && prog.progress !== undefined) aiLoadingPct.textContent = `${prog.progress}%`;
+                  if (aiLoadingBarFill && prog.progress !== undefined) aiLoadingBarFill.style.width = `${prog.progress}%`;
+                }
+              });
 
-              let sectionsPillsHtml = '';
-              if (res.targetSections && res.targetSections.length > 0) {
-                sectionsPillsHtml = `<div class="rag-sections-list">
-                  ${res.targetSections.map(s => {
-                    const isIntro = s.isIntro;
-                    const pillClass = isIntro ? 'rag-section-pill intro-pill' : 'rag-section-pill';
-                    const pillLabel = isIntro ? '📖 Intro' : `🎯 ${escapeHtml(s.title)}`;
-                    return `<button type="button" class="${pillClass}" data-section-url="${escapeHtml(s.url)}" title="Jump directly to: ${escapeHtml(s.title)}">${pillLabel}</button>`;
-                  }).join('')}
-                </div>`;
-              } else if (res.targetSectionTitle) {
-                sectionsPillsHtml = `<span class="rag-section-badge" title="Target section in this document">🎯 Section: ${escapeHtml(res.targetSectionTitle)}</span>`;
-              }
+              if (searchId !== activeAiSearchId) return; // Discard superseded search
+              if (modalAiLoading) modalAiLoading.style.display = 'none';
 
-              html += `<li class="search-result-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}">
-                <div class="res-main">
-                  <div class="res-title-row" style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
-                    <span style="color:var(--text-muted); font-size:0.775rem;">${escapeHtml(res.breadcrumb)}</span>
-                  </div>
-                  <div style="font-weight:600; font-size:0.925rem; color:var(--text-main); margin-top:0.15rem;">
-                    ${res.highlightedTitle || escapeHtml(res.title)}
-                  </div>
-                  ${sectionsPillsHtml}
-                  <div class="rag-snippet">${res.snippet}</div>
-                </div>
-                <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.35rem; flex-shrink:0;">
-                  <span class="rag-match-badge ${badgeClass}">${pct}% match</span>
-                  <span class="res-badge ${typeBadgeClass}">${displayType}</span>
-                </div>
+              lastAiRawResults = results;
+              lastAiQuery = trimmed;
+            } catch (err) {
+              console.error('[RAG] Search error:', err);
+              if (modalAiLoading) modalAiLoading.style.display = 'none';
+              searchResults.innerHTML = `<li style="padding:1.5rem; text-align:center; color:#ef4444; font-size:0.875rem">
+                <strong>AI Search Error</strong><br>
+                <span style="font-size:0.775rem; color:var(--text-muted)">${escapeHtml(err.message)}</span>
               </li>`;
-            });
-
-            searchResults.innerHTML = html;
-
-            // Bind section pills
-            searchResults.querySelectorAll('.rag-section-pill').forEach(pill => {
-              pill.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const targetUrl = pill.getAttribute('data-section-url');
-                const parentItem = pill.closest('.search-result-item');
-                const idx = parentItem ? parseInt(parentItem.getAttribute('data-index'), 10) : 0;
-                const baseItem = filteredSearchResults[idx].item;
-                selectSearchResult({
-                  name: baseItem.name,
-                  category: baseItem.category,
-                  type: baseItem.type,
-                  doc: targetUrl,
-                  src: baseItem.src,
-                  desc: baseItem.desc
-                });
-              });
-            });
-
-            // Bind main result card
-            searchResults.querySelectorAll('.search-result-item').forEach(el => {
-              el.addEventListener('click', () => {
-                const idx = parseInt(el.getAttribute('data-index'), 10);
-                selectSearchResult(filteredSearchResults[idx].item);
-              });
-            });
-
-          } catch (err) {
-            console.error('[RAG] Search error:', err);
-            if (modalAiLoading) modalAiLoading.style.display = 'none';
-            searchResults.innerHTML = `<li style="padding:1.5rem; text-align:center; color:#ef4444; font-size:0.875rem">
-              <strong>AI Search Error</strong><br>
-              <span style="font-size:0.775rem; color:var(--text-muted)">${escapeHtml(err.message)}</span>
-            </li>`;
+              return;
+            }
           }
+
+          // Filter results by active pills using isRagResultAllowed
+          const filtered = results.filter(r => isRagResultAllowed(r, searchFilterTypes));
+
+          filteredSearchResults = filtered.map(r => ({
+            item: {
+              name: r.title,
+              type: r.targetType || r.type || 'class',
+              category: r.category,
+              doc: r.targetUrl || r.chunk.url,
+              src: (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc) ? UVM_DATA.docToSrc[(r.targetUrl || r.chunk.url).split('#')[0]] : null,
+              desc: r.snippet
+            },
+            score: r.score,
+            matchPct: r.matchPct,
+            snippet: r.snippet,
+            chunk: r.chunk,
+            targetUrl: r.targetUrl,
+            targetSections: r.targetSections || [],
+            targetSectionTitle: r.targetSectionTitle,
+            targetType: r.targetType,
+            highlightedTitle: r.highlightedTitle,
+            title: r.title,
+            breadcrumb: r.breadcrumb,
+            type: r.type
+          }));
+
+          searchSelectedIndex = filteredSearchResults.length > 0 ? 0 : -1;
+
+          if (filteredSearchResults.length === 0) {
+            const filterLabels = Array.from(searchFilterTypes).filter(t => t !== 'all');
+            const filterNotice = filterLabels.length > 0 ? ` for filter [${filterLabels.join(', ')}]` : '';
+            searchResults.innerHTML = `<li style="padding:2rem; text-align:center; color:var(--text-muted); font-size:0.875rem">
+              No semantic matches found${filterNotice}.<br>
+              <span style="font-size:0.8rem; margin-top:0.35rem; display:inline-block;">Try selecting "All" or rephrasing your question.</span>
+            </li>`;
+            return;
+          }
+
+          let html = '';
+          filteredSearchResults.forEach((res, idx) => {
+            const pct = res.matchPct;
+            const badgeClass = pct >= 80 ? 'rag-match-high' : (pct >= 65 ? 'rag-match-med' : 'rag-match-low');
+
+            let displayType = res.targetType || res.type || 'class';
+            if (searchFilterTypes.has('example') || (res.targetUrl && res.targetUrl.includes('examples_view/'))) {
+              displayType = 'example';
+            } else if (searchFilterTypes.has('class') && (res.type === 'class' || res.type === 'overview')) {
+              displayType = 'class';
+            } else if (searchFilterTypes.has('macro') && (res.type === 'macro' || (res.targetSections && res.targetSections.some(s => s.type === 'macro')))) {
+              displayType = 'macro';
+            } else if (searchFilterTypes.has('task')) {
+              displayType = 'task';
+            } else if (searchFilterTypes.has('function')) {
+              displayType = 'function';
+            } else if (displayType === 'method') {
+              displayType = 'function';
+            }
+
+            const typeBadgeClass = displayType === 'class' ? 'badge-class' :
+              (displayType === 'macro' ? 'badge-macro' :
+                (displayType === 'function' ? 'badge-function' :
+                  (displayType === 'task' ? 'badge-task' :
+                    (displayType === 'example' ? 'badge-example' :
+                      (displayType === 'method' ? 'badge-method' : 'badge-file')))));
+
+            let sectionsPillsHtml = '';
+            if (res.targetSections && res.targetSections.length > 0) {
+              sectionsPillsHtml = `<div class="rag-sections-list">
+                ${res.targetSections.map(s => {
+                  const isIntro = s.isIntro;
+                  const pillClass = isIntro ? 'rag-section-pill intro-pill' : 'rag-section-pill';
+                  const pillLabel = isIntro ? '📖 Intro' : `🎯 ${escapeHtml(s.title)}`;
+                  return `<button type="button" class="${pillClass}" data-section-url="${escapeHtml(s.url)}" title="Jump directly to: ${escapeHtml(s.title)}">${pillLabel}</button>`;
+                }).join('')}
+              </div>`;
+            } else if (res.targetSectionTitle) {
+              sectionsPillsHtml = `<span class="rag-section-badge" title="Target section in this document">🎯 Section: ${escapeHtml(res.targetSectionTitle)}</span>`;
+            }
+
+            html += `<li class="search-result-item ${idx === 0 ? 'selected' : ''}" data-index="${idx}">
+              <div class="res-main">
+                <div class="res-title-row" style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
+                  <span style="color:var(--text-muted); font-size:0.775rem;">${escapeHtml(res.breadcrumb)}</span>
+                </div>
+                <div style="font-weight:600; font-size:0.925rem; color:var(--text-main); margin-top:0.15rem;">
+                  ${res.highlightedTitle || escapeHtml(res.title)}
+                </div>
+                ${sectionsPillsHtml}
+                <div class="rag-snippet">${res.snippet}</div>
+              </div>
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.35rem; flex-shrink:0;">
+                <span class="rag-match-badge ${badgeClass}">${pct}% match</span>
+                <span class="res-badge ${typeBadgeClass}">${displayType}</span>
+              </div>
+            </li>`;
+          });
+
+          searchResults.innerHTML = html;
+
+          // Bind section pills
+          searchResults.querySelectorAll('.rag-section-pill').forEach(pill => {
+            pill.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const targetUrl = pill.getAttribute('data-section-url');
+              const parentItem = pill.closest('.search-result-item');
+              const idx = parentItem ? parseInt(parentItem.getAttribute('data-index'), 10) : 0;
+              const baseItem = filteredSearchResults[idx].item;
+              selectSearchResult({
+                name: baseItem.name,
+                category: baseItem.category,
+                type: baseItem.type,
+                doc: targetUrl,
+                src: baseItem.src,
+                desc: baseItem.desc
+              });
+            });
+          });
+
+          // Bind main result card
+          searchResults.querySelectorAll('.search-result-item').forEach(el => {
+            el.addEventListener('click', () => {
+              const idx = parseInt(el.getAttribute('data-index'), 10);
+              selectSearchResult(filteredSearchResults[idx].item);
+            });
+          });
+
           return;
         }
 
@@ -2066,28 +2190,44 @@ function selectSearchResult(item) {
   if (!item) return;
   closeSearchModal();
 
+  const isExample = (item.type === 'example' || (item.doc && item.doc.includes('examples_view/')));
+
   if (currentMode === 'split') {
     if (item.doc) {
-      currentDocUrl = normalizeDocUrl(item.doc);
+      currentDocUrl = isExample ? normalizeExampleUrl(item.doc) : normalizeDocUrl(item.doc);
       setFrameSrc(docFrame, currentDocUrl);
       updateDocTitle(currentDocUrl);
     }
-    if (item.src) {
+    if (item.src && !item.src.includes('examples_view/')) {
       currentSrcUrl = normalizeSrcUrl(item.src);
       setFrameSrc(srcFrame, currentSrcUrl);
       updateSrcTitle(currentSrcUrl);
     } else if (item.doc) {
-      const docClean = currentDocUrl.replace(/^docs_view\//, '');
-      if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
-        currentSrcUrl = UVM_DATA.docToSrc[docClean];
-        setFrameSrc(srcFrame, currentSrcUrl);
-        updateSrcTitle(currentSrcUrl);
+      if (isExample) {
+        const exClean = currentDocUrl.replace(/^examples_view\//, '');
+        if (typeof UVM_DATA !== 'undefined' && UVM_DATA.exampleToSrc && UVM_DATA.exampleToSrc[exClean]) {
+          currentSrcUrl = UVM_DATA.exampleToSrc[exClean];
+          setFrameSrc(srcFrame, currentSrcUrl);
+          updateSrcTitle(currentSrcUrl);
+        }
+      } else {
+        const docClean = currentDocUrl.replace(/^docs_view\//, '');
+        if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
+          currentSrcUrl = UVM_DATA.docToSrc[docClean];
+          setFrameSrc(srcFrame, currentSrcUrl);
+          updateSrcTitle(currentSrcUrl);
+        }
       }
     }
     updateHash();
     highlightActiveSidebar(item.doc || item.src);
+    if (isExample) {
+      switchSidebarTab('examples');
+    }
   } else {
-    if (item.doc) {
+    if (isExample) {
+      window.openExampleView(item.doc);
+    } else if (item.doc) {
       loadDoc(item.doc);
       if (item.src) {
         currentSrcUrl = normalizeSrcUrl(item.src);

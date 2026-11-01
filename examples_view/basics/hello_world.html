@@ -33,7 +33,7 @@
       </div>
 
       <div class="banner-actions">
-        <button type="button" class="btn btn-outline" id="btn-split-source" title="View side-by-side with UVM source code in Split View">
+        <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="src_view/comps/uvm_component.svh.html#L44" title="View side-by-side with UVM source code in Split View">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
           <span>Split View</span>
         </button>
@@ -97,11 +97,20 @@
               <div class="CBody">
                 <div class="studio-section">
                   <div class="studio-header">
-                    <div class="studio-tab-bar" id="studio-tab-bar">
-                      <button type="button" class="studio-tab active" data-file-idx="0"><span class="tab-icon">📄</span><span class="tab-name">consumer.sv</span><span class="tab-badge">64L</span></button><button type="button" class="studio-tab " data-file-idx="1"><span class="tab-icon">📄</span><span class="tab-name">hello_world.sv</span><span class="tab-badge">52L</span></button><button type="button" class="studio-tab " data-file-idx="2"><span class="tab-icon">📄</span><span class="tab-name">packet.sv</span><span class="tab-badge">42L</span></button><button type="button" class="studio-tab " data-file-idx="3"><span class="tab-icon">📄</span><span class="tab-name">producer.sv</span><span class="tab-badge">79L</span></button><button type="button" class="studio-tab " data-file-idx="4"><span class="tab-icon">📄</span><span class="tab-name">top.sv</span><span class="tab-badge">53L</span></button><button type="button" class="studio-tab " data-file-idx="5"><span class="tab-icon">📄</span><span class="tab-name">Makefile.ius</span><span class="tab-badge">33L</span></button><button type="button" class="studio-tab " data-file-idx="6"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span><span class="tab-badge">35L</span></button><button type="button" class="studio-tab " data-file-idx="7"><span class="tab-icon">📄</span><span class="tab-name">Makefile.vcs</span><span class="tab-badge">36L</span></button>
+                    <div class="studio-tab-bar-wrapper">
+                      <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
+                      <div class="studio-tab-bar" id="studio-tab-bar">
+                        <button type="button" class="studio-tab active" data-file-idx="0" title="consumer.sv"><span class="tab-icon">📄</span><span class="tab-name">consumer.sv</span><span class="tab-badge">64L</span></button><button type="button" class="studio-tab " data-file-idx="1" title="hello_world.sv"><span class="tab-icon">📄</span><span class="tab-name">hello_world.sv</span><span class="tab-badge">52L</span></button><button type="button" class="studio-tab " data-file-idx="2" title="packet.sv"><span class="tab-icon">📄</span><span class="tab-name">packet.sv</span><span class="tab-badge">42L</span></button><button type="button" class="studio-tab " data-file-idx="3" title="producer.sv"><span class="tab-icon">📄</span><span class="tab-name">producer.sv</span><span class="tab-badge">79L</span></button><button type="button" class="studio-tab " data-file-idx="4" title="top.sv"><span class="tab-icon">📄</span><span class="tab-name">top.sv</span><span class="tab-badge">53L</span></button><button type="button" class="studio-tab " data-file-idx="5" title="Makefile.ius"><span class="tab-icon">📄</span><span class="tab-name">Makefile.ius</span><span class="tab-badge">33L</span></button><button type="button" class="studio-tab " data-file-idx="6" title="Makefile.questa"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span><span class="tab-badge">35L</span></button><button type="button" class="studio-tab " data-file-idx="7" title="Makefile.vcs"><span class="tab-icon">📄</span><span class="tab-name">Makefile.vcs</span><span class="tab-badge">36L</span></button>
+                      </div>
+                      <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
                     </div>
 
                     <div class="studio-toolbar">
+                      <div class="studio-file-select-wrapper" title="Jump directly to any file in this example">
+                        <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
+                          <option value="0">consumer.sv (64 lines)</option><option value="1">hello_world.sv (52 lines)</option><option value="2">packet.sv (42 lines)</option><option value="3">producer.sv (79 lines)</option><option value="4">top.sv (53 lines)</option><option value="5">Makefile.ius (33 lines)</option><option value="6">Makefile.questa (35 lines)</option><option value="7">Makefile.vcs (36 lines)</option>
+                        </select>
+                      </div>
                       <span class="studio-file-info" id="studio-file-info">consumer.sv (64 lines, 1.8 KB)</span>
                       <button type="button" class="btn btn-sm btn-outline" id="btn-copy-code" title="Copy file code to clipboard">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>

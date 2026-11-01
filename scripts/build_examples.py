@@ -974,6 +974,64 @@ def collect_example_files(suite_dir):
     collected.sort(key=sort_key)
     return collected
 
+# Map each interactive example suite to its primary paired UVM source implementation
+EXAMPLE_TO_SRC_MAP = {
+    # 1. Getting Started & Basics
+    "basics/trivial.html": "src_view/base/uvm_root.svh.html#L42",
+    "basics/hello_world.html": "src_view/comps/uvm_component.svh.html#L44",
+    "basics/module.html": "src_view/base/uvm_root.svh.html#L145",
+    "basics/pkg.html": "src_view/base/uvm_pkg.sv.html",
+
+    # 2. Core Infrastructure
+    "infrastructure/factory.html": "src_view/base/uvm_factory.svh.html#L47",
+    "infrastructure/manual.html": "src_view/base/uvm_config_db.svh.html#L44",
+    "infrastructure/automated.html": "src_view/base/uvm_config_db.svh.html#L44",
+    "infrastructure/callbacks.html": "src_view/base/uvm_callback.svh.html#L40",
+    "infrastructure/interfaces.html": "src_view/base/uvm_resource_db.svh.html#L42",
+
+    # 3. Phasing & Objections
+    "phasing/basic.html": "src_view/base/uvm_phase.svh.html#L46",
+    "phasing/run_test.html": "src_view/base/uvm_root.svh.html#L210",
+    "phasing/timeout.html": "src_view/base/uvm_root.svh.html#L38",
+    "phasing/objections.html": "src_view/base/uvm_objection.svh.html#L44",
+    "phasing/event_pool.html": "src_view/base/uvm_event.svh.html#L35",
+
+    # 4. Stimulus & Sequences
+    "sequences/basic_read_write_sequence.html": "src_view/seq/uvm_sequence.svh.html#L44",
+
+    # 5. TLM-1 Communication
+    "tlm-1/producer_consumer.html": "src_view/tlm1/uvm_ports.svh.html#L30",
+    "tlm-1/fifo.html": "src_view/tlm1/uvm_tlm_fifos.svh.html#L38",
+    "tlm-1/bidir.html": "src_view/tlm1/uvm_ports.svh.html#L120",
+    "tlm-1/hierarchy.html": "src_view/tlm1/uvm_ports.svh.html#L50",
+
+    # 6. TLM-2 Interconnects
+    "tlm-2/blocking_simple.html": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L42",
+    "tlm-2/nonblocking_simple.html": "src_view/tlm2/uvm_tlm2_sockets.svh.html#L112",
+    "tlm-2/temporal_decoupling.html": "src_view/tlm2/uvm_tlm2_time.svh.html#L35",
+
+    # 7. Register Abstraction Layer (RAL)
+    "registers/primer.html": "src_view/reg/uvm_reg_block.svh.html#L42",
+    "registers/sequence_api.html": "src_view/reg/sequences/uvm_reg_sequence.svh.html#L35",
+    "registers/vertical_reuse.html": "src_view/reg/uvm_reg_block.svh.html#L60",
+    "registers/10direct.html": "src_view/reg/uvm_reg.svh.html#L40",
+    "registers/20layered.html": "src_view/reg/uvm_reg_adapter.svh.html#L38",
+    "registers/aliasing.html": "src_view/reg/uvm_reg_field.svh.html#L45",
+    "registers/broadcast.html": "src_view/reg/uvm_reg_map.svh.html#L40",
+    "registers/coverage.html": "src_view/reg/uvm_reg.svh.html#L200",
+    "registers/fifo_reg.html": "src_view/reg/uvm_reg_fifo.svh.html#L35",
+    "registers/not_yet_implemented.html": "src_view/reg/uvm_reg.svh.html#L40",
+    "registers/reg_without_field.html": "src_view/reg/uvm_reg.svh.html#L40",
+    "registers/ro_wo_same_addr.html": "src_view/reg/uvm_reg.svh.html#L40",
+    "registers/shared_reg.html": "src_view/reg/uvm_reg.svh.html#L40",
+    "registers/user-defined.html": "src_view/reg/uvm_reg_cbs.svh.html#L35",
+
+    # 8. Integrated Environments & VIPs
+    "integrated/ubus.html": "src_view/comps/uvm_driver.svh.html#L44",
+    "integrated/codec.html": "src_view/seq/uvm_sequencer.svh.html#L40",
+    "integrated/apb.html": "src_view/reg/uvm_reg_adapter.svh.html#L38"
+}
+
 def build_suite_page(suite_key, meta, files):
     """Generate interactive HTML page for an example suite."""
     slug = suite_key.replace('/', '_')
@@ -981,6 +1039,9 @@ def build_suite_page(suite_key, meta, files):
     out_dir = OUTPUT_EXAMPLES_VIEW / cat_slug
     out_dir.mkdir(parents=True, exist_ok=True)
     out_file = out_dir / f"{Path(suite_key).name}.html"
+
+    ex_rel = f"{cat_slug}/{Path(suite_key).name}.html"
+    paired_src = EXAMPLE_TO_SRC_MAP.get(ex_rel, "src_view/base/uvm_component.svh.html#L44")
 
     # Pre-render all files
     files_data = []
@@ -1115,7 +1176,7 @@ def build_suite_page(suite_key, meta, files):
       </div>
 
       <div class="banner-actions">
-        <button type="button" class="btn btn-outline" id="btn-split-source" title="View side-by-side with UVM source code in Split View">
+        <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="{paired_src}" title="View side-by-side with UVM source code in Split View">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
           <span>Split View</span>
         </button>
@@ -1171,11 +1232,20 @@ def build_suite_page(suite_key, meta, files):
               <div class="CBody">
                 <div class="studio-section">
                   <div class="studio-header">
-                    <div class="studio-tab-bar" id="studio-tab-bar">
-                      {''.join([f'<button type="button" class="studio-tab {("active" if i == 0 else "")}" data-file-idx="{i}"><span class="tab-icon">📄</span><span class="tab-name">{html.escape(fd["name"])}</span><span class="tab-badge">{fd["lines"]}L</span></button>' for i, fd in enumerate(files_data)])}
+                    <div class="studio-tab-bar-wrapper">
+                      <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
+                      <div class="studio-tab-bar" id="studio-tab-bar">
+                        {''.join([f'<button type="button" class="studio-tab {("active" if i == 0 else "")}" data-file-idx="{i}" title="{html.escape(fd["name"])}"><span class="tab-icon">📄</span><span class="tab-name">{html.escape(fd["name"])}</span><span class="tab-badge">{fd["lines"]}L</span></button>' for i, fd in enumerate(files_data)])}
+                      </div>
+                      <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
                     </div>
 
                     <div class="studio-toolbar">
+                      <div class="studio-file-select-wrapper" title="Jump directly to any file in this example">
+                        <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
+                          {''.join([f'<option value="{i}">{html.escape(fd["name"])} ({fd["lines"]} lines)</option>' for i, fd in enumerate(files_data)])}
+                        </select>
+                      </div>
                       <span class="studio-file-info" id="studio-file-info">{files_data[0]["name"]} ({files_data[0]["lines"]} lines, {files_data[0]["size_kb"]} KB)</span>
                       <button type="button" class="btn btn-sm btn-outline" id="btn-copy-code" title="Copy file code to clipboard">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -1357,7 +1427,8 @@ def generate_all_examples():
     return {
         "suites": suites_built,
         "examplesTree": examples_tree,
-        "searchItems": example_search_items
+        "searchItems": example_search_items,
+        "exampleToSrc": EXAMPLE_TO_SRC_MAP
     }
 
 if __name__ == "__main__":
