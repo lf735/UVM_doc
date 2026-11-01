@@ -82,6 +82,7 @@
   --shadow-lg: 0 4px 12px rgba(60, 64, 67, 0.15), 0 8px 24px rgba(60, 64, 67, 0.1);
   --font-sans: "Google Sans", "Google Sans Text", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   --font-mono: "Roboto Mono", SFMono-Regular, "Cascadia Code", Consolas, Menlo, monospace;
+  --font-main: var(--font-sans);
 }
 
 [data-theme="dark"] {
@@ -1040,7 +1041,7 @@ body.is-resizing iframe {
 }
 
 .doc-toc-link.doc-toc-subgroup-link {
-  font-family: var(--font-main) !important;
+  font-family: var(--font-sans) !important;
   font-weight: 600 !important;
   color: var(--text-main) !important;
   font-size: 0.74rem !important;
@@ -3397,7 +3398,7 @@ body.src-viewer-body {
 }
 
 .IPageTitle {
-  font-family: var(--font-main);
+  font-family: var(--font-sans);
   font-size: 1.85rem;
   font-weight: 500;
   color: var(--text-main);
@@ -3448,7 +3449,7 @@ body.src-viewer-body {
 }
 
 .IHeading {
-  font-family: var(--font-main);
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--primary);
@@ -3589,7 +3590,7 @@ body.src-viewer-body {
   transform: translateX(-50%) translateY(4px);
   background: #1f2937;
   color: #ffffff;
-  font-family: var(--font-main);
+  font-family: var(--font-sans);
   font-size: 0.72rem;
   font-weight: 500;
   padding: 3px 8px;
@@ -3625,4 +3626,733 @@ body.src-viewer-body {
 [data-theme="dark"] .anchor-copy-tooltip::after {
   border-color: #374151 transparent transparent transparent;
 }
+
+/* ==========================================================================
+   Interactive UVM Examples Studio & Viewer (Harmonized with docs_view)
+   ========================================================================== */
+
+.example-page {
+  height: 100%;
+}
+
+.example-body {
+  /* Inherits full styling, font-family, background and padding from .doc-body */
+}
+
+.example-body .doc-main-content {
+  max-width: 1040px;
+}
+
+.example-source-banner {
+  margin-bottom: 1.5rem;
+}
+
+.example-source-banner .banner-file-code {
+  font-family: var(--font-mono);
+  background: var(--surface-color);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  font-size: 0.8rem;
+  color: var(--text-main);
+}
+
+.example-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.example-breadcrumbs .breadcrumb-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.example-breadcrumbs .breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.example-breadcrumbs .sep {
+  opacity: 0.5;
+}
+
+.example-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.title-with-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.title-with-badges h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.badge-scope {
+  background: rgba(26, 115, 232, 0.12);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(26, 115, 232, 0.25);
+}
+
+.badge-diff {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.badge-diff-beginner {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-diff-intermediate {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge-diff-advanced {
+  background: rgba(139, 92, 246, 0.12);
+  color: #7c3aed;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.badge-files {
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+}
+
+.example-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.example-summary-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 950px;
+  margin: 0.5rem 0 1rem;
+  line-height: 1.6;
+}
+
+.example-api-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.example-api-pills .api-label {
+  font-weight: 600;
+  color: var(--text-main);
+  margin-right: 0.25rem;
+}
+
+.api-pill {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.api-pill:hover {
+  background: rgba(26, 115, 232, 0.1);
+  border-color: var(--primary);
+}
+
+.clickable-uvm-sym {
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+  border-radius: 2px;
+}
+
+.clickable-uvm-sym:hover {
+  color: var(--primary) !important;
+  text-decoration: underline;
+  background: rgba(26, 115, 232, 0.08);
+}
+
+/* ==========================================================================
+   Example Sections
+   ========================================================================== */
+
+.example-section {
+  margin-bottom: 2.5rem;
+}
+
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-title svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.section-title h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   Visual Flow Stepper
+   ========================================================================== */
+
+.stepper-section {
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.stepper-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stepper-timeline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0 1rem;
+  margin-bottom: 1rem;
+  scrollbar-width: thin;
+}
+
+.step-node {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.step-node .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.step-node:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.step-node.active {
+  background: rgba(26, 115, 232, 0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.step-node.active .step-num {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.step-node.completed {
+  border-color: #10b981;
+  color: #059669;
+}
+
+.step-node.completed .step-num {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.step-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  border-left: 4px solid var(--primary);
+}
+
+.step-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.step-card-header h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.step-active-comp {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(26, 115, 232, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.step-card p {
+  margin: 0.5rem 0 0.75rem;
+  color: var(--text-main);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.step-log-hint {
+  font-size: 0.85rem;
+  background: var(--surface-alt);
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.step-log-hint code {
+  font-family: var(--font-mono);
+  color: #059669;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .step-log-hint code {
+  color: #34d399;
+}
+
+/* ==========================================================================
+   Topology Grid
+   ========================================================================== */
+
+.topo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.topo-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.topo-card.highlighted {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.3);
+  background: rgba(26, 115, 232, 0.05);
+  transform: translateY(-2px);
+}
+
+.topo-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.topo-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  background: rgba(26, 115, 232, 0.15);
+  color: var(--primary);
+}
+
+.topo-header strong {
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.topo-details {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Multi-File Code Studio
+   ========================================================================== */
+
+.studio-section {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.studio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 0.75rem;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+.studio-tab-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.studio-tab-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.studio-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.9rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.studio-tab:hover {
+  color: var(--text-main);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.studio-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 600;
+  background: var(--surface-color);
+}
+
+.studio-tab .tab-badge {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  padding: 0 0.3rem;
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.studio-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.studio-file-info {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.btn-copied {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  border-color: #10b981 !important;
+}
+
+.studio-code-container {
+  max-height: 580px;
+  overflow-y: auto;
+  position: relative;
+  background: var(--surface-color);
+}
+
+.file-code-pane {
+  display: none;
+}
+
+.file-code-pane.active {
+  display: block;
+}
+
+tr.stepper-highlight {
+  background: rgba(26, 115, 232, 0.15) !important;
+  border-left: 3px solid var(--primary);
+}
+
+[data-theme="dark"] tr.stepper-highlight {
+  background: rgba(37, 99, 235, 0.25) !important;
+}
+
+/* ==========================================================================
+   Simulation Console
+   ========================================================================== */
+
+.sim-cmd-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.sim-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sim-tab {
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sim-tab.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+.sim-cmd-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+}
+
+.sim-cmd-box code {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-main);
+}
+
+.terminal-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #1e1e24;
+  color: #e2e8f0;
+  box-shadow: var(--shadow-md);
+  border: 1px solid #2d3748;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #141419;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #2d3748;
+}
+
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.terminal-dots .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.terminal-dots .dot.red { background: #ef4444; }
+.terminal-dots .dot.yellow { background: #f59e0b; }
+.terminal-dots .dot.green { background: #10b981; }
+
+.terminal-title {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: #94a3b8;
+}
+
+.terminal-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.term-filter {
+  background: transparent;
+  border: 1px solid #475569;
+  color: #94a3b8;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.term-filter.active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+.terminal-body {
+  padding: 1rem 1.25rem;
+  margin: 0;
+  max-height: 380px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #cbd5e1;
+}
+
+/* ==========================================================================
+   Documentation Practical Example Callout Banner
+   ========================================================================== */
+
+.doc-example-callout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 1.25rem 0 1.5rem;
+  background: rgba(26, 115, 232, 0.08);
+  border: 1px solid rgba(26, 115, 232, 0.25);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+}
+
+.example-callout-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.example-callout-content {
+  flex: 1;
+  color: var(--text-main);
+}
+
+.example-callout-content strong {
+  color: var(--primary);
+  margin-right: 0.4rem;
+}
+
+.example-callout-content a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.example-callout-badge {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(26, 115, 232, 0.15);
+  color: var(--primary);
+}
+
+/* Search badge for examples */
+.badge-example {
+  background: #ccfbf1 !important;
+  color: #0f766e !important;
+}
+
+[data-theme="dark"] .badge-example {
+  background: #134e4a !important;
+  color: #5eead4 !important;
+}
+
 

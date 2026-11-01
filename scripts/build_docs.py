@@ -9,6 +9,7 @@ Parses UVM 1.2 sources and reference docs to generate:
 """
 
 import os
+import sys
 import re
 import html
 import json
@@ -19,6 +20,8 @@ from pathlib import Path
 
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "scripts"))
+import build_examples
 SRC_DIR = BASE_DIR / "uvm-1.2" / "src"
 DOCS_DIR = BASE_DIR / "uvm-1.2" / "docs" / "html"
 DOCS_FILES_DIR = DOCS_DIR / "files"
@@ -38,6 +41,64 @@ if DB_JSON_PATH.exists():
         print(f"Loaded UVM AST Database: {len(UVM_DB.get('classes', {}))} classes, {len(UVM_DB.get('macros', {}))} macros.")
     except Exception as e:
         print(f"Warning: Could not load {DB_JSON_PATH}: {e}")
+
+# Bidirectional mapping between UVM classes and practical interactive examples
+CLASS_TO_EXAMPLE_MAP = {
+    # TLM-1
+    "uvm_tlm_fifo": ("tlm-1/fifo.html", "TLM-1 FIFO with Non-Blocking Check"),
+    "uvm_tlm_fifo_base": ("tlm-1/fifo.html", "TLM-1 FIFO with Non-Blocking Check"),
+    "uvm_blocking_put_port": ("tlm-1/producer_consumer.html", "Blocking Put & Get Ports"),
+    "uvm_blocking_get_port": ("tlm-1/producer_consumer.html", "Blocking Put & Get Ports"),
+    "uvm_put_port": ("tlm-1/hierarchy.html", "Hierarchical TLM Port Forwarding"),
+    "uvm_put_export": ("tlm-1/hierarchy.html", "Hierarchical TLM Port Forwarding"),
+    "uvm_master_port": ("tlm-1/bidir.html", "Bidirectional TLM Transport"),
+    "uvm_slave_port": ("tlm-1/bidir.html", "Bidirectional TLM Transport"),
+    # TLM-2
+    "uvm_tlm_b_transport": ("tlm-2/blocking_simple.html", "Blocking TLM-2 Transport (b_transport)"),
+    "uvm_tlm_b_initiator_socket": ("tlm-2/blocking_simple.html", "Blocking TLM-2 Transport (b_transport)"),
+    "uvm_tlm_b_target_socket": ("tlm-2/blocking_simple.html", "Blocking TLM-2 Transport (b_transport)"),
+    "uvm_tlm_nb_transport_fw": ("tlm-2/nonblocking_simple.html", "Non-Blocking 4-Phase Protocol"),
+    "uvm_tlm_nb_transport_bw": ("tlm-2/nonblocking_simple.html", "Non-Blocking 4-Phase Protocol"),
+    "uvm_tlm_nb_initiator_socket": ("tlm-2/nonblocking_simple.html", "Non-Blocking 4-Phase Protocol"),
+    "uvm_tlm_nb_target_socket": ("tlm-2/nonblocking_simple.html", "Non-Blocking 4-Phase Protocol"),
+    "uvm_tlm_time": ("tlm-2/temporal_decoupling.html", "Temporal Decoupling & Quantum Keeper"),
+    # Infrastructure
+    "uvm_factory": ("infrastructure/factory.html", "Factory Overrides"),
+    "uvm_default_factory": ("infrastructure/factory.html", "Factory Overrides"),
+    "uvm_config_db": ("infrastructure/manual.html", "Manual Configuration DB"),
+    "uvm_resource_db": ("infrastructure/manual.html", "Manual Configuration DB"),
+    "uvm_callback": ("infrastructure/callbacks.html", "Callback Hooks"),
+    "uvm_callbacks": ("infrastructure/callbacks.html", "Callback Hooks"),
+    # Phasing & Objections
+    "uvm_phase": ("phasing/basic.html", "Phased Execution Lifecycle"),
+    "uvm_task_phase": ("phasing/basic.html", "Phased Execution Lifecycle"),
+    "uvm_root": ("phasing/run_test.html", "Dynamic Test Selection"),
+    "uvm_objection": ("phasing/objections.html", "Phase Objections & Drain Time"),
+    "uvm_event": ("phasing/event_pool.html", "Event Synchronization (Pool)"),
+    "uvm_event_pool": ("phasing/event_pool.html", "Event Synchronization (Pool)"),
+    # Stimulus & Sequences
+    "uvm_sequence": ("sequences/basic_read_write_sequence.html", "Basic Read/Write Sequence"),
+    "uvm_sequence_base": ("sequences/basic_read_write_sequence.html", "Basic Read/Write Sequence"),
+    "uvm_sequencer": ("sequences/basic_read_write_sequence.html", "Basic Read/Write Sequence"),
+    "uvm_sequencer_base": ("sequences/basic_read_write_sequence.html", "Basic Read/Write Sequence"),
+    "uvm_sequence_item": ("sequences/basic_read_write_sequence.html", "Basic Read/Write Sequence"),
+    # Registers (RAL)
+    "uvm_reg_block": ("registers/primer.html", "RAL Primer & Bus Adapter"),
+    "uvm_reg": ("registers/primer.html", "RAL Primer & Bus Adapter"),
+    "uvm_reg_field": ("registers/primer.html", "RAL Primer & Bus Adapter"),
+    "uvm_reg_adapter": ("registers/primer.html", "RAL Primer & Bus Adapter"),
+    "uvm_reg_predictor": ("registers/primer.html", "RAL Primer & Bus Adapter"),
+    "uvm_reg_sequence": ("registers/sequence_api.html", "Register Sequence Convenience API"),
+    "uvm_reg_fifo": ("registers/fifo_reg.html", "FIFO Registers"),
+    "uvm_reg_cbs": ("registers/user-defined.html", "User-Defined Register Callbacks"),
+    # Integrated Components & VIPs
+    "uvm_driver": ("integrated/ubus.html", "UBUS Verification Component & TB"),
+    "uvm_monitor": ("integrated/ubus.html", "UBUS Verification Component & TB"),
+    "uvm_agent": ("integrated/ubus.html", "UBUS Verification Component & TB"),
+    "uvm_scoreboard": ("integrated/ubus.html", "UBUS Verification Component & TB"),
+    "uvm_env": ("integrated/ubus.html", "UBUS Verification Component & TB"),
+    "uvm_component": ("basics/hello_world.html", "Hello World & TLM FIFO")
+}
 
 # SystemVerilog keywords (IEEE 1800)
 SV_KEYWORDS = set([
@@ -794,6 +855,18 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
   <div class="derived-classes-list">{"".join(pills)}</div>
 </div>'''
                 w_body = re.sub(r'(</h[123]>)', r'\1' + derived_box, w_body, count=1)
+
+            if target_cname in CLASS_TO_EXAMPLE_MAP:
+                ex_rel, ex_title = CLASS_TO_EXAMPLE_MAP[target_cname]
+                ex_box = f'''<div class="doc-example-callout">
+  <span class="example-callout-icon">💡</span>
+  <div class="example-callout-content">
+    <strong>Interactive Example:</strong>
+    <a href="{root_rel}examples_view/{ex_rel}" class="example-callout-link" data-example-url="{root_rel}examples_view/{ex_rel}" title="Open {ex_title}">{ex_title}</a>
+  </div>
+  <span class="example-callout-badge">Interactive Studio</span>
+</div>'''
+                w_body = re.sub(r'(</h[123]>)', r'\1' + ex_box, w_body, count=1)
 
     elif cls_name in ('CMethod', 'CFunction', 'CTask'):
         decl_f = None
@@ -1838,6 +1911,11 @@ def generate_search_and_nav_data():
     source_tree = build_source_tree()
     search_items = build_search_index(categories)
 
+    # Generate and integrate interactive examples
+    examples_catalog = build_examples.generate_all_examples()
+    search_items.extend(examples_catalog.get("searchItems", []))
+    examples_tree = examples_catalog.get("examplesTree", [])
+
     # Pre-calculate Doc <-> Source cross-referencing maps
     def get_target_line(src):
         for sym in FILE_SYMBOLS.get(src, []):
@@ -1855,6 +1933,7 @@ def generate_search_and_nav_data():
     payload = {
         "categories": categories,
         "sourceTree": source_tree,
+        "examplesTree": examples_tree,
         "searchIndex": search_items,
         "docToSrc": doc_to_src,
         "srcToDoc": src_to_doc,

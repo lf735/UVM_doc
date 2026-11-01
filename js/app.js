@@ -106,10 +106,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let pathPart = hashIdx !== -1 ? url.substring(0, hashIdx) : url;
     let hashPart = hashIdx !== -1 ? url.substring(hashIdx) : '';
     let clean = pathPart.replace(/^[./]+/, '');
-    if (clean.includes('docs_view/')) {
+    if (clean.includes('examples_view/')) {
+      clean = clean.substring(clean.indexOf('examples_view/'));
+    } else if (clean.includes('docs_view/')) {
       clean = clean.substring(clean.indexOf('docs_view/'));
     } else {
       clean = 'docs_view/' + clean;
+    }
+    return clean + hashPart;
+  }
+
+  function normalizeExampleUrl(url) {
+    if (!url) return 'examples_view/basics/hello_world.html';
+    const hashIdx = url.indexOf('#');
+    let pathPart = hashIdx !== -1 ? url.substring(0, hashIdx) : url;
+    let hashPart = hashIdx !== -1 ? url.substring(hashIdx) : '';
+    let clean = pathPart.replace(/^[./]+/, '');
+    if (clean.includes('examples_view/')) {
+      clean = clean.substring(clean.indexOf('examples_view/'));
+    } else {
+      clean = 'examples_view/' + clean;
     }
     return clean + hashPart;
   }
@@ -306,9 +322,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
+      // Global handler for when a page requests to view an example
+      window.openExampleView = function (exUrl) {
+        const fullEx = normalizeExampleUrl(exUrl);
+        currentDocUrl = fullEx;
+        setFrameSrc(docFrame, fullEx);
+        updateDocTitle(fullEx);
+
+        if (currentMode === 'source') {
+          setViewMode('docs', true);
+        } else {
+          updateHash();
+        }
+        switchSidebarTab('examples');
+        highlightActiveSidebar(fullEx);
+      };
+
       // Global handler for when a source page requests to view documentation
-      window.openDocView = function (docUrl) {
-        const fullDoc = normalizeDocUrl(docUrl);
+      window.openDocView = function (docUrl, symbol) {
+        let fullDoc = normalizeDocUrl(docUrl);
+        if (symbol && typeof UVM_DATA !== 'undefined' && UVM_DATA.searchIndex) {
+          const match = UVM_DATA.searchIndex.find(s => s.name === symbol && s.doc);
+          if (match && match.doc) {
+            fullDoc = normalizeDocUrl(match.doc);
+          }
+        }
         currentDocUrl = fullDoc;
         setFrameSrc(docFrame, fullDoc);
         updateDocTitle(fullDoc);
@@ -326,8 +364,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!e.data || typeof e.data !== 'object') return;
         if (e.data.type === 'openSourceView' && e.data.url) {
           window.openSourceView(e.data.url);
-        } else if (e.data.type === 'openDocView' && e.data.url) {
-          window.openDocView(e.data.url);
+        } else if (e.data.type === 'openDocView' && (e.data.url || e.data.symbol)) {
+          window.openDocView(e.data.url, e.data.symbol);
+        } else if (e.data.type === 'openExampleView' && e.data.url) {
+          window.openExampleView(e.data.url);
+        } else if (e.data.type === 'exampleNavigated' && e.data.url) {
+          const fullEx = normalizeExampleUrl(e.data.url);
+          currentDocUrl = fullEx;
+          updateDocTitle(fullEx);
+          highlightActiveSidebar(fullEx);
+          updateHash();
         } else if (e.data.type === 'docNavigated' && e.data.url) {
           const fullDoc = normalizeDocUrl(e.data.url);
           currentDocUrl = fullDoc;
@@ -386,6 +432,22 @@ document.addEventListener('DOMContentLoaded', () => {
           setFrameSrc(srcFrame, srcPath);
           updateSrcTitle(srcPath);
           highlightActiveSidebar(srcPath);
+        } else if (hash.startsWith('#/example/')) {
+          const exPath = normalizeExampleUrl(hash.substring(10));
+          currentDocUrl = exPath;
+          setViewMode('docs', false);
+          setFrameSrc(docFrame, exPath);
+          updateDocTitle(exPath);
+          switchSidebarTab('examples');
+          highlightActiveSidebar(exPath);
+        } else if (hash === '#/examples') {
+          switchSidebarTab('examples');
+          const defaultEx = 'examples_view/basics/hello_world.html';
+          currentDocUrl = defaultEx;
+          setViewMode('docs', false);
+          setFrameSrc(docFrame, defaultEx);
+          updateDocTitle(defaultEx);
+          highlightActiveSidebar(defaultEx);
         } else if (hash.startsWith('#/doc/')) {
           const docPath = normalizeDocUrl(hash.substring(6));
           currentDocUrl = docPath;
@@ -400,15 +462,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       function updateHash() {
         if (currentMode === 'split') {
-          const doc = currentDocUrl.replace(/^docs_view\//, '');
+          const doc = currentDocUrl.includes('examples_view/') 
+            ? currentDocUrl.replace(/^examples_view\//, '') 
+            : currentDocUrl.replace(/^docs_view\//, '');
           const src = currentSrcUrl.replace(/^src_view\//, '');
           window.location.hash = `#/split?doc=${encodeURIComponent(doc)}&src=${encodeURIComponent(src)}`;
         } else if (currentMode === 'source') {
           const src = currentSrcUrl.replace(/^src_view\//, '');
           window.location.hash = `#/src/${src}`;
         } else {
-          const doc = currentDocUrl.replace(/^docs_view\//, '');
-          window.location.hash = `#/doc/${doc}`;
+          if (currentDocUrl.includes('examples_view/')) {
+            const ex = currentDocUrl.replace(/^examples_view\//, '');
+            window.location.hash = `#/example/${ex}`;
+          } else {
+            const doc = currentDocUrl.replace(/^docs_view\//, '');
+            window.location.hash = `#/doc/${doc}`;
+          }
         }
       }
 
@@ -464,8 +533,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       function updateDocTitle(url) {
         if (!docPaneTitle) return;
-        const clean = url.replace('docs_view/', '').replace('.html', '').split('#')[0];
-        docPaneTitle.textContent = clean;
+        if (url.includes('examples_view/')) {
+          const clean = url.replace('examples_view/', '').replace('.html', '').split('#')[0];
+          docPaneTitle.textContent = `Example: ${clean}`;
+        } else {
+          const clean = url.replace('docs_view/', '').replace('.html', '').split('#')[0];
+          docPaneTitle.textContent = clean;
+        }
       }
 
       function updateSrcTitle(url) {
@@ -823,9 +897,54 @@ document.addEventListener('DOMContentLoaded', () => {
           renderDocsMenu(rawQuery);
         } else if (activeSidebarTab === 'source') {
           renderSourceTree(rawQuery);
+        } else if (activeSidebarTab === 'examples') {
+          renderExamplesTree(rawQuery);
         } else if (activeSidebarTab === 'index') {
           renderAlphabeticalIndex(rawQuery);
         }
+      }
+
+      function renderExamplesTree(rawQuery) {
+        const examplesTree = UVM_DATA.examplesTree || [];
+        const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
+        let html = '';
+
+        examplesTree.forEach(cat => {
+          const subItems = (cat.children || []).filter(ex => {
+            if (!isItemTypeAllowed('example', sidebarFilterTypes)) return false;
+            if (!matcher) return true;
+            const haystack = `${ex.title} ${ex.difficulty} ${ex.scope} ${ex.summary || ''}`.toLowerCase();
+            if (matcher.type === 'regex') {
+              return matcher.regex ? matcher.regex.test(haystack) : true;
+            }
+            return matcher.words.every(w => haystack.includes(w));
+          });
+
+          const catTitleMatches = matcher && matcher.type === 'words' && matcher.words.every(w => cat.title.toLowerCase().includes(w));
+          if (subItems.length > 0 || catTitleMatches) {
+            html += `<div class="nav-group">
+              <div class="nav-group-header">
+                <span>${highlightMatch(cat.title, matcher)}</span>
+                <span style="font-size:0.7rem; opacity:0.6; margin-left:auto; margin-right:0.5rem; background:var(--surface-color); padding:0.1rem 0.4rem; border-radius:9999px;">${subItems.length}</span>
+                <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              <ul class="nav-group-items">
+                ${subItems.map(ex => {
+                  const isActive = currentDocUrl.includes(ex.href);
+                  return `<li>
+                    <a href="#" data-doc-href="${ex.href}" class="nav-item-link ${isActive ? 'active' : ''}" title="${escapeHtml(ex.summary || '')}">
+                      <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${highlightMatch(ex.title, matcher)}</span>
+                      <span class="badge badge-diff-${(ex.difficulty || 'beginner').toLowerCase()}" style="font-size:0.65rem; padding:0.1rem 0.35rem; margin-left:auto; flex-shrink:0;">${ex.difficulty}</span>
+                    </a>
+                  </li>`;
+                }).join('')}
+              </ul>
+            </div>`;
+          }
+        });
+
+        sidebarContent.innerHTML = html || '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem">No matching examples</div>';
+        attachSidebarListeners();
       }
 
       function renderDocsMenu(rawQuery) {
@@ -987,7 +1106,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const badgeClass = item.type === 'class' ? 'badge-class' :
             (item.type === 'macro' ? 'badge-macro' :
               (item.type === 'function' ? 'badge-function' :
-                (item.type === 'task' ? 'badge-task' : 'badge-method')));
+                (item.type === 'task' ? 'badge-task' :
+                  (item.type === 'example' ? 'badge-example' : 'badge-method'))));
           const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method';
           const ownerInfo = item.category && isMethodLike ?
             `<span class="az-symbol-owner" style="font-size:0.68rem; color:var(--text-muted); margin-left:auto; margin-right:0.35rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px;">${highlightMatch(item.category, matcher)}</span>` : '';
@@ -1774,7 +1894,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 (displayType === 'macro' ? 'badge-macro' :
                   (displayType === 'function' ? 'badge-function' :
                     (displayType === 'task' ? 'badge-task' :
-                      (displayType === 'method' ? 'badge-method' : 'badge-file'))));
+                      (displayType === 'example' ? 'badge-example' :
+                        (displayType === 'method' ? 'badge-method' : 'badge-file')))));
 
               let sectionsPillsHtml = '';
               if (res.targetSections && res.targetSections.length > 0) {
@@ -1909,7 +2030,8 @@ document.addEventListener('DOMContentLoaded', () => {
             (item.type === 'macro' ? 'badge-macro' :
               (item.type === 'function' ? 'badge-function' :
                 (item.type === 'task' ? 'badge-task' :
-                  (item.type === 'method' ? 'badge-method' : 'badge-file'))));
+                  (item.type === 'example' ? 'badge-example' :
+                    (item.type === 'method' ? 'badge-method' : 'badge-file')))));
 
           const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method';
           const categoryTag = item.category && isMethodLike ?

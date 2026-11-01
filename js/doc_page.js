@@ -875,6 +875,24 @@
     const href = link.getAttribute('href');
     if (!href || href === '#' || href.startsWith('javascript:')) return;
 
+    if (link.classList.contains('example-callout-link') || href.includes('examples_view/')) {
+      e.preventDefault();
+      const exTarget = link.getAttribute('data-example-url') || link.getAttribute('href');
+      const targetHref = new URL(exTarget, window.location.href).href;
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'openExampleView',
+          url: targetHref
+        }, '*');
+      }
+      try {
+        if (window.parent && window.parent.openExampleView) {
+          window.parent.openExampleView(targetHref);
+        }
+      } catch (err) { }
+      return;
+    }
+
     if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
       e.preventDefault();
       const targetHref = new URL(link.getAttribute('href'), window.location.href).href;

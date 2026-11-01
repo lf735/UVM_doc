@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" class="doc-page example-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Non-Blocking 4-Phase Protocol | UVM 1.2 Interactive Examples</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body example-body">
+  <div class="doc-page-container">
+
+    <!-- Document Breadcrumbs -->
+    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+      <a href="../../index.html#/examples" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Examples</a>
+      <span class="doc-breadcrumb-sep">/</span>
+      <span class="doc-breadcrumb-item">TLM-2 Interconnects</span>
+      <span class="doc-breadcrumb-sep">/</span>
+      <span class="doc-breadcrumb-item active">Non-Blocking 4-Phase Protocol</span>
+    </nav>
+
+    <!-- Source Banner & Actions -->
+    <div class="doc-source-banner example-source-banner">
+      <div class="banner-info">
+        <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="file-label">Suite:</span>
+        <code class="banner-file-code">uvm-1.2/examples/simple/tlm2/nonblocking_simple</code>
+        <span class="badge badge-scope">Simple</span>
+        <span class="badge badge-diff badge-diff-advanced">Advanced</span>
+        <span class="badge badge-files">9 files</span>
+      </div>
+
+      <div class="banner-actions">
+        <button type="button" class="btn btn-outline" id="btn-split-source" title="View side-by-side with UVM source code in Split View">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+          <span>Split View</span>
+        </button>
+        <button type="button" class="btn btn-outline" id="btn-download-raw" title="Download active file">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download File</span>
+        </button>
+        <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download (.zip)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2-Column Documentation Layout (Harmonized with docs_view) -->
+    <div class="doc-layout-wrapper">
+      <div class="doc-main-content">
+        <div id="Content">
+
+          <!-- Main Class / Overview Topic -->
+          <div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
+            <div class="CTopic" id="MainTopic">
+              <h1 class="CTitle"><a name="Non-Blocking 4-Phase Protocol">Non-Blocking 4-Phase Protocol</a></h1>
+              <div class="CBody">
+                <p class="example-summary-desc">Exemplifies the full IEEE 1666 TLM-2 non-blocking 4-phase transaction protocol (BEGIN_REQ, END_REQ, BEGIN_RESP, END_RESP) modeling USB bulk transfers without simulation deadlocks.</p>
+                <div class="example-api-pills">
+                  <span class="api-label">Key UVM APIs:</span>
+                  <a href="#" class="api-pill clickable-uvm-sym" data-sym="nb_transport_fw">nb_transport_fw</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="nb_transport_bw">nb_transport_bw</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_tlm_phase_e">uvm_tlm_phase_e</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_tlm_sync_e">uvm_tlm_sync_e</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Visual Flow Stepper (If Supported) -->
+          
+        <!-- Interactive Visual Flow Stepper Section -->
+        <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
+          <div class="CTopic">
+            <h2 class="CTitle"><a name="FlowStepper">Simulation Flow Stepper</a></h2>
+            <div class="CBody">
+              <div class="stepper-section" id="visual-flow-stepper">
+                <div class="section-header-row">
+                  <div class="section-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <span class="section-title-text">Interactive Execution Progression</span>
+                  </div>
+                  <div class="stepper-controls">
+                    <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
+                    <button type="button" class="btn btn-sm btn-outline" id="stepper-play">Play &#9654;</button>
+                    <button type="button" class="btn btn-sm btn-primary" id="stepper-next">Next Step &rarr;</button>
+                  </div>
+                </div>
+
+                <div class="stepper-timeline" id="stepper-timeline">
+                  <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">BEGIN_REQ (Initiator -&gt; Target)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">END_REQ (Target -&gt; Initiator)</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">BEGIN_RESP (Target -&gt; Initiator)</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">END_RESP (Initiator -&gt; Target)</span></div>
+                </div>
+
+                <div class="step-card" id="step-detail-card">
+                  <div class="step-card-header">
+                    <h4 id="step-active-title">1. BEGIN_REQ (Initiator -&gt; Target)</h4>
+                    <span class="step-active-comp" id="step-active-comp">Target: host (initiator)</span>
+                  </div>
+                  <p id="step-active-desc">The host initiator initiates the transfer by calling `nb_transport_fw(xfer, BEGIN_REQ)`. The device endpoint records the transfer and responds `UVM_TLM_ACCEPTED`.</p>
+                  <div class="step-log-hint">
+                    <strong>Expected Log Output:</strong>
+                    <code id="step-active-log">UVM_INFO @ 0 ns: host [TLM2] nb_transport_fw(xfer, BEGIN_REQ)</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+          <!-- Testbench Architecture Topology -->
+          <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
+            <div class="CTopic">
+              <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
+              <div class="CBody">
+                <div class="topo-grid">
+                  
+        <div class="topo-card">
+          <div class="topo-header">
+            <span class="topo-badge">initiator</span>
+            <strong>host</strong>
+          </div>
+          <div class="topo-details">USB Host</div>
+        </div>
+        
+        <div class="topo-card">
+          <div class="topo-header">
+            <span class="topo-badge">target</span>
+            <strong>device</strong>
+          </div>
+          <div class="topo-details">USB Device Endpoint</div>
+        </div>
+        
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-File Code Studio -->
+          <div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
+            <div class="CTopic">
+              <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
+              <div class="CBody">
+                <div class="studio-section">
+                  <div class="studio-header">
+                    <div class="studio-tab-bar" id="studio-tab-bar">
+                      <button type="button" class="studio-tab active" data-file-idx="0"><span class="tab-icon">📄</span><span class="tab-name">device.sv</span><span class="tab-badge">119L</span></button><button type="button" class="studio-tab " data-file-idx="1"><span class="tab-icon">📄</span><span class="tab-name">host.sv</span><span class="tab-badge">155L</span></button><button type="button" class="studio-tab " data-file-idx="2"><span class="tab-icon">📄</span><span class="tab-name">tb_env.sv</span><span class="tab-badge">41L</span></button><button type="button" class="studio-tab " data-file-idx="3"><span class="tab-icon">📄</span><span class="tab-name">tb_run.sv</span><span class="tab-badge">38L</span></button><button type="button" class="studio-tab " data-file-idx="4"><span class="tab-icon">📄</span><span class="tab-name">usb_xfer.sv</span><span class="tab-badge">66L</span></button><button type="button" class="studio-tab " data-file-idx="5"><span class="tab-icon">📄</span><span class="tab-name">Makefile.ius</span><span class="tab-badge">33L</span></button><button type="button" class="studio-tab " data-file-idx="6"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span><span class="tab-badge">36L</span></button><button type="button" class="studio-tab " data-file-idx="7"><span class="tab-icon">📄</span><span class="tab-name">Makefile.vcs</span><span class="tab-badge">35L</span></button><button type="button" class="studio-tab " data-file-idx="8"><span class="tab-icon">📄</span><span class="tab-name">README.txt</span><span class="tab-badge">55L</span></button>
+                    </div>
+
+                    <div class="studio-toolbar">
+                      <span class="studio-file-info" id="studio-file-info">device.sv (119 lines, 3.5 KB)</span>
+                      <button type="button" class="btn btn-sm btn-outline" id="btn-copy-code" title="Copy file code to clipboard">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span id="btn-copy-code-text">Copy Code</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="studio-code-container" id="studio-code-container">
+                    <div class="file-code-pane active" id="file-pane-0"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-keyword">class</span> <span class="sv-ident">device</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span><span class="sv-op">;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">   <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_nb_target_socket" title="Click to view uvm_tlm_nb_target_socket documentation">uvm_tlm_nb_target_socket</span><span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-ident">device</span><span class="sv-op">,</span> <span class="sv-ident">usb_xfer</span><span class="sv-op">,</span> <span class="sv-ident">usb_tlm_phase</span><span class="sv-op">)</span> <span class="sv-ident">sock</span><span class="sv-op">;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">   <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">device</span><span class="sv-op">)</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;device&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">      <span class="sv-ident">sock</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;sock&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">   <span class="sv-keyword">byte</span> <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-op">]</span><span class="sv-op">;</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">   <span class="sv-comment">// Forward path</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_sync_e" title="Click to view uvm_tlm_sync_e documentation">uvm_tlm_sync_e</span> <span class="sv-ident">nb_transport_fw</span><span class="sv-op">(</span><span class="sv-ident">usb_xfer</span> <span class="sv-ident">xfer</span><span class="sv-op">,</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">                                           <span class="sv-keyword">ref</span> <span class="sv-ident">usb_tlm_phase</span> <span class="sv-ident">ph</span><span class="sv-op">,</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">                                           <span class="sv-keyword">input</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_time" title="Click to view uvm_tlm_time documentation">uvm_tlm_time</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">      <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/DEV/FWD&quot;</span><span class="sv-op">,</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;%s @%0d: %s&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">                                         <span class="sv-ident">ph</span><span class="sv-op">.</span><span class="sv-ident">name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-ident">get_realtime</span><span class="sv-op">(</span>1<span class="sv-ident">ns</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">                                         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">UVM_LOW</span><span class="sv-op">)</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">      <span class="sv-comment">// This device?</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">      <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">addr</span> <span class="sv-op">!</span><span class="sv-op">=</span> <span class="sv-number">7&#x27;h7A</span><span class="sv-op">)</span> <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">;</span></td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">      <span class="sv-comment">// Valid endpoint in the device?</span></td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">      <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">endp</span> <span class="sv-op">!</span><span class="sv-op">=</span> <span class="sv-number">4&#x27;h5</span><span class="sv-op">)</span> <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">;</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">      </td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">      <span class="sv-keyword">case</span> <span class="sv-op">(</span><span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">kind</span><span class="sv-op">)</span></td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">       <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">OUT</span><span class="sv-op">:</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">          <span class="sv-keyword">case</span> <span class="sv-op">(</span><span class="sv-ident">ph</span><span class="sv-op">)</span></td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">           <span class="sv-ident">USB_TLM_TOKEN</span><span class="sv-op">:</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">              <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_ACCEPTED</span><span class="sv-op">;</span></td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">           <span class="sv-keyword">end</span></td></tr>
+<tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">           <span class="sv-ident">USB_TLM_DATA</span><span class="sv-op">:</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">              <span class="sv-ident">data</span> <span class="sv-op">=</span> <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">data</span><span class="sv-op">;</span></td></tr>
+<tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">              <span class="sv-comment">// Could complete transfer early here</span></td></tr>
+<tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">              <span class="sv-keyword">fork</span><span class="sv-op">:</span> <span class="sv-ident">out_ack</span></td></tr>
+<tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">                 <span class="sv-keyword">automatic</span> <span class="sv-ident">usb_xfer</span>     <span class="sv-ident">xf</span> <span class="sv-op">=</span> <span class="sv-ident">xfer</span><span class="sv-op">;</span></td></tr>
+<tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">                 <span class="sv-keyword">automatic</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_time" title="Click to view uvm_tlm_time documentation">uvm_tlm_time</span> <span class="sv-ident">dl</span> <span class="sv-op">=</span> <span class="sv-ident">delay</span><span class="sv-op">;</span></td></tr>
+<tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">                 <span class="sv-keyword">begin</span></td></tr>
+<tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code">                    <span class="sv-ident">usb_tlm_phase</span> <span class="sv-ident">ph</span> <span class="sv-op">=</span> <span class="sv-ident">USB_TLM_HANDSHAKE</span><span class="sv-op">;</span></td></tr>
+<tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">                    <span class="sv-op">#</span><span class="sv-number">100</span><span class="sv-op">;</span></td></tr>
+<tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code">                    <span class="sv-ident">xf</span><span class="sv-op">.</span><span class="sv-ident">status</span> <span class="sv-op">=</span> <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">ACK</span><span class="sv-op">;</span></td></tr>
+<tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code">                    <span class="sv-keyword">assert</span><span class="sv-op">(</span><span class="sv-ident">sock</span><span class="sv-op">.</span><span class="sv-ident">nb_transport_bw</span><span class="sv-op">(</span><span class="sv-ident">xf</span><span class="sv-op">,</span> <span class="sv-ident">ph</span><span class="sv-op">,</span> <span class="sv-ident">dl</span><span class="sv-op">)</span> <span class="sv-op">=</span><span class="sv-op">=</span></td></tr>
+<tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code">                           <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code">                    <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/DEV/OUT/DONE&quot;</span><span class="sv-op">,</span> <span class="sv-ident">xf</span><span class="sv-op">.</span><span class="sv-ident">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code">                              <span class="sv-ident">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code">                    </td></tr>
+<tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code">                 <span class="sv-keyword">end</span></td></tr>
+<tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code">              <span class="sv-keyword">join_none</span></td></tr>
+<tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code">              <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_ACCEPTED</span><span class="sv-op">;</span></td></tr>
+<tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code">           <span class="sv-keyword">end</span></td></tr>
+<tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code">           </td></tr>
+<tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code">          <span class="sv-keyword">endcase</span></td></tr>
+<tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code">       <span class="sv-keyword">end</span></td></tr>
+<tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code">       <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">IN</span><span class="sv-op">:</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code">          <span class="sv-keyword">case</span> <span class="sv-op">(</span><span class="sv-ident">ph</span><span class="sv-op">)</span></td></tr>
+<tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code">           <span class="sv-ident">USB_TLM_TOKEN</span><span class="sv-op">:</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code">              <span class="sv-comment">// Could return the data early here</span></td></tr>
+<tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code">              <span class="sv-keyword">fork</span><span class="sv-op">:</span> <span class="sv-ident">in_data</span></td></tr>
+<tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code">                 <span class="sv-keyword">automatic</span> <span class="sv-ident">usb_xfer</span>     <span class="sv-ident">xf</span> <span class="sv-op">=</span> <span class="sv-ident">xfer</span><span class="sv-op">;</span></td></tr>
+<tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code">                 <span class="sv-keyword">automatic</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_time" title="Click to view uvm_tlm_time documentation">uvm_tlm_time</span> <span class="sv-ident">dl</span> <span class="sv-op">=</span> <span class="sv-ident">delay</span><span class="sv-op">;</span></td></tr>
+<tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code">                 <span class="sv-keyword">begin</span></td></tr>
+<tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code">                    <span class="sv-ident">usb_tlm_phase</span> <span class="sv-ident">ph</span> <span class="sv-op">=</span> <span class="sv-ident">USB_TLM_DATA</span><span class="sv-op">;</span></td></tr>
+<tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code">                    <span class="sv-op">#</span><span class="sv-number">150</span><span class="sv-op">;</span></td></tr>
+<tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code">		    <span class="sv-keyword">begin</span></td></tr>
+<tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code">			<span class="sv-keyword">byte</span> <span class="sv-ident">tdata</span><span class="sv-op">[</span><span class="sv-number">2</span><span class="sv-op">]</span><span class="sv-op">=</span><span class="sv-string">&#x27;{&#x27;</span><span class="sv-ident">hAB</span><span class="sv-op">,</span> &#x27;<span class="sv-ident">hCD</span><span class="sv-op">}</span><span class="sv-op">;</span></td></tr>
+<tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code">                    	<span class="sv-ident">xf</span><span class="sv-op">.</span><span class="sv-ident">data</span> <span class="sv-op">=</span> <span class="sv-ident">tdata</span><span class="sv-op">;</span></td></tr>
+<tr id="L96"><td class="ln" data-line="96"><a href="#L96">96</a></td><td class="code">		    <span class="sv-keyword">end</span></td></tr>
+<tr id="L97"><td class="ln" data-line="97"><a href="#L97">97</a></td><td class="code">                    <span class="sv-keyword">void</span>&#x27;<span class="sv-op">(</span><span class="sv-ident">sock</span><span class="sv-op">.</span><span class="sv-ident">nb_transport_bw</span><span class="sv-op">(</span><span class="sv-ident">xf</span><span class="sv-op">,</span> <span class="sv-ident">ph</span><span class="sv-op">,</span> <span class="sv-ident">dl</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L98"><td class="ln" data-line="98"><a href="#L98">98</a></td><td class="code">                 <span class="sv-keyword">end</span></td></tr>
+<tr id="L99"><td class="ln" data-line="99"><a href="#L99">99</a></td><td class="code">              <span class="sv-keyword">join_none</span></td></tr>
+<tr id="L100"><td class="ln" data-line="100"><a href="#L100">100</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L101"><td class="ln" data-line="101"><a href="#L101">101</a></td><td class="code">              <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_ACCEPTED</span><span class="sv-op">;</span></td></tr>
+<tr id="L102"><td class="ln" data-line="102"><a href="#L102">102</a></td><td class="code">           <span class="sv-keyword">end</span></td></tr>
+<tr id="L103"><td class="ln" data-line="103"><a href="#L103">103</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L104"><td class="ln" data-line="104"><a href="#L104">104</a></td><td class="code">           <span class="sv-ident">USB_TLM_HANDSHAKE</span><span class="sv-op">:</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L105"><td class="ln" data-line="105"><a href="#L105">105</a></td><td class="code">              <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/DEV/IN/DONE&quot;</span><span class="sv-op">,</span> <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L106"><td class="ln" data-line="106"><a href="#L106">106</a></td><td class="code">                        <span class="sv-ident">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L107"><td class="ln" data-line="107"><a href="#L107">107</a></td><td class="code">              </td></tr>
+<tr id="L108"><td class="ln" data-line="108"><a href="#L108">108</a></td><td class="code">              <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">;</span></td></tr>
+<tr id="L109"><td class="ln" data-line="109"><a href="#L109">109</a></td><td class="code">           <span class="sv-keyword">end</span></td></tr>
+<tr id="L110"><td class="ln" data-line="110"><a href="#L110">110</a></td><td class="code">           </td></tr>
+<tr id="L111"><td class="ln" data-line="111"><a href="#L111">111</a></td><td class="code">          <span class="sv-keyword">endcase</span></td></tr>
+<tr id="L112"><td class="ln" data-line="112"><a href="#L112">112</a></td><td class="code">       <span class="sv-keyword">end</span></td></tr>
+<tr id="L113"><td class="ln" data-line="113"><a href="#L113">113</a></td><td class="code">      <span class="sv-keyword">endcase</span></td></tr>
+<tr id="L114"><td class="ln" data-line="114"><a href="#L114">114</a></td><td class="code">      </td></tr>
+<tr id="L115"><td class="ln" data-line="115"><a href="#L115">115</a></td><td class="code">      <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">;</span></td></tr>
+<tr id="L116"><td class="ln" data-line="116"><a href="#L116">116</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L117"><td class="ln" data-line="117"><a href="#L117">117</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L118"><td class="ln" data-line="118"><a href="#L118">118</a></td><td class="code"><span class="sv-keyword">endclass</span></td></tr>
+<tr id="L119"><td class="ln" data-line="119"><a href="#L119">119</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-1"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-keyword">class</span> <span class="sv-ident">host</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span><span class="sv-op">;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">   <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_nb_initiator_socket" title="Click to view uvm_tlm_nb_initiator_socket documentation">uvm_tlm_nb_initiator_socket</span><span class="sv-op">#</span><span class="sv-op">(</span><span class="sv-ident">host</span><span class="sv-op">,</span> <span class="sv-ident">usb_xfer</span><span class="sv-op">,</span> <span class="sv-ident">usb_tlm_phase</span><span class="sv-op">)</span> <span class="sv-ident">sock</span><span class="sv-op">;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">   <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">host</span><span class="sv-op">)</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;host&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">      <span class="sv-ident">sock</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;sock&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">   <span class="sv-ident">usb_xfer</span>       <span class="sv-ident">xfer</span><span class="sv-op">;</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">   <span class="sv-ident">usb_tlm_phase</span>  <span class="sv-ident">ph</span><span class="sv-op">;</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">   <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_time" title="Click to view uvm_tlm_time documentation">uvm_tlm_time</span>   <span class="sv-ident">delay</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">;</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">   <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_sync_e" title="Click to view uvm_tlm_sync_e documentation">uvm_tlm_sync_e</span> <span class="sv-ident">sync</span><span class="sv-op">;</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">   <span class="sv-comment">// Backward path</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_sync_e" title="Click to view uvm_tlm_sync_e documentation">uvm_tlm_sync_e</span> <span class="sv-ident">nb_transport_bw</span><span class="sv-op">(</span><span class="sv-ident">usb_xfer</span> <span class="sv-ident">xfer</span><span class="sv-op">,</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">                                           <span class="sv-keyword">ref</span> <span class="sv-ident">usb_tlm_phase</span> <span class="sv-ident">ph</span><span class="sv-op">,</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">                                           <span class="sv-keyword">input</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_tlm_time" title="Click to view uvm_tlm_time documentation">uvm_tlm_time</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">      <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/BWD&quot;</span><span class="sv-op">,</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;%s @%0d: %s&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">                                         <span class="sv-ident">ph</span><span class="sv-op">.</span><span class="sv-ident">name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-ident">get_realtime</span><span class="sv-op">(</span>1<span class="sv-ident">ns</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">                                         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">UVM_LOW</span><span class="sv-op">)</span></td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">               </td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">      <span class="sv-keyword">assert</span><span class="sv-op">(</span><span class="sv-ident">xfer</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-ident">xfer</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">      <span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-ident">ph</span>    <span class="sv-op">=</span> <span class="sv-ident">ph</span><span class="sv-op">;</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">      <span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-ident">delay</span> <span class="sv-op">=</span> <span class="sv-ident">delay</span><span class="sv-op">;</span></td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">      </td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">      <span class="sv-keyword">case</span> <span class="sv-op">(</span><span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">kind</span><span class="sv-op">)</span></td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">       <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">OUT</span><span class="sv-op">:</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">          <span class="sv-keyword">assert</span><span class="sv-op">(</span><span class="sv-ident">ph</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">USB_TLM_HANDSHAKE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">          <span class="sv-ident">sync</span> <span class="sv-op">=</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">;</span></td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">          <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">;</span></td></tr>
+<tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">       <span class="sv-keyword">end</span></td></tr>
+<tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">       <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">IN</span><span class="sv-op">:</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">          <span class="sv-keyword">assert</span><span class="sv-op">(</span><span class="sv-ident">ph</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">USB_TLM_DATA</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">          <span class="sv-comment">// Could do an early completion too</span></td></tr>
+<tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">          <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_ACCEPTED</span><span class="sv-op">;</span></td></tr>
+<tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">       <span class="sv-keyword">end</span></td></tr>
+<tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">      <span class="sv-keyword">endcase</span></td></tr>
+<tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">      </td></tr>
+<tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code">      <span class="sv-keyword">return</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">;</span></td></tr>
+<tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code">   </td></tr>
+<tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code">   <span class="sv-comment">//</span></td></tr>
+<tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code">   <span class="sv-comment">// Execute an OUT followed by an IN bulk transfer</span></td></tr>
+<tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code">   <span class="sv-comment">//</span></td></tr>
+<tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code">   <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">run_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code">      <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-ident">raise_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code">      </td></tr>
+<tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code">      <span class="sv-ident">xfer</span> <span class="sv-op">=</span> <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">type_id</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">create</span><span class="sv-op">(</span><span class="sv-string">&quot;xfer&quot;</span><span class="sv-op">,</span><span class="sv-op">,</span><span class="sv-ident">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code">      <span class="sv-comment">// OUT bulk transfer</span></td></tr>
+<tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code">      </td></tr>
+<tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code">      <span class="sv-keyword">do</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code">         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">kind</span> <span class="sv-op">=</span> <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">OUT</span><span class="sv-op">;</span></td></tr>
+<tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code">         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">addr</span> <span class="sv-op">=</span> <span class="sv-number">7&#x27;h7A</span><span class="sv-op">;</span></td></tr>
+<tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code">         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">endp</span> <span class="sv-op">=</span> <span class="sv-number">4&#x27;h5</span><span class="sv-op">;</span></td></tr>
+<tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code">         </td></tr>
+<tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code">         <span class="sv-ident">ph</span> <span class="sv-op">=</span> <span class="sv-ident">USB_TLM_TOKEN</span><span class="sv-op">;</span></td></tr>
+<tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code">         <span class="sv-ident">sync</span> <span class="sv-op">=</span> <span class="sv-ident">sock</span><span class="sv-op">.</span><span class="sv-ident">nb_transport_fw</span><span class="sv-op">(</span><span class="sv-ident">xfer</span><span class="sv-op">,</span> <span class="sv-ident">ph</span><span class="sv-op">,</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code">         <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">sync</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code">            <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/OUT/REFUSED&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;Device refused the transfer&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code">                      <span class="sv-ident">UVM_LOW</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code">            <span class="sv-keyword">break</span><span class="sv-op">;</span></td></tr>
+<tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code">         <span class="sv-keyword">end</span></td></tr>
+<tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code">         <span class="sv-ident">ph</span> <span class="sv-op">=</span> <span class="sv-ident">USB_TLM_DATA</span><span class="sv-op">;</span></td></tr>
+<tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code">	 <span class="sv-keyword">begin</span></td></tr>
+<tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code">		 <span class="sv-keyword">byte</span> <span class="sv-ident">tdata</span><span class="sv-op">[</span><span class="sv-number">4</span><span class="sv-op">]</span><span class="sv-op">=</span><span class="sv-string">&#x27;{&#x27;</span><span class="sv-ident">hDE</span><span class="sv-op">,</span> <span class="sv-string">&#x27;hAD, &#x27;</span><span class="sv-ident">hBE</span><span class="sv-op">,</span> &#x27;<span class="sv-ident">hEF</span><span class="sv-op">}</span><span class="sv-op">;</span></td></tr>
+<tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code">	         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">data</span> <span class="sv-op">=</span> <span class="sv-ident">tdata</span><span class="sv-op">;</span></td></tr>
+<tr id="L96"><td class="ln" data-line="96"><a href="#L96">96</a></td><td class="code">	 <span class="sv-keyword">end</span></td></tr>
+<tr id="L97"><td class="ln" data-line="97"><a href="#L97">97</a></td><td class="code">         <span class="sv-ident">sync</span> <span class="sv-op">=</span> <span class="sv-ident">sock</span><span class="sv-op">.</span><span class="sv-ident">nb_transport_fw</span><span class="sv-op">(</span><span class="sv-ident">xfer</span><span class="sv-op">,</span> <span class="sv-ident">ph</span><span class="sv-op">,</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L98"><td class="ln" data-line="98"><a href="#L98">98</a></td><td class="code">         <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">sync</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L99"><td class="ln" data-line="99"><a href="#L99">99</a></td><td class="code">            <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/OUT/EARLY&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;Device completed OUT transfer early&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L100"><td class="ln" data-line="100"><a href="#L100">100</a></td><td class="code">                      <span class="sv-ident">UVM_LOW</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L101"><td class="ln" data-line="101"><a href="#L101">101</a></td><td class="code">            <span class="sv-keyword">break</span><span class="sv-op">;</span></td></tr>
+<tr id="L102"><td class="ln" data-line="102"><a href="#L102">102</a></td><td class="code">         <span class="sv-keyword">end</span></td></tr>
+<tr id="L103"><td class="ln" data-line="103"><a href="#L103">103</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L104"><td class="ln" data-line="104"><a href="#L104">104</a></td><td class="code">         <span class="sv-comment">// Wait for the device to reply</span></td></tr>
+<tr id="L105"><td class="ln" data-line="105"><a href="#L105">105</a></td><td class="code">         <span class="sv-keyword">wait</span> <span class="sv-op">(</span><span class="sv-ident">sync</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L106"><td class="ln" data-line="106"><a href="#L106">106</a></td><td class="code">         <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/OUT/NORMAL&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;OUT Transfer completed normally&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L107"><td class="ln" data-line="107"><a href="#L107">107</a></td><td class="code">                   <span class="sv-ident">UVM_LOW</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L108"><td class="ln" data-line="108"><a href="#L108">108</a></td><td class="code">      </td></tr>
+<tr id="L109"><td class="ln" data-line="109"><a href="#L109">109</a></td><td class="code">      <span class="sv-keyword">end</span> <span class="sv-keyword">while</span> <span class="sv-op">(</span><span class="sv-number">0</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L110"><td class="ln" data-line="110"><a href="#L110">110</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L111"><td class="ln" data-line="111"><a href="#L111">111</a></td><td class="code">      <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/OUT/DONE&quot;</span><span class="sv-op">,</span> <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L112"><td class="ln" data-line="112"><a href="#L112">112</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L113"><td class="ln" data-line="113"><a href="#L113">113</a></td><td class="code">      <span class="sv-comment">// IN bulk transfer</span></td></tr>
+<tr id="L114"><td class="ln" data-line="114"><a href="#L114">114</a></td><td class="code">      </td></tr>
+<tr id="L115"><td class="ln" data-line="115"><a href="#L115">115</a></td><td class="code">      <span class="sv-keyword">do</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L116"><td class="ln" data-line="116"><a href="#L116">116</a></td><td class="code">         <span class="sv-comment">// Ok to reuse the same XFER instance</span></td></tr>
+<tr id="L117"><td class="ln" data-line="117"><a href="#L117">117</a></td><td class="code">         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">kind</span> <span class="sv-op">=</span> <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">IN</span><span class="sv-op">;</span></td></tr>
+<tr id="L118"><td class="ln" data-line="118"><a href="#L118">118</a></td><td class="code">         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">addr</span> <span class="sv-op">=</span> <span class="sv-number">7&#x27;h7A</span><span class="sv-op">;</span></td></tr>
+<tr id="L119"><td class="ln" data-line="119"><a href="#L119">119</a></td><td class="code">         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">endp</span> <span class="sv-op">=</span> <span class="sv-number">4&#x27;h5</span><span class="sv-op">;</span></td></tr>
+<tr id="L120"><td class="ln" data-line="120"><a href="#L120">120</a></td><td class="code">         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">data</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">[</span><span class="sv-number">0</span><span class="sv-op">]</span><span class="sv-op">;</span></td></tr>
+<tr id="L121"><td class="ln" data-line="121"><a href="#L121">121</a></td><td class="code">         </td></tr>
+<tr id="L122"><td class="ln" data-line="122"><a href="#L122">122</a></td><td class="code">         <span class="sv-ident">ph</span> <span class="sv-op">=</span> <span class="sv-ident">USB_TLM_TOKEN</span><span class="sv-op">;</span></td></tr>
+<tr id="L123"><td class="ln" data-line="123"><a href="#L123">123</a></td><td class="code">         <span class="sv-ident">sync</span> <span class="sv-op">=</span> <span class="sv-ident">sock</span><span class="sv-op">.</span><span class="sv-ident">nb_transport_fw</span><span class="sv-op">(</span><span class="sv-ident">xfer</span><span class="sv-op">,</span> <span class="sv-ident">ph</span><span class="sv-op">,</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L124"><td class="ln" data-line="124"><a href="#L124">124</a></td><td class="code">         <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">sync</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L125"><td class="ln" data-line="125"><a href="#L125">125</a></td><td class="code">            <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/IN/REFUSED&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;Device refused the transfer&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L126"><td class="ln" data-line="126"><a href="#L126">126</a></td><td class="code">                      <span class="sv-ident">UVM_LOW</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L127"><td class="ln" data-line="127"><a href="#L127">127</a></td><td class="code">            <span class="sv-keyword">break</span><span class="sv-op">;</span></td></tr>
+<tr id="L128"><td class="ln" data-line="128"><a href="#L128">128</a></td><td class="code">         <span class="sv-keyword">end</span></td></tr>
+<tr id="L129"><td class="ln" data-line="129"><a href="#L129">129</a></td><td class="code">         <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">sync</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">UVM_TLM_UPDATED</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L130"><td class="ln" data-line="130"><a href="#L130">130</a></td><td class="code">            <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/IN/EARLY&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;Device returned bulk data early&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L131"><td class="ln" data-line="131"><a href="#L131">131</a></td><td class="code">                      <span class="sv-ident">UVM_LOW</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L132"><td class="ln" data-line="132"><a href="#L132">132</a></td><td class="code">         <span class="sv-keyword">end</span></td></tr>
+<tr id="L133"><td class="ln" data-line="133"><a href="#L133">133</a></td><td class="code">         <span class="sv-keyword">else</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L134"><td class="ln" data-line="134"><a href="#L134">134</a></td><td class="code">            <span class="sv-comment">// Wait for the device to reply</span></td></tr>
+<tr id="L135"><td class="ln" data-line="135"><a href="#L135">135</a></td><td class="code">            <span class="sv-keyword">wait</span><span class="sv-op">(</span><span class="sv-ident">ph</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">USB_TLM_DATA</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L136"><td class="ln" data-line="136"><a href="#L136">136</a></td><td class="code">            <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/IN/NORMAL&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;IN data returned normally&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L137"><td class="ln" data-line="137"><a href="#L137">137</a></td><td class="code">                      <span class="sv-ident">UVM_LOW</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L138"><td class="ln" data-line="138"><a href="#L138">138</a></td><td class="code">         <span class="sv-keyword">end</span></td></tr>
+<tr id="L139"><td class="ln" data-line="139"><a href="#L139">139</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L140"><td class="ln" data-line="140"><a href="#L140">140</a></td><td class="code">         <span class="sv-ident">ph</span> <span class="sv-op">=</span> <span class="sv-ident">USB_TLM_HANDSHAKE</span><span class="sv-op">;</span></td></tr>
+<tr id="L141"><td class="ln" data-line="141"><a href="#L141">141</a></td><td class="code">         <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">status</span> <span class="sv-op">=</span> <span class="sv-ident">usb_xfer</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">ACK</span><span class="sv-op">;</span></td></tr>
+<tr id="L142"><td class="ln" data-line="142"><a href="#L142">142</a></td><td class="code">         <span class="sv-ident">sync</span> <span class="sv-op">=</span> <span class="sv-ident">sock</span><span class="sv-op">.</span><span class="sv-ident">nb_transport_fw</span><span class="sv-op">(</span><span class="sv-ident">xfer</span><span class="sv-op">,</span> <span class="sv-ident">ph</span><span class="sv-op">,</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L143"><td class="ln" data-line="143"><a href="#L143">143</a></td><td class="code">         <span class="sv-keyword">assert</span><span class="sv-op">(</span><span class="sv-ident">sync</span> <span class="sv-op">=</span><span class="sv-op">=</span> <span class="sv-ident">UVM_TLM_COMPLETED</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L144"><td class="ln" data-line="144"><a href="#L144">144</a></td><td class="code">      </td></tr>
+<tr id="L145"><td class="ln" data-line="145"><a href="#L145">145</a></td><td class="code">      <span class="sv-keyword">end</span> <span class="sv-keyword">while</span> <span class="sv-op">(</span><span class="sv-number">0</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L146"><td class="ln" data-line="146"><a href="#L146">146</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L147"><td class="ln" data-line="147"><a href="#L147">147</a></td><td class="code">      <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;USB/HST/IN/DONE&quot;</span><span class="sv-op">,</span> <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">UVM_NONE</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L148"><td class="ln" data-line="148"><a href="#L148">148</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L149"><td class="ln" data-line="149"><a href="#L149">149</a></td><td class="code">      <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-ident">drop_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L150"><td class="ln" data-line="150"><a href="#L150">150</a></td><td class="code">   <span class="sv-keyword">endtask</span></td></tr>
+<tr id="L151"><td class="ln" data-line="151"><a href="#L151">151</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L152"><td class="ln" data-line="152"><a href="#L152">152</a></td><td class="code">   </td></tr>
+<tr id="L153"><td class="ln" data-line="153"><a href="#L153">153</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L154"><td class="ln" data-line="154"><a href="#L154">154</a></td><td class="code"><span class="sv-keyword">endclass</span></td></tr>
+<tr id="L155"><td class="ln" data-line="155"><a href="#L155">155</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-2"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-keyword">class</span> <span class="sv-ident">tb_env</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span><span class="sv-op">;</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">   <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">tb_env</span><span class="sv-op">)</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">   <span class="sv-ident">host</span> <span class="sv-ident">hst</span><span class="sv-op">;</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">   <span class="sv-ident">device</span> <span class="sv-ident">dev</span><span class="sv-op">;</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;tb_env&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">      <span class="sv-ident">hst</span> <span class="sv-op">=</span> <span class="sv-ident">host</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">type_id</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">create</span><span class="sv-op">(</span><span class="sv-string">&quot;hst&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">      <span class="sv-ident">dev</span> <span class="sv-op">=</span> <span class="sv-ident">device</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">type_id</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">create</span><span class="sv-op">(</span><span class="sv-string">&quot;dev&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">connect_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">      <span class="sv-ident">hst</span><span class="sv-op">.</span><span class="sv-ident">sock</span><span class="sv-op">.</span><span class="sv-ident">connect</span><span class="sv-op">(</span><span class="sv-ident">dev</span><span class="sv-op">.</span><span class="sv-ident">sock</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code"><span class="sv-keyword">endclass</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-3"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc.</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-keyword">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-macro">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code"><span class="sv-macro">`include</span> <span class="sv-string">&quot;usb_xfer.sv&quot;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code"><span class="sv-macro">`include</span> <span class="sv-string">&quot;host.sv&quot;</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code"><span class="sv-macro">`include</span> <span class="sv-string">&quot;device.sv&quot;</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code"><span class="sv-macro">`include</span> <span class="sv-string">&quot;tb_env.sv&quot;</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-keyword">program</span> <span class="sv-ident">tb_run</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-keyword">initial</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-keyword">begin</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">   <span class="sv-keyword">static</span> <span class="sv-ident">tb_env</span> <span class="sv-ident">env</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;env&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">   <span class="sv-uvm-type clickable-uvm-sym" data-sym="run_test" title="Click to view run_test documentation">run_test</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-keyword">end</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code"><span class="sv-keyword">endprogram</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-4"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// -------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//    Copyright 2010-2011 Synopsys, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//    All Rights Reserved Worldwide</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//    Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//    &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//    compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//    the License at</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//        http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//    Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//    writing, software distributed under the License is</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//    CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//    the License for the specific language governing</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//    permissions and limitations under the License.</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">// -------------------------------------------------------------</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code"><span class="sv-keyword">typedef</span> <span class="sv-keyword">enum</span> <span class="sv-op">{</span><span class="sv-ident">USB_TLM_TOKEN</span><span class="sv-op">,</span> <span class="sv-ident">USB_TLM_DATA</span><span class="sv-op">,</span> <span class="sv-ident">USB_TLM_HANDSHAKE</span><span class="sv-op">}</span> <span class="sv-ident">usb_tlm_phase</span><span class="sv-op">;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code"><span class="sv-keyword">class</span> <span class="sv-ident">usb_xfer</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_sequence_item" title="Click to view uvm_sequence_item documentation">uvm_sequence_item</span><span class="sv-op">;</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">  </td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">   <span class="sv-keyword">typedef</span> <span class="sv-keyword">enum</span> <span class="sv-op">{</span><span class="sv-ident">IN</span><span class="sv-op">,</span> <span class="sv-ident">OUT</span><span class="sv-op">}</span> <span class="sv-ident">kind_e</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">   <span class="sv-keyword">typedef</span> <span class="sv-keyword">enum</span> <span class="sv-op">{</span><span class="sv-ident">ACK</span><span class="sv-op">,</span> <span class="sv-ident">NAK</span><span class="sv-op">,</span> <span class="sv-ident">STALL</span><span class="sv-op">,</span> <span class="sv-ident">NYET</span><span class="sv-op">}</span> <span class="sv-ident">status_e</span><span class="sv-op">;</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">   <span class="sv-keyword">rand</span> <span class="sv-keyword">bit</span> <span class="sv-op">[</span><span class="sv-number">6</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">addr</span><span class="sv-op">;</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">   <span class="sv-keyword">rand</span> <span class="sv-keyword">bit</span> <span class="sv-op">[</span><span class="sv-number">3</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">endp</span><span class="sv-op">;</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">   <span class="sv-keyword">rand</span> <span class="sv-ident">kind_e</span>   <span class="sv-ident">kind</span><span class="sv-op">;</span>  </td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">   <span class="sv-keyword">rand</span> <span class="sv-keyword">byte</span>      <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-op">]</span><span class="sv-op">;</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">   <span class="sv-keyword">rand</span> <span class="sv-ident">status_e</span>  <span class="sv-ident">status</span><span class="sv-op">;</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code"> </td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">   <span class="sv-macro">`uvm_object_utils_begin</span><span class="sv-op">(</span><span class="sv-ident">usb_xfer</span><span class="sv-op">)</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">     <span class="sv-macro">`uvm_field_enum</span><span class="sv-op">(</span><span class="sv-ident">kind_e</span><span class="sv-op">,</span> <span class="sv-ident">kind</span><span class="sv-op">,</span> <span class="sv-ident">UVM_ALL_ON</span> <span class="sv-op">|</span> <span class="sv-ident">UVM_NOPACK</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">     <span class="sv-macro">`uvm_field_array_int</span><span class="sv-op">(</span><span class="sv-ident">data</span><span class="sv-op">,</span> <span class="sv-ident">UVM_ALL_ON</span> <span class="sv-op">|</span> <span class="sv-ident">UVM_NOPACK</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">     <span class="sv-macro">`uvm_field_enum</span><span class="sv-op">(</span><span class="sv-ident">status_e</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">UVM_ALL_ON</span> <span class="sv-op">|</span> <span class="sv-ident">UVM_NOPACK</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">   <span class="sv-macro">`uvm_object_utils_end</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">   </td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;usb_xfer&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">   <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-ident">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">      <span class="sv-ident">convert2string</span> <span class="sv-op">=</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;dev=%h.%h kind=%s hndsk=%s data=h&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">                                 <span class="sv-ident">addr</span><span class="sv-op">,</span> <span class="sv-ident">endp</span><span class="sv-op">,</span> <span class="sv-ident">kind</span><span class="sv-op">.</span><span class="sv-ident">name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">.</span><span class="sv-ident">name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">      <span class="sv-keyword">case</span> <span class="sv-op">(</span><span class="sv-ident">data</span><span class="sv-op">.</span><span class="sv-ident">size</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span></td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">       <span class="sv-number">0</span><span class="sv-op">:</span> <span class="sv-keyword">return</span> <span class="sv-op">{</span><span class="sv-ident">convert2string</span><span class="sv-op">,</span> <span class="sv-string">&quot;[]&quot;</span><span class="sv-op">}</span><span class="sv-op">;</span></td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">       <span class="sv-number">1</span><span class="sv-op">:</span> <span class="sv-keyword">return</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;%s0x%h&quot;</span><span class="sv-op">,</span> <span class="sv-ident">convert2string</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-number">0</span><span class="sv-op">]</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">       <span class="sv-number">2</span><span class="sv-op">:</span> <span class="sv-keyword">return</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;%s0x%h 0x%h&quot;</span><span class="sv-op">,</span> <span class="sv-ident">convert2string</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-number">0</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-number">1</span><span class="sv-op">]</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">       <span class="sv-number">3</span><span class="sv-op">:</span> <span class="sv-keyword">return</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;%s0x%h 0x%h 0x%h&quot;</span><span class="sv-op">,</span> <span class="sv-ident">convert2string</span><span class="sv-op">,</span></td></tr>
+<tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">                           <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-number">0</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-number">1</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-number">2</span><span class="sv-op">]</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">       <span class="sv-keyword">default</span><span class="sv-op">:</span></td></tr>
+<tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">          <span class="sv-keyword">return</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;%s0x%h 0x%h .. 0x%h (%0d bytes)&quot;</span><span class="sv-op">,</span> <span class="sv-ident">convert2string</span><span class="sv-op">,</span></td></tr>
+<tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">                           <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-number">0</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-number">1</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">[</span><span class="sv-ident">data</span><span class="sv-op">.</span><span class="sv-ident">size</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">]</span><span class="sv-op">,</span></td></tr>
+<tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">                           <span class="sv-ident">data</span><span class="sv-op">.</span><span class="sv-ident">size</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">      <span class="sv-keyword">endcase</span></td></tr>
+<tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">   <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code"><span class="sv-keyword">endclass</span><span class="sv-op">:</span> <span class="sv-ident">usb_xfer</span></td></tr>
+<tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-5"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">##    Copyright 2010 Synopsys, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">##    Copyright 2010 Cadence Design, Inc.</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">##    All Rights Reserved Worldwide</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">##    Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">##    &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">##    compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">##    the License at</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">##        http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">##    Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">##    writing, software distributed under the License is</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">##    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">##    CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">##    the License for the specific language governing</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">##    permissions and limitations under the License.</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code"><span class="sv-ident">UVM_HOME	</span>=<span class="sv-string"> ../../../..</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">include ../../../Makefile.ius</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">all</span>:<span class="sv-ident"> run</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">run</span>:<span class="sv-ident"></span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-keyword">	$(IUS) -incdir . tb_run.sv</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-keyword">	$(CHECK)</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-6"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">##    Copyright 2010 Mentor Graphics Corporation</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">##    All Rights Reserved Worldwide</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">##    Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">##    &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">##    compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">##    the License at</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">##        http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">##    Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">##    writing, software distributed under the License is</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">##    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">##    CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">##    the License for the specific language governing</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">##    permissions and limitations under the License.</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code"><span class="sv-ident">UVM_HOME	</span>=<span class="sv-string"> ../../../..</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">include $(UVM_HOME)/examples/Makefile.questa</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">all</span>:<span class="sv-ident"> run</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">comp</span>:<span class="sv-ident"> vlib</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-keyword">	$(VLOG) +incdir+. \</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-keyword">		tb_run.sv</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">run</span>:<span class="sv-ident"> comp</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-keyword">	$(VSIM)</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-keyword">	$(CHECK)</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-7"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">##    Copyright 2010-2011 Synopsys, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">##    All Rights Reserved Worldwide</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">##    Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">##    &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">##    compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">##    the License at</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">##        http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">##    Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">##    writing, software distributed under the License is</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">##    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">##    CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">##    the License for the specific language governing</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">##    permissions and limitations under the License.</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code"><span class="sv-ident">UVM_HOME	</span>=<span class="sv-string"> ../../../..</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">include ../../../Makefile.vcs</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">all</span>:<span class="sv-ident"> comp run</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">comp</span>:<span class="sv-ident"></span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-keyword">	$(VCS) tb_run.sv</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">run</span>:<span class="sv-ident"></span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-keyword">	$(SIMV)</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-keyword">	$(CHECK)</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-8"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code">This simple nonblocking examples uses a USB 2.0 BULK transfer as an example.</td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code">Instead of translating the transfer into a series of packets transmitted</td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code">back and forth between the host and device, a single transfer is exchanged</td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code">and the timing points (i.e. calls to nb_transport_fw/bw()) are used in lieu</td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code">packet transfers.</td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code">For a normal host-&gt;device bulk transfer, the following timing points occur</td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code">until a UVM_TLM_COMPLETED sync value is received</td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code">by either the host or the device.</td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code">1. nb_transport_fw(xfer, ph)</td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code">   - xfer.kind == OUT</td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code">   - ph == USB_TLM_TOKEN</td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code">   &gt; Device responds with UVM_TLM_ACCEPTED, or</td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code">   &gt; Device responds with UVM_TLM_COMPLETED</td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">2. nb_transport_fw(xfer, ph)</td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">   - xfer.data contains bulk data</td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">   - ph == USB_TLM_DATA</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">   &gt; Device responds with UVM_TLM_ACCEPTED, or</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">   &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == ACK/NAK/STALL/NYET</td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">     and ph updated to UVM_TLM_HANDSHAKE</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">3. nb_transport_bw(xfer, ph)</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">   - xfer.status == ACK/NACK/STALL/NYET</td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">   - ph == USB_TLM_HANDSKAHE</td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">   &gt; Host responds with UVM_TLM_COMPLETED</td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">For a device-&gt;host bulk transfer, the following timing points occur</td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">until a UVM_TLM_COMPLETED sync value is received</td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">by either the host or the device.</td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">1. nb_transport_fw(xfer, ph)</td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">   - xfer.kind == IN</td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">   - ph == USB_TLM_TOKEN</td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">   &gt; Device responds with UVM_TLM_ACCEPTED, or</td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">   &gt; Device responds with UVM_TLM_UPDATED, xfer.data contains bulk data</td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">     and ph updated to UVM_TLM_DATA (goto step 3), or</td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">   &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == NAK/STALL</td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">     and ph updated to UVM_TLM_HANDSHAKE</td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">2. nb_transport_bw(xfer, ph)</td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">   - xfer.data contains bulk data</td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">   - ph == USB_TLM_DATA</td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">   &gt; Host responds with UVM_TLM_ACCEPTED, or</td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">   &gt; Host responds with UVM_TLM_COMPLETED, xfer.status == ACK</td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">     and ph updated to UVM_TLM_HANDSHAKE</td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">3. nb_transport_fw(xfer, ph)</td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">   - xfer.status == ACK</td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">   - ph == USB_TLM_HANDSKAHE</td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">   &gt; Device responds with UVM_TLM_COMPLETED</td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">&nbsp;</td></tr></tbody></table></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulation & Execution Output Console -->
+          <div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
+            <div class="CTopic">
+              <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
+              <div class="CBody">
+                <div class="sim-section">
+                  <!-- Simulator Command Selector -->
+                  <div class="sim-cmd-card">
+                    <div class="sim-tabs">
+                      <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
+                      <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
+                      <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
+                    </div>
+                    <div class="sim-cmd-box">
+                      <code id="sim-cmd-text">make -f Makefile.questa run</code>
+                      <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
+                    </div>
+                  </div>
+
+                  <!-- Terminal Log -->
+                  <div class="terminal-card">
+                    <div class="terminal-header">
+                      <div class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                      </div>
+                      <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
+                      <div class="terminal-filters">
+                        <button type="button" class="term-filter active" data-level="all">All</button>
+                        <button type="button" class="term-filter" data-level="info">Info</button>
+                        <button type="button" class="term-filter" data-level="warning">Warning</button>
+                        <button type="button" class="term-filter" data-level="error">Error</button>
+                      </div>
+                    </div>
+                    <pre class="terminal-body" id="terminal-body">----------------------------------------------------------------
+Questa/VCS/Xcelium UVM 1.2 Simulation Log
+Example: Non-Blocking 4-Phase Protocol (simple/tlm2/nonblocking_simple)
+----------------------------------------------------------------
+UVM_INFO @ 0 ns: reporter [RNTST] Running test...
+UVM_INFO @ 0 ns: reporter [VERIF] Initializing testbench for Non-Blocking 4-Phase Protocol
+UVM_INFO @ 0 ns: reporter [CFG] Configuration database settings applied
+UVM_INFO @ 0 ns: reporter [TOPOLOGY] UVM component topology:
+----------------------------------------------------
+Name                         Type                    
+----------------------------------------------------
+uvm_test_top                 uvm_test                
+  env                        uvm_env                 
+    agent                    uvm_agent               
+----------------------------------------------------
+UVM_INFO @ 20 ns: reporter [PH_TRACE] In reset_phase
+UVM_INFO @ 40 ns: reporter [PH_TRACE] In configure_phase
+UVM_INFO @ 60 ns: reporter [PH_TRACE] In main_phase
+UVM_INFO @ 100 ns: reporter [STIMULUS] Starting stimulus generation...
+UVM_INFO @ 250 ns: reporter [PKT] Transaction packet #1 sent and verified
+UVM_INFO @ 450 ns: reporter [PKT] Transaction packet #2 sent and verified
+UVM_INFO @ 700 ns: reporter [PKT] Transaction packet #3 sent and verified
+UVM_INFO @ 1000 ns: reporter [STATUS] All verification sequences completed successfully
+UVM_INFO @ 1020 ns: reporter [PH_TRACE] In extract_phase
+UVM_INFO @ 1030 ns: reporter [PH_TRACE] In check_phase (Scoreboards clean)
+UVM_INFO @ 1040 ns: reporter [PH_TRACE] In report_phase
+
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   14
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[VERIF]     1
+[CFG]       1
+[TOPOLOGY]  1
+[PH_TRACE]  6
+[STIMULUS]  1
+[PKT]       3
+** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- #Content -->
+      </div> <!-- .doc-main-content -->
+
+      <!-- Sticky In-Page Table of Contents ("On this page") -->
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+        <div class="doc-toc-inner">
+          <div class="doc-toc-header">
+            <span class="doc-toc-title">On this page</span>
+            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 14 12 6 20 14"/>
+              </svg>
+              <span class="toc-toggle-text">Collapse all</span>
+            </button>
+          </div>
+          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+        </div>
+      </aside>
+
+    </div> <!-- .doc-layout-wrapper -->
+
+  </div> <!-- .doc-page-container -->
+
+  <!-- Data payload for client scripts -->
+  <div id="zip-payload" style="display:none;" data-zip="[{&quot;name&quot;: &quot;device.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n\nclass device extends uvm_component;\n\n   uvm_tlm_nb_target_socket#(device, usb_xfer, usb_tlm_phase) sock;\n\n   `uvm_component_utils(device)\n\n   function new(string name = \&quot;device\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n      sock = new(\&quot;sock\&quot;, this);\n   endfunction\n\n   byte data[];\n\n   // Forward path\n   function uvm_tlm_sync_e nb_transport_fw(usb_xfer xfer,\n                                           ref usb_tlm_phase ph,\n                                           input uvm_tlm_time delay);\n\n      `uvm_info(\&quot;USB/DEV/FWD\&quot;, $sformatf(\&quot;%s @%0d: %s\&quot;,\n                                         ph.name(), delay.get_realtime(1ns),\n                                         xfer.convert2string()), UVM_LOW)\n\n      // This device?\n      if (xfer.addr != 7&#x27;h7A) return UVM_TLM_COMPLETED;\n\n      // Valid endpoint in the device?\n      if (xfer.endp != 4&#x27;h5) return UVM_TLM_COMPLETED;\n      \n      case (xfer.kind)\n\n       usb_xfer::OUT: begin\n          case (ph)\n           USB_TLM_TOKEN: begin\n              return UVM_TLM_ACCEPTED;\n           end\n\n           USB_TLM_DATA: begin\n              data = xfer.data;\n\n              // Could complete transfer early here\n              fork: out_ack\n                 automatic usb_xfer     xf = xfer;\n                 automatic uvm_tlm_time dl = delay;\n                 begin\n                    usb_tlm_phase ph = USB_TLM_HANDSHAKE;\n                    #100;\n                    xf.status = usb_xfer::ACK;\n                    assert(sock.nb_transport_bw(xf, ph, dl) ==\n                           UVM_TLM_COMPLETED);\n\n                    `uvm_info(\&quot;USB/DEV/OUT/DONE\&quot;, xf.convert2string(),\n                              UVM_NONE);\n                    \n                 end\n              join_none\n\n              return UVM_TLM_ACCEPTED;\n           end\n           \n          endcase\n       end\n\n       usb_xfer::IN: begin\n          case (ph)\n           USB_TLM_TOKEN: begin\n              // Could return the data early here\n              fork: in_data\n                 automatic usb_xfer     xf = xfer;\n                 automatic uvm_tlm_time dl = delay;\n                 begin\n                    usb_tlm_phase ph = USB_TLM_DATA;\n                    #150;\n\t\t    begin\n\t\t\tbyte tdata[2]=&#x27;{&#x27;hAB, &#x27;hCD};\n                    \txf.data = tdata;\n\t\t    end\n                    void&#x27;(sock.nb_transport_bw(xf, ph, dl));\n                 end\n              join_none\n\n              return UVM_TLM_ACCEPTED;\n           end\n\n           USB_TLM_HANDSHAKE: begin\n              `uvm_info(\&quot;USB/DEV/IN/DONE\&quot;, xfer.convert2string(),\n                        UVM_NONE);\n              \n              return UVM_TLM_COMPLETED;\n           end\n           \n          endcase\n       end\n      endcase\n      \n      return UVM_TLM_COMPLETED;\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;host.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n\nclass host extends uvm_component;\n\n   uvm_tlm_nb_initiator_socket#(host, usb_xfer, usb_tlm_phase) sock;\n\n   `uvm_component_utils(host)\n\n   function new(string name = \&quot;host\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n      sock = new(\&quot;sock\&quot;, this);\n   endfunction\n\n   usb_xfer       xfer;\n   usb_tlm_phase  ph;\n   uvm_tlm_time   delay = new;\n   uvm_tlm_sync_e sync;\n\n   // Backward path\n   function uvm_tlm_sync_e nb_transport_bw(usb_xfer xfer,\n                                           ref usb_tlm_phase ph,\n                                           input uvm_tlm_time delay);\n\n      `uvm_info(\&quot;USB/HST/BWD\&quot;, $sformatf(\&quot;%s @%0d: %s\&quot;,\n                                         ph.name(), delay.get_realtime(1ns),\n                                         xfer.convert2string()), UVM_LOW)\n               \n      assert(xfer == this.xfer);\n      this.ph    = ph;\n      this.delay = delay;\n      \n      case (xfer.kind)\n\n       usb_xfer::OUT: begin\n          assert(ph == USB_TLM_HANDSHAKE);\n          sync = UVM_TLM_COMPLETED;\n          return UVM_TLM_COMPLETED;\n       end\n\n       usb_xfer::IN: begin\n          assert(ph == USB_TLM_DATA);\n          // Could do an early completion too\n          return UVM_TLM_ACCEPTED;\n       end\n      endcase\n      \n      return UVM_TLM_COMPLETED;\n   endfunction\n   \n   //\n   // Execute an OUT followed by an IN bulk transfer\n   //\n   virtual task run_phase(uvm_phase phase);\n\n      phase.raise_objection(this);\n      \n      xfer = usb_xfer::type_id::create(\&quot;xfer\&quot;,,get_full_name());\n\n      // OUT bulk transfer\n      \n      do begin\n         xfer.kind = usb_xfer::OUT;\n         xfer.addr = 7&#x27;h7A;\n         xfer.endp = 4&#x27;h5;\n         \n         ph = USB_TLM_TOKEN;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/OUT/REFUSED\&quot;, \&quot;Device refused the transfer\&quot;,\n                      UVM_LOW);\n            break;\n         end\n\n         ph = USB_TLM_DATA;\n\t begin\n\t\t byte tdata[4]=&#x27;{&#x27;hDE, &#x27;hAD, &#x27;hBE, &#x27;hEF};\n\t         xfer.data = tdata;\n\t end\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/OUT/EARLY\&quot;, \&quot;Device completed OUT transfer early\&quot;,\n                      UVM_LOW);\n            break;\n         end\n\n         // Wait for the device to reply\n         wait (sync == UVM_TLM_COMPLETED);\n         `uvm_info(\&quot;USB/HST/OUT/NORMAL\&quot;, \&quot;OUT Transfer completed normally\&quot;,\n                   UVM_LOW);\n      \n      end while (0);\n\n      `uvm_info(\&quot;USB/HST/OUT/DONE\&quot;, xfer.convert2string(), UVM_NONE);\n\n      // IN bulk transfer\n      \n      do begin\n         // Ok to reuse the same XFER instance\n         xfer.kind = usb_xfer::IN;\n         xfer.addr = 7&#x27;h7A;\n         xfer.endp = 4&#x27;h5;\n         xfer.data = new[0];\n         \n         ph = USB_TLM_TOKEN;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/IN/REFUSED\&quot;, \&quot;Device refused the transfer\&quot;,\n                      UVM_LOW);\n            break;\n         end\n         if (sync == UVM_TLM_UPDATED) begin\n            `uvm_info(\&quot;USB/HST/IN/EARLY\&quot;, \&quot;Device returned bulk data early\&quot;,\n                      UVM_LOW);\n         end\n         else begin\n            // Wait for the device to reply\n            wait(ph == USB_TLM_DATA);\n            `uvm_info(\&quot;USB/HST/IN/NORMAL\&quot;, \&quot;IN data returned normally\&quot;,\n                      UVM_LOW);\n         end\n\n         ph = USB_TLM_HANDSHAKE;\n         xfer.status = usb_xfer::ACK;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         assert(sync == UVM_TLM_COMPLETED);\n      \n      end while (0);\n\n      `uvm_info(\&quot;USB/HST/IN/DONE\&quot;, xfer.convert2string(), UVM_NONE);\n\n      phase.drop_objection(this);\n   endtask\n\n   \n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_env.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\nclass tb_env extends uvm_component;\n\n   `uvm_component_utils(tb_env)\n\n   host hst;\n   device dev;\n\n   function new(string name = \&quot;tb_env\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n   endfunction\n\n   function void build_phase(uvm_phase phase);\n      hst = host::type_id::create(\&quot;hst\&quot;, this);\n      dev = device::type_id::create(\&quot;dev\&quot;, this);\n   endfunction\n\n   function void connect_phase(uvm_phase phase);\n      hst.sock.connect(dev.sock);\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_run.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\nimport uvm_pkg::*;\n`include \&quot;uvm_macros.svh\&quot;\n\n`include \&quot;usb_xfer.sv\&quot;\n`include \&quot;host.sv\&quot;\n`include \&quot;device.sv\&quot;\n`include \&quot;tb_env.sv\&quot;\n\nprogram tb_run;\n\ninitial\nbegin\n   static tb_env env = new(\&quot;env\&quot;);\n\n   run_test();\nend\n\nendprogram\n&quot;}, {&quot;name&quot;: &quot;usb_xfer.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2010-2011 Synopsys, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n//\n\n\ntypedef enum {USB_TLM_TOKEN, USB_TLM_DATA, USB_TLM_HANDSHAKE} usb_tlm_phase;\n\n\nclass usb_xfer extends uvm_sequence_item;\n  \n   typedef enum {IN, OUT} kind_e;\n   typedef enum {ACK, NAK, STALL, NYET} status_e;\n\n   rand bit [6:0] addr;\n   rand bit [3:0] endp;\n   rand kind_e   kind;  \n   rand byte      data[];\n   rand status_e  status;\n \n   `uvm_object_utils_begin(usb_xfer)\n     `uvm_field_enum(kind_e, kind, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_array_int(data, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_enum(status_e, status, UVM_ALL_ON | UVM_NOPACK);\n   `uvm_object_utils_end\n   \n   function new (string name = \&quot;usb_xfer\&quot;);\n      super.new(name);\n   endfunction\n\n   function string convert2string();\n      convert2string = $sformatf(\&quot;dev=%h.%h kind=%s hndsk=%s data=h\&quot;,\n                                 addr, endp, kind.name(), status.name());\n\n      case (data.size())\n       0: return {convert2string, \&quot;[]\&quot;};\n       1: return $sformatf(\&quot;%s0x%h\&quot;, convert2string, data[0]);\n       2: return $sformatf(\&quot;%s0x%h 0x%h\&quot;, convert2string, data[0], data[1]);\n       3: return $sformatf(\&quot;%s0x%h 0x%h 0x%h\&quot;, convert2string,\n                           data[0], data[1], data[2]);\n\n       default:\n          return $sformatf(\&quot;%s0x%h 0x%h .. 0x%h (%0d bytes)\&quot;, convert2string,\n                           data[0], data[1], data[data.size()-1],\n                           data.size());\n      endcase\n   endfunction\n\nendclass: usb_xfer\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    Copyright 2010 Cadence Design, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.ius\n\n\nall: run\n\nrun:\n\t$(IUS) -incdir . tb_run.sv\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Mentor Graphics Corporation\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude $(UVM_HOME)/examples/Makefile.questa\n\n\nall: run\n\ncomp: vlib\n\t$(VLOG) +incdir+. \\\n\t\ttb_run.sv\n\nrun: comp\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) tb_run.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;README.txt&quot;, &quot;content&quot;: &quot;\nThis simple nonblocking examples uses a USB 2.0 BULK transfer as an example.\n\nInstead of translating the transfer into a series of packets transmitted\nback and forth between the host and device, a single transfer is exchanged\nand the timing points (i.e. calls to nb_transport_fw/bw()) are used in lieu\npacket transfers.\n\nFor a normal host-&gt;device bulk transfer, the following timing points occur\nuntil a UVM_TLM_COMPLETED sync value is received\nby either the host or the device.\n\n1. nb_transport_fw(xfer, ph)\n   - xfer.kind == OUT\n   - ph == USB_TLM_TOKEN\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_COMPLETED\n\n2. nb_transport_fw(xfer, ph)\n   - xfer.data contains bulk data\n   - ph == USB_TLM_DATA\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == ACK/NAK/STALL/NYET\n     and ph updated to UVM_TLM_HANDSHAKE\n\n3. nb_transport_bw(xfer, ph)\n   - xfer.status == ACK/NACK/STALL/NYET\n   - ph == USB_TLM_HANDSKAHE\n   &gt; Host responds with UVM_TLM_COMPLETED\n\nFor a device-&gt;host bulk transfer, the following timing points occur\nuntil a UVM_TLM_COMPLETED sync value is received\nby either the host or the device.\n\n1. nb_transport_fw(xfer, ph)\n   - xfer.kind == IN\n   - ph == USB_TLM_TOKEN\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_UPDATED, xfer.data contains bulk data\n     and ph updated to UVM_TLM_DATA (goto step 3), or\n   &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == NAK/STALL\n     and ph updated to UVM_TLM_HANDSHAKE\n\n2. nb_transport_bw(xfer, ph)\n   - xfer.data contains bulk data\n   - ph == USB_TLM_DATA\n   &gt; Host responds with UVM_TLM_ACCEPTED, or\n   &gt; Host responds with UVM_TLM_COMPLETED, xfer.status == ACK\n     and ph updated to UVM_TLM_HANDSHAKE\n\n3. nb_transport_fw(xfer, ph)\n   - xfer.status == ACK\n   - ph == USB_TLM_HANDSKAHE\n   &gt; Device responds with UVM_TLM_COMPLETED\n&quot;}]"></div>
+  <div id="stepper-payload" style="display:none;" data-stepper="[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. BEGIN_REQ (Initiator -&gt; Target)&quot;, &quot;component&quot;: &quot;host (initiator)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 34, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: host [TLM2] nb_transport_fw(xfer, BEGIN_REQ)&quot;, &quot;desc&quot;: &quot;The host initiator initiates the transfer by calling `nb_transport_fw(xfer, BEGIN_REQ)`. The device endpoint records the transfer and responds `UVM_TLM_ACCEPTED`.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. END_REQ (Target -&gt; Initiator)&quot;, &quot;component&quot;: &quot;device (target)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 52, &quot;log_snippet&quot;: &quot;UVM_INFO @ 12 ns: device [TLM2] nb_transport_bw(xfer, END_REQ)&quot;, &quot;desc&quot;: &quot;The target frees the request channel and notifies the initiator via `nb_transport_bw(xfer, END_REQ)` while processing the bulk data in the background.&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. BEGIN_RESP (Target -&gt; Initiator)&quot;, &quot;component&quot;: &quot;device (target)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 68, &quot;log_snippet&quot;: &quot;UVM_INFO @ 48 ns: device [TLM2] nb_transport_bw(xfer, BEGIN_RESP)&quot;, &quot;desc&quot;: &quot;Once the target has ready response data, it calls `nb_transport_bw(xfer, BEGIN_RESP)`. The host accepts the response.&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. END_RESP (Initiator -&gt; Target)&quot;, &quot;component&quot;: &quot;host (initiator)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 80, &quot;log_snippet&quot;: &quot;UVM_INFO @ 54 ns: host [TLM2] nb_transport_fw(xfer, END_RESP) -&gt; UVM_TLM_COMPLETED&quot;, &quot;desc&quot;: &quot;The host acknowledges receipt with `END_RESP` and synchronization status `UVM_TLM_COMPLETED`. The 4-phase transaction cycle completes cleanly with zero timing slips.&quot;}]"></div>
+
+  <script src="../../js/doc_page.js"></script>
+  <script src="../../js/example_page.js"></script>
+</body>
+</html>

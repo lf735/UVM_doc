@@ -9,6 +9,13 @@ Ready for local offline browsing and automated continuous deployment to **GitHub
 ## 🚀 Key Features
 
 - **Dynamic Interactive Web Portal**: Fast, responsive layout with single-page navigation and deep-linking.
+- **Interactive UVM 1.2 Examples Studio**:
+  - Full interactive integration of all **38 official Accellera UVM 1.2 example suites** (309 source files across `uvm-1.2/examples/`).
+  - **Multi-File Code Studio**: Tabbed viewer across all project files with syntax highlighting, line anchors (`#Lxx`), and clickable UVM class references.
+  - **Visual Flow Stepper**: Interactive step-by-step execution timeline on the 5 pillar examples (*Phases, Objections, TLM-1 FIFO, TLM-2 Non-Blocking, RAL Primer*) with topology highlighting, synchronous code focusing, and terminal log inspection.
+  - **Simulation Console**: Tabbed execution commands for Questa, VCS, and Xcelium with authentic Accellera UVM report simulation logs and severity filters.
+  - **Zero-Dependency Dual Downloads**: 1-click download of individual raw files or client-side native ZIP archive creation for the complete example suite.
+  - **Bidirectional Linking**: Reference documentation pages feature contextual *"💡 Practical Example"* callouts linking directly into the interactive studios.
 - **Google Developers Inspired Design**: High-contrast, crystal-clear typography (Google Sans & Roboto) with a refined Google Blue color scheme matching official documentation such as Google Apps Script and Google Cloud reference docs.
 - **Full Syntax Highlighting in Documentation**: Syntax-highlighted code blocks, command-line snippets, and API prototypes with language badges and 1-click clipboard copy buttons.
 - **SystemVerilog Web Source Viewer**: Complete syntax highlighting, clickable line numbers (`#Lxx`), copy buttons, and raw downloads for all 155 source files (`.sv`, `.svh`, `.c`, `.h`).
@@ -38,19 +45,24 @@ UVM_doc/
 │   └── style.css             # Unified stylesheet (theme variables, syntax colors, layout)
 ├── js/
 │   ├── app.js                # Core SPA application (router, search, theme, split view)
+│   ├── doc_page.js           # Shared controller for docs_view reference pages
+│   ├── example_page.js       # Controller for interactive example studios & native ZIP generator
 │   ├── rag_engine.js         # Client-side RAG & vector similarity search engine
 │   └── search_data.js        # Generated index (untracked, built at deployment & locally)
 ├── scripts/
-│   ├── build_docs.py         # Python build script generating docs_view and src_view
+│   ├── build_docs.py         # Python build script generating docs_view, src_view, and nav data
+│   ├── build_examples.py     # Python generator for all 38 interactive example studios
 │   ├── build_rag_embeddings.py # Generates intelligent chunks & dense vector embeddings
 │   ├── build_uvm_source_db.py # Python parser extracting classes, methods, overrides, and macros
-│   └── query_uvm_db.py       # Interactive CLI explorer tool for terminal navigation
+│   ├── query_uvm_db.py       # Interactive CLI explorer tool for terminal navigation
+│   └── verify_examples.py    # 20-test automated verification suite for interactive examples
 ├── data/
 │   ├── uvm_source_database.json # Complete hierarchical, bidirectional & indexed database (5.55 MB)
 │   ├── uvm_source_database.sqlite # Relational 3NF SQLite database with indexes (2.11 MB)
 │   ├── uvm_source_database.js   # Browser JS bundle for offline file:// execution (5.59 MB)
 │   └── uvm_dpi_database.json    # Dedicated DPI SystemVerilog <-> C bindings database (24 KB)
 ├── docs_view/                # Modernized, responsive UVM 1.2 reference HTML pages
+├── examples_view/            # 38 interactive UVM 1.2 multi-file example studios
 ├── src_view/                 # Syntax-highlighted HTML views of all 155 source files
 ├── uvm-1.2/                  # Official Accellera UVM 1.2 distribution
 │   ├── src/                  # Raw SystemVerilog and C source tree

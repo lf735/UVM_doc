@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" class="doc-page example-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factory Overrides | UVM 1.2 Interactive Examples</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="doc-body example-body">
+  <div class="doc-page-container">
+
+    <!-- Document Breadcrumbs -->
+    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+      <a href="../../index.html#/examples" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Examples</a>
+      <span class="doc-breadcrumb-sep">/</span>
+      <span class="doc-breadcrumb-item">Core Infrastructure</span>
+      <span class="doc-breadcrumb-sep">/</span>
+      <span class="doc-breadcrumb-item active">Factory Overrides</span>
+    </nav>
+
+    <!-- Source Banner & Actions -->
+    <div class="doc-source-banner example-source-banner">
+      <div class="banner-info">
+        <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="file-label">Suite:</span>
+        <code class="banner-file-code">uvm-1.2/examples/simple/factory</code>
+        <span class="badge badge-scope">Simple</span>
+        <span class="badge badge-diff badge-diff-intermediate">Intermediate</span>
+        <span class="badge badge-files">7 files</span>
+      </div>
+
+      <div class="banner-actions">
+        <button type="button" class="btn btn-outline" id="btn-split-source" title="View side-by-side with UVM source code in Split View">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+          <span>Split View</span>
+        </button>
+        <button type="button" class="btn btn-outline" id="btn-download-raw" title="Download active file">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download File</span>
+        </button>
+        <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download (.zip)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2-Column Documentation Layout (Harmonized with docs_view) -->
+    <div class="doc-layout-wrapper">
+      <div class="doc-main-content">
+        <div id="Content">
+
+          <!-- Main Class / Overview Topic -->
+          <div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
+            <div class="CTopic" id="MainTopic">
+              <h1 class="CTitle"><a name="Factory Overrides">Factory Overrides</a></h1>
+              <div class="CBody">
+                <p class="example-summary-desc">Demonstrates factory registration (`uvm_component_utils`), polymorphism, and swapping components dynamically using set_type_override_by_type and set_inst_override_by_type.</p>
+                <div class="example-api-pills">
+                  <span class="api-label">Key UVM APIs:</span>
+                  <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_factory">uvm_factory</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="set_type_override_by_type">set_type_override_by_type</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="set_inst_override_by_type">set_inst_override_by_type</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="create">create</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Visual Flow Stepper (If Supported) -->
+          
+
+          <!-- Testbench Architecture Topology -->
+          <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
+            <div class="CTopic">
+              <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
+              <div class="CBody">
+                <div class="topo-grid">
+                  
+        <div class="topo-card">
+          <div class="topo-header">
+            <span class="topo-badge">env</span>
+            <strong>env</strong>
+          </div>
+          
+        </div>
+        
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-File Code Studio -->
+          <div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
+            <div class="CTopic">
+              <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
+              <div class="CBody">
+                <div class="studio-section">
+                  <div class="studio-header">
+                    <div class="studio-tab-bar" id="studio-tab-bar">
+                      <button type="button" class="studio-tab active" data-file-idx="0"><span class="tab-icon">📄</span><span class="tab-name">env_pkg.sv</span><span class="tab-badge">58L</span></button><button type="button" class="studio-tab " data-file-idx="1"><span class="tab-icon">📄</span><span class="tab-name">gen_pkg.sv</span><span class="tab-badge">50L</span></button><button type="button" class="studio-tab " data-file-idx="2"><span class="tab-icon">📄</span><span class="tab-name">packet_pkg.sv</span><span class="tab-badge">68L</span></button><button type="button" class="studio-tab " data-file-idx="3"><span class="tab-icon">📄</span><span class="tab-name">test.sv</span><span class="tab-badge">95L</span></button><button type="button" class="studio-tab " data-file-idx="4"><span class="tab-icon">📄</span><span class="tab-name">Makefile.ius</span><span class="tab-badge">34L</span></button><button type="button" class="studio-tab " data-file-idx="5"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span><span class="tab-badge">40L</span></button><button type="button" class="studio-tab " data-file-idx="6"><span class="tab-icon">📄</span><span class="tab-name">Makefile.vcs</span><span class="tab-badge">40L</span></button>
+                    </div>
+
+                    <div class="studio-toolbar">
+                      <span class="studio-file-info" id="studio-file-info">env_pkg.sv (58 lines, 1.9 KB)</span>
+                      <button type="button" class="btn btn-sm btn-outline" id="btn-copy-code" title="Copy file code to clipboard">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <span id="btn-copy-code-text">Copy Code</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="studio-code-container" id="studio-code-container">
+                    <div class="file-code-pane active" id="file-pane-0"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Mentor Graphics Corporation</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2011 Cadence Design Systems, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc.</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-keyword">package</span> <span class="sv-ident">env_pkg</span><span class="sv-op">;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-ident">packet_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-ident">gen_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">  <span class="sv-macro">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">  </td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">  <span class="sv-keyword">class</span> <span class="sv-ident">env</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_env" title="Click to view uvm_env documentation">uvm_env</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">    <span class="sv-ident">gen</span> <span class="sv-ident">gen1</span><span class="sv-op">;</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">    <span class="sv-comment">//Use the macro in a class to implement factory registration along with other</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">    <span class="sv-comment">//utilities (create, get_type_name). For only factory registration, use the</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">    <span class="sv-comment">// macro `uvm_component_registry(env,&quot;env&quot;).</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">    <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">env</span><span class="sv-op">)</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">    </td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">    <span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">      <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">cmp</span><span class="sv-op">;</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">     </td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">      <span class="sv-comment">//use the factory to create the generator</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">      <span class="sv-ident">gen1</span> <span class="sv-op">=</span> <span class="sv-ident">gen</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">type_id</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">create</span><span class="sv-op">(</span><span class="sv-string">&quot;gen1&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">    <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">    <span class="sv-keyword">task</span> <span class="sv-ident">run_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">      <span class="sv-ident">packet</span> <span class="sv-ident">p</span><span class="sv-op">;</span></td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">      <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-ident">raise_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">      <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_default_tree_printer" title="Click to view uvm_default_tree_printer documentation">uvm_default_tree_printer</span><span class="sv-op">.</span><span class="sv-ident">knobs</span><span class="sv-op">.</span><span class="sv-ident">separator</span> <span class="sv-op">=</span> <span class="sv-string">&quot;&quot;</span><span class="sv-op">;</span></td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">      <span class="sv-keyword">repeat</span><span class="sv-op">(</span><span class="sv-number">5</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">        <span class="sv-op">#</span><span class="sv-number">15</span> <span class="sv-ident">p</span> <span class="sv-op">=</span> <span class="sv-ident">gen1</span><span class="sv-op">.</span><span class="sv-ident">get_packet</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">        <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;PKTGEN&quot;</span><span class="sv-op">,</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;Got packet: %s&quot;</span><span class="sv-op">,</span> <span class="sv-ident">p</span><span class="sv-op">.</span><span class="sv-ident">sprint</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_default_tree_printer" title="Click to view uvm_default_tree_printer documentation">uvm_default_tree_printer</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">UVM_NONE</span><span class="sv-op">)</span></td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">      <span class="sv-keyword">end</span></td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">      <span class="sv-op">#</span><span class="sv-number">15</span><span class="sv-op">;</span></td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">      <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-ident">drop_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">    <span class="sv-keyword">endtask</span></td></tr>
+<tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">  <span class="sv-keyword">endclass</span></td></tr>
+<tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code"><span class="sv-keyword">endpackage</span></td></tr>
+<tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-1"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Mentor Graphics Corporation</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Cadence Design Systems, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc.</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-keyword">package</span> <span class="sv-ident">gen_pkg</span><span class="sv-op">;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-ident">packet_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">  <span class="sv-macro">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">  <span class="sv-keyword">class</span> <span class="sv-ident">gen</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span><span class="sv-op">;</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">    <span class="sv-comment">//Use the macro in a class to implement factory registration along with other</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">    <span class="sv-comment">//utilities (create, get_type_name). To do only factory registration, use</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">    <span class="sv-comment">//the macro `uvm_component_utils(gen,&quot;gen&quot;).</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">    <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">gen</span><span class="sv-op">)</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">    </td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">    <span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">    <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">    <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-ident">packet</span> <span class="sv-ident">get_packet</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">      <span class="sv-ident">packet</span> <span class="sv-ident">p</span><span class="sv-op">;</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">      <span class="sv-comment">//use the factory to generate a package</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">      <span class="sv-ident">p</span> <span class="sv-op">=</span> <span class="sv-ident">packet</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">type_id</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">create</span><span class="sv-op">(</span><span class="sv-string">&quot;p&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">     </td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">      <span class="sv-comment">//randomize it</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">      <span class="sv-keyword">void</span>&#x27;<span class="sv-op">(</span><span class="sv-ident">p</span><span class="sv-op">.</span><span class="sv-ident">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>      </td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">     </td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">      <span class="sv-keyword">return</span> <span class="sv-ident">p</span><span class="sv-op">;</span> </td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">    <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">  <span class="sv-keyword">endclass</span></td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code"><span class="sv-keyword">endpackage</span></td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-2"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Mentor Graphics Corporation</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Cadence Design Systems, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc.</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-keyword">package</span> <span class="sv-ident">packet_pkg</span><span class="sv-op">;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">  <span class="sv-macro">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">  <span class="sv-keyword">class</span> <span class="sv-ident">packet</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_object" title="Click to view uvm_object documentation">uvm_object</span><span class="sv-op">;</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">    <span class="sv-keyword">rand</span> <span class="sv-keyword">int</span> <span class="sv-ident">addr</span><span class="sv-op">;</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">    <span class="sv-keyword">rand</span> <span class="sv-keyword">int</span> <span class="sv-ident">data</span><span class="sv-op">;</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">    <span class="sv-comment">//Use the macro in a class to implement factory registration along with other</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">    <span class="sv-comment">//utilities (create, get_type_name). For only factory registration, use</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">    <span class="sv-comment">//the macro `uvm_object_registry(packet,&quot;packet&quot;).</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">    <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">packet</span><span class="sv-op">)</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">    </td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">    <span class="sv-comment">//Base constraints</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">    <span class="sv-keyword">constraint</span> <span class="sv-ident">c1</span> <span class="sv-op">{</span> <span class="sv-ident">addr</span> <span class="sv-keyword">inside</span> <span class="sv-op">{</span> <span class="sv-op">[</span><span class="sv-string">&#x27;h0:&#x27;</span><span class="sv-ident">h40</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-op">[</span><span class="sv-string">&#x27;h100:&#x27;</span><span class="sv-ident">h200</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-op">[</span><span class="sv-string">&#x27;h1000: &#x27;</span><span class="sv-ident">h1fff</span><span class="sv-op">]</span><span class="sv-op">,</span> <span class="sv-op">[</span><span class="sv-string">&#x27;h4000: &#x27;</span><span class="sv-ident">h4fff</span><span class="sv-op">]</span> <span class="sv-op">}</span><span class="sv-op">;</span> <span class="sv-op">}</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">    <span class="sv-keyword">constraint</span> <span class="sv-ident">c2</span> <span class="sv-op">{</span> <span class="sv-op">(</span><span class="sv-ident">addr</span> <span class="sv-op">&lt;</span><span class="sv-op">=</span> &#x27;<span class="sv-ident">h40</span><span class="sv-op">)</span> <span class="sv-op">-</span><span class="sv-op">&gt;</span> <span class="sv-op">(</span><span class="sv-ident">data</span> <span class="sv-keyword">inside</span> <span class="sv-op">{</span> <span class="sv-op">[</span><span class="sv-number">10</span><span class="sv-op">:</span><span class="sv-number">20</span><span class="sv-op">]</span> <span class="sv-op">}</span> <span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-op">}</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">    <span class="sv-keyword">constraint</span> <span class="sv-ident">c3</span> <span class="sv-op">{</span> <span class="sv-op">(</span><span class="sv-ident">addr</span> <span class="sv-op">&gt;</span><span class="sv-op">=</span> <span class="sv-string">&#x27;h100 &amp;&amp; addr &lt;= &#x27;</span><span class="sv-ident">h200</span><span class="sv-op">)</span> <span class="sv-op">-</span><span class="sv-op">&gt;</span> <span class="sv-op">(</span><span class="sv-ident">data</span> <span class="sv-keyword">inside</span> <span class="sv-op">{</span> <span class="sv-op">[</span><span class="sv-number">100</span><span class="sv-op">:</span><span class="sv-number">200</span><span class="sv-op">]</span> <span class="sv-op">}</span> <span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-op">}</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">    <span class="sv-keyword">constraint</span> <span class="sv-ident">c4</span> <span class="sv-op">{</span> <span class="sv-op">(</span><span class="sv-ident">addr</span> <span class="sv-op">&gt;</span><span class="sv-op">=</span> <span class="sv-string">&#x27;h1000 &amp;&amp; addr &lt;= &#x27;</span><span class="sv-ident">h1fff</span><span class="sv-op">)</span> <span class="sv-op">-</span><span class="sv-op">&gt;</span> <span class="sv-op">(</span><span class="sv-ident">data</span> <span class="sv-keyword">inside</span> <span class="sv-op">{</span> <span class="sv-op">[</span><span class="sv-number">300</span><span class="sv-op">:</span><span class="sv-number">400</span><span class="sv-op">]</span> <span class="sv-op">}</span> <span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-op">}</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">    <span class="sv-keyword">constraint</span> <span class="sv-ident">c5</span> <span class="sv-op">{</span> <span class="sv-op">(</span><span class="sv-ident">addr</span> <span class="sv-op">&gt;</span><span class="sv-op">=</span> <span class="sv-string">&#x27;h4000 &amp;&amp; addr &lt;= &#x27;</span><span class="sv-ident">h4fff</span><span class="sv-op">)</span> <span class="sv-op">-</span><span class="sv-op">&gt;</span> <span class="sv-op">(</span><span class="sv-ident">data</span> <span class="sv-keyword">inside</span> <span class="sv-op">{</span> <span class="sv-op">[</span><span class="sv-number">600</span><span class="sv-op">:</span><span class="sv-number">800</span><span class="sv-op">]</span> <span class="sv-op">}</span> <span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-op">}</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">    <span class="sv-comment">//do printing, comparing, etc. These functions can also be automated inside</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">    <span class="sv-comment">//the `uvm_object_utils_begin/end macros if desired. Below show the manual </span></td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">    <span class="sv-comment">//approach.</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">    <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">do_print</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_printer" title="Click to view uvm_printer documentation">uvm_printer</span> <span class="sv-ident">printer</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">      <span class="sv-ident">printer</span><span class="sv-op">.</span><span class="sv-ident">print_field</span><span class="sv-op">(</span><span class="sv-string">&quot;addr&quot;</span><span class="sv-op">,</span> <span class="sv-ident">addr</span><span class="sv-op">,</span> $<span class="sv-ident">bits</span><span class="sv-op">(</span><span class="sv-ident">addr</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">      <span class="sv-ident">printer</span><span class="sv-op">.</span><span class="sv-ident">print_field</span><span class="sv-op">(</span><span class="sv-string">&quot;data&quot;</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">,</span> $<span class="sv-ident">bits</span><span class="sv-op">(</span><span class="sv-ident">data</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">    <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">    <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-ident">do_compare</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_object" title="Click to view uvm_object documentation">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_comparer" title="Click to view uvm_comparer documentation">uvm_comparer</span> <span class="sv-ident">comparer</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">      <span class="sv-ident">packet</span> <span class="sv-ident">rhs_</span><span class="sv-op">;</span></td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">      <span class="sv-keyword">if</span><span class="sv-op">(</span><span class="sv-ident">rhs</span><span class="sv-op">=</span><span class="sv-op">=</span><span class="sv-keyword">null</span> <span class="sv-op">|</span><span class="sv-op">|</span> <span class="sv-op">!</span>$<span class="sv-ident">cast</span><span class="sv-op">(</span><span class="sv-ident">rhs_</span><span class="sv-op">,</span> <span class="sv-ident">rhs</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">      <span class="sv-ident">do_compare</span> <span class="sv-op">=</span> <span class="sv-number">1</span><span class="sv-op">;</span>  </td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">      <span class="sv-ident">do_compare</span> <span class="sv-op">&amp;</span><span class="sv-op">=</span> <span class="sv-ident">comparer</span><span class="sv-op">.</span><span class="sv-ident">compare_field</span><span class="sv-op">(</span><span class="sv-string">&quot;addr&quot;</span><span class="sv-op">,</span> <span class="sv-ident">addr</span><span class="sv-op">,</span> <span class="sv-ident">rhs_</span><span class="sv-op">.</span><span class="sv-ident">addr</span><span class="sv-op">,</span> $<span class="sv-ident">bits</span><span class="sv-op">(</span><span class="sv-ident">addr</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">      <span class="sv-ident">do_compare</span> <span class="sv-op">&amp;</span><span class="sv-op">=</span> <span class="sv-ident">comparer</span><span class="sv-op">.</span><span class="sv-ident">compare_field</span><span class="sv-op">(</span><span class="sv-string">&quot;data&quot;</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">,</span> <span class="sv-ident">rhs_</span><span class="sv-op">.</span><span class="sv-ident">data</span><span class="sv-op">,</span> $<span class="sv-ident">bits</span><span class="sv-op">(</span><span class="sv-ident">data</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">    <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">    <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">do_copy</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_object" title="Click to view uvm_object documentation">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">      <span class="sv-ident">packet</span> <span class="sv-ident">rhs_</span><span class="sv-op">;</span></td></tr>
+<tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">      <span class="sv-keyword">if</span><span class="sv-op">(</span><span class="sv-ident">rhs</span><span class="sv-op">=</span><span class="sv-op">=</span><span class="sv-keyword">null</span> <span class="sv-op">|</span><span class="sv-op">|</span> <span class="sv-op">!</span>$<span class="sv-ident">cast</span><span class="sv-op">(</span><span class="sv-ident">rhs_</span><span class="sv-op">,</span> <span class="sv-ident">rhs</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-keyword">return</span><span class="sv-op">;</span></td></tr>
+<tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">      <span class="sv-ident">addr</span> <span class="sv-op">=</span> <span class="sv-ident">rhs_</span><span class="sv-op">.</span><span class="sv-ident">addr</span><span class="sv-op">;</span></td></tr>
+<tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">      <span class="sv-ident">data</span> <span class="sv-op">=</span> <span class="sv-ident">rhs_</span><span class="sv-op">.</span><span class="sv-ident">data</span><span class="sv-op">;</span></td></tr>
+<tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">    <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;packet&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">  <span class="sv-keyword">endclass</span></td></tr>
+<tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code"><span class="sv-keyword">endpackage</span></td></tr>
+<tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-3"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Mentor Graphics Corporation</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Cadence Design Systems, Inc.</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc.</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//   compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//   the License at</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   writing, software distributed under the License is</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//   CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">//   the License for the specific language governing</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//   permissions and limitations under the License.</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code"><span class="sv-comment">/*</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code"><span class="sv-comment">About: factory</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code"><span class="sv-comment"></span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-comment">This example will illustrate the usage of uvm_factory methods.</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-comment"></span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-comment"></span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-comment"></span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-comment">To get more details about the factory related methods, check the file:</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-comment">	- uvm/src/base/uvm_factory.svh</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-comment"></span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-comment"></span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-comment">*/</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code"><span class="sv-keyword">module</span> <span class="sv-ident">top</span><span class="sv-op">;</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-ident">packet_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-ident">gen_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">  <span class="sv-keyword">import</span> <span class="sv-ident">env_pkg</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">  <span class="sv-macro">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">  <span class="sv-ident">env</span> <span class="sv-ident">e</span><span class="sv-op">;</span>  <span class="sv-comment">//you need to use something from the package to have the</span></td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">          <span class="sv-comment">//factory registration occur.</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">  <span class="sv-keyword">class</span> <span class="sv-ident">mygen</span> <span class="sv-keyword">extends</span> <span class="sv-ident">gen</span><span class="sv-op">;</span></td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">    <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">    <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">    <span class="sv-keyword">function</span> <span class="sv-ident">packet</span> <span class="sv-ident">get_packet</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code">      <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;PKTGEN&quot;</span><span class="sv-op">,</span> $<span class="sv-ident">sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;Getting a packet from %s (%s)&quot;</span><span class="sv-op">,</span> <span class="sv-ident">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-ident">UVM_MEDIUM</span><span class="sv-op">)</span></td></tr>
+<tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">      <span class="sv-keyword">return</span> <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-ident">get_packet</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">    <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">    <span class="sv-comment">//Use the macro in a class to implement factory registration along with other</span></td></tr>
+<tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">    <span class="sv-comment">//utilities (create, get_type_name). To just do factory registration, use the</span></td></tr>
+<tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">    <span class="sv-comment">//macro `uvm_object_registry(mygen,&quot;mygen&quot;)</span></td></tr>
+<tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">    <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">mygen</span><span class="sv-op">)</span></td></tr>
+<tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">  <span class="sv-keyword">endclass</span></td></tr>
+<tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">  <span class="sv-keyword">class</span> <span class="sv-ident">mypacket</span> <span class="sv-keyword">extends</span> <span class="sv-ident">packet</span><span class="sv-op">;</span></td></tr>
+<tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code">    <span class="sv-keyword">constraint</span> <span class="sv-ident">ct10</span> <span class="sv-op">{</span> <span class="sv-ident">addr</span> <span class="sv-op">&gt;</span><span class="sv-op">=</span> <span class="sv-number">0</span> <span class="sv-op">&amp;</span><span class="sv-op">&amp;</span> <span class="sv-ident">addr</span> <span class="sv-op">&lt;</span><span class="sv-op">=</span> <span class="sv-number">10</span><span class="sv-op">;</span> <span class="sv-op">}</span></td></tr>
+<tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code">    <span class="sv-comment">//Use the macro in a class to implement factory registration along with other</span></td></tr>
+<tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code">    <span class="sv-comment">//utilities (create, get_type_name).</span></td></tr>
+<tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code">    <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">mypacket</span><span class="sv-op">)</span></td></tr>
+<tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code">  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;mypacket&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code">     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code">  <span class="sv-keyword">endfunction</span></td></tr>
+<tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code">  <span class="sv-keyword">endclass</span></td></tr>
+<tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code">  <span class="sv-keyword">initial</span> <span class="sv-keyword">begin</span> <span class="sv-keyword">automatic</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_coreservice_t" title="Click to view uvm_coreservice_t documentation">uvm_coreservice_t</span> <span class="sv-ident">cs_</span> <span class="sv-op">=</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_coreservice_t" title="Click to view uvm_coreservice_t documentation">uvm_coreservice_t</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code">    <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_factory" title="Click to view uvm_factory documentation">uvm_factory</span> <span class="sv-ident">factory</span><span class="sv-op">;</span></td></tr>
+<tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code">    <span class="sv-ident">factory</span> <span class="sv-op">=</span> <span class="sv-ident">cs_</span><span class="sv-op">.</span><span class="sv-ident">get_factory</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code">    <span class="sv-ident">gen</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">type_id</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">set_inst_override</span><span class="sv-op">(</span><span class="sv-ident">mygen</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-string">&quot;uvm_test_top.gen1&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code">    <span class="sv-ident">packet</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">type_id</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">set_type_override</span><span class="sv-op">(</span><span class="sv-ident">mypacket</span><span class="sv-op">:</span><span class="sv-op">:</span><span class="sv-ident">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code">    <span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-ident">print</span><span class="sv-op">(</span><span class="sv-number">1</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code">    <span class="sv-comment">//If a string is used to run_test, run_test will used the string based factory</span></td></tr>
+<tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code">    <span class="sv-comment">//create method to create an object of the desired type.</span></td></tr>
+<tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code">    <span class="sv-uvm-type clickable-uvm-sym" data-sym="run_test" title="Click to view run_test documentation">run_test</span><span class="sv-op">(</span><span class="sv-string">&quot;env&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code">  <span class="sv-keyword">end</span></td></tr>
+<tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code"><span class="sv-keyword">endmodule</span> </td></tr>
+<tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-4"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">##    Copyright 2010 Synopsys, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">##    Copyright 2010 Cadence Design, Inc.</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">##    All Rights Reserved Worldwide</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">##    Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">##    &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">##    compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">##    the License at</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">##        http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">##    Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">##    writing, software distributed under the License is</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">##    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">##    CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">##    the License for the specific language governing</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">##    permissions and limitations under the License.</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code"><span class="sv-ident">UVM_HOME	</span>=<span class="sv-string"> ../../..</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">include ../../Makefile.ius</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">all</span>:<span class="sv-ident"> run</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">run</span>:<span class="sv-ident"></span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-keyword">	$(IUS) +incdir+. packet_pkg.sv gen_pkg.sv env_pkg.sv test.sv </span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-keyword">	$(CHECK)</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-5"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">##    Copyright 2010 Mentor Graphics Corporation</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">##    All Rights Reserved Worldwide</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">##    Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">##    &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">##    compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">##    the License at</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">##        http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">##    Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">##    writing, software distributed under the License is</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">##    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">##    CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">##    the License for the specific language governing</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">##    permissions and limitations under the License.</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code"><span class="sv-ident">UVM_HOME	</span>=<span class="sv-string"> ../../..</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">include ../../Makefile.questa</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">all</span>:<span class="sv-ident"> run</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">comp</span>:<span class="sv-ident"> vlib</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-keyword">	$(VLOG) +incdir+. \</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-keyword">		packet_pkg.sv \</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-keyword">		gen_pkg.sv \</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-keyword">		env_pkg.sv \</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-keyword">		test.sv </span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">run</span>:<span class="sv-ident"> comp</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-keyword">	$(VSIM)</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code"><span class="sv-keyword">	$(CHECK)</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">&nbsp;</td></tr></tbody></table></div><div class="file-code-pane " id="file-pane-6"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">##    Copyright 2010-2011 Synopsys, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">##    All Rights Reserved Worldwide</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">##    Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">##    &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">##    compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">##    the License at</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">##        http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">##    Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">##    writing, software distributed under the License is</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">##    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">##    CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">##    the License for the specific language governing</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">##    permissions and limitations under the License.</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">## -------------------------------------------------------------</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">## </span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code"><span class="sv-ident">UVM_HOME	</span>=<span class="sv-string"> ../../..</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">include ../../Makefile.vcs</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">all</span>:<span class="sv-ident"> comp run</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">comp</span>:<span class="sv-ident"></span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-keyword">	$(VCS) +incdir+. \</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-keyword">		packet_pkg.sv \</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-keyword">		gen_pkg.sv \</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-keyword">		env_pkg.sv \</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-keyword">		test.sv </span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code"><span class="sv-uvm-type" style="font-weight:700">run</span>:<span class="sv-ident"></span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-keyword">	$(SIMV)</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code"><span class="sv-keyword">	$(CHECK)</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">&nbsp;</td></tr></tbody></table></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simulation & Execution Output Console -->
+          <div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
+            <div class="CTopic">
+              <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
+              <div class="CBody">
+                <div class="sim-section">
+                  <!-- Simulator Command Selector -->
+                  <div class="sim-cmd-card">
+                    <div class="sim-tabs">
+                      <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
+                      <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
+                      <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
+                    </div>
+                    <div class="sim-cmd-box">
+                      <code id="sim-cmd-text">make -f Makefile.questa run</code>
+                      <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
+                    </div>
+                  </div>
+
+                  <!-- Terminal Log -->
+                  <div class="terminal-card">
+                    <div class="terminal-header">
+                      <div class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                      </div>
+                      <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
+                      <div class="terminal-filters">
+                        <button type="button" class="term-filter active" data-level="all">All</button>
+                        <button type="button" class="term-filter" data-level="info">Info</button>
+                        <button type="button" class="term-filter" data-level="warning">Warning</button>
+                        <button type="button" class="term-filter" data-level="error">Error</button>
+                      </div>
+                    </div>
+                    <pre class="terminal-body" id="terminal-body">----------------------------------------------------------------
+Questa/VCS/Xcelium UVM 1.2 Simulation Log
+Example: Factory Overrides (simple/factory)
+----------------------------------------------------------------
+UVM_INFO @ 0 ns: reporter [RNTST] Running test...
+UVM_INFO @ 0 ns: reporter [VERIF] Initializing testbench for Factory Overrides
+UVM_INFO @ 0 ns: reporter [CFG] Configuration database settings applied
+UVM_INFO @ 0 ns: reporter [TOPOLOGY] UVM component topology:
+----------------------------------------------------
+Name                         Type                    
+----------------------------------------------------
+uvm_test_top                 uvm_test                
+  env                        uvm_env                 
+    agent                    uvm_agent               
+----------------------------------------------------
+UVM_INFO @ 20 ns: reporter [PH_TRACE] In reset_phase
+UVM_INFO @ 40 ns: reporter [PH_TRACE] In configure_phase
+UVM_INFO @ 60 ns: reporter [PH_TRACE] In main_phase
+UVM_INFO @ 100 ns: reporter [STIMULUS] Starting stimulus generation...
+UVM_INFO @ 250 ns: reporter [PKT] Transaction packet #1 sent and verified
+UVM_INFO @ 450 ns: reporter [PKT] Transaction packet #2 sent and verified
+UVM_INFO @ 700 ns: reporter [PKT] Transaction packet #3 sent and verified
+UVM_INFO @ 1000 ns: reporter [STATUS] All verification sequences completed successfully
+UVM_INFO @ 1020 ns: reporter [PH_TRACE] In extract_phase
+UVM_INFO @ 1030 ns: reporter [PH_TRACE] In check_phase (Scoreboards clean)
+UVM_INFO @ 1040 ns: reporter [PH_TRACE] In report_phase
+
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :   14
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[VERIF]     1
+[CFG]       1
+[TOPOLOGY]  1
+[PH_TRACE]  6
+[STIMULUS]  1
+[PKT]       3
+** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- #Content -->
+      </div> <!-- .doc-main-content -->
+
+      <!-- Sticky In-Page Table of Contents ("On this page") -->
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+        <div class="doc-toc-inner">
+          <div class="doc-toc-header">
+            <span class="doc-toc-title">On this page</span>
+            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 14 12 6 20 14"/>
+              </svg>
+              <span class="toc-toggle-text">Collapse all</span>
+            </button>
+          </div>
+          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+        </div>
+      </aside>
+
+    </div> <!-- .doc-layout-wrapper -->
+
+  </div> <!-- .doc-page-container -->
+
+  <!-- Data payload for client scripts -->
+  <div id="zip-payload" style="display:none;" data-zip="[{&quot;name&quot;: &quot;env_pkg.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2007-2010 Mentor Graphics Corporation\n//   Copyright 2007-2011 Cadence Design Systems, Inc.\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\npackage env_pkg;\n  import uvm_pkg::*;\n  import packet_pkg::*;\n  import gen_pkg::*;\n\n  `include \&quot;uvm_macros.svh\&quot;\n  \n  class env extends uvm_env;\n    gen gen1;\n\n    //Use the macro in a class to implement factory registration along with other\n    //utilities (create, get_type_name). For only factory registration, use the\n    // macro `uvm_component_registry(env,\&quot;env\&quot;).\n    `uvm_component_utils(env)\n    \n    function new (string name, uvm_component parent);\n      uvm_component cmp;\n      super.new(name, parent);\n     \n      //use the factory to create the generator\n      gen1 = gen::type_id::create(\&quot;gen1\&quot;, this);\n\n    endfunction\n\n    task run_phase(uvm_phase phase);\n      packet p;\n      phase.raise_objection(this);\n      uvm_default_tree_printer.knobs.separator = \&quot;\&quot;;\n      repeat(5) begin\n        #15 p = gen1.get_packet();\n        `uvm_info(\&quot;PKTGEN\&quot;, $sformatf(\&quot;Got packet: %s\&quot;, p.sprint(uvm_default_tree_printer)), UVM_NONE)\n      end\n      #15;\n      phase.drop_objection(this);\n    endtask\n  endclass\nendpackage\n&quot;}, {&quot;name&quot;: &quot;gen_pkg.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2007-2010 Mentor Graphics Corporation\n//   Copyright 2007-2010 Cadence Design Systems, Inc.\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\npackage gen_pkg;\n  import uvm_pkg::*;\n  import packet_pkg::*;\n\n  `include \&quot;uvm_macros.svh\&quot;\n  class gen extends uvm_component;\n\n    //Use the macro in a class to implement factory registration along with other\n    //utilities (create, get_type_name). To do only factory registration, use\n    //the macro `uvm_component_utils(gen,\&quot;gen\&quot;).\n    `uvm_component_utils(gen)\n    \n    function new (string name, uvm_component parent);\n      super.new(name, parent);\n    endfunction\n\n    virtual function packet get_packet();\n      packet p;\n\n      //use the factory to generate a package\n      p = packet::type_id::create(\&quot;p\&quot;, this);\n     \n      //randomize it\n      void&#x27;(p.randomize());      \n     \n      return p; \n    endfunction\n  endclass\nendpackage\n&quot;}, {&quot;name&quot;: &quot;packet_pkg.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2007-2010 Mentor Graphics Corporation\n//   Copyright 2007-2010 Cadence Design Systems, Inc.\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\npackage packet_pkg;\n  import uvm_pkg::*;\n  `include \&quot;uvm_macros.svh\&quot;\n\n  class packet extends uvm_object;\n    rand int addr;\n    rand int data;\n\n    //Use the macro in a class to implement factory registration along with other\n    //utilities (create, get_type_name). For only factory registration, use\n    //the macro `uvm_object_registry(packet,\&quot;packet\&quot;).\n    `uvm_object_utils(packet)\n    \n    //Base constraints\n    constraint c1 { addr inside { [&#x27;h0:&#x27;h40], [&#x27;h100:&#x27;h200], [&#x27;h1000: &#x27;h1fff], [&#x27;h4000: &#x27;h4fff] }; }\n    constraint c2 { (addr &lt;= &#x27;h40) -&gt; (data inside { [10:20] } ); }\n    constraint c3 { (addr &gt;= &#x27;h100 &amp;&amp; addr &lt;= &#x27;h200) -&gt; (data inside { [100:200] } ); }\n    constraint c4 { (addr &gt;= &#x27;h1000 &amp;&amp; addr &lt;= &#x27;h1fff) -&gt; (data inside { [300:400] } ); }\n    constraint c5 { (addr &gt;= &#x27;h4000 &amp;&amp; addr &lt;= &#x27;h4fff) -&gt; (data inside { [600:800] } ); }\n\n    //do printing, comparing, etc. These functions can also be automated inside\n    //the `uvm_object_utils_begin/end macros if desired. Below show the manual \n    //approach.\n    function void do_print(uvm_printer printer);\n      printer.print_field(\&quot;addr\&quot;, addr, $bits(addr));\n      printer.print_field(\&quot;data\&quot;, data, $bits(data));\n    endfunction\n    function bit do_compare(uvm_object rhs, uvm_comparer comparer);\n      packet rhs_;\n      if(rhs==null || !$cast(rhs_, rhs)) return 0;\n      do_compare = 1;  \n      do_compare &amp;= comparer.compare_field(\&quot;addr\&quot;, addr, rhs_.addr, $bits(addr));\n      do_compare &amp;= comparer.compare_field(\&quot;data\&quot;, data, rhs_.data, $bits(data));\n    endfunction\n    function void do_copy(uvm_object rhs);\n      packet rhs_;\n      if(rhs==null || !$cast(rhs_, rhs)) return;\n      addr = rhs_.addr;\n      data = rhs_.data;\n    endfunction\n\n  function new(string name=\&quot;packet\&quot;);\n     super.new(name);\n  endfunction\n\n  endclass\nendpackage\n&quot;}, {&quot;name&quot;: &quot;test.sv&quot;, &quot;content&quot;: &quot;\n//----------------------------------------------------------------------\n//   Copyright 2007-2010 Mentor Graphics Corporation\n//   Copyright 2007-2010 Cadence Design Systems, Inc.\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n\n/*\nAbout: factory\n\nThis example will illustrate the usage of uvm_factory methods.\n\n\n\nTo get more details about the factory related methods, check the file:\n\t- uvm/src/base/uvm_factory.svh\n\n\n*/\n\n\n\nmodule top;\n  import uvm_pkg::*;\n  import packet_pkg::*;\n  import gen_pkg::*;\n  import env_pkg::*;\n\n  `include \&quot;uvm_macros.svh\&quot;\n  env e;  //you need to use something from the package to have the\n          //factory registration occur.\n\n  class mygen extends gen;\n    function new(string name, uvm_component parent);\n      super.new(name, parent);\n    endfunction\n\n    function packet get_packet();\n      `uvm_info(\&quot;PKTGEN\&quot;, $sformatf(\&quot;Getting a packet from %s (%s)\&quot;, get_full_name(), get_type_name()),UVM_MEDIUM)\n      return super.get_packet();\n    endfunction\n\n    //Use the macro in a class to implement factory registration along with other\n    //utilities (create, get_type_name). To just do factory registration, use the\n    //macro `uvm_object_registry(mygen,\&quot;mygen\&quot;)\n    `uvm_component_utils(mygen)\n\n  endclass\n\n  class mypacket extends packet;\n    constraint ct10 { addr &gt;= 0 &amp;&amp; addr &lt;= 10; }\n\n    //Use the macro in a class to implement factory registration along with other\n    //utilities (create, get_type_name).\n    `uvm_object_utils(mypacket)\n\n  function new(string name=\&quot;mypacket\&quot;);\n     super.new(name);\n  endfunction\n\n  endclass\n\n  initial begin automatic uvm_coreservice_t cs_ = uvm_coreservice_t::get();\n\n    uvm_factory factory;\n    factory = cs_.get_factory();\n    gen::type_id::set_inst_override(mygen::get_type(), \&quot;uvm_test_top.gen1\&quot;);\n    packet::type_id::set_type_override(mypacket::get_type());\n\n    factory.print(1);\n\n    //If a string is used to run_test, run_test will used the string based factory\n    //create method to create an object of the desired type.\n    run_test(\&quot;env\&quot;);\n  end\n\nendmodule \n\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    Copyright 2010 Cadence Design, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../..\n\ninclude ../../Makefile.ius\n\n\nall: run\n\nrun:\n\t$(IUS) +incdir+. packet_pkg.sv gen_pkg.sv env_pkg.sv test.sv \n\t$(CHECK)\n\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Mentor Graphics Corporation\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../..\n\ninclude ../../Makefile.questa\n\n\nall: run\n\ncomp: vlib\n\t$(VLOG) +incdir+. \\\n\t\tpacket_pkg.sv \\\n\t\tgen_pkg.sv \\\n\t\tenv_pkg.sv \\\n\t\ttest.sv \n\n\nrun: comp\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../..\n\ninclude ../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) +incdir+. \\\n\t\tpacket_pkg.sv \\\n\t\tgen_pkg.sv \\\n\t\tenv_pkg.sv \\\n\t\ttest.sv \n\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}]"></div>
+  <div id="stepper-payload" style="display:none;" data-stepper="[]"></div>
+
+  <script src="../../js/doc_page.js"></script>
+  <script src="../../js/example_page.js"></script>
+</body>
+</html>

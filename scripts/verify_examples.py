@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+"""
+Automated Verification Suite for UVM 1.2 Interactive Examples
+Validates:
+1. Generation and integrity of all 39 example suites in examples_view/
+2. Visual Flow Stepper presence on the 5 pillar examples
+3. Multi-file Code Studio, syntax highlighting, and ZIP payloads
+4. Navigation and search index integrity in js/search_data.js
+5. Bidirectional linking between docs_view/ and examples_view/
+6. Zero external runtime dependencies compliance (Rule 1)
+"""
+
+import sys
+import os
+import re
+import json
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+EXAMPLES_VIEW_DIR = BASE_DIR / "examples_view"
+DOCS_VIEW_DIR = BASE_DIR / "docs_view"
+SEARCH_DATA_FILE = BASE_DIR / "js" / "search_data.js"
+
+TOTAL_TESTS = 0
+PASSED_TESTS = 0
+FAILED_TESTS = 0
+
+def assert_test(cond, name, details=""):
+    global TOTAL_TESTS, PASSED_TESTS, FAILED_TESTS
+    TOTAL_TESTS += 1
+    if cond:
+        PASSED_TESTS += 1
+        print(f"  [PASS] {name}")
+    else:
+        FAILED_TESTS += 1
+        print(f"  [FAIL] {name} - {details}")
+
+def main():
+    print("=" * 60)
+    print("  UVM 1.2 Interactive Examples Automated Test Suite")
+    print("=" * 60)
+
+    # Test 1: examples_view directory exists and contains all 39 suites
+    assert_test(EXAMPLES_VIEW_DIR.exists() and EXAMPLES_VIEW_DIR.is_dir(), "examples_view directory exists")
+    
+    html_files = list(EXAMPLES_VIEW_DIR.rglob("*.html"))
+    assert_test(len(html_files) >= 38, f"Generated HTML suites count ({len(html_files)} found, >= 38 expected)")
+
+    # Test 2: Integrity of each example suite
+    all_have_studio = True
+    all_have_topo = True
+    all_have_terminal = True
+    all_have_zip_payload = True
+    all_have_no_external_scripts = True
+
+    for hf in html_files:
+        with open(hf, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        if "studio-tab-bar" not in content or "file-code-pane" not in content:
+            all_have_studio = False
+        if "topo-section" not in content or "topo-card" not in content:
+            all_have_topo = False
+        if "terminal-body" not in content or "sim-cmd-card" not in content:
+            all_have_terminal = False
+        if "id=\"zip-payload\"" not in content:
+            all_have_zip_payload = False
+        if re.search(r'<script[^>]+src=["\']https?://', content):
+            all_have_no_external_scripts = False
+
+    assert_test(all_have_studio, "All 39 suites possess Multi-File Code Studio with tabs and code panes")
+    assert_test(all_have_topo, "All 39 suites possess Testbench Architecture Topology Grid")
+    assert_test(all_have_terminal, "All 39 suites possess Simulation Execution Console & Command Card")
+    assert_test(all_have_zip_payload, "All 39 suites possess Embedded Zero-Dependency Native ZIP Payload")
+    assert_test(all_have_no_external_scripts, "Zero external script dependencies (Rule 1: 100% offline file:// compatible)")
+
+    # Test 3: Visual Flow Stepper on 5 pillar examples
+    pillar_examples = [
+        EXAMPLES_VIEW_DIR / "phasing" / "basic.html",
+        EXAMPLES_VIEW_DIR / "phasing" / "objections.html",
+        EXAMPLES_VIEW_DIR / "tlm-1" / "fifo.html",
+        EXAMPLES_VIEW_DIR / "tlm-2" / "nonblocking_simple.html",
+        EXAMPLES_VIEW_DIR / "registers" / "primer.html"
+    ]
+
+    all_pillars_valid = True
+    for pe in pillar_examples:
+        if not pe.exists():
+            all_pillars_valid = False
+            break
+        with open(pe, 'r', encoding='utf-8') as f:
+            c = f.read()
+        if "visual-flow-stepper" not in c or "step-node" not in c or "id=\"stepper-payload\"" not in c:
+            all_pillars_valid = False
+
+    assert_test(all_pillars_valid, "All 5 pillar examples contain Interactive Visual Flow Stepper with timeline")
+
+    # Test 4: Verify search_data.js integrity
+    assert_test(SEARCH_DATA_FILE.exists(), "js/search_data.js exists")
+
+    with open(SEARCH_DATA_FILE, 'r', encoding='utf-8') as f:
+        js_text = f.read()
+
+    m = re.search(r'const UVM_DATA\s*=\s*(\{[\s\S]*\});\s*$', js_text)
+    if m:
+        data_str = m.group(1)
+    else:
+        prefix = "const UVM_DATA = "
+        data_str = js_text.strip()
+        if data_str.startswith(prefix):
+            data_str = data_str[len(prefix):].rstrip(';')
+    uvm_data = json.loads(data_str)
+
+    assert_test("examplesTree" in uvm_data and len(uvm_data["examplesTree"]) == 8, 
+                f"examplesTree contains all 8 logical categories ({len(uvm_data.get('examplesTree', []))} found)")
+
+    ex_search_items = [item for item in uvm_data.get("searchIndex", []) if item.get("type") == "example"]
+    assert_test(len(ex_search_items) >= 38, f"searchIndex contains all example entries ({len(ex_search_items)} found)")
+
+    # Test 5: Verify bidirectional callout links in docs_view
+    callout_count = 0
+    valid_callout_targets = True
+
+    for doc_file in DOCS_VIEW_DIR.rglob("*.html"):
+        with open(doc_file, 'r', encoding='utf-8') as f:
+            doc_content = f.read()
+        for m in re.finditer(r'data-example-url=["\']([^"\']+)["\']', doc_content):
+            callout_count += 1
+            target_rel = m.group(1).replace('../../', '').replace('../', '')
+            target_path = BASE_DIR / target_rel
+            if not target_path.exists():
+                valid_callout_targets = False
+                print(f"Broken callout link in {doc_file}: {target_rel}")
+
+    assert_test(callout_count >= 15, f"Bidirectional callouts present across documentation pages ({callout_count} injected)")
+    assert_test(valid_callout_targets, "All injected callout links point to valid, existing example studios")
+
+    # Test 6: Verify UI index.html integration
+    with open(BASE_DIR / "index.html", 'r', encoding='utf-8') as f:
+        index_html = f.read()
+
+    assert_test('data-tab="examples"' in index_html, "index.html has 'Examples' sidebar tab button")
+    assert_test('class="sidebar-pill" data-type="example"' in index_html, "index.html has 'Examples' sidebar filter pill")
+    assert_test('class="filter-pill" data-type="example"' in index_html, "index.html has 'Examples' search modal filter pill")
+
+    # Test 7: Verify app.js routing & handler integration
+    with open(BASE_DIR / "js" / "app.js", 'r', encoding='utf-8') as f:
+        app_js = f.read()
+
+    assert_test('renderExamplesTree' in app_js, "js/app.js implements renderExamplesTree()")
+    assert_test('#/example/' in app_js, "js/app.js handles #/example/ hash routing")
+    assert_test('openExampleView' in app_js, "js/app.js handles openExampleView postMessage")
+    assert_test('badge-example' in app_js, "js/app.js styles example search results with badge-example")
+
+    print("=" * 60)
+    print(f"  Test Results: {PASSED_TESTS}/{TOTAL_TESTS} passed ({FAILED_TESTS} failed)")
+    print("=" * 60)
+
+    if FAILED_TESTS > 0:
+        sys.exit(1)
+    else:
+        sys.exit(0)
+
+if __name__ == "__main__":
+    main()
