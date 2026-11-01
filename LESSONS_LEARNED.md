@@ -249,4 +249,50 @@ Le fichier de données de recherche [`js/search_data.js`](file:///c:/Dev/UVM_doc
 ### 9.4 Extraits Intelligents (*Smart Snippets*) sans Surcharge
 - Plutôt que d'exécuter un modèle NLP lourd pour générer des résumés, le système découpe le segment en phrases via regex et calcule la densité de pertinence textuelle uniquement sur le **Top 10** des résultats au moment de l'affichage (< 2 ms).
 
+---
+
+## 10. Pièges de Structuration des Données Héritées & Parsing Multi-Sujets
+
+### Piège 10.1 : La Confusion entre "Contents" et "Summary"
+- **Symptôme** : Dans les fichiers multi-classes (ex. `uvm_port_base-svh.html`, `uvm_callback-svh.html`, 53 fichiers au total), cliquer sur "Summary" dans le sommaire scrollait vers une table intitulée `Contents` (la liste des classes du fichier), tandis que les véritables tables de méthodes des classes étaient écrasées ou confondues.
+- **Cause racine** : NaturalDocs génère la même classe CSS `<div class=Summary>` pour la table récapitulative des contenus du fichier (`<div class=STitle>Contents</div>`) et pour les résumés des méthodes de chaque classe (`<div class=STitle>Summary</div>`). Un simple remplacement global par chaîne de caractères dans `build_docs.py` attribuait le même identifiant dupliqué `id="doc-nav-summary"` à toutes ces tables !
+- **Solution pérenne** :
+  1. Inspecter le contenu textuel réel de chaque `<div class="STitle">` lors du parsing Python.
+  2. Assigner des identifiants et des classes CSS spécifiques et uniques :
+     - Table globale de fichier : `id="doc-nav-contents" data-anchor="Contents"` avec classe `.ContentsSummary`.
+     - Tables de résumés par classe : `id="doc-nav-summary-{topicId}" data-anchor="Summary-{topicId}"` avec classe `.ClassSummary`.
+  3. Mettre à jour `extract_doc_headings()` pour enregistrer séparément l'ancre `Contents` et l'ancre `Summary` dans l'arbre documentaire.
+
+### Piège 10.2 : Le Double Échappement des Entités HTML dans les Menus et Listes
+- **Symptôme** : Des titres comme `TLM Generic Payload &amp; Extensions` ou `What&rsquo;s Changed` s'affichaient avec leurs entités HTML littérales dans le menu de gauche et les info-bulles.
+- **Cause racine** : `menu.html` et les fichiers HTML NaturalDocs stockaient déjà du texte contenant des entités HTML (`&amp;`, `&rsquo;`). Côté frontend, les fonctions d'affichage et de surbrillance (`highlightMatch()`) appelaient à leur tour `escapeHtml(text)`. Le `&` de `&amp;` était ainsi ré-échappé en `&amp;amp;`, produisant un double échappement visible.
+- **Règle d'or** :
+  - **Toutes les chaînes extraites de HTML lors du build doivent être normalisées en texte brut** via `html.unescape()` avant d'être insérées dans les structures de données JSON / JS (`search_data.js`).
+  - Le frontend peut alors appliquer sereinement son propre échappement XSS (`escapeHtml`) au moment du rendu sans risque de double échappement.
+
+### Piège 10.3 : Récursion Infinie des Iframes par Clics Relatifs
+- **Symptôme** : Cliquer sur le logo ou le lien racine d'un fil d'Ariane (`doc-breadcrumbs`) à l'intérieur d'une page de documentation ouvrait une réplique complète du portail principal `index.html` à l'intérieur de la sous-iframe (mise en abyme).
+- **Règle d'or** :
+  - Pour tout lien renvoyant vers le shell de navigation ou la racine de l'application, toujours forcer la cible au niveau supérieur (`target="_top"`).
+  - Côté contrôleur client (`doc_page.js`), intercepter les clics sur les éléments de fil d'Ariane racine pour communiquer avec le parent via `window.parent.postMessage({ type: 'openDocView', ... })` au lieu de laisser le navigateur résoudre l'URL localement dans l'iframe.
+
+### Piège 10.4 : Clarté Visuelle & État par Défaut des Cartes de Sous-Classes (`derived-classes-card`)
+- **Symptôme** : L'injection de la liste des sous-classes polymorphiques sous le titre de chaque classe occupait un espace vertical important dès l'ouverture de la page, masquant la description et les méthodes principales.
+- **Solution pérenne** :
+  - Encapsuler la liste dans une carte stylisée discrète dotée d'une bordure latérale Google Blue (`.derived-classes-card`).
+  - **Replier la carte par défaut** via la classe `.collapsed` (`display: none` sur la liste des pilules).
+  - Fournir un en-tête cliquable (`role="button"`, `tabindex="0"`) avec un chevron rotatif animé et un gestionnaire d'événements clavier (`Entrée` / `Espace`) et souris.
+
+### Piège 10.5 : Précision du Routage Profond vers les Classes Dérivées
+- **Symptôme** : Les pilules de sous-classes renvoyaient vers l'ancre générique `#doc-nav-main`. Si la classe cible partageait un fichier avec d'autres classes (fichiers multi-classes), le clic atterrissait en haut du fichier plutôt qu'au niveau du titre de la classe cible.
+- **Solution pérenne** : Lors de la génération des pilules dans `build_docs.py`, consulter le dictionnaire global d'ancres `GLOBAL_DOC_ANCHOR_MAPS[doc_file]` pour pointer vers l'identifiant exact de la classe (`#doc-nav-item-X`) avec l'attribut `data-target-id`.
+
+### Piège 10.6 : Bouton de Copie d'Ancre Directe au Survol des Titres
+- **Pattern moderne (Google Developer Docs)** : Les titres de rubriques et de méthodes affichent une icône de chaîne de lien au survol (`.doc-anchor-link-btn`).
+- **Piège UX** : Si le clic effectue uniquement une copie dans le presse-papiers sans retour visuel, l'utilisateur doute de la prise en compte de l'action.
+- **Solution** :
+  1. Copie de l'URL complète avec le hash profond correspondant (`location.origin + location.pathname + '#' + targetId`).
+  2. Remplacement temporaire (1,5 s) de l'icône par un checkmark vert accompagné d'un tooltip *"Link copied!"* avec classe `.copied`.
+
+
 

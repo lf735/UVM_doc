@@ -35,7 +35,15 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | | **Respect de la Casse** | Bascule `Aa` (`Alt+C`) pour différencier les identifiants sensibles à la casse. |
 | | **Filtres Multi-Sélection Non Exclusifs**| Pilules (`All`, `Classes`, `Functions`, `Tasks`, `Macros`, `Files`) activables simultanément sans repli forcé. |
 | | **Bouton Effacer (`Clear / ×`)** | Nettoyage instantané du champ au clic ou via une première pression sur la touche `Escape`. |
-| **Documentation (`docs_view`)** | **Bannière "View Source"** | En-tête injecté avec lien direct vers la ligne exacte d'implémentation dans le code source. |
+| **Documentation (`docs_view`)** | **Bannière "View Source" Discrète** | En-tête injecté avec bouton compact iconique (`.banner-icon-btn`) et badge de ligne, discret et sans bouton verbeux encombrant. |
+| | **Hiérarchie Polymorphique Directe** | Boîte repliable `.derived-classes-card` listant les sous-classes directes sous forme de pilules cliquables, repliée par défaut (`.collapsed`) pour économiser l'espace. |
+| | **Routage Précis des Liens Dérivés** | Redirection vers l'ancre exacte de la classe au sein de la page cible (`#doc-nav-item-X`) au lieu du haut de page générique. |
+| | **Bouton Copie d'Ancre au Survol** | Icône de chaîne de lien apparaissant au survol de chaque titre (`.doc-anchor-link-btn`) copiant le lien direct avec feedback "Link copied!". |
+| | **Protection Anti-Récursion Iframe** | Liens de fil d'Ariane (`doc-breadcrumbs`) configurés avec `target="_top"` et interceptés en JS pour éviter toute duplication en abyme du portail dans une sous-iframe. |
+| | **Documentation des Classes Orphelines** | Génération de pages documentaires pour les 15 classes UVM réelles non documentées dans l'historique NaturalDocs (ex. `uvm_spell_chkr`, `uvm_resource_specializations`). |
+| | **Index NaturalDocs Modernisés** | 26 pages d'index A-Z héritées modernisées dans `docs_view/index/` et pleinement reliées aux onglets de navigation. |
+| | **Différenciation Contents / Summary**| Séparation nette entre la table de contenu de fichier (`Contents`) et les résumés de méthodes de classe (`Summary`), sans collision d'identifiants DOM. |
+| | **Normalisation des Entités HTML** | Décodage systématique des entités (`&amp;`, `&rsquo;`) garantissant un rendu propre sans double échappement dans les menus. |
 | | **Sommaire Interne ("On this page")** | Barre latérale droite dynamique avec défilement espion (Scrollspy) et repli par groupes. |
 | | **Défilement Précis des Liens** | Compensation de la marge supérieure (`scroll-margin-top`), suppression des conflits `scrollIntoView`, micro-ajustement géométrique. |
 | | **Syntax Highlighting & Copie** | Coloration SystemVerilog des blocs `<pre>` et prototypes de méthodes avec bouton de copie en un clic. |
@@ -146,6 +154,14 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
 - **Exécution locale** : L'embedding de la requête est généré directement sur le matériel de l'utilisateur (WASM/WebGPU via Transformers.js).
 - **Précalcul CI/CD** : La base vectorielle de la documentation est calculée une fois pour toutes lors du déploiement GitHub Pages via `scripts/build_rag_embeddings.py` et stockée au format binaire compact `data/rag_embeddings.bin`.
 - **Hygiène Mémoire** : Aucun modèle n'est téléchargé au chargement initial du site (0 Ko supplémentaire). L'instance en mémoire vive (RAM) est libérée dès la fermeture de la recherche.
+
+### Règle 7 : Hygiène des Liens Iframe et Découplage de Contexte
+- **Principe** : Une sous-page chargée dans une iframe (`docs_view`) ne doit jamais tenter de réinjecter le portail parent en son sein.
+- **Règle** : Les liens menant à l'accueil ou au portail racine doivent porter `target="_top"`. Tout lien interne menant au code source ou à une autre page doit être intercepté via `postMessage` pour piloter la SPA parente de manière cohérente.
+
+### Règle 8 : Normalisation Systématique des Entités HTML au Build
+- **Principe** : Tout texte extrait de fichiers HTML historiques (NaturalDocs, XML) doit être converti en texte brut via `html.unescape()` avant stockage dans les index JavaScript / JSON.
+- **Règle** : Ne jamais stocker de chaînes contenant des entités brutes (`&amp;`, `&rsquo;`) dans les structures de données, afin d'éviter les doubles échappements lors de l'application des filtres ou de la coloration syntaxique frontend.
 
 ---
 
