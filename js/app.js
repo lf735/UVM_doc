@@ -1180,8 +1180,8 @@ document.addEventListener('DOMContentLoaded', () => {
               ? `<a href="#" data-doc-href="${item.overviewHref}" class="nav-group-title-link nav-item-link ${isOverviewActive ? 'active' : ''}" title="View ${escapeHtml(item.title)} Overview">${highlightMatch(item.title, matcher)}</a>`
               : `<span class="nav-group-title-text">${highlightMatch(item.title, matcher)}</span>`;
 
-            out += `<div class="nav-group ${hasOverview ? 'has-overview' : ''}" style="margin-left: 0.5rem">
-          <div class="nav-group-header" style="font-size:0.775rem;">
+            out += `<div class="nav-group ${hasOverview ? 'has-overview' : ''}">
+          <div class="nav-group-header">
             ${titleHtml}
             <button type="button" class="nav-group-chevron-btn" title="Toggle section" aria-label="Toggle ${escapeHtml(item.title)} section">
               <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
