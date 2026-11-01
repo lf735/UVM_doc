@@ -1140,6 +1140,8 @@ def build_suite_page(suite_key, meta, files):
         </div>
         """
 
+    scope_badge = f'<span class="badge badge-scope badge-scope-integrated">Integrated VIP / Env</span>' if meta.get("scope") == "Integrated" else ''
+
     # Generate page HTML fully harmonized with docs_view layout and design tokens
     page_html = f"""<!DOCTYPE html>
 <html lang="en" data-theme="light" class="doc-page example-page">
@@ -1170,12 +1172,16 @@ def build_suite_page(suite_key, meta, files):
         <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         <span class="file-label">Suite:</span>
         <code class="banner-file-code">uvm-1.2/examples/{suite_key}</code>
-        <span class="badge badge-scope">{html.escape(meta["scope"])}</span>
+        {scope_badge}
         <span class="badge badge-diff badge-diff-{meta["difficulty"].lower()}">{html.escape(meta["difficulty"])}</span>
         <span class="badge badge-files">{len(files_data)} files</span>
       </div>
 
       <div class="banner-actions">
+        <button type="button" class="btn btn-outline" id="btn-copy-example-link" title="Copy shareable link to this example">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          <span id="btn-copy-link-text">Copy Link</span>
+        </button>
         <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="{paired_src}" title="View side-by-side with UVM source code in Split View">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
           <span>Split View</span>
@@ -1415,13 +1421,15 @@ def generate_all_examples():
     # Build search items
     example_search_items = []
     for s in suites_built:
+        scope_txt = f", {s['scope']} VIP" if s.get('scope') == 'Integrated' else ""
         example_search_items.append({
             "name": s["title"],
             "type": "example",
             "category": f"Examples / {s['category_title']}",
+            "difficulty": s["difficulty"],
             "src": s["href"],
             "doc": s["href"],
-            "desc": f"UVM 1.2 Example: {s['summary']} (Scope: {s['scope']}, Level: {s['difficulty']}, {s['files_count']} files)"
+            "desc": f"UVM 1.2 Example: {s['summary']} ({s['difficulty']} level{scope_txt}, {s['files_count']} files)"
         })
 
     return {

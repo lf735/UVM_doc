@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const sidebarFilter = document.getElementById('sidebar-filter');
   const sidebarFilterClear = document.getElementById('sidebar-filter-clear');
   const sidebarFilterRegex = document.getElementById('sidebar-filter-regex');
-  const sidebarPills = document.querySelectorAll('.sidebar-pill');
+  const sidebarPillsContainer = document.getElementById('sidebar-filter-pills');
+  let sidebarPills = document.querySelectorAll('.sidebar-pill');
   const sidebarToggleAll = document.getElementById('sidebar-toggle-all');
   const splitDivider = document.getElementById('split-divider');
 
@@ -296,6 +297,9 @@ document.addEventListener('DOMContentLoaded', () => {
         tabBtns.forEach(btn => {
           btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
         });
+        if (typeof updateSidebarPillsForTab === 'function') {
+          updateSidebarPillsForTab();
+        }
         renderSidebar();
       }
 
@@ -727,7 +731,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Example Filter
         if (filterSet.has('example')) {
-          if (isExample) return true;
+          if (isExample) {
+            if (filterSet.has('beginner') || filterSet.has('intermediate') || filterSet.has('advanced')) {
+              const desc = (r.snippet || (r.chunk && r.chunk.text) || '').toLowerCase();
+              const diff = ((r.chunk && r.chunk.difficulty) || '').toLowerCase();
+              const cat = (r.category || '').toLowerCase();
+              let matchDiff = false;
+              ['beginner', 'intermediate', 'advanced'].forEach(d => {
+                if (filterSet.has(d)) {
+                  if (diff === d || cat.includes(d) || desc.includes(d + ' level') || desc.includes('level: ' + d)) {
+                    matchDiff = true;
+                  }
+                }
+              });
+              return matchDiff;
+            }
+            return true;
+          }
         }
         if (filterSet.size === 1 && filterSet.has('example') && !isExample) {
           return false;
@@ -898,9 +918,45 @@ document.addEventListener('DOMContentLoaded', () => {
           tabBtns.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           activeSidebarTab = btn.getAttribute('data-tab');
+          updateSidebarPillsForTab();
           renderSidebar();
         });
       });
+
+      function updateSidebarPillsForTab() {
+        if (!sidebarPillsContainer) return;
+        // Reset sidebarFilterTypes to 'all' when switching tabs so filters from one tab don't block the other
+        sidebarFilterTypes.clear();
+        sidebarFilterTypes.add('all');
+
+        if (activeSidebarTab === 'examples') {
+          sidebarPillsContainer.innerHTML = `
+            <button class="sidebar-pill active" data-type="all">All</button>
+            <button class="sidebar-pill" data-type="beginner">Beginner</button>
+            <button class="sidebar-pill" data-type="intermediate">Intermediate</button>
+            <button class="sidebar-pill" data-type="advanced">Advanced</button>
+          `;
+        } else {
+          // For docs / source / index: show language symbol types (Docs has no examples)
+          sidebarPillsContainer.innerHTML = `
+            <button class="sidebar-pill active" data-type="all">All</button>
+            <button class="sidebar-pill" data-type="class">Classes</button>
+            <button class="sidebar-pill" data-type="function">Functions</button>
+            <button class="sidebar-pill" data-type="task">Tasks</button>
+            <button class="sidebar-pill" data-type="macro">Macros</button>
+          `;
+        }
+
+        // Re-query and bind click listeners to updated pills
+        sidebarPills = sidebarPillsContainer.querySelectorAll('.sidebar-pill');
+        sidebarPills.forEach(pill => {
+          pill.addEventListener('click', () => {
+            handleMultiFilterPillClick(pill, sidebarPills, sidebarFilterTypes, () => {
+              renderSidebar();
+            });
+          });
+        });
+      }
 
       if (sidebarFilter) {
         sidebarFilter.addEventListener('input', debounce((e) => {
@@ -992,7 +1048,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         examplesTree.forEach(cat => {
           const subItems = (cat.children || []).filter(ex => {
-            if (!isItemTypeAllowed('example', sidebarFilterTypes)) return false;
+            // Difficulty filtering if beginner, intermediate, or advanced is selected
+            if (sidebarFilterTypes.has('beginner') || sidebarFilterTypes.has('intermediate') || sidebarFilterTypes.has('advanced')) {
+              const exDiff = (ex.difficulty || 'beginner').toLowerCase();
+              let matchDiff = false;
+              ['beginner', 'intermediate', 'advanced'].forEach(d => {
+                if (sidebarFilterTypes.has(d) && exDiff === d) {
+                  matchDiff = true;
+                }
+              });
+              if (!matchDiff) return false;
+            } else if (!isItemTypeAllowed('example', sidebarFilterTypes)) {
+              return false;
+            }
+
             if (!matcher) return true;
             const haystack = `${ex.title} ${ex.difficulty} ${ex.scope} ${ex.summary || ''}`.toLowerCase();
             if (matcher.type === 'regex') {
@@ -1385,6 +1454,20 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.style.height = `${newHeight}px`;
       }
 
+      function syncModalDiffPillsVisibility() {
+        const modalDiffSep = document.getElementById('modal-filter-diff-sep');
+        const diffPills = document.querySelectorAll('.filter-pill-diff');
+        const isExActive = searchFilterTypes.has('example');
+        if (modalDiffSep) modalDiffSep.style.display = isExActive ? 'inline-block' : 'none';
+        diffPills.forEach(p => {
+          p.style.display = isExActive ? 'inline-flex' : 'none';
+          if (!isExActive) {
+            p.classList.remove('active');
+            searchFilterTypes.delete(p.getAttribute('data-type'));
+          }
+        });
+      }
+
       function openSearchModal() {
         if (!searchModal) return;
         searchModal.classList.add('open');
@@ -1393,6 +1476,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalSearchClear) modalSearchClear.style.display = 'none';
         if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
         if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
+
+        // Context-aware filter selection: if user was browsing Examples, auto-select Example filter
+        if (activeSidebarTab === 'examples') {
+          searchFilterTypes.clear();
+          searchFilterTypes.add('example');
+          searchFilterPills.forEach(p => {
+            p.classList.toggle('active', p.getAttribute('data-type') === 'example');
+          });
+        }
+        syncModalDiffPillsVisibility();
+
         if (modalAiEnabled) {
           renderPromptChips();
           if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
@@ -1806,6 +1900,7 @@ document.addEventListener('DOMContentLoaded', () => {
       searchFilterPills.forEach(pill => {
         pill.addEventListener('click', () => {
           handleMultiFilterPillClick(pill, searchFilterPills, searchFilterTypes, () => {
+            syncModalDiffPillsVisibility();
             executeSearch(searchInput ? searchInput.value : '');
           });
         });
@@ -2127,6 +2222,18 @@ document.addEventListener('DOMContentLoaded', () => {
         items.forEach(item => {
           if (!isItemTypeAllowed(item.type, searchFilterTypes)) {
             return;
+          }
+          if (item.type === 'example') {
+            if (searchFilterTypes.has('beginner') || searchFilterTypes.has('intermediate') || searchFilterTypes.has('advanced')) {
+              const diff = (item.difficulty || '').toLowerCase();
+              let matchDiff = false;
+              ['beginner', 'intermediate', 'advanced'].forEach(d => {
+                if (searchFilterTypes.has(d) && diff === d) {
+                  matchDiff = true;
+                }
+              });
+              if (!matchDiff) return;
+            }
           }
           const res = matchSymbolItem(item, matcher);
           if (res.match) {

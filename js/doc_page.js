@@ -676,36 +676,81 @@
 
       // 2. Compute canonical URL to copy
       let fullUrl = '';
+      const isExample = window.location.pathname.includes('examples_view/') || window.location.href.includes('examples_view/');
+      const exMatch = window.location.pathname.match(/(examples_view\/.*)$/);
       const docMatch = window.location.pathname.match(/(docs_view\/.*)$/);
+      const exRel = exMatch ? exMatch[1] : '';
       const docRel = docMatch ? docMatch[1] : '';
 
       if (window.parent && window.parent !== window) {
         try {
-          // Inside portail iframe -> generate full parent URL
-          const parentBase = window.parent.location.origin + window.parent.location.pathname;
-          fullUrl = `${parentBase}#/doc/${docRel}${hash}`;
-
-          // Update parent state & URL
-          window.parent.location.hash = `#/doc/${docRel}${hash}`;
-          window.parent.postMessage({
-            type: 'docNavigated',
-            url: docRel + hash
-          }, '*');
+          let parentBase = '';
+          try {
+            parentBase = (window.parent.location.origin || '') + (window.parent.location.pathname || '');
+          } catch(e) {
+            parentBase = window.location.href.split(isExample ? '/examples_view/' : '/docs_view/')[0] + '/index.html';
+          }
+          if (isExample) {
+            const exClean = exRel.replace(/^examples_view\//, '');
+            fullUrl = `${parentBase}#/example/${exClean}${hash}`;
+            try {
+              window.parent.location.hash = `#/example/${exClean}${hash}`;
+            } catch(e) {}
+            window.parent.postMessage({
+              type: 'exampleNavigated',
+              url: exRel + hash
+            }, '*');
+          } else {
+            fullUrl = `${parentBase}#/doc/${docRel}${hash}`;
+            try {
+              window.parent.location.hash = `#/doc/${docRel}${hash}`;
+            } catch(e) {}
+            window.parent.postMessage({
+              type: 'docNavigated',
+              url: docRel + hash
+            }, '*');
+          }
         } catch (err) {
-          fullUrl = window.location.href;
+          fullUrl = window.location.href.split('#')[0] + hash;
         }
       } else {
-        // Direct standalone page view
-        fullUrl = window.location.href;
+        fullUrl = window.location.href.split('#')[0] + hash;
       }
 
-      // 3. Copy to clipboard
-      const tip = btn.querySelector('.anchor-copy-tooltip');
-      const copyPromise = navigator.clipboard && navigator.clipboard.writeText
-        ? navigator.clipboard.writeText(fullUrl)
-        : Promise.resolve();
+      // 3. Robust clipboard copy with fallback
+      function copyTextWithFallback(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text).catch(function () {
+            return execCommandFallback(text);
+          });
+        }
+        return execCommandFallback(text);
+      }
 
-      copyPromise.then(() => {
+      function execCommandFallback(text) {
+        return new Promise(function (resolve, reject) {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            ta.style.top = '-9999px';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            const successful = document.execCommand('copy');
+            document.body.removeChild(ta);
+            if (successful) resolve();
+            else reject(new Error('execCommand copy failed'));
+          } catch (e) {
+            reject(e);
+          }
+        });
+      }
+
+      const tip = btn.querySelector('.anchor-copy-tooltip');
+      copyTextWithFallback(fullUrl).then(function () {
         btn.classList.add('copied');
         btn.innerHTML = CHECK_ICON_SVG;
         if (tip) {
@@ -714,7 +759,7 @@
           tip.classList.add('show');
         }
 
-        setTimeout(() => {
+        setTimeout(function () {
           btn.classList.remove('copied');
           btn.innerHTML = LINK_ICON_SVG;
           if (tip) {
@@ -722,7 +767,7 @@
             tip.classList.remove('show');
           }
         }, 1800);
-      }).catch(err => {
+      }).catch(function (err) {
         console.error('Failed to copy link:', err);
       });
     });

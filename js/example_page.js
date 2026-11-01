@@ -20,6 +20,8 @@
   const btnDownloadRaw = document.getElementById('btn-download-raw');
   const btnDownloadZip = document.getElementById('btn-download-zip');
   const btnSplitSource = document.getElementById('btn-split-source');
+  const btnCopyExampleLink = document.getElementById('btn-copy-example-link');
+  const btnCopyLinkText = document.getElementById('btn-copy-link-text');
 
   // Simulation Console Elements
   const simTabs = document.querySelectorAll('.sim-tab');
@@ -136,13 +138,109 @@
     }, { passive: false });
   }
 
+  function copyTextWithFallback(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).catch(function () {
+        return execCommandFallback(text);
+      });
+    }
+    return execCommandFallback(text);
+  }
+
+  function execCommandFallback(text) {
+    return new Promise(function (resolve, reject) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.top = '-9999px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (successful) resolve();
+        else reject(new Error('execCommand copy failed'));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  // Copy Example URL
+  if (btnCopyExampleLink) {
+    btnCopyExampleLink.addEventListener('click', () => {
+      let fullUrl = window.location.href;
+      const exMatch = window.location.pathname.match(/(examples_view\/.*)$/);
+      if (exMatch) {
+        const exClean = exMatch[1].replace(/^examples_view\//, '');
+        let parentBase = '';
+        try {
+          if (window.parent && window.parent !== window && window.parent.location.pathname) {
+            parentBase = (window.parent.location.origin || '') + window.parent.location.pathname;
+          }
+        } catch(e) {}
+        if (!parentBase) {
+          parentBase = window.location.href.split('/examples_view/')[0] + '/index.html';
+        }
+        fullUrl = `${parentBase}#/example/${exClean}`;
+      }
+
+      copyTextWithFallback(fullUrl).then(() => {
+        if (btnCopyLinkText) btnCopyLinkText.textContent = 'Copied!';
+        btnCopyExampleLink.classList.add('btn-copied');
+        setTimeout(() => {
+          if (btnCopyLinkText) btnCopyLinkText.textContent = 'Copy Link';
+          btnCopyExampleLink.classList.remove('btn-copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Copy link failed:', err);
+      });
+    });
+  }
+
+  // Line number link click -> copy direct line link & highlight
+  document.querySelectorAll('.file-code-pane .ln a').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const lineNum = a.textContent.trim();
+      const targetRow = a.closest('tr');
+      if (targetRow) {
+        document.querySelectorAll('.file-code-pane tr.active-line').forEach(tr => tr.classList.remove('active-line'));
+        targetRow.classList.add('active-line');
+      }
+      let fullUrl = window.location.href.split('#')[0] + `#L${lineNum}`;
+      const exMatch = window.location.pathname.match(/(examples_view\/.*)$/);
+      if (exMatch) {
+        const exClean = exMatch[1].replace(/^examples_view\//, '');
+        let parentBase = '';
+        try {
+          if (window.parent && window.parent !== window && window.parent.location.pathname) {
+            parentBase = (window.parent.location.origin || '') + window.parent.location.pathname;
+          }
+        } catch(e) {}
+        if (!parentBase) {
+          parentBase = window.location.href.split('/examples_view/')[0] + '/index.html';
+        }
+        fullUrl = `${parentBase}#/example/${exClean}?file=${currentFileIdx}#L${lineNum}`;
+      }
+      copyTextWithFallback(fullUrl).then(() => {
+        const origText = a.textContent;
+        a.textContent = '✓';
+        setTimeout(() => { a.textContent = origText; }, 1200);
+      });
+    });
+  });
+
   // Copy Active File Code
   if (btnCopyCode) {
     btnCopyCode.addEventListener('click', () => {
       const curFile = filesList[currentFileIdx];
       if (!curFile) return;
 
-      navigator.clipboard.writeText(curFile.content).then(() => {
+      copyTextWithFallback(curFile.content).then(() => {
         if (btnCopyCodeText) btnCopyCodeText.textContent = 'Copied!';
         btnCopyCode.classList.add('btn-copied');
         setTimeout(() => {
@@ -310,7 +408,7 @@
 
   if (btnCopyCmd && simCmdText) {
     btnCopyCmd.addEventListener('click', () => {
-      navigator.clipboard.writeText(simCmdText.textContent).then(() => {
+      copyTextWithFallback(simCmdText.textContent).then(() => {
         btnCopyCmd.textContent = 'Copied!';
         setTimeout(() => { btnCopyCmd.textContent = 'Copy'; }, 2000);
       });

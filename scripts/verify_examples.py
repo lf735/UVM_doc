@@ -135,13 +135,13 @@ def main():
     assert_test(callout_count >= 15, f"Bidirectional callouts present across documentation pages ({callout_count} injected)")
     assert_test(valid_callout_targets, "All injected callout links point to valid, existing example studios")
 
-    # Test 6: Verify UI index.html integration
+    # Test 6: Verify UI index.html & app.js filter integration
     with open(BASE_DIR / "index.html", 'r', encoding='utf-8') as f:
         index_html = f.read()
 
     assert_test('data-tab="examples"' in index_html, "index.html has 'Examples' sidebar tab button")
-    assert_test('class="sidebar-pill" data-type="example"' in index_html, "index.html has 'Examples' sidebar filter pill")
     assert_test('class="filter-pill" data-type="example"' in index_html, "index.html has 'Examples' search modal filter pill")
+    assert_test('filter-pill-diff' in index_html, "index.html has difficulty filter pills in search modal")
 
     # Test 7: Verify app.js routing & handler integration
     with open(BASE_DIR / "js" / "app.js", 'r', encoding='utf-8') as f:
