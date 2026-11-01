@@ -1707,28 +1707,37 @@ code {
 .doc-breadcrumbs {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 6px;
   font-size: 0.8rem;
   color: var(--text-muted);
   margin-bottom: 0.75rem;
 }
 
-.doc-breadcrumbs a {
+.doc-breadcrumbs a,
+.doc-breadcrumbs .doc-breadcrumb-link {
   color: var(--primary);
   text-decoration: none;
   font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease;
 }
 
-.doc-breadcrumbs a:hover {
+.doc-breadcrumbs a:hover,
+.doc-breadcrumbs .doc-breadcrumb-link:hover {
   text-decoration: underline;
+  color: var(--primary-hover, var(--primary));
 }
 
-.doc-breadcrumbs .sep {
+.doc-breadcrumbs .sep,
+.doc-breadcrumbs .doc-breadcrumb-sep {
   color: var(--text-subtle);
   font-size: 0.75rem;
+  user-select: none;
 }
 
-.doc-breadcrumbs .crumb-current {
+.doc-breadcrumbs .crumb-current,
+.doc-breadcrumbs .doc-breadcrumb-item.active {
   color: var(--text-main);
   font-weight: 600;
 }

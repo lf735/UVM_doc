@@ -893,23 +893,25 @@
     }
   });
 
-  // Breadcrumb home navigation (prevent recursive iframe embedding)
+  // Breadcrumb navigation (prevent recursive iframe embedding and support parent navigation)
   document.addEventListener('click', function (e) {
-    const homeLink = e.target.closest('.doc-breadcrumb-home');
-    if (homeLink) {
+    const breadcrumbLink = e.target.closest('.doc-breadcrumb-link');
+    if (breadcrumbLink) {
       e.preventDefault();
+      const docHref = breadcrumbLink.getAttribute('data-doc-href') || 'docs_view/overviews/intro-txt.html';
+      const cleanHashDoc = docHref.replace(/^docs_view\//, '');
       if (window.parent && window.parent !== window) {
         try {
-          window.parent.location.hash = '#/doc/overviews/intro-txt.html';
+          window.parent.location.hash = '#/doc/' + cleanHashDoc;
           return;
         } catch (err) { }
         window.parent.postMessage({
           type: 'openDocView',
-          url: 'docs_view/overviews/intro-txt.html'
+          url: docHref
         }, '*');
         return;
       }
-      window.top.location.href = homeLink.getAttribute('href');
+      window.top.location.href = breadcrumbLink.getAttribute('href');
     }
   });
 

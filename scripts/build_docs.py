@@ -426,6 +426,7 @@ DOC_TO_SRC_MAP = {}
 CLASS_TO_DOC_MAP = {}
 DOC_HEADINGS_MAP = {}
 GLOBAL_DOC_ANCHOR_MAPS = {}
+DOC_BREADCRUMBS_MAP = {}
 
 # Orphan doc files (classes in UVM 1.2 src without Accellera legacy HTML doc pages)
 ORPHAN_DOC_FILES = [
@@ -435,6 +436,87 @@ ORPHAN_DOC_FILES = [
     ("seq/uvm_sequencer_analysis_fifo-svh.html", "seq/uvm_sequencer_analysis_fifo.svh", "uvm_sequencer_analysis_fifo", "Sequencer Analysis FIFO"),
     ("deprecated/uvm_resource_converter-svh.html", "deprecated/uvm_resource_converter.svh", "uvm_resource_converter", "Resource Converter (Deprecated)")
 ]
+
+def init_doc_breadcrumbs_map(categories):
+    """Build a mapping from normalized doc path to its breadcrumb ancestor chain."""
+    global DOC_BREADCRUMBS_MAP
+    DOC_BREADCRUMBS_MAP.clear()
+
+    def traverse(nodes, chain):
+        for node in nodes:
+            curr_chain = list(chain)
+            if node.get('type') == 'group':
+                grp_entry = {'title': node.get('title'), 'overviewHref': node.get('overviewHref')}
+                ov_href = node.get('overviewHref')
+                if ov_href:
+                    norm_ov = ov_href.replace('\\', '/')
+                    if norm_ov.startswith('docs_view/'):
+                        norm_ov = norm_ov[len('docs_view/'):]
+                    DOC_BREADCRUMBS_MAP[norm_ov] = curr_chain
+                new_chain = curr_chain + [grp_entry]
+                if 'children' in node:
+                    traverse(node['children'], new_chain)
+            elif node.get('type') in ('file', 'index'):
+                href = node.get('href')
+                if href:
+                    norm_href = href.replace('\\', '/')
+                    if norm_href.startswith('docs_view/'):
+                        norm_href = norm_href[len('docs_view/'):]
+                    DOC_BREADCRUMBS_MAP[norm_href] = curr_chain
+                if 'children' in node:
+                    traverse(node['children'], curr_chain)
+
+    traverse(categories, [])
+
+def build_breadcrumbs_html(doc_rel, page_title, root_rel):
+    """Generate clickable breadcrumbs navigation HTML for a documentation page."""
+    norm_doc = doc_rel.replace('\\', '/')
+    ancestors = DOC_BREADCRUMBS_MAP.get(norm_doc, None)
+
+    # Fallback to subsystem folder name if not mapped in tree (ignore 'overviews')
+    if ancestors is None:
+        if '/' in norm_doc:
+            folder = norm_doc.split('/')[0]
+            if folder.lower() != 'overviews':
+                ancestors = [{'title': folder.capitalize(), 'overviewHref': None}]
+            else:
+                ancestors = []
+        else:
+            ancestors = []
+
+    clean_t = page_title.split(' - ')[0].replace('UVM Reference', '').strip() or Path(norm_doc).stem
+    home_href = f"{root_rel}index.html#/doc/overviews/intro-txt.html"
+
+    items_html = [
+        f'<a href="{home_href}" class="doc-breadcrumb-item doc-breadcrumb-link doc-breadcrumb-home" data-doc-href="docs_view/overviews/intro-txt.html">Home</a>'
+    ]
+
+    for anc in ancestors:
+        title = html.escape(anc['title'])
+        ov = anc.get('overviewHref')
+        if ov:
+            norm_ov = ov.replace('\\', '/')
+            if norm_ov.startswith('docs_view/'):
+                clean_target = norm_ov[len('docs_view/'):]
+            else:
+                clean_target = norm_ov
+            target_href = f"{root_rel}index.html#/doc/{clean_target}"
+            items_html.append(
+                f'<a href="{target_href}" class="doc-breadcrumb-item doc-breadcrumb-link" data-doc-href="{html.escape(norm_ov)}">{title}</a>'
+            )
+        else:
+            items_html.append(f'<span class="doc-breadcrumb-item">{title}</span>')
+
+    # If this page itself is intro-txt.html (Home), avoid Home / Home
+    if norm_doc == 'overviews/intro-txt.html':
+        items_html = ['<span class="doc-breadcrumb-item active">Home</span>']
+    else:
+        items_html.append(f'<span class="doc-breadcrumb-item active">{html.escape(clean_t)}</span>')
+
+    sep_html = '\n  <span class="doc-breadcrumb-sep">/</span>\n  '
+    return f'''<nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  {sep_html.join(items_html)}
+</nav>'''
 
 def extract_doc_headings(html_text, rel_doc_path):
     """Extract ordered headings, methods, and groups for a documentation page."""
@@ -1157,15 +1239,7 @@ def modernize_doc_files():
                 </div>'''
 
             # Breadcrumb navigation
-            subsys = rel_path.split('/')[0].capitalize()
-            clean_t = page_title.split(' - ')[0].replace('UVM Reference', '').strip() or Path(rel_path).stem
-            breadcrumbs_html = f'''<nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
-  <a href="{root_rel}index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
-  <span class="doc-breadcrumb-sep">/</span>
-  <span class="doc-breadcrumb-item">{subsys}</span>
-  <span class="doc-breadcrumb-sep">/</span>
-  <span class="doc-breadcrumb-item active">{html.escape(clean_t)}</span>
-</nav>'''
+            breadcrumbs_html = build_breadcrumbs_html(rel_path, page_title, root_rel)
 
             modern_html = f'''<!DOCTYPE html>
 <html lang="en" data-theme="light" class="doc-page">
@@ -1248,13 +1322,7 @@ def modernize_index_pages():
 
         body = re.sub(r'href="([^"]+)"', repl_href, body)
 
-        breadcrumbs_html = f'''<nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
-  <a href="../../index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
-  <span class="doc-breadcrumb-sep">/</span>
-  <span class="doc-breadcrumb-item">Index</span>
-  <span class="doc-breadcrumb-sep">/</span>
-  <span class="doc-breadcrumb-item active">{html.escape(page_name)}</span>
-</nav>'''
+        breadcrumbs_html = build_breadcrumbs_html(f"index/{f.name}", page_name, "../../")
 
         modern_html = f'''<!DOCTYPE html>
 <html lang="en" data-theme="light" class="doc-page">
@@ -1304,13 +1372,7 @@ def generate_orphan_doc_pages():
         first_line = UVM_DB.get('classes', {}).get(first_cname, {}).get('start_line', 1)
 
         src_view_url = f"{root_rel}src_view/{src_rel}.html#L{first_line}"
-        breadcrumbs = f'''<nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
-  <a href="{root_rel}index.html#/doc/overviews/intro-txt.html" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Home</a>
-  <span class="doc-breadcrumb-sep">/</span>
-  <span class="doc-breadcrumb-item">{subsys}</span>
-  <span class="doc-breadcrumb-sep">/</span>
-  <span class="doc-breadcrumb-item active">{html.escape(page_title)}</span>
-</nav>'''
+        breadcrumbs = build_breadcrumbs_html(doc_rel, page_title, root_rel)
 
         banner = f'''<div class="doc-source-banner">
   <div class="banner-info">
@@ -1973,6 +2035,10 @@ def main():
 
     index_source_symbols()
     map_docs_to_sources()
+
+    # Pre-parse navigation tree to initialize breadcrumb hierarchy
+    nav_categories = parse_navigation_and_categories()
+    init_doc_breadcrumbs_map(nav_categories)
 
     if args.search_only:
         populate_doc_headings_from_docs_view()
