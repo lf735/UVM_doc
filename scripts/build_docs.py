@@ -390,30 +390,10 @@ def wrap_doc_diagrams(body_html):
         title = " ".join(label_words)
 
         return f'''<figure class="doc-diagram-card">
-  <div class="doc-diagram-header">
-    <span class="doc-diagram-label" title="{html.escape(title)}">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-        <circle cx="8.5" cy="8.5" r="1.5"/>
-        <polyline points="21 15 16 10 5 21"/>
-      </svg>
-      <span>{html.escape(title)}</span>
-    </span>
-    <div class="doc-diagram-actions">
-      <button type="button" class="doc-img-zoom-btn" title="Enlarge and zoom diagram" aria-label="Enlarge and zoom">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          <line x1="11" y1="8" x2="11" y2="14"/>
-          <line x1="8" y1="11" x2="14" y2="11"/>
-        </svg>
-        <span>Zoom</span>
-      </button>
-    </div>
-  </div>
   <div class="doc-diagram-body">
-    <img src="{src}" class="doc-diagram-img" alt="{html.escape(title)}" title="Click to zoom diagram" loading="lazy">
+    <img src="{src}" class="doc-diagram-img" alt="{html.escape(title)}" title="Click to zoom" loading="lazy">
   </div>
+  <figcaption class="doc-diagram-caption">{html.escape(title)}</figcaption>
 </figure>'''
 
     return re.sub(r'<img\b[^>]*>', repl_img, body_html, flags=re.IGNORECASE)

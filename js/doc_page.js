@@ -979,7 +979,7 @@
       const card = (zoomBtn || img).closest('.doc-diagram-card');
       const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
       if (targetImg) {
-        const titleEl = card ? card.querySelector('.doc-diagram-label span') : null;
+        const titleEl = card ? card.querySelector('.doc-diagram-caption, .doc-diagram-label span') : null;
         const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'UVM Diagram');
         const fullSrc = targetImg.src;
         if (window.parent && window.parent !== window) {

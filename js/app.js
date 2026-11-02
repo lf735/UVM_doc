@@ -2501,8 +2501,13 @@ function fitImageToViewport() {
 
 function openImageZoomModal(src, title) {
   if (!imageZoomModal || !imageModalImg) return;
+  const diagramTitle = title || 'UVM Diagram';
   if (imageModalTitle) {
-    imageModalTitle.textContent = title || 'UVM Diagram';
+    imageModalTitle.textContent = diagramTitle;
+  }
+  const modalCaption = document.getElementById('image-modal-caption');
+  if (modalCaption) {
+    modalCaption.textContent = diagramTitle;
   }
   imageModalImg.src = src;
   imageModalImg.onload = () => {
