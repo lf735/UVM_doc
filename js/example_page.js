@@ -203,9 +203,12 @@
       copyTextWithFallback(fullUrl).then(() => {
         if (btnCopyLinkText) btnCopyLinkText.textContent = 'Copied!';
         btnCopyExampleLink.classList.add('btn-copied');
+        const origTitle = btnCopyExampleLink.getAttribute('title') || 'Copy shareable link';
+        btnCopyExampleLink.setAttribute('title', 'Copied!');
         setTimeout(() => {
           if (btnCopyLinkText) btnCopyLinkText.textContent = 'Copy Link';
           btnCopyExampleLink.classList.remove('btn-copied');
+          btnCopyExampleLink.setAttribute('title', origTitle);
         }, 2000);
       }).catch(err => {
         console.error('Copy link failed:', err);
@@ -255,9 +258,12 @@
       copyTextWithFallback(curFile.content).then(() => {
         if (btnCopyCodeText) btnCopyCodeText.textContent = 'Copied!';
         btnCopyCode.classList.add('btn-copied');
+        const origTitle = btnCopyCode.getAttribute('title') || 'Copy active file code';
+        btnCopyCode.setAttribute('title', 'Copied!');
         setTimeout(() => {
           if (btnCopyCodeText) btnCopyCodeText.textContent = 'Copy Code';
           btnCopyCode.classList.remove('btn-copied');
+          btnCopyCode.setAttribute('title', origTitle);
         }, 2000);
       }).catch(err => {
         console.error('Copy failed:', err);

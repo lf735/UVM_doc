@@ -19,6 +19,7 @@ import re
 import html
 import json
 from pathlib import Path
+from collections import OrderedDict
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 EXAMPLES_SRC_DIR = BASE_DIR / "uvm-1.2" / "examples"
@@ -1032,6 +1033,38 @@ EXAMPLE_TO_SRC_MAP = {
     "integrated/apb.html": "src_view/reg/uvm_reg_adapter.svh.html#L38"
 }
 
+def build_file_select_options(files_data):
+    """Build <select> option elements with tree hierarchy when subdirectories exist."""
+    has_dirs = any('/' in fd['name'] or '\\' in fd['name'] for fd in files_data)
+    if not has_dirs:
+        return ''.join([
+            f'<option value="{i}">📄 {html.escape(fd["name"])}</option>'
+            for i, fd in enumerate(files_data)
+        ])
+
+    groups = OrderedDict()
+    for i, fd in enumerate(files_data):
+        raw_name = fd['name'].replace('\\', '/')
+        if '/' in raw_name:
+            folder, fname = raw_name.rsplit('/', 1)
+            folder_key = folder + '/'
+        else:
+            folder_key = 'root/'
+            fname = raw_name
+        if folder_key not in groups:
+            groups[folder_key] = []
+        groups[folder_key].append((i, fname))
+
+    html_parts = []
+    for folder_label, items in groups.items():
+        html_parts.append(f'<optgroup label="📁 {html.escape(folder_label)}">')
+        total = len(items)
+        for idx, (file_idx, fname) in enumerate(items):
+            branch = '└── ' if idx == total - 1 else '├── '
+            html_parts.append(f'<option value="{file_idx}">{branch}{html.escape(fname)}</option>')
+        html_parts.append('</optgroup>')
+    return ''.join(html_parts)
+
 def build_suite_page(suite_key, meta, files):
     """Generate interactive HTML page for an example suite."""
     slug = suite_key.replace('/', '_')
@@ -1065,6 +1098,9 @@ def build_suite_page(suite_key, meta, files):
     # Prepare JSON files bundle for client-side zero-dependency ZIP download
     zip_payload = [{"name": fd["name"], "content": fd["raw_content"]} for fd in files_data]
     zip_json_escaped = html.escape(json.dumps(zip_payload))
+
+    # Pre-render file select options (tree hierarchy when subdirectories exist)
+    file_select_options = build_file_select_options(files_data)
 
     # Stepper data if present
     stepper_list = STEPPER_DATA.get(suite_key, [])
@@ -1247,24 +1283,20 @@ def build_suite_page(suite_key, meta, files):
                       <div class="studio-toolbar-left">
                         <div class="studio-file-select-wrapper" title="Jump directly to any file in this example">
                           <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
-                            {''.join([f'<option value="{i}">{html.escape(fd["name"])} ({fd["lines"]} lines)</option>' for i, fd in enumerate(files_data)])}
+                            {file_select_options}
                           </select>
                         </div>
-                        <span class="studio-file-info" id="studio-file-info">{files_data[0]["name"]} ({files_data[0]["lines"]} lines, {files_data[0]["size_kb"]} KB)</span>
                       </div>
 
                       <div class="studio-toolbar-actions">
-                        <button type="button" class="btn btn-sm btn-outline" id="btn-copy-code" title="Copy active file code to clipboard">
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                          <span id="btn-copy-code-text">Copy Code</span>
+                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                         </button>
-                        <button type="button" class="btn btn-sm btn-outline" id="btn-download-raw" title="Download active file">
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                          <span>Download File</span>
+                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         </button>
-                        <button type="button" class="btn btn-sm btn-outline" id="btn-copy-example-link" title="Copy shareable link to this example">
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                          <span id="btn-copy-link-text">Copy Link</span>
+                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                         </button>
                       </div>
                     </div>
@@ -1272,7 +1304,7 @@ def build_suite_page(suite_key, meta, files):
                     <div class="studio-tab-bar-wrapper">
                       <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
                       <div class="studio-tab-bar" id="studio-tab-bar">
-                        {''.join([f'<button type="button" class="studio-tab {("active" if i == 0 else "")}" data-file-idx="{i}" title="{html.escape(fd["name"])}"><span class="tab-icon">📄</span><span class="tab-name">{html.escape(fd["name"])}</span><span class="tab-badge">{fd["lines"]}L</span></button>' for i, fd in enumerate(files_data)])}
+                        {''.join([f'<button type="button" class="studio-tab {("active" if i == 0 else "")}" data-file-idx="{i}" title="{html.escape(fd["name"])}"><span class="tab-icon">📄</span><span class="tab-name">{html.escape(fd["name"])}</span></button>' for i, fd in enumerate(files_data)])}
                       </div>
                       <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
                     </div>
