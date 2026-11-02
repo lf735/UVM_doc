@@ -596,6 +596,12 @@
       document.documentElement.setAttribute('data-theme', e.data.theme);
     }
   });
+  try {
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    if (parentTheme) {
+      document.documentElement.setAttribute('data-theme', parentTheme);
+    }
+  } catch (e) { }
 
   // Notify parent of current page navigation
   if (window.parent && window.parent !== window) {

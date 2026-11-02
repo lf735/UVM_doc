@@ -193,6 +193,23 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         } catch (e) { }
 
+        // Ensure new page adheres to current theme as soon as it loads
+        const onFrameThemeLoaded = function () {
+          frame.removeEventListener('load', onFrameThemeLoaded);
+          const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+          try {
+            if (frame.contentDocument && frame.contentDocument.documentElement) {
+              frame.contentDocument.documentElement.setAttribute('data-theme', currentTheme);
+            }
+          } catch (e) { }
+          try {
+            if (frame.contentWindow) {
+              frame.contentWindow.postMessage({ theme: currentTheme }, '*');
+            }
+          } catch (e) { }
+        };
+        frame.addEventListener('load', onFrameThemeLoaded);
+
         frame.src = relUrl;
       }
 
@@ -214,15 +231,63 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       function setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
+        // Freeze transitions across main document and iframes to eliminate staggered lag
+        const docs = [document];
+        [docFrame, srcFrame].forEach(frame => {
+          try {
+            if (frame && frame.contentDocument) docs.push(frame.contentDocument);
+          } catch (e) { }
+        });
+
+        docs.forEach(doc => {
+          if (doc && doc.documentElement) {
+            doc.documentElement.classList.add('theme-transitioning');
+            doc.documentElement.setAttribute('data-theme', theme);
+          }
+        });
+
         localStorage.setItem('theme', theme);
         updateThemeIcon(theme);
-        // Broadcast to iframes
-        if (docFrame && docFrame.contentWindow) {
-          docFrame.contentWindow.postMessage({ theme }, '*');
+        updateFaviconAndLogo(theme);
+
+        // Broadcast via postMessage for cross-frame listeners
+        [docFrame, srcFrame].forEach(frame => {
+          if (!frame) return;
+          try {
+            if (frame.contentWindow) {
+              frame.contentWindow.postMessage({ theme }, '*');
+            }
+          } catch (e) { }
+        });
+
+        // Re-enable interactive hover transitions on next paint
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            docs.forEach(doc => {
+              try {
+                if (doc && doc.documentElement) {
+                  doc.documentElement.classList.remove('theme-transitioning');
+                }
+              } catch (e) { }
+            });
+          });
+        });
+      }
+
+      function updateFaviconAndLogo(theme) {
+        const isDark = theme === 'dark';
+        const faviconFile = isDark ? 'images/favicon_dark.svg' : 'images/favicon_light.svg';
+        
+        // Update browser favicon <link rel="icon">
+        let faviconLink = document.querySelector('link[rel="icon"]');
+        if (faviconLink) {
+          faviconLink.href = faviconFile;
         }
-        if (srcFrame && srcFrame.contentWindow) {
-          srcFrame.contentWindow.postMessage({ theme }, '*');
+
+        // Update brand logo in header
+        const brandLogo = document.getElementById('brand-logo');
+        if (brandLogo) {
+          brandLogo.src = faviconFile;
         }
       }
 

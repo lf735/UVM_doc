@@ -166,12 +166,19 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   line-height: 1.6;
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 body#app-container {
   height: 100%;
   overflow: hidden;
+}
+
+/* Global instant theme switching - disables all transitions during theme toggle */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: none !important;
 }
 
 /* Custom Modern Warm Scrollbars */
@@ -238,17 +245,13 @@ body.is-resizing iframe {
 }
 
 .brand-icon {
-  width: 28px;
-  height: 28px;
-  background: var(--primary);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 700;
-  box-shadow: 0 1px 3px rgba(26, 115, 232, 0.3);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: block;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .brand-badge {

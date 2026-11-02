@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
+  <defs>
+    <!-- Fond très clair pour le mode clair (avec dégradé subtil et liseré de contraste) -->
+    <linearGradient id="bgGradLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FAFCFF" />
+      <stop offset="100%" stop-color="#E9F2FC" />
+    </linearGradient>
+
+    <!-- Dégradé cyan/teal profond pour la branche gauche -->
+    <linearGradient id="leftStemCyan" x1="0%" y1="15%" x2="90%" y2="95%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="35%" stop-color="#00ACC1" />
+      <stop offset="75%" stop-color="#006064" />
+      <stop offset="100%" stop-color="#004347" />
+    </linearGradient>
+
+    <!-- Dégradé ambre/orange vif pour la branche droite -->
+    <linearGradient id="rightStemAmber" x1="65%" y1="15%" x2="25%" y2="95%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="40%" stop-color="#FB8C00" />
+      <stop offset="75%" stop-color="#E65100" />
+      <stop offset="100%" stop-color="#9E2A00" />
+    </linearGradient>
+
+    <!-- Relief intérieur du ruban ambre -->
+    <linearGradient id="innerBevelAmber" x1="50%" y1="0%" x2="30%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082" />
+      <stop offset="55%" stop-color="#FF8F00" />
+      <stop offset="100%" stop-color="#D84315" />
+    </linearGradient>
+  </defs>
+
+  <!-- Fond clair de l'icône, sans bordure perdue pour les petits écrans -->
+  <rect x="0" y="0" width="1024" height="1024" rx="220" fill="url(#bgGradLight)" stroke="#D5E4F5" stroke-width="12" />
+
+  <!-- Ensemble du U grossi et centré pour combler l'espace -->
+  <g transform="translate(512, 512) scale(1.28) translate(-512, -525)">
+    <!-- Branche gauche & courbe (Cyan/Teal) -->
+    <path d="M 288 338
+             A 67 67 0 0 1 422 338
+             L 422 570
+             C 422 652 500 665 560 610
+             C 590 582 602 520 602 470
+             L 650 580
+             C 630 695 570 770 492 770
+             C 365 770 288 680 288 555
+             Z" fill="url(#leftStemCyan)" />
+
+    <!-- Branche droite (Ambre/Orange) -->
+    <path d="M 492 770
+             C 572 770 602 658 602 555
+             L 602 315
+             C 602 385 685 422 736 392
+             L 736 555
+             C 736 685 628 770 492 770
+             Z" fill="url(#rightStemAmber)" />
+
+    <!-- Biseau interne du ruban pour accentuer le volume 3D -->
+    <path d="M 492 770
+             C 572 770 602 658 602 555
+             L 602 315
+             C 602 356 632 386 668 397
+             L 668 555
+             C 668 655 605 748 492 770
+             Z" fill="url(#innerBevelAmber)" />
+
+    <!-- Filet lumineux au centre pour détacher les volumes -->
+    <path d="M 492 770
+             C 572 770 602 658 602 555
+             L 602 315" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" />
+
+    <!-- Astérisque renforcé et foncé (bleu nuit) pour contraster avec le fond clair -->
+    <g transform="translate(698, 310)" fill="#091E42">
+      <rect x="-15" y="-62" width="30" height="124" rx="8" />
+      <rect x="-15" y="-62" width="30" height="124" rx="8" transform="rotate(60)" />
+      <rect x="-15" y="-62" width="30" height="124" rx="8" transform="rotate(120)" />
+    </g>
+  </g>
+</svg>
