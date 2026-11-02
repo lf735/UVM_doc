@@ -833,9 +833,22 @@ def generate_source_views():
             </select>''' if sym_options else ""
 
             html_content = f'''<!DOCTYPE html>
-<html lang="en" data-theme="light" class="src-page">
+<html lang="en" class="src-page">
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {{
+      try {{
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {{
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }}
+      }} catch (e) {{ }}
+    }})();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(rel_path)} | UVM 1.2 Source Code</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1242,9 +1255,22 @@ def modernize_doc_files():
             breadcrumbs_html = build_breadcrumbs_html(rel_path, page_title, root_rel)
 
             modern_html = f'''<!DOCTYPE html>
-<html lang="en" data-theme="light" class="doc-page">
+<html lang="en" class="doc-page">
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {{
+      try {{
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {{
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }}
+      }} catch (e) {{ }}
+    }})();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(page_title)} | UVM 1.2 Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1325,9 +1351,22 @@ def modernize_index_pages():
         breadcrumbs_html = build_breadcrumbs_html(f"index/{f.name}", page_name, "../../")
 
         modern_html = f'''<!DOCTYPE html>
-<html lang="en" data-theme="light" class="doc-page">
+<html lang="en" class="doc-page">
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {{
+      try {{
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {{
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }}
+      }} catch (e) {{ }}
+    }})();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(title)} | UVM 1.2 Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1506,9 +1545,22 @@ def generate_orphan_doc_pages():
         DOC_HEADINGS_MAP[doc_key] = extract_doc_headings(body_content, doc_rel)
 
         page_html = f'''<!DOCTYPE html>
-<html lang="en" data-theme="light" class="doc-page">
+<html lang="en" class="doc-page">
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {{
+      try {{
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {{
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }}
+      }} catch (e) {{ }}
+    }})();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(page_title)} | UVM 1.2 Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,46 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
   <defs>
-    <!-- Dégradé du fond bleu nuit -->
+    <!-- Dégradé du fond bleu nuit profond et contrasté -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#072863" />
-      <stop offset="100%" stop-color="#051c47" />
+      <stop offset="0%" stop-color="#051c47" />
+      <stop offset="100%" stop-color="#020d24" />
     </linearGradient>
 
-    <!-- Dégradé de la branche gauche du U (bleu vif vers bleu foncé) -->
+    <!-- Dégradé de la branche gauche du U (bleu électrique lumineux vers bleu royal franc) -->
     <linearGradient id="leftStemGrad" x1="0%" y1="15%" x2="90%" y2="95%">
-      <stop offset="0%" stop-color="#1982fa" />
-      <stop offset="55%" stop-color="#0d65d9" />
-      <stop offset="85%" stop-color="#0b46a0" />
-      <stop offset="100%" stop-color="#082e70" />
+      <stop offset="0%" stop-color="#389aff" />
+      <stop offset="55%" stop-color="#187bf2" />
+      <stop offset="85%" stop-color="#0e56be" />
+      <stop offset="100%" stop-color="#0a3e8c" />
     </linearGradient>
 
-    <!-- Dégradé de la branche droite du U (blanc/bleu très clair vers bleu azur) -->
+    <!-- Dégradé de la branche droite du U : parties claires renforcées (blanc pur éclatant vers cyan/bleu ciel vif) -->
     <linearGradient id="rightStemGrad" x1="65%" y1="15%" x2="25%" y2="95%">
       <stop offset="0%" stop-color="#ffffff" />
-      <stop offset="35%" stop-color="#d5e9ff" />
-      <stop offset="75%" stop-color="#6eb2ff" />
-      <stop offset="100%" stop-color="#1f7bf2" />
+      <stop offset="45%" stop-color="#f0f7ff" />
+      <stop offset="75%" stop-color="#99ceff" />
+      <stop offset="100%" stop-color="#479eff" />
     </linearGradient>
 
-    <!-- Dégradé du biseau intérieur sur la branche droite -->
+    <!-- Dégradé du biseau intérieur sur la branche droite : blanc bleuté éclatant -->
     <linearGradient id="innerBevelGrad" x1="50%" y1="0%" x2="30%" y2="100%">
-      <stop offset="0%" stop-color="#b8d9ff" />
-      <stop offset="55%" stop-color="#8ec2ff" />
-      <stop offset="100%" stop-color="#4193ff" />
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="40%" stop-color="#d6ebff" />
+      <stop offset="75%" stop-color="#a8d5ff" />
+      <stop offset="100%" stop-color="#60adff" />
     </linearGradient>
 
     <!-- Dégradé du reflet lumineux sur le pli -->
     <linearGradient id="edgeHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2" />
-      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.85" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
     </linearGradient>
   </defs>
 
-  <!-- Fond plein sans marges (identique à favicon_light.svg) -->
-  <rect x="0" y="0" width="1024" height="1024" rx="220" fill="url(#bgGrad)" />
+  <!-- Fond plein avec fine bordure pour détacher sur fonds sombres -->
+  <rect x="0" y="0" width="1024" height="1024" rx="220" fill="url(#bgGrad)" stroke="#1a4282" stroke-width="12" />
 
-  <!-- Ensemble du U avec le même zoom 1.28x et centrage que favicon_light.svg -->
+  <!-- Ensemble du U avec le même zoom 1.28x et centrage -->
   <g transform="translate(512, 512) scale(1.28) translate(-512, -525)">
     <!-- Partie gauche et courbe basse du "U" -->
     <path d="M 288 338
@@ -53,7 +54,7 @@
              C 365 770 288 680 288 555
              Z" fill="url(#leftStemGrad)" />
 
-    <!-- Partie droite du "U" (ruban clair qui s'enroule) -->
+    <!-- Partie droite du "U" (ruban clair qui s'enroule, blanc et bleu ciel éclatant) -->
     <path d="M 492 770
              C 572 770 602 658 602 555
              L 602 315
@@ -62,7 +63,7 @@
              C 736 685 628 770 492 770
              Z" fill="url(#rightStemGrad)" />
 
-    <!-- Facette / biseau interne sur la branche droite pour l'effet de relief -->
+    <!-- Facette / biseau interne sur la branche droite pour l'effet de relief lumineux -->
     <path d="M 492 770
              C 572 770 602 658 602 555
              L 602 315
@@ -74,13 +75,13 @@
     <!-- Ligne de pli lumineuse entre les deux sections -->
     <path d="M 492 770
              C 572 770 602 658 602 555
-             L 602 315" fill="none" stroke="url(#edgeHighlight)" stroke-width="3.5" stroke-linecap="round" />
+             L 602 315" fill="none" stroke="url(#edgeHighlight)" stroke-width="4" stroke-linecap="round" />
 
-    <!-- Astérisque à 6 branches en haut à droite -->
+    <!-- Astérisque blanc pur éclatant à 6 branches en haut à droite -->
     <g transform="translate(698, 314)" fill="#ffffff">
-      <rect x="-12" y="-56" width="24" height="112" rx="5" />
-      <rect x="-12" y="-56" width="24" height="112" rx="5" transform="rotate(60)" />
-      <rect x="-12" y="-56" width="24" height="112" rx="5" transform="rotate(120)" />
+      <rect x="-13" y="-58" width="26" height="116" rx="6" />
+      <rect x="-13" y="-58" width="26" height="116" rx="6" transform="rotate(60)" />
+      <rect x="-13" y="-58" width="26" height="116" rx="6" transform="rotate(120)" />
     </g>
   </g>
 </svg>

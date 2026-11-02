@@ -1,44 +1,86 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="100%" height="100%">
   <defs>
-    <!-- Fond clair légèrement bleuté avec bordure subtile -->
+    <!-- Fond clair très légèrement bleuté avec dégradé subtil -->
     <linearGradient id="bgGradLight" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#FFFFFF" />
-      <stop offset="100%" stop-color="#EBF3FF" />
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#ebf3ff" />
     </linearGradient>
 
-    <!-- Bleu nuit vers bleu roi intense -->
-    <linearGradient id="leftStemDark" x1="0%" y1="15%" x2="90%" y2="95%">
-      <stop offset="0%" stop-color="#052359" />
-      <stop offset="60%" stop-color="#0A45A6" />
-      <stop offset="100%" stop-color="#04183D" />
+    <!-- Branche gauche : Bleu nuit profond vers bleu royal franc pour un contraste parfait sur fond blanc -->
+    <linearGradient id="leftStemLight" x1="0%" y1="15%" x2="90%" y2="95%">
+      <stop offset="0%" stop-color="#0a2a66" />
+      <stop offset="45%" stop-color="#0e4499" />
+      <stop offset="85%" stop-color="#155ac4" />
+      <stop offset="100%" stop-color="#1b6def" />
     </linearGradient>
 
-    <!-- Cyan vif vers bleu azur -->
-    <linearGradient id="rightStemVibrant" x1="65%" y1="15%" x2="25%" y2="95%">
-      <stop offset="0%" stop-color="#00C8FF" />
-      <stop offset="50%" stop-color="#0088FF" />
-      <stop offset="100%" stop-color="#0051D5" />
+    <!-- Branche droite : Cyan lumineux vers bleu azur vif -->
+    <linearGradient id="rightStemLight" x1="65%" y1="15%" x2="25%" y2="95%">
+      <stop offset="0%" stop-color="#00e5ff" />
+      <stop offset="40%" stop-color="#00b4d8" />
+      <stop offset="75%" stop-color="#0077b6" />
+      <stop offset="100%" stop-color="#023e8a" />
     </linearGradient>
 
-    <linearGradient id="innerBevelVibrant" x1="50%" y1="0%" x2="30%" y2="100%">
-      <stop offset="0%" stop-color="#5CE1FF" />
-      <stop offset="100%" stop-color="#0073E6" />
+    <!-- Biseau intérieur sur la branche droite : éclat cyan azuré -->
+    <linearGradient id="innerBevelLight" x1="50%" y1="0%" x2="30%" y2="100%">
+      <stop offset="0%" stop-color="#48cae4" />
+      <stop offset="45%" stop-color="#0096c7" />
+      <stop offset="100%" stop-color="#03045e" />
+    </linearGradient>
+
+    <!-- Ligne de pli lumineuse entre les deux sections -->
+    <linearGradient id="edgeHighlightLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8" />
     </linearGradient>
   </defs>
 
-  <rect x="0" y="0" width="1024" height="1024" rx="220" fill="url(#bgGradLight)" stroke="#D0E2FF" stroke-width="16" />
+  <!-- Fond plein avec fine bordure claire -->
+  <rect x="0" y="0" width="1024" height="1024" rx="220" fill="url(#bgGradLight)" stroke="#d0e2ff" stroke-width="12" />
 
+  <!-- Ensemble du U avec le même zoom 1.28x et centrage exact que la version dark -->
   <g transform="translate(512, 512) scale(1.28) translate(-512, -525)">
-    <path d="M 288 338 A 67 67 0 0 1 422 338 L 422 570 C 422 652 500 665 560 610 C 590 582 602 520 602 470 L 650 580 C 630 695 570 770 492 770 C 365 770 288 680 288 555 Z" fill="url(#leftStemDark)" />
-    <path d="M 492 770 C 572 770 602 658 602 555 L 602 315 C 602 385 685 422 736 392 L 736 555 C 736 685 628 770 492 770 Z" fill="url(#rightStemVibrant)" />
-    <path d="M 492 770 C 572 770 602 658 602 555 L 602 315 C 602 356 632 386 668 397 L 668 555 C 668 655 605 748 492 770 Z" fill="url(#innerBevelVibrant)" />
-    <path d="M 492 770 C 572 770 602 658 602 555 L 602 315" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" />
+    <!-- Partie gauche et courbe basse du "U" -->
+    <path d="M 288 338
+             A 67 67 0 0 1 422 338
+             L 422 570
+             C 422 652 500 665 560 610
+             C 590 582 602 520 602 470
+             L 650 580
+             C 630 695 570 770 492 770
+             C 365 770 288 680 288 555
+             Z" fill="url(#leftStemLight)" />
 
-    <!-- Astérisque bleu foncé pour trancher sur le fond blanc -->
-    <g transform="translate(698, 310)" fill="#052359">
-      <rect x="-15" y="-62" width="30" height="124" rx="8" />
-      <rect x="-15" y="-62" width="30" height="124" rx="8" transform="rotate(60)" />
-      <rect x="-15" y="-62" width="30" height="124" rx="8" transform="rotate(120)" />
+    <!-- Partie droite du "U" (ruban cyan vif) -->
+    <path d="M 492 770
+             C 572 770 602 658 602 555
+             L 602 315
+             C 602 385 685 422 736 392
+             L 736 555
+             C 736 685 628 770 492 770
+             Z" fill="url(#rightStemLight)" />
+
+    <!-- Facette / biseau interne sur la branche droite -->
+    <path d="M 492 770
+             C 572 770 602 658 602 555
+             L 602 315
+             C 602 356 632 386 668 397
+             L 668 555
+             C 668 655 605 748 492 770
+             Z" fill="url(#innerBevelLight)" />
+
+    <!-- Ligne de pli lumineuse entre les deux sections -->
+    <path d="M 492 770
+             C 572 770 602 658 602 555
+             L 602 315" fill="none" stroke="url(#edgeHighlightLight)" stroke-width="4.5" stroke-linecap="round" />
+
+    <!-- Astérisque bleu nuit net à 6 branches en haut à droite (géométrie identique à la version dark) -->
+    <g transform="translate(698, 314)" fill="#0a2a66">
+      <rect x="-13" y="-58" width="26" height="116" rx="6" />
+      <rect x="-13" y="-58" width="26" height="116" rx="6" transform="rotate(60)" />
+      <rect x="-13" y="-58" width="26" height="116" rx="6" transform="rotate(120)" />
     </g>
   </g>
 </svg>

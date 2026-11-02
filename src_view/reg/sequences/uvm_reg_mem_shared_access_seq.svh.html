@@ -1,7 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" class="src-page">
+<html lang="en" class="src-page">
 <head>
   <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) { }
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>reg/sequences/uvm_reg_mem_shared_access_seq.svh | UVM 1.2 Source Code</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">

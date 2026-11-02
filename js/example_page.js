@@ -5,6 +5,18 @@
  * Zero external runtime dependencies - 100% offline file:// compatible.
  */
 
+// Immediate Theme Initialization (executes synchronously before DOM builds to eliminate FOUC / flash)
+(function initImmediateTheme() {
+  try {
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    const localTheme = localStorage.getItem('theme');
+    const theme = parentTheme || localTheme;
+    if (theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+  } catch (e) { }
+})();
+
 (function initExampleStudio() {
   // Elements
   const studioTabBar = document.getElementById('studio-tab-bar');

@@ -5,6 +5,18 @@
  * theme sync, and navigation back to documentation.
  */
 
+// Immediate Theme Initialization (executes synchronously before DOM builds to eliminate FOUC / flash)
+(function initImmediateTheme() {
+  try {
+    const parentTheme = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+    const localTheme = localStorage.getItem('theme');
+    const theme = parentTheme || localTheme;
+    if (theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+  } catch (e) { }
+})();
+
 (function initSrcPage() {
   // Copy raw source code
   const copyBtn = document.getElementById('copy-src-btn');
