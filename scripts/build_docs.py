@@ -970,10 +970,13 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
                     decl_l = sym['line']
                     break
 
-        if decl_f and decl_l:
-            w_body = re.sub(r'href=["\'][^"\']*src_view/[^"\']*["\']', f'href="{root_rel}src_view/{decl_f}.html#L{decl_l}"', w_body, count=1)
-            w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{decl_l}"', w_body, count=1)
-            w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{decl_f}"', w_body, count=1)
+        target_f = impl_f if (impl_f and impl_l) else decl_f
+        target_l = impl_l if (impl_f and impl_l) else decl_l
+
+        if target_f and target_l:
+            w_body = re.sub(r'href=["\'][^"\']*src_view/[^"\']*["\']', f'href="{root_rel}src_view/{target_f}.html#L{target_l}"', w_body, count=1)
+            w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{target_l}"', w_body, count=1)
+            w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{target_f}"', w_body, count=1)
 
             badges = []
             if overridden_from:
@@ -1491,6 +1494,9 @@ def generate_orphan_doc_pages():
                     decl_l = minfo['decl']['start_line']
                     impl = minfo.get('impl')
                     impl_l = impl['start_line'] if impl else None
+                    impl_f = impl['file'] if impl and impl.get('file') else None
+                    target_m_f = impl_f if (impl_f and impl_l) else src_rel
+                    target_m_l = impl_l if (impl_f and impl_l) else decl_l
                     m_kind = minfo.get('kind', 'function')
                     m_ret = minfo.get('return_type') or 'void'
                     m_params = minfo.get('parameters_raw', '()')
@@ -1509,7 +1515,7 @@ def generate_orphan_doc_pages():
 
                     body_parts.append(f'''<div class="CMethod" id="{m_id}" data-doc-topic="{m_id}" data-anchor="{cname}.{mname}">
 <div class="CTopic">
-  <h3 class="CTitle"><a name="{cname}.{mname}" id="{cname}.{mname}" href="{root_rel}src_view/{src_rel}.html#L{decl_l}" class="src-code-link" data-src-file="{src_rel}" data-src-line="{decl_l}">{mname}</a></h3>
+  <h3 class="CTitle"><a name="{cname}.{mname}" id="{cname}.{mname}" href="{root_rel}src_view/{target_m_f}.html#L{target_m_l}" class="src-code-link" data-src-file="{target_m_f}" data-src-line="{target_m_l}">{mname}</a></h3>
   {meta_bar}
   <blockquote>{proto_html}</blockquote>
   <div class="CBody"><p>{m_doc}</p></div>
@@ -1900,7 +1906,18 @@ def build_search_index(categories):
 
                 src_link = None
                 src_rel = DOC_TO_SRC_MAP.get(file_part)
-                if src_rel:
+                # Check UVM_DB for implementation line first
+                if parent_class and parent_class in UVM_DB.get('classes', {}) and mname in UVM_DB['classes'][parent_class].get('methods', {}):
+                    minfo_search = UVM_DB['classes'][parent_class]['methods'][mname]
+                    s_impl = minfo_search.get('impl')
+                    if s_impl and s_impl.get('start_line'):
+                        s_f = s_impl.get('file') or (minfo_search.get('decl', {}).get('file')) or src_rel
+                        src_link = f"src_view/{s_f}.html#L{s_impl['start_line']}"
+                    elif minfo_search.get('decl', {}).get('start_line'):
+                        s_f = minfo_search['decl'].get('file') or src_rel
+                        src_link = f"src_view/{s_f}.html#L{minfo_search['decl']['start_line']}"
+
+                if not src_link and src_rel:
                     syms = FILE_SYMBOLS.get(src_rel, [])
                     sym_match = next((s for s in syms if s['name'] == mname and s['type'] in ('task', 'function')), None)
                     if not sym_match:

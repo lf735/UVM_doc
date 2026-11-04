@@ -1359,14 +1359,43 @@ h3.CTitle {
   margin-bottom: 0.5rem;
 }
 
+.CTitle,
 .CTitle a {
   color: var(--text-main);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
-.CTitle a:hover {
-  color: var(--primary);
+/* Headings or links inside headings that do NOT have a real navigational link */
+.CTitle:not(:has(a[href]:not([href="#"]):not([href=""]):not([href^="javascript:"]))),
+.CTitle a:not([href]),
+.CTitle a[href="#"],
+.CTitle a[href=""],
+.CTitle a[href^="javascript:"] {
+  cursor: default;
+  color: var(--text-main) !important;
+  text-decoration: none !important;
+}
+
+.CTitle:not(:has(a[href]:not([href="#"]):not([href=""]):not([href^="javascript:"]))):hover,
+.CTitle a:not([href]):hover,
+.CTitle a[href="#"]:hover,
+.CTitle a[href=""]:hover,
+.CTitle a[href^="javascript:"]:hover {
+  cursor: default;
+  text-decoration: none !important;
+  color: var(--text-main) !important;
+}
+
+/* Only genuine clickable links in titles get the pointer cursor and hover accent color */
+.CTitle a[href]:not([href="#"]):not([href=""]):not([href^="javascript:"]) {
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+.CTitle a[href]:not([href="#"]):not([href=""]):not([href^="javascript:"]):hover {
+  color: var(--primary) !important;
+  text-decoration: underline;
 }
 
 .CBody p {

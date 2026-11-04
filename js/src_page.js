@@ -38,11 +38,12 @@
   }
 
   // Highlight active target line
-  function highlightTargetLine() {
-    const hash = window.location.hash;
+  function highlightTargetLine(targetHash) {
+    const hash = targetHash || window.location.hash;
     document.querySelectorAll('.sv-code-table tr.active-line').forEach(el => el.classList.remove('active-line'));
-    if (hash && hash.startsWith('#L')) {
-      const target = document.querySelector(hash);
+    if (hash && (hash.startsWith('#L') || hash.startsWith('#'))) {
+      const selector = hash.startsWith('#L') ? hash : '#L' + hash.replace(/^#/, '');
+      const target = document.querySelector(selector) || document.querySelector(hash);
       if (target) {
         target.classList.add('active-line');
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -50,14 +51,25 @@
     }
   }
 
-  window.addEventListener('hashchange', highlightTargetLine);
-  window.addEventListener('DOMContentLoaded', highlightTargetLine);
-  setTimeout(highlightTargetLine, 100);
+  window.addEventListener('hashchange', function () { highlightTargetLine(); });
+  window.addEventListener('DOMContentLoaded', function () { highlightTargetLine(); });
+  setTimeout(function () { highlightTargetLine(); }, 100);
 
-  // Theme sync
+  // Cross-frame message handling (theme sync & scroll to section / line)
   window.addEventListener('message', function (e) {
-    if (e.data && e.data.theme) {
+    if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.theme) {
       document.documentElement.setAttribute('data-theme', e.data.theme);
+    }
+    if (e.data.type === 'scrollToSection') {
+      const anchor = e.data.anchor || e.data.id;
+      if (anchor) {
+        const lineHash = anchor.startsWith('#') ? anchor : (anchor.startsWith('L') ? '#' + anchor : '#L' + anchor);
+        try {
+          history.replaceState(null, '', lineHash);
+        } catch (err) { }
+        highlightTargetLine(lineHash);
+      }
     }
   });
   try {
