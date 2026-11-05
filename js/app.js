@@ -320,10 +320,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Debounce utility
   function debounce(func, wait) {
     let timeout;
-    return function (...args) {
+    const debounced = function (...args) {
       clearTimeout(timeout);
       timeout = setTimeout(() => func.apply(this, args), wait);
     };
+    debounced.cancel = function () {
+      clearTimeout(timeout);
+    };
+    return debounced;
   }
 
   const viewBtns = document.querySelectorAll('.view-btn');
@@ -1625,7 +1629,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const m = mode === 'ai' ? 'ai' : (mode === 'standard' ? 'standard' : (modalAiEnabled ? 'ai' : 'standard'));
     try {
       let list = getRecentSearches();
-      list = list.filter(item => !(item.query.toLowerCase() === q.toLowerCase() && item.mode === m));
+      list = list.filter(item => item.query.toLowerCase() !== q.toLowerCase());
       list.unshift({ query: q, mode: m });
       if (list.length > MAX_RECENT_SEARCHES) list = list.slice(0, MAX_RECENT_SEARCHES);
       localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(list));
@@ -1653,11 +1657,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!modalRecentSearches || !recentSearchesChips) return;
     const history = getRecentSearches();
     if (!history.length) {
-      modalRecentSearches.style.display = 'none';
       if (modalAiEnabled) {
+        // En mode IA : afficher un état vide élégant pour que la section historique reste toujours visible
+        recentSearchesChips.innerHTML = `
+          <div class="recent-searches-empty" style="padding:1.25rem 1.25rem; text-align:center; color:var(--text-muted); font-size:0.825rem;">
+            <span style="opacity:0.75;">Aucune recherche récente. Vos requêtes s'afficheront ici.</span>
+          </div>`;
+        modalRecentSearches.style.display = 'flex';
         if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
         if (searchResults) searchResults.style.display = 'none';
       } else {
+        modalRecentSearches.style.display = 'none';
         if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
         if (searchResults) {
           searchResults.style.display = 'block';
@@ -1727,11 +1737,11 @@ document.addEventListener('DOMContentLoaded', () => {
               openAiConsentModal();
               return;
             }
-            toggleAiSearchMode(true);
+            toggleAiSearchMode(true, { skipSearch: true });
           }
         } else {
           if (modalAiEnabled) {
-            toggleAiSearchMode(false);
+            toggleAiSearchMode(false, { skipSearch: true });
           }
         }
 
@@ -1817,7 +1827,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const shouldPreserve = options.preserveSession || (activeSearchSession.isActive && activeSearchSession.query);
     if (shouldPreserve && activeSearchSession.query) {
-      searchSelectedIndex = activeSearchSession.currentIndex >= 0 ? activeSearchSession.currentIndex : -1;
+      searchSelectedIndex = -1;
       searchInput.value = activeSearchSession.query;
       adjustSearchInputHeight();
       if (modalSearchClear) modalSearchClear.style.display = 'inline-flex';
@@ -1846,6 +1856,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (modalAiEnabled) {
         renderPromptChips();
+        if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
       } else {
         if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
       }
@@ -2029,7 +2040,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (searchInput) searchInput.focus();
   }
 
-  function toggleAiSearchMode(forceState) {
+  function toggleAiSearchMode(forceState, options = {}) {
+    const query = searchInput ? searchInput.value.trim() : '';
+
     if (forceState !== undefined) {
       modalAiEnabled = forceState;
     } else {
@@ -2049,17 +2062,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const query = searchInput ? searchInput.value.trim() : '';
     if (modalAiEnabled && !query) {
       renderPromptChips();
       if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
+      renderRecentSearches();
       if (searchResults) searchResults.style.display = 'none';
-    } else {
+    } else if (!modalAiEnabled && !query) {
       if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
-      if (searchResults) searchResults.style.display = 'block';
+      renderRecentSearches();
     }
 
-    executeSearch(searchInput ? searchInput.value : '');
+    if (!options.skipSearch) {
+      executeSearch(searchInput ? searchInput.value : '');
+    }
   }
 
   if (modalSearchAi) {
@@ -2354,12 +2369,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         e.preventDefault();
         const val = searchInput ? searchInput.value.trim() : '';
-        if (val.length >= 2) {
-          saveRecentSearch(val, modalAiEnabled ? 'ai' : 'standard');
-        }
-        const targetIdx = searchSelectedIndex >= 0 ? searchSelectedIndex : (filteredSearchResults.length > 0 ? 0 : -1);
-        if (targetIdx >= 0 && targetIdx < filteredSearchResults.length) {
-          selectSearchResult(filteredSearchResults[targetIdx].item, { index: targetIdx });
+
+        if (searchSelectedIndex === -1) {
+          // Premier appui sur Entrée : sélectionne le premier résultat en le mettant en évidence
+          // C'est à ce moment que la requête est mémorisée par l'historique
+          if (items.length > 0) {
+            searchSelectedIndex = 0;
+            updateSelectedSearchItem(items);
+            if (val.length >= 2) {
+              saveRecentSearch(val, modalAiEnabled ? 'ai' : 'standard');
+            }
+          } else if (val.length >= 2) {
+            // Validation immédiate par Entrée (ex: mode IA ou avant la fin du debounce)
+            saveRecentSearch(val, modalAiEnabled ? 'ai' : 'standard');
+            debouncedExecuteSearch.cancel();
+            executeSearch(val);
+          }
+        } else if (searchSelectedIndex >= 0 && searchSelectedIndex < filteredSearchResults.length) {
+          // Second appui sur Entrée (ou déjà sélectionné) : validation et ouverture
+          if (val.length >= 2) {
+            saveRecentSearch(val, modalAiEnabled ? 'ai' : 'standard');
+          }
+          const entry = filteredSearchResults[searchSelectedIndex];
+          const item = entry.item || entry;
+          selectSearchResult(item, { index: searchSelectedIndex });
         }
       } else if (e.key === 'r' && e.altKey) {
         e.preventDefault();
@@ -2423,8 +2456,10 @@ document.addEventListener('DOMContentLoaded', () => {
         lastAiRawResults = null;
         lastAiQuery = null;
         renderPromptChips();
+        if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
         renderRecentSearches();
         searchResults.innerHTML = '';
+        if (searchResults) searchResults.style.display = 'none';
         filteredSearchResults = [];
         searchSelectedIndex = -1;
         return;
@@ -2504,11 +2539,7 @@ document.addEventListener('DOMContentLoaded', () => {
         type: r.type
       }));
 
-      if (activeSearchSession.isActive && activeSearchSession.currentIndex >= 0 && activeSearchSession.currentIndex < filteredSearchResults.length) {
-        searchSelectedIndex = activeSearchSession.currentIndex;
-      } else {
-        searchSelectedIndex = -1;
-      }
+      searchSelectedIndex = -1;
       activeSearchSession.query = trimmed;
       activeSearchSession.mode = 'ai';
       activeSearchSession.results = filteredSearchResults;
@@ -2566,7 +2597,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const isCurrent = (activeSearchSession.isActive && activeSearchSession.currentIndex === idx);
         const isViewed = activeSearchSession.viewedIndices.has(idx);
-        const isSelected = (searchSelectedIndex >= 0 && searchSelectedIndex === idx && !isCurrent);
+        const isSelected = (searchSelectedIndex >= 0 && searchSelectedIndex === idx);
 
         const itemClasses = ['search-result-item'];
         if (isCurrent) itemClasses.push('current-result');
@@ -2600,10 +2631,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       searchResults.innerHTML = html;
 
-      if (activeSearchSession.isActive && activeSearchSession.currentIndex >= 0) {
-        const currentEl = searchResults.querySelector('.search-result-item.current-result');
-        if (currentEl) currentEl.scrollIntoView({ block: 'nearest' });
-      }
 
       // Bind section pills
       searchResults.querySelectorAll('.rag-section-pill').forEach(pill => {
@@ -2711,11 +2738,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const displayResults = filteredSearchResults.slice(0, 80);
-    if (activeSearchSession.isActive && activeSearchSession.currentIndex >= 0 && activeSearchSession.currentIndex < displayResults.length) {
-      searchSelectedIndex = activeSearchSession.currentIndex;
-    } else {
-      searchSelectedIndex = -1;
-    }
+    searchSelectedIndex = -1;
     activeSearchSession.query = query;
     activeSearchSession.mode = 'standard';
     activeSearchSession.results = displayResults;
@@ -2735,7 +2758,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isCurrent = (activeSearchSession.isActive && activeSearchSession.currentIndex === idx);
       const isViewed = activeSearchSession.viewedIndices.has(idx);
-      const isSelected = (searchSelectedIndex >= 0 && searchSelectedIndex === idx && !isCurrent);
+      const isSelected = (searchSelectedIndex >= 0 && searchSelectedIndex === idx);
 
       const itemClasses = ['search-result-item'];
       if (isCurrent) itemClasses.push('current-result');
@@ -2766,11 +2789,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchResults.innerHTML = html || '<li style="padding:2rem; text-align:center; color:var(--text-muted); font-size:0.875rem">No matching items found</li>';
 
-    if (activeSearchSession.isActive && activeSearchSession.currentIndex >= 0) {
-      const currentEl = searchResults.querySelector('.search-result-item.current-result');
-      if (currentEl) currentEl.scrollIntoView({ block: 'nearest' });
-    }
-
     searchResults.querySelectorAll('.search-result-item').forEach(item => {
       item.addEventListener('click', () => {
         const idx = parseInt(item.getAttribute('data-index'), 10);
@@ -2788,7 +2806,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update session tracking
     if (options.index !== undefined && options.index >= 0) {
       activeSearchSession.currentIndex = options.index;
-      searchSelectedIndex = options.index;
     } else if (activeSearchSession.results && activeSearchSession.results.length > 0) {
       const foundIdx = activeSearchSession.results.findIndex(r => {
         const it = r.item || r;
@@ -2796,16 +2813,18 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (foundIdx !== -1) {
         activeSearchSession.currentIndex = foundIdx;
-        searchSelectedIndex = foundIdx;
       }
     }
+    // No result should remain selected in the search results list
+    searchSelectedIndex = -1;
     if (activeSearchSession.currentIndex >= 0) {
       activeSearchSession.viewedIndices.add(activeSearchSession.currentIndex);
     }
     activeSearchSession.isActive = true;
 
-    if (activeSearchSession.query) {
-      saveRecentSearch(activeSearchSession.query, activeSearchSession.mode || (modalAiEnabled ? 'ai' : 'standard'));
+    const qToSave = activeSearchSession.query || (searchInput ? searchInput.value.trim() : '');
+    if (qToSave && qToSave.length >= 2) {
+      saveRecentSearch(qToSave, activeSearchSession.mode || (modalAiEnabled ? 'ai' : 'standard'));
     }
 
     updateSearchPilotBar();

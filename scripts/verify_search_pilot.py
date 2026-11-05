@@ -29,7 +29,13 @@ def test_html():
     for element_id in required_ids:
         assert f'id="{element_id}"' in content, f"Missing id: {element_id} in index.html"
 
-    print("PASS: index.html elements verified successfully.")
+    # Verify that Suggested Prompts section comes before Recent Searches section
+    idx_prompts = content.find('id="modal-search-prompts"')
+    idx_recent = content.find('id="modal-recent-searches"')
+    assert idx_prompts != -1 and idx_recent != -1, "Missing prompts or recent searches in index.html"
+    assert idx_prompts < idx_recent, "Suggested queries (modal-search-prompts) MUST be placed before Recent searches (modal-recent-searches)"
+
+    print("PASS: index.html elements and section order verified successfully.")
 
 def test_css():
     css_path = Path("css/style.css")
@@ -105,6 +111,10 @@ def test_js():
     ]
     for sym in required_symbols:
         assert sym in content, f"Missing symbol or identifier: {sym} in js/app.js"
+
+    # Verify that searchSelectedIndex is -1 by default and only highlighted on first Enter
+    assert "searchSelectedIndex = -1" in content, "searchSelectedIndex must be reset to -1 by default"
+    assert "searchSelectedIndex === -1" in content, "Enter handler must check for searchSelectedIndex === -1 to select first result"
 
     print("PASS: js/app.js syntax balance and integration verified successfully.")
 

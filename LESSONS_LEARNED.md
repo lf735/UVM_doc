@@ -469,6 +469,44 @@ Le fichier de données de recherche [`js/search_data.js`](file:///c:/Dev/UVM_doc
   - Suppression de la condition en dur. L'élément actif reçoit `.current-result` uniquement s'il correspond à `activeSearchSession.currentIndex`.
   - La classe `.selected` est strictement réservée au curseur actif lors de la navigation au clavier (`↑` / `↓`).
 
+### Piège 13.7 : La Sélection par Défaut & Le Modèle de Validation d'Historique en Deux Temps (`Entrée` pour Surligner/Mémoriser, Clic Direct)
+- **Symptôme** : Sélectionner arbitrairement un résultat dès la frappe ou mémoriser passivement chaque caractère lors du live search polluait l'historique avec des fragments ou déclenchait des navigations involontaires dès le premier appui sur `Entrée`.
+- **Règle ergonomique établie** :
+  1. **Aucun résultat sélectionné par défaut** : À chaque exécution de recherche (`executeSearch`), `searchSelectedIndex` est initialisé à `-1`. Aucun élément ne porte la classe `.selected` par défaut.
+  2. **Validation progressive au clavier (modèle 2 temps)** :
+     - Lorsque l'utilisateur tape sa requête, l'historique n'est pas pollué en tâche de fond.
+     - Un premier appui sur `Entrée` (quand `searchSelectedIndex === -1`) sélectionne le **premier résultat**, le met en évidence (`.selected`), le fait défiler dans la vue, et **mémorise la requête dans l'historique**. La modale reste ouverte pour vérification.
+     - Un second appui sur `Entrée` valide et ouvre le résultat sélectionné.
+  3. **Clic direct à la souris** : Si l'utilisateur clique directement sur un résultat sans avoir appuyé sur `Entrée`, la requête active est automatiquement mémorisée dans l'historique avant de charger le document.
+
+### Piège 13.8 : La Hiérarchie Visuelle de l'Accueil IA (`Prompts` vs `Recent Searches`)
+- **Symptôme** : En mode IA avec un historique présent, les recherches récentes se retrouvaient affichées au-dessus des suggestions de requêtes en langage naturel, masquant l'accès rapide aux modèles de prompts techniques.
+- **Solution** :
+  - Inversion de l'ordre structurel dans `index.html` : `#modal-search-prompts` est positionné en première section, immédiatement suivi de `#modal-recent-searches`.
+  - Chacun des deux blocs s'ajuste harmonieusement en flexbox (`flex: 1; overflow-y: auto`), offrant les requêtes d'inspiration en haut et l'historique de travail en bas.
+
+### Piège 13.9 : La Persistance Indésirable de Surlignage du Dernier Élément Cliqué
+- **Symptôme** : Après avoir cliqué sur un résultat de recherche, lors de la réouverture ou du parcours de la liste, le dernier élément cliqué restait perpétuellement surligné avec un fond bleu (`var(--primary-light)`) et une bordure latérale (`border-left: 3px solid var(--primary)`).
+- **Cause racine** :
+  1. Lors du clic, `selectSearchResult` affectait `searchSelectedIndex = options.index;`, et la boucle de rendu appliquait `.search-result-item.current-result` avec des styles forçant le fond de sélection (`!important`).
+  2. En outre, `currentEl.scrollIntoView()` recentrait automatiquement la vue sur l'élément cliqué au lieu de laisser la liste propre en position initiale.
+- **Solution** :
+  - Dans `selectSearchResult` : `searchSelectedIndex` est systématiquement remis à `-1`.
+  - Dans `css/style.css` : Suppression du background et de la bordure sur `.search-result-item.current-result`. Seule la coche SVG discrète (`.viewed`) atteste qu'un élément a déjà été consulté au cours de la session.
+  - La mise en évidence bleue/sélectionnée est strictement réservée au curseur actif du clavier (`↑` / `↓` ou premier `Entrée`).
+
+### Piège 13.10 : Disparition de l'Historique en Mode IA
+- **Symptôme** : Lors du passage en mode IA, la section d'historique disparaissait complètement.
+- **Cause racine** :
+  1. Si l'historique était vide, `renderRecentSearches` basculait `modalRecentSearches.style.display = 'none'`, ce qui faisait disparaître l'ensemble de la section et ne laissait que les prompts sans aucun indicateur d'historique.
+  2. Lors de la saisie d'une question IA, l'exécution sémantique étant asynchrone (~1-2s), `items.length` valait 0 au moment où l'utilisateur appuyait sur `Entrée`. La condition `if (items.length > 0)` sautait silencieusement et `saveRecentSearch` n'était jamais appelée !
+  3. De plus, les 15 suggestions de prompts en `flex: 1` sans `max-height` écrasaient visuellement la zone inférieure.
+- **Solution** :
+  - En mode IA, la section d'historique reste toujours visible sous les prompts. Si l'historique est vide, un état neutre et épuré s'affiche (`"Aucune recherche récente. Vos requêtes s'afficheront ici."`).
+  - L'appui sur `Entrée` valide et mémorise immédiatement la requête (`saveRecentSearch(val, 'ai')`), déclenchant la recherche sémantique sans attendre.
+  - `.modal-search-prompts` est équilibré avec `max-height: 420px; min-height: 180px; flex: 1 1 auto;`, offrant un espace généreux et confortable pour afficher plusieurs rangées de suggestions de requêtes sans écraser la section d'historique en dessous.
+
+
 
 
 
