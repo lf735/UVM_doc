@@ -409,7 +409,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-op">%</span> <span class="sv-ident">uvm11</span><span class="sv-op">-</span><span class="sv-ident">to</span><span class="sv-op">-</span><span class="sv-ident">uvm12</span><span class="sv-op">.</span><span class="sv-ident">pl</span> <span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-ident">write</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-op">%</span> <span class="sv-ident">uvm11</span><span class="sv-op">-</span><span class="sv-ident">to</span><span class="sv-op">-</span><span class="sv-ident">uvm12</span><span class="sv-op">.</span><span class="sv-ident">pl</span> <span class="sv-op">--</span><span class="sv-method">write</span></code></pre>
 </div><p>See the <i>--help</i> command-line option for additional details.</p><p>The script may not be able to automatically identify all cases of backwards incompatibility, and the user may need to fix some manually.&nbsp;  Because most of these issues will result in a compile-time error, they should be easy to identify.</p></div></div></div>
 
 
@@ -667,14 +667,14 @@
   <pre class="code-block-content"><code><span class="sv-comment">// Old Code:</span>
 <span class="sv-uvm-type">uvm_objection</span> <span class="sv-ident">phase_done</span><span class="sv-op">;</span>
 <span class="sv-ident">phase_done</span> <span class="sv-op">=</span> <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">get_objection</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-ident">phase_done</span><span class="sv-op">.</span><span class="sv-method">drop_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span>
+<span class="sv-ident">phase_done</span><span class="sv-op">.</span><span class="sv-method">drop_objection</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span>
                           <span class="sv-string">&quot;dropping all objections&quot;</span><span class="sv-op">,</span>
-                          <span class="sv-ident">phase_done</span><span class="sv-op">.</span><span class="sv-method">get_objection_count</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
+                          <span class="sv-ident">phase_done</span><span class="sv-op">.</span><span class="sv-method">get_objection_count</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
 <span class="sv-comment">// New Code:</span>
-<span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">drop_objection</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span>
+<span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">drop_objection</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span>
                      <span class="sv-string">&quot;dropping all objections&quot;</span><span class="sv-op">,</span>
-                     <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">get_objection_count</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+                     <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">get_objection_count</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
 
@@ -752,16 +752,16 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
     <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">my_obj</span><span class="sv-op">)</span>
 
-    <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;my_obj&quot;</span><span class="sv-op">)</span>
-      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;my_obj&quot;</span><span class="sv-op">)</span>
+      <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
       <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-    <span class="sv-keyword">endfunction</span>
+    <span class="sv-keyword-decl">endfunction</span>
     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-<span class="sv-keyword">endclass</span></code></pre>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div><p>However, in UVM 1.0 and UVM 1.1, the presence of such a constructor were not enforced by the library and they were technically optional.&nbsp; If no constructor was specified, a default constructor was provided by SystemVerilog:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -773,14 +773,14 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
     <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">my_obj</span><span class="sv-op">)</span>
 
-    <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
-    <span class="sv-keyword">endfunction</span>
+    <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword-decl">endfunction</span>
     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-<span class="sv-keyword">endclass</span></code></pre>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div><p>Note the important difference: in the default constructor, there is no <i>name</i> argument.&nbsp; Because the factory could not rely on the presence of that argument, <a href="../base/uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link99  >uvm_object</a> instances were created by calling <i>new()</i> without any arguments and subsequently setting the object instance name using <a href="../base/uvm_object-svh.html#doc-nav-item-6" data-target-id="doc-nav-item-6" class=LMethod id=link100  >uvm_object::set_name</a>.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -792,7 +792,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-ident">obj</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-ident">obj</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">name</span> <span class="sv-op">!=</span> <span class="sv-string">&quot;&quot;</span><span class="sv-op">)</span> <span class="sv-ident">obj</span><span class="sv-op">.</span><span class="sv-method">set_name</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>In most cases, this difference was not significant.&nbsp; However, for any class that makes use of the value of the <i>name</i> argument in the constructor,</p><div class="code-block-container">
   <div class="code-block-header">
@@ -805,17 +805,17 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
     <span class="sv-ident">your_obj</span> <span class="sv-ident">sub</span><span class="sv-op">;</span>
 
     <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">my_obj</span><span class="sv-op">)</span>
 
-    <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;my_obj&quot;</span><span class="sv-op">)</span>
-      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
-      <span class="sv-ident">sub</span> <span class="sv-op">=</span> <span class="sv-ident">your_obj</span><span class="sv-op">::</span><span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-string">&quot;.sub&quot;</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span>
-    <span class="sv-keyword">endfunction</span>
+    <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;my_obj&quot;</span><span class="sv-op">)</span>
+      <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+      <span class="sv-ident">sub</span> <span class="sv-op">=</span> <span class="sv-ident">your_obj</span><span class="sv-op">::</span><span class="sv-method">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-string">&quot;.sub&quot;</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword-decl">endfunction</span>
     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-<span class="sv-keyword">endclass</span></code></pre>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div><p>a difference in behavior was observed between instantiating an object directly:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -827,7 +827,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-ident">my_obj</span> <span class="sv-ident">o</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;o&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-ident">my_obj</span> <span class="sv-ident">o</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;o&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>and instantiating an object via the factory:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -839,7 +839,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-ident">my_obj</span> <span class="sv-ident">o</span> <span class="sv-op">=</span> <span class="sv-ident">my_obj</span><span class="sv-op">::</span><span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;o&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-ident">my_obj</span> <span class="sv-ident">o</span> <span class="sv-op">=</span> <span class="sv-ident">my_obj</span><span class="sv-op">::</span><span class="sv-method">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;o&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>The difference could have been worked around by overriding the <a href="../base/uvm_object-svh.html#doc-nav-item-6" data-target-id="doc-nav-item-6" class=LMethod id=link101  >uvm_object::set_name</a> method to percolate the effect of the name change.&nbsp; However, that work-around was often impossible or too late.&nbsp; In the examples above, the former creates an instance of <i>your_obj</i> named &ldquo;o.sub&rdquo; whereas the latter creates an instance named &ldquo;my_obj.sub&rdquo;.&nbsp; It made it impossible to control the sub-object factory based on the parent object name.</p><p>Instantiating coverage group is another example where the work-around did not work.&nbsp; Coverage groups cannot be renamed and must be instantiated in the encapsulating object&rsquo;s constructor.&nbsp; The following example would create coverage groups that are always named &ldquo;my_obj&rdquo; when using the object factory.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -851,20 +851,20 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
-    <span class="sv-keyword">covergroup</span> <span class="sv-method">my_cg</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+    <span class="sv-keyword-decl">covergroup</span> <span class="sv-method">my_cg</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
        <span class="sv-ident">option</span><span class="sv-op">.</span><span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-ident">name</span><span class="sv-op">;</span>
        <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-    <span class="sv-keyword">endgroup</span>
+    <span class="sv-keyword-decl">endgroup</span>
 
     <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">my_obj</span><span class="sv-op">)</span>
 
-    <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;my_obj&quot;</span><span class="sv-op">)</span>
-      <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
-      <span class="sv-ident">my_cg</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
-    <span class="sv-keyword">endfunction</span>
+    <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;my_obj&quot;</span><span class="sv-op">)</span>
+      <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+      <span class="sv-ident">my_cg</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword-decl">endfunction</span>
     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-<span class="sv-keyword">endclass</span></code></pre>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div><p>Because the object factory is such a fundamental element of UVM, it is important that it be able to rely on the presence of a <i>name</i> argument in object constructors.</p></div></div></div>
 
 
@@ -882,16 +882,16 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-macro">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span>
-<span class="sv-keyword">program</span> <span class="sv-ident">test</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-preproc">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span>
+<span class="sv-keyword-decl">program</span> <span class="sv-ident">test</span><span class="sv-op">;</span>
 
-<span class="sv-keyword">import</span> <span class="sv-uvm-type">uvm_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">import</span> <span class="sv-uvm-type">uvm_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span>
 
-<span class="sv-keyword">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">class</span> <span class="sv-ident">my_obj</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
    <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">my_obj</span><span class="sv-op">)</span>
-<span class="sv-keyword">endclass</span>
+<span class="sv-keyword-decl">endclass</span>
 
-<span class="sv-keyword">endprogram</span></code></pre>
+<span class="sv-keyword-decl">endprogram</span></code></pre>
 </div><p>will produce the following error messages:</p><h4 class=CHeading>Questa</h4><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -918,7 +918,7 @@
   <pre class="code-block-content"><code><span class="sv-ident">file</span><span class="sv-op">:</span> <span class="sv-ident">test</span><span class="sv-op">.</span><span class="sv-ident">sv</span>
 <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">my_obj</span><span class="sv-op">)</span>
                         <span class="sv-op">|</span>
-<span class="sv-ident">ncvlog</span><span class="sv-op">:</span> <span class="sv-op">*</span><span class="sv-ident">E</span><span class="sv-op">,</span><span class="sv-method">TOOMAC</span> <span class="sv-op">(</span><span class="sv-ident">test</span><span class="sv-op">.</span><span class="sv-ident">sv</span><span class="sv-op">,</span><span class="sv-number">8</span><span class="sv-op">|</span><span class="sv-number">24</span><span class="sv-op">)</span><span class="sv-op">:</span> <span class="sv-ident">too</span> <span class="sv-ident">many</span> <span class="sv-ident">actual</span> <span class="sv-ident">arguments</span> <span class="sv-op">[</span><span class="sv-number">10</span><span class="sv-op">.</span><span class="sv-number">2</span><span class="sv-op">.</span><span class="sv-number">2</span><span class="sv-op">]</span><span class="sv-op">[</span><span class="sv-number">10</span><span class="sv-op">.</span><span class="sv-number">3</span><span class="sv-op">(</span><span class="sv-ident">IEEE</span><span class="sv-op">)</span><span class="sv-op">]</span><span class="sv-op">.</span></code></pre>
+<span class="sv-ident">ncvlog</span><span class="sv-op">:</span> <span class="sv-op">*</span><span class="sv-ident">E</span><span class="sv-op">,</span><span class="sv-method">TOOMAC</span> <span class="sv-op">(</span><span class="sv-ident">test</span><span class="sv-op">.</span><span class="sv-ident">sv</span><span class="sv-op">,</span><span class="sv-number">8</span><span class="sv-op">|</span><span class="sv-number">24</span><span class="sv-op">)</span><span class="sv-op">:</span> <span class="sv-ident">too</span> <span class="sv-ident">many</span> <span class="sv-ident">actual</span> <span class="sv-ident">arguments</span> <span class="sv-op">[</span><span class="sv-number">10.2</span><span class="sv-op">.</span><span class="sv-number">2</span><span class="sv-op">]</span><span class="sv-op">[</span><span class="sv-number">10.3</span><span class="sv-op">(</span><span class="sv-ident">IEEE</span><span class="sv-op">)</span><span class="sv-op">]</span><span class="sv-op">.</span></code></pre>
 </div><h4 class=CHeading>VCS</h4><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -930,16 +930,16 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-ident">Error</span><span class="sv-op">-</span><span class="sv-op">[</span><span class="sv-ident">TMAFTC</span><span class="sv-op">]</span> <span class="sv-ident">Too</span> <span class="sv-ident">many</span> <span class="sv-ident">arguments</span> <span class="sv-ident">to</span> <span class="sv-keyword">function</span><span class="sv-op">/</span><span class="sv-keyword">task</span> <span class="sv-ident">call</span>
-$<span class="sv-uvm-type">UVM_HOME</span><span class="sv-op">/</span><span class="sv-ident">src</span><span class="sv-op">/</span><span class="sv-ident">base</span><span class="sv-op">/</span><span class="sv-uvm-type">uvm_registry</span><span class="sv-op">.</span><span class="sv-ident">svh</span><span class="sv-op">,</span> <span class="sv-number">197</span>
+  <pre class="code-block-content"><code><span class="sv-ident">Error</span><span class="sv-op">-</span><span class="sv-op">[</span><span class="sv-ident">TMAFTC</span><span class="sv-op">]</span> <span class="sv-ident">Too</span> <span class="sv-ident">many</span> <span class="sv-ident">arguments</span> <span class="sv-ident">to</span> <span class="sv-keyword-decl">function</span><span class="sv-op">/</span><span class="sv-keyword-decl">task</span> <span class="sv-ident">call</span>
+<span class="sv-system-tf">$UVM_HOME</span><span class="sv-op">/</span><span class="sv-ident">src</span><span class="sv-op">/</span><span class="sv-ident">base</span><span class="sv-op">/</span><span class="sv-uvm-type">uvm_registry</span><span class="sv-op">.</span><span class="sv-ident">svh</span><span class="sv-op">,</span> <span class="sv-number">197</span>
 <span class="sv-string">&quot;my_obj::new(name)&quot;</span>
-  <span class="sv-ident">The</span> <span class="sv-ident">above</span> <span class="sv-keyword">function</span><span class="sv-op">/</span><span class="sv-keyword">task</span> <span class="sv-ident">call</span> <span class="sv-ident">is</span> <span class="sv-ident">done</span> <span class="sv-keyword">with</span> <span class="sv-ident">more</span> <span class="sv-ident">arguments</span> <span class="sv-ident">than</span> <span class="sv-ident">needed</span><span class="sv-op">.</span>
+  <span class="sv-ident">The</span> <span class="sv-ident">above</span> <span class="sv-keyword-decl">function</span><span class="sv-op">/</span><span class="sv-keyword-decl">task</span> <span class="sv-ident">call</span> <span class="sv-ident">is</span> <span class="sv-ident">done</span> <span class="sv-keyword-decl">with</span> <span class="sv-ident">more</span> <span class="sv-ident">arguments</span> <span class="sv-ident">than</span> <span class="sv-ident">needed</span><span class="sv-op">.</span>
 
 
-<span class="sv-ident">Error</span><span class="sv-op">-</span><span class="sv-op">[</span><span class="sv-ident">TMAFTC</span><span class="sv-op">]</span> <span class="sv-ident">Too</span> <span class="sv-ident">many</span> <span class="sv-ident">arguments</span> <span class="sv-ident">to</span> <span class="sv-keyword">function</span><span class="sv-op">/</span><span class="sv-keyword">task</span> <span class="sv-ident">call</span>
+<span class="sv-ident">Error</span><span class="sv-op">-</span><span class="sv-op">[</span><span class="sv-ident">TMAFTC</span><span class="sv-op">]</span> <span class="sv-ident">Too</span> <span class="sv-ident">many</span> <span class="sv-ident">arguments</span> <span class="sv-ident">to</span> <span class="sv-keyword-decl">function</span><span class="sv-op">/</span><span class="sv-keyword-decl">task</span> <span class="sv-ident">call</span>
 <span class="sv-ident">test</span><span class="sv-op">.</span><span class="sv-ident">sv</span><span class="sv-op">,</span> <span class="sv-number">6</span>
 <span class="sv-string">&quot;my_obj::new(name)&quot;</span>
-  <span class="sv-ident">The</span> <span class="sv-ident">above</span> <span class="sv-keyword">function</span><span class="sv-op">/</span><span class="sv-keyword">task</span> <span class="sv-ident">call</span> <span class="sv-ident">is</span> <span class="sv-ident">done</span> <span class="sv-keyword">with</span> <span class="sv-ident">more</span> <span class="sv-ident">arguments</span> <span class="sv-ident">than</span> <span class="sv-ident">needed</span><span class="sv-op">.</span></code></pre>
+  <span class="sv-ident">The</span> <span class="sv-ident">above</span> <span class="sv-keyword-decl">function</span><span class="sv-op">/</span><span class="sv-keyword-decl">task</span> <span class="sv-ident">call</span> <span class="sv-ident">is</span> <span class="sv-ident">done</span> <span class="sv-keyword-decl">with</span> <span class="sv-ident">more</span> <span class="sv-ident">arguments</span> <span class="sv-ident">than</span> <span class="sv-ident">needed</span><span class="sv-op">.</span></code></pre>
 </div><p>When using VCS, ignore the first message reported in uvm_registry.svh and focus on the subsequent one identifying the invalid constructor being called.&nbsp; The reported line number will be on the <i>endclass</i> token of the class that is missing the required constructor.</p></div></div></div>
 
 
@@ -957,7 +957,7 @@ $<span class="sv-uvm-type">UVM_HOME</span><span class="sv-op">/</span><span clas
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-op">%</span> <span class="sv-ident">add_uvm_object_new</span><span class="sv-op">.</span><span class="sv-ident">pl</span> <span class="sv-op">-</span><span class="sv-op">-</span><span class="sv-ident">write</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-op">%</span> <span class="sv-ident">add_uvm_object_new</span><span class="sv-op">.</span><span class="sv-ident">pl</span> <span class="sv-op">--</span><span class="sv-method">write</span></code></pre>
 </div><p>See the <i>--help</i> command-line option for more details.</p><p>The script may not be able to automatically identify all classes with missing constructors, or users may prefer to manually modify their source files.&nbsp; The script is also unable to fix unsuitable constructors; those will need to be fixed manually.&nbsp; Because the error is a compile-time error, it will be easy to identify any remaining changes that are required.</p></div></div></div>
 
 
@@ -975,7 +975,7 @@ $<span class="sv-uvm-type">UVM_HOME</span><span class="sv-op">/</span><span clas
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-op">%</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-cmdline-opt">+define</span><span class="sv-cmdline-opt">+UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR</span> <span class="sv-uvm-type">uvm_pkg</span><span class="sv-op">.</span><span class="sv-ident">sv</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-op">%</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-op">+</span><span class="sv-ident">define</span><span class="sv-op">+</span><span class="sv-ident">UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR</span> <span class="sv-uvm-type">uvm_pkg</span><span class="sv-op">.</span><span class="sv-ident">sv</span></code></pre>
 </div><p>Users must be aware that this may result in difference in behavior in code that now relies on the correct implementation of the UVM object factory.</p></div></div></div>
 
 
@@ -1071,7 +1071,7 @@ $<span class="sv-uvm-type">UVM_HOME</span><span class="sv-op">/</span><span clas
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-op">%</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-cmdline-opt">+define</span><span class="sv-cmdline-opt">+UVM_DEPRECATED_REPORTING</span> <span class="sv-uvm-type">uvm_pkg</span><span class="sv-op">.</span><span class="sv-ident">sv</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-op">%</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-op">+</span><span class="sv-ident">define</span><span class="sv-op">+</span><span class="sv-ident">UVM_DEPRECATED_REPORTING</span> <span class="sv-uvm-type">uvm_pkg</span><span class="sv-op">.</span><span class="sv-ident">sv</span></code></pre>
 </div><p>Users must be aware that this will result in different behavior in code that now relies on the new implementation of <a href="../base/uvm_report_server-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link116  >uvm_report_server</a>.</p></div></div></div>
 
 

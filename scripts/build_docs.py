@@ -22,6 +22,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR / "scripts"))
 import build_examples
+import syntax_highlighter as sh
 SRC_DIR = BASE_DIR / "uvm-1.2" / "src"
 DOCS_DIR = BASE_DIR / "uvm-1.2" / "docs" / "html"
 DOCS_FILES_DIR = DOCS_DIR / "files"
@@ -187,54 +188,7 @@ def highlight_outside_tags(text, highlight_fn):
 
 def highlight_doc_code(raw_code):
     """Highlight a block of code from documentation preserving indentation and newlines."""
-    code = html.unescape(raw_code)
-    pos = 0
-    code_len = len(code)
-    parts = []
-
-    while pos < code_len:
-        m = DOC_TOKEN_REGEX.search(code, pos)
-        if not m:
-            parts.append(html.escape(code[pos:]))
-            break
-        
-        start, end = m.span()
-        if start > pos:
-            parts.append(html.escape(code[pos:start]))
-            
-        kind = m.lastgroup
-        val = m.group(kind)
-        esc = html.escape(val)
-
-        if kind in ('BLOCK_COMMENT', 'LINE_COMMENT'):
-            parts.append(f'<span class="sv-comment">{esc}</span>')
-        elif kind in ('STRING', 'CHAR'):
-            parts.append(f'<span class="sv-string">{esc}</span>')
-        elif kind == 'MACRO':
-            parts.append(f'<span class="sv-macro">{esc}</span>')
-        elif kind == 'CMD_OPTION':
-            parts.append(f'<span class="sv-cmdline-opt">{esc}</span>')
-        elif kind == 'NUMBER':
-            parts.append(f'<span class="sv-number">{esc}</span>')
-        elif kind == 'IDENT':
-            if val in SV_KEYWORDS:
-                parts.append(f'<span class="sv-keyword">{esc}</span>')
-            elif val.startswith(('uvm_', 'UVM_')) or val in ('uvm_void', 'uvm_object', 'uvm_component', 'uvm_phase', 'uvm_report_object', 'uvm_driver', 'uvm_sequence', 'uvm_env', 'uvm_test', 'uvm_callbacks'):
-                parts.append(f'<span class="sv-uvm-type">{esc}</span>')
-            else:
-                rest = code[end:].lstrip()
-                if rest.startswith('(') and val not in ('if', 'for', 'while', 'case', 'return', 'super', 'this'):
-                    parts.append(f'<span class="sv-method">{esc}</span>')
-                else:
-                    parts.append(f'<span class="sv-ident">{esc}</span>')
-        elif kind == 'OP':
-            parts.append(f'<span class="sv-op">{esc}</span>')
-        else:
-            parts.append(esc)
-            
-        pos = end
-
-    return "".join(parts)
+    return sh.highlight_doc_snippet(raw_code)
 
 def highlight_before_params(text):
     def repl_text(t):
@@ -245,9 +199,19 @@ def highlight_before_params(text):
         for tok in tokens:
             if not tok:
                 continue
-            if tok in SV_KEYWORDS:
+            if tok in sh.SV_CONTROL_KEYWORDS:
                 res.append(f'<span class="sv-keyword">{tok}</span>')
-            elif tok == method_name:
+            elif tok in sh.SV_DECL_KEYWORDS:
+                res.append(f'<span class="sv-keyword-decl">{tok}</span>')
+            elif tok in sh.SV_BUILTIN_TYPES:
+                res.append(f'<span class="sv-type">{tok}</span>')
+            elif tok in sh.SV_QUALIFIERS:
+                res.append(f'<span class="sv-qualifier">{tok}</span>')
+            elif tok in sh.SV_CONSTANTS:
+                res.append(f'<span class="sv-constant">{tok}</span>')
+            elif tok.startswith(('uvm_', 'UVM_')):
+                res.append(f'<span class="sv-uvm-type">{tok}</span>')
+            elif tok == method_name or tok in sh.KNOWN_UVM_METHODS:
                 res.append(f'<span class="sv-proto-name">{tok}</span>')
             elif tok == '(':
                 res.append(f'<span class="sv-op">(</span>')
@@ -260,8 +224,16 @@ def highlight_type_cell(text):
     def repl_text(t):
         def repl(m):
             w = m.group(0)
-            if w in SV_KEYWORDS:
+            if w in sh.SV_CONTROL_KEYWORDS:
                 return f'<span class="sv-keyword">{w}</span>'
+            elif w in sh.SV_DECL_KEYWORDS:
+                return f'<span class="sv-keyword-decl">{w}</span>'
+            elif w in sh.SV_BUILTIN_TYPES:
+                return f'<span class="sv-type">{w}</span>'
+            elif w in sh.SV_QUALIFIERS:
+                return f'<span class="sv-qualifier">{w}</span>'
+            elif w in sh.SV_CONSTANTS:
+                return f'<span class="sv-constant">{w}</span>'
             elif w.startswith(('uvm_', 'UVM_')) or 'uvm' in w:
                 return f'<span class="sv-uvm-type">{w}</span>'
             else:
@@ -320,15 +292,23 @@ def highlight_prototype_table(proto_html):
                         continue
                     if re.match(r'^\s+$', tok):
                         parts.append(tok)
-                    elif tok in SV_KEYWORDS:
+                    elif tok in sh.SV_CONTROL_KEYWORDS:
                         parts.append(f'<span class="sv-keyword">{tok}</span>')
+                    elif tok in sh.SV_DECL_KEYWORDS:
+                        parts.append(f'<span class="sv-keyword-decl">{tok}</span>')
+                    elif tok in sh.SV_BUILTIN_TYPES:
+                        parts.append(f'<span class="sv-type">{tok}</span>')
+                    elif tok in sh.SV_QUALIFIERS:
+                        parts.append(f'<span class="sv-qualifier">{tok}</span>')
+                    elif tok in sh.SV_CONSTANTS:
+                        parts.append(f'<span class="sv-constant">{tok}</span>')
                     elif tok.startswith(('uvm_', 'UVM_')):
                         parts.append(f'<span class="sv-uvm-type">{tok}</span>')
                     elif tok in '()=,;':
                         parts.append(f'<span class="sv-op">{tok}</span>')
                     else:
                         next_tok = next((x for x in tokens[idx+1:] if x.strip()), '')
-                        if next_tok.startswith('('):
+                        if next_tok.startswith('(') or tok in sh.KNOWN_UVM_METHODS:
                             parts.append(f'<span class="sv-proto-name">{tok}</span>')
                         else:
                             parts.append(f'<span class="sv-ident">{tok}</span>')
@@ -610,80 +590,7 @@ def highlight_code_lines(code, filename):
     Stateful tokenizer for SystemVerilog and C/C++ files.
     Returns a list of HTML table rows with line numbers and syntax highlighted tokens.
     """
-    is_c = filename.endswith(('.c', '.cc', '.h'))
-    keywords = C_KEYWORDS if is_c else SV_KEYWORDS
-    lines = code.splitlines()
-    rows = []
-    in_block_comment = False
-
-    for idx, line in enumerate(lines, 1):
-        pos = 0
-        line_len = len(line)
-        line_parts = []
-
-        while pos < line_len:
-            if in_block_comment:
-                end_pos = line.find('*/', pos)
-                if end_pos != -1:
-                    comment_text = line[pos:end_pos + 2]
-                    line_parts.append(f'<span class="sv-comment">{html.escape(comment_text)}</span>')
-                    pos = end_pos + 2
-                    in_block_comment = False
-                else:
-                    comment_text = line[pos:]
-                    line_parts.append(f'<span class="sv-comment">{html.escape(comment_text)}</span>')
-                    pos = line_len
-            else:
-                m = TOKEN_REGEX.search(line, pos)
-                if not m:
-                    line_parts.append(html.escape(line[pos:]))
-                    pos = line_len
-                else:
-                    start, end = m.span()
-                    if start > pos:
-                        line_parts.append(html.escape(line[pos:start]))
-                    kind = m.lastgroup
-                    val = m.group(kind)
-                    esc = html.escape(val)
-
-                    if kind == 'BLOCK_COMMENT_START':
-                        end_pos = line.find('*/', end)
-                        if end_pos != -1:
-                            comment_text = line[start:end_pos + 2]
-                            line_parts.append(f'<span class="sv-comment">{html.escape(comment_text)}</span>')
-                            pos = end_pos + 2
-                        else:
-                            comment_text = line[start:]
-                            line_parts.append(f'<span class="sv-comment">{html.escape(comment_text)}</span>')
-                            in_block_comment = True
-                            pos = line_len
-                    elif kind == 'LINE_COMMENT':
-                        line_parts.append(f'<span class="sv-comment">{esc}</span>')
-                        pos = end
-                    elif kind in ('STRING', 'CHAR'):
-                        line_parts.append(f'<span class="sv-string">{esc}</span>')
-                        pos = end
-                    elif kind == 'MACRO':
-                        line_parts.append(f'<span class="sv-macro">{esc}</span>')
-                        pos = end
-                    elif kind == 'NUMBER':
-                        line_parts.append(f'<span class="sv-number">{esc}</span>')
-                        pos = end
-                    elif kind == 'IDENT':
-                        if val in keywords:
-                            line_parts.append(f'<span class="sv-keyword">{esc}</span>')
-                        elif val.startswith('uvm_') or val.startswith('UVM_'):
-                            line_parts.append(f'<span class="sv-uvm-type">{esc}</span>')
-                        else:
-                            line_parts.append(f'<span class="sv-ident">{esc}</span>')
-                        pos = end
-                    elif kind == 'OP':
-                        line_parts.append(f'<span class="sv-op">{esc}</span>')
-                        pos = end
-
-        code_html = "".join(line_parts) or "&nbsp;"
-        rows.append(f'<tr id="L{idx}"><td class="ln" data-line="{idx}"><a href="#L{idx}">{idx}</a></td><td class="code">{code_html}</td></tr>')
-
+    rows, _ = sh.highlight_source_code_table_rows(code, filename, clickable_sym_links=False)
     return rows
 
 def index_source_symbols():

@@ -181,13 +181,13 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_create</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>
-<span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-method">wait_for_grant</span><span class="sv-op">(</span><span class="sv-ident">prior</span><span class="sv-op">)</span> <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
-<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">pre_do</span><span class="sv-op">(</span><span class="sv-number">1</span><span class="sv-op">)</span>                  <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
+<span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-method">wait_for_grant</span><span class="sv-op">(</span><span class="sv-ident">prior</span><span class="sv-op">)</span> <span class="sv-op">(</span><span class="sv-keyword-decl">task</span><span class="sv-op">)</span>
+<span class="sv-constant">this</span><span class="sv-op">.</span><span class="sv-method">pre_do</span><span class="sv-op">(</span><span class="sv-number">1</span><span class="sv-op">)</span>                  <span class="sv-op">(</span><span class="sv-keyword-decl">task</span><span class="sv-op">)</span>
 <span class="sv-ident">item</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span>
-<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">mid_do</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>               <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
+<span class="sv-constant">this</span><span class="sv-op">.</span><span class="sv-method">mid_do</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>               <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
 <span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-method">send_request</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>    <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
-<span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-method">wait_for_item_done</span><span class="sv-op">(</span><span class="sv-op">)</span>  <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
-<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">post_do</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span></code></pre>
+<span class="sv-ident">sequencer</span><span class="sv-op">.</span><span class="sv-method">wait_for_item_done</span><span class="sv-op">(</span><span class="sv-op">)</span>  <span class="sv-op">(</span><span class="sv-keyword-decl">task</span><span class="sv-op">)</span>
+<span class="sv-constant">this</span><span class="sv-op">.</span><span class="sv-method">post_do</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span></code></pre>
 </div><p>For a sequence, the following are called, in order</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -201,12 +201,12 @@
   </div>
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_create</span><span class="sv-op">(</span><span class="sv-ident">sub_seq</span><span class="sv-op">)</span>
 <span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span>
-<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">pre_start</span><span class="sv-op">(</span><span class="sv-op">)</span>         <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
-<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">pre_do</span><span class="sv-op">(</span><span class="sv-number">0</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
-<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">mid_do</span><span class="sv-op">(</span><span class="sv-ident">sub_seq</span><span class="sv-op">)</span>        <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
-<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">body</span><span class="sv-op">(</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span>
-<span class="sv-keyword">this</span><span class="sv-op">.</span><span class="sv-method">post_do</span><span class="sv-op">(</span><span class="sv-ident">sub_seq</span><span class="sv-op">)</span>       <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
-<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">post_start</span><span class="sv-op">(</span><span class="sv-op">)</span>        <span class="sv-op">(</span><span class="sv-keyword">task</span><span class="sv-op">)</span></code></pre>
+<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">pre_start</span><span class="sv-op">(</span><span class="sv-op">)</span>         <span class="sv-op">(</span><span class="sv-keyword-decl">task</span><span class="sv-op">)</span>
+<span class="sv-constant">this</span><span class="sv-op">.</span><span class="sv-method">pre_do</span><span class="sv-op">(</span><span class="sv-number">0</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-keyword-decl">task</span><span class="sv-op">)</span>
+<span class="sv-constant">this</span><span class="sv-op">.</span><span class="sv-method">mid_do</span><span class="sv-op">(</span><span class="sv-ident">sub_seq</span><span class="sv-op">)</span>        <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
+<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">body</span><span class="sv-op">(</span><span class="sv-op">)</span>              <span class="sv-op">(</span><span class="sv-keyword-decl">task</span><span class="sv-op">)</span>
+<span class="sv-constant">this</span><span class="sv-op">.</span><span class="sv-method">post_do</span><span class="sv-op">(</span><span class="sv-ident">sub_seq</span><span class="sv-op">)</span>       <span class="sv-op">(</span><span class="sv-ident">func</span><span class="sv-op">)</span>
+<span class="sv-ident">sub_seq</span><span class="sv-op">.</span><span class="sv-method">post_start</span><span class="sv-op">(</span><span class="sv-op">)</span>        <span class="sv-op">(</span><span class="sv-keyword-decl">task</span><span class="sv-op">)</span></code></pre>
 </div></div></div></div>
 
 
@@ -500,24 +500,24 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">seqA</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_sequence_base</span> <span class="sv-op">#(</span><span class="sv-ident">simple_item</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">seqA</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_sequence_base</span> <span class="sv-op">#(</span><span class="sv-ident">simple_item</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-   <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>`<span class="sv-string">&quot;TYPE`&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
-     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
-   <span class="sv-keyword">endfunction</span>
+   <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>`<span class="sv-string">&quot;TYPE`&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+   <span class="sv-keyword-decl">endfunction</span>
 
    <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">seqA</span><span class="sv-op">)</span>
 
    <span class="sv-macro">`uvm_add_to_seq_lib</span><span class="sv-op">(</span><span class="sv-ident">seqA</span><span class="sv-op">,</span> <span class="sv-ident">simple_seq_lib_RST</span><span class="sv-op">)</span>
    <span class="sv-macro">`uvm_add_to_seq_lib</span><span class="sv-op">(</span><span class="sv-ident">seqA</span><span class="sv-op">,</span> <span class="sv-ident">simple_seq_lib_CFG</span><span class="sv-op">)</span>
 
-   <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-method">body</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span> \
+   <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method">body</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span> \
      <span class="sv-macro">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;SEQ_START&quot;</span><span class="sv-op">,</span> <span class="sv-op">{</span><span class="sv-string">&quot;Executing sequence &#x27;&quot;</span><span class="sv-op">,</span> <span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span>
-                            <span class="sv-string">&quot;&#x27; (&quot;</span><span class="sv-op">,</span><span class="sv-method">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;)&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span><span class="sv-uvm-type">UVM_HIGH</span><span class="sv-op">)</span>
+                            <span class="sv-string">&quot;&#x27; (&quot;</span><span class="sv-op">,</span><span class="sv-method">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;)&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span><span class="sv-constant">UVM_HIGH</span><span class="sv-op">)</span>
      <span class="sv-op">#</span><span class="sv-number">10</span><span class="sv-op">;</span>
-   <span class="sv-keyword">endtask</span>
+   <span class="sv-keyword-decl">endtask</span>
 
- <span class="sv-keyword">endclass</span></code></pre>
+ <span class="sv-keyword-decl">endclass</span></code></pre>
 </div></div></div></div>
 
 
@@ -547,19 +547,19 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">typedef</span> <span class="sv-ident">simple_seq_lib</span> <span class="sv-uvm-type">uvm_sequence_library</span> <span class="sv-op">#(</span><span class="sv-ident">simple_item</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">typedef</span> <span class="sv-ident">simple_seq_lib</span> <span class="sv-uvm-type">uvm_sequence_library</span> <span class="sv-op">#(</span><span class="sv-ident">simple_item</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-<span class="sv-keyword">class</span> <span class="sv-ident">simple_seq_lib_RST</span> <span class="sv-keyword">extends</span> <span class="sv-ident">simple_seq_lib</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">class</span> <span class="sv-ident">simple_seq_lib_RST</span> <span class="sv-keyword-decl">extends</span> <span class="sv-ident">simple_seq_lib</span><span class="sv-op">;</span>
 
   <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">simple_seq_lib_RST</span><span class="sv-op">)</span>
 
   <span class="sv-macro">`uvm_sequence_library_utils</span><span class="sv-op">(</span><span class="sv-ident">simple_seq_lib_RST</span><span class="sv-op">)</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
-    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-keyword">endfunction</span>
+  <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">endfunction</span>
 
-<span class="sv-keyword">endclass</span></code></pre>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div><p>Each library, itself a sequence, can then be started independently on different sequencers or in different phases of the same sequencer.&nbsp; See <a href="../seq/uvm_sequencer_base-svh.html#doc-nav-item-6" data-target-id="doc-nav-item-6" class=LMethod id=link7  >uvm_sequencer_base::start_phase_sequence</a> for information on starting default sequences.</p></div></div></div>
 
 
@@ -595,16 +595,16 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mysequence</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_sequence</span><span class="sv-op">#(</span><span class="sv-ident">mydata</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mysequence</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_sequence</span><span class="sv-op">#(</span><span class="sv-ident">mydata</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">mysequence</span><span class="sv-op">)</span>
   <span class="sv-macro">`uvm_declare_p_sequencer</span><span class="sv-op">(</span><span class="sv-ident">some_seqr_type</span><span class="sv-op">)</span>
-  <span class="sv-keyword">task</span> <span class="sv-ident">body</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">task</span> <span class="sv-method">body</span><span class="sv-op">;</span>
     <span class="sv-comment">//Access some variable in the user&#x27;s custom sequencer</span>
     <span class="sv-keyword">if</span><span class="sv-op">(</span><span class="sv-ident">p_sequencer</span><span class="sv-op">.</span><span class="sv-ident">some_variable</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span>
       <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
     <span class="sv-keyword">end</span>
-  <span class="sv-keyword">endtask</span>
-<span class="sv-keyword">endclass</span></code></pre>
+  <span class="sv-keyword-decl">endtask</span>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div></div></div></div>
 
 </div><!--Content-->

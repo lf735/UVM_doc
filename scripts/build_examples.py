@@ -20,6 +20,7 @@ import html
 import json
 from pathlib import Path
 from collections import OrderedDict
+import syntax_highlighter as sh
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 EXAMPLES_SRC_DIR = BASE_DIR / "uvm-1.2" / "examples"
@@ -78,104 +79,8 @@ TOKEN_REGEX = re.compile(
 
 def highlight_code_lines(code, filename):
     """Highlight code lines and return (lines_html, total_lines)."""
-    lines = code.split('\n')
-    is_sv = filename.endswith(('.sv', '.svh', '.v'))
-    is_make = filename.startswith('Makefile')
-    is_txt = filename.endswith('.txt')
-
-    if not is_sv and not is_make:
-        # Plain text
-        html_lines = []
-        for i, line in enumerate(lines, 1):
-            escaped = html.escape(line) or '&nbsp;'
-            html_lines.append(f'<tr id="L{i}"><td class="ln" data-line="{i}"><a href="#L{i}">{i}</a></td><td class="code">{escaped}</td></tr>')
-        return '\n'.join(html_lines), len(lines)
-
-    in_block_comment = False
-    html_lines = []
-
-    for i, line in enumerate(lines, 1):
-        line_parts = []
-        pos = 0
-        length = len(line)
-
-        if in_block_comment:
-            end_bc = line.find('*/')
-            if end_bc != -1:
-                comment_text = line[:end_bc+2]
-                line_parts.append(f'<span class="sv-comment">{html.escape(comment_text)}</span>')
-                pos = end_bc + 2
-                in_block_comment = False
-            else:
-                line_parts.append(f'<span class="sv-comment">{html.escape(line)}</span>')
-                pos = length
-
-        if is_make:
-            # Simple makefile coloring
-            if pos < length:
-                rest = line[pos:]
-                if rest.strip().startswith('#'):
-                    line_parts.append(f'<span class="sv-comment">{html.escape(rest)}</span>')
-                elif '=' in rest:
-                    k, v = rest.split('=', 1)
-                    line_parts.append(f'<span class="sv-ident">{html.escape(k)}</span>=<span class="sv-string">{html.escape(v)}</span>')
-                elif rest.startswith('\t') or rest.startswith('    '):
-                    line_parts.append(f'<span class="sv-keyword">{html.escape(rest)}</span>')
-                elif ':' in rest:
-                    tgt, deps = rest.split(':', 1)
-                    line_parts.append(f'<span class="sv-uvm-type" style="font-weight:700">{html.escape(tgt)}</span>:<span class="sv-ident">{html.escape(deps)}</span>')
-                else:
-                    line_parts.append(html.escape(rest))
-        else:
-            while pos < length:
-                m = TOKEN_REGEX.search(line, pos)
-                if not m:
-                    line_parts.append(html.escape(line[pos:]))
-                    break
-
-                if m.start() > pos:
-                    line_parts.append(html.escape(line[pos:m.start()]))
-
-                kind = m.lastgroup
-                val = m.group(0)
-
-                if kind == 'BLOCK_COMMENT_START':
-                    end_bc = line.find('*/', m.start() + 2)
-                    if end_bc != -1:
-                        comment_text = line[m.start():end_bc+2]
-                        line_parts.append(f'<span class="sv-comment">{html.escape(comment_text)}</span>')
-                        pos = end_bc + 2
-                    else:
-                        line_parts.append(f'<span class="sv-comment">{html.escape(line[m.start():])}</span>')
-                        in_block_comment = True
-                        pos = length
-                    continue
-                elif kind == 'LINE_COMMENT':
-                    line_parts.append(f'<span class="sv-comment">{html.escape(val)}</span>')
-                elif kind == 'STRING' or kind == 'CHAR':
-                    line_parts.append(f'<span class="sv-string">{html.escape(val)}</span>')
-                elif kind == 'MACRO':
-                    line_parts.append(f'<span class="sv-macro">{html.escape(val)}</span>')
-                elif kind == 'NUMBER':
-                    line_parts.append(f'<span class="sv-number">{html.escape(val)}</span>')
-                elif kind == 'IDENT':
-                    if val in SV_KEYWORDS:
-                        line_parts.append(f'<span class="sv-keyword">{html.escape(val)}</span>')
-                    elif val.startswith('uvm_') or val in ('run_test', 'uvm_pkg'):
-                        line_parts.append(f'<span class="sv-uvm-type clickable-uvm-sym" data-sym="{html.escape(val)}" title="Click to view {html.escape(val)} documentation">{html.escape(val)}</span>')
-                    else:
-                        line_parts.append(f'<span class="sv-ident">{html.escape(val)}</span>')
-                elif kind == 'OP':
-                    line_parts.append(f'<span class="sv-op">{html.escape(val)}</span>')
-                else:
-                    line_parts.append(html.escape(val))
-
-                pos = m.end()
-
-        code_content = "".join(line_parts) or '&nbsp;'
-        html_lines.append(f'<tr id="L{i}"><td class="ln" data-line="{i}"><a href="#L{i}">{i}</a></td><td class="code">{code_content}</td></tr>')
-
-    return '\n'.join(html_lines), len(lines)
+    rows, count = sh.highlight_source_code_table_rows(code, filename, clickable_sym_links=True)
+    return '\n'.join(rows), count
 
 # Metadata catalogue for all 38 suites
 SUITES_METADATA = {

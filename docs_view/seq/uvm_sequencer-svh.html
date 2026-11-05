@@ -89,7 +89,7 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_sequencer</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_sequencer</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">REQ</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">uvm_sequence_item,</span></td>
@@ -149,7 +149,7 @@
 <div class="CMethod" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_sequencer#(REQ,RSP).new"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).new" id="uvm_sequencer#(REQ,RSP).new" href="../../src_view/seq/uvm_sequencer.svh.html#L150" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="150">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_sequencer_param_base">Overrides uvm_sequencer_param_base</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
@@ -169,7 +169,7 @@
 
  <!--CONTENT index=2 -->
 <div class="CMethod" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_sequencer#(REQ,RSP).stop_sequences"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).stop_sequences" id="uvm_sequencer#(REQ,RSP).stop_sequences" href="../../src_view/seq/uvm_sequencer.svh.html#L163" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="163">stop_sequences</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_sequencer_base">Overrides uvm_sequencer_base</span></div>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">stop_sequences</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">stop_sequences</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Tells the sequencer to kill all sequences and child sequences currently operating on the sequencer, and remove all requests, locks and responses that are currently queued.&nbsp;  This essentially resets the sequencer to an idle state.</p></div></div></div>
 
 
@@ -188,16 +188,16 @@
     </button>
   </div>
   <pre class="code-block-content"><code><span class="sv-ident">Requests</span><span class="sv-op">:</span>
- <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span>          <span class="sv-method">get_next_item</span>      <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">)</span><span class="sv-op">;</span>
- <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span>          <span class="sv-method">try_next_item</span>      <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">)</span><span class="sv-op">;</span>
- <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span>          <span class="sv-method">get</span>                <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">)</span><span class="sv-op">;</span>
- <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span>          <span class="sv-method">peek</span>               <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">)</span><span class="sv-op">;</span>
+ <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span>          <span class="sv-method">get_next_item</span>      <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">)</span><span class="sv-op">;</span>
+ <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span>          <span class="sv-method">try_next_item</span>      <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">)</span><span class="sv-op">;</span>
+ <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span>          <span class="sv-method">get</span>                <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">)</span><span class="sv-op">;</span>
+ <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span>          <span class="sv-method">peek</span>               <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-ident">Responses</span><span class="sv-op">:</span>
- <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">item_done</span>          <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">=</span><span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
- <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span>          <span class="sv-method">put</span>                <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">)</span><span class="sv-op">;</span>
+ <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">item_done</span>          <span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">=</span><span class="sv-constant">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+ <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span>          <span class="sv-method">put</span>                <span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-ident">Sync</span> <span class="sv-ident">Control</span><span class="sv-op">:</span>
- <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span>          <span class="sv-method">wait_for_sequences</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
- <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span>  <span class="sv-method">has_do_available</span>   <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+ <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span>          <span class="sv-method">wait_for_sequences</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+ <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span>  <span class="sv-method">has_do_available</span>   <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>See <a href="../tlm1/uvm_sqr_ifs-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link17  >uvm_sqr_if_base #(REQ,RSP)</a> for information about this interface.</p></div></div></div>
 
 
@@ -207,7 +207,7 @@
 <div class="CVariable" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_sequencer#(REQ,RSP).seq_item_export"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).seq_item_export" id="uvm_sequencer#(REQ,RSP).seq_item_export" href="../../src_view/seq/uvm_sequencer.svh.html#L30" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="30">seq_item_export</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=2><span class="sv-proto-name">uvm_seq_item_pull_imp</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">REQ</span><span class="sv-op">,</span></td>
+      <td class=PBeforeParameters colspan=2><span class="sv-uvm-type">uvm_seq_item_pull_imp</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">REQ</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">RSP</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">this_type</span></td>
     </tr>
@@ -224,7 +224,7 @@
 <div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_sequencer#(REQ,RSP).get_next_item"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).get_next_item" id="uvm_sequencer#(REQ,RSP).get_next_item" href="../../src_view/seq/uvm_sequencer.svh.html#L206" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="206">get_next_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">get_next_item</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-proto-name">get_next_item</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">output</span>&nbsp;</td>
       <td class=PType nowrap><span class="sv-type">REQ</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
@@ -241,7 +241,7 @@
 <div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_sequencer#(REQ,RSP).try_next_item"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).try_next_item" id="uvm_sequencer#(REQ,RSP).try_next_item" href="../../src_view/seq/uvm_sequencer.svh.html#L230" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="230">try_next_item</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">try_next_item</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-proto-name">try_next_item</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">output</span>&nbsp;</td>
       <td class=PType nowrap><span class="sv-type">REQ</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
@@ -258,7 +258,7 @@
 <div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_sequencer#(REQ,RSP).item_done"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).item_done" id="uvm_sequencer#(REQ,RSP).item_done" href="../../src_view/seq/uvm_sequencer.svh.html#L277" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="277">item_done</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">item_done</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">RSP</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">item_done</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">RSP</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">item</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> null</span></td>
@@ -276,7 +276,7 @@
 <div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_sequencer#(REQ,RSP).put"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).put" id="uvm_sequencer#(REQ,RSP).put" href="../../src_view/seq/uvm_sequencer.svh.html#L304" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="304">put</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-proto-name">put</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">RSP</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-proto-name">put</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">RSP</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
     <tr>
@@ -292,7 +292,7 @@
 <div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_sequencer#(REQ,RSP).get"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).get" id="uvm_sequencer#(REQ,RSP).get" href="../../src_view/seq/uvm_sequencer.svh.html#L312" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="312">get</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">task</span> <span class="sv-proto-name">get</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword-decl">task</span> <span class="sv-proto-name">get</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">output</span>&nbsp;</td>
       <td class=PType nowrap><span class="sv-type">REQ</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
@@ -309,7 +309,7 @@
 <div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_sequencer#(REQ,RSP).peek"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequencer#(REQ,RSP).peek" id="uvm_sequencer#(REQ,RSP).peek" href="../../src_view/seq/uvm_sequencer.svh.html#L325" class="src-code-link" data-src-file="seq/uvm_sequencer.svh" data-src-line="325">peek</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">task</span> <span class="sv-proto-name">peek</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword-decl">task</span> <span class="sv-proto-name">peek</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">output</span>&nbsp;</td>
       <td class=PType nowrap><span class="sv-type">REQ</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>

@@ -141,7 +141,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_tlm_generic_payload</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_sequence_item</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_tlm_generic_payload</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_sequence_item</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=6 -->
@@ -283,7 +283,7 @@
 
  <!--CONTENT index=6 -->
 <div class="CVariable" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_tlm_generic_payload.m_address"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_address" id="uvm_tlm_generic_payload.m_address" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_address</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-ident">m_address</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">rand</span> <span class="sv-type">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-ident">m_address</span>
   </td></tr></table></blockquote><div class=CBody><p>Address for the bus operation.&nbsp; Should be set or read using the <a href="#doc-nav-item-23" data-target-id="doc-nav-item-23" class=LMethod id=link81  >set_address</a> and <a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LMethod id=link82  >get_address</a> methods.&nbsp; The variable should be used only when constraining.</p><p>For a read command or a write command, the target shall interpret the current value of the address attribute as the start address in the system memory map of the contiguous block of data being read or written.&nbsp; The address associated with any given byte in the data array is dependent upon the address attribute, the array index, the streaming width attribute, the endianness and the width of the physical bus.</p><p>If the target is unable to execute the transaction with the given address attribute (because the address is out-of-range, for example) it shall generate a standard error response.&nbsp; The recommended response status is <i>UVM_TLM_ADDRESS_ERROR_RESPONSE</i>.</p></div></div></div>
 
 
@@ -291,7 +291,7 @@
 
  <!--CONTENT index=7 -->
 <div class="CVariable" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_tlm_generic_payload.m_command"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_command" id="uvm_tlm_generic_payload.m_command" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_command</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-uvm-type">uvm_tlm_command_e</span> <span class="sv-ident">m_command</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">rand</span> <span class="sv-uvm-type">uvm_tlm_command_e</span> <span class="sv-ident">m_command</span>
   </td></tr></table></blockquote><div class=CBody><p>Bus operation type.&nbsp; Should be set using the <a href="#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link83  >set_command</a>, <a href="#doc-nav-item-20" data-target-id="doc-nav-item-20" class=LMethod id=link84  >set_read</a> or <a href="#doc-nav-item-22" data-target-id="doc-nav-item-22" class=LMethod id=link85  >set_write</a> methods and read using the <a href="#doc-nav-item-17" data-target-id="doc-nav-item-17" class=LMethod id=link86  >get_command</a>, <a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" class=LMethod id=link87  >is_read</a> or <a href="#doc-nav-item-21" data-target-id="doc-nav-item-21" class=LMethod id=link88  >is_write</a> methods.&nbsp; The variable should be used only when constraining.</p><p>If the target is unable to execute a read or write command, it shall generate a standard error response.&nbsp; The recommended response status is UVM_TLM_COMMAND_ERROR_RESPONSE.</p><p>On receipt of a generic payload transaction with the command attribute equal to UVM_TLM_IGNORE_COMMAND, the target shall not execute a write command or a read command not modify any data.&nbsp; The target may, however, use the value of any attribute in the generic payload, including any extensions.</p><p>The command attribute shall be set by the initiator, and shall not be overwritten by any interconnect</p></div></div></div>
 
 
@@ -299,7 +299,7 @@
 
  <!--CONTENT index=8 -->
 <div class="CVariable" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_tlm_generic_payload.m_data"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_data" id="uvm_tlm_generic_payload.m_data" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_data</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">byte</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">m_data</span><span class="sv-ident">[]
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">rand</span> <span class="sv-type">byte</span> <span class="sv-type">unsigned</span> <span class="sv-ident">m_data</span><span class="sv-ident">[]
   </span></td></tr></table></blockquote><div class=CBody><p>Data read or to be written.&nbsp; Should be set and read using the <a href="#doc-nav-item-26" data-target-id="doc-nav-item-26" class=LMethod id=link89  >set_data</a> or <a href="#doc-nav-item-25" data-target-id="doc-nav-item-25" class=LMethod id=link90  >get_data</a> methods The variable should be used only when constraining.</p><p>For a read command or a write command, the target shall copy data to or from the data array, respectively, honoring the semantics of the remaining attributes of the generic payload.</p><p>For a write command or UVM_TLM_IGNORE_COMMAND, the contents of the data array shall be set by the initiator, and shall not be overwritten by any interconnect component or target.&nbsp; For a read command, the contents of the data array shall be overwritten by the target (honoring the semantics of the byte enable) but by no other component.</p><p>Unlike the OSCI TLM-2.0 LRM, there is no requirement on the endiannes of multi-byte data in the generic payload to match the host endianness.&nbsp; Unlike C++, it is not possible in SystemVerilog to cast an arbitrary data type as an array of bytes.&nbsp; Therefore, matching the host endianness is not necessary.&nbsp; In contrast, arbitrary data types may be converted to and from a byte array using the streaming operator and <a href="../base/uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link91  >uvm_object</a> objects may be further converted using the <a href="../base/uvm_object-svh.html#doc-nav-item-33" data-target-id="doc-nav-item-33" class=LMethod id=link92  >uvm_object::pack_bytes()</a> and <a href="../base/uvm_object-svh.html#doc-nav-item-38" data-target-id="doc-nav-item-38" class=LMethod id=link93  >uvm_object::unpack_bytes()</a> methods.&nbsp; All that is required is that a consistent mechanism is used to fill the payload data array and later extract data from it.</p><p>Should a generic payload be transferred to/from a SystemC model, it will be necessary for any multi-byte data in that generic payload to use/be interpreted using the host endianness.&nbsp; However, this process is currently outside the scope of this standard.</p></div></div></div>
 
 
@@ -307,7 +307,7 @@
 
  <!--CONTENT index=9 -->
 <div class="CVariable" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_tlm_generic_payload.m_length"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_length" id="uvm_tlm_generic_payload.m_length" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_length</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">m_length</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">rand</span> <span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-ident">m_length</span>
   </td></tr></table></blockquote><div class=CBody><p>The number of bytes to be copied to or from the <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LVariable id=link94  >m_data</a> array, inclusive of any bytes disabled by the <a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LVariable id=link95  >m_byte_enable</a> attribute.</p><p>The data length attribute shall be set by the initiator, and shall not be overwritten by any interconnect component or target.</p><p>The data length attribute shall not be set to 0.&nbsp; In order to transfer zero bytes, the <a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" class=LVariable id=link96  >m_command</a> attribute should be set to <a href="#UVM_TLM_IGNORE_COMMAND" class=LConstant id=link97  >UVM_TLM_IGNORE_COMMAND</a>.</p></div></div></div>
 
 
@@ -315,7 +315,7 @@
 
  <!--CONTENT index=10 -->
 <div class="CVariable" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_tlm_generic_payload.m_response_status"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_response_status" id="uvm_tlm_generic_payload.m_response_status" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_response_status</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-uvm-type">uvm_tlm_response_status_e</span> <span class="sv-ident">m_response_status</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">rand</span> <span class="sv-uvm-type">uvm_tlm_response_status_e</span> <span class="sv-ident">m_response_status</span>
   </td></tr></table></blockquote><div class=CBody><p>Status of the bus operation.&nbsp; Should be set using the <a href="#doc-nav-item-38" data-target-id="doc-nav-item-38" class=LMethod id=link98  >set_response_status</a> method and read using the <a href="#doc-nav-item-37" data-target-id="doc-nav-item-37" class=LMethod id=link99  >get_response_status</a>, <a href="#doc-nav-item-41" data-target-id="doc-nav-item-41" class=LMethod id=link100  >get_response_string</a>, <a href="#doc-nav-item-39" data-target-id="doc-nav-item-39" class=LMethod id=link101  >is_response_ok</a> or <a href="#doc-nav-item-40" data-target-id="doc-nav-item-40" class=LMethod id=link102  >is_response_error</a> methods.&nbsp; The variable should be used only when constraining.</p><p>The response status attribute shall be set to UVM_TLM_INCOMPLETE_RESPONSE by the initiator, and may be overwritten by the target.&nbsp; The response status attribute should not be overwritten by any interconnect component, because the default value UVM_TLM_INCOMPLETE_RESPONSE indicates that the transaction was not delivered to the target.</p><p>The target may set the response status attribute to UVM_TLM_OK_RESPONSE to indicate that it was able to execute the command successfully, or to one of the five error responses to indicate an error.&nbsp; The target should choose the appropriate error response depending on the cause of the error.&nbsp; If a target detects an error but is unable to select a specific error response, it may set the response status to UVM_TLM_GENERIC_ERROR_RESPONSE.</p><p>The target shall be responsible for setting the response status attribute at the appropriate point in the lifetime of the transaction.&nbsp; In the case of the blocking transport interface, this means before returning control from b_transport.&nbsp; In the case of the non-blocking transport interface and the base protocol, this means before sending the BEGIN_RESP phase or returning a value of UVM_TLM_COMPLETED.</p><p>It is recommended that the initiator should always check the response status attribute on receiving a transition to the BEGIN_RESP phase or after the completion of the transaction.&nbsp; An initiator may choose to ignore the response status if it is known in advance that the value will be UVM_TLM_OK_RESPONSE, perhaps because it is known in advance that the initiator is only connected to targets that always return UVM_TLM_OK_RESPONSE, but in general this will not be the case.&nbsp; In other words, the initiator ignores the response status at its own risk.</p></div></div></div>
 
 
@@ -323,7 +323,7 @@
 
  <!--CONTENT index=11 -->
 <div class="CVariable" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_tlm_generic_payload.m_dmi"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_dmi" id="uvm_tlm_generic_payload.m_dmi" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_dmi</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">bit</span> <span class="sv-ident">m_dmi</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-type">bit</span> <span class="sv-ident">m_dmi</span>
   </td></tr></table></blockquote><div class=CBody><p>DMI mode is not yet supported in the UVM TLM2 subset.&nbsp; This variable is provided for completeness and interoperability with SystemC.</p></div></div></div>
 
 
@@ -331,7 +331,7 @@
 
  <!--CONTENT index=12 -->
 <div class="CVariable" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_tlm_generic_payload.m_byte_enable"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_byte_enable" id="uvm_tlm_generic_payload.m_byte_enable" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_byte_enable</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">byte</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">m_byte_enable</span><span class="sv-ident">[]
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">rand</span> <span class="sv-type">byte</span> <span class="sv-type">unsigned</span> <span class="sv-ident">m_byte_enable</span><span class="sv-ident">[]
   </span></td></tr></table></blockquote><div class=CBody><p>Indicates valid <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LVariable id=link103  >m_data</a> array elements.&nbsp; Should be set and read using the <a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" class=LMethod id=link104  >set_byte_enable</a> or <a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" class=LMethod id=link105  >get_byte_enable</a> methods The variable should be used only when constraining.</p><p>The elements in the byte enable array shall be interpreted as follows.&nbsp; A value of 8&rsquo;h00 shall indicate that that corresponding byte is disabled, and a value of 8&rsquo;hFF shall indicate that the corresponding byte is enabled.</p><p>Byte enables may be used to create burst transfers where the address increment between each beat is greater than the number of significant bytes transferred on each beat, or to place words in selected byte lanes of a bus.&nbsp; At a more abstract level, byte enables may be used to create &ldquo;lacy bursts&rdquo; where the data array of the generic payload has an arbitrary pattern of holes punched in it.</p><p>The byte enable mask may be defined by a small pattern applied repeatedly or by a large pattern covering the whole data array.&nbsp; The byte enable array may be empty, in which case byte enables shall not be used for the current transaction.</p><p>The byte enable array shall be set by the initiator and shall not be overwritten by any interconnect component or target.</p><p>If the byte enable pointer is not empty, the target shall either implement the semantics of the byte enable as defined below or shall generate a standard error response.&nbsp; The recommended response status is UVM_TLM_BYTE_ENABLE_ERROR_RESPONSE.</p><p>In the case of a write command, any interconnect component or target should ignore the values of any disabled bytes in the <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LVariable id=link106  >m_data</a> array.&nbsp; In the case of a read command, any interconnect component or target should not modify the values of disabled bytes in the <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LVariable id=link107  >m_data</a> array.</p></div></div></div>
 
 
@@ -339,7 +339,7 @@
 
  <!--CONTENT index=13 -->
 <div class="CVariable" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_tlm_generic_payload.m_byte_enable_length"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_byte_enable_length" id="uvm_tlm_generic_payload.m_byte_enable_length" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_byte_enable_length</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">m_byte_enable_length</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">rand</span> <span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-ident">m_byte_enable_length</span>
   </td></tr></table></blockquote><div class=CBody><p>The number of elements in the <a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LVariable id=link108  >m_byte_enable</a> array.</p><p>It shall be set by the initiator, and shall not be overwritten by any interconnect component or target.</p></div></div></div>
 
 
@@ -347,7 +347,7 @@
 
  <!--CONTENT index=14 -->
 <div class="CVariable" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_tlm_generic_payload.m_streaming_width"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.m_streaming_width" id="uvm_tlm_generic_payload.m_streaming_width" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L103" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="103">m_streaming_width</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">rand</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-ident">m_streaming_width</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">rand</span> <span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-ident">m_streaming_width</span>
   </td></tr></table></blockquote><div class=CBody><p>Number of bytes transferred on each beat.&nbsp; Should be set and read using the <a href="#doc-nav-item-30" data-target-id="doc-nav-item-30" class=LMethod id=link109  >set_streaming_width</a> or <a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" class=LMethod id=link110  >get_streaming_width</a> methods The variable should be used only when constraining.</p><p>Streaming affects the way a component should interpret the data array.&nbsp; A stream consists of a sequence of data transfers occurring on successive notional beats, each beat having the same start address as given by the generic payload address attribute.&nbsp; The streaming width attribute shall determine the width of the stream, that is, the number of bytes transferred on each beat.&nbsp; In other words, streaming affects the local address associated with each byte in the data array.&nbsp; In all other respects, the organization of the data array is unaffected by streaming.</p><p>The bytes within the data array have a corresponding sequence of local addresses within the component accessing the generic payload transaction.&nbsp; The lowest address is given by the value of the address attribute.&nbsp; The highest address is given by the formula address_attribute + streaming_width - 1.&nbsp; The address to or from which each byte is being copied in the target shall be set to the value of the address attribute at the start of each beat.</p><p>With respect to the interpretation of the data array, a single transaction with a streaming width shall be functionally equivalent to a sequence of transactions each having the same address as the original transaction, each having a data length attribute equal to the streaming width of the original, and each with a data array that is a different subset of the original data array on each beat.&nbsp; This subset effectively steps down the original data array maintaining the sequence of bytes.</p><p>A streaming width of 0 indicates that a streaming transfer is not required. it is equivalent to a streaming width value greater than or equal to the size of the <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LVariable id=link111  >m_data</a> array.</p><p>Streaming may be used in conjunction with byte enables, in which case the streaming width would typically be equal to the byte enable length.&nbsp; It would also make sense to have the streaming width a multiple of the byte enable length.&nbsp; Having the byte enable length a multiple of the streaming width would imply that different bytes were enabled on each beat.</p><p>If the target is unable to execute the transaction with the given streaming width, it shall generate a standard error response.&nbsp; The recommended response status is TLM_BURST_ERROR_RESPONSE.</p></div></div></div>
 
 
@@ -357,7 +357,7 @@
 <div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_tlm_generic_payload.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.new" id="uvm_tlm_generic_payload.new" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L372" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="372">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_sequence_item">Overrides uvm_sequence_item</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
@@ -379,7 +379,7 @@
 
  <!--CONTENT index=17 -->
 <div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_tlm_generic_payload.get_command"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_command" id="uvm_tlm_generic_payload.get_command" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L626" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="626">get_command</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_tlm_command_e</span> <span class="sv-proto-name">get_command</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_tlm_command_e</span> <span class="sv-proto-name">get_command</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the value of the <a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" class=LVariable id=link112  >m_command</a> variable</p></div></div></div>
 
 
@@ -389,7 +389,7 @@
 <div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_tlm_generic_payload.set_command"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_command" id="uvm_tlm_generic_payload.set_command" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L634" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="634">set_command</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_command</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_command_e</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_command</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_command_e</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">command</span></td>
     </tr>
     <tr>
@@ -403,7 +403,7 @@
 
  <!--CONTENT index=19 -->
 <div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_tlm_generic_payload.is_read"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.is_read" id="uvm_tlm_generic_payload.is_read" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L643" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="643">is_read</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_read</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">is_read</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns true if the current value of the <a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" class=LVariable id=link114  >m_command</a> variable is <i>UVM_TLM_READ_COMMAND</i>.</p></div></div></div>
 
 
@@ -411,7 +411,7 @@
 
  <!--CONTENT index=20 -->
 <div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_tlm_generic_payload.set_read"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_read" id="uvm_tlm_generic_payload.set_read" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L652" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="652">set_read</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_read</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_read</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Set the current value of the <a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" class=LVariable id=link115  >m_command</a> variable to <i>UVM_TLM_READ_COMMAND</i>.</p></div></div></div>
 
 
@@ -419,7 +419,7 @@
 
  <!--CONTENT index=21 -->
 <div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_tlm_generic_payload.is_write"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.is_write" id="uvm_tlm_generic_payload.is_write" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L661" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="661">is_write</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_write</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">is_write</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns true if the current value of the <a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" class=LVariable id=link116  >m_command</a> variable is <i>UVM_TLM_WRITE_COMMAND</i>.</p></div></div></div>
 
 
@@ -427,7 +427,7 @@
 
  <!--CONTENT index=22 -->
 <div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_tlm_generic_payload.set_write"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_write" id="uvm_tlm_generic_payload.set_write" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L670" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="670">set_write</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_write</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_write</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Set the current value of the <a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" class=LVariable id=link117  >m_command</a> variable to <i>UVM_TLM_WRITE_COMMAND</i>.</p></div></div></div>
 
 
@@ -437,7 +437,7 @@
 <div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_tlm_generic_payload.set_address"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_address" id="uvm_tlm_generic_payload.set_address" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L677" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="677">set_address</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_address</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_address</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-type">bit</span>&nbsp;</td>
       <td class=PType nowrap>[63:0]&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">addr</span></td>
     </tr>
@@ -452,7 +452,7 @@
 
  <!--CONTENT index=24 -->
 <div class="CMethod" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_tlm_generic_payload.get_address"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_address" id="uvm_tlm_generic_payload.get_address" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L685" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="685">get_address</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-proto-name">get_address</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span><span class="sv-ident"> [63:0] </span><span class="sv-proto-name">get_address</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the value of the <a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" class=LVariable id=link119  >m_address</a> variable</p></div></div></div>
 
 
@@ -462,7 +462,7 @@
 <div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_tlm_generic_payload.get_data"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_data" id="uvm_tlm_generic_payload.get_data" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L693" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="693">get_data</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">get_data</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span> <span class="sv-keyword">byte</span> <span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">get_data</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">output</span> <span class="sv-type">byte</span> <span class="sv-type">unsigned</span>&nbsp;</td>
       <td class=PType nowrap><span class="sv-type">p</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%>[]</td>
     </tr>
@@ -479,7 +479,7 @@
 <div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_tlm_generic_payload.set_data"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_data" id="uvm_tlm_generic_payload.set_data" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L701" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="701">set_data</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_data</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-keyword">byte</span> <span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_data</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">ref</span> <span class="sv-type">byte</span> <span class="sv-type">unsigned</span>&nbsp;</td>
       <td class=PType nowrap><span class="sv-type">p</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%>[]</td>
     </tr>
@@ -494,7 +494,7 @@
 
  <!--CONTENT index=27 -->
 <div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_tlm_generic_payload.get_data_length"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_data_length" id="uvm_tlm_generic_payload.get_data_length" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L709" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="709">get_data_length</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-proto-name">get_data_length</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-proto-name">get_data_length</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return the current size of the <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LVariable id=link122  >m_data</a> array</p></div></div></div>
 
 
@@ -504,8 +504,8 @@
 <div class="CMethod" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_tlm_generic_payload.set_data_length"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_data_length" id="uvm_tlm_generic_payload.set_data_length" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L716" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="716">set_data_length</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_data_length</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">int</span>&nbsp;</td>
-      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_data_length</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-type">int</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">unsigned</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">length</span></td>
     </tr>
     <tr>
@@ -519,7 +519,7 @@
 
  <!--CONTENT index=29 -->
 <div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_tlm_generic_payload.get_streaming_width"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_streaming_width" id="uvm_tlm_generic_payload.get_streaming_width" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L724" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="724">get_streaming_width</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-proto-name">get_streaming_width</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-proto-name">get_streaming_width</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Get the value of the <a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" class=LVariable id=link124  >m_streaming_width</a> array</p></div></div></div>
 
 
@@ -529,8 +529,8 @@
 <div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_tlm_generic_payload.set_streaming_width"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_streaming_width" id="uvm_tlm_generic_payload.set_streaming_width" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L733" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="733">set_streaming_width</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_streaming_width</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">int</span>&nbsp;</td>
-      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_streaming_width</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-type">int</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">unsigned</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">width</span></td>
     </tr>
     <tr>
@@ -546,8 +546,8 @@
 <div class="CMethod" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_tlm_generic_payload.get_byte_enable"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_byte_enable" id="uvm_tlm_generic_payload.get_byte_enable" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L740" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="740">get_byte_enable</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">get_byte_enable</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span> <span class="sv-keyword">byte</span>&nbsp;</td>
-      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">get_byte_enable</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">output</span> <span class="sv-type">byte</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">unsigned</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">p</span>[]</td>
     </tr>
     <tr>
@@ -563,8 +563,8 @@
 <div class="CMethod" id="doc-nav-item-32" data-doc-topic="doc-nav-item-32" data-anchor="uvm_tlm_generic_payload.set_byte_enable"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_byte_enable" id="uvm_tlm_generic_payload.set_byte_enable" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L748" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="748">set_byte_enable</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_byte_enable</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">ref</span> <span class="sv-keyword">byte</span>&nbsp;</td>
-      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_byte_enable</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">ref</span> <span class="sv-type">byte</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">unsigned</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">p</span>[]</td>
     </tr>
     <tr>
@@ -578,7 +578,7 @@
 
  <!--CONTENT index=33 -->
 <div class="CMethod" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_tlm_generic_payload.get_byte_enable_length"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_byte_enable_length" id="uvm_tlm_generic_payload.get_byte_enable_length" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L756" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="756">get_byte_enable_length</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-keyword">unsigned</span> <span class="sv-proto-name">get_byte_enable_length</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-proto-name">get_byte_enable_length</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return the current size of the <a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" class=LVariable id=link128  >m_byte_enable</a> array</p></div></div></div>
 
 
@@ -588,8 +588,8 @@
 <div class="CMethod" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_tlm_generic_payload.set_byte_enable_length"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_byte_enable_length" id="uvm_tlm_generic_payload.set_byte_enable_length" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L765" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="765">set_byte_enable_length</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_byte_enable_length</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">int</span>&nbsp;</td>
-      <td class=PType nowrap><span class="sv-keyword">unsigned</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_byte_enable_length</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-type">int</span>&nbsp;</td>
+      <td class=PType nowrap><span class="sv-type">unsigned</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">length</span></td>
     </tr>
     <tr>
@@ -605,7 +605,7 @@
 <div class="CMethod" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_tlm_generic_payload.set_dmi_allowed"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_dmi_allowed" id="uvm_tlm_generic_payload.set_dmi_allowed" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L773" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="773">set_dmi_allowed</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_dmi_allowed</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_dmi_allowed</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">bit</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">dmi</span></td>
     </tr>
     <tr>
@@ -619,7 +619,7 @@
 
  <!--CONTENT index=36 -->
 <div class="CMethod" id="doc-nav-item-36" data-doc-topic="doc-nav-item-36" data-anchor="uvm_tlm_generic_payload.is_dmi_allowed"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.is_dmi_allowed" id="uvm_tlm_generic_payload.is_dmi_allowed" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L781" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="781">is_dmi_allowed</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_dmi_allowed</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">is_dmi_allowed</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>DMI hint.&nbsp; Query the internal flag <a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" class=LVariable id=link133  >m_dmi</a> if allowed dmi access</p></div></div></div>
 
 
@@ -627,7 +627,7 @@
 
  <!--CONTENT index=37 -->
 <div class="CMethod" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_tlm_generic_payload.get_response_status"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_response_status" id="uvm_tlm_generic_payload.get_response_status" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L789" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="789">get_response_status</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_tlm_response_status_e</span> <span class="sv-proto-name">get_response_status</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_tlm_response_status_e</span> <span class="sv-proto-name">get_response_status</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return the current value of the <a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LVariable id=link134  >m_response_status</a> variable</p></div></div></div>
 
 
@@ -637,7 +637,7 @@
 <div class="CMethod" id="doc-nav-item-38" data-doc-topic="doc-nav-item-38" data-anchor="uvm_tlm_generic_payload.set_response_status"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_response_status" id="uvm_tlm_generic_payload.set_response_status" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L797" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="797">set_response_status</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_response_status</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_response_status_e</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_response_status</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_response_status_e</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">status</span></td>
     </tr>
     <tr>
@@ -651,7 +651,7 @@
 
  <!--CONTENT index=39 -->
 <div class="CMethod" id="doc-nav-item-39" data-doc-topic="doc-nav-item-39" data-anchor="uvm_tlm_generic_payload.is_response_ok"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.is_response_ok" id="uvm_tlm_generic_payload.is_response_ok" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L806" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="806">is_response_ok</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_response_ok</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">is_response_ok</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return TRUE if the current value of the <a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LVariable id=link136  >m_response_status</a> variable is <i>UVM_TLM_OK_RESPONSE</i></p></div></div></div>
 
 
@@ -659,7 +659,7 @@
 
  <!--CONTENT index=40 -->
 <div class="CMethod" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_tlm_generic_payload.is_response_error"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.is_response_error" id="uvm_tlm_generic_payload.is_response_error" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L815" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="815">is_response_error</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_response_error</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">is_response_error</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return TRUE if the current value of the <a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LVariable id=link137  >m_response_status</a> variable is not <i>UVM_TLM_OK_RESPONSE</i></p></div></div></div>
 
 
@@ -667,7 +667,7 @@
 
  <!--CONTENT index=41 -->
 <div class="CMethod" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_tlm_generic_payload.get_response_string"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_response_string" id="uvm_tlm_generic_payload.get_response_string" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L824" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="824">get_response_string</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_response_string</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-proto-name">get_response_string</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return the current value of the <a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LVariable id=link138  >m_response_status</a> variable as a string</p></div></div></div>
 
 
@@ -683,7 +683,7 @@
 <div class="CMethod" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_tlm_generic_payload.set_extension"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.set_extension" id="uvm_tlm_generic_payload.set_extension" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L853" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="853">set_extension</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> uvm_tlm_extension_base <span class="sv-proto-name">set_extension</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_extension_base</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_tlm_extension_base</span> <span class="sv-proto-name">set_extension</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_extension_base</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">ext</span></td>
     </tr>
     <tr>
@@ -697,7 +697,7 @@
 
  <!--CONTENT index=44 -->
 <div class="CMethod" id="doc-nav-item-44" data-doc-topic="doc-nav-item-44" data-anchor="uvm_tlm_generic_payload.get_num_extensions"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_num_extensions" id="uvm_tlm_generic_payload.get_num_extensions" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L867" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="867">get_num_extensions</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_num_extensions</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-proto-name">get_num_extensions</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return the current number of instance specific extensions.</p></div></div></div>
 
 
@@ -707,7 +707,7 @@
 <div class="CMethod" id="doc-nav-item-45" data-doc-topic="doc-nav-item-45" data-anchor="uvm_tlm_generic_payload.get_extension"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.get_extension" id="uvm_tlm_generic_payload.get_extension" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L877" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="877">get_extension</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> uvm_tlm_extension_base <span class="sv-proto-name">get_extension</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_extension_base</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_tlm_extension_base</span> <span class="sv-proto-name">get_extension</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_extension_base</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">ext_handle</span></td>
     </tr>
     <tr>
@@ -723,7 +723,7 @@
 <div class="CMethod" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_tlm_generic_payload.clear_extension"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.clear_extension" id="uvm_tlm_generic_payload.clear_extension" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L888" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="888">clear_extension</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">clear_extension</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_extension_base</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">clear_extension</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tlm_extension_base</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">ext_handle</span></td>
     </tr>
     <tr>
@@ -737,7 +737,7 @@
 
  <!--CONTENT index=47 -->
 <div class="CMethod" id="doc-nav-item-47" data-doc-topic="doc-nav-item-47" data-anchor="uvm_tlm_generic_payload.clear_extensions"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.clear_extensions" id="uvm_tlm_generic_payload.clear_extensions" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L900" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="900">clear_extensions</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">clear_extensions</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">clear_extensions</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Remove all instance-specific extensions</p></div></div></div>
 
 
@@ -745,7 +745,7 @@
 
  <!--CONTENT index=48 -->
 <div class="CMethod" id="doc-nav-item-48" data-doc-topic="doc-nav-item-48" data-anchor="uvm_tlm_generic_payload.pre_randomize"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.pre_randomize" id="uvm_tlm_generic_payload.pre_randomize" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L908" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="908">pre_randomize()</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">pre_randomize</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">pre_randomize</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Prepare this class instance for randomization</p></div></div></div>
 
 
@@ -753,7 +753,7 @@
 
  <!--CONTENT index=49 -->
 <div class="CMethod" id="doc-nav-item-49" data-doc-topic="doc-nav-item-49" data-anchor="uvm_tlm_generic_payload.post_randomize"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_generic_payload.post_randomize" id="uvm_tlm_generic_payload.post_randomize" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L920" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="920">post_randomize()</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">post_randomize</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">post_randomize</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Clean-up this class instance after randomization</p></div></div></div>
 
 
@@ -771,7 +771,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_tlm_generic_payload</span> <span class="sv-uvm-type">uvm_tlm_gp</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">typedef</span> <span class="sv-uvm-type">uvm_tlm_generic_payload</span> <span class="sv-uvm-type">uvm_tlm_gp</span>
   </td></tr></table></blockquote></td></tr>
 </table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
@@ -812,7 +812,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_tlm_extension_base</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_tlm_extension_base</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=52 -->
@@ -845,7 +845,7 @@
 <div class="CMethod" id="doc-nav-item-53" data-doc-topic="doc-nav-item-53" data-anchor="uvm_tlm_extension_base.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_extension_base.new" id="uvm_tlm_extension_base.new" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L951" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="951">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;</span></td>
@@ -861,7 +861,7 @@
 
  <!--CONTENT index=54 -->
 <div class="CMethod" id="doc-nav-item-54" data-doc-topic="doc-nav-item-54" data-anchor="uvm_tlm_extension_base.get_type_handle"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_extension_base.get_type_handle" id="uvm_tlm_extension_base.get_type_handle" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L960" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="960">get_type_handle</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_tlm_extension_base</span> <span class="sv-proto-name">get_type_handle</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">pure</span> <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_tlm_extension_base</span> <span class="sv-proto-name">get_type_handle</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>An interface to polymorphically retrieve a handle that uniquely identifies the type of the sub-class</p></div></div></div>
 
 
@@ -869,7 +869,7 @@
 
  <!--CONTENT index=55 -->
 <div class="CMethod" id="doc-nav-item-55" data-doc-topic="doc-nav-item-55" data-anchor="uvm_tlm_extension_base.get_type_handle_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_extension_base.get_type_handle_name" id="uvm_tlm_extension_base.get_type_handle_name" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L967" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="967">get_type_handle_name</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">pure</span> <span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">string</span> <span class="sv-proto-name">get_type_handle_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">pure</span> <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-proto-name">get_type_handle_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>An interface to polymorphically retrieve the name that uniquely identifies the type of the sub-class</p></div></div></div>
 
 
@@ -879,7 +879,7 @@
 <div class="CMethod" id="doc-nav-item-56" data-doc-topic="doc-nav-item-56" data-anchor="uvm_tlm_extension_base.create"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_extension_base.create" id="uvm_tlm_extension_base.create" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L976" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="976">create</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> uvm_object <span class="sv-proto-name">create</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_object</span> <span class="sv-proto-name">create</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
@@ -905,17 +905,17 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">my_ID</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_tlm_extension</span><span class="sv-op">#(</span><span class="sv-ident">my_ID</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-keyword">int</span> <span class="sv-ident">ID</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_ID</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_tlm_extension</span><span class="sv-op">#(</span><span class="sv-ident">my_ID</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-type">int</span> <span class="sv-ident">ID</span><span class="sv-op">;</span>
 
   <span class="sv-macro">`uvm_object_utils_begin</span><span class="sv-op">(</span><span class="sv-ident">my_ID</span><span class="sv-op">)</span>
-     <span class="sv-macro">`uvm_field_int</span><span class="sv-op">(</span><span class="sv-ident">ID</span><span class="sv-op">,</span> <span class="sv-uvm-type">UVM_ALL_ON</span><span class="sv-op">)</span>
+     <span class="sv-macro">`uvm_field_int</span><span class="sv-op">(</span><span class="sv-ident">ID</span><span class="sv-op">,</span> <span class="sv-constant">UVM_ALL_ON</span><span class="sv-op">)</span>
   <span class="sv-macro">`uvm_object_utils_end</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;my_ID&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
-     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-keyword">endfunction</span>
-<span class="sv-keyword">endclass</span></code></pre>
+  <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;my_ID&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">endfunction</span>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div>
 
 <!--START_ND_SUMMARY index=57-->
@@ -945,7 +945,7 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_tlm_extension</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_tlm_extension</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
@@ -980,7 +980,7 @@
 <div class="CMethod" id="doc-nav-item-59" data-doc-topic="doc-nav-item-59" data-anchor="uvm_tlm_extension.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_extension.new" id="uvm_tlm_extension.new" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1022" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1022">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_tlm_extension_base">Overrides uvm_tlm_extension_base</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
@@ -996,7 +996,7 @@
 
  <!--CONTENT index=60 -->
 <div class="CMethod" id="doc-nav-item-60" data-doc-topic="doc-nav-item-60" data-anchor="uvm_tlm_extension.ID"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_extension.ID" id="uvm_tlm_extension.ID" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1033" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1033">ID()</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">static</span> <span class="sv-keyword">function</span> <span class="sv-ident">this_type</span> <span class="sv-proto-name">ID</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">static</span> <span class="sv-keyword-decl">function</span> <span class="sv-ident">this_type</span> <span class="sv-proto-name">ID</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return the unique ID of this TLM extension type.&nbsp; This method is used to identify the type of the extension to retrieve from a <a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" class=LClass id=link157  >uvm_tlm_generic_payload</a> instance, using the <a href="#doc-nav-item-45" data-target-id="doc-nav-item-45" class=LMethod id=link158  >uvm_tlm_generic_payload::get_extension()</a> method.</p></div></div></div>
 
 </div><!--Content-->

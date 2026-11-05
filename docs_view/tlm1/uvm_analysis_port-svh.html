@@ -83,21 +83,21 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mon</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mon</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-uvm-type">uvm_analysis_port</span><span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">)</span> <span class="sv-ident">ap</span><span class="sv-op">;</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;sb&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
-     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
-     <span class="sv-ident">ap</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ap&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-keyword">endfunction</span>
+  <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;sb&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-constant">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-ident">ap</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ap&quot;</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">endfunction</span>
 
-  <span class="sv-keyword">task</span> <span class="sv-method">run_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">task</span> <span class="sv-method">run_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
       <span class="sv-ident">trans</span> <span class="sv-ident">t</span><span class="sv-op">;</span>
       <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
       <span class="sv-ident">ap</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
       <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-  <span class="sv-keyword">endfunction</span>
-<span class="sv-keyword">endclass</span></code></pre>
+  <span class="sv-keyword-decl">endfunction</span>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div>
 
 <!--START_ND_SUMMARY index=1-->
@@ -125,7 +125,7 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_analysis_port</span> # <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_analysis_port</span> # <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> int</span></td>
@@ -157,7 +157,7 @@
 <div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_analysis_port.write"><div class="CTopic"><h3 class=CTitle><a name="uvm_analysis_port.write" id="uvm_analysis_port.write" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L70" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="70">write</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">write</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">input</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">write</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">input</span>&nbsp;</td>
       <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">t</span></td>
     </tr>
@@ -182,18 +182,18 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">sb</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">sb</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-uvm-type">uvm_analysis_imp</span><span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">,</span> <span class="sv-ident">sb</span><span class="sv-op">)</span> <span class="sv-ident">ap</span><span class="sv-op">;</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;sb&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-keyword">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
-     <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
-     <span class="sv-ident">ap</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ap&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-keyword">endfunction</span>
+  <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;sb&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-constant">null</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+     <span class="sv-ident">ap</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ap&quot;</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">endfunction</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">trans</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">trans</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
       <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-  <span class="sv-keyword">endfunction</span>
-<span class="sv-keyword">endclass</span></code></pre>
+  <span class="sv-keyword-decl">endfunction</span>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div>
 
 <!--START_ND_SUMMARY index=4-->
@@ -221,11 +221,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_analysis_imp</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_analysis_imp</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">int,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">IMP</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
@@ -269,7 +269,7 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_analysis_export</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_analysis_export</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
@@ -301,7 +301,7 @@
 <div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_analysis_export.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_analysis_export.new" id="uvm_analysis_export.new" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L131" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="131">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_port_base">Overrides uvm_port_base</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>

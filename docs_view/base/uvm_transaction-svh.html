@@ -67,14 +67,14 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-uvm-type">uvm_execute</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-uvm-type">uvm_execute</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-comment">// can use the `uvm_do macros as well</span>
     <span class="sv-method">start_item</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-ident">item</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-method">finish_item</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-ident">item</span><span class="sv-op">.</span><span class="sv-ident">end_event</span><span class="sv-op">.</span><span class="sv-method">wait_on</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-comment">// get_response(rsp, item.get_transaction_id()); //if needed</span>
-<span class="sv-keyword">endtask</span></code></pre>
+<span class="sv-keyword-decl">endtask</span></code></pre>
 </div><p>A simple two-stage pipeline driver that can execute address and data phases concurrently might be implemented as follows:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -86,16 +86,16 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">run</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-method">run</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-comment">// this driver supports a two-deep pipeline</span>
     <span class="sv-keyword">fork</span>
       <span class="sv-method">do_item</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
       <span class="sv-method">do_item</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-keyword">join</span>
-<span class="sv-keyword">endtask</span>
+<span class="sv-keyword-decl">endtask</span>
 
 
-<span class="sv-keyword">task</span> <span class="sv-method">do_item</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">task</span> <span class="sv-method">do_item</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
   <span class="sv-keyword">forever</span> <span class="sv-keyword">begin</span>
     <span class="sv-ident">mbus_item</span> <span class="sv-ident">req</span><span class="sv-op">;</span>
@@ -104,7 +104,7 @@
 
     <span class="sv-ident">seq_item_port</span><span class="sv-op">.</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-comment">// Completes the sequencer-driver handshake</span>
 
-    <span class="sv-keyword">accept_tr</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-keyword-decl">accept_tr</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
       <span class="sv-comment">// request bus, wait for grant, etc.</span>
 
@@ -122,7 +122,7 @@
 
   <span class="sv-keyword">end</span>
 
-<span class="sv-keyword">endtask</span><span class="sv-op">:</span> <span class="sv-ident">do_item</span></code></pre>
+<span class="sv-keyword-decl">endtask</span><span class="sv-op">:</span> <span class="sv-ident">do_item</span></code></pre>
 </div>
 
 <!--START_ND_SUMMARY index=0-->
@@ -149,7 +149,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_transaction</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_transaction</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=1 -->
@@ -245,7 +245,7 @@
 <div class="CMethod" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_transaction.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.new" id="uvm_transaction.new" href="../../src_view/base/uvm_transaction.svh.html#L481" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="481">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;,</span></td>
@@ -267,7 +267,7 @@
 <div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_transaction.accept_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.accept_tr" id="uvm_transaction.accept_tr" href="../../src_view/base/uvm_transaction.svh.html#L667" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="667">accept_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-keyword">accept_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-keyword-decl">accept_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">time</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">accept_time</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
@@ -283,7 +283,7 @@
 
  <!--CONTENT index=4 -->
 <div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_transaction.do_accept_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.do_accept_tr" id="uvm_transaction.do_accept_tr" href="../../src_view/base/uvm_transaction.svh.html#L560" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="560">do_accept_tr</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_accept_tr</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-qualifier">protected</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">do_accept_tr</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link56  >accept_tr</a> just before the accept event is triggered.&nbsp; Implementations should call <i>super.do_accept_tr</i> to ensure correct operation.</p></div></div></div>
 
 
@@ -293,7 +293,7 @@
 <div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_transaction.begin_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.begin_tr" id="uvm_transaction.begin_tr" href="../../src_view/base/uvm_transaction.svh.html#L685" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="685">begin_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">begin_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-type">integer</span> <span class="sv-proto-name">begin_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">time</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">begin_time</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
@@ -311,11 +311,11 @@
 <div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_transaction.begin_child_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.begin_child_tr" id="uvm_transaction.begin_child_tr" href="../../src_view/base/uvm_transaction.svh.html#L693" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="693">begin_child_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">begin_child_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-type">integer</span> <span class="sv-proto-name">begin_child_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">time</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">begin_time</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">integer</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">integer</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">parent_handle</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
@@ -331,7 +331,7 @@
 
  <!--CONTENT index=7 -->
 <div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_transaction.do_begin_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.do_begin_tr" id="uvm_transaction.do_begin_tr" href="../../src_view/base/uvm_transaction.svh.html#L568" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="568">do_begin_tr</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_begin_tr</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-qualifier">protected</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">do_begin_tr</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" class=LMethod id=link66  >begin_tr</a> and <a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" class=LMethod id=link67  >begin_child_tr</a> just before the begin event is triggered.&nbsp; Implementations should call <i>super.do_begin_tr</i> to ensure correct operation.</p></div></div></div>
 
 
@@ -341,11 +341,11 @@
 <div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_transaction.end_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.end_tr" id="uvm_transaction.end_tr" href="../../src_view/base/uvm_transaction.svh.html#L758" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="758">end_tr</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">end_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">time</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">end_tr</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">time</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">end_time</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">0,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">bit</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">free_handle</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
@@ -361,7 +361,7 @@
 
  <!--CONTENT index=9 -->
 <div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_transaction.do_end_tr"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.do_end_tr" id="uvm_transaction.do_end_tr" href="../../src_view/base/uvm_transaction.svh.html#L576" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="576">do_end_tr</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">protected</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">do_end_tr</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-qualifier">protected</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">do_end_tr</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>This user-definable callback is called by <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LMethod id=link74  >end_tr</a> just before the end event is triggered.&nbsp; Implementations should call <i>super.do_end_tr</i> to ensure correct operation.</p></div></div></div>
 
 
@@ -369,7 +369,7 @@
 
  <!--CONTENT index=10 -->
 <div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_transaction.get_tr_handle"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.get_tr_handle" id="uvm_transaction.get_tr_handle" href="../../src_view/base/uvm_transaction.svh.html#L633" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="633">get_tr_handle</a></h3><div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">get_tr_handle</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">integer</span> <span class="sv-proto-name">get_tr_handle</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the handle associated with the transaction, as set by a previous call to <a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" class=LMethod id=link75  >begin_child_tr</a> or <a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" class=LMethod id=link76  >begin_tr</a> with transaction recording enabled.</p></div></div></div>
 
 
@@ -377,7 +377,7 @@
 
  <!--CONTENT index=11 -->
 <div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_transaction.disable_recording"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.disable_recording" id="uvm_transaction.disable_recording" href="../../src_view/base/uvm_transaction.svh.html#L644" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="644">disable_recording</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">disable_recording</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">disable_recording</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Turns off recording for the transaction stream.&nbsp; This method does not effect a <a href="uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link77  >uvm_component</a>&rsquo;s recording streams.</p></div></div></div>
 
 
@@ -387,7 +387,7 @@
 <div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_transaction.enable_recording"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.enable_recording" id="uvm_transaction.enable_recording" href="../../src_view/base/uvm_transaction.svh.html#L652" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="652">enable_recording</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">enable_recording</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tr_stream</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">enable_recording</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_tr_stream</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">stream</span></td>
     </tr>
     <tr>
@@ -401,7 +401,7 @@
 
  <!--CONTENT index=13 -->
 <div class="CMethod" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_transaction.is_recording_enabled"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.is_recording_enabled" id="uvm_transaction.is_recording_enabled" href="../../src_view/base/uvm_transaction.svh.html#L659" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="659">is_recording_enabled</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_recording_enabled</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">is_recording_enabled</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if recording is currently on, 0 otherwise.</p></div></div></div>
 
 
@@ -409,7 +409,7 @@
 
  <!--CONTENT index=14 -->
 <div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_transaction.is_active"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.is_active" id="uvm_transaction.is_active" href="../../src_view/base/uvm_transaction.svh.html#L528" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="528">is_active</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">is_active</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">is_active</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns 1 if the transaction has been started but has not yet been ended.&nbsp; Returns 0 if the transaction has not been started.</p></div></div></div>
 
 
@@ -417,7 +417,7 @@
 
  <!--CONTENT index=15 -->
 <div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_transaction.get_event_pool"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.get_event_pool" id="uvm_transaction.get_event_pool" href="../../src_view/base/uvm_transaction.svh.html#L520" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="520">get_event_pool</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_event_pool</span> <span class="sv-proto-name">get_event_pool</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_event_pool</span> <span class="sv-proto-name">get_event_pool</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the event pool associated with this transaction.</p><p>By default, the event pool contains the events: begin, accept, and end.&nbsp; Events can also be added by derivative objects.&nbsp; An event pool is a specialization of <a href="uvm_pool-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link78  >uvm_pool#(KEY,T)</a>, e.g. a <i>uvm_pool#(uvm_event)</i>.</p></div></div></div>
 
 
@@ -427,7 +427,7 @@
 <div class="CMethod" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_transaction.set_initiator"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.set_initiator" id="uvm_transaction.set_initiator" href="../../src_view/base/uvm_transaction.svh.html#L506" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="506">set_initiator</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_initiator</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_initiator</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">initiator</span></td>
     </tr>
     <tr>
@@ -441,7 +441,7 @@
 
  <!--CONTENT index=17 -->
 <div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_transaction.get_initiator"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.get_initiator" id="uvm_transaction.get_initiator" href="../../src_view/base/uvm_transaction.svh.html#L513" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="513">get_initiator</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-proto-name">get_initiator</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-proto-name">get_initiator</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the component that produced or started the transaction, as set by a previous call to set_initiator.</p></div></div></div>
 
 
@@ -449,7 +449,7 @@
 
  <!--CONTENT index=18 -->
 <div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_transaction.get_accept_time"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.get_accept_time" id="uvm_transaction.get_accept_time" href="../../src_view/base/uvm_transaction.svh.html#L552" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="552">get_accept_time</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">time</span> <span class="sv-proto-name">get_accept_time</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">time</span> <span class="sv-proto-name">get_accept_time</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody></div></div></div>
 
 
@@ -457,7 +457,7 @@
 
  <!--CONTENT index=19 -->
 <div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_transaction.get_begin_time"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.get_begin_time" id="uvm_transaction.get_begin_time" href="../../src_view/base/uvm_transaction.svh.html#L536" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="536">get_begin_time</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">time</span> <span class="sv-proto-name">get_begin_time</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">time</span> <span class="sv-proto-name">get_begin_time</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody></div></div></div>
 
 
@@ -465,7 +465,7 @@
 
  <!--CONTENT index=20 -->
 <div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_transaction.get_end_time"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.get_end_time" id="uvm_transaction.get_end_time" href="../../src_view/base/uvm_transaction.svh.html#L544" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="544">get_end_time</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">time</span> <span class="sv-proto-name">get_end_time</span> <span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">time</span> <span class="sv-proto-name">get_end_time</span> <span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the time at which this transaction was accepted, begun, or ended, as by a previous call to <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link79  >accept_tr</a>, <a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" class=LMethod id=link80  >begin_tr</a>, <a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" class=LMethod id=link81  >begin_child_tr</a>, or <a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LMethod id=link82  >end_tr</a>.</p></div></div></div>
 
 
@@ -475,7 +475,7 @@
 <div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_transaction.set_transaction_id"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.set_transaction_id" id="uvm_transaction.set_transaction_id" href="../../src_view/base/uvm_transaction.svh.html#L494" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="494">set_transaction_id</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_transaction_id</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">integer</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_transaction_id</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">integer</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span></td>
     </tr>
     <tr>
@@ -489,7 +489,7 @@
 
  <!--CONTENT index=22 -->
 <div class="CMethod" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_transaction.get_transaction_id"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.get_transaction_id" id="uvm_transaction.get_transaction_id" href="../../src_view/base/uvm_transaction.svh.html#L499" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="499">get_transaction_id</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">integer</span> <span class="sv-proto-name">get_transaction_id</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">integer</span> <span class="sv-proto-name">get_transaction_id</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns this transaction&rsquo;s numeric identifier, which is -1 if not set explicitly by <i>set_transaction_id</i>.</p><p>When using a <a href="../seq/uvm_sequence-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link83  >uvm_sequence #(REQ,RSP)</a> to generate stimulus, the transaction ID is used along with the sequence ID to route responses in sequencers and to correlate responses to requests.</p></div></div></div>
 
 
@@ -503,7 +503,7 @@
 
  <!--CONTENT index=24 -->
 <div class="CVariable" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_transaction.events"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.events" id="uvm_transaction.events" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">events</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">const</span> <span class="sv-uvm-type">uvm_event_pool</span> <span class="sv-ident">events</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">const</span> <span class="sv-uvm-type">uvm_event_pool</span> <span class="sv-ident">events</span> <span class="sv-op">=</span> <span class="sv-ident">new</span>
   </td></tr></table></blockquote><div class=CBody><p>The event pool instance for this transaction.&nbsp; This pool is used to track various milestones: by default, begin, accept, and end</p></div></div></div>
 
 
@@ -513,7 +513,7 @@
 <div class="CVariable" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_transaction.begin_event"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.begin_event" id="uvm_transaction.begin_event" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">begin_event</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=2><span class="sv-proto-name">uvm_event</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">uvm_object</span></td>
+      <td class=PBeforeParameters colspan=2><span class="sv-uvm-type">uvm_event</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">uvm_object</span></td>
     </tr>
     <tr>
       <td class=PAfterParameters colspan=2><span class="sv-op">) begin_event</span></td></tr>
@@ -528,7 +528,7 @@
 <div class="CVariable" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_transaction.end_event"><div class="CTopic"><h3 class=CTitle><a name="uvm_transaction.end_event" id="uvm_transaction.end_event" href="../../src_view/base/uvm_transaction.svh.html#L124" class="src-code-link" data-src-file="base/uvm_transaction.svh" data-src-line="124">end_event</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=2><span class="sv-proto-name">uvm_event</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">uvm_object</span></td>
+      <td class=PBeforeParameters colspan=2><span class="sv-uvm-type">uvm_event</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PParameter nowrap width=100%><span class="sv-param-name">uvm_object</span></td>
     </tr>
     <tr>
       <td class=PAfterParameters colspan=2><span class="sv-op">) end_event</span></td></tr>
@@ -545,7 +545,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-ident">my_sequence</span><span class="sv-op">::</span><span class="sv-method">body</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-ident">my_sequence</span><span class="sv-op">::</span><span class="sv-method">body</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
  <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
  <span class="sv-method">start_item</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span><span class="sv-op">;</span>    \
  <span class="sv-ident">item</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>     <span class="sv-op">}</span> <span class="sv-macro">`uvm_do</span><span class="sv-op">(</span><span class="sv-ident">item</span><span class="sv-op">)</span>

@@ -61,13 +61,13 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">class</span> <span class="sv-ident">mycomp</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mycomp</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-uvm-type">uvm_put_imp</span><span class="sv-op">#(</span><span class="sv-ident">data_type</span><span class="sv-op">,</span> <span class="sv-ident">mycomp</span><span class="sv-op">)</span> <span class="sv-ident">put_imp</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-  <span class="sv-keyword">virtual</span> <span class="sv-keyword">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-ident">data_type</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-ident">data_type</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-  <span class="sv-keyword">endtask</span>
-<span class="sv-keyword">endclass</span></code></pre>
+  <span class="sv-keyword-decl">endtask</span>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div><p>There are times, however, when you need more than one implementation for an interface.&nbsp; This set of declarations allow you to easily create a new implementation class to allow for multiple implementations.&nbsp; Although the new implementation class is a different class, it can be bound to the same types of exports and ports as the original class.&nbsp; Extending the put example above, let&rsquo;s say that mycomp needs to provide two put implementation ports.&nbsp; In that case, you would do something like:</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -85,19 +85,19 @@
 <span class="sv-macro">`uvm_put_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">_1</span><span class="sv-op">)</span>
 <span class="sv-macro">`uvm_put_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">_2</span><span class="sv-op">)</span>
 
-<span class="sv-keyword">class</span> <span class="sv-ident">my_put_imp</span><span class="sv-op">#(</span><span class="sv-keyword">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-keyword">int</span><span class="sv-op">)</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">class</span> <span class="sv-ident">my_put_imp</span><span class="sv-op">#(</span><span class="sv-type">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-type">int</span><span class="sv-op">)</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
    <span class="sv-uvm-type">uvm_put_imp_1</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">my_put_imp</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-ident">put_imp1</span><span class="sv-op">;</span>
    <span class="sv-uvm-type">uvm_put_imp_2</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">,</span><span class="sv-ident">my_put_imp</span><span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-ident">put_imp2</span><span class="sv-op">;</span>
    <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-   <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">put_1</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+   <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">put_1</span> <span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
      <span class="sv-comment">//puts coming into put_imp1</span>
      <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-   <span class="sv-keyword">endfunction</span>
-   <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">put_2</span><span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+   <span class="sv-keyword-decl">endfunction</span>
+   <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">put_2</span><span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
      <span class="sv-comment">//puts coming into put_imp2</span>
      <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-   <span class="sv-keyword">endfunction</span>
-<span class="sv-keyword">endclass</span></code></pre>
+   <span class="sv-keyword-decl">endfunction</span>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div><p>The important thing to note is that each `uvm_&lt;interface&gt;_imp_decl creates a new class of type uvm_&lt;interface&gt;_imp&lt;suffix&gt;, where suffix is the input argument to the macro.&nbsp; For this reason, you will typically want to put these macros in a separate package to avoid collisions and to allow sharing of the definitions.</p>
 
 <!--START_ND_SUMMARY index=0-->
@@ -591,31 +591,31 @@
   <pre class="code-block-content"><code><span class="sv-macro">`uvm_analysis_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">_ingress</span><span class="sv-op">)</span>
 <span class="sv-macro">`uvm_analysis_imp_decl</span><span class="sv-op">(</span><span class="sv-ident">_egress</span><span class="sv-op">)</span>
 
-<span class="sv-keyword">class</span> <span class="sv-ident">myscoreboard</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">class</span> <span class="sv-ident">myscoreboard</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-uvm-type">uvm_analysis_imp_ingress</span><span class="sv-op">#(</span><span class="sv-ident">mydata</span><span class="sv-op">,</span> <span class="sv-ident">myscoreboard</span><span class="sv-op">)</span> <span class="sv-ident">ingress</span><span class="sv-op">;</span>
   <span class="sv-uvm-type">uvm_analysis_imp_egress</span><span class="sv-op">#(</span><span class="sv-ident">mydata</span><span class="sv-op">,</span> <span class="sv-ident">myscoreboard</span><span class="sv-op">)</span> <span class="sv-ident">egress</span><span class="sv-op">;</span>
   <span class="sv-ident">mydata</span> <span class="sv-ident">ingress_list</span><span class="sv-op">[</span>$<span class="sv-op">]</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-keyword">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
-    <span class="sv-keyword">super</span><span class="sv-op">.</span><span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
-    <span class="sv-ident">ingress</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ingress&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
-    <span class="sv-ident">egress</span> <span class="sv-op">=</span> <span class="sv-keyword">new</span><span class="sv-op">(</span><span class="sv-string">&quot;egress&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-keyword">endfunction</span>
+  <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">ingress</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;ingress&quot;</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+    <span class="sv-ident">egress</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;egress&quot;</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">endfunction</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write_ingress</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">write_ingress</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-ident">ingress_list</span><span class="sv-op">.</span><span class="sv-method">push_back</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-keyword">endfunction</span>
+  <span class="sv-keyword-decl">endfunction</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write_egress</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">write_egress</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-method">find_match_in_ingress_list</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-keyword">endfunction</span>
+  <span class="sv-keyword-decl">endfunction</span>
 
-  <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">find_match_in_ingress_list</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">find_match_in_ingress_list</span><span class="sv-op">(</span><span class="sv-ident">mydata</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-comment">//implement scoreboarding for this particular dut</span>
     <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
-  <span class="sv-keyword">endfunction</span>
-<span class="sv-keyword">endclass</span></code></pre>
+  <span class="sv-keyword-decl">endfunction</span>
+<span class="sv-keyword-decl">endclass</span></code></pre>
 </div></div></div></div>
 
 </div><!--Content-->

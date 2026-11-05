@@ -51,27 +51,34 @@
   --scrollbar-thumb: #dadce0;
   --scrollbar-thumb-hover: #bdc1c6;
 
-  /* Syntax Highlighting (Light - Google Developers / DevSite palette) */
+  /* Syntax Highlighting (Light - Modern High-Contrast Developer Palette) */
   --code-bg: #f8f9fa;
   --code-gutter-bg: #f1f3f4;
   --code-text: #202124;
   --code-active-line: #e8f0fe;
   --code-active-border: #1a73e8;
   --code-hover-line: #f1f3f4;
-  --sv-keyword: #af00db;
-  --sv-uvm-type: #1a73e8;
-  --sv-type: #1a73e8;
-  --sv-proto-name: #202124;
-  --sv-param-name: #202124;
-  --sv-default-val: #b06000;
-  --sv-macro: #9334e6;
-  --sv-string: #137333;
-  --sv-comment: #5f6368;
-  --sv-number: #b06000;
-  --sv-op: #3c4043;
-  --sv-ident: #202124;
-  --sv-cmdline-opt: #c5221f;
-  --sv-method: #1a73e8;
+  --sv-keyword: #cf222e;
+  --sv-keyword-decl: #d73a49;
+  --sv-uvm-type: #0550ae;
+  --sv-type: #0969da;
+  --sv-qualifier: #8250df;
+  --sv-constant: #0550ae;
+  --sv-proto-name: #24292f;
+  --sv-param-name: #24292f;
+  --sv-default-val: #953800;
+  --sv-macro: #bc4c00;
+  --sv-preproc: #8250df;
+  --sv-system-tf: #b35900;
+  --sv-method: #6f42c1;
+  --sv-string: #0a3069;
+  --sv-string-escape: #cf222e;
+  --sv-comment: #57606a;
+  --sv-comment-tag: #b08800;
+  --sv-number: #0969da;
+  --sv-op: #24292f;
+  --sv-ident: #24292f;
+  --sv-cmdline-opt: #cf222e;
 
   --sidebar-width: 340px;
   --header-height: 56px;
@@ -129,27 +136,34 @@
   --scrollbar-thumb: #3c4043;
   --scrollbar-thumb-hover: #5f6368;
 
-  /* Syntax Highlighting (Dark - Google Developers / DevSite dark palette) */
+  /* Syntax Highlighting (Dark - Modern High-Contrast Developer Dark Palette) */
   --code-bg: #282a2d;
   --code-gutter-bg: #202124;
   --code-text: #e8eaed;
   --code-active-line: rgba(138, 180, 248, 0.16);
   --code-active-border: #8ab4f8;
   --code-hover-line: rgba(255, 255, 255, 0.04);
-  --sv-keyword: #c58af9;
-  --sv-uvm-type: #8ab4f8;
-  --sv-type: #8ab4f8;
-  --sv-proto-name: #e8eaed;
-  --sv-param-name: #e8eaed;
-  --sv-default-val: #fdd663;
-  --sv-macro: #d7aefb;
-  --sv-string: #81c995;
-  --sv-comment: #9aa0a6;
-  --sv-number: #fdd663;
-  --sv-op: #dadce0;
-  --sv-ident: #e8eaed;
-  --sv-cmdline-opt: #f28b82;
-  --sv-method: #8ab4f8;
+  --sv-keyword: #ff7b72;
+  --sv-keyword-decl: #ff7b72;
+  --sv-uvm-type: #58a6ff;
+  --sv-type: #79c0ff;
+  --sv-qualifier: #d2a8ff;
+  --sv-constant: #79c0ff;
+  --sv-proto-name: #e6edf3;
+  --sv-param-name: #e6edf3;
+  --sv-default-val: #ffab70;
+  --sv-macro: #ffab70;
+  --sv-preproc: #d2a8ff;
+  --sv-system-tf: #f0883e;
+  --sv-method: #bc8cff;
+  --sv-string: #a5d6ff;
+  --sv-string-escape: #ff7b72;
+  --sv-comment: #8b949e;
+  --sv-comment-tag: #e3b341;
+  --sv-number: #79c0ff;
+  --sv-op: #e6edf3;
+  --sv-ident: #e6edf3;
+  --sv-cmdline-opt: #ff7b72;
 }
 
 * {
@@ -1910,19 +1924,56 @@ code {
   white-space: pre;
 }
 
-/* Syntax Highlighting Tokens (Google Developers DevSite Theme) */
+/* Syntax Highlighting Tokens (High-Contrast Developer Theme) */
 .sv-keyword {
   color: var(--sv-keyword);
   font-weight: 600;
 }
 
+.sv-keyword-decl {
+  color: var(--sv-keyword-decl);
+  font-weight: 600;
+}
+
 .sv-uvm-type {
   color: var(--sv-uvm-type);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .sv-type {
   color: var(--sv-type);
+  font-weight: 500;
+}
+
+.sv-qualifier {
+  color: var(--sv-qualifier);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.sv-constant {
+  color: var(--sv-constant);
+  font-weight: 600;
+}
+
+.sv-system-tf {
+  color: var(--sv-system-tf);
+  font-weight: 600;
+}
+
+.sv-macro {
+  color: var(--sv-macro);
+  font-weight: 600;
+}
+
+.sv-preproc {
+  color: var(--sv-preproc);
+  font-weight: 600;
+}
+
+.sv-method {
+  color: var(--sv-method);
+  font-weight: 500;
 }
 
 .sv-proto-name {
@@ -1939,18 +1990,24 @@ code {
   color: var(--sv-default-val);
 }
 
-.sv-macro {
-  color: var(--sv-macro);
-  font-weight: 500;
-}
-
 .sv-string {
   color: var(--sv-string);
+}
+
+.sv-string-escape {
+  color: var(--sv-string-escape);
+  font-weight: 700;
 }
 
 .sv-comment {
   color: var(--sv-comment);
   font-style: italic;
+}
+
+.sv-comment-tag {
+  color: var(--sv-comment-tag);
+  font-style: normal;
+  font-weight: 700;
 }
 
 .sv-number {
@@ -1968,10 +2025,6 @@ code {
 .sv-cmdline-opt {
   color: var(--sv-cmdline-opt);
   font-weight: 600;
-}
-
-.sv-method {
-  color: var(--sv-method);
 }
 
 /* ==========================================================================
@@ -2157,43 +2210,6 @@ body.src-viewer-body {
 .sv-code-table tr.active-line {
   background-color: var(--code-active-line) !important;
   border-left: 3px solid var(--code-active-border);
-}
-
-/* Syntax Tokens */
-.sv-keyword {
-  color: var(--sv-keyword);
-  font-weight: 600;
-}
-
-.sv-uvm-type {
-  color: var(--sv-uvm-type);
-  font-weight: 600;
-}
-
-.sv-macro {
-  color: var(--sv-macro);
-  font-weight: 600;
-}
-
-.sv-string {
-  color: var(--sv-string);
-}
-
-.sv-comment {
-  color: var(--sv-comment);
-  font-style: italic;
-}
-
-.sv-number {
-  color: var(--sv-number);
-}
-
-.sv-op {
-  color: var(--sv-op);
-}
-
-.sv-ident {
-  color: var(--sv-ident);
 }
 
 /* ==========================================================================

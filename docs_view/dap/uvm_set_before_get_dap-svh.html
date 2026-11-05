@@ -63,28 +63,28 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">typedef</span> <span class="sv-uvm-type">uvm_set_before_get_dap</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_sequencer_base</span><span class="sv-op">)</span> <span class="sv-ident">seqr_dap_t</span><span class="sv-op">;</span>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">typedef</span> <span class="sv-uvm-type">uvm_set_before_get_dap</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_sequencer_base</span><span class="sv-op">)</span> <span class="sv-ident">seqr_dap_t</span><span class="sv-op">;</span>
 <span class="sv-ident">virtual_seqeuncer_type</span> <span class="sv-ident">virtual_sequencer</span><span class="sv-op">;</span>
 <span class="sv-ident">agent_type</span> <span class="sv-ident">my_agent</span><span class="sv-op">;</span>
 <span class="sv-ident">seqr_dap_t</span> <span class="sv-ident">seqr_dap</span><span class="sv-op">;</span>
 
-<span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">my_env</span><span class="sv-op">::</span><span class="sv-method">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
-  <span class="sv-ident">seqr_dap</span> <span class="sv-op">=</span> <span class="sv-ident">seqr_dap_t</span><span class="sv-op">::</span><span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;seqr_dap&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-ident">my_env</span><span class="sv-op">::</span><span class="sv-method">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-ident">seqr_dap</span> <span class="sv-op">=</span> <span class="sv-ident">seqr_dap_t</span><span class="sv-op">::</span><span class="sv-method">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;seqr_dap&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-comment">// Pass the DAP, because we don&#x27;t have a reference to the</span>
   <span class="sv-comment">// real sequencer yet...</span>
-  <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-ident">seqr_dap_t</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-keyword">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;virtual_sequencer&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;seqr_dap&quot;</span><span class="sv-op">,</span> <span class="sv-ident">seqr_dap</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-uvm-type">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-ident">seqr_dap_t</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;virtual_sequencer&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;seqr_dap&quot;</span><span class="sv-op">,</span> <span class="sv-ident">seqr_dap</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
   <span class="sv-comment">// Create the virtual sequencer</span>
-  <span class="sv-ident">virtual_sequencer</span> <span class="sv-op">=</span> <span class="sv-ident">virtual_sequencer_type</span><span class="sv-op">::</span><span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;virtual_sequencer&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+  <span class="sv-ident">virtual_sequencer</span> <span class="sv-op">=</span> <span class="sv-ident">virtual_sequencer_type</span><span class="sv-op">::</span><span class="sv-method">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;virtual_sequencer&quot;</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
   <span class="sv-comment">// Create the agent</span>
-  <span class="sv-ident">agent</span> <span class="sv-op">=</span> <span class="sv-ident">agent_type</span><span class="sv-op">::</span><span class="sv-ident">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;agent&quot;</span><span class="sv-op">,</span> <span class="sv-keyword">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">endfunction</span>
+  <span class="sv-ident">agent</span> <span class="sv-op">=</span> <span class="sv-ident">agent_type</span><span class="sv-op">::</span><span class="sv-method">type_id</span><span class="sv-op">::</span><span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-string">&quot;agent&quot;</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">endfunction</span>
 
-<span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">my_env</span><span class="sv-op">::</span><span class="sv-method">connect_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-ident">my_env</span><span class="sv-op">::</span><span class="sv-method">connect_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-comment">// Now that we know the value is good, we can set it</span>
   <span class="sv-ident">seqr_dap</span><span class="sv-op">.</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-ident">agent</span><span class="sv-op">.</span><span class="sv-ident">sequencer</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">endfunction</span></code></pre>
+<span class="sv-keyword-decl">endfunction</span></code></pre>
 </div><p>In the example above, the environment didn&rsquo;t have a reference to the agent&rsquo;s sequencer yet, because the agent hadn&rsquo;t executed its <i>build_phase</i>.&nbsp; The environment needed to give the virtual sequencer a &ldquo;Set before get&rdquo; DAP so that the virtual sequencer (and any sequences one it), could <i>eventually</i> see the agent&rsquo;s sequencer, when the reference was finally available.&nbsp;  If the virtual sequencer (or any sequences on it) attempted to &lsquo;get&rsquo; the reference to the agent&rsquo;s sequencer <i>prior</i> to the environment assigning it, an error would have been reported.</p>
 
 <!--START_ND_SUMMARY index=0-->
@@ -112,7 +112,7 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_set_before_get_dap</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_set_before_get_dap</span>#<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">T</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">int</span></td>
@@ -153,7 +153,7 @@
 <div class="CMethod" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_set_before_get_dap.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_set_before_get_dap.new" id="uvm_set_before_get_dap.new" href="../../src_view/dap/uvm_set_before_get_dap.svh.html#L84" class="src-code-link" data-src-file="dap/uvm_set_before_get_dap.svh" data-src-line="84">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_set_get_dap_base">Overrides uvm_set_get_dap_base</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;unnamed-uvm_set_before_get_dap#(T)&quot;</span></td>
@@ -177,7 +177,7 @@
 <div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_set_before_get_dap.set"><div class="CTopic"><h3 class=CTitle><a name="uvm_set_before_get_dap.set" id="uvm_set_before_get_dap.set" href="../../src_view/dap/uvm_set_before_get_dap.svh.html#L94" class="src-code-link" data-src-file="dap/uvm_set_before_get_dap.svh" data-src-line="94">set</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_set_get_dap_base">Overrides uvm_set_get_dap_base</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
@@ -193,7 +193,7 @@
 <div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_set_before_get_dap.try_set"><div class="CTopic"><h3 class=CTitle><a name="uvm_set_before_get_dap.try_set" id="uvm_set_before_get_dap.try_set" href="../../src_view/dap/uvm_set_before_get_dap.svh.html#L103" class="src-code-link" data-src-file="dap/uvm_set_before_get_dap.svh" data-src-line="103">try_set</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_set_get_dap_base">Overrides uvm_set_get_dap_base</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">try_set</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">try_set</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>
     <tr>
@@ -207,7 +207,7 @@
 
  <!--CONTENT index=5 -->
 <div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_set_before_get_dap.get"><div class="CTopic"><h3 class=CTitle><a name="uvm_set_before_get_dap.get" id="uvm_set_before_get_dap.get" href="../../src_view/dap/uvm_set_before_get_dap.svh.html#L113" class="src-code-link" data-src-file="dap/uvm_set_before_get_dap.svh" data-src-line="113">get</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_set_get_dap_base">Overrides uvm_set_get_dap_base</span></div>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-ident">T</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-ident">T</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the current value stored within the DAP.</p><p>If &lsquo;get&rsquo; is called before a call to <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link7  >set</a> or <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LMethod id=link8  >try_set</a>, then an error will be reported.</p></div></div></div>
 
 
@@ -217,7 +217,7 @@
 <div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_set_before_get_dap.try_get"><div class="CTopic"><h3 class=CTitle><a name="uvm_set_before_get_dap.try_get" id="uvm_set_before_get_dap.try_get" href="../../src_view/dap/uvm_set_before_get_dap.svh.html#L128" class="src-code-link" data-src-file="dap/uvm_set_before_get_dap.svh" data-src-line="128">try_get</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_set_get_dap_base">Overrides uvm_set_get_dap_base</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=4><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-proto-name">try_get</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-keyword">output</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=4><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-proto-name">try_get</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PTypePrefix nowrap><span class="sv-qualifier">output</span>&nbsp;</td>
       <td class=PType nowrap><span class="sv-type">T</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">value</span></td>
     </tr>

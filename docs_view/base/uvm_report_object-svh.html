@@ -67,10 +67,10 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-uvm-type">UVM_INFO</span> <span class="sv-op">-</span>       <span class="sv-uvm-type">UVM_DISPLAY</span>
-<span class="sv-uvm-type">UVM_WARNING</span> <span class="sv-op">-</span>    <span class="sv-uvm-type">UVM_DISPLAY</span>
-<span class="sv-uvm-type">UVM_ERROR</span> <span class="sv-op">-</span>      <span class="sv-uvm-type">UVM_DISPLAY</span> <span class="sv-op">|</span> <span class="sv-uvm-type">UVM_COUNT</span>
-<span class="sv-uvm-type">UVM_FATAL</span> <span class="sv-op">-</span>      <span class="sv-uvm-type">UVM_DISPLAY</span> <span class="sv-op">|</span> <span class="sv-uvm-type">UVM_EXIT</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-constant">UVM_INFO</span> <span class="sv-op">-</span>       <span class="sv-constant">UVM_DISPLAY</span>
+<span class="sv-constant">UVM_WARNING</span> <span class="sv-op">-</span>    <span class="sv-constant">UVM_DISPLAY</span>
+<span class="sv-constant">UVM_ERROR</span> <span class="sv-op">-</span>      <span class="sv-constant">UVM_DISPLAY</span> <span class="sv-op">|</span> <span class="sv-constant">UVM_COUNT</span>
+<span class="sv-constant">UVM_FATAL</span> <span class="sv-op">-</span>      <span class="sv-constant">UVM_DISPLAY</span> <span class="sv-op">|</span> <span class="sv-constant">UVM_EXIT</span></code></pre>
 </div><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>File descriptors</td><td class=CDLDescription>These can be set by (in increasing priority) default, severity level, an id, or (severity,id) pair.&nbsp;  File descriptors are standard SystemVerilog file descriptors; they may refer to more than one file.&nbsp; It is the user&rsquo;s responsibility to open and close them.</td></tr><tr><td class=CDLEntry>Default file handle</td><td class=CDLDescription>The default file handle is 0, which means that reports are not sent to a file even if a UVM_LOG attribute is set in the action associated with the report.&nbsp; This can be overridden by any of the <i>set_*_file</i> methods.</td></tr></table>
 
 <!--START_ND_SUMMARY index=0-->
@@ -97,7 +97,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_report_object</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_object</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_report_object</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=1 -->
@@ -211,7 +211,7 @@
 <div class="CMethod" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_report_object.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.new" id="uvm_report_object.new" href="../../src_view/base/uvm_report_object.svh.html#L91" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="91">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 3 derived class(es)">Overridden in 3 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;</span></td>
@@ -233,7 +233,7 @@
 
  <!--CONTENT index=3 -->
 <div class="CMethod" id="doc-nav-item-3" data-doc-topic="doc-nav-item-3" data-anchor="uvm_report_object.uvm_get_report_object"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.uvm_get_report_object" id="uvm_report_object.uvm_get_report_object" href="../../src_view/base/uvm_report_object.svh.html#L108" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="108">uvm_get_report_object</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_report_object</span> <span class="sv-uvm-type">uvm_get_report_object</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_report_object</span> <span class="sv-uvm-type">uvm_get_report_object</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the nearest uvm_report_object when called.&nbsp;  From inside a uvm_component, the method simply returns <i>this</i>.</p><p>See also the global version of <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link38  >uvm_get_report_object</a>.</p></div></div></div>
 
 
@@ -243,7 +243,7 @@
 <div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_report_object.uvm_report_enabled"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.uvm_report_enabled" id="uvm_report_object.uvm_report_enabled" href="../../src_view/base/uvm_report_object.svh.html#L120" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="120">uvm_report_enabled</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">uvm_report_enabled</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-uvm-type">uvm_report_enabled</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">verbosity</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
@@ -251,7 +251,7 @@
       <td class=PParameter nowrap><span class="sv-param-name">severity</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_INFO,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">id</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;</span></td>
@@ -269,35 +269,35 @@
 <div class="CMethod" id="doc-nav-item-5" data-doc-topic="doc-nav-item-5" data-anchor="uvm_report_object.uvm_report"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.uvm_report" id="uvm_report_object.uvm_report" href="../../src_view/base/uvm_report_object.svh.html#L129" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="129">uvm_report</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-uvm-type">uvm_report</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">severity</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">message</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">verbosity</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> (severity == uvm_severity'(UVM_ERROR)) ? UVM_LOW : (severity == uvm_severity'(UVM_FATAL)) ? UVM_NONE : UVM_MEDIUM,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">filename</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">line</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">context_name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">bit</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">report_enabled_checked</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">0</span></td>
@@ -315,31 +315,31 @@
 <div class="CMethod" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_report_object.uvm_report_info"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.uvm_report_info" id="uvm_report_object.uvm_report_info" href="../../src_view/base/uvm_report_object.svh.html#L152" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="152">uvm_report_info</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report_info</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-uvm-type">uvm_report_info</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">message</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">verbosity</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_MEDIUM,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">filename</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">line</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">context_name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">bit</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">report_enabled_checked</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
@@ -357,31 +357,31 @@
 <div class="CMethod" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_report_object.uvm_report_warning"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.uvm_report_warning" id="uvm_report_object.uvm_report_warning" href="../../src_view/base/uvm_report_object.svh.html#L166" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="166">uvm_report_warning</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report_warning</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-uvm-type">uvm_report_warning</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">message</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">verbosity</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_MEDIUM,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">filename</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">line</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">context_name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">bit</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">report_enabled_checked</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
@@ -399,31 +399,31 @@
 <div class="CMethod" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_report_object.uvm_report_error"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.uvm_report_error" id="uvm_report_object.uvm_report_error" href="../../src_view/base/uvm_report_object.svh.html#L180" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="180">uvm_report_error</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report_error</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-uvm-type">uvm_report_error</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">message</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">verbosity</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_LOW,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">filename</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">line</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">context_name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">bit</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">report_enabled_checked</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
@@ -441,31 +441,31 @@
 <div class="CMethod" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_report_object.uvm_report_fatal"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.uvm_report_fatal" id="uvm_report_object.uvm_report_fatal" href="../../src_view/base/uvm_report_object.svh.html#L231" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="231">uvm_report_fatal</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_report_fatal</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-uvm-type">uvm_report_fatal</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">message</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">verbosity</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> UVM_NONE,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">filename</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">line</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">context_name</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> &quot;&quot;,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">bit</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">bit</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">report_enabled_checked</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"> 0</span></td>
@@ -483,7 +483,7 @@
 <div class="CMethod" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_report_object.uvm_process_report_message"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.uvm_process_report_message" id="uvm_report_object.uvm_process_report_message" href="../../src_view/base/uvm_report_object.svh.html#L249" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="249">uvm_process_report_message</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">virtual</span> <span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">uvm_process_report_message</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_report_message</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-uvm-type">uvm_process_report_message</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_report_message</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">report_message</span></td>
     </tr>
     <tr>
@@ -505,11 +505,11 @@
 <div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_report_object.get_report_verbosity_level"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.get_report_verbosity_level" id="uvm_report_object.get_report_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L267" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="267">get_report_verbosity_level</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_report_verbosity_level</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-proto-name">get_report_verbosity_level</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">severity</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">UVM_INFO,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">id</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">&quot;&quot;</span></td>
@@ -525,7 +525,7 @@
 
  <!--CONTENT index=13 -->
 <div class="CMethod" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_report_object.get_report_max_verbosity_level"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.get_report_max_verbosity_level" id="uvm_report_object.get_report_max_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L278" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="278">get_report_max_verbosity_level</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_report_max_verbosity_level</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-proto-name">get_report_max_verbosity_level</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Gets the maximum verbosity level in effect for this report object.&nbsp; Any report from this component whose verbosity exceeds this maximum will be ignored.</p></div></div></div>
 
 
@@ -535,7 +535,7 @@
 <div class="CMethod" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_report_object.set_report_verbosity_level"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_verbosity_level" id="uvm_report_object.set_report_verbosity_level" href="../../src_view/base/uvm_report_object.svh.html#L289" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="289">set_report_verbosity_level</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_verbosity_level</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_verbosity_level</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">verbosity_level</span></td>
     </tr>
     <tr>
@@ -551,9 +551,9 @@
 <div class="CMethod" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_report_object.set_report_id_verbosity"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_id_verbosity" id="uvm_report_object.set_report_id_verbosity" href="../../src_view/base/uvm_report_object.svh.html#L295" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="295">set_report_id_verbosity</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_id_verbosity</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_id_verbosity</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">verbosity</span></td>
     </tr>
     <tr>
@@ -569,11 +569,11 @@
 <div class="CMethod" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_report_object.set_report_severity_id_verbosity"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_verbosity" id="uvm_report_object.set_report_severity_id_verbosity" href="../../src_view/base/uvm_report_object.svh.html#L312" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="312">set_report_severity_id_verbosity</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_id_verbosity</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_severity_id_verbosity</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">severity</span><span class="sv-op">,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">verbosity</span></td>
     </tr>
     <tr>
@@ -595,9 +595,9 @@
 <div class="CMethod" id="doc-nav-item-18" data-doc-topic="doc-nav-item-18" data-anchor="uvm_report_object.get_report_action"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.get_report_action" id="uvm_report_object.get_report_action" href="../../src_view/base/uvm_report_object.svh.html#L328" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="328">get_report_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_report_action</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-proto-name">get_report_action</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">severity</span><span class="sv-op">,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span></td>
     </tr>
     <tr>
@@ -613,7 +613,7 @@
 <div class="CMethod" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_report_object.set_report_severity_action"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_severity_action" id="uvm_report_object.set_report_severity_action" href="../../src_view/base/uvm_report_object.svh.html#L335" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="335">set_report_severity_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_action</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_severity_action</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">severity</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_action</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">action</span></td>
@@ -631,7 +631,7 @@
 <div class="CMethod" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_report_object.set_report_id_action"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_id_action" id="uvm_report_object.set_report_id_action" href="../../src_view/base/uvm_report_object.svh.html#L342" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="342">set_report_id_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_id_action</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_id_action</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_action</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">action</span></td>
@@ -649,9 +649,9 @@
 <div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_report_object.set_report_severity_id_action"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_action" id="uvm_report_object.set_report_severity_id_action" href="../../src_view/base/uvm_report_object.svh.html#L357" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="357">set_report_severity_id_action</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_id_action</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_severity_id_action</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">severity</span><span class="sv-op">,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_action</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">action</span></td>
@@ -675,9 +675,9 @@
 <div class="CMethod" id="doc-nav-item-23" data-doc-topic="doc-nav-item-23" data-anchor="uvm_report_object.get_report_file_handle"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.get_report_file_handle" id="uvm_report_object.get_report_file_handle" href="../../src_view/base/uvm_report_object.svh.html#L373" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="373">get_report_file_handle</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">int</span> <span class="sv-proto-name">get_report_file_handle</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">int</span> <span class="sv-proto-name">get_report_file_handle</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">severity</span><span class="sv-op">,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span></td>
     </tr>
     <tr>
@@ -693,7 +693,7 @@
 <div class="CMethod" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_report_object.set_report_default_file"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_default_file" id="uvm_report_object.set_report_default_file" href="../../src_view/base/uvm_report_object.svh.html#L380" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="380">set_report_default_file</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_default_file</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">UVM_FILE</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_default_file</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">UVM_FILE</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">file</span></td>
     </tr>
     <tr>
@@ -709,7 +709,7 @@
 <div class="CMethod" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_report_object.set_report_id_file"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_id_file" id="uvm_report_object.set_report_id_file" href="../../src_view/base/uvm_report_object.svh.html#L386" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="386">set_report_id_file</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_id_file</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_id_file</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">UVM_FILE</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">file</span></td>
@@ -727,7 +727,7 @@
 <div class="CMethod" id="doc-nav-item-26" data-doc-topic="doc-nav-item-26" data-anchor="uvm_report_object.set_report_severity_file"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_severity_file" id="uvm_report_object.set_report_severity_file" href="../../src_view/base/uvm_report_object.svh.html#L392" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="392">set_report_severity_file</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_file</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_severity_file</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">severity</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">UVM_FILE</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">file</span></td>
@@ -745,9 +745,9 @@
 <div class="CMethod" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_report_object.set_report_severity_id_file"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_file" id="uvm_report_object.set_report_severity_id_file" href="../../src_view/base/uvm_report_object.svh.html#L412" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="412">set_report_severity_id_file</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_id_file</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_severity_id_file</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">severity</span><span class="sv-op">,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">UVM_FILE</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">file</span></td>
@@ -771,7 +771,7 @@
 <div class="CMethod" id="doc-nav-item-29" data-doc-topic="doc-nav-item-29" data-anchor="uvm_report_object.set_report_severity_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_severity_override" id="uvm_report_object.set_report_severity_override" href="../../src_view/base/uvm_report_object.svh.html#L425" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="425">set_report_severity_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_severity_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">cur_severity</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">new_severity</span></td>
@@ -789,9 +789,9 @@
 <div class="CMethod" id="doc-nav-item-30" data-doc-topic="doc-nav-item-30" data-anchor="uvm_report_object.set_report_severity_id_override"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_severity_id_override" id="uvm_report_object.set_report_severity_id_override" href="../../src_view/base/uvm_report_object.svh.html#L436" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="436">set_report_severity_id_override</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_severity_id_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_severity_id_override</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">cur_severity</span><span class="sv-op">,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">id</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_severity</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">new_severity</span></td>
@@ -815,7 +815,7 @@
 <div class="CMethod" id="doc-nav-item-32" data-doc-topic="doc-nav-item-32" data-anchor="uvm_report_object.set_report_handler"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.set_report_handler" id="uvm_report_object.set_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L452" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="452">set_report_handler</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-proto-name">set_report_handler</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_report_handler</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">set_report_handler</span><span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_report_handler</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">handler</span></td>
     </tr>
     <tr>
@@ -829,7 +829,7 @@
 
  <!--CONTENT index=33 -->
 <div class="CMethod" id="doc-nav-item-33" data-doc-topic="doc-nav-item-33" data-anchor="uvm_report_object.get_report_handler"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.get_report_handler" id="uvm_report_object.get_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L462" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="462">get_report_handler</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-uvm-type">uvm_report_handler</span> <span class="sv-proto-name">get_report_handler</span><span class="sv-op">(</span><span class="sv-op">)</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_report_handler</span> <span class="sv-proto-name">get_report_handler</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the underlying report handler to which most reporting tasks are delegated.</p></div></div></div>
 
 
@@ -837,7 +837,7 @@
 
  <!--CONTENT index=34 -->
 <div class="CMethod" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_report_object.reset_report_handler"><div class="CTopic"><h3 class=CTitle><a name="uvm_report_object.reset_report_handler" id="uvm_report_object.reset_report_handler" href="../../src_view/base/uvm_report_object.svh.html#L81" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="81">reset_report_handler</a></h3>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-ident">reset_report_handler</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-ident">reset_report_handler</span>
   </td></tr></table></blockquote><div class=CBody><p>Resets the underlying report handler to its default settings.&nbsp; This clears any settings made with the <i>set_report_*</i> methods (see below).</p></div></div></div>
 
 </div><!--Content-->

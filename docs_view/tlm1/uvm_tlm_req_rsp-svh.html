@@ -113,11 +113,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_tlm_req_rsp_channel</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_tlm_req_rsp_channel</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">REQ</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">int,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">RSP</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">REQ</span></td>
@@ -184,9 +184,9 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_put</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_put</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">can_put</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">try_put</span> <span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Any put port variant can connect and send transactions to the request FIFO via this export, provided the transaction types match.</p></div></div></div>
 
 
@@ -204,12 +204,12 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">get</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_get</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_get</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">task</span> <span class="sv-method">peek</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_peek</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_peek</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-method">get</span> <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">can_get</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">try_get</span> <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">task</span> <span class="sv-method">peek</span> <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">can_peek</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">try_peek</span> <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Any get or peek port variant can connect to and retrieve transactions from the response FIFO via this export, provided the transaction types match.</p></div></div></div>
 
 
@@ -227,12 +227,12 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">get</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_get</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_get</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">task</span> <span class="sv-method">peek</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_peek</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_peek</span> <span class="sv-op">(</span><span class="sv-keyword">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-method">get</span> <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">can_get</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">try_get</span> <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">task</span> <span class="sv-method">peek</span> <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">can_peek</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">try_peek</span> <span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Any get or peek port variant can connect to and retrieve transactions from the response FIFO via this export, provided the transaction types match.</p></div></div></div>
 
 
@@ -250,9 +250,9 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">can_put</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">try_put</span> <span class="sv-op">(</span><span class="sv-keyword">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-method">put</span> <span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">can_put</span> <span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">try_put</span> <span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Any put port variant can connect and send transactions to the response FIFO via this export, provided the transaction types match.</p></div></div></div>
 
 
@@ -270,7 +270,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write</span> <span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">write</span> <span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>All connected analysis exports and imps will receive these transactions.</p></div></div></div>
 
 
@@ -288,7 +288,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">function</span> <span class="sv-keyword">void</span> <span class="sv-method">write</span> <span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">write</span> <span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>All connected analysis exports and imps will receive these transactions.</p></div></div></div>
 
 
@@ -316,7 +316,7 @@
 <div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_tlm_req_rsp_channel#(REQ,RSP).new"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_req_rsp_channel#(REQ,RSP).new" id="uvm_tlm_req_rsp_channel#(REQ,RSP).new" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L203" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="203">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_component">Overrides uvm_component</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>
@@ -324,11 +324,11 @@
       <td class=PParameter nowrap><span class="sv-param-name">parent</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">null,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">request_fifo_size</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">1,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">int</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">int</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">response_fifo_size</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">1</span></td>
@@ -374,11 +374,11 @@
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">class</span> <span class="sv-proto-name">uvm_tlm_transport_channel</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_tlm_transport_channel</span> #<span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">REQ</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">int,</span></td>
-      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">type</span>&nbsp;</td>
+      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">type</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">RSP</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;=&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val">REQ</span></td>
@@ -424,8 +424,8 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">task</span> <span class="sv-method">transport</span><span class="sv-op">(</span><span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">,</span> <span class="sv-keyword">output</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">)</span><span class="sv-op">;</span>
-<span class="sv-keyword">function</span> <span class="sv-keyword">bit</span> <span class="sv-method">nb_transport</span><span class="sv-op">(</span><span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">,</span> <span class="sv-keyword">output</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-method">transport</span><span class="sv-op">(</span><span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">,</span> <span class="sv-qualifier">output</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">nb_transport</span><span class="sv-op">(</span><span class="sv-ident">REQ</span> <span class="sv-ident">request</span><span class="sv-op">,</span> <span class="sv-qualifier">output</span> <span class="sv-ident">RSP</span> <span class="sv-ident">response</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Any transport port variant can connect to and send requests and retrieve responses via this export, provided the transaction types match.&nbsp; Upon return, the response argument carries the response to the request.</p></div></div></div>
 
 
@@ -441,7 +441,7 @@
 <div class="CMethod" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_tlm_transport_channel#(REQ,RSP).new"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_transport_channel#(REQ,RSP).new" id="uvm_tlm_transport_channel#(REQ,RSP).new" href="../../src_view/tlm1/uvm_tlm_req_rsp.svh.html#L331" class="src-code-link" data-src-file="tlm1/uvm_tlm_req_rsp.svh" data-src-line="331">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_tlm_req_rsp_channel">Overrides uvm_tlm_req_rsp_channel</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=5><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=5><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
       <td class=PDefaultValuePrefix><span class="sv-op">&nbsp;&nbsp;</span></td>
       <td class=PDefaultValue width=100%><span class="sv-default-val"></span></td>

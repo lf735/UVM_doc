@@ -61,7 +61,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-ident">prompt</span><span class="sv-op">&gt;</span> <span class="sv-ident">SIM_COMMAND</span> <span class="sv-cmdline-opt">+UVM_TESTNAME=test_bus_retry</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-ident">prompt</span><span class="sv-op">&gt;</span> <span class="sv-ident">SIM_COMMAND</span> <span class="sv-op">+</span><span class="sv-ident">UVM_TESTNAME</span><span class="sv-op">=</span><span class="sv-ident">test_bus_retry</span></code></pre>
 </div><p>The global run_test() task should be specified inside an initial block such as</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -73,7 +73,7 @@
       <span class="copy-text">Copy</span>
     </button>
   </div>
-  <pre class="code-block-content"><code><span class="sv-keyword">initial</span> <span class="sv-method">run_test</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+  <pre class="code-block-content"><code><span class="sv-keyword-decl">initial</span> <span class="sv-method">run_test</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Multiple tests, identified by their type name, are compiled in and then selected for execution from the command line without need for recompilation.&nbsp; Random seed selection is also available on the command line.</p><p>If +UVM_TESTNAME=test_name is specified, then an object of type &lsquo;test_name&rsquo; is created by factory and phasing begins.&nbsp; Here, it is presumed that the test will instantiate the test environment, or the test environment will have already been instantiated before the call to run_test().</p><p>If the specified test_name cannot be created by the <a href="../base/uvm_factory-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link9  >uvm_factory</a>, then a fatal error occurs.&nbsp; If run_test() is called without UVM_TESTNAME being specified, then all components constructed before the call to run_test will be cycled through their simulation phases.</p><p>Deriving from uvm_test will allow you to distinguish tests from other component types that inherit from uvm_component directly.&nbsp; Such tests will automatically inherit features that may be added to uvm_test in the future.</p>
 
 <!--START_ND_SUMMARY index=0-->
@@ -102,7 +102,7 @@
   <!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword">virtual</span> <span class="sv-keyword">class</span> <span class="sv-uvm-type">uvm_test</span> <span class="sv-keyword">extends</span> <span class="sv-uvm-type">uvm_component</span>
+    <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_test</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span>
   </td></tr></table></blockquote></td></tr>
 
   <!-- index=1 -->
@@ -126,7 +126,7 @@
 <div class="CMethod" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_test.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_test.new" id="uvm_test.new" href="../../src_view/comps/uvm_test.svh.html#L70" class="src-code-link" data-src-file="comps/uvm_test.svh" data-src-line="70">new</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_component">Overrides uvm_component</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype>
       <tr><td><table border=0 cellspacing=0 cellpadding=0><tr>
-      <td class=PBeforeParameters colspan=3><span class="sv-keyword">function</span> <span class="sv-keyword">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-keyword">string</span>&nbsp;</td>
+      <td class=PBeforeParameters colspan=3><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span> <span class="sv-op">(</span></td>      </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-type">string</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">name</span><span class="sv-op">,</span></td>
       </tr><tr><td>&nbsp;&nbsp;&nbsp;</td>      <td class=PType nowrap><span class="sv-uvm-type">uvm_component</span>&nbsp;</td>
       <td class=PParameter nowrap width=100%><span class="sv-param-name">parent</span></td>
