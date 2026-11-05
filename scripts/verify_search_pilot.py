@@ -38,7 +38,12 @@ def test_css():
 
     required_classes = [
         ".modal-recent-searches",
-        ".recent-search-chip",
+        ".recent-search-row",
+        ".recent-mode-badge",
+        ".badge-ai",
+        ".badge-standard",
+        ".recent-row-icon",
+        ".recent-row-remove",
         ".recent-clear-btn",
         ".search-result-item.current-result",
         ".search-result-item.viewed",
@@ -75,8 +80,10 @@ def test_js():
         "activeSearchSession",
         "getRecentSearches",
         "saveRecentSearch",
+        "removeRecentSearch",
         "clearRecentSearches",
         "renderRecentSearches",
+        "toggleAiSearchMode",
         "updateSearchPilotBar",
         "closeSearchPilot",
         "navigateSearchResult",
@@ -92,7 +99,9 @@ def test_js():
         "searchNavClose",
         "current-result",
         "viewed",
-        "res-viewed-icon"
+        "res-viewed-icon",
+        "badge-ai",
+        "badge-standard"
     ]
     for sym in required_symbols:
         assert sym in content, f"Missing symbol or identifier: {sym} in js/app.js"

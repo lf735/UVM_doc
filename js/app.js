@@ -1602,29 +1602,41 @@ document.addEventListener('DOMContentLoaded', () => {
   function getRecentSearches() {
     try {
       const stored = localStorage.getItem(RECENT_SEARCHES_KEY);
-      return stored ? JSON.parse(stored) : [];
+      if (!stored) return [];
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed)) return [];
+      return parsed.map(item => {
+        if (typeof item === 'string') {
+          return { query: item, mode: 'standard' };
+        }
+        return {
+          query: item.query || '',
+          mode: item.mode === 'ai' ? 'ai' : 'standard'
+        };
+      }).filter(item => item.query && item.query.trim().length > 0);
     } catch (e) {
       return [];
     }
   }
 
-  function saveRecentSearch(query) {
+  function saveRecentSearch(query, mode) {
     const q = (query || '').trim();
     if (!q || q.length < 2) return;
+    const m = mode === 'ai' ? 'ai' : (mode === 'standard' ? 'standard' : (modalAiEnabled ? 'ai' : 'standard'));
     try {
       let list = getRecentSearches();
-      list = list.filter(item => item.toLowerCase() !== q.toLowerCase());
-      list.unshift(q);
+      list = list.filter(item => !(item.query.toLowerCase() === q.toLowerCase() && item.mode === m));
+      list.unshift({ query: q, mode: m });
       if (list.length > MAX_RECENT_SEARCHES) list = list.slice(0, MAX_RECENT_SEARCHES);
       localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(list));
     } catch (e) { }
   }
 
-  function removeRecentSearch(query) {
+  function removeRecentSearch(query, mode) {
     const q = (query || '').trim().toLowerCase();
     try {
       let list = getRecentSearches();
-      list = list.filter(item => item.toLowerCase() !== q);
+      list = list.filter(item => !(item.query.toLowerCase() === q && (!mode || item.mode === mode)));
       localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(list));
     } catch (e) { }
     renderRecentSearches();
@@ -1640,16 +1652,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderRecentSearches() {
     if (!modalRecentSearches || !recentSearchesChips) return;
     const history = getRecentSearches();
-    if (!history.length || modalAiEnabled) {
+    if (!history.length) {
       modalRecentSearches.style.display = 'none';
-      if (searchResults) {
-        searchResults.style.display = 'block';
-        if (!searchInput || !searchInput.value.trim()) {
-          searchResults.innerHTML = `<li style="padding:3rem 1.5rem; text-align:center; color:var(--text-muted); font-size:0.875rem">
-            <div style="font-size:1.75rem; margin-bottom:0.6rem; opacity:0.65;">🔍</div>
-            <strong style="color:var(--text-main); font-size:0.95rem;">Type to search UVM documentation</strong><br>
-            <span style="font-size:0.8rem; margin-top:0.35rem; display:inline-block; opacity:0.75;">Search 3,096 classes, methods, tasks, macros, files and interactive examples</span>
-          </li>`;
+      if (modalAiEnabled) {
+        if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
+        if (searchResults) searchResults.style.display = 'none';
+      } else {
+        if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+        if (searchResults) {
+          searchResults.style.display = 'block';
+          if (!searchInput || !searchInput.value.trim()) {
+            searchResults.innerHTML = `<li style="padding:3rem 1.5rem; text-align:center; color:var(--text-muted); font-size:0.875rem">
+              <div style="font-size:1.75rem; margin-bottom:0.6rem; opacity:0.65;">🔍</div>
+              <strong style="color:var(--text-main); font-size:0.95rem;">Type to search UVM documentation</strong><br>
+              <span style="font-size:0.8rem; margin-top:0.35rem; display:inline-block; opacity:0.75;">Search 3,096 classes, methods, tasks, macros, files and interactive examples</span>
+            </li>`;
+          }
         }
       }
       return;
@@ -1657,17 +1675,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let html = '';
     history.forEach(item => {
-      html += `<div class="recent-search-row recent-search-chip" data-query="${escapeHtml(item)}" role="button" tabindex="0">
+      const isAi = item.mode === 'ai';
+      html += `<div class="recent-search-row recent-search-chip" data-query="${escapeHtml(item.query)}" data-mode="${isAi ? 'ai' : 'standard'}" role="button" tabindex="0">
         <div class="recent-row-main">
-          <svg class="recent-row-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-          <span class="recent-row-query">${escapeHtml(item)}</span>
+          ${isAi ? `
+            <svg class="recent-row-icon icon-ai" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          ` : `
+            <svg class="recent-row-icon icon-standard" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          `}
+          <span class="recent-row-query">${escapeHtml(item.query)}</span>
+          <span class="recent-mode-badge ${isAi ? 'badge-ai' : 'badge-standard'}">${isAi ? 'AI' : 'Standard'}</span>
         </div>
         <div class="recent-row-actions">
           <span class="recent-row-hint">Jump to search ↵</span>
-          <button type="button" class="recent-row-remove" data-remove="${escapeHtml(item)}" title="Remove from history" aria-label="Remove '${escapeHtml(item)}' from history">
+          <button type="button" class="recent-row-remove" data-remove="${escapeHtml(item.query)}" data-mode="${isAi ? 'ai' : 'standard'}" title="Remove from history" aria-label="Remove '${escapeHtml(item.query)}' from history">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -1681,16 +1707,40 @@ document.addEventListener('DOMContentLoaded', () => {
     modalRecentSearches.style.display = 'flex';
     if (searchResults) searchResults.style.display = 'none';
 
-    // Click on row to run search
+    if (modalAiEnabled) {
+      if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
+    } else {
+      if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
+    }
+
+    // Click on row to run search and activate corresponding mode
     recentSearchesChips.querySelectorAll('.recent-search-row').forEach(row => {
       row.addEventListener('click', (e) => {
         if (e.target.closest('.recent-row-remove')) return;
         const query = row.getAttribute('data-query');
+        const mode = row.getAttribute('data-mode') || 'standard';
+
+        // Switch to corresponding mode
+        if (mode === 'ai') {
+          if (!modalAiEnabled) {
+            if (window.UVMRagEngine && !window.UVMRagEngine.hasConsent()) {
+              openAiConsentModal();
+              return;
+            }
+            toggleAiSearchMode(true);
+          }
+        } else {
+          if (modalAiEnabled) {
+            toggleAiSearchMode(false);
+          }
+        }
+
         if (searchInput) {
           searchInput.value = query;
           adjustSearchInputHeight();
           if (modalSearchClear) modalSearchClear.style.display = 'inline-flex';
           modalRecentSearches.style.display = 'none';
+          if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
           if (searchResults) searchResults.style.display = 'block';
           searchInput.focus();
           executeSearch(query);
@@ -1709,7 +1759,8 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const query = btn.getAttribute('data-remove');
-        removeRecentSearch(query);
+        const mode = btn.getAttribute('data-mode');
+        removeRecentSearch(query, mode);
       });
     });
   }
@@ -1795,14 +1846,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (modalAiEnabled) {
         renderPromptChips();
-        if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
-        if (searchResults) searchResults.style.display = 'none';
-        if (modalRecentSearches) modalRecentSearches.style.display = 'none';
       } else {
         if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
-        if (searchResults) searchResults.style.display = 'block';
-        renderRecentSearches();
       }
+      renderRecentSearches();
       searchInput.focus();
       searchSelectedIndex = -1;
       executeSearch('');
@@ -1863,6 +1910,7 @@ document.addEventListener('DOMContentLoaded', () => {
       chip.addEventListener('click', () => {
         const query = chip.getAttribute('data-query');
         if (searchInput) {
+          saveRecentSearch(query, 'ai');
           searchInput.value = query;
           adjustSearchInputHeight();
           if (modalSearchClear) modalSearchClear.style.display = 'inline-flex';
@@ -2305,6 +2353,10 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         e.preventDefault();
+        const val = searchInput ? searchInput.value.trim() : '';
+        if (val.length >= 2) {
+          saveRecentSearch(val, modalAiEnabled ? 'ai' : 'standard');
+        }
         const targetIdx = searchSelectedIndex >= 0 ? searchSelectedIndex : (filteredSearchResults.length > 0 ? 0 : -1);
         if (targetIdx >= 0 && targetIdx < filteredSearchResults.length) {
           selectSearchResult(filteredSearchResults[targetIdx].item, { index: targetIdx });
@@ -2371,9 +2423,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lastAiRawResults = null;
         lastAiQuery = null;
         renderPromptChips();
-        if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
-        if (searchResults) searchResults.style.display = 'none';
-        if (modalRecentSearches) modalRecentSearches.style.display = 'none';
+        renderRecentSearches();
         searchResults.innerHTML = '';
         filteredSearchResults = [];
         searchSelectedIndex = -1;
@@ -2755,7 +2805,7 @@ document.addEventListener('DOMContentLoaded', () => {
     activeSearchSession.isActive = true;
 
     if (activeSearchSession.query) {
-      saveRecentSearch(activeSearchSession.query);
+      saveRecentSearch(activeSearchSession.query, activeSearchSession.mode || (modalAiEnabled ? 'ai' : 'standard'));
     }
 
     updateSearchPilotBar();

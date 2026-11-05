@@ -192,8 +192,8 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
   1. **Conservation d'état** : L'état `activeSearchSession` mémorise la requête, le mode (standard/IA), les résultats filtrés et l'index actif. La réouverture de la modale restaure la liste sans recalcul et sélectionne le champ texte (`searchInput.select()`).
   2. **Contrôle flottant docké** : Un bandeau discret `#search-nav-bar` (« Search Pilot ») apparaît en bas d'écran dès qu'un résultat est sélectionné. Il permet de passer au résultat suivant/précédent sans réouvrir la modale, d'afficher la position `N of Total`, ou de réouvrir la liste complète d'un clic.
   3. **Raccourcis clavier ergonomiques** : Navigation globale via `Alt + [` (Précédent) et `Alt + ]` (Suivant).
-  4. **Traçage visuel d'exploration** : Tout résultat ouvert durant la session reçoit la classe `.viewed` (avec coche `✓`), et le résultat actif est surligné avec `.current-result`.
-  5. **Historique local respectueux** : Les 8 dernières recherches sont sauvegardées dans `localStorage` et proposées en puces cliquables lorsque l'input est vide.
+  4. **Traçage visuel d'exploration** : Tout résultat ouvert durant la session reçoit la classe `.viewed` (avec coche SVG vectorielle non déformée `.res-viewed-icon`), et le résultat actif est surligné avec `.current-result` (sans figer artificiellement le premier élément).
+  5. **Historique local contextualisé par mode** : Les 8 dernières recherches sont sauvegardées dans `localStorage` sous le format `{ query, mode: 'standard' | 'ai' }`. Elles sont restituées dans une vue liste plein format Spotlight avec badge d'identification de mode (`[AI]` violet avec étincelles / `[Standard]` sobre avec loupe), hint clavier et bouton de suppression unitaire `✕`. Un clic sur une entrée bascule automatiquement l'interface dans le mode correspondant (`toggleAiSearchMode(true/false)`) et exécute la recherche immédiatement.
 
 ---
 
