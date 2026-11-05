@@ -332,6 +332,71 @@ Le fichier de données de recherche [`js/search_data.js`](file:///c:/Dev/UVM_doc
   - Déplacement de ces 4 sections dans une sous-barre horizontale dédiée (`<nav class="app-subbar">`) occupant 100% de la largeur de l'écran directement sous le header principal.
   - Chaque section dispose d'une icône vectorielle explicite et d'un grand confort de lecture, tout en libérant l'intégralité de la hauteur de la barre latérale pour la recherche et l'arbre de navigation.
 
+---
+
+## 12. Pièges et Bonnes Pratiques de la Coloration Syntaxique SystemVerilog & Multi-Langages
+
+### Piège 12.1 : L'Écrasement Sémantique des Tokens et l'Uniformité Monotone (Le Piège du "Tout-en-Violet")
+- **Symptôme** : Dans les versions initiales, les mots-clés de contrôle (`if`, `case`, `return`), les déclarations structurelles (`class`, `module`, `task`, `function`), les types primitifs (`logic`, `bit`, `int`, `void`, `string`), les qualificateurs OOP (`virtual`, `rand`, `local`) et les classes UVM étaient tous regroupés dans une liste unique de mots-clés sous la même classe `.sv-keyword` (#af00db en clair, #c58af9 en sombre).
+- **Conséquence UX** : Le code était visuellement plat et difficile à scanner pour un ingénieur de vérification. Impossible de repérer en un coup d'œil la frontière entre la structure d'une classe, ses types et ses structures de contrôle.
+- **Solution architecturale** :
+  - Décomposition stricte en catégories de tokens spécialisées :
+    - `.sv-keyword` : Mots-clés de contrôle et exécution (`if`, `else`, `case`, `for`, `fork`, `join`, `begin`, `end`, etc.).
+    - `.sv-keyword-decl` : Mots-clés de déclaration (`class`, `module`, `task`, `function`, `package`, `typedef`, etc.).
+    - `.sv-type` : Types de données IEEE 1800 (`bit`, `logic`, `byte`, `int`, `time`, `string`, `void`, etc.).
+    - `.sv-qualifier` : Modificateurs d'accès et de stockage (`virtual`, `local`, `protected`, `rand`, `static`, etc.).
+    - `.sv-constant` : Littéraux constants (`null`, `this`, `super`, `UVM_LOW`, `UVM_NONE`, `UVM_ALL_ON`, etc.).
+  - Palette CSS haute lisibilité inspirée des IDEs modernes (VS Code, JetBrains, DVT Eclipse) avec contrastes conformes WCAG AA.
+
+### Piège 12.2 : Le Piège du Préfixe `$` des Tâches et Fonctions Système (`$display`, `$cast`, `$time`)
+- **Symptôme** : Les appels système fondamentaux de SystemVerilog (`$display`, `$cast`, `$time`, `$sformatf`, `$finish`, `$urandom_range`) s'affichaient sans coloration : le caractère `$` était isolé comme un opérateur de ponctuation générique (`.sv-op`), tandis que le nom de la tâche était rendu en texte noir ordinaire (`.sv-ident`).
+- **Cause racine** : L'expression régulière du tokenizer analysait les opérateurs via `[#+\-*/%=&|~^!<>?:;.,()\[\]{}]` (incluant ou excluant `$`), tandis que l'analyse des identifiants utilisait `[a-zA-Z_][a-zA-Z0-9_]*` sans prise en compte du préfixe `$`.
+- **Solution** :
+  - Introduction d'une règle de tokenisation prioritaire dédiée :
+    ```python
+    r'(?P<SYSTEM_TF>\$[a-zA-Z_][a-zA-Z0-9_$]*)'
+    ```
+  - Attribué à la classe `.sv-system-tf` stylisée dans une nuance ambrée/orange vive (`#b35900` en clair, `#f0883e` en sombre).
+
+### Piège 12.3 : La Détection Contextuelle des Méthodes sans Parenthèses en SystemVerilog
+- **Symptôme** : En SystemVerilog, une fonction ou tâche sans arguments peut être déclarée ou implémentée sans parenthèses vides :
+  ```systemverilog
+  function void uvm_component::m_do_pre_abort;
+  pre_abort();
+  ```
+  Un tokenizer classique basé uniquement sur un lookahead `(` identifiait `pre_abort()` comme méthode, mais laissait `m_do_pre_abort` en texte ordinaire (`sv-ident`) !
+- **Solution** :
+  - Détection contextuelle bidirectionnelle (lookahead et lookbehind) :
+    1. Si l'identifiant est immédiatement suivi d'une parenthèse ouvrante `(` -> `.sv-method`.
+    2. Si l'identifiant est précédé de l'opérateur de portée `::` et que la ligne contient une déclaration `function` ou `task` ou se termine par `;` -> `.sv-method`.
+    3. Si l'identifiant appartient au dictionnaire des méthodes canoniques du cycle de vie UVM (`KNOWN_UVM_METHODS` : `build_phase`, `connect_phase`, `run_phase`, `raise_objection`, `drop_objection`, `start_item`, `create`, etc.) -> `.sv-method`.
+
+### Piège 12.4 : La Fragmentation des Opérateurs Multi-Caractères (`::`, `->`, `<=`, `&&`)
+- **Symptôme** : Une expression comme `uvm_component::type_id` était découpée en :
+  `<span class="sv-op">:</span><span class="sv-op">:</span>` au lieu d'un token unitaire `::`.
+- **Cause racine** : Utilisation d'une classe de caractères Regex à un seul caractère `[#+\-*/%=&|~^!<>]` appliquée caractère par caractère.
+- **Solution** :
+  - Regex ordonné plaçant les opérateurs multi-caractères les plus longs en tête de l'alternative :
+    ```python
+    r'(?P<OP>::|->>|->|<=|>=|===|!==|==\?|!=\?|==|!=|&&|\|\||\+:|-:|\+:=|-:=|\+=|-=|\*=|/=|%=|&=|\|=|\^=|<<=|>>=|<<<=|>>>=|<<<|>>>|<<|>>|\+\+|--|\|->|\|=>|##|@@|#\(|[#+\-*/%=&|~^!<>?:;.,()\[\]{}])'
+    ```
+  - Les opérateurs composés sont ainsi émis sous un seul élément HTML propre et atomique (`<span class="sv-op">::</span>`).
+
+### Piège 12.5 : Le Piège de l'Échappement des Apostrophes dans `html.escape()` (`8'hA5`)
+- **Symptôme** : Les nombres basés SystemVerilog (`8'hA5`, `32'hDEAD_BEEF`, `'0`, `'1`) généraient `<span class="sv-number">8&#x27;hA5</span>`.
+- **Cause racine** : En Python 3.8+, `html.escape(s, quote=True)` remplace par défaut l'apostrophe `'` par l'entité `&#x27;`.
+- **Bonne pratique** :
+  - S'assurer que le tokenizer capture le littéral basé dans sa globalité via `\b\d+\s*\'[sS]?[bBoOdDhH]\s*[0-9a-fA-F_xzXZ]+\b` pour que le nombre entier soit encapsulé dans un unique span `.sv-number`.
+  - Dans les suites de tests unitaires, vérifier la compatibilité des assertions sur les deux formes de chaîne (`'8\'hA5'` et `'8&#x27;hA5'`).
+
+### Piège 12.6 : La Duplication de Code de Coloration entre Scripts (`build_docs.py` vs `build_examples.py`)
+- **Symptôme** : Initialement, `build_docs.py` possédait son propre tokenizer, et `build_examples.py` en possédait un second distinct. Les exemples interactifs n'avaient pas le même rendu que les sources officielles, et tout ajout de mot-clé devait être dupliqué dans deux fichiers.
+- **Solution architecturale pérenne** :
+  - Création d'un module unique et partagé `scripts/syntax_highlighter.py`.
+  - `build_docs.py` et `build_examples.py` importent ce module comme source de vérité unique.
+  - Ajout d'une suite de tests unitaires dédiée `scripts/test_syntax_highlighter.py` intégrée au cycle de recette automatisé.
+
+
 
 
 

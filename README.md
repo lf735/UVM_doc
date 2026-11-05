@@ -51,11 +51,13 @@ UVM_doc/
 │   └── search_data.js        # Generated index (untracked, built at deployment & locally)
 ├── scripts/
 │   ├── build_docs.py         # Python build script generating docs_view, src_view, and nav data
-│   ├── build_examples.py     # Python generator for all 38 interactive example studios
+│   ├── build_examples.py     # Python generator for all 39 interactive example studios
 │   ├── build_rag_embeddings.py # Generates intelligent chunks & dense vector embeddings
 │   ├── build_uvm_source_db.py # Python parser extracting classes, methods, overrides, and macros
 │   ├── query_uvm_db.py       # Interactive CLI explorer tool for terminal navigation
-│   └── verify_examples.py    # 20-test automated verification suite for interactive examples
+│   ├── syntax_highlighter.py # Unified high-fidelity tokenizer for SystemVerilog, UVM, C/DPI & Makefiles
+│   ├── test_syntax_highlighter.py # Automated unit test suite for syntax tokenization
+│   └── verify_examples.py    # 27-test automated verification suite for interactive examples
 ├── data/
 │   ├── uvm_source_database.json # Complete hierarchical, bidirectional & indexed database (5.55 MB)
 │   ├── uvm_source_database.sqlite # Relational 3NF SQLite database with indexes (2.11 MB)

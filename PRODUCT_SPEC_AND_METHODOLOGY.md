@@ -50,8 +50,8 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | | **Normalisation des Entités HTML** | Décodage systématique des entités (`&amp;`, `&rsquo;`) garantissant un rendu propre sans double échappement dans les menus. |
 | | **Sommaire Interne ("On this page")** | Barre latérale droite dynamique avec défilement espion (Scrollspy) et repli par groupes. |
 | | **Défilement Précis des Liens** | Compensation de la marge supérieure (`scroll-margin-top`), suppression des conflits `scrollIntoView`, micro-ajustement géométrique. |
-| | **Syntax Highlighting & Copie** | Coloration SystemVerilog des blocs `<pre>` et prototypes de méthodes avec bouton de copie en un clic. |
-| **Exemples Interactifs (`examples_view`)** | **Studio Multi-Fichiers en 2 Barres** | Barre d'outils supérieure (`.studio-toolbar` : saut direct de fichier, copie de code, téléchargement de fichier brut, copie de lien) + Barre d'onglets de fichiers pleine largeur inférieure avec défilement horizontal fluide. |
+| | **Syntax Highlighting Sémantique** | Coloration SystemVerilog/UVM haute fidélité (appels système `$`, déclarations structurelles, types primitifs, qualificateurs OOP, méthodes/phases, constantes, macros et directives) sur les blocs `<pre>`, prototypes de méthodes et tables de signatures avec bouton de copie en un clic. |
+| **Exemples Interactifs (`examples_view`)** | **Studio Multi-Fichiers en 2 Barres** | Barre d'outils supérieure (`.studio-toolbar` : saut direct de fichier, copie de code, téléchargement de fichier brut, copie de lien) + Barre d'onglets de fichiers pleine largeur inférieure avec défilement horizontal fluide et surlignage syntaxique multi-langages (SV, C/DPI, Makefiles). |
 | | **Console d'Exécution Multi-Simulateurs** | Sorties réelles d'exécution pour Questa, VCS et Xcelium avec onglets interactifs et bannière de résumé UVM (0 errors / 0 fatals). |
 | | **Archive ZIP Client-Side 1-Clic** | Téléchargement instantané de l'intégralité des fichiers de chaque exemple sans dépendance serveur via encodage binaire natif. |
 | | **Visual Flow Stepper** | Progression pas-à-pas interactive avec frise chronologique sur les 5 piliers clés UVM. |
@@ -59,7 +59,7 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | | **Cadrage Haute Lisibilité** | Encapsulation dans `<figure class="doc-diagram-card">` avec canevas `#ffffff` garantissant le contraste en mode sombre. |
 | | **Visionneuse Zoom Plein Écran** | Modale Lightbox (`#image-zoom-modal`) avec zoom molette, déplacement drag & drop, boutons (+, -, 1:1, Fit) et raccourcis clavier. |
 | | **Sécurité Non-Bloquante** | Masquage complet (`display: none; visibility: hidden; pointer-events: none;`) prévenant tout blocage d'interface à la fermeture. |
-| **Explorateur Source (`src_view`)** | **Affichage SystemVerilog/C** | 155 fichiers sources colorisés avec numéros de lignes cliquables (`#L44`) et bouton retour vers la documentation. |
+| **Explorateur Source (`src_view`)** | **Visualiseur Haute Fidélité (SV/C)** | 155 fichiers sources SystemVerilog et C/DPI avec tokenisation fine (fonctions système, méthodes, types, qualificateurs, opérateurs composés), numéros de lignes cliquables (`#L44`) et navigation bidirectionnelle avec la doc. |
 
 ---
 
@@ -88,7 +88,9 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
                                                           │
                                      ┌────────────────────┴────────────────────┐
                                      │         Pipeline Python Statique         │
-                                     │          scripts/build_docs.py          │
+                                     │  - scripts/build_docs.py                │
+                                     │  - scripts/build_examples.py            │
+                                     │  - scripts/syntax_highlighter.py (Core) │
                                      └────────────────────▲────────────────────┘
                                                           │ Lit & Transforme
                                                           │
@@ -171,6 +173,15 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
 - **Principe** : Tout texte extrait de fichiers HTML historiques (NaturalDocs, XML) doit être converti en texte brut via `html.unescape()` avant stockage dans les index JavaScript / JSON.
 - **Règle** : Ne jamais stocker de chaînes contenant des entités brutes (`&amp;`, `&rsquo;`) dans les structures de données, afin d'éviter les doubles échappements lors de l'application des filtres ou de la coloration syntaxique frontend.
 
+### Règle 9 : Coloration Syntaxique Sémantique et Source Unique de Vérité
+- **Principe** : La coloration syntaxique de l'ensemble du projet (documentation, visualiseur source et code studio des exemples) doit être pilotée par un moteur unifié (`scripts/syntax_highlighter.py`) garantissant une taxonomie sémantique riche et cohérente.
+- **Règles d'implémentation** :
+  1. **Taxonomie fine** : Dissocier impérativement les mots-clés de contrôle (`.sv-keyword`), les déclarations de structure (`.sv-keyword-decl`), les types primitifs (`.sv-type`), les qualificateurs OOP (`.sv-qualifier`), les classes UVM (`.sv-uvm-type`) et les constantes (`.sv-constant`).
+  2. **Appels système prioritaires** : Capturer les symboles débutant par `$` (`$display`, `$cast`, `$time`, `$sformatf`) comme fonctions système (`.sv-system-tf`) avant toute tokenisation d'opérateurs.
+  3. **Opérateurs composés atomiques** : Traiter les opérateurs multi-caractères (`::`, `->`, `<=`, `==`, `!=`, `&&`, etc.) en un seul élément HTML sans découpage caractère par caractère.
+  4. **Multi-Langages** : Prise en charge native de SystemVerilog (IEEE 1800), C / C++ DPI (`.c`, `.cc`, `.h`) et Makefiles (`Makefile.*`).
+  5. **Contraste binaire Dual-Theme** : Synchroniser rigoureusement les variables `--sv-*` en mode clair et mode sombre en respectant les critères d'accessibilité WCAG AA.
+
 ---
 
 ## 4. Méthodologie de Vérification & Recette Automatisée
@@ -180,11 +191,14 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                   Niveau 1 : Tests Unitaires Statiques                  │
-│       scripts/build_docs.py (validation de génération des 146 docs)    │
+│  - scripts/test_syntax_highlighter.py (assertions lexer & tokens)      │
+│  - scripts/build_docs.py (validation de génération des 146 docs & 155 src)│
+│  - scripts/build_examples.py (génération des 39 studios interactifs)    │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
 │              Niveau 2 : Scripts de Vérification DOM & CSS              │
+│  - verify_examples.py (27 assertions fonctionnelles sur les studios)   │
 │  - verify_architecture.py (25 assertions structurelles & fonctionnelles)│
 │  - verify_image_features.py (cadrage, boutons zoom, règles CSS non-bloqu)│
 └───────────────────────────────────┬────────────────────────────────────┘
@@ -198,7 +212,10 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ### 4.1 Check-list de Vérification Obligatoire
 
 Avant de valider une version :
+- [ ] **Tests Unitaires de Coloration Syntaxique** : `python scripts/test_syntax_highlighter.py` (7/7 tests validés).
 - [ ] **Compilation sans erreur** : `python scripts/build_docs.py` s'exécute avec le code de retour `0`.
+- [ ] **Génération des Exemples** : `python scripts/build_examples.py` génère les 39 suites sans warning.
+- [ ] **Validation des Studios** : `python scripts/verify_examples.py` (27/27 assertions validées).
 - [ ] **Tests d'Architecture** : Exécution de `verify_architecture.py` : les 25 tests doivent être validés (`PASS`).
 - [ ] **Absence de barrière d'événements** : Vérifier que tous les backdrops de modales (`#search-modal`, `#image-zoom-modal`) sont en `display: none` et `visibility: hidden` lorsqu'ils sont inactifs.
 - [ ] **Précision du scrolling** : Tester un lien vers une méthode située à plus de 15 000 px dans `uvm_component` : la section doit atterrir avec un décalage de 24 px sous le bandeau supérieur.
