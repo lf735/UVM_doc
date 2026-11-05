@@ -30,6 +30,10 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | | **Bouton Expand / Collapse All** | Bouton `#sidebar-toggle-all` permettant de déplier ou replier d'un clic tous les dossiers ou catégories visibles. |
 | | **Filtre Temps Réel de Barre** | Filtrage instantané avec champ dédié, effacement rapide (`×`), mode Regex (`.*`) et pilules multi-filtres enveloppantes (`flex-wrap`). |
 | **Moteur de Recherche** | **Recherche Modale Globale** | Déclenchement via `/` ou `Ctrl+K` / `Cmd+K` couvrant 3 096 symboles, fichiers et exemples interactifs. |
+| | **Persistance Non-Destructive** | Préservation complète de la session de recherche (`activeSearchSession` : requête, filtres, liste de résultats et position active), sélection du texte à l'ouverture (`searchInput.select()`). |
+| | **Barre Flottante (« Search Pilot »)** | Barre dockée fixe (`#search-nav-bar`) affichant la requête, le compteur `N of Total`, boutons `◀ Précédent` (`Alt+[`), `▶ Suivant` (`Alt+]`), bouton de réouverture `All Results` et bouton de fermeture `✕`. |
+| | **Traçage des Résultats Consultés**| Marquage visuel des symboles déjà examinés avec coche verte (`.viewed`) et surlignage de l'élément actif (`.current-result`). |
+| | **Historique des Recherches Récentes**| Mémorisation locale des 8 dernières recherches dans `localStorage` présentées sous forme de puces interactives dès que le champ est vide en mode standard. |
 | | **Distinction Function / Task** | Typage strict identifiant clairement les `functions` (non-temporelles) et les `tasks` (consommatrices de temps de simulation). |
 | | **Affichage de la Classe Parente** | Présentation explicite `Classe :: Méthode` dans les résultats pour lever toute ambiguïté (ex. `uvm_driver :: run_phase`). |
 | | **Recherche Multi-Mots Intelligente** | Scoring pondéré associant des termes répartis entre le nom du symbole, sa classe et sa description. |
@@ -182,6 +186,15 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
   4. **Multi-Langages** : Prise en charge native de SystemVerilog (IEEE 1800), C / C++ DPI (`.c`, `.cc`, `.h`) et Makefiles (`Makefile.*`).
   5. **Contraste binaire Dual-Theme** : Synchroniser rigoureusement les variables `--sv-*` en mode clair et mode sombre en respectant les critères d'accessibilité WCAG AA.
 
+### Règle 10 : Persistance Non-Destructive de Session de Recherche et Navigation Flottante (« Search Pilot »)
+- **Principe** : La recherche technique ne doit jamais pénaliser l'exploration séquentielle des résultats. La sélection d'un résultat ne doit pas anéantir le contexte de recherche.
+- **Règles d'implémentation** :
+  1. **Conservation d'état** : L'état `activeSearchSession` mémorise la requête, le mode (standard/IA), les résultats filtrés et l'index actif. La réouverture de la modale restaure la liste sans recalcul et sélectionne le champ texte (`searchInput.select()`).
+  2. **Contrôle flottant docké** : Un bandeau discret `#search-nav-bar` (« Search Pilot ») apparaît en bas d'écran dès qu'un résultat est sélectionné. Il permet de passer au résultat suivant/précédent sans réouvrir la modale, d'afficher la position `N of Total`, ou de réouvrir la liste complète d'un clic.
+  3. **Raccourcis clavier ergonomiques** : Navigation globale via `Alt + [` (Précédent) et `Alt + ]` (Suivant).
+  4. **Traçage visuel d'exploration** : Tout résultat ouvert durant la session reçoit la classe `.viewed` (avec coche `✓`), et le résultat actif est surligné avec `.current-result`.
+  5. **Historique local respectueux** : Les 8 dernières recherches sont sauvegardées dans `localStorage` et proposées en puces cliquables lorsque l'input est vide.
+
 ---
 
 ## 4. Méthodologie de Vérification & Recette Automatisée
@@ -192,6 +205,7 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ┌────────────────────────────────────────────────────────────────────────┐
 │                   Niveau 1 : Tests Unitaires Statiques                  │
 │  - scripts/test_syntax_highlighter.py (assertions lexer & tokens)      │
+│  - scripts/verify_search_pilot.py (assertions DOM, CSS & JS du Search) │
 │  - scripts/build_docs.py (validation de génération des 146 docs & 155 src)│
 │  - scripts/build_examples.py (génération des 39 studios interactifs)    │
 └───────────────────────────────────┬────────────────────────────────────┘
@@ -213,13 +227,14 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 
 Avant de valider une version :
 - [ ] **Tests Unitaires de Coloration Syntaxique** : `python scripts/test_syntax_highlighter.py` (7/7 tests validés).
+- [ ] **Vérification du Search Pilot & Session** : `python scripts/verify_search_pilot.py` (assertions DOM, CSS et JS validées).
 - [ ] **Compilation sans erreur** : `python scripts/build_docs.py` s'exécute avec le code de retour `0`.
 - [ ] **Génération des Exemples** : `python scripts/build_examples.py` génère les 39 suites sans warning.
 - [ ] **Validation des Studios** : `python scripts/verify_examples.py` (27/27 assertions validées).
 - [ ] **Tests d'Architecture** : Exécution de `verify_architecture.py` : les 25 tests doivent être validés (`PASS`).
 - [ ] **Absence de barrière d'événements** : Vérifier que tous les backdrops de modales (`#search-modal`, `#image-zoom-modal`) sont en `display: none` et `visibility: hidden` lorsqu'ils sont inactifs.
 - [ ] **Précision du scrolling** : Tester un lien vers une méthode située à plus de 15 000 px dans `uvm_component` : la section doit atterrir avec un décalage de 24 px sous le bandeau supérieur.
-- [ ] **Recherche multi-mots** : Taper `component build` : `build_phase` de la classe `uvm_component` doit apparaître en tête avec les deux mots surlignés.
+- [ ] **Recherche multi-mots & Search Pilot** : Taper `component build` : sélectionner un résultat, vérifier l'apparition du Search Pilot en bas d'écran (`1 of N`), naviguer avec `Alt+]`, et vérifier la présence de la coche `✓` sur les résultats consultés.
 - [ ] **Mode Regex** : Taper une regex partielle `uvm_[` : la bordure doit devenir ambre/rouge sans générer d'exception console.
 - [ ] **Fonctionnement hors-ligne** : Ouvrir `index.html` via le protocole `file:///` dans un navigateur sans connexion réseau active.
 

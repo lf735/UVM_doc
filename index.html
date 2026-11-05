@@ -319,6 +319,23 @@
         </div>
       </div>
 
+      <!-- Recent Searches Section (shown when query is empty) -->
+      <div id="modal-recent-searches" class="modal-recent-searches" style="display:none;">
+        <div class="recent-searches-header">
+          <div class="recent-searches-title-group">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Recent searches</span>
+          </div>
+          <button type="button" class="recent-clear-btn" id="recent-searches-clear" title="Clear search history">Clear</button>
+        </div>
+        <div class="recent-searches-chips" id="recent-searches-chips">
+          <!-- Rendered dynamically from localStorage -->
+        </div>
+      </div>
+
       <ul class="modal-search-results" id="modal-search-results">
         <!-- Injected dynamically by js/app.js -->
       </ul>
@@ -521,6 +538,41 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating Search Results Navigation Bar (Docked Search Pilot) -->
+  <aside id="search-nav-bar" class="search-nav-bar" aria-label="Search results navigation" style="display:none;">
+    <div class="search-nav-main">
+      <div class="search-nav-query-group" id="search-nav-reopen-btn" role="button" tabindex="0" title="View all search results (or press /)">
+        <svg class="search-nav-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="search-nav-query" id="search-nav-query">query</span>
+        <span class="search-nav-badge" id="search-nav-badge">1 of 12</span>
+      </div>
+      <div class="search-nav-controls">
+        <button type="button" class="search-nav-btn" id="search-nav-prev" title="Previous search result (Alt+[)" aria-label="Previous result">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button type="button" class="search-nav-btn" id="search-nav-next" title="Next search result (Alt+])" aria-label="Next result">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+        <button type="button" class="search-nav-btn search-nav-list-btn" id="search-nav-list" title="Reopen full search modal (/)">
+          <span>All Results</span>
+        </button>
+        <button type="button" class="search-nav-btn search-nav-close-btn" id="search-nav-close" title="Dismiss search pilot" aria-label="Dismiss search pilot">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </aside>
 
   <!-- Search & App Scripts -->
   <script src="js/search_data.js"></script>

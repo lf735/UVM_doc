@@ -396,6 +396,81 @@ Le fichier de données de recherche [`js/search_data.js`](file:///c:/Dev/UVM_doc
   - `build_docs.py` et `build_examples.py` importent ce module comme source de vérité unique.
   - Ajout d'une suite de tests unitaires dédiée `scripts/test_syntax_highlighter.py` intégrée au cycle de recette automatisé.
 
+---
+
+## 13. Le Piège de l'Effacement Destructif de Recherche & La Barre Flottante (« Search Pilot »)
+
+### Le Symptôme Observé
+> *"Quand l'utilisateur clique sur un résultat, il faut qu'il puisse revenir aux autres résultats."*  
+> Dans l'implémentation initiale, cliquer sur un résultat de recherche fermait la modale et réinitialisait complètement la requête (`searchInput.value = ''`). Pour consulter un second résultat d'une même recherche (par exemple en comparant différentes implémentations de `phase_ready_to_end` ou `uvm_sequence_base`), l'utilisateur devait ré-ouvrir la modale, retaper sa requête en entier, ré-appliquer ses filtres et faire défiler à nouveau les résultats.
+
+### Piège 13.1 : La Réinitialisation Destructrice de l'Input lors de l'Ouverture de Modale
+- **Cause racine** : La fonction `openSearchModal()` exécutait inconditionnellement `searchInput.value = ''; executeSearch('');` à chaque ouverture. Ce comportement, classique sur les moteurs de recherche simplistes, brise totalement le flux de travail exploratoire d'un ingénieur consultant une documentation technique.
+- **Solution** :
+  - Introduction d'un état de session actif non-destructif `activeSearchSession` :
+    ```javascript
+    const activeSearchSession = {
+      query: '',
+      mode: 'standard', // 'standard' | 'ai'
+      results: [],
+      currentIndex: -1,
+      viewedIndices: new Set(),
+      isActive: false
+    };
+    ```
+  - Lors de la réouverture (via le bouton « Search », le raccourci `/`, `Ctrl+K` ou le bouton « All Results »), `openSearchModal({ preserveSession: true })` restaure la requête, restitue les résultats instantanément sans recalcul, et sélectionne le champ (`searchInput.select()`). L'utilisateur peut ainsi continuer sa navigation ou écraser sa saisie d'une seule touche.
+
+### Piège 13.2 : L'Effet Tunnel du Résultat Unique & La Solution « Search Pilot »
+- **Problème** : Consulter une liste de résultats à travers une modale pleine page crée une friction cognitive majeure : la modale masque le contenu du document, empêchant de lire et de naviguer simultanément dans la liste des correspondances.
+- **Solution architecturale pérenne** :
+  - Déploiement d'une barre de contrôle flottante discrète et dockée en bas de l'écran : `#search-nav-bar` (« Search Pilot »).
+  - Dès qu'un résultat est sélectionné, le Search Pilot affiche la requête, le compteur de position (`N of Total`), deux boutons de saut rapide `◀ Précédent` et `▶ Suivant`, un bouton de réouverture immédiate de la modale complète `All Results`, et un bouton de fermeture `✕`.
+  - Intégration de raccourcis clavier globaux non-conflictuels : `Alt + [` (Précédent) et `Alt + ]` (Suivant).
+
+### Piège 13.3 : Le Traçage Visuel des Éléments Consultés (`.viewed` et `.current-result`)
+- **Problème** : Lors du retour dans la modale de recherche avec 30 ou 50 résultats, l'utilisateur oubliait quels symboles avaient déjà été examinés.
+- **Solution** :
+  - Traçage dans un `Set` (`activeSearchSession.viewedIndices`) de tous les index consultés durant la session de recherche.
+  - Ajout des classes CSS `.current-result` (surlignage accentué et barre latérale primaire) et `.viewed` (opacité adoucie et coche verte/primaire injectée via un composant vectoriel SVG dédié).
+
+### Piège 13.4 : La Présentation Visuelle Bancale des Recherches Récentes (Pilules Squelettiques vs Liste Native)
+- **Symptôme** : L'affichage initial des recherches récentes utilisait un conteneur rigide de 85px max (`max-height: 85px`) avec des pilules enroulées horizontalement et une bordure inférieure arbitraire. En dessous, la zone de résultats laissait un grand vide blanc ou sombre, donnant une impression de composant "bancal" et inachevé. De plus, aucune suppression unitaire n'était possible (seul un bouton "Clear" effaçant tout l'historique était présent).
+- **Solution architecturale pérenne** :
+  - Restructuration complète de `.modal-recent-searches` en conteneur pleine hauteur (`flex: 1; overflow-y: auto`).
+  - Passage d'un nuage de tags étriqué à une liste verticale élégante (`.recent-search-row`) calquée sur le modèle des résultats de recherche :
+    1. Icône historique horloge discrète virant au bleu primaire au survol.
+    2. Typographie monospace propre pour le terme recherché.
+    3. Indication contextuelle subtile « Jump to search ↵ » apparaissant au survol de la ligne.
+    4. Bouton de suppression individuelle `✕` permettant d'effacer une requête erronée d'un clic sans vider tout son historique.
+    5. Gestion d'un état d'accueil chaleureux quand l'historique est vide invitant à la découverte des 3 096 symboles UVM.
+
+### Piège 13.5 : La Déformation des Glyphes Unicode dans les Conteneurs Monospace (`Consolas` vs `content: " ✓"`)
+- **Symptôme** : Dans la recherche standard (sans IA), la coche de validation `✓` apparaissait étirée, crénelée, écrasée ou disproportionnée, alors qu'en mode IA elle s'affichait normalement.
+- **Cause racine** :
+  - Dans la recherche standard, le pseudo-élément `::after` était rattaché à `.res-name` (`.search-result-item.viewed .res-name::after`).
+  - Or, `.res-name` possède la règle `font-family: var(--font-mono)` (Consolas sous Windows, Menlo/Monaco sous macOS).
+  - La police Consolas ne contient pas le glyphe Unicode `✓` (U+2713). Le moteur de rendu de Windows effectuait un *font fallback* arbitraire (ex. MS Gothic ou Segoe UI Symbol) en tentant d'étirer ou de forcer le glyphe dans une cellule de largeur fixe monospace, provoquant une distorsion géométrique disgracieuse.
+- **Solution architecturale pérenne** :
+  - Bannir les caractères textuels Unicode arbitraires dans les pseudo-éléments de chaînes typées en police monospace.
+  - Remplacer le `::after` par un badge d'icône vectoriel SVG dédié (`.res-viewed-icon`) :
+    ```html
+    <span class="res-viewed-icon" title="Viewed in this session">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </span>
+    ```
+  - L'icône est désormais 100% vectorielle, indépendante de la police système, parfaitement centrée verticalement et nette sur tous les écrans (Retina, 4K, Dual-Theme).
+
+### Piège 13.6 : Le Surlignage Forcé de l'Index 0 (`idx === 0`)
+- **Symptôme** : Le premier résultat de recherche restait perpétuellement surligné en bleu, même lorsque l'utilisateur cliquait sur un autre résultat.
+- **Cause racine** : La boucle de rendu des résultats appliquait en dur `if (idx === 0) itemClasses.push('selected');`, attribuant la classe de sélection au premier élément sans tenir compte de l'index réel actif.
+- **Solution** :
+  - Suppression de la condition en dur. L'élément actif reçoit `.current-result` uniquement s'il correspond à `activeSearchSession.currentIndex`.
+  - La classe `.selected` est strictement réservée au curseur actif lors de la navigation au clavier (`↑` / `↓`).
+
+
+
 
 
 
