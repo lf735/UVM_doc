@@ -55,7 +55,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Beginner",
         "summary": "Classic UVM hello world testbench demonstrating producer and consumer components connected through a uvm_tlm_fifo, with uvm_config_db configuration and table printing.",
-        "apis": ["uvm_component", "uvm_tlm_fifo", "uvm_config_db", "run_test", "uvm_default_table_printer"],
+        "apis": ["uvm_component", "uvm_tlm_fifo", "uvm_config_db", "run_test", "uvm_table_printer"],
         "topology": [
             {"name": "top (uvm_component)", "type": "env", "children": [
                 {"name": "producer1", "type": "producer", "details": "put_port"},
@@ -73,7 +73,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Beginner",
         "summary": "Illustrates executing UVM testbench hierarchies directly from pure SystemVerilog modules and calling run_test without a formal top-level test class.",
-        "apis": ["uvm_component", "run_test", "uvm_pkg"],
+        "apis": ["uvm_component", "uvm_object", "run_test", "uvm_root"],
         "topology": [{"name": "top_module", "type": "module", "children": [{"name": "uvm_test_top", "type": "test"}]}],
         "primary_file": "test.sv"
     },
@@ -84,7 +84,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Beginner",
         "summary": "Shows best practices for packaging UVM components into clean, reusable SystemVerilog packages and importing them into test top modules.",
-        "apis": ["uvm_pkg", "package", "import"],
+        "apis": ["uvm_component", "uvm_factory", "uvm_coreservice_t", "uvm_printer"],
         "topology": [{"name": "my_pkg", "type": "package", "children": [{"name": "my_component", "type": "class"}, {"name": "my_env", "type": "class"}]}],
         "primary_file": "test.sv"
     },
@@ -119,7 +119,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Intermediate",
         "summary": "Uses UVM field automation macros (`uvm_field_int`, etc.) and automated configuration tables for zero-boilerplate field population during build_phase.",
-        "apis": ["uvm_field_int", "uvm_config_db", "apply_config_settings"],
+        "apis": ["`uvm_field_int", "uvm_config_db", "apply_config_settings"],
         "topology": [{"name": "top", "type": "top", "children": [{"name": "instA", "type": "classA"}, {"name": "instB", "type": "classB"}]}],
         "primary_file": "top.sv"
     },
@@ -130,7 +130,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Advanced",
         "summary": "Implements non-intrusive testbench modifications using uvm_callback and uvm_register_cb to alter component behavior or inject errors without editing component source code.",
-        "apis": ["uvm_callback", "uvm_register_cb", "`uvm_do_callbacks"],
+        "apis": ["uvm_callback", "`uvm_register_cb", "`uvm_do_callbacks"],
         "topology": [{"name": "driver", "type": "driver", "children": [{"name": "cb_hook", "type": "user_callback", "details": "Injects error packets"}]}],
         "primary_file": "top.sv"
     },
@@ -141,7 +141,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Beginner",
         "summary": "Demonstrates encapsulating physical SystemVerilog interface instances in uvm_config_db and retrieving them inside UVM drivers/monitors as virtual interfaces.",
-        "apis": ["virtual interface", "uvm_config_db", "uvm_driver"],
+        "apis": ["uvm_resource_db", "uvm_config_db", "uvm_component", "uvm_driver"],
         "topology": [{"name": "dut_if (interface)", "type": "interface", "details": "Physical signals"}, {"name": "driver", "type": "uvm_driver", "details": "Holds virtual dut_if"}],
         "primary_file": "interface.sv"
     },
@@ -166,7 +166,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Beginner",
         "summary": "Demonstrates calling run_test() with command-line argument +UVM_TESTNAME to instantiate and execute different test classes dynamically without recompilation.",
-        "apis": ["run_test", "+UVM_TESTNAME", "uvm_root"],
+        "apis": ["run_test", "uvm_cmdline_processor", "uvm_root", "uvm_test"],
         "topology": [{"name": "uvm_root", "type": "singleton", "details": "Instantiates test selected by +UVM_TESTNAME"}],
         "primary_file": "test.sv"
     },
@@ -177,7 +177,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Intermediate",
         "summary": "Configures global simulation watchdog timers via uvm_root::set_timeout() to cleanly terminate runaway simulations with appropriate error diagnostics.",
-        "apis": ["set_timeout", "uvm_root", "uvm_fatal"],
+        "apis": ["set_timeout", "uvm_root", "`uvm_fatal"],
         "topology": [{"name": "uvm_top", "type": "root", "details": "Watchdog timer set to 1000 ns"}],
         "primary_file": "test.sv"
     },
@@ -200,7 +200,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Intermediate",
         "summary": "Coordinates asynchronous parallel components using the global uvm_event_pool singleton, triggering named events and waiting on triggers across disparate components.",
-        "apis": ["uvm_event_pool", "uvm_event", "trigger", "wait_trigger"],
+        "apis": ["uvm_event", "uvm_pool", "trigger", "wait_trigger"],
         "topology": [{"name": "componentA", "type": "trigger", "details": "Triggers 'done_event'"}, {"name": "componentB", "type": "listener", "details": "Waits on 'done_event'"}],
         "primary_file": "test.sv"
     },
@@ -284,7 +284,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Advanced",
         "summary": "Exemplifies the full IEEE 1666 TLM-2 non-blocking 4-phase transaction protocol (BEGIN_REQ, END_REQ, BEGIN_RESP, END_RESP) modeling USB bulk transfers without simulation deadlocks.",
-        "apis": ["nb_transport_fw", "nb_transport_bw", "uvm_tlm_phase_e", "uvm_tlm_sync_e"],
+        "apis": ["uvm_tlm_nb_initiator_socket", "uvm_tlm_nb_target_socket", "nb_transport_fw", "nb_transport_bw", "uvm_tlm_time"],
         "topology": [{"name": "host", "type": "initiator", "details": "USB Host"}, {"name": "device", "type": "target", "details": "USB Device Endpoint"}],
         "primary_file": "tb_run.sv",
         "has_stepper": True
@@ -296,7 +296,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Advanced",
         "summary": "Accelerates simulation speed by letting initiators run ahead of simulation time within a defined time quantum before synchronizing with global simulation time.",
-        "apis": ["uvm_tlm_time", "temporal decoupling", "b_transport"],
+        "apis": ["uvm_tlm_time", "uvm_tlm_b_initiator_socket", "uvm_tlm_b_target_socket", "b_transport"],
         "topology": [{"name": "fast_initiator", "type": "quantum_keeper", "details": "Accumulates local delay"}, {"name": "target", "type": "target", "details": "Synchronizes at quantum boundaries"}],
         "primary_file": "tb_run.sv"
     },
@@ -336,7 +336,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Advanced",
         "summary": "Demonstrates reusing block-level register sequences and register models unchanged inside system-level testbenches with hierarchical address offsets.",
-        "apis": ["uvm_reg_block", "default_map", "add_submap"],
+        "apis": ["uvm_reg_block", "uvm_reg_map", "add_submap"],
         "topology": [{"name": "sys_reg_model", "type": "system", "children": [{"name": "blk_A", "type": "block"}, {"name": "blk_B", "type": "block"}]}],
         "primary_file": "sys_run.sv"
     },
@@ -347,7 +347,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Intermediate",
         "summary": "Integrates an explicit register model directly with a single physical bus sequencer and adapter without intermediate translation layers.",
-        "apis": ["set_sequencer", "default_map", "uvm_reg_adapter"],
+        "apis": ["set_sequencer", "uvm_reg_map", "uvm_reg_adapter"],
         "topology": [{"name": "reg_model", "type": "RAL"}, {"name": "adapter", "type": "adapter"}, {"name": "sequencer", "type": "sqr"}],
         "primary_file": "tb_env.sv"
     },
@@ -358,7 +358,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Advanced",
         "summary": "Connects a register model through layered sequencers, translating high-level register items into protocol-specific sub-transactions.",
-        "apis": ["layered sequencer", "uvm_reg_sequence", "adapter"],
+        "apis": ["uvm_reg_sequence", "uvm_reg_adapter", "uvm_sequencer", "uvm_sequence"],
         "topology": [{"name": "reg_model", "type": "RAL"}, {"name": "reg_seq", "type": "seq"}, {"name": "layer_sqr", "type": "sqr"}, {"name": "phy_sqr", "type": "sqr"}],
         "primary_file": "tb_env.sv"
     },
@@ -369,7 +369,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Intermediate",
         "summary": "Models hardware registers that can be accessed via multiple distinct memory addresses, maintaining synchronized mirrored values across aliases.",
-        "apis": ["uvm_reg", "predict", "add_field"],
+        "apis": ["uvm_reg", "uvm_reg_field", "uvm_reg_cbs", "predict"],
         "topology": [{"name": "reg_primary", "type": "addr 0x00"}, {"name": "reg_alias", "type": "addr 0x04", "details": "Same underlying HW bits"}],
         "primary_file": "tb_run.sv"
     },
@@ -391,7 +391,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Intermediate",
         "summary": "Integrates SystemVerilog covergroups directly within register and field definitions to track address coverage, field value coverage, and access type coverage.",
-        "apis": ["build_coverage", "sample", "uvm_coverage_model_e"],
+        "apis": ["uvm_reg_block", "uvm_reg", "build_coverage", "sample"],
         "topology": [{"name": "reg_model", "type": "RAL", "details": "Embedded covergroups sampled on read/write"}],
         "primary_file": "tb_run.sv"
     },
@@ -435,7 +435,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Intermediate",
         "summary": "Models distinct read-only and write-only registers mapped to the exact same physical bus address, isolating write mirrors from read status.",
-        "apis": ["default_map", "add_reg", "RO", "WO"],
+        "apis": ["uvm_reg_block", "uvm_reg", "uvm_reg_field", "uvm_reg_map", "add_reg"],
         "topology": [{"name": "addr 0x10", "type": "shared", "details": "Write -> TX Buffer, Read -> RX Buffer"}],
         "primary_file": "tb_run.sv"
     },
@@ -446,7 +446,7 @@ SUITES_METADATA = {
         "scope": "Simple",
         "difficulty": "Advanced",
         "summary": "Models registers accessible from multiple bus masters or clock domains with separate bus maps and synchronization semantics.",
-        "apis": ["create_map", "add_submap", "default_map"],
+        "apis": ["create_map", "add_submap", "uvm_reg_map"],
         "topology": [{"name": "shared_reg", "type": "reg", "details": "Mapped in both CPU_map and DMA_map"}],
         "primary_file": "blk_run.sv"
     },
@@ -510,7 +510,7 @@ SUITES_METADATA = {
         "scope": "Integrated",
         "difficulty": "Intermediate",
         "summary": "Reusable AMBA APB (Advanced Peripheral Bus) UVC package: master agent, configurable sequencer, monitor, signal interface, and read/write transfer sequences.",
-        "apis": ["uvm_agent", "uvm_driver", "uvm_monitor", "uvm_sequence", "apb_rw"],
+        "apis": ["uvm_agent", "uvm_driver", "uvm_monitor", "uvm_sequencer", "uvm_sequence", "uvm_sequence_item"],
         "topology": [
             {"name": "apb_agent", "type": "agent", "children": [
                 {"name": "apb_master", "type": "driver", "details": "Drives PSEL, PENABLE, PWRITE"},

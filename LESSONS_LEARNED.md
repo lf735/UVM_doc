@@ -557,6 +557,41 @@ const link = e.target.closest('a');
 if (!link) return;
 ```
 
+---
+
+## 15. Le Piège de la Résolution des Symboles et Badges « Key UVM APIs » : Fallback 404 & Métadonnées Non-UVM
+
+### Le Symptôme Observé
+> *"Dans les pages d'exemples il y a parfois des erreurs sur les Key UVM APIs"*  
+> Lors du clic sur certains badges de la barre « Key UVM APIs » dans les exemples interactifs :
+> 1. Certains badges provoquaient une erreur 404 dans la vue documentation.
+> 2. D'autres badges affichaient du texte non-standard (ex: `+UVM_TESTNAME`, `package`, `import`, `virtual interface`, `RO`, `WO`, `layered sequencer`, `adapter`).
+> 3. Certaines macros UVM (ex: `uvm_fatal`, `uvm_field_int`, `uvm_register_cb`) ne trouvaient pas leur documentation cible à cause de l'absence du backtick initial (``` `uvm_fatal ```).
+
+### L'Anatomie du Piège
+1. **L'URL de repli en dur dans `page_common.js`** :
+   Le contrôleur d'événements transmettait en dur `url: docs_view/base/${sym}-svh.html` lors du message `openDocView`. Si le symbole n'était pas dans le répertoire `base/` (ex: `comps/`, `seq/`, `reg/`, `tlm1/`, `tlm2/`, `macros/`), et si `app.js` ne trouvait pas de correspondance exacte dans `searchIndex`, l'application chargeait directement cette fausse URL, causant une erreur 404.
+2. **La rigidité de la résolution dans `openDocView` (`app.js`)** :
+   La recherche initiale se limitait à `s.name === symbol && s.doc`. Si `symbol` était un nom de macro sans son backtick (ex: `uvm_fatal` vs `` `uvm_fatal ``), ou une méthode de classe qualifiée, la recherche échouait silencieusement et basculait sur l'URL de repli inexistante.
+3. **Pollution conceptuelle dans `SUITES_METADATA['apis']`** :
+   Certains exemples contenaient des mots-clés SystemVerilog (`package`, `import`), des flags CLI (`+UVM_TESTNAME`), ou des termes informels (`adapter`, `layered sequencer`, `temporal decoupling`) au lieu des classes et identifiants formels UVM documentés.
+
+### La Solution
+1. **Assainissement des listes `apis` dans `scripts/build_examples.py`** :
+   - Remplacement des 18 entrées non-résolues par leurs classes/méthodes canoniques UVM (`uvm_cmdline_processor`, `uvm_reg_adapter`, `uvm_reg_map`, `uvm_table_printer`, `uvm_tlm_b_initiator_socket`, `uvm_tlm_nb_initiator_socket`, `` `uvm_fatal ``, etc.).
+   - 100% des 93 APIs uniques réparties sur les 39 suites d'exemples se résolvent désormais de façon déterministe.
+2. **Résolution Multi-Niveaux Robuste dans `openDocView` (`js/app.js`)** :
+   - Étape 1 : Correspondance exacte (`s.name === symbol`).
+   - Étape 2 : Tolérance au backtick des macros (recherche avec et sans `` ` ``).
+   - Étape 3 : Correspondance insensible à la casse.
+   - Étape 4 : Correspondance de suffixe pour les méthodes et sous-types (`::method` ou `.method`).
+   - Étape 5 : Correspondance de sous-chaîne pour les classes et macros.
+3. **Suppression du Fallback Dangereux dans `js/page_common.js`** :
+   Ne plus forcer de chemin `docs_view/base/...` artificiel, mais laisser le résolveur central de symboles s'exécuter à partir du `symbol` pur.
+4. **Test Automatisé Pérenne (`verify_examples.py`)** :
+   Ajout du Test 13 vérifiant automatiquement que 100% des Key UVM APIs de toutes les suites se résolvent sans aucune ambiguïté ni cible manquante.
+
+
 
 
 

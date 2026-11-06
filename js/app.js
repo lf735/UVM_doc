@@ -438,13 +438,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Global handler for when a source page requests to view documentation
   window.openDocView = function (docUrl, symbol) {
-    let fullDoc = normalizeDocUrl(docUrl);
+    let fullDoc = null;
     if (symbol && typeof UVM_DATA !== 'undefined' && UVM_DATA.searchIndex) {
-      const match = UVM_DATA.searchIndex.find(s => s.name === symbol && s.doc);
+      const symClean = symbol.replace(/^`/, '');
+      const symLower = symbol.toLowerCase();
+      const cleanLower = symClean.toLowerCase();
+
+      // 1. Exact match
+      let match = UVM_DATA.searchIndex.find(s => s.name === symbol && s.doc);
+      // 2. Exact match with or without macro backtick
+      if (!match) {
+        match = UVM_DATA.searchIndex.find(s => (s.name === '`' + symClean || s.name === symClean) && s.doc);
+      }
+      // 3. Case-insensitive exact match
+      if (!match) {
+        match = UVM_DATA.searchIndex.find(s => {
+          if (!s.name || !s.doc) return false;
+          const sClean = s.name.replace(/^`/, '').toLowerCase();
+          return sClean === cleanLower || s.name.toLowerCase() === symLower;
+        });
+      }
+      // 4. Suffix match (methods or nested types, e.g. class::method or class.method)
+      if (!match) {
+        match = UVM_DATA.searchIndex.find(s => {
+          if (!s.name || !s.doc) return false;
+          return s.name.endsWith('::' + symClean) || s.name.endsWith('.' + symClean);
+        });
+      }
+      // 5. Broad substring match for classes and macros
+      if (!match) {
+        match = UVM_DATA.searchIndex.find(s => {
+          if (!s.name || !s.doc) return false;
+          const sLower = s.name.toLowerCase();
+          return (s.type === 'class' || s.type === 'macro') && (sLower.includes(cleanLower) || cleanLower.includes(sLower));
+        });
+      }
+
       if (match && match.doc) {
         fullDoc = normalizeDocUrl(match.doc);
       }
     }
+
+    if (!fullDoc && docUrl) {
+      fullDoc = normalizeDocUrl(docUrl);
+    }
+    if (!fullDoc) {
+      fullDoc = 'docs_view/overviews/intro-txt.html';
+    }
+
     currentDocUrl = fullDoc;
     setFrameSrc(docFrame, fullDoc);
     updateDocTitle(fullDoc);

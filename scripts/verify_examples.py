@@ -187,6 +187,34 @@ def main():
     stepper_guide_file = BASE_DIR / "docs" / "visual_flow_stepper_guide.md"
     assert_test(stepper_guide_file.exists(), "docs/visual_flow_stepper_guide.md exists and is documented")
 
+    # Test 13: Verify all Key UVM APIs resolve to valid documentation targets
+    sys.path.insert(0, str(BASE_DIR / "scripts"))
+    import build_examples
+    search_index = uvm_data.get("searchIndex", [])
+    valid_names = set()
+    for s in search_index:
+        name = s.get('name')
+        if name:
+            valid_names.add(name)
+            valid_names.add(name.lower())
+            valid_names.add(name.lstrip('`'))
+            valid_names.add(name.lstrip('`').lower())
+
+    unresolved_apis = []
+    for suite_key, meta in build_examples.SUITES_METADATA.items():
+        for api in meta.get("apis", []):
+            clean = api.lstrip('`')
+            if api in valid_names or clean in valid_names or api.lower() in valid_names or clean.lower() in valid_names:
+                continue
+            # Check suffix
+            if any(n.endswith('::' + clean) or n.endswith('.' + clean) for n in valid_names):
+                continue
+            unresolved_apis.append((suite_key, api))
+
+    assert_test(len(unresolved_apis) == 0, 
+                f"All Key UVM APIs resolve cleanly ({len(unresolved_apis)} unresolved)",
+                f"Unresolved: {unresolved_apis}")
+
     print("=" * 60)
     print(f"  Test Results: {PASSED_TESTS}/{TOTAL_TESTS} passed ({FAILED_TESTS} failed)")
     print("=" * 60)

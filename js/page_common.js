@@ -1390,16 +1390,17 @@ window.PageCommon = (function () {
       if (symEl) {
         e.preventDefault();
         const sym = symEl.getAttribute('data-sym') || symEl.textContent.trim();
+        const customUrl = symEl.getAttribute('data-doc') || symEl.getAttribute('data-url');
         if (sym && window.parent && window.parent !== window) {
           window.parent.postMessage({
             type: 'openDocView',
             symbol: sym,
-            url: `docs_view/base/${sym}-svh.html`
+            url: customUrl || undefined
           }, '*');
         }
         try {
           if (window.parent && window.parent.openDocView) {
-            window.parent.openDocView(`docs_view/base/${sym}-svh.html`, sym);
+            window.parent.openDocView(customUrl || undefined, sym);
           }
         } catch (err) { }
         return;
