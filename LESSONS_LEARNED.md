@@ -591,6 +591,231 @@ if (!link) return;
 4. **Test Automatisé Pérenne (`verify_examples.py`)** :
    Ajout du Test 13 vérifiant automatiquement que 100% des Key UVM APIs de toutes les suites se résolvent sans aucune ambiguïté ni cible manquante.
 
+---
+
+## 16. L'Uniformisation des Conteneurs de Code (`src-code-container` & `studio-code-container`) : Factorisation Génération & Contrôleur Partagé
+
+### Le Symptôme & Le Besoin Architectural
+> *"Uniformise les éléments src-code-container et studio-code-container. Le but est d'avoir le plus d'uniformité et des fonctions et générations communes entre le code studio et le src-pane."*  
+> Historiquement, la génération des pages de source (`src_view/`) et celle des studios d'exemples (`examples_view/`) s'étaient développées de manière disjointe :
+> - `src_view` utilisait son propre script inline dans `build_docs.py`, générant `<div class="src-code-container">`, des balises Google Fonts CDN externes (en infraction avec la Règle 1), et incluait un script dédié `js/src_page.js` qui réimplémentait le thème, le surlignage et la copie.
+> - `examples_view` s'appuyait sur `page_builder_common.py` avec `<div class="studio-code-container">` et `js/page_common.js`.
+
+### L'Anatomie de la Solution
+1. **Factorisation de la génération HTML (`scripts/page_builder_common.py`)** :
+   - Introduction de `render_code_pane(table_html, pane_id, is_active, filename)` générant un panneau unifié `<div class="file-code-pane ...">`.
+   - Introduction de `render_code_container(panes_html, container_id, extra_classes)` générant le conteneur unifié `<div class="code-container ...">`.
+   - Introduction de `render_source_viewer(rel_path, code, rows, syms, doc_rel, root_rel)` s'appuyant directement sur `render_html_shell(..., is_full_page=True)`, éliminant 80 lignes de HTML codé en dur dans `build_docs.py` et garantissant une conformité 100% locale sans CDN.
+2. **Contrôleur JavaScript Mutualisé (`js/page_common.js`)** :
+   - `initCodeStudio()` devient le gestionnaire universel de visualiseur de code :
+     - Prise en charge transparente des conteneurs multi-fichiers avec onglets (`.studio-tab-bar`) ET des conteneurs mono-fichiers (`.src-code-container`).
+     - Copie du lien profond sur clic de numéro de ligne avec feedback visuel vert `✓` (1.2s), synchronisé avec l'URL parent (`#/src/...` ou `#/example/...`).
+     - Bouton de copie unifié (`#btn-copy-code` / `#copy-src-btn`) extrayant le code depuis la mémoire (`filesList`), le textarea de secours (`#raw-source-text`), ou les cellules `.code`.
+     - Saut vers ligne/symbole unifié (`scrollToLine(lineHashOrNum)`) avec centrage vertical fluide et gestion de défilement conteneur vs fenêtre.
+     - Redirection autonome (iframe restore) unifiée prenant en charge `#/src/`, `#/example/` et `#/doc/`.
+   - `js/src_page.js` est allégé en un simple délégué appelant `UVM_PAGE_COMMON.initAll()`.
+3. **Harmonisation CSS (`css/style.css`)** :
+   - Classe socle commune `.code-container` unifiant l'arrière-plan en `var(--code-bg)`, la gouttière en `var(--code-gutter-bg)`, et la typographie monospace `var(--font-mono)`.
+   - Sélecteurs déroulants unifiés (`.studio-file-select` et `.sym-jump-select`) avec styles de focus et d'optgroup partagés.
+4. **Validation Automatisée (`scripts/verify_code_containers.py`)** :
+   - Nouveau script de vérification validant les 155 pages de `src_view/` et les 39 pages de `examples_view/` (16/16 tests PASS).
+
+---
+
+## 17. Le Piège des Classes Héritées sur les Vues Pleine Page (`doc-body` vs `src-viewer-body`)
+
+### Le Symptôme Observé
+> *"Le rendu du code fait apparaitre une barre blanche sur le coté gauche et ajoute des marges inutiles. LA présentatation ne va pas"*  
+> Après l'unification des conteneurs de code via `render_source_viewer()`, toutes les pages de source (`src_view/`) affichaient une épaisse bande blanche (ou couleur de surface) de 48px sur le flanc gauche, la barre d'outils sticky flottait avec des marges tout autour au lieu d'être collée aux bords de l'iframe, et en mode `split` 20% de la largeur du panneau source était gâchée par un padding inutile.
+
+### Cause Racine
+1. Dans `scripts/page_builder_common.py`, la fonction template `render_html_shell()` ajoutait par défaut et inconditionnellement les classes de documentation :
+   ```python
+   html_cls = f"doc-page {extra_html_classes}".strip()
+   body_cls = f"doc-body {extra_body_classes}".strip()
+   ```
+2. Dans `css/style.css`, la classe `.doc-body` (conçue pour les articles de doc à 2 colonnes avec barre de sommaire) possède des règles agressives avec `!important` :
+   ```css
+   .doc-body {
+     padding: 2.25rem 3rem !important;
+     background: var(--surface-color) !important;
+     overflow-x: hidden;
+   }
+   ```
+3. Par conséquent, les pages sources (`src_view/`) recevaient `<body class="doc-body src-viewer-body">`. Le `padding: 2.25rem 3rem !important` écrasait le comportement attendu du visualiseur de code pleine page (`body.src-viewer-body`), créant une marge de 3rem (48px) peinte avec la couleur de fond du corps (`var(--surface-color)`, blanc pur en mode clair), apparaissant comme une "barre blanche" sur le côté gauche du code.
+
+### Solution Architecturale Pérenne
+1. **Désolidarisation dans `render_html_shell()` via `is_full_page`** :
+   ```python
+   if is_full_page:
+       html_cls = extra_html_classes.strip() if extra_html_classes else "full-page"
+       body_cls = extra_body_classes.strip() if extra_body_classes else "full-body"
+   else:
+       html_cls = f"doc-page {extra_html_classes}".strip()
+       body_cls = f"doc-body {extra_body_classes}".strip()
+   ```
+2. **Réinitialisation stricte dans `css/style.css` pour `body.src-viewer-body`** :
+   ```css
+   body.src-viewer-body {
+     margin: 0 !important;
+     padding: 0 !important;
+     height: auto;
+     min-height: 100%;
+     overflow-y: auto;
+     overflow-x: auto;
+     background: var(--code-bg) !important;
+     color: var(--code-text);
+     -webkit-overflow-scrolling: touch;
+   }
+   ```
+3. **Suppression des marges superflues dans `.src-code-container`** :
+   `padding: 0; margin: 0;` pour que la table de code démarre directement sous la barre d'outils sticky sans espacement parasite, avec des numéros de ligne calés à gauche.
+4. **Stabilité des lignes sans saut visuel** :
+   Ajout de `border-left: 3px solid transparent;` sur `.sv-code-table tr` pour éviter tout décalage d'un pixel ou saut horizontal lors de l'activation d'une ligne avec `.active-line`.
+
+---
+
+## 18. Le Piège du Scroll Horizontal Global sur la Barre d'Outils (`position: sticky` vs Défilement Interne)
+
+### Le Symptôme Observé
+> *"la toolbar ne devrait pas bouger avec le scroll hiorizontal"*  
+> Lorsque le code source contient de longues lignes (dépassant la largeur de la fenêtre ou du panneau source en mode `split`), faire défiler horizontalement pour lire la fin de ligne faisait glisser toute la barre d'outils (`.src-sticky-bar`) hors de l'écran vers la gauche, faisant disparaître les boutons d'action (Copier, Télécharger brut, sélecteur de symboles).
+
+### Cause Racine
+1. Dans l'architecture initiale de `src_view`, le défilement horizontal était géré au niveau de la fenêtre/body (`body.src-viewer-body { overflow-x: auto; }`).
+2. La règle `position: sticky; top: 0;` ne fige l'élément que sur l'axe **vertical**. Lors d'un défilement horizontal du conteneur parent, l'élément sticky se déplace solidairement avec le scroll horizontal du document.
+
+### Solution Architecturale Pérenne
+1. **Verrouillage de la fenêtre / body (`overflow: hidden`)** :
+   ```css
+   html.src-page {
+     height: 100%;
+     overflow: hidden;
+   }
+   body.src-viewer-body {
+     height: 100vh;
+     max-height: 100vh;
+     display: flex;
+     flex-direction: column;
+     overflow: hidden !important;
+   }
+   ```
+2. **Barre d'outils fixe et pleine largeur (`flex: 0 0 auto`)** :
+   ```css
+   .src-sticky-bar {
+     flex: 0 0 auto;
+     width: 100%;
+     box-sizing: border-box;
+   }
+   ```
+3. **Délégation du défilement au conteneur de code (`.src-code-container`)** :
+   ```css
+   .src-code-container {
+     flex: 1 1 auto;
+     min-height: 0;
+     overflow: auto;
+     -webkit-overflow-scrolling: touch;
+   }
+   ```
+   - L'ensemble du défilement (vertical ET horizontal) s'opère désormais **exclusivement à l'intérieur** de `.src-code-container`.
+   - La barre d'outils reste 100% visible, parfaitement ancrée en haut, et insensible au défilement horizontal du code.
+   - La barre de défilement horizontal apparaît directement au bas de la zone visible du panneau, sans forcer l'utilisateur à faire défiler des milliers de lignes de code pour l'atteindre.
+4. **Recentrage horizontal sur saut de ligne (`scrollToLine`)** :
+   Dans `page_common.js`, lors d'un saut vers une ancre de ligne (`#L123`) ou un symbole, le scroll horizontal est automatiquement réinitialisé à `left: 0` (`container.scrollTo({ top: targetScroll, left: 0, behavior: 'smooth' });`) pour garantir que le numéro de ligne et le début du code soient immédiatement sous les yeux de l'utilisateur.
+
+---
+
+## 19. Le Piège de la Gouttière Défilante & Les Numéros de Lignes Pinned (`position: sticky; left: 0`)
+
+### Le Symptôme Observé
+> *"La barre avec les numéros de ligne devrait elle aussi rester fixe"*  
+> Lors du défilement horizontal d'un fichier source ou d'un exemple contenant du code long, la colonne des numéros de ligne (`.ln`) défilait vers la gauche avec le code et disparaissait de la vue, empêchant de savoir sur quelle ligne on se trouvait.
+
+### Cause Racine & Pièges Techniques CSS
+1. Initialement, les cellules de numéros de ligne (`<td class="ln">`) avaient une position statique standard au sein de la table (`.sv-code-table`).
+2. **Le piège de `border-collapse: collapse` avec `position: sticky`** :
+   - Selon les spécifications W3C et les moteurs Chromium/Gecko, les bordures des tables collapsed appartiennent à la grille globale et non aux cellules individuelles. En conséquence, appliquer `position: sticky; left: 0;` sur un `<td>` dans une table avec `border-collapse: collapse` entraîne des artefacts de rendu, des bordures manquantes ou du clipping.
+3. **Le piège de l'opacité et des états actifs / survol** :
+   - Si la cellule sticky n'a pas un fond opaque explicite (`z-index: 10; background: var(--code-gutter-bg)`), le texte du code défilant passe visiblement sous les numéros de ligne, rendant le tout illisible.
+   - Si les règles de survol et de ligne active ne ciblent pas les cellules individuellement (`tr:hover td`, `tr.active-line td`), la colonne `.ln` sticky ne reflète pas la couleur d'accentuation de la ligne active.
+
+### Solution Architecturale Pérenne
+1. **Passage de la table en `border-collapse: separate` sans espacement** :
+   ```css
+   .sv-code-table {
+     border-collapse: separate;
+     border-spacing: 0;
+   }
+   ```
+2. **Gouttière sticky à gauche avec masque opaque et séparateur net** :
+   ```css
+   .sv-code-table .ln {
+     position: sticky;
+     left: 0;
+     z-index: 10;
+     background: var(--code-gutter-bg);
+     border-right: 1px solid var(--border-color);
+     box-shadow: 1px 0 0 var(--border-color);
+   }
+   ```
+3. **Propagation des états de survol et de surlignage actif aux cellules** :
+   ```css
+   .sv-code-table tr:hover td {
+     background-color: var(--code-hover-line);
+   }
+   .sv-code-table tr.active-line td {
+     background-color: var(--code-active-line) !important;
+   }
+   .sv-code-table tr.active-line .ln {
+     border-left: 3px solid var(--code-active-border);
+   }
+   ```
+   Désormais, le code défile de manière fluide sous la gouttière des numéros de ligne, qui reste 100% visible, parfaitement lisible et ancrée à gauche aussi bien dans les 155 pages de sources (`src_view/`) que dans les 39 Code Studios d'exemples (`examples_view/`).
+
+---
+
+## 20. Le Piège des Ligatures Typographiques dans le Code Source (`!=` transformé en `≠`)
+
+### Le Symptôme Observé
+> *"attntio, certaines suites de caractères sont transformées en un caractère unique (pe "!="). Dans le code il ne devrait pas y avoir ce genre de choses"*  
+> Lors de la lecture du code, des opérateurs multi-caractères comme `!=`, `==`, `<=`, `>=`, `->` ou `=>` étaient fusionnés visuellement en un symbole typographique unique (par exemple `≠`, `≤`, `≥`, `→`).
+
+### Cause Racine
+1. Dans la pile des polices monospace (`--font-mono`), la police `"Cascadia Code"` (fournie par défaut sur Windows 10 et 11) était sélectionnée comme police de secours suite au retrait des polices Google Fonts externes.
+2. `Cascadia Code` active par défaut les fonctionnalités OpenType de ligatures de programmation (`calt` - Contextual Alternates, et `liga` - Standard Ligatures).
+3. Le code HTML généré contient bien les caractères bruts distincts (`<span class="sv-op">!=</span>`), mais le moteur de rendu du navigateur applique la ligature OpenType de la police, fusionnant visuellement `!` et `=` en `≠`.
+
+### Solution Architecturale Pérenne
+1. **Désactivation globale et stricte des ligatures en CSS** :
+   ```css
+   code,
+   pre,
+   kbd,
+   samp,
+   .code,
+   .sv-code-table,
+   .code-container,
+   .studio-code-container,
+   .src-code-container,
+   .file-code-pane,
+   .code-block-content,
+   .sim-cmd-box,
+   .terminal-body {
+     font-variant-ligatures: none !important;
+     font-feature-settings: "liga" 0, "clig" 0, "calt" 0, "dlig" 0 !important;
+   }
+   ```
+   - `"calt" 0` désactive spécifiquement les alternatives contextuelles de programmation responsables de la fusion des opérateurs.
+   - `"liga" 0` et `"clig" 0` désactivent les ligatures standard.
+2. **Priorité aux variantes sans ligature dans la pile de polices** :
+   ```css
+   --font-mono: Consolas, "Cascadia Mono", "Roboto Mono", SFMono-Regular, Menlo, Monaco, monospace;
+   ```
+   - `Consolas` est positionné en première priorité sur Windows (police native sans ligatures).
+   - `"Cascadia Mono"` (variante officielle sans ligatures de Cascadia) remplace `"Cascadia Code"`.
+   - Tous les caractères de code (`!=`, `==`, `===`, `<=`, `>=`, `->`, `=>`) s'affichent désormais sous forme de glyphes séparés et littéraux, sans aucune altération visuelle.
+
+
 
 
 

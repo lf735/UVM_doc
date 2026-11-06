@@ -598,86 +598,17 @@ def generate_source_views():
             root_rel = get_rel_root(depth)
 
             rows = highlight_code_lines(code, f)
-            line_count = len(rows)
-            file_size_kb = round(len(code.encode('utf-8')) / 1024, 1)
-
             doc_rel = SRC_TO_DOC_MAP.get(rel_path)
-            doc_btn = ""
-            if doc_rel:
-                doc_href = f"{root_rel}docs_view/{doc_rel}"
-                doc_btn = f'''<a href="{doc_href}" class="btn btn-outline src-to-doc-btn" data-doc-url="{doc_href}" title="View Reference Documentation for this file">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                  <span>Documentation</span>
-                </a>'''
-
-            raw_href = f"{root_rel}uvm-1.2/src/{rel_path}"
-
             syms = FILE_SYMBOLS.get(rel_path, [])
-            sym_options = "".join([f'<option value="#L{s["line"]}">{html.escape(s["type"])}: {html.escape(s["name"])} (L{s["line"]})</option>' for s in syms if s["type"] in ('class', 'macro')])
-            sym_select = f'''<select class="sym-jump-select" onchange="if(this.value) window.location.hash = this.value">
-              <option value="">Jump to Symbol ({len(syms)} symbols)...</option>
-              {sym_options}
-            </select>''' if sym_options else ""
 
-            html_content = f'''<!DOCTYPE html>
-<html lang="en" class="src-page">
-<head>
-  <meta charset="UTF-8">
-  <meta name="color-scheme" content="light dark">
-  <script>
-    (function () {{
-      try {{
-        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-        var t = p || localStorage.getItem('theme');
-        if (t) {{
-          document.documentElement.setAttribute('data-theme', t);
-          document.documentElement.style.colorScheme = t;
-        }}
-      }} catch (e) {{ }}
-    }})();
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(rel_path)} | UVM 1.2 Source Code</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{root_rel}css/style.css">
-</head>
-<body class="src-viewer-body">
-  <div class="src-sticky-bar">
-    <div class="src-breadcrumbs">
-      <a href="{root_rel}index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
-      <span class="sep">/</span>
-      <span class="src-cur-file">{html.escape(rel_path)}</span>
-      <span class="badge badge-info">{line_count} lines</span>
-      <span class="badge badge-secondary">{file_size_kb} KB</span>
-    </div>
-    <div class="src-actions">
-      {sym_select}
-      {doc_btn}
-      <button class="btn btn-outline" id="copy-src-btn" title="Copy raw source code">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        <span>Copy Code</span>
-      </button>
-      <a href="{raw_href}" download class="btn btn-outline" title="Download raw source file">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span>Raw</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="src-code-container">
-    <table class="sv-code-table">
-      <tbody>
-        {"".join(rows)}
-      </tbody>
-    </table>
-  </div>
-
-  <textarea id="raw-source-text" style="display:none">{html.escape(code)}</textarea>
-  <script src="{root_rel}js/src_page.js"></script>
-</body>
-</html>'''
+            html_content = pbc.render_source_viewer(
+                rel_path=rel_path,
+                code=code,
+                rows=rows,
+                syms=syms,
+                doc_rel=doc_rel,
+                root_rel=root_rel
+            )
 
             with open(out_file, 'w', encoding='utf-8', newline='\n') as of:
                 of.write(html_content)

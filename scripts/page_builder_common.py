@@ -114,6 +114,25 @@ def render_toc_sidebar() -> str:
 </aside>'''
 
 
+def render_code_pane(table_html: str, pane_id: str = "file-pane-0", is_active: bool = True, filename: str = "") -> str:
+    """
+    Renders a single file code pane containing the syntax-highlighted code table.
+    """
+    active_cls = " active" if is_active else ""
+    data_attr = f' data-filename="{html.escape(filename)}"' if filename else ""
+    return f'<div class="file-code-pane{active_cls}" id="{pane_id}"{data_attr}><table class="sv-code-table"><tbody>{table_html}</tbody></table></div>'
+
+
+def render_code_container(panes_html: str, container_id: str = "studio-code-container", extra_classes: str = "") -> str:
+    """
+    Renders the unified code container wrapping code panes.
+    Carries both .code-container and contextual classes (.studio-code-container, .src-code-container)
+    for 100% backward compatibility.
+    """
+    classes = f"code-container {extra_classes}".strip()
+    return f'<div class="{classes}" id="{container_id}">{panes_html}</div>'
+
+
 def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root_rel: str) -> str:
     """
     Renders the complete Multi-File Code Studio component:
@@ -161,9 +180,10 @@ def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root
 
     # 3. Panes
     panes_html = ''.join([
-        f'<div class="file-code-pane {("active" if i == 0 else "")}" id="file-pane-{i}"><table class="sv-code-table"><tbody>{fd["table_html"]}</tbody></table></div>'
+        render_code_pane(fd["table_html"], pane_id=f"file-pane-{i}", is_active=(i == 0), filename=fd["name"])
         for i, fd in enumerate(files_data)
     ])
+    code_container_html = render_code_container(panes_html, container_id="studio-code-container", extra_classes="studio-code-container")
 
     return f'''<div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
   <div class="CTopic">
@@ -202,9 +222,7 @@ def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root
           </div>
         </div>
 
-        <div class="studio-code-container" id="studio-code-container">
-          {panes_html}
-        </div>
+        {code_container_html}
       </div>
     </div>
   </div>
@@ -450,22 +468,26 @@ def render_html_shell(
     extra_body_classes: str = "",
     extra_scripts: Optional[List[str]] = None,
     data_payloads: Optional[Dict[str, str]] = None,
-    include_toc: bool = True
+    include_toc: bool = True,
+    is_full_page: bool = False
 ) -> str:
     """
     Renders a complete, unified HTML page shell complying with UVM modern design tokens.
     Automatically includes:
     - Inline anti-FOUC theme script
-    - Google fonts (Google Sans, Roboto, Roboto Mono)
     - CSS stylesheets link
     - Breadcrumbs & Header banner
-    - 2-column layout wrapper with #Content
+    - 2-column layout wrapper with #Content (or direct full-page layout if is_full_page is True)
     - In-page Table of Contents sidebar (if include_toc is True)
     - Data payloads (e.g. #zip-payload, #stepper-payload)
     - js/page_common.js script + any extra scripts
     """
-    html_cls = f"doc-page {extra_html_classes}".strip()
-    body_cls = f"doc-body {extra_body_classes}".strip()
+    if is_full_page:
+        html_cls = extra_html_classes.strip() if extra_html_classes else "full-page"
+        body_cls = extra_body_classes.strip() if extra_body_classes else "full-body"
+    else:
+        html_cls = f"doc-page {extra_html_classes}".strip()
+        body_cls = f"doc-body {extra_body_classes}".strip()
 
     # Scripts: page_common.js is always loaded
     scripts_list = [f"{root_rel}js/page_common.js"]
@@ -492,6 +514,19 @@ def render_html_shell(
     else:
         main_content_html = f'''        {body_content}'''
 
+    if is_full_page:
+        inner_body = f"{body_content}{payloads_markup}"
+    else:
+        inner_body = f'''  <div class="doc-page-container">
+    {breadcrumbs_html}
+    {banner_html}
+    <div class="doc-layout-wrapper">
+      <div class="doc-main-content">
+{main_content_html}
+      </div>{toc_markup}
+    </div>
+  </div>{payloads_markup}'''
+
     return f'''<!DOCTYPE html>
 <html lang="en" class="{html_cls}">
 <head>
@@ -511,22 +546,87 @@ def render_html_shell(
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{html.escape(title)}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{root_rel}css/style.css">
 </head>
 <body class="{body_cls}">
-  <div class="doc-page-container">
-    {breadcrumbs_html}
-    {banner_html}
-    <div class="doc-layout-wrapper">
-      <div class="doc-main-content">
-{main_content_html}
-      </div>{toc_markup}
-    </div>
-  </div>{payloads_markup}
+{inner_body}
   {scripts_markup}
 </body>
 </html>'''
+
+
+def render_source_viewer(
+    rel_path: str,
+    code: str,
+    rows: List[str],
+    syms: List[Dict[str, Any]],
+    doc_rel: Optional[str] = None,
+    root_rel: str = "../../"
+) -> str:
+    """
+    Renders a unified, syntax-highlighted source view page (single file) for src_view/.
+    Uses the unified render_html_shell, render_code_container, and render_code_pane.
+    """
+    line_count = len(rows)
+    file_size_kb = round(len(code.encode('utf-8')) / 1024, 1)
+
+    # Document link button
+    doc_btn = ""
+    if doc_rel:
+        doc_href = f"{root_rel}docs_view/{doc_rel}"
+        doc_btn = f'''<a href="{doc_href}" class="btn btn-outline src-to-doc-btn" data-doc-url="{doc_href}" title="View Reference Documentation for this file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>Documentation</span>
+      </a>'''
+
+    raw_href = f"{root_rel}uvm-1.2/src/{rel_path}"
+
+    # Symbol jump select
+    sym_options = "".join([
+        f'<option value="#L{s["line"]}">{html.escape(s["type"])}: {html.escape(s["name"])} (L{s["line"]})</option>'
+        for s in syms if s.get("type") in ('class', 'macro')
+    ])
+    sym_select = f'''<select class="studio-file-select sym-jump-select" id="src-sym-select" aria-label="Jump to symbol" onchange="if(this.value) window.location.hash = this.value">
+        <option value="">Jump to Symbol ({len(syms)} symbols)...</option>
+        {sym_options}
+      </select>''' if sym_options else ""
+
+    # Sticky Toolbar
+    toolbar_html = f'''  <div class="src-sticky-bar studio-toolbar">
+    <div class="src-breadcrumbs">
+      <a href="{root_rel}index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
+      <span class="sep">/</span>
+      <span class="src-cur-file">{html.escape(rel_path)}</span>
+      <span class="badge badge-info">{line_count} lines</span>
+      <span class="badge badge-secondary">{file_size_kb} KB</span>
+    </div>
+    <div class="src-actions studio-toolbar-actions">
+      {sym_select}
+      {doc_btn}
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-copy-code" title="Copy raw source code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Code</span>
+      </button>
+      <a href="{raw_href}" download class="btn btn-outline studio-action-btn" id="btn-download-raw" title="Download raw source file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Raw</span>
+      </a>
+    </div>
+  </div>'''
+
+    pane_html = render_code_pane("".join(rows), pane_id="file-pane-0", is_active=True, filename=rel_path)
+    container_html = render_code_container(pane_html, container_id="src-code-container", extra_classes="src-code-container")
+    raw_textarea = f'  <textarea id="raw-source-text" style="display:none">{html.escape(code)}</textarea>'
+
+    body_content = f"{toolbar_html}\n  {container_html}\n{raw_textarea}"
+
+    return render_html_shell(
+        title=f"{rel_path} | UVM 1.2 Source Code",
+        body_content=body_content,
+        root_rel=root_rel,
+        extra_html_classes="src-page",
+        extra_body_classes="src-viewer-body",
+        include_toc=False,
+        is_full_page=True
+    )
 

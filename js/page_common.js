@@ -793,7 +793,8 @@ window.PageCommon = (function () {
   }
 
   // =========================================================================
-  // Multi-File Code Studio Controller
+  // Unified Code Viewer & Multi-File Code Studio Controller
+  // Powers both multi-file studios (examples_view/) and source viewer (src_view/)
   // =========================================================================
 
   function initCodeStudio() {
@@ -801,15 +802,18 @@ window.PageCommon = (function () {
     const studioTabs = document.querySelectorAll('.studio-tab');
     const codePanes = document.querySelectorAll('.file-code-pane');
     const studioFileSelect = document.getElementById('studio-file-select');
-    const studioCodeContainer = document.getElementById('studio-code-container');
+    const symSelect = document.getElementById('src-sym-select') || document.querySelector('.sym-jump-select');
+    const studioCodeContainer = document.getElementById('studio-code-container') ||
+      document.getElementById('src-code-container') ||
+      document.querySelector('.code-container');
     const studioTabScrollLeft = document.getElementById('studio-tab-scroll-left');
     const studioTabScrollRight = document.getElementById('studio-tab-scroll-right');
-    const btnCopyCode = document.getElementById('btn-copy-code');
+    const btnCopyCode = document.getElementById('btn-copy-code') || document.getElementById('copy-src-btn');
     const btnDownloadRaw = document.getElementById('btn-download-raw');
     const btnCopyExampleLink = document.getElementById('btn-copy-example-link');
     const btnSplitSource = document.getElementById('btn-split-source');
 
-    if (!studioTabBar && !codePanes.length) return;
+    if (!studioTabBar && !codePanes.length && !document.querySelector('.sv-code-table')) return;
 
     let currentFileIdx = 0;
     const zipPayloadEl = document.getElementById('zip-payload');
@@ -876,33 +880,82 @@ window.PageCommon = (function () {
       }, { passive: false });
     }
 
+    // Smooth Line Scrolling & Centering helper
+    function scrollToLine(lineHashOrNum) {
+      if (!lineHashOrNum) return;
+      const lineStr = String(lineHashOrNum).replace(/^#?L?/, '');
+      const selector = `#L${lineStr}`;
+      const targetRow = document.querySelector(`.file-code-pane tr${selector}`) ||
+        document.querySelector(`.sv-code-table tr${selector}`) ||
+        document.getElementById(`L${lineStr}`);
+      if (targetRow) {
+        document.querySelectorAll('.file-code-pane tr.active-line, .sv-code-table tr.active-line').forEach(function (tr) {
+          tr.classList.remove('active-line');
+        });
+        targetRow.classList.add('active-line');
+
+        const container = studioCodeContainer || document.getElementById('src-code-container') || document.querySelector('.code-container');
+        if (container && container.scrollHeight > container.clientHeight && getComputedStyle(container).overflowY !== 'visible') {
+          const cRect = container.getBoundingClientRect();
+          const rRect = targetRow.getBoundingClientRect();
+          const offsetTop = rRect.top - cRect.top + container.scrollTop;
+          const targetScroll = Math.max(0, offsetTop - (container.clientHeight / 2));
+          container.scrollTo({ top: targetScroll, left: 0, behavior: 'smooth' });
+        } else {
+          targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        try {
+          history.replaceState(null, '', `#L${lineStr}`);
+        } catch (err) { }
+      }
+    }
+
+    // Symbol Jump Select dropdown in source viewer
+    if (symSelect) {
+      symSelect.addEventListener('change', function (e) {
+        const val = e.target.value;
+        if (val) {
+          scrollToLine(val);
+        }
+      });
+    }
+
     // Line number click -> copy line deep-link & highlight
-    document.querySelectorAll('.file-code-pane .ln a').forEach(function (a) {
+    document.querySelectorAll('.file-code-pane .ln a, .sv-code-table .ln a').forEach(function (a) {
       a.addEventListener('click', function (e) {
         e.preventDefault();
         const lineNum = a.textContent.trim();
         const targetRow = a.closest('tr');
         if (targetRow) {
-          document.querySelectorAll('.file-code-pane tr.active-line').forEach(function (tr) {
+          document.querySelectorAll('.file-code-pane tr.active-line, .sv-code-table tr.active-line').forEach(function (tr) {
             tr.classList.remove('active-line');
           });
           targetRow.classList.add('active-line');
         }
 
         let fullUrl = window.location.href.split('#')[0] + `#L${lineNum}`;
+        let parentBase = '';
+        try {
+          if (window.parent && window.parent !== window && window.parent.location.pathname) {
+            parentBase = (window.parent.location.origin || '') + window.parent.location.pathname;
+          }
+        } catch (err) { }
+
         const exMatch = window.location.pathname.match(/(examples_view\/.*)$/);
+        const srcMatch = window.location.pathname.match(/(src_view\/.*)$/);
+
         if (exMatch) {
           const exClean = exMatch[1].replace(/^examples_view\//, '');
-          let parentBase = '';
-          try {
-            if (window.parent && window.parent !== window && window.parent.location.pathname) {
-              parentBase = (window.parent.location.origin || '') + window.parent.location.pathname;
-            }
-          } catch (err) { }
           if (!parentBase) {
             parentBase = window.location.href.split('/examples_view/')[0] + '/index.html';
           }
           fullUrl = `${parentBase}#/example/${exClean}?file=${currentFileIdx}#L${lineNum}`;
+        } else if (srcMatch) {
+          const srcClean = srcMatch[1].replace(/^src_view\//, '').replace(/\.html$/, '');
+          if (!parentBase) {
+            parentBase = window.location.href.split('/src_view/')[0] + '/index.html';
+          }
+          fullUrl = `${parentBase}#/src/${srcClean}#L${lineNum}`;
         }
 
         copyText(fullUrl).then(function () {
@@ -913,29 +966,48 @@ window.PageCommon = (function () {
       });
     });
 
+    // Copy Code button (supports both multi-file studio and mono-file source view)
     if (btnCopyCode) {
       btnCopyCode.addEventListener('click', function () {
-        const curFile = filesList[currentFileIdx];
-        if (!curFile) return;
-        copyText(curFile.content).then(function () {
+        let codeToCopy = '';
+        if (filesList[currentFileIdx] && filesList[currentFileIdx].content) {
+          codeToCopy = filesList[currentFileIdx].content;
+        } else {
+          const rawTextEl = document.getElementById('raw-source-text');
+          if (rawTextEl) {
+            codeToCopy = rawTextEl.value;
+          } else {
+            const activePane = codePanes[currentFileIdx] || codePanes[0] || document.querySelector('.file-code-pane') || document.querySelector('.sv-code-table');
+            if (activePane) {
+              const codeCells = Array.from(activePane.querySelectorAll('.code'));
+              codeToCopy = codeCells.map(c => c.textContent).join('\n');
+            }
+          }
+        }
+        if (!codeToCopy) return;
+        copyText(codeToCopy).then(function () {
           bindCopyFeedback(btnCopyCode, 'Copy Code', 'Copied!');
         });
       });
     }
 
+    // Download Raw button
     if (btnDownloadRaw) {
-      btnDownloadRaw.addEventListener('click', function () {
+      btnDownloadRaw.addEventListener('click', function (e) {
         const curFile = filesList[currentFileIdx];
-        if (!curFile) return;
-        const blob = new Blob([curFile.content], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = curFile.name.split('/').pop();
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        if (curFile && curFile.content) {
+          e.preventDefault();
+          const blob = new Blob([curFile.content], { type: 'text/plain;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = curFile.name.split('/').pop();
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+        // If not in filesList (e.g. single-file source view with a direct download link), let browser download native href
       });
     }
 
@@ -971,8 +1043,32 @@ window.PageCommon = (function () {
       });
     }
 
-    // Expose switchFileTab for stepper synchronization
-    return { switchFileTab: switchFileTab, getCurrentFileIdx: function () { return currentFileIdx; } };
+    // Hash and cross-frame scrollToSection / line handling
+    function handleInitialHash() {
+      const hash = window.location.hash;
+      if (hash && (hash.startsWith('#L') || hash.startsWith('#line-'))) {
+        scrollToLine(hash);
+      }
+    }
+    window.addEventListener('hashchange', handleInitialHash);
+    setTimeout(handleInitialHash, 100);
+
+    window.addEventListener('message', function (e) {
+      if (!e.data || typeof e.data !== 'object') return;
+      if (e.data.type === 'scrollToSection') {
+        const anchor = e.data.anchor || e.data.id;
+        if (anchor && (anchor.startsWith('L') || anchor.startsWith('#L') || anchor.startsWith('line-'))) {
+          scrollToLine(anchor);
+        }
+      }
+    });
+
+    // Expose control methods
+    return {
+      switchFileTab: switchFileTab,
+      getCurrentFileIdx: function () { return currentFileIdx; },
+      scrollToLine: scrollToLine
+    };
   }
 
   // =========================================================================
@@ -1464,25 +1560,31 @@ window.PageCommon = (function () {
     try {
       if (window.self === window.top) {
         const isExample = window.location.pathname.includes('examples_view/');
+        const isSrc = window.location.pathname.includes('src_view/');
         const match = window.location.pathname.match(/(?:docs_view|examples_view|src_view)\/(.*)$/);
         if (match) {
           const relPath = match[1];
           const depth = relPath.split('/').length;
           const rootRel = '../'.repeat(depth + 1);
-          const routePrefix = isExample ? '#/example/' : '#/doc/';
+          const routePrefix = isExample ? '#/example/' : (isSrc ? '#/src/' : '#/doc/');
           window.location.replace(rootRel + 'index.html' + routePrefix + relPath + window.location.hash);
         }
       }
     } catch (e) { }
 
-    // Notify parent when document/example is loaded
+    // Notify parent when document/example/source is loaded
     try {
       if (window.parent && window.parent !== window) {
         const isExample = window.location.pathname.includes('examples_view/');
+        const isSrc = window.location.pathname.includes('src_view/');
         if (isExample) {
           const match = window.location.pathname.match(/(examples_view\/.*)$/);
           const exRel = match ? (match[1] + (window.location.hash || '')) : '';
           window.parent.postMessage({ type: 'exampleNavigated', url: exRel, title: document.title }, '*');
+        } else if (isSrc) {
+          const match = window.location.pathname.match(/(src_view\/.*)$/);
+          const srcRel = match ? (match[1] + (window.location.hash || '')) : '';
+          window.parent.postMessage({ type: 'srcNavigated', url: srcRel, title: document.title }, '*');
         } else {
           const match = window.location.pathname.match(/(docs_view\/.*)$/);
           const docRel = match ? (match[1] + (window.location.hash || '')) : '';
