@@ -24,121 +24,104 @@
 </head>
 <body class="doc-body example-body">
   <div class="doc-page-container">
-
-    <!-- Document Breadcrumbs -->
     <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
-      <a href="../../index.html#/examples" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Examples</a>
-      <span class="doc-breadcrumb-sep">/</span>
-      <span class="doc-breadcrumb-item">Register Layer (RAL)</span>
-      <span class="doc-breadcrumb-sep">/</span>
-      <span class="doc-breadcrumb-item active">User-Defined Register Callbacks</span>
-    </nav>
-
-    <!-- Source Banner & Actions -->
+  <a href="../../index.html#/examples" class="doc-breadcrumb-item doc-breadcrumb-link doc-breadcrumb-home">Examples</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">Register Layer (RAL)</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">User-Defined Register Callbacks</span>
+</nav>
     <div class="doc-source-banner example-source-banner">
-      <div class="banner-info">
-        <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span class="file-label">Suite:</span>
-        <code class="banner-file-code">uvm-1.2/examples/simple/registers/models/user-defined</code>
-        
-        <span class="badge badge-diff badge-diff-advanced">Advanced</span>
-        <span class="badge badge-files">7 files</span>
-      </div>
-
-      <div class="banner-actions">
-        <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="src_view/reg/uvm_reg_cbs.svh.html#L35" title="View side-by-side with UVM source code in Split View">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
-          <span>Split View</span>
-        </button>
-        <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Download (.zip)</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- 2-Column Documentation Layout (Harmonized with docs_view) -->
+  <div class="banner-info">
+    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <span class="file-label">Suite:</span>
+    <code class="banner-file-code">uvm-1.2/examples/simple/registers/models/user-defined</code>
+    
+    <span class="badge badge-diff badge-diff-advanced">Advanced</span>
+    <span class="badge badge-files">7 files</span>
+  </div>
+  <div class="banner-actions">
+    <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="src_view/reg/uvm_reg_cbs.svh.html#L35" title="View side-by-side with UVM source code in Split View">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+      <span>Split View</span>
+    </button>
+    <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Download (.zip)</span>
+    </button>
+  </div>
+</div>
     <div class="doc-layout-wrapper">
       <div class="doc-main-content">
         <div id="Content">
-
-          <!-- Main Class / Overview Topic -->
           <div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
-            <div class="CTopic" id="MainTopic">
-              <h1 class="CTitle"><a name="User-Defined Register Callbacks">User-Defined Register Callbacks</a></h1>
-              <div class="CBody">
-                <p class="example-summary-desc">Extends standard register access behaviors with custom pre_read, post_read, pre_write, and post_write user callbacks for side-effects.</p>
-                <div class="example-api-pills">
-                  <span class="api-label">Key UVM APIs:</span>
-                  <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_reg_cbs">uvm_reg_cbs</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="pre_write">pre_write</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="post_write">post_write</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="pre_read">pre_read</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="post_read">post_read</a>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="CTopic" id="MainTopic">
+    <h1 class="CTitle"><a name="User-Defined Register Callbacks">User-Defined Register Callbacks</a></h1>
+    <div class="CBody">
+      <p class="example-summary-desc">Extends standard register access behaviors with custom pre_read, post_read, pre_write, and post_write user callbacks for side-effects.</p>
+      <div class="example-api-pills">
+        <span class="api-label">Key UVM APIs:</span>
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_reg_cbs">uvm_reg_cbs</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="pre_write">pre_write</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="post_write">post_write</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="pre_read">pre_read</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="post_read">post_read</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <!-- Interactive Visual Flow Stepper (If Supported) -->
-          
-
-          <!-- Testbench Architecture Topology -->
-          <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
-              <div class="CBody">
-                <div class="topo-grid">
-                  
+<div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
+    <div class="CBody">
+      <div class="topo-grid">
         <div class="topo-card">
-          <div class="topo-header">
-            <span class="topo-badge">reg</span>
-            <strong>reg_ctrl</strong>
-          </div>
-          <div class="topo-details">Has user_callback attached</div>
-        </div>
-        
-                </div>
+  <div class="topo-header">
+    <span class="topo-badge">reg</span>
+    <strong>reg_ctrl</strong>
+  </div>
+  <div class="topo-details">Has user_callback attached</div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
+    <div class="CBody">
+      <div class="studio-section">
+        <div class="studio-header">
+          <div class="studio-toolbar">
+            <div class="studio-toolbar-left">
+              <div class="studio-file-select-wrapper" title="Jump directly to any file in this studio">
+                <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
+                  <option value="0">📄 dut.sv</option><option value="1">📄 regmodel.sv</option><option value="2">📄 tb_env.sv</option><option value="3">📄 tb_run.sv</option><option value="4">📄 Makefile.ius</option><option value="5">📄 Makefile.questa</option><option value="6">📄 Makefile.vcs</option>
+                </select>
               </div>
+            </div>
+
+            <div class="studio-toolbar-actions">
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              </button>
             </div>
           </div>
 
-          <!-- Multi-File Code Studio -->
-          <div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
-              <div class="CBody">
-                <div class="studio-section">
-                  <div class="studio-header">
-                    <div class="studio-toolbar">
-                      <div class="studio-toolbar-left">
-                        <div class="studio-file-select-wrapper" title="Jump directly to any file in this example">
-                          <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
-                            <option value="0">📄 dut.sv</option><option value="1">📄 regmodel.sv</option><option value="2">📄 tb_env.sv</option><option value="3">📄 tb_run.sv</option><option value="4">📄 Makefile.ius</option><option value="5">📄 Makefile.questa</option><option value="6">📄 Makefile.vcs</option>
-                          </select>
-                        </div>
-                      </div>
+          <div class="studio-tab-bar-wrapper">
+            <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
+            <div class="studio-tab-bar" id="studio-tab-bar">
+              <button type="button" class="studio-tab active" data-file-idx="0" title="dut.sv"><span class="tab-icon">📄</span><span class="tab-name">dut.sv</span></button><button type="button" class="studio-tab " data-file-idx="1" title="regmodel.sv"><span class="tab-icon">📄</span><span class="tab-name">regmodel.sv</span></button><button type="button" class="studio-tab " data-file-idx="2" title="tb_env.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_env.sv</span></button><button type="button" class="studio-tab " data-file-idx="3" title="tb_run.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_run.sv</span></button><button type="button" class="studio-tab " data-file-idx="4" title="Makefile.ius"><span class="tab-icon">📄</span><span class="tab-name">Makefile.ius</span></button><button type="button" class="studio-tab " data-file-idx="5" title="Makefile.questa"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span></button><button type="button" class="studio-tab " data-file-idx="6" title="Makefile.vcs"><span class="tab-icon">📄</span><span class="tab-name">Makefile.vcs</span></button>
+            </div>
+            <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
+          </div>
+        </div>
 
-                      <div class="studio-toolbar-actions">
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="studio-tab-bar-wrapper">
-                      <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
-                      <div class="studio-tab-bar" id="studio-tab-bar">
-                        <button type="button" class="studio-tab active" data-file-idx="0" title="dut.sv"><span class="tab-icon">📄</span><span class="tab-name">dut.sv</span></button><button type="button" class="studio-tab " data-file-idx="1" title="regmodel.sv"><span class="tab-icon">📄</span><span class="tab-name">regmodel.sv</span></button><button type="button" class="studio-tab " data-file-idx="2" title="tb_env.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_env.sv</span></button><button type="button" class="studio-tab " data-file-idx="3" title="tb_run.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_run.sv</span></button><button type="button" class="studio-tab " data-file-idx="4" title="Makefile.ius"><span class="tab-icon">📄</span><span class="tab-name">Makefile.ius</span></button><button type="button" class="studio-tab " data-file-idx="5" title="Makefile.questa"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span></button><button type="button" class="studio-tab " data-file-idx="6" title="Makefile.vcs"><span class="tab-icon">📄</span><span class="tab-name">Makefile.vcs</span></button>
-                      </div>
-                      <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
-                    </div>
-                  </div>
-
-                  <div class="studio-code-container" id="studio-code-container">
-                    <div class="file-code-pane active" id="file-pane-0"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+        <div class="studio-code-container" id="studio-code-container">
+          <div class="file-code-pane active" id="file-pane-0"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
 <tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// -------------------------------------------------------------</span></td></tr>
 <tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//    Copyright 2004-2011 Synopsys, Inc.</span></td></tr>
 <tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//    Copyright 2010 Mentor Graphics Corporation</span></td></tr>
@@ -550,48 +533,46 @@
 <tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-proto-name" style="font-weight:700">run</span><span class="sv-op">:</span></td></tr>
 <tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-ident">	$(SIMV)</span></td></tr>
 <tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-ident">	$(CHECK)</span></td></tr></tbody></table></div>
-                  </div>
-                </div>
-              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
+    <div class="CBody">
+      <div class="sim-section">
+        <!-- Simulator Command Selector -->
+        <div class="sim-cmd-card">
+          <div class="sim-tabs">
+            <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
+            <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
+            <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
+          </div>
+          <div class="sim-cmd-box">
+            <code id="sim-cmd-text">make -f Makefile.questa run</code>
+            <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
+          </div>
+        </div>
+
+        <!-- Terminal Log -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
+            <div class="terminal-filters">
+              <button type="button" class="term-filter active" data-level="all">All</button>
+              <button type="button" class="term-filter" data-level="info">Info</button>
+              <button type="button" class="term-filter" data-level="warning">Warning</button>
+              <button type="button" class="term-filter" data-level="error">Error</button>
             </div>
           </div>
-
-          <!-- Simulation & Execution Output Console -->
-          <div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
-              <div class="CBody">
-                <div class="sim-section">
-                  <!-- Simulator Command Selector -->
-                  <div class="sim-cmd-card">
-                    <div class="sim-tabs">
-                      <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
-                      <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
-                      <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
-                    </div>
-                    <div class="sim-cmd-box">
-                      <code id="sim-cmd-text">make -f Makefile.questa run</code>
-                      <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
-                    </div>
-                  </div>
-
-                  <!-- Terminal Log -->
-                  <div class="terminal-card">
-                    <div class="terminal-header">
-                      <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                      </div>
-                      <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
-                      <div class="terminal-filters">
-                        <button type="button" class="term-filter active" data-level="all">All</button>
-                        <button type="button" class="term-filter" data-level="info">Info</button>
-                        <button type="button" class="term-filter" data-level="warning">Warning</button>
-                        <button type="button" class="term-filter" data-level="error">Error</button>
-                      </div>
-                    </div>
-                    <pre class="terminal-body" id="terminal-body">----------------------------------------------------------------
+          <pre class="terminal-body" id="terminal-body">----------------------------------------------------------------
 Questa/VCS/Xcelium UVM 1.2 Simulation Log
 Example: User-Defined Register Callbacks (simple/registers/models/user-defined)
 ----------------------------------------------------------------
@@ -634,40 +615,32 @@ UVM_FATAL :    0
 [STIMULUS]  1
 [PKT]       3
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div> <!-- #Content -->
-      </div> <!-- .doc-main-content -->
-
-      <!-- Sticky In-Page Table of Contents ("On this page") -->
-      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
-        <div class="doc-toc-inner">
-          <div class="doc-toc-header">
-            <span class="doc-toc-title">On this page</span>
-            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
-              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4 14 12 6 20 14"/>
-              </svg>
-              <span class="toc-toggle-text">Collapse all</span>
-            </button>
-          </div>
-          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
         </div>
-      </aside>
-
-    </div> <!-- .doc-layout-wrapper -->
-
-  </div> <!-- .doc-page-container -->
-
-  <!-- Data payload for client scripts -->
-  <div id="zip-payload" style="display:none;" data-zip="[{&quot;name&quot;: &quot;dut.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\nmodule dut();\n\nbit [15:0] acp;\n\nfunction void reset();\n   acp = 0;\nendfunction\n\n\ninitial reset();\n\nendmodule\n&quot;}, {&quot;name&quot;: &quot;regmodel.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2010-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n//\n\n//\n// This example demonstrates how to include a user-defined register\n// in a register model.\n//\n\n//\n// The user_acp_reg has a user-defined behavior\n//\n// It increments by 1 after every write\n//\nclass user_acp_incr_on_write_cbs extends uvm_reg_cbs;\n\n   virtual function void post_predict(input uvm_reg_field  fld,\n                                      input uvm_reg_data_t previous,\n                                      inout uvm_reg_data_t value,\n                                      input uvm_predict_e  kind,\n                                      input uvm_path_e     path,\n                                      input uvm_reg_map    map);\n      if (kind != UVM_PREDICT_WRITE) return;\n      if (path != UVM_FRONTDOOR) return;\n\n      value = previous + 1;\n   endfunction\n   \nendclass\n\n\nclass user_acp_reg extends uvm_reg;\n\n   local uvm_reg_field value;\n\n   `uvm_object_utils(user_acp_reg)\n\n   function new(string name = \&quot;user_acp_reg\&quot;);\n      super.new(name,16,UVM_NO_COVERAGE);\n   endfunction: new\n\n   virtual function void build();\n      value = uvm_reg_field::type_id::create(\&quot;value\&quot;,,get_full_name());\n      value.configure(this, 16, 0, \&quot;RW\&quot;, 0, 16&#x27;h0000, 1, 0, 0);\n      value.set_compare(UVM_NO_CHECK);\n\n      uvm_resource_db#(bit)::set({\&quot;REG::\&quot;,get_full_name()},\n                                 \&quot;NO_REG_BIT_BASH_TEST\&quot;, 1);\n      uvm_resource_db#(bit)::set({\&quot;REG::\&quot;,get_full_name()},\n                                 \&quot;NO_REG_ACCESS_TEST\&quot;, 1);\n\n      begin\n         user_acp_incr_on_write_cbs cb = new;\n         uvm_reg_field_cb::add(value, cb);\n      end\n   endfunction: build\n\n\n   virtual task pre_write(uvm_reg_item rw);\n      uvm_reg_data_t m_data;\n      uvm_reg rg;\n\n      assert($cast(rg,rw.element));\n\n      // Predict the value that will be in the register\n      m_data = rg.get() + 1;\n      \n      // If a backdoor write is used, replace the value written\n      // with the incremented value to emulate the front-door\n      if (rw.path == UVM_BACKDOOR)\n         rw.value[0] = m_data;\n   endtask: pre_write\n\nendclass : user_acp_reg\n\n\nclass block_B extends uvm_reg_block;\n   user_acp_reg user_acp;\n\n   `uvm_object_utils(block_B)\n   \n   function new(string name = \&quot;B\&quot;);\n      super.new(name, UVM_NO_COVERAGE);\n   endfunction: new\n   \n   virtual function void build();\n\n      default_map = create_map(\&quot;\&quot;, 0, 1, UVM_BIG_ENDIAN);\n\n      user_acp = user_acp_reg::type_id::create(\&quot;user_acp\&quot;,,get_full_name());\n      user_acp.configure(this, null, \&quot;acp\&quot;);\n      user_acp.build();\n\n      default_map.add_reg(user_acp, &#x27;h0000,  \&quot;RW\&quot;);\n   endfunction : build\n\nendclass : block_B\n&quot;}, {&quot;name&quot;: &quot;tb_env.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010-2011 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`include \&quot;reg_agent.sv\&quot;\n\nclass dut_rw;\n   static task rw(reg_rw rw);\n      casez (rw.addr)\n       &#x27;h0000: // acp (MSB)\n          if (rw.read) rw.data = dut.acp[15:8];\n       &#x27;h0001: // acp (LSB)\n          if (rw.read) rw.data = dut.acp[7:0];\n          else dut.acp++;\n      endcase\n      #1;\n      // $write(\&quot;%s\\n\&quot;, rw.convert2string());\n   endtask\nendclass\n\n\nclass tb_env extends uvm_env;\n\n   `uvm_component_utils(tb_env)\n\n   block_B   regmodel;\n   reg_agent#(dut_rw) bus;\n   uvm_reg_predictor#(reg_rw) predict;\n\n   function new(string name = \&quot;tb_env\&quot;, uvm_component parent=null);\n      super.new(name, parent);\n   endfunction: new\n\n   virtual function void build_phase(uvm_phase phase);\n      regmodel = block_B::type_id::create(\&quot;regmodel\&quot;);\n      regmodel.build();\n      regmodel.lock_model();\n\n      bus = reg_agent#(dut_rw)::type_id::create(\&quot;bus\&quot;, this);\n      predict = uvm_reg_predictor#(reg_rw)::type_id::create(\&quot;predict\&quot;, this);\n\n      regmodel.set_hdl_path_root(\&quot;dut\&quot;);\n  endfunction: build_phase\n\n   virtual function void connect_phase(uvm_phase phase);\n      reg2rw_adapter reg2rw  = new(\&quot;reg2rw\&quot;);\n      regmodel.default_map.set_sequencer(bus.sqr, reg2rw);\n\n      predict.map = regmodel.default_map;\n      predict.adapter = reg2rw;\n      bus.mon.ap.connect(predict.bus_in);\n      regmodel.default_map.set_auto_predict(0);\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_run.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010-2011 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n`include \&quot;uvm_pkg.sv\&quot;\n\n`include \&quot;dut.sv\&quot;\n\nprogram tb;\n\nimport uvm_pkg::*;\n\n`include \&quot;regmodel.sv\&quot;\n`include \&quot;tb_env.sv\&quot;\n\n\nclass tb_test extends uvm_test;\n\n   function new(string name = \&quot;tb_test\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n   endfunction\n\n   virtual task run_phase(uvm_phase phase);\n      tb_env env;\n      uvm_status_e   status;\n      uvm_reg_data_t data;\n\n      phase.raise_objection(this);\n      \n      if (!$cast(env, uvm_top.find(\&quot;env\&quot;)) || env == null) begin\n         `uvm_fatal(\&quot;test\&quot;, \&quot;Cannot find tb_env\&quot;);\n      end\n\n      env.regmodel.reset();\n\n      begin\n         uvm_reg_sequence seq;\n\n         seq = uvm_reg_hw_reset_seq::type_id::create(\&quot;seq\&quot;);\n         seq.model = env.regmodel;\n         seq.start(null);\n         seq.wait_for_sequence_state(UVM_FINISHED);\n      end\n\n      `uvm_info(\&quot;Test\&quot;, \&quot;Performing 257 writes...\&quot;, UVM_LOW)\n\n      repeat (257) begin\n         env.regmodel.user_acp.write(status, $random());\n      end\n      env.regmodel.user_acp.mirror(status, UVM_CHECK);\n\n      `uvm_info(\&quot;Test\&quot;, \&quot;Resetting DUT...\&quot;, UVM_LOW)\n      dut.reset();\n      env.regmodel.reset();\n      env.regmodel.user_acp.mirror(status, UVM_CHECK);\n      \n      phase.drop_objection(this);\n   endtask\nendclass\n\n\ninitial begin automatic uvm_coreservice_t cs_ = uvm_coreservice_t::get();\n\n   tb_env env;\n   tb_test test;\n   uvm_report_server svr;\n\n   env = new(\&quot;env\&quot;);\n   test = new(\&quot;test\&quot;);\n\n   svr = cs_.get_report_server();\n   svr.set_max_quit_count(10);\n   \n   run_test();\nend\n\nendprogram\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Cadence\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../../..\n\ninclude ../../../../Makefile.ius\n\n\nall: \n\t$(IUS)  +incdir+../../common tb_run.sv\n\t$(CHECK)\n\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../../..\nUSES_DPI = 1\ninclude ../../../../Makefile.questa\n\n\nall: prepare comp run\n\ncomp:\n\t$(VLOG) +incdir+../../common tb_run.sv\n\nrun:\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../../..\n\ninclude ../../../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) +incdir+../../common tb_run.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}]"></div>
-  <div id="stepper-payload" style="display:none;" data-stepper="[]"></div>
-
-  <script src="../../js/doc_page.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+  <div class="doc-toc-inner">
+    <div class="doc-toc-header">
+      <span class="doc-toc-title">On this page</span>
+      <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+        <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="4 14 12 6 20 14"/>
+        </svg>
+        <span class="toc-toggle-text">Collapse all</span>
+      </button>
+    </div>
+    <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+  </div>
+</aside>
+    </div>
+  </div>
+  <div id="zip-payload" style="display:none;" data-zip='[{&quot;name&quot;: &quot;dut.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\nmodule dut();\n\nbit [15:0] acp;\n\nfunction void reset();\n   acp = 0;\nendfunction\n\n\ninitial reset();\n\nendmodule\n&quot;}, {&quot;name&quot;: &quot;regmodel.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2010-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n//\n\n//\n// This example demonstrates how to include a user-defined register\n// in a register model.\n//\n\n//\n// The user_acp_reg has a user-defined behavior\n//\n// It increments by 1 after every write\n//\nclass user_acp_incr_on_write_cbs extends uvm_reg_cbs;\n\n   virtual function void post_predict(input uvm_reg_field  fld,\n                                      input uvm_reg_data_t previous,\n                                      inout uvm_reg_data_t value,\n                                      input uvm_predict_e  kind,\n                                      input uvm_path_e     path,\n                                      input uvm_reg_map    map);\n      if (kind != UVM_PREDICT_WRITE) return;\n      if (path != UVM_FRONTDOOR) return;\n\n      value = previous + 1;\n   endfunction\n   \nendclass\n\n\nclass user_acp_reg extends uvm_reg;\n\n   local uvm_reg_field value;\n\n   `uvm_object_utils(user_acp_reg)\n\n   function new(string name = \&quot;user_acp_reg\&quot;);\n      super.new(name,16,UVM_NO_COVERAGE);\n   endfunction: new\n\n   virtual function void build();\n      value = uvm_reg_field::type_id::create(\&quot;value\&quot;,,get_full_name());\n      value.configure(this, 16, 0, \&quot;RW\&quot;, 0, 16&#x27;h0000, 1, 0, 0);\n      value.set_compare(UVM_NO_CHECK);\n\n      uvm_resource_db#(bit)::set({\&quot;REG::\&quot;,get_full_name()},\n                                 \&quot;NO_REG_BIT_BASH_TEST\&quot;, 1);\n      uvm_resource_db#(bit)::set({\&quot;REG::\&quot;,get_full_name()},\n                                 \&quot;NO_REG_ACCESS_TEST\&quot;, 1);\n\n      begin\n         user_acp_incr_on_write_cbs cb = new;\n         uvm_reg_field_cb::add(value, cb);\n      end\n   endfunction: build\n\n\n   virtual task pre_write(uvm_reg_item rw);\n      uvm_reg_data_t m_data;\n      uvm_reg rg;\n\n      assert($cast(rg,rw.element));\n\n      // Predict the value that will be in the register\n      m_data = rg.get() + 1;\n      \n      // If a backdoor write is used, replace the value written\n      // with the incremented value to emulate the front-door\n      if (rw.path == UVM_BACKDOOR)\n         rw.value[0] = m_data;\n   endtask: pre_write\n\nendclass : user_acp_reg\n\n\nclass block_B extends uvm_reg_block;\n   user_acp_reg user_acp;\n\n   `uvm_object_utils(block_B)\n   \n   function new(string name = \&quot;B\&quot;);\n      super.new(name, UVM_NO_COVERAGE);\n   endfunction: new\n   \n   virtual function void build();\n\n      default_map = create_map(\&quot;\&quot;, 0, 1, UVM_BIG_ENDIAN);\n\n      user_acp = user_acp_reg::type_id::create(\&quot;user_acp\&quot;,,get_full_name());\n      user_acp.configure(this, null, \&quot;acp\&quot;);\n      user_acp.build();\n\n      default_map.add_reg(user_acp, &#x27;h0000,  \&quot;RW\&quot;);\n   endfunction : build\n\nendclass : block_B\n&quot;}, {&quot;name&quot;: &quot;tb_env.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010-2011 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`include \&quot;reg_agent.sv\&quot;\n\nclass dut_rw;\n   static task rw(reg_rw rw);\n      casez (rw.addr)\n       &#x27;h0000: // acp (MSB)\n          if (rw.read) rw.data = dut.acp[15:8];\n       &#x27;h0001: // acp (LSB)\n          if (rw.read) rw.data = dut.acp[7:0];\n          else dut.acp++;\n      endcase\n      #1;\n      // $write(\&quot;%s\\n\&quot;, rw.convert2string());\n   endtask\nendclass\n\n\nclass tb_env extends uvm_env;\n\n   `uvm_component_utils(tb_env)\n\n   block_B   regmodel;\n   reg_agent#(dut_rw) bus;\n   uvm_reg_predictor#(reg_rw) predict;\n\n   function new(string name = \&quot;tb_env\&quot;, uvm_component parent=null);\n      super.new(name, parent);\n   endfunction: new\n\n   virtual function void build_phase(uvm_phase phase);\n      regmodel = block_B::type_id::create(\&quot;regmodel\&quot;);\n      regmodel.build();\n      regmodel.lock_model();\n\n      bus = reg_agent#(dut_rw)::type_id::create(\&quot;bus\&quot;, this);\n      predict = uvm_reg_predictor#(reg_rw)::type_id::create(\&quot;predict\&quot;, this);\n\n      regmodel.set_hdl_path_root(\&quot;dut\&quot;);\n  endfunction: build_phase\n\n   virtual function void connect_phase(uvm_phase phase);\n      reg2rw_adapter reg2rw  = new(\&quot;reg2rw\&quot;);\n      regmodel.default_map.set_sequencer(bus.sqr, reg2rw);\n\n      predict.map = regmodel.default_map;\n      predict.adapter = reg2rw;\n      bus.mon.ap.connect(predict.bus_in);\n      regmodel.default_map.set_auto_predict(0);\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_run.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010-2011 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n`include \&quot;uvm_pkg.sv\&quot;\n\n`include \&quot;dut.sv\&quot;\n\nprogram tb;\n\nimport uvm_pkg::*;\n\n`include \&quot;regmodel.sv\&quot;\n`include \&quot;tb_env.sv\&quot;\n\n\nclass tb_test extends uvm_test;\n\n   function new(string name = \&quot;tb_test\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n   endfunction\n\n   virtual task run_phase(uvm_phase phase);\n      tb_env env;\n      uvm_status_e   status;\n      uvm_reg_data_t data;\n\n      phase.raise_objection(this);\n      \n      if (!$cast(env, uvm_top.find(\&quot;env\&quot;)) || env == null) begin\n         `uvm_fatal(\&quot;test\&quot;, \&quot;Cannot find tb_env\&quot;);\n      end\n\n      env.regmodel.reset();\n\n      begin\n         uvm_reg_sequence seq;\n\n         seq = uvm_reg_hw_reset_seq::type_id::create(\&quot;seq\&quot;);\n         seq.model = env.regmodel;\n         seq.start(null);\n         seq.wait_for_sequence_state(UVM_FINISHED);\n      end\n\n      `uvm_info(\&quot;Test\&quot;, \&quot;Performing 257 writes...\&quot;, UVM_LOW)\n\n      repeat (257) begin\n         env.regmodel.user_acp.write(status, $random());\n      end\n      env.regmodel.user_acp.mirror(status, UVM_CHECK);\n\n      `uvm_info(\&quot;Test\&quot;, \&quot;Resetting DUT...\&quot;, UVM_LOW)\n      dut.reset();\n      env.regmodel.reset();\n      env.regmodel.user_acp.mirror(status, UVM_CHECK);\n      \n      phase.drop_objection(this);\n   endtask\nendclass\n\n\ninitial begin automatic uvm_coreservice_t cs_ = uvm_coreservice_t::get();\n\n   tb_env env;\n   tb_test test;\n   uvm_report_server svr;\n\n   env = new(\&quot;env\&quot;);\n   test = new(\&quot;test\&quot;);\n\n   svr = cs_.get_report_server();\n   svr.set_max_quit_count(10);\n   \n   run_test();\nend\n\nendprogram\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Cadence\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../../..\n\ninclude ../../../../Makefile.ius\n\n\nall: \n\t$(IUS)  +incdir+../../common tb_run.sv\n\t$(CHECK)\n\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../../..\nUSES_DPI = 1\ninclude ../../../../Makefile.questa\n\n\nall: prepare comp run\n\ncomp:\n\t$(VLOG) +incdir+../../common tb_run.sv\n\nrun:\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../../..\n\ninclude ../../../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) +incdir+../../common tb_run.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}]'></div>
+  <div id="stepper-payload" style="display:none;" data-stepper='[]'></div>
+  <script src="../../js/page_common.js"></script>
   <script src="../../js/example_page.js"></script>
 </body>
 </html>

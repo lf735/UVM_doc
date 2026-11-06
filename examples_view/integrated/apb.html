@@ -24,121 +24,104 @@
 </head>
 <body class="doc-body example-body">
   <div class="doc-page-container">
-
-    <!-- Document Breadcrumbs -->
     <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
-      <a href="../../index.html#/examples" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Examples</a>
-      <span class="doc-breadcrumb-sep">/</span>
-      <span class="doc-breadcrumb-item">Integrated Environments &amp; VIPs</span>
-      <span class="doc-breadcrumb-sep">/</span>
-      <span class="doc-breadcrumb-item active">APB VIP Agent Library</span>
-    </nav>
-
-    <!-- Source Banner & Actions -->
+  <a href="../../index.html#/examples" class="doc-breadcrumb-item doc-breadcrumb-link doc-breadcrumb-home">Examples</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">Integrated Environments &amp; VIPs</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">APB VIP Agent Library</span>
+</nav>
     <div class="doc-source-banner example-source-banner">
-      <div class="banner-info">
-        <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span class="file-label">Suite:</span>
-        <code class="banner-file-code">uvm-1.2/examples/integrated/apb</code>
-        <span class="badge badge-scope badge-scope-integrated">Integrated VIP / Env</span>
-        <span class="badge badge-diff badge-diff-intermediate">Intermediate</span>
-        <span class="badge badge-files">8 files</span>
-      </div>
-
-      <div class="banner-actions">
-        <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="src_view/reg/uvm_reg_adapter.svh.html#L38" title="View side-by-side with UVM source code in Split View">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
-          <span>Split View</span>
-        </button>
-        <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Download (.zip)</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- 2-Column Documentation Layout (Harmonized with docs_view) -->
+  <div class="banner-info">
+    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <span class="file-label">Suite:</span>
+    <code class="banner-file-code">uvm-1.2/examples/integrated/apb</code>
+    <span class="badge badge-scope badge-scope-integrated">Integrated VIP / Env</span>
+    <span class="badge badge-diff badge-diff-intermediate">Intermediate</span>
+    <span class="badge badge-files">8 files</span>
+  </div>
+  <div class="banner-actions">
+    <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="src_view/reg/uvm_reg_adapter.svh.html#L38" title="View side-by-side with UVM source code in Split View">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+      <span>Split View</span>
+    </button>
+    <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Download (.zip)</span>
+    </button>
+  </div>
+</div>
     <div class="doc-layout-wrapper">
       <div class="doc-main-content">
         <div id="Content">
-
-          <!-- Main Class / Overview Topic -->
           <div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
-            <div class="CTopic" id="MainTopic">
-              <h1 class="CTitle"><a name="APB VIP Agent Library">APB VIP Agent Library</a></h1>
-              <div class="CBody">
-                <p class="example-summary-desc">Reusable AMBA APB (Advanced Peripheral Bus) UVC package: master agent, configurable sequencer, monitor, signal interface, and read/write transfer sequences.</p>
-                <div class="example-api-pills">
-                  <span class="api-label">Key UVM APIs:</span>
-                  <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_agent">uvm_agent</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_driver">uvm_driver</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_monitor">uvm_monitor</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_sequence">uvm_sequence</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="apb_rw">apb_rw</a>
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="CTopic" id="MainTopic">
+    <h1 class="CTitle"><a name="APB VIP Agent Library">APB VIP Agent Library</a></h1>
+    <div class="CBody">
+      <p class="example-summary-desc">Reusable AMBA APB (Advanced Peripheral Bus) UVC package: master agent, configurable sequencer, monitor, signal interface, and read/write transfer sequences.</p>
+      <div class="example-api-pills">
+        <span class="api-label">Key UVM APIs:</span>
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_agent">uvm_agent</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_driver">uvm_driver</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_monitor">uvm_monitor</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_sequence">uvm_sequence</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="apb_rw">apb_rw</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <!-- Interactive Visual Flow Stepper (If Supported) -->
-          
-
-          <!-- Testbench Architecture Topology -->
-          <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
-              <div class="CBody">
-                <div class="topo-grid">
-                  
+<div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
+    <div class="CBody">
+      <div class="topo-grid">
         <div class="topo-card">
-          <div class="topo-header">
-            <span class="topo-badge">agent</span>
-            <strong>apb_agent</strong>
-          </div>
-          
-        </div>
-        
-                </div>
+  <div class="topo-header">
+    <span class="topo-badge">agent</span>
+    <strong>apb_agent</strong>
+  </div>
+  
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
+    <div class="CBody">
+      <div class="studio-section">
+        <div class="studio-header">
+          <div class="studio-toolbar">
+            <div class="studio-toolbar-left">
+              <div class="studio-file-select-wrapper" title="Jump directly to any file in this studio">
+                <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
+                  <option value="0">📄 apb.sv</option><option value="1">📄 apb_agent.sv</option><option value="2">📄 apb_config.sv</option><option value="3">📄 apb_if.sv</option><option value="4">📄 apb_master.sv</option><option value="5">📄 apb_monitor.sv</option><option value="6">📄 apb_rw.sv</option><option value="7">📄 apb_sequencer.sv</option>
+                </select>
               </div>
+            </div>
+
+            <div class="studio-toolbar-actions">
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              </button>
             </div>
           </div>
 
-          <!-- Multi-File Code Studio -->
-          <div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
-              <div class="CBody">
-                <div class="studio-section">
-                  <div class="studio-header">
-                    <div class="studio-toolbar">
-                      <div class="studio-toolbar-left">
-                        <div class="studio-file-select-wrapper" title="Jump directly to any file in this example">
-                          <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
-                            <option value="0">📄 apb.sv</option><option value="1">📄 apb_agent.sv</option><option value="2">📄 apb_config.sv</option><option value="3">📄 apb_if.sv</option><option value="4">📄 apb_master.sv</option><option value="5">📄 apb_monitor.sv</option><option value="6">📄 apb_rw.sv</option><option value="7">📄 apb_sequencer.sv</option>
-                          </select>
-                        </div>
-                      </div>
+          <div class="studio-tab-bar-wrapper">
+            <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
+            <div class="studio-tab-bar" id="studio-tab-bar">
+              <button type="button" class="studio-tab active" data-file-idx="0" title="apb.sv"><span class="tab-icon">📄</span><span class="tab-name">apb.sv</span></button><button type="button" class="studio-tab " data-file-idx="1" title="apb_agent.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_agent.sv</span></button><button type="button" class="studio-tab " data-file-idx="2" title="apb_config.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_config.sv</span></button><button type="button" class="studio-tab " data-file-idx="3" title="apb_if.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_if.sv</span></button><button type="button" class="studio-tab " data-file-idx="4" title="apb_master.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_master.sv</span></button><button type="button" class="studio-tab " data-file-idx="5" title="apb_monitor.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_monitor.sv</span></button><button type="button" class="studio-tab " data-file-idx="6" title="apb_rw.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_rw.sv</span></button><button type="button" class="studio-tab " data-file-idx="7" title="apb_sequencer.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_sequencer.sv</span></button>
+            </div>
+            <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
+          </div>
+        </div>
 
-                      <div class="studio-toolbar-actions">
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="studio-tab-bar-wrapper">
-                      <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
-                      <div class="studio-tab-bar" id="studio-tab-bar">
-                        <button type="button" class="studio-tab active" data-file-idx="0" title="apb.sv"><span class="tab-icon">📄</span><span class="tab-name">apb.sv</span></button><button type="button" class="studio-tab " data-file-idx="1" title="apb_agent.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_agent.sv</span></button><button type="button" class="studio-tab " data-file-idx="2" title="apb_config.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_config.sv</span></button><button type="button" class="studio-tab " data-file-idx="3" title="apb_if.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_if.sv</span></button><button type="button" class="studio-tab " data-file-idx="4" title="apb_master.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_master.sv</span></button><button type="button" class="studio-tab " data-file-idx="5" title="apb_monitor.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_monitor.sv</span></button><button type="button" class="studio-tab " data-file-idx="6" title="apb_rw.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_rw.sv</span></button><button type="button" class="studio-tab " data-file-idx="7" title="apb_sequencer.sv"><span class="tab-icon">📄</span><span class="tab-name">apb_sequencer.sv</span></button>
-                      </div>
-                      <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
-                    </div>
-                  </div>
-
-                  <div class="studio-code-container" id="studio-code-container">
-                    <div class="file-code-pane active" id="file-pane-0"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+        <div class="studio-code-container" id="studio-code-container">
+          <div class="file-code-pane active" id="file-pane-0"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
 <tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// -------------------------------------------------------------</span></td></tr>
 <tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//    Copyright 2004-2011 Synopsys, Inc.</span></td></tr>
 <tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//    Copyright 2010 Mentor Graphics Corporation</span></td></tr>
@@ -702,48 +685,46 @@
 <tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">&nbsp;</td></tr>
 <tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code"><span class="sv-preproc">`endif</span></td></tr>
 <tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">&nbsp;</td></tr></tbody></table></div>
-                  </div>
-                </div>
-              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
+    <div class="CBody">
+      <div class="sim-section">
+        <!-- Simulator Command Selector -->
+        <div class="sim-cmd-card">
+          <div class="sim-tabs">
+            <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
+            <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
+            <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
+          </div>
+          <div class="sim-cmd-box">
+            <code id="sim-cmd-text">make -f Makefile.questa run</code>
+            <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
+          </div>
+        </div>
+
+        <!-- Terminal Log -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
+            <div class="terminal-filters">
+              <button type="button" class="term-filter active" data-level="all">All</button>
+              <button type="button" class="term-filter" data-level="info">Info</button>
+              <button type="button" class="term-filter" data-level="warning">Warning</button>
+              <button type="button" class="term-filter" data-level="error">Error</button>
             </div>
           </div>
-
-          <!-- Simulation & Execution Output Console -->
-          <div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
-              <div class="CBody">
-                <div class="sim-section">
-                  <!-- Simulator Command Selector -->
-                  <div class="sim-cmd-card">
-                    <div class="sim-tabs">
-                      <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
-                      <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
-                      <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
-                    </div>
-                    <div class="sim-cmd-box">
-                      <code id="sim-cmd-text">make -f Makefile.questa run</code>
-                      <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
-                    </div>
-                  </div>
-
-                  <!-- Terminal Log -->
-                  <div class="terminal-card">
-                    <div class="terminal-header">
-                      <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                      </div>
-                      <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
-                      <div class="terminal-filters">
-                        <button type="button" class="term-filter active" data-level="all">All</button>
-                        <button type="button" class="term-filter" data-level="info">Info</button>
-                        <button type="button" class="term-filter" data-level="warning">Warning</button>
-                        <button type="button" class="term-filter" data-level="error">Error</button>
-                      </div>
-                    </div>
-                    <pre class="terminal-body" id="terminal-body">----------------------------------------------------------------
+          <pre class="terminal-body" id="terminal-body">----------------------------------------------------------------
 Questa/VCS/Xcelium UVM 1.2 Simulation Log
 Example: APB VIP Agent Library (integrated/apb)
 ----------------------------------------------------------------
@@ -786,40 +767,32 @@ UVM_FATAL :    0
 [STIMULUS]  1
 [PKT]       3
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div> <!-- #Content -->
-      </div> <!-- .doc-main-content -->
-
-      <!-- Sticky In-Page Table of Contents ("On this page") -->
-      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
-        <div class="doc-toc-inner">
-          <div class="doc-toc-header">
-            <span class="doc-toc-title">On this page</span>
-            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
-              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4 14 12 6 20 14"/>
-              </svg>
-              <span class="toc-toggle-text">Collapse all</span>
-            </button>
-          </div>
-          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
         </div>
-      </aside>
-
-    </div> <!-- .doc-layout-wrapper -->
-
-  </div> <!-- .doc-page-container -->
-
-  <!-- Data payload for client scripts -->
-  <div id="zip-payload" style="display:none;" data-zip="[{&quot;name&quot;: &quot;apb.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n`ifndef APB__SV\n`define APB__SV\n\n`include \&quot;apb_if.sv\&quot;\n`include \&quot;uvm_macros.svh\&quot;\n\npackage apb_pkg; \n\n  import uvm_pkg::*;\n\n  typedef virtual apb_if apb_vif;\n\n  typedef class apb_agent;\n\n `include \&quot;apb_rw.sv\&quot;\n `include \&quot;apb_config.sv\&quot;\n `include \&quot;apb_master.sv\&quot;\n `include \&quot;apb_monitor.sv\&quot;\n `include \&quot;apb_sequencer.sv\&quot;\n `include \&quot;apb_agent.sv\&quot;\nendpackage\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;apb_agent.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010-2011 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_AGENT__SV\n`define APB_AGENT__SV\n\n\ntypedef class apb_agent;\n\n\nclass apb_agent extends uvm_agent;\n\n   apb_sequencer sqr;\n   apb_master    drv;\n   apb_monitor   mon;\n\n   apb_vif       vif;\n\n   `uvm_component_utils_begin(apb_agent)\n      `uvm_field_object(sqr, UVM_ALL_ON)\n      `uvm_field_object(drv, UVM_ALL_ON)\n      `uvm_field_object(mon, UVM_ALL_ON)\n   `uvm_component_utils_end\n   \n   function new(string name, uvm_component parent = null);\n      super.new(name, parent);\n   endfunction\n\n   virtual function void build_phase(uvm_phase phase);\n      sqr = apb_sequencer::type_id::create(\&quot;sqr\&quot;, this);\n      drv = apb_master::type_id::create(\&quot;drv\&quot;, this);\n      mon = apb_monitor::type_id::create(\&quot;mon\&quot;, this);\n      \n      if (!uvm_config_db#(apb_vif)::get(this, \&quot;\&quot;, \&quot;vif\&quot;, vif)) begin\n         `uvm_fatal(\&quot;APB/AGT/NOVIF\&quot;, \&quot;No virtual interface specified for this agent instance\&quot;)\n      end\n   endfunction: build_phase\n\n   virtual function void connect_phase(uvm_phase phase);\n      drv.seq_item_port.connect(sqr.seq_item_export);\n   endfunction\nendclass: apb_agent\n\n`endif\n\n\n&quot;}, {&quot;name&quot;: &quot;apb_config.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\nclass apb_config extends uvm_object;\n\n   `uvm_object_utils(apb_config)\n   virtual apb_if vif;\n  \n\n  function new(string name=\&quot;apb_config\&quot;);\n     super.new(name);\n  endfunction\n\nendclass\n\n&quot;}, {&quot;name&quot;: &quot;apb_if.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_IF__SV\n`define APB_IF__SV\n\n`timescale 1ns/1ns\n\ninterface apb_if(input bit pclk);\n   wire [31:0] paddr;\n   wire        psel;\n   wire        penable;\n   wire        pwrite;\n   wire [31:0] prdata;\n   wire [31:0] pwdata;\n\n\n   clocking mck @(posedge pclk);\n      output paddr, psel, penable, pwrite, pwdata;\n      input  prdata;\n\n      sequence at_posedge;\n         1;\n      endsequence : at_posedge\n   endclocking: mck\n\n   clocking sck @(posedge pclk);\n      input  paddr, psel, penable, pwrite, pwdata;\n      output prdata;\n\n      sequence at_posedge_; // FIXME todo review \n         1;\n      endsequence : at_posedge_\n   endclocking: sck\n\n   clocking pck @(posedge pclk);\n      input paddr, psel, penable, pwrite, prdata, pwdata;\n   endclocking: pck\n\n   modport master(clocking mck);\n   modport slave(clocking sck);\n   modport passive(clocking pck);\n\nendinterface: apb_if\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;apb_master.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010-2011 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_MASTER__SV\n`define APB_MASTER__SV\n\ntypedef class apb_master;\nclass apb_master_cbs extends uvm_callback;\n    virtual task trans_received (apb_master xactor , apb_rw cycle);endtask\n    virtual task trans_executed (apb_master xactor , apb_rw cycle);endtask\nendclass\n\nclass apb_master extends uvm_driver#(apb_rw);\n\n    `uvm_component_utils(apb_master)\n  \n   event trig;\n   apb_vif sigs;\n   apb_config cfg;\n\n   function new(string name,uvm_component parent = null);\n      super.new(name,parent);\n   endfunction\n   \n   virtual function void build_phase(uvm_phase phase);\n      apb_agent agent;\n      if ($cast(agent, get_parent()) &amp;&amp; agent != null) begin\n         sigs = agent.vif;\n      end\n      else begin\n         if (!uvm_config_db#(apb_vif)::get(this, \&quot;\&quot;, \&quot;vif\&quot;, sigs)) begin\n            `uvm_fatal(\&quot;APB/DRV/NOVIF\&quot;, \&quot;No virtual interface specified for this driver instance\&quot;)\n         end\n      end\n   endfunction\n\n   virtual task run_phase(uvm_phase phase);\n      super.run_phase(phase);\n\n      this.sigs.mck.psel    &lt;= &#x27;0;\n      this.sigs.mck.penable &lt;= &#x27;0;\n\n      forever begin\n         apb_rw tr;\n         @ (this.sigs.mck);\n\n         seq_item_port.get_next_item(tr);\n\n         // TODO: QUESTA issue with hier ref to sequence via modport; need workaround?\n`ifdef VCS\n         if (!this.sigs.mck.at_posedge.triggered)\n`endif\n\n`ifdef INCA\n          // FIXME      if (!this.sigs.mck.at_posedge.triggered) // this is wrong and has to be reviewed\n`endif\n`ifdef QUESTA\t\n\t   if (!this.sigs.mck.triggered)\n`endif\n\t    @ (this.sigs.mck);\n         \n         this.trans_received(tr);\n         `uvm_do_callbacks(apb_master,apb_master_cbs,trans_received(this,tr))\n         \n\t case (tr.kind)\n          apb_rw::READ:  this.read(tr.addr, tr.data);  \n          apb_rw::WRITE: this.write(tr.addr, tr.data);\n         endcase\n         \n         this.trans_executed(tr);\n         `uvm_do_callbacks(apb_master,apb_master_cbs,trans_executed(this,tr))\n\n         seq_item_port.item_done();\n\t -&gt;trig ;\n      end\n   endtask: run_phase\n\n   virtual protected task read(input  bit   [31:0] addr,\n                               output logic [31:0] data);\n\n      this.sigs.mck.paddr   &lt;= addr;\n      this.sigs.mck.pwrite  &lt;= &#x27;0;\n      this.sigs.mck.psel    &lt;= &#x27;1;\n      @ (this.sigs.mck);\n      this.sigs.mck.penable &lt;= &#x27;1;\n      @ (this.sigs.mck);\n      data = this.sigs.mck.prdata;\n      this.sigs.mck.psel    &lt;= &#x27;0;\n      this.sigs.mck.penable &lt;= &#x27;0;\n   endtask: read\n\n   virtual protected task write(input bit [31:0] addr,\n                                input bit [31:0] data);\n      this.sigs.mck.paddr   &lt;= addr;\n      this.sigs.mck.pwdata  &lt;= data;\n      this.sigs.mck.pwrite  &lt;= &#x27;1;\n      this.sigs.mck.psel    &lt;= &#x27;1;\n      @ (this.sigs.mck);\n      this.sigs.mck.penable &lt;= &#x27;1;\n      @ (this.sigs.mck);\n      this.sigs.mck.psel    &lt;= &#x27;0;\n      this.sigs.mck.penable &lt;= &#x27;0;\n   endtask: write\n\n   virtual protected task trans_received(apb_rw tr);\n   endtask\n \n   virtual protected task trans_executed(apb_rw tr);\n   endtask\nendclass: apb_master\n\n`endif\n\n\n&quot;}, {&quot;name&quot;: &quot;apb_monitor.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010-2011 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_MONITOR__SV\n`define APB_MONITOR__SV\n\n\ntypedef class apb_monitor;\n\nclass apb_monitor_cbs extends uvm_callback;\n  virtual function void trans_observed(apb_monitor xactor,apb_rw cycle);\n  endfunction:trans_observed\nendclass: apb_monitor_cbs\n\n\nclass apb_monitor extends uvm_monitor;\n   virtual apb_if.passive sigs;\n\n   uvm_analysis_port#(apb_rw) ap;\n   apb_config cfg;\n\n   `uvm_component_utils(apb_monitor)\n\n   function new(string name, uvm_component parent = null);\n      super.new(name, parent);\n      ap = new(\&quot;ap\&quot;, this);\n   endfunction: new\n\n   virtual function void build_phase(uvm_phase phase);\n      apb_agent agent;\n      if ($cast(agent, get_parent()) &amp;&amp; agent != null) begin\n         sigs = agent.vif;\n      end\n      else begin\n         virtual apb_if tmp;\n         if (!uvm_config_db#(apb_vif)::get(this, \&quot;\&quot;, \&quot;vif\&quot;, tmp)) begin\n            `uvm_fatal(\&quot;APB/MON/NOVIF\&quot;, \&quot;No virtual interface specified for this monitor instance\&quot;)\n         end\n         sigs = tmp;\n      end\n   endfunction\n\n   virtual task run_phase(uvm_phase phase);\n      super.run_phase(phase);\n      forever begin\n         apb_rw tr;\n         \n         // Wait for a SETUP cycle\n         do begin\n            @ (this.sigs.pck);\n         end\n         while (this.sigs.pck.psel !== 1&#x27;b1 ||\n                this.sigs.pck.penable !== 1&#x27;b0);\n\n         tr = apb_rw::type_id::create(\&quot;tr\&quot;, this);\n         \n         tr.kind = (this.sigs.pck.pwrite) ? apb_rw::WRITE : apb_rw::READ;\n         tr.addr = this.sigs.pck.paddr;\n\n         @ (this.sigs.pck);\n         if (this.sigs.pck.penable !== 1&#x27;b1) begin\n            `uvm_error(\&quot;APB\&quot;, \&quot;APB protocol violation: SETUP cycle not followed by ENABLE cycle\&quot;);\n         end\n         tr.data = (tr.kind == apb_rw::READ) ? this.sigs.pck.prdata :\n                                               this.sigs.pck.pwdata;\n\n         trans_observed(tr);\n         `uvm_do_callbacks(apb_monitor,apb_monitor_cbs,trans_observed(this,tr))\n\n         ap.write(tr);\n      end\n   endtask: run_phase\n\n   virtual protected task trans_observed(apb_rw tr);\n   endtask\n\nendclass: apb_monitor\n\n`endif\n\n\n&quot;}, {&quot;name&quot;: &quot;apb_rw.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_RW__SV\n`define APB_RW__SV\n\nclass apb_rw extends uvm_sequence_item;\n  \n   typedef enum {READ, WRITE} kind_e;\n   rand bit   [31:0] addr;\n   rand logic [31:0] data;\n   rand kind_e kind;  \n \n   `uvm_object_utils_begin(apb_rw)\n     `uvm_field_int(addr, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_int(data, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_enum(kind_e,kind, UVM_ALL_ON | UVM_NOPACK);\n   `uvm_object_utils_end\n   \n   function new (string name = \&quot;apb_rw\&quot;);\n      super.new(name);\n   endfunction\n\n   function string convert2string();\n     return $sformatf(\&quot;kind=%s addr=%0h data=%0h\&quot;,kind,addr,data);\n   endfunction\n\nendclass: apb_rw\n\n\nclass reg2apb_adapter extends uvm_reg_adapter;\n\n  `uvm_object_utils(reg2apb_adapter)\n\n   function new(string name = \&quot;reg2apb_adapter\&quot;);\n      super.new(name);\n   endfunction \n\n  virtual function uvm_sequence_item reg2bus(const ref uvm_reg_bus_op rw);\n    apb_rw apb = apb_rw::type_id::create(\&quot;apb_rw\&quot;);\n    apb.kind = (rw.kind == UVM_READ) ? apb_rw::READ : apb_rw::WRITE;\n    apb.addr = rw.addr;\n    apb.data = rw.data;\n    return apb;\n  endfunction\n\n  virtual function void bus2reg(uvm_sequence_item bus_item,\n                                ref uvm_reg_bus_op rw);\n    apb_rw apb;\n    if (!$cast(apb,bus_item)) begin\n      `uvm_fatal(\&quot;NOT_APB_TYPE\&quot;,\&quot;Provided bus_item is not of the correct type\&quot;)\n      return;\n    end\n    rw.kind = apb.kind == apb_rw::READ ? UVM_READ : UVM_WRITE;\n    rw.addr = apb.addr;\n    rw.data = apb.data;\n    rw.status = UVM_IS_OK;\n  endfunction\n\nendclass\n\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;apb_sequencer.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n`ifndef APB_SEQUENCER__SV\n`define APB_SEQUENCER__SV\n\nclass apb_sequencer extends uvm_sequencer #(apb_rw);\n\n   `uvm_component_utils(apb_sequencer)\n\n   function new(input string name, uvm_component parent=null);\n      super.new(name, parent);\n   endfunction : new\n\nendclass : apb_sequencer\n\n`endif\n\n&quot;}]"></div>
-  <div id="stepper-payload" style="display:none;" data-stepper="[]"></div>
-
-  <script src="../../js/doc_page.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+  <div class="doc-toc-inner">
+    <div class="doc-toc-header">
+      <span class="doc-toc-title">On this page</span>
+      <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+        <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="4 14 12 6 20 14"/>
+        </svg>
+        <span class="toc-toggle-text">Collapse all</span>
+      </button>
+    </div>
+    <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+  </div>
+</aside>
+    </div>
+  </div>
+  <div id="zip-payload" style="display:none;" data-zip='[{&quot;name&quot;: &quot;apb.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n`ifndef APB__SV\n`define APB__SV\n\n`include \&quot;apb_if.sv\&quot;\n`include \&quot;uvm_macros.svh\&quot;\n\npackage apb_pkg; \n\n  import uvm_pkg::*;\n\n  typedef virtual apb_if apb_vif;\n\n  typedef class apb_agent;\n\n `include \&quot;apb_rw.sv\&quot;\n `include \&quot;apb_config.sv\&quot;\n `include \&quot;apb_master.sv\&quot;\n `include \&quot;apb_monitor.sv\&quot;\n `include \&quot;apb_sequencer.sv\&quot;\n `include \&quot;apb_agent.sv\&quot;\nendpackage\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;apb_agent.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010-2011 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_AGENT__SV\n`define APB_AGENT__SV\n\n\ntypedef class apb_agent;\n\n\nclass apb_agent extends uvm_agent;\n\n   apb_sequencer sqr;\n   apb_master    drv;\n   apb_monitor   mon;\n\n   apb_vif       vif;\n\n   `uvm_component_utils_begin(apb_agent)\n      `uvm_field_object(sqr, UVM_ALL_ON)\n      `uvm_field_object(drv, UVM_ALL_ON)\n      `uvm_field_object(mon, UVM_ALL_ON)\n   `uvm_component_utils_end\n   \n   function new(string name, uvm_component parent = null);\n      super.new(name, parent);\n   endfunction\n\n   virtual function void build_phase(uvm_phase phase);\n      sqr = apb_sequencer::type_id::create(\&quot;sqr\&quot;, this);\n      drv = apb_master::type_id::create(\&quot;drv\&quot;, this);\n      mon = apb_monitor::type_id::create(\&quot;mon\&quot;, this);\n      \n      if (!uvm_config_db#(apb_vif)::get(this, \&quot;\&quot;, \&quot;vif\&quot;, vif)) begin\n         `uvm_fatal(\&quot;APB/AGT/NOVIF\&quot;, \&quot;No virtual interface specified for this agent instance\&quot;)\n      end\n   endfunction: build_phase\n\n   virtual function void connect_phase(uvm_phase phase);\n      drv.seq_item_port.connect(sqr.seq_item_export);\n   endfunction\nendclass: apb_agent\n\n`endif\n\n\n&quot;}, {&quot;name&quot;: &quot;apb_config.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\nclass apb_config extends uvm_object;\n\n   `uvm_object_utils(apb_config)\n   virtual apb_if vif;\n  \n\n  function new(string name=\&quot;apb_config\&quot;);\n     super.new(name);\n  endfunction\n\nendclass\n\n&quot;}, {&quot;name&quot;: &quot;apb_if.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_IF__SV\n`define APB_IF__SV\n\n`timescale 1ns/1ns\n\ninterface apb_if(input bit pclk);\n   wire [31:0] paddr;\n   wire        psel;\n   wire        penable;\n   wire        pwrite;\n   wire [31:0] prdata;\n   wire [31:0] pwdata;\n\n\n   clocking mck @(posedge pclk);\n      output paddr, psel, penable, pwrite, pwdata;\n      input  prdata;\n\n      sequence at_posedge;\n         1;\n      endsequence : at_posedge\n   endclocking: mck\n\n   clocking sck @(posedge pclk);\n      input  paddr, psel, penable, pwrite, pwdata;\n      output prdata;\n\n      sequence at_posedge_; // FIXME todo review \n         1;\n      endsequence : at_posedge_\n   endclocking: sck\n\n   clocking pck @(posedge pclk);\n      input paddr, psel, penable, pwrite, prdata, pwdata;\n   endclocking: pck\n\n   modport master(clocking mck);\n   modport slave(clocking sck);\n   modport passive(clocking pck);\n\nendinterface: apb_if\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;apb_master.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010-2011 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_MASTER__SV\n`define APB_MASTER__SV\n\ntypedef class apb_master;\nclass apb_master_cbs extends uvm_callback;\n    virtual task trans_received (apb_master xactor , apb_rw cycle);endtask\n    virtual task trans_executed (apb_master xactor , apb_rw cycle);endtask\nendclass\n\nclass apb_master extends uvm_driver#(apb_rw);\n\n    `uvm_component_utils(apb_master)\n  \n   event trig;\n   apb_vif sigs;\n   apb_config cfg;\n\n   function new(string name,uvm_component parent = null);\n      super.new(name,parent);\n   endfunction\n   \n   virtual function void build_phase(uvm_phase phase);\n      apb_agent agent;\n      if ($cast(agent, get_parent()) &amp;&amp; agent != null) begin\n         sigs = agent.vif;\n      end\n      else begin\n         if (!uvm_config_db#(apb_vif)::get(this, \&quot;\&quot;, \&quot;vif\&quot;, sigs)) begin\n            `uvm_fatal(\&quot;APB/DRV/NOVIF\&quot;, \&quot;No virtual interface specified for this driver instance\&quot;)\n         end\n      end\n   endfunction\n\n   virtual task run_phase(uvm_phase phase);\n      super.run_phase(phase);\n\n      this.sigs.mck.psel    &lt;= &#x27;0;\n      this.sigs.mck.penable &lt;= &#x27;0;\n\n      forever begin\n         apb_rw tr;\n         @ (this.sigs.mck);\n\n         seq_item_port.get_next_item(tr);\n\n         // TODO: QUESTA issue with hier ref to sequence via modport; need workaround?\n`ifdef VCS\n         if (!this.sigs.mck.at_posedge.triggered)\n`endif\n\n`ifdef INCA\n          // FIXME      if (!this.sigs.mck.at_posedge.triggered) // this is wrong and has to be reviewed\n`endif\n`ifdef QUESTA\t\n\t   if (!this.sigs.mck.triggered)\n`endif\n\t    @ (this.sigs.mck);\n         \n         this.trans_received(tr);\n         `uvm_do_callbacks(apb_master,apb_master_cbs,trans_received(this,tr))\n         \n\t case (tr.kind)\n          apb_rw::READ:  this.read(tr.addr, tr.data);  \n          apb_rw::WRITE: this.write(tr.addr, tr.data);\n         endcase\n         \n         this.trans_executed(tr);\n         `uvm_do_callbacks(apb_master,apb_master_cbs,trans_executed(this,tr))\n\n         seq_item_port.item_done();\n\t -&gt;trig ;\n      end\n   endtask: run_phase\n\n   virtual protected task read(input  bit   [31:0] addr,\n                               output logic [31:0] data);\n\n      this.sigs.mck.paddr   &lt;= addr;\n      this.sigs.mck.pwrite  &lt;= &#x27;0;\n      this.sigs.mck.psel    &lt;= &#x27;1;\n      @ (this.sigs.mck);\n      this.sigs.mck.penable &lt;= &#x27;1;\n      @ (this.sigs.mck);\n      data = this.sigs.mck.prdata;\n      this.sigs.mck.psel    &lt;= &#x27;0;\n      this.sigs.mck.penable &lt;= &#x27;0;\n   endtask: read\n\n   virtual protected task write(input bit [31:0] addr,\n                                input bit [31:0] data);\n      this.sigs.mck.paddr   &lt;= addr;\n      this.sigs.mck.pwdata  &lt;= data;\n      this.sigs.mck.pwrite  &lt;= &#x27;1;\n      this.sigs.mck.psel    &lt;= &#x27;1;\n      @ (this.sigs.mck);\n      this.sigs.mck.penable &lt;= &#x27;1;\n      @ (this.sigs.mck);\n      this.sigs.mck.psel    &lt;= &#x27;0;\n      this.sigs.mck.penable &lt;= &#x27;0;\n   endtask: write\n\n   virtual protected task trans_received(apb_rw tr);\n   endtask\n \n   virtual protected task trans_executed(apb_rw tr);\n   endtask\nendclass: apb_master\n\n`endif\n\n\n&quot;}, {&quot;name&quot;: &quot;apb_monitor.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010-2011 Mentor Graphics Corporation\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_MONITOR__SV\n`define APB_MONITOR__SV\n\n\ntypedef class apb_monitor;\n\nclass apb_monitor_cbs extends uvm_callback;\n  virtual function void trans_observed(apb_monitor xactor,apb_rw cycle);\n  endfunction:trans_observed\nendclass: apb_monitor_cbs\n\n\nclass apb_monitor extends uvm_monitor;\n   virtual apb_if.passive sigs;\n\n   uvm_analysis_port#(apb_rw) ap;\n   apb_config cfg;\n\n   `uvm_component_utils(apb_monitor)\n\n   function new(string name, uvm_component parent = null);\n      super.new(name, parent);\n      ap = new(\&quot;ap\&quot;, this);\n   endfunction: new\n\n   virtual function void build_phase(uvm_phase phase);\n      apb_agent agent;\n      if ($cast(agent, get_parent()) &amp;&amp; agent != null) begin\n         sigs = agent.vif;\n      end\n      else begin\n         virtual apb_if tmp;\n         if (!uvm_config_db#(apb_vif)::get(this, \&quot;\&quot;, \&quot;vif\&quot;, tmp)) begin\n            `uvm_fatal(\&quot;APB/MON/NOVIF\&quot;, \&quot;No virtual interface specified for this monitor instance\&quot;)\n         end\n         sigs = tmp;\n      end\n   endfunction\n\n   virtual task run_phase(uvm_phase phase);\n      super.run_phase(phase);\n      forever begin\n         apb_rw tr;\n         \n         // Wait for a SETUP cycle\n         do begin\n            @ (this.sigs.pck);\n         end\n         while (this.sigs.pck.psel !== 1&#x27;b1 ||\n                this.sigs.pck.penable !== 1&#x27;b0);\n\n         tr = apb_rw::type_id::create(\&quot;tr\&quot;, this);\n         \n         tr.kind = (this.sigs.pck.pwrite) ? apb_rw::WRITE : apb_rw::READ;\n         tr.addr = this.sigs.pck.paddr;\n\n         @ (this.sigs.pck);\n         if (this.sigs.pck.penable !== 1&#x27;b1) begin\n            `uvm_error(\&quot;APB\&quot;, \&quot;APB protocol violation: SETUP cycle not followed by ENABLE cycle\&quot;);\n         end\n         tr.data = (tr.kind == apb_rw::READ) ? this.sigs.pck.prdata :\n                                               this.sigs.pck.pwdata;\n\n         trans_observed(tr);\n         `uvm_do_callbacks(apb_monitor,apb_monitor_cbs,trans_observed(this,tr))\n\n         ap.write(tr);\n      end\n   endtask: run_phase\n\n   virtual protected task trans_observed(apb_rw tr);\n   endtask\n\nendclass: apb_monitor\n\n`endif\n\n\n&quot;}, {&quot;name&quot;: &quot;apb_rw.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n\n`ifndef APB_RW__SV\n`define APB_RW__SV\n\nclass apb_rw extends uvm_sequence_item;\n  \n   typedef enum {READ, WRITE} kind_e;\n   rand bit   [31:0] addr;\n   rand logic [31:0] data;\n   rand kind_e kind;  \n \n   `uvm_object_utils_begin(apb_rw)\n     `uvm_field_int(addr, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_int(data, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_enum(kind_e,kind, UVM_ALL_ON | UVM_NOPACK);\n   `uvm_object_utils_end\n   \n   function new (string name = \&quot;apb_rw\&quot;);\n      super.new(name);\n   endfunction\n\n   function string convert2string();\n     return $sformatf(\&quot;kind=%s addr=%0h data=%0h\&quot;,kind,addr,data);\n   endfunction\n\nendclass: apb_rw\n\n\nclass reg2apb_adapter extends uvm_reg_adapter;\n\n  `uvm_object_utils(reg2apb_adapter)\n\n   function new(string name = \&quot;reg2apb_adapter\&quot;);\n      super.new(name);\n   endfunction \n\n  virtual function uvm_sequence_item reg2bus(const ref uvm_reg_bus_op rw);\n    apb_rw apb = apb_rw::type_id::create(\&quot;apb_rw\&quot;);\n    apb.kind = (rw.kind == UVM_READ) ? apb_rw::READ : apb_rw::WRITE;\n    apb.addr = rw.addr;\n    apb.data = rw.data;\n    return apb;\n  endfunction\n\n  virtual function void bus2reg(uvm_sequence_item bus_item,\n                                ref uvm_reg_bus_op rw);\n    apb_rw apb;\n    if (!$cast(apb,bus_item)) begin\n      `uvm_fatal(\&quot;NOT_APB_TYPE\&quot;,\&quot;Provided bus_item is not of the correct type\&quot;)\n      return;\n    end\n    rw.kind = apb.kind == apb_rw::READ ? UVM_READ : UVM_WRITE;\n    rw.addr = apb.addr;\n    rw.data = apb.data;\n    rw.status = UVM_IS_OK;\n  endfunction\n\nendclass\n\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;apb_sequencer.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\n`ifndef APB_SEQUENCER__SV\n`define APB_SEQUENCER__SV\n\nclass apb_sequencer extends uvm_sequencer #(apb_rw);\n\n   `uvm_component_utils(apb_sequencer)\n\n   function new(input string name, uvm_component parent=null);\n      super.new(name, parent);\n   endfunction : new\n\nendclass : apb_sequencer\n\n`endif\n\n&quot;}]'></div>
+  <div id="stepper-payload" style="display:none;" data-stepper='[]'></div>
+  <script src="../../js/page_common.js"></script>
   <script src="../../js/example_page.js"></script>
 </body>
 </html>

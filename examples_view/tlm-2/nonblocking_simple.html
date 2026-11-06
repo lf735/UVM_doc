@@ -24,167 +24,146 @@
 </head>
 <body class="doc-body example-body">
   <div class="doc-page-container">
-
-    <!-- Document Breadcrumbs -->
     <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
-      <a href="../../index.html#/examples" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Examples</a>
-      <span class="doc-breadcrumb-sep">/</span>
-      <span class="doc-breadcrumb-item">TLM-2 Interconnects</span>
-      <span class="doc-breadcrumb-sep">/</span>
-      <span class="doc-breadcrumb-item active">Non-Blocking 4-Phase Protocol</span>
-    </nav>
-
-    <!-- Source Banner & Actions -->
+  <a href="../../index.html#/examples" class="doc-breadcrumb-item doc-breadcrumb-link doc-breadcrumb-home">Examples</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">TLM-2 Interconnects</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">Non-Blocking 4-Phase Protocol</span>
+</nav>
     <div class="doc-source-banner example-source-banner">
-      <div class="banner-info">
-        <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span class="file-label">Suite:</span>
-        <code class="banner-file-code">uvm-1.2/examples/simple/tlm2/nonblocking_simple</code>
-        
-        <span class="badge badge-diff badge-diff-advanced">Advanced</span>
-        <span class="badge badge-files">9 files</span>
-      </div>
-
-      <div class="banner-actions">
-        <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="src_view/tlm2/uvm_tlm2_sockets.svh.html#L112" title="View side-by-side with UVM source code in Split View">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
-          <span>Split View</span>
-        </button>
-        <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Download (.zip)</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- 2-Column Documentation Layout (Harmonized with docs_view) -->
+  <div class="banner-info">
+    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <span class="file-label">Suite:</span>
+    <code class="banner-file-code">uvm-1.2/examples/simple/tlm2/nonblocking_simple</code>
+    
+    <span class="badge badge-diff badge-diff-advanced">Advanced</span>
+    <span class="badge badge-files">9 files</span>
+  </div>
+  <div class="banner-actions">
+    <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="src_view/tlm2/uvm_tlm2_sockets.svh.html#L112" title="View side-by-side with UVM source code in Split View">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+      <span>Split View</span>
+    </button>
+    <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Download (.zip)</span>
+    </button>
+  </div>
+</div>
     <div class="doc-layout-wrapper">
       <div class="doc-main-content">
         <div id="Content">
-
-          <!-- Main Class / Overview Topic -->
           <div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
-            <div class="CTopic" id="MainTopic">
-              <h1 class="CTitle"><a name="Non-Blocking 4-Phase Protocol">Non-Blocking 4-Phase Protocol</a></h1>
-              <div class="CBody">
-                <p class="example-summary-desc">Exemplifies the full IEEE 1666 TLM-2 non-blocking 4-phase transaction protocol (BEGIN_REQ, END_REQ, BEGIN_RESP, END_RESP) modeling USB bulk transfers without simulation deadlocks.</p>
-                <div class="example-api-pills">
-                  <span class="api-label">Key UVM APIs:</span>
-                  <a href="#" class="api-pill clickable-uvm-sym" data-sym="nb_transport_fw">nb_transport_fw</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="nb_transport_bw">nb_transport_bw</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_tlm_phase_e">uvm_tlm_phase_e</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_tlm_sync_e">uvm_tlm_sync_e</a>
-                </div>
-              </div>
-            </div>
+  <div class="CTopic" id="MainTopic">
+    <h1 class="CTitle"><a name="Non-Blocking 4-Phase Protocol">Non-Blocking 4-Phase Protocol</a></h1>
+    <div class="CBody">
+      <p class="example-summary-desc">Exemplifies the full IEEE 1666 TLM-2 non-blocking 4-phase transaction protocol (BEGIN_REQ, END_REQ, BEGIN_RESP, END_RESP) modeling USB bulk transfers without simulation deadlocks.</p>
+      <div class="example-api-pills">
+        <span class="api-label">Key UVM APIs:</span>
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="nb_transport_fw">nb_transport_fw</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="nb_transport_bw">nb_transport_bw</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_tlm_phase_e">uvm_tlm_phase_e</a> <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_tlm_sync_e">uvm_tlm_sync_e</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Interactive Visual Flow Stepper Section -->
+<div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="FlowStepper">Simulation Flow Stepper</a></h2>
+    <div class="CBody">
+      <div class="stepper-section" id="visual-flow-stepper">
+        <div class="section-header-row">
+          <div class="section-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span class="section-title-text">Interactive Execution Progression</span>
           </div>
-
-          <!-- Interactive Visual Flow Stepper (If Supported) -->
-          
-        <!-- Interactive Visual Flow Stepper Section -->
-        <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
-          <div class="CTopic">
-            <h2 class="CTitle"><a name="FlowStepper">Simulation Flow Stepper</a></h2>
-            <div class="CBody">
-              <div class="stepper-section" id="visual-flow-stepper">
-                <div class="section-header-row">
-                  <div class="section-title">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                    <span class="section-title-text">Interactive Execution Progression</span>
-                  </div>
-                  <div class="stepper-controls">
-                    <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
-                    <button type="button" class="btn btn-sm btn-outline" id="stepper-play">Play &#9654;</button>
-                    <button type="button" class="btn btn-sm btn-primary" id="stepper-next">Next Step &rarr;</button>
-                  </div>
-                </div>
-
-                <div class="stepper-timeline" id="stepper-timeline">
-                  <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">BEGIN_REQ (Initiator -&gt; Target)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">END_REQ (Target -&gt; Initiator)</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">BEGIN_RESP (Target -&gt; Initiator)</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">END_RESP (Initiator -&gt; Target)</span></div>
-                </div>
-
-                <div class="step-card" id="step-detail-card">
-                  <div class="step-card-header">
-                    <h4 id="step-active-title">1. BEGIN_REQ (Initiator -&gt; Target)</h4>
-                    <span class="step-active-comp" id="step-active-comp">Target: host (initiator)</span>
-                  </div>
-                  <p id="step-active-desc">The host initiator initiates the transfer by calling `nb_transport_fw(xfer, BEGIN_REQ)`. The device endpoint records the transfer and responds `UVM_TLM_ACCEPTED`.</p>
-                  <div class="step-log-hint">
-                    <strong>Expected Log Output:</strong>
-                    <code id="step-active-log">UVM_INFO @ 0 ns: host [TLM2] nb_transport_fw(xfer, BEGIN_REQ)</code>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="stepper-controls">
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-play">Play &#9654;</button>
+            <button type="button" class="btn btn-sm btn-primary" id="stepper-next">Next Step &rarr;</button>
           </div>
         </div>
-        
 
-          <!-- Testbench Architecture Topology -->
-          <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
-              <div class="CBody">
-                <div class="topo-grid">
-                  
+        <div class="stepper-timeline" id="stepper-timeline">
+          <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">BEGIN_REQ (Initiator -&gt; Target)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">END_REQ (Target -&gt; Initiator)</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">BEGIN_RESP (Target -&gt; Initiator)</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">END_RESP (Initiator -&gt; Target)</span></div>
+        </div>
+
+        <div class="step-card" id="step-detail-card">
+          <div class="step-card-header">
+            <h4 id="step-active-title">1. BEGIN_REQ (Initiator -&gt; Target)</h4>
+            <span class="step-active-comp" id="step-active-comp">Target: host (initiator)</span>
+          </div>
+          <p id="step-active-desc">The host initiator initiates the transfer by calling `nb_transport_fw(xfer, BEGIN_REQ)`. The device endpoint records the transfer and responds `UVM_TLM_ACCEPTED`.</p>
+          <div class="step-log-hint">
+            <strong>Expected Log Output:</strong>
+            <code id="step-active-log">UVM_INFO @ 0 ns: host [TLM2] nb_transport_fw(xfer, BEGIN_REQ)</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
+    <div class="CBody">
+      <div class="topo-grid">
         <div class="topo-card">
-          <div class="topo-header">
-            <span class="topo-badge">initiator</span>
-            <strong>host</strong>
-          </div>
-          <div class="topo-details">USB Host</div>
-        </div>
-        
-        <div class="topo-card">
-          <div class="topo-header">
-            <span class="topo-badge">target</span>
-            <strong>device</strong>
-          </div>
-          <div class="topo-details">USB Device Endpoint</div>
-        </div>
-        
-                </div>
+  <div class="topo-header">
+    <span class="topo-badge">initiator</span>
+    <strong>host</strong>
+  </div>
+  <div class="topo-details">USB Host</div>
+</div><div class="topo-card">
+  <div class="topo-header">
+    <span class="topo-badge">target</span>
+    <strong>device</strong>
+  </div>
+  <div class="topo-details">USB Device Endpoint</div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
+    <div class="CBody">
+      <div class="studio-section">
+        <div class="studio-header">
+          <div class="studio-toolbar">
+            <div class="studio-toolbar-left">
+              <div class="studio-file-select-wrapper" title="Jump directly to any file in this studio">
+                <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
+                  <option value="0">📄 device.sv</option><option value="1">📄 host.sv</option><option value="2">📄 tb_env.sv</option><option value="3">📄 tb_run.sv</option><option value="4">📄 usb_xfer.sv</option><option value="5">📄 Makefile.ius</option><option value="6">📄 Makefile.questa</option><option value="7">📄 Makefile.vcs</option><option value="8">📄 README.txt</option>
+                </select>
               </div>
+            </div>
+
+            <div class="studio-toolbar-actions">
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              </button>
             </div>
           </div>
 
-          <!-- Multi-File Code Studio -->
-          <div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
-              <div class="CBody">
-                <div class="studio-section">
-                  <div class="studio-header">
-                    <div class="studio-toolbar">
-                      <div class="studio-toolbar-left">
-                        <div class="studio-file-select-wrapper" title="Jump directly to any file in this example">
-                          <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
-                            <option value="0">📄 device.sv</option><option value="1">📄 host.sv</option><option value="2">📄 tb_env.sv</option><option value="3">📄 tb_run.sv</option><option value="4">📄 usb_xfer.sv</option><option value="5">📄 Makefile.ius</option><option value="6">📄 Makefile.questa</option><option value="7">📄 Makefile.vcs</option><option value="8">📄 README.txt</option>
-                          </select>
-                        </div>
-                      </div>
+          <div class="studio-tab-bar-wrapper">
+            <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
+            <div class="studio-tab-bar" id="studio-tab-bar">
+              <button type="button" class="studio-tab active" data-file-idx="0" title="device.sv"><span class="tab-icon">📄</span><span class="tab-name">device.sv</span></button><button type="button" class="studio-tab " data-file-idx="1" title="host.sv"><span class="tab-icon">📄</span><span class="tab-name">host.sv</span></button><button type="button" class="studio-tab " data-file-idx="2" title="tb_env.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_env.sv</span></button><button type="button" class="studio-tab " data-file-idx="3" title="tb_run.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_run.sv</span></button><button type="button" class="studio-tab " data-file-idx="4" title="usb_xfer.sv"><span class="tab-icon">📄</span><span class="tab-name">usb_xfer.sv</span></button><button type="button" class="studio-tab " data-file-idx="5" title="Makefile.ius"><span class="tab-icon">📄</span><span class="tab-name">Makefile.ius</span></button><button type="button" class="studio-tab " data-file-idx="6" title="Makefile.questa"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span></button><button type="button" class="studio-tab " data-file-idx="7" title="Makefile.vcs"><span class="tab-icon">📄</span><span class="tab-name">Makefile.vcs</span></button><button type="button" class="studio-tab " data-file-idx="8" title="README.txt"><span class="tab-icon">📄</span><span class="tab-name">README.txt</span></button>
+            </div>
+            <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
+          </div>
+        </div>
 
-                      <div class="studio-toolbar-actions">
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div class="studio-tab-bar-wrapper">
-                      <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
-                      <div class="studio-tab-bar" id="studio-tab-bar">
-                        <button type="button" class="studio-tab active" data-file-idx="0" title="device.sv"><span class="tab-icon">📄</span><span class="tab-name">device.sv</span></button><button type="button" class="studio-tab " data-file-idx="1" title="host.sv"><span class="tab-icon">📄</span><span class="tab-name">host.sv</span></button><button type="button" class="studio-tab " data-file-idx="2" title="tb_env.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_env.sv</span></button><button type="button" class="studio-tab " data-file-idx="3" title="tb_run.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_run.sv</span></button><button type="button" class="studio-tab " data-file-idx="4" title="usb_xfer.sv"><span class="tab-icon">📄</span><span class="tab-name">usb_xfer.sv</span></button><button type="button" class="studio-tab " data-file-idx="5" title="Makefile.ius"><span class="tab-icon">📄</span><span class="tab-name">Makefile.ius</span></button><button type="button" class="studio-tab " data-file-idx="6" title="Makefile.questa"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span></button><button type="button" class="studio-tab " data-file-idx="7" title="Makefile.vcs"><span class="tab-icon">📄</span><span class="tab-name">Makefile.vcs</span></button><button type="button" class="studio-tab " data-file-idx="8" title="README.txt"><span class="tab-icon">📄</span><span class="tab-name">README.txt</span></button>
-                      </div>
-                      <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
-                    </div>
-                  </div>
-
-                  <div class="studio-code-container" id="studio-code-container">
-                    <div class="file-code-pane active" id="file-pane-0"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
+        <div class="studio-code-container" id="studio-code-container">
+          <div class="file-code-pane active" id="file-pane-0"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//----------------------------------------------------------------------</span></td></tr>
 <tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2010-2011 Synopsys, Inc</span></td></tr>
 <tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
 <tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
@@ -745,48 +724,46 @@
 <tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code">   <span class="sv-op">-</span> <span class="sv-ident">xfer</span><span class="sv-op">.</span><span class="sv-ident">status</span> <span class="sv-op">==</span> <span class="sv-ident">ACK</span></td></tr>
 <tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code">   <span class="sv-op">-</span> <span class="sv-ident">ph</span> <span class="sv-op">==</span> <span class="sv-ident">USB_TLM_HANDSKAHE</span></td></tr>
 <tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">   <span class="sv-op">&gt;</span> <span class="sv-ident">Device</span> <span class="sv-ident">responds</span> <span class="sv-keyword-decl">with</span> <span class="sv-constant">UVM_TLM_COMPLETED</span></td></tr></tbody></table></div>
-                  </div>
-                </div>
-              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
+    <div class="CBody">
+      <div class="sim-section">
+        <!-- Simulator Command Selector -->
+        <div class="sim-cmd-card">
+          <div class="sim-tabs">
+            <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
+            <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
+            <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
+          </div>
+          <div class="sim-cmd-box">
+            <code id="sim-cmd-text">make -f Makefile.questa run</code>
+            <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
+          </div>
+        </div>
+
+        <!-- Terminal Log -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
+            <div class="terminal-filters">
+              <button type="button" class="term-filter active" data-level="all">All</button>
+              <button type="button" class="term-filter" data-level="info">Info</button>
+              <button type="button" class="term-filter" data-level="warning">Warning</button>
+              <button type="button" class="term-filter" data-level="error">Error</button>
             </div>
           </div>
-
-          <!-- Simulation & Execution Output Console -->
-          <div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
-              <div class="CBody">
-                <div class="sim-section">
-                  <!-- Simulator Command Selector -->
-                  <div class="sim-cmd-card">
-                    <div class="sim-tabs">
-                      <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
-                      <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
-                      <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
-                    </div>
-                    <div class="sim-cmd-box">
-                      <code id="sim-cmd-text">make -f Makefile.questa run</code>
-                      <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
-                    </div>
-                  </div>
-
-                  <!-- Terminal Log -->
-                  <div class="terminal-card">
-                    <div class="terminal-header">
-                      <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                      </div>
-                      <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
-                      <div class="terminal-filters">
-                        <button type="button" class="term-filter active" data-level="all">All</button>
-                        <button type="button" class="term-filter" data-level="info">Info</button>
-                        <button type="button" class="term-filter" data-level="warning">Warning</button>
-                        <button type="button" class="term-filter" data-level="error">Error</button>
-                      </div>
-                    </div>
-                    <pre class="terminal-body" id="terminal-body">----------------------------------------------------------------
+          <pre class="terminal-body" id="terminal-body">----------------------------------------------------------------
 Questa/VCS/Xcelium UVM 1.2 Simulation Log
 Example: Non-Blocking 4-Phase Protocol (simple/tlm2/nonblocking_simple)
 ----------------------------------------------------------------
@@ -829,40 +806,32 @@ UVM_FATAL :    0
 [STIMULUS]  1
 [PKT]       3
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div> <!-- #Content -->
-      </div> <!-- .doc-main-content -->
-
-      <!-- Sticky In-Page Table of Contents ("On this page") -->
-      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
-        <div class="doc-toc-inner">
-          <div class="doc-toc-header">
-            <span class="doc-toc-title">On this page</span>
-            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
-              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4 14 12 6 20 14"/>
-              </svg>
-              <span class="toc-toggle-text">Collapse all</span>
-            </button>
-          </div>
-          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
         </div>
-      </aside>
-
-    </div> <!-- .doc-layout-wrapper -->
-
-  </div> <!-- .doc-page-container -->
-
-  <!-- Data payload for client scripts -->
-  <div id="zip-payload" style="display:none;" data-zip="[{&quot;name&quot;: &quot;device.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n\nclass device extends uvm_component;\n\n   uvm_tlm_nb_target_socket#(device, usb_xfer, usb_tlm_phase) sock;\n\n   `uvm_component_utils(device)\n\n   function new(string name = \&quot;device\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n      sock = new(\&quot;sock\&quot;, this);\n   endfunction\n\n   byte data[];\n\n   // Forward path\n   function uvm_tlm_sync_e nb_transport_fw(usb_xfer xfer,\n                                           ref usb_tlm_phase ph,\n                                           input uvm_tlm_time delay);\n\n      `uvm_info(\&quot;USB/DEV/FWD\&quot;, $sformatf(\&quot;%s @%0d: %s\&quot;,\n                                         ph.name(), delay.get_realtime(1ns),\n                                         xfer.convert2string()), UVM_LOW)\n\n      // This device?\n      if (xfer.addr != 7&#x27;h7A) return UVM_TLM_COMPLETED;\n\n      // Valid endpoint in the device?\n      if (xfer.endp != 4&#x27;h5) return UVM_TLM_COMPLETED;\n      \n      case (xfer.kind)\n\n       usb_xfer::OUT: begin\n          case (ph)\n           USB_TLM_TOKEN: begin\n              return UVM_TLM_ACCEPTED;\n           end\n\n           USB_TLM_DATA: begin\n              data = xfer.data;\n\n              // Could complete transfer early here\n              fork: out_ack\n                 automatic usb_xfer     xf = xfer;\n                 automatic uvm_tlm_time dl = delay;\n                 begin\n                    usb_tlm_phase ph = USB_TLM_HANDSHAKE;\n                    #100;\n                    xf.status = usb_xfer::ACK;\n                    assert(sock.nb_transport_bw(xf, ph, dl) ==\n                           UVM_TLM_COMPLETED);\n\n                    `uvm_info(\&quot;USB/DEV/OUT/DONE\&quot;, xf.convert2string(),\n                              UVM_NONE);\n                    \n                 end\n              join_none\n\n              return UVM_TLM_ACCEPTED;\n           end\n           \n          endcase\n       end\n\n       usb_xfer::IN: begin\n          case (ph)\n           USB_TLM_TOKEN: begin\n              // Could return the data early here\n              fork: in_data\n                 automatic usb_xfer     xf = xfer;\n                 automatic uvm_tlm_time dl = delay;\n                 begin\n                    usb_tlm_phase ph = USB_TLM_DATA;\n                    #150;\n\t\t    begin\n\t\t\tbyte tdata[2]=&#x27;{&#x27;hAB, &#x27;hCD};\n                    \txf.data = tdata;\n\t\t    end\n                    void&#x27;(sock.nb_transport_bw(xf, ph, dl));\n                 end\n              join_none\n\n              return UVM_TLM_ACCEPTED;\n           end\n\n           USB_TLM_HANDSHAKE: begin\n              `uvm_info(\&quot;USB/DEV/IN/DONE\&quot;, xfer.convert2string(),\n                        UVM_NONE);\n              \n              return UVM_TLM_COMPLETED;\n           end\n           \n          endcase\n       end\n      endcase\n      \n      return UVM_TLM_COMPLETED;\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;host.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n\nclass host extends uvm_component;\n\n   uvm_tlm_nb_initiator_socket#(host, usb_xfer, usb_tlm_phase) sock;\n\n   `uvm_component_utils(host)\n\n   function new(string name = \&quot;host\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n      sock = new(\&quot;sock\&quot;, this);\n   endfunction\n\n   usb_xfer       xfer;\n   usb_tlm_phase  ph;\n   uvm_tlm_time   delay = new;\n   uvm_tlm_sync_e sync;\n\n   // Backward path\n   function uvm_tlm_sync_e nb_transport_bw(usb_xfer xfer,\n                                           ref usb_tlm_phase ph,\n                                           input uvm_tlm_time delay);\n\n      `uvm_info(\&quot;USB/HST/BWD\&quot;, $sformatf(\&quot;%s @%0d: %s\&quot;,\n                                         ph.name(), delay.get_realtime(1ns),\n                                         xfer.convert2string()), UVM_LOW)\n               \n      assert(xfer == this.xfer);\n      this.ph    = ph;\n      this.delay = delay;\n      \n      case (xfer.kind)\n\n       usb_xfer::OUT: begin\n          assert(ph == USB_TLM_HANDSHAKE);\n          sync = UVM_TLM_COMPLETED;\n          return UVM_TLM_COMPLETED;\n       end\n\n       usb_xfer::IN: begin\n          assert(ph == USB_TLM_DATA);\n          // Could do an early completion too\n          return UVM_TLM_ACCEPTED;\n       end\n      endcase\n      \n      return UVM_TLM_COMPLETED;\n   endfunction\n   \n   //\n   // Execute an OUT followed by an IN bulk transfer\n   //\n   virtual task run_phase(uvm_phase phase);\n\n      phase.raise_objection(this);\n      \n      xfer = usb_xfer::type_id::create(\&quot;xfer\&quot;,,get_full_name());\n\n      // OUT bulk transfer\n      \n      do begin\n         xfer.kind = usb_xfer::OUT;\n         xfer.addr = 7&#x27;h7A;\n         xfer.endp = 4&#x27;h5;\n         \n         ph = USB_TLM_TOKEN;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/OUT/REFUSED\&quot;, \&quot;Device refused the transfer\&quot;,\n                      UVM_LOW);\n            break;\n         end\n\n         ph = USB_TLM_DATA;\n\t begin\n\t\t byte tdata[4]=&#x27;{&#x27;hDE, &#x27;hAD, &#x27;hBE, &#x27;hEF};\n\t         xfer.data = tdata;\n\t end\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/OUT/EARLY\&quot;, \&quot;Device completed OUT transfer early\&quot;,\n                      UVM_LOW);\n            break;\n         end\n\n         // Wait for the device to reply\n         wait (sync == UVM_TLM_COMPLETED);\n         `uvm_info(\&quot;USB/HST/OUT/NORMAL\&quot;, \&quot;OUT Transfer completed normally\&quot;,\n                   UVM_LOW);\n      \n      end while (0);\n\n      `uvm_info(\&quot;USB/HST/OUT/DONE\&quot;, xfer.convert2string(), UVM_NONE);\n\n      // IN bulk transfer\n      \n      do begin\n         // Ok to reuse the same XFER instance\n         xfer.kind = usb_xfer::IN;\n         xfer.addr = 7&#x27;h7A;\n         xfer.endp = 4&#x27;h5;\n         xfer.data = new[0];\n         \n         ph = USB_TLM_TOKEN;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/IN/REFUSED\&quot;, \&quot;Device refused the transfer\&quot;,\n                      UVM_LOW);\n            break;\n         end\n         if (sync == UVM_TLM_UPDATED) begin\n            `uvm_info(\&quot;USB/HST/IN/EARLY\&quot;, \&quot;Device returned bulk data early\&quot;,\n                      UVM_LOW);\n         end\n         else begin\n            // Wait for the device to reply\n            wait(ph == USB_TLM_DATA);\n            `uvm_info(\&quot;USB/HST/IN/NORMAL\&quot;, \&quot;IN data returned normally\&quot;,\n                      UVM_LOW);\n         end\n\n         ph = USB_TLM_HANDSHAKE;\n         xfer.status = usb_xfer::ACK;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         assert(sync == UVM_TLM_COMPLETED);\n      \n      end while (0);\n\n      `uvm_info(\&quot;USB/HST/IN/DONE\&quot;, xfer.convert2string(), UVM_NONE);\n\n      phase.drop_objection(this);\n   endtask\n\n   \n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_env.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\nclass tb_env extends uvm_component;\n\n   `uvm_component_utils(tb_env)\n\n   host hst;\n   device dev;\n\n   function new(string name = \&quot;tb_env\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n   endfunction\n\n   function void build_phase(uvm_phase phase);\n      hst = host::type_id::create(\&quot;hst\&quot;, this);\n      dev = device::type_id::create(\&quot;dev\&quot;, this);\n   endfunction\n\n   function void connect_phase(uvm_phase phase);\n      hst.sock.connect(dev.sock);\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_run.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\nimport uvm_pkg::*;\n`include \&quot;uvm_macros.svh\&quot;\n\n`include \&quot;usb_xfer.sv\&quot;\n`include \&quot;host.sv\&quot;\n`include \&quot;device.sv\&quot;\n`include \&quot;tb_env.sv\&quot;\n\nprogram tb_run;\n\ninitial\nbegin\n   static tb_env env = new(\&quot;env\&quot;);\n\n   run_test();\nend\n\nendprogram\n&quot;}, {&quot;name&quot;: &quot;usb_xfer.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2010-2011 Synopsys, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n//\n\n\ntypedef enum {USB_TLM_TOKEN, USB_TLM_DATA, USB_TLM_HANDSHAKE} usb_tlm_phase;\n\n\nclass usb_xfer extends uvm_sequence_item;\n  \n   typedef enum {IN, OUT} kind_e;\n   typedef enum {ACK, NAK, STALL, NYET} status_e;\n\n   rand bit [6:0] addr;\n   rand bit [3:0] endp;\n   rand kind_e   kind;  \n   rand byte      data[];\n   rand status_e  status;\n \n   `uvm_object_utils_begin(usb_xfer)\n     `uvm_field_enum(kind_e, kind, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_array_int(data, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_enum(status_e, status, UVM_ALL_ON | UVM_NOPACK);\n   `uvm_object_utils_end\n   \n   function new (string name = \&quot;usb_xfer\&quot;);\n      super.new(name);\n   endfunction\n\n   function string convert2string();\n      convert2string = $sformatf(\&quot;dev=%h.%h kind=%s hndsk=%s data=h\&quot;,\n                                 addr, endp, kind.name(), status.name());\n\n      case (data.size())\n       0: return {convert2string, \&quot;[]\&quot;};\n       1: return $sformatf(\&quot;%s0x%h\&quot;, convert2string, data[0]);\n       2: return $sformatf(\&quot;%s0x%h 0x%h\&quot;, convert2string, data[0], data[1]);\n       3: return $sformatf(\&quot;%s0x%h 0x%h 0x%h\&quot;, convert2string,\n                           data[0], data[1], data[2]);\n\n       default:\n          return $sformatf(\&quot;%s0x%h 0x%h .. 0x%h (%0d bytes)\&quot;, convert2string,\n                           data[0], data[1], data[data.size()-1],\n                           data.size());\n      endcase\n   endfunction\n\nendclass: usb_xfer\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    Copyright 2010 Cadence Design, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.ius\n\n\nall: run\n\nrun:\n\t$(IUS) -incdir . tb_run.sv\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Mentor Graphics Corporation\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude $(UVM_HOME)/examples/Makefile.questa\n\n\nall: run\n\ncomp: vlib\n\t$(VLOG) +incdir+. \\\n\t\ttb_run.sv\n\nrun: comp\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) tb_run.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;README.txt&quot;, &quot;content&quot;: &quot;\nThis simple nonblocking examples uses a USB 2.0 BULK transfer as an example.\n\nInstead of translating the transfer into a series of packets transmitted\nback and forth between the host and device, a single transfer is exchanged\nand the timing points (i.e. calls to nb_transport_fw/bw()) are used in lieu\npacket transfers.\n\nFor a normal host-&gt;device bulk transfer, the following timing points occur\nuntil a UVM_TLM_COMPLETED sync value is received\nby either the host or the device.\n\n1. nb_transport_fw(xfer, ph)\n   - xfer.kind == OUT\n   - ph == USB_TLM_TOKEN\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_COMPLETED\n\n2. nb_transport_fw(xfer, ph)\n   - xfer.data contains bulk data\n   - ph == USB_TLM_DATA\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == ACK/NAK/STALL/NYET\n     and ph updated to UVM_TLM_HANDSHAKE\n\n3. nb_transport_bw(xfer, ph)\n   - xfer.status == ACK/NACK/STALL/NYET\n   - ph == USB_TLM_HANDSKAHE\n   &gt; Host responds with UVM_TLM_COMPLETED\n\nFor a device-&gt;host bulk transfer, the following timing points occur\nuntil a UVM_TLM_COMPLETED sync value is received\nby either the host or the device.\n\n1. nb_transport_fw(xfer, ph)\n   - xfer.kind == IN\n   - ph == USB_TLM_TOKEN\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_UPDATED, xfer.data contains bulk data\n     and ph updated to UVM_TLM_DATA (goto step 3), or\n   &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == NAK/STALL\n     and ph updated to UVM_TLM_HANDSHAKE\n\n2. nb_transport_bw(xfer, ph)\n   - xfer.data contains bulk data\n   - ph == USB_TLM_DATA\n   &gt; Host responds with UVM_TLM_ACCEPTED, or\n   &gt; Host responds with UVM_TLM_COMPLETED, xfer.status == ACK\n     and ph updated to UVM_TLM_HANDSHAKE\n\n3. nb_transport_fw(xfer, ph)\n   - xfer.status == ACK\n   - ph == USB_TLM_HANDSKAHE\n   &gt; Device responds with UVM_TLM_COMPLETED\n&quot;}]"></div>
-  <div id="stepper-payload" style="display:none;" data-stepper="[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. BEGIN_REQ (Initiator -&gt; Target)&quot;, &quot;component&quot;: &quot;host (initiator)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 34, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: host [TLM2] nb_transport_fw(xfer, BEGIN_REQ)&quot;, &quot;desc&quot;: &quot;The host initiator initiates the transfer by calling `nb_transport_fw(xfer, BEGIN_REQ)`. The device endpoint records the transfer and responds `UVM_TLM_ACCEPTED`.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. END_REQ (Target -&gt; Initiator)&quot;, &quot;component&quot;: &quot;device (target)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 52, &quot;log_snippet&quot;: &quot;UVM_INFO @ 12 ns: device [TLM2] nb_transport_bw(xfer, END_REQ)&quot;, &quot;desc&quot;: &quot;The target frees the request channel and notifies the initiator via `nb_transport_bw(xfer, END_REQ)` while processing the bulk data in the background.&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. BEGIN_RESP (Target -&gt; Initiator)&quot;, &quot;component&quot;: &quot;device (target)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 68, &quot;log_snippet&quot;: &quot;UVM_INFO @ 48 ns: device [TLM2] nb_transport_bw(xfer, BEGIN_RESP)&quot;, &quot;desc&quot;: &quot;Once the target has ready response data, it calls `nb_transport_bw(xfer, BEGIN_RESP)`. The host accepts the response.&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. END_RESP (Initiator -&gt; Target)&quot;, &quot;component&quot;: &quot;host (initiator)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 80, &quot;log_snippet&quot;: &quot;UVM_INFO @ 54 ns: host [TLM2] nb_transport_fw(xfer, END_RESP) -&gt; UVM_TLM_COMPLETED&quot;, &quot;desc&quot;: &quot;The host acknowledges receipt with `END_RESP` and synchronization status `UVM_TLM_COMPLETED`. The 4-phase transaction cycle completes cleanly with zero timing slips.&quot;}]"></div>
-
-  <script src="../../js/doc_page.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+  <div class="doc-toc-inner">
+    <div class="doc-toc-header">
+      <span class="doc-toc-title">On this page</span>
+      <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+        <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="4 14 12 6 20 14"/>
+        </svg>
+        <span class="toc-toggle-text">Collapse all</span>
+      </button>
+    </div>
+    <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+  </div>
+</aside>
+    </div>
+  </div>
+  <div id="zip-payload" style="display:none;" data-zip='[{&quot;name&quot;: &quot;device.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n\nclass device extends uvm_component;\n\n   uvm_tlm_nb_target_socket#(device, usb_xfer, usb_tlm_phase) sock;\n\n   `uvm_component_utils(device)\n\n   function new(string name = \&quot;device\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n      sock = new(\&quot;sock\&quot;, this);\n   endfunction\n\n   byte data[];\n\n   // Forward path\n   function uvm_tlm_sync_e nb_transport_fw(usb_xfer xfer,\n                                           ref usb_tlm_phase ph,\n                                           input uvm_tlm_time delay);\n\n      `uvm_info(\&quot;USB/DEV/FWD\&quot;, $sformatf(\&quot;%s @%0d: %s\&quot;,\n                                         ph.name(), delay.get_realtime(1ns),\n                                         xfer.convert2string()), UVM_LOW)\n\n      // This device?\n      if (xfer.addr != 7&#x27;h7A) return UVM_TLM_COMPLETED;\n\n      // Valid endpoint in the device?\n      if (xfer.endp != 4&#x27;h5) return UVM_TLM_COMPLETED;\n      \n      case (xfer.kind)\n\n       usb_xfer::OUT: begin\n          case (ph)\n           USB_TLM_TOKEN: begin\n              return UVM_TLM_ACCEPTED;\n           end\n\n           USB_TLM_DATA: begin\n              data = xfer.data;\n\n              // Could complete transfer early here\n              fork: out_ack\n                 automatic usb_xfer     xf = xfer;\n                 automatic uvm_tlm_time dl = delay;\n                 begin\n                    usb_tlm_phase ph = USB_TLM_HANDSHAKE;\n                    #100;\n                    xf.status = usb_xfer::ACK;\n                    assert(sock.nb_transport_bw(xf, ph, dl) ==\n                           UVM_TLM_COMPLETED);\n\n                    `uvm_info(\&quot;USB/DEV/OUT/DONE\&quot;, xf.convert2string(),\n                              UVM_NONE);\n                    \n                 end\n              join_none\n\n              return UVM_TLM_ACCEPTED;\n           end\n           \n          endcase\n       end\n\n       usb_xfer::IN: begin\n          case (ph)\n           USB_TLM_TOKEN: begin\n              // Could return the data early here\n              fork: in_data\n                 automatic usb_xfer     xf = xfer;\n                 automatic uvm_tlm_time dl = delay;\n                 begin\n                    usb_tlm_phase ph = USB_TLM_DATA;\n                    #150;\n\t\t    begin\n\t\t\tbyte tdata[2]=&#x27;{&#x27;hAB, &#x27;hCD};\n                    \txf.data = tdata;\n\t\t    end\n                    void&#x27;(sock.nb_transport_bw(xf, ph, dl));\n                 end\n              join_none\n\n              return UVM_TLM_ACCEPTED;\n           end\n\n           USB_TLM_HANDSHAKE: begin\n              `uvm_info(\&quot;USB/DEV/IN/DONE\&quot;, xfer.convert2string(),\n                        UVM_NONE);\n              \n              return UVM_TLM_COMPLETED;\n           end\n           \n          endcase\n       end\n      endcase\n      \n      return UVM_TLM_COMPLETED;\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;host.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n\nclass host extends uvm_component;\n\n   uvm_tlm_nb_initiator_socket#(host, usb_xfer, usb_tlm_phase) sock;\n\n   `uvm_component_utils(host)\n\n   function new(string name = \&quot;host\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n      sock = new(\&quot;sock\&quot;, this);\n   endfunction\n\n   usb_xfer       xfer;\n   usb_tlm_phase  ph;\n   uvm_tlm_time   delay = new;\n   uvm_tlm_sync_e sync;\n\n   // Backward path\n   function uvm_tlm_sync_e nb_transport_bw(usb_xfer xfer,\n                                           ref usb_tlm_phase ph,\n                                           input uvm_tlm_time delay);\n\n      `uvm_info(\&quot;USB/HST/BWD\&quot;, $sformatf(\&quot;%s @%0d: %s\&quot;,\n                                         ph.name(), delay.get_realtime(1ns),\n                                         xfer.convert2string()), UVM_LOW)\n               \n      assert(xfer == this.xfer);\n      this.ph    = ph;\n      this.delay = delay;\n      \n      case (xfer.kind)\n\n       usb_xfer::OUT: begin\n          assert(ph == USB_TLM_HANDSHAKE);\n          sync = UVM_TLM_COMPLETED;\n          return UVM_TLM_COMPLETED;\n       end\n\n       usb_xfer::IN: begin\n          assert(ph == USB_TLM_DATA);\n          // Could do an early completion too\n          return UVM_TLM_ACCEPTED;\n       end\n      endcase\n      \n      return UVM_TLM_COMPLETED;\n   endfunction\n   \n   //\n   // Execute an OUT followed by an IN bulk transfer\n   //\n   virtual task run_phase(uvm_phase phase);\n\n      phase.raise_objection(this);\n      \n      xfer = usb_xfer::type_id::create(\&quot;xfer\&quot;,,get_full_name());\n\n      // OUT bulk transfer\n      \n      do begin\n         xfer.kind = usb_xfer::OUT;\n         xfer.addr = 7&#x27;h7A;\n         xfer.endp = 4&#x27;h5;\n         \n         ph = USB_TLM_TOKEN;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/OUT/REFUSED\&quot;, \&quot;Device refused the transfer\&quot;,\n                      UVM_LOW);\n            break;\n         end\n\n         ph = USB_TLM_DATA;\n\t begin\n\t\t byte tdata[4]=&#x27;{&#x27;hDE, &#x27;hAD, &#x27;hBE, &#x27;hEF};\n\t         xfer.data = tdata;\n\t end\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/OUT/EARLY\&quot;, \&quot;Device completed OUT transfer early\&quot;,\n                      UVM_LOW);\n            break;\n         end\n\n         // Wait for the device to reply\n         wait (sync == UVM_TLM_COMPLETED);\n         `uvm_info(\&quot;USB/HST/OUT/NORMAL\&quot;, \&quot;OUT Transfer completed normally\&quot;,\n                   UVM_LOW);\n      \n      end while (0);\n\n      `uvm_info(\&quot;USB/HST/OUT/DONE\&quot;, xfer.convert2string(), UVM_NONE);\n\n      // IN bulk transfer\n      \n      do begin\n         // Ok to reuse the same XFER instance\n         xfer.kind = usb_xfer::IN;\n         xfer.addr = 7&#x27;h7A;\n         xfer.endp = 4&#x27;h5;\n         xfer.data = new[0];\n         \n         ph = USB_TLM_TOKEN;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         if (sync == UVM_TLM_COMPLETED) begin\n            `uvm_info(\&quot;USB/HST/IN/REFUSED\&quot;, \&quot;Device refused the transfer\&quot;,\n                      UVM_LOW);\n            break;\n         end\n         if (sync == UVM_TLM_UPDATED) begin\n            `uvm_info(\&quot;USB/HST/IN/EARLY\&quot;, \&quot;Device returned bulk data early\&quot;,\n                      UVM_LOW);\n         end\n         else begin\n            // Wait for the device to reply\n            wait(ph == USB_TLM_DATA);\n            `uvm_info(\&quot;USB/HST/IN/NORMAL\&quot;, \&quot;IN data returned normally\&quot;,\n                      UVM_LOW);\n         end\n\n         ph = USB_TLM_HANDSHAKE;\n         xfer.status = usb_xfer::ACK;\n         sync = sock.nb_transport_fw(xfer, ph, delay);\n         assert(sync == UVM_TLM_COMPLETED);\n      \n      end while (0);\n\n      `uvm_info(\&quot;USB/HST/IN/DONE\&quot;, xfer.convert2string(), UVM_NONE);\n\n      phase.drop_objection(this);\n   endtask\n\n   \n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_env.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\nclass tb_env extends uvm_component;\n\n   `uvm_component_utils(tb_env)\n\n   host hst;\n   device dev;\n\n   function new(string name = \&quot;tb_env\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n   endfunction\n\n   function void build_phase(uvm_phase phase);\n      hst = host::type_id::create(\&quot;hst\&quot;, this);\n      dev = device::type_id::create(\&quot;dev\&quot;, this);\n   endfunction\n\n   function void connect_phase(uvm_phase phase);\n      hst.sock.connect(dev.sock);\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_run.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\nimport uvm_pkg::*;\n`include \&quot;uvm_macros.svh\&quot;\n\n`include \&quot;usb_xfer.sv\&quot;\n`include \&quot;host.sv\&quot;\n`include \&quot;device.sv\&quot;\n`include \&quot;tb_env.sv\&quot;\n\nprogram tb_run;\n\ninitial\nbegin\n   static tb_env env = new(\&quot;env\&quot;);\n\n   run_test();\nend\n\nendprogram\n&quot;}, {&quot;name&quot;: &quot;usb_xfer.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2010-2011 Synopsys, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n//\n\n\ntypedef enum {USB_TLM_TOKEN, USB_TLM_DATA, USB_TLM_HANDSHAKE} usb_tlm_phase;\n\n\nclass usb_xfer extends uvm_sequence_item;\n  \n   typedef enum {IN, OUT} kind_e;\n   typedef enum {ACK, NAK, STALL, NYET} status_e;\n\n   rand bit [6:0] addr;\n   rand bit [3:0] endp;\n   rand kind_e   kind;  \n   rand byte      data[];\n   rand status_e  status;\n \n   `uvm_object_utils_begin(usb_xfer)\n     `uvm_field_enum(kind_e, kind, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_array_int(data, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_enum(status_e, status, UVM_ALL_ON | UVM_NOPACK);\n   `uvm_object_utils_end\n   \n   function new (string name = \&quot;usb_xfer\&quot;);\n      super.new(name);\n   endfunction\n\n   function string convert2string();\n      convert2string = $sformatf(\&quot;dev=%h.%h kind=%s hndsk=%s data=h\&quot;,\n                                 addr, endp, kind.name(), status.name());\n\n      case (data.size())\n       0: return {convert2string, \&quot;[]\&quot;};\n       1: return $sformatf(\&quot;%s0x%h\&quot;, convert2string, data[0]);\n       2: return $sformatf(\&quot;%s0x%h 0x%h\&quot;, convert2string, data[0], data[1]);\n       3: return $sformatf(\&quot;%s0x%h 0x%h 0x%h\&quot;, convert2string,\n                           data[0], data[1], data[2]);\n\n       default:\n          return $sformatf(\&quot;%s0x%h 0x%h .. 0x%h (%0d bytes)\&quot;, convert2string,\n                           data[0], data[1], data[data.size()-1],\n                           data.size());\n      endcase\n   endfunction\n\nendclass: usb_xfer\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    Copyright 2010 Cadence Design, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.ius\n\n\nall: run\n\nrun:\n\t$(IUS) -incdir . tb_run.sv\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Mentor Graphics Corporation\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude $(UVM_HOME)/examples/Makefile.questa\n\n\nall: run\n\ncomp: vlib\n\t$(VLOG) +incdir+. \\\n\t\ttb_run.sv\n\nrun: comp\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) tb_run.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;README.txt&quot;, &quot;content&quot;: &quot;\nThis simple nonblocking examples uses a USB 2.0 BULK transfer as an example.\n\nInstead of translating the transfer into a series of packets transmitted\nback and forth between the host and device, a single transfer is exchanged\nand the timing points (i.e. calls to nb_transport_fw/bw()) are used in lieu\npacket transfers.\n\nFor a normal host-&gt;device bulk transfer, the following timing points occur\nuntil a UVM_TLM_COMPLETED sync value is received\nby either the host or the device.\n\n1. nb_transport_fw(xfer, ph)\n   - xfer.kind == OUT\n   - ph == USB_TLM_TOKEN\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_COMPLETED\n\n2. nb_transport_fw(xfer, ph)\n   - xfer.data contains bulk data\n   - ph == USB_TLM_DATA\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == ACK/NAK/STALL/NYET\n     and ph updated to UVM_TLM_HANDSHAKE\n\n3. nb_transport_bw(xfer, ph)\n   - xfer.status == ACK/NACK/STALL/NYET\n   - ph == USB_TLM_HANDSKAHE\n   &gt; Host responds with UVM_TLM_COMPLETED\n\nFor a device-&gt;host bulk transfer, the following timing points occur\nuntil a UVM_TLM_COMPLETED sync value is received\nby either the host or the device.\n\n1. nb_transport_fw(xfer, ph)\n   - xfer.kind == IN\n   - ph == USB_TLM_TOKEN\n   &gt; Device responds with UVM_TLM_ACCEPTED, or\n   &gt; Device responds with UVM_TLM_UPDATED, xfer.data contains bulk data\n     and ph updated to UVM_TLM_DATA (goto step 3), or\n   &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == NAK/STALL\n     and ph updated to UVM_TLM_HANDSHAKE\n\n2. nb_transport_bw(xfer, ph)\n   - xfer.data contains bulk data\n   - ph == USB_TLM_DATA\n   &gt; Host responds with UVM_TLM_ACCEPTED, or\n   &gt; Host responds with UVM_TLM_COMPLETED, xfer.status == ACK\n     and ph updated to UVM_TLM_HANDSHAKE\n\n3. nb_transport_fw(xfer, ph)\n   - xfer.status == ACK\n   - ph == USB_TLM_HANDSKAHE\n   &gt; Device responds with UVM_TLM_COMPLETED\n&quot;}]'></div>
+  <div id="stepper-payload" style="display:none;" data-stepper='[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. BEGIN_REQ (Initiator -&gt; Target)&quot;, &quot;component&quot;: &quot;host (initiator)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 34, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: host [TLM2] nb_transport_fw(xfer, BEGIN_REQ)&quot;, &quot;desc&quot;: &quot;The host initiator initiates the transfer by calling `nb_transport_fw(xfer, BEGIN_REQ)`. The device endpoint records the transfer and responds `UVM_TLM_ACCEPTED`.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. END_REQ (Target -&gt; Initiator)&quot;, &quot;component&quot;: &quot;device (target)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 52, &quot;log_snippet&quot;: &quot;UVM_INFO @ 12 ns: device [TLM2] nb_transport_bw(xfer, END_REQ)&quot;, &quot;desc&quot;: &quot;The target frees the request channel and notifies the initiator via `nb_transport_bw(xfer, END_REQ)` while processing the bulk data in the background.&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. BEGIN_RESP (Target -&gt; Initiator)&quot;, &quot;component&quot;: &quot;device (target)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 68, &quot;log_snippet&quot;: &quot;UVM_INFO @ 48 ns: device [TLM2] nb_transport_bw(xfer, BEGIN_RESP)&quot;, &quot;desc&quot;: &quot;Once the target has ready response data, it calls `nb_transport_bw(xfer, BEGIN_RESP)`. The host accepts the response.&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. END_RESP (Initiator -&gt; Target)&quot;, &quot;component&quot;: &quot;host (initiator)&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 80, &quot;log_snippet&quot;: &quot;UVM_INFO @ 54 ns: host [TLM2] nb_transport_fw(xfer, END_RESP) -&gt; UVM_TLM_COMPLETED&quot;, &quot;desc&quot;: &quot;The host acknowledges receipt with `END_RESP` and synchronization status `UVM_TLM_COMPLETED`. The 4-phase transaction cycle completes cleanly with zero timing slips.&quot;}]'></div>
+  <script src="../../js/page_common.js"></script>
   <script src="../../js/example_page.js"></script>
 </body>
 </html>

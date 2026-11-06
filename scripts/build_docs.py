@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR / "scripts"))
 import build_examples
 import syntax_highlighter as sh
+import page_builder_common as pbc
 SRC_DIR = BASE_DIR / "uvm-1.2" / "src"
 DOCS_DIR = BASE_DIR / "uvm-1.2" / "docs" / "html"
 DOCS_FILES_DIR = DOCS_DIR / "files"
@@ -101,82 +102,10 @@ CLASS_TO_EXAMPLE_MAP = {
     "uvm_component": ("basics/hello_world.html", "Hello World & TLM FIFO")
 }
 
-# SystemVerilog keywords (IEEE 1800)
-SV_KEYWORDS = set([
-    'accept_tr', 'alias', 'always', 'always_comb', 'always_ff', 'always_latch',
-    'and', 'assert', 'assign', 'assume', 'automatic', 'before', 'begin', 'bind',
-    'bins', 'binsof', 'bit', 'break', 'buf', 'bufif0', 'bufif1', 'byte', 'case',
-    'casex', 'casez', 'cell', 'chandle', 'checker', 'class', 'clocking', 'cmos',
-    'config', 'const', 'constraint', 'context', 'continue', 'cover', 'covergroup',
-    'coverpoint', 'cross', 'deassign', 'default', 'defparam', 'design', 'disable',
-    'dist', 'do', 'edge', 'else', 'end', 'endcase', 'endchecker', 'endclass',
-    'endclocking', 'endconfig', 'endfunction', 'endgenerate', 'endgroup',
-    'endinterface', 'endmodule', 'endpackage', 'endprimitive', 'endprogram',
-    'endproperty', 'endsequence', 'endspecify', 'endtable', 'endtask', 'enum',
-    'event', 'expect', 'export', 'extends', 'extern', 'final', 'first_match',
-    'for', 'force', 'foreach', 'forever', 'fork', 'forkjoin', 'function',
-    'generate', 'genvar', 'highz0', 'highz1', 'if', 'iff', 'ifnone', 'ignore_bins',
-    'illegal_bins', 'implements', 'implies', 'import', 'incdir', 'include',
-    'initial', 'inout', 'input', 'inside', 'instance', 'int', 'integer',
-    'interconnect', 'interface', 'intersect', 'join', 'join_any', 'join_none',
-    'large', 'let', 'liblist', 'library', 'local', 'localparam', 'logic',
-    'longint', 'matches', 'medium', 'modport', 'module', 'nand', 'negedge',
-    'nettype', 'new', 'nexttime', 'nmos', 'nor', 'noshowcancelled', 'not',
-    'notif0', 'notif1', 'null', 'or', 'output', 'package', 'packed', 'parameter',
-    'pmos', 'posedge', 'primitive', 'priority', 'program', 'property',
-    'protected', 'pull0', 'pull1', 'pulldown', 'pullup', 'pulsestyle_ondetect',
-    'pulsestyle_onevent', 'pure', 'rand', 'randc', 'randcase', 'randsequence',
-    'rcmos', 'real', 'realtime', 'ref', 'reg', 'reject_on', 'release', 'repeat',
-    'restrict', 'return', 'rnmos', 'rpmos', 'rtran', 'rtranif0', 'rtranif1',
-    's_always', 's_eventually', 's_nexttime', 's_until', 's_until_with', 'scalared',
-    'sequence', 'shortint', 'shortreal', 'showcancelled', 'signed', 'small',
-    'soft', 'solve', 'specify', 'specparam', 'static', 'string', 'strong',
-    'struct', 'super', 'supply0', 'supply1', 'sync_accept_on', 'sync_reject_on',
-    'table', 'tagged', 'task', 'this', 'throughout', 'time', 'timeprecision',
-    'timeunit', 'tran', 'tranif0', 'tranif1', 'tri', 'tri0', 'tri1', 'triand',
-    'trior', 'trireg', 'type', 'typedef', 'union', 'unique', 'unique0',
-    'unsigned', 'until', 'until_with', 'untyped', 'use', 'uwire', 'var', 'vectored',
-    'virtual', 'void', 'wait', 'wait_order', 'wand', 'weak', 'weak0', 'weak1',
-    'while', 'wildcard', 'wire', 'with', 'within', 'wor', 'xnor', 'xor'
-])
-
-# C/C++ keywords for DPI files
-C_KEYWORDS = set([
-    'auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do',
-    'double', 'else', 'enum', 'extern', 'float', 'for', 'goto', 'if',
-    'int', 'long', 'register', 'return', 'short', 'signed', 'sizeof', 'static',
-    'struct', 'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile',
-    'while', 'include', 'define', 'ifdef', 'ifndef', 'endif', 'NULL', 'bool',
-    'true', 'false', 'size_t', 'int32_t', 'uint32_t', 'int64_t', 'uint64_t'
-])
-
-TOKEN_REGEX = re.compile(
-    r'(?P<BLOCK_COMMENT_START>/\*)|'
-    r'(?P<LINE_COMMENT>//[^\n]*)|'
-    r'(?P<STRING>"([^"\\]|\\.)*")|'
-    r'(?P<CHAR>\'([^\'\\]|\\.)*\')|'
-    r'(?P<MACRO>`[a-zA-Z_][a-zA-Z0-9_]*)|'
-    r'(?P<NUMBER>\b\d+\'?[bBoOdDhH]?[0-9a-fA-F_xzXZ]*\b|\b\d+\b)|'
-    r'(?P<IDENT>[a-zA-Z_][a-zA-Z0-9_]*)|'
-    r'(?P<OP>[#+\-*/%=&|~^!<>?:;.,()\[\]{}])'
-)
-
 # Symbol extraction regexes
 CLASS_DEF_REGEX = re.compile(r'^\s*(?:virtual\s+)?class\s+([a-zA-Z0-9_]+)')
 METHOD_DEF_REGEX = re.compile(r'^\s*(?:virtual\s+|local\s+|protected\s+|static\s+)*(task|function)\s+(?:[\w:\[\]\$]+\s+)?([a-zA-Z0-9_]+)\s*\(')
 MACRO_DEF_REGEX = re.compile(r'^\s*`define\s+([a-zA-Z0-9_]+)')
-
-DOC_TOKEN_REGEX = re.compile(
-    r'(?P<BLOCK_COMMENT>/\*[\s\S]*?\*/)|'
-    r'(?P<LINE_COMMENT>//[^\n]*)|'
-    r'(?P<STRING>"([^"\\]|\\.)*")|'
-    r'(?P<CHAR>\'([^\'\\]|\\.)*\')|'
-    r'(?P<MACRO>`[a-zA-Z_][a-zA-Z0-9_]*)|'
-    r'(?P<CMD_OPTION>\+[a-zA-Z0-9_]+(?:=[^\s,()]+)?)|'
-    r'(?P<NUMBER>\b\d+\'?[bBoOdDhH]?[0-9a-fA-F_xzXZ]*\b|\b\d+(?:ns|ps|us|ms|s)?\b)|'
-    r'(?P<IDENT>[a-zA-Z_][a-zA-Z0-9_]*)|'
-    r'(?P<OP>::|->|<=|>=|==|!=|\+=|-=|\*=|&=|\|=|\^=|&&|\|\||#\(|[#+\-*/%=&|~^!<>?:;.,()\[\]{}])'
-)
 
 def highlight_outside_tags(text, highlight_fn):
     """Tokenize text outside HTML tags and HTML entity sequences."""
@@ -326,30 +255,7 @@ def process_doc_code_blocks(html_text):
     def replace_code_block(match):
         raw_code = match.group(1)
         clean_code = html.unescape(raw_code).strip('\r\n')
-        
-        # Determine language badge
-        if any(clean_code.startswith(x) for x in ('prompt>', '<sim command', 'SIM_COMMAND')) or '+UVM_' in clean_code or '+uvm_' in clean_code:
-            lang = "Command Line"
-        elif clean_code.startswith('#') or 'extern "C"' in clean_code:
-            lang = "C / DPI"
-        else:
-            lang = "SystemVerilog"
-        
-        highlighted = highlight_doc_code(clean_code)
-        
-        return f'''<div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>{lang}</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
-  <pre class="code-block-content"><code>{highlighted}</code></pre>
-</div>'''
+        return pbc.render_code_block(clean_code)
 
     return re.sub(r'(?:<blockquote>\s*)?<pre>([\s\S]*?)</pre>(?:\s*</blockquote>)?', replace_code_block, html_text, flags=re.IGNORECASE)
 
@@ -368,13 +274,7 @@ def wrap_doc_diagrams(body_html):
         name_no_ext = re.sub(r'\.[a-zA-Z0-9]+$', '', filename)
         label_words = [w.upper() if w.lower() in ('uvm', 'tlm', 'uml', 'if', 'ifs') else w.capitalize() for w in name_no_ext.split('_')]
         title = " ".join(label_words)
-
-        return f'''<figure class="doc-diagram-card">
-  <div class="doc-diagram-body">
-    <img src="{src}" class="doc-diagram-img" alt="{html.escape(title)}" title="Click to zoom" loading="lazy">
-  </div>
-  <figcaption class="doc-diagram-caption">{html.escape(title)}</figcaption>
-</figure>'''
+        return pbc.render_diagram_card(src, title)
 
     return re.sub(r'<img\b[^>]*>', repl_img, body_html, flags=re.IGNORECASE)
 
@@ -583,14 +483,14 @@ def extract_doc_headings(html_text, rel_doc_path):
 
 def get_rel_root(depth):
     """Return relative path back to root based on folder depth."""
-    return "../" * depth if depth > 0 else "./"
+    return pbc.get_rel_root(depth)
 
 def highlight_code_lines(code, filename):
     """
     Stateful tokenizer for SystemVerilog and C/C++ files.
     Returns a list of HTML table rows with line numbers and syntax highlighted tokens.
     """
-    rows, _ = sh.highlight_source_code_table_rows(code, filename, clickable_sym_links=False)
+    rows, _ = pbc.highlight_code_lines(code, filename, clickable_sym_links=False)
     return rows
 
 def index_source_symbols():
@@ -816,38 +716,14 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
 
             children = c_info.get('children', [])
             if children:
-                pills = []
-                for child in sorted(children):
-                    if child in CLASS_TO_DOC_MAP:
-                        ch_doc = CLASS_TO_DOC_MAP[child]
-                        target_id = GLOBAL_DOC_ANCHOR_MAPS.get(ch_doc, {}).get(child, 'doc-nav-main')
-                        pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#{target_id}" class="derived-class-pill" data-target-id="{target_id}" title="Documentation for {child}">{child}</a>')
-                    elif child in UVM_DB.get('classes', {}):
-                        ch_f = UVM_DB['classes'][child]['file']
-                        ch_l = UVM_DB['classes'][child]['start_line']
-                        pills.append(f'<a href="{root_rel}src_view/{ch_f}.html#L{ch_l}" class="derived-class-pill src-code-link" data-src-file="{ch_f}" data-src-line="{ch_l}" title="Source for {child}">{child}</a>')
-                    else:
-                        pills.append(f'<span class="derived-class-pill">{child}</span>')
-
-                derived_box = f'''<div class="derived-classes-card collapsed">
-  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
-    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    <span>Direct Subclasses ({len(children)})</span>
-  </div>
-  <div class="derived-classes-list">{"".join(pills)}</div>
-</div>'''
+                derived_box = pbc.render_derived_classes_card(
+                    children, root_rel, CLASS_TO_DOC_MAP, UVM_DB, GLOBAL_DOC_ANCHOR_MAPS
+                )
                 w_body = re.sub(r'(</h[123]>)', r'\1' + derived_box, w_body, count=1)
 
             if target_cname in CLASS_TO_EXAMPLE_MAP:
                 ex_rel, ex_title = CLASS_TO_EXAMPLE_MAP[target_cname]
-                ex_box = f'''<div class="doc-example-callout">
-  <span class="example-callout-icon">💡</span>
-  <div class="example-callout-content">
-    <strong>Interactive Example:</strong>
-    <a href="{root_rel}examples_view/{ex_rel}" class="example-callout-link" data-example-url="{root_rel}examples_view/{ex_rel}" title="Open {ex_title}">{ex_title}</a>
-  </div>
-  <span class="example-callout-badge">Interactive Studio</span>
-</div>'''
+                ex_box = pbc.render_example_callout(ex_rel, ex_title, root_rel)
                 w_body = re.sub(r'(</h[123]>)', r'\1' + ex_box, w_body, count=1)
 
     elif cls_name in ('CMethod', 'CFunction', 'CTask'):
@@ -1144,57 +1020,15 @@ def modernize_doc_files():
             # Breadcrumb navigation
             breadcrumbs_html = build_breadcrumbs_html(rel_path, page_title, root_rel)
 
-            modern_html = f'''<!DOCTYPE html>
-<html lang="en" class="doc-page">
-<head>
-  <meta charset="UTF-8">
-  <meta name="color-scheme" content="light dark">
-  <script>
-    (function () {{
-      try {{
-        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-        var t = p || localStorage.getItem('theme');
-        if (t) {{
-          document.documentElement.setAttribute('data-theme', t);
-          document.documentElement.style.colorScheme = t;
-        }}
-      }} catch (e) {{ }}
-    }})();
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(page_title)} | UVM 1.2 Documentation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{root_rel}css/style.css">
-</head>
-<body class="doc-body">
-  <div class="doc-page-container">
-    {breadcrumbs_html}
-    {view_source_banner}
-    <div class="doc-layout-wrapper">
-      <div class="doc-main-content">
-        {body_content}
-      </div>
-      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
-        <div class="doc-toc-inner">
-          <div class="doc-toc-header">
-            <span class="doc-toc-title">On this page</span>
-            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
-              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4 14 12 6 20 14"/>
-              </svg>
-              <span class="toc-toggle-text">Collapse all</span>
-            </button>
-          </div>
-          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
-        </div>
-      </aside>
-    </div>
-  </div>
-  <script src="{root_rel}js/doc_page.js"></script>
-</body>
-</html>'''
+            modern_html = pbc.render_html_shell(
+                title=f"{page_title} | UVM 1.2 Documentation",
+                body_content=body_content,
+                root_rel=root_rel,
+                breadcrumbs_html=breadcrumbs_html,
+                banner_html=view_source_banner,
+                extra_scripts=[f"{root_rel}js/doc_page.js"],
+                include_toc=True
+            )
 
             with open(out_file, 'w', encoding='utf-8', newline='\n') as of:
                 of.write(modern_html)
@@ -1240,44 +1074,14 @@ def modernize_index_pages():
 
         breadcrumbs_html = build_breadcrumbs_html(f"index/{f.name}", page_name, "../../")
 
-        modern_html = f'''<!DOCTYPE html>
-<html lang="en" class="doc-page">
-<head>
-  <meta charset="UTF-8">
-  <meta name="color-scheme" content="light dark">
-  <script>
-    (function () {{
-      try {{
-        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-        var t = p || localStorage.getItem('theme');
-        if (t) {{
-          document.documentElement.setAttribute('data-theme', t);
-          document.documentElement.style.colorScheme = t;
-        }}
-      }} catch (e) {{ }}
-    }})();
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(title)} | UVM 1.2 Documentation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/style.css">
-</head>
-<body class="doc-body">
-  <div class="doc-page-container">
-    {breadcrumbs_html}
-    <div class="doc-layout-wrapper">
-      <div class="doc-main-content">
-        <div id="Content">
-          {body}
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="../../js/doc_page.js"></script>
-</body>
-</html>'''
+        modern_html = pbc.render_html_shell(
+            title=f"{title} | UVM 1.2 Documentation",
+            body_content=body,
+            root_rel="../../",
+            breadcrumbs_html=breadcrumbs_html,
+            extra_scripts=["../../js/doc_page.js"],
+            include_toc=False
+        )
 
         out_file = output_index_dir / f.name
         out_file.write_text(modern_html, encoding='utf-8', newline='\n')
@@ -1437,57 +1241,15 @@ def generate_orphan_doc_pages():
         doc_key = f"docs_view/{doc_rel}"
         DOC_HEADINGS_MAP[doc_key] = extract_doc_headings(body_content, doc_rel)
 
-        page_html = f'''<!DOCTYPE html>
-<html lang="en" class="doc-page">
-<head>
-  <meta charset="UTF-8">
-  <meta name="color-scheme" content="light dark">
-  <script>
-    (function () {{
-      try {{
-        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-        var t = p || localStorage.getItem('theme');
-        if (t) {{
-          document.documentElement.setAttribute('data-theme', t);
-          document.documentElement.style.colorScheme = t;
-        }}
-      }} catch (e) {{ }}
-    }})();
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(page_title)} | UVM 1.2 Documentation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{root_rel}css/style.css">
-</head>
-<body class="doc-body">
-  <div class="doc-page-container">
-    {breadcrumbs}
-    {banner}
-    <div class="doc-layout-wrapper">
-      <div class="doc-main-content">
-        {body_content}
-      </div>
-      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
-        <div class="doc-toc-inner">
-          <div class="doc-toc-header">
-            <span class="doc-toc-title">On this page</span>
-            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
-              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4 14 12 6 20 14"/>
-              </svg>
-              <span class="toc-toggle-text">Collapse all</span>
-            </button>
-          </div>
-          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
-        </div>
-      </aside>
-    </div>
-  </div>
-  <script src="{root_rel}js/doc_page.js"></script>
-</body>
-</html>'''
+        page_html = pbc.render_html_shell(
+            title=f"{page_title} | UVM 1.2 Documentation",
+            body_content=body_content,
+            root_rel=root_rel,
+            breadcrumbs_html=breadcrumbs,
+            banner_html=banner,
+            extra_scripts=[f"{root_rel}js/doc_page.js"],
+            include_toc=True
+        )
 
         with open(out_file, 'w', encoding='utf-8', newline='\n') as of:
             of.write(page_html)

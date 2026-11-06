@@ -506,6 +506,58 @@ Le fichier de données de recherche [`js/search_data.js`](file:///c:/Dev/UVM_doc
   - L'appui sur `Entrée` valide et mémorise immédiatement la requête (`saveRecentSearch(val, 'ai')`), déclenchant la recherche sémantique sans attendre.
   - `.modal-search-prompts` est équilibré avec `max-height: 420px; min-height: 180px; flex: 1 1 auto;`, offrant un espace généreux et confortable pour afficher plusieurs rangées de suggestions de requêtes sans écraser la section d'historique en dessous.
 
+---
+
+## 14. Le Piège des Liens de Code Cliquables : Balises `<span>` vs `<a>` dans les Code Studios
+
+### Le Symptôme Observé
+> *"Les liens dans le code des fichiers du code studio ne fonctionnent pas non plus."*  
+> Dans les exemples interactifs, les types et classes UVM (ex: `uvm_component`, `uvm_tlm_fifo`) mis en évidence dans le code source étaient visuellement indiqués comme cliquables (`cursor: pointer`, soulignement bleu au survol), mais un clic dessus ne déclenchait aucune action.
+
+### L'Anatomie du Piège
+1. **Nature des balises dans les tableaux de coloration syntaxique** :
+   Dans [`scripts/syntax_highlighter.py`](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/syntax_highlighter.py), les identifiants UVM cliquables dans les lignes de code sont générés sous forme de balises `<span>` :
+   ```html
+   <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" title="Click to view uvm_component documentation">uvm_component</span>
+   ```
+   Cette utilisation de `<span>` plutôt que de `<a>` est volontaire : elle évite les conflits d'imbrication d'ancres avec les numéros de ligne (`<td class="ln"><a href="#L10">10</a>`) et maintient la conformité HTML5 dans les tables de code.
+2. **Le piège de la délégation d'événements** :
+   Dans le contrôleur unifié [`js/page_common.js`](file:///c:/Users/uf755lfr/Perso/UVM_doc/js/page_common.js), le gestionnaire central de clics débutait par :
+   ```javascript
+   const link = e.target.closest('a');
+   if (!link) return;
+   ```
+   Puisque l'élément cliqué était un `<span>` et ne se trouvait à l'intérieur d'aucune balise `<a>`, `link` valait systématiquement `null` et le gestionnaire retournait immédiatement sans exécuter la moindre action.
+
+### La Solution
+Intercepter `.clickable-uvm-sym` au plus haut niveau de la chaîne de délégation d'événements, indépendamment du type de balise (`span` ou `a`) :
+```javascript
+// 1. Clickable UVM Symbols (spans in Code Studio or <a> badges in headers)
+const symEl = e.target.closest('.clickable-uvm-sym');
+if (symEl) {
+  e.preventDefault();
+  const sym = symEl.getAttribute('data-sym') || symEl.textContent.trim();
+  if (sym && window.parent && window.parent !== window) {
+    window.parent.postMessage({
+      type: 'openDocView',
+      symbol: sym,
+      url: `docs_view/base/${sym}-svh.html`
+    }, '*');
+  }
+  try {
+    if (window.parent && window.parent.openDocView) {
+      window.parent.openDocView(`docs_view/base/${sym}-svh.html`, sym);
+    }
+  } catch (err) { }
+  return;
+}
+
+// 2. Traitement ultérieur réservé aux balises <a>
+const link = e.target.closest('a');
+if (!link) return;
+```
+
+
 
 
 

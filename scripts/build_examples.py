@@ -20,66 +20,16 @@ import html
 import json
 from pathlib import Path
 from collections import OrderedDict
-import syntax_highlighter as sh
+import page_builder_common as pbc
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 EXAMPLES_SRC_DIR = BASE_DIR / "uvm-1.2" / "examples"
 OUTPUT_EXAMPLES_VIEW = BASE_DIR / "examples_view"
 OUTPUT_JS_DIR = BASE_DIR / "js"
 
-# SystemVerilog keywords (IEEE 1800)
-SV_KEYWORDS = set([
-    'accept_tr', 'alias', 'always', 'always_comb', 'always_ff', 'always_latch',
-    'and', 'assert', 'assign', 'assume', 'automatic', 'before', 'begin', 'bind',
-    'bins', 'binsof', 'bit', 'break', 'buf', 'bufif0', 'bufif1', 'byte', 'case',
-    'casex', 'casez', 'cell', 'chandle', 'checker', 'class', 'clocking', 'cmos',
-    'config', 'const', 'constraint', 'context', 'continue', 'cover', 'covergroup',
-    'coverpoint', 'cross', 'deassign', 'default', 'defparam', 'design', 'disable',
-    'dist', 'do', 'edge', 'else', 'end', 'endcase', 'endchecker', 'endclass',
-    'endclocking', 'endconfig', 'endfunction', 'endgenerate', 'endgroup',
-    'endinterface', 'endmodule', 'endpackage', 'endprimitive', 'endprogram',
-    'endproperty', 'endsequence', 'endspecify', 'endtable', 'endtask', 'enum',
-    'event', 'expect', 'export', 'extends', 'extern', 'final', 'first_match',
-    'for', 'force', 'foreach', 'forever', 'fork', 'forkjoin', 'function',
-    'generate', 'genvar', 'highz0', 'highz1', 'if', 'iff', 'ifnone', 'ignore_bins',
-    'illegal_bins', 'implements', 'implies', 'import', 'incdir', 'include',
-    'initial', 'inout', 'input', 'inside', 'instance', 'int', 'integer',
-    'interconnect', 'interface', 'intersect', 'join', 'join_any', 'join_none',
-    'large', 'let', 'liblist', 'library', 'local', 'localparam', 'logic',
-    'longint', 'matches', 'medium', 'modport', 'module', 'nand', 'negedge',
-    'nettype', 'new', 'nexttime', 'nmos', 'nor', 'noshowcancelled', 'not',
-    'notif0', 'notif1', 'null', 'or', 'output', 'package', 'packed', 'parameter',
-    'pmos', 'posedge', 'primitive', 'priority', 'program', 'property',
-    'protected', 'pull0', 'pull1', 'pulldown', 'pullup', 'pulsestyle_ondetect',
-    'pulsestyle_onevent', 'pure', 'rand', 'randc', 'randcase', 'randsequence',
-    'rcmos', 'real', 'realtime', 'ref', 'reg', 'reject_on', 'release', 'repeat',
-    'restrict', 'return', 'rnmos', 'rpmos', 'rtran', 'rtranif0', 'rtranif1',
-    's_always', 's_eventually', 's_nexttime', 's_until', 's_until_with', 'scalared',
-    'sequence', 'shortint', 'shortreal', 'showcancelled', 'signed', 'small',
-    'soft', 'solve', 'specify', 'specparam', 'static', 'string', 'strong',
-    'struct', 'super', 'supply0', 'supply1', 'sync_accept_on', 'sync_reject_on',
-    'table', 'tagged', 'task', 'this', 'throughout', 'time', 'timeprecision',
-    'timeunit', 'tran', 'tranif0', 'tranif1', 'tri', 'tri0', 'tri1', 'triand',
-    'trior', 'trireg', 'type', 'typedef', 'union', 'unique', 'unique0',
-    'unsigned', 'until', 'until_with', 'untyped', 'use', 'uwire', 'var', 'vectored',
-    'virtual', 'void', 'wait', 'wait_order', 'wand', 'weak', 'weak0', 'weak1',
-    'while', 'wildcard', 'wire', 'with', 'within', 'wor', 'xnor', 'xor'
-])
-
-TOKEN_REGEX = re.compile(
-    r'(?P<BLOCK_COMMENT_START>/\*)|'
-    r'(?P<LINE_COMMENT>//[^\n]*)|'
-    r'(?P<STRING>"([^"\\]|\\.)*")|'
-    r'(?P<CHAR>\'([^\'\\]|\\.)*\')|'
-    r'(?P<MACRO>`[a-zA-Z_][a-zA-Z0-9_]*)|'
-    r'(?P<NUMBER>\b\d+\'?[bBoOdDhH]?[0-9a-fA-F_xzXZ]*\b|\b\d+\b)|'
-    r'(?P<IDENT>[a-zA-Z_][a-zA-Z0-9_]*)|'
-    r'(?P<OP>[#+\-*/%=&|~^!<>?:;.,()\[\]{}])'
-)
-
 def highlight_code_lines(code, filename):
     """Highlight code lines and return (lines_html, total_lines)."""
-    rows, count = sh.highlight_source_code_table_rows(code, filename, clickable_sym_links=True)
+    rows, count = pbc.highlight_code_lines(code, filename, clickable_sym_links=True)
     return '\n'.join(rows), count
 
 # Metadata catalogue for all 38 suites
@@ -938,38 +888,6 @@ EXAMPLE_TO_SRC_MAP = {
     "integrated/apb.html": "src_view/reg/uvm_reg_adapter.svh.html#L38"
 }
 
-def build_file_select_options(files_data):
-    """Build <select> option elements with tree hierarchy when subdirectories exist."""
-    has_dirs = any('/' in fd['name'] or '\\' in fd['name'] for fd in files_data)
-    if not has_dirs:
-        return ''.join([
-            f'<option value="{i}">📄 {html.escape(fd["name"])}</option>'
-            for i, fd in enumerate(files_data)
-        ])
-
-    groups = OrderedDict()
-    for i, fd in enumerate(files_data):
-        raw_name = fd['name'].replace('\\', '/')
-        if '/' in raw_name:
-            folder, fname = raw_name.rsplit('/', 1)
-            folder_key = folder + '/'
-        else:
-            folder_key = 'root/'
-            fname = raw_name
-        if folder_key not in groups:
-            groups[folder_key] = []
-        groups[folder_key].append((i, fname))
-
-    html_parts = []
-    for folder_label, items in groups.items():
-        html_parts.append(f'<optgroup label="📁 {html.escape(folder_label)}">')
-        total = len(items)
-        for idx, (file_idx, fname) in enumerate(items):
-            branch = '└── ' if idx == total - 1 else '├── '
-            html_parts.append(f'<option value="{file_idx}">{branch}{html.escape(fname)}</option>')
-        html_parts.append('</optgroup>')
-    return ''.join(html_parts)
-
 def build_suite_page(suite_key, meta, files):
     """Generate interactive HTML page for an example suite."""
     slug = suite_key.replace('/', '_')
@@ -1004,299 +922,81 @@ def build_suite_page(suite_key, meta, files):
     zip_payload = [{"name": fd["name"], "content": fd["raw_content"]} for fd in files_data]
     zip_json_escaped = html.escape(json.dumps(zip_payload))
 
-    # Pre-render file select options (tree hierarchy when subdirectories exist)
-    file_select_options = build_file_select_options(files_data)
-
     # Stepper data if present
     stepper_list = STEPPER_DATA.get(suite_key, [])
-    has_stepper = len(stepper_list) > 0
 
     # Simulation log
     sim_log = generate_simulation_log(suite_key, meta)
 
-    # Topology HTML
+    # Topology nodes
     topo_nodes = meta.get("topology", [])
-    topo_html = ""
-    for node in topo_nodes:
-        name = node.get("name", "")
-        ntype = node.get("type", "")
-        det = node.get("details", "")
-        topo_html += f"""
-        <div class="topo-card">
-          <div class="topo-header">
-            <span class="topo-badge">{html.escape(ntype)}</span>
-            <strong>{html.escape(name)}</strong>
-          </div>
-          {f'<div class="topo-details">{html.escape(det)}</div>' if det else ''}
-        </div>
-        """
 
-    # Stepper HTML Block
-    stepper_html_block = ""
-    if has_stepper:
-        stepper_nodes_html = ''.join([
-            f'<div class="step-node {("active" if i == 0 else "")}" data-step="{i+1}">'
-            f'<span class="step-num">{i+1}</span>'
-            f'<span class="step-title">{html.escape(s["title"].split(". ")[1] if ". " in s["title"] else s["title"])}</span>'
-            f'</div>'
-            for i, s in enumerate(stepper_list)
-        ])
-        stepper_html_block = f"""
-        <!-- Interactive Visual Flow Stepper Section -->
-        <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
-          <div class="CTopic">
-            <h2 class="CTitle"><a name="FlowStepper">Simulation Flow Stepper</a></h2>
-            <div class="CBody">
-              <div class="stepper-section" id="visual-flow-stepper">
-                <div class="section-header-row">
-                  <div class="section-title">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                    <span class="section-title-text">Interactive Execution Progression</span>
-                  </div>
-                  <div class="stepper-controls">
-                    <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
-                    <button type="button" class="btn btn-sm btn-outline" id="stepper-play">Play &#9654;</button>
-                    <button type="button" class="btn btn-sm btn-primary" id="stepper-next">Next Step &rarr;</button>
-                  </div>
-                </div>
-
-                <div class="stepper-timeline" id="stepper-timeline">
-                  {stepper_nodes_html}
-                </div>
-
-                <div class="step-card" id="step-detail-card">
-                  <div class="step-card-header">
-                    <h4 id="step-active-title">{html.escape(stepper_list[0]["title"] if stepper_list else "")}</h4>
-                    <span class="step-active-comp" id="step-active-comp">Target: {html.escape(stepper_list[0]["component"] if stepper_list else "")}</span>
-                  </div>
-                  <p id="step-active-desc">{html.escape(stepper_list[0]["desc"] if stepper_list else "")}</p>
-                  <div class="step-log-hint">
-                    <strong>Expected Log Output:</strong>
-                    <code id="step-active-log">{html.escape(stepper_list[0]["log_snippet"] if stepper_list else "")}</code>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        """
-
-    scope_badge = f'<span class="badge badge-scope badge-scope-integrated">Integrated VIP / Env</span>' if meta.get("scope") == "Integrated" else ''
-
-    # Generate page HTML fully harmonized with docs_view layout and design tokens
-    page_html = f"""<!DOCTYPE html>
-<html lang="en" class="doc-page example-page">
-<head>
-  <meta charset="UTF-8">
-  <meta name="color-scheme" content="light dark">
-  <script>
-    (function () {{
-      try {{
-        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
-        var t = p || localStorage.getItem('theme');
-        if (t) {{
-          document.documentElement.setAttribute('data-theme', t);
-          document.documentElement.style.colorScheme = t;
-        }}
-      }} catch (e) {{ }}
-    }})();
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(meta["title"])} | UVM 1.2 Interactive Examples</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/style.css">
-</head>
-<body class="doc-body example-body">
-  <div class="doc-page-container">
-
-    <!-- Document Breadcrumbs -->
-    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
-      <a href="../../index.html#/examples" target="_top" class="doc-breadcrumb-item doc-breadcrumb-home">Examples</a>
-      <span class="doc-breadcrumb-sep">/</span>
-      <span class="doc-breadcrumb-item">{html.escape(meta["category_title"])}</span>
-      <span class="doc-breadcrumb-sep">/</span>
-      <span class="doc-breadcrumb-item active">{html.escape(meta["title"])}</span>
-    </nav>
-
-    <!-- Source Banner & Actions -->
-    <div class="doc-source-banner example-source-banner">
-      <div class="banner-info">
-        <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span class="file-label">Suite:</span>
-        <code class="banner-file-code">uvm-1.2/examples/{suite_key}</code>
-        {scope_badge}
-        <span class="badge badge-diff badge-diff-{meta["difficulty"].lower()}">{html.escape(meta["difficulty"])}</span>
-        <span class="badge badge-files">{len(files_data)} files</span>
-      </div>
-
-      <div class="banner-actions">
-        <button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="{paired_src}" title="View side-by-side with UVM source code in Split View">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
-          <span>Split View</span>
-        </button>
-        <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Download (.zip)</span>
-        </button>
+    # Assemble sections using page_builder_common
+    main_topic_html = f"""<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
+  <div class="CTopic" id="MainTopic">
+    <h1 class="CTitle"><a name="{html.escape(meta['title'])}">{html.escape(meta['title'])}</a></h1>
+    <div class="CBody">
+      <p class="example-summary-desc">{html.escape(meta['summary'])}</p>
+      <div class="example-api-pills">
+        <span class="api-label">Key UVM APIs:</span>
+        {' '.join([f'<a href="#" class="api-pill clickable-uvm-sym" data-sym="{html.escape(api)}">{html.escape(api)}</a>' for api in meta.get('apis', [])])}
       </div>
     </div>
+  </div>
+</div>"""
 
-    <!-- 2-Column Documentation Layout (Harmonized with docs_view) -->
-    <div class="doc-layout-wrapper">
-      <div class="doc-main-content">
-        <div id="Content">
+    stepper_block = pbc.render_flow_stepper(stepper_list)
+    topo_block = pbc.render_topology_grid(topo_nodes)
+    primary_file = meta.get("primary_file", files_data[0]["name"] if files_data else "")
+    studio_block = pbc.render_code_studio(files_data, primary_file, "../../")
+    sim_block = pbc.render_simulation_console(sim_log)
 
-          <!-- Main Class / Overview Topic -->
-          <div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
-            <div class="CTopic" id="MainTopic">
-              <h1 class="CTitle"><a name="{html.escape(meta["title"])}">{html.escape(meta["title"])}</a></h1>
-              <div class="CBody">
-                <p class="example-summary-desc">{html.escape(meta["summary"])}</p>
-                <div class="example-api-pills">
-                  <span class="api-label">Key UVM APIs:</span>
-                  {' '.join([f'<a href="#" class="api-pill clickable-uvm-sym" data-sym="{html.escape(api)}">{html.escape(api)}</a>' for api in meta.get("apis", [])])}
-                </div>
-              </div>
-            </div>
-          </div>
+    body_content = f"{main_topic_html}\n{stepper_block}\n{topo_block}\n{studio_block}\n{sim_block}"
 
-          <!-- Interactive Visual Flow Stepper (If Supported) -->
-          {stepper_html_block}
+    breadcrumbs_html = pbc.render_breadcrumbs([
+        {"title": "Examples", "href": "../../index.html#/examples", "is_home": True},
+        {"title": meta["category_title"]},
+        {"title": meta["title"]}
+    ], "../../")
 
-          <!-- Testbench Architecture Topology -->
-          <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
-              <div class="CBody">
-                <div class="topo-grid">
-                  {topo_html}
-                </div>
-              </div>
-            </div>
-          </div>
+    scope_badge = '<span class="badge badge-scope badge-scope-integrated">Integrated VIP / Env</span>' if meta.get("scope") == "Integrated" else ''
+    diff_badge = f'<span class="badge badge-diff badge-diff-{meta["difficulty"].lower()}">{html.escape(meta["difficulty"])}</span>'
+    files_badge = f'<span class="badge badge-files">{len(files_data)} files</span>'
 
-          <!-- Multi-File Code Studio -->
-          <div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
-              <div class="CBody">
-                <div class="studio-section">
-                  <div class="studio-header">
-                    <div class="studio-toolbar">
-                      <div class="studio-toolbar-left">
-                        <div class="studio-file-select-wrapper" title="Jump directly to any file in this example">
-                          <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
-                            {file_select_options}
-                          </select>
-                        </div>
-                      </div>
+    info_html = f'''<svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <span class="file-label">Suite:</span>
+    <code class="banner-file-code">uvm-1.2/examples/{suite_key}</code>
+    {scope_badge}
+    {diff_badge}
+    {files_badge}'''
 
-                      <div class="studio-toolbar-actions">
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                        </button>
-                      </div>
-                    </div>
+    actions_html = f'''<button type="button" class="btn btn-outline" id="btn-split-source" data-src-url="{paired_src}" title="View side-by-side with UVM source code in Split View">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+      <span>Split View</span>
+    </button>
+    <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download all example files in a ZIP archive">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Download (.zip)</span>
+    </button>'''
 
-                    <div class="studio-tab-bar-wrapper">
-                      <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
-                      <div class="studio-tab-bar" id="studio-tab-bar">
-                        {''.join([f'<button type="button" class="studio-tab {("active" if i == 0 else "")}" data-file-idx="{i}" title="{html.escape(fd["name"])}"><span class="tab-icon">📄</span><span class="tab-name">{html.escape(fd["name"])}</span></button>' for i, fd in enumerate(files_data)])}
-                      </div>
-                      <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
-                    </div>
-                  </div>
+    banner_html = pbc.render_banner(info_html, actions_html, extra_classes="example-source-banner")
 
-                  <div class="studio-code-container" id="studio-code-container">
-                    {''.join([f'<div class="file-code-pane {("active" if i == 0 else "")}" id="file-pane-{i}"><table class="sv-code-table"><tbody>{fd["table_html"]}</tbody></table></div>' for i, fd in enumerate(files_data)])}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    page_html = pbc.render_html_shell(
+        title=f"{meta['title']} | UVM 1.2 Interactive Examples",
+        body_content=body_content,
+        root_rel="../../",
+        breadcrumbs_html=breadcrumbs_html,
+        banner_html=banner_html,
+        extra_html_classes="example-page",
+        extra_body_classes="example-body",
+        extra_scripts=["../../js/example_page.js"],
+        data_payloads={
+            "zip-payload": zip_json_escaped,
+            "stepper-payload": html.escape(json.dumps(stepper_list))
+        },
+        include_toc=True
+    )
 
-          <!-- Simulation & Execution Output Console -->
-          <div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
-            <div class="CTopic">
-              <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
-              <div class="CBody">
-                <div class="sim-section">
-                  <!-- Simulator Command Selector -->
-                  <div class="sim-cmd-card">
-                    <div class="sim-tabs">
-                      <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
-                      <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
-                      <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
-                    </div>
-                    <div class="sim-cmd-box">
-                      <code id="sim-cmd-text">make -f Makefile.questa run</code>
-                      <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
-                    </div>
-                  </div>
-
-                  <!-- Terminal Log -->
-                  <div class="terminal-card">
-                    <div class="terminal-header">
-                      <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                      </div>
-                      <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
-                      <div class="terminal-filters">
-                        <button type="button" class="term-filter active" data-level="all">All</button>
-                        <button type="button" class="term-filter" data-level="info">Info</button>
-                        <button type="button" class="term-filter" data-level="warning">Warning</button>
-                        <button type="button" class="term-filter" data-level="error">Error</button>
-                      </div>
-                    </div>
-                    <pre class="terminal-body" id="terminal-body">{html.escape(sim_log)}</pre>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div> <!-- #Content -->
-      </div> <!-- .doc-main-content -->
-
-      <!-- Sticky In-Page Table of Contents ("On this page") -->
-      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
-        <div class="doc-toc-inner">
-          <div class="doc-toc-header">
-            <span class="doc-toc-title">On this page</span>
-            <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
-              <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4 14 12 6 20 14"/>
-              </svg>
-              <span class="toc-toggle-text">Collapse all</span>
-            </button>
-          </div>
-          <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
-        </div>
-      </aside>
-
-    </div> <!-- .doc-layout-wrapper -->
-
-  </div> <!-- .doc-page-container -->
-
-  <!-- Data payload for client scripts -->
-  <div id="zip-payload" style="display:none;" data-zip="{zip_json_escaped}"></div>
-  <div id="stepper-payload" style="display:none;" data-stepper="{html.escape(json.dumps(stepper_list))}"></div>
-
-  <script src="../../js/doc_page.js"></script>
-  <script src="../../js/example_page.js"></script>
-</body>
-</html>
-"""
     with open(out_file, 'w', encoding='utf-8', newline='\n') as f:
         f.write(page_html)
 
@@ -1311,7 +1011,7 @@ def build_suite_page(suite_key, meta, files):
         "apis": meta.get("apis", []),
         "href": f"examples_view/{cat_slug}/{Path(suite_key).name}.html",
         "files_count": len(files_data),
-        "primary_file": meta.get("primary_file", files_data[0]["name"] if files_data else "")
+        "primary_file": primary_file
     }
 
 def generate_all_examples():
