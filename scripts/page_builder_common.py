@@ -125,12 +125,37 @@ def render_code_pane(table_html: str, pane_id: str = "file-pane-0", is_active: b
 
 def render_code_container(panes_html: str, container_id: str = "studio-code-container", extra_classes: str = "") -> str:
     """
-    Renders the unified code container wrapping code panes.
+    Renders the unified code container wrapping code panes with integrated editor widgets:
+    - Code Find Widget (Ctrl+F)
+    - Quick Info Tooltip Popover (Hover)
+    - Monaco IDE Pane (Activated on demand)
     Carries both .code-container and contextual classes (.studio-code-container, .src-code-container)
     for 100% backward compatibility.
     """
     classes = f"code-container {extra_classes}".strip()
-    return f'<div class="{classes}" id="{container_id}">{panes_html}</div>'
+    find_widget_html = '''    <div class="code-find-widget" id="code-find-widget" style="display:none;" role="search" aria-label="Find in file">
+      <div class="find-input-wrap">
+        <input type="text" id="find-input" placeholder="Find in file (Ctrl+F)..." autocomplete="off" spellcheck="false">
+        <span class="find-count" id="find-count">0 of 0</span>
+      </div>
+      <div class="find-actions">
+        <button type="button" class="find-btn" id="find-case-toggle" title="Match Case (Alt+C)">Aa</button>
+        <button type="button" class="find-btn" id="find-word-toggle" title="Match Whole Word (Alt+W)">\\b</button>
+        <button type="button" class="find-btn" id="find-prev" title="Previous Match (Shift+Enter)">▲</button>
+        <button type="button" class="find-btn" id="find-next" title="Next Match (Enter)">▼</button>
+        <button type="button" class="find-btn" id="find-close" title="Close (Esc)">✕</button>
+      </div>
+    </div>'''
+
+    quick_info_html = '    <div class="code-quick-info-tooltip" id="code-quick-info" style="display:none;"></div>'
+    monaco_pane_html = '    <div id="monaco-editor-pane" style="display:none;"></div>'
+
+    return f'''<div class="{classes}" id="{container_id}">
+{find_widget_html}
+{quick_info_html}
+{monaco_pane_html}
+{panes_html}
+</div>'''
 
 
 def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root_rel: str) -> str:
@@ -201,6 +226,16 @@ def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root
             </div>
 
             <div class="studio-toolbar-actions">
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-toggle-find" title="Find in file (Ctrl+F)" aria-label="Find in file">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-toggle-wrap" title="Toggle Word Wrap (Alt+Z)" aria-label="Toggle Word Wrap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><polyline points="14 16 18 12 14 8"/><path d="M21 18H9a4 4 0 0 1 0-8h6"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn btn-monaco-ide" id="btn-toggle-monaco" title="Toggle Monaco VS Code Editor" aria-label="Monaco IDE">
+                <svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>
+                <span>Monaco</span>
+              </button>
               <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               </button>
@@ -489,8 +524,8 @@ def render_html_shell(
         html_cls = f"doc-page {extra_html_classes}".strip()
         body_cls = f"doc-body {extra_body_classes}".strip()
 
-    # Scripts: page_common.js is always loaded
-    scripts_list = [f"{root_rel}js/page_common.js"]
+    # Scripts: uvm_symbol_quick.js and page_common.js are always loaded
+    scripts_list = [f"{root_rel}js/uvm_symbol_quick.js", f"{root_rel}js/page_common.js"]
     if extra_scripts:
         scripts_list.extend(extra_scripts)
 
@@ -603,6 +638,18 @@ def render_source_viewer(
     <div class="src-actions studio-toolbar-actions">
       {sym_select}
       {doc_btn}
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-toggle-find" title="Find in file (Ctrl+F)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Find</span>
+      </button>
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-toggle-wrap" title="Toggle Word Wrap (Alt+Z)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><polyline points="14 16 18 12 14 8"/><path d="M21 18H9a4 4 0 0 1 0-8h6"/></svg>
+        <span>Wrap</span>
+      </button>
+      <button type="button" class="btn btn-outline studio-action-btn btn-monaco-ide" id="btn-toggle-monaco" title="Toggle Monaco VS Code Editor">
+        <svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>
+        <span>Monaco IDE</span>
+      </button>
       <button type="button" class="btn btn-outline studio-action-btn" id="btn-copy-code" title="Copy raw source code">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         <span>Copy Code</span>

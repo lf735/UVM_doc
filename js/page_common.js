@@ -824,6 +824,33 @@ window.PageCommon = (function () {
       }
     } catch (e) { }
 
+    let onFileTabSwitched = null;
+
+    function getActivePane() {
+      if (codePanes.length > 0) {
+        return codePanes[currentFileIdx] || codePanes[0];
+      }
+      return document.querySelector('.sv-code-table') || studioCodeContainer;
+    }
+
+    function getActiveCodeText() {
+      if (filesList[currentFileIdx] && filesList[currentFileIdx].content) {
+        return filesList[currentFileIdx].content;
+      }
+      const rawTextEl = document.getElementById('raw-source-text');
+      if (rawTextEl) {
+        return rawTextEl.value;
+      }
+      const pane = getActivePane();
+      if (pane) {
+        const codeCells = Array.from(pane.querySelectorAll('.code'));
+        if (codeCells.length > 0) {
+          return codeCells.map(function (c) { return c.textContent; }).join('\n');
+        }
+      }
+      return '';
+    }
+
     function switchFileTab(idx) {
       if (idx < 0 || idx >= codePanes.length) return;
       currentFileIdx = idx;
@@ -838,6 +865,10 @@ window.PageCommon = (function () {
 
       if (studioFileSelect) {
         studioFileSelect.value = String(idx);
+      }
+
+      if (typeof onFileTabSwitched === 'function') {
+        onFileTabSwitched(idx);
       }
 
       if (studioTabs[idx]) {
@@ -1042,6 +1073,775 @@ window.PageCommon = (function () {
         }
       });
     }
+
+    // =======================================================================
+    // Code Editor Tools Suite
+    // (Find in file, Occurrence Highlighting, Go to Definition, Quick Info, Monaco)
+    // =======================================================================
+
+    function scrollToRow(targetRow) {
+      if (!targetRow || !studioCodeContainer) return;
+      const cRect = studioCodeContainer.getBoundingClientRect();
+      const rRect = targetRow.getBoundingClientRect();
+      const offsetTop = rRect.top - cRect.top + studioCodeContainer.scrollTop;
+      studioCodeContainer.scrollTo({
+        top: Math.max(0, offsetTop - (studioCodeContainer.clientHeight / 2)),
+        behavior: 'smooth'
+      });
+    }
+
+    // 1. Integrated Search Widget (Ctrl+F)
+    let clearFindMatches = null;
+    (function initCodeFindWidget() {
+      const findWidget = document.getElementById('code-find-widget');
+      const btnToggleFind = document.getElementById('btn-toggle-find');
+      if (!findWidget) return;
+
+      const findInput = document.getElementById('find-input');
+      const findCount = document.getElementById('find-count');
+      const findPrev = document.getElementById('find-prev');
+      const findNext = document.getElementById('find-next');
+      const findCase = document.getElementById('find-case');
+      const findWord = document.getElementById('find-word');
+      const findClose = document.getElementById('find-close');
+
+      let currentMatches = [];
+      let currentMatchIdx = -1;
+
+      clearFindMatches = function () {
+        const pane = getActivePane();
+        if (!pane) return;
+        pane.querySelectorAll('mark.find-match').forEach(function (m) {
+          m.replaceWith(...m.childNodes);
+        });
+        pane.normalize();
+        currentMatches = [];
+        currentMatchIdx = -1;
+        if (findCount) findCount.textContent = 'No results';
+      };
+
+      function showWidget() {
+        findWidget.classList.add('visible');
+        if (btnToggleFind) btnToggleFind.classList.add('active');
+        if (findInput) {
+          const sel = window.getSelection().toString().trim();
+          if (sel && sel.length < 50 && !sel.includes('\n')) {
+            findInput.value = sel;
+          }
+          findInput.focus();
+          findInput.select();
+          performSearch();
+        }
+      }
+
+      function hideWidget() {
+        findWidget.classList.remove('visible');
+        if (btnToggleFind) btnToggleFind.classList.remove('active');
+        clearFindMatches();
+      }
+
+      function toggleWidget() {
+        if (findWidget.classList.contains('visible')) {
+          hideWidget();
+        } else {
+          showWidget();
+        }
+      }
+
+      function highlightMatch(idx) {
+        if (!currentMatches.length || idx < 0 || idx >= currentMatches.length) return;
+        currentMatches.forEach(function (m) { m.classList.remove('find-match-current'); });
+        const target = currentMatches[idx];
+        target.classList.add('find-match-current');
+        if (findCount) {
+          findCount.textContent = (idx + 1) + ' of ' + currentMatches.length;
+        }
+        const row = target.closest('tr');
+        if (row) scrollToRow(row);
+      }
+
+      function performSearch() {
+        clearFindMatches();
+        if (!findInput || !findInput.value) return;
+        const query = findInput.value;
+        const isCase = findCase && findCase.classList.contains('active');
+        const isWord = findWord && findWord.classList.contains('active');
+
+        let regex;
+        try {
+          let pattern = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          if (isWord) pattern = '\\b' + pattern + '\\b';
+          regex = new RegExp(pattern, isCase ? 'g' : 'gi');
+        } catch (e) {
+          return;
+        }
+
+        const pane = getActivePane();
+        if (!pane) return;
+        const codeCells = pane.querySelectorAll('td.code, .code');
+
+        codeCells.forEach(function (cell) {
+          const walker = document.createTreeWalker(cell, NodeFilter.SHOW_TEXT, null, false);
+          const textNodes = [];
+          let n;
+          while ((n = walker.nextNode())) {
+            if (n.nodeValue && n.nodeValue.trim().length > 0) {
+              textNodes.push(n);
+            }
+          }
+
+          textNodes.forEach(function (node) {
+            const text = node.nodeValue;
+            regex.lastIndex = 0;
+            const splits = [];
+            let match;
+            while ((match = regex.exec(text)) !== null) {
+              splits.push({ start: match.index, end: match.index + match[0].length, val: match[0] });
+              if (!regex.global) break;
+            }
+
+            if (splits.length > 0) {
+              const frag = document.createDocumentFragment();
+              let curr = 0;
+              splits.forEach(function (s) {
+                if (s.start > curr) {
+                  frag.appendChild(document.createTextNode(text.substring(curr, s.start)));
+                }
+                const mark = document.createElement('mark');
+                mark.className = 'find-match';
+                mark.textContent = s.val;
+                frag.appendChild(mark);
+                currentMatches.push(mark);
+                curr = s.end;
+              });
+              if (curr < text.length) {
+                frag.appendChild(document.createTextNode(text.substring(curr)));
+              }
+              if (node.parentNode) {
+                node.parentNode.replaceChild(frag, node);
+              }
+            }
+          });
+        });
+
+        if (currentMatches.length > 0) {
+          currentMatchIdx = 0;
+          highlightMatch(currentMatchIdx);
+        } else {
+          if (findCount) findCount.textContent = '0 of 0';
+        }
+      }
+
+      function nextMatch() {
+        if (!currentMatches.length) return;
+        currentMatchIdx = (currentMatchIdx + 1) % currentMatches.length;
+        highlightMatch(currentMatchIdx);
+      }
+
+      function prevMatch() {
+        if (!currentMatches.length) return;
+        currentMatchIdx = (currentMatchIdx - 1 + currentMatches.length) % currentMatches.length;
+        highlightMatch(currentMatchIdx);
+      }
+
+      if (btnToggleFind) btnToggleFind.addEventListener('click', toggleWidget);
+      if (findClose) findClose.addEventListener('click', hideWidget);
+      if (findNext) findNext.addEventListener('click', nextMatch);
+      if (findPrev) findPrev.addEventListener('click', prevMatch);
+
+      if (findCase) {
+        findCase.addEventListener('click', function () {
+          findCase.classList.toggle('active');
+          performSearch();
+        });
+      }
+      if (findWord) {
+        findWord.addEventListener('click', function () {
+          findWord.classList.toggle('active');
+          performSearch();
+        });
+      }
+      if (findInput) {
+        findInput.addEventListener('input', performSearch);
+        findInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            if (e.shiftKey) prevMatch();
+            else nextMatch();
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            hideWidget();
+          }
+        });
+      }
+
+      window.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'F')) {
+          if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') && document.activeElement !== findInput) {
+            return;
+          }
+          e.preventDefault();
+          showWidget();
+        }
+      });
+    })();
+
+    // 2. Occurrence Highlighter & Sequential Jump (Ctrl+D)
+    let clearTokenOccurrences = null;
+    (function initOccurrenceHighlighter() {
+      if (!studioCodeContainer) return;
+      let occurrences = [];
+      let occIdx = -1;
+
+      clearTokenOccurrences = function () {
+        const pane = getActivePane();
+        if (!pane) return;
+        pane.querySelectorAll('.token-highlight').forEach(function (el) {
+          el.classList.remove('token-highlight', 'token-active-jump');
+        });
+        occurrences = [];
+        occIdx = -1;
+      };
+
+      function highlightToken(token, startEl) {
+        clearTokenOccurrences();
+        if (!token || !/^[A-Za-z_][A-Za-z0-9_]*$/.test(token) || token.length < 2) return;
+        const pane = getActivePane();
+        if (!pane) return;
+
+        const candidateSpans = pane.querySelectorAll('span');
+        candidateSpans.forEach(function (span) {
+          if (span.textContent.trim() === token) {
+            span.classList.add('token-highlight');
+            occurrences.push(span);
+          }
+        });
+
+        if (startEl && occurrences.includes(startEl)) {
+          occIdx = occurrences.indexOf(startEl);
+        } else if (occurrences.length > 0) {
+          occIdx = 0;
+        }
+      }
+
+      studioCodeContainer.addEventListener('dblclick', function (e) {
+        const target = e.target.closest('span');
+        if (!target) return;
+        const token = target.textContent.trim().replace(/^`/, '');
+        if (token) highlightToken(token, target);
+      });
+
+      studioCodeContainer.addEventListener('click', function (e) {
+        const target = e.target.closest('.code span');
+        if (target && !e.ctrlKey && !e.metaKey) {
+          const token = target.textContent.trim().replace(/^`/, '');
+          if (token && (target.classList.contains('sv-ident') || target.classList.contains('sv-type') || target.classList.contains('sv-method') || target.classList.contains('sv-macro'))) {
+            highlightToken(token, target);
+          }
+        } else if (!e.target.closest('.code')) {
+          clearTokenOccurrences();
+        }
+      });
+
+      window.addEventListener('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'd' || e.key === 'D')) {
+          if (occurrences.length > 0) {
+            e.preventDefault();
+            occurrences.forEach(function (o) { o.classList.remove('token-active-jump'); });
+            occIdx = (occIdx + 1) % occurrences.length;
+            const target = occurrences[occIdx];
+            target.classList.add('token-active-jump');
+            const row = target.closest('tr');
+            if (row) scrollToRow(row);
+          }
+        } else if (e.key === 'Escape') {
+          clearTokenOccurrences();
+        }
+      });
+    })();
+
+    // 3. Go to Definition (Ctrl+Click / F12) & Go to Implementation (Ctrl+F12)
+    (function initDefinitionResolver() {
+      if (!studioCodeContainer) return;
+      let isCtrlDown = false;
+      let hoveredToken = null;
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Control' || e.key === 'Meta') {
+          isCtrlDown = true;
+          if (hoveredToken) hoveredToken.classList.add('ctrl-hoverable');
+        }
+      });
+
+      window.addEventListener('keyup', function (e) {
+        if (e.key === 'Control' || e.key === 'Meta') {
+          isCtrlDown = false;
+          document.querySelectorAll('.ctrl-hoverable').forEach(function (el) {
+            el.classList.remove('ctrl-hoverable');
+          });
+        }
+      });
+
+      studioCodeContainer.addEventListener('mouseover', function (e) {
+        const target = e.target.closest('.code span');
+        if (target && (target.classList.contains('sv-ident') || target.classList.contains('sv-type') || target.classList.contains('sv-method') || target.classList.contains('sv-macro'))) {
+          hoveredToken = target;
+          if (isCtrlDown) {
+            target.classList.add('ctrl-hoverable');
+          }
+        }
+      });
+
+      studioCodeContainer.addEventListener('mouseout', function (e) {
+        if (e.target === hoveredToken) {
+          if (hoveredToken) hoveredToken.classList.remove('ctrl-hoverable');
+          hoveredToken = null;
+        }
+      });
+
+      function resolveSymbol(tokenName, isImplementation) {
+        const cleanToken = tokenName.trim().replace(/^`/, '');
+        if (!cleanToken) return;
+
+        const pane = getActivePane();
+
+        // Step A: Local file lookup
+        if (pane) {
+          const rows = Array.from(pane.querySelectorAll('tr'));
+          let targetRow = null;
+
+          if (isImplementation) {
+            for (let i = 0; i < rows.length; i++) {
+              const text = rows[i].querySelector('.code') ? rows[i].querySelector('.code').textContent : '';
+              const impRegex = new RegExp('(?:function|task)\\s+(?:\\w+\\s+)?\\w+::' + cleanToken + '\\b');
+              if (impRegex.test(text)) {
+                targetRow = rows[i];
+                break;
+              }
+            }
+          }
+
+          if (!targetRow) {
+            for (let i = 0; i < rows.length; i++) {
+              const text = rows[i].querySelector('.code') ? rows[i].querySelector('.code').textContent : '';
+              const declRegex = new RegExp('(?:class|function|task|typedef)\\s+(?:\\w+\\s+)?' + cleanToken + '\\b|`define\\s+' + cleanToken + '\\b');
+              if (declRegex.test(text)) {
+                targetRow = rows[i];
+                break;
+              }
+            }
+          }
+
+          if (targetRow) {
+            const lineNum = targetRow.id ? targetRow.id.replace('L', '') : targetRow.getAttribute('data-line');
+            if (lineNum) {
+              scrollToLine(lineNum);
+              targetRow.classList.add('active-line');
+              return;
+            }
+          }
+        }
+
+        // Step B: Cross-file lookup in global UVM_SYMBOLS
+        if (window.UVM_SYMBOLS) {
+          const sym = (window.UVM_SYMBOLS.classes && window.UVM_SYMBOLS.classes[cleanToken]) ||
+            (window.UVM_SYMBOLS.macros && window.UVM_SYMBOLS.macros[cleanToken]) ||
+            (window.UVM_SYMBOLS.methods && window.UVM_SYMBOLS.methods[cleanToken]);
+          if (sym && sym.file) {
+            const targetUrl = 'src_view/' + sym.file + '.html#L' + sym.line;
+            if (window.parent && window.parent !== window) {
+              window.parent.postMessage({ type: 'openSourceView', url: targetUrl }, '*');
+              try {
+                if (window.parent.openSourceView) window.parent.openSourceView(targetUrl);
+              } catch (err) { }
+            } else {
+              window.location.href = '../' + targetUrl;
+            }
+            return;
+          }
+        }
+      }
+
+      studioCodeContainer.addEventListener('click', function (e) {
+        if (e.ctrlKey || e.metaKey) {
+          const target = e.target.closest('.code span');
+          if (target) {
+            e.preventDefault();
+            const token = target.textContent.trim();
+            resolveSymbol(token, false);
+          }
+        }
+      });
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'F12') {
+          e.preventDefault();
+          const sel = window.getSelection().toString().trim();
+          let token = sel;
+          if (!token && hoveredToken) {
+            token = hoveredToken.textContent.trim();
+          }
+          if (token) {
+            resolveSymbol(token, e.ctrlKey || e.metaKey);
+          }
+        }
+      });
+    })();
+
+    // 4. Quick Info Hover Popover
+    (function initQuickInfoHover() {
+      const quickInfo = document.getElementById('code-quick-info');
+      if (!quickInfo || !studioCodeContainer) return;
+
+      let hoverTimer = null;
+      let currentTokenEl = null;
+
+      function hideTooltip() {
+        clearTimeout(hoverTimer);
+        quickInfo.classList.remove('visible');
+        currentTokenEl = null;
+      }
+
+      function showTooltip(target, token) {
+        if (!window.UVM_SYMBOLS) return;
+        const cleanToken = token.trim().replace(/^`/, '');
+        const info = (window.UVM_SYMBOLS.classes && window.UVM_SYMBOLS.classes[cleanToken]) ||
+          (window.UVM_SYMBOLS.macros && window.UVM_SYMBOLS.macros[cleanToken]) ||
+          (window.UVM_SYMBOLS.methods && window.UVM_SYMBOLS.methods[cleanToken]);
+        if (!info) {
+          hideTooltip();
+          return;
+        }
+
+        const typeKind = info.type || 'symbol';
+        let sigSnippet = '';
+        if (info.params || info.extends) {
+          sigSnippet = `<div class="qi-signature"><code>${typeKind} ${cleanToken}${info.params ? ' #(' + info.params + ')' : ''}${info.extends ? ' extends ' + info.extends : ''}</code></div>`;
+        } else if (info.signature) {
+          sigSnippet = `<div class="qi-signature"><code>${info.signature}</code></div>`;
+        }
+
+        const docText = info.doc ? `<div class="qi-doc">${info.doc}</div>` : '';
+        const fileLoc = info.file ? `${info.file}:${info.line}` : '';
+        const srcUrl = info.file ? `src_view/${info.file}.html#L${info.line}` : '#';
+
+        quickInfo.innerHTML = `
+          <div class="qi-header">
+            <span class="qi-badge qi-${typeKind}">${typeKind}</span>
+            <span class="qi-title">${cleanToken}</span>
+          </div>
+          ${sigSnippet}
+          ${docText}
+          <div class="qi-actions">
+            <a href="#" class="qi-link qi-def-link" data-src-url="${srcUrl}">Go to Definition (F12)</a>
+            ${fileLoc ? `<span class="qi-sep">•</span><span class="qi-file">${fileLoc}</span>` : ''}
+          </div>
+        `;
+
+        const tRect = target.getBoundingClientRect();
+        const cRect = studioCodeContainer.getBoundingClientRect();
+
+        let top = tRect.top - cRect.top - quickInfo.offsetHeight - 8;
+        if (top < 10) {
+          top = tRect.bottom - cRect.top + 8;
+        }
+        let left = tRect.left - cRect.left;
+        if (left + 320 > cRect.width) {
+          left = Math.max(10, cRect.width - 330);
+        }
+
+        quickInfo.style.top = top + 'px';
+        quickInfo.style.left = Math.max(10, left) + 'px';
+        quickInfo.classList.add('visible');
+        currentTokenEl = target;
+
+        const defLink = quickInfo.querySelector('.qi-def-link');
+        if (defLink) {
+          defLink.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            if (window.parent && window.parent !== window) {
+              window.parent.postMessage({ type: 'openSourceView', url: srcUrl }, '*');
+              try {
+                if (window.parent.openSourceView) window.parent.openSourceView(srcUrl);
+              } catch (err) { }
+            } else {
+              window.location.href = '../' + srcUrl;
+            }
+          });
+        }
+      }
+
+      studioCodeContainer.addEventListener('mouseover', function (e) {
+        const target = e.target.closest('.code span');
+        if (target && (target.classList.contains('sv-ident') || target.classList.contains('sv-type') || target.classList.contains('sv-method') || target.classList.contains('sv-macro'))) {
+          const token = target.textContent.trim();
+          clearTimeout(hoverTimer);
+          hoverTimer = setTimeout(function () {
+            showTooltip(target, token);
+          }, 250);
+        }
+      });
+
+      studioCodeContainer.addEventListener('mouseout', function (e) {
+        if (e.relatedTarget && (e.relatedTarget.closest('#code-quick-info') || e.relatedTarget === currentTokenEl)) {
+          return;
+        }
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(hideTooltip, 200);
+      });
+
+      quickInfo.addEventListener('mouseleave', function () {
+        hideTooltip();
+      });
+
+      studioCodeContainer.addEventListener('scroll', hideTooltip, { passive: true });
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') hideTooltip();
+      });
+    })();
+
+    // 5. Monaco Editor Dynamic Loader
+    let monacoEditorInstance = null;
+    let isMonacoActive = false;
+    (function initMonacoLoader() {
+      const btnToggleMonaco = document.getElementById('btn-toggle-monaco');
+      const monacoPane = document.getElementById('monaco-editor-pane');
+      if (!btnToggleMonaco || !monacoPane) return;
+
+      function loadMonacoScript(onSuccess, onError) {
+        if (window.monaco) {
+          onSuccess();
+          return;
+        }
+        if (window.require && window.require.config) {
+          window.require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
+          window.require(['vs/editor/editor.main'], function () { onSuccess(); });
+          return;
+        }
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js';
+        script.onload = function () {
+          window.require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
+          window.require(['vs/editor/editor.main'], function () { onSuccess(); });
+        };
+        script.onerror = onError || function () { };
+        document.head.appendChild(script);
+      }
+
+      function setupMonacoLanguageProviders() {
+        if (window.__monacoProvidersRegistered || !window.monaco || !window.UVM_SYMBOLS) return;
+        window.__monacoProvidersRegistered = true;
+
+        monaco.languages.registerHoverProvider('systemverilog', {
+          provideHover: function (model, position) {
+            const word = model.getWordAtPosition(position);
+            if (!word) return null;
+            const clean = word.word.replace(/^`/, '');
+            const sym = (window.UVM_SYMBOLS.classes && window.UVM_SYMBOLS.classes[clean]) ||
+              (window.UVM_SYMBOLS.macros && window.UVM_SYMBOLS.macros[clean]) ||
+              (window.UVM_SYMBOLS.methods && window.UVM_SYMBOLS.methods[clean]);
+            if (!sym) return null;
+            const contents = [
+              { value: `**[${sym.type.toUpperCase()}]** \`${clean}\`` },
+              { value: `*Source:* \`${sym.file}:${sym.line}\`` }
+            ];
+            if (sym.doc) contents.push({ value: sym.doc });
+            return {
+              range: new monaco.Range(position.lineNumber, word.startColumn, position.lineNumber, word.endColumn),
+              contents: contents
+            };
+          }
+        });
+
+        monaco.languages.registerDefinitionProvider('systemverilog', {
+          provideDefinition: function (model, position) {
+            const word = model.getWordAtPosition(position);
+            if (!word) return null;
+            const clean = word.word.replace(/^`/, '');
+            const sym = (window.UVM_SYMBOLS.classes && window.UVM_SYMBOLS.classes[clean]) ||
+              (window.UVM_SYMBOLS.macros && window.UVM_SYMBOLS.macros[clean]) ||
+              (window.UVM_SYMBOLS.methods && window.UVM_SYMBOLS.methods[clean]);
+            if (!sym) return null;
+            if (sym.file && !window.location.pathname.includes(sym.file)) {
+              const targetUrl = `src_view/${sym.file}.html#L${sym.line}`;
+              if (window.parent && window.parent !== window) {
+                window.parent.postMessage({ type: 'openSourceView', url: targetUrl }, '*');
+              }
+            }
+            return {
+              uri: model.uri,
+              range: new monaco.Range(sym.line || 1, 1, sym.line || 1, 1)
+            };
+          }
+        });
+      }
+
+      function getMonacoTheme() {
+        const curTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        return (curTheme === 'dark' || curTheme === 'night') ? 'vs-dark' : 'vs';
+      }
+
+      const VSCODE_ICON_SVG = '<svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>';
+      const CLOSE_ICON_SVG = '<svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+
+      function activateMonaco() {
+        btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + ' <span>Loading Monaco...</span>';
+
+        const prevHeight = studioCodeContainer ? studioCodeContainer.offsetHeight : 0;
+        const targetHeight = Math.max(prevHeight, 520);
+
+        if (studioCodeContainer) {
+          studioCodeContainer.classList.add('monaco-active');
+          if (studioCodeContainer.classList.contains('studio-code-container')) {
+            studioCodeContainer.style.height = targetHeight + 'px';
+          }
+        }
+
+        loadMonacoScript(function () {
+          setupMonacoLanguageProviders();
+          const codeText = getActiveCodeText();
+          const themeName = getMonacoTheme();
+
+          codePanes.forEach(function (p) { p.style.display = 'none'; });
+          const svTable = document.querySelector('.sv-code-table');
+          if (svTable) svTable.style.display = 'none';
+
+          monacoPane.style.display = 'block';
+          monacoPane.classList.add('active');
+
+          if (!monacoEditorInstance) {
+            monacoEditorInstance = monaco.editor.create(monacoPane, {
+              value: codeText,
+              language: 'systemverilog',
+              theme: themeName,
+              readOnly: true,
+              lineNumbers: 'on',
+              renderWhitespace: 'none',
+              scrollBeyondLastLine: false,
+              automaticLayout: true,
+              fontFamily: 'Consolas, "Cascadia Mono", monospace',
+              fontSize: 13,
+              minimap: { enabled: true }
+            });
+          } else {
+            monacoEditorInstance.setValue(codeText);
+            monaco.editor.setTheme(themeName);
+          }
+
+          requestAnimationFrame(function () {
+            if (monacoEditorInstance) {
+              monacoEditorInstance.layout();
+            }
+          });
+          setTimeout(function () {
+            if (monacoEditorInstance) {
+              monacoEditorInstance.layout();
+            }
+          }, 80);
+
+          const hash = window.location.hash;
+          if (hash && hash.startsWith('#L')) {
+            const lineNum = parseInt(hash.replace('#L', ''), 10);
+            if (!isNaN(lineNum)) {
+              monacoEditorInstance.revealLineInCenter(lineNum);
+              monacoEditorInstance.setPosition({ lineNumber: lineNum, column: 1 });
+            }
+          }
+
+          isMonacoActive = true;
+          btnToggleMonaco.innerHTML = CLOSE_ICON_SVG + ' <span>Standard View</span>';
+          btnToggleMonaco.classList.add('active');
+        }, function () {
+          btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + ' <span>Monaco Error</span>';
+          if (studioCodeContainer) {
+            studioCodeContainer.classList.remove('monaco-active');
+            if (studioCodeContainer.classList.contains('studio-code-container')) {
+              studioCodeContainer.style.height = '';
+            }
+          }
+          setTimeout(function () {
+            btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + ' <span>Monaco IDE</span>';
+          }, 3000);
+        });
+      }
+
+      function deactivateMonaco() {
+        monacoPane.style.display = 'none';
+        monacoPane.classList.remove('active');
+
+        if (studioCodeContainer) {
+          studioCodeContainer.classList.remove('monaco-active');
+          if (studioCodeContainer.classList.contains('studio-code-container')) {
+            studioCodeContainer.style.height = '';
+          }
+        }
+
+        codePanes.forEach(function (p, idx) {
+          p.style.display = (idx === currentFileIdx) ? '' : 'none';
+        });
+        const svTable = document.querySelector('.sv-code-table');
+        if (svTable) svTable.style.display = '';
+        isMonacoActive = false;
+        btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + ' <span>Monaco IDE</span>';
+        btnToggleMonaco.classList.remove('active');
+      }
+
+      btnToggleMonaco.addEventListener('click', function () {
+        if (isMonacoActive) {
+          deactivateMonaco();
+        } else {
+          activateMonaco();
+        }
+      });
+
+      window.addEventListener('message', function (e) {
+        if (e.data && e.data.theme && monacoEditorInstance && window.monaco) {
+          const theme = (e.data.theme === 'dark' || e.data.theme === 'night') ? 'vs-dark' : 'vs';
+          monaco.editor.setTheme(theme);
+        }
+      });
+    })();
+
+    // Synchronize tab switches with tools
+    onFileTabSwitched = function (idx) {
+      if (typeof clearFindMatches === 'function') clearFindMatches();
+      if (typeof clearTokenOccurrences === 'function') clearTokenOccurrences();
+      if (isMonacoActive && monacoEditorInstance) {
+        monacoEditorInstance.setValue(getActiveCodeText());
+      }
+    };
+
+    // 6. Editor Keyboard Shortcuts (Alt+Z Word Wrap, Ctrl+G Go to Line)
+    (function initCodeEditorShortcuts() {
+      const btnToggleWrap = document.getElementById('btn-toggle-wrap');
+
+      function toggleWrap() {
+        if (!studioCodeContainer) return;
+        const isWrapped = studioCodeContainer.classList.toggle('code-wrap-active');
+        if (btnToggleWrap) btnToggleWrap.classList.toggle('active', isWrapped);
+      }
+
+      if (btnToggleWrap) {
+        btnToggleWrap.addEventListener('click', toggleWrap);
+      }
+
+      window.addEventListener('keydown', function (e) {
+        if (e.altKey && (e.key === 'z' || e.key === 'Z')) {
+          e.preventDefault();
+          toggleWrap();
+        }
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'g' || e.key === 'G')) {
+          e.preventDefault();
+          const input = prompt('Go to line number:');
+          if (input) {
+            const line = parseInt(input.trim().replace(/^L/, ''), 10);
+            if (!isNaN(line)) {
+              scrollToLine(line);
+            }
+          }
+        }
+      });
+    })();
 
     // Hash and cross-frame scrollToSection / line handling
     function handleInitialHash() {

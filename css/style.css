@@ -5097,3 +5097,318 @@ tr.stepper-highlight .ln {
   background: #134e4a !important;
   color: #5eead4 !important;
 }
+
+/* ==========================================================================
+   Code Editor Advanced Capabilities (Find, Occurrences, Tooltips, Monaco)
+   ========================================================================== */
+
+/* In-File Code Find Widget (Ctrl+F) */
+.code-find-widget {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  backdrop-filter: blur(8px);
+  animation: findSlideIn 0.15s ease-out;
+}
+
+@keyframes findSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.find-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.find-input-wrap input {
+  width: 190px;
+  padding: 4px 58px 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.find-input-wrap input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.find-input-wrap input.no-match {
+  border-color: #ef4444 !important;
+  background-color: rgba(239, 68, 68, 0.08) !important;
+}
+
+.find-count {
+  position: absolute;
+  right: 6px;
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--text-subtle);
+  pointer-events: none;
+  user-select: none;
+}
+
+.find-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.find-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.12s ease;
+  user-select: none;
+}
+
+.find-btn:hover {
+  background: var(--surface-active);
+  color: var(--text-main);
+}
+
+.find-btn.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.find-btn#find-close:hover {
+  color: #ef4444;
+}
+
+/* Find Matches Highlighting */
+mark.find-match {
+  background-color: rgba(250, 204, 21, 0.45) !important;
+  color: inherit !important;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+[data-theme="dark"] mark.find-match {
+  background-color: rgba(234, 179, 8, 0.35) !important;
+}
+
+mark.find-match.find-match-current {
+  background-color: #f97316 !important;
+  color: #ffffff !important;
+  outline: 2px solid #ea580c;
+  z-index: 2;
+  position: relative;
+}
+
+/* Token / Identifier Occurrence Highlighting */
+.token-highlight {
+  background-color: rgba(26, 115, 232, 0.18);
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(26, 115, 232, 0.4);
+}
+
+[data-theme="dark"] .token-highlight {
+  background-color: rgba(138, 180, 248, 0.22);
+  box-shadow: 0 0 0 1px rgba(138, 180, 248, 0.45);
+}
+
+/* Ctrl+Click interactive link styling */
+.ctrl-hoverable {
+  cursor: pointer !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  color: var(--primary) !important;
+}
+
+/* Quick Info Hover Tooltip (Popover) */
+.code-quick-info-tooltip {
+  position: absolute;
+  z-index: 150;
+  max-width: 440px;
+  min-width: 240px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+  animation: qiFadeIn 0.15s ease-out;
+}
+
+@keyframes qiFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.qi-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.qi-kind-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
+}
+
+.qi-badge-class { background: #e0e7ff; color: #3730a3; }
+.qi-badge-function { background: #dcfce7; color: #166534; }
+.qi-badge-task { background: #fef3c7; color: #92400e; }
+.qi-badge-macro { background: #f3e8ff; color: #6b21a8; }
+
+[data-theme="dark"] .qi-badge-class { background: #312e81; color: #c7d2fe; }
+[data-theme="dark"] .qi-badge-function { background: #14532d; color: #bbf7d0; }
+[data-theme="dark"] .qi-badge-task { background: #78350f; color: #fde68a; }
+[data-theme="dark"] .qi-badge-macro { background: #581c87; color: #e9d5ff; }
+
+.qi-symbol-name {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--text-main);
+}
+
+.qi-signature {
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.35rem 0.6rem;
+  margin: 0.4rem 0;
+  overflow-x: auto;
+}
+
+.qi-signature code {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--code-text);
+  white-space: pre;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.qi-doc {
+  font-size: 0.77rem;
+  color: var(--text-muted);
+  margin: 0.4rem 0;
+  line-height: 1.45;
+}
+
+.qi-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.74rem;
+}
+
+.qi-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.qi-link:hover {
+  text-decoration: underline;
+}
+
+.qi-sep {
+  color: var(--text-subtle);
+}
+
+/* Word Wrap Mode Active */
+.code-wrap-active .sv-code-table .code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+
+/* Monaco IDE Container */
+.studio-code-container.monaco-active {
+  height: 580px;
+  min-height: 480px;
+  overflow: hidden !important;
+}
+
+.src-code-container.monaco-active {
+  overflow: hidden !important;
+}
+
+#monaco-editor-pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 90;
+  background: var(--code-bg);
+  display: none;
+}
+
+#monaco-editor-pane.active {
+  display: block;
+}
+
+.btn-monaco-ide {
+  color: var(--primary) !important;
+  border-color: rgba(26, 115, 232, 0.4) !important;
+  background: rgba(26, 115, 232, 0.05) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-monaco-ide .monaco-btn-icon {
+  flex-shrink: 0;
+}
+
+.btn-monaco-ide:hover {
+  background: rgba(26, 115, 232, 0.15) !important;
+}
+
+.btn-monaco-ide.active {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+}

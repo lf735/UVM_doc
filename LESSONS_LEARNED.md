@@ -825,3 +825,62 @@ if (!link) return;
 
 
 
+
+
+---
+
+## 21. Architecture et Intégration d'Outils d'Éditeur de Code Hybrides
+
+### Objectif
+Transformer les conteneurs de visualisation de code statiques (`src_view/*.html` et `examples_view/*/*.html`) en véritables environnements de lecture et d'exploration de code typés IDE (type VS Code), combinant :
+- Une réactivité instantanée à zéro dépendance (0 ms) par défaut.
+- Des fonctionnalités avancées d'éditeur : Recherche intégrée dans le fichier (`Ctrl+F`), mise en évidence des occurrences (`Ctrl+D`), navigation vers la définition (`F12` / `Ctrl+Click`) et vers l'implémentation (`Ctrl+F12`), infobulle de survol avec signature et documentation UVM, saut de ligne (`Ctrl+G`), retour à la ligne automatique (`Alt+Z`).
+- Une passerelle optionnelle vers un éditeur complet Monaco Editor (VS Code Web) chargé à la demande par CDN.
+
+### Enseignements et Règles d'Ingénierie
+
+1. **Recherche Intégrée DOM sans Corruption Syntaxique (`Ctrl+F`)** :
+   - Le code SystemVerilog étant pré-coloré avec des balises imbriquées (`<span class="sv-keyword">`, etc.), découper naivement le HTML avec un `innerHTML` détruit les gestionnaires d'événements et corrompt la structure du DOM.
+   - **Règle** : Utiliser `document.createTreeWalker(cell, NodeFilter.SHOW_TEXT)` pour parcourir uniquement les nœuds de texte réels, insérer des balises `<mark class="find-match">`, et restaurer les nœuds d'origine à la fermeture via `mark.replaceWith(...mark.childNodes); node.normalize();`.
+
+2. **Dictionnaire de Symboles Compact pour Résolution Instantanée** :
+   - Charger l'AST complet de 22 Mo en mémoire ralentirait le chargement de chaque page.
+   - **Règle** : Pré-extraire via [`scripts/generate_quick_symbols.py`](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/generate_quick_symbols.py) un dictionnaire compact [`js/uvm_symbol_quick.js`](file:///c:/Users/uf755lfr/Perso/UVM_doc/js/uvm_symbol_quick.js) (~440 Ko) contenant les classes, macros et méthodes clés avec leur fichier, ligne, signature et docstring.
+   - Les résolutions `F12` et infobulles s'exécutent en moins de 1 ms sans aucune latence réseau.
+
+3. **Approche Hybride : Performance Native + Monaco à la Demande** :
+   - Monaco Editor pèse plusieurs mégaoctets et nécessite des workers web. Le charger systématiquement pour chaque fichier alourdirait l'expérience de lecture.
+   - **Règle** : Fournir l'ensemble des outils IDE (Recherche, Définition, Surlignage, Quick Info) en pur JavaScript natif ultra-léger par défaut.
+   - Un bouton dédié `[ ⚡ Monaco ]` permet de charger Monaco dynamiquement via son AMD Loader (`require.js`) uniquement lorsque l'utilisateur le demande explicitement, avec synchronisation du thème clair/sombre et de la ligne active.
+
+4. **Résolution Multi-Niveaux (Local puis Global)** :
+   - Lors d'un `Ctrl+Click` ou `F12` :
+     1. Vérifier en priorité si le symbole est défini dans le fichier actif (recherche de `class`, `function`, `task`, `typedef`, `` `define `` dans les lignes courantes).
+     2. Si absent, basculer sur le dictionnaire global `window.UVM_SYMBOLS` et naviguer vers le fichier source UVM correspondant via `postMessage({ type: 'openSourceView', url: ... })`.
+
+
+---
+
+## 22. Effondrement de Hauteur du Conteneur avec Monaco Editor en Position Absolue
+
+### Le Symptôme Observé
+> *"La vue monaco sur code studio est invisible"*  
+> Lors du clic sur le bouton Monaco dans un Code Studio d'exemple (`examples_view/*/*.html`), les panneaux de code natifs disparaissaient, mais l'éditeur Monaco était invisible (hauteur de 0 pixel).
+
+### Cause Racine
+1. Dans le Code Studio, `.studio-code-container` possède une règle CSS `max-height: 580px; position: relative; overflow: auto;`. La hauteur effective de la boîte est calculée dynamiquement en fonction de son contenu dans le flux standard (`.file-code-pane.active`).
+2. Lors de l'activation de Monaco, le contrôleur masquait les panneaux avec `p.style.display = 'none'` et affichait `#monaco-editor-pane`.
+3. `#monaco-editor-pane` étant en `position: absolute; inset: 0; height: 100%;`, il est extrait du flux normal du document.
+4. N'ayant plus aucun enfant dans le flux normal (`display: none`), `.studio-code-container` s'effondrait instantanément à une hauteur calculée de **0 pixel**.
+5. Monaco calculait donc `height: 100% of 0px = 0px` et s'initialisait dans un canevas invisible.
+
+### Solution Appliquée
+1. **Verrouillage de la hauteur du conteneur en mode Monaco** :
+   - Mesure de la hauteur actuelle avant masquage des panneaux : `const targetHeight = Math.max(studioCodeContainer.offsetHeight, 520);`.
+   - Application d'une classe `.monaco-active` et fixation explicite de `studioCodeContainer.style.height = targetHeight + 'px'`.
+   - Règle CSS : `.studio-code-container.monaco-active { height: 580px; min-height: 480px; overflow: hidden !important; }`.
+   - Monaco gère ainsi son propre défilement, sa minimap et son rendu sans effondrement.
+2. **Double déclenchement du layout Monaco** :
+   - Appel de `monacoEditorInstance.layout()` via `requestAnimationFrame` puis à `+80ms` pour garantir le calcul après recalcul du reflow CSS.
+3. **Restauration à la désactivation** :
+   - Réinitialisation de `studioCodeContainer.style.height = ''` et retrait de la classe `.monaco-active` pour restituer la hauteur automatique native du Code Studio.
