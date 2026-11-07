@@ -69,9 +69,28 @@ window.PageCommon = (function () {
   }
 
   function bindCopyFeedback(buttonEl, originalText, successText, duration) {
+    if (!buttonEl) return;
     const delay = duration || 2000;
-    const orig = originalText || (buttonEl ? buttonEl.textContent : 'Copy');
-    if (buttonEl) {
+
+    // Check if the button has SVG icon(s)
+    const existingSvg = buttonEl.querySelector('svg');
+    const existingSpan = buttonEl.querySelector('span');
+
+    if (existingSvg) {
+      // Icon-based button (e.g., toolbar studio-action-btn)
+      const origHtml = buttonEl.innerHTML;
+      const checkSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      
+      buttonEl.innerHTML = checkSvg + (existingSpan ? ' <span>' + (successText || 'Copied!') + '</span>' : '');
+      buttonEl.classList.add('btn-copied');
+      
+      setTimeout(function () {
+        buttonEl.innerHTML = origHtml;
+        buttonEl.classList.remove('btn-copied');
+      }, delay);
+    } else {
+      // Text-only button
+      const orig = originalText || buttonEl.textContent || 'Copy';
       buttonEl.textContent = successText || 'Copied!';
       buttonEl.classList.add('btn-copied');
       setTimeout(function () {
