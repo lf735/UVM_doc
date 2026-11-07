@@ -939,7 +939,6 @@ def modernize_doc_files():
                     <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                     <span class="file-label">Source:</span>
                     <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}" title="Open source code at line {target_line}"><code>src/{html.escape(associated_src)}</code></a>
-                    <span class="banner-line-badge">L{target_line}</span>
                   </div>
                   <div class="banner-actions">
                     <a href="{src_view_url}" class="banner-icon-btn src-code-link" data-src-url="{src_view_url}" title="Open source code at line {target_line}" aria-label="Open source code at line {target_line}">
@@ -1043,7 +1042,6 @@ def generate_orphan_doc_pages():
     <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
     <span class="file-label">Source:</span>
     <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}" title="Open source code at line {first_line}"><code>src/{html.escape(src_rel)}</code></a>
-    <span class="banner-line-badge">L{first_line}</span>
   </div>
   <div class="banner-actions">
     <a href="{src_view_url}" class="banner-icon-btn src-code-link" data-src-url="{src_view_url}" title="Open source code at line {first_line}" aria-label="Open source code at line {first_line}">
