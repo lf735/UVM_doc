@@ -2367,7 +2367,7 @@ window.PageCommon = (function () {
     document.addEventListener('click', function (e) {
       const header = e.target.closest('.derived-classes-header');
       if (header) {
-        const card = header.closest('.derived-classes-card');
+        const card = header.closest('.derived-classes-card, .hierarchy-subclasses-card');
         if (card) card.classList.toggle('collapsed');
       }
     });
@@ -2377,7 +2377,7 @@ window.PageCommon = (function () {
         const header = e.target.closest('.derived-classes-header');
         if (header) {
           e.preventDefault();
-          const card = header.closest('.derived-classes-card');
+          const card = header.closest('.derived-classes-card, .hierarchy-subclasses-card');
           if (card) card.classList.toggle('collapsed');
         }
       }
@@ -2385,7 +2385,7 @@ window.PageCommon = (function () {
 
     // Handle click on derived-class-pill for exact in-page or cross-page jump
     document.addEventListener('click', function (e) {
-      const pill = e.target.closest('.derived-class-pill');
+      const pill = e.target.closest('.derived-class-pill, .hierarchy-flow-node.parent');
       if (!pill) return;
       const href = pill.getAttribute('href');
       if (!href || pill.classList.contains('src-code-link')) return;
@@ -2413,6 +2413,125 @@ window.PageCommon = (function () {
           }
         }
       } catch (err) { }
+    });
+  }
+
+  // =========================================================================
+  // Inherited Methods Matrix & Explorer
+  // =========================================================================
+
+  function initInheritedMethodsExplorer() {
+    const hierarchyWidget = document.querySelector('.class-hierarchy-widget[data-cname]');
+    if (!hierarchyWidget) return;
+    const cname = hierarchyWidget.getAttribute('data-cname');
+    if (!cname) return;
+
+    let classHierarchy = null;
+    let searchIndex = null;
+    try {
+      if (window.parent && window.parent.UVM_DATA) {
+        classHierarchy = window.parent.UVM_DATA.classHierarchy;
+        searchIndex = window.parent.UVM_DATA.searchIndex;
+      }
+    } catch (e) {
+      return;
+    }
+
+    if (!classHierarchy || !classHierarchy.nodes || !classHierarchy.nodes[cname]) return;
+    const node = classHierarchy.nodes[cname];
+    if (!node.parent) return;
+
+    const ancestors = [];
+    let curr = node.parent;
+    const visited = new Set();
+    while (curr && classHierarchy.nodes[curr] && !visited.has(curr)) {
+      visited.add(curr);
+      ancestors.push(curr);
+      curr = classHierarchy.nodes[curr].parent;
+    }
+
+    if (ancestors.length === 0) return;
+
+    const summaryEl = document.querySelector('.ClassSummary, #doc-nav-summary');
+    if (!summaryEl) return;
+
+    const inheritedByAncestor = new Map();
+    if (searchIndex && Array.isArray(searchIndex)) {
+      ancestors.forEach(anc => {
+        const methods = searchIndex.filter(item =>
+          (item.type === 'function' || item.type === 'task') &&
+          (item.category === anc || (item.category && item.category.startsWith(anc + '#')))
+        );
+        if (methods.length > 0) {
+          inheritedByAncestor.set(anc, methods);
+        }
+      });
+    }
+
+    if (inheritedByAncestor.size === 0) return;
+
+    const inheritedSection = document.createElement('div');
+    inheritedSection.className = 'inherited-methods-section';
+
+    let totalInheritedCount = 0;
+    inheritedByAncestor.forEach(methods => totalInheritedCount += methods.length);
+
+    let cardsHtml = '';
+    for (const [anc, methods] of inheritedByAncestor.entries()) {
+      const ancNode = classHierarchy.nodes[anc];
+      const ancDoc = ancNode && ancNode.doc ? ancNode.doc : '#';
+      const pills = methods.slice(0, 30).map(m => {
+        const mHref = m.doc ? `../../${m.doc}` : (m.src ? `../../${m.src}` : '#');
+        return `<a href="${mHref}" class="inherited-method-pill" title="${m.desc || m.name}"><code>${m.name}()</code></a>`;
+      }).join('');
+
+      const moreNotice = methods.length > 30 ? `<span class="inherited-more-notice">+${methods.length - 30} more</span>` : '';
+
+      cardsHtml += `
+        <div class="inherited-ancestor-group">
+          <div class="inherited-ancestor-header">
+            <span class="inherited-from-label">Inherited from</span>
+            <a href="../../${ancDoc}" class="inherited-ancestor-link">${anc}</a>
+            <span class="inherited-count-badge">${methods.length} methods</span>
+          </div>
+          <div class="inherited-pills-list">
+            ${pills}
+            ${moreNotice}
+          </div>
+        </div>`;
+    }
+
+    inheritedSection.innerHTML = `
+      <div class="inherited-section-header" role="button" tabindex="0" title="Click to view inherited methods from ancestor classes">
+        <div class="inherited-header-title">
+          <svg class="inherited-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <span>Inherited Methods (${totalInheritedCount})</span>
+        </div>
+        <span class="inherited-summary-badge">from ${ancestors.length} base classes</span>
+      </div>
+      <div class="inherited-section-content" style="display: none;">
+        ${cardsHtml}
+      </div>`;
+
+    summaryEl.parentNode.insertBefore(inheritedSection, summaryEl.nextSibling);
+
+    const toggleBtn = inheritedSection.querySelector('.inherited-section-header');
+    const contentBox = inheritedSection.querySelector('.inherited-section-content');
+    const chevron = inheritedSection.querySelector('.inherited-chevron');
+
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = contentBox.style.display === 'none';
+      contentBox.style.display = isHidden ? 'block' : 'none';
+      if (chevron) {
+        chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
+      }
+    });
+
+    toggleBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleBtn.click();
+      }
     });
   }
 
@@ -2617,8 +2736,9 @@ window.PageCommon = (function () {
     if (document.getElementById('visual-flow-stepper')) {
       initFlowStepper(studio);
     }
-    if (document.querySelector('.derived-classes-card, .derived-class-pill')) {
+    if (document.querySelector('.derived-classes-card, .derived-class-pill, .class-hierarchy-widget, .hierarchy-subclasses-card')) {
       initDerivedClasses();
+      initInheritedMethodsExplorer();
     }
   }
 

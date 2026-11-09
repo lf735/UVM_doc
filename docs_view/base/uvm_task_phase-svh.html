@@ -53,12 +53,6 @@
     <a href="../../examples_view/phasing/basic.html" class="example-callout-link" data-example-url="../../examples_view/phasing/basic.html" title="Open Phased Execution Lifecycle">Phased Execution Lifecycle</a>
   </div>
   <span class="example-callout-badge">Interactive Studio</span>
-</div><div class="derived-classes-card collapsed">
-  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
-    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    <span>Direct Subclasses (13)</span>
-  </div>
-  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-13" class="derived-class-pill" data-target-id="doc-nav-item-13" title="Documentation for uvm_configure_phase">uvm_configure_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-22" class="derived-class-pill" data-target-id="doc-nav-item-22" title="Documentation for uvm_main_phase">uvm_main_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-16" class="derived-class-pill" data-target-id="doc-nav-item-16" title="Documentation for uvm_post_configure_phase">uvm_post_configure_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-25" class="derived-class-pill" data-target-id="doc-nav-item-25" title="Documentation for uvm_post_main_phase">uvm_post_main_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-7" class="derived-class-pill" data-target-id="doc-nav-item-7" title="Documentation for uvm_post_reset_phase">uvm_post_reset_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-34" class="derived-class-pill" data-target-id="doc-nav-item-34" title="Documentation for uvm_post_shutdown_phase">uvm_post_shutdown_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-10" class="derived-class-pill" data-target-id="doc-nav-item-10" title="Documentation for uvm_pre_configure_phase">uvm_pre_configure_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-19" class="derived-class-pill" data-target-id="doc-nav-item-19" title="Documentation for uvm_pre_main_phase">uvm_pre_main_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-1" class="derived-class-pill" data-target-id="doc-nav-item-1" title="Documentation for uvm_pre_reset_phase">uvm_pre_reset_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-28" class="derived-class-pill" data-target-id="doc-nav-item-28" title="Documentation for uvm_pre_shutdown_phase">uvm_pre_shutdown_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-4" class="derived-class-pill" data-target-id="doc-nav-item-4" title="Documentation for uvm_reset_phase">uvm_reset_phase</a><a href="../../docs_view/base/uvm_common_phases-svh.html#doc-nav-item-13" class="derived-class-pill" data-target-id="doc-nav-item-13" title="Documentation for uvm_run_phase">uvm_run_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-31" class="derived-class-pill" data-target-id="doc-nav-item-31" title="Documentation for uvm_shutdown_phase">uvm_shutdown_phase</a></div>
 </div><div class=CBody><p>Base class for all task phases.&nbsp; It forks a call to <a href="uvm_phase-svh.html#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link9  >uvm_phase::exec_task()</a> for each component in the hierarchy.</p><p>The completion of the task does not imply, nor is it required for, the end of phase.&nbsp; Once the phase completes, any remaining forked <a href="uvm_phase-svh.html#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link10  >uvm_phase::exec_task()</a> threads are forcibly and immediately killed.</p><p>By default, the way for a task phase to extend over time is if there is at least one component that raises an objection.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
@@ -89,14 +83,30 @@
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-      <div class=ClassHierarchy>
-        <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_misc-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link1  >uvm_void</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_object</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="uvm_phase-svh.html#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link3  >uvm_phase</a></div></div></td></tr>
-          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_task_phase</div></div></td></tr>
-        </table>
-      </div>
+      <div class="class-hierarchy-widget" data-cname="uvm_task_phase">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-phase">Phasing</span>
+      <span class="hierarchy-virtual-badge">virtual</span>
+      <span class="hierarchy-method-badge">4 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <a href="../../docs_view/base/uvm_misc-svh.html#doc-nav-item-1" class="hierarchy-flow-node parent" data-target-id="doc-nav-item-1" title="Base class: uvm_void">uvm_void</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><a href="../../docs_view/base/uvm_object-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_object">uvm_object</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><a href="../../docs_view/base/uvm_phase-svh.html#doc-nav-item-1" class="hierarchy-flow-node parent" data-target-id="doc-nav-item-1" title="Base class: uvm_phase">uvm_phase</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span class="hierarchy-flow-node current" title="Current class: uvm_task_phase">uvm_task_phase</span>
+  </div>
+  
+  <div class="hierarchy-subclasses-card collapsed">
+    <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
+      <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      <span>Direct Subclasses (13)</span>
+    </div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-13" class="derived-class-pill" data-target-id="doc-nav-item-13" title="Subclass: uvm_configure_phase">uvm_configure_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-22" class="derived-class-pill" data-target-id="doc-nav-item-22" title="Subclass: uvm_main_phase">uvm_main_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-16" class="derived-class-pill" data-target-id="doc-nav-item-16" title="Subclass: uvm_post_configure_phase">uvm_post_configure_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-25" class="derived-class-pill" data-target-id="doc-nav-item-25" title="Subclass: uvm_post_main_phase">uvm_post_main_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-7" class="derived-class-pill" data-target-id="doc-nav-item-7" title="Subclass: uvm_post_reset_phase">uvm_post_reset_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-34" class="derived-class-pill" data-target-id="doc-nav-item-34" title="Subclass: uvm_post_shutdown_phase">uvm_post_shutdown_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-10" class="derived-class-pill" data-target-id="doc-nav-item-10" title="Subclass: uvm_pre_configure_phase">uvm_pre_configure_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-19" class="derived-class-pill" data-target-id="doc-nav-item-19" title="Subclass: uvm_pre_main_phase">uvm_pre_main_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-1" class="derived-class-pill" data-target-id="doc-nav-item-1" title="Subclass: uvm_pre_reset_phase">uvm_pre_reset_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-28" class="derived-class-pill" data-target-id="doc-nav-item-28" title="Subclass: uvm_pre_shutdown_phase">uvm_pre_shutdown_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-4" class="derived-class-pill" data-target-id="doc-nav-item-4" title="Subclass: uvm_reset_phase">uvm_reset_phase</a><a href="../../docs_view/base/uvm_common_phases-svh.html#doc-nav-item-13" class="derived-class-pill" data-target-id="doc-nav-item-13" title="Subclass: uvm_run_phase">uvm_run_phase</a><a href="../../docs_view/base/uvm_runtime_phases-svh.html#doc-nav-item-31" class="derived-class-pill" data-target-id="doc-nav-item-31" title="Subclass: uvm_shutdown_phase">uvm_shutdown_phase</a></div>
+  </div>
+</div>
   </td></tr>
 
 

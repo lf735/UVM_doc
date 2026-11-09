@@ -75,12 +75,6 @@
     <a href="../../examples_view/infrastructure/factory.html" class="example-callout-link" data-example-url="../../examples_view/infrastructure/factory.html" title="Open Factory Overrides">Factory Overrides</a>
   </div>
   <span class="example-callout-badge">Interactive Studio</span>
-</div><div class="derived-classes-card collapsed">
-  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
-    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    <span>Direct Subclasses (1)</span>
-  </div>
-  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_factory-svh.html#doc-nav-item-23" class="derived-class-pill" data-target-id="doc-nav-item-23" title="Documentation for uvm_default_factory">uvm_default_factory</a></div>
 </div><div class=CBody><p>As the name implies, uvm_factory is used to manufacture (create) UVM objects and components.&nbsp; Object and component types are registered with the factory using lightweight proxies to the actual objects and components being created.&nbsp; The <a href="uvm_registry-svh.html#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LClass id=link23  >uvm_object_registry #(T,Tname)</a> and <a href="uvm_registry-svh.html#doc-nav-item-2" data-target-id="doc-nav-item-2" class=LClass id=link24  >uvm_component_registry #(T,Tname)</a> class are used to proxy <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link25  >uvm_objects</a> and <a href="uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link26  >uvm_components</a>.</p><p>The factory provides both name-based and type-based interfaces.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>type-based</td><td class=CDLDescription>The type-based interface is far less prone to errors in usage.&nbsp; When errors do occur, they are caught at compile-time.</td></tr><tr><td class=CDLEntry>name-based</td><td class=CDLDescription>The name-based interface is dominated by string arguments that can be misspelled and provided in the wrong order.&nbsp; Errors in name-based requests might only be caught at the time of the call, if at all.&nbsp; Further, the name-based interface is not portable across simulators when used with parameterized classes.</td></tr></table><p>The <i>uvm_factory</i> is an abstract class which declares many of its methods as <i>pure virtual</i>.&nbsp;  The UVM uses the <a href="#doc-nav-item-23" data-target-id="doc-nav-item-23" class=LClass id=link27  >uvm_default_factory</a> class as its default factory implementation.</p><p>See <a href="#doc-nav-item-42" data-target-id="doc-nav-item-42" class=LGroup id=link28  >uvm_default_factory::Usage</a> section for details on configuring and using the factory.</p>
 
 <!--START_ND_SUMMARY index=1-->
@@ -89,7 +83,34 @@
 
 <tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" id=link4  >uvm_factory</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>As the name implies, uvm_factory is used to manufacture (create) UVM objects and components. </td></tr>
-  <!-- PROTOTYPE -->
+  <tr class="SHierarchy SIndent1"><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+<tr class="SPrototype SIndent1"><td colspan=2 class="SDescription">
+<div class="class-hierarchy-widget" data-cname="uvm_factory">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      <span class="hierarchy-virtual-badge">virtual</span>
+      <span class="hierarchy-method-badge">16 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-node current" title="Current class: uvm_factory">uvm_factory</span>
+  </div>
+  
+  <div class="hierarchy-subclasses-card collapsed">
+    <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
+      <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      <span>Direct Subclasses (1)</span>
+    </div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_factory-svh.html#doc-nav-item-23" class="derived-class-pill" data-target-id="doc-nav-item-23" title="Subclass: uvm_default_factory">uvm_default_factory</a></div>
+  </div>
+</div>
+</td></tr>
+<!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_factory</span>
@@ -593,12 +614,23 @@
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-      <div class=ClassHierarchy>
-        <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link37  >uvm_factory</a></div></div></td></tr>
-          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_default_factory</div></div></td></tr>
-        </table>
-      </div>
+      <div class="class-hierarchy-widget" data-cname="uvm_default_factory">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      <span class="hierarchy-method-badge">19 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <a href="../../docs_view/base/uvm_factory-svh.html#doc-nav-item-1" class="hierarchy-flow-node parent" data-target-id="doc-nav-item-1" title="Base class: uvm_factory">uvm_factory</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span class="hierarchy-flow-node current" title="Current class: uvm_default_factory">uvm_default_factory</span>
+  </div>
+  
+</div>
   </td></tr>
 
 
@@ -1336,13 +1368,7 @@
 
 
  <!--CONTENT index=43 -->
-<div class="CClass" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_object_wrapper"><div class="CTopic"><h2 class=CTitle><a name="uvm_object_wrapper" id="uvm_object_wrapper" href="../../src_view/base/uvm_factory.svh.html#L810" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="810">uvm_object_wrapper</a></h2><div class="derived-classes-card collapsed">
-  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
-    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    <span>Direct Subclasses (2)</span>
-  </div>
-  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_registry-svh.html#doc-nav-item-2" class="derived-class-pill" data-target-id="doc-nav-item-2" title="Documentation for uvm_component_registry">uvm_component_registry</a><a href="../../docs_view/base/uvm_registry-svh.html#doc-nav-item-10" class="derived-class-pill" data-target-id="doc-nav-item-10" title="Documentation for uvm_object_registry">uvm_object_registry</a></div>
-</div><div class=CBody><p>The uvm_object_wrapper provides an abstract interface for creating object and component proxies.&nbsp; Instances of these lightweight proxies, representing every <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link72  >uvm_object</a>-based and <a href="uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link73  >uvm_component</a>-based object available in the test environment, are registered with the <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link74  >uvm_factory</a>.&nbsp; When the factory is called upon to create an object or component, it finds and delegates the request to the appropriate proxy.</p>
+<div class="CClass" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_object_wrapper"><div class="CTopic"><h2 class=CTitle><a name="uvm_object_wrapper" id="uvm_object_wrapper" href="../../src_view/base/uvm_factory.svh.html#L810" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="810">uvm_object_wrapper</a></h2><div class=CBody><p>The uvm_object_wrapper provides an abstract interface for creating object and component proxies.&nbsp; Instances of these lightweight proxies, representing every <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link72  >uvm_object</a>-based and <a href="uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link73  >uvm_component</a>-based object available in the test environment, are registered with the <a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" class=LClass id=link74  >uvm_factory</a>.&nbsp; When the factory is called upon to create an object or component, it finds and delegates the request to the appropriate proxy.</p>
 
 <!--START_ND_SUMMARY index=43-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-43" data-anchor="Summary-doc-nav-item-43"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -1350,7 +1376,34 @@
 
 <tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" id=link66  >uvm_object_wrapper</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The uvm_object_wrapper provides an abstract interface for creating object and component proxies. </td></tr>
-  <!-- PROTOTYPE -->
+  <tr class="SHierarchy SIndent1"><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+<tr class="SPrototype SIndent1"><td colspan=2 class="SDescription">
+<div class="class-hierarchy-widget" data-cname="uvm_object_wrapper">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      <span class="hierarchy-virtual-badge">virtual</span>
+      <span class="hierarchy-method-badge">3 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-node current" title="Current class: uvm_object_wrapper">uvm_object_wrapper</span>
+  </div>
+  
+  <div class="hierarchy-subclasses-card collapsed">
+    <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
+      <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      <span>Direct Subclasses (2)</span>
+    </div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_registry-svh.html#doc-nav-item-2" class="derived-class-pill" data-target-id="doc-nav-item-2" title="Subclass: uvm_component_registry">uvm_component_registry</a><a href="../../docs_view/base/uvm_registry-svh.html#doc-nav-item-10" class="derived-class-pill" data-target-id="doc-nav-item-10" title="Subclass: uvm_object_registry">uvm_object_registry</a></div>
+  </div>
+</div>
+</td></tr>
+<!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_object_wrapper</span>

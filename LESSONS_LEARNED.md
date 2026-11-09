@@ -884,3 +884,132 @@ Transformer les conteneurs de visualisation de code statiques (`src_view/*.html`
    - Appel de `monacoEditorInstance.layout()` via `requestAnimationFrame` puis à `+80ms` pour garantir le calcul après recalcul du reflow CSS.
 3. **Restauration à la désactivation** :
    - Réinitialisation de `studioCodeContainer.style.height = ''` et retrait de la classe `.monaco-active` pour restituer la hauteur automatique native du Code Studio.
+
+
+---
+
+## 23. Le Piège de la Duplication des Métadonnées sur les Pages Multi-Classes (`CSection` vs `CClass`)
+
+### Le Symptôme Observé
+> *"Lorsqu'il y a plusieurs classes dans la même page, la hierarchie de la première est dupliquée."*  
+> Sur les pages documentant plusieurs classes regroupées dans un même fichier (ex: `comps/uvm_pair-svh.html` documentant `uvm_class_pair` et `uvm_built_in_pair`, ou `base/uvm_resource_specializations-svh.html`), le widget complet de la première classe s'affichait en double : une première fois sur le titre général du fichier (le conteneur de section), puis une seconde fois sur le titre de la classe elle-même.
+
+### L'Anatomie du Piège
+Dans l'architecture HTML générée par Natural Docs :
+1. Une page de documentation est découpée en une suite de blocs de topiques (`CTopicWrap`) :
+   ```html
+   <!-- Bloc 1 : En-tête général du fichier -->
+   <div class="CSection"><div class="CTopic" id="MainTopic">
+     <h1 class="CTitle"><a name="uvm_pair_classes">uvm_pair classes</a></h1>
+     ...
+   </div></div>
+
+   <!-- Bloc 2 : Première classe réelle -->
+   <div class="CClass"><div class="CTopic">
+     <h2 class="CTitle"><a name="uvm_class_pair#(T1,T2)">uvm_class_pair</a></h2>
+     ...
+   </div></div>
+   ```
+2. Dans le script de compilation [`scripts/build_docs.py`](file:///c:/Dev/UVM_doc/scripts/build_docs.py), la condition d'enrichissement évaluait :
+   ```python
+   if is_main or cls_name == 'CClass':
+   ```
+3. Or, pour le premier bloc (`CSection`), `is_main` valait `True` même s'il ne s'agissait absolument pas d'une classe !
+4. L'algorithme cherchait le nom d'ancre `clean_a` (`"uvm_pair_classes"`) dans `UVM_DB['classes']`. Ne le trouvant pas (puisque c'est un nom de section informatif), il basculait sur la branche de repli :
+   ```python
+   elif associated_src and associated_src in UVM_DB.get('files', {}):
+       f_classes = UVM_DB['files'][associated_src].get('classes', [])
+       if f_classes:
+           target_cname = f_classes[0] # ◄── PIÈGE !
+   ```
+5. Il sélectionnait donc aveuglément la première classe du fichier (`f_classes[0] = "uvm_class_pair"`) et injectait sa topologie complète directement sur le titre de section `uvm_pair_classes` !
+6. Quelques lignes plus bas, en atteignant le bloc 2 (`cls_name == 'CClass'`), l'enrichissement s'exécutait à nouveau pour `uvm_class_pair`, produisant la duplication constatée par l'utilisateur.
+
+### La Règle d'Or (Typage Strict des Topiques)
+1. **Élimination stricte du prédicat `is_main` pour les enrichissements de classe** : Seuls les blocs explicitement marqués `cls_name == 'CClass'` sont autorisés à recevoir des données structurelles de classe.
+2. **Résolution ciblée par nom ou préfixe** :
+   ```python
+   if cls_name == 'CClass':
+       target_cname = None
+       if clean_a and clean_a in UVM_DB.get('classes', {}):
+           target_cname = clean_a
+       elif associated_src and associated_src in UVM_DB.get('files', {}):
+           f_classes = UVM_DB['files'][associated_src].get('classes', [])
+           for fc in f_classes:
+               if clean_a and (fc.lower() == clean_a.lower() or clean_a.lower().startswith(fc.lower())):
+                   target_cname = fc
+                   break
+           # Repli vers f_classes[0] uniquement s'il n'y a qu'une seule classe dans tout le fichier
+           if not target_cname and len(f_classes) == 1:
+               target_cname = f_classes[0]
+   ```
+3. **Résultat** : Les en-têtes de section `CSection` restent totalement vierges de widgets de classe, et chaque classe dans un fichier multi-classes reçoit uniquement son propre widget dédié.
+
+---
+
+## 24. Remplacement In-Situ vs Injection au Sommet (`</h123>`) & Découplage de Sélection CSS
+
+### Le Symptôme Observé
+> *"La nouvelle visualisation de la hierachie devrait remplacer l'ancienne au même endroit"*  
+> *"La selection des classes dans la hiérarchie n'est pas belle"*  
+> 1. Deux hiérarchies cohabitaient de façon redondante dans chaque document : le nouveau widget moderne injecté au sommet sous le titre `<h1>`, tandis que l'ancienne table statique Natural Docs restait présente plus bas dans le tableau de sommaire.
+> 2. Dans l'onglet latéral Hierarchy, lorsqu'une classe était sélectionnée, l'élément affichait un rendu lourd et heurté : doubles bordures bleues, boîte imbriquée dans une boîte, et décalage brutal du texte à l'activation.
+
+### L'Anatomie du Piège
+
+#### A. Le Piège de l'Injection au Sommet
+Au départ, le widget était injecté naïvement par substitution regex sous le titre principal :
+```python
+w_body = re.sub(r'(</h[123]>)', r'\1' + hierarchy_widget, w_body, count=1)
+```
+Ce choix créait deux désagréments majeurs :
+- Il encombrait le haut de la page avant même la description introductive de la classe.
+- Il laissait intact l'ancien bloc historique `<div class=ClassHierarchy>` plus bas dans la table de sommaire (`STable`). L'utilisateur voyait donc deux représentations différentes de la hiérarchie dans la même page.
+
+#### B. Le Piège CSS du Conflit de Classes Actives (« Boîte dans une Boîte »)
+Dans l'arborescence latérale, le template généré attribuait la classe `.nav-item-link` au lien `.hierarchy-link` :
+```html
+<div class="hierarchy-row" data-cname="...">
+  ...
+  <a class="hierarchy-link nav-item-link">...</a>
+</div>
+```
+Lorsque l'utilisateur cliquait sur un nœud, le script ajoutait la classe `.active` sur la ligne ET sur le lien :
+- `.hierarchy-row.active` appliquait : `background: var(--primary-light); border-left: 3px solid var(--primary); padding-left: calc(...);`
+- `.nav-item-link.active` appliquait à son tour : `background: var(--primary-light) !important; border-left: 3px solid var(--primary);`
+Résultat : un rectangle bleu intérieur venait s'empiler à l'intérieur d'un rectangle bleu extérieur, avec une double bordure gauche et un saut disgracieux du texte au moment du clic.
+
+### Les Solutions Appliquées
+
+#### 1. Remplacement In-Situ dans le Tableau de Sommaire
+Le script [`scripts/build_docs.py`](file:///c:/Dev/UVM_doc/scripts/build_docs.py) remplace désormais directement le conteneur historique au sein même du tableau `STable` :
+```python
+old_h_pattern = r'<div class=[\x22\x27]?ClassHierarchy[\x22\x27]?>[\s\S]*?</table>\s*</div>'
+if re.search(old_h_pattern, w_body):
+    w_body = re.sub(old_h_pattern, lambda m: hierarchy_widget, w_body, count=1)
+```
+- Pour les classes sans bloc d'héritage d'origine, le widget est inséré immédiatement avant `Class Declaration` dans le sommaire.
+- Aucun widget parasite n'apparaît sous le titre `</h123>`, garantissant une lecture épurée.
+
+#### 2. Découplage CSS & Barre d'Accentuation Verticale
+1. **Suppression de `nav-item-link`** sur `.hierarchy-link` pour neutraliser tout conflit d'héritage de styles.
+2. **Indicateur d'accent sans décalage géométrique** :
+   ```css
+   .hierarchy-row.active {
+     background: var(--primary-light);
+     color: var(--primary);
+     font-weight: 600;
+   }
+   .hierarchy-row.active::before {
+     content: '';
+     position: absolute;
+     left: 0;
+     top: 3px;
+     bottom: 3px;
+     width: 3.5px;
+     border-radius: 0 3px 3px 0;
+     background: var(--primary);
+   }
+   ```
+   L'indicateur utilise un pseudo-élément en position absolue : le texte et les bordures ne sautent plus d'un pixel lors du clic.
+3. **Pastille de la classe courante** : Dans la documentation, `.hierarchy-flow-node.current` est passé d'un bloc bleu opaque lourd à une pastille douce `var(--primary-light)` avec bordure de 1.5px et texte `var(--primary)`, harmonieuse en thème clair comme en thème sombre.

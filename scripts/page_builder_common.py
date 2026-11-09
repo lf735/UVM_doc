@@ -399,6 +399,135 @@ def render_topology_grid(topology_nodes: List[Dict[str, Any]]) -> str:
 </div>'''
 
 
+def render_class_hierarchy_card(
+    cname: str,
+    root_rel: str,
+    class_to_doc_map: Optional[Dict[str, str]] = None,
+    uvm_db: Optional[Dict[str, Any]] = None,
+    global_anchor_maps: Optional[Dict[str, Any]] = None
+) -> str:
+    """
+    Renders the unified, rich Class Hierarchy widget showing lineage breadcrumbs
+    (ancestors -> active class) and direct subclasses with role tags.
+    """
+    class_to_doc_map = class_to_doc_map or {}
+    uvm_db = uvm_db or {}
+    global_anchor_maps = global_anchor_maps or {}
+    classes = uvm_db.get('classes', {})
+    c_info = classes.get(cname, {})
+    if not c_info:
+        return ""
+
+    def is_descendant(sub, anc):
+        c = sub
+        vis = set()
+        while c and c in classes and c not in vis:
+            vis.add(c)
+            p = classes[c].get('parent')
+            if p == anc or (p and p.startswith(anc)):
+                return True
+            c = p
+        return False
+
+    def get_role_tag(name):
+        if name == 'uvm_component' or is_descendant(name, 'uvm_component'):
+            return ('component', 'Component')
+        if name == 'uvm_sequence_base' or is_descendant(name, 'uvm_sequence_base') or 'sequence' in name or 'seq_item' in name:
+            return ('sequence', 'Sequence')
+        if name.startswith('uvm_reg') or name.startswith('uvm_vreg') or name.startswith('uvm_mem'):
+            return ('reg', 'Register Model')
+        if 'tlm' in name or 'port' in name or 'export' in name or 'fifo' in name:
+            return ('tlm', 'TLM Channel')
+        if 'phase' in name or is_descendant(name, 'uvm_phase'):
+            return ('phase', 'Phasing')
+        if name == 'uvm_object' or is_descendant(name, 'uvm_object'):
+            return ('object', 'Object')
+        return ('utility', 'Utility')
+
+    role_key, role_label = get_role_tag(cname)
+
+    # 1. Trace ancestors
+    ancestors = []
+    curr = c_info.get('parent')
+    visited = set()
+    while curr and curr not in visited:
+        visited.add(curr)
+        clean_p = re.sub(r'#\(.*?\)', '', curr).strip()
+        ancestors.insert(0, (curr, clean_p))
+        p_info = classes.get(clean_p, {})
+        curr = p_info.get('parent') if p_info else None
+
+    # 2. Build lineage items
+    flow_items = []
+    for raw_p, clean_p in ancestors:
+        link_href = None
+        target_id = 'doc-nav-main'
+        if clean_p in class_to_doc_map:
+            ch_doc = class_to_doc_map[clean_p]
+            target_id = global_anchor_maps.get(ch_doc, {}).get(clean_p, 'doc-nav-main')
+            link_href = f"{root_rel}docs_view/{ch_doc}#{target_id}"
+        elif clean_p in classes and classes[clean_p].get('file'):
+            cf = classes[clean_p]['file']
+            cl = classes[clean_p].get('start_line', 1)
+            link_href = f"{root_rel}src_view/{cf}.html#L{cl}"
+
+        if link_href:
+            flow_items.append(f'<a href="{link_href}" class="hierarchy-flow-node parent" data-target-id="{target_id}" title="Base class: {clean_p}">{clean_p}</a>')
+        else:
+            flow_items.append(f'<span class="hierarchy-flow-node parent static">{clean_p}</span>')
+
+    methods_count = len(c_info.get('methods', {}))
+    is_virtual = c_info.get('is_virtual', False)
+    flow_items.append(f'<span class="hierarchy-flow-node current" title="Current class: {cname}">{cname}</span>')
+
+    arrow_svg = '<svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>'
+    flow_html = arrow_svg.join(flow_items)
+
+    # 3. Children / Subclasses
+    children = c_info.get('children', [])
+    subclasses_html = ""
+    if children:
+        pills = []
+        for child in sorted(children):
+            if child in class_to_doc_map:
+                ch_doc = class_to_doc_map[child]
+                target_id = global_anchor_maps.get(ch_doc, {}).get(child, 'doc-nav-main')
+                pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#{target_id}" class="derived-class-pill" data-target-id="{target_id}" title="Subclass: {child}">{child}</a>')
+            elif child in classes and classes[child].get('file'):
+                ch_f = classes[child]['file']
+                ch_l = classes[child]['start_line']
+                pills.append(f'<a href="{root_rel}src_view/{ch_f}.html#L{ch_l}" class="derived-class-pill src-code-link" data-src-file="{ch_f}" data-src-line="{ch_l}" title="Source for {child}">{child}</a>')
+            else:
+                pills.append(f'<span class="derived-class-pill">{child}</span>')
+
+        subclasses_html = f'''
+  <div class="hierarchy-subclasses-card collapsed">
+    <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
+      <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      <span>Direct Subclasses ({len(children)})</span>
+    </div>
+    <div class="derived-classes-list">{"".join(pills)}</div>
+  </div>'''
+
+    return f'''<div class="class-hierarchy-widget" data-cname="{cname}">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-{role_key}">{role_label}</span>
+      {f'<span class="hierarchy-virtual-badge">virtual</span>' if is_virtual else ''}
+      {f'<span class="hierarchy-method-badge">{methods_count} methods</span>' if methods_count else ''}
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    {flow_html}
+  </div>
+  {subclasses_html}
+</div>'''
+
+
 def render_derived_classes_card(
     children: List[str],
     root_rel: str,

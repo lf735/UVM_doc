@@ -46,12 +46,29 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_printer"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_printer" id="uvm_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_printer</a></h1><div class="derived-classes-card collapsed">
-  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
-    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    <span>Direct Subclasses (2)</span>
+<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_printer"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_printer" id="uvm_printer" href="../../src_view/base/uvm_printer.svh.html#L74" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="74">uvm_printer</a></h1><div class="class-hierarchy-widget" data-cname="uvm_printer">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      <span class="hierarchy-virtual-badge">virtual</span>
+      <span class="hierarchy-method-badge">19 methods</span>
+    </div>
   </div>
-  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-19" class="derived-class-pill" data-target-id="doc-nav-item-19" title="Documentation for uvm_table_printer">uvm_table_printer</a><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-24" class="derived-class-pill" data-target-id="doc-nav-item-24" title="Documentation for uvm_tree_printer">uvm_tree_printer</a></div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-node current" title="Current class: uvm_printer">uvm_printer</span>
+  </div>
+  
+  <div class="hierarchy-subclasses-card collapsed">
+    <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
+      <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      <span>Direct Subclasses (2)</span>
+    </div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-19" class="derived-class-pill" data-target-id="doc-nav-item-19" title="Subclass: uvm_table_printer">uvm_table_printer</a><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-24" class="derived-class-pill" data-target-id="doc-nav-item-24" title="Subclass: uvm_tree_printer">uvm_tree_printer</a></div>
+  </div>
 </div><div class=CBody><p>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link8  >uvm_objects</a> in various formats.&nbsp; Subtypes of uvm_printer implement different print formats, or policies.</p><p>A user-defined printer format can be created, or one of the following four built-in printers can be used:</p><ul><li><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link9  >uvm_printer</a> - provides base printer functionality; must be overridden.</li><li><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" class=LClass id=link10  >uvm_table_printer</a> - prints the object in a tabular form.</li><li><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link11  >uvm_tree_printer</a> - prints the object in a tree form.</li><li><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" class=LClass id=link12  >uvm_line_printer</a> - prints the information on a single line, but uses the same object separators as the tree printer.</li></ul><p>Printers have knobs that you use to control what and how information is printed.&nbsp; These knobs are contained in a separate knob class:</p><ul><li><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" class=LClass id=link13  >uvm_printer_knobs</a> - common printer settings</li></ul><p>For convenience, global instances of each printer type are available for direct reference in your testbenches.</p><ul><li><a href="uvm_object_globals-svh.html#doc-nav-item-26" data-target-id="doc-nav-item-26" class=LVariable id=link14  >uvm_default_tree_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-27" data-target-id="doc-nav-item-27" class=LVariable id=link15  >uvm_default_line_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-25" data-target-id="doc-nav-item-25" class=LVariable id=link16  >uvm_default_table_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LVariable id=link17  >uvm_default_printer</a> (set to default_table_printer by default)</li></ul><p>When <a href="uvm_object-svh.html#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link18  >uvm_object::print</a> and <a href="uvm_object-svh.html#doc-nav-item-19" data-target-id="doc-nav-item-19" class=LMethod id=link19  >uvm_object::sprint</a> are called without specifying a printer, the <a href="uvm_object_globals-svh.html#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LVariable id=link20  >uvm_default_printer</a> is used.</p>
 
 <!--START_ND_SUMMARY index=0-->
@@ -472,12 +489,23 @@
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-      <div class=ClassHierarchy>
-        <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link26  >uvm_printer</a></div></div></td></tr>
-          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_table_printer</div></div></td></tr>
-        </table>
-      </div>
+      <div class="class-hierarchy-widget" data-cname="uvm_table_printer">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      <span class="hierarchy-method-badge">3 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span class="hierarchy-flow-node current" title="Current class: uvm_table_printer">uvm_table_printer</span>
+  </div>
+  
+</div>
   </td></tr>
 
 
@@ -534,13 +562,7 @@
 
 
  <!--CONTENT index=24 -->
-<div class="CClass" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_tree_printer"><div class="CTopic"><h2 class=CTitle><a name="uvm_tree_printer" id="uvm_tree_printer" href="../../src_view/base/uvm_printer.svh.html#L358" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="358">uvm_tree_printer</a></h2><div class="derived-classes-card collapsed">
-  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
-    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    <span>Direct Subclasses (1)</span>
-  </div>
-  <div class="derived-classes-list"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-29" class="derived-class-pill" data-target-id="doc-nav-item-29" title="Documentation for uvm_line_printer">uvm_line_printer</a></div>
-</div><div class=CBody><p>By overriding various methods of the <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link35  >uvm_printer</a> super class, the tree printer prints output in a tree format.</p><p>The following shows sample output from the tree printer.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_tree_printer"><div class="CTopic"><h2 class=CTitle><a name="uvm_tree_printer" id="uvm_tree_printer" href="../../src_view/base/uvm_printer.svh.html#L358" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="358">uvm_tree_printer</a></h2><div class=CBody><p>By overriding various methods of the <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link35  >uvm_printer</a> super class, the tree printer prints output in a tree format.</p><p>The following shows sample output from the tree printer.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -571,12 +593,30 @@
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-      <div class=ClassHierarchy>
-        <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link30  >uvm_printer</a></div></div></td></tr>
-          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_tree_printer</div></div></td></tr>
-        </table>
-      </div>
+      <div class="class-hierarchy-widget" data-cname="uvm_tree_printer">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      <span class="hierarchy-method-badge">2 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span class="hierarchy-flow-node current" title="Current class: uvm_tree_printer">uvm_tree_printer</span>
+  </div>
+  
+  <div class="hierarchy-subclasses-card collapsed">
+    <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
+      <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      <span>Direct Subclasses (1)</span>
+    </div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-29" class="derived-class-pill" data-target-id="doc-nav-item-29" title="Subclass: uvm_line_printer">uvm_line_printer</a></div>
+  </div>
+</div>
   </td></tr>
 
 
@@ -657,13 +697,23 @@
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
-      <div class=ClassHierarchy>
-        <table border=0 cellspacing=0 cellpadding=0>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link36  >uvm_printer</a></div></div></td></tr>
-          <tr><td><div class=CHParent><div class=CHEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link37  >uvm_tree_printer</a></div></div></td></tr>
-          <tr><td><div class=CHCurrent><div class=CHEntry>uvm_line_printer</div></div></td></tr>
-        </table>
-      </div>
+      <div class="class-hierarchy-widget" data-cname="uvm_line_printer">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      <span class="hierarchy-method-badge">1 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-24" class="hierarchy-flow-node parent" data-target-id="doc-nav-item-24" title="Base class: uvm_tree_printer">uvm_tree_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg><span class="hierarchy-flow-node current" title="Current class: uvm_line_printer">uvm_line_printer</span>
+  </div>
+  
+</div>
   </td></tr>
 
 
@@ -708,7 +758,27 @@
 
 <tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link41  >uvm_printer_knobs</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</td></tr>
-  <!-- PROTOTYPE -->
+  <tr class="SHierarchy SIndent1"><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+<tr class="SPrototype SIndent1"><td colspan=2 class="SDescription">
+<div class="class-hierarchy-widget" data-cname="uvm_printer_knobs">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Inheritance & Class Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      <span class="hierarchy-method-badge">1 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-node current" title="Current class: uvm_printer_knobs">uvm_printer_knobs</span>
+  </div>
+  
+</div>
+</td></tr>
+<!-- PROTOTYPE -->
   <tr class="SPrototype SIndent1"><td colspan=2 class="SEntry SIndent1">Class Declaration</td></tr>
   <tr class="SPrototype SIndent1"><td colspan=2 class=SDescription>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">class</span> <span class="sv-uvm-type">uvm_printer_knobs</span>

@@ -1136,6 +1136,16 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="sidebar-pill" data-type="intermediate">Intermediate</button>
             <button class="sidebar-pill" data-type="advanced">Advanced</button>
           `;
+    } else if (activeSidebarTab === 'hierarchy') {
+      sidebarPillsContainer.innerHTML = `
+            <button class="sidebar-pill active" data-type="all">All</button>
+            <button class="sidebar-pill" data-type="component">Components</button>
+            <button class="sidebar-pill" data-type="object">Objects</button>
+            <button class="sidebar-pill" data-type="sequence">Sequences</button>
+            <button class="sidebar-pill" data-type="tlm">TLM</button>
+            <button class="sidebar-pill" data-type="reg">Registers</button>
+            <button class="sidebar-pill" data-type="phase">Phases</button>
+          `;
     } else {
       // For docs / source / index: show language symbol types (Docs has no examples)
       sidebarPillsContainer.innerHTML = `
@@ -1236,6 +1246,8 @@ document.addEventListener('DOMContentLoaded', () => {
       renderSourceTree(rawQuery);
     } else if (activeSidebarTab === 'examples') {
       renderExamplesTree(rawQuery);
+    } else if (activeSidebarTab === 'hierarchy') {
+      renderHierarchyTree(rawQuery);
     } else if (activeSidebarTab === 'index') {
       renderAlphabeticalIndex(rawQuery);
     }
@@ -1494,6 +1506,182 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
+  // Class Hierarchy Tree Renderer & Controller
+  // =========================================================================
+
+  function renderHierarchyTree(rawQuery) {
+    if (!UVM_DATA || !UVM_DATA.classHierarchy) {
+      sidebarContent.innerHTML = `
+        <div style="padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+          <p>Class hierarchy data not available.</p>
+        </div>`;
+      return;
+    }
+
+    const { nodes, roots } = UVM_DATA.classHierarchy;
+    const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
+    const selectedRoles = sidebarFilterTypes;
+    const filterByRole = !selectedRoles.has('all');
+
+    const matchCache = new Map();
+    function nodeOrDescendantMatches(cname) {
+      if (matchCache.has(cname)) return matchCache.get(cname);
+      const node = nodes[cname];
+      if (!node) {
+        const fallback = { selfMatches: false, anyChildMatches: false, keep: false };
+        matchCache.set(cname, fallback);
+        return fallback;
+      }
+
+      let roleMatches = true;
+      if (filterByRole) {
+        roleMatches = selectedRoles.has(node.role);
+      }
+
+      let textMatches = true;
+      if (matcher && matcher.clean) {
+        const cLower = node.name.toLowerCase();
+        const sLower = (node.summary || '').toLowerCase();
+        textMatches = matcher.words.every(w => cLower.includes(w) || sLower.includes(w));
+      }
+
+      const selfMatches = roleMatches && textMatches;
+      let anyChildMatches = false;
+      if (node.children && node.children.length > 0) {
+        for (const ch of node.children) {
+          const chRes = nodeOrDescendantMatches(ch);
+          if (chRes.keep) {
+            anyChildMatches = true;
+          }
+        }
+      }
+
+      const res = { selfMatches, anyChildMatches, keep: selfMatches || anyChildMatches };
+      matchCache.set(cname, res);
+      return res;
+    }
+
+    const isSearching = (matcher && matcher.clean) || filterByRole;
+
+    function renderNodeHtml(cname, depth = 0) {
+      const node = nodes[cname];
+      if (!node) return '';
+
+      const matchInfo = isSearching ? nodeOrDescendantMatches(cname) : { selfMatches: true, anyChildMatches: false, keep: true };
+      if (isSearching && !matchInfo.keep) return '';
+
+      const hasChildren = node.children && node.children.length > 0;
+      const shouldExpand = isSearching ? matchInfo.anyChildMatches : (depth === 0 && cname === 'uvm_void');
+
+      const roleBadges = {
+        component: '<span class="hierarchy-role-badge role-component" title="UVM Component">C</span>',
+        sequence: '<span class="hierarchy-role-badge role-sequence" title="UVM Sequence / Item">S</span>',
+        reg: '<span class="hierarchy-role-badge role-reg" title="Register Model (UVM_REG)">R</span>',
+        tlm: '<span class="hierarchy-role-badge role-tlm" title="TLM Channel / Port">T</span>',
+        phase: '<span class="hierarchy-role-badge role-phase" title="Phasing">P</span>',
+        object: '<span class="hierarchy-role-badge role-object" title="UVM Object">O</span>',
+        utility: '<span class="hierarchy-role-badge role-utility" title="Utility">U</span>'
+      };
+      const badgeHtml = roleBadges[node.role] || roleBadges.utility;
+
+      let metaBadges = '';
+      if (node.methodsCount > 0) {
+        metaBadges += `<span class="hierarchy-badge" title="${node.methodsCount} methods">${node.methodsCount}m</span>`;
+      }
+      if (hasChildren) {
+        metaBadges += `<span class="hierarchy-badge" title="${node.children.length} subclasses">${node.children.length}</span>`;
+      }
+
+      const srcBtn = node.src
+        ? `<a href="${node.src}" class="hierarchy-src-link" title="Open SystemVerilog source code" data-src-href="${node.src}">
+             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+           </a>`
+        : '';
+
+      const docHref = node.doc || '';
+      const srcHref = node.src || '';
+
+      let childrenHtml = '';
+      if (hasChildren) {
+        let renderedChildren = '';
+        for (const ch of node.children) {
+          renderedChildren += renderNodeHtml(ch, depth + 1);
+        }
+        if (renderedChildren) {
+          childrenHtml = `<div class="hierarchy-children ${shouldExpand ? 'open' : ''}">${renderedChildren}</div>`;
+        }
+      }
+
+      const displayName = highlightMatch(node.name, matcher);
+
+      return `
+        <div class="hierarchy-tree-node ${shouldExpand ? '' : 'collapsed'}" data-cname="${cname}">
+          <div class="hierarchy-row" data-cname="${cname}">
+            <span class="hierarchy-expander ${hasChildren ? (shouldExpand ? 'open' : '') : 'empty'}" role="button" title="${hasChildren ? 'Toggle subclasses' : ''}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+            ${badgeHtml}
+            <a href="${docHref || srcHref}" class="hierarchy-link" data-doc-href="${docHref}" data-src-href="${srcHref}" data-cname="${cname}" title="${node.summary || cname}">
+              ${displayName}
+            </a>
+            <div class="hierarchy-meta">
+              ${metaBadges}
+              ${srcBtn}
+            </div>
+          </div>
+          ${childrenHtml}
+        </div>`;
+    }
+
+    let treeHtml = '<div class="hierarchy-tree-root">';
+    let renderedCount = 0;
+    for (const rootName of roots) {
+      const rendered = renderNodeHtml(rootName, 0);
+      if (rendered) {
+        treeHtml += rendered;
+        renderedCount++;
+      }
+    }
+    treeHtml += '</div>';
+
+    if (renderedCount === 0) {
+      sidebarContent.innerHTML = '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem">No matching classes</div>';
+    } else {
+      sidebarContent.innerHTML = treeHtml;
+    }
+
+    attachHierarchyListeners();
+    attachSidebarListeners();
+  }
+
+  function attachHierarchyListeners() {
+    sidebarContent.querySelectorAll('.hierarchy-expander:not(.empty)').forEach(exp => {
+      exp.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const node = exp.closest('.hierarchy-tree-node');
+        if (!node) return;
+        const children = node.querySelector(':scope > .hierarchy-children');
+        if (children) {
+          const isOpen = children.classList.toggle('open');
+          exp.classList.toggle('open', isOpen);
+          node.classList.toggle('collapsed', !isOpen);
+        }
+        updateSidebarToggleAllBtn();
+      });
+    });
+
+    sidebarContent.querySelectorAll('.hierarchy-row').forEach(row => {
+      row.addEventListener('click', (e) => {
+        if (e.target.closest('.hierarchy-expander') || e.target.closest('.hierarchy-src-link') || e.target.closest('.hierarchy-link')) {
+          return;
+        }
+        const link = row.querySelector('.hierarchy-link');
+        if (link) link.click();
+      });
+    });
+  }
+
+  // =========================================================================
   // Left Sidebar Expand / Collapse All Controller
   // =========================================================================
 
@@ -1501,6 +1689,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!sidebarToggleAll) return;
     if (activeSidebarTab === 'index') {
       sidebarToggleAll.style.display = 'none';
+      return;
+    }
+    if (activeSidebarTab === 'hierarchy') {
+      const allChildren = sidebarContent.querySelectorAll('.hierarchy-children');
+      if (allChildren.length === 0) {
+        sidebarToggleAll.style.display = 'none';
+        return;
+      }
+      sidebarToggleAll.style.display = 'inline-flex';
+      const allCollapsed = Array.from(allChildren).every(c => !c.classList.contains('open'));
+      const textSpan = sidebarToggleAll.querySelector('.sidebar-toggle-text');
+      const icon = sidebarToggleAll.querySelector('.sidebar-toggle-icon');
+      if (allCollapsed) {
+        if (textSpan) textSpan.textContent = 'Expand all';
+        if (icon) icon.innerHTML = '<polyline points="4 6 12 14 20 6"/>';
+        sidebarToggleAll.setAttribute('title', 'Expand all classes');
+      } else {
+        if (textSpan) textSpan.textContent = 'Collapse all';
+        if (icon) icon.innerHTML = '<polyline points="4 14 12 6 20 14"/>';
+        sidebarToggleAll.setAttribute('title', 'Collapse all classes');
+      }
       return;
     }
     const allGroups = sidebarContent.querySelectorAll('.nav-group');
@@ -1525,6 +1734,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (sidebarToggleAll) {
     sidebarToggleAll.addEventListener('click', () => {
+      if (activeSidebarTab === 'hierarchy') {
+        const allChildren = sidebarContent.querySelectorAll('.hierarchy-children');
+        if (allChildren.length === 0) return;
+        const anyExpanded = Array.from(allChildren).some(c => c.classList.contains('open'));
+        if (anyExpanded) {
+          allChildren.forEach(c => c.classList.remove('open'));
+          sidebarContent.querySelectorAll('.hierarchy-expander:not(.empty)').forEach(exp => exp.classList.remove('open'));
+          sidebarContent.querySelectorAll('.hierarchy-tree-node').forEach(n => n.classList.add('collapsed'));
+        } else {
+          allChildren.forEach(c => c.classList.add('open'));
+          sidebarContent.querySelectorAll('.hierarchy-expander:not(.empty)').forEach(exp => exp.classList.add('open'));
+          sidebarContent.querySelectorAll('.hierarchy-tree-node').forEach(n => n.classList.remove('collapsed'));
+        }
+        updateSidebarToggleAllBtn();
+        return;
+      }
       const allGroups = sidebarContent.querySelectorAll('.nav-group');
       if (allGroups.length === 0) return;
       const anyExpanded = Array.from(allGroups).some(g => !g.classList.contains('collapsed'));
@@ -1570,14 +1795,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const srcHref = link.getAttribute('data-src-href');
 
         // Immediately highlight the clicked item for instant, reliable visual feedback
-        sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item').forEach(el => el.classList.remove('active'));
+        sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item, .hierarchy-link').forEach(el => el.classList.remove('active'));
+        sidebarContent.querySelectorAll('.hierarchy-row').forEach(el => el.classList.remove('active'));
         link.classList.add('active');
+        const row = link.closest('.hierarchy-row');
+        if (row) row.classList.add('active');
 
         // Make sure all ancestor groups are expanded so the active item is in plain view
-        let parentGroup = link.closest('.nav-group');
-        while (parentGroup) {
-          parentGroup.classList.remove('collapsed');
-          parentGroup = parentGroup.parentElement ? parentGroup.parentElement.closest('.nav-group') : null;
+        let p = link.parentElement;
+        while (p && p !== sidebarContent) {
+          if (p.classList.contains('hierarchy-children')) {
+            p.classList.add('open');
+            const parentNode = p.closest('.hierarchy-tree-node');
+            if (parentNode) {
+              parentNode.classList.remove('collapsed');
+              const exp = parentNode.querySelector(':scope > .hierarchy-row > .hierarchy-expander');
+              if (exp) exp.classList.add('open');
+            }
+          } else if (p.classList.contains('nav-group')) {
+            p.classList.remove('collapsed');
+          }
+          p = p.parentElement;
         }
         updateSidebarToggleAllBtn();
 
@@ -1598,12 +1836,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Ensure parent groups of active doc item are expanded so it is visible
-    const activeItem = sidebarContent.querySelector('.nav-item-link.active, .file-tree-item.active');
+    const activeItem = sidebarContent.querySelector('.nav-item-link.active, .file-tree-item.active, .hierarchy-link.active');
     if (activeItem) {
-      let p = activeItem.closest('.nav-group');
-      while (p) {
-        p.classList.remove('collapsed');
-        p = p.parentElement ? p.parentElement.closest('.nav-group') : null;
+      let p = activeItem.parentElement;
+      while (p && p !== sidebarContent) {
+        if (p.classList.contains('hierarchy-children')) {
+          p.classList.add('open');
+          const parentNode = p.closest('.hierarchy-tree-node');
+          if (parentNode) {
+            parentNode.classList.remove('collapsed');
+            const exp = parentNode.querySelector(':scope > .hierarchy-row > .hierarchy-expander');
+            if (exp) exp.classList.add('open');
+          }
+        } else if (p.classList.contains('nav-group')) {
+          p.classList.remove('collapsed');
+        }
+        p = p.parentElement;
       }
     }
 
@@ -1617,7 +1865,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Guard: Never clear documentation/example active selection when a source file navigates, and vice versa
     if (url) {
-      if ((activeSidebarTab === 'docs' || activeSidebarTab === 'examples') && isSrcUrl) return;
+      if ((activeSidebarTab === 'docs' || activeSidebarTab === 'examples' || activeSidebarTab === 'hierarchy') && isSrcUrl) return;
       if (activeSidebarTab === 'source' && (isDocUrl || isExUrl)) return;
     }
 
@@ -1625,7 +1873,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!targetUrl) {
       if (activeSidebarTab === 'source') {
         targetUrl = currentSrcUrl;
-      } else if (activeSidebarTab === 'examples' || activeSidebarTab === 'docs') {
+      } else if (activeSidebarTab === 'examples' || activeSidebarTab === 'docs' || activeSidebarTab === 'hierarchy') {
         targetUrl = currentDocUrl;
       } else {
         targetUrl = currentDocUrl || currentSrcUrl;
@@ -1633,7 +1881,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let foundActive = false;
-    sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item').forEach(el => {
+    sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item, .hierarchy-link').forEach(el => {
       const docHref = el.getAttribute('data-doc-href');
       const srcHref = el.getAttribute('data-src-href');
       const href = (activeSidebarTab === 'source') ? (srcHref || docHref) : (docHref || srcHref);
@@ -1641,14 +1889,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const isMatch = urlsMatch(href, targetUrl);
       if (isMatch && !foundActive) {
         el.classList.add('active');
+        const row = el.closest('.hierarchy-row');
+        if (row) row.classList.add('active');
         foundActive = true;
-        let p = el.closest('.nav-group');
-        while (p) {
-          p.classList.remove('collapsed');
-          p = p.parentElement ? p.parentElement.closest('.nav-group') : null;
+        let p = el.parentElement;
+        while (p && p !== sidebarContent) {
+          if (p.classList.contains('hierarchy-children')) {
+            p.classList.add('open');
+            const parentNode = p.closest('.hierarchy-tree-node');
+            if (parentNode) {
+              parentNode.classList.remove('collapsed');
+              const exp = parentNode.querySelector(':scope > .hierarchy-row > .hierarchy-expander');
+              if (exp) exp.classList.add('open');
+            }
+          } else if (p.classList.contains('nav-group')) {
+            p.classList.remove('collapsed');
+          }
+          p = p.parentElement;
         }
       } else {
         el.classList.remove('active');
+        const row = el.closest('.hierarchy-row');
+        if (row && !isMatch) row.classList.remove('active');
       }
     });
 

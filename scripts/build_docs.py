@@ -624,17 +624,26 @@ def resolve_cross_doc_path(current_rel_path, target_rel_href):
 
 def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src, root_rel):
     """Enrich topic HTML with exact AST source links, decl/impl buttons, derived classes, and badges."""
-    clean_a = re.sub(r'#\([^)]*\)', '', a_name) if a_name else None
+    clean_a = re.sub(r'#\(.*', '', a_name) if a_name else None
+    if clean_a:
+        clean_a = clean_a.split('#')[0].strip()
     cls_m = re.search(r'class=["\'](C[A-Za-z0-9_]+)["\']', w_start)
     cls_name = cls_m.group(1) if cls_m else 'CTopicWrap'
 
-    if is_main or cls_name == 'CClass':
+    # STRICT: Only enrich class hierarchy & class details for genuine CClass topics!
+    # Never decorate CSection / CGeneric / CFile topics, which caused the first class's hierarchy
+    # to be duplicated onto the top-level section header when multiple classes exist on one page.
+    if cls_name == 'CClass':
         target_cname = None
         if clean_a and clean_a in UVM_DB.get('classes', {}):
             target_cname = clean_a
         elif associated_src and associated_src in UVM_DB.get('files', {}):
             f_classes = UVM_DB['files'][associated_src].get('classes', [])
-            if f_classes:
+            for fc in f_classes:
+                if clean_a and (fc.lower() == clean_a.lower() or clean_a.lower().startswith(fc.lower()) or fc.lower().startswith(clean_a.lower())):
+                    target_cname = fc
+                    break
+            if not target_cname and len(f_classes) == 1:
                 target_cname = f_classes[0]
 
         if target_cname and target_cname in UVM_DB.get('classes', {}):
@@ -645,12 +654,52 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
             w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{start_l}"', w_body, count=1)
             w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{decl_f}"', w_body, count=1)
 
-            children = c_info.get('children', [])
-            if children:
-                derived_box = pbc.render_derived_classes_card(
-                    children, root_rel, CLASS_TO_DOC_MAP, UVM_DB, GLOBAL_DOC_ANCHOR_MAPS
-                )
-                w_body = re.sub(r'(</h[123]>)', r'\1' + derived_box, w_body, count=1)
+            hierarchy_widget = pbc.render_class_hierarchy_card(
+                target_cname, root_rel, CLASS_TO_DOC_MAP, UVM_DB, GLOBAL_DOC_ANCHOR_MAPS
+            )
+            if hierarchy_widget:
+                # Replace the old hierarchy visualization in-place at the exact same location in the Summary table
+                old_h_pattern = r'<div class=[\x22\x27]?ClassHierarchy[\x22\x27]?>[\s\S]*?</table>\s*</div>'
+                if re.search(old_h_pattern, w_body):
+                    w_body = re.sub(old_h_pattern, lambda m: hierarchy_widget, w_body, count=1)
+                elif re.search(r'(<!--\s*PROTOTYPE\s*-->\s*<tr class=["\']SPrototype SIndent1["\']><td colspan=2 class=["\']SEntry SIndent1["\']>Class Declaration</td></tr>)', w_body):
+                    h_row = f'''<tr class="SHierarchy SIndent1"><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+<tr class="SPrototype SIndent1"><td colspan=2 class="SDescription">
+{hierarchy_widget}
+</td></tr>
+'''
+                    w_body = re.sub(
+                        r'(<!--\s*PROTOTYPE\s*-->\s*<tr class=["\']SPrototype SIndent1["\']><td colspan=2 class=["\']SEntry SIndent1["\']>Class Declaration</td></tr>)',
+                        lambda m: h_row + m.group(1),
+                        w_body,
+                        count=1
+                    )
+                elif re.search(r'(<tr class=["\']SPrototype SIndent1["\']><td colspan=2 class=["\']SEntry SIndent1["\']>Class Declaration</td></tr>)', w_body):
+                    h_row = f'''<tr class="SHierarchy SIndent1"><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+<tr class="SPrototype SIndent1"><td colspan=2 class="SDescription">
+{hierarchy_widget}
+</td></tr>
+'''
+                    w_body = re.sub(
+                        r'(<tr class=["\']SPrototype SIndent1["\']><td colspan=2 class=["\']SEntry SIndent1["\']>Class Declaration</td></tr>)',
+                        lambda m: h_row + m.group(1),
+                        w_body,
+                        count=1
+                    )
+                elif re.search(r'(<tr class=["\']?SMain["\']?>[\s\S]*?</tr>)', w_body):
+                    h_row = f'''<tr class="SHierarchy SIndent1"><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
+<tr class="SPrototype SIndent1"><td colspan=2 class="SDescription">
+{hierarchy_widget}
+</td></tr>'''
+                    w_body = re.sub(
+                        r'(<tr class=["\']?SMain["\']?>[\s\S]*?</tr>)',
+                        lambda m: m.group(1) + '\n' + h_row,
+                        w_body,
+                        count=1
+                    )
+                else:
+                    # Fallback for topics without Summary table
+                    w_body = re.sub(r'(</h[123]>)', lambda m: m.group(1) + hierarchy_widget, w_body, count=1)
 
             if target_cname in CLASS_TO_EXAMPLE_MAP:
                 ex_rel, ex_title = CLASS_TO_EXAMPLE_MAP[target_cname]
@@ -1071,32 +1120,14 @@ def generate_orphan_doc_pages():
             if is_main:
                 a_map['MainTopic'] = 'doc-nav-main'
 
-            # Pills for derived classes if any
-            pills = []
-            for child in sorted(children):
-                if child in CLASS_TO_DOC_MAP:
-                    ch_doc = CLASS_TO_DOC_MAP[child]
-                    target_id = GLOBAL_DOC_ANCHOR_MAPS.get(ch_doc, {}).get(child, 'doc-nav-main')
-                    pills.append(f'<a href="{root_rel}docs_view/{ch_doc}#{target_id}" class="derived-class-pill" data-target-id="{target_id}" title="Documentation for {child}">{child}</a>')
-                elif child in UVM_DB.get('classes', {}):
-                    ch_f = UVM_DB['classes'][child]['file']
-                    ch_l = UVM_DB['classes'][child]['start_line']
-                    pills.append(f'<a href="{root_rel}src_view/{ch_f}.html#L{ch_l}" class="derived-class-pill src-code-link" data-src-file="{ch_f}" data-src-line="{ch_l}" title="Source for {child}">{child}</a>')
-                else:
-                    pills.append(f'<span class="derived-class-pill">{child}</span>')
-
-            derived_box = f'''<div class="derived-classes-card collapsed">
-  <div class="derived-classes-header" role="button" tabindex="0" title="Click to expand/collapse subclasses">
-    <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    <span>Direct Subclasses ({len(children)})</span>
-  </div>
-  <div class="derived-classes-list">{"".join(pills)}</div>
-</div>''' if pills else ""
+            hierarchy_widget = pbc.render_class_hierarchy_card(
+                cname, root_rel, CLASS_TO_DOC_MAP, UVM_DB, GLOBAL_DOC_ANCHOR_MAPS
+            )
 
             body_parts.append(f'''<div class="CClass" id="{topic_id}" data-doc-topic="{topic_id}" data-anchor="{cname}">
 <div class="CTopic" {"id='MainTopic'" if is_main else ""}>
   <h1 class="CTitle"><a href="{root_rel}src_view/{src_rel}.html#L{c_line}" class="src-code-link" data-src-file="{src_rel}" data-src-line="{c_line}">{cname}</a></h1>
-  {derived_box}
+  {hierarchy_widget}
   <div class="CBody">
     <p>{html.escape(c_doc)}</p>
     {f"<p><b>Base Class:</b> <code>{c_parent}</code></p>" if c_parent else ""}
@@ -1626,12 +1657,106 @@ def populate_doc_headings_from_docs_view():
                 print(f"Error reading {full_path}: {e}")
     print(f"Extracted headings from {count} documentation pages.")
 
+def build_class_hierarchy_data():
+    """Build complete class hierarchy tree from UVM AST database."""
+    classes = UVM_DB.get('classes', {})
+    if not classes:
+        return {"nodes": {}, "roots": []}
+
+    def is_descendant_of(cname, ancestor):
+        curr = cname
+        visited = set()
+        while curr and curr in classes and curr not in visited:
+            visited.add(curr)
+            p = classes[curr].get('parent')
+            if p == ancestor:
+                return True
+            curr = p
+        return False
+
+    def get_role(cname):
+        if cname == 'uvm_component' or is_descendant_of(cname, 'uvm_component'):
+            return 'component'
+        if cname == 'uvm_sequence_base' or is_descendant_of(cname, 'uvm_sequence_base') or 'sequence' in cname or 'seq_item' in cname:
+            return 'sequence'
+        if cname.startswith('uvm_reg') or cname.startswith('uvm_vreg') or cname.startswith('uvm_mem'):
+            return 'reg'
+        if 'tlm' in cname or 'port' in cname or 'export' in cname or 'fifo' in cname:
+            return 'tlm'
+        if 'phase' in cname or is_descendant_of(cname, 'uvm_phase'):
+            return 'phase'
+        if cname == 'uvm_object' or is_descendant_of(cname, 'uvm_object'):
+            return 'object'
+        return 'utility'
+
+    nodes = {}
+    for cname, cinfo in classes.items():
+        parent = cinfo.get('parent')
+        clean_parent = re.sub(r'#\(.*?\)', '', parent).strip() if parent else None
+        if clean_parent and clean_parent not in classes:
+            p_simple = clean_parent.split()[0] if clean_parent.split() else ''
+            if p_simple in classes:
+                clean_parent = p_simple
+
+        children = [ch for ch in cinfo.get('children', []) if ch in classes]
+        children.sort()
+
+        doc_path = CLASS_TO_DOC_MAP.get(cname)
+        target_id = 'doc-nav-main'
+        if doc_path and doc_path in GLOBAL_DOC_ANCHOR_MAPS:
+            target_id = GLOBAL_DOC_ANCHOR_MAPS[doc_path].get(cname, 'doc-nav-main')
+
+        src_f = cinfo.get('file', '')
+        start_l = cinfo.get('start_line', 1)
+        src_url = f"src_view/{src_f}.html#L{start_l}" if src_f else None
+
+        methods_dict = cinfo.get('methods', {})
+
+        raw_summary = cinfo.get('doc', {}).get('summary', '') if cinfo.get('doc') else ''
+        if raw_summary and ('copyright' in raw_summary.lower() or 'all rights reserved' in raw_summary.lower()):
+            raw_summary = ''
+
+        nodes[cname] = {
+            "name": cname,
+            "parent": clean_parent,
+            "children": children,
+            "doc": f"docs_view/{doc_path}#{target_id}" if doc_path else None,
+            "src": src_url,
+            "methodsCount": len(methods_dict),
+            "role": get_role(cname),
+            "isVirtual": cinfo.get('is_virtual', False),
+            "summary": raw_summary[:160]
+        }
+
+    # Identify roots
+    roots = []
+    for cname, node in nodes.items():
+        if not node["parent"] or node["parent"] not in nodes:
+            roots.append(cname)
+
+    def count_descendants(cname, visited=None):
+        if visited is None: visited = set()
+        if cname in visited or cname not in nodes: return 0
+        visited.add(cname)
+        total = len(nodes[cname]["children"])
+        for ch in nodes[cname]["children"]:
+            total += count_descendants(ch, visited)
+        return total
+
+    roots.sort(key=lambda r: (0 if r == 'uvm_void' else 1, -count_descendants(r), r))
+
+    return {
+        "nodes": nodes,
+        "roots": roots
+    }
+
 def generate_search_and_nav_data():
     """Generate js/search_data.js for client-side search and menu tree."""
     print("Generating search index and navigation data...")
     categories = parse_navigation_and_categories()
     source_tree = build_source_tree()
     search_items = build_search_index(categories)
+    class_hierarchy = build_class_hierarchy_data()
 
     # Generate and integrate interactive examples
     examples_catalog = build_examples.generate_all_examples()
@@ -1657,6 +1782,7 @@ def generate_search_and_nav_data():
         "categories": categories,
         "sourceTree": source_tree,
         "examplesTree": examples_tree,
+        "classHierarchy": class_hierarchy,
         "searchIndex": search_items,
         "docToSrc": doc_to_src,
         "srcToDoc": src_to_doc,

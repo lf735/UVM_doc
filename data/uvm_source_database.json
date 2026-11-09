@@ -3431,7 +3431,8 @@
       ],
       "classes": [
         "uvm_reg_cbs",
-        "uvm_reg_write_only_cbs"
+        "uvm_reg_write_only_cbs",
+        "uvm_reg_read_only_cbs"
       ],
       "macros": []
     },
@@ -79124,7 +79125,8 @@
         "uvm_void"
       ],
       "children": [
-        "uvm_reg_write_only_cbs"
+        "uvm_reg_write_only_cbs",
+        "uvm_reg_read_only_cbs"
       ],
       "descendants": [
         "uvm_reg_write_only_cbs"
@@ -110773,6 +110775,79 @@
           "overridden_by": []
         }
       }
+    },
+    "uvm_reg_read_only_cbs": {
+      "name": "uvm_reg_read_only_cbs",
+      "file": "reg/uvm_reg_cbs.svh",
+      "start_line": 369,
+      "end_line": 444,
+      "is_virtual": false,
+      "parameters_raw": null,
+      "extends_raw": "uvm_reg_cbs",
+      "extends_base": "uvm_reg_cbs",
+      "parent": "uvm_reg_cbs",
+      "ancestors": [
+        "uvm_reg_cbs",
+        "uvm_callback",
+        "uvm_object",
+        "uvm_void"
+      ],
+      "children": [],
+      "descendants": [],
+      "depth": 4,
+      "is_deprecated": false,
+      "doc": {
+        "title": "uvm_reg_read_only_cbs",
+        "summary": "Pre-defined register callback method for read-only registers that will issue an error if a write() operation is attempted.",
+        "full_text": "Pre-defined register callback method for read-only registers\nthat will issue an error if a write() operation is attempted."
+      },
+      "methods": {
+        "new": {
+          "name": "new",
+          "class": "uvm_reg_read_only_cbs",
+          "kind": "function",
+          "return_type": "void",
+          "modifiers": [],
+          "visibility": "public",
+          "is_virtual": false,
+          "is_pure_virtual": false,
+          "is_static": false,
+          "is_extern": false,
+          "is_inline": true,
+          "decl": {
+            "file": "reg/uvm_reg_cbs.svh",
+            "start_line": 371,
+            "end_line": 371
+          },
+          "impl": {
+            "file": "reg/uvm_reg_cbs.svh",
+            "start_line": 371,
+            "end_line": 373,
+            "is_inline": true,
+            "calls_super": true
+          },
+          "parameters": [
+            {
+              "direction": "input",
+              "type": "string",
+              "name": "name",
+              "default": "\"uvm_reg_read_only_cbs\""
+            }
+          ],
+          "parameters_raw": "(string name = \"uvm_reg_read_only_cbs\")",
+          "doc": null,
+          "overrides": true,
+          "overridden_from": "uvm_reg_cbs",
+          "root_ancestor": "uvm_object",
+          "is_override_of_pure_virtual": false,
+          "overridden_by": [],
+          "ancestor_decl": {
+            "class": "uvm_reg_cbs",
+            "file": "reg/uvm_reg_cbs.svh",
+            "line": 46
+          }
+        }
+      }
     }
   },
   "macros": {
@@ -111125,8 +111200,8 @@
       "is_deprecated": true,
       "doc": {
         "title": "`uvm_update_sequence_lib",
-        "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencerï¿½ï¿½s constructor.",
-        "full_text": "This macro populates the instance-specific sequence library for a sequencer.\nIt should be invoked inside the sequencerï¿½ï¿½s constructor."
+        "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencer\u00ef\u00bf\u00bd\u00ef\u00bf\u00bds constructor.",
+        "full_text": "This macro populates the instance-specific sequence library for a sequencer.\nIt should be invoked inside the sequencer\u00ef\u00bf\u00bd\u00ef\u00bf\u00bds constructor."
       }
     },
     "uvm_update_sequence_lib_and_item": {
@@ -176830,7 +176905,7 @@
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 125,
-      "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencerï¿½ï¿½s constructor."
+      "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencer\u00ef\u00bf\u00bd\u00ef\u00bf\u00bds constructor."
     },
     {
       "name": "uvm_update_sequence_lib_and_item",

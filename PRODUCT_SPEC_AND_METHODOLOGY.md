@@ -20,12 +20,13 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | Domaine | Fonctionnalité | Description Détaillée |
 | :--- | :--- | :--- |
 | **Shell & Layout** | **Architecture SPA** | Portail unique ([index.html](file:///c:/Dev/UVM_doc/index.html)) hébergeant la barre d'outils, la sous-barre globale et un viewport double iframe. |
-| | **Sous-Barre de Navigation Pleine Largeur** | Bandeau horizontal supérieur à 100% de la largeur (`.app-subbar`) hébergeant les 4 sections majeures (**Documentation**, **Source Tree**, **Examples**, **Index A-Z**) avec icônes SVG et sélection active. |
+| | **Sous-Barre de Navigation Pleine Largeur** | Bandeau horizontal supérieur à 100% de la largeur (`.app-subbar`) hébergeant les 5 sections majeures (**Documentation**, **Source Tree**, **Examples**, **Hierarchy**, **Index A-Z**) avec icônes SVG et sélection active. |
 | | **Modes de Vue (View Switcher)** | **Docs** (documentation seule), **Source** (code SystemVerilog seul) et **Split** (vue côte à côte). |
 | | **Split-View Redimensionnable** | Séparateur draggable (`#split-divider`) avec redimensionnement interactif et double-clic pour restaurer le ratio 50/50. |
 | | **Routage par Hash** | URLs avec état profond : `#/doc/<path>#<id>`, `#/src/<path>#L<line>`, `#/example/<path>`, `#/split?doc=<path>&src=<path>`. |
 | | **Thème Clair / Sombre** | Palette Google Developers (Light / Dark) avec bascule instantanée et propagation `postMessage` synchrone dans les iframes. |
 | **Navigation Latérale** | **Arborescence Hiérarchique Structurée** | Affichage en arbre avec guide visuel vertical (`border-left: 1px solid var(--border-subtle)`) et alignement harmonisé sans décalage arbitraire. |
+| | **Explorateur d'Arborescence Hiérarchique (Onglet Hierarchy)** | Navigation complète dans l'arbre d'héritage UVM (328 classes avec racine `uvm_void`), indicateurs visuels de rôle (Components, Objects, Sequences, TLM, Registers, Phases), badges de métriques (méthodes propres, sous-classes directes), filtres thématiques rapides, recherche temps réel avec auto-expansion, boutons Expand/Collapse All et bouton d'accès direct au code source. |
 | | **Titres de Groupes avec Aperçu Clignotant** | Titres de sections cliquables (`overviewHref`) ouvrant la page de synthèse de la section, doublés d'un bouton chevron dédié au dépliement/repliement. |
 | | **Bouton Expand / Collapse All** | Bouton `#sidebar-toggle-all` permettant de déplier ou replier d'un clic tous les dossiers ou catégories visibles. |
 | | **Filtre Temps Réel de Barre** | Filtrage instantané avec champ dédié, effacement rapide (`×`), mode Regex (`.*`) et pilules multi-filtres enveloppantes (`flex-wrap`). |
@@ -44,7 +45,8 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | **Documentation (`docs_view`)** | **Fil d'Ariane Cliquable Hiérarchique** | Navigation ascendant complète reliant la page courante à ses sections parentes avec aperçu direct, sans insertion du dossier technique `Overviews`. |
 | | **Bannière "View Source" Discrète** | En-tête injecté avec bouton compact iconique (`.banner-icon-btn`) et badge de ligne, discret et sans bouton verbeux encombrant. |
 | | **Nettoyage des En-têtes Légaux** | Élimination totale des mentions parasites de copyright dans les descriptions de classes et méthodes orphelines. |
-| | **Hiérarchie Polymorphique Directe** | Boîte repliable `.derived-classes-card` listant les sous-classes directes sous forme de pilules cliquables, repliée par défaut (`.collapsed`) pour économiser l'espace. |
+| | **Topologie & Hiérarchie de Classes In-Situ (`class-hierarchy-widget`)** | Remplacement in-situ au même endroit de l'ancien bloc statique Natural Docs (`<div class=ClassHierarchy>`) dans le tableau Summary. Chaîne ascendante navigable (`uvm_void` ➔ ... ➔ classe courante), sous-classes directes repliables (`.hierarchy-subclasses-card`), tags de rôle architectural et badges de métriques sans duplication sur les en-têtes de sections multi-classes. |
+| | **Matrice Interactive des Méthodes Héritées** | Accordéon interactif situé sous le sommaire de chaque classe, regroupant l'ensemble des méthodes héritées par classe ancêtre avec pastilles cliquables menant directement à la documentation ou à l'implémentation de la classe d'origine. |
 | | **Routage Précis des Liens Dérivés** | Redirection vers l'ancre exacte de la classe au sein de la page cible (`#doc-nav-item-X`) au lieu du haut de page générique. |
 | | **Bouton Copie d'Ancre au Survol** | Icône de chaîne de lien apparaissant au survol de chaque titre (`.doc-anchor-link-btn`) copiant le lien direct avec feedback "Link copied!". |
 | | **Protection Anti-Récursion Iframe** | Liens de fil d'Ariane (`doc-breadcrumbs`) configurés avec `target="_top"` et interceptés en JS pour éviter toute duplication en abyme du portail dans une sous-iframe. |
@@ -194,6 +196,19 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
   3. **Raccourcis clavier ergonomiques** : Navigation globale via `Alt + [` (Précédent) et `Alt + ]` (Suivant).
   4. **Traçage visuel d'exploration** : Tout résultat ouvert durant la session reçoit la classe `.viewed` (avec coche SVG vectorielle non déformée `.res-viewed-icon`), et le résultat actif est surligné avec `.current-result` (sans figer artificiellement le premier élément).
   5. **Historique local contextualisé & Modèle de validation délibéré (Entrée / Clic)** : Aucun résultat n'est sélectionné par défaut (`searchSelectedIndex = -1`). Lors de la saisie, un premier appui sur `Entrée` sélectionne et met en évidence le premier résultat (`.selected`), tout en enregistrant la requête dans l'historique (`localStorage`, 8 entrées max avec badge `[Standard]` ou `[AI]`). Un second appui ouvre le document. Si l'utilisateur clique directement sur un résultat sans valider par `Entrée`, la requête est également mémorisée dans l'historique. En mode IA, les suggestions de requêtes (`#modal-search-prompts`) sont positionnées avant l'historique (`#modal-recent-searches`). Les entrées d'historique s'affichent en liste plein format Spotlight avec hint clavier et suppression unitaire `✕`. Le clic sur une entrée bascule automatiquement le mode correspondant (`toggleAiSearchMode`) et lance la recherche.
+
+### Règle 11 : Intégrité Sémantique et Remplacement In-Situ des Composants Hérités (In-Place Replacement)
+- **Principe** : Ne jamais juxtaposer un nouveau composant modernisé en haut de document (`</h1>`/`</h2>`) si un composant équivalent existe déjà plus bas dans le document d'origine.
+- **Règles d'implémentation** :
+  1. **Remplacement in-situ** : Substituer directement l'ancien conteneur HTML (ex. `<div class=ClassHierarchy>...</div>`) par le nouveau composant interactif `.class-hierarchy-widget` au sein même de la table de sommaire (`STable`).
+  2. **Typage strict des topics** : Restreindre strictement les enrichissements de classe au type `cls_name == 'CClass'`. Ne jamais appliquer de données de classe sur des en-têtes de section générale (`CSection`) ou de fichier pour éliminer toute duplication sur les pages multi-classes (ex. `uvm_pair-svh.html`).
+  3. **Fallback ordonné dans le sommaire** : Si un document de classe ne possède pas l'ancien conteneur de hiérarchie, insérer la nouvelle section immédiatement avant la déclaration de classe (`Class Declaration`) dans le sommaire, et uniquement en dernier recours sous le titre si aucun sommaire n'existe.
+
+### Règle 12 : Découplage CSS Strict pour les Éléments d'Arborescence Latérale
+- **Principe** : Éviter d'assigner des classes CSS transversales génériques (ex. `.nav-item-link`) à des éléments d'arborescences spécialisées ayant leur propre conteneur de ligne (`.hierarchy-row`).
+- **Règles d'implémentation** :
+  1. **Absence de classes concurrentes** : Le lien interne `.hierarchy-link` ne doit pas hériter de règles d'état actif `.active` (fonds colorés, bordures latérales) réservées aux liens simples, sous peine de créer un effet disgracieux de "boîte dans une boîte" avec son conteneur parent `.hierarchy-row.active`.
+  2. **Indicateur d'accent sans décalage géométrique** : Pour les arborescences à forte densité, matérialiser la sélection active via un pseudo-élément positionné en absolu (`.hierarchy-row.active::before`) de largeur fixe avec bords arrondis, sans altérer les marges ni le padding de la rangée.
 
 ---
 
