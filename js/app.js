@@ -1662,8 +1662,30 @@ document.addEventListener('DOMContentLoaded', () => {
   if (splitDivider) {
     let isDragging = false;
     const viewport = document.getElementById('app-viewport');
+    const dividerWidth = 6;
+    const minPaneWidth = 180; // matches CSS min-width
+
+    function updateSplitPosition(clientX) {
+      if (!viewport || !docPane || !srcPane) return;
+      const rect = viewport.getBoundingClientRect();
+      const totalWidth = rect.width;
+      const minX = minPaneWidth;
+      const maxX = totalWidth - minPaneWidth - dividerWidth;
+
+      if (maxX <= minX) return;
+
+      const rawX = clientX - rect.left;
+      const clampedX = Math.max(minX, Math.min(maxX, rawX));
+      const pct = (clampedX / totalWidth) * 100;
+
+      docPane.style.flex = `0 0 ${pct}%`;
+      docPane.style.width = `${pct}%`;
+      srcPane.style.flex = `0 0 calc(${100 - pct}% - ${dividerWidth}px)`;
+      srcPane.style.width = `calc(${100 - pct}% - ${dividerWidth}px)`;
+    }
 
     splitDivider.addEventListener('mousedown', (e) => {
+      e.preventDefault();
       isDragging = true;
       splitDivider.classList.add('active');
       document.body.classList.add('is-resizing');
@@ -1673,18 +1695,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let rafPending = false;
     window.addEventListener('mousemove', (e) => {
-      if (!isDragging || !viewport || !docPane || !srcPane) return;
+      if (!isDragging) return;
       if (rafPending) return;
       rafPending = true;
       window.requestAnimationFrame(() => {
-        const rect = viewport.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const totalWidth = rect.width;
-        const pct = Math.max(15, Math.min(85, (x / totalWidth) * 100));
-        docPane.style.flex = `0 0 ${pct}%`;
-        docPane.style.width = `${pct}%`;
-        srcPane.style.flex = `0 0 calc(${100 - pct}% - 6px)`;
-        srcPane.style.width = `calc(${100 - pct}% - 6px)`;
+        updateSplitPosition(e.clientX);
         rafPending = false;
       });
     });
@@ -1696,6 +1711,34 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('is-resizing');
         document.body.style.cursor = '';
         document.body.style.userSelect = '';
+      }
+    });
+
+    // Touch support for mobile / touch devices
+    splitDivider.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        splitDivider.classList.add('active');
+        document.body.classList.add('is-resizing');
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging || e.touches.length !== 1) return;
+      if (rafPending) return;
+      rafPending = true;
+      const clientX = e.touches[0].clientX;
+      window.requestAnimationFrame(() => {
+        updateSplitPosition(clientX);
+        rafPending = false;
+      });
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      if (isDragging) {
+        isDragging = false;
+        splitDivider.classList.remove('active');
+        document.body.classList.remove('is-resizing');
       }
     });
 

@@ -826,11 +826,26 @@ body.is-resizing iframe {
 /* Split Divider */
 .split-divider {
   width: 6px;
+  min-width: 6px;
+  max-width: 6px;
+  flex: 0 0 6px !important;
+  flex-shrink: 0 !important;
   background: var(--border-color);
   cursor: col-resize;
   transition: background 0.2s ease;
   position: relative;
   z-index: 10;
+}
+
+/* Invisible hit area so divider is easily grabbable */
+.split-divider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  right: -4px;
+  z-index: 2;
 }
 
 .split-divider:hover,
@@ -866,6 +881,7 @@ body.is-resizing iframe {
   flex: 1 1 0;
   width: 50%;
   min-width: 180px;
+  max-width: calc(100% - 186px);
 }
 
 .mode-split #src-pane {
@@ -873,6 +889,7 @@ body.is-resizing iframe {
   flex: 1 1 0;
   width: 50%;
   min-width: 180px;
+  max-width: calc(100% - 186px);
   animation: paneFadeIn 0.12s ease-out;
 }
 
@@ -883,6 +900,10 @@ body.is-resizing iframe {
 
 .mode-split #split-divider {
   display: block !important;
+  flex: 0 0 6px !important;
+  flex-shrink: 0 !important;
+  width: 6px !important;
+  min-width: 6px !important;
 }
 
 /* ==========================================================================
