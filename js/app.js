@@ -159,6 +159,23 @@ document.addEventListener('DOMContentLoaded', () => {
     return clean + hashPart;
   }
 
+  function normalizePathForCompare(p) {
+    if (!p) return '';
+    return p.split('#')[0].split('?')[0].replace(/^[./]+/, '').toLowerCase();
+  }
+
+  function urlsMatch(url1, url2) {
+    if (!url1 || !url2) return false;
+    const clean1 = normalizePathForCompare(url1);
+    const clean2 = normalizePathForCompare(url2);
+    if (!clean1 || !clean2) return false;
+    if (clean1 === clean2) return true;
+    if (clean1.endsWith('/' + clean2) || clean2.endsWith('/' + clean1)) return true;
+    const bare1 = clean1.replace(/^(docs_view|src_view|examples_view)\//, '');
+    const bare2 = clean2.replace(/^(docs_view|src_view|examples_view)\//, '');
+    return bare1 === bare2 || bare1.endsWith('/' + bare2) || bare2.endsWith('/' + bare1);
+  }
+
   function setFrameSrc(frame, relUrl) {
     if (!frame || !relUrl) return;
     try {
@@ -392,6 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateSidebarPillsForTab();
     }
     renderSidebar();
+    highlightActiveSidebar();
   }
 
   function setViewMode(mode, updateHistory = true) {
@@ -1262,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               <ul class="nav-group-items">
                 ${subItems.map(ex => {
-          const isActive = currentDocUrl.includes(ex.href);
+          const isActive = urlsMatch(ex.href, currentDocUrl);
           return `<li>
                     <a href="#" data-doc-href="${ex.href}" class="nav-item-link ${isActive ? 'active' : ''}" title="${escapeHtml(ex.summary || '')}">
                       <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${highlightMatch(ex.title, matcher)}</span>
@@ -1288,7 +1306,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (cat.type === 'file' || cat.type === 'index') {
         const matches = docItemMatchesMatcher(cat, matcher);
         if (matches) {
-          const isActive = currentDocUrl.includes(cat.href);
+          const isActive = urlsMatch(cat.href, currentDocUrl);
           html += `<div class="nav-single-item">
             <a href="#" data-doc-href="${cat.href}" class="nav-item-link ${isActive ? 'active' : ''}">
               ${highlightMatch(cat.title, matcher)}
@@ -1300,7 +1318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const groupTitleMatches = matcher && matcher.type === 'words' && matcher.words.every(w => cat.title.toLowerCase().includes(w));
         if (subItems.length > 0 || groupTitleMatches || (cat.overviewHref && (!matcher || groupTitleMatches))) {
           const hasOverview = !!cat.overviewHref;
-          const isOverviewActive = hasOverview && currentDocUrl.includes(cat.overviewHref);
+          const isOverviewActive = hasOverview && urlsMatch(cat.overviewHref, currentDocUrl);
           const titleHtml = hasOverview
             ? `<a href="#" data-doc-href="${cat.overviewHref}" class="nav-group-title-link nav-item-link ${isOverviewActive ? 'active' : ''}" title="View ${escapeHtml(cat.title)} Overview">${highlightMatch(cat.title, matcher)}</a>`
             : `<span class="nav-group-title-text">${highlightMatch(cat.title, matcher)}</span>`;
@@ -1349,7 +1367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let out = '';
     items.forEach(item => {
       if (item.type === 'file' || item.type === 'index') {
-        const isActive = currentDocUrl.includes(item.href);
+        const isActive = urlsMatch(item.href, currentDocUrl);
         out += `<li>
           <a href="#" data-doc-href="${item.href}" class="nav-item-link ${isActive ? 'active' : ''}">
             ${highlightMatch(item.title, matcher)}
@@ -1357,7 +1375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </li>`;
       } else if (item.type === 'group') {
         const hasOverview = !!item.overviewHref;
-        const isOverviewActive = hasOverview && currentDocUrl.includes(item.overviewHref);
+        const isOverviewActive = hasOverview && urlsMatch(item.overviewHref, currentDocUrl);
         const titleHtml = hasOverview
           ? `<a href="#" data-doc-href="${item.overviewHref}" class="nav-group-title-link nav-item-link ${isOverviewActive ? 'active' : ''}" title="View ${escapeHtml(item.title)} Overview">${highlightMatch(item.title, matcher)}</a>`
           : `<span class="nav-group-title-text">${highlightMatch(item.title, matcher)}</span>`;
@@ -1385,7 +1403,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderNode(node, depth) {
       if (node.type === 'file') {
         if (sourceNodeMatches(node, matcher)) {
-          const isActive = currentSrcUrl.includes(node.url);
+          const isActive = urlsMatch(node.url, currentSrcUrl);
           return `<div class="file-tree-item ${isActive ? 'active' : ''}" data-src-href="${node.url}" style="padding-left: ${depth * 12 + 10}px">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             <span>${highlightMatch(node.name, matcher)}</span>
@@ -1459,8 +1477,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method';
       const ownerInfo = item.category && isMethodLike ?
         `<span class="az-symbol-owner" style="font-size:0.68rem; color:var(--text-muted); margin-left:auto; margin-right:0.35rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px;">${highlightMatch(item.category, matcher)}</span>` : '';
+      const isDocActive = item.doc && urlsMatch(item.doc, currentDocUrl);
+      const isSrcActive = item.src && urlsMatch(item.src, currentSrcUrl);
+      const isActive = isDocActive || isSrcActive;
       html += `<div class="nav-single-item">
-            <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" class="nav-item-link az-index-link" title="${item.desc || item.name}">
+            <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" class="nav-item-link az-index-link ${isActive ? 'active' : ''}" title="${item.desc || item.name}">
               <span class="az-symbol-name">${highlightMatch(item.name, matcher)}</span>
               ${ownerInfo}
               <span class="res-badge ${badgeClass}">${item.type}</span>
@@ -1548,12 +1569,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const docHref = link.getAttribute('data-doc-href');
         const srcHref = link.getAttribute('data-src-href');
 
-        // If it's a group overview title link, also make sure the group is expanded
-        const parentGroup = link.closest('.nav-group');
-        if (parentGroup && link.classList.contains('nav-group-title-link')) {
+        // Immediately highlight the clicked item for instant, reliable visual feedback
+        sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item').forEach(el => el.classList.remove('active'));
+        link.classList.add('active');
+
+        // Make sure all ancestor groups are expanded so the active item is in plain view
+        let parentGroup = link.closest('.nav-group');
+        while (parentGroup) {
           parentGroup.classList.remove('collapsed');
-          updateSidebarToggleAllBtn();
+          parentGroup = parentGroup.parentElement ? parentGroup.parentElement.closest('.nav-group') : null;
         }
+        updateSidebarToggleAllBtn();
 
         if (activeSidebarTab === 'source' || (!docHref && srcHref)) {
           if (srcHref) loadSource(srcHref);
@@ -1585,20 +1611,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function highlightActiveSidebar(url) {
-    const baseUrl = url ? url.split('#')[0] : '';
+    const isSrcUrl = url && (url.includes('src_view/') || url.endsWith('.sv') || url.endsWith('.svh') || url.endsWith('.v') || url.endsWith('.c') || url.endsWith('.h'));
+    const isExUrl = url && url.includes('examples_view/');
+    const isDocUrl = url && !isSrcUrl && !isExUrl;
+
+    // Guard: Never clear documentation/example active selection when a source file navigates, and vice versa
+    if (url) {
+      if ((activeSidebarTab === 'docs' || activeSidebarTab === 'examples') && isSrcUrl) return;
+      if (activeSidebarTab === 'source' && (isDocUrl || isExUrl)) return;
+    }
+
+    let targetUrl = url;
+    if (!targetUrl) {
+      if (activeSidebarTab === 'source') {
+        targetUrl = currentSrcUrl;
+      } else if (activeSidebarTab === 'examples' || activeSidebarTab === 'docs') {
+        targetUrl = currentDocUrl;
+      } else {
+        targetUrl = currentDocUrl || currentSrcUrl;
+      }
+    }
+
+    let foundActive = false;
     sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item').forEach(el => {
-      el.classList.remove('active');
       const docHref = el.getAttribute('data-doc-href');
       const srcHref = el.getAttribute('data-src-href');
-      if ((docHref && baseUrl.includes(docHref)) || (srcHref && baseUrl.includes(srcHref))) {
+      const href = (activeSidebarTab === 'source') ? (srcHref || docHref) : (docHref || srcHref);
+
+      const isMatch = urlsMatch(href, targetUrl);
+      if (isMatch && !foundActive) {
         el.classList.add('active');
+        foundActive = true;
         let p = el.closest('.nav-group');
         while (p) {
           p.classList.remove('collapsed');
           p = p.parentElement ? p.parentElement.closest('.nav-group') : null;
         }
+      } else {
+        el.classList.remove('active');
       }
     });
+
     updateSidebarToggleAllBtn();
   }
 
