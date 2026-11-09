@@ -681,6 +681,129 @@ window.PageCommon = (function () {
   }
 
   // =========================================================================
+  // Scroll Position & Reading Level Preserver (on resize, split toggle, reflow)
+  // =========================================================================
+
+  let activeAnchorEl = null;
+  let activeAnchorOffset = 0;
+  let activeScrollRatio = 0;
+  let isAnchorUpdating = false;
+
+  function findTopmostVisibleElement() {
+    // 1. Check headings and section landmarks first (invariant height, perfect anchors)
+    const headings = document.querySelectorAll(
+      '.CTitle, .STitle, h1, h2, h3, .topo-header, .studio-header, .sim-header, .doc-source-banner, .example-source-banner, .file-code-pane.active tr, .sv-code-table tr'
+    );
+    let bestEl = null;
+    let minDistance = Infinity;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 800;
+
+    for (let i = 0; i < headings.length; i++) {
+      const el = headings[i];
+      const rect = el.getBoundingClientRect();
+      if (rect.top >= -40 && rect.top <= viewportHeight * 0.6) {
+        const dist = Math.abs(rect.top - 24);
+        if (dist < minDistance) {
+          minDistance = dist;
+          bestEl = el;
+        }
+      }
+    }
+    if (bestEl) return bestEl;
+
+    // 2. Fallback to compact content blocks
+    const blocks = document.querySelectorAll('.CTopic, .CBody > p, .topo-card, .doc-source-banner');
+    for (let i = 0; i < blocks.length; i++) {
+      const el = blocks[i];
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom > 20 && rect.top <= viewportHeight * 0.5) {
+        return el;
+      }
+    }
+    return null;
+  }
+
+  function saveScrollAnchor() {
+    if (isAnchorUpdating) return;
+    const scrollEl = document.scrollingElement || document.documentElement || document.body;
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const maxScroll = Math.max(1, scrollEl.scrollHeight - window.innerHeight);
+    activeScrollRatio = scrollY / maxScroll;
+
+    const el = findTopmostVisibleElement();
+    if (el) {
+      activeAnchorEl = el;
+      activeAnchorOffset = el.getBoundingClientRect().top;
+    }
+  }
+
+  function restoreScrollAnchor() {
+    isAnchorUpdating = true;
+    const scrollEl = document.scrollingElement || document.documentElement || document.body;
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    // Force instantaneous non-animated repositioning to eliminate laggy/strange gliding transitions
+    const docEl = document.documentElement;
+    const prevScrollBehavior = docEl.style.scrollBehavior;
+    docEl.style.scrollBehavior = 'auto';
+
+    if (activeAnchorEl && activeAnchorEl.isConnected) {
+      const rect = activeAnchorEl.getBoundingClientRect();
+      const diff = rect.top - activeAnchorOffset;
+      if (Math.abs(diff) > 1) {
+        const targetY = Math.max(0, currentScroll + diff);
+        window.scrollTo(0, targetY);
+        if (scrollEl) scrollEl.scrollTop = targetY;
+      }
+    } else if (activeScrollRatio > 0) {
+      const maxScroll = Math.max(1, scrollEl.scrollHeight - window.innerHeight);
+      const targetY = Math.round(activeScrollRatio * maxScroll);
+      window.scrollTo(0, targetY);
+      if (scrollEl) scrollEl.scrollTop = targetY;
+    }
+
+    requestAnimationFrame(function () {
+      docEl.style.scrollBehavior = prevScrollBehavior || '';
+      isAnchorUpdating = false;
+      saveScrollAnchor();
+    });
+  }
+
+  function initScrollAnchor() {
+    let lastWidth = window.innerWidth;
+
+    function handleResize() {
+      const currentWidth = window.innerWidth;
+      if (Math.abs(currentWidth - lastWidth) < 2) return;
+      lastWidth = currentWidth;
+      restoreScrollAnchor();
+    }
+
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    let scrollAnchorRaf = null;
+    window.addEventListener('scroll', function () {
+      if (isAnchorUpdating) return;
+      if (scrollAnchorRaf) return;
+      scrollAnchorRaf = requestAnimationFrame(function () {
+        saveScrollAnchor();
+        scrollAnchorRaf = null;
+      });
+    }, { passive: true });
+
+    setTimeout(saveScrollAnchor, 150);
+
+    window.addEventListener('message', function (e) {
+      if (!e.data || typeof e.data !== 'object') return;
+      if (e.data.type === 'saveScrollAnchor') {
+        saveScrollAnchor();
+      } else if (e.data.type === 'restoreScrollAnchor') {
+        restoreScrollAnchor();
+      }
+    });
+  }
+
+  // =========================================================================
   // Heading Anchors & Canonical Link Sharing
   // =========================================================================
 
@@ -2346,6 +2469,7 @@ window.PageCommon = (function () {
       // 3. Source Code Links
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
         e.preventDefault();
+        saveScrollAnchor();
         const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
         if (window.parent && window.parent !== window) {
           window.parent.postMessage({ type: 'openSourceView', url: targetHref }, '*');
@@ -2477,6 +2601,7 @@ window.PageCommon = (function () {
     initLinks();
     initCodeBlocks();
     initDiagramZoom();
+    initScrollAnchor();
 
     if (document.getElementById('doc-toc-sidebar')) {
       initTOC();
@@ -2514,6 +2639,9 @@ window.PageCommon = (function () {
     initFlowStepper: initFlowStepper,
     initDerivedClasses: initDerivedClasses,
     initLinks: initLinks,
+    initScrollAnchor: initScrollAnchor,
+    saveScrollAnchor: saveScrollAnchor,
+    restoreScrollAnchor: restoreScrollAnchor,
     initAll: initAll
   };
 })();

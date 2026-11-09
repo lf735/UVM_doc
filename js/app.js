@@ -163,22 +163,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!frame || !relUrl) return;
     try {
       const targetUrl = new URL(relUrl, window.location.href);
-      const currentUrl = new URL(frame.src, window.location.href);
+      let currentPath = '';
+      try {
+        if (frame.contentWindow && frame.contentWindow.location) {
+          currentPath = frame.contentWindow.location.pathname;
+        }
+      } catch (e) { }
+      if (!currentPath && frame.src) {
+        currentPath = new URL(frame.src, window.location.href).pathname;
+      }
       const rawAnchor = targetUrl.hash ? targetUrl.hash.replace(/^#/, '') : '';
 
-      // If already on the same page, scroll immediately and directly
-      if (currentUrl.pathname === targetUrl.pathname) {
+      // If already on the same page, do not reload the iframe; scroll only if anchor specified
+      if (currentPath === targetUrl.pathname) {
         if (targetUrl.hash) {
           try {
             frame.contentWindow.location.hash = targetUrl.hash;
           } catch (e) { }
-        }
-        if (frame.contentWindow && rawAnchor) {
-          frame.contentWindow.postMessage({
-            type: 'scrollToSection',
-            anchor: rawAnchor,
-            id: rawAnchor
-          }, '*');
+          if (frame.contentWindow && rawAnchor) {
+            frame.contentWindow.postMessage({
+              type: 'scrollToSection',
+              anchor: rawAnchor,
+              id: rawAnchor
+            }, '*');
+          }
         }
         return;
       }
@@ -387,6 +395,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setViewMode(mode, updateHistory = true) {
+    if (currentMode === mode && !updateHistory) return;
+
+    // Preserve the exact scroll reading level of the active doc frame before mode class switch
+    try {
+      if (docFrame && docFrame.contentWindow) {
+        if (docFrame.contentWindow.PageCommon && docFrame.contentWindow.PageCommon.saveScrollAnchor) {
+          docFrame.contentWindow.PageCommon.saveScrollAnchor();
+        } else {
+          docFrame.contentWindow.postMessage({ type: 'saveScrollAnchor' }, '*');
+        }
+      }
+    } catch (e) { }
+
     currentMode = mode;
     appContainer.classList.remove('mode-docs', 'mode-source', 'mode-split');
     appContainer.classList.add(`mode-${mode}`);
@@ -400,19 +421,47 @@ document.addEventListener('DOMContentLoaded', () => {
       if (srcPane) { srcPane.style.width = ''; srcPane.style.flex = ''; }
     }
 
+    // Restore the exact reading level synchronously and on next frame to eliminate visual lag
+    try {
+      if (docFrame && docFrame.contentWindow) {
+        if (docFrame.contentWindow.PageCommon && docFrame.contentWindow.PageCommon.restoreScrollAnchor) {
+          docFrame.contentWindow.PageCommon.restoreScrollAnchor();
+        } else {
+          docFrame.contentWindow.postMessage({ type: 'restoreScrollAnchor' }, '*');
+        }
+      }
+    } catch (e) { }
+
+    requestAnimationFrame(() => {
+      try {
+        if (docFrame && docFrame.contentWindow) {
+          if (docFrame.contentWindow.PageCommon && docFrame.contentWindow.PageCommon.restoreScrollAnchor) {
+            docFrame.contentWindow.PageCommon.restoreScrollAnchor();
+          } else {
+            docFrame.contentWindow.postMessage({ type: 'restoreScrollAnchor' }, '*');
+          }
+        }
+      } catch (e) { }
+    });
+
     if (updateHistory) {
       updateHash();
     }
   }
 
   // Global handler for when a doc page requests to view source code
+  let lastOpenSource = { url: '', time: 0 };
   window.openSourceView = function (srcUrl) {
+    const now = Date.now();
+    if (lastOpenSource.url === srcUrl && (now - lastOpenSource.time) < 150) return;
+    lastOpenSource = { url: srcUrl, time: now };
+
     const fullSrc = normalizeSrcUrl(srcUrl);
     currentSrcUrl = fullSrc;
     setFrameSrc(srcFrame, fullSrc);
     updateSrcTitle(fullSrc);
 
-    // Switch to split view so user sees both doc and source!
+    // Switch to split view so user sees both doc and source without resetting reading position
     if (currentMode !== 'split') {
       setViewMode('split', true);
     } else {
@@ -556,13 +605,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const fullDoc = rawDoc ? (isEx ? normalizeExampleUrl(rawDoc) : normalizeDocUrl(rawDoc)) : currentDocUrl;
       const fullSrc = rawSrc ? normalizeSrcUrl(rawSrc) : currentSrcUrl;
 
+      const docChanged = currentDocUrl !== fullDoc;
+      const srcChanged = currentSrcUrl !== fullSrc;
+
       currentDocUrl = fullDoc;
       currentSrcUrl = fullSrc;
 
-      setViewMode('split', false);
+      if (currentMode !== 'split') {
+        setViewMode('split', false);
+      }
 
-      setFrameSrc(docFrame, fullDoc);
-      setFrameSrc(srcFrame, fullSrc);
+      if (docChanged) {
+        setFrameSrc(docFrame, fullDoc);
+      }
+      if (srcChanged) {
+        setFrameSrc(srcFrame, fullSrc);
+      }
 
       updateDocTitle(fullDoc);
       updateSrcTitle(fullSrc);

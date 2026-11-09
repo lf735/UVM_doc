@@ -857,12 +857,24 @@ body.is-resizing iframe {
   flex: 1 1 100% !important;
 }
 
-.mode-split #doc-pane,
+.mode-split #doc-pane {
+  display: flex !important;
+  flex: 1 1 0;
+  width: 50%;
+  min-width: 180px;
+}
+
 .mode-split #src-pane {
   display: flex !important;
   flex: 1 1 0;
   width: 50%;
   min-width: 180px;
+  animation: paneFadeIn 0.12s ease-out;
+}
+
+@keyframes paneFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .mode-split #split-divider {
