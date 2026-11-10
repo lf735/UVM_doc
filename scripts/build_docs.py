@@ -106,6 +106,8 @@ CLASS_TO_EXAMPLE_MAP = {
 CLASS_DEF_REGEX = re.compile(r'^\s*(?:virtual\s+)?class\s+([a-zA-Z0-9_]+)')
 METHOD_DEF_REGEX = re.compile(r'^\s*(?:virtual\s+|local\s+|protected\s+|static\s+)*(task|function)\s+(?:[\w:\[\]\$]+\s+)?([a-zA-Z0-9_]+)\s*\(')
 MACRO_DEF_REGEX = re.compile(r'^\s*`define\s+([a-zA-Z0-9_]+)')
+ND_TAG_REGEX = re.compile(r'^\s*(?://|/\*|\*)\s*(Variable|Type|Enum|Port|Export|Imp|Constant|Parameter)\s*:\s*([^\r\n]+)', re.IGNORECASE)
+TYPEDEF_REGEX = re.compile(r'^\s*typedef\s+(?:enum|struct)?.*?\b([a-zA-Z0-9_]+)\s*;')
 
 def highlight_outside_tags(text, highlight_fn):
     """Tokenize text outside HTML tags and HTML entity sequences."""
@@ -528,6 +530,40 @@ def index_source_symbols():
                     mkind, mname = mf.group(1), mf.group(2)
                     symbols_in_file.append({'name': mname, 'line': line_no, 'type': mkind})
 
+                # NaturalDocs tag detection (Variables, Types, Enums, Ports, etc.)
+                mnd = ND_TAG_REGEX.match(line)
+                if mnd:
+                    tag_kind = mnd.group(1).lower()
+                    raw_val = mnd.group(2).strip().rstrip('*/')
+                    tokens = raw_val.split()
+                    tag_name = tokens[-1] if tokens else ''
+                    tag_name = re.sub(r'[^a-zA-Z0-9_`+*]', '', tag_name)
+                    if tag_name:
+                        decl_line = None
+                        for j in range(line_no, min(line_no + 60, len(lines))):
+                            l_str = lines[j].strip()
+                            if not l_str or l_str.startswith('//') or l_str.startswith('/*') or l_str.startswith('*'):
+                                continue
+                            decl_line = j + 1
+                            break
+                        target_line = decl_line if decl_line is not None else line_no
+                        symbols_in_file.append({
+                            'name': tag_name,
+                            'raw': raw_val,
+                            'line': target_line,
+                            'type': tag_kind
+                        })
+                        if tag_kind in ('type', 'enum'):
+                            SYMBOL_MAP[tag_name] = {'file': rel_path, 'line': target_line, 'type': tag_kind}
+
+                # Direct typedef detection
+                mtd = TYPEDEF_REGEX.match(line)
+                if mtd:
+                    tname = mtd.group(1)
+                    if not any(s['name'] == tname and s['line'] == line_no for s in symbols_in_file):
+                        symbols_in_file.append({'name': tname, 'raw': tname, 'line': line_no, 'type': 'type'})
+                        SYMBOL_MAP[tname] = {'file': rel_path, 'line': line_no, 'type': 'type'}
+
             FILE_SYMBOLS[rel_path] = symbols_in_file
 
     print(f"Total symbols indexed: {len(SYMBOL_MAP)} across {len(FILE_SYMBOLS)} files.")
@@ -624,7 +660,7 @@ def resolve_cross_doc_path(current_rel_path, target_rel_href):
 
 def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src, root_rel):
     """Enrich topic HTML with exact AST source links, decl/impl buttons, derived classes, and badges."""
-    clean_a = re.sub(r'#\(.*', '', a_name) if a_name else None
+    clean_a = re.sub(r'#\([^)]*\)', '', a_name) if a_name else None
     if clean_a:
         clean_a = clean_a.split('#')[0].strip()
     cls_m = re.search(r'class=["\'](C[A-Za-z0-9_]+)["\']', w_start)
@@ -770,6 +806,43 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
             w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{ml}"', w_body, count=1)
             w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{mf}"', w_body, count=1)
             pass
+
+    elif cls_name in ('CVariable', 'CType', 'CEnumeration', 'CPort', 'CParameter', 'CConstant', 'CGeneric'):
+        target_f = associated_src
+        target_l = None
+
+        if clean_a and associated_src and associated_src in FILE_SYMBOLS:
+            f_syms = FILE_SYMBOLS[associated_src]
+            # Symbol name can be scoped (e.g. uvm_comparer.policy -> policy, uvm_callbacks#(T,CB).T -> T)
+            sym_clean = clean_a.split('.')[-1].strip()
+            norm_clean = sym_clean.split('_')[-1] if '_' in sym_clean and any(s['name'] == sym_clean.split('_')[-1] for s in f_syms) else sym_clean
+
+            # Try exact match, normalized match, substring match
+            sym_match = next((s for s in f_syms if s['name'] == sym_clean), None)
+            if not sym_match and norm_clean != sym_clean:
+                sym_match = next((s for s in f_syms if s['name'] == norm_clean), None)
+            if not sym_match:
+                sym_match = next((s for s in f_syms if s['name'] == clean_a), None)
+            if not sym_match:
+                sym_match = next((s for s in f_syms if sym_clean in s['name'] or s['name'] in sym_clean), None)
+
+            if sym_match:
+                target_l = sym_match['line']
+
+        # Fallback to global SYMBOL_MAP for global types / enums / constants
+        if not target_l and clean_a:
+            sym_clean = clean_a.split('.')[-1].strip()
+            if sym_clean in SYMBOL_MAP:
+                target_f = SYMBOL_MAP[sym_clean]['file']
+                target_l = SYMBOL_MAP[sym_clean]['line']
+            elif clean_a in SYMBOL_MAP:
+                target_f = SYMBOL_MAP[clean_a]['file']
+                target_l = SYMBOL_MAP[clean_a]['line']
+
+        if target_f and target_l:
+            w_body = re.sub(r'href=["\'][^"\']*src_view/[^"\']*["\']', f'href="{root_rel}src_view/{target_f}.html#L{target_l}"', w_body, count=1)
+            w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{target_l}"', w_body, count=1)
+            w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{target_f}"', w_body, count=1)
 
     return w_body
 
@@ -1598,11 +1671,12 @@ def build_search_index(categories):
             class_name = doc_rel.split('/')[-1].replace('-svh.html', '').replace('-txt.html', '')
 
         for h in headings:
-            if h.get('type') == 'method':
-                mname = h.get('title')
-                if not mname:
+            htype = h.get('type')
+            if htype in ('method', 'variable', 'type', 'enumeration', 'port', 'constant', 'parameter'):
+                sym_name = h.get('title')
+                if not sym_name:
                     continue
-                dedup_key = (mname, class_name)
+                dedup_key = (sym_name, class_name)
                 if dedup_key in seen_methods:
                     continue
                 seen_methods.add(dedup_key)
@@ -1610,29 +1684,59 @@ def build_search_index(categories):
                 anchor = h.get('anchor', '')
                 doc_link = f"{doc_key}#{anchor}" if anchor else doc_key
 
-                mkind = 'function'
+                mkind = 'function' if htype == 'method' else htype
                 src_link = None
                 src_rel = DOC_TO_SRC_MAP.get(doc_rel)
                 if src_rel:
                     syms = FILE_SYMBOLS.get(src_rel, [])
-                    sym_match = next((s for s in syms if s['name'] == mname and s['type'] in ('task', 'function')), None)
-                    if not sym_match:
-                        sym_match = next((s for s in syms if s['name'] == mname), None)
+                    sym_clean = sym_name.split('.')[-1].strip()
+                    norm_clean = sym_clean.split('_')[-1] if '_' in sym_clean and any(s['name'] == sym_clean.split('_')[-1] for s in syms) else sym_clean
+
+                    sym_match = None
+                    if htype == 'method':
+                        sym_match = next((s for s in syms if s['name'] == sym_name and s['type'] in ('task', 'function')), None)
+                        if not sym_match:
+                            sym_match = next((s for s in syms if s['name'] == sym_name), None)
+                    else:
+                        sym_match = next((s for s in syms if s['name'] == sym_clean), None)
+                        if not sym_match and norm_clean != sym_clean:
+                            sym_match = next((s for s in syms if s['name'] == norm_clean), None)
+                        if not sym_match:
+                            sym_match = next((s for s in syms if s['name'] == sym_name), None)
+                        if not sym_match:
+                            sym_match = next((s for s in syms if sym_clean in s['name'] or s['name'] in sym_clean), None)
+
                     if sym_match:
                         src_link = f"src_view/{src_rel}.html#L{sym_match['line']}"
-                        if sym_match['type'] in ('task', 'function'):
+                        if htype == 'method' and sym_match['type'] in ('task', 'function'):
+                            mkind = sym_match['type']
+                        elif htype != 'method':
                             mkind = sym_match['type']
                     else:
-                        cls_match = next((s for s in syms if s['type'] == 'class'), None)
-                        line_no = cls_match['line'] if cls_match else 1
-                        src_link = f"src_view/{src_rel}.html#L{line_no}"
+                        # Fallback to global SYMBOL_MAP
+                        if sym_clean in SYMBOL_MAP:
+                            src_link = f"src_view/{SYMBOL_MAP[sym_clean]['file']}.html#L{SYMBOL_MAP[sym_clean]['line']}"
+                        else:
+                            cls_match = next((s for s in syms if s['type'] == 'class'), None)
+                            line_no = cls_match['line'] if cls_match else 1
+                            src_link = f"src_view/{src_rel}.html#L{line_no}"
 
-                if mkind == 'function' and mname in known_tasks:
+                if mkind == 'function' and sym_name in known_tasks:
                     mkind = 'task'
 
-                desc_label = 'Task' if mkind == 'task' else 'Function'
+                type_label_map = {
+                    'task': 'Task',
+                    'function': 'Function',
+                    'variable': 'Variable',
+                    'type': 'Type',
+                    'enumeration': 'Enum',
+                    'port': 'Port',
+                    'constant': 'Constant',
+                    'parameter': 'Parameter'
+                }
+                desc_label = type_label_map.get(mkind, mkind.capitalize())
                 search_items.append({
-                    'name': mname,
+                    'name': sym_name,
                     'type': mkind,
                     'category': class_name,
                     'src': src_link,

@@ -751,10 +751,11 @@ def render_source_viewer(
     # Symbol jump select
     sym_options = "".join([
         f'<option value="#L{s["line"]}">{html.escape(s["type"])}: {html.escape(s["name"])} (L{s["line"]})</option>'
-        for s in syms if s.get("type") in ('class', 'macro')
+        for s in syms if s.get("type") in ('class', 'macro', 'type', 'enum', 'variable', 'function', 'task', 'port')
     ])
+    displayed_syms_count = sum(1 for s in syms if s.get("type") in ('class', 'macro', 'type', 'enum', 'variable', 'function', 'task', 'port'))
     sym_select = f'''<select class="studio-file-select sym-jump-select" id="src-sym-select" aria-label="Jump to symbol" onchange="if(this.value) window.location.hash = this.value">
-        <option value="">Jump to Symbol ({len(syms)} symbols)...</option>
+        <option value="">Jump to Symbol ({displayed_syms_count} symbols)...</option>
         {sym_options}
       </select>''' if sym_options else ""
 
