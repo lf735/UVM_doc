@@ -658,6 +658,38 @@ def resolve_cross_doc_path(current_rel_path, target_rel_href):
     combined = posixpath.join(cur_dir, target_rel_href) if cur_dir else target_rel_href
     return posixpath.normpath(combined)
 
+def strip_title_source_link(w_body):
+    """Remove source code links from topic headings (CTitle) while preserving anchor name/id."""
+    def clean_title_anchor(m):
+        h_open = m.group(1)
+        inner = m.group(2)
+        h_close = m.group(3)
+
+        def remove_link(am):
+            a_open = am.group(1)
+            a_text = am.group(2)
+            a_close = am.group(3)
+            name_m = re.search(r'\bname=["\']([^"\']+)["\']', a_open)
+            id_m = re.search(r'\bid=["\']([^"\']+)["\']', a_open)
+            name_val = name_m.group(1) if name_m else None
+            id_val = id_m.group(1) if id_m else None
+
+            attrs = []
+            if name_val:
+                attrs.append(f'name="{name_val}"')
+            if id_val and id_val != name_val:
+                attrs.append(f'id="{id_val}"')
+
+            if attrs:
+                return f'<a {" ".join(attrs)}>{a_text}{a_close}'
+            else:
+                return a_text
+
+        cleaned_inner = re.sub(r'(<a\b[^>]*>)([\s\S]*?)(</a>)', remove_link, inner, count=1)
+        return f'{h_open}{cleaned_inner}{h_close}'
+
+    return re.sub(r'(<h[1-6]\s+class=["\']?CTitle["\']?[^>]*>)([\s\S]*?)(</h[1-6]>)', clean_title_anchor, w_body, count=1)
+
 def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src, root_rel):
     """Enrich topic HTML with exact AST source links, decl/impl buttons, derived classes, and badges."""
     clean_a = re.sub(r'#\([^)]*\)', '', a_name) if a_name else None
@@ -666,10 +698,14 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
     cls_m = re.search(r'class=["\'](C[A-Za-z0-9_]+)["\']', w_start)
     cls_name = cls_m.group(1) if cls_m else 'CTopicWrap'
 
+    # Structural / non-code topics: remove source code links from titles
+    if cls_name in ('CGroup', 'CSection', 'CFile'):
+        w_body = strip_title_source_link(w_body)
+
     # STRICT: Only enrich class hierarchy & class details for genuine CClass topics!
     # Never decorate CSection / CGeneric / CFile topics, which caused the first class's hierarchy
     # to be duplicated onto the top-level section header when multiple classes exist on one page.
-    if cls_name == 'CClass':
+    elif cls_name == 'CClass':
         target_cname = None
         if clean_a and clean_a in UVM_DB.get('classes', {}):
             target_cname = clean_a
@@ -843,6 +879,8 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
             w_body = re.sub(r'href=["\'][^"\']*src_view/[^"\']*["\']', f'href="{root_rel}src_view/{target_f}.html#L{target_l}"', w_body, count=1)
             w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{target_l}"', w_body, count=1)
             w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{target_f}"', w_body, count=1)
+        elif cls_name == 'CGeneric':
+            w_body = strip_title_source_link(w_body)
 
     return w_body
 
