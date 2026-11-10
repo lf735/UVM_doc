@@ -204,6 +204,18 @@ document.addEventListener('DOMContentLoaded', () => {
               id: rawAnchor
             }, '*');
           }
+        } else {
+          // Navigating to top of the current page
+          try {
+            frame.contentWindow.scrollTo({ top: 0, behavior: 'smooth' });
+          } catch (e) { }
+          if (frame.contentWindow) {
+            frame.contentWindow.postMessage({
+              type: 'scrollToSection',
+              anchor: 'MainTopic',
+              id: 'MainTopic'
+            }, '*');
+          }
         }
         return;
       }
@@ -216,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (rawAnchor) {
         const onFrameLoaded = function () {
           frame.removeEventListener('load', onFrameLoaded);
-          setTimeout(() => {
+          const sendScroll = () => {
             try {
               if (frame.contentWindow) {
                 frame.contentWindow.postMessage({
@@ -226,7 +238,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, '*');
               }
             } catch (err) { }
-          }, 180);
+          };
+          sendScroll();
+          setTimeout(sendScroll, 120);
+          setTimeout(sendScroll, 320);
         };
         frame.addEventListener('load', onFrameLoaded);
       }
@@ -707,15 +722,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('hashchange', parseHash);
 
-  function loadDoc(url, pushState = true) {
+  function loadDoc(url, pushState = true, autoPair = true) {
     const fullDoc = normalizeDocUrl(url);
     currentDocUrl = fullDoc;
     setFrameSrc(docFrame, fullDoc);
     updateDocTitle(fullDoc);
 
-    if (currentMode === 'split') {
+    if (autoPair && currentMode === 'split') {
       // In split mode, check if we should pair with its source file
-      const docClean = fullDoc.replace(/^docs_view\//, '');
+      const docClean = fullDoc.replace(/^docs_view\//, '').split('#')[0];
       if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
         const pairedSrc = UVM_DATA.docToSrc[docClean];
         currentSrcUrl = pairedSrc;
@@ -731,13 +746,13 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightActiveSidebar(fullDoc);
   }
 
-  function loadSource(url, pushState = true) {
+  function loadSource(url, pushState = true, autoPair = true) {
     const fullSrc = normalizeSrcUrl(url);
     currentSrcUrl = fullSrc;
     setFrameSrc(srcFrame, fullSrc);
     updateSrcTitle(fullSrc);
 
-    if (currentMode === 'split') {
+    if (autoPair && currentMode === 'split') {
       // In split mode, check if we should pair with its doc file
       const srcClean = fullSrc.replace(/^src_view\//, '').split('#')[0];
       if (typeof UVM_DATA !== 'undefined' && UVM_DATA.srcToDoc && UVM_DATA.srcToDoc[srcClean]) {
@@ -1963,9 +1978,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeSidebarTab === 'source' || (!docHref && srcHref)) {
           if (srcHref) loadSource(srcHref);
         } else if (docHref) {
-          loadDoc(docHref);
           if (currentMode === 'split' && srcHref) {
-            loadSource(srcHref);
+            loadDoc(docHref, true, false);
+            loadSource(srcHref, true, false);
+          } else {
+            loadDoc(docHref);
           }
         } else if (srcHref) {
           loadSource(srcHref);
@@ -3508,11 +3525,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isExample) {
         window.openExampleView(item.doc);
       } else if (item.doc) {
-        loadDoc(item.doc);
-        if (item.src) {
-          currentSrcUrl = normalizeSrcUrl(item.src);
-          setFrameSrc(srcFrame, currentSrcUrl);
-          updateSrcTitle(currentSrcUrl);
+        if (currentMode === 'split' && item.src) {
+          loadDoc(item.doc, true, false);
+          loadSource(item.src, true, false);
+        } else {
+          loadDoc(item.doc);
         }
       } else if (item.src) {
         loadSource(item.src);

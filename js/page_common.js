@@ -80,10 +80,10 @@ window.PageCommon = (function () {
       // Icon-based button (e.g., toolbar studio-action-btn)
       const origHtml = buttonEl.innerHTML;
       const checkSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-      
+
       buttonEl.innerHTML = checkSvg + (existingSpan ? ' <span>' + (successText || 'Copied!') + '</span>' : '');
       buttonEl.classList.add('btn-copied');
-      
+
       setTimeout(function () {
         buttonEl.innerHTML = origHtml;
         buttonEl.classList.remove('btn-copied');
@@ -401,6 +401,10 @@ window.PageCommon = (function () {
 
     function scrollToElement(targetEl) {
       if (!targetEl) return;
+      if (targetEl === document.body || targetEl === document.documentElement) {
+        performScroll(0);
+        return;
+      }
       const targetY = getTargetScrollY(targetEl);
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
       const distance = Math.abs(currentScroll - targetY);
@@ -608,42 +612,109 @@ window.PageCommon = (function () {
       });
     }, { passive: true });
 
+    function findDocTargetElement(anchor, targetId) {
+      if (!anchor && !targetId) return null;
+      const idToTry = targetId || anchor;
+      const rawAnchor = anchor || targetId;
+
+      // Special top-level anchors
+      if (idToTry === 'MainTopic' || idToTry === 'Overview' || idToTry === 'doc-nav-main') {
+        return document.getElementById('doc-nav-main') || document.getElementById('MainTopic') || document.body;
+      }
+      if (idToTry === 'Contents' || idToTry === 'doc-nav-contents') {
+        return document.getElementById('doc-nav-contents') || document.querySelector('.ContentsSummary');
+      }
+      if (idToTry === 'Summary' || idToTry === 'doc-nav-summary') {
+        return document.getElementById('doc-nav-summary') || document.querySelector('.ClassSummary, .Summary');
+      }
+
+      // Build list of string variants to search (handling decoded URL, backticks, percent-encoding)
+      const variants = new Set();
+      [idToTry, rawAnchor].forEach(str => {
+        if (!str) return;
+        variants.add(str);
+        try {
+          const dec = decodeURIComponent(str);
+          variants.add(dec);
+          variants.add(dec.replace(/^`/, ''));
+          variants.add('`' + dec.replace(/^`/, ''));
+        } catch (e) { }
+        if (str.includes('%60')) {
+          const unpct = str.replace(/%60/g, '`');
+          variants.add(unpct);
+          variants.add(unpct.replace(/^`/, ''));
+        }
+        variants.add(str.replace(/^`/, ''));
+        variants.add('`' + str.replace(/^`/, ''));
+      });
+
+      // 1. Direct getElementById with variants
+      for (const v of variants) {
+        try {
+          const el = document.getElementById(v);
+          if (el) return el;
+        } catch (e) { }
+      }
+
+      // 2. Exact attribute matches on data-anchor, data-doc-topic, a[name]
+      for (const v of variants) {
+        try {
+          const safe = v.replace(/"/g, '\\"');
+          const el = document.querySelector(`[data-anchor="${safe}"]`) ||
+            document.querySelector(`[data-doc-topic="${safe}"]`) ||
+            document.querySelector(`a[name="${safe}"]`);
+          if (el) return el;
+        } catch (e) { }
+      }
+
+      // 3. Fallback: linear scan of elements with data-anchor, data-doc-topic, or a[name]
+      const candidates = document.querySelectorAll('[data-anchor], [data-doc-topic], a[name]');
+      for (let i = 0; i < candidates.length; i++) {
+        const c = candidates[i];
+        const da = c.getAttribute('data-anchor') || '';
+        const dt = c.getAttribute('data-doc-topic') || '';
+        const nm = c.getAttribute('name') || '';
+        for (const v of variants) {
+          if (da === v || dt === v || nm === v) {
+            return c;
+          }
+        }
+      }
+
+      // 4. Case-insensitive or stripped suffix fallback (e.g. "uvm_component.accept_tr" -> method "accept_tr")
+      for (const v of variants) {
+        const dotIdx = v.lastIndexOf('.');
+        if (dotIdx !== -1) {
+          const shortName = v.slice(dotIdx + 1);
+          for (let i = 0; i < candidates.length; i++) {
+            const c = candidates[i];
+            const da = c.getAttribute('data-anchor') || '';
+            const nm = c.getAttribute('name') || '';
+            if (da.endsWith('.' + shortName) || nm === shortName || da === shortName) {
+              return c;
+            }
+          }
+        }
+      }
+
+      return null;
+    }
+
     // Cross-frame scrollToSection listener
     window.addEventListener('message', function (e) {
       if (!e.data || typeof e.data !== 'object') return;
       if (e.data.type === 'scrollToSection') {
         const anchor = e.data.anchor;
         const targetId = e.data.id || anchor;
-        let target = null;
-        if (targetId) {
-          target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-        }
-        if (!target && anchor) {
-          if (anchor === 'MainTopic' || anchor === 'Overview' || anchor === 'doc-nav-main') {
-            target = document.getElementById('doc-nav-main') || document.getElementById('MainTopic');
-          } else if (anchor === 'Contents' || anchor === 'doc-nav-contents') {
-            target = document.getElementById('doc-nav-contents') || document.querySelector('.ContentsSummary');
-          } else if (anchor === 'Summary' || anchor === 'doc-nav-summary') {
-            target = document.getElementById('doc-nav-summary') || document.querySelector('.ClassSummary, .Summary');
-          } else {
-            try {
-              target = document.getElementById(anchor) ||
-                document.querySelector('[data-anchor="' + CSS.escape(anchor) + '"]') ||
-                document.querySelector('a[name="' + CSS.escape(anchor) + '"]');
-            } catch (err) { }
-            if (!target) {
-              const allA = document.querySelectorAll('[data-anchor], a[name]');
-              for (let i = 0; i < allA.length; i++) {
-                if (allA[i].getAttribute('data-anchor') === anchor || allA[i].getAttribute('name') === anchor) {
-                  target = allA[i];
-                  break;
-                }
-              }
-            }
-          }
-        }
+        let target = findDocTargetElement(anchor, targetId);
+
         if (target && target.tagName === 'A' && target.closest) {
-          target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+          const tableRow = target.closest('tr');
+          if (tableRow) {
+            target = tableRow;
+          } else {
+            target = target.closest('.CTopic') || target.closest('#Content > div') || target;
+          }
         }
         if (target) {
           scrollToElement(target);

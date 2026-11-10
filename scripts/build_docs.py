@@ -554,15 +554,19 @@ def index_source_symbols():
                             'type': tag_kind
                         })
                         if tag_kind in ('type', 'enum'):
-                            SYMBOL_MAP[tag_name] = {'file': rel_path, 'line': target_line, 'type': tag_kind}
+                            # Never overwrite an actual class definition!
+                            if tag_name not in SYMBOL_MAP or SYMBOL_MAP[tag_name]['type'] != 'class':
+                                SYMBOL_MAP[tag_name] = {'file': rel_path, 'line': target_line, 'type': tag_kind}
 
-                # Direct typedef detection
+                # Direct typedef detection (ignore forward class declarations 'typedef class <name>;')
                 mtd = TYPEDEF_REGEX.match(line)
-                if mtd:
+                if mtd and not re.match(r'^\s*typedef\s+class\b', line):
                     tname = mtd.group(1)
                     if not any(s['name'] == tname and s['line'] == line_no for s in symbols_in_file):
                         symbols_in_file.append({'name': tname, 'raw': tname, 'line': line_no, 'type': 'type'})
-                        SYMBOL_MAP[tname] = {'file': rel_path, 'line': line_no, 'type': 'type'}
+                        # Never overwrite an actual class definition!
+                        if tname not in SYMBOL_MAP or SYMBOL_MAP[tname]['type'] != 'class':
+                            SYMBOL_MAP[tname] = {'file': rel_path, 'line': line_no, 'type': 'type'}
 
             FILE_SYMBOLS[rel_path] = symbols_in_file
 
@@ -1574,17 +1578,37 @@ def build_search_index(categories):
                 'desc': f"UVM Class defined in src/{src_file}:{info['line']}"
             })
 
+    # Ensure all classes in UVM_DB are present as classes
+    for cname, cinfo in sorted(UVM_DB.get('classes', {}).items()):
+        if not any(x['name'] == cname and x['type'] == 'class' for x in search_items):
+            src_file = cinfo.get('file', '')
+            doc_file = SRC_TO_DOC_MAP.get(src_file)
+            doc_anchor = GLOBAL_DOC_ANCHOR_MAPS.get(doc_file, {}).get(cname) if doc_file else None
+            doc_url = f"docs_view/{doc_file}#{doc_anchor}" if (doc_file and doc_anchor) else (f"docs_view/{doc_file}" if doc_file else None)
+            search_items.append({
+                'name': cname,
+                'type': 'class',
+                'category': src_file.split('/')[0].capitalize() if src_file else 'Base',
+                'src': f"src_view/{src_file}.html#L{cinfo.get('start_line', 1)}" if src_file else None,
+                'doc': doc_url,
+                'desc': f"UVM Class: {cname}"
+            })
+
     # 2. Add macros
     for mname, info in sorted(SYMBOL_MAP.items()):
         if info['type'] == 'macro' and mname.startswith('`'):
             src_file = info['file']
             doc_file = SRC_TO_DOC_MAP.get(src_file)
+            doc_map = GLOBAL_DOC_ANCHOR_MAPS.get(doc_file, {}) if doc_file else {}
+            # Look up macro anchor in GLOBAL_DOC_ANCHOR_MAPS (matches exact doc-nav-item id or name)
+            doc_anchor = doc_map.get(mname) or doc_map.get(mname.lstrip('`')) or doc_map.get('`' + mname)
+            doc_url = f"docs_view/{doc_file}#{doc_anchor}" if (doc_file and doc_anchor) else (f"docs_view/{doc_file}" if doc_file else None)
             search_items.append({
                 'name': mname,
                 'type': 'macro',
                 'category': 'Macros',
                 'src': f"src_view/{src_file}.html#L{info['line']}",
-                'doc': f"docs_view/{doc_file}" if doc_file else None,
+                'doc': doc_url,
                 'desc': f"UVM Macro defined in src/{src_file}:{info['line']}"
             })
 
