@@ -1135,7 +1135,12 @@ document.addEventListener('DOMContentLoaded', () => {
     sidebarFilterTypes.clear();
     sidebarFilterTypes.add('all');
 
-    if (activeSidebarTab === 'examples') {
+    if (activeSidebarTab === 'source') {
+      sidebarPillsContainer.innerHTML = '';
+      sidebarPillsContainer.style.display = 'none';
+      return;
+    } else if (activeSidebarTab === 'examples') {
+      sidebarPillsContainer.style.display = 'flex';
       sidebarPillsContainer.innerHTML = `
             <button class="sidebar-pill active" data-type="all">All</button>
             <button class="sidebar-pill" data-type="beginner">Beginner</button>
@@ -1143,6 +1148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="sidebar-pill" data-type="advanced">Advanced</button>
           `;
     } else if (activeSidebarTab === 'hierarchy') {
+      sidebarPillsContainer.style.display = 'flex';
       sidebarPillsContainer.innerHTML = `
             <button class="sidebar-pill active" data-type="all">All</button>
             <button class="sidebar-pill" data-type="component">Components</button>
@@ -1153,7 +1159,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="sidebar-pill" data-type="phase">Phases</button>
           `;
     } else {
-      // For docs / source / index: show language symbol types (Docs has no examples)
+      // For docs / index: show language symbol types (Classes, Functions, Tasks, Macros)
+      sidebarPillsContainer.style.display = 'flex';
       sidebarPillsContainer.innerHTML = `
             <button class="sidebar-pill active" data-type="all">All</button>
             <button class="sidebar-pill" data-type="class">Classes</button>
