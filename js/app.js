@@ -1586,10 +1586,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let metaBadges = '';
       if (node.methodsCount > 0) {
-        metaBadges += `<span class="hierarchy-badge" title="${node.methodsCount} methods">${node.methodsCount}m</span>`;
+        metaBadges += `<span class="hierarchy-badge hierarchy-meta-methods" title="${node.methodsCount} methods">${node.methodsCount}m</span>`;
       }
       if (hasChildren) {
-        metaBadges += `<span class="hierarchy-badge" title="${node.children.length} subclasses">${node.children.length}</span>`;
+        metaBadges += `<span class="hierarchy-badge hierarchy-meta-subs" title="${node.children.length} subclasses">${node.children.length}</span>`;
       }
 
       const srcBtn = node.src

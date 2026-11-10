@@ -646,6 +646,15 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
             if not target_cname and len(f_classes) == 1:
                 target_cname = f_classes[0]
 
+        if not target_cname and clean_a:
+            clean_lower = clean_a.lower().replace(' ', '')
+            if 'export' in clean_lower and associated_src and 'tlm' in str(associated_src):
+                target_cname = 'uvm_port_base'
+            elif 'port' in clean_lower and associated_src and 'tlm' in str(associated_src):
+                target_cname = 'uvm_port_base'
+            elif 'imp' in clean_lower and associated_src and 'tlm' in str(associated_src):
+                target_cname = 'uvm_port_base'
+
         if target_cname and target_cname in UVM_DB.get('classes', {}):
             c_info = UVM_DB['classes'][target_cname]
             decl_f = c_info['file']

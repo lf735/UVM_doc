@@ -457,8 +457,9 @@ def render_class_hierarchy_card(
         p_info = classes.get(clean_p, {})
         curr = p_info.get('parent') if p_info else None
 
-    # 2. Build lineage items
-    flow_items = []
+    # 2. Build lineage items (each step is an indivisible unit containing node + arrow)
+    arrow_svg = '<svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>'
+    flow_steps = []
     for raw_p, clean_p in ancestors:
         link_href = None
         target_id = 'doc-nav-main'
@@ -472,16 +473,18 @@ def render_class_hierarchy_card(
             link_href = f"{root_rel}src_view/{cf}.html#L{cl}"
 
         if link_href:
-            flow_items.append(f'<a href="{link_href}" class="hierarchy-flow-node parent" data-target-id="{target_id}" title="Base class: {clean_p}">{clean_p}</a>')
+            node_html = f'<a href="{link_href}" class="hierarchy-flow-node parent" data-target-id="{target_id}" title="Base class: {clean_p}">{clean_p}</a>'
         else:
-            flow_items.append(f'<span class="hierarchy-flow-node parent static">{clean_p}</span>')
+            node_html = f'<span class="hierarchy-flow-node parent static">{clean_p}</span>'
+
+        flow_steps.append(f'<span class="hierarchy-flow-step">{node_html}{arrow_svg}</span>')
 
     methods_count = len(c_info.get('methods', {}))
     is_virtual = c_info.get('is_virtual', False)
-    flow_items.append(f'<span class="hierarchy-flow-node current" title="Current class: {cname}">{cname}</span>')
+    current_node = f'<span class="hierarchy-flow-node current" title="Current class: {cname}">{cname}</span>'
+    flow_steps.append(f'<span class="hierarchy-flow-step current-step">{current_node}</span>')
 
-    arrow_svg = '<svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>'
-    flow_html = arrow_svg.join(flow_items)
+    flow_html = "".join(flow_steps)
 
     # 3. Children / Subclasses
     children = c_info.get('children', [])
@@ -513,7 +516,7 @@ def render_class_hierarchy_card(
   <div class="hierarchy-widget-header">
     <div class="hierarchy-widget-title">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
-      <span>Inheritance & Class Topology</span>
+      <span>Class Hierarchy &amp; Topology</span>
     </div>
     <div class="hierarchy-widget-badges">
       <span class="hierarchy-role-tag role-{role_key}">{role_label}</span>

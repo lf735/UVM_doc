@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -302,6 +303,41 @@
       font-size: 0.85rem;
     }
 
+    .lineage-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .lineage-arrow {
+      color: var(--text-subtle);
+      opacity: 0.6;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    @media (max-width: 640px) {
+      .lineage-chain {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .lineage-step {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        white-space: normal;
+      }
+
+      .lineage-step .lineage-arrow {
+        transform: rotate(90deg);
+        margin: 2px 0 2px 8px;
+      }
+    }
+
     .lineage-pill {
       background: var(--surface-color);
       border: 1px solid var(--border-color);
@@ -407,11 +443,32 @@
       text-transform: uppercase;
     }
 
-    .badge-function { background: #e8f0fe; color: #1a73e8; }
-    .badge-task { background: #fef7e0; color: #b06000; }
-    .badge-override { background: #e6f4ea; color: #137333; font-size: 0.7rem; }
-    .badge-pure { background: #fce8e6; color: #c5221f; font-size: 0.7rem; }
-    .badge-macro { background: #f3e8fd; color: #9334e6; }
+    .badge-function {
+      background: #e8f0fe;
+      color: #1a73e8;
+    }
+
+    .badge-task {
+      background: #fef7e0;
+      color: #b06000;
+    }
+
+    .badge-override {
+      background: #e6f4ea;
+      color: #137333;
+      font-size: 0.7rem;
+    }
+
+    .badge-pure {
+      background: #fce8e6;
+      color: #c5221f;
+      font-size: 0.7rem;
+    }
+
+    .badge-macro {
+      background: #f3e8fd;
+      color: #9334e6;
+    }
 
     /* View 2: Overrides Matrix */
     .overrides-view {
@@ -593,6 +650,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Top Navigation & Header -->
@@ -645,7 +703,8 @@
     <div class="tab-view" id="tab-overrides">
       <div class="overrides-view">
         <div class="matrix-search-bar">
-          <input type="text" class="matrix-search-input" id="overrides-search-input" placeholder="Search overridden method (e.g. build_phase, run_phase, do_copy, create)..." />
+          <input type="text" class="matrix-search-input" id="overrides-search-input"
+            placeholder="Search overridden method (e.g. build_phase, run_phase, do_copy, create)..." />
           <span class="stats-pill" id="overrides-count-pill" style="align-self: center;">0 Overridden Methods</span>
         </div>
         <div class="card-grid" id="overrides-grid">
@@ -661,7 +720,8 @@
           <!-- Injected by JS -->
         </div>
         <div style="margin-bottom: 16px;">
-          <input type="text" class="matrix-search-input" id="macro-search-input" placeholder="Filter macros by name or description..." style="width: 100%; max-width: 500px;" />
+          <input type="text" class="matrix-search-input" id="macro-search-input"
+            placeholder="Filter macros by name or description..." style="width: 100%; max-width: 500px;" />
         </div>
         <div id="macros-list">
           <!-- Cards injected by JS -->
@@ -676,7 +736,8 @@
           <!-- Injected by JS -->
         </div>
         <div style="margin-bottom: 16px;">
-          <input type="text" class="matrix-search-input" id="file-search-input" placeholder="Filter files by path or description..." style="width: 100%; max-width: 500px;" />
+          <input type="text" class="matrix-search-input" id="file-search-input"
+            placeholder="Filter files by path or description..." style="width: 100%; max-width: 500px;" />
         </div>
         <table class="methods-table" id="files-table">
           <thead>
@@ -699,7 +760,8 @@
     <!-- TAB 5: DPI-C Interfaces -->
     <div class="tab-view" id="tab-dpi">
       <div class="dpi-view">
-        <h2 style="font-size: 1.2rem; margin-bottom: 16px;">SystemVerilog DPI-C Imports & Simulator C Implementations</h2>
+        <h2 style="font-size: 1.2rem; margin-bottom: 16px;">SystemVerilog DPI-C Imports & Simulator C Implementations
+        </h2>
         <div id="dpi-list">
           <!-- Injected by JS -->
         </div>
@@ -877,10 +939,12 @@
       const methods = Object.values(c.methods);
 
       // Lineage breadcrumbs
-      const lineageHtml = [
-        ...c.ancestors.slice().reverse().map(a => `<span class="lineage-pill" onclick="jumpToClass('${a}')">${a}</span>`),
-        `<span class="lineage-pill current">${c.name}</span>`
-      ].join(' <span style="color: var(--text-subtle);">&gt;</span> ');
+      const arrowSvg = '<svg class="lineage-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>';
+      const lineageSteps = [
+        ...c.ancestors.slice().reverse().map(a => `<span class="lineage-step"><span class="lineage-pill" onclick="jumpToClass('${a}')">${a}</span>${arrowSvg}</span>`),
+        `<span class="lineage-step current-step"><span class="lineage-pill current">${c.name}</span></span>`
+      ];
+      const lineageHtml = lineageSteps.join(' ');
 
       // Subclasses
       const subclassesHtml = c.children.length > 0
@@ -996,7 +1060,7 @@
       renderMethodRows();
     }
 
-    window.jumpToClass = function(cname) {
+    window.jumpToClass = function (cname) {
       selectedClassName = cname;
       renderClassTree();
       selectClass(cname);
@@ -1076,7 +1140,7 @@
       `).join('');
     }
 
-    window.selectMacroCat = function(cat) {
+    window.selectMacroCat = function (cat) {
       selectedMacroCategory = cat;
       document.querySelectorAll('#macro-category-pills .cat-pill').forEach(b => b.classList.remove('active'));
       event.target.classList.add('active');
@@ -1135,7 +1199,7 @@
       `).join('');
     }
 
-    window.selectSubsystem = function(s) {
+    window.selectSubsystem = function (s) {
       selectedSubsystem = s;
       document.querySelectorAll('#file-subsystem-pills .cat-pill').forEach(b => b.classList.remove('active'));
       event.target.classList.add('active');
@@ -1224,5 +1288,5 @@
     initDatabase();
   </script>
 </body>
-</html>
 
+</html>
