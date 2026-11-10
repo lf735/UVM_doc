@@ -939,8 +939,13 @@ html[data-theme="dark"] .sidebar-tab-btn:hover {
 }
 
 @keyframes paneFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .mode-split #split-divider {
@@ -1540,8 +1545,11 @@ h3.CTitle {
 .CVariable,
 .CMacro,
 .CPort,
-.CGeneric,
-.CSection {
+.CType,
+.CEnumeration,
+.CConstant,
+.CParameter,
+.CGeneric:has(.src-code-link) {
   margin-bottom: 2rem;
   padding-bottom: 1.75rem;
   border-bottom: 1px solid var(--border-subtle);
@@ -1552,6 +1560,87 @@ h3.CTitle {
 .CFunction:last-child,
 .CVariable:last-child {
   border-bottom: none;
+}
+
+/* ============================================================
+   Section & Group Headings Styling (CGroup, CSection, CFile)
+   ============================================================ */
+
+/* Topic Groups (e.g. Methods, Variables, Configuration, Reporting, Phasing) */
+.CGroup {
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  border: none;
+  clear: both;
+}
+
+.CGroup .CTitle,
+.CGroup h2.CTitle,
+.CGroup h3.CTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.85rem 0;
+  padding: 0;
+  border: none;
+  line-height: 1.35;
+}
+
+.CGroup .CBody {
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  color: var(--text-muted);
+  font-size: 0.925rem;
+  line-height: 1.6;
+}
+
+.CGroup .CBody p {
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+}
+
+/* Major Secondary Sections (e.g. "Types" in uvm_config_db, or extra class sections) */
+.CSection:not(#doc-nav-main),
+.CFile:not(#doc-nav-main) {
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  padding: 0;
+  border: none;
+  clear: both;
+}
+
+.CSection:not(#doc-nav-main) .CTitle,
+.CSection:not(#doc-nav-main) h2.CTitle,
+.CFile:not(#doc-nav-main) .CTitle {
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.015em;
+  padding: 0;
+  margin-bottom: 1rem;
+  border: none;
+  line-height: 1.3;
+}
+
+/* Editorial / Intro generic topics */
+.CGeneric:not(#doc-nav-main):not(:has(.src-code-link)) {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.CGeneric:not(#doc-nav-main):not(:has(.src-code-link)) .CTitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+  padding: 0;
+  background: none;
+  border: none;
 }
 
 /* Inline code pill */
@@ -1870,13 +1959,47 @@ code {
   white-space: nowrap;
 }
 
-.role-component { background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
-.role-sequence  { background: rgba(168, 85, 247, 0.12); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); }
-.role-reg       { background: rgba(249, 115, 22, 0.12); color: #f97316; border: 1px solid rgba(249, 115, 22, 0.3); }
-.role-tlm       { background: rgba(6, 182, 212, 0.12); color: #06b6d4; border: 1px solid rgba(6, 182, 212, 0.3); }
-.role-phase     { background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-.role-object    { background: rgba(99, 102, 241, 0.12); color: #6366f1; border: 1px solid rgba(99, 102, 241, 0.3); }
-.role-utility   { background: rgba(100, 116, 139, 0.12); color: #64748b; border: 1px solid rgba(100, 116, 139, 0.3); }
+.role-component {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.role-sequence {
+  background: rgba(168, 85, 247, 0.12);
+  color: #a855f7;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.role-reg {
+  background: rgba(249, 115, 22, 0.12);
+  color: #f97316;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.role-tlm {
+  background: rgba(6, 182, 212, 0.12);
+  color: #06b6d4;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.role-phase {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.role-object {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.role-utility {
+  background: rgba(100, 116, 139, 0.12);
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
 
 .hierarchy-virtual-badge {
   display: inline-flex;
@@ -5758,8 +5881,15 @@ tr.stepper-highlight .ln {
 }
 
 @keyframes findSlideIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .find-input-wrap {
@@ -5902,8 +6032,15 @@ mark.find-match.find-match-current {
 }
 
 @keyframes qiFadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .qi-header {
@@ -5923,15 +6060,45 @@ mark.find-match.find-match-current {
   letter-spacing: 0.03em;
 }
 
-.qi-badge-class { background: #e0e7ff; color: #3730a3; }
-.qi-badge-function { background: #dcfce7; color: #166534; }
-.qi-badge-task { background: #fef3c7; color: #92400e; }
-.qi-badge-macro { background: #f3e8ff; color: #6b21a8; }
+.qi-badge-class {
+  background: #e0e7ff;
+  color: #3730a3;
+}
 
-[data-theme="dark"] .qi-badge-class { background: #312e81; color: #c7d2fe; }
-[data-theme="dark"] .qi-badge-function { background: #14532d; color: #bbf7d0; }
-[data-theme="dark"] .qi-badge-task { background: #78350f; color: #fde68a; }
-[data-theme="dark"] .qi-badge-macro { background: #581c87; color: #e9d5ff; }
+.qi-badge-function {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.qi-badge-task {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.qi-badge-macro {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
+[data-theme="dark"] .qi-badge-class {
+  background: #312e81;
+  color: #c7d2fe;
+}
+
+[data-theme="dark"] .qi-badge-function {
+  background: #14532d;
+  color: #bbf7d0;
+}
+
+[data-theme="dark"] .qi-badge-task {
+  background: #78350f;
+  color: #fde68a;
+}
+
+[data-theme="dark"] .qi-badge-macro {
+  background: #581c87;
+  color: #e9d5ff;
+}
 
 .qi-symbol-name {
   font-family: var(--font-mono);
