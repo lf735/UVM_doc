@@ -443,8 +443,10 @@ body.is-resizing iframe {
 .sidebar-tabs {
   display: flex;
   align-items: center;
+  gap: 3px;
+  padding: 6px 8px;
+  background: var(--surface-alt);
   border-bottom: 1px solid var(--border-color);
-  background: var(--surface-color);
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -456,30 +458,69 @@ body.is-resizing iframe {
 .sidebar-tab-btn {
   flex: 1 1 0;
   min-width: 0;
-  padding: 0.65rem 0.35rem;
-  border: none;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 5px 2px 4px 2px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   background: transparent;
-  font-size: 0.775rem;
-  font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
   text-align: center;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.sidebar-tab-btn .tab-icon {
+  flex-shrink: 0;
+  stroke-width: 2;
+  transition: transform 0.15s ease, color 0.15s ease;
+  opacity: 0.8;
+}
+
+.sidebar-tab-btn .tab-label {
+  font-size: 0.69rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-bottom: 2px solid transparent;
-  transition: all 0.15s ease;
+  max-width: 100%;
+  line-height: 1.1;
 }
 
 .sidebar-tab-btn:hover {
   color: var(--text-main);
-  background: var(--surface-alt);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+html[data-theme="dark"] .sidebar-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sidebar-tab-btn:hover .tab-icon {
+  opacity: 1;
+  transform: translateY(-1px);
 }
 
 .sidebar-tab-btn.active {
   color: var(--primary);
-  border-bottom-color: var(--primary);
-  background: var(--surface-alt);
+  background: var(--surface-color);
+  border-color: var(--border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+}
+
+.sidebar-tab-btn.active .tab-icon {
+  opacity: 1;
+  stroke: var(--primary);
+}
+
+.sidebar-tab-btn.active .tab-label {
+  color: var(--primary);
+  font-weight: 700;
 }
 
 .sidebar-filter {

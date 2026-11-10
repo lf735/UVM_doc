@@ -403,7 +403,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeSidebarTab === tabName) return;
     activeSidebarTab = tabName;
     tabBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
+      const isActive = btn.getAttribute('data-tab') === tabName;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
     if (typeof updateSidebarPillsForTab === 'function') {
       updateSidebarPillsForTab();
@@ -1115,8 +1117,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabBtns = document.querySelectorAll('.sidebar-tab-btn');
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      tabBtns.forEach(b => b.classList.remove('active'));
+      tabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
       activeSidebarTab = btn.getAttribute('data-tab');
       updateSidebarPillsForTab();
       renderSidebar();
