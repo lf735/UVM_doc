@@ -20,6 +20,7 @@ import os
 import re
 import sys
 import json
+import html
 import sqlite3
 from pathlib import Path
 from collections import defaultdict
@@ -862,6 +863,118 @@ def build_database():
             "line": minfo["start_line"],
             "summary": minfo["doc"]["summary"] if minfo["doc"] else ""
         })
+
+    # 6b. Extract Constants, Variables, Types, and Ports from NaturalDocs indices and SV sources
+    docs_index_dir = BASE_DIR / "uvm-1.2" / "docs" / "html" / "index"
+    existing_sym_keys = set((s["name"], s.get("class")) for s in symbols_index)
+
+    file_lines_cache = {}
+    def get_lines(rel_file):
+        if rel_file not in file_lines_cache:
+            p = SRC_DIR / rel_file
+            if p.exists():
+                try:
+                    file_lines_cache[rel_file] = p.read_text(encoding="latin-1").splitlines()
+                except Exception:
+                    file_lines_cache[rel_file] = []
+            else:
+                file_lines_cache[rel_file] = []
+        return file_lines_cache[rel_file]
+
+    def find_decl_line(rel_file, sym_name):
+        lines = get_lines(rel_file)
+        clean_name = sym_name.lstrip('+`')
+        pat = re.compile(r'\b' + re.escape(clean_name) + r'\b')
+        for idx, l in enumerate(lines, 1):
+            if pat.search(l):
+                return idx
+        return 1
+
+    configs = [
+        ("Constants.html", "constant"),
+        ("Types.html", "type"),
+        ("Variables.html", "variable"),
+        ("Ports.html", "port")
+    ]
+
+    extra_count = 0
+    for fname, sym_type in configs:
+        fpath = docs_index_dir / fname
+        if not fpath.exists():
+            continue
+        try:
+            content = fpath.read_text(encoding="latin-1")
+        except Exception:
+            continue
+
+        # 1. Parse Tooltips
+        tooltips = {}
+        for m in re.finditer(r'<div class=CToolTip id="?([^">]+)"?>\s*<div class=[^>]+>([\s\S]*?)</div>\s*</div>', content):
+            tid = m.group(1).replace('"', '').strip()
+            clean_txt = re.sub(r'<[^>]+>', ' ', m.group(2)).strip()
+            clean_txt = re.sub(r'\s+', ' ', clean_txt)
+            tooltips[tid] = clean_txt
+
+        # 2. Direct entries: <td class=IEntry><a href="..." ... class=ISymbol>NAME</a></td>
+        for m in re.finditer(r'<td class=IEntry><a href="([^"]+)"(?:[^>]*onMouseOver="ShowTip\(event,\s*\'([^\']+)\'[^"]*")?[^>]*class=ISymbol>([^<]+)</a></td>', content):
+            raw_href = m.group(1).replace('../files/', '')
+            doc_file, _, _ = raw_href.partition('#')
+            tid = m.group(2)
+            name = html.unescape(m.group(3).strip())
+            desc = tooltips.get(tid, "")
+
+            if (name, None) in existing_sym_keys:
+                continue
+            existing_sym_keys.add((name, None))
+
+            sv_rel = doc_file.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
+            line_no = find_decl_line(sv_rel, name)
+
+            symbols_index.append({
+                "name": name,
+                "type": sym_type,
+                "class": None,
+                "file": sv_rel,
+                "line": line_no,
+                "summary": desc
+            })
+            extra_count += 1
+
+        # 3. Subindex entries: <td class=IEntry><span class=ISymbol>NAME</span><div class=ISubIndex>...</div>
+        for m in re.finditer(r'<td class=IEntry><span class=ISymbol>([^<]+)</span>\s*<div class=ISubIndex>([\s\S]*?)</div>', content):
+            sname = html.unescape(m.group(1).strip())
+            sub_html = m.group(2)
+            for lm in re.finditer(r'<a\s+href="([^"]+)"(?:[^>]*onMouseOver="ShowTip\(event,\s*\'([^\']+)\'[^"]*")?[^>]*class=IParent>([^<]+)</a>', sub_html):
+                raw_href = lm.group(1).replace('../files/', '')
+                doc_file, _, _ = raw_href.partition('#')
+                tid = lm.group(2)
+                parent_class = html.unescape(lm.group(3).strip())
+                desc = tooltips.get(tid, "")
+
+                full_name = f"{parent_class}::{sname}" if parent_class else sname
+                if (full_name, parent_class) in existing_sym_keys:
+                    continue
+                existing_sym_keys.add((full_name, parent_class))
+
+                sv_rel = None
+                if parent_class and parent_class in classes_db:
+                    sv_rel = classes_db[parent_class]["file"]
+                if not sv_rel:
+                    sv_rel = doc_file.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
+                line_no = find_decl_line(sv_rel, sname)
+
+                symbols_index.append({
+                    "name": full_name,
+                    "short_name": sname,
+                    "type": sym_type,
+                    "class": parent_class,
+                    "file": sv_rel,
+                    "line": line_no,
+                    "summary": desc
+                })
+                extra_count += 1
+
+    print(f"Enriched symbols_index with {extra_count} additional constants, variables, types, and ports.")
 
     # 7. DPI Dedicated Database
     # Bind SystemVerilog DPI imports with C implementations

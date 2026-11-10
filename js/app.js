@@ -916,6 +916,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (itemType === 'method') {
       return filterSet.has('function') || filterSet.has('task') || filterSet.has('method');
     }
+    if (itemType === 'constant' || itemType === 'parameter') {
+      return filterSet.has('constant');
+    }
+    if (itemType === 'variable') {
+      return filterSet.has('variable');
+    }
+    if (itemType === 'type' || itemType === 'enum' || itemType === 'enumeration') {
+      return filterSet.has('type');
+    }
+    if (itemType === 'port') {
+      return filterSet.has('port');
+    }
     if (itemType === 'studio' || itemType === 'stepper' || itemType === 'example') {
       return filterSet.has('example');
     }
@@ -1158,8 +1170,21 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="sidebar-pill" data-type="reg">Registers</button>
             <button class="sidebar-pill" data-type="phase">Phases</button>
           `;
+    } else if (activeSidebarTab === 'index') {
+      sidebarPillsContainer.style.display = 'flex';
+      sidebarPillsContainer.innerHTML = `
+            <button class="sidebar-pill active" data-type="all">All</button>
+            <button class="sidebar-pill" data-type="class">Classes</button>
+            <button class="sidebar-pill" data-type="function">Functions</button>
+            <button class="sidebar-pill" data-type="task">Tasks</button>
+            <button class="sidebar-pill" data-type="macro">Macros</button>
+            <button class="sidebar-pill" data-type="variable">Variables</button>
+            <button class="sidebar-pill" data-type="constant">Constants</button>
+            <button class="sidebar-pill" data-type="type">Types</button>
+            <button class="sidebar-pill" data-type="port">Ports</button>
+          `;
     } else {
-      // For docs / index: show language symbol types (Classes, Functions, Tasks, Macros)
+      // For docs: show language symbol types
       sidebarPillsContainer.style.display = 'flex';
       sidebarPillsContainer.innerHTML = `
             <button class="sidebar-pill active" data-type="all">All</button>
@@ -1474,9 +1499,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const items = UVM_DATA.searchIndex || [];
     const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
 
+    const allowedTypes = new Set([
+      'class', 'macro', 'function', 'task', 'method',
+      'variable', 'constant', 'parameter', 'type', 'enum', 'enumeration', 'port'
+    ]);
+
     const allSymbols = items.filter(x => {
       if (!isItemTypeAllowed(x.type, sidebarFilterTypes)) return false;
-      return x.type === 'class' || x.type === 'macro' || x.type === 'function' || x.type === 'task' || x.type === 'method';
+      return allowedTypes.has(x.type);
     });
 
     const matchedSymbols = [];
@@ -1498,8 +1528,12 @@ document.addEventListener('DOMContentLoaded', () => {
         (item.type === 'macro' ? 'badge-macro' :
           (item.type === 'function' ? 'badge-function' :
             (item.type === 'task' ? 'badge-task' :
-              (item.type === 'example' ? 'badge-example' : 'badge-method'))));
-      const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method';
+              (item.type === 'variable' ? 'badge-variable' :
+                (item.type === 'constant' || item.type === 'parameter' ? 'badge-constant' :
+                  (item.type === 'type' || item.type === 'enum' || item.type === 'enumeration' ? 'badge-type' :
+                    (item.type === 'port' ? 'badge-port' :
+                      (item.type === 'example' ? 'badge-example' : 'badge-method'))))))));
+      const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method' || item.type === 'variable' || item.type === 'port';
       const ownerInfo = item.category && isMethodLike ?
         `<span class="az-symbol-owner" style="font-size:0.68rem; color:var(--text-muted); margin-left:auto; margin-right:0.35rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px;">${highlightMatch(item.category, matcher)}</span>` : '';
       const isDocActive = item.doc && urlsMatch(item.doc, currentDocUrl);
@@ -3048,8 +3082,12 @@ document.addEventListener('DOMContentLoaded', () => {
           (displayType === 'macro' ? 'badge-macro' :
             (displayType === 'function' ? 'badge-function' :
               (displayType === 'task' ? 'badge-task' :
-                (displayType === 'example' ? 'badge-example' :
-                  (displayType === 'method' ? 'badge-method' : 'badge-file')))));
+                (displayType === 'variable' ? 'badge-variable' :
+                  (displayType === 'constant' || displayType === 'parameter' ? 'badge-constant' :
+                    (displayType === 'type' || displayType === 'enum' || displayType === 'enumeration' ? 'badge-type' :
+                      (displayType === 'port' ? 'badge-port' :
+                        (displayType === 'example' ? 'badge-example' :
+                          (displayType === 'method' ? 'badge-method' : 'badge-file')))))))));
 
         let sectionsPillsHtml = '';
         if (res.targetSections && res.targetSections.length > 0) {
@@ -3219,10 +3257,14 @@ document.addEventListener('DOMContentLoaded', () => {
         (item.type === 'macro' ? 'badge-macro' :
           (item.type === 'function' ? 'badge-function' :
             (item.type === 'task' ? 'badge-task' :
-              (item.type === 'example' ? 'badge-example' :
-                (item.type === 'method' ? 'badge-method' : 'badge-file')))));
+              (item.type === 'variable' ? 'badge-variable' :
+                (item.type === 'constant' || item.type === 'parameter' ? 'badge-constant' :
+                  (item.type === 'type' || item.type === 'enum' || item.type === 'enumeration' ? 'badge-type' :
+                    (item.type === 'port' ? 'badge-port' :
+                      (item.type === 'example' ? 'badge-example' :
+                        (item.type === 'method' ? 'badge-method' : 'badge-file')))))))));
 
-      const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method';
+      const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method' || item.type === 'variable' || item.type === 'port';
       const categoryTag = item.category && isMethodLike ?
         `<span style="color:var(--text-muted); font-size:0.8rem; margin-right:0.35rem">${highlightMatch(item.category, matcher)} ::</span>` : '';
 

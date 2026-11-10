@@ -6,7 +6,7 @@
     "total_macros": 373,
     "total_methods": 2213,
     "total_overrides": 531,
-    "total_symbols": 2913,
+    "total_symbols": 3302,
     "generated_at": "2026-10-31"
   },
   "files": {
@@ -3431,8 +3431,7 @@
       ],
       "classes": [
         "uvm_reg_cbs",
-        "uvm_reg_write_only_cbs",
-        "uvm_reg_read_only_cbs"
+        "uvm_reg_write_only_cbs"
       ],
       "macros": []
     },
@@ -79125,8 +79124,7 @@
         "uvm_void"
       ],
       "children": [
-        "uvm_reg_write_only_cbs",
-        "uvm_reg_read_only_cbs"
+        "uvm_reg_write_only_cbs"
       ],
       "descendants": [
         "uvm_reg_write_only_cbs"
@@ -110775,79 +110773,6 @@
           "overridden_by": []
         }
       }
-    },
-    "uvm_reg_read_only_cbs": {
-      "name": "uvm_reg_read_only_cbs",
-      "file": "reg/uvm_reg_cbs.svh",
-      "start_line": 369,
-      "end_line": 444,
-      "is_virtual": false,
-      "parameters_raw": null,
-      "extends_raw": "uvm_reg_cbs",
-      "extends_base": "uvm_reg_cbs",
-      "parent": "uvm_reg_cbs",
-      "ancestors": [
-        "uvm_reg_cbs",
-        "uvm_callback",
-        "uvm_object",
-        "uvm_void"
-      ],
-      "children": [],
-      "descendants": [],
-      "depth": 4,
-      "is_deprecated": false,
-      "doc": {
-        "title": "uvm_reg_read_only_cbs",
-        "summary": "Pre-defined register callback method for read-only registers that will issue an error if a write() operation is attempted.",
-        "full_text": "Pre-defined register callback method for read-only registers\nthat will issue an error if a write() operation is attempted."
-      },
-      "methods": {
-        "new": {
-          "name": "new",
-          "class": "uvm_reg_read_only_cbs",
-          "kind": "function",
-          "return_type": "void",
-          "modifiers": [],
-          "visibility": "public",
-          "is_virtual": false,
-          "is_pure_virtual": false,
-          "is_static": false,
-          "is_extern": false,
-          "is_inline": true,
-          "decl": {
-            "file": "reg/uvm_reg_cbs.svh",
-            "start_line": 371,
-            "end_line": 371
-          },
-          "impl": {
-            "file": "reg/uvm_reg_cbs.svh",
-            "start_line": 371,
-            "end_line": 373,
-            "is_inline": true,
-            "calls_super": true
-          },
-          "parameters": [
-            {
-              "direction": "input",
-              "type": "string",
-              "name": "name",
-              "default": "\"uvm_reg_read_only_cbs\""
-            }
-          ],
-          "parameters_raw": "(string name = \"uvm_reg_read_only_cbs\")",
-          "doc": null,
-          "overrides": true,
-          "overridden_from": "uvm_reg_cbs",
-          "root_ancestor": "uvm_object",
-          "is_override_of_pure_virtual": false,
-          "overridden_by": [],
-          "ancestor_decl": {
-            "class": "uvm_reg_cbs",
-            "file": "reg/uvm_reg_cbs.svh",
-            "line": 46
-          }
-        }
-      }
     }
   },
   "macros": {
@@ -111200,8 +111125,8 @@
       "is_deprecated": true,
       "doc": {
         "title": "`uvm_update_sequence_lib",
-        "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencer\u00ef\u00bf\u00bd\u00ef\u00bf\u00bds constructor.",
-        "full_text": "This macro populates the instance-specific sequence library for a sequencer.\nIt should be invoked inside the sequencer\u00ef\u00bf\u00bd\u00ef\u00bf\u00bds constructor."
+        "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencerï¿½ï¿½s constructor.",
+        "full_text": "This macro populates the instance-specific sequence library for a sequencer.\nIt should be invoked inside the sequencerï¿½ï¿½s constructor."
       }
     },
     "uvm_update_sequence_lib_and_item": {
@@ -176905,7 +176830,7 @@
       "class": null,
       "file": "macros/uvm_deprecated_defines.svh",
       "line": 125,
-      "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencer\u00ef\u00bf\u00bd\u00ef\u00bf\u00bds constructor."
+      "summary": "This macro populates the instance-specific sequence library for a sequencer. It should be invoked inside the sequencerï¿½ï¿½s constructor."
     },
     {
       "name": "uvm_update_sequence_lib_and_item",
@@ -179722,6 +179647,3320 @@
       "file": "uvm_macros.svh",
       "line": 66,
       "summary": ""
+    },
+    {
+      "name": "BEGIN_REQ",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 29,
+      "summary": "Beginning of request phase"
+    },
+    {
+      "name": "BEGIN_RESP",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 31,
+      "summary": "Beginning of response phase"
+    },
+    {
+      "name": "END_REQ",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 30,
+      "summary": "End of request phase"
+    },
+    {
+      "name": "END_RESP",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 32,
+      "summary": "End of response phase"
+    },
+    {
+      "name": "UNINITIALIZED_PHASE",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 28,
+      "summary": "Defaults for constructor"
+    },
+    {
+      "name": "UVM_ACTIVE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 146,
+      "summary": "&ldquo;Active&rdquo; mode"
+    },
+    {
+      "name": "UVM_ALL_DROPPED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 578,
+      "summary": "all objections have been dropped"
+    },
+    {
+      "name": "UVM_BACKDOOR",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 160,
+      "summary": "Use the back door"
+    },
+    {
+      "name": "UVM_BIG_ENDIAN",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 192,
+      "summary": "Most-significant bytes first in consecutive addresses"
+    },
+    {
+      "name": "UVM_BIG_FIFO",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 194,
+      "summary": "Most-significant bytes first at the same address"
+    },
+    {
+      "name": "UVM_BIN",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 67,
+      "summary": "Selects binary (%b) format"
+    },
+    {
+      "name": "UVM_BODY",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 384,
+      "summary": "The sequence is started and the uvm_sequence_base::body() task is being executed."
+    },
+    {
+      "name": "UVM_CALL_HOOK",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 266,
+      "summary": "Callback the report hook methods"
+    },
+    {
+      "name": "UVM_CHECK",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 178,
+      "summary": "Read and check"
+    },
+    {
+      "name": "UVM_COUNT",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 263,
+      "summary": "Counts the number of reports with the COUNT attribute."
+    },
+    {
+      "name": "UVM_CREATED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 377,
+      "summary": "The sequence has been allocated."
+    },
+    {
+      "name": "UVM_CVR_ADDR_MAP",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 270,
+      "summary": "Individual register and memory addresses"
+    },
+    {
+      "name": "UVM_CVR_ALL",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 272,
+      "summary": "All coverage models"
+    },
+    {
+      "name": "UVM_CVR_FIELD_VALS",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 271,
+      "summary": "Field values"
+    },
+    {
+      "name": "UVM_CVR_REG_BITS",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 269,
+      "summary": "Individual register bits"
+    },
+    {
+      "name": "UVM_DEC",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 68,
+      "summary": "Selects decimal (%d) format"
+    },
+    {
+      "name": "UVM_DEEP",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 128,
+      "summary": "Objects are deep copied (object must implement uvm_object::copy method)"
+    },
+    {
+      "name": "UVM_DEFAULT_PATH",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 163,
+      "summary": "Operation specified by the context"
+    },
+    {
+      "name": "UVM_DISPLAY",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 261,
+      "summary": "Sends the report to the standard output"
+    },
+    {
+      "name": "UVM_DO_ALL_REG_MEM_TESTS",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 296,
+      "summary": "Run all of the above"
+    },
+    {
+      "name": "UVM_DO_MEM_ACCESS",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 293,
+      "summary": "Run uvm_mem_access_seq"
+    },
+    {
+      "name": "UVM_DO_MEM_WALK",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 295,
+      "summary": "Run uvm_mem_walk_seq"
+    },
+    {
+      "name": "UVM_DO_REG_ACCESS",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 292,
+      "summary": "Run uvm_reg_access_seq"
+    },
+    {
+      "name": "UVM_DO_REG_BIT_BASH",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 291,
+      "summary": "Run uvm_reg_bit_bash_seq"
+    },
+    {
+      "name": "UVM_DO_REG_HW_RESET",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 290,
+      "summary": "Run uvm_reg_hw_reset_seq"
+    },
+    {
+      "name": "UVM_DO_SHARED_ACCESS",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 294,
+      "summary": "Run uvm_reg_mem_shared_access_seq"
+    },
+    {
+      "name": "UVM_DROPPED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 577,
+      "summary": "an objection was raised"
+    },
+    {
+      "name": "UVM_ENDED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 387,
+      "summary": "The sequence has completed the execution of the uvm_sequence_base::body() task."
+    },
+    {
+      "name": "UVM_ENUM",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 76,
+      "summary": "Selects enumeration value (name) format"
+    },
+    {
+      "name": "UVM_EQ",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 551,
+      "summary": "equal"
+    },
+    {
+      "name": "UVM_ERROR",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 237,
+      "summary": "Indicates a real problem."
+    },
+    {
+      "name": "UVM_EXIT",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 265,
+      "summary": "Terminates the simulation immediately."
+    },
+    {
+      "name": "UVM_EXPORT",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 326,
+      "summary": "The port provides the interface that is its type parameter via a connection to some other export or implementation."
+    },
+    {
+      "name": "UVM_FATAL",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 239,
+      "summary": "Indicates a problem from which simulation cannot recover."
+    },
+    {
+      "name": "UVM_FIELD",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 210,
+      "summary": "Field"
+    },
+    {
+      "name": "UVM_FINISHED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 397,
+      "summary": "The sequence is completely finished executing."
+    },
+    {
+      "name": "UVM_FRONTDOOR",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 159,
+      "summary": "Use the front door"
+    },
+    {
+      "name": "UVM_FULL",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 299,
+      "summary": "Report is issued if configured verbosity is set to UVM_FULL or above."
+    },
+    {
+      "name": "UVM_GT",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 555,
+      "summary": "greater than"
+    },
+    {
+      "name": "UVM_GTE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 556,
+      "summary": "greater than or equal to"
+    },
+    {
+      "name": "UVM_HAS_X",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 145,
+      "summary": "Operation completed successfully bit had unknown bits."
+    },
+    {
+      "name": "UVM_HEX",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 73,
+      "summary": "Selects hexadecimal (%h) format"
+    },
+    {
+      "name": "UVM_HIER",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 240,
+      "summary": "Provide info based on the hierarchical context"
+    },
+    {
+      "name": "UVM_HIGH",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 297,
+      "summary": "Report is issued if configured verbosity is set to UVM_HIGH or above."
+    },
+    {
+      "name": "UVM_IMPLEMENTATION",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 329,
+      "summary": "The port provides the interface that is its type parameter, and it is bound to the component that implements the interface."
+    },
+    {
+      "name": "UVM_INFO",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 235,
+      "summary": "Informative message."
+    },
+    {
+      "name": "UVM_IS_OK",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 143,
+      "summary": "Operation completed successfully"
+    },
+    {
+      "name": "UVM_LITTLE_ENDIAN",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 191,
+      "summary": "Least-significant bytes first in consecutive addresses"
+    },
+    {
+      "name": "UVM_LITTLE_FIFO",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 193,
+      "summary": "Least-significant bytes first at the same address"
+    },
+    {
+      "name": "UVM_LOG",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 262,
+      "summary": "Sends the report to the file(s) for this (severity,id) pair"
+    },
+    {
+      "name": "UVM_LOW",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 293,
+      "summary": "Report is issued if configured verbosity is set to UVM_LOW or above."
+    },
+    {
+      "name": "UVM_LT",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 553,
+      "summary": "less than"
+    },
+    {
+      "name": "UVM_LTE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 554,
+      "summary": "less than or equal to"
+    },
+    {
+      "name": "UVM_MEDIUM",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 295,
+      "summary": "Report is issued if configured verbosity is set to UVM_MEDIUM or above."
+    },
+    {
+      "name": "UVM_MEM",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 211,
+      "summary": "Memory location"
+    },
+    {
+      "name": "UVM_NE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 552,
+      "summary": "not equal"
+    },
+    {
+      "name": "UVM_NO_ACTION",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 260,
+      "summary": "No action is taken"
+    },
+    {
+      "name": "UVM_NO_CHECK",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 177,
+      "summary": "Read only"
+    },
+    {
+      "name": "UVM_NO_COVERAGE",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 268,
+      "summary": "None"
+    },
+    {
+      "name": "UVM_NO_ENDIAN",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 190,
+      "summary": "Byte ordering not applicable"
+    },
+    {
+      "name": "UVM_NO_HIER",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 239,
+      "summary": "Provide info from the local context"
+    },
+    {
+      "name": "UVM_NONE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 291,
+      "summary": "Report is always printed."
+    },
+    {
+      "name": "UVM_NOT_OK",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 144,
+      "summary": "Operation completed with error"
+    },
+    {
+      "name": "UVM_OCT",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 72,
+      "summary": "Selects octal (%o) format"
+    },
+    {
+      "name": "UVM_PASSIVE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 145,
+      "summary": "&ldquo;Passive&rdquo; mode"
+    },
+    {
+      "name": "UVM_PHASE_CLEANUP",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 520,
+      "summary": "all processes related to phase are being killed"
+    },
+    {
+      "name": "UVM_PHASE_DOMAIN",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 462,
+      "summary": "This object represents an entire graph segment that executes in parallel with the &lsquo;run&rsquo; phase."
+    },
+    {
+      "name": "UVM_PHASE_DONE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 522,
+      "summary": "A phase is done after it terminated execution."
+    },
+    {
+      "name": "UVM_PHASE_DORMANT",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 489,
+      "summary": "The schedule is not currently operating on the phase node, however it will be scheduled at some point in the future."
+    },
+    {
+      "name": "UVM_PHASE_ENDED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 509,
+      "summary": "phase completed execution, now running phase_ended() callback"
+    },
+    {
+      "name": "UVM_PHASE_EXECUTING",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 501,
+      "summary": "An executing phase is one where the phase callbacks are being executed."
+    },
+    {
+      "name": "UVM_PHASE_IMP",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 443,
+      "summary": "The phase object is used to traverse the component hierarchy and call the component phase method as well as the phase_started and phase_ended callbacks."
+    },
+    {
+      "name": "UVM_PHASE_JUMPING",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 517,
+      "summary": "all processes related to phase are being killed and all predecessors are forced into the DONE state."
+    },
+    {
+      "name": "UVM_PHASE_NODE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 451,
+      "summary": "The object represents a simple node instance in the graph."
+    },
+    {
+      "name": "UVM_PHASE_READY_TO_END",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 504,
+      "summary": "no objections remain in this phase or in any predecessors of its successors or in any sync&rsquo;d phases."
+    },
+    {
+      "name": "UVM_PHASE_SCHEDULE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 455,
+      "summary": "The object represents a portion of the phasing graph, typically consisting of several NODE types, in series, parallel, or both."
+    },
+    {
+      "name": "UVM_PHASE_SCHEDULED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 492,
+      "summary": "At least one immediate predecessor has completed."
+    },
+    {
+      "name": "UVM_PHASE_STARTED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 499,
+      "summary": "phase ready to execute, running phase_started() callback"
+    },
+    {
+      "name": "UVM_PHASE_SYNCING",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 496,
+      "summary": "All predecessors complete, checking that all synced phases (e.g."
+    },
+    {
+      "name": "UVM_PHASE_TERMINAL",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 459,
+      "summary": "This internal object serves as the termination NODE for a SCHEDULE phase object."
+    },
+    {
+      "name": "UVM_PHASE_UNINITIALIZED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 485,
+      "summary": "The state is uninitialized."
+    },
+    {
+      "name": "UVM_PORT",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 324,
+      "summary": "The port requires the interface that is its type parameter."
+    },
+    {
+      "name": "UVM_POST_BODY",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 389,
+      "summary": "The sequence is started and the uvm_sequence_base::post_body() task is being executed."
+    },
+    {
+      "name": "UVM_POST_START",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 392,
+      "summary": "The sequence is started and the uvm_sequence_base::post_start() task is being executed."
+    },
+    {
+      "name": "UVM_PRE_BODY",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 381,
+      "summary": "The sequence is started and the uvm_sequence_base::pre_body() task is being executed."
+    },
+    {
+      "name": "UVM_PRE_START",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 378,
+      "summary": "The sequence is started and the uvm_sequence_base::pre_start() task is being executed."
+    },
+    {
+      "name": "UVM_PREDICT",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 161,
+      "summary": "Operation derived from observations by a bus monitor via the uvm_reg_predictor class."
+    },
+    {
+      "name": "UVM_PREDICT_DIRECT",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 252,
+      "summary": "Predicted value is as-is"
+    },
+    {
+      "name": "UVM_PREDICT_READ",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 253,
+      "summary": "Predict based on the specified value having been read"
+    },
+    {
+      "name": "UVM_PREDICT_WRITE",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 254,
+      "summary": "Predict based on the specified value having been written"
+    },
+    {
+      "name": "UVM_RAISED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 576,
+      "summary": "an objection was raised"
+    },
+    {
+      "name": "UVM_READ",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 224,
+      "summary": "Read operation"
+    },
+    {
+      "name": "UVM_REAL",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 77,
+      "summary": "Selects real (%g) in exponential or decimal format, whichever format results in the shorter printed output"
+    },
+    {
+      "name": "UVM_REAL_DEC",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 79,
+      "summary": "Selects real (%f) in decimal format"
+    },
+    {
+      "name": "UVM_REAL_EXP",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 80,
+      "summary": "Selects real (%e) in exponential format"
+    },
+    {
+      "name": "UVM_REFERENCE",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 130,
+      "summary": "Only object handles are copied."
+    },
+    {
+      "name": "UVM_REG",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 209,
+      "summary": "Register"
+    },
+    {
+      "name": "UVM_RM_RECORD",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 269,
+      "summary": "Sends the report to the recorder"
+    },
+    {
+      "name": "UVM_SEQ_ARB_FIFO",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 349,
+      "summary": "Requests are granted in FIFO order (default)"
+    },
+    {
+      "name": "UVM_SEQ_ARB_RANDOM",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 351,
+      "summary": "Requests are granted randomly"
+    },
+    {
+      "name": "UVM_SEQ_ARB_STRICT_FIFO",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 352,
+      "summary": "Requests at highest priority granted in fifo order"
+    },
+    {
+      "name": "UVM_SEQ_ARB_STRICT_RANDOM",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 353,
+      "summary": "Requests at highest priority granted in randomly"
+    },
+    {
+      "name": "UVM_SEQ_ARB_USER",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 354,
+      "summary": "Arbitration is delegated to the user-defined function, user_priority_arbitration."
+    },
+    {
+      "name": "UVM_SEQ_ARB_WEIGHTED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 350,
+      "summary": "Requests are granted randomly by weight"
+    },
+    {
+      "name": "UVM_SEQ_LIB_ITEM",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 421,
+      "summary": "Emit only items, no sequence execution"
+    },
+    {
+      "name": "UVM_SEQ_LIB_RAND",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 419,
+      "summary": "Random sequence selection"
+    },
+    {
+      "name": "UVM_SEQ_LIB_RANDC",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 420,
+      "summary": "Random cyclic sequence selection"
+    },
+    {
+      "name": "UVM_SEQ_LIB_USER",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 422,
+      "summary": "Apply a user-defined random-selection algorithm"
+    },
+    {
+      "name": "UVM_SHALLOW",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 129,
+      "summary": "Objects are shallow copied using default SV copy."
+    },
+    {
+      "name": "UVM_STOP",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 267,
+      "summary": "Causes $stop to be executed, putting the simulation into interactive mode."
+    },
+    {
+      "name": "UVM_STOPPED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 395,
+      "summary": "The sequence has been forcibly ended by issuing a uvm_sequence_base::kill() on the sequence."
+    },
+    {
+      "name": "UVM_STRING",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 74,
+      "summary": "Selects string (%s) format"
+    },
+    {
+      "name": "UVM_TIME",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 75,
+      "summary": "Selects time (%t) format"
+    },
+    {
+      "name": "UVM_TLM_ACCEPTED",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 48,
+      "summary": "Transaction has been accepted"
+    },
+    {
+      "name": "UVM_TLM_ADDRESS_ERROR_RESPONSE",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 65,
+      "summary": "Invalid address specified"
+    },
+    {
+      "name": "UVM_TLM_BURST_ERROR_RESPONSE",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 69,
+      "summary": "Invalid burst specified"
+    },
+    {
+      "name": "UVM_TLM_BYTE_ENABLE_ERROR_RESPONSE",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 71,
+      "summary": "Invalid byte enabling specified"
+    },
+    {
+      "name": "UVM_TLM_COMMAND_ERROR_RESPONSE",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 67,
+      "summary": "Invalid command specified"
+    },
+    {
+      "name": "UVM_TLM_COMPLETED",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 50,
+      "summary": "Execution of transaction is complete"
+    },
+    {
+      "name": "UVM_TLM_GENERIC_ERROR_RESPONSE",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 63,
+      "summary": "Bus operation had an error"
+    },
+    {
+      "name": "UVM_TLM_IGNORE_COMMAND",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 45,
+      "summary": "No bus operation."
+    },
+    {
+      "name": "UVM_TLM_INCOMPLETE_RESPONSE",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 61,
+      "summary": "Transaction was not delivered to target"
+    },
+    {
+      "name": "UVM_TLM_OK_RESPONSE",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 59,
+      "summary": "Bus operation completed successfully"
+    },
+    {
+      "name": "UVM_TLM_READ_COMMAND",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 41,
+      "summary": "Bus read operation"
+    },
+    {
+      "name": "UVM_TLM_UPDATED",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 49,
+      "summary": "Transaction has been modified"
+    },
+    {
+      "name": "UVM_TLM_WRITE_COMMAND",
+      "type": "constant",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 43,
+      "summary": "Bus write operation"
+    },
+    {
+      "name": "UVM_UNFORMAT2",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 70,
+      "summary": "Selects unformatted 2 value data (%u) format"
+    },
+    {
+      "name": "UVM_UNFORMAT4",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 71,
+      "summary": "Selects unformatted 4 value data (%z) format"
+    },
+    {
+      "name": "UVM_UNSIGNED",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 69,
+      "summary": "Selects unsigned decimal (%u) format"
+    },
+    {
+      "name": "UVM_WARNING",
+      "type": "constant",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 236,
+      "summary": "Indicates a potential problem."
+    },
+    {
+      "name": "UVM_WRITE",
+      "type": "constant",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 225,
+      "summary": "Write operation"
+    },
+    {
+      "name": "uvm_access_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 220,
+      "summary": "Type of operation begin performed"
+    },
+    {
+      "name": "uvm_action",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 254,
+      "summary": "Defines all possible values for report actions."
+    },
+    {
+      "name": "uvm_active_passive_enum",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 140,
+      "summary": "Convenience value to define whether a component, usually an agent, is in &ldquo;active&rdquo; mode or &ldquo;passive&rdquo; mode."
+    },
+    {
+      "name": "uvm_bitstream_t",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 42,
+      "summary": "The bitstream type is used as a argument type for passing integral values in such methods as uvm_object::set_int_local, uvm_config_int, uvm_printer::print_field, uvm_recorder::record_field, uvm_packer::pack_field and uvm_packer::unpack_field."
+    },
+    {
+      "name": "uvm_check_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 173,
+      "summary": "Read-only or read-and-check"
+    },
+    {
+      "name": "uvm_coverage_model_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 95,
+      "summary": "Coverage models available or desired."
+    },
+    {
+      "name": "uvm_elem_kind_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 205,
+      "summary": "Type of element being read or written"
+    },
+    {
+      "name": "uvm_endianness_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 186,
+      "summary": "Specifies byte ordering"
+    },
+    {
+      "name": "uvm_hdl_path_slice",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 108,
+      "summary": "Slice of an HDL path"
+    },
+    {
+      "name": "uvm_hier_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 235,
+      "summary": "Whether to provide the requested information from a hierarchical context."
+    },
+    {
+      "name": "uvm_integral_t",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 51,
+      "summary": "The integral type is used as a argument type for passing integral values of 64 bits or less in such methods as uvm_printer::print_field_int, uvm_recorder::record_field_int, uvm_packer::pack_field_int and uvm_packer::unpack_field_int."
+    },
+    {
+      "name": "uvm_mem_cb",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_cbs.svh",
+      "line": 317,
+      "summary": "Convenience callback type declaration for memories"
+    },
+    {
+      "name": "uvm_mem_cb_iter",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_cbs.svh",
+      "line": 327,
+      "summary": "Convenience callback iterator type declaration for memories"
+    },
+    {
+      "name": "uvm_objection_event",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 571,
+      "summary": "Enumerated the possible objection events one could wait on."
+    },
+    {
+      "name": "uvm_path_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 155,
+      "summary": "Path used for register operation"
+    },
+    {
+      "name": "uvm_phase_state",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 479,
+      "summary": "The set of possible states of a phase."
+    },
+    {
+      "name": "uvm_phase_type",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 438,
+      "summary": "This is an attribute of a uvm_phase object which defines the phase type."
+    },
+    {
+      "name": "uvm_port_type_e",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 320,
+      "summary": "Specifies the type of port"
+    },
+    {
+      "name": "uvm_predict_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 248,
+      "summary": "How the mirror is to be updated"
+    },
+    {
+      "name": "uvm_radix_enum",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 63,
+      "summary": "Specifies the radix to print or record in."
+    },
+    {
+      "name": "uvm_recursion_policy_enum",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 124,
+      "summary": "Specifies the policy for copying objects."
+    },
+    {
+      "name": "uvm_reg_addr_logic_t",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 76,
+      "summary": "4-state address value with `UVM_REG_ADDR_WIDTH bits"
+    },
+    {
+      "name": "uvm_reg_addr_t",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 69,
+      "summary": "2-state address value with `UVM_REG_ADDR_WIDTH bits"
+    },
+    {
+      "name": "uvm_reg_bd_cb",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_cbs.svh",
+      "line": 297,
+      "summary": "Convenience callback type declaration for backdoor"
+    },
+    {
+      "name": "uvm_reg_bd_cb_iter",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_cbs.svh",
+      "line": 307,
+      "summary": "Convenience callback iterator type declaration for backdoor"
+    },
+    {
+      "name": "uvm_reg_byte_en_t",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 83,
+      "summary": "2-state byte_enable value with `UVM_REG_BYTENABLE_WIDTH bits"
+    },
+    {
+      "name": "uvm_reg_cb",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_cbs.svh",
+      "line": 277,
+      "summary": "Convenience callback type declaration for registers"
+    },
+    {
+      "name": "uvm_reg_cb_iter",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_cbs.svh",
+      "line": 287,
+      "summary": "Convenience callback iterator type declaration for registers"
+    },
+    {
+      "name": "uvm_reg_cvr_t",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 90,
+      "summary": "Coverage model value set with `UVM_REG_CVR_WIDTH bits."
+    },
+    {
+      "name": "uvm_reg_data_logic_t",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 62,
+      "summary": "4-state data value with `UVM_REG_DATA_WIDTH bits"
+    },
+    {
+      "name": "uvm_reg_data_t",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 55,
+      "summary": "2-state data value with `UVM_REG_DATA_WIDTH bits"
+    },
+    {
+      "name": "uvm_reg_field_cb",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_cbs.svh",
+      "line": 337,
+      "summary": "Convenience callback type declaration for fields"
+    },
+    {
+      "name": "uvm_reg_field_cb_iter",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_cbs.svh",
+      "line": 347,
+      "summary": "Convenience callback iterator type declaration for fields"
+    },
+    {
+      "name": "uvm_reg_mem_tests_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 283,
+      "summary": "Select which pre-defined test sequence to execute."
+    },
+    {
+      "name": "uvm_sequence_lib_mode",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 415,
+      "summary": "Specifies the random selection mode of a sequence library"
+    },
+    {
+      "name": "uvm_sequence_state_enum",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 373,
+      "summary": "Defines current sequence state"
+    },
+    {
+      "name": "uvm_sequencer_arb_mode",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 345,
+      "summary": "Specifies a sequencer&rsquo;s arbitration mode"
+    },
+    {
+      "name": "uvm_severity",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 231,
+      "summary": "Defines all possible values for report severity."
+    },
+    {
+      "name": "uvm_status_e",
+      "type": "type",
+      "class": null,
+      "file": "reg/uvm_reg_model.svh",
+      "line": 139,
+      "summary": "Return status for register operations"
+    },
+    {
+      "name": "uvm_tlm_command_e",
+      "type": "type",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 37,
+      "summary": "Command attribute type definition"
+    },
+    {
+      "name": "uvm_tlm_phase_e",
+      "type": "type",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 23,
+      "summary": "Nonblocking transport synchronization state values between an initiator and a target."
+    },
+    {
+      "name": "uvm_tlm_response_status_e",
+      "type": "type",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 55,
+      "summary": "Response status attribute type definition"
+    },
+    {
+      "name": "uvm_tlm_sync_e",
+      "type": "type",
+      "class": null,
+      "file": "tlm2/uvm_tlm2_ifs.svh",
+      "line": 43,
+      "summary": "Pre-defined phase state values for the nonblocking transport Base Protocol between an initiator and a target."
+    },
+    {
+      "name": "uvm_verbosity",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 287,
+      "summary": "Defines standard verbosity levels for reports."
+    },
+    {
+      "name": "uvm_wait_op",
+      "type": "type",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 547,
+      "summary": "Specifies the operand when using methods like uvm_phase::wait_for_state."
+    },
+    {
+      "name": "uvm_mem_mam::alloc_mode_e",
+      "short_name": "alloc_mode_e",
+      "type": "type",
+      "class": "uvm_mem_mam",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 72,
+      "summary": "Memory allocation mode"
+    },
+    {
+      "name": "uvm_mem_mam::locality_e",
+      "short_name": "locality_e",
+      "type": "type",
+      "class": "uvm_mem_mam",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 84,
+      "summary": "Location of memory regions"
+    },
+    {
+      "name": "uvm_vreg_cbs::uvm_vreg_cb",
+      "short_name": "uvm_vreg_cb",
+      "type": "type",
+      "class": "uvm_vreg_cbs",
+      "file": "reg/uvm_vreg.svh",
+      "line": 720,
+      "summary": "Convenience callback type declaration"
+    },
+    {
+      "name": "uvm_vreg_cbs::uvm_vreg_cb_iter",
+      "short_name": "uvm_vreg_cb_iter",
+      "type": "type",
+      "class": "uvm_vreg_cbs",
+      "file": "reg/uvm_vreg.svh",
+      "line": 729,
+      "summary": "Convenience callback iterator type declaration"
+    },
+    {
+      "name": "uvm_vreg_field_cbs::uvm_vreg_field_cb",
+      "short_name": "uvm_vreg_field_cb",
+      "type": "type",
+      "class": "uvm_vreg_field_cbs",
+      "file": "reg/uvm_vreg_field.svh",
+      "line": 468,
+      "summary": "Convenience callback type declaration"
+    },
+    {
+      "name": "uvm_vreg_field_cbs::uvm_vreg_field_cb_iter",
+      "short_name": "uvm_vreg_field_cb_iter",
+      "type": "type",
+      "class": "uvm_vreg_field_cbs",
+      "file": "reg/uvm_vreg_field.svh",
+      "line": 477,
+      "summary": "Convenience callback iterator type declaration"
+    },
+    {
+      "name": "uvm_default_comparer",
+      "type": "variable",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 648,
+      "summary": "uvm_comparer uvm_default_comparer = new() The default compare policy."
+    },
+    {
+      "name": "uvm_default_line_printer",
+      "type": "variable",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 621,
+      "summary": "uvm_line_printer uvm_default_line_printer = new() The line printer is a global object that can be used with uvm_object::do_print to get single-line style printing."
+    },
+    {
+      "name": "uvm_default_packer",
+      "type": "variable",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 640,
+      "summary": "uvm_packer uvm_default_packer = new() The default packer policy."
+    },
+    {
+      "name": "uvm_default_printer",
+      "type": "variable",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 629,
+      "summary": "uvm_printer uvm_default_printer = uvm_default_table_printer The default printer policy."
+    },
+    {
+      "name": "uvm_default_table_printer",
+      "type": "variable",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 605,
+      "summary": "uvm_table_printer uvm_default_table_printer = new() The table printer is a global object that can be used with uvm_object::do_print to get tabular style printing."
+    },
+    {
+      "name": "uvm_default_tree_printer",
+      "type": "variable",
+      "class": null,
+      "file": "base/uvm_object_globals.svh",
+      "line": 613,
+      "summary": "uvm_tree_printer uvm_default_tree_printer = new() The tree printer is a global object that can be used with uvm_object::do_print to get multi-line tree style printing."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_CONFIG_DB_TRACE",
+      "short_name": "+UVM_CONFIG_DB_TRACE",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 372,
+      "summary": "+UVM_CONFIG_DB_TRACE turns on tracing of configuration DB access."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_DUMP_CMDLINE_ARGS",
+      "short_name": "+UVM_DUMP_CMDLINE_ARGS",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 265,
+      "summary": "+UVM_DUMP_CMDLINE_ARGS allows the user to dump all command line arguments to the reporting mechanism."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_MAX_QUIT_COUNT",
+      "short_name": "+UVM_MAX_QUIT_COUNT",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 346,
+      "summary": "+UVM_MAX_QUIT_COUNT=&lt;count&gt;,&lt;overridable&gt; allows users to change max quit count for the report server."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_OBJECTION_TRACE",
+      "short_name": "+UVM_OBJECTION_TRACE",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 362,
+      "summary": "+UVM_OBJECTION_TRACE turns on tracing of objection activity."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_PHASE_TRACE",
+      "short_name": "+UVM_PHASE_TRACE",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 357,
+      "summary": "+UVM_PHASE_TRACE turns on tracing of phase executions."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_RESOURCE_DB_TRACE",
+      "short_name": "+UVM_RESOURCE_DB_TRACE",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 367,
+      "summary": "+UVM_RESOURCE_DB_TRACE turns on tracing of resource DB access."
+    },
+    {
+      "name": "uvm_cmdline_processor::+uvm_set_action",
+      "short_name": "+uvm_set_action",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 313,
+      "summary": "+uvm_set_action=&lt;comp&gt;,&lt;id&gt;,&lt;severity&gt;,&lt;action&gt; provides the equivalent of various uvm_report_object&rsquo;s set_report_*_action APIs."
+    },
+    {
+      "name": "uvm_cmdline_processor::+uvm_set_config_int",
+      "short_name": "+uvm_set_config_int",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 394,
+      "summary": ""
+    },
+    {
+      "name": "uvm_cmdline_processor::+uvm_set_config_string",
+      "short_name": "+uvm_set_config_string",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 396,
+      "summary": "+uvm_set_config_int=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt; and +uvm_set_config_string=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt; work like their procedural counterparts: set_config_int() and set_config_string()."
+    },
+    {
+      "name": "uvm_cmdline_processor::+uvm_set_default_sequence",
+      "short_name": "+uvm_set_default_sequence",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 415,
+      "summary": "The +uvm_set_default_sequence=&lt;seqr&gt;,&lt;phase&gt;,&lt;type&gt; plusarg allows the user to define a default sequence from the command line, using the typename of that sequence."
+    },
+    {
+      "name": "uvm_cmdline_processor::+uvm_set_inst_override",
+      "short_name": "+uvm_set_inst_override",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 377,
+      "summary": ""
+    },
+    {
+      "name": "uvm_cmdline_processor::+uvm_set_severity",
+      "short_name": "+uvm_set_severity",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 324,
+      "summary": "+uvm_set_severity=&lt;comp&gt;,&lt;id&gt;,&lt;current severity&gt;,&lt;new severity&gt; provides the equivalent of the various uvm_report_object&rsquo;s set_report_*_severity_override APIs."
+    },
+    {
+      "name": "uvm_cmdline_processor::+uvm_set_type_override",
+      "short_name": "+uvm_set_type_override",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 379,
+      "summary": "+uvm_set_inst_override=&lt;req_type&gt;,&lt;override_type&gt;,&lt;full_inst_path&gt; and +uvm_set_type_override=&lt;req_type&gt;,&lt;override_type&gt;[,&lt;replace&gt;] work like the name based overrides in the factory--factory.set_inst_override_by_name() and factory.set_type_override_by_name()."
+    },
+    {
+      "name": "uvm_cmdline_processor::+uvm_set_verbosity",
+      "short_name": "+uvm_set_verbosity",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 299,
+      "summary": "+uvm_set_verbosity=&lt;comp&gt;,&lt;id&gt;,&lt;verbosity&gt;,&lt;phase&gt; and +uvm_set_verbosity=&lt;comp&gt;,&lt;id&gt;,&lt;verbosity&gt;,time,&lt;time&gt; allow the users to manipulate the verbosity of specific components at specific phases (and times during the &ldquo;run&rdquo; phases) of the simulation."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_TESTNAME",
+      "short_name": "+UVM_TESTNAME",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 274,
+      "summary": "+UVM_TESTNAME=&lt;class name&gt; allows the user to specify which uvm_test (or uvm_component) should be created via the factory and cycled through the UVM phases."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_TIMEOUT",
+      "short_name": "+UVM_TIMEOUT",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 334,
+      "summary": "+UVM_TIMEOUT=&lt;timeout&gt;,&lt;overridable&gt; allows users to change the global timeout of the UVM framework."
+    },
+    {
+      "name": "uvm_cmdline_processor::+UVM_VERBOSITY",
+      "short_name": "+UVM_VERBOSITY",
+      "type": "variable",
+      "class": "uvm_cmdline_processor",
+      "file": "base/uvm_cmdline_processor.svh",
+      "line": 287,
+      "summary": "+UVM_VERBOSITY=&lt;verbosity&gt; allows the user to specify the initial verbosity for all components."
+    },
+    {
+      "name": "uvm_comparer::abstract",
+      "short_name": "abstract",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 85,
+      "summary": "bit abstract = 1 This bit provides a filtering mechanism for fields."
+    },
+    {
+      "name": "uvm_packer::abstract",
+      "short_name": "abstract",
+      "type": "variable",
+      "class": "uvm_packer",
+      "file": "base/uvm_packer.svh",
+      "line": 286,
+      "summary": "bit abstract This bit provides a filtering mechanism for fields."
+    },
+    {
+      "name": "uvm_recorder::abstract",
+      "short_name": "abstract",
+      "type": "variable",
+      "class": "uvm_recorder",
+      "file": "base/uvm_recorder.svh",
+      "line": 29,
+      "summary": "bit abstract = 1 This bit provides a filtering mechanism for fields."
+    },
+    {
+      "name": "uvm_reg_mem_hdl_paths_seq::abstractions",
+      "short_name": "abstractions",
+      "type": "variable",
+      "class": "uvm_reg_mem_hdl_paths_seq",
+      "file": "reg/sequences/uvm_reg_mem_hdl_paths_seq.svh",
+      "line": 36,
+      "summary": "string abstractions[$] If set, check the HDL paths for the specified design abstractions."
+    },
+    {
+      "name": "uvm_reg_predictor::adapter",
+      "short_name": "adapter",
+      "type": "variable",
+      "class": "uvm_reg_predictor",
+      "file": "reg/uvm_reg_predictor.svh",
+      "line": 95,
+      "summary": "uvm_reg_adapter adapter The adapter used to convey the parameters of a bus operation in terms of a canonical uvm_reg_bus_op datum."
+    },
+    {
+      "name": "uvm_reg_sequence::adapter",
+      "short_name": "adapter",
+      "type": "variable",
+      "class": "uvm_reg_sequence",
+      "file": "reg/uvm_reg_sequence.svh",
+      "line": 92,
+      "summary": "uvm_reg_adapter adapter Adapter to use for translating between abstract register transactions and physical bus transactions, defined only when this sequence is a translation sequence."
+    },
+    {
+      "name": "uvm_reg_bus_op::addr",
+      "short_name": "addr",
+      "type": "variable",
+      "class": "uvm_reg_bus_op",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 266,
+      "summary": "uvm_reg_addr_t addr The bus address."
+    },
+    {
+      "name": "uvm_reg_item::bd_kind",
+      "short_name": "bd_kind",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 145,
+      "summary": "string bd_kind If path is UVM_BACKDOOR, this member specifies the abstraction kind for the backdoor access, e.g."
+    },
+    {
+      "name": "uvm_printer_knobs::begin_elements",
+      "short_name": "begin_elements",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 256,
+      "summary": "int begin_elements = 5 Defines the number of elements at the head of a list to print."
+    },
+    {
+      "name": "uvm_transaction::begin_event",
+      "short_name": "begin_event",
+      "type": "variable",
+      "class": "uvm_transaction",
+      "file": "base/uvm_transaction.svh",
+      "line": 48,
+      "summary": "uvm_event#( &nbsp;&nbsp;&nbsp; uvm_object ) begin_event A uvm_event#(uvm_object) that is triggered when this transaction&rsquo;s actual execution on the bus begins, typically as a result of a driver calling uvm_component::begin_tr."
+    },
+    {
+      "name": "uvm_packer::big_endian",
+      "short_name": "big_endian",
+      "type": "variable",
+      "class": "uvm_packer",
+      "file": "base/uvm_packer.svh",
+      "line": 93,
+      "summary": "bit big_endian = 1 This bit determines the order that integral data is packed (using pack_field, pack_field_int, pack_time, or pack_real) and how the data is unpacked from the pack array (using unpack_field, unpack_field_int, unpack_time, or unpack_real)."
+    },
+    {
+      "name": "uvm_printer_knobs::bin_radix",
+      "short_name": "bin_radix",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 566,
+      "summary": "string bin_radix = &quot;'b&quot; This string should be prepended to the value of an integral type when a radix of UVM_BIN is used for the radix of the integral object."
+    },
+    {
+      "name": "uvm_reg_predictor::bus_in",
+      "short_name": "bus_in",
+      "type": "variable",
+      "class": "uvm_reg_predictor",
+      "file": "reg/uvm_reg_predictor.svh",
+      "line": 58,
+      "summary": "uvm_analysis_imp #( &nbsp;&nbsp;&nbsp; &nbsp; BUSTYPE, &nbsp;&nbsp;&nbsp; uvm_reg_predictor&nbsp; #(BUSTYPE) ) bus_in Observed bus transactions of type BUSTYPE are received from this port and processed."
+    },
+    {
+      "name": "uvm_reg_bus_op::byte_en",
+      "short_name": "byte_en",
+      "type": "variable",
+      "class": "uvm_reg_bus_op",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 297,
+      "summary": "uvm_reg_byte_en_t byte_en Enables for the byte lanes on the bus."
+    },
+    {
+      "name": "uvm_comparer::check_type",
+      "short_name": "check_type",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 107,
+      "summary": "bit check_type = 1 This bit determines whether the type, given by uvm_object::get_type_name, is used to verify that the types of two objects are the same."
+    },
+    {
+      "name": "uvm_reg_bus_op::data",
+      "short_name": "data",
+      "type": "variable",
+      "class": "uvm_reg_bus_op",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 28,
+      "summary": "uvm_reg_data_t data The data to write."
+    },
+    {
+      "name": "uvm_printer_knobs::dec_radix",
+      "short_name": "dec_radix",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 555,
+      "summary": "string dec_radix = &quot;'d&quot; This string should be prepended to the value of an integral type when a radix of UVM_DEC is used for the radix of the integral object."
+    },
+    {
+      "name": "uvm_mem_mam::default_alloc",
+      "short_name": "default_alloc",
+      "type": "variable",
+      "class": "uvm_mem_mam",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 97,
+      "summary": "uvm_mem_mam_policy default_alloc Region allocation policy"
+    },
+    {
+      "name": "uvm_reg_block::default_map",
+      "short_name": "default_map",
+      "type": "variable",
+      "class": "uvm_reg_block",
+      "file": "reg/uvm_reg_block.svh",
+      "line": 151,
+      "summary": "uvm_reg_map default_map Default address map"
+    },
+    {
+      "name": "uvm_reg_block::default_path",
+      "short_name": "default_path",
+      "type": "variable",
+      "class": "uvm_reg_block",
+      "file": "reg/uvm_reg_block.svh",
+      "line": 49,
+      "summary": "uvm_path_e default_path = UVM_DEFAULT_PATH Default access path for the registers and memories in this block."
+    },
+    {
+      "name": "uvm_resource_base::default_precedence",
+      "short_name": "default_precedence",
+      "type": "variable",
+      "class": "uvm_resource_base",
+      "file": "base/uvm_resource.svh",
+      "line": 211,
+      "summary": "static int unsigned default_precedence = 1000 The default precedence for an resource that has been created."
+    },
+    {
+      "name": "uvm_printer_knobs::default_radix",
+      "short_name": "default_radix",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 546,
+      "summary": "uvm_radix_enum default_radix = UVM_HEX This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the uvm_printer::print_field or uvm_printer::print_field_int methods."
+    },
+    {
+      "name": "uvm_recorder::default_radix",
+      "short_name": "default_radix",
+      "type": "variable",
+      "class": "uvm_recorder",
+      "file": "base/uvm_recorder.svh",
+      "line": 74,
+      "summary": "uvm_radix_enum default_radix = UVM_HEX This is the default radix setting if record_field is called without a radix."
+    },
+    {
+      "name": "uvm_printer_knobs::depth",
+      "short_name": "depth",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 141,
+      "summary": "int depth = -1 Indicates how deep to recurse when printing objects."
+    },
+    {
+      "name": "uvm_sequence_base::do_not_randomize",
+      "short_name": "do_not_randomize",
+      "type": "variable",
+      "class": "uvm_sequence_base",
+      "file": "seq/uvm_sequence_base.svh",
+      "line": 152,
+      "summary": "bit do_not_randomize If set, prevents the sequence from being randomized before being executed by the `uvm_do*() and `uvm_rand_send*() macros, or as a default sequence."
+    },
+    {
+      "name": "uvm_reg_item::element",
+      "short_name": "element",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 47,
+      "summary": "uvm_object element A handle to the RegModel model element associated with this transaction."
+    },
+    {
+      "name": "uvm_reg_item::element_kind",
+      "short_name": "element_kind",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 45,
+      "summary": "uvm_elem_kind_e element_kind Kind of element being accessed: REG, MEM, or FIELD."
+    },
+    {
+      "name": "uvm_root::enable_print_topology",
+      "short_name": "enable_print_topology",
+      "type": "variable",
+      "class": "uvm_root",
+      "file": "base/uvm_root.svh",
+      "line": 205,
+      "summary": "bit enable_print_topology = 0 If set, then the entire testbench topology is printed just after completion of the end_of_elaboration phase."
+    },
+    {
+      "name": "uvm_default_report_server::enable_report_id_count_summary",
+      "short_name": "enable_report_id_count_summary",
+      "type": "variable",
+      "class": "uvm_default_report_server",
+      "file": "base/uvm_report_server.svh",
+      "line": 256,
+      "summary": "bit enable_report_id_count_summary=1 A flag to enable report count summary for each ID"
+    },
+    {
+      "name": "uvm_printer_knobs::end_elements",
+      "short_name": "end_elements",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 256,
+      "summary": "int end_elements = 5 This defines the number of elements at the end of a list that should be printed."
+    },
+    {
+      "name": "uvm_transaction::end_event",
+      "short_name": "end_event",
+      "type": "variable",
+      "class": "uvm_transaction",
+      "file": "base/uvm_transaction.svh",
+      "line": 48,
+      "summary": "uvm_event#( &nbsp;&nbsp;&nbsp; uvm_object ) end_event A uvm_event#(uvm_object) that is triggered when this transaction&rsquo;s actual execution on the bus ends, typically as a result of a driver calling uvm_component::end_tr."
+    },
+    {
+      "name": "uvm_mem_mam_cfg::end_offset",
+      "short_name": "end_offset",
+      "type": "variable",
+      "class": "uvm_mem_mam_cfg",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 292,
+      "summary": "rand bit [63:0] end_offset Last address of managed space"
+    },
+    {
+      "name": "uvm_transaction::events",
+      "short_name": "events",
+      "type": "variable",
+      "class": "uvm_transaction",
+      "file": "base/uvm_transaction.svh",
+      "line": 36,
+      "summary": "const uvm_event_pool events = new The event pool instance for this transaction."
+    },
+    {
+      "name": "uvm_reg_item::extension",
+      "short_name": "extension",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 137,
+      "summary": "rand uvm_object extension Handle to optional user data, as conveyed in the call to write(), read(), mirror(), or update() used to trigger the operation."
+    },
+    {
+      "name": "uvm_reg_fifo::fifo",
+      "short_name": "fifo",
+      "type": "variable",
+      "class": "uvm_reg_fifo",
+      "file": "reg/uvm_reg_fifo.svh",
+      "line": 41,
+      "summary": "rand uvm_reg_data_t fifo[$] The abstract representation of the FIFO."
+    },
+    {
+      "name": "uvm_root::finish_on_completion",
+      "short_name": "finish_on_completion",
+      "type": "variable",
+      "class": "uvm_root",
+      "file": "base/uvm_root.svh",
+      "line": 112,
+      "summary": "bit finish_on_completion = 1 If set, then run_test will call $finish after all phases are executed."
+    },
+    {
+      "name": "uvm_reg_item::fname",
+      "short_name": "fname",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 153,
+      "summary": "string fname The file name from where this transaction originated, if provided at the call site."
+    },
+    {
+      "name": "uvm_printer_knobs::footer",
+      "short_name": "footer",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 225,
+      "summary": "bit footer = 1 Indicates whether the uvm_printer::format_footer function should be called when printing an object."
+    },
+    {
+      "name": "uvm_printer_knobs::full_name",
+      "short_name": "full_name",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 434,
+      "summary": "bit full_name = 0 Indicates whether uvm_printer::adjust_name should print the full name of an identifier or just the leaf name."
+    },
+    {
+      "name": "uvm_printer_knobs::header",
+      "short_name": "header",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 217,
+      "summary": "bit header = 1 Indicates whether the uvm_printer::format_header function should be called when printing an object."
+    },
+    {
+      "name": "uvm_printer_knobs::hex_radix",
+      "short_name": "hex_radix",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 591,
+      "summary": "string hex_radix = &quot;'h&quot; This string should be prepended to the value of an integral type when a radix of UVM_HEX is used for the radix of the integral object."
+    },
+    {
+      "name": "uvm_printer_knobs::identifier",
+      "short_name": "identifier",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 236,
+      "summary": "bit identifier = 1 Indicates whether uvm_printer::adjust_name should print the identifier."
+    },
+    {
+      "name": "uvm_recorder::identifier",
+      "short_name": "identifier",
+      "type": "variable",
+      "class": "uvm_recorder",
+      "file": "base/uvm_recorder.svh",
+      "line": 107,
+      "summary": "bit identifier = 1 This bit is used to specify whether or not an object&rsquo;s reference should be recorded when the object is recorded."
+    },
+    {
+      "name": "uvm_mem_mam_policy::in_use",
+      "short_name": "in_use",
+      "type": "variable",
+      "class": "uvm_mem_mam_policy",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 107,
+      "summary": "uvm_mem_region in_use[$] Regions already allocated in the managed address space"
+    },
+    {
+      "name": "uvm_printer_knobs::indent",
+      "short_name": "indent",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 400,
+      "summary": "int indent = 2 This knob specifies the number of spaces to use for level indentation."
+    },
+    {
+      "name": "uvm_reg_bus_op::kind",
+      "short_name": "kind",
+      "type": "variable",
+      "class": "uvm_reg_bus_op",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 61,
+      "summary": "uvm_access_e kind Kind of access: READ or WRITE."
+    },
+    {
+      "name": "uvm_reg_item::kind",
+      "short_name": "kind",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 61,
+      "summary": "rand uvm_access_e kind Kind of access: READ or WRITE."
+    },
+    {
+      "name": "uvm_printer::knobs",
+      "short_name": "knobs",
+      "type": "variable",
+      "class": "uvm_printer",
+      "file": "base/uvm_printer.svh",
+      "line": 57,
+      "summary": "uvm_printer_knobs knobs = new The knob object provides access to the variety of knobs associated with a specific printer instance."
+    },
+    {
+      "name": "uvm_mem_mam_policy::len",
+      "short_name": "len",
+      "type": "variable",
+      "class": "uvm_mem_mam_policy",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 283,
+      "summary": "int unsigned len Number of addresses required"
+    },
+    {
+      "name": "uvm_reg_item::lineno",
+      "short_name": "lineno",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 161,
+      "summary": "int lineno The file name from where this transaction originated, if provided at the call site."
+    },
+    {
+      "name": "uvm_reg_item::local_map",
+      "short_name": "local_map",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 95,
+      "summary": "uvm_reg_map local_map The local map used to obtain addresses."
+    },
+    {
+      "name": "uvm_mem_mam_cfg::locality",
+      "short_name": "locality",
+      "type": "variable",
+      "class": "uvm_mem_mam_cfg",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 137,
+      "summary": "rand uvm_mem_mam::locality_e locality Region location mode"
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_address",
+      "short_name": "m_address",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 105,
+      "summary": "rand bit [63:0] m_address Address for the bus operation."
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_byte_enable",
+      "short_name": "m_byte_enable",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 189,
+      "summary": "rand byte unsigned m_byte_enable[] Indicates valid m_data array elements."
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_byte_enable_length",
+      "short_name": "m_byte_enable_length",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 298,
+      "summary": "rand int unsigned m_byte_enable_length The number of elements in the m_byte_enable array."
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_command",
+      "short_name": "m_command",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 127,
+      "summary": "rand uvm_tlm_command_e m_command Bus operation type."
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_data",
+      "short_name": "m_data",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 150,
+      "summary": "rand byte unsigned m_data[] Data read or to be written."
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_dmi",
+      "short_name": "m_dmi",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 248,
+      "summary": "bit m_dmi DMI mode is not yet supported in the UVM TLM2 subset."
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_length",
+      "short_name": "m_length",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 186,
+      "summary": "rand int unsigned m_length The number of bytes to be copied to or from the m_data array, inclusive of any bytes disabled by the m_byte_enable attribute."
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_response_status",
+      "short_name": "m_response_status",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 201,
+      "summary": "rand uvm_tlm_response_status_e m_response_status Status of the bus operation."
+    },
+    {
+      "name": "uvm_tlm_generic_payload::m_streaming_width",
+      "short_name": "m_streaming_width",
+      "type": "variable",
+      "class": "uvm_tlm_generic_payload",
+      "file": "tlm2/uvm_tlm2_generic_payload.svh",
+      "line": 308,
+      "summary": "rand int unsigned m_streaming_width Number of bytes transferred on each beat."
+    },
+    {
+      "name": "uvm_mem::mam",
+      "short_name": "mam",
+      "type": "variable",
+      "class": "uvm_mem",
+      "file": "reg/uvm_mem.svh",
+      "line": 132,
+      "summary": "uvm_mem_mam mam Memory allocation manager"
+    },
+    {
+      "name": "uvm_reg_item::map",
+      "short_name": "map",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 97,
+      "summary": "uvm_reg_map map The original map specified for the operation."
+    },
+    {
+      "name": "uvm_reg_predictor::map",
+      "short_name": "map",
+      "type": "variable",
+      "class": "uvm_reg_predictor",
+      "file": "reg/uvm_reg_predictor.svh",
+      "line": 87,
+      "summary": "uvm_reg_map map The map used to convert a bus address to the corresponding register or memory handle."
+    },
+    {
+      "name": "uvm_mem_mam_policy::max_offset",
+      "short_name": "max_offset",
+      "type": "variable",
+      "class": "uvm_mem_mam_policy",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 535,
+      "summary": "bit [63:0] max_offset Maximum address offset in the managed address space"
+    },
+    {
+      "name": "uvm_sequence_library::max_random_count",
+      "short_name": "max_random_count",
+      "type": "variable",
+      "class": "uvm_sequence_library",
+      "file": "seq/uvm_sequence_library.svh",
+      "line": 120,
+      "summary": "int unsigned max_random_count=10 Sets the maximum number of items to execute."
+    },
+    {
+      "name": "uvm_printer_knobs::mcd",
+      "short_name": "mcd",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 520,
+      "summary": "int mcd = UVM_STDOUT This is a file descriptor, or multi-channel descriptor, that specifies where the print output should be directed."
+    },
+    {
+      "name": "uvm_mem_shared_access_seq::mem",
+      "short_name": "mem",
+      "type": "variable",
+      "class": "uvm_mem_shared_access_seq",
+      "file": "reg/sequences/uvm_reg_mem_shared_access_seq.svh",
+      "line": 208,
+      "summary": "uvm_mem mem The memory to be tested"
+    },
+    {
+      "name": "uvm_mem_single_access_seq::mem",
+      "short_name": "mem",
+      "type": "variable",
+      "class": "uvm_mem_single_access_seq",
+      "file": "reg/sequences/uvm_mem_access_seq.svh",
+      "line": 52,
+      "summary": "uvm_mem mem The memory to be tested"
+    },
+    {
+      "name": "uvm_mem_single_walk_seq::mem",
+      "short_name": "mem",
+      "type": "variable",
+      "class": "uvm_mem_single_walk_seq",
+      "file": "reg/sequences/uvm_mem_walk_seq.svh",
+      "line": 35,
+      "summary": "uvm_mem mem The memory to test; must be assigned prior to starting sequence."
+    },
+    {
+      "name": "uvm_mem_access_seq::mem_seq",
+      "short_name": "mem_seq",
+      "type": "variable",
+      "class": "uvm_mem_access_seq",
+      "file": "reg/sequences/uvm_mem_access_seq.svh",
+      "line": 204,
+      "summary": "protected uvm_mem_single_access_seq mem_seq The sequence used to test one memory"
+    },
+    {
+      "name": "uvm_mem_walk_seq::mem_seq",
+      "short_name": "mem_seq",
+      "type": "variable",
+      "class": "uvm_mem_walk_seq",
+      "file": "reg/sequences/uvm_mem_walk_seq.svh",
+      "line": 206,
+      "summary": "protected uvm_mem_single_walk_seq mem_seq The sequence used to test one memory"
+    },
+    {
+      "name": "uvm_reg_mem_shared_access_seq::mem_seq",
+      "short_name": "mem_seq",
+      "type": "variable",
+      "class": "uvm_reg_mem_shared_access_seq",
+      "file": "reg/sequences/uvm_reg_mem_shared_access_seq.svh",
+      "line": 370,
+      "summary": "protected uvm_mem_shared_access_seq mem_seq The sequence used to test one memory"
+    },
+    {
+      "name": "uvm_mem_mam_policy::min_offset",
+      "short_name": "min_offset",
+      "type": "variable",
+      "class": "uvm_mem_mam_policy",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 531,
+      "summary": "bit [63:0] min_offset Minimum address offset in the managed address space"
+    },
+    {
+      "name": "uvm_sequence_library::min_random_count",
+      "short_name": "min_random_count",
+      "type": "variable",
+      "class": "uvm_sequence_library",
+      "file": "seq/uvm_sequence_library.svh",
+      "line": 119,
+      "summary": "int unsigned min_random_count=10 Sets the minimum number of items to execute."
+    },
+    {
+      "name": "uvm_comparer::miscompares",
+      "short_name": "miscompares",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 27,
+      "summary": "string miscompares = &quot;&quot; This string is reset to an empty string when a comparison is started."
+    },
+    {
+      "name": "uvm_mem_mam_cfg::mode",
+      "short_name": "mode",
+      "type": "variable",
+      "class": "uvm_mem_mam_cfg",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 74,
+      "summary": "rand uvm_mem_mam::alloc_mode_e mode Region allocation mode"
+    },
+    {
+      "name": "uvm_mem_access_seq::model",
+      "short_name": "model",
+      "type": "variable",
+      "class": "uvm_mem_access_seq",
+      "file": "reg/sequences/uvm_mem_access_seq.svh",
+      "line": 197,
+      "summary": "The block to be tested."
+    },
+    {
+      "name": "uvm_mem_walk_seq::model",
+      "short_name": "model",
+      "type": "variable",
+      "class": "uvm_mem_walk_seq",
+      "file": "reg/sequences/uvm_mem_walk_seq.svh",
+      "line": 199,
+      "summary": "The block to be tested."
+    },
+    {
+      "name": "uvm_reg_access_seq::model",
+      "short_name": "model",
+      "type": "variable",
+      "class": "uvm_reg_access_seq",
+      "file": "reg/sequences/uvm_reg_access_seq.svh",
+      "line": 30,
+      "summary": "The block to be tested."
+    },
+    {
+      "name": "uvm_reg_bit_bash_seq::model",
+      "short_name": "model",
+      "type": "variable",
+      "class": "uvm_reg_bit_bash_seq",
+      "file": "reg/sequences/uvm_reg_bit_bash_seq.svh",
+      "line": 27,
+      "summary": "The block to be tested."
+    },
+    {
+      "name": "uvm_reg_hw_reset_seq::model",
+      "short_name": "model",
+      "type": "variable",
+      "class": "uvm_reg_hw_reset_seq",
+      "file": "reg/sequences/uvm_reg_hw_reset_seq.svh",
+      "line": 57,
+      "summary": "The block to be tested."
+    },
+    {
+      "name": "uvm_reg_mem_built_in_seq::model",
+      "short_name": "model",
+      "type": "variable",
+      "class": "uvm_reg_mem_built_in_seq",
+      "file": "reg/sequences/uvm_reg_mem_built_in_seq.svh",
+      "line": 39,
+      "summary": "The block to be tested."
+    },
+    {
+      "name": "uvm_reg_mem_shared_access_seq::model",
+      "short_name": "model",
+      "type": "variable",
+      "class": "uvm_reg_mem_shared_access_seq",
+      "file": "reg/sequences/uvm_reg_mem_shared_access_seq.svh",
+      "line": 356,
+      "summary": "The block to be tested"
+    },
+    {
+      "name": "uvm_reg_sequence::model",
+      "short_name": "model",
+      "type": "variable",
+      "class": "uvm_reg_sequence",
+      "file": "reg/uvm_reg_sequence.svh",
+      "line": 43,
+      "summary": "uvm_reg_block model Block abstraction this sequence executes on, defined only when this sequence is a user-defined test sequence."
+    },
+    {
+      "name": "uvm_reg_bus_op::n_bits",
+      "short_name": "n_bits",
+      "type": "variable",
+      "class": "uvm_reg_bus_op",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 282,
+      "summary": "int n_bits The number of bits of uvm_reg_item::value being transferred by this transaction."
+    },
+    {
+      "name": "uvm_mem_mam_cfg::n_bytes",
+      "short_name": "n_bytes",
+      "type": "variable",
+      "class": "uvm_mem_mam_cfg",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 171,
+      "summary": "rand int unsigned n_bytes Number of bytes in each memory location"
+    },
+    {
+      "name": "uvm_printer_knobs::oct_radix",
+      "short_name": "oct_radix",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 574,
+      "summary": "string oct_radix = &quot;'o&quot; This string should be prepended to the value of an integral type when a radix of UVM_OCT is used for the radix of the integral object."
+    },
+    {
+      "name": "uvm_reg_item::offset",
+      "short_name": "offset",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 79,
+      "summary": "rand uvm_reg_addr_t offset For memory accesses, the offset address."
+    },
+    {
+      "name": "uvm_reg_item::parent",
+      "short_name": "parent",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 122,
+      "summary": "rand uvm_sequence_base parent The sequence from which the operation originated."
+    },
+    {
+      "name": "uvm_reg_adapter::parent_sequence",
+      "short_name": "parent_sequence",
+      "type": "variable",
+      "class": "uvm_reg_adapter",
+      "file": "reg/uvm_reg_adapter.svh",
+      "line": 66,
+      "summary": "uvm_sequence_base parent_sequence Set this member in extensions of this class if the bus driver requires bus items be executed via a particular sequence base type."
+    },
+    {
+      "name": "uvm_reg_item::path",
+      "short_name": "path",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 115,
+      "summary": "uvm_path_e path The path being used: UVM_FRONTDOOR or UVM_BACKDOOR."
+    },
+    {
+      "name": "uvm_comparer::physical",
+      "short_name": "physical",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 81,
+      "summary": "bit physical = 1 This bit provides a filtering mechanism for fields."
+    },
+    {
+      "name": "uvm_packer::physical",
+      "short_name": "physical",
+      "type": "variable",
+      "class": "uvm_packer",
+      "file": "base/uvm_packer.svh",
+      "line": 282,
+      "summary": "bit physical = 1 This bit provides a filtering mechanism for fields."
+    },
+    {
+      "name": "uvm_recorder::physical",
+      "short_name": "physical",
+      "type": "variable",
+      "class": "uvm_recorder",
+      "file": "base/uvm_recorder.svh",
+      "line": 81,
+      "summary": "bit physical = 1 This bit provides a filtering mechanism for fields."
+    },
+    {
+      "name": "uvm_comparer::policy",
+      "short_name": "policy",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 26,
+      "summary": "uvm_recursion_policy_enum policy = UVM_DEFAULT_POLICY Determines whether comparison is UVM_DEEP, UVM_REFERENCE, or UVM_SHALLOW."
+    },
+    {
+      "name": "uvm_resource_base::precedence",
+      "short_name": "precedence",
+      "type": "variable",
+      "class": "uvm_resource_base",
+      "file": "base/uvm_resource.svh",
+      "line": 58,
+      "summary": "int unsigned precedence This variable is used to associate a precedence that a resource has with respect to other resources which match the same scope and name."
+    },
+    {
+      "name": "uvm_printer_knobs::prefix",
+      "short_name": "prefix",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 496,
+      "summary": "string prefix = &quot;&quot; Specifies the string prepended to each output line"
+    },
+    {
+      "name": "uvm_component::print_config_matches",
+      "short_name": "print_config_matches",
+      "type": "variable",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 963,
+      "summary": "static bit print_config_matches Setting this static variable causes uvm_config_db::get() to print info about matching configuration settings as they are being applied."
+    },
+    {
+      "name": "uvm_component::print_enabled",
+      "short_name": "print_enabled",
+      "type": "variable",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1589,
+      "summary": "bit print_enabled = 1 This bit determines if this component should automatically be printed as a child of its parent object."
+    },
+    {
+      "name": "uvm_reg_item::prior",
+      "short_name": "prior",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 129,
+      "summary": "int prior = -1 The priority requested of this transfer, as defined by uvm_sequence_base::start_item."
+    },
+    {
+      "name": "uvm_reg_adapter::provides_responses",
+      "short_name": "provides_responses",
+      "type": "variable",
+      "class": "uvm_reg_adapter",
+      "file": "reg/uvm_reg_adapter.svh",
+      "line": 58,
+      "summary": "bit provides_responses Set this bit in extensions of this class if the bus driver provides separate response items."
+    },
+    {
+      "name": "uvm_default_report_server::record_all_messages",
+      "short_name": "record_all_messages",
+      "type": "variable",
+      "class": "uvm_default_report_server",
+      "file": "base/uvm_report_server.svh",
+      "line": 263,
+      "summary": "bit record_all_messages = 0 A flag to force recording of all messages (add UVM_RM_RECORD action)"
+    },
+    {
+      "name": "uvm_recorder::recursion_policy",
+      "short_name": "recursion_policy",
+      "type": "variable",
+      "class": "uvm_recorder",
+      "file": "base/uvm_recorder.svh",
+      "line": 115,
+      "summary": "uvm_recursion_policy_enum policy = UVM_DEFAULT_POLICY Sets the recursion policy for recording objects."
+    },
+    {
+      "name": "uvm_printer_knobs::reference",
+      "short_name": "reference",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 63,
+      "summary": "bit reference = 1 Controls whether to print a unique reference ID for object handles."
+    },
+    {
+      "name": "uvm_reg_predictor::reg_ap",
+      "short_name": "reg_ap",
+      "type": "variable",
+      "class": "uvm_reg_predictor",
+      "file": "reg/uvm_reg_predictor.svh",
+      "line": 71,
+      "summary": "uvm_analysis_port #( &nbsp;&nbsp;&nbsp; uvm_reg_item ) reg_ap Analysis output port that publishes uvm_reg_item transactions converted from bus transactions received on bus_in ."
+    },
+    {
+      "name": "uvm_reg_access_seq::reg_seq",
+      "short_name": "reg_seq",
+      "type": "variable",
+      "class": "uvm_reg_access_seq",
+      "file": "reg/sequences/uvm_reg_access_seq.svh",
+      "line": 204,
+      "summary": "protected uvm_reg_single_access_seq reg_seq The sequence used to test one register"
+    },
+    {
+      "name": "uvm_reg_bit_bash_seq::reg_seq",
+      "short_name": "reg_seq",
+      "type": "variable",
+      "class": "uvm_reg_bit_bash_seq",
+      "file": "reg/sequences/uvm_reg_bit_bash_seq.svh",
+      "line": 212,
+      "summary": "protected uvm_reg_single_bit_bash_seq reg_seq The sequence used to test one register"
+    },
+    {
+      "name": "uvm_reg_mem_shared_access_seq::reg_seq",
+      "short_name": "reg_seq",
+      "type": "variable",
+      "class": "uvm_reg_mem_shared_access_seq",
+      "file": "reg/sequences/uvm_reg_mem_shared_access_seq.svh",
+      "line": 363,
+      "summary": "protected uvm_reg_shared_access_seq reg_seq The sequence used to test one register"
+    },
+    {
+      "name": "uvm_reg_sequence::reg_seqr",
+      "short_name": "reg_seqr",
+      "type": "variable",
+      "class": "uvm_reg_sequence",
+      "file": "reg/uvm_reg_sequence.svh",
+      "line": 101,
+      "summary": "uvm_sequencer #( &nbsp;&nbsp;&nbsp; uvm_reg_item ) reg_seqr Layered upstream &ldquo;register&rdquo; sequencer."
+    },
+    {
+      "name": "uvm_sequence#(REQ,RSP)::req",
+      "short_name": "req",
+      "type": "variable",
+      "class": "uvm_sequence#(REQ,RSP)",
+      "file": "seq/uvm_sequence.svh",
+      "line": 40,
+      "summary": "REQ req The sequence contains a field of the request type called req."
+    },
+    {
+      "name": "uvm_comparer::result",
+      "short_name": "result",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 119,
+      "summary": "int unsigned result = 0 This bit stores the number of miscompares for a given compare operation."
+    },
+    {
+      "name": "uvm_reg_shared_access_seq::rg",
+      "short_name": "rg",
+      "type": "variable",
+      "class": "uvm_reg_shared_access_seq",
+      "file": "reg/sequences/uvm_reg_mem_shared_access_seq.svh",
+      "line": 59,
+      "summary": "uvm_reg rg The register to be tested"
+    },
+    {
+      "name": "uvm_reg_single_access_seq::rg",
+      "short_name": "rg",
+      "type": "variable",
+      "class": "uvm_reg_single_access_seq",
+      "file": "reg/sequences/uvm_reg_access_seq.svh",
+      "line": 64,
+      "summary": "uvm_reg rg The register to be tested"
+    },
+    {
+      "name": "uvm_reg_single_bit_bash_seq::rg",
+      "short_name": "rg",
+      "type": "variable",
+      "class": "uvm_reg_single_bit_bash_seq",
+      "file": "reg/sequences/uvm_reg_bit_bash_seq.svh",
+      "line": 56,
+      "summary": "uvm_reg rg The register to be tested"
+    },
+    {
+      "name": "uvm_sequence#(REQ,RSP)::rsp",
+      "short_name": "rsp",
+      "type": "variable",
+      "class": "uvm_sequence#(REQ,RSP)",
+      "file": "seq/uvm_sequence.svh",
+      "line": 47,
+      "summary": "RSP rsp The sequence contains a field of the response type called rsp."
+    },
+    {
+      "name": "uvm_reg_frontdoor::rw_info",
+      "short_name": "rw_info",
+      "type": "variable",
+      "class": "uvm_reg_frontdoor",
+      "file": "reg/uvm_reg_sequence.svh",
+      "line": 519,
+      "summary": "uvm_reg_item rw_info Holds information about the register being read or written"
+    },
+    {
+      "name": "uvm_sequence_library::select_rand",
+      "short_name": "select_rand",
+      "type": "variable",
+      "class": "uvm_sequence_library",
+      "file": "seq/uvm_sequence_library.svh",
+      "line": 36,
+      "summary": "rand int unsigned select_rand The index variable that is randomized to select the next sequence to execute when in UVM_SEQ_LIB_RAND mode"
+    },
+    {
+      "name": "uvm_sequence_library::select_randc",
+      "short_name": "select_randc",
+      "type": "variable",
+      "class": "uvm_sequence_library",
+      "file": "seq/uvm_sequence_library.svh",
+      "line": 38,
+      "summary": "randc bit [15:0] select_randc The index variable that is randomized to select the next sequence to execute when in UVM_SEQ_LIB_RANDC mode"
+    },
+    {
+      "name": "uvm_sequence_library::selection_mode",
+      "short_name": "selection_mode",
+      "type": "variable",
+      "class": "uvm_sequence_library",
+      "file": "seq/uvm_sequence_library.svh",
+      "line": 85,
+      "summary": "uvm_sequence_lib_mode selection_mode Specifies the mode used to select sequences for execution"
+    },
+    {
+      "name": "uvm_printer_knobs::separator",
+      "short_name": "separator",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 99,
+      "summary": "string separator = &quot;{}&quot; For tree printers only, determines the opening and closing separators used for nested objects."
+    },
+    {
+      "name": "uvm_sequencer#(REQ,RSP)::seq_item_export",
+      "short_name": "seq_item_export",
+      "type": "variable",
+      "class": "uvm_sequencer#(REQ,RSP)",
+      "file": "seq/uvm_sequencer.svh",
+      "line": 79,
+      "summary": "uvm_seq_item_pull_imp #( &nbsp;&nbsp;&nbsp; REQ, &nbsp;&nbsp;&nbsp; RSP, &nbsp;&nbsp;&nbsp; this_type ) seq_item_export This export provides access to this sequencer&rsquo;s implementation of the sequencer interface."
+    },
+    {
+      "name": "uvm_sequence_library::sequence_count",
+      "short_name": "sequence_count",
+      "type": "variable",
+      "class": "uvm_sequence_library",
+      "file": "seq/uvm_sequence_library.svh",
+      "line": 158,
+      "summary": "rand int unsigned sequence_count = 10 Specifies the number of sequences to execute when this sequence library is started."
+    },
+    {
+      "name": "uvm_reg_frontdoor::sequencer",
+      "short_name": "sequencer",
+      "type": "variable",
+      "class": "uvm_reg_frontdoor",
+      "file": "reg/uvm_reg_sequence.svh",
+      "line": 47,
+      "summary": "uvm_sequencer_base sequencer Sequencer executing the operation"
+    },
+    {
+      "name": "uvm_sequence_library::sequences_executed",
+      "short_name": "sequences_executed",
+      "type": "variable",
+      "class": "uvm_sequence_library",
+      "file": "seq/uvm_sequence_library.svh",
+      "line": 150,
+      "summary": "protected int unsigned sequences_executed Indicates the number of sequences executed, not including the currently executing sequence, if any."
+    },
+    {
+      "name": "uvm_comparer::sev",
+      "short_name": "sev",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 61,
+      "summary": "uvm_severity sev = UVM_INFO Sets the severity for printed messages."
+    },
+    {
+      "name": "uvm_comparer::show_max",
+      "short_name": "show_max",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 43,
+      "summary": "int unsigned show_max = 1 Sets the maximum number of messages to send to the printer for miscompares of an object."
+    },
+    {
+      "name": "uvm_printer_knobs::show_radix",
+      "short_name": "show_radix",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 538,
+      "summary": "bit show_radix = 1 Indicates whether the radix string (&lsquo;h, and so on) should be prepended to an integral value when one is printed."
+    },
+    {
+      "name": "uvm_printer_knobs::show_root",
+      "short_name": "show_root",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 511,
+      "summary": "bit show_root = 0 This setting indicates whether or not the initial object that is printed (when current depth is 0) prints the full path name."
+    },
+    {
+      "name": "uvm_default_report_server::show_terminator",
+      "short_name": "show_terminator",
+      "type": "variable",
+      "class": "uvm_default_report_server",
+      "file": "base/uvm_report_server.svh",
+      "line": 279,
+      "summary": "bit show_terminator = 0 A flag to add a terminator in the messages, e.g."
+    },
+    {
+      "name": "uvm_default_report_server::show_verbosity",
+      "short_name": "show_verbosity",
+      "type": "variable",
+      "class": "uvm_default_report_server",
+      "file": "base/uvm_report_server.svh",
+      "line": 270,
+      "summary": "bit show_verbosity = 0 A flag to include verbosity in the messages, e.g."
+    },
+    {
+      "name": "uvm_printer_knobs::size",
+      "short_name": "size",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 32,
+      "summary": "bit size = 1 Controls whether to print a field&rsquo;s size."
+    },
+    {
+      "name": "uvm_hdl_path_concat::slices",
+      "short_name": "slices",
+      "type": "variable",
+      "class": "uvm_hdl_path_concat",
+      "file": "reg/uvm_reg_model.svh",
+      "line": 348,
+      "summary": "uvm_hdl_path_slice slices[] Array of individual slices, stored in most-to-least significant order"
+    },
+    {
+      "name": "uvm_mem_mam_policy::start_offset",
+      "short_name": "start_offset",
+      "type": "variable",
+      "class": "uvm_mem_mam_policy",
+      "file": "reg/uvm_mem_mam.svh",
+      "line": 170,
+      "summary": "rand bit [63:0] start_offset The starting offset of the region"
+    },
+    {
+      "name": "uvm_reg_bus_op::status",
+      "short_name": "status",
+      "type": "variable",
+      "class": "uvm_reg_bus_op",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 87,
+      "summary": "uvm_status_e status The result of the transaction: UVM_IS_OK, UVM_HAS_X, UVM_NOT_OK."
+    },
+    {
+      "name": "uvm_reg_item::status",
+      "short_name": "status",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 87,
+      "summary": "uvm_status_e status The result of the transaction: IS_OK, HAS_X, or ERROR."
+    },
+    {
+      "name": "uvm_reg_adapter::supports_byte_enable",
+      "short_name": "supports_byte_enable",
+      "type": "variable",
+      "class": "uvm_reg_adapter",
+      "file": "reg/uvm_reg_adapter.svh",
+      "line": 50,
+      "summary": "bit supports_byte_enable Set this bit in extensions of this class if the bus protocol supports byte enables."
+    },
+    {
+      "name": "uvm_built_in_pair#(T1,T2)::T1 first",
+      "short_name": "T1 first",
+      "type": "variable",
+      "class": "uvm_built_in_pair#(T1,T2)",
+      "file": "comps/uvm_pair.svh",
+      "line": 45,
+      "summary": "T1 first The first value in the pair"
+    },
+    {
+      "name": "uvm_class_pair#(T1,T2)::T1 first",
+      "short_name": "T1 first",
+      "type": "variable",
+      "class": "uvm_class_pair#(T1,T2)",
+      "file": "comps/uvm_pair.svh",
+      "line": 45,
+      "summary": "T1 first The handle to the first object in the pair"
+    },
+    {
+      "name": "uvm_built_in_pair#(T1,T2)::T2 second",
+      "short_name": "T2 second",
+      "type": "variable",
+      "class": "uvm_built_in_pair#(T1,T2)",
+      "file": "comps/uvm_pair.svh",
+      "line": 51,
+      "summary": "T2 second The second value in the pair"
+    },
+    {
+      "name": "uvm_class_pair#(T1,T2)::T2 second",
+      "short_name": "T2 second",
+      "type": "variable",
+      "class": "uvm_class_pair#(T1,T2)",
+      "file": "comps/uvm_pair.svh",
+      "line": 51,
+      "summary": "T2 second The handle to the second object in the pair"
+    },
+    {
+      "name": "uvm_reg_mem_built_in_seq::tests",
+      "short_name": "tests",
+      "type": "variable",
+      "class": "uvm_reg_mem_built_in_seq",
+      "file": "reg/sequences/uvm_reg_mem_built_in_seq.svh",
+      "line": 46,
+      "summary": "bit [63:0] tests = UVM_DO_ALL_REG_MEM_TESTS The pre-defined test sequences to be executed."
+    },
+    {
+      "name": "uvm_root::top_levels",
+      "short_name": "top_levels",
+      "type": "variable",
+      "class": "uvm_root",
+      "file": "base/uvm_root.svh",
+      "line": 168,
+      "summary": "uvm_component top_levels[$] This variable is a list of all of the top level components in UVM."
+    },
+    {
+      "name": "uvm_component::tr_database",
+      "short_name": "tr_database",
+      "type": "variable",
+      "class": "uvm_component",
+      "file": "base/uvm_component.svh",
+      "line": 1599,
+      "summary": "uvm_tr_database tr_database Specifies the uvm_tr_database object to use for begin_tr and other methods in the Recording Interface."
+    },
+    {
+      "name": "uvm_printer_knobs::type_name",
+      "short_name": "type_name",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 31,
+      "summary": "bit type_name = 1 Controls whether to print a field&rsquo;s type name."
+    },
+    {
+      "name": "uvm_printer_knobs::unsigned_radix",
+      "short_name": "unsigned_radix",
+      "type": "variable",
+      "class": "uvm_printer_knobs",
+      "file": "base/uvm_printer.svh",
+      "line": 582,
+      "summary": "string unsigned_radix = &quot;'d&quot; This is the string which should be prepended to the value of an integral type when a radix of UVM_UNSIGNED is used for the radix of the integral object."
+    },
+    {
+      "name": "uvm_packer::use_metadata",
+      "short_name": "use_metadata",
+      "type": "variable",
+      "class": "uvm_packer",
+      "file": "base/uvm_packer.svh",
+      "line": 306,
+      "summary": "bit use_metadata This flag indicates whether to encode metadata when packing dynamic data, or to decode metadata when unpacking."
+    },
+    {
+      "name": "uvm_object::use_uvm_seeding",
+      "short_name": "use_uvm_seeding",
+      "type": "variable",
+      "class": "uvm_object",
+      "file": "base/uvm_object.svh",
+      "line": 59,
+      "summary": "static bit use_uvm_seeding = 1 This bit enables or disables the UVM seeding mechanism."
+    },
+    {
+      "name": "uvm_root::uvm_top",
+      "short_name": "uvm_top",
+      "type": "variable",
+      "class": "uvm_root",
+      "file": "base/uvm_root.svh",
+      "line": 32,
+      "summary": "const uvm_root uvm_top = uvm_root::get() This is the top-level that governs phase execution and provides component search interface."
+    },
+    {
+      "name": "uvm_reg_field::value",
+      "short_name": "value",
+      "type": "variable",
+      "class": "uvm_reg_field",
+      "file": "reg/uvm_reg_field.svh",
+      "line": 41,
+      "summary": "rand uvm_reg_data_t value Mirrored field value."
+    },
+    {
+      "name": "uvm_reg_item::value",
+      "short_name": "value",
+      "type": "variable",
+      "class": "uvm_reg_item",
+      "file": "reg/uvm_reg_item.svh",
+      "line": 68,
+      "summary": "rand uvm_reg_data_t value[] The value to write to, or after completion, the value read from the DUT."
+    },
+    {
+      "name": "uvm_comparer::verbosity",
+      "short_name": "verbosity",
+      "type": "variable",
+      "class": "uvm_comparer",
+      "file": "base/uvm_comparer.svh",
+      "line": 51,
+      "summary": "int unsigned verbosity = UVM_LOW Sets the verbosity for printed messages."
+    },
+    {
+      "name": "uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)::after_export",
+      "short_name": "after_export",
+      "type": "port",
+      "class": "uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)",
+      "file": "comps/uvm_algorithmic_comparator.svh",
+      "line": 91,
+      "summary": "The export to which a data stream of type AFTER is sent via a connected analysis port."
+    },
+    {
+      "name": "uvm_in_order_comparator#(T,comp_type,convert,pair_type)::after_export",
+      "short_name": "after_export",
+      "type": "port",
+      "class": "uvm_in_order_comparator#(T,comp_type,convert,pair_type)",
+      "file": "comps/uvm_in_order_comparator.svh",
+      "line": 64,
+      "summary": "The export to which the other stream of data is written."
+    },
+    {
+      "name": "uvm_subscriber::analysis_export",
+      "short_name": "analysis_export",
+      "type": "port",
+      "class": "uvm_subscriber",
+      "file": "comps/uvm_subscriber.svh",
+      "line": 40,
+      "summary": "This export provides access to the write method, which derived subscribers must implement."
+    },
+    {
+      "name": "uvm_tlm_analysis_fifo#(T)::analysis_export#(T)",
+      "short_name": "analysis_export#(T)",
+      "type": "port",
+      "class": "uvm_tlm_analysis_fifo#(T)",
+      "file": "tlm1/uvm_tlm_fifos.svh",
+      "line": 1,
+      "summary": "The analysis_export provides the write method to all connected analysis ports and parent exports:"
+    },
+    {
+      "name": "uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)::before_export",
+      "short_name": "before_export",
+      "type": "port",
+      "class": "uvm_algorithmic_comparator#(BEFORE,AFTER,TRANSFORMER)",
+      "file": "comps/uvm_algorithmic_comparator.svh",
+      "line": 81,
+      "summary": "The export to which a data stream of type BEFORE is sent via a connected analysis port."
+    },
+    {
+      "name": "uvm_in_order_comparator#(T,comp_type,convert,pair_type)::before_export",
+      "short_name": "before_export",
+      "type": "port",
+      "class": "uvm_in_order_comparator#(T,comp_type,convert,pair_type)",
+      "file": "comps/uvm_in_order_comparator.svh",
+      "line": 64,
+      "summary": "The export to which one stream of data is written."
+    },
+    {
+      "name": "uvm_random_stimulus#(T)::blocking_put_port",
+      "short_name": "blocking_put_port",
+      "type": "port",
+      "class": "uvm_random_stimulus#(T)",
+      "file": "comps/uvm_random_stimulus.svh",
+      "line": 52,
+      "summary": "The blocking_put_port is used to send the generated stimulus to the rest of the testbench."
+    },
+    {
+      "name": "uvm_tlm_fifo_base#(T)::get_ap",
+      "short_name": "get_ap",
+      "type": "port",
+      "class": "uvm_tlm_fifo_base#(T)",
+      "file": "tlm1/uvm_tlm_fifo_base.svh",
+      "line": 102,
+      "summary": "Transactions passed via get , try_get , peek , or try_peek (via any port connected to the get_peek_export) are sent out this port via its write method."
+    },
+    {
+      "name": "uvm_tlm_fifo_base#(T)::get_peek_export",
+      "short_name": "get_peek_export",
+      "type": "port",
+      "class": "uvm_tlm_fifo_base#(T)",
+      "file": "tlm1/uvm_tlm_fifo_base.svh",
+      "line": 38,
+      "summary": "The get_peek_export provides all the blocking and non-blocking get and peek interface methods:"
+    },
+    {
+      "name": "uvm_tlm_req_rsp_channel#(REQ,RSP)::get_peek_request_export",
+      "short_name": "get_peek_request_export",
+      "type": "port",
+      "class": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 85,
+      "summary": "The get_peek_export provides all the blocking and non-blocking get and peek interface methods to the response FIFO:"
+    },
+    {
+      "name": "uvm_tlm_req_rsp_channel#(REQ,RSP)::get_peek_response_export",
+      "short_name": "get_peek_response_export",
+      "type": "port",
+      "class": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 67,
+      "summary": "The get_peek_response_export provides all the blocking and non-blocking get and peek interface methods to the response FIFO:"
+    },
+    {
+      "name": "uvm_tlm_req_rsp_channel#(REQ,RSP)::master_export",
+      "short_name": "master_export",
+      "type": "port",
+      "class": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 143,
+      "summary": "Exports a single interface that allows a master to put requests and get or peek responses."
+    },
+    {
+      "name": "uvm_in_order_comparator#(T,comp_type,convert,pair_type)::pair_ap",
+      "short_name": "pair_ap",
+      "type": "port",
+      "class": "uvm_in_order_comparator#(T,comp_type,convert,pair_type)",
+      "file": "comps/uvm_in_order_comparator.svh",
+      "line": 101,
+      "summary": "The comparator sends out pairs of transactions across this analysis port."
+    },
+    {
+      "name": "uvm_tlm_fifo_base#(T)::put_ap",
+      "short_name": "put_ap",
+      "type": "port",
+      "class": "uvm_tlm_fifo_base#(T)",
+      "file": "tlm1/uvm_tlm_fifo_base.svh",
+      "line": 88,
+      "summary": "Transactions passed via put or try_put (via any port connected to the put_export) are sent out this port via its write method."
+    },
+    {
+      "name": "uvm_tlm_fifo_base#(T)::put_export",
+      "short_name": "put_export",
+      "type": "port",
+      "class": "uvm_tlm_fifo_base#(T)",
+      "file": "tlm1/uvm_tlm_fifo_base.svh",
+      "line": 38,
+      "summary": "The put_export provides both the blocking and non-blocking put interface methods to any attached port:"
+    },
+    {
+      "name": "uvm_tlm_req_rsp_channel#(REQ,RSP)::put_request_export",
+      "short_name": "put_request_export",
+      "type": "port",
+      "class": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 52,
+      "summary": "The put_export provides both the blocking and non-blocking put interface methods to the request FIFO:"
+    },
+    {
+      "name": "uvm_tlm_req_rsp_channel#(REQ,RSP)::put_response_export",
+      "short_name": "put_response_export",
+      "type": "port",
+      "class": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 104,
+      "summary": "The put_export provides both the blocking and non-blocking put interface methods to the response FIFO:"
+    },
+    {
+      "name": "uvm_push_driver#(REQ,RSP)::req_export",
+      "short_name": "req_export",
+      "type": "port",
+      "class": "uvm_push_driver#(REQ,RSP)",
+      "file": "comps/uvm_push_driver.svh",
+      "line": 31,
+      "summary": "This export provides the blocking put interface whose default implementation produces an error."
+    },
+    {
+      "name": "uvm_push_sequencer#(REQ,RSP)::req_port",
+      "short_name": "req_port",
+      "type": "port",
+      "class": "uvm_push_sequencer#(REQ,RSP)",
+      "file": "seq/uvm_push_sequencer.svh",
+      "line": 34,
+      "summary": "The push sequencer requires access to a blocking put interface."
+    },
+    {
+      "name": "uvm_tlm_req_rsp_channel#(REQ,RSP)::request_ap",
+      "short_name": "request_ap",
+      "type": "port",
+      "class": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 119,
+      "summary": "Transactions passed via put or try_put (via any port connected to the put_request_export) are sent out this port via its write method."
+    },
+    {
+      "name": "uvm_tlm_req_rsp_channel#(REQ,RSP)::response_ap",
+      "short_name": "response_ap",
+      "type": "port",
+      "class": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 131,
+      "summary": "Transactions passed via put or try_put (via any port connected to the put_response_export) are sent out this port via its write method."
+    },
+    {
+      "name": "uvm_sequencer_param_base#(REQ,RSP)::rsp_export",
+      "short_name": "rsp_export",
+      "type": "port",
+      "class": "uvm_sequencer_param_base#(REQ,RSP)",
+      "file": "seq/uvm_sequencer_param_base.svh",
+      "line": 141,
+      "summary": "Drivers or monitors can connect to this port to send responses to the sequencer."
+    },
+    {
+      "name": "uvm_driver#(REQ,RSP)::rsp_port",
+      "short_name": "rsp_port",
+      "type": "port",
+      "class": "uvm_driver#(REQ,RSP)",
+      "file": "comps/uvm_driver.svh",
+      "line": 37,
+      "summary": "This port provides an alternate way of sending responses back to the originating sequencer."
+    },
+    {
+      "name": "uvm_push_driver#(REQ,RSP)::rsp_port",
+      "short_name": "rsp_port",
+      "type": "port",
+      "class": "uvm_push_driver#(REQ,RSP)",
+      "file": "comps/uvm_push_driver.svh",
+      "line": 32,
+      "summary": "This analysis port is used to send response transactions back to the originating sequencer."
+    },
+    {
+      "name": "uvm_driver#(REQ,RSP)::seq_item_port",
+      "short_name": "seq_item_port",
+      "type": "port",
+      "class": "uvm_driver#(REQ,RSP)",
+      "file": "comps/uvm_driver.svh",
+      "line": 36,
+      "summary": "Derived driver classes should use this port to request items from the sequencer."
+    },
+    {
+      "name": "uvm_tlm_req_rsp_channel#(REQ,RSP)::slave_export",
+      "short_name": "slave_export",
+      "type": "port",
+      "class": "uvm_tlm_req_rsp_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 152,
+      "summary": "Exports a single interface that allows a slave to get or peek requests and to put responses."
+    },
+    {
+      "name": "uvm_tlm_transport_channel#(REQ,RSP)::transport_export",
+      "short_name": "transport_export",
+      "type": "port",
+      "class": "uvm_tlm_transport_channel#(REQ,RSP)",
+      "file": "tlm1/uvm_tlm_req_rsp.svh",
+      "line": 309,
+      "summary": "The put_export provides both the blocking and non-blocking transport interface methods to the response FIFO:"
     }
   ],
   "dpi": {

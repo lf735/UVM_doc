@@ -1782,6 +1782,151 @@ def build_search_index(categories):
                     'desc': f"{desc_label} in {class_name}" + (f" ({h['group']})" if h.get('group') else "")
                 })
 
+    # 7. Extract Constants, Variables, Types, and Ports from NaturalDocs indices and UVM_DB
+    seen_search_keys = set((item['name'], item.get('category')) for item in search_items)
+
+    docs_index_dir = DOCS_DIR / "index"
+    index_configs = [
+        ("Constants.html", "constant", "Constant"),
+        ("Types.html", "type", "Type"),
+        ("Variables.html", "variable", "Variable"),
+        ("Ports.html", "port", "Port")
+    ]
+
+    for fname, sym_type, type_label in index_configs:
+        fpath = docs_index_dir / fname
+        if not fpath.exists():
+            continue
+        try:
+            with open(fpath, 'r', encoding='latin-1') as f:
+                c_html = f.read()
+        except Exception:
+            continue
+
+        tooltips = {}
+        for m in re.finditer(r'<div class=CToolTip id="?([^">]+)"?>\s*<div class=[^>]+>([\s\S]*?)</div>\s*</div>', c_html):
+            tid = m.group(1).replace('"', '').strip()
+            clean_txt = re.sub(r'<[^>]+>', ' ', m.group(2)).strip()
+            tooltips[tid] = re.sub(r'\s+', ' ', clean_txt)
+
+        # Direct entries
+        for m in re.finditer(r'<td class=IEntry><a href="([^"]+)"(?:[^>]*onMouseOver="ShowTip\(event,\s*\'([^\']+)\'[^"]*")?[^>]*class=ISymbol>([^<]+)</a></td>', c_html):
+            raw_href = m.group(1).replace('../files/', '')
+            file_part, _, a_part = raw_href.partition('#')
+            tid = m.group(2)
+            name = html.unescape(m.group(3).strip())
+            desc = tooltips.get(tid, "") or f"UVM {type_label}: {name}"
+
+            dedup_key = (name, None)
+            if dedup_key in seen_search_keys:
+                continue
+            seen_search_keys.add(dedup_key)
+
+            target_id = a_part
+            doc_map = GLOBAL_DOC_ANCHOR_MAPS.get(file_part, {})
+            if a_part in doc_map:
+                target_id = doc_map[a_part]
+            doc_link = f"docs_view/{file_part}#{target_id}" if target_id else f"docs_view/{file_part}"
+
+            # Source link resolution
+            src_link = None
+            src_rel = DOC_TO_SRC_MAP.get(file_part)
+            if not src_rel:
+                src_rel = file_part.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
+            if src_rel in FILE_SYMBOLS:
+                clean_n = name.lstrip('+`')
+                s_match = next((s for s in FILE_SYMBOLS[src_rel] if s['name'] == clean_n or s['name'] == name), None)
+                if s_match:
+                    src_link = f"src_view/{src_rel}.html#L{s_match['line']}"
+                else:
+                    src_link = f"src_view/{src_rel}.html#L1"
+            elif (SRC_DIR / src_rel).exists():
+                src_link = f"src_view/{src_rel}.html#L1"
+
+            search_items.append({
+                'name': name,
+                'type': sym_type,
+                'category': file_part.split('/')[0].capitalize(),
+                'src': src_link,
+                'doc': doc_link,
+                'desc': desc
+            })
+
+        # Subindex entries
+        for m in re.finditer(r'<td class=IEntry><span class=ISymbol>([^<]+)</span>\s*<div class=ISubIndex>([\s\S]*?)</div>', c_html):
+            sname = html.unescape(m.group(1).strip())
+            sub_html = m.group(2)
+            for lm in re.finditer(r'<a\s+href="([^"]+)"(?:[^>]*onMouseOver="ShowTip\(event,\s*\'([^\']+)\'[^"]*")?[^>]*class=IParent>([^<]+)</a>', sub_html):
+                raw_href = lm.group(1).replace('../files/', '')
+                file_part, _, a_part = raw_href.partition('#')
+                tid = lm.group(2)
+                parent_class = html.unescape(lm.group(3).strip())
+                desc = tooltips.get(tid, "") or f"{type_label} in {parent_class}"
+
+                dedup_key = (sname, parent_class)
+                if dedup_key in seen_search_keys:
+                    continue
+                seen_search_keys.add(dedup_key)
+
+                target_id = a_part
+                doc_map = GLOBAL_DOC_ANCHOR_MAPS.get(file_part, {})
+                if a_part in doc_map:
+                    target_id = doc_map[a_part]
+                doc_link = f"docs_view/{file_part}#{target_id}" if target_id else f"docs_view/{file_part}"
+
+                src_link = None
+                src_rel = DOC_TO_SRC_MAP.get(file_part)
+                if parent_class in UVM_DB.get('classes', {}):
+                    src_rel = UVM_DB['classes'][parent_class]['file']
+                if not src_rel:
+                    src_rel = file_part.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
+
+                if src_rel in FILE_SYMBOLS:
+                    clean_n = sname.lstrip('+`')
+                    s_match = next((s for s in FILE_SYMBOLS[src_rel] if s['name'] == clean_n or s['name'] == sname), None)
+                    if s_match:
+                        src_link = f"src_view/{src_rel}.html#L{s_match['line']}"
+                    elif parent_class in UVM_DB.get('classes', {}):
+                        src_link = f"src_view/{src_rel}.html#L{UVM_DB['classes'][parent_class]['start_line']}"
+                    else:
+                        src_link = f"src_view/{src_rel}.html#L1"
+                elif (SRC_DIR / src_rel).exists():
+                    src_link = f"src_view/{src_rel}.html#L1"
+
+                search_items.append({
+                    'name': sname,
+                    'type': sym_type,
+                    'category': parent_class,
+                    'src': src_link,
+                    'doc': doc_link,
+                    'desc': desc
+                })
+
+    # Also add any remaining symbols from UVM_DB symbols_index
+    for s in UVM_DB.get('symbols_index', []):
+        stype = s.get('type')
+        if stype in ('constant', 'variable', 'type', 'port', 'enum'):
+            sname = s.get('short_name') or s['name']
+            cname = s.get('class')
+            dedup_key = (sname, cname)
+            if dedup_key in seen_search_keys:
+                continue
+            seen_search_keys.add(dedup_key)
+
+            src_file = s.get('file', '')
+            src_link = f"src_view/{src_file}.html#L{s['line']}" if src_file else None
+            doc_file = SRC_TO_DOC_MAP.get(src_file)
+            doc_link = f"docs_view/{doc_file}" if doc_file else None
+
+            search_items.append({
+                'name': sname,
+                'type': stype,
+                'category': cname or (src_file.split('/')[0].capitalize() if src_file else 'Reference'),
+                'src': src_link,
+                'doc': doc_link,
+                'desc': s.get('summary') or f"UVM {stype.capitalize()}: {sname}"
+            })
+
     return search_items
 
 def populate_doc_headings_from_docs_view():
