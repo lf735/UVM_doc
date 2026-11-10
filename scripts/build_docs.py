@@ -1496,6 +1496,64 @@ def build_source_tree():
             })
     return tree
 
+def find_actual_decl_in_file(rel_file, sym_name, sym_type=None):
+    clean = sym_name.split('::')[-1].split('#')[0].lstrip('+`').strip()
+    if not clean or not rel_file:
+        return 1
+    p = SRC_DIR / rel_file
+    if not p.exists():
+        return 1
+    try:
+        lines = p.read_text(encoding='latin-1').splitlines()
+    except Exception:
+        return 1
+
+    pat = re.compile(r'\b' + re.escape(clean) + r'\b')
+    candidates = []
+    for idx, l in enumerate(lines, 1):
+        s = l.strip()
+        is_comment = s.startswith('//') or s.startswith('/*') or s.startswith('*')
+        if not is_comment and pat.search(l):
+            candidates.append((idx, l))
+
+    if candidates:
+        if sym_type in ('constant', 'parameter'):
+            for idx, l in candidates:
+                if re.search(r'\b(parameter|localparam|const)\b', l):
+                    return idx
+            for idx, l in candidates:
+                if re.search(r'\b(enum|typedef)\b', l) or '=' in l or ',' in l:
+                    return idx
+        elif sym_type in ('type', 'enum'):
+            for idx, l in candidates:
+                if re.search(r'\btypedef\b', l):
+                    return idx
+        elif sym_type == 'port':
+            for idx, l in candidates:
+                if re.search(r'\b(port|export|imp)\b', l):
+                    return idx
+        return candidates[0][0]
+
+    comment_line = None
+    for idx, l in enumerate(lines, 1):
+        if pat.search(l):
+            comment_line = idx
+            break
+    if comment_line:
+        in_block_comment = False
+        for idx in range(comment_line, min(comment_line + 60, len(lines) + 1)):
+            s = lines[idx - 1].strip()
+            if '/*' in s:
+                in_block_comment = True
+            if '*/' in s:
+                in_block_comment = False
+                continue
+            if in_block_comment or s.startswith('//') or s.startswith('*') or not s:
+                continue
+            return idx
+        return comment_line
+    return 1
+
 def build_search_index(categories):
     """Build unified search data with classes, macros, methods, files, and categories."""
     search_items = []
@@ -1785,6 +1843,18 @@ def build_search_index(categories):
     # 7. Extract Constants, Variables, Types, and Ports from NaturalDocs indices and UVM_DB
     seen_search_keys = set((item['name'], item.get('category')) for item in search_items)
 
+    db_symbols_by_name = {}
+    for s in UVM_DB.get('symbols_index', []):
+        s_name = s.get('short_name') or s['name']
+        s_cls = s.get('class')
+        s_file = s.get('file')
+        if s_cls:
+            db_symbols_by_name[(s_name, s_cls)] = s
+        if s_file:
+            db_symbols_by_name[(s_name, s_file)] = s
+        if s_name not in db_symbols_by_name:
+            db_symbols_by_name[s_name] = s
+
     docs_index_dir = DOCS_DIR / "index"
     index_configs = [
         ("Constants.html", "constant", "Constant"),
@@ -1833,14 +1903,22 @@ def build_search_index(categories):
             src_rel = DOC_TO_SRC_MAP.get(file_part)
             if not src_rel:
                 src_rel = file_part.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
-            if src_rel in FILE_SYMBOLS:
+
+            # 1. Look up in UVM_DB symbols_index
+            db_match = db_symbols_by_name.get((name, src_rel)) or db_symbols_by_name.get(name)
+            if db_match and db_match.get('file') and db_match.get('line') and db_match.get('line') > 1:
+                src_rel = db_match['file']
+                src_link = f"src_view/{src_rel}.html#L{db_match['line']}"
+            elif src_rel in FILE_SYMBOLS:
                 clean_n = name.lstrip('+`')
                 s_match = next((s for s in FILE_SYMBOLS[src_rel] if s['name'] == clean_n or s['name'] == name), None)
-                if s_match:
+                if s_match and s_match.get('line') and s_match['line'] > 1:
                     src_link = f"src_view/{src_rel}.html#L{s_match['line']}"
-                else:
-                    src_link = f"src_view/{src_rel}.html#L1"
-            elif (SRC_DIR / src_rel).exists():
+
+            if not src_link and (SRC_DIR / src_rel).exists():
+                decl_line = find_actual_decl_in_file(src_rel, name, sym_type)
+                src_link = f"src_view/{src_rel}.html#L{decl_line}"
+            elif not src_link:
                 src_link = f"src_view/{src_rel}.html#L1"
 
             search_items.append({
@@ -1881,16 +1959,23 @@ def build_search_index(categories):
                 if not src_rel:
                     src_rel = file_part.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
 
-                if src_rel in FILE_SYMBOLS:
+                # 1. Look up in UVM_DB symbols_index
+                db_match = db_symbols_by_name.get((sname, parent_class)) or db_symbols_by_name.get((sname, src_rel)) or db_symbols_by_name.get(sname)
+                if db_match and db_match.get('file') and db_match.get('line') and db_match.get('line') > 1:
+                    src_rel = db_match['file']
+                    src_link = f"src_view/{src_rel}.html#L{db_match['line']}"
+                elif src_rel in FILE_SYMBOLS:
                     clean_n = sname.lstrip('+`')
                     s_match = next((s for s in FILE_SYMBOLS[src_rel] if s['name'] == clean_n or s['name'] == sname), None)
-                    if s_match:
+                    if s_match and s_match.get('line') and s_match['line'] > 1:
                         src_link = f"src_view/{src_rel}.html#L{s_match['line']}"
                     elif parent_class in UVM_DB.get('classes', {}):
                         src_link = f"src_view/{src_rel}.html#L{UVM_DB['classes'][parent_class]['start_line']}"
-                    else:
-                        src_link = f"src_view/{src_rel}.html#L1"
-                elif (SRC_DIR / src_rel).exists():
+
+                if not src_link and (SRC_DIR / src_rel).exists():
+                    decl_line = find_actual_decl_in_file(src_rel, sname, sym_type)
+                    src_link = f"src_view/{src_rel}.html#L{decl_line}"
+                elif not src_link:
                     src_link = f"src_view/{src_rel}.html#L1"
 
                 search_items.append({

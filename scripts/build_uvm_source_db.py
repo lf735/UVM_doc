@@ -881,13 +881,62 @@ def build_database():
                 file_lines_cache[rel_file] = []
         return file_lines_cache[rel_file]
 
-    def find_decl_line(rel_file, sym_name):
+    def find_decl_line(rel_file, sym_name, sym_type=None, parent_class=None):
         lines = get_lines(rel_file)
-        clean_name = sym_name.lstrip('+`')
-        pat = re.compile(r'\b' + re.escape(clean_name) + r'\b')
+        if not lines:
+            return 1
+        clean = sym_name.split('::')[-1].split('#')[0].lstrip('+`').strip()
+        if not clean:
+            return 1
+
+        pat = re.compile(r'\b' + re.escape(clean) + r'\b')
+
+        candidates = []
+        for idx, l in enumerate(lines, 1):
+            s = l.strip()
+            is_comment = s.startswith('//') or s.startswith('/*') or s.startswith('*')
+            if not is_comment and pat.search(l):
+                candidates.append((idx, l))
+
+        if candidates:
+            if sym_type in ('constant', 'parameter'):
+                for idx, l in candidates:
+                    if re.search(r'\b(parameter|localparam|const)\b', l):
+                        return idx
+                for idx, l in candidates:
+                    if re.search(r'\b(enum|typedef)\b', l) or '=' in l or ',' in l:
+                        return idx
+            elif sym_type in ('type', 'enum'):
+                for idx, l in candidates:
+                    if re.search(r'\btypedef\b', l):
+                        return idx
+            elif sym_type == 'port':
+                for idx, l in candidates:
+                    if re.search(r'\b(port|export|imp)\b', l):
+                        return idx
+            return candidates[0][0]
+
+        # Scan for comment occurrence, then jump to the first code line following it
+        comment_line = None
         for idx, l in enumerate(lines, 1):
             if pat.search(l):
+                comment_line = idx
+                break
+
+        if comment_line:
+            in_block_comment = False
+            for idx in range(comment_line, min(comment_line + 60, len(lines) + 1)):
+                s = lines[idx - 1].strip()
+                if '/*' in s:
+                    in_block_comment = True
+                if '*/' in s:
+                    in_block_comment = False
+                    continue
+                if in_block_comment or s.startswith('//') or s.startswith('*') or not s:
+                    continue
                 return idx
+            return comment_line
+
         return 1
 
     configs = [
@@ -928,7 +977,7 @@ def build_database():
             existing_sym_keys.add((name, None))
 
             sv_rel = doc_file.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
-            line_no = find_decl_line(sv_rel, name)
+            line_no = find_decl_line(sv_rel, name, sym_type, None)
 
             symbols_index.append({
                 "name": name,
@@ -961,7 +1010,7 @@ def build_database():
                     sv_rel = classes_db[parent_class]["file"]
                 if not sv_rel:
                     sv_rel = doc_file.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
-                line_no = find_decl_line(sv_rel, sname)
+                line_no = find_decl_line(sv_rel, sname, sym_type, parent_class)
 
                 symbols_index.append({
                     "name": full_name,

@@ -3256,6 +3256,46 @@ body.src-viewer-body {
   gap: 0.5rem;
   width: 100%;
   cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+/* High-visibility active state for selected alphabetical index element */
+.az-index-link.active {
+  color: var(--primary) !important;
+  background: var(--primary-light) !important;
+  font-weight: 600;
+  border-left: 4px solid var(--primary) !important;
+  padding-left: calc(0.55rem - 4px) !important;
+  box-shadow: 0 1px 4px rgba(26, 115, 232, 0.22), inset 0 0 0 1px rgba(26, 115, 232, 0.35) !important;
+  border-radius: 4px;
+}
+
+.az-index-link.active .az-symbol-name {
+  color: var(--primary) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em;
+}
+
+.az-index-link.active .az-symbol-owner {
+  color: var(--text-main) !important;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.az-index-link.active .res-badge {
+  filter: brightness(1.12);
+  box-shadow: 0 0 0 1.5px currentColor;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .az-index-link.active {
+  background: rgba(138, 180, 248, 0.22) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(138, 180, 248, 0.45) !important;
+}
+
+[data-theme="dark"] .az-index-link.active .az-symbol-name {
+  color: #8ab4f8 !important;
+  text-shadow: 0 0 12px rgba(138, 180, 248, 0.4);
 }
 
 .az-symbol-name {

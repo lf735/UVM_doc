@@ -1047,24 +1047,49 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function docItemMatchesMatcher(item, matcher) {
-    if (!matcher) {
-      if (sidebarFilterTypes.has('all') || sidebarFilterTypes.size === 0) return true;
-      if (sidebarFilterTypes.has('class') && item.title && !item.title.includes('Package') && !item.title.includes('Overview')) {
-        return true;
+    const title = item.title || '';
+    const href = item.href || '';
+    const hrefLower = href.toLowerCase();
+    const titleLower = title.toLowerCase();
+
+    // Check sidebar filter pills for docs tab
+    if (activeSidebarTab === 'docs' && !sidebarFilterTypes.has('all') && sidebarFilterTypes.size > 0) {
+      let pillMatch = false;
+      if (sidebarFilterTypes.has('class')) {
+        if (!title.includes('Overview') && !title.includes('Package') && !hrefLower.includes('macro') && !hrefLower.includes('intro') && !hrefLower.includes('notes')) {
+          pillMatch = true;
+        }
       }
-      if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docHeadings && item.href) {
-        const headings = UVM_DATA.docHeadings[item.href] || [];
-        return headings.some(h => {
-          if (h.type === 'main') return sidebarFilterTypes.has('class');
-          if (h.type === 'method') return sidebarFilterTypes.has('function') || sidebarFilterTypes.has('task');
-          if (h.type === 'macro') return sidebarFilterTypes.has('macro');
-          return false;
-        });
+      if (sidebarFilterTypes.has('macro')) {
+        if (hrefLower.includes('macro') || titleLower.includes('macro') || (typeof UVM_DATA !== 'undefined' && (UVM_DATA.docHeadings[href] || []).some(h => h.type === 'macro'))) {
+          pillMatch = true;
+        }
       }
-      return true;
+      if (sidebarFilterTypes.has('overview')) {
+        if (title.includes('Overview') || title.includes('Introduction') || title.includes('Release Notes') || hrefLower.includes('intro') || hrefLower.includes('notes') || item.type === 'index') {
+          pillMatch = true;
+        }
+      }
+      if (sidebarFilterTypes.has('component') && (hrefLower.includes('comps/') || hrefLower.includes('component') || titleLower.includes('component'))) {
+        pillMatch = true;
+      }
+      if (sidebarFilterTypes.has('sequence') && (hrefLower.includes('seq/') || hrefLower.includes('sequence') || titleLower.includes('sequence'))) {
+        pillMatch = true;
+      }
+      if (sidebarFilterTypes.has('tlm') && (hrefLower.includes('tlm') || titleLower.includes('tlm'))) {
+        pillMatch = true;
+      }
+      if (sidebarFilterTypes.has('reg') && (hrefLower.includes('reg/') || titleLower.includes('reg') || titleLower.includes('register'))) {
+        pillMatch = true;
+      }
+      if (sidebarFilterTypes.has('phase') && (hrefLower.includes('phase') || hrefLower.includes('phasing') || titleLower.includes('phase'))) {
+        pillMatch = true;
+      }
+      if (!pillMatch) return false;
     }
 
-    const title = item.title || '';
+    if (!matcher) return true;
+
     if (matcher.type === 'regex') {
       if (!matcher.valid || !matcher.regex) return false;
       if (matcher.regex.test(title)) return true;
@@ -1091,11 +1116,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docHeadings && item.href) {
       const headings = UVM_DATA.docHeadings[item.href] || [];
       return headings.some(h => {
-        if (!sidebarFilterTypes.has('all') && sidebarFilterTypes.size > 0) {
-          if (h.type === 'main' && !sidebarFilterTypes.has('class')) return false;
-          if (h.type === 'method' && !sidebarFilterTypes.has('function') && !sidebarFilterTypes.has('task')) return false;
-          if (h.type === 'macro' && !sidebarFilterTypes.has('macro')) return false;
-        }
         const hTitle = matcher.isCaseSensitive ? (h.title || '') : (h.title || '').toLowerCase();
         const hGroup = matcher.isCaseSensitive ? (h.group || '') : (h.group || '').toLowerCase();
         const combined = `${lowerTitle} ${hTitle} ${hGroup}`;
@@ -1107,6 +1127,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function sourceNodeMatches(node, matcher) {
+    if (activeSidebarTab === 'source' && !sidebarFilterTypes.has('all') && sidebarFilterTypes.size > 0) {
+      const p = (node.path || node.url || node.name || '').toLowerCase();
+      let matchPill = false;
+      if (sidebarFilterTypes.has('svh') && p.endsWith('.svh')) matchPill = true;
+      if (sidebarFilterTypes.has('sv') && (p.endsWith('.sv') && !p.endsWith('.svh'))) matchPill = true;
+      if (sidebarFilterTypes.has('c') && (p.endsWith('.c') || p.endsWith('.h') || p.endsWith('.cc'))) matchPill = true;
+      if (sidebarFilterTypes.has('base') && p.includes('base/')) matchPill = true;
+      if (sidebarFilterTypes.has('comps') && p.includes('comps/')) matchPill = true;
+      if (sidebarFilterTypes.has('seq') && p.includes('seq/')) matchPill = true;
+      if (sidebarFilterTypes.has('tlm') && (p.includes('tlm1/') || p.includes('tlm2/'))) matchPill = true;
+      if (sidebarFilterTypes.has('reg') && p.includes('reg/')) matchPill = true;
+      if (!matchPill && node.type === 'file') return false;
+    }
+
     if (!matcher) return true;
     const name = node.name || '';
     const path = node.path || '';
@@ -1148,9 +1182,18 @@ document.addEventListener('DOMContentLoaded', () => {
     sidebarFilterTypes.add('all');
 
     if (activeSidebarTab === 'source') {
-      sidebarPillsContainer.innerHTML = '';
-      sidebarPillsContainer.style.display = 'none';
-      return;
+      sidebarPillsContainer.style.display = 'flex';
+      sidebarPillsContainer.innerHTML = `
+            <button class="sidebar-pill active" data-type="all">All</button>
+            <button class="sidebar-pill" data-type="svh">.svh</button>
+            <button class="sidebar-pill" data-type="sv">.sv</button>
+            <button class="sidebar-pill" data-type="c">.c / .h</button>
+            <button class="sidebar-pill" data-type="base">Base</button>
+            <button class="sidebar-pill" data-type="comps">Components</button>
+            <button class="sidebar-pill" data-type="seq">Sequences</button>
+            <button class="sidebar-pill" data-type="tlm">TLM</button>
+            <button class="sidebar-pill" data-type="reg">Registers</button>
+          `;
     } else if (activeSidebarTab === 'examples') {
       sidebarPillsContainer.style.display = 'flex';
       sidebarPillsContainer.innerHTML = `
@@ -1184,14 +1227,18 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="sidebar-pill" data-type="port">Ports</button>
           `;
     } else {
-      // For docs: show language symbol types
+      // For docs: show topics and category filters
       sidebarPillsContainer.style.display = 'flex';
       sidebarPillsContainer.innerHTML = `
             <button class="sidebar-pill active" data-type="all">All</button>
             <button class="sidebar-pill" data-type="class">Classes</button>
-            <button class="sidebar-pill" data-type="function">Functions</button>
-            <button class="sidebar-pill" data-type="task">Tasks</button>
             <button class="sidebar-pill" data-type="macro">Macros</button>
+            <button class="sidebar-pill" data-type="overview">Overviews</button>
+            <button class="sidebar-pill" data-type="component">Components</button>
+            <button class="sidebar-pill" data-type="sequence">Sequences</button>
+            <button class="sidebar-pill" data-type="tlm">TLM</button>
+            <button class="sidebar-pill" data-type="reg">Registers</button>
+            <button class="sidebar-pill" data-type="phase">Phases</button>
           `;
     }
 
@@ -1366,7 +1413,18 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (cat.type === 'group') {
         const subItems = filterGroupItems(cat.children || [], matcher);
         const groupTitleMatches = matcher && matcher.type === 'words' && matcher.words.every(w => cat.title.toLowerCase().includes(w));
-        if (subItems.length > 0 || groupTitleMatches || (cat.overviewHref && (!matcher || groupTitleMatches))) {
+        let catPillMatch = false;
+        if (activeSidebarTab === 'docs' && !sidebarFilterTypes.has('all') && sidebarFilterTypes.size > 0) {
+          const cTitleLower = cat.title.toLowerCase();
+          if (sidebarFilterTypes.has('component') && cTitleLower.includes('component')) catPillMatch = true;
+          if (sidebarFilterTypes.has('sequence') && cTitleLower.includes('sequence')) catPillMatch = true;
+          if (sidebarFilterTypes.has('tlm') && cTitleLower.includes('tlm')) catPillMatch = true;
+          if (sidebarFilterTypes.has('reg') && (cTitleLower.includes('register') || cTitleLower.includes('reg'))) catPillMatch = true;
+          if (sidebarFilterTypes.has('phase') && cTitleLower.includes('phas')) catPillMatch = true;
+          if (sidebarFilterTypes.has('macro') && cTitleLower.includes('macro')) catPillMatch = true;
+          if (sidebarFilterTypes.has('overview') && (cTitleLower.includes('overview') || cat.overviewHref)) catPillMatch = true;
+        }
+        if (subItems.length > 0 || groupTitleMatches || catPillMatch || (cat.overviewHref && (!matcher || groupTitleMatches))) {
           const hasOverview = !!cat.overviewHref;
           const isOverviewActive = hasOverview && urlsMatch(cat.overviewHref, currentDocUrl);
           const titleHtml = hasOverview
@@ -1381,7 +1439,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </button>
             </div>
             <ul class="nav-group-items">
-              ${renderGroupItemsHtml(subItems, matcher)}
+              ${renderGroupItemsHtml(subItems.length > 0 ? subItems : cat.children, matcher)}
             </ul>
           </div>`;
         }
@@ -1405,8 +1463,19 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (item.type === 'group') {
         const subs = filterGroupItems(item.children || [], matcher);
         const titleMatches = matcher && matcher.type === 'words' && matcher.words.every(w => item.title.toLowerCase().includes(w));
-        if (subs.length > 0 || titleMatches) {
-          res.push({ ...item, children: subs });
+        let groupPillMatch = false;
+        if (activeSidebarTab === 'docs' && !sidebarFilterTypes.has('all') && sidebarFilterTypes.size > 0) {
+          const gTitleLower = item.title.toLowerCase();
+          if (sidebarFilterTypes.has('component') && gTitleLower.includes('component')) groupPillMatch = true;
+          if (sidebarFilterTypes.has('sequence') && gTitleLower.includes('sequence')) groupPillMatch = true;
+          if (sidebarFilterTypes.has('tlm') && gTitleLower.includes('tlm')) groupPillMatch = true;
+          if (sidebarFilterTypes.has('reg') && (gTitleLower.includes('register') || gTitleLower.includes('reg'))) groupPillMatch = true;
+          if (sidebarFilterTypes.has('phase') && gTitleLower.includes('phas')) groupPillMatch = true;
+          if (sidebarFilterTypes.has('macro') && gTitleLower.includes('macro')) groupPillMatch = true;
+          if (sidebarFilterTypes.has('overview') && (gTitleLower.includes('overview') || item.overviewHref)) groupPillMatch = true;
+        }
+        if (subs.length > 0 || titleMatches || groupPillMatch) {
+          res.push({ ...item, children: subs.length > 0 ? subs : item.children });
         }
       }
     });
@@ -1482,8 +1551,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function hasMatch(node, matcher) {
-      if (!matcher) return true;
-      if (sourceNodeMatches(node, matcher)) return true;
+      if (node.type === 'file') {
+        return sourceNodeMatches(node, matcher);
+      }
       if (node.children) {
         return node.children.some(c => hasMatch(c, matcher));
       }
@@ -1493,6 +1563,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const html = (root.children || []).map(child => renderNode(child, 0)).join('');
     sidebarContent.innerHTML = html || '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem">No matching files</div>';
     attachSidebarListeners();
+  }
+
+  let currentActiveIndexKey = null;
+
+  function getSymbolIndexKey(item) {
+    if (!item) return '';
+    return `${item.name}::${item.type}::${item.category || ''}::${item.doc || ''}::${item.src || ''}`;
   }
 
   function renderAlphabeticalIndex(rawQuery) {
@@ -1536,11 +1613,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method' || item.type === 'variable' || item.type === 'port';
       const ownerInfo = item.category && isMethodLike ?
         `<span class="az-symbol-owner" style="font-size:0.68rem; color:var(--text-muted); margin-left:auto; margin-right:0.35rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px;">${highlightMatch(item.category, matcher)}</span>` : '';
-      const isDocActive = item.doc && urlsMatch(item.doc, currentDocUrl);
-      const isSrcActive = item.src && urlsMatch(item.src, currentSrcUrl);
-      const isActive = isDocActive || isSrcActive;
+      const itemKey = getSymbolIndexKey(item);
+      let isActive = false;
+      if (currentActiveIndexKey) {
+        isActive = (itemKey === currentActiveIndexKey);
+      } else {
+        const cleanDoc = currentDocUrl ? currentDocUrl.replace(/^[./]+/, '') : '';
+        const cleanSrc = currentSrcUrl ? currentSrcUrl.replace(/^[./]+/, '') : '';
+        if (item.doc && cleanDoc && (item.doc === cleanDoc || item.doc.replace(/^[./]+/, '') === cleanDoc)) {
+          isActive = true;
+        } else if (item.src && cleanSrc && (item.src === cleanSrc || item.src.replace(/^[./]+/, '') === cleanSrc)) {
+          isActive = true;
+        }
+      }
       html += `<div class="nav-single-item">
-            <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" class="nav-item-link az-index-link ${isActive ? 'active' : ''}" title="${item.desc || item.name}">
+            <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" data-index-key="${escapeHtml(itemKey)}" class="nav-item-link az-index-link ${isActive ? 'active' : ''}" title="${item.desc || item.name}">
               <span class="az-symbol-name">${highlightMatch(item.name, matcher)}</span>
               ${ownerInfo}
               <span class="res-badge ${badgeClass}">${item.type}</span>
@@ -1840,6 +1927,10 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         const docHref = link.getAttribute('data-doc-href');
         const srcHref = link.getAttribute('data-src-href');
+        const indexKey = link.getAttribute('data-index-key');
+        if (indexKey) {
+          currentActiveIndexKey = indexKey;
+        }
 
         // Immediately highlight the clicked item for instant, reliable visual feedback
         sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item, .hierarchy-link').forEach(el => el.classList.remove('active'));
@@ -1847,6 +1938,9 @@ document.addEventListener('DOMContentLoaded', () => {
         link.classList.add('active');
         const row = link.closest('.hierarchy-row');
         if (row) row.classList.add('active');
+        try {
+          link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } catch (e) { }
 
         // Make sure all ancestor groups are expanded so the active item is in plain view
         let p = link.parentElement;
@@ -1906,6 +2000,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function highlightActiveSidebar(url) {
+    if (activeSidebarTab === 'index') {
+      // In the index tab, preserve and enforce the exact active index item!
+      if (currentActiveIndexKey) {
+        sidebarContent.querySelectorAll('.az-index-link').forEach(el => {
+          const matches = el.getAttribute('data-index-key') === currentActiveIndexKey;
+          el.classList.toggle('active', matches);
+        });
+        return;
+      }
+      // If no explicit indexKey yet, try to find an exact matching anchor
+      if (url) {
+        let found = false;
+        sidebarContent.querySelectorAll('.az-index-link').forEach(el => {
+          const docHref = el.getAttribute('data-doc-href') || '';
+          const srcHref = el.getAttribute('data-src-href') || '';
+          const matchExact = (docHref && url && docHref.includes('#') && (docHref === url || url.endsWith(docHref))) ||
+                             (srcHref && url && srcHref.includes('#') && (srcHref === url || url.endsWith(srcHref)));
+          if (matchExact && !found) {
+            el.classList.add('active');
+            found = true;
+            currentActiveIndexKey = el.getAttribute('data-index-key');
+            try {
+              el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            } catch (e) { }
+          } else {
+            el.classList.remove('active');
+          }
+        });
+        if (found) return;
+      }
+      return;
+    }
+
     const isSrcUrl = url && (url.includes('src_view/') || url.endsWith('.sv') || url.endsWith('.svh') || url.endsWith('.v') || url.endsWith('.c') || url.endsWith('.h'));
     const isExUrl = url && url.includes('examples_view/');
     const isDocUrl = url && !isSrcUrl && !isExUrl;
@@ -3341,6 +3468,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateSearchPilotBar();
 
+    currentActiveIndexKey = getSymbolIndexKey(item);
+
     const isExample = (item.type === 'example' || (item.doc && item.doc.includes('examples_view/')));
 
     if (currentMode === 'split') {
@@ -3565,6 +3694,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initialize
+  updateSidebarPillsForTab();
   renderSidebar();
   parseHash();
 });
