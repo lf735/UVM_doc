@@ -5471,6 +5471,596 @@ body.src-viewer-body {
 }
 
 /* ==========================================================================
+   Visual Concept Animations (Phase 2 - Test Scenario Walkthrough)
+   ========================================================================== */
+
+.scenario-anim-section {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* 1. FIFO Animation */
+.anim-fifo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.anim-actor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 100px;
+  padding: 0.6rem 0.8rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+.anim-actor .actor-header {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.anim-actor .actor-icon {
+  font-size: 1rem;
+}
+
+.anim-actor .actor-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text-main);
+}
+
+.actor-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.actor-badge.ready {
+  color: #059669;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.actor-badge.burst {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.actor-badge.blocked {
+  color: #dc2626;
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  animation: pulse-blocked 1s infinite alternate;
+}
+
+.actor-badge.waiting {
+  color: #d97706;
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.actor-badge.reading {
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.12);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.anim-actor.blocked {
+  border-color: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+.anim-fifo-channel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.anim-fifo-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.anim-fifo-label .fifo-name {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.anim-fifo-label .fifo-count-text {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.anim-fifo-slots {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 0.35rem;
+  background: var(--surface-alt);
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+.anim-fifo-slots .slot {
+  height: 32px;
+  background: var(--surface-color);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  transition: all 0.25s ease;
+}
+
+.anim-fifo-slots .slot.filled {
+  background: #3b82f6;
+  border: 1px solid #2563eb;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.anim-fifo-slots .slot.full-blocked {
+  background: #ef4444;
+  border: 1px solid #dc2626;
+  color: #ffffff;
+  font-weight: 700;
+  animation: pulse-slot 1.2s infinite alternate;
+}
+
+.anim-fifo-slots .slot.popping {
+  background: #10b981;
+  border: 1px solid #059669;
+  color: #ffffff;
+  transform: scale(0.92);
+}
+
+@keyframes pulse-blocked {
+  from { opacity: 0.8; }
+  to { opacity: 1; transform: scale(1.04); }
+}
+
+@keyframes pulse-slot {
+  from { opacity: 0.85; }
+  to { opacity: 1; }
+}
+
+/* 2. Objections Animation */
+.anim-objections-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.anim-obj-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.anim-obj-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.anim-obj-counter .counter-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.anim-obj-counter .counter-digit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #3b82f6;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+  transition: all 0.3s ease;
+}
+
+.anim-obj-drain-status {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.anim-obj-drain-status.ready {
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.anim-obj-drain-status.running {
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.3);
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.anim-obj-drain-status.drain-active {
+  color: #d97706;
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  animation: pulse-drain 1s infinite alternate;
+}
+
+.anim-obj-drain-status.completed {
+  color: #10b981;
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+}
+
+@keyframes pulse-drain {
+  from { opacity: 0.75; }
+  to { opacity: 1; transform: scale(1.02); }
+}
+
+.anim-gantt-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.gantt-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gantt-label {
+  width: 95px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.gantt-bar-bg {
+  flex: 1;
+  height: 14px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.gantt-bar {
+  height: 100%;
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 2px;
+  transition: all 0.35s ease;
+}
+
+.gantt-bar.active {
+  background: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.gantt-bar.done {
+  background: #10b981;
+}
+
+.gantt-drain-bar {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: rgba(245, 158, 11, 0.25);
+  border-left: 2px dashed #f59e0b;
+}
+
+.gantt-drain-bar.active {
+  background: #f59e0b;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.gantt-drain-bar.done {
+  background: #10b981;
+  border-left-color: #10b981;
+}
+
+/* 3. TLM-2 Non-Blocking Animation */
+.anim-tlm2-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.5rem 0;
+}
+
+.tlm2-node {
+  min-width: 140px;
+  padding: 0.75rem 0.9rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.tlm2-node .node-icon {
+  font-size: 1.25rem;
+}
+
+.tlm2-node .node-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.tlm2-node .node-sub {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.tlm2-node.active {
+  border-color: #3b82f6;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.tlm2-node.completed {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.tlm2-bus {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.tlm2-path {
+  position: relative;
+  background: var(--surface-alt);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.6rem;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tlm2-path .path-label {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.tlm2-packet {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: var(--border-color);
+  color: var(--text-muted);
+  transition: all 0.35s ease;
+}
+
+.tlm2-packet.moving-fw {
+  background: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.tlm2-packet.at-target {
+  background: #7c3aed;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.4);
+}
+
+.tlm2-packet.moving-bw {
+  background: #f59e0b;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.tlm2-packet.completed {
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* 4. RAL Primer Animation */
+.anim-ral-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0;
+}
+
+.ral-step-block {
+  flex: 1;
+  min-width: 100px;
+  padding: 0.6rem 0.5rem;
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.ral-step-block .b-icon {
+  font-size: 1rem;
+}
+
+.ral-step-block .b-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.ral-step-block .b-sub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.ral-step-block.active {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.ral-step-block.completed {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.ral-arrow {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* 5. Phasing Tree Animation */
+.anim-phasing-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+}
+
+.phasing-tree {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.p-node {
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-alt);
+  border: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all 0.3s ease;
+}
+
+.p-branches {
+  display: flex;
+  gap: 2rem;
+}
+
+.p-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.p-subbranch {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.p-node.highlight-build {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: #3b82f6;
+  color: #2563eb;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.p-node.highlight-elaboration {
+  background: rgba(124, 58, 237, 0.15);
+  border-color: #8b5cf6;
+  color: #7c3aed;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
+}
+
+.p-node.highlight-run {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #059669;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+.p-node.highlight-cleanup {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: #f59e0b;
+  color: #d97706;
+}
+
+.phasing-badge-box {
+  min-width: 170px;
+}
+
+.phasing-dir-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #2563eb;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+[data-theme="dark"] .phasing-dir-badge {
+  color: #93c5fd;
+  background: rgba(59, 130, 246, 0.2);
+}
+
+/* ==========================================================================
    Topology Grid
    ========================================================================== */
 

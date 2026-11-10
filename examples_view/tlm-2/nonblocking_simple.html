@@ -81,7 +81,30 @@
         <div class="stepper-timeline" id="stepper-timeline">
           <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">Initiator Sends BEGIN_REQ (Forward)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Payload Transfer &amp; Target Background Task</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Target Handshake via Backward Path</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Device Completes Transfer (UVM_TLM_COMPLETED)</span></div>
         </div>
-
+        <div class="scenario-anim-section" id="scenario-anim-section" data-anim="tlm2">
+          <div class="anim-tlm2-wrapper">
+  <div class="tlm2-node tlm2-host active" id="tlm2-host-node">
+    <span class="node-icon">💻</span>
+    <span class="node-title">HOST (Initiator)</span>
+    <span class="node-sub">nb_initiator_socket</span>
+  </div>
+  <div class="tlm2-bus">
+    <div class="tlm2-path fw-path" id="tlm2-fw-lane">
+      <span class="path-label">Forward: nb_transport_fw</span>
+      <div class="tlm2-packet moving-fw" id="tlm2-packet-fw">TOKEN (BEGIN_REQ)</div>
+    </div>
+    <div class="tlm2-path bw-path" id="tlm2-bw-lane">
+      <span class="path-label">Backward: nb_transport_bw</span>
+      <div class="tlm2-packet" id="tlm2-packet-bw">HANDSHAKE (ACK)</div>
+    </div>
+  </div>
+  <div class="tlm2-node tlm2-device" id="tlm2-dev-node">
+    <span class="node-icon">🖨️</span>
+    <span class="node-title">DEVICE (Target)</span>
+    <span class="node-sub">nb_target_socket</span>
+  </div>
+</div>
+        </div>
         <div class="step-card" id="step-detail-card">
           <div class="step-card-header">
             <h4 id="step-active-title">1. Initiator Sends BEGIN_REQ (Forward)</h4>

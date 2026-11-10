@@ -1120,7 +1120,15 @@ def build_suite_page(suite_key, meta, files):
   </div>
 </div>"""
 
-    stepper_block = pbc.render_flow_stepper(stepper_list)
+    ANIM_TYPE_MAP = {
+        "simple/phases/basic": "phasing",
+        "simple/objections": "objections",
+        "simple/tlm1/fifo": "fifo",
+        "simple/tlm2/nonblocking_simple": "tlm2",
+        "simple/registers/primer": "ral"
+    }
+    anim_type = ANIM_TYPE_MAP.get(suite_key, "")
+    stepper_block = pbc.render_flow_stepper(stepper_list, anim_type)
     topo_block = pbc.render_topology_grid(topo_nodes)
     primary_file = meta.get("primary_file", files_data[0]["name"] if files_data else "")
     studio_block = pbc.render_code_studio(files_data, primary_file, "../../")

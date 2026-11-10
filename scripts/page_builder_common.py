@@ -311,7 +311,154 @@ def render_simulation_console(sim_log: str, custom_commands: Optional[Dict[str, 
 </div>'''
 
 
-def render_flow_stepper(stepper_steps: List[Dict[str, Any]]) -> str:
+def render_scenario_animation(anim_type: str) -> str:
+    """
+    Renders visual concept animations (Phase 2) for each specific test intent.
+    """
+    if anim_type == "fifo":
+        slots_html = ''.join([f'<span class="slot" data-slot="{i}"><span class="slot-idx">{i}</span></span>' for i in range(10)])
+        return f'''<div class="anim-fifo-wrapper">
+  <div class="anim-actor anim-producer" id="fifo-actor-prod">
+    <div class="actor-header"><span class="actor-icon">⚡</span><span class="actor-name">PRODUCER</span></div>
+    <span class="actor-badge ready" id="fifo-prod-badge">Ready</span>
+  </div>
+  <div class="anim-fifo-channel">
+    <div class="anim-fifo-label">
+      <span class="fifo-name">uvm_tlm_fifo #(packet)</span>
+      <span class="fifo-count-text" id="fifo-count-label">0 / 10</span>
+    </div>
+    <div class="anim-fifo-slots" id="fifo-slots-bar">
+      {slots_html}
+    </div>
+  </div>
+  <div class="anim-actor anim-consumer" id="fifo-actor-cons">
+    <div class="actor-header"><span class="actor-icon">📥</span><span class="actor-name">CONSUMER</span></div>
+    <span class="actor-badge waiting" id="fifo-cons-badge">Waiting</span>
+  </div>
+</div>'''
+
+    if anim_type == "objections":
+        return '''<div class="anim-objections-wrapper">
+  <div class="anim-obj-header">
+    <div class="anim-obj-counter">
+      <span class="counter-label">Active Objections</span>
+      <span class="counter-digit" id="obj-counter-digit">0</span>
+    </div>
+    <div class="anim-obj-drain-status ready" id="obj-drain-status">
+      Drain Time: 10 ns (Armed)
+    </div>
+  </div>
+  <div class="anim-gantt-chart">
+    <div class="gantt-row" data-thread="3">
+      <span class="gantt-label">doit(15ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar" id="gbar-15" style="width: 25%;"></div></div>
+    </div>
+    <div class="gantt-row" data-thread="1">
+      <span class="gantt-label">doit(25ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar" id="gbar-25" style="width: 41%;"></div></div>
+    </div>
+    <div class="gantt-row" data-thread="0">
+      <span class="gantt-label">doit(35ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar" id="gbar-35" style="width: 58%;"></div></div>
+    </div>
+    <div class="gantt-row" data-thread="2">
+      <span class="gantt-label">doit(50ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar" id="gbar-50" style="width: 83%;"></div></div>
+    </div>
+    <div class="gantt-row gantt-drain-row">
+      <span class="gantt-label">Drain (+10ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar gantt-drain-bar" id="gbar-drain" style="left: 83%; width: 17%;"></div></div>
+    </div>
+  </div>
+</div>'''
+
+    if anim_type == "tlm2":
+        return '''<div class="anim-tlm2-wrapper">
+  <div class="tlm2-node tlm2-host active" id="tlm2-host-node">
+    <span class="node-icon">💻</span>
+    <span class="node-title">HOST (Initiator)</span>
+    <span class="node-sub">nb_initiator_socket</span>
+  </div>
+  <div class="tlm2-bus">
+    <div class="tlm2-path fw-path" id="tlm2-fw-lane">
+      <span class="path-label">Forward: nb_transport_fw</span>
+      <div class="tlm2-packet moving-fw" id="tlm2-packet-fw">TOKEN (BEGIN_REQ)</div>
+    </div>
+    <div class="tlm2-path bw-path" id="tlm2-bw-lane">
+      <span class="path-label">Backward: nb_transport_bw</span>
+      <div class="tlm2-packet" id="tlm2-packet-bw">HANDSHAKE (ACK)</div>
+    </div>
+  </div>
+  <div class="tlm2-node tlm2-device" id="tlm2-dev-node">
+    <span class="node-icon">🖨️</span>
+    <span class="node-title">DEVICE (Target)</span>
+    <span class="node-sub">nb_target_socket</span>
+  </div>
+</div>'''
+
+    if anim_type == "ral":
+        return '''<div class="anim-ral-wrapper">
+  <div class="ral-step-block active" id="ral-block-seq">
+    <span class="b-icon">📝</span>
+    <span class="b-title">Sequence</span>
+    <code class="b-sub">model.write()</code>
+  </div>
+  <div class="ral-arrow" id="ral-arr-1">➔</div>
+  <div class="ral-step-block" id="ral-block-adapt">
+    <span class="b-icon">⚙️</span>
+    <span class="b-title">Adapter</span>
+    <code class="b-sub">reg2bus (0x30)</code>
+  </div>
+  <div class="ral-arrow" id="ral-arr-2">➔</div>
+  <div class="ral-step-block" id="ral-block-bus">
+    <span class="b-icon">⚡</span>
+    <span class="b-title">APB Bus</span>
+    <code class="b-sub">PSEL, PENABLE</code>
+  </div>
+  <div class="ral-arrow" id="ral-arr-3">➔</div>
+  <div class="ral-step-block" id="ral-block-dut">
+    <span class="b-icon">💾</span>
+    <span class="b-title">DUT Memory</span>
+    <code class="b-sub">TABLES[12]</code>
+  </div>
+  <div class="ral-arrow" id="ral-arr-4">↻</div>
+  <div class="ral-step-block" id="ral-block-mirror">
+    <span class="b-icon">🪞</span>
+    <span class="b-title">RAL Mirror</span>
+    <code class="b-sub">0x3F8A019B</code>
+  </div>
+</div>'''
+
+    if anim_type == "phasing":
+        return '''<div class="anim-phasing-wrapper">
+  <div class="phasing-tree">
+    <div class="p-node p-top highlight-build" id="pnode-top"><span>top (env)</span></div>
+    <div class="p-branches">
+      <div class="p-branch">
+        <div class="p-node p-a highlight-build" id="pnode-a1"><span>a1 (AA)</span></div>
+        <div class="p-subbranch">
+          <div class="p-node p-leaf" id="pnode-b1"><span>b1 (B)</span></div>
+          <div class="p-node p-leaf" id="pnode-d1"><span>d1 (D)</span></div>
+        </div>
+      </div>
+      <div class="p-branch">
+        <div class="p-node p-a highlight-build" id="pnode-a2"><span>a2 (AA)</span></div>
+        <div class="p-subbranch">
+          <div class="p-node p-leaf" id="pnode-b2"><span>b1 (B)</span></div>
+          <div class="p-node p-leaf" id="pnode-d2"><span>d1 (D)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phasing-badge-box">
+    <span class="phasing-dir-badge" id="phasing-dir-badge">Top-Down Phasing (build_phase)</span>
+  </div>
+</div>'''
+
+    return ""
+
+
+def render_flow_stepper(stepper_steps: List[Dict[str, Any]], anim_type: str = "") -> str:
     """
     Renders the Interactive Visual Flow Stepper Section (Test Scenario Walkthrough).
     """
@@ -329,6 +476,12 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]]) -> str:
     first = stepper_steps[0]
     initial_state = first.get("state", "")
     state_badge_html = f'<span class="scenario-state-pill" id="step-state-badge">{html.escape(initial_state)}</span>' if initial_state else '<span class="scenario-state-pill" id="step-state-badge" style="display:none;"></span>'
+
+    anim_markup = ""
+    if anim_type:
+        anim_markup = f'''        <div class="scenario-anim-section" id="scenario-anim-section" data-anim="{html.escape(anim_type)}">
+          {render_scenario_animation(anim_type)}
+        </div>'''
 
     return f'''<!-- Interactive Visual Flow Stepper Section -->
 <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
@@ -352,7 +505,7 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]]) -> str:
         <div class="stepper-timeline" id="stepper-timeline">
           {stepper_nodes_html}
         </div>
-
+{anim_markup}
         <div class="step-card" id="step-detail-card">
           <div class="step-card-header">
             <h4 id="step-active-title">{html.escape(first.get("title", ""))}</h4>

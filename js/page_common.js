@@ -2309,6 +2309,8 @@ window.PageCommon = (function () {
     const stepperPayloadEl = document.getElementById('stepper-payload');
     const terminalBody = document.getElementById('terminal-body');
     const studioCodeContainer = document.getElementById('studio-code-container');
+    const animSection = document.getElementById('scenario-anim-section');
+    const animType = animSection ? animSection.getAttribute('data-anim') : '';
 
     if (!stepperSection || !stepNodes.length) return;
 
@@ -2468,6 +2470,181 @@ window.PageCommon = (function () {
 
       // Synchronize with simulation log trace
       scrollToHighlightedLog();
+
+      // Synchronize with visual concept animation
+      updateScenarioAnimation(animType, idx, step);
+    }
+
+    function updateScenarioAnimation(type, idx, step) {
+      if (!type) return;
+
+      if (type === 'fifo') {
+        const slots = document.querySelectorAll('.anim-fifo-slots .slot');
+        const countLabel = document.getElementById('fifo-count-label');
+        const prodBadge = document.getElementById('fifo-prod-badge');
+        const consBadge = document.getElementById('fifo-cons-badge');
+        const prodActor = document.getElementById('fifo-actor-prod');
+
+        if (idx === 0) {
+          slots.forEach(function (s) { s.className = 'slot'; });
+          if (countLabel) countLabel.textContent = '0 / 10';
+          if (prodBadge) { prodBadge.textContent = 'Ready'; prodBadge.className = 'actor-badge ready'; }
+          if (consBadge) { consBadge.textContent = 'Waiting'; consBadge.className = 'actor-badge waiting'; }
+          if (prodActor) prodActor.classList.remove('blocked');
+        } else if (idx === 1) {
+          slots.forEach(function (s) { s.className = 'slot filled'; });
+          if (countLabel) countLabel.textContent = '10 / 10 [FULL]';
+          if (prodBadge) { prodBadge.textContent = 'Bursting (try_put)'; prodBadge.className = 'actor-badge burst'; }
+          if (consBadge) { consBadge.textContent = 'Asleep (#100)'; consBadge.className = 'actor-badge waiting'; }
+          if (prodActor) prodActor.classList.remove('blocked');
+        } else if (idx === 2) {
+          slots.forEach(function (s) { s.className = 'slot full-blocked'; });
+          if (countLabel) countLabel.textContent = '10 / 10 [BLOCKED]';
+          if (prodBadge) { prodBadge.textContent = 'BLOCKED (Back-Pressure)'; prodBadge.className = 'actor-badge blocked'; }
+          if (consBadge) { consBadge.textContent = 'Waking up'; consBadge.className = 'actor-badge'; }
+          if (prodActor) prodActor.classList.add('blocked');
+        } else if (idx === 3) {
+          slots.forEach(function (s, i) {
+            s.className = i === 0 ? 'slot popping' : 'slot filled';
+          });
+          if (countLabel) countLabel.textContent = '9 / 10 (Item Released)';
+          if (prodBadge) { prodBadge.textContent = 'Unblocking'; prodBadge.className = 'actor-badge ready'; }
+          if (consBadge) { consBadge.textContent = 'GET(data 0)'; consBadge.className = 'actor-badge reading'; }
+          if (prodActor) prodActor.classList.remove('blocked');
+        } else if (idx === 4) {
+          slots.forEach(function (s) { s.className = 'slot filled'; });
+          if (countLabel) countLabel.textContent = '10 / 10 [RESUMED]';
+          if (prodBadge) { prodBadge.textContent = 'Resumed (Put OK)'; prodBadge.className = 'actor-badge ready'; }
+          if (consBadge) { consBadge.textContent = 'Consuming'; consBadge.className = 'actor-badge'; }
+          if (prodActor) prodActor.classList.remove('blocked');
+        }
+      } else if (type === 'objections') {
+        const counterDigit = document.getElementById('obj-counter-digit');
+        const drainStatus = document.getElementById('obj-drain-status');
+        const bar15 = document.getElementById('gbar-15');
+        const bar25 = document.getElementById('gbar-25');
+        const bar35 = document.getElementById('gbar-35');
+        const bar50 = document.getElementById('gbar-50');
+        const barDrain = document.getElementById('gbar-drain');
+
+        if (idx === 0) {
+          if (counterDigit) counterDigit.textContent = '0';
+          if (drainStatus) { drainStatus.textContent = 'Drain Time: 10 ns (Armed)'; drainStatus.className = 'anim-obj-drain-status ready'; }
+          [bar15, bar25, bar35, bar50, barDrain].forEach(function (b) { if (b) b.className = 'gantt-bar'; });
+        } else if (idx === 1) {
+          if (counterDigit) counterDigit.textContent = '4';
+          if (drainStatus) { drainStatus.textContent = '4 Threads Running Concurrently'; drainStatus.className = 'anim-obj-drain-status running'; }
+          [bar15, bar25, bar35, bar50].forEach(function (b) { if (b) b.className = 'gantt-bar active'; });
+          if (barDrain) barDrain.className = 'gantt-bar gantt-drain-bar';
+        } else if (idx === 2) {
+          if (counterDigit) counterDigit.textContent = '1';
+          if (drainStatus) { drainStatus.textContent = 'Threads Dropping (35ns reached)'; drainStatus.className = 'anim-obj-drain-status running'; }
+          if (bar15) bar15.className = 'gantt-bar done';
+          if (bar25) bar25.className = 'gantt-bar done';
+          if (bar35) bar35.className = 'gantt-bar done';
+          if (bar50) bar50.className = 'gantt-bar active';
+          if (barDrain) barDrain.className = 'gantt-bar gantt-drain-bar';
+        } else if (idx === 3) {
+          if (counterDigit) counterDigit.textContent = '0';
+          if (drainStatus) { drainStatus.textContent = 'Objections = 0 -> DRAIN WATCHDOG ACTIVE (10ns)'; drainStatus.className = 'anim-obj-drain-status drain-active'; }
+          [bar15, bar25, bar35, bar50].forEach(function (b) { if (b) b.className = 'gantt-bar done'; });
+          if (barDrain) barDrain.className = 'gantt-bar gantt-drain-bar active';
+        } else if (idx === 4) {
+          if (counterDigit) counterDigit.textContent = '0';
+          if (drainStatus) { drainStatus.textContent = 'Drain Expired -> Test Done @ 60ns'; drainStatus.className = 'anim-obj-drain-status completed'; }
+          [bar15, bar25, bar35, bar50].forEach(function (b) { if (b) b.className = 'gantt-bar done'; });
+          if (barDrain) barDrain.className = 'gantt-bar gantt-drain-bar done';
+        }
+      } else if (type === 'tlm2') {
+        const pktFw = document.getElementById('tlm2-packet-fw');
+        const pktBw = document.getElementById('tlm2-packet-bw');
+        const hostNode = document.getElementById('tlm2-host-node');
+        const devNode = document.getElementById('tlm2-dev-node');
+
+        if (idx === 0) {
+          if (pktFw) { pktFw.textContent = 'TOKEN (BEGIN_REQ)'; pktFw.className = 'tlm2-packet moving-fw'; }
+          if (pktBw) pktBw.className = 'tlm2-packet';
+          if (hostNode) hostNode.className = 'tlm2-node tlm2-host active';
+          if (devNode) devNode.className = 'tlm2-node tlm2-device';
+        } else if (idx === 1) {
+          if (pktFw) { pktFw.textContent = 'DATA (DE AD BE EF)'; pktFw.className = 'tlm2-packet at-target'; }
+          if (pktBw) pktBw.className = 'tlm2-packet';
+          if (hostNode) hostNode.className = 'tlm2-node tlm2-host';
+          if (devNode) devNode.className = 'tlm2-node tlm2-device active';
+        } else if (idx === 2) {
+          if (pktFw) pktFw.className = 'tlm2-packet';
+          if (pktBw) { pktBw.textContent = 'HANDSHAKE (ACK)'; pktBw.className = 'tlm2-packet moving-bw'; }
+          if (hostNode) hostNode.className = 'tlm2-node tlm2-host';
+          if (devNode) devNode.className = 'tlm2-node tlm2-device active';
+        } else if (idx === 3) {
+          if (pktFw) pktFw.className = 'tlm2-packet';
+          if (pktBw) { pktBw.textContent = 'UVM_TLM_COMPLETED'; pktBw.className = 'tlm2-packet completed'; }
+          if (hostNode) hostNode.className = 'tlm2-node tlm2-host completed';
+          if (devNode) devNode.className = 'tlm2-node tlm2-device completed';
+        }
+      } else if (type === 'ral') {
+        const blocks = ['ral-block-seq', 'ral-block-adapt', 'ral-block-bus', 'ral-block-dut', 'ral-block-mirror'];
+        blocks.forEach(function (b) {
+          const el = document.getElementById(b);
+          if (el) el.classList.remove('active', 'completed');
+        });
+
+        if (idx === 0) {
+          const b = document.getElementById('ral-block-seq');
+          if (b) b.classList.add('active');
+        } else if (idx === 1) {
+          const b1 = document.getElementById('ral-block-seq');
+          const b2 = document.getElementById('ral-block-adapt');
+          if (b1) b1.classList.add('completed');
+          if (b2) b2.classList.add('active');
+        } else if (idx === 2) {
+          ['ral-block-seq', 'ral-block-adapt'].forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('completed');
+          });
+          const b3 = document.getElementById('ral-block-bus');
+          const b4 = document.getElementById('ral-block-dut');
+          if (b3) b3.classList.add('active');
+          if (b4) b4.classList.add('active');
+        } else if (idx === 3) {
+          blocks.forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('completed');
+          });
+          const bm = document.getElementById('ral-block-mirror');
+          if (bm) bm.classList.add('active');
+        }
+      } else if (type === 'phasing') {
+        const dirBadge = document.getElementById('phasing-dir-badge');
+        const allNodes = document.querySelectorAll('.p-node');
+        allNodes.forEach(function (n) { n.className = n.className.replace(/highlight-\w+/g, '').trim(); });
+
+        if (idx === 0) {
+          if (dirBadge) dirBadge.textContent = 'Top-Down Phasing (build_phase)';
+          const top = document.getElementById('pnode-top');
+          const a1 = document.getElementById('pnode-a1');
+          const a2 = document.getElementById('pnode-a2');
+          if (top) top.classList.add('highlight-build');
+          if (a1) a1.classList.add('highlight-build');
+          if (a2) a2.classList.add('highlight-build');
+        } else if (idx === 1) {
+          if (dirBadge) dirBadge.textContent = 'Bottom-Up Phasing (end_of_elaboration)';
+          const b1 = document.getElementById('pnode-b1');
+          const d1 = document.getElementById('pnode-d1');
+          const b2 = document.getElementById('pnode-b2');
+          const d2 = document.getElementById('pnode-d2');
+          [b1, d1, b2, d2].forEach(function (n) { if (n) n.classList.add('highlight-elaboration'); });
+        } else if (idx === 2) {
+          if (dirBadge) dirBadge.textContent = 'Time-Consuming Phasing (run_phase @ 0ns)';
+          allNodes.forEach(function (n) { n.classList.add('highlight-run'); });
+        } else if (idx === 3) {
+          if (dirBadge) dirBadge.textContent = 'Advancing Simulation Time (t = 500ns)';
+          allNodes.forEach(function (n) { n.classList.add('highlight-run'); });
+        } else if (idx === 4) {
+          if (dirBadge) dirBadge.textContent = 'Cleanup & Reporting (extract, check, report)';
+          allNodes.forEach(function (n) { n.classList.add('highlight-cleanup'); });
+        }
+      }
     }
 
     function stopAutoPlay() {

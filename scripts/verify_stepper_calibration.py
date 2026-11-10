@@ -63,6 +63,12 @@ def verify_all():
             all_ok = False
             continue
 
+        # Check visual concept animation container
+        if "scenario-anim-section" not in content or f'data-anim="{p["name"] if p["name"] != "primer" and p["name"] != "basic" and p["name"] != "nonblocking_simple" else ("ral" if p["name"] == "primer" else ("phasing" if p["name"] == "basic" else "tlm2"))}"' not in content:
+            print(f"  [FAIL] {p['name']}: scenario-anim-section or matching data-anim missing")
+            all_ok = False
+            continue
+
         # Check jump buttons
         if "btn-jump-code" not in content or "btn-jump-log" not in content:
             print(f"  [FAIL] {p['name']}: jump buttons missing")

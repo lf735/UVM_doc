@@ -81,7 +81,39 @@
         <div class="stepper-timeline" id="stepper-timeline">
           <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">High-Level Register Write (model.write)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Adapter Translation (reg2bus)</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Hardware Bus Cycle on DUT</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">High-Level Read &amp; Mirror Check</span></div>
         </div>
-
+        <div class="scenario-anim-section" id="scenario-anim-section" data-anim="ral">
+          <div class="anim-ral-wrapper">
+  <div class="ral-step-block active" id="ral-block-seq">
+    <span class="b-icon">📝</span>
+    <span class="b-title">Sequence</span>
+    <code class="b-sub">model.write()</code>
+  </div>
+  <div class="ral-arrow" id="ral-arr-1">➔</div>
+  <div class="ral-step-block" id="ral-block-adapt">
+    <span class="b-icon">⚙️</span>
+    <span class="b-title">Adapter</span>
+    <code class="b-sub">reg2bus (0x30)</code>
+  </div>
+  <div class="ral-arrow" id="ral-arr-2">➔</div>
+  <div class="ral-step-block" id="ral-block-bus">
+    <span class="b-icon">⚡</span>
+    <span class="b-title">APB Bus</span>
+    <code class="b-sub">PSEL, PENABLE</code>
+  </div>
+  <div class="ral-arrow" id="ral-arr-3">➔</div>
+  <div class="ral-step-block" id="ral-block-dut">
+    <span class="b-icon">💾</span>
+    <span class="b-title">DUT Memory</span>
+    <code class="b-sub">TABLES[12]</code>
+  </div>
+  <div class="ral-arrow" id="ral-arr-4">↻</div>
+  <div class="ral-step-block" id="ral-block-mirror">
+    <span class="b-icon">🪞</span>
+    <span class="b-title">RAL Mirror</span>
+    <code class="b-sub">0x3F8A019B</code>
+  </div>
+</div>
+        </div>
         <div class="step-card" id="step-detail-card">
           <div class="step-card-header">
             <h4 id="step-active-title">1. High-Level Register Write (model.write)</h4>

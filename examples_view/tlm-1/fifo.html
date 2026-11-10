@@ -81,7 +81,27 @@
         <div class="stepper-timeline" id="stepper-timeline">
           <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">TLM Port Setup &amp; 10-Level FIFO</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Fast Burst Fill with try_put()</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Back-Pressure &amp; Blocking Put</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Consumer Extraction with get()</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Instant Producer Resume (Delta-Cycle)</span></div>
         </div>
-
+        <div class="scenario-anim-section" id="scenario-anim-section" data-anim="fifo">
+          <div class="anim-fifo-wrapper">
+  <div class="anim-actor anim-producer" id="fifo-actor-prod">
+    <div class="actor-header"><span class="actor-icon">⚡</span><span class="actor-name">PRODUCER</span></div>
+    <span class="actor-badge ready" id="fifo-prod-badge">Ready</span>
+  </div>
+  <div class="anim-fifo-channel">
+    <div class="anim-fifo-label">
+      <span class="fifo-name">uvm_tlm_fifo #(packet)</span>
+      <span class="fifo-count-text" id="fifo-count-label">0 / 10</span>
+    </div>
+    <div class="anim-fifo-slots" id="fifo-slots-bar">
+      <span class="slot" data-slot="0"><span class="slot-idx">0</span></span><span class="slot" data-slot="1"><span class="slot-idx">1</span></span><span class="slot" data-slot="2"><span class="slot-idx">2</span></span><span class="slot" data-slot="3"><span class="slot-idx">3</span></span><span class="slot" data-slot="4"><span class="slot-idx">4</span></span><span class="slot" data-slot="5"><span class="slot-idx">5</span></span><span class="slot" data-slot="6"><span class="slot-idx">6</span></span><span class="slot" data-slot="7"><span class="slot-idx">7</span></span><span class="slot" data-slot="8"><span class="slot-idx">8</span></span><span class="slot" data-slot="9"><span class="slot-idx">9</span></span>
+    </div>
+  </div>
+  <div class="anim-actor anim-consumer" id="fifo-actor-cons">
+    <div class="actor-header"><span class="actor-icon">📥</span><span class="actor-name">CONSUMER</span></div>
+    <span class="actor-badge waiting" id="fifo-cons-badge">Waiting</span>
+  </div>
+</div>
+        </div>
         <div class="step-card" id="step-detail-card">
           <div class="step-card-header">
             <h4 id="step-active-title">1. TLM Port Setup &amp; 10-Level FIFO</h4>

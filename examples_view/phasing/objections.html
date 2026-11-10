@@ -81,7 +81,41 @@
         <div class="stepper-timeline" id="stepper-timeline">
           <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">Arming Drain Time (10 ns)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Forking 4 Concurrent Threads</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Threads Dropping (15 ns, 25 ns, 35 ns)</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Last Thread (50 ns) &amp; Drain Trigger</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Drain Expiration &amp; Termination @ 60 ns</span></div>
         </div>
-
+        <div class="scenario-anim-section" id="scenario-anim-section" data-anim="objections">
+          <div class="anim-objections-wrapper">
+  <div class="anim-obj-header">
+    <div class="anim-obj-counter">
+      <span class="counter-label">Active Objections</span>
+      <span class="counter-digit" id="obj-counter-digit">0</span>
+    </div>
+    <div class="anim-obj-drain-status ready" id="obj-drain-status">
+      Drain Time: 10 ns (Armed)
+    </div>
+  </div>
+  <div class="anim-gantt-chart">
+    <div class="gantt-row" data-thread="3">
+      <span class="gantt-label">doit(15ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar" id="gbar-15" style="width: 25%;"></div></div>
+    </div>
+    <div class="gantt-row" data-thread="1">
+      <span class="gantt-label">doit(25ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar" id="gbar-25" style="width: 41%;"></div></div>
+    </div>
+    <div class="gantt-row" data-thread="0">
+      <span class="gantt-label">doit(35ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar" id="gbar-35" style="width: 58%;"></div></div>
+    </div>
+    <div class="gantt-row" data-thread="2">
+      <span class="gantt-label">doit(50ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar" id="gbar-50" style="width: 83%;"></div></div>
+    </div>
+    <div class="gantt-row gantt-drain-row">
+      <span class="gantt-label">Drain (+10ns)</span>
+      <div class="gantt-bar-bg"><div class="gantt-bar gantt-drain-bar" id="gbar-drain" style="left: 83%; width: 17%;"></div></div>
+    </div>
+  </div>
+</div>
+        </div>
         <div class="step-card" id="step-detail-card">
           <div class="step-card-header">
             <h4 id="step-active-title">1. Arming Drain Time (10 ns)</h4>
