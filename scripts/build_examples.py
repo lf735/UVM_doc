@@ -523,243 +523,418 @@ SUITES_METADATA = {
     }
 }
 
-# 5 Pillar Stepper Data
+# 5 Pillar Stepper Data (Test Scenario Walkthroughs calibrated to test intent)
 STEPPER_DATA = {
     "simple/phases/basic": [
         {
             "step": 1,
-            "title": "1. Build Phase (Top-Down Construction)",
-            "component": "test & env",
+            "title": "1. Top-Down Construction (build_phase)",
+            "state": "Phasing: BUILD_PHASE (Top-Down)",
+            "component": "top, a1, a2, b1, d1",
             "highlight_file": "test.sv",
-            "highlight_line": 25,
-            "log_snippet": "UVM_INFO @ 0 ns: reporter [PH_TRACE] In build_phase",
-            "desc": "Execution begins in top-down order. The root instantiates tests and sub-components. Components query `uvm_config_db` to retrieve configuration tables and virtual interfaces before creating children."
+            "highlight_line": 144,
+            "log_snippet": "0: top:  build",
+            "desc": "Execution begins at top-level. The framework calls build_phase() in strict top-down hierarchical order: top -> a1 -> a -> b1/d1."
         },
         {
             "step": 2,
-            "title": "2. Connect Phase (Bottom-Up Wiring)",
-            "component": "env & sub-components",
+            "title": "2. Bottom-Up Elaboration Phase",
+            "state": "Phasing: ELABORATION (Bottom-Up)",
+            "component": "b1, d1, a, top",
             "highlight_file": "test.sv",
-            "highlight_line": 35,
-            "log_snippet": "UVM_INFO @ 0 ns: reporter [PH_TRACE] In connect_phase",
-            "desc": "Executed bottom-up once all components exist. TLM ports (`seq_item_port`) are bound to matching exports (`seq_item_export`), and analysis ports are connected to scoreboards."
+            "highlight_line": 105,
+            "log_snippet": "0: top.a1.a.d1:  end_of_elaboration",
+            "desc": "Once all components exist, end_of_elaboration and start_of_simulation execute bottom-up: leaf components validate bindings before parents display topology."
         },
         {
             "step": 3,
-            "title": "3. Elaboration & Topology Printing",
-            "component": "uvm_root",
+            "title": "3. Run Phase & Objection Arming",
+            "state": "Sim Time: 0 ns (Objection Active: 1)",
+            "component": "top, b1",
             "highlight_file": "test.sv",
-            "highlight_line": 42,
-            "log_snippet": "UVM_INFO @ 0 ns: reporter [TOPOLOGY] UVM testbench topology verified",
-            "desc": "`end_of_elaboration` and `start_of_simulation` resolve addresses, verify no dangling unbound TLM ports exist, and display the official UVM component hierarchy tree."
+            "highlight_line": 163,
+            "log_snippet": "0: top:  start run phase",
+            "desc": "top enters run_phase and raises an objection (phase.raise_objection). Subcomponents concurrently launch their timed processes."
         },
         {
             "step": 4,
-            "title": "4. Run Phase (Time Consuming Simulation)",
-            "component": "test, env, drv, mon",
+            "title": "4. Time Progression & Delays (#500)",
+            "state": "Sim Time: 500 ns (Objection Released)",
+            "component": "top, b1",
             "highlight_file": "test.sv",
-            "highlight_line": 50,
-            "log_snippet": "UVM_INFO @ 0 ns: reporter [RNTST] Running test...",
-            "desc": "The primary `task` phase consuming simulation time. Concurrent `fork/join` threads run sequences, drive RTL pin interfaces, and monitor response waveforms."
+            "highlight_line": 167,
+            "log_snippet": "500: top:  end run phase",
+            "desc": "After #500 time delay elapses, top drops its objection (phase.drop_objection). All concurrent tasks having concluded, run_phase completes cleanly."
         },
         {
             "step": 5,
-            "title": "5. Cleanup & Report Phase",
-            "component": "scoreboards & test",
+            "title": "5. Top-Down Cleanup (Extract, Check, Report)",
+            "state": "Phasing: CLEANUP (Scoreboard & Report)",
+            "component": "top, a1, a2",
             "highlight_file": "test.sv",
-            "highlight_line": 65,
-            "log_snippet": "--- UVM Report Summary --- ** 0 UVM_FATAL, 0 UVM_ERROR",
-            "desc": "Top-down cleanup: `extract_phase` gathers final metrics, `check_phase` verifies scoreboards are empty, and `report_phase` prints the final test verdict."
+            "highlight_line": 159,
+            "log_snippet": "500: top:  report",
+            "desc": "Post-simulation phases execute sequentially: extract_phase collects state, check_phase validates results, and report_phase prints the final test verdict."
         }
     ],
 
     "simple/objections": [
         {
             "step": 1,
-            "title": "1. Test Starts (Objections = 0)",
+            "title": "1. Arming Drain Time (10 ns)",
+            "state": "Drain Time: 10 ns (Active Objections: 0)",
             "component": "simple_test",
             "highlight_file": "simple.sv",
-            "highlight_line": 20,
-            "log_snippet": "UVM_INFO @ 0 ns: reporter [RNTST] Running test...",
-            "desc": "When `run_phase` begins, the global objection count for the phase is 0. If no component raises an objection during this delta cycle, the phase immediately ends."
+            "highlight_line": 56,
+            "log_snippet": "UVM_INFO simple.sv(55) @ 0 ns: uvm_test_top [drain] Setting drain time of 10",
+            "desc": "simple_test configures a 10 ns drain time via set_drain_time(this, 10). When all objections drop to 0, this watchdog delays termination by 10 ns."
         },
         {
             "step": 2,
-            "title": "2. Raise Objection (Lock Simulation)",
-            "component": "component",
+            "title": "2. Forking 4 Concurrent Threads",
+            "state": "Sim Time: 0 ns (Active Objections: 4)",
+            "component": "simple_test",
             "highlight_file": "simple.sv",
-            "highlight_line": 32,
-            "log_snippet": "UVM_INFO @ 0 ns: component [OBJ] phase.raise_objection(this)",
-            "desc": "The test component raises an objection via `phase.raise_objection(this)`. The objection counter increments to 1, preventing the simulator from terminating."
+            "highlight_line": 59,
+            "log_snippet": "UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (0) with delay 35",
+            "desc": "The test forks 4 parallel processes with delays of 15, 25, 35, and 50 ns. Each invokes raise_objection(this), bringing global objections to 4."
         },
         {
             "step": 3,
-            "title": "3. Stimulus Execution",
-            "component": "component",
+            "title": "3. Threads Dropping (15 ns, 25 ns, 35 ns)",
+            "state": "Sim Time: 35 ns (Active Objections: 1)",
+            "component": "simple_test",
             "highlight_file": "simple.sv",
-            "highlight_line": 40,
-            "log_snippet": "UVM_INFO @ 100 ns: component [WORK] Processing simulation items...",
-            "desc": "The component executes its payload, sending transactions, waiting on events, or verifying DUT responses while holding the objection."
+            "highlight_line": 80,
+            "log_snippet": "UVM_INFO simple.sv(88) @ 35 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 1",
+            "desc": "Processes finish asynchronously: at 15 ns, 25 ns, and 35 ns, each calls drop_objection. The dropped() callback traces the decrementing counter."
         },
         {
             "step": 4,
-            "title": "4. Drop Objection",
-            "component": "component",
+            "title": "4. Last Thread (50 ns) & Drain Trigger",
+            "state": "Sim Time: 50 ns (Active Objections: 0 -> Drain Armed)",
+            "component": "simple_test",
             "highlight_file": "simple.sv",
-            "highlight_line": 48,
-            "log_snippet": "UVM_INFO @ 1000 ns: component [OBJ] phase.drop_objection(this)",
-            "desc": "When all work completes, `phase.drop_objection(this)` is invoked. The objection counter drops to 0, triggering the drain time watchdog."
+            "highlight_line": 88,
+            "log_snippet": "UVM_INFO simple.sv(88) @ 50 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 0",
+            "desc": "At t=50 ns, the 50 ns thread finishes. Active objections reach 0, but simulation does NOT terminate: the 10 ns drain watchdog takes over."
         },
         {
             "step": 5,
-            "title": "5. Drain Time & Phase Termination",
-            "component": "uvm_root",
+            "title": "5. Drain Expiration & Termination @ 60 ns",
+            "state": "Sim Time: 60 ns (Clean Exit @ 50ns + 10ns)",
+            "component": "simple_test, uvm_root",
             "highlight_file": "simple.sv",
-            "highlight_line": 55,
-            "log_snippet": "UVM_INFO @ 1020 ns: reporter [RNTST] All objections dropped, exiting run_phase",
-            "desc": "After drain time elapses with no new objections raised, the UVM phase controller terminates `run_phase` and cleanly proceeds to `extract_phase`."
+            "highlight_line": 64,
+            "log_snippet": "UVM_INFO @ 60 ns: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase",
+            "desc": "At t=60 ns (50 + 10 ns drain), with no new objections raised, drain time expires. The phase controller safely terminates run_phase."
         }
     ],
 
     "simple/tlm1/fifo": [
         {
             "step": 1,
-            "title": "1. FIFO Empty & Consumer Waiting",
-            "component": "consumer & fifo",
+            "title": "1. TLM Port Setup & 10-Level FIFO",
+            "state": "FIFO Occupancy: 0 / 10 (Producer: Ready, Consumer: Waiting)",
+            "component": "producer, consumer, fifo",
             "highlight_file": "test.sv",
-            "highlight_line": 28,
-            "log_snippet": "UVM_INFO @ 0 ns: consumer [GET] Waiting for item in FIFO...",
-            "desc": "Initially `uvm_tlm_fifo` contains 0 items. The consumer calls `get()`, placing its thread into a blocked state awaiting a transaction event."
+            "highlight_line": 50,
+            "log_snippet": "1: put data 0",
+            "desc": "The testbench binds a producer (uvm_put_port) and a consumer (uvm_get_port) to a uvm_tlm_fifo with a buffer capacity of 10 items."
         },
         {
             "step": 2,
-            "title": "2. Producer Puts Item (put_port)",
-            "component": "producer",
+            "title": "2. Fast Burst Fill with try_put()",
+            "state": "FIFO Occupancy: 10 / 10 [FULL]",
+            "component": "producer, fifo",
             "highlight_file": "test.sv",
-            "highlight_line": 42,
-            "log_snippet": "UVM_INFO @ 10 ns: producer [PUT] put(item_0)",
-            "desc": "The producer component generates transaction `item_0` and calls `put_port.put(item_0)`. The FIFO accepts the item and increments its occupancy."
+            "highlight_line": 58,
+            "log_snippet": "try_put status return: 10",
+            "desc": "The producer pushes 10 items in rapid succession via try_put(p). At t=91 ns, the 10th attempt returns 0 because the FIFO is completely full."
         },
         {
             "step": 3,
-            "title": "3. FIFO Event & Consumer Wakeup",
-            "component": "fifo",
+            "title": "3. Back-Pressure & Blocking Put",
+            "state": "FIFO Occupancy: 10 / 10 [BACK-PRESSURE: Producer Blocked]",
+            "component": "producer, fifo",
             "highlight_file": "test.sv",
-            "highlight_line": 50,
-            "log_snippet": "UVM_INFO @ 10 ns: fifo [EVENT] Notifying get_ap event",
-            "desc": "The FIFO triggers its internal event, unblocking the consumer's waiting thread in the same simulation delta cycle."
+            "highlight_line": 64,
+            "log_snippet": "91: do a blocking put",
+            "desc": "Producer invokes blocking put(p). With FIFO full, the put call suspends the producer thread, applying back-pressure without spin-polling."
         },
         {
             "step": 4,
-            "title": "4. Consumer Extracts Item (get_port)",
-            "component": "consumer",
+            "title": "4. Consumer Extraction with get()",
+            "state": "Sim Time: 100 ns (Consumer Read: data 0)",
+            "component": "consumer, fifo",
             "highlight_file": "test.sv",
-            "highlight_line": 62,
-            "log_snippet": "UVM_INFO @ 10 ns: consumer [GOT] Successfully received item_0",
-            "desc": "The consumer retrieves the handle, processes the payload, and the FIFO returns to empty status."
+            "highlight_line": 78,
+            "log_snippet": "100: getting one",
+            "desc": "At t=100 ns, the consumer wakes up after #100 delay and calls data_in.get(p), extracting the first item (data 0) from the FIFO."
         },
         {
             "step": 5,
-            "title": "5. Back-Pressure Demonstration",
-            "component": "fifo",
+            "title": "5. Instant Producer Resume (Delta-Cycle)",
+            "state": "FIFO Occupancy: 10 / 10 (Producer Resumed)",
+            "component": "producer, consumer, fifo",
             "highlight_file": "test.sv",
-            "highlight_line": 75,
-            "log_snippet": "UVM_INFO @ 50 ns: producer [CAN_PUT] FIFO full, back-pressure applied",
-            "desc": "When the producer produces faster than consumer consumes and FIFO reaches capacity, `can_put()` returns false and `put()` blocks the producer until space is freed."
+            "highlight_line": 65,
+            "log_snippet": "100: blocking put succeeded",
+            "desc": "In the same delta cycle at t=100 ns, the newly freed FIFO slot unblocks data_out.put(p), resuming producer execution immediately."
         }
     ],
 
     "simple/tlm2/nonblocking_simple": [
         {
             "step": 1,
-            "title": "1. BEGIN_REQ (Initiator -> Target)",
+            "title": "1. Initiator Sends BEGIN_REQ (Forward)",
+            "state": "TLM-2 Phase: BEGIN_REQ (Host -> Device)",
             "component": "host (initiator)",
-            "highlight_file": "tb_run.sv",
-            "highlight_line": 34,
-            "log_snippet": "UVM_INFO @ 0 ns: host [TLM2] nb_transport_fw(xfer, BEGIN_REQ)",
-            "desc": "The host initiator initiates the transfer by calling `nb_transport_fw(xfer, BEGIN_REQ)`. The device endpoint records the transfer and responds `UVM_TLM_ACCEPTED`."
+            "highlight_file": "host.sv",
+            "highlight_line": 85,
+            "log_snippet": "UVM_INFO host.sv(85) @ 0 ns: host [USB/DEV/FWD] USB_TLM_TOKEN @0: OUT [00000000] addr=7A endp=5",
+            "desc": "Host initiator initiates OUT transfer by calling sock.nb_transport_fw(xfer, ph, delay) with ph = USB_TLM_TOKEN, returning UVM_TLM_ACCEPTED without thread blocking."
         },
         {
             "step": 2,
-            "title": "2. END_REQ (Target -> Initiator)",
-            "component": "device (target)",
-            "highlight_file": "tb_run.sv",
-            "highlight_line": 52,
-            "log_snippet": "UVM_INFO @ 12 ns: device [TLM2] nb_transport_bw(xfer, END_REQ)",
-            "desc": "The target frees the request channel and notifies the initiator via `nb_transport_bw(xfer, END_REQ)` while processing the bulk data in the background."
+            "title": "2. Payload Transfer & Target Background Task",
+            "state": "TLM-2 Phase: DATA Transferred (Device Processing)",
+            "component": "host, device",
+            "highlight_file": "host.sv",
+            "highlight_line": 97,
+            "log_snippet": "UVM_INFO host.sv(97) @ 0 ns: host [USB/DEV/FWD] USB_TLM_DATA @0: OUT [00000000] addr=7A endp=5 data='{DE, AD, BE, EF}",
+            "desc": "Host sends data payload ('{DE, AD, BE, EF}). Device accepts payload and spawns an asynchronous background thread (fork: out_ack) to model 100 ns hardware latency."
         },
         {
             "step": 3,
-            "title": "3. BEGIN_RESP (Target -> Initiator)",
+            "title": "3. Target Handshake via Backward Path",
+            "state": "Sim Time: 100 ns (Phase: USB_TLM_HANDSHAKE / ACK)",
             "component": "device (target)",
-            "highlight_file": "tb_run.sv",
+            "highlight_file": "device.sv",
             "highlight_line": 68,
-            "log_snippet": "UVM_INFO @ 48 ns: device [TLM2] nb_transport_bw(xfer, BEGIN_RESP)",
-            "desc": "Once the target has ready response data, it calls `nb_transport_bw(xfer, BEGIN_RESP)`. The host accepts the response."
+            "log_snippet": "UVM_INFO device.sv(68) @ 100 ns: device [USB/HST/BWD] USB_TLM_HANDSHAKE @0: OUT [00000000] addr=7A endp=5 status=ACK",
+            "desc": "After 100 ns processing, device targets host via backward path sock.nb_transport_bw(xf, ph, dl) with status ACK, notifying completion."
         },
         {
             "step": 4,
-            "title": "4. END_RESP (Initiator -> Target)",
-            "component": "host (initiator)",
-            "highlight_file": "tb_run.sv",
-            "highlight_line": 80,
-            "log_snippet": "UVM_INFO @ 54 ns: host [TLM2] nb_transport_fw(xfer, END_RESP) -> UVM_TLM_COMPLETED",
-            "desc": "The host acknowledges receipt with `END_RESP` and synchronization status `UVM_TLM_COMPLETED`. The 4-phase transaction cycle completes cleanly with zero timing slips."
+            "title": "4. Device Completes Transfer (UVM_TLM_COMPLETED)",
+            "state": "TLM-2 Sync: UVM_TLM_COMPLETED (Zero-Slip Termination)",
+            "component": "device, host",
+            "highlight_file": "device.sv",
+            "highlight_line": 71,
+            "log_snippet": "UVM_INFO device.sv(71) @ 100 ns: device [USB/DEV/OUT/DONE] OUT [00000000] addr=7A endp=5 data='{DE, AD, BE, EF} status=ACK",
+            "desc": "Transfer finishes with UVM_TLM_COMPLETED. Non-blocking protocol achieves bidirectional cycle-accurate handshaking with zero thread overhead."
         }
     ],
 
     "simple/registers/primer": [
         {
             "step": 1,
-            "title": "1. High-Level Register Write",
-            "component": "user_sequence",
-            "highlight_file": "test.sv",
-            "highlight_line": 30,
-            "log_snippet": "UVM_INFO @ 10 ns: seq [RAL] reg_model.regA.write(status, 32'hA5A5_00FF)",
-            "desc": "The user sequence executes a high-level write on the RAL model (`reg_model.regA.write()`). The RAL model validates fields and updates its desired value."
+            "title": "1. High-Level Register Write (model.write)",
+            "state": "RAL Operation: WRITE (TABLES[12] = 0x3F8A019B)",
+            "component": "user_test_seq",
+            "highlight_file": "user_test.sv",
+            "highlight_line": 46,
+            "log_snippet": "UVM_INFO user_test.sv(46) @ 25 ns: user_test [RAL/WRITE] Writing model.TABLES[12] = 0x3F8A019B",
+            "desc": "User sequence executes high-level write on the RAL model: model.TABLES[idx].write(status, data). Verification sequences manipulate objects without pin-level knowledge."
         },
         {
             "step": 2,
             "title": "2. Adapter Translation (reg2bus)",
-            "component": "reg2apb_adapter",
-            "highlight_file": "test.sv",
+            "state": "Adapter Layer: reg2bus (APB addr=0x0030 data=0x3F8A019B)",
+            "component": "reg2apb_adapter, tb_env",
+            "highlight_file": "tb_env.sv",
             "highlight_line": 48,
-            "log_snippet": "UVM_INFO @ 10 ns: adapter [REG2BUS] Converted RAL op to APB write: addr=0x0004 data=0xA5A500FF",
-            "desc": "The register map passes the operation to `uvm_reg_adapter::reg2bus()`, translating abstract register operations into physical APB bus transactions (`apb_rw`)."
+            "log_snippet": "UVM_INFO tb_env.sv(48) @ 25 ns: reg2apb [ADAPT] reg2bus: WRITE addr=0x0030 data=0x3F8A019B",
+            "desc": "The register map delegates the operation to reg2apb_adapter::reg2bus(), translating abstract register writes into physical APB bus transactions (apb_rw) with address 0x0030."
         },
         {
             "step": 3,
-            "title": "3. Physical Bus Execution",
-            "component": "apb_driver & DUT",
-            "highlight_file": "test.sv",
-            "highlight_line": 65,
-            "log_snippet": "UVM_INFO @ 30 ns: driver [APB] PSEL=1 PENABLE=1 PWRITE=1 PADDR=0x4 PWDATA=0xA5A500FF",
-            "desc": "The physical APB driver toggles interface pins to perform the hardware bus transaction into the DUT's addressable registers."
+            "title": "3. Hardware Bus Cycle on DUT",
+            "state": "Physical Bus: PSEL=1, PENABLE=1, PWRITE=1",
+            "component": "dut (slave)",
+            "highlight_file": "dut.sv",
+            "highlight_line": 58,
+            "log_snippet": "UVM_INFO dut.sv(58) @ 35 ns: apb_slave [BUS] APB Write complete: PADDR=0x0030 PWDATA=0x3F8A019B",
+            "desc": "The physical APB driver toggles interface pins. In dut.sv, the hardware slave detects the SETUP+ENABLE cycle and writes the payload into DUT TABLES memory."
         },
         {
             "step": 4,
-            "title": "4. Monitor Observation & Predictor",
-            "component": "apb_monitor",
-            "highlight_file": "test.sv",
-            "highlight_line": 82,
-            "log_snippet": "UVM_INFO @ 40 ns: monitor [APB] Captured valid write at addr=0x4",
-            "desc": "The APB bus monitor observes the completed bus cycle on the physical wires and broadcasts the `apb_rw` item through its analysis port."
-        },
-        {
-            "step": 5,
-            "title": "5. Mirror Update & Verification",
-            "component": "uvm_reg_predictor",
-            "highlight_file": "test.sv",
-            "highlight_line": 95,
-            "log_snippet": "UVM_INFO @ 40 ns: predictor [MIRROR] Mirrored value updated to 0xA5A500FF",
-            "desc": "`uvm_reg_predictor` passes the monitored item through `bus2reg()` to update the RAL mirrored value (`get_mirrored_value()`), confirming perfect coherence."
+            "title": "4. High-Level Read & Mirror Check",
+            "state": "RAL Readback: TABLES[12] matches 0x3F8A019B",
+            "component": "user_test_seq, dut",
+            "highlight_file": "user_test.sv",
+            "highlight_line": 54,
+            "log_snippet": "TABLES[12] is 0x3F8A019B...",
+            "desc": "The test issues model.TABLES[i].read(status, data). With set_auto_predict(1), the RAL model automatically updates and verifies its mirrored value, confirming coherence."
         }
     ]
 }
 
 def generate_simulation_log(suite_key, meta):
-    """Generate realistic Accellera UVM simulation log."""
+    """Generate authentic, realistic simulation log tailored to each example's scenario."""
     title = meta["title"]
+    
+    if suite_key == "simple/phases/basic":
+        return f"""----------------------------------------------------------------
+Questa/VCS/Xcelium UVM 1.2 Simulation Log
+Example: {title} ({suite_key})
+----------------------------------------------------------------
+UVM_INFO @ 0 ns: reporter [RNTST] Running test...
+0: top:  build
+0: top.a1:  build
+0: top.a1.a:  build
+0: top.a1.a.b1:  build
+0: top.a1.a.d1:  build
+0: top.a2:  build
+0: top.a2.a:  build
+0: top.a2.a.b1:  build
+0: top.a2.a.d1:  build
+0: top.a1.a.d1:  end_of_elaboration
+0: top.a1.a.b1:  end_of_elaboration
+0: top.a1.a:  end_of_elaboration
+0: top.a1:  end_of_elaboration
+0: top.a2.a.d1:  end_of_elaboration
+0: top.a2.a.b1:  end_of_elaboration
+0: top.a2.a:  end_of_elaboration
+0: top.a2:  end_of_elaboration
+0: top:  end_of_elaboration
+0: top.a1.a.d1:  start_of_simulation
+0: top.a1.a.b1:  start_of_simulation
+0: top.a1.a:  start_of_simulation
+0: top.a1:  start_of_simulation
+0: top.a2.a.d1:  start_of_simulation
+0: top.a2.a.b1:  start_of_simulation
+0: top.a2.a:  start_of_simulation
+0: top.a2:  start_of_simulation
+0: top:  start_of_simulation
+0: top:  start run phase
+0: top.a1.a:  start run phase
+0: top.a1.a.b1:  start run phase
+0: top.a2.a:  start run phase
+0: top.a2.a.b1:  start run phase
+500: top:  end run phase
+500: top:  extract
+500: top:  check
+500: top:  report
+--- UVM Report Summary ---
+** Report counts by severity
+UVM_INFO :    1
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **"""
+
+    if suite_key == "simple/objections":
+        return f"""----------------------------------------------------------------
+Questa/VCS/Xcelium UVM 1.2 Simulation Log
+Example: {title} ({suite_key})
+----------------------------------------------------------------
+UVM_INFO @ 0 ns: reporter [RNTST] Running test...
+UVM_INFO simple.sv(55) @ 0 ns: uvm_test_top [drain] Setting drain time of 10
+UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (0) with delay 35
+UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (1) with delay 25
+UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (2) with delay 50
+UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (3) with delay 15
+UVM_INFO simple.sv(77) @ 15 ns: uvm_test_top [doit] Ending doit (3)
+UVM_INFO simple.sv(88) @ 15 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 3
+UVM_INFO simple.sv(77) @ 25 ns: uvm_test_top [doit] Ending doit (1)
+UVM_INFO simple.sv(88) @ 25 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 2
+UVM_INFO simple.sv(77) @ 35 ns: uvm_test_top [doit] Ending doit (0)
+UVM_INFO simple.sv(88) @ 35 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 1
+UVM_INFO simple.sv(77) @ 50 ns: uvm_test_top [doit] Ending doit (2)
+UVM_INFO simple.sv(88) @ 50 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 0
+UVM_INFO @ 60 ns: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+--- UVM Report Summary ---
+** Report counts by severity
+UVM_INFO :   14
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **"""
+
+    if suite_key == "simple/tlm1/fifo":
+        return f"""----------------------------------------------------------------
+Questa/VCS/Xcelium UVM 1.2 Simulation Log
+Example: {title} ({suite_key})
+----------------------------------------------------------------
+UVM_INFO @ 0 ns: reporter [RNTST] Running test...
+1: put data 0
+11: put data 1
+21: put data 2
+31: put data 3
+41: put data 4
+51: put data 5
+61: put data 6
+71: put data 7
+81: put data 8
+91: put data 9
+try_put status return: 10
+91: do a blocking put
+100: getting one
+100: received data 0
+100: blocking put succeeded
+200: received data 1
+210: received data 2
+220: received data 3
+230: received data 4
+240: received data 5
+250: received data 6
+260: received data 7
+270: received data 8
+280: received data 9
+290: received data 10
+--- UVM Report Summary ---
+** Report counts by severity
+UVM_INFO :    1
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **"""
+
+    if suite_key == "simple/tlm2/nonblocking_simple":
+        return f"""----------------------------------------------------------------
+Questa/VCS/Xcelium UVM 1.2 Simulation Log
+Example: {title} ({suite_key})
+----------------------------------------------------------------
+UVM_INFO @ 0 ns: reporter [RNTST] Running test...
+UVM_INFO host.sv(85) @ 0 ns: host [USB/DEV/FWD] USB_TLM_TOKEN @0: OUT [00000000] addr=7A endp=5
+UVM_INFO host.sv(97) @ 0 ns: host [USB/DEV/FWD] USB_TLM_DATA @0: OUT [00000000] addr=7A endp=5 data='{{DE, AD, BE, EF}}
+UVM_INFO device.sv(68) @ 100 ns: device [USB/HST/BWD] USB_TLM_HANDSHAKE @0: OUT [00000000] addr=7A endp=5 status=ACK
+UVM_INFO device.sv(71) @ 100 ns: device [USB/DEV/OUT/DONE] OUT [00000000] addr=7A endp=5 data='{{DE, AD, BE, EF}} status=ACK
+UVM_INFO host.sv(110) @ 100 ns: host [USB/DEV/FWD] USB_TLM_TOKEN @0: IN [00000000] addr=7A endp=5
+UVM_INFO device.sv(97) @ 250 ns: device [USB/HST/BWD] USB_TLM_DATA @0: IN [00000000] addr=7A endp=5 data='{{AB, CD}}
+--- UVM Report Summary ---
+** Report counts by severity
+UVM_INFO :    7
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **"""
+
+    if suite_key == "simple/registers/primer":
+        return f"""----------------------------------------------------------------
+Questa/VCS/Xcelium UVM 1.2 Simulation Log
+Example: {title} ({suite_key})
+----------------------------------------------------------------
+UVM_INFO @ 0 ns: reporter [RNTST] Running test...
+UVM_INFO tb_top.sv(45) @ 10 ns: reporter [RST] Reset sequence complete
+UVM_INFO user_test.sv(46) @ 25 ns: user_test [RAL/WRITE] Writing model.TABLES[12] = 0x3F8A019B
+UVM_INFO tb_env.sv(48) @ 25 ns: reg2apb [ADAPT] reg2bus: WRITE addr=0x0030 data=0x3F8A019B
+UVM_INFO dut.sv(58) @ 35 ns: apb_slave [BUS] APB Write complete: PADDR=0x0030 PWDATA=0x3F8A019B
+UVM_INFO user_test.sv(54) @ 50 ns: user_test [RAL/READ] Reading model.TABLES[12]...
+UVM_INFO tb_env.sv(48) @ 50 ns: reg2apb [ADAPT] reg2bus: READ addr=0x0030
+UVM_INFO dut.sv(56) @ 60 ns: apb_slave [BUS] APB Read complete: PADDR=0x0030 PRDATA=0x3F8A019B
+TABLES[12] is 0x3F8A019B...
+UVM_INFO user_test.sv(55) @ 60 ns: user_test [VERIF] Mirror match confirmed for TABLES[12]
+--- UVM Report Summary ---
+** Report counts by severity
+UVM_INFO :    9
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **"""
+
     cat = meta["category"]
     
     log_lines = [

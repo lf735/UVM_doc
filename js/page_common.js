@@ -2217,6 +2217,26 @@ window.PageCommon = (function () {
 
     const rawLogContent = terminalBody ? terminalBody.textContent : '';
 
+    // Structure terminal body into styled line elements
+    if (terminalBody && rawLogContent) {
+      const rawLogLines = rawLogContent.split('\n');
+      terminalBody.innerHTML = '';
+      rawLogLines.forEach(function (line, idx) {
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'term-line';
+        lineDiv.setAttribute('data-line', idx);
+        if (line.includes('UVM_ERROR') || line.includes('UVM_FATAL')) {
+          lineDiv.classList.add('line-error');
+        } else if (line.includes('UVM_WARNING')) {
+          lineDiv.classList.add('line-warning');
+        } else if (line.includes('UVM_INFO')) {
+          lineDiv.classList.add('line-info');
+        }
+        lineDiv.textContent = line || '\u00A0';
+        terminalBody.appendChild(lineDiv);
+      });
+    }
+
     const SIM_COMMANDS = {
       questa: 'make -f Makefile.questa run',
       vcs: 'make -f Makefile.vcs run',
@@ -2249,24 +2269,22 @@ window.PageCommon = (function () {
         const level = btn.getAttribute('data-level');
         if (!terminalBody) return;
 
-        if (level === 'all') {
-          terminalBody.textContent = rawLogContent;
-        } else if (level === 'info') {
-          const filtered = rawLogContent.split('\n').filter(function (l) {
-            return l.includes('UVM_INFO') || l.includes('---') || l.includes('Report counts') || l.includes('PASSED');
-          });
-          terminalBody.textContent = filtered.join('\n');
-        } else if (level === 'warning') {
-          const filtered = rawLogContent.split('\n').filter(function (l) {
-            return l.includes('UVM_WARNING') || l.includes('---');
-          });
-          terminalBody.textContent = filtered.join('\n');
-        } else if (level === 'error') {
-          const filtered = rawLogContent.split('\n').filter(function (l) {
-            return l.includes('UVM_ERROR') || l.includes('UVM_FATAL') || l.includes('---');
-          });
-          terminalBody.textContent = filtered.join('\n');
-        }
+        const allLines = terminalBody.querySelectorAll('.term-line');
+        allLines.forEach(function (lineEl) {
+          const text = lineEl.textContent;
+          if (level === 'all') {
+            lineEl.style.display = '';
+          } else if (level === 'info') {
+            const show = lineEl.classList.contains('line-info') || text.includes('---') || text.includes('Report counts') || text.includes('PASSED');
+            lineEl.style.display = show ? '' : 'none';
+          } else if (level === 'warning') {
+            const show = lineEl.classList.contains('line-warning') || text.includes('---');
+            lineEl.style.display = show ? '' : 'none';
+          } else if (level === 'error') {
+            const show = lineEl.classList.contains('line-error') || text.includes('---');
+            lineEl.style.display = show ? '' : 'none';
+          }
+        });
       });
     });
   }
@@ -2285,6 +2303,9 @@ window.PageCommon = (function () {
     const stepActiveComp = document.getElementById('step-active-comp');
     const stepActiveDesc = document.getElementById('step-active-desc');
     const stepActiveLog = document.getElementById('step-active-log');
+    const stepStateBadge = document.getElementById('step-state-badge');
+    const btnJumpCode = document.getElementById('btn-jump-code');
+    const btnJumpLog = document.getElementById('btn-jump-log');
     const stepperPayloadEl = document.getElementById('stepper-payload');
     const terminalBody = document.getElementById('terminal-body');
     const studioCodeContainer = document.getElementById('studio-code-container');
@@ -2312,6 +2333,75 @@ window.PageCommon = (function () {
     let currentStepIdx = 0;
     let playInterval = null;
 
+    function scrollToHighlightedCode() {
+      const activeIdx = studioController ? studioController.getCurrentFileIdx() : 0;
+      const activePane = document.getElementById(`file-pane-${activeIdx}`);
+      const step = stepperSteps[currentStepIdx];
+      if (!step || !step.highlight_line) return;
+      const targetRow = activePane ? activePane.querySelector(`tr[data-line="${step.highlight_line}"], tr#L${step.highlight_line}`) : null;
+      if (targetRow && studioCodeContainer) {
+        const rowTop = targetRow.offsetTop;
+        studioCodeContainer.scrollTo({
+          top: Math.max(0, rowTop - (studioCodeContainer.clientHeight / 2)),
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    function scrollToHighlightedLog() {
+      const step = stepperSteps[currentStepIdx];
+      if (!terminalBody || !step || !step.log_snippet) return;
+      const snippet = step.log_snippet.trim();
+      if (!snippet) return;
+
+      // Clear previous line highlights
+      terminalBody.querySelectorAll('.term-line.term-line-highlight').forEach(function (el) {
+        el.classList.remove('term-line-highlight');
+      });
+
+      const allLines = terminalBody.querySelectorAll('.term-line');
+      if (!allLines.length) return;
+
+      let targetEl = null;
+
+      // 1. Direct substring match
+      for (let i = 0; i < allLines.length; i++) {
+        const lineText = allLines[i].textContent.trim();
+        if (lineText.includes(snippet) || (snippet.length > 12 && snippet.includes(lineText))) {
+          targetEl = allLines[i];
+          break;
+        }
+      }
+
+      // 2. Token-based fallback matching for robust partial hits
+      if (!targetEl) {
+        const tokens = snippet.split(/[\s:\[\]@\(\)]+/).filter(function (t) { return t.length > 4; });
+        for (let i = 0; i < allLines.length; i++) {
+          const lineText = allLines[i].textContent;
+          const matchCount = tokens.filter(function (t) { return lineText.includes(t); }).length;
+          if (matchCount >= 2 || (tokens.length === 1 && matchCount === 1)) {
+            targetEl = allLines[i];
+            break;
+          }
+        }
+      }
+
+      if (targetEl) {
+        // Ensure line is visible if a filter was active
+        if (targetEl.style.display === 'none') {
+          const allBtn = document.querySelector('.term-filter[data-level="all"]');
+          if (allBtn) allBtn.click();
+        }
+
+        targetEl.classList.add('term-line-highlight');
+        const targetTop = targetEl.offsetTop - terminalBody.offsetTop;
+        terminalBody.scrollTo({
+          top: Math.max(0, targetTop - (terminalBody.clientHeight / 2) + 20),
+          behavior: 'smooth'
+        });
+      }
+    }
+
     function renderStep(idx) {
       if (idx < 0) idx = 0;
       if (idx >= stepperSteps.length) idx = stepperSteps.length - 1;
@@ -2328,6 +2418,15 @@ window.PageCommon = (function () {
       if (stepActiveComp) stepActiveComp.textContent = `Target: ${step.component}`;
       if (stepActiveDesc) stepActiveDesc.textContent = step.desc;
       if (stepActiveLog) stepActiveLog.textContent = step.log_snippet;
+
+      if (stepStateBadge) {
+        if (step.state) {
+          stepStateBadge.textContent = step.state;
+          stepStateBadge.style.display = 'inline-flex';
+        } else {
+          stepStateBadge.style.display = 'none';
+        }
+      }
 
       if (stepPrevBtn) stepPrevBtn.disabled = idx === 0;
       if (stepNextBtn) stepNextBtn.disabled = idx === stepperSteps.length - 1;
@@ -2368,17 +2467,7 @@ window.PageCommon = (function () {
       }
 
       // Synchronize with simulation log trace
-      if (terminalBody && step.log_snippet) {
-        const logText = terminalBody.textContent || '';
-        const needle = step.log_snippet.split('[')[0].trim();
-        if (needle) {
-          const pos = logText.indexOf(needle);
-          if (pos !== -1) {
-            const lineNo = logText.substring(0, pos).split('\n').length;
-            terminalBody.scrollTo({ top: Math.max(0, (lineNo - 2) * 19), behavior: 'smooth' });
-          }
-        }
-      }
+      scrollToHighlightedLog();
     }
 
     function stopAutoPlay() {
@@ -2400,6 +2489,24 @@ window.PageCommon = (function () {
       stepNextBtn.addEventListener('click', function () {
         stopAutoPlay();
         renderStep(currentStepIdx + 1);
+      });
+    }
+
+    if (btnJumpCode) {
+      btnJumpCode.addEventListener('click', function () {
+        scrollToHighlightedCode();
+        if (studioCodeContainer) {
+          studioCodeContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    if (btnJumpLog) {
+      btnJumpLog.addEventListener('click', function () {
+        scrollToHighlightedLog();
+        if (terminalBody) {
+          terminalBody.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       });
     }
 

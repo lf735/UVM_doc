@@ -313,7 +313,7 @@ def render_simulation_console(sim_log: str, custom_commands: Optional[Dict[str, 
 
 def render_flow_stepper(stepper_steps: List[Dict[str, Any]]) -> str:
     """
-    Renders the Interactive Visual Flow Stepper Section.
+    Renders the Interactive Visual Flow Stepper Section (Test Scenario Walkthrough).
     """
     if not stepper_steps:
         return ""
@@ -327,16 +327,20 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]]) -> str:
     ])
 
     first = stepper_steps[0]
+    initial_state = first.get("state", "")
+    state_badge_html = f'<span class="scenario-state-pill" id="step-state-badge">{html.escape(initial_state)}</span>' if initial_state else '<span class="scenario-state-pill" id="step-state-badge" style="display:none;"></span>'
+
     return f'''<!-- Interactive Visual Flow Stepper Section -->
 <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
   <div class="CTopic">
-    <h2 class="CTitle"><a name="FlowStepper">Simulation Flow Stepper</a></h2>
+    <h2 class="CTitle"><a name="FlowStepper">Test Scenario Walkthrough</a></h2>
     <div class="CBody">
       <div class="stepper-section" id="visual-flow-stepper">
         <div class="section-header-row">
           <div class="section-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            <span class="section-title-text">Interactive Execution Progression</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
+            {state_badge_html}
           </div>
           <div class="stepper-controls">
             <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
@@ -358,6 +362,16 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]]) -> str:
           <div class="step-log-hint">
             <strong>Expected Log Output:</strong>
             <code id="step-active-log">{html.escape(first.get("log_snippet", ""))}</code>
+          </div>
+          <div class="step-card-actions">
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-code" title="Scroll to code in Code Studio">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>Jump to Code</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-log" title="Scroll to log message in Terminal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              <span>Jump to Terminal Log</span>
+            </button>
           </div>
         </div>
       </div>

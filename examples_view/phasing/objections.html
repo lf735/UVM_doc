@@ -62,13 +62,14 @@
 <!-- Interactive Visual Flow Stepper Section -->
 <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
   <div class="CTopic">
-    <h2 class="CTitle"><a name="FlowStepper">Simulation Flow Stepper</a></h2>
+    <h2 class="CTitle"><a name="FlowStepper">Test Scenario Walkthrough</a></h2>
     <div class="CBody">
       <div class="stepper-section" id="visual-flow-stepper">
         <div class="section-header-row">
           <div class="section-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            <span class="section-title-text">Interactive Execution Progression</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
+            <span class="scenario-state-pill" id="step-state-badge">Drain Time: 10 ns (Active Objections: 0)</span>
           </div>
           <div class="stepper-controls">
             <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
@@ -78,18 +79,28 @@
         </div>
 
         <div class="stepper-timeline" id="stepper-timeline">
-          <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">Test Starts (Objections = 0)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Raise Objection (Lock Simulation)</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Stimulus Execution</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Drop Objection</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Drain Time &amp; Phase Termination</span></div>
+          <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">Arming Drain Time (10 ns)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Forking 4 Concurrent Threads</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Threads Dropping (15 ns, 25 ns, 35 ns)</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Last Thread (50 ns) &amp; Drain Trigger</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Drain Expiration &amp; Termination @ 60 ns</span></div>
         </div>
 
         <div class="step-card" id="step-detail-card">
           <div class="step-card-header">
-            <h4 id="step-active-title">1. Test Starts (Objections = 0)</h4>
+            <h4 id="step-active-title">1. Arming Drain Time (10 ns)</h4>
             <span class="step-active-comp" id="step-active-comp">Target: simple_test</span>
           </div>
-          <p id="step-active-desc">When `run_phase` begins, the global objection count for the phase is 0. If no component raises an objection during this delta cycle, the phase immediately ends.</p>
+          <p id="step-active-desc">simple_test configures a 10 ns drain time via set_drain_time(this, 10). When all objections drop to 0, this watchdog delays termination by 10 ns.</p>
           <div class="step-log-hint">
             <strong>Expected Log Output:</strong>
-            <code id="step-active-log">UVM_INFO @ 0 ns: reporter [RNTST] Running test...</code>
+            <code id="step-active-log">UVM_INFO simple.sv(55) @ 0 ns: uvm_test_top [drain] Setting drain time of 10</code>
+          </div>
+          <div class="step-card-actions">
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-code" title="Scroll to code in Code Studio">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>Jump to Code</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-log" title="Scroll to log message in Terminal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              <span>Jump to Terminal Log</span>
+            </button>
           </div>
         </div>
       </div>
@@ -418,43 +429,26 @@ Questa/VCS/Xcelium UVM 1.2 Simulation Log
 Example: Phase Objections &amp; Drain Time (simple/objections)
 ----------------------------------------------------------------
 UVM_INFO @ 0 ns: reporter [RNTST] Running test...
-UVM_INFO @ 0 ns: reporter [VERIF] Initializing testbench for Phase Objections &amp; Drain Time
-UVM_INFO @ 0 ns: reporter [CFG] Configuration database settings applied
-UVM_INFO @ 0 ns: reporter [TOPOLOGY] UVM component topology:
-----------------------------------------------------
-Name                         Type                    
-----------------------------------------------------
-uvm_test_top                 uvm_test                
-  env                        uvm_env                 
-    agent                    uvm_agent               
-----------------------------------------------------
-UVM_INFO @ 20 ns: reporter [PH_TRACE] In reset_phase
-UVM_INFO @ 40 ns: reporter [PH_TRACE] In configure_phase
-UVM_INFO @ 60 ns: reporter [PH_TRACE] In main_phase
-UVM_INFO @ 100 ns: reporter [STIMULUS] Starting stimulus generation...
-UVM_INFO @ 250 ns: reporter [PKT] Transaction packet #1 sent and verified
-UVM_INFO @ 450 ns: reporter [PKT] Transaction packet #2 sent and verified
-UVM_INFO @ 700 ns: reporter [PKT] Transaction packet #3 sent and verified
-UVM_INFO @ 1000 ns: reporter [STATUS] All verification sequences completed successfully
-UVM_INFO @ 1020 ns: reporter [PH_TRACE] In extract_phase
-UVM_INFO @ 1030 ns: reporter [PH_TRACE] In check_phase (Scoreboards clean)
-UVM_INFO @ 1040 ns: reporter [PH_TRACE] In report_phase
-
+UVM_INFO simple.sv(55) @ 0 ns: uvm_test_top [drain] Setting drain time of 10
+UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (0) with delay 35
+UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (1) with delay 25
+UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (2) with delay 50
+UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (3) with delay 15
+UVM_INFO simple.sv(77) @ 15 ns: uvm_test_top [doit] Ending doit (3)
+UVM_INFO simple.sv(88) @ 15 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 3
+UVM_INFO simple.sv(77) @ 25 ns: uvm_test_top [doit] Ending doit (1)
+UVM_INFO simple.sv(88) @ 25 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 2
+UVM_INFO simple.sv(77) @ 35 ns: uvm_test_top [doit] Ending doit (0)
+UVM_INFO simple.sv(88) @ 35 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 1
+UVM_INFO simple.sv(77) @ 50 ns: uvm_test_top [doit] Ending doit (2)
+UVM_INFO simple.sv(88) @ 50 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 0
+UVM_INFO @ 60 ns: reporter [TEST_DONE] &#x27;run&#x27; phase is ready to proceed to the &#x27;extract&#x27; phase
 --- UVM Report Summary ---
-
 ** Report counts by severity
 UVM_INFO :   14
 UVM_WARNING :    0
 UVM_ERROR :    0
 UVM_FATAL :    0
-** Report counts by id
-[RNTST]     1
-[VERIF]     1
-[CFG]       1
-[TOPOLOGY]  1
-[PH_TRACE]  6
-[STIMULUS]  1
-[PKT]       3
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
         </div>
       </div>
@@ -480,7 +474,7 @@ UVM_FATAL :    0
     </div>
   </div>
   <div id="zip-payload" style="display:none;" data-zip='[{&quot;name&quot;: &quot;simple.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2007-2010 Mentor Graphics Corporation\n//   Copyright 2007-2011 Cadence Design Systems, Inc.\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n`timescale 1ns/1ns\n\nmodule test;\n\n  // This simple example shows how the uvm_test_done objection is\n  // used to coordinate end of test activity. For an example of\n  // using end of test coordination in the context of a full\n  // environment, refer to the xbus example.\n\n  // In this example, a drain time of 10 is set on the component.\n  // The component then forks 4 processes which consume different\n  // amounts of time. When the last process is done (time 50),\n  // the drain time takes effect. The test is completed at time\n  // 60.\n\n  // The example also shows usage of the component objection \n  // callbacks. In this case, the dropped callback is used, but\n  // the raised and all_dropped work similarly (except the \n  // all dropped is a time-consuming task).\n\n  import uvm_pkg::*;\n  `include \&quot;uvm_macros.svh\&quot;\n\n  class simple_test extends uvm_test;\n    function new (string name, uvm_component parent);\n      super.new(name, parent);\n    endfunction : new\n\n    // Register with the factory.\n    `uvm_component_utils(simple_test)\n\n    virtual task run_phase(uvm_phase phase);\n      // Set a drain time on the objection if needed\n      uvm_report_info(\&quot;drain\&quot;, \&quot;Setting drain time of 10\&quot;, UVM_NONE);\n      uvm_test_done.set_drain_time(this,10);\n\n      // Run a bunch of processes in parallel\n      fork\n        doit(35);\n        doit(25);\n        doit(50);\n        doit(15);\n      join\n    endtask\n\n    // A simple task that consumes some time.\n    task doit (time delay);\n      static int s_inst = 0; int inst = s_inst++;\n\n      //Raise an objection before starting the activity\n      uvm_test_done.raise_objection(this);\n\n      uvm_report_info(\&quot;doit\&quot;, $sformatf(\&quot;Starting doit (%0d) with delay %0t\&quot;, \n          inst, delay), UVM_NONE);\n      #delay;\n      uvm_report_info(\&quot;doit\&quot;, $sformatf(\&quot;Ending doit (%0d)\&quot;, inst), UVM_NONE);\n\n      //Drop the objection when done\n      uvm_test_done.drop_objection(this);\n    endtask\n\n    // Use an objection callback do something when objections are raised or\n    // dropped (or all dropped). This example prints some information on each\n    // drop.\n    virtual function void dropped (uvm_objection objection, \n        uvm_object source_obj, string description, int count);\n      uvm_report_info(\&quot;dropped\&quot;, \n        $sformatf(\&quot;%d objection(s) dropped from %s, total count is now %0d\&quot;, \n        count, source_obj.get_full_name, objection.get_objection_total(this)), \n        UVM_NONE);\n    endfunction\n\n  endclass : simple_test\n\n  // Run the test\n  initial\n    run_test(\&quot;simple_test\&quot;);\n\nendmodule\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    Copyright 2010 Cadence Design, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../..\n\ninclude ../../Makefile.ius\n\n\nall: run\n\nrun:\n\t$(IUS) -incdir . simple.sv\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Mentor Graphics Corporation\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../..\n\ninclude ../../Makefile.questa\n\n\nall: run\n\ncomp: vlib\n\t$(VLOG) +incdir+. \\\n\t\tsimple.sv\n\nrun: comp\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../..\n\ninclude ../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) +incdir+. \\\n\t\tsimple.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}]'></div>
-  <div id="stepper-payload" style="display:none;" data-stepper='[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. Test Starts (Objections = 0)&quot;, &quot;component&quot;: &quot;simple_test&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 20, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: reporter [RNTST] Running test...&quot;, &quot;desc&quot;: &quot;When `run_phase` begins, the global objection count for the phase is 0. If no component raises an objection during this delta cycle, the phase immediately ends.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. Raise Objection (Lock Simulation)&quot;, &quot;component&quot;: &quot;component&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 32, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: component [OBJ] phase.raise_objection(this)&quot;, &quot;desc&quot;: &quot;The test component raises an objection via `phase.raise_objection(this)`. The objection counter increments to 1, preventing the simulator from terminating.&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. Stimulus Execution&quot;, &quot;component&quot;: &quot;component&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 40, &quot;log_snippet&quot;: &quot;UVM_INFO @ 100 ns: component [WORK] Processing simulation items...&quot;, &quot;desc&quot;: &quot;The component executes its payload, sending transactions, waiting on events, or verifying DUT responses while holding the objection.&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. Drop Objection&quot;, &quot;component&quot;: &quot;component&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 48, &quot;log_snippet&quot;: &quot;UVM_INFO @ 1000 ns: component [OBJ] phase.drop_objection(this)&quot;, &quot;desc&quot;: &quot;When all work completes, `phase.drop_objection(this)` is invoked. The objection counter drops to 0, triggering the drain time watchdog.&quot;}, {&quot;step&quot;: 5, &quot;title&quot;: &quot;5. Drain Time &amp; Phase Termination&quot;, &quot;component&quot;: &quot;uvm_root&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 55, &quot;log_snippet&quot;: &quot;UVM_INFO @ 1020 ns: reporter [RNTST] All objections dropped, exiting run_phase&quot;, &quot;desc&quot;: &quot;After drain time elapses with no new objections raised, the UVM phase controller terminates `run_phase` and cleanly proceeds to `extract_phase`.&quot;}]'></div>
+  <div id="stepper-payload" style="display:none;" data-stepper='[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. Arming Drain Time (10 ns)&quot;, &quot;state&quot;: &quot;Drain Time: 10 ns (Active Objections: 0)&quot;, &quot;component&quot;: &quot;simple_test&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 56, &quot;log_snippet&quot;: &quot;UVM_INFO simple.sv(55) @ 0 ns: uvm_test_top [drain] Setting drain time of 10&quot;, &quot;desc&quot;: &quot;simple_test configures a 10 ns drain time via set_drain_time(this, 10). When all objections drop to 0, this watchdog delays termination by 10 ns.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. Forking 4 Concurrent Threads&quot;, &quot;state&quot;: &quot;Sim Time: 0 ns (Active Objections: 4)&quot;, &quot;component&quot;: &quot;simple_test&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 59, &quot;log_snippet&quot;: &quot;UVM_INFO simple.sv(74) @ 0 ns: uvm_test_top [doit] Starting doit (0) with delay 35&quot;, &quot;desc&quot;: &quot;The test forks 4 parallel processes with delays of 15, 25, 35, and 50 ns. Each invokes raise_objection(this), bringing global objections to 4.&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. Threads Dropping (15 ns, 25 ns, 35 ns)&quot;, &quot;state&quot;: &quot;Sim Time: 35 ns (Active Objections: 1)&quot;, &quot;component&quot;: &quot;simple_test&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 80, &quot;log_snippet&quot;: &quot;UVM_INFO simple.sv(88) @ 35 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 1&quot;, &quot;desc&quot;: &quot;Processes finish asynchronously: at 15 ns, 25 ns, and 35 ns, each calls drop_objection. The dropped() callback traces the decrementing counter.&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. Last Thread (50 ns) &amp; Drain Trigger&quot;, &quot;state&quot;: &quot;Sim Time: 50 ns (Active Objections: 0 -&gt; Drain Armed)&quot;, &quot;component&quot;: &quot;simple_test&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 88, &quot;log_snippet&quot;: &quot;UVM_INFO simple.sv(88) @ 50 ns: uvm_test_top [dropped] 1 objection(s) dropped from uvm_test_top, total count is now 0&quot;, &quot;desc&quot;: &quot;At t=50 ns, the 50 ns thread finishes. Active objections reach 0, but simulation does NOT terminate: the 10 ns drain watchdog takes over.&quot;}, {&quot;step&quot;: 5, &quot;title&quot;: &quot;5. Drain Expiration &amp; Termination @ 60 ns&quot;, &quot;state&quot;: &quot;Sim Time: 60 ns (Clean Exit @ 50ns + 10ns)&quot;, &quot;component&quot;: &quot;simple_test, uvm_root&quot;, &quot;highlight_file&quot;: &quot;simple.sv&quot;, &quot;highlight_line&quot;: 64, &quot;log_snippet&quot;: &quot;UVM_INFO @ 60 ns: reporter [TEST_DONE] &#x27;run&#x27; phase is ready to proceed to the &#x27;extract&#x27; phase&quot;, &quot;desc&quot;: &quot;At t=60 ns (50 + 10 ns drain), with no new objections raised, drain time expires. The phase controller safely terminates run_phase.&quot;}]'></div>
   <script src="../../js/uvm_symbol_quick.js"></script>
   <script src="../../js/page_common.js"></script>
   <script src="../../js/example_page.js"></script>

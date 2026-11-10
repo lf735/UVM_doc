@@ -62,13 +62,14 @@
 <!-- Interactive Visual Flow Stepper Section -->
 <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
   <div class="CTopic">
-    <h2 class="CTitle"><a name="FlowStepper">Simulation Flow Stepper</a></h2>
+    <h2 class="CTitle"><a name="FlowStepper">Test Scenario Walkthrough</a></h2>
     <div class="CBody">
       <div class="stepper-section" id="visual-flow-stepper">
         <div class="section-header-row">
           <div class="section-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            <span class="section-title-text">Interactive Execution Progression</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
+            <span class="scenario-state-pill" id="step-state-badge">Phasing: BUILD_PHASE (Top-Down)</span>
           </div>
           <div class="stepper-controls">
             <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
@@ -78,18 +79,28 @@
         </div>
 
         <div class="stepper-timeline" id="stepper-timeline">
-          <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">Build Phase (Top-Down Construction)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Connect Phase (Bottom-Up Wiring)</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Elaboration &amp; Topology Printing</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Run Phase (Time Consuming Simulation)</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Cleanup &amp; Report Phase</span></div>
+          <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">Top-Down Construction (build_phase)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Bottom-Up Elaboration Phase</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Run Phase &amp; Objection Arming</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Time Progression &amp; Delays (#500)</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Top-Down Cleanup (Extract, Check, Report)</span></div>
         </div>
 
         <div class="step-card" id="step-detail-card">
           <div class="step-card-header">
-            <h4 id="step-active-title">1. Build Phase (Top-Down Construction)</h4>
-            <span class="step-active-comp" id="step-active-comp">Target: test &amp; env</span>
+            <h4 id="step-active-title">1. Top-Down Construction (build_phase)</h4>
+            <span class="step-active-comp" id="step-active-comp">Target: top, a1, a2, b1, d1</span>
           </div>
-          <p id="step-active-desc">Execution begins in top-down order. The root instantiates tests and sub-components. Components query `uvm_config_db` to retrieve configuration tables and virtual interfaces before creating children.</p>
+          <p id="step-active-desc">Execution begins at top-level. The framework calls build_phase() in strict top-down hierarchical order: top -&gt; a1 -&gt; a -&gt; b1/d1.</p>
           <div class="step-log-hint">
             <strong>Expected Log Output:</strong>
-            <code id="step-active-log">UVM_INFO @ 0 ns: reporter [PH_TRACE] In build_phase</code>
+            <code id="step-active-log">0: top:  build</code>
+          </div>
+          <div class="step-card-actions">
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-code" title="Scroll to code in Code Studio">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>Jump to Code</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-log" title="Scroll to log message in Terminal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              <span>Jump to Terminal Log</span>
+            </button>
           </div>
         </div>
       </div>
@@ -498,43 +509,48 @@ Questa/VCS/Xcelium UVM 1.2 Simulation Log
 Example: Phased Execution Lifecycle (simple/phases/basic)
 ----------------------------------------------------------------
 UVM_INFO @ 0 ns: reporter [RNTST] Running test...
-UVM_INFO @ 0 ns: reporter [VERIF] Initializing testbench for Phased Execution Lifecycle
-UVM_INFO @ 0 ns: reporter [CFG] Configuration database settings applied
-UVM_INFO @ 0 ns: reporter [TOPOLOGY] UVM component topology:
-----------------------------------------------------
-Name                         Type                    
-----------------------------------------------------
-uvm_test_top                 uvm_test                
-  env                        uvm_env                 
-    agent                    uvm_agent               
-----------------------------------------------------
-UVM_INFO @ 20 ns: reporter [PH_TRACE] In reset_phase
-UVM_INFO @ 40 ns: reporter [PH_TRACE] In configure_phase
-UVM_INFO @ 60 ns: reporter [PH_TRACE] In main_phase
-UVM_INFO @ 100 ns: reporter [STIMULUS] Starting stimulus generation...
-UVM_INFO @ 250 ns: reporter [PKT] Transaction packet #1 sent and verified
-UVM_INFO @ 450 ns: reporter [PKT] Transaction packet #2 sent and verified
-UVM_INFO @ 700 ns: reporter [PKT] Transaction packet #3 sent and verified
-UVM_INFO @ 1000 ns: reporter [STATUS] All verification sequences completed successfully
-UVM_INFO @ 1020 ns: reporter [PH_TRACE] In extract_phase
-UVM_INFO @ 1030 ns: reporter [PH_TRACE] In check_phase (Scoreboards clean)
-UVM_INFO @ 1040 ns: reporter [PH_TRACE] In report_phase
-
+0: top:  build
+0: top.a1:  build
+0: top.a1.a:  build
+0: top.a1.a.b1:  build
+0: top.a1.a.d1:  build
+0: top.a2:  build
+0: top.a2.a:  build
+0: top.a2.a.b1:  build
+0: top.a2.a.d1:  build
+0: top.a1.a.d1:  end_of_elaboration
+0: top.a1.a.b1:  end_of_elaboration
+0: top.a1.a:  end_of_elaboration
+0: top.a1:  end_of_elaboration
+0: top.a2.a.d1:  end_of_elaboration
+0: top.a2.a.b1:  end_of_elaboration
+0: top.a2.a:  end_of_elaboration
+0: top.a2:  end_of_elaboration
+0: top:  end_of_elaboration
+0: top.a1.a.d1:  start_of_simulation
+0: top.a1.a.b1:  start_of_simulation
+0: top.a1.a:  start_of_simulation
+0: top.a1:  start_of_simulation
+0: top.a2.a.d1:  start_of_simulation
+0: top.a2.a.b1:  start_of_simulation
+0: top.a2.a:  start_of_simulation
+0: top.a2:  start_of_simulation
+0: top:  start_of_simulation
+0: top:  start run phase
+0: top.a1.a:  start run phase
+0: top.a1.a.b1:  start run phase
+0: top.a2.a:  start run phase
+0: top.a2.a.b1:  start run phase
+500: top:  end run phase
+500: top:  extract
+500: top:  check
+500: top:  report
 --- UVM Report Summary ---
-
 ** Report counts by severity
-UVM_INFO :   14
+UVM_INFO :    1
 UVM_WARNING :    0
 UVM_ERROR :    0
 UVM_FATAL :    0
-** Report counts by id
-[RNTST]     1
-[VERIF]     1
-[CFG]       1
-[TOPOLOGY]  1
-[PH_TRACE]  6
-[STIMULUS]  1
-[PKT]       3
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
         </div>
       </div>
@@ -560,7 +576,7 @@ UVM_FATAL :    0
     </div>
   </div>
   <div id="zip-payload" style="display:none;" data-zip='[{&quot;name&quot;: &quot;test.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2007-2010 Mentor Graphics Corporation\n//   Copyright 2007-2011 Cadence Design Systems, Inc.\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n//----------------------------------------------------------------------\n// This example illustrates basic hierarchy construction and test phasing\n//----------------------------------------------------------------------\n\nmodule top;\n  import uvm_pkg::*;\n\n  //Create a topology\n  //            top\n  //       |            |\n  //     u1(A)         u2(A)\n  //    |     |      |        |\n  //   b1(B) d1(D)  b1(B)    d1(D)\n\n  //No run phase\n  class D extends uvm_component;\n    function new (string name, uvm_component parent);\n      super.new(name,parent);\n    endfunction\n    function void build_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  build\&quot;, $time, get_full_name());\n    endfunction\n    function void end_of_elaboration_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  end_of_elaboration\&quot;, $time, get_full_name());\n    endfunction\n    function void start_of_simulation_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  start_of_simulation\&quot;, $time, get_full_name());\n    endfunction\n    function void extract_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  extract\&quot;, $time, get_full_name());\n    endfunction\n    function void check_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  check\&quot;, $time, get_full_name());\n    endfunction\n    function void report_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  report\&quot;, $time, get_full_name());\n    endfunction\n  endclass\n\n  //Has run phase\n  class B extends uvm_component;\n    rand logic [7:0] delay;\n    function new (string name, uvm_component parent);\n      super.new(name,parent);\n    endfunction\n    function void build_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  build\&quot;, $time, get_full_name());\n    endfunction\n    function void end_of_elaboration_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  end_of_elaboration\&quot;, $time, get_full_name());\n    endfunction\n    function void start_of_simulation_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  start_of_simulation\&quot;, $time, get_full_name());\n    endfunction\n    function void extract_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  extract\&quot;, $time, get_full_name());\n    endfunction\n    function void check_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  check\&quot;, $time, get_full_name());\n    endfunction\n    function void report_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  report\&quot;, $time, get_full_name());\n    endfunction\n    task run_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  start run phase\&quot;, $time, get_full_name());\n      #delay;\n      $display(\&quot;%0t: %0s:  end run phase\&quot;, $time, get_full_name());\n    endtask\n  endclass\n  \n  //Has run phase and contains subcomponents\n  class A extends uvm_component;\n    rand B b1;\n    rand D d1;\n    rand logic [7:0] delay;\n    function new (string name, uvm_component parent);\n      super.new(name,parent);\n      b1 = new(\&quot;b1\&quot;, this);\n      d1 = new(\&quot;d1\&quot;, this);\n    endfunction\n    function void build_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  build\&quot;, $time, get_full_name());\n    endfunction\n    function void end_of_elaboration_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  end_of_elaboration\&quot;, $time, get_full_name());\n    endfunction\n    function void start_of_simulation_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  start_of_simulation\&quot;, $time, get_full_name());\n    endfunction\n    function void extract_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  extract\&quot;, $time, get_full_name());\n    endfunction\n    function void check_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  check\&quot;, $time, get_full_name());\n    endfunction\n    function void report_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  report\&quot;, $time, get_full_name());\n    endfunction\n    task run_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  start run phase\&quot;, $time, get_full_name());\n      #delay;\n      $display(\&quot;%0t: %0s:  end run phase\&quot;, $time, get_full_name());\n    endtask\n  endclass\n\n  class AA extends uvm_component;\n    rand A a;\n    function new (string name, uvm_component parent);\n      super.new(name,parent);\n      a = new(\&quot;a\&quot;, this);\n    endfunction\n  endclass\n\n  //Top level contains two A components\n  class top extends uvm_env;\n    rand AA a1;\n    rand AA a2;\n    function new (string name, uvm_component parent);\n      super.new(name,parent);\n      a1 = new(\&quot;a1\&quot;, this);\n      a2 = new(\&quot;a2\&quot;, this);\n    endfunction\n    function void build_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  build\&quot;, $time, get_full_name());\n    endfunction\n    function void end_of_elaboration_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  end_of_elaboration\&quot;, $time, get_full_name());\n    endfunction\n    function void start_of_simulation_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  start_of_simulation\&quot;, $time, get_full_name());\n    endfunction\n    function void extract_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  extract\&quot;, $time, get_full_name());\n    endfunction\n    function void check_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  check\&quot;, $time, get_full_name());\n    endfunction\n    function void report_phase(uvm_phase phase);\n      $display(\&quot;%0t: %0s:  report\&quot;, $time, get_full_name());\n    endfunction\n    task run_phase(uvm_phase phase);\n      phase.raise_objection(this);\n      $display(\&quot;%0t: %0s:  start run phase\&quot;, $time, get_full_name());\n      #500;\n      $display(\&quot;%0t: %0s:  end run phase\&quot;, $time, get_full_name());\n      phase.drop_objection(this);\n    endtask\n  endclass\n\n\n  top t = new(\&quot;top\&quot;, null);\n\n  initial begin\n    //Randomize all of the delays\n    void&#x27;(t.randomize());\n\n    run_test();\n  end\nendmodule\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    Copyright 2010 Cadence Design, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.ius\n\n\nall: run\n\nrun:\n\t$(IUS) -incdir . test.sv\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Mentor Graphics Corporation\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.questa\n\n\nall: run\n\ncomp: vlib\n\t$(VLOG) +incdir+. \\\n\t\ttest.sv\n\nrun: comp\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) +incdir+. \\\n\t\ttest.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}]'></div>
-  <div id="stepper-payload" style="display:none;" data-stepper='[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. Build Phase (Top-Down Construction)&quot;, &quot;component&quot;: &quot;test &amp; env&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 25, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: reporter [PH_TRACE] In build_phase&quot;, &quot;desc&quot;: &quot;Execution begins in top-down order. The root instantiates tests and sub-components. Components query `uvm_config_db` to retrieve configuration tables and virtual interfaces before creating children.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. Connect Phase (Bottom-Up Wiring)&quot;, &quot;component&quot;: &quot;env &amp; sub-components&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 35, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: reporter [PH_TRACE] In connect_phase&quot;, &quot;desc&quot;: &quot;Executed bottom-up once all components exist. TLM ports (`seq_item_port`) are bound to matching exports (`seq_item_export`), and analysis ports are connected to scoreboards.&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. Elaboration &amp; Topology Printing&quot;, &quot;component&quot;: &quot;uvm_root&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 42, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: reporter [TOPOLOGY] UVM testbench topology verified&quot;, &quot;desc&quot;: &quot;`end_of_elaboration` and `start_of_simulation` resolve addresses, verify no dangling unbound TLM ports exist, and display the official UVM component hierarchy tree.&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. Run Phase (Time Consuming Simulation)&quot;, &quot;component&quot;: &quot;test, env, drv, mon&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 50, &quot;log_snippet&quot;: &quot;UVM_INFO @ 0 ns: reporter [RNTST] Running test...&quot;, &quot;desc&quot;: &quot;The primary `task` phase consuming simulation time. Concurrent `fork/join` threads run sequences, drive RTL pin interfaces, and monitor response waveforms.&quot;}, {&quot;step&quot;: 5, &quot;title&quot;: &quot;5. Cleanup &amp; Report Phase&quot;, &quot;component&quot;: &quot;scoreboards &amp; test&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 65, &quot;log_snippet&quot;: &quot;--- UVM Report Summary --- ** 0 UVM_FATAL, 0 UVM_ERROR&quot;, &quot;desc&quot;: &quot;Top-down cleanup: `extract_phase` gathers final metrics, `check_phase` verifies scoreboards are empty, and `report_phase` prints the final test verdict.&quot;}]'></div>
+  <div id="stepper-payload" style="display:none;" data-stepper='[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. Top-Down Construction (build_phase)&quot;, &quot;state&quot;: &quot;Phasing: BUILD_PHASE (Top-Down)&quot;, &quot;component&quot;: &quot;top, a1, a2, b1, d1&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 144, &quot;log_snippet&quot;: &quot;0: top:  build&quot;, &quot;desc&quot;: &quot;Execution begins at top-level. The framework calls build_phase() in strict top-down hierarchical order: top -&gt; a1 -&gt; a -&gt; b1/d1.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. Bottom-Up Elaboration Phase&quot;, &quot;state&quot;: &quot;Phasing: ELABORATION (Bottom-Up)&quot;, &quot;component&quot;: &quot;b1, d1, a, top&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 105, &quot;log_snippet&quot;: &quot;0: top.a1.a.d1:  end_of_elaboration&quot;, &quot;desc&quot;: &quot;Once all components exist, end_of_elaboration and start_of_simulation execute bottom-up: leaf components validate bindings before parents display topology.&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. Run Phase &amp; Objection Arming&quot;, &quot;state&quot;: &quot;Sim Time: 0 ns (Objection Active: 1)&quot;, &quot;component&quot;: &quot;top, b1&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 163, &quot;log_snippet&quot;: &quot;0: top:  start run phase&quot;, &quot;desc&quot;: &quot;top enters run_phase and raises an objection (phase.raise_objection). Subcomponents concurrently launch their timed processes.&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. Time Progression &amp; Delays (#500)&quot;, &quot;state&quot;: &quot;Sim Time: 500 ns (Objection Released)&quot;, &quot;component&quot;: &quot;top, b1&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 167, &quot;log_snippet&quot;: &quot;500: top:  end run phase&quot;, &quot;desc&quot;: &quot;After #500 time delay elapses, top drops its objection (phase.drop_objection). All concurrent tasks having concluded, run_phase completes cleanly.&quot;}, {&quot;step&quot;: 5, &quot;title&quot;: &quot;5. Top-Down Cleanup (Extract, Check, Report)&quot;, &quot;state&quot;: &quot;Phasing: CLEANUP (Scoreboard &amp; Report)&quot;, &quot;component&quot;: &quot;top, a1, a2&quot;, &quot;highlight_file&quot;: &quot;test.sv&quot;, &quot;highlight_line&quot;: 159, &quot;log_snippet&quot;: &quot;500: top:  report&quot;, &quot;desc&quot;: &quot;Post-simulation phases execute sequentially: extract_phase collects state, check_phase validates results, and report_phase prints the final test verdict.&quot;}]'></div>
   <script src="../../js/uvm_symbol_quick.js"></script>
   <script src="../../js/page_common.js"></script>
   <script src="../../js/example_page.js"></script>
