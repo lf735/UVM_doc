@@ -1013,3 +1013,124 @@ if re.search(old_h_pattern, w_body):
    ```
    L'indicateur utilise un pseudo-élément en position absolue : le texte et les bordures ne sautent plus d'un pixel lors du clic.
 3. **Pastille de la classe courante** : Dans la documentation, `.hierarchy-flow-node.current` est passé d'un bloc bleu opaque lourd à une pastille douce `var(--primary-light)` avec bordure de 1.5px et texte `var(--primary)`, harmonieuse en thème clair comme en thème sombre.
+
+---
+
+## 25. Écrasement des Classes et Symboles Majeurs par les Déclarations Anticipées SystemVerilog (`typedef class`)
+
+### Le Symptôme Observé
+> *"Dans l'index des classes, `uvm_component`, `uvm_barrier`, `uvm_config_db` ou `uvm_factory` sont introuvables ou classés comme des types."*  
+> 44 classes fondamentales de l'architecture UVM disparaissaient de l'index des classes et pointaient vers de mauvais fichiers ou mauvaises lignes dans le code source.
+
+### L'Anatomie du Piège
+En SystemVerilog, l'instruction `typedef class <nom>;` est une déclaration anticipée (*forward declaration*) permettant de déclarer des pointeurs de classes avant leur définition complète.
+Dans [`scripts/build_docs.py`](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/build_docs.py), l'expression régulière chargée de détecter les typedefs était :
+```python
+TYPEDEF_REGEX = re.compile(r'^\s*typedef\s+(?:enum|struct)?.*?\b([a-zA-Z0-9_]+)\s*;')
+```
+1. Lors du parcours des fichiers source, en lisant `uvm_transaction.svh:25` (`typedef class uvm_component;`), cette regex capturait le nom `uvm_component` comme étant un typedef de type `type`.
+2. Le dictionnaire `SYMBOL_MAP['uvm_component']` voyait son entrée légitime de classe écrasée par :
+   `{'file': 'base/uvm_transaction.svh', 'line': 25, 'type': 'type'}`.
+3. Lors de la construction de l'index de recherche `searchIndex`, la condition `if info['type'] == 'class':` rejetait `uvm_component`, `uvm_barrier`, `uvm_config_db`, etc.
+
+### La Règle d'Or (Protection du Typage AST)
+1. **Exclusion explicite des déclarations anticipées** :
+   ```python
+   mtd = TYPEDEF_REGEX.match(line)
+   if mtd and not re.match(r'^\s*typedef\s+class\b', line):
+       ...
+   ```
+2. **Priorité absolue aux classes validées** : Un `typedef` ou un tag NaturalDocs ne doit **jamais** écraser une entrée déjà typée `'class'` dans `SYMBOL_MAP`.
+3. **Passe de réconciliation avec la base AST** : S'assurer que chaque classe présente dans `UVM_DB['classes']` (327 classes) est systématiquement injectée avec son fichier et sa ligne de début d'origine.
+
+---
+
+## 26. Le Conflit d'Appariement Automatique en Mode Split (`loadDoc` vs `loadSource`)
+
+### Le Symptôme Observé
+> *"La sélection d'un élément dans la liste d'index ne redirige pas bien dans la doc en mode split."*  
+> Lorsqu'un utilisateur cliquait sur une méthode ou une constante dans l'Index, le visualiseur de doc chargeait brièvement la bonne ancre puis sautait immédiatement en haut de page ou perdait l'ancre ciblée.
+
+### L'Anatomie du Piège
+En mode `split`, le portail maintient deux vues côte à côte. Pour faciliter la navigation, `loadDoc()` cherche le code source correspondant (`docToSrc`), et `loadSource()` cherche la documentation correspondante (`srcToDoc`).
+Or, lorsqu'un élément d'index possède à la fois `docHref` (avec ancre, ex: `uvm_component-svh.html#uvm_component.accept_tr`) et `srcHref` (avec ligne, ex: `uvm_component.svh.html#L2603`) :
+1. Le contrôleur exécutait `loadDoc(docHref)` : le cadre doc recevait l'URL avec ancre.
+2. Immédiatement après, le contrôleur exécutait `loadSource(srcHref)`.
+3. À l'intérieur de `loadSource()`, constatant que le mode était `split`, la fonction cherchait `srcToDoc[srcClean]` et appelait aveuglément :
+   ```javascript
+   setFrameSrc(docFrame, pairedDoc); // pairedDoc n'a AUCUNE ancre !
+   ```
+4. `docFrame` était donc immédiatement écrasé par l'URL de base sans ancre, annulant la navigation demandée !
+
+### La Solution Appliquée
+1. **Paramètre de contrôle d'appariement `autoPair`** :
+   ```javascript
+   function loadDoc(url, pushState = true, autoPair = true) { ... }
+   function loadSource(url, pushState = true, autoPair = true) { ... }
+   ```
+2. **Découplage lors d'un clic explicite à double cible** :
+   Lorsque le lien fournit à la fois la doc et la source, on désactive l'appariement automatique croisé :
+   ```javascript
+   if (currentMode === 'split' && srcHref) {
+     loadDoc(docHref, true, false);
+     loadSource(srcHref, true, false);
+   }
+   ```
+3. **Nettoyage des ancres pour la recherche d'appariement** : Découpage systématique sur `#` (`split('#')[0]`) pour que les clés de recherche correspondent aux noms de fichiers dans `docToSrc` et `srcToDoc`.
+
+---
+
+## 27. Précision du Défilement d'Ancre dans les Tableaux de Description NaturalDocs (`page_common.js`)
+
+### Le Symptôme Observé
+> *"Les constantes ne redirigent pas toujours vers le bon morceau de code ou la bonne ligne dans la doc."*  
+> En cliquant sur une constante d'énumération (ex. `UVM_ACTIVE`, `BEGIN_REQ`), la documentation défilait jusqu'en haut de la page ou au début d'un immense bloc, sans centrer ni surligner la ligne du tableau concernée.
+
+### L'Anatomie du Piège
+1. Dans les pages générées par NaturalDocs, les constantes et champs d'énumérations sont présentés dans des tables `<table class="CDescriptionList">` :
+   ```html
+   <tr><td class="CDLEntry"><a name="BEGIN_REQ"></a>BEGIN_REQ</td><td class="CDLDescription">...</td></tr>
+   ```
+2. Lors de la réception du message `scrollToSection`, le script cherchait le conteneur parent via :
+   ```javascript
+   target = target.closest('#Content > div') || target.closest('.CTopic') || target;
+   ```
+3. Pour une ancre `<a>` située dans une ligne de tableau, `target.closest('#Content > div')` remontait jusqu'à la `div` de section générale (pouvant mesurer plusieurs milliers de pixels de haut).
+4. La position cible calculée `getTargetScrollY()` était celle du haut de la section et non celle de la ligne `<tr>`, et l'effet de surbrillance `.doc-target-highlight` s'appliquait à tout le bloc.
+
+### La Solution Appliquée
+1. **Prise en charge prioritaire des lignes de tableau (`<tr>`)** :
+   ```javascript
+   if (target && target.tagName === 'A' && target.closest) {
+     const tableRow = target.closest('tr');
+     if (tableRow) {
+       target = tableRow;
+     } else {
+       target = target.closest('.CTopic') || target.closest('#Content > div') || target;
+     }
+   }
+   ```
+2. **Fonction de recherche robuste `findDocTargetElement()`** : Recherche multi-critères tolérante aux identifiants spéciaux, parenthèses de templates SystemVerilog (`#(BEFORE,AFTER)`), avec fallback par attributs et comparaison de suffixes.
+3. **Résultat** : La ligne exacte du tableau défile au centre de l'écran et reçoit le halo de surbrillance jaune/bleu pendant 1,6 s.
+
+---
+
+## 28. Résolution des Ancres de Macros et Encodage des Backticks (`%60`)
+
+### Le Symptôme Observé
+> *"Les macros depuis l'index ne redirigent pas vers le bon endroit de la page."*  
+> Cliquer sur une macro comme `` `uvm_info `` ouvrait le fichier `uvm_message_defines-svh.html`, mais restait systématiquement figé tout en haut de la page.
+
+### L'Anatomie du Piège
+Deux failles bloquaient la navigation :
+1. **Omission des ancres à la génération de l'index** : Dans `build_docs.py`, la boucle générant les macros créait le champ `doc` sous la forme brute `docs_view/{doc_file}` sans jamais chercher l'ancre spécifique dans `GLOBAL_DOC_ANCHOR_MAPS`.
+2. **L'encodage URL des backticks (`%60`)** : Lorsqu'un lien contient un backtick (`` ` ``), le parser d'URL des navigateurs (RFC 3986 / WHATWG) le convertit en `%60` dans `location.hash` (ex: `#%60uvm_info`). Lors de la réception par `postMessage`, `document.getElementById("%60uvm_info")` échouait car l'ancre HTML réelle portait `name="`uvm_info"`.
+
+### La Solution Appliquée
+1. **Indexation par identifiants DOM canoniques** : Dans `build_docs.py`, chaque macro reçoit son identifiant de navigation direct (`#doc-nav-item-X`) qui ne contient aucun caractère spécial susceptible d'être altéré par l'encodage d'URL.
+2. **Résolution multi-variantes dans `findDocTargetElement()`** : Le script teste automatiquement :
+   - L'identifiant direct (`doc-nav-item-X`)
+   - La forme brute (`` `uvm_info ``)
+   - La forme sans backtick (`uvm_info`)
+   - La forme décodée depuis l'URL (`decodeURIComponent`)
+   - La forme ré-injectant le backtick depuis `%60`.

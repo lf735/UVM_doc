@@ -316,6 +316,11 @@ Pour chaque méthode `m` d'une classe `C` :
   - `inca` : Implémentations spécifiques à Cadence Incisive / Xcelium (`uvm_hdl_inca.c`).
   - `generic` : Fonctions transversales C++ (ex. expressions régulières `uvm_regex.cc` et arguments `uvm_svcmd_dpi.c`).
 
+### 4.7 Index Global des Symboles (`symbols_index`) & Algorithme `find_decl_line`
+Pour éliminer les redirections erronées vers les commentaires d'en-tête ou vers la première ligne des fichiers (`#L1`) :
+- **Localisation chirurgicale de la déclaration** : L'algorithme `find_decl_line()` ignore les blocs de commentaires NaturalDocs (`/* ... */` et `// ...`) et recherche la déclaration SystemVerilog réelle active (`parameter`, `localparam`, `typedef enum`, `typedef struct`, déclaration de port `uvm_*_port`, variable typée).
+- **Couverture exhaustive** : Indexation de 3 688 symboles (classes, fonctions, tâches, macros, constantes, variables, types, ports et exemples interactifs) avec discrimination des doublons et liaison bidirectionnelle vers la documentation et les sources.
+
 ---
 
 ## 5. Métriques & Couverture Vérifiées
@@ -323,13 +328,13 @@ Pour chaque méthode `m` d'une classe `C` :
 | Domaine | Quantité | Taux de Résolution |
 | :--- | :--- | :--- |
 | Fichiers sources | **155** | 100% analysés sans omission |
-| Classes SystemVerilog | **325** | 100% avec position exacte de début et fin |
+| Classes SystemVerilog | **327** | 100% avec position exacte de début et fin |
 | Méthodes de classes | **2 130** | 100% avec typage (`function`/`task`), modificateurs et paramètres |
 | Implémentations hors-classe | **472** | Appariées avec leur classe et méthode cible |
 | Redéfinitions (*Overrides*) | **507** | Résolues bidirectionnellement dans les deux sens |
 | Macros fonctionnelles | **373** | Gardes d'inclusion exclues, corps et arguments parsés |
 | Interfaces DPI-C | **15 SV / 62 C** | 100% des imports SystemVerilog reliés aux fonctions C EDA |
-| Symboles globaux indexés | **2 828** | Accessibles par recherche plein texte instantanée |
+| Symboles globaux indexés | **3 688** | Accessibles par recherche plein texte instantanée et navigation A-Z |
 
 ---
 
