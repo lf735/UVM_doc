@@ -1597,7 +1597,7 @@ window.PageCommon = (function () {
 
       studioCodeContainer.addEventListener('mouseover', function (e) {
         const target = e.target.closest('.code span');
-        if (target && (target.classList.contains('sv-ident') || target.classList.contains('sv-type') || target.classList.contains('sv-method') || target.classList.contains('sv-macro'))) {
+        if (target && isHoverableToken(target)) {
           hoveredToken = target;
           if (isCtrlDown) {
             target.classList.add('ctrl-hoverable');
@@ -1612,7 +1612,7 @@ window.PageCommon = (function () {
         }
       });
 
-      function resolveSymbol(tokenName, isImplementation) {
+      function resolveSymbol(tokenName, isImplementation, contextEl) {
         const cleanToken = tokenName.trim().replace(/^`/, '');
         if (!cleanToken) return;
 
@@ -1656,22 +1656,14 @@ window.PageCommon = (function () {
         }
 
         // Step B: Cross-file lookup in global UVM_SYMBOLS
-        if (window.UVM_SYMBOLS) {
-          const sym = (window.UVM_SYMBOLS.classes && window.UVM_SYMBOLS.classes[cleanToken]) ||
-            (window.UVM_SYMBOLS.macros && window.UVM_SYMBOLS.macros[cleanToken]) ||
-            (window.UVM_SYMBOLS.methods && window.UVM_SYMBOLS.methods[cleanToken]);
-          if (sym && sym.file) {
-            const targetUrl = 'src_view/' + sym.file + '.html#L' + sym.line;
-            if (window.parent && window.parent !== window) {
-              window.parent.postMessage({ type: 'openSourceView', url: targetUrl }, '*');
-              try {
-                if (window.parent.openSourceView) window.parent.openSourceView(targetUrl);
-              } catch (err) { }
-            } else {
-              window.location.href = '../' + targetUrl;
-            }
-            return;
-          }
+        const owner = contextEl ? (contextEl.getAttribute('data-sym-owner') || '') : '';
+        const base = contextEl ? (contextEl.getAttribute('data-sym-base') || '') : '';
+        const symKind = contextEl ? (contextEl.getAttribute('data-sym-kind') || '') : '';
+        const resolved = lookupUvmSymbol(cleanToken, owner, base, symKind);
+        const sym = resolved ? (resolved.isAmbiguous ? resolved.primary : resolved) : null;
+        if (sym && sym.file) {
+          dispatchOpenSource('src_view/' + sym.file + '.html#L' + (sym.line || 1));
+          return;
         }
       }
 
@@ -1680,8 +1672,9 @@ window.PageCommon = (function () {
           const target = e.target.closest('.code span');
           if (target) {
             e.preventDefault();
+            e.stopPropagation();
             const token = target.textContent.trim();
-            resolveSymbol(token, false);
+            resolveSymbol(token, false, target);
           }
         }
       });
@@ -1695,7 +1688,7 @@ window.PageCommon = (function () {
             token = hoveredToken.textContent.trim();
           }
           if (token) {
-            resolveSymbol(token, e.ctrlKey || e.metaKey);
+            resolveSymbol(token, e.ctrlKey || e.metaKey, hoveredToken);
           }
         }
       });
@@ -1718,36 +1711,46 @@ window.PageCommon = (function () {
       function showTooltip(target, token) {
         if (!window.UVM_SYMBOLS) return;
         const cleanToken = token.trim().replace(/^`/, '');
-        const info = (window.UVM_SYMBOLS.classes && window.UVM_SYMBOLS.classes[cleanToken]) ||
-          (window.UVM_SYMBOLS.macros && window.UVM_SYMBOLS.macros[cleanToken]) ||
-          (window.UVM_SYMBOLS.methods && window.UVM_SYMBOLS.methods[cleanToken]);
-        if (!info) {
+        const owner = target.getAttribute('data-sym-owner') || '';
+        const base = target.getAttribute('data-sym-base') || '';
+        const symKind = target.getAttribute('data-sym-kind') || '';
+        const resolved = lookupUvmSymbol(cleanToken, owner, base, symKind);
+        if (!resolved) {
           hideTooltip();
           return;
         }
 
-        const typeKind = info.type || 'symbol';
+        const primary = resolved.isAmbiguous ? resolved.primary : resolved;
+        const entry = primary.entry || {};
+        const typeKind = primary.type || 'symbol';
         let sigSnippet = '';
-        if (info.params || info.extends) {
-          sigSnippet = `<div class="qi-signature"><code>${typeKind} ${cleanToken}${info.params ? ' #(' + info.params + ')' : ''}${info.extends ? ' extends ' + info.extends : ''}</code></div>`;
-        } else if (info.signature) {
-          sigSnippet = `<div class="qi-signature"><code>${info.signature}</code></div>`;
+        if (entry.params || entry.extends) {
+          sigSnippet = `<div class="qi-signature"><code>${escapeHtml(typeKind)} ${escapeHtml(cleanToken)}${entry.params ? ' #(' + escapeHtml(entry.params) + ')' : ''}${entry.extends ? ' extends ' + escapeHtml(entry.extends) : ''}</code></div>`;
+        } else if (resolved.isAmbiguous) {
+          const preview = resolved.candidates.slice(0, 3).map(c => c.class).join(', ');
+          sigSnippet = `<div class="qi-signature"><code>${escapeHtml(primary.kind || typeKind)} ${escapeHtml(cleanToken)}() — ${resolved.candidates.length} classes (${escapeHtml(preview)}${resolved.candidates.length > 3 ? ', ...' : ''})</code></div>`;
+        } else if (primary.ownerClass && (primary.kind === 'function' || primary.kind === 'task' || typeKind === 'function' || typeKind === 'task' || typeKind === 'method')) {
+          sigSnippet = `<div class="qi-signature"><code>${primary.ret ? escapeHtml(primary.ret) + ' ' : ''}${escapeHtml(primary.ownerClass)}::${escapeHtml(cleanToken)}()</code></div>`;
+        } else if (entry.signature) {
+          sigSnippet = `<div class="qi-signature"><code>${escapeHtml(entry.signature)}</code></div>`;
         }
 
-        const docText = info.doc ? `<div class="qi-doc">${info.doc}</div>` : '';
-        const fileLoc = info.file ? `${info.file}:${info.line}` : '';
-        const srcUrl = info.file ? `src_view/${info.file}.html#L${info.line}` : '#';
+        const docText = primary.doc ? `<div class="qi-doc">${escapeHtml(primary.doc)}</div>` : '';
+        const fileLoc = primary.file ? `${primary.file}:${primary.line || 1}` : '';
+        const srcUrl = primary.file ? `src_view/${primary.file}.html#L${primary.line || 1}` : '';
+        const docUrl = primary.doc_url || '';
 
         quickInfo.innerHTML = `
           <div class="qi-header">
-            <span class="qi-badge qi-${typeKind}">${typeKind}</span>
-            <span class="qi-title">${cleanToken}</span>
+            <span class="qi-badge qi-${escapeHtml(typeKind)}">${escapeHtml(typeKind)}</span>
+            <span class="qi-title">${escapeHtml(cleanToken)}</span>
           </div>
           ${sigSnippet}
           ${docText}
           <div class="qi-actions">
-            <a href="#" class="qi-link qi-def-link" data-src-url="${srcUrl}">Go to Definition (F12)</a>
-            ${fileLoc ? `<span class="qi-sep">•</span><span class="qi-file">${fileLoc}</span>` : ''}
+            ${srcUrl ? `<a href="#" class="qi-link qi-def-link" data-src-url="${escapeHtml(srcUrl)}">Go to Definition (F12)</a>` : ''}
+            ${docUrl ? `<span class="qi-sep">•</span><a href="#" class="qi-link qi-doc-link" data-doc-url="${escapeHtml(docUrl)}">View Docs</a>` : ''}
+            ${fileLoc ? `<span class="qi-sep">•</span><span class="qi-file">${escapeHtml(fileLoc)}</span>` : ''}
           </div>
         `;
 
@@ -1769,24 +1772,24 @@ window.PageCommon = (function () {
         currentTokenEl = target;
 
         const defLink = quickInfo.querySelector('.qi-def-link');
-        if (defLink) {
+        if (defLink && srcUrl) {
           defLink.addEventListener('click', function (ev) {
             ev.preventDefault();
-            if (window.parent && window.parent !== window) {
-              window.parent.postMessage({ type: 'openSourceView', url: srcUrl }, '*');
-              try {
-                if (window.parent.openSourceView) window.parent.openSourceView(srcUrl);
-              } catch (err) { }
-            } else {
-              window.location.href = '../' + srcUrl;
-            }
+            dispatchOpenSource(srcUrl);
+          });
+        }
+        const docLinkEl = quickInfo.querySelector('.qi-doc-link');
+        if (docLinkEl && docUrl) {
+          docLinkEl.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            dispatchOpenDoc(docUrl, cleanToken, primary.ownerClass || '');
           });
         }
       }
 
       studioCodeContainer.addEventListener('mouseover', function (e) {
         const target = e.target.closest('.code span');
-        if (target && (target.classList.contains('sv-ident') || target.classList.contains('sv-type') || target.classList.contains('sv-method') || target.classList.contains('sv-macro'))) {
+        if (target && isHoverableToken(target)) {
           const token = target.textContent.trim();
           clearTimeout(hoverTimer);
           hoverTimer = setTimeout(function () {
@@ -1850,13 +1853,12 @@ window.PageCommon = (function () {
             const word = model.getWordAtPosition(position);
             if (!word) return null;
             const clean = word.word.replace(/^`/, '');
-            const sym = (window.UVM_SYMBOLS.classes && window.UVM_SYMBOLS.classes[clean]) ||
-              (window.UVM_SYMBOLS.macros && window.UVM_SYMBOLS.macros[clean]) ||
-              (window.UVM_SYMBOLS.methods && window.UVM_SYMBOLS.methods[clean]);
+            const resolved = lookupUvmSymbol(clean);
+            const sym = resolved ? (resolved.isAmbiguous ? resolved.primary : resolved) : null;
             if (!sym) return null;
             const contents = [
-              { value: `**[${sym.type.toUpperCase()}]** \`${clean}\`` },
-              { value: `*Source:* \`${sym.file}:${sym.line}\`` }
+              { value: `**[${(sym.type || 'symbol').toUpperCase()}]** \`${sym.ownerClass ? sym.ownerClass + '::' : ''}${clean}\`` },
+              { value: `*Source:* \`${sym.file}:${sym.line || 1}\`` }
             ];
             if (sym.doc) contents.push({ value: sym.doc });
             return {
@@ -1871,15 +1873,11 @@ window.PageCommon = (function () {
             const word = model.getWordAtPosition(position);
             if (!word) return null;
             const clean = word.word.replace(/^`/, '');
-            const sym = (window.UVM_SYMBOLS.classes && window.UVM_SYMBOLS.classes[clean]) ||
-              (window.UVM_SYMBOLS.macros && window.UVM_SYMBOLS.macros[clean]) ||
-              (window.UVM_SYMBOLS.methods && window.UVM_SYMBOLS.methods[clean]);
+            const resolved = lookupUvmSymbol(clean);
+            const sym = resolved ? (resolved.isAmbiguous ? resolved.primary : resolved) : null;
             if (!sym) return null;
             if (sym.file && !window.location.pathname.includes(sym.file)) {
-              const targetUrl = `src_view/${sym.file}.html#L${sym.line}`;
-              if (window.parent && window.parent !== window) {
-                window.parent.postMessage({ type: 'openSourceView', url: targetUrl }, '*');
-              }
+              dispatchOpenSource(`src_view/${sym.file}.html#L${sym.line || 1}`);
             }
             return {
               uri: model.uri,
@@ -2904,8 +2902,327 @@ window.PageCommon = (function () {
   }
 
   // =========================================================================
-  // Centralized Link Interception & Cross-Frame Routing
+  // UVM Symbol Resolution, Disambiguation Popover & Cross-Frame Routing
   // =========================================================================
+
+  const HOVERABLE_TOKEN_CLASSES = ['sv-ident', 'sv-type', 'sv-uvm-type', 'sv-method', 'sv-macro', 'sv-constant'];
+
+  function isHoverableToken(el) {
+    if (!el || !el.classList) return false;
+    for (let i = 0; i < HOVERABLE_TOKEN_CLASSES.length; i++) {
+      if (el.classList.contains(HOVERABLE_TOKEN_CLASSES[i])) return true;
+    }
+    return false;
+  }
+
+  function escapeHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function dispatchOpenDoc(docUrl, symbol, ownerClass) {
+    if (window.parent && window.parent !== window) {
+      try {
+        if (window.parent.openDocView) {
+          window.parent.openDocView(docUrl || undefined, symbol, ownerClass || undefined);
+          return;
+        }
+      } catch (err) { }
+      window.parent.postMessage({
+        type: 'openDocView',
+        symbol: symbol,
+        ownerClass: ownerClass || undefined,
+        url: docUrl || undefined
+      }, '*');
+      return;
+    }
+    if (docUrl) {
+      window.location.href = '../' + docUrl.replace(/^(\.\.\/)+/, '');
+    }
+  }
+
+  function dispatchOpenSource(srcUrl) {
+    if (!srcUrl) return;
+    if (window.parent && window.parent !== window) {
+      try {
+        if (window.parent.openSourceView) {
+          window.parent.openSourceView(srcUrl);
+          return;
+        }
+      } catch (err) { }
+      window.parent.postMessage({ type: 'openSourceView', url: srcUrl }, '*');
+      return;
+    }
+    window.location.href = '../' + srcUrl.replace(/^(\.\.\/)+/, '');
+  }
+
+  function getUvmAncestorChain(clsName) {
+    const chain = [];
+    const seen = new Set();
+    let curr = clsName;
+    let nodes = null;
+    try {
+      nodes = window.parent && window.parent.UVM_DATA && window.parent.UVM_DATA.classHierarchy
+        ? window.parent.UVM_DATA.classHierarchy.nodes
+        : null;
+    } catch (err) {
+      nodes = null;
+    }
+    while (curr && !seen.has(curr)) {
+      seen.add(curr);
+      chain.push(curr);
+      curr = (nodes && nodes[curr]) ? nodes[curr].parent : null;
+    }
+    return chain;
+  }
+
+  const PRIORITY_DISAMBIG_CLASSES = new Set([
+    'Global', 'Globals', 'uvm_object', 'uvm_component', 'uvm_objection',
+    'uvm_phase', 'uvm_config_db', 'uvm_reg', 'uvm_reg_field', 'uvm_mem',
+    'uvm_reg_block', 'uvm_analysis_port', 'uvm_tlm_fifo', 'uvm_sequence_base',
+    'uvm_sequencer_base', 'uvm_root', 'uvm_factory', 'uvm_report_object'
+  ]);
+
+  function formatSingleSymbol(name, type, entry) {
+    return {
+      isAmbiguous: false,
+      name: name,
+      type: (entry && entry.type) || type || 'symbol',
+      kind: (entry && (entry.kind || entry.type)) || type || 'symbol',
+      ownerClass: (entry && entry.class) || '',
+      ret: (entry && entry.ret) || '',
+      file: (entry && entry.file) || '',
+      line: (entry && entry.line) || 1,
+      doc: (entry && entry.doc) || '',
+      doc_url: (entry && entry.doc_url) || '',
+      entry: entry
+    };
+  }
+
+  function resolveMethodEntry(cleanToken, candidates, ownerClass, baseClass) {
+    if (!Array.isArray(candidates) || candidates.length === 0) return null;
+    const publicCands = candidates.filter(c => c.class && !c.class.startsWith('m_uvm_'));
+    const pool = publicCands.length > 0 ? publicCands : candidates;
+
+    function wrapCandidate(c) {
+      return {
+        isAmbiguous: false,
+        name: cleanToken,
+        type: c.kind || 'method',
+        kind: c.kind || 'method',
+        ownerClass: c.class || '',
+        ret: c.ret || '',
+        file: c.file || '',
+        line: c.line || 1,
+        doc: c.doc || '',
+        doc_url: c.doc_url || '',
+        entry: c
+      };
+    }
+
+    if (ownerClass) {
+      if (ownerClass === 'Global' || ownerClass === 'Globals') {
+        const gMatch = pool.find(c => c.class === 'Global' || c.class === 'Globals')
+          || candidates.find(c => c.class === 'Global' || c.class === 'Globals');
+        if (gMatch) return wrapCandidate(gMatch);
+      } else {
+        const chain = getUvmAncestorChain(ownerClass);
+        for (let i = 0; i < chain.length; i++) {
+          const match = pool.find(c => c.class === chain[i]) || candidates.find(c => c.class === chain[i]);
+          if (match) return wrapCandidate(match);
+        }
+      }
+    }
+
+    if (baseClass) {
+      const chain = getUvmAncestorChain(baseClass);
+      for (let i = 0; i < chain.length; i++) {
+        const match = pool.find(c => c.class === chain[i]) || candidates.find(c => c.class === chain[i]);
+        if (match) return wrapCandidate(match);
+      }
+    }
+
+    if (pool.length === 1) {
+      return wrapCandidate(pool[0]);
+    }
+
+    // Deduplicate by distinct doc target when every candidate points to the exact same anchored doc item
+    const distinctDocUrls = new Set(pool.map(c => c.doc_url || (c.file + ':' + c.line)));
+    if (distinctDocUrls.size === 1) {
+      const onlyDocUrl = pool[0].doc_url || '';
+      if (onlyDocUrl.includes('#doc-nav-')) {
+        const best = pool.find(c => c.class === 'uvm_component' || c.class === 'uvm_object') || pool[0];
+        return wrapCandidate(best);
+      }
+    }
+
+    const sorted = pool.slice().sort((a, b) => {
+      const ap = PRIORITY_DISAMBIG_CLASSES.has(a.class) ? 0 : 1;
+      const bp = PRIORITY_DISAMBIG_CLASSES.has(b.class) ? 0 : 1;
+      if (ap !== bp) return ap - bp;
+      return String(a.class).localeCompare(String(b.class));
+    });
+
+    const primary = wrapCandidate(sorted[0]);
+    return {
+      isAmbiguous: true,
+      name: cleanToken,
+      type: primary.type,
+      kind: primary.kind,
+      candidates: sorted,
+      primary: primary
+    };
+  }
+
+  function lookupUvmSymbol(token, ownerClass, baseClass, symKind) {
+    const cleanToken = String(token || '').trim().replace(/^`/, '');
+    if (!cleanToken || !window.UVM_SYMBOLS) return null;
+    const syms = window.UVM_SYMBOLS;
+
+    if (symKind === 'method' && syms.methods && syms.methods[cleanToken]) {
+      return resolveMethodEntry(cleanToken, syms.methods[cleanToken], ownerClass, baseClass);
+    }
+    if (symKind === 'macro' && syms.macros && syms.macros[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'macro', syms.macros[cleanToken]);
+    }
+    if (symKind === 'constant' && syms.constants && syms.constants[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'constant', syms.constants[cleanToken]);
+    }
+    if (symKind === 'type' && syms.types && syms.types[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'type', syms.types[cleanToken]);
+    }
+    if (symKind === 'var' && syms.vars && syms.vars[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'variable', syms.vars[cleanToken]);
+    }
+
+    if (syms.classes && syms.classes[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'class', syms.classes[cleanToken]);
+    }
+    if (syms.macros && syms.macros[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'macro', syms.macros[cleanToken]);
+    }
+    if (syms.types && syms.types[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'type', syms.types[cleanToken]);
+    }
+    if (syms.constants && syms.constants[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'constant', syms.constants[cleanToken]);
+    }
+    if (syms.vars && syms.vars[cleanToken]) {
+      return formatSingleSymbol(cleanToken, 'variable', syms.vars[cleanToken]);
+    }
+    if (syms.methods && syms.methods[cleanToken]) {
+      return resolveMethodEntry(cleanToken, syms.methods[cleanToken], ownerClass, baseClass);
+    }
+    return null;
+  }
+
+  let activeDisambigPopover = null;
+
+  function closeSymbolDisambigPopover() {
+    if (activeDisambigPopover) {
+      activeDisambigPopover.classList.remove('visible');
+    }
+  }
+
+  function showSymbolDisambigPopover(anchorEl, resolved) {
+    if (!anchorEl || !resolved || !resolved.candidates || !resolved.candidates.length) return;
+    let popover = document.getElementById('sym-disambig-popover');
+    if (!popover) {
+      popover = document.createElement('div');
+      popover.id = 'sym-disambig-popover';
+      popover.className = 'sym-disambig-popover';
+      popover.setAttribute('role', 'dialog');
+      popover.setAttribute('aria-label', 'Choose UVM symbol class');
+      document.body.appendChild(popover);
+
+      document.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Escape') closeSymbolDisambigPopover();
+      });
+      document.addEventListener('mousedown', function (ev) {
+        if (popover.classList.contains('visible') && !popover.contains(ev.target) && !ev.target.closest('.clickable-uvm-sym')) {
+          closeSymbolDisambigPopover();
+        }
+      });
+      window.addEventListener('scroll', closeSymbolDisambigPopover, { passive: true, capture: true });
+    }
+    activeDisambigPopover = popover;
+
+    const kindLabel = resolved.kind || resolved.type || 'method';
+    const itemsHtml = resolved.candidates.map((cand, idx) => {
+      const clsName = cand.class || 'Global';
+      const qualified = (clsName === 'Global' || clsName === 'Globals')
+        ? resolved.name
+        : `${clsName}::${resolved.name}`;
+      const retHtml = cand.ret ? `<span class="sdp-ret">${escapeHtml(cand.ret)}</span>` : '';
+      const fileHtml = cand.file ? `<span class="sdp-loc">${escapeHtml(cand.file)}:${cand.line || 1}</span>` : '';
+      return `
+        <div class="sdp-item" data-cand-idx="${idx}">
+          <button type="button" class="sdp-doc-btn" title="Open documentation for ${escapeHtml(qualified)}">
+            <span class="sdp-name">${escapeHtml(qualified)}</span>
+            ${retHtml}
+            ${fileHtml}
+          </button>
+          ${cand.file ? `<button type="button" class="sdp-src-btn" title="Open source at ${escapeHtml(cand.file)}:${cand.line || 1}">Src</button>` : ''}
+        </div>
+      `;
+    }).join('');
+
+    popover.innerHTML = `
+      <div class="sdp-header">
+        <div class="sdp-title-wrap">
+          <span class="sdp-badge">${escapeHtml(kindLabel)}</span>
+          <span class="sdp-title">${escapeHtml(resolved.name)}</span>
+          <span class="sdp-count">${resolved.candidates.length} classes</span>
+        </div>
+        <button type="button" class="sdp-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="sdp-list">${itemsHtml}</div>
+    `;
+
+    popover.querySelector('.sdp-close').addEventListener('click', closeSymbolDisambigPopover);
+    popover.querySelectorAll('.sdp-item').forEach((rowEl) => {
+      const idx = parseInt(rowEl.getAttribute('data-cand-idx'), 10);
+      const cand = resolved.candidates[idx];
+      if (!cand) return;
+      const docBtn = rowEl.querySelector('.sdp-doc-btn');
+      if (docBtn) {
+        docBtn.addEventListener('click', function () {
+          closeSymbolDisambigPopover();
+          dispatchOpenDoc(cand.doc_url || undefined, resolved.name, cand.class || '');
+        });
+      }
+      const srcBtn = rowEl.querySelector('.sdp-src-btn');
+      if (srcBtn && cand.file) {
+        srcBtn.addEventListener('click', function (ev) {
+          ev.stopPropagation();
+          closeSymbolDisambigPopover();
+          dispatchOpenSource('src_view/' + cand.file + '.html#L' + (cand.line || 1));
+        });
+      }
+    });
+
+    popover.classList.add('visible');
+    const aRect = anchorEl.getBoundingClientRect();
+    const pRect = popover.getBoundingClientRect();
+    const vw = window.innerWidth || document.documentElement.clientWidth;
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+
+    let top = aRect.bottom + 6;
+    if (top + pRect.height > vh - 12 && aRect.top - pRect.height - 6 >= 12) {
+      top = aRect.top - pRect.height - 6;
+    }
+    top = Math.max(10, Math.min(top, vh - pRect.height - 10));
+
+    let left = aRect.left;
+    if (left + pRect.width > vw - 12) {
+      left = Math.max(10, vw - pRect.width - 12);
+    }
+    popover.style.top = top + 'px';
+    popover.style.left = Math.max(10, left) + 'px';
+  }
 
   function initLinks() {
     // Intercept clicks on links pointing to source code, example studios, or UVM symbols
@@ -2913,21 +3230,25 @@ window.PageCommon = (function () {
       // 1. Clickable UVM Symbols (spans in Code Studio or <a> badges in headers)
       const symEl = e.target.closest('.clickable-uvm-sym');
       if (symEl) {
+        if (e.ctrlKey || e.metaKey) return;
         e.preventDefault();
         const sym = symEl.getAttribute('data-sym') || symEl.textContent.trim();
         const customUrl = symEl.getAttribute('data-doc') || symEl.getAttribute('data-url');
-        if (sym && window.parent && window.parent !== window) {
-          window.parent.postMessage({
-            type: 'openDocView',
-            symbol: sym,
-            url: customUrl || undefined
-          }, '*');
+        const owner = symEl.getAttribute('data-sym-owner') || '';
+        const base = symEl.getAttribute('data-sym-base') || '';
+        const symKind = symEl.getAttribute('data-sym-kind') || '';
+        if (customUrl) {
+          dispatchOpenDoc(customUrl, sym, owner);
+          return;
         }
-        try {
-          if (window.parent && window.parent.openDocView) {
-            window.parent.openDocView(customUrl || undefined, sym);
-          }
-        } catch (err) { }
+        const resolved = lookupUvmSymbol(sym, owner, base, symKind);
+        if (resolved && resolved.isAmbiguous) {
+          showSymbolDisambigPopover(symEl, resolved);
+        } else if (resolved) {
+          dispatchOpenDoc(resolved.doc_url || undefined, sym, resolved.ownerClass || owner);
+        } else if (sym) {
+          dispatchOpenDoc(undefined, sym, owner);
+        }
         return;
       }
 

@@ -93,7 +93,7 @@ def test_source_views():
 
 
 def test_example_studios():
-    print("[5/5] Testing examples_view/*/*.html studios...")
+    print("[5/6] Testing examples_view/*/*.html studios...")
     ex_files = list(EX_DIR.glob("**/*.html"))
     assert len(ex_files) == 39, f"Expected 39 example studios, found {len(ex_files)}"
     checked = 0
@@ -111,6 +111,39 @@ def test_example_studios():
     print(f"  OK: All {checked} example studios verified.")
 
 
+def test_clickable_uvm_symbols_integration():
+    print("[6/6] Testing enriched clickable UVM symbols & disambiguation assets...")
+    quick_js = (JS_DIR / "uvm_symbol_quick.js").read_text(encoding="utf-8")
+    for key in ('"constants":', '"types":', '"vars":', '"doc_url":'):
+        assert key in quick_js, f"uvm_symbol_quick.js missing {key}"
+
+    page_common = (JS_DIR / "page_common.js").read_text(encoding="utf-8")
+    for sym_token in ("lookupUvmSymbol", "sym-disambig-popover", "sv-uvm-type", "sv-constant"):
+        assert sym_token in page_common, f"page_common.js missing {sym_token}"
+
+    app_js = (JS_DIR / "app.js").read_text(encoding="utf-8")
+    assert "ownerClass" in app_js, "app.js openDocView missing ownerClass support"
+
+    css_text = CSS_PATH.read_text(encoding="utf-8")
+    assert ".sym-disambig-popover" in css_text, "style.css missing .sym-disambig-popover"
+    assert ".sv-method.clickable-uvm-sym" in css_text, "style.css missing .sv-method.clickable-uvm-sym"
+
+    obj_html = (EX_DIR / "phasing" / "objections.html").read_text(encoding="utf-8")
+    for expected in (
+        "sv-uvm-type clickable-uvm-sym",
+        "sv-macro clickable-uvm-sym",
+        "sv-method clickable-uvm-sym",
+        "sv-constant clickable-uvm-sym",
+    ):
+        assert expected in obj_html, f"objections.html missing {expected}"
+
+    primer_html = (EX_DIR / "registers" / "primer.html").read_text(encoding="utf-8")
+    assert 'data-sym="write"' in primer_html and "sv-method clickable-uvm-sym" in primer_html, (
+        "primer.html missing clickable method write"
+    )
+    print("  OK: Enriched clickable UVM symbols and disambiguation popover verified.")
+
+
 if __name__ == "__main__":
     print("=" * 60)
     print("  Running Verification for Code Editor Tools")
@@ -120,6 +153,7 @@ if __name__ == "__main__":
     test_js_controllers()
     test_source_views()
     test_example_studios()
+    test_clickable_uvm_symbols_integration()
     print("=" * 60)
     print("  ALL VERIFICATIONS PASSED SUCCESSFULLY!")
     print("=" * 60)

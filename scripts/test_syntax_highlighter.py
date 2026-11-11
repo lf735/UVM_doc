@@ -94,6 +94,52 @@ def test_c_dpi_and_makefile():
     assert '<span class="sv-keyword">ifeq</span>' in make_html, "ifeq should be .sv-keyword"
     print("✔ test_c_dpi_and_makefile passed")
 
+
+def test_clickable_uvm_symbols():
+    code = '\n'.join([
+        'class my_test extends uvm_test;',
+        '  `uvm_component_utils(my_test)',
+        '  function new(string name, uvm_component parent);',
+        '    super.new(name, parent);',
+        '  endfunction',
+        '  virtual task run_phase(uvm_phase phase);',
+        '    phase.raise_objection(this);',
+        '    uvm_test_done.set_drain_time(this, 10);',
+        '    uvm_config_db#(int)::set(this, "*", "val", 1);',
+        '    `uvm_info("ID", phase.get_full_name, UVM_LOW)',
+        '    run_test();',
+        '  endtask',
+        'endclass',
+        'module top;',
+        '  logic reset;',
+        '  int size;',
+        '  dut u0 (.reset(reset), .parent(this));',
+        'endmodule',
+    ])
+    rows, _ = sh.highlight_source_code_table_rows(code, "test.sv", clickable_sym_links=True)
+    html_out = "".join(rows)
+
+    # Classes, macros, constants clickable
+    assert 'class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_test"' in html_out, "uvm_test should be clickable"
+    assert 'class="sv-macro clickable-uvm-sym" data-sym="`uvm_component_utils" data-sym-kind="macro"' in html_out, "`uvm_component_utils should be clickable macro"
+    assert 'class="sv-macro clickable-uvm-sym" data-sym="`uvm_info" data-sym-kind="macro"' in html_out, "`uvm_info should be clickable macro"
+    assert 'class="sv-constant clickable-uvm-sym" data-sym="UVM_LOW" data-sym-kind="constant"' in html_out, "UVM_LOW should be clickable constant"
+
+    # Methods with static context inference
+    assert 'class="sv-method clickable-uvm-sym" data-sym="raise_objection" data-sym-kind="method" data-sym-owner="uvm_phase"' in html_out, "phase.raise_objection should resolve owner uvm_phase"
+    assert 'class="sv-method clickable-uvm-sym" data-sym="set_drain_time" data-sym-kind="method" data-sym-owner="uvm_objection"' in html_out, "uvm_test_done.set_drain_time should resolve owner uvm_objection"
+    assert 'class="sv-method clickable-uvm-sym" data-sym="set" data-sym-kind="method" data-sym-owner="uvm_config_db"' in html_out, "uvm_config_db#(int)::set should resolve owner uvm_config_db"
+    assert 'class="sv-method clickable-uvm-sym" data-sym="get_full_name" data-sym-kind="method" data-sym-owner="uvm_phase"' in html_out, "zero-arg phase.get_full_name should be clickable"
+    assert 'class="sv-method clickable-uvm-sym" data-sym="run_phase" data-sym-kind="method" data-sym-base="uvm_test"' in html_out, "run_phase inside my_test should carry base uvm_test"
+    assert 'class="sv-method clickable-uvm-sym" data-sym="run_test" data-sym-kind="method"' in html_out, "run_test() should be clickable"
+
+    # Non-false-positive guards: bare hardware signals & named port connections must NOT become clickable
+    assert 'data-sym="reset"' not in html_out, "hardware wire / named port .reset(reset) must not be clickable"
+    assert 'data-sym="size"' not in html_out, "bare int size; must not be clickable"
+    assert 'data-sym="parent"' not in html_out, "named arg .parent(this) must not be clickable"
+    print("✔ test_clickable_uvm_symbols passed")
+
+
 if __name__ == "__main__":
     test_system_tasks()
     test_types_vs_keywords()
@@ -102,4 +148,5 @@ if __name__ == "__main__":
     test_operators_and_numbers()
     test_comments_and_tags()
     test_c_dpi_and_makefile()
+    test_clickable_uvm_symbols()
     print("\n🎉 ALL SYNTAX HIGHLIGHTER TESTS PASSED!")

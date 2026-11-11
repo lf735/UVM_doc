@@ -520,16 +520,61 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightActiveSidebar(fullEx);
   };
 
+  let lastOpenDoc = { url: '', time: 0 };
+
   // Global handler for when a source page requests to view documentation
-  window.openDocView = function (docUrl, symbol) {
+  window.openDocView = function (docUrl, symbol, ownerClass) {
+    let rawSymbol = symbol || '';
+    let resolvedOwner = ownerClass || '';
+    if (rawSymbol.includes('::') && !resolvedOwner) {
+      const parts = rawSymbol.split('::');
+      resolvedOwner = parts[0].trim();
+      rawSymbol = parts[parts.length - 1].trim();
+    }
+
     let fullDoc = null;
-    if (symbol && typeof UVM_DATA !== 'undefined' && UVM_DATA.searchIndex) {
-      const symClean = symbol.replace(/^`/, '');
-      const symLower = symbol.toLowerCase();
+    if (docUrl) {
+      fullDoc = normalizeDocUrl(docUrl);
+    }
+
+    if (!fullDoc && rawSymbol && typeof UVM_DATA !== 'undefined' && UVM_DATA.searchIndex) {
+      const symClean = rawSymbol.replace(/^`/, '');
+      const symLower = rawSymbol.toLowerCase();
       const cleanLower = symClean.toLowerCase();
+      let match = null;
+
+      // 0. Owner / ancestor-scoped match when ownerClass is known
+      if (resolvedOwner) {
+        if (resolvedOwner === 'Global' || resolvedOwner === 'Globals') {
+          match = UVM_DATA.searchIndex.find(s =>
+            s.doc && s.name === symClean && (!s.category || s.category === 'Global' || s.category === 'Globals')
+          );
+        } else {
+          const chain = [];
+          const seen = new Set();
+          let curr = resolvedOwner;
+          const nodes = (UVM_DATA.classHierarchy && UVM_DATA.classHierarchy.nodes) || {};
+          while (curr && !seen.has(curr)) {
+            seen.add(curr);
+            chain.push(curr);
+            curr = nodes[curr] ? nodes[curr].parent : null;
+          }
+          for (const cls of chain) {
+            match = UVM_DATA.searchIndex.find(s => {
+              if (!s.doc || !s.name) return false;
+              const nameOk = s.name === symClean || s.name === cls + '::' + symClean || s.name.endsWith('::' + symClean);
+              const catOk = s.category && (s.category === cls || s.category.split('::')[0] === cls);
+              return nameOk && catOk;
+            });
+            if (match) break;
+          }
+        }
+      }
 
       // 1. Exact match
-      let match = UVM_DATA.searchIndex.find(s => s.name === symbol && s.doc);
+      if (!match) {
+        match = UVM_DATA.searchIndex.find(s => s.name === rawSymbol && s.doc);
+      }
       // 2. Exact match with or without macro backtick
       if (!match) {
         match = UVM_DATA.searchIndex.find(s => (s.name === '`' + symClean || s.name === symClean) && s.doc);
@@ -563,12 +608,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    if (!fullDoc && docUrl) {
-      fullDoc = normalizeDocUrl(docUrl);
-    }
     if (!fullDoc) {
       fullDoc = 'docs_view/overviews/intro-txt.html';
     }
+
+    const now = Date.now();
+    if (lastOpenDoc.url === fullDoc && (now - lastOpenDoc.time) < 200) {
+      return;
+    }
+    lastOpenDoc = { url: fullDoc, time: now };
 
     currentDocUrl = fullDoc;
     setFrameSrc(docFrame, fullDoc);
@@ -588,7 +636,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.data.type === 'openSourceView' && e.data.url) {
       window.openSourceView(e.data.url);
     } else if (e.data.type === 'openDocView' && (e.data.url || e.data.symbol)) {
-      window.openDocView(e.data.url, e.data.symbol);
+      window.openDocView(e.data.url, e.data.symbol, e.data.ownerClass);
     } else if (e.data.type === 'openExampleView' && e.data.url) {
       window.openExampleView(e.data.url);
     } else if (e.data.type === 'exampleNavigated' && e.data.url) {

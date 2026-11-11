@@ -10,7 +10,9 @@ Provides state-of-the-art tokenization and syntax highlighting for:
 
 import re
 import html
-from typing import List, Tuple, Optional, Set, Dict
+import json
+from pathlib import Path
+from typing import List, Tuple, Optional, Set, Dict, Any
 
 # ==============================================================================
 # SystemVerilog Keyword & Token Classifications
@@ -118,6 +120,95 @@ ALL_SV_KEYWORDS: Set[str] = (
     SV_CONTROL_KEYWORDS | SV_DECL_KEYWORDS | SV_BUILTIN_TYPES | SV_QUALIFIERS
 )
 
+# Bare method names that are unambiguous UVM calls even without parentheses or explicit receiver
+UNAMBIGUOUS_BARE_UVM_METHODS: Set[str] = {
+    'build_phase', 'connect_phase', 'end_of_elaboration_phase',
+    'start_of_simulation_phase', 'run_phase', 'pre_reset_phase', 'reset_phase',
+    'post_reset_phase', 'pre_configure_phase', 'configure_phase',
+    'post_configure_phase', 'pre_main_phase', 'main_phase', 'post_main_phase',
+    'pre_shutdown_phase', 'shutdown_phase', 'post_shutdown_phase',
+    'extract_phase', 'check_phase', 'report_phase', 'final_phase',
+    'phase_started', 'phase_ready_to_end', 'phase_ended',
+    'raise_objection', 'drop_objection', 'set_drain_time',
+    'start_item', 'finish_item', 'pre_body', 'post_body',
+    'run_test', 'uvm_wait_for_nba_region',
+    'set_config_int', 'set_config_string', 'set_config_object',
+    'get_config_int', 'get_config_string', 'get_config_object',
+    'set_report_verbosity_level', 'set_report_id_verbosity',
+    'set_report_severity_action', 'set_report_id_action',
+    'do_print', 'do_copy', 'do_compare', 'do_pack', 'do_unpack', 'do_record',
+    'convert2string', 'get_full_name', 'get_type_name', 'get_num_children',
+    'b_transport', 'nb_transport_fw', 'nb_transport_bw'
+}
+
+_UVM_SYMBOL_CATALOG: Optional[Dict[str, Any]] = None
+
+
+def _get_uvm_symbol_catalog() -> Dict[str, Any]:
+    """Lazily loads UVM symbol sets from js/uvm_symbol_quick.js (or uvm_source_database.json)."""
+    global _UVM_SYMBOL_CATALOG
+    if _UVM_SYMBOL_CATALOG is not None:
+        return _UVM_SYMBOL_CATALOG
+
+    root_dir = Path(__file__).resolve().parent.parent
+    quick_js = root_dir / "js" / "uvm_symbol_quick.js"
+    db_json = root_dir / "data" / "uvm_source_database.json"
+
+    classes: Set[str] = set()
+    macros: Set[str] = set()
+    methods: Set[str] = set(KNOWN_UVM_METHODS)
+    constants: Set[str] = set(SV_CONSTANTS) - {'null', 'this', 'super', '$root', '$unit'}
+    types: Set[str] = set()
+    var_types: Dict[str, str] = {}
+
+    if quick_js.exists():
+        try:
+            raw = quick_js.read_text(encoding='utf-8')
+            marker = 'window.UVM_SYMBOLS = '
+            if marker in raw:
+                payload = raw.split(marker, 1)[1].rstrip().rstrip(';')
+                data = json.loads(payload)
+                classes = set(data.get('classes', {}).keys())
+                macros = {k.lstrip('`') for k in data.get('macros', {}).keys()}
+                methods.update(data.get('methods', {}).keys())
+                constants.update(data.get('constants', {}).keys())
+                types = set(data.get('types', {}).keys())
+                for vname, vinfo in data.get('vars', {}).items():
+                    vtype = vinfo.get('var_type') or vinfo.get('class') or ''
+                    if vtype:
+                        var_types[vname] = vtype
+        except Exception:
+            pass
+    elif db_json.exists():
+        try:
+            data = json.loads(db_json.read_text(encoding='utf-8'))
+            classes = set(data.get('classes', {}).keys())
+            macros = {k.lstrip('`') for k in data.get('macros', {}).keys()}
+            methods.update(data.get('methods_index', {}).keys())
+            for item in data.get('symbols_index', []):
+                stype = item.get('type', '')
+                name = item.get('name', '')
+                if not name:
+                    continue
+                if stype == 'constant':
+                    constants.add(name)
+                elif stype == 'type':
+                    types.add(name)
+                elif stype in ('function', 'task'):
+                    methods.add(name)
+        except Exception:
+            pass
+
+    _UVM_SYMBOL_CATALOG = {
+        'classes': classes,
+        'macros': macros,
+        'methods': methods,
+        'constants': constants,
+        'types': types,
+        'var_types': var_types,
+    }
+    return _UVM_SYMBOL_CATALOG
+
 # ==============================================================================
 # C / C++ (DPI) Classifications
 # ==============================================================================
@@ -222,15 +313,117 @@ def highlight_string_content(raw_string: str) -> str:
 # SystemVerilog Highlighter
 # ==============================================================================
 
+def _format_clickable_sym(
+    css_class: str,
+    val: str,
+    esc: str,
+    sym_kind: str,
+    sym_label: str,
+    owner: Optional[str] = None,
+    base: Optional[str] = None,
+) -> str:
+    """Formats a clickable UVM symbol token span with optional static context metadata."""
+    attrs = [
+        f'class="{css_class} clickable-uvm-sym"',
+        f'data-sym="{esc}"',
+        f'data-sym-kind="{sym_kind}"',
+    ]
+    if owner:
+        attrs.append(f'data-sym-owner="{html.escape(owner)}"')
+    if base:
+        attrs.append(f'data-sym-base="{html.escape(base)}"')
+    attrs.append(f'title="Click to view {esc} {sym_label}documentation"')
+    return f'<span {" ".join(attrs)}>{esc}</span>'
+
+
+def _infer_method_context(
+    prev_text: str,
+    line_ctx: Optional[Dict[str, Any]],
+    catalog: Dict[str, Any],
+) -> Tuple[Optional[str], Optional[str]]:
+    """Infers static owner class or UVM base class for a method call or declaration."""
+    owner: Optional[str] = None
+    base: Optional[str] = line_ctx.get('current_uvm_base') if line_ctx else None
+
+    m_scope = re.search(r'([A-Za-z_][A-Za-z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?::$', prev_text)
+    if m_scope:
+        qual = m_scope.group(1)
+        if qual == 'type_id':
+            m_outer = re.search(
+                r'([A-Za-z_][A-Za-z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?::\s*type_id\s*::$',
+                prev_text
+            )
+            if m_outer and line_ctx:
+                outer_cls = m_outer.group(1)
+                outer_base = line_ctx.get('class_base_map', {}).get(outer_cls) or outer_cls
+                if outer_base in ('uvm_component', 'uvm_test', 'uvm_env', 'uvm_agent', 'uvm_driver', 'uvm_monitor', 'uvm_scoreboard', 'uvm_sequencer'):
+                    return 'uvm_component_registry', None
+            return 'uvm_object_registry', None
+        if qual in catalog['classes']:
+            return qual, None
+        if line_ctx and qual in line_ctx.get('class_base_map', {}):
+            return None, line_ctx['class_base_map'][qual]
+        return None, None
+
+    if re.search(r'[A-Za-z0-9_\)\]]\s*\.$', prev_text):
+        m_dot = re.search(r'([A-Za-z_][A-Za-z0-9_]*)\s*\.$', prev_text)
+        if m_dot:
+            recv = m_dot.group(1)
+            if recv in ('this', 'super'):
+                return None, base
+            if line_ctx:
+                vtype = line_ctx.get('var_types', {}).get(recv)
+                if vtype:
+                    if vtype in catalog['classes']:
+                        return vtype, None
+                    mapped = line_ctx.get('class_base_map', {}).get(vtype)
+                    if mapped:
+                        return None, mapped
+            if recv in catalog['var_types']:
+                return catalog['var_types'][recv], None
+        return None, None
+
+    return owner, base
+
+
+def _update_sv_line_context(line: str, line_ctx: Dict[str, Any], catalog: Dict[str, Any]) -> None:
+    """Updates lightweight per-file SystemVerilog class and variable type tracking."""
+    code_part = re.sub(r'//.*$', '', line)
+    code_part = re.sub(r'"[^"]*"', '""', code_part)
+
+    m_cls = re.search(r'\bclass\s+([A-Za-z_][A-Za-z0-9_]*)\s+extends\s+([A-Za-z_][A-Za-z0-9_]*)', code_part)
+    if m_cls:
+        cls_name, base_name = m_cls.group(1), m_cls.group(2)
+        uvm_base = base_name if base_name in catalog['classes'] else line_ctx['class_base_map'].get(base_name)
+        if uvm_base:
+            line_ctx['class_base_map'][cls_name] = uvm_base
+            line_ctx['current_uvm_base'] = uvm_base
+        else:
+            line_ctx['current_uvm_base'] = None
+    elif re.search(r'\bendclass\b', code_part):
+        line_ctx['current_uvm_base'] = None
+
+    known_types = catalog['classes'] | catalog['types']
+    for m_var in re.finditer(
+        r'\b([A-Za-z_][A-Za-z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?([A-Za-z_][A-Za-z0-9_]*)\b',
+        code_part
+    ):
+        tname, vname = m_var.group(1), m_var.group(2)
+        if tname in known_types and vname not in ALL_SV_KEYWORDS:
+            line_ctx['var_types'][vname] = tname
+
+
 def tokenize_sv_line(
     line: str,
     in_block_comment: bool,
-    clickable_sym_links: bool = False
+    clickable_sym_links: bool = False,
+    line_ctx: Optional[Dict[str, Any]] = None
 ) -> Tuple[List[str], bool]:
     """
     Tokenizes a single line of SystemVerilog code into HTML syntax spans.
     Returns: (list_of_html_spans, new_in_block_comment_state)
     """
+    catalog = _get_uvm_symbol_catalog() if clickable_sym_links else None
     pos = 0
     line_len = len(line)
     line_parts: List[str] = []
@@ -281,6 +474,10 @@ def tokenize_sv_line(
                 elif kind == 'MACRO':
                     if val in SV_PREPROCESSOR_DIRECTIVES:
                         line_parts.append(f'<span class="sv-preproc">{esc}</span>')
+                    elif clickable_sym_links and catalog and val.lstrip('`') in catalog['macros']:
+                        line_parts.append(
+                            _format_clickable_sym('sv-macro', val, esc, 'macro', 'macro ')
+                        )
                     else:
                         line_parts.append(f'<span class="sv-macro">{esc}</span>')
                     pos = end
@@ -303,18 +500,77 @@ def tokenize_sv_line(
                         line_parts.append(f'<span class="sv-type">{esc}</span>')
                     elif val in SV_QUALIFIERS:
                         line_parts.append(f'<span class="sv-qualifier">{esc}</span>')
-                    elif val in SV_CONSTANTS:
-                        line_parts.append(f'<span class="sv-constant">{esc}</span>')
+                    elif val in SV_CONSTANTS or (clickable_sym_links and catalog and val in catalog['constants']):
+                        if (
+                            clickable_sym_links
+                            and val not in {'null', 'this', 'super', '$root', '$unit'}
+                        ):
+                            line_parts.append(
+                                _format_clickable_sym('sv-constant', val, esc, 'constant', 'constant ')
+                            )
+                        else:
+                            line_parts.append(f'<span class="sv-constant">{esc}</span>')
                     elif val.startswith(('uvm_', 'ovm_')) or val == 'uvm_pkg':
-                        if clickable_sym_links:
+                        if clickable_sym_links and catalog:
+                            if val in catalog['classes'] or val == 'uvm_pkg':
+                                line_parts.append(
+                                    _format_clickable_sym('sv-uvm-type', val, esc, 'class', '')
+                                )
+                            elif val in catalog['types']:
+                                line_parts.append(
+                                    _format_clickable_sym('sv-uvm-type', val, esc, 'type', 'type ')
+                                )
+                            elif val in catalog['var_types']:
+                                line_parts.append(
+                                    _format_clickable_sym('sv-uvm-type', val, esc, 'var', '')
+                                )
+                            elif val in catalog['methods']:
+                                prev_text = line[:start].rstrip()
+                                owner, base = _infer_method_context(prev_text, line_ctx, catalog)
+                                if not owner and not base and not prev_text.endswith(('.', '::')):
+                                    owner = 'Global'
+                                line_parts.append(
+                                    _format_clickable_sym('sv-method', val, esc, 'method', 'method ', owner, base)
+                                )
+                            else:
+                                line_parts.append(f'<span class="sv-uvm-type">{esc}</span>')
+                        elif clickable_sym_links:
                             line_parts.append(
                                 f'<span class="sv-uvm-type clickable-uvm-sym" data-sym="{esc}" '
                                 f'title="Click to view {esc} documentation">{esc}</span>'
                             )
                         else:
                             line_parts.append(f'<span class="sv-uvm-type">{esc}</span>')
-                    elif val in KNOWN_UVM_METHODS:
-                        line_parts.append(f'<span class="sv-method">{esc}</span>')
+                    elif val in KNOWN_UVM_METHODS or (clickable_sym_links and catalog and val in catalog['methods']):
+                        if clickable_sym_links and catalog:
+                            rest = line[end:].lstrip()
+                            prev_text = line[:start].rstrip()
+                            is_dot_member = bool(re.search(r'[A-Za-z0-9_\)\]]\s*\.$', prev_text))
+                            is_scope_member = prev_text.endswith('::')
+                            is_named_arg = prev_text.endswith('.') and not is_dot_member
+                            is_call = rest.startswith('(') and not is_named_arg
+                            is_func_hdr = bool(re.search(r'\b(function|task)\b[^();]*$', prev_text))
+                            is_unambiguous_bare = (
+                                val in UNAMBIGUOUS_BARE_UVM_METHODS
+                                and not is_named_arg
+                                and not re.search(
+                                    r'\b(input|output|inout|wire|logic|bit|reg|int|integer|string|real)\b\s*$',
+                                    prev_text
+                                )
+                            )
+                            if is_call or is_dot_member or is_scope_member or is_func_hdr or is_unambiguous_bare:
+                                owner, base = _infer_method_context(prev_text, line_ctx, catalog)
+                                line_parts.append(
+                                    _format_clickable_sym('sv-method', val, esc, 'method', 'method ', owner, base)
+                                )
+                            else:
+                                line_parts.append(
+                                    f'<span class="sv-method">{esc}</span>'
+                                    if val in KNOWN_UVM_METHODS
+                                    else f'<span class="sv-ident">{esc}</span>'
+                                )
+                        else:
+                            line_parts.append(f'<span class="sv-method">{esc}</span>')
                     else:
                         # Contextual lookahead & lookbehind: is it followed by '(' or declared after function/task?
                         rest = line[end:].lstrip()
@@ -485,6 +741,16 @@ def highlight_source_code_table_rows(
     lines = code.splitlines()
     rows: List[str] = []
     in_block_comment = False
+    catalog = _get_uvm_symbol_catalog() if (clickable_sym_links and not is_makefile and not is_c) else None
+    line_ctx: Optional[Dict[str, Any]] = (
+        {
+            'current_uvm_base': None,
+            'class_base_map': {},
+            'var_types': dict(catalog['var_types']),
+        }
+        if catalog
+        else None
+    )
 
     for idx, line in enumerate(lines, 1):
         if is_makefile:
@@ -492,10 +758,13 @@ def highlight_source_code_table_rows(
         elif is_c:
             parts, in_block_comment = tokenize_c_line(line, in_block_comment)
         else:
+            if line_ctx is not None and not in_block_comment:
+                _update_sv_line_context(line, line_ctx, catalog)
             parts, in_block_comment = tokenize_sv_line(
                 line,
                 in_block_comment,
-                clickable_sym_links=clickable_sym_links
+                clickable_sym_links=clickable_sym_links,
+                line_ctx=line_ctx
             )
 
         code_html = "".join(parts) or "&nbsp;"
