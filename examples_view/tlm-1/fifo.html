@@ -90,74 +90,6 @@
     </div>
   </div>
 </div>
-<!-- Interactive Visual Flow Stepper Section -->
-<div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
-  <div class="CTopic">
-    <h2 class="CTitle"><a name="FlowStepper">Test Scenario Walkthrough</a></h2>
-    <div class="CBody">
-      <div class="stepper-section" id="visual-flow-stepper">
-        <div class="section-header-row">
-          <div class="section-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-            <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
-            <span class="scenario-state-pill" id="step-state-badge">FIFO Occupancy: 0 / 10 (Producer: Ready, Consumer: Waiting)</span>
-          </div>
-          <div class="stepper-controls">
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-play">Play &#9654;</button>
-            <button type="button" class="btn btn-sm btn-primary" id="stepper-next">Next Step &rarr;</button>
-          </div>
-        </div>
-
-        <div class="stepper-timeline" id="stepper-timeline">
-          <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">TLM Port Setup &amp; 10-Level FIFO</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Fast Burst Fill with try_put()</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Back-Pressure &amp; Blocking Put</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Consumer Extraction with get()</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Instant Producer Resume (Delta-Cycle)</span></div>
-        </div>
-        <div class="scenario-anim-section" id="scenario-anim-section" data-anim="fifo">
-          <div class="anim-fifo-wrapper">
-  <div class="anim-actor anim-producer" id="fifo-actor-prod">
-    <div class="actor-header"><span class="actor-icon">⚡</span><span class="actor-name">PRODUCER</span></div>
-    <span class="actor-badge ready" id="fifo-prod-badge">Ready</span>
-  </div>
-  <div class="anim-fifo-channel">
-    <div class="anim-fifo-label">
-      <span class="fifo-name">uvm_tlm_fifo #(packet)</span>
-      <span class="fifo-count-text" id="fifo-count-label">0 / 10</span>
-    </div>
-    <div class="anim-fifo-slots" id="fifo-slots-bar">
-      <span class="slot" data-slot="0"><span class="slot-idx">0</span></span><span class="slot" data-slot="1"><span class="slot-idx">1</span></span><span class="slot" data-slot="2"><span class="slot-idx">2</span></span><span class="slot" data-slot="3"><span class="slot-idx">3</span></span><span class="slot" data-slot="4"><span class="slot-idx">4</span></span><span class="slot" data-slot="5"><span class="slot-idx">5</span></span><span class="slot" data-slot="6"><span class="slot-idx">6</span></span><span class="slot" data-slot="7"><span class="slot-idx">7</span></span><span class="slot" data-slot="8"><span class="slot-idx">8</span></span><span class="slot" data-slot="9"><span class="slot-idx">9</span></span>
-    </div>
-  </div>
-  <div class="anim-actor anim-consumer" id="fifo-actor-cons">
-    <div class="actor-header"><span class="actor-icon">📥</span><span class="actor-name">CONSUMER</span></div>
-    <span class="actor-badge waiting" id="fifo-cons-badge">Waiting</span>
-  </div>
-</div>
-        </div>
-        <div class="step-card" id="step-detail-card">
-          <div class="step-card-header">
-            <h4 id="step-active-title">1. TLM Port Setup &amp; 10-Level FIFO</h4>
-            <span class="step-active-comp" id="step-active-comp">Target: producer, consumer, fifo</span>
-          </div>
-          <p id="step-active-desc">The testbench binds a producer (uvm_put_port) and a consumer (uvm_get_port) to a uvm_tlm_fifo with a buffer capacity of 10 items.</p>
-          <div class="step-log-hint">
-            <strong>Expected Log Output:</strong>
-            <code id="step-active-log">1: put data 0</code>
-          </div>
-          <div class="step-card-actions">
-            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-code" title="Scroll to code in Code Studio">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-              <span>Jump to Code</span>
-            </button>
-            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-log" title="Scroll to log message in Terminal">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-              <span>Jump to Terminal Log</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
   <div class="CTopic">
     <h2 class="CTitle"><a name="Topology">Testbench Architecture Topology</a></h2>
@@ -544,6 +476,74 @@ UVM_WARNING :    0
 UVM_ERROR :    0
 UVM_FATAL :    0
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Interactive Visual Flow Stepper Section -->
+<div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="FlowStepper">Test Scenario Walkthrough</a></h2>
+    <div class="CBody">
+      <div class="stepper-section" id="visual-flow-stepper">
+        <div class="section-header-row">
+          <div class="section-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
+            <span class="scenario-state-pill" id="step-state-badge">FIFO Occupancy: 0 / 10 (Producer: Ready, Consumer: Waiting)</span>
+          </div>
+          <div class="stepper-controls">
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-play">Play &#9654;</button>
+            <button type="button" class="btn btn-sm btn-primary" id="stepper-next">Next Step &rarr;</button>
+          </div>
+        </div>
+
+        <div class="stepper-timeline" id="stepper-timeline">
+          <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">TLM Port Setup &amp; 10-Level FIFO</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Fast Burst Fill with try_put()</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Back-Pressure &amp; Blocking Put</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Consumer Extraction with get()</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Instant Producer Resume (Delta-Cycle)</span></div>
+        </div>
+        <div class="scenario-anim-section" id="scenario-anim-section" data-anim="fifo">
+          <div class="anim-fifo-wrapper">
+  <div class="anim-actor anim-producer" id="fifo-actor-prod">
+    <div class="actor-header"><span class="actor-icon">⚡</span><span class="actor-name">PRODUCER</span></div>
+    <span class="actor-badge ready" id="fifo-prod-badge">Ready</span>
+  </div>
+  <div class="anim-fifo-channel">
+    <div class="anim-fifo-label">
+      <span class="fifo-name">uvm_tlm_fifo #(packet)</span>
+      <span class="fifo-count-text" id="fifo-count-label">0 / 10</span>
+    </div>
+    <div class="anim-fifo-slots" id="fifo-slots-bar">
+      <span class="slot" data-slot="0"><span class="slot-idx">0</span></span><span class="slot" data-slot="1"><span class="slot-idx">1</span></span><span class="slot" data-slot="2"><span class="slot-idx">2</span></span><span class="slot" data-slot="3"><span class="slot-idx">3</span></span><span class="slot" data-slot="4"><span class="slot-idx">4</span></span><span class="slot" data-slot="5"><span class="slot-idx">5</span></span><span class="slot" data-slot="6"><span class="slot-idx">6</span></span><span class="slot" data-slot="7"><span class="slot-idx">7</span></span><span class="slot" data-slot="8"><span class="slot-idx">8</span></span><span class="slot" data-slot="9"><span class="slot-idx">9</span></span>
+    </div>
+  </div>
+  <div class="anim-actor anim-consumer" id="fifo-actor-cons">
+    <div class="actor-header"><span class="actor-icon">📥</span><span class="actor-name">CONSUMER</span></div>
+    <span class="actor-badge waiting" id="fifo-cons-badge">Waiting</span>
+  </div>
+</div>
+        </div>
+        <div class="step-card" id="step-detail-card">
+          <div class="step-card-header">
+            <h4 id="step-active-title">1. TLM Port Setup &amp; 10-Level FIFO</h4>
+            <span class="step-active-comp" id="step-active-comp">Target: producer, consumer, fifo</span>
+          </div>
+          <p id="step-active-desc">The testbench binds a producer (uvm_put_port) and a consumer (uvm_get_port) to a uvm_tlm_fifo with a buffer capacity of 10 items.</p>
+          <div class="step-log-hint">
+            <strong>Expected Log Output:</strong>
+            <code id="step-active-log">1: put data 0</code>
+          </div>
+          <div class="step-card-actions">
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-code" title="Scroll to code in Code Studio">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>Jump to Code</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-log" title="Scroll to log message in Terminal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              <span>Jump to Terminal Log</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

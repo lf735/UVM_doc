@@ -1491,7 +1491,7 @@ def build_suite_page(suite_key, meta, files):
     studio_block = pbc.render_code_studio(files_data, primary_file, "../../")
     sim_block = pbc.render_simulation_console(sim_log)
 
-    body_content = f"{main_topic_html}\n{source_notes_block}\n{stepper_block}\n{topo_block}\n{studio_block}\n{sim_block}"
+    body_content = f"{main_topic_html}\n{source_notes_block}\n{topo_block}\n{studio_block}\n{sim_block}\n{stepper_block}"
 
     breadcrumbs_html = pbc.render_breadcrumbs([
         {"title": "Examples", "href": "../../index.html#/examples", "is_home": True},
