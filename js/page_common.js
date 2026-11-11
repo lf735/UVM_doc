@@ -2783,121 +2783,251 @@ window.PageCommon = (function () {
   }
 
   // =========================================================================
-  // Inherited Methods Matrix & Explorer
+  // Inherited Methods & Elements Explorer (From Parent Docs, Oldest -> Newest)
   // =========================================================================
 
-  function initInheritedMethodsExplorer() {
-    const hierarchyWidget = document.querySelector('.class-hierarchy-widget[data-cname]');
-    if (!hierarchyWidget) return;
-    const cname = hierarchyWidget.getAttribute('data-cname');
-    if (!cname) return;
+  const DOC_TOPIC_CACHE = Object.create(null);
+  const DOC_TOPIC_WAITERS = Object.create(null);
 
-    let classHierarchy = null;
-    let searchIndex = null;
-    try {
-      if (window.parent && window.parent.UVM_DATA) {
-        classHierarchy = window.parent.UVM_DATA.classHierarchy;
-        searchIndex = window.parent.UVM_DATA.searchIndex;
-      }
-    } catch (e) {
-      return;
-    }
-
-    if (!classHierarchy || !classHierarchy.nodes || !classHierarchy.nodes[cname]) return;
-    const node = classHierarchy.nodes[cname];
-    if (!node.parent) return;
-
-    const ancestors = [];
-    let curr = node.parent;
-    const visited = new Set();
-    while (curr && classHierarchy.nodes[curr] && !visited.has(curr)) {
-      visited.add(curr);
-      ancestors.push(curr);
-      curr = classHierarchy.nodes[curr].parent;
-    }
-
-    if (ancestors.length === 0) return;
-
-    const summaryEl = document.querySelector('.ClassSummary, #doc-nav-summary');
-    if (!summaryEl) return;
-
-    const inheritedByAncestor = new Map();
-    if (searchIndex && Array.isArray(searchIndex)) {
-      ancestors.forEach(anc => {
-        const methods = searchIndex.filter(item =>
-          (item.type === 'function' || item.type === 'task') &&
-          (item.category === anc || (item.category && item.category.startsWith(anc + '#')))
-        );
-        if (methods.length > 0) {
-          inheritedByAncestor.set(anc, methods);
-        }
+  window.__registerUvmDocTopics = function (clsName, items) {
+    DOC_TOPIC_CACHE[clsName] = Array.isArray(items) ? items : [];
+    const waiters = DOC_TOPIC_WAITERS[clsName];
+    if (waiters) {
+      delete DOC_TOPIC_WAITERS[clsName];
+      waiters.forEach(function (fn) {
+        try { fn(DOC_TOPIC_CACHE[clsName]); } catch (e) { }
       });
     }
+  };
 
-    if (inheritedByAncestor.size === 0) return;
-
-    const inheritedSection = document.createElement('div');
-    inheritedSection.className = 'inherited-methods-section';
-
-    let totalInheritedCount = 0;
-    inheritedByAncestor.forEach(methods => totalInheritedCount += methods.length);
-
-    let cardsHtml = '';
-    for (const [anc, methods] of inheritedByAncestor.entries()) {
-      const ancNode = classHierarchy.nodes[anc];
-      const ancDoc = ancNode && ancNode.doc ? ancNode.doc : '#';
-      const pills = methods.slice(0, 30).map(m => {
-        const mHref = m.doc ? `../../${m.doc}` : (m.src ? `../../${m.src}` : '#');
-        return `<a href="${mHref}" class="inherited-method-pill" title="${m.desc || m.name}"><code>${m.name}()</code></a>`;
-      }).join('');
-
-      const moreNotice = methods.length > 30 ? `<span class="inherited-more-notice">+${methods.length - 30} more</span>` : '';
-
-      cardsHtml += `
-        <div class="inherited-ancestor-group">
-          <div class="inherited-ancestor-header">
-            <span class="inherited-from-label">Inherited from</span>
-            <a href="../../${ancDoc}" class="inherited-ancestor-link">${anc}</a>
-            <span class="inherited-count-badge">${methods.length} methods</span>
-          </div>
-          <div class="inherited-pills-list">
-            ${pills}
-            ${moreNotice}
-          </div>
-        </div>`;
+  function getDocRootRel() {
+    const cleanPath = window.location.pathname.replace(/\\/g, '/');
+    const m = cleanPath.match(/docs_view\/(.*)$/);
+    if (m && m[1]) {
+      const parts = m[1].split('/').filter(Boolean);
+      return '../'.repeat(parts.length);
     }
+    return '../../';
+  }
 
-    inheritedSection.innerHTML = `
-      <div class="inherited-section-header" role="button" tabindex="0" title="Click to view inherited methods from ancestor classes">
-        <div class="inherited-header-title">
-          <svg class="inherited-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          <span>Inherited Methods (${totalInheritedCount})</span>
-        </div>
-        <span class="inherited-summary-badge">from ${ancestors.length} base classes</span>
-      </div>
-      <div class="inherited-section-content" style="display: none;">
-        ${cardsHtml}
-      </div>`;
-
-    summaryEl.parentNode.insertBefore(inheritedSection, summaryEl.nextSibling);
-
-    const toggleBtn = inheritedSection.querySelector('.inherited-section-header');
-    const contentBox = inheritedSection.querySelector('.inherited-section-content');
-    const chevron = inheritedSection.querySelector('.inherited-chevron');
-
-    toggleBtn.addEventListener('click', () => {
-      const isHidden = contentBox.style.display === 'none';
-      contentBox.style.display = isHidden ? 'block' : 'none';
-      if (chevron) {
-        chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
+  function loadUvmDocTopics(clsName, rootRel) {
+    if (Object.prototype.hasOwnProperty.call(DOC_TOPIC_CACHE, clsName)) {
+      return Promise.resolve(DOC_TOPIC_CACHE[clsName]);
+    }
+    return new Promise(function (resolve) {
+      if (!DOC_TOPIC_WAITERS[clsName]) {
+        DOC_TOPIC_WAITERS[clsName] = [];
+        const safeName = String(clsName).replace(/[^A-Za-z0-9_]/g, '_');
+        const script = document.createElement('script');
+        script.src = rootRel + 'js/doc_topics/' + safeName + '.js';
+        script.async = true;
+        script.onerror = function () {
+          if (!Object.prototype.hasOwnProperty.call(DOC_TOPIC_CACHE, clsName)) {
+            window.__registerUvmDocTopics(clsName, []);
+          }
+        };
+        document.head.appendChild(script);
       }
+      DOC_TOPIC_WAITERS[clsName].push(resolve);
     });
+  }
 
-    toggleBtn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleBtn.click();
+  function initInheritedMethodsExplorer() {
+    const hierarchyWidgets = document.querySelectorAll('.class-hierarchy-widget[data-cname]');
+    if (!hierarchyWidgets.length || !window.UVM_SYMBOLS) return;
+
+    const classParents = window.UVM_SYMBOLS.classParents || {};
+    const classDocMembers = window.UVM_SYMBOLS.classDocMembers || {};
+    const rootRel = getDocRootRel();
+
+    hierarchyWidgets.forEach(function (hierarchyWidget) {
+      const cname = hierarchyWidget.getAttribute('data-cname');
+      if (!cname) return;
+
+      const cNode = classParents[cname];
+      if (!cNode || !cNode.parent) return;
+
+      const summaryEl = hierarchyWidget.closest('.Summary, .ClassSummary')
+        || document.getElementById('doc-nav-summary-' + cname)
+        || hierarchyWidget.closest('.CClass');
+      if (!summaryEl || !summaryEl.parentNode) return;
+
+      // Build ancestor chain from direct parent upward to root
+      const ancestorsNearestFirst = [];
+      let curr = cNode.parent;
+      const visited = new Set([cname]);
+      while (curr && !visited.has(curr)) {
+        visited.add(curr);
+        ancestorsNearestFirst.push(curr);
+        curr = classParents[curr] ? classParents[curr].parent : '';
       }
+      if (!ancestorsNearestFirst.length) return;
+
+      // Collect own documented/defined symbols on this class so redefined ones are excluded
+      const ownNames = new Set(['new']);
+      (classDocMembers[cname] || []).forEach(function (m) {
+        if (m && m.n) ownNames.add(m.n);
+      });
+      summaryEl.querySelectorAll('.STable tr:not(.SGroup):not(.SClass):not(.SMain):not(.SHierarchy):not(.SPrototype) td.SEntry a').forEach(function (a) {
+        const txt = (a.textContent || '').trim();
+        if (txt) ownNames.add(txt);
+      });
+
+      // Deduplicate nearest-to-oldest (nearest ancestor wins when overridden in hierarchy)
+      const seenNames = new Set(ownNames);
+      const retainedByAncestor = new Map();
+      ancestorsNearestFirst.forEach(function (anc) {
+        const members = classDocMembers[anc] || [];
+        const keep = [];
+        const keepSet = new Set();
+        members.forEach(function (m) {
+          if (!m || !m.n || seenNames.has(m.n)) return;
+          seenNames.add(m.n);
+          keep.push(m.n);
+          keepSet.add(m.n);
+        });
+        if (keep.length > 0) {
+          retainedByAncestor.set(anc, { names: keep, nameSet: keepSet });
+        }
+      });
+
+      if (retainedByAncestor.size === 0) return;
+
+      // Display order: oldest ancestor -> most recent parent
+      const ancestorsOldestFirst = ancestorsNearestFirst
+        .slice()
+        .reverse()
+        .filter(function (anc) { return retainedByAncestor.has(anc); });
+
+      let totalCount = 0;
+      ancestorsOldestFirst.forEach(function (anc) {
+        totalCount += retainedByAncestor.get(anc).names.length;
+      });
+
+      const inheritedSection = document.createElement('div');
+      inheritedSection.className = 'inherited-methods-section inherited-doc-category';
+      inheritedSection.id = 'doc-nav-inherited-' + cname.replace(/[^A-Za-z0-9_]/g, '_');
+
+      inheritedSection.innerHTML = `
+        <div class="inherited-section-header" role="button" tabindex="0" aria-expanded="false" title="Click to expand inherited methods and elements (not overridden)">
+          <div class="inherited-header-title">
+            <svg class="inherited-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            <span>Inherited Methods &amp; Elements (${totalCount})</span>
+          </div>
+          <span class="inherited-summary-badge">${ancestorsOldestFirst.map(escapeHtml).join(' &rarr; ')}</span>
+        </div>
+        <div class="inherited-section-content" style="display: none;">
+          <div class="inherited-loading-state">Loading inherited documentation...</div>
+        </div>`;
+
+      summaryEl.parentNode.insertBefore(inheritedSection, summaryEl.nextSibling);
+
+      const toggleBtn = inheritedSection.querySelector('.inherited-section-header');
+      const contentBox = inheritedSection.querySelector('.inherited-section-content');
+      const chevron = inheritedSection.querySelector('.inherited-chevron');
+      let hasRendered = false;
+      let isLoading = false;
+
+      function renderUnifiedInheritedList() {
+        const listEl = document.createElement('div');
+        listEl.className = 'inherited-unified-list';
+
+        ancestorsOldestFirst.forEach(function (anc) {
+          const retained = retainedByAncestor.get(anc);
+          const items = DOC_TOPIC_CACHE[anc] || [];
+          const ancNode = classParents[anc] || {};
+          const ancDocRaw = ancNode.doc || '';
+
+          items.forEach(function (item) {
+            if (!item || !retained.nameSet.has(item.n)) return;
+
+            const entryWrap = document.createElement('div');
+            entryWrap.className = 'inherited-topic-entry';
+            entryWrap.setAttribute('data-origin-class', anc);
+            if (item.s) {
+              entryWrap.setAttribute('data-src-url', rootRel + item.s);
+            }
+
+            const renderedHtml = (item.h || '').replace(/__ROOT_REL__/g, rootRel);
+            entryWrap.innerHTML = renderedHtml;
+
+            const titleEl = entryWrap.querySelector('h3.CTitle, .CTitle');
+            if (titleEl) {
+              if (!titleEl.querySelector('a.src-code-link') && item.s) {
+                const textLabel = titleEl.textContent.trim();
+                titleEl.innerHTML = `<a href="${escapeHtml(rootRel + item.s)}" class="src-code-link">${escapeHtml(textLabel)}</a>`;
+              }
+              const srcLinkEl = titleEl.querySelector('a.src-code-link');
+              if (srcLinkEl && item.s) {
+                srcLinkEl.setAttribute('data-src-url', rootRel + item.s);
+                if (!srcLinkEl.getAttribute('title')) {
+                  srcLinkEl.setAttribute('title', 'Open source definition');
+                }
+              }
+
+              const exactDocRaw = item.d || ancDocRaw;
+              if (exactDocRaw) {
+                const metaRight = document.createElement('span');
+                metaRight.className = 'inherited-title-meta';
+                const originBadge = document.createElement('a');
+                originBadge.className = 'inherited-origin-badge';
+                originBadge.href = rootRel + exactDocRaw;
+                originBadge.setAttribute('data-doc-href', exactDocRaw);
+                originBadge.textContent = anc + '::' + item.n;
+                originBadge.title = 'Open exact definition of ' + anc + '::' + item.n + ' in documentation';
+                metaRight.appendChild(originBadge);
+                titleEl.appendChild(metaRight);
+              }
+            }
+
+            listEl.appendChild(entryWrap);
+          });
+        });
+
+        contentBox.innerHTML = '';
+        contentBox.appendChild(listEl);
+
+        // Clicking anywhere on an inherited entry header bar opens its corresponding source file
+        listEl.addEventListener('click', function (ev) {
+          if (ev.target.closest('.inherited-origin-badge')) return;
+          const headerTitle = ev.target.closest('.inherited-topic-entry .CTitle');
+          if (!headerTitle) return;
+          if (ev.target.closest('a.src-code-link')) return; // handled by initLinks
+          const srcAnchor = headerTitle.querySelector('a.src-code-link');
+          if (srcAnchor) {
+            ev.preventDefault();
+            srcAnchor.click();
+          }
+        });
+      }
+
+      function toggleSection() {
+        const isHidden = contentBox.style.display === 'none';
+        contentBox.style.display = isHidden ? 'block' : 'none';
+        inheritedSection.classList.toggle('is-expanded', isHidden);
+        toggleBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+        if (chevron) {
+          chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
+        }
+        if (isHidden && !hasRendered && !isLoading) {
+          isLoading = true;
+          Promise.all(ancestorsOldestFirst.map(function (anc) {
+            return loadUvmDocTopics(anc, rootRel);
+          })).then(function () {
+            hasRendered = true;
+            isLoading = false;
+            renderUnifiedInheritedList();
+          });
+        }
+      }
+
+      toggleBtn.addEventListener('click', toggleSection);
+      toggleBtn.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleSection();
+        }
+      });
     });
   }
 
@@ -3280,13 +3410,23 @@ window.PageCommon = (function () {
         saveScrollAnchor();
         const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
         if (window.parent && window.parent !== window) {
-          window.parent.postMessage({ type: 'openSourceView', url: targetHref }, '*');
+          dispatchOpenSource(targetHref);
+        } else {
+          window.location.href = targetHref;
         }
-        try {
-          if (window.parent && window.parent.openSourceView) {
-            window.parent.openSourceView(targetHref);
-          }
-        } catch (err) { }
+        return;
+      }
+
+      // 3b. Cross-doc links inside inherited blocks or explicit data-doc-href links
+      const docHrefAttr = link.getAttribute('data-doc-href');
+      if (docHrefAttr || (!link.classList.contains('doc-breadcrumb-link') && href.includes('docs_view/'))) {
+        e.preventDefault();
+        const relDoc = docHrefAttr || (href.match(/(docs_view\/.*)$/) ? href.match(/(docs_view\/.*)$/)[1] : '');
+        if (relDoc && window.parent && window.parent !== window) {
+          dispatchOpenDoc(relDoc);
+        } else {
+          window.location.href = new URL(href, window.location.href).href;
+        }
         return;
       }
 

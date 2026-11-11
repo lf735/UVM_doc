@@ -22,6 +22,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR / "scripts"))
 import build_examples
+import generate_quick_symbols
 import syntax_highlighter as sh
 import page_builder_common as pbc
 SRC_DIR = BASE_DIR / "uvm-1.2" / "src"
@@ -2224,6 +2225,7 @@ def main():
     if args.search_only:
         populate_doc_headings_from_docs_view()
         generate_search_and_nav_data()
+        generate_quick_symbols.generate_quick_symbols()
     else:
         generate_source_views()
         modernize_doc_files()
@@ -2231,6 +2233,7 @@ def main():
         generate_orphan_doc_pages()
         copy_assets()
         generate_search_and_nav_data()
+        generate_quick_symbols.generate_quick_symbols()
 
     print("=" * 60)
     print("  Documentation build complete successfully!")

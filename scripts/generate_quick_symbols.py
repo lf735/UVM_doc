@@ -8,6 +8,8 @@ Go to Definition, Hover Tooltips, and Monaco Language Services.
 
 import json
 import os
+import posixpath
+import re
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,6 +17,16 @@ DB_PATH = BASE_DIR / "data" / "uvm_source_database.json"
 SEARCH_DATA_PATH = BASE_DIR / "js" / "search_data.js"
 DOCS_VIEW_DIR = BASE_DIR / "docs_view"
 OUT_PATH = BASE_DIR / "js" / "uvm_symbol_quick.js"
+DOC_TOPICS_DIR = BASE_DIR / "js" / "doc_topics"
+
+TOPIC_CLASS_TO_KIND = {
+    "CMethod": "method",
+    "CVariable": "variable",
+    "CPort": "port",
+    "CType": "type",
+    "CEnumeration": "enum",
+    "CParameter": "parameter",
+}
 
 
 def load_search_doc_map() -> dict:
@@ -66,6 +78,289 @@ def clean_summary(text: str, max_chars: int = 240) -> str:
     if len(full) > max_chars:
         return full[:max_chars - 3] + "..."
     return full
+
+
+def _extract_div_block(html_text: str, start_idx: int) -> str:
+    """Extract a balanced <div ...>...</div> block starting at start_idx."""
+    div_tag_re = re.compile(r'<(/?)div\b[^>]*>', re.IGNORECASE)
+    depth = 0
+    for m in div_tag_re.finditer(html_text, start_idx):
+        if m.group(1) == '/':
+            depth -= 1
+            if depth == 0:
+                return html_text[start_idx:m.end()]
+        else:
+            depth += 1
+    return ""
+
+
+def _rewrite_topic_html(block_html: str, rel_doc: str) -> tuple:
+    """Normalize wrapper IDs, internal anchor names, and links inside a parent topic HTML block."""
+    rel_dir = posixpath.dirname(rel_doc)
+    src_href = ""
+
+    # Capture primary source link from the topic heading if present
+    title_src_m = re.search(
+        r'<h3\b[^>]*>[\s\S]*?<a\b[^>]*href=["\']([^"\']*src_view/[^"\']+)["\']',
+        block_html,
+        re.IGNORECASE,
+    )
+    if title_src_m:
+        raw_src = title_src_m.group(1)
+        idx_sv = raw_src.find("src_view/")
+        if idx_sv != -1:
+            src_href = raw_src[idx_sv:]
+
+    # Strip id and data-doc-topic on outer wrapper <div ...> to prevent duplicate DOM IDs
+    first_gt = block_html.find(">")
+    if first_gt != -1:
+        outer_open = block_html[:first_gt + 1]
+        outer_open = re.sub(r'\s+id="[^"]*"', "", outer_open)
+        outer_open = re.sub(r'\s+data-doc-topic="[^"]*"', "", outer_open)
+        block_html = outer_open + block_html[first_gt + 1:]
+
+    # Remove NaturalDocs synthetic link IDs and heading anchor names/ids
+    block_html = re.sub(r'\s+id=link\d+\b', "", block_html)
+    block_html = re.sub(r'\s+id="link\d+"', "", block_html)
+
+    def clean_h3_anchor(hm):
+        h3_txt = hm.group(0)
+        h3_txt = re.sub(r'\s+(?:name|id)=["\'][^"\']*["\']', "", h3_txt)
+        return h3_txt
+
+    block_html = re.sub(r'<h3\b[^>]*>[\s\S]*?</h3>', clean_h3_anchor, block_html, count=1, flags=re.IGNORECASE)
+
+    def rewrite_href(hm):
+        quote = hm.group(1)
+        href_val = hm.group(2)
+        if not href_val or href_val.startswith(("http://", "https://", "javascript:", "mailto:")):
+            return hm.group(0)
+        if href_val.startswith("#"):
+            norm_url = f"docs_view/{rel_doc}{href_val}"
+            return f'href={quote}__ROOT_REL__{norm_url}{quote} data-doc-href={quote}{norm_url}{quote}'
+        if "src_view/" in href_val:
+            tail = href_val[href_val.find("src_view/"):]
+            return f'href={quote}__ROOT_REL__{tail}{quote}'
+        if "examples_view/" in href_val:
+            tail = href_val[href_val.find("examples_view/"):]
+            return f'href={quote}__ROOT_REL__{tail}{quote}'
+
+        path_part, sep, frag = href_val.partition("#")
+        resolved = posixpath.normpath(posixpath.join(rel_dir, path_part)) if path_part else rel_doc
+        if resolved.startswith("docs_view/"):
+            norm_path = resolved
+        else:
+            norm_path = f"docs_view/{resolved}"
+        norm_url = f"{norm_path}{sep}{frag}"
+        return f'href={quote}__ROOT_REL__{norm_url}{quote} data-doc-href={quote}{norm_url}{quote}'
+
+    block_html = re.sub(r'href=(["\'])([^"\']+)\1', rewrite_href, block_html)
+    return block_html, src_href
+
+
+def _resolve_exact_member_src(
+    db: dict,
+    src_lines_cache: dict,
+    owner: str,
+    member_name: str,
+    cur_src_href: str,
+) -> str:
+    """
+    When a topic block's source link only points to #L1 or the class header line,
+    resolve the exact line of that member's implementation, declaration, or comment block.
+    """
+    classes = db.get("classes", {})
+    cinfo = classes.get(owner, {})
+    c_line = cinfo.get("start_line")
+    c_file = cinfo.get("file", "")
+
+    needs_refine = (
+        not cur_src_href
+        or cur_src_href.endswith("#L1")
+        or (c_line and cur_src_href.endswith(f"#L{c_line}"))
+    )
+    if not needs_refine:
+        return cur_src_href
+
+    # 1. Check methods_index exact match on owning class
+    for cand in db.get("methods_index", {}).get(member_name, []):
+        if cand.get("class") == owner and cand.get("file") and cand.get("line"):
+            if cand["line"] != c_line and cand["line"] > 1:
+                return f"src_view/{cand['file']}.html#L{cand['line']}"
+
+    # 2. Check class-scoped symbols_index entry
+    for sym in db.get("symbols_index", []):
+        sname = sym.get("short_name") or sym.get("name") or ""
+        if sym.get("class") == owner and sname == member_name and sym.get("file") and sym.get("line"):
+            if sym["line"] != c_line and sym["line"] > 1:
+                return f"src_view/{sym['file']}.html#L{sym['line']}"
+
+    # 3. Scan the owning .svh file for implementation, declaration, or NaturalDocs header
+    target_file = c_file
+    if not target_file and cur_src_href.startswith("src_view/") and ".html" in cur_src_href:
+        target_file = cur_src_href[len("src_view/"):].split(".html", 1)[0]
+    if target_file:
+        if target_file not in src_lines_cache:
+            full_src = BASE_DIR / "uvm-1.2" / "src" / target_file
+            src_lines_cache[target_file] = (
+                full_src.read_text(encoding="utf-8", errors="replace").splitlines()
+                if full_src.exists()
+                else []
+            )
+        lines = src_lines_cache[target_file]
+        if lines:
+            esc_owner = re.escape(owner)
+            esc_mem = re.escape(member_name)
+            pat_impl = re.compile(rf'\b(?:function|task)\b[\w\s#:,\[\]]*\b{esc_owner}\s*::\s*{esc_mem}\b')
+            pat_decl = re.compile(rf'\b(?:function|task|virtual|extern|pure|protected|local|static|typedef|enum|const)\b[^\n;]*\b{esc_mem}\b')
+            pat_nd = re.compile(rf'//\s*(?:Function|Task|Variable|Property|Port|Type|Enum|Enumeration|Parameter|Constant)\s*:\s*{esc_mem}\b', re.IGNORECASE)
+
+            for idx, ln in enumerate(lines):
+                if pat_impl.search(ln):
+                    return f"src_view/{target_file}.html#L{idx + 1}"
+            start_i = max(0, (c_line or 1) - 1)
+            for idx in range(start_i, len(lines)):
+                clean_ln = re.sub(r'//.*', '', lines[idx])
+                if pat_decl.search(clean_ln) and not clean_ln.lstrip().startswith('class '):
+                    return f"src_view/{target_file}.html#L{idx + 1}"
+            for idx in range(start_i, len(lines)):
+                if pat_nd.search(lines[idx]):
+                    return f"src_view/{target_file}.html#L{idx + 1}"
+
+    return cur_src_href
+
+
+def build_inherited_doc_bundles(db: dict, by_exact: dict) -> tuple:
+    """
+    Extract real documented member topic blocks directly from docs_view/**/*.html
+    and generate per-class JSONP topic modules in js/doc_topics/<class>.js.
+    Returns: (class_parents, class_doc_members)
+    """
+    class_doc_map = {}
+    topics_by_class = {}
+    seen_member_names = {}
+    src_lines_cache = {}
+
+    topic_open_re = re.compile(
+        r'<div class="(C(?:Method|Variable|Port|Type|Enumeration|Parameter))" '
+        r'id="(doc-nav-item-[^"]+)"[^>]*data-anchor="([^"]*)"[^>]*>'
+    )
+    widget_re = re.compile(r'<div class="class-hierarchy-widget" data-cname="([^"]+)"')
+    cclass_re = re.compile(r'<div class="CClass" id="([^"]+)"[^>]*data-anchor="([^"]*)"')
+
+    if DOCS_VIEW_DIR.exists():
+        for root, _, files in os.walk(DOCS_VIEW_DIR):
+            for fname in sorted(files):
+                if not fname.endswith(".html"):
+                    continue
+                fpath = Path(root) / fname
+                rel_doc = fpath.relative_to(DOCS_VIEW_DIR).as_posix()
+                try:
+                    html_text = fpath.read_text(encoding="utf-8")
+                except Exception:
+                    continue
+
+                # Map class -> canonical doc page + anchor from CClass wrappers
+                for cm in cclass_re.finditer(html_text):
+                    cid, canchor = cm.group(1), cm.group(2)
+                    clean_c = re.sub(r'#\([^)]*\)', '', canchor).strip()
+                    if clean_c and clean_c not in class_doc_map:
+                        class_doc_map[clean_c] = f"docs_view/{rel_doc}#{cid}"
+
+                for wm in widget_re.finditer(html_text):
+                    wcname = wm.group(1).strip()
+                    if wcname and wcname not in class_doc_map:
+                        class_doc_map[wcname] = f"docs_view/{rel_doc}#doc-nav-main"
+
+                # Extract documented class member topic blocks in original doc order
+                for tm in topic_open_re.finditer(html_text):
+                    tclass, tid, anchor = tm.group(1), tm.group(2), tm.group(3)
+                    if "." not in anchor:
+                        continue
+                    owner_raw, member_name = anchor.split(".", 1)
+                    owner = re.sub(r'#\([^)]*\)', '', owner_raw).strip()
+                    member_name = member_name.strip()
+                    if not owner or not member_name:
+                        continue
+
+                    raw_block = _extract_div_block(html_text, tm.start())
+                    if not raw_block:
+                        continue
+
+                    norm_html, src_href = _rewrite_topic_html(raw_block, rel_doc)
+                    refined_src = _resolve_exact_member_src(db, src_lines_cache, owner, member_name, src_href)
+                    if refined_src and refined_src != src_href:
+                        if src_href:
+                            norm_html = norm_html.replace(f"__ROOT_REL__{src_href}", f"__ROOT_REL__{refined_src}", 1)
+                        line_m = re.search(r'#L(\d+)$', refined_src)
+                        if line_m:
+                            norm_html = re.sub(r'data-src-line="[^"]*"', f'data-src-line="{line_m.group(1)}"', norm_html, count=1)
+                        src_href = refined_src
+
+                    kind = TOPIC_CLASS_TO_KIND.get(tclass, "method")
+                    doc_url = f"docs_view/{rel_doc}#{tid}"
+
+                    seen_for_owner = seen_member_names.setdefault(owner, set())
+                    if member_name in seen_for_owner:
+                        continue
+                    seen_for_owner.add(member_name)
+
+                    topics_by_class.setdefault(owner, []).append({
+                        "n": member_name,
+                        "k": kind,
+                        "d": doc_url,
+                        "s": src_href,
+                        "h": norm_html,
+                    })
+
+    # Build lightweight classParents & classDocMembers metadata for client MRO resolution
+    class_parents = {}
+    for cname, cinfo in db.get("classes", {}).items():
+        parent_raw = cinfo.get("parent") or cinfo.get("extends_base") or ""
+        parent_clean = re.sub(r'#\([^)]*\)', '', parent_raw).strip()
+        doc_url = class_doc_map.get(cname) or by_exact.get((cname, "Classes"), "")
+        if not doc_url and cinfo.get("file"):
+            doc_url = fallback_doc_url(cinfo.get("file", ""))
+        class_parents[cname] = {
+            "parent": parent_clean,
+            "doc": doc_url,
+        }
+
+    # Include any class present only in class_doc_map
+    for cname, durl in class_doc_map.items():
+        if cname not in class_parents:
+            class_parents[cname] = {"parent": "", "doc": durl}
+
+    class_doc_members = {
+        owner: [{"n": t["n"], "k": t["k"]} for t in items]
+        for owner, items in topics_by_class.items()
+    }
+
+    # Write per-class JSONP modules in js/doc_topics/
+    DOC_TOPICS_DIR.mkdir(parents=True, exist_ok=True)
+    expected_files = set()
+    for owner, items in topics_by_class.items():
+        safe_name = re.sub(r'[^A-Za-z0-9_]', '_', owner)
+        fname = f"{safe_name}.js"
+        expected_files.add(fname)
+        payload_json = json.dumps(items, separators=(',', ':'), ensure_ascii=False)
+        owner_json = json.dumps(owner)
+        js_body = (
+            f"// UVM 1.2 Inherited Doc Topics for {owner}\n"
+            f"if(window.__registerUvmDocTopics){{window.__registerUvmDocTopics({owner_json},{payload_json});}}\n"
+        )
+        (DOC_TOPICS_DIR / fname).write_text(js_body, encoding="utf-8")
+
+    # Remove stale topic bundles if any
+    for old_f in DOC_TOPICS_DIR.glob("*.js"):
+        if old_f.name not in expected_files:
+            old_f.unlink()
+
+    print(
+        f"Generated {len(expected_files)} documented topic bundles in {DOC_TOPICS_DIR} "
+        f"({sum(len(v) for v in topics_by_class.values())} member docs)."
+    )
+    return class_parents, class_doc_members
 
 
 def generate_quick_symbols():
@@ -217,6 +512,8 @@ def generate_quick_symbols():
     for gname, ginfo in core_globals.items():
         vars_dict[gname] = ginfo
 
+    class_parents, class_doc_members = build_inherited_doc_bundles(db, by_exact)
+
     payload = {
         "metadata": {
             "version": "UVM 1.2",
@@ -225,14 +522,17 @@ def generate_quick_symbols():
             "methods_count": len(methods_dict),
             "constants_count": len(constants_dict),
             "types_count": len(types_dict),
-            "vars_count": len(vars_dict)
+            "vars_count": len(vars_dict),
+            "doc_classes_count": len(class_doc_members)
         },
         "classes": classes_dict,
         "macros": macros_dict,
         "methods": methods_dict,
         "constants": constants_dict,
         "types": types_dict,
-        "vars": vars_dict
+        "vars": vars_dict,
+        "classParents": class_parents,
+        "classDocMembers": class_doc_members
     }
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
