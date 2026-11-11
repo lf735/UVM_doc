@@ -5,13 +5,13 @@
 
 ### 1. Présentation Générale
 
-L'**Interactive Execution Progression** (ou **Visual Flow Stepper**) est un simulateur pédagogique pas-à-pas intégré aux exemples UVM 1.2 du site documentaire.
+Le **Test Scenario Walkthrough** (anciennement *Visual Flow Stepper*) est un simulateur pédagogique pas-à-pas situé en fin de page des exemples majeurs UVM 1.2 du site documentaire.
 
-Contrairement à la lecture statique de code SystemVerilog ou à l'inspection d'un journal de simulation brut (*simulation log*), le Visual Flow Stepper permet de **visualiser le déroulement dynamique d'une simulation UVM**, étape par étape, avec une synchronisation visuelle immédiate entre :
-1. **L'étape temporelle et le descriptif conceptuel** (Timeline & Step Cards).
+Contrairement à la lecture statique de code SystemVerilog ou à l'inspection d'un journal de simulation brut (*simulation log*), il permet de **visualiser l'intention réelle et l'état dynamique du test**, étape par étape, grâce à des **animations visuelles conceptuelles dédiées** et une synchronisation bidirectionnelle entre :
+1. **La carte d'étape & l'animation visuelle** (Timeline, badge d'état dynamique `.scenario-state-pill` et schémas animés en direct).
 2. **La topologie active des composants UVM** (Glow lumineux et badge de rôle).
-3. **Le fichier source et la ligne exacte exécutée** (Code Studio).
-4. **La ligne correspondante dans le log de simulation** (Console interactive).
+3. **Le fichier source et la ligne exacte exécutée** (Code Studio + bouton `Jump to Code`).
+4. **La ligne correspondante dans le log de simulation** (Console interactive + surbrillance `.term-line-highlight` + bouton `Jump to Terminal Log`).
 
 ---
 
@@ -47,22 +47,23 @@ Contrairement à la lecture statique de code SystemVerilog ou à l'inspection d'
 - **Défilement isolé** : Le conteneur de code défile en douceur (*smooth internal scroll*) pour centrer la ligne, **sans jamais faire sauter la page principale de votre navigateur**.
 
 #### D. Console de Simulation Synchronisée
-- La console de simulation (en bas de page) affiche les logs réels formatés avec la coloration syntaxique UVM (`UVM_INFO`, `UVM_WARNING`, `UVM_ERROR`, `UVM_FATAL`).
-- Lors du passage d'une étape, la console repère la ligne de journal associée et la fait défiler au centre de l'affichage avec un effet de surbrillance temporaire.
+- La console de simulation (juste au-dessus du Walkthrough) affiche les logs réels segmentés ligne par ligne (`.term-line`) avec coloration syntaxique UVM (`UVM_INFO`, `UVM_WARNING`, `UVM_ERROR`, `UVM_FATAL`).
+- Lors du passage d'une étape, la console repère automatiquement la ligne de journal associée, la centre et lui applique une surbrillance persistante animée (`.term-line-highlight`).
+- Les boutons **`Jump to Code`** et **`Jump to Terminal Log`** permettent d'aller immédiatement inspecter la ligne correspondante dans l'un ou l'autre des panneaux.
 
 ---
 
 ### 3. Les 5 Exemples Majeurs Équipés (Pillar Examples)
 
-Le Stepper est déployé sur les 5 concepts clés fondamentaux de la méthodologie UVM :
+Le Test Scenario Walkthrough est déployé sur les 5 concepts clés fondamentaux de la méthodologie UVM, chacun doté de son animation interactive sur mesure :
 
-| Exemple | Emplacement | Nombre d'étapes | Concepts clés illustrés |
+| Exemple | Emplacement | Étapes | Animation Visuelle & Concepts Calibrés |
 | :--- | :--- | :---: | :--- |
-| **Phasing Lifecycle** | `examples_view/phasing/basic.html` | 12 | Déroulement séquentiel des 12 phases UVM (`build`, `connect`, `end_of_elaboration`, `start_of_simulation`, `run_phase`, `extract`, `check`, `report`, `final`), ordre top-down vs bottom-up. |
-| **Objections & Drain Time** | `examples_view/phasing/objections.html` | 7 | Mécanisme `raise_objection` et `drop_objection`, calcul du zéro objection (`all_dropped`), application du `set_drain_time()`, terminaison propre du test. |
-| **TLM-1 FIFO Communication** | `examples_view/tlm-1/fifo.html` | 6 | Ports et exports TLM-1, opération `put()` bloquante du producteur, mise en attente dans `uvm_tlm_fifo`, opération `get()` du consommateur. |
-| **TLM-2 4-Phase Non-Blocking** | `examples_view/tlm-2/nonblocking_simple.html` | 8 | Protocole de transport non-bloquant TLM-2 (`nb_transport_fw` / `nb_transport_bw`), phases `BEGIN_REQ`, `END_REQ`, `BEGIN_RESP`, `END_RESP` et synchronisation temporelle. |
-| **Register Primer & Adapter** | `examples_view/registers/primer.html` | 8 | Abstraction RAL (`uvm_reg_block`), appel `write()` / `read()`, adaptateur `reg2bus` et `bus2reg`, mise à jour du miroir matériel (`desired` vs `mirrored`). |
+| **Phasing Lifecycle** | `examples_view/phasing/basic.html` | 5 | Arbre hiérarchique animé (`top` / `a1,a2` / `b1,d1`) illustrant en direct les phases descendantes (*Top-Down*, ex. `build_phase`) vs ascendantes (*Bottom-Up*, ex. `connect_phase`, `report_phase`). |
+| **Objections & Drain Time** | `examples_view/phasing/objections.html` | 5 | Diagramme de Gantt temporel avec 4 threads concurrents et barre d'extension dynamique pour la fenêtre de `drain_time` (`#10` après `all_dropped`). |
+| **TLM-1 FIFO Communication** | `examples_view/tlm-1/fifo.html` | 5 | Jauge FIFO à 10 emplacements avec indicateurs `Producer`/`Consumer`, saturation (`10/10 [BLOCKED]`) et déblocage sur `get()`. |
+| **TLM-2 4-Phase Non-Blocking** | `examples_view/tlm-2/nonblocking_simple.html` | 4 | Navette bidirectionnelle (`Initiator` ↔ `Device`) montrant les transitions `BEGIN_REQ`, `END_REQ`, `BEGIN_RESP` et `END_RESP` sur `nb_transport_fw` / `bw`. |
+| **Register Primer & Adapter** | `examples_view/registers/primer.html` | 4 | Pipeline RAL temps réel : `Sequence (write/read)` → `Adapter (reg2bus)` → `APB Bus` → `DUT Memory` → `RAL Mirror` (`desired` vs `mirrored`). |
 
 ---
 
@@ -80,9 +81,10 @@ Pour les projets contenant de nombreux fichiers (ex: `ubus` avec 26 fichiers, `v
 - **Boutons de défilement horizontal (`◀` et `▶`)** : Permettent de faire glisser la barre d'onglets vers la gauche ou vers la droite sans utiliser la molette.
 - **Molette de souris** : Placer le curseur sur la barre d'onglets et utiliser la molette fait défiler les onglets horizontalement.
 
-#### Mode Split View (Vue Côte à Côte avec les Sources UVM)
-- Chaque studio d'exemple dispose d'un bouton **`Split with UVM Source`** dans son en-tête.
-- Un clic divise automatiquement l'écran : le volet gauche affiche l'exemple et le volet droit charge le code source officiel UVM 1.2 correspondant (ex: `uvm_reg_block.svh`, `uvm_objection.svh`, `uvm_tlm_fifo.svh`), positionné à la ligne exacte de la définition de classe.
+#### Accès Direct aux Sources et APIs UVM
+- **Pastilles `Key UVM APIs`** : Chaque exemple affiche dans sa bannière les classes UVM principales (ex: `uvm_reg_block`, `uvm_objection`). Un clic ouvre le fichier source UVM correspondant dans le panneau de documentation / mode Split View.
+- **Badge `Source Specification & Design Notes`** : Cliquer sur le badge `Source: <fichier>` en haut de la section d'architecture bascule automatiquement le Code Studio sur le fichier correspondant et fait défiler la vue vers `#doc-nav-studio`.
+- **Positionnement pédagogique** : Le *Test Scenario Walkthrough* est placé en fin de page afin de permettre d'assimiler d'abord la spécification source, la topologie et le code avant de rejouer le scénario étape par étape.
 
 ---
 

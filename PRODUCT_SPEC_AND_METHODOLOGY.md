@@ -61,10 +61,12 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | | **Résolution Multi-Variantes d'Ancres (Macros & Templates)** | Prise en charge des identifiants DOM canoniques (`doc-nav-item-X`), décodage automatique des backticks (`` ` ``) et encodages URL (`%60`), tolérance aux templates SystemVerilog (`#(BEFORE,AFTER)`). |
 | | **Découplage d'Appariement Split-View (`autoPair`)** | Préservation absolue des ancres de documentation lors des navigations combinées (doc + source) évitant l'écrasement intempestif du panneau de documentation par l'appariement automatique. |
 | | **Syntax Highlighting Sémantique** | Coloration SystemVerilog/UVM haute fidélité (appels système `$`, déclarations structurelles, types primitifs, qualificateurs OOP, méthodes/phases, constantes, macros et directives) sur les blocs `<pre>`, prototypes de méthodes et tables de signatures avec bouton de copie en un clic. |
-| **Exemples Interactifs (`examples_view`)** | **Studio Multi-Fichiers en 2 Barres** | Barre d'outils supérieure (`.studio-toolbar` : saut direct de fichier, copie de code, téléchargement de fichier brut, copie de lien) + Barre d'onglets de fichiers pleine largeur inférieure avec défilement horizontal fluide et surlignage syntaxique multi-langages (SV, C/DPI, Makefiles). |
-| | **Console d'Exécution Multi-Simulateurs** | Sorties réelles d'exécution pour Questa, VCS et Xcelium avec onglets interactifs et bannière de résumé UVM (0 errors / 0 fatals). |
+| **Exemples Interactifs (`examples_view`)** | **Source Specification & Design Notes** | Extraction automatique des commentaires introductifs (`About:`, `Title:`, `Walk through:`) et des fichiers `README.txt` sur les 39 suites avec suppression des en-têtes Apache 2.0, formatage NaturalDocs → HTML, et badge `Source: <fichier>` cliquable basculant le Code Studio sur le fichier d'origine. |
+| | **Topologie & Architecture** | Grille de topologie testbench visuelle (`.topo-grid`) mettant en valeur dynamiquement les composants sollicités à chaque étape du scénario. |
+| | **Studio Multi-Fichiers en 2 Barres** | Barre d'outils supérieure (`.studio-toolbar` : saut direct de fichier, recherche Ctrl+F, Monaco IDE, copie de code, téléchargement de fichier brut, copie de lien) + Barre d'onglets de fichiers pleine largeur inférieure avec défilement horizontal fluide et surlignage syntaxique multi-langages (SV, C/DPI, Makefiles). |
+| | **Console d'Exécution Multi-Simulateurs** | Sorties réelles d'exécution pour Questa, VCS et Xcelium avec segmentation ligne par ligne (`.term-line`), filtrage par sévérité (`UVM_INFO`, `UVM_WARNING`, `UVM_ERROR`, `UVM_FATAL`), bannière de résumé et mise en évidence synchronisée (`.term-line-highlight`). |
 | | **Archive ZIP Client-Side 1-Clic** | Téléchargement instantané de l'intégralité des fichiers de chaque exemple sans dépendance serveur via encodage binaire natif. |
-| | **Visual Flow Stepper** | Progression pas-à-pas interactive avec frise chronologique sur les 5 piliers clés UVM. |
+| | **Test Scenario Walkthrough & Animations** | Positionné en conclusion de la page après la console de simulation : scénarios pédagogiques calibrés sur les 5 piliers clés UVM (`phasing`, `objections`, `fifo`, `tlm2`, `ral`) avec animations visuelles dynamiques synchronisées, badge d'état (`.scenario-state-pill`), raccourcis *Jump to Code* / *Jump to Terminal Log*, bascule d'onglet et mise en évidence bidirectionnelle du code et des logs. |
 | **Diagrammes & Médias** | **Suppression des Sauts au Survol** | Neutralisation stricte de l'effet `transform: translateY(-2px)` sur toutes les images. |
 | | **Cadrage Haute Lisibilité** | Encapsulation dans `<figure class="doc-diagram-card">` avec canevas `#ffffff` garantissant le contraste en mode sombre. |
 | | **Visionneuse Zoom Plein Écran** | Modale Lightbox (`#image-zoom-modal`) avec zoom molette, déplacement drag & drop, boutons (+, -, 1:1, Fit) et raccourcis clavier. |
@@ -214,6 +216,13 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
   1. **Absence de classes concurrentes** : Le lien interne `.hierarchy-link` ne doit pas hériter de règles d'état actif `.active` (fonds colorés, bordures latérales) réservées aux liens simples, sous peine de créer un effet disgracieux de "boîte dans une boîte" avec son conteneur parent `.hierarchy-row.active`.
   2. **Indicateur d'accent sans décalage géométrique** : Pour les arborescences à forte densité, matérialiser la sélection active via un pseudo-élément positionné en absolu (`.hierarchy-row.active::before`) de largeur fixe avec bords arrondis, sans altérer les marges ni le padding de la rangée.
 
+### Règle 13 : Intégration & Nettoyage des Notes de Conception Sources (`examples_view`)
+- **Principe** : Les commentaires de conception et fichiers `README.txt` des exemples UVM doivent être mis en valeur de façon propre, structurée et sans bruit juridique.
+- **Règles d'implémentation** :
+  1. **Suppression stricte de la licence Apache 2.0** : Nettoyer toute mention légale (y compris les coquilles historiques telles que `under t,he License`) avant l'analyse des commentaires.
+  2. **Ordre logique de lecture de la page d'exemple** : Structurer la page dans l'ordre progressif : `MainTopic` (Titre & APIs clés) → `Source Specification & Design Notes` (`#doc-nav-notes`) → `Testbench Topology` (`#doc-nav-topo`) → `Multi-File Code Studio` (`#doc-nav-studio`) → `Simulation Console` (`#doc-nav-sim`) → `Test Scenario Walkthrough` (`#doc-nav-stepper`).
+  3. **Imports explicites de typage Python** : Tout script importé par la pipeline CI (`build_docs.py` ← `build_examples.py`) doit explicitement importer ses types depuis `typing` (`Dict`, `List`, `Any`) afin d'éviter toute erreur `NameError` lors de l'exécution sur GitHub Actions.
+
 ---
 
 ## 4. Méthodologie de Vérification & Recette Automatisée
@@ -231,7 +240,9 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
 │              Niveau 2 : Scripts de Vérification DOM & CSS              │
-│  - verify_examples.py (27 assertions fonctionnelles sur les studios)   │
+│  - verify_examples.py (28 assertions fonctionnelles sur les studios)   │
+│  - verify_stepper_calibration.py (calibration des 5 piliers & logs)    │
+│  - verify_source_notes.py (notes sources & 0 fuite Apache sur 39 suites)│
 │  - verify_architecture.py (25 assertions structurelles & fonctionnelles)│
 │  - verify_image_features.py (cadrage, boutons zoom, règles CSS non-bloqu)│
 └───────────────────────────────────┬────────────────────────────────────┘
@@ -249,7 +260,9 @@ Avant de valider une version :
 - [ ] **Vérification du Search Pilot & Session** : `python scripts/verify_search_pilot.py` (assertions DOM, CSS et JS validées).
 - [ ] **Compilation sans erreur** : `python scripts/build_docs.py` s'exécute avec le code de retour `0`.
 - [ ] **Génération des Exemples** : `python scripts/build_examples.py` génère les 39 suites sans warning.
-- [ ] **Validation des Studios** : `python scripts/verify_examples.py` (27/27 assertions validées).
+- [ ] **Validation des Studios** : `python scripts/verify_examples.py` (28/28 assertions validées).
+- [ ] **Validation des Scénarios & Logs** : `python scripts/verify_stepper_calibration.py` (5/5 piliers vérifiés).
+- [ ] **Validation des Notes Sources** : `python scripts/verify_source_notes.py` (39/39 suites validées, zéro fuite de licence Apache).
 - [ ] **Tests d'Architecture** : Exécution de `verify_architecture.py` : les 25 tests doivent être validés (`PASS`).
 - [ ] **Absence de barrière d'événements** : Vérifier que tous les backdrops de modales (`#search-modal`, `#image-zoom-modal`) sont en `display: none` et `visibility: hidden` lorsqu'ils sont inactifs.
 - [ ] **Précision du scrolling** : Tester un lien vers une méthode située à plus de 15 000 px dans `uvm_component` : la section doit atterrir avec un décalage de 24 px sous le bandeau supérieur.

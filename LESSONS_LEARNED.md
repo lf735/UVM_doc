@@ -1134,3 +1134,38 @@ Deux failles bloquaient la navigation :
    - La forme sans backtick (`uvm_info`)
    - La forme décodée depuis l'URL (`decodeURIComponent`)
    - La forme ré-injectant le backtick depuis `%60`.
+
+---
+
+## 29. Recalibrage du Visual Flow Stepper, Synchronisation des Logs et Animations Visuelles
+
+### Le Symptôme Observé
+> *"Le Visual Flow Stepper est générique et déconnecté du but réel du test ; de plus, la ligne de log concernée n'est pas mise en évidence dans le terminal."*
+
+### L'Anatomie du Piège
+1. **Des étapes génériques et redondantes** : Tous les tests affichaient la même séquence standard (`build_phase` → `connect_phase` → `run_phase`) qui masquait l'intention spécifique du test (ex. blocage sur FIFO pleine à 10 éléments ou calcul de `drain_time`).
+2. **Console de logs monolithique** : Le bloc `<pre id="terminal-body">` contenait du texte brut continu. Sans segmentation en éléments individuels `.term-line`, il était impossible de cibler, centrer ou surligner une ligne précise lors du passage d'étape.
+3. **SyntaxError silencieux sur les f-strings Python** : L'ajout de logs réalistes contenant des accolades SystemVerilog (`data='{DE, AD, BE, EF}'`) dans une f-string a provoqué une erreur de compilation Python.
+
+### La Solution Appliquée
+1. **Scénarios calibrés par pilier + Animations conceptuelles** : Refactorisation en *Test Scenario Walkthrough* sur les 5 piliers clés (`phasing`, `objections`, `fifo`, `tlm2`, `ral`), enrichi d'animations CSS/JS synchronisées (jauge FIFO 10 slots avec back-pressure, diagramme Gantt avec drain-time, navette TLM-2 4-phases, pipeline RAL Register→Adapter→Bus→Mirror, arbre hiérarchique top-down/bottom-up) et de boutons d'action *Jump to Code* / *Jump to Terminal Log*.
+2. **Segmentation et surbrillance de lignes de terminal (`initSimulationConsole`)** : Découpage dynamique du flux brut en éléments `.term-line` typés (`line-info`, `line-warning`, `line-error`), suivi d'une recherche exacte et par jetons dans `scrollToHighlightedLog()` qui applique `.term-line-highlight` et centre la ligne dans la console.
+3. **Placement ergonomique en fin de page** : Positionnement du *Test Scenario Walkthrough* tout en bas de la page (après le code et la console de simulation) afin de préserver la lecture naturelle : *Notes Sources → Topologie → Code → Logs → Scénario Interactif*.
+
+---
+
+## 30. Extraction de Commentaires Sources, APIs JS Manquantes et Imports CI Python
+
+### Le Symptôme Observé
+> *"Le lien 'Source' dans les notes ne redirige nulle part"*, suivi en CI/CD GitHub Actions d'un échec : `NameError: name 'Dict' is not defined` dans `scripts/build_examples.py`.
+
+### L'Anatomie du Piège
+Trois problèmes subtils se sont manifestés lors de l'intégration des commentaires des fichiers de test :
+1. **Coquilles historiques dans les licences Apache** : Certains fichiers officiels UVM 1.2 (ex. `simple/registers/models/ro_wo_same_addr/tb_run.sv`) comportent une faute de frappe dans leur en-tête légal (`under t,he License`). Une regex stricte laissait passer tout le bloc de licence dans le texte extrait !
+2. **Désynchronisation d'API entre contrôleur et appelant (`switchFile` vs `switchFileTab`)** : Le badge `.notes-file-badge` appelait `studio.switchFile(targetFile)` et cherchait `#doc-nav-code`, alors que `initCodeStudio()` n'exposait que `switchFileTab(idx)` par index numérique et que le conteneur s'appelait `#doc-nav-studio`.
+3. **Import implicite de typage (`typing`)** : `scripts/build_examples.py` utilisait des annotations `Dict[str, Any]` et `List[...]` sur la nouvelle fonction `extract_suite_source_notes()`, sans avoir importé `Dict, List, Any` depuis `typing`. Lors du déploiement, `build_docs.py` (qui importe `build_examples`) a levé une exception `NameError` immédiate à l'import du module.
+
+### La Règle d'Or
+1. **Regex tolérante pour l'en-tête Apache** : Toujours matcher `under\s+t,?he\s+License` et valider via un script dédié (`scripts/verify_source_notes.py`) qu'aucune des 39 suites ne contient de fragment légal (`all rights reserved`, `mentor graphics`, `synopsys`).
+2. **Contrats d'API JavaScript explicites** : Exposer `studio.switchFile(filename)` (résolution par nom complet ou suffixe de chemin relatif) en plus de `switchFileTab(idx)`, et cibler `#doc-nav-studio` comme ancre canonique.
+3. **Tester l'import croisé avant chaque push** : Toujours exécuter `python scripts/build_docs.py --help` et les scripts de build complets après toute modification d'annotations de types Python.
