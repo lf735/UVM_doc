@@ -59,6 +59,35 @@
     </div>
   </div>
 </div>
+<div class="CGroup example-source-notes" id="doc-nav-notes" data-doc-topic="doc-nav-notes" data-anchor="DesignNotes">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="DesignNotes">Source Specification &amp; Design Notes</a></h2>
+    <div class="source-notes-header">
+      <div class="notes-title-box">
+        <svg class="notes-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span class="notes-heading-label">Test Intent &amp; Implementation Walkthrough</span>
+      </div>
+      <span class="notes-file-badge" data-file="simple.sv" title="Click to view file in Code Studio">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>Source: <strong>simple.sv</strong></span>
+      </span>
+    </div>
+    <div class="CBody source-notes-body">
+      <p>This simple example shows how the uvm_test_done objection is used to coordinate end of test activity. For an example of using end of test coordination in the context of a full environment, refer to the xbus example.</p>
+<p>In this example, a drain time of 10 is set on the component. The component then forks 4 processes which consume different amounts of time. When the last process is done (time 50), the drain time takes effect. The test is completed at time 60.</p>
+<p>The example also shows usage of the component objection callbacks. In this case, the dropped callback is used, but the raised and all_dropped work similarly (except the all dropped is a time-consuming task).</p>
+    </div>
+  </div>
+</div>
 <!-- Interactive Visual Flow Stepper Section -->
 <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
   <div class="CTopic">

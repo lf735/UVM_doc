@@ -1005,6 +1005,357 @@ def collect_example_files(suite_dir):
     collected.sort(key=sort_key)
     return collected
 
+# ----------------------------------------------------------------------
+# Source Specification & Design Notes Extraction
+# ----------------------------------------------------------------------
+
+SOURCE_NOTES_OVERRIDES = {
+    "simple/trivial": {
+        "source_file": "component.sv",
+        "raw_text": (
+            "About: Trivial Component\n\n"
+            "This fundamental example illustrates the absolute minimum UVM component lifecycle:\n"
+            "- Defines a custom class 'my_component' derived from uvm_component\n"
+            "- Implements the run_phase() task using raise_objection() and drop_objection()\n"
+            "- Emits a basic UVM_INFO greeting message at simulation time 0\n"
+            "- Instantiates the component top-level and invokes run_test() in the initial block"
+        )
+    },
+    "simple/hello_world": {
+        "source_file": "hello_world.sv",
+        "raw_text": (
+            "About: UVM Hello World Testbench\n\n"
+            "Demonstrates a complete hello world verification environment with table and tree printers:\n"
+            "- Configures default table printer knobs (name_width, type_width, size_width, value_width)\n"
+            "- Sets packet count parameters in uvm_config_int for two producer components\n"
+            "- Instantiates a top environment containing two producers connected to a consumer\n"
+            "- Starts the simulation lifecycle via run_test()"
+        )
+    },
+    "simple/basic_examples/module": {
+        "source_file": "test.sv",
+        "raw_text": (
+            "About: Module-Based Testbench Architecture\n\n"
+            "Illustrates the integration of UVM components within top-level SystemVerilog modules:\n"
+            "- Defines a lower component that retrieves configuration parameters via uvm_config_int and uvm_config_string\n"
+            "- Shows component lifecycle execution inside a traditional Verilog module scope\n"
+            "- Coordinates simulation termination using phase objections"
+        )
+    },
+    "simple/basic_examples/pkg": {
+        "source_file": "test.sv",
+        "raw_text": (
+            "About: Package-Encapsulated Testbench Components\n\n"
+            "Demonstrates standard packaging best practices for UVM components:\n"
+            "- Encapsulates component classes inside a SystemVerilog package scope\n"
+            "- Imports uvm_pkg and the component package in top-level test modules\n"
+            "- Explores proper name resolution and namespace isolation in large testbenches"
+        )
+    },
+    "simple/configuration/manual": {
+        "source_file": "top.sv",
+        "raw_text": (
+            "About: Manual Configuration Database\n\n"
+            "Demonstrates manual configuration database management without field automation macros:\n"
+            "- Sets configuration prior to creating the environment using uvm_config_int and uvm_config_string\n"
+            "- Uses wildcard scopes ('topenv.*.u1', '*') and associative array indexed strings ('myaa[foo]')\n"
+            "- Explicitly retrieves parameters inside child component build_phase() methods"
+        )
+    },
+    "simple/tlm2/blocking_simple": {
+        "source_file": "initiator.sv",
+        "raw_text": (
+            "About: TLM-2.0 Blocking Transport Interface\n\n"
+            "Demonstrates standard TLM-2.0 blocking communication using simple sockets:\n"
+            "- Initiator issues read-modify-write transactions via b_transport()\n"
+            "- Target executes in-order payload servicing and returns transaction status\n"
+            "- Illustrates seamless synchronization and payload memory reuse"
+        )
+    },
+    "simple/tlm2/temporal_decoupling": {
+        "source_file": "initiator.sv",
+        "raw_text": (
+            "About: TLM-2.0 Temporal Decoupling\n\n"
+            "Demonstrates time quantum and temporal decoupling using the TLM-2.0 interface:\n"
+            "- Initiator runs ahead of simulation time using local time offsets\n"
+            "- Synchronizes with global simulation time only upon exceeding quantum boundaries\n"
+            "- Dramatically accelerates transaction-level system performance"
+        )
+    },
+    "simple/registers/primer": {
+        "source_file": "test.sv",
+        "raw_text": (
+            "About: Register Abstraction Layer (RAL) Primer\n\n"
+            "Introduces UVM RAL architecture and basic sequence operations:\n"
+            "- Connects a memory-mapped register block to an APB bus agent via an adapter\n"
+            "- Performs frontdoor read and write operations across randomized register addresses\n"
+            "- Demonstrates register model mirror synchronization and state verification"
+        )
+    },
+    "simple/registers/vertical_reuse": {
+        "source_file": "sys_run.sv",
+        "raw_text": (
+            "About: Vertical Reuse in Register Models\n\n"
+            "Demonstrates reusing block-level register models directly within system-level environments:\n"
+            "- Integrates block register models into a system-level register block with address offsets\n"
+            "- Reuses block-level sequences seamlessly at the system level without code modification\n"
+            "- Verifies register access across hierarchical bus topologies"
+        )
+    },
+    "simple/registers/models/fifo_reg": {
+        "source_file": "tb_run.sv",
+        "raw_text": (
+            "About: FIFO Register Modeling\n\n"
+            "Demonstrates modeling hardware FIFOs and queues using uvm_reg_fifo:\n"
+            "- Configures a FIFO register model with designated capacity and access semantics\n"
+            "- Verifies push and pop operations between the register abstraction and DUT\n"
+            "- Validates status flags (empty, full, overflow) against the register mirror"
+        )
+    },
+    "simple/registers/models/not_yet_implemented": {
+        "source_file": "tb_run.sv",
+        "raw_text": (
+            "About: Unimplemented / Reserved Register Handling\n\n"
+            "Demonstrates how to model unmapped, reserved, or not-yet-implemented registers:\n"
+            "- Handles access to nonexistent registers gracefully without causing simulation errors\n"
+            "- Returns default bus error responses or zero payloads as expected by system specification"
+        )
+    },
+    "simple/registers/models/reg_without_field": {
+        "source_file": "tb_run.sv",
+        "raw_text": (
+            "About: Registers Without Fields\n\n"
+            "Demonstrates modeling simple monolithic registers that contain no sub-fields:\n"
+            "- Directly inherits from uvm_reg without configuring individual uvm_reg_field objects\n"
+            "- Uses custom user-defined frontdoor access mechanisms in lieu of standard bus agents"
+        )
+    },
+    "integrated/ubus": {
+        "source_file": "examples/ubus_example_tb.sv",
+        "raw_text": (
+            "About: UBUS Comprehensive Verification Component & Environment\n\n"
+            "Accellera's canonical reference verification architecture showcasing industrial methodology:\n"
+            "- Master Agent: Drives bus protocol stimuli via sequencer and driver\n"
+            "- Slave Agent: Responds to bus read/write requests with configurable wait states\n"
+            "- Central Bus Monitor: Observes all bus transactions for protocol compliance\n"
+            "- Scoreboard: Verifies end-to-end memory transaction integrity between masters and slaves\n"
+            "- Virtual Sequences: Coordinates complex multi-master arbitration and concurrent traffic"
+        )
+    },
+    "integrated/apb": {
+        "source_file": "apb.sv",
+        "raw_text": (
+            "About: Advanced Peripheral Bus (APB) UVC Architecture\n\n"
+            "Complete AMBA APB (Advanced Peripheral Bus) verification component package:\n"
+            "- APB Master Driver & Sequencer: Generates SETUP and ACCESS phase bus cycles\n"
+            "- APB Monitor: Captures bus transactions from virtual interface pins\n"
+            "- APB Agent & Config: Encapsulates driver, monitor, and sequencer with active/passive modes\n"
+            "- Serves as the primary bus bridge for RAL register adapters throughout the UVM test suite"
+        )
+    }
+}
+
+def strip_apache_license(text: str) -> str:
+    """Strip standard Apache 2.0 copyright and license headers from source text."""
+    if not text:
+        return ""
+    # Strip license block up to 'limitations under the License' (including typos like 'under t,he License')
+    pat = re.compile(r'limitations[\s\S]{1,80}?under\s+t,?he\s+License\.?\s*[-=/*]*\n?', re.IGNORECASE)
+    m = pat.search(text)
+    if m:
+        text = text[m.end():]
+    return text.strip()
+
+def natural_docs_to_html(raw_text: str) -> str:
+    """Converts NaturalDocs-style documentation text into clean, structured HTML."""
+    if not raw_text:
+        return ""
+
+    # Replace inline tilde tags ~method~ with <code>method</code>
+    raw_text = re.sub(r'~([^~]+)~', r'<code>\1</code>', raw_text)
+
+    lines = raw_text.splitlines()
+    html_out = []
+    in_list = False
+    para_lines = []
+
+    def flush_para():
+        nonlocal para_lines
+        if para_lines:
+            text = ' '.join(para_lines).strip()
+            if text:
+                html_out.append(f'<p>{html.escape(text)}</p>')
+            para_lines = []
+
+    def flush_list():
+        nonlocal in_list
+        if in_list:
+            html_out.append('</ul>')
+            in_list = False
+
+    for line in lines:
+        s = line.strip()
+        if not s:
+            flush_para()
+            flush_list()
+            continue
+
+        # Subheading: 'About: <title>', 'Title: <title>', 'Begindoc: <title>', 'Walk through the test:' or '1. DUT SPECIFICATION'
+        m_head = re.match(r'^(?:About|Title|Begindoc|Group):\s*(.*)$', s, re.IGNORECASE)
+        m_section = re.match(r'^(\d+\.\s+[A-Z0-9_\s\-]+)$', s)
+        m_walk = re.match(r'^(Walk through.*?):?$', s, re.IGNORECASE)
+
+        if m_head:
+            flush_para()
+            flush_list()
+            title = m_head.group(1).strip()
+            if title:
+                html_out.append(f'<h4 class="notes-subheading">{html.escape(title)}</h4>')
+            continue
+        elif m_section:
+            flush_para()
+            flush_list()
+            html_out.append(f'<h4 class="notes-subheading">{html.escape(m_section.group(1).strip())}</h4>')
+            continue
+        elif m_walk:
+            flush_para()
+            flush_list()
+            html_out.append(f'<h4 class="notes-subheading">{html.escape(m_walk.group(1).strip())}</h4>')
+            continue
+
+        # Bullet list item (- item or * item)
+        m_bullet = re.match(r'^[\-\*]\s+(.*)$', s)
+        if m_bullet:
+            flush_para()
+            if not in_list:
+                html_out.append('<ul class="notes-list">')
+                in_list = True
+            html_out.append(f'<li>{html.escape(m_bullet.group(1).strip())}</li>')
+            continue
+        else:
+            flush_list()
+            para_lines.append(s)
+
+    flush_para()
+    flush_list()
+    return '\n'.join(html_out)
+
+def extract_suite_source_notes(suite_dir: Path, suite_key: str, meta: Dict[str, Any], files_data: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    Extracts introductory and specification comments for an example suite.
+    Checks overrides first, then README.txt / README.md, then primary SV file, then all SV files.
+    """
+    if suite_key in SOURCE_NOTES_OVERRIDES:
+        entry = SOURCE_NOTES_OVERRIDES[suite_key]
+        return {
+            "source_file": entry["source_file"],
+            "raw_text": entry["raw_text"],
+            "notes_html": natural_docs_to_html(entry["raw_text"])
+        }
+
+    # 1. Check README.txt or README.md
+    for readme_name in ["README.txt", "README.md", "README"]:
+        readme_path = suite_dir / readme_name
+        if readme_path.exists():
+            try:
+                with open(readme_path, 'r', encoding='utf-8', errors='replace') as f:
+                    c = f.read()
+            except Exception:
+                with open(readme_path, 'r', encoding='latin-1', errors='replace') as f:
+                    c = f.read()
+            stripped = strip_apache_license(c)
+            # Remove leading // from README lines if present
+            lines = [re.sub(r'^\s*//\s?', '', l) for l in stripped.splitlines()]
+            while lines and re.match(r'^[=\-/*\s]+$', lines[0]):
+                lines.pop(0)
+            cleaned_text = '\n'.join(lines).strip()
+            if cleaned_text and len(cleaned_text) > 40:
+                return {
+                    "source_file": readme_name,
+                    "raw_text": cleaned_text,
+                    "notes_html": natural_docs_to_html(cleaned_text)
+                }
+
+    # 2. Check primary file and other files
+    def extract_from_sv(code: str) -> str:
+        stripped = strip_apache_license(code)
+        lines = stripped.splitlines()[:140]
+        intro_lines = []
+        in_block = False
+        started = False
+
+        for line in lines:
+            s = line.strip()
+            if not in_block:
+                if s.startswith('/*'):
+                    in_block = True
+                    started = True
+                    inner = s[2:].strip()
+                    if inner.endswith('*/'):
+                        in_block = False
+                        inner = inner[:-2].strip()
+                    if inner:
+                        intro_lines.append(inner)
+                elif s.startswith('//'):
+                    clean = re.sub(r'^\s*//[\s\-=/*]*', '', line).strip()
+                    if clean and not any(w in clean.lower() for w in ['copyright', 'mentor graphics', 'synopsys', 'cadence design', 'all rights reserved', 'licensed under the apache']):
+                        started = True
+                        intro_lines.append(clean)
+                    elif not clean and started:
+                        intro_lines.append('')
+                elif not s:
+                    if started and intro_lines and intro_lines[-1] != '':
+                        intro_lines.append('')
+                elif s.startswith(('module', 'class', 'package', 'program', 'interface', '`timescale', '`include', 'import')):
+                    if started and len([l for l in intro_lines if l.strip()]) >= 2:
+                        break
+                    else:
+                        continue
+                else:
+                    if started:
+                        break
+            else:
+                if '*/' in s:
+                    in_block = False
+                    end_pos = s.find('*/')
+                    inner = s[:end_pos].strip().lstrip('* ')
+                    if inner:
+                        intro_lines.append(inner)
+                else:
+                    inner = s.lstrip('* ')
+                    intro_lines.append(inner)
+
+        return '\n'.join(intro_lines).strip()
+
+    primary_file = meta.get("primary_file")
+    best_text = ""
+    best_file = primary_file or ""
+
+    for fd in files_data:
+        fname = fd["name"]
+        raw = fd["raw_content"]
+        extracted = extract_from_sv(raw)
+        if extracted and len(extracted) > len(best_text):
+            best_text = extracted
+            best_file = fname
+            if len(best_text) > 120:
+                break
+
+    if best_text and len(best_text) >= 20:
+        return {
+            "source_file": best_file,
+            "raw_text": best_text,
+            "notes_html": natural_docs_to_html(best_text)
+        }
+
+    # Fallback to meta summary if comments were sparse
+    fallback_text = f"About: {meta['title']}\n\n{meta['summary']}"
+    return {
+        "source_file": primary_file or (files_data[0]["name"] if files_data else "source"),
+        "raw_text": fallback_text,
+        "notes_html": natural_docs_to_html(fallback_text)
+    }
+
 # Map each interactive example suite to its primary paired UVM source implementation
 EXAMPLE_TO_SRC_MAP = {
     # 1. Getting Started & Basics
@@ -1120,6 +1471,11 @@ def build_suite_page(suite_key, meta, files):
   </div>
 </div>"""
 
+    # Extract source specification and design notes
+    suite_dir = EXAMPLES_SRC_DIR / suite_key
+    source_notes_data = extract_suite_source_notes(suite_dir, suite_key, meta, files_data)
+    source_notes_block = pbc.render_source_notes(source_notes_data)
+
     ANIM_TYPE_MAP = {
         "simple/phases/basic": "phasing",
         "simple/objections": "objections",
@@ -1134,7 +1490,7 @@ def build_suite_page(suite_key, meta, files):
     studio_block = pbc.render_code_studio(files_data, primary_file, "../../")
     sim_block = pbc.render_simulation_console(sim_log)
 
-    body_content = f"{main_topic_html}\n{stepper_block}\n{topo_block}\n{studio_block}\n{sim_block}"
+    body_content = f"{main_topic_html}\n{source_notes_block}\n{stepper_block}\n{topo_block}\n{studio_block}\n{sim_block}"
 
     breadcrumbs_html = pbc.render_breadcrumbs([
         {"title": "Examples", "href": "../../index.html#/examples", "is_home": True},

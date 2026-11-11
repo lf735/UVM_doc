@@ -533,6 +533,50 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]], anim_type: str = ""
 </div>'''
 
 
+def render_source_notes(source_notes: Dict[str, Any]) -> str:
+    """
+    Renders the Source Specification & Design Notes card.
+    Displays extracted comments, intent, and architectural notes from the test bench files or README.
+    source_notes: dict with keys:
+      - 'source_file': filename where comments were extracted from (e.g. 'test.sv', 'README.txt')
+      - 'notes_html': formatted HTML body
+      - 'raw_text': raw extracted comment text
+    """
+    if not source_notes or not source_notes.get("notes_html"):
+        return ""
+
+    source_file = html.escape(source_notes.get("source_file", "source"))
+    notes_html = source_notes.get("notes_html", "")
+
+    return f'''<div class="CGroup example-source-notes" id="doc-nav-notes" data-doc-topic="doc-nav-notes" data-anchor="DesignNotes">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="DesignNotes">Source Specification &amp; Design Notes</a></h2>
+    <div class="source-notes-header">
+      <div class="notes-title-box">
+        <svg class="notes-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span class="notes-heading-label">Test Intent &amp; Implementation Walkthrough</span>
+      </div>
+      <span class="notes-file-badge" data-file="{source_file}" title="Click to view file in Code Studio">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>Source: <strong>{source_file}</strong></span>
+      </span>
+    </div>
+    <div class="CBody source-notes-body">
+      {notes_html}
+    </div>
+  </div>
+</div>'''
+
+
 def render_topology_grid(topology_nodes: List[Dict[str, Any]]) -> str:
     """
     Renders the Testbench Architecture Topology grid.

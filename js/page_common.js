@@ -2079,6 +2079,19 @@ window.PageCommon = (function () {
     // Expose control methods
     return {
       switchFileTab: switchFileTab,
+      switchFile: function (filename) {
+        if (!filename) return false;
+        const cleanTarget = filename.replace(/\\/g, '/');
+        const idx = filesList.findIndex(function (f) {
+          const fn = f.name.replace(/\\/g, '/');
+          return fn === cleanTarget || fn.endsWith('/' + cleanTarget) || cleanTarget.endsWith('/' + fn);
+        });
+        if (idx !== -1) {
+          switchFileTab(idx);
+          return true;
+        }
+        return false;
+      },
       getCurrentFileIdx: function () { return currentFileIdx; },
       scrollToLine: scrollToLine
     };
@@ -3087,6 +3100,24 @@ window.PageCommon = (function () {
     const studio = initCodeStudio();
     initZipDownload();
     initSimulationConsole();
+
+    // Source Notes File Badge click -> switch file in Code Studio
+    const notesBadge = document.querySelector('.notes-file-badge');
+    if (notesBadge && studio) {
+      notesBadge.addEventListener('click', function () {
+        const targetFile = notesBadge.getAttribute('data-file');
+        if (targetFile) {
+          studio.switchFile(targetFile);
+          const studioEl = document.getElementById('doc-nav-studio') ||
+            document.getElementById('doc-nav-code') ||
+            document.querySelector('.studio-section') ||
+            document.querySelector('.code-studio-section');
+          if (studioEl) {
+            studioEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    }
 
     if (document.getElementById('visual-flow-stepper')) {
       initFlowStepper(studio);

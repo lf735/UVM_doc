@@ -59,6 +59,52 @@
     </div>
   </div>
 </div>
+<div class="CGroup example-source-notes" id="doc-nav-notes" data-doc-topic="doc-nav-notes" data-anchor="DesignNotes">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="DesignNotes">Source Specification &amp; Design Notes</a></h2>
+    <div class="source-notes-header">
+      <div class="notes-title-box">
+        <svg class="notes-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span class="notes-heading-label">Test Intent &amp; Implementation Walkthrough</span>
+      </div>
+      <span class="notes-file-badge" data-file="README.txt" title="Click to view file in Code Studio">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>Source: <strong>README.txt</strong></span>
+      </span>
+    </div>
+    <div class="CBody source-notes-body">
+      <p>This is an end-to-end phasing example involving a non-trivial (yet simple) DUT.</p>
+<h4 class="notes-subheading">1. DUT SPECIFICATION</h4>
+<p>The DUT is a full-duplex parallel-to-serial codec.</p>
+<p>Bytes written to the TxFIFO are transmitted MSB-first in order received. If there are no bytes to be transmitted, IDLE is transmitted.</p>
+<p>Received bytes are added to the RxFIFO if it is not full. SYNC, IDLE and ESC characters are ignored.</p>
+<p>The bit stream is identical in both direction. There is a SYNC character (0xB2) inserted every 7 bytes. IDLE characters (0x81) represent invalid data, unless escaped by a preceeding ESC character (0xE7). If an IDLE or ESC character must be transmitted as valid data, they must be preceeded by a ESC characted. The SYNC character, when found in a position other than the SYNC slot is a valid character.</p>
+<p>For example, the phrase 0xADB2EF81E7FEED could be transmitted as:</p>
+<p>B2 81 81 81 81 AD B2 B2 81 EF 81 E7 81 E7 B2 E7 81 E7 FE ED 81 B2 SS .. .. .. .. vv vv SS .. vv .. EE vv EE SS vv .. EE vv vv .. SS</p>
+<p>SS = SYNC EE = ESC .. = IDLE vv = Valid data</p>
+<p>Bits are valid at the rising edge of the clock.</p>
+<p>The following host-accessible registers are available:</p>
+<p>Address	      Bits	Name</p>
+<p>0x0000			IntSrc	  Interrupt Source RO	      0:0	TxEmpty	  Tx FIFO is empty RO	      1:1	TxLow	  Tx is at or below low water mark RO	      2:2	TxFull	  Tx FIFO is full (32) RO	      4:4	RxEmpty	  Rx FIFO is empty RO	      5:5 	RxHigh	  Rx FIFO is at or above high water mark RO	      6:6	RxFull	  Rx FIFO is full (32) W1C	      8:8	SA	  Symbol alignment has been acquired or lost Resets to &#x27;b000010001</p>
+<p>0x0004			IntMask	  Interrupt Mask RW          8:0       If &#x27;0&#x27;, masks the corresponding interrupt source Resets to all 0&#x27;s</p>
+<p>0x0010			TxStatus RW          0:0       TxEn      Enable transmit path Resets to 0</p>
+<p>0x0014			TxLWM RW          4:0       TxLWM     Low water mark for the Tx FIFO Resets to 8.</p>
+<p>0x0020			RxStatus RW          0:0       RxEn      Enable receive path RO          1:1       ALIGN     Symbol alignment status Resets to all 0&#x27;s</p>
+<p>0x0024			RxHWM RW          4:0       RxHWM     High water mark for the Rx FIFO Resets to 16.</p>
+<p>0x0100		        TxRx WO	      7:0	TxData    Write data to TxFIFO if not full RO	      7:0	RxData	  Read data from RxFIFO if not empty</p>
+<p>All unspecified bits are RO and read at 0&#x27;s.</p>
+    </div>
+  </div>
+</div>
 
 <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
   <div class="CTopic">

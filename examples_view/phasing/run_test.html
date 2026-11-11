@@ -59,6 +59,38 @@
     </div>
   </div>
 </div>
+<div class="CGroup example-source-notes" id="doc-nav-notes" data-doc-topic="doc-nav-notes" data-anchor="DesignNotes">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="DesignNotes">Source Specification &amp; Design Notes</a></h2>
+    <div class="source-notes-header">
+      <div class="notes-title-box">
+        <svg class="notes-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span class="notes-heading-label">Test Intent &amp; Implementation Walkthrough</span>
+      </div>
+      <span class="notes-file-badge" data-file="test.sv" title="Click to view file in Code Studio">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>Source: <strong>test.sv</strong></span>
+      </span>
+    </div>
+    <div class="CBody source-notes-body">
+      <h4 class="notes-subheading">phases/run_test</h4>
+<p>This test case will test a hierarchy contains mix of uvm_components,  uvm_threaded_components, and envs.</p>
+<p>To get detailed information about the uvm_components, uvm_components, uvm_phases and uvm_env.You may check the following files: uvm/src/base/uvm_phases.sv uvm/src/base/uvm_component.sv uvm/src/base/uvm_component.svh uvm/src/methodology/uvm_test.svh</p>
+<h4 class="notes-subheading">Walk through the test</h4>
+<p>the main idea is to create a topology of components which had no run phase, and threads which had a run phase, and through the run phase of the top uvm_env ensure phasing is correct.</p>
+<p>at the top module level the env will use the run_test mode.</p>
+    </div>
+  </div>
+</div>
 
 <div class="CGroup topo-section" id="doc-nav-topo" data-doc-topic="doc-nav-topo" data-anchor="Topology">
   <div class="CTopic">

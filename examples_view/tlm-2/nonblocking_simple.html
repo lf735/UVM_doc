@@ -59,6 +59,72 @@
     </div>
   </div>
 </div>
+<div class="CGroup example-source-notes" id="doc-nav-notes" data-doc-topic="doc-nav-notes" data-anchor="DesignNotes">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="DesignNotes">Source Specification &amp; Design Notes</a></h2>
+    <div class="source-notes-header">
+      <div class="notes-title-box">
+        <svg class="notes-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span class="notes-heading-label">Test Intent &amp; Implementation Walkthrough</span>
+      </div>
+      <span class="notes-file-badge" data-file="README.txt" title="Click to view file in Code Studio">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <span>Source: <strong>README.txt</strong></span>
+      </span>
+    </div>
+    <div class="CBody source-notes-body">
+      <p>This simple nonblocking examples uses a USB 2.0 BULK transfer as an example.</p>
+<p>Instead of translating the transfer into a series of packets transmitted back and forth between the host and device, a single transfer is exchanged and the timing points (i.e. calls to nb_transport_fw/bw()) are used in lieu packet transfers.</p>
+<p>For a normal host-&gt;device bulk transfer, the following timing points occur until a UVM_TLM_COMPLETED sync value is received by either the host or the device.</p>
+<p>1. nb_transport_fw(xfer, ph)</p>
+<ul class="notes-list">
+<li>xfer.kind == OUT</li>
+<li>ph == USB_TLM_TOKEN</li>
+</ul>
+<p>&gt; Device responds with UVM_TLM_ACCEPTED, or &gt; Device responds with UVM_TLM_COMPLETED</p>
+<p>2. nb_transport_fw(xfer, ph)</p>
+<ul class="notes-list">
+<li>xfer.data contains bulk data</li>
+<li>ph == USB_TLM_DATA</li>
+</ul>
+<p>&gt; Device responds with UVM_TLM_ACCEPTED, or &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == ACK/NAK/STALL/NYET and ph updated to UVM_TLM_HANDSHAKE</p>
+<p>3. nb_transport_bw(xfer, ph)</p>
+<ul class="notes-list">
+<li>xfer.status == ACK/NACK/STALL/NYET</li>
+<li>ph == USB_TLM_HANDSKAHE</li>
+</ul>
+<p>&gt; Host responds with UVM_TLM_COMPLETED</p>
+<p>For a device-&gt;host bulk transfer, the following timing points occur until a UVM_TLM_COMPLETED sync value is received by either the host or the device.</p>
+<p>1. nb_transport_fw(xfer, ph)</p>
+<ul class="notes-list">
+<li>xfer.kind == IN</li>
+<li>ph == USB_TLM_TOKEN</li>
+</ul>
+<p>&gt; Device responds with UVM_TLM_ACCEPTED, or &gt; Device responds with UVM_TLM_UPDATED, xfer.data contains bulk data and ph updated to UVM_TLM_DATA (goto step 3), or &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == NAK/STALL and ph updated to UVM_TLM_HANDSHAKE</p>
+<p>2. nb_transport_bw(xfer, ph)</p>
+<ul class="notes-list">
+<li>xfer.data contains bulk data</li>
+<li>ph == USB_TLM_DATA</li>
+</ul>
+<p>&gt; Host responds with UVM_TLM_ACCEPTED, or &gt; Host responds with UVM_TLM_COMPLETED, xfer.status == ACK and ph updated to UVM_TLM_HANDSHAKE</p>
+<p>3. nb_transport_fw(xfer, ph)</p>
+<ul class="notes-list">
+<li>xfer.status == ACK</li>
+<li>ph == USB_TLM_HANDSKAHE</li>
+</ul>
+<p>&gt; Device responds with UVM_TLM_COMPLETED</p>
+    </div>
+  </div>
+</div>
 <!-- Interactive Visual Flow Stepper Section -->
 <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
   <div class="CTopic">
