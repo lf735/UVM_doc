@@ -12,10 +12,13 @@ Ready for local offline browsing and automated continuous deployment to **GitHub
 - **Interactive UVM 1.2 Examples Studio**:
   - Full interactive integration of all **38 official Accellera UVM 1.2 example suites** (309 source files across `uvm-1.2/examples/`).
   - **Multi-File Code Studio**: Tabbed viewer across all project files with syntax highlighting, line anchors (`#Lxx`), and clickable UVM class references.
+  - **Clickable UVM Symbols & Disambiguation Popover**: Enriched tokenization across all studios for UVM macros, types, methods, and constants with static context inference (owner/base class detection). When clicking ambiguous methods implemented across multiple classes, an interactive popover enables instant direct navigation to the exact class documentation.
   - **Visual Flow Stepper**: Interactive step-by-step execution timeline on the 5 pillar examples (*Phases, Objections, TLM-1 FIFO, TLM-2 Non-Blocking, RAL Primer*) with topology highlighting, synchronous code focusing, and terminal log inspection.
   - **Simulation Console**: Tabbed execution commands for Questa, VCS, and Xcelium with authentic Accellera UVM report simulation logs and severity filters.
   - **Zero-Dependency Dual Downloads**: 1-click download of individual raw files or client-side native ZIP archive creation for the complete example suite.
   - **Bidirectional Linking**: Reference documentation pages feature contextual *"💡 Practical Example"* callouts linking directly into the interactive studios.
+- **Interactive Inherited Class Members View**: Complete ancestor hierarchy display on class documentation pages (`docs_view`) showing all inherited tasks and functions, dynamic instant search filtering, method signatures, argument lists, and direct links to parent documentation.
+- **Deep Anchor Navigation & Auto-Expansion**: Intelligent auto-expansion of collapsed containers (inherited methods sections, `<details>`, derived classes cards) when navigating via anchor hashes, symbol clicks, or cross-frame `postMessage` requests.
 - **Google Developers Inspired Design**: High-contrast, crystal-clear typography (Google Sans & Roboto) with a refined Google Blue color scheme matching official documentation such as Google Apps Script and Google Cloud reference docs.
 - **Full Syntax Highlighting in Documentation**: Syntax-highlighted code blocks, command-line snippets, and API prototypes with language badges and 1-click clipboard copy buttons.
 - **SystemVerilog Web Source Viewer**: Complete syntax highlighting, clickable line numbers (`#Lxx`), copy buttons, and raw downloads for all 155 source files (`.sv`, `.svh`, `.c`, `.h`).
@@ -54,10 +57,15 @@ UVM_doc/
 │   ├── build_examples.py     # Python generator for all 39 interactive example studios
 │   ├── build_rag_embeddings.py # Generates intelligent chunks & dense vector embeddings
 │   ├── build_uvm_source_db.py # Python parser extracting classes, methods, overrides, and macros
+│   ├── generate_quick_symbols.py # Fast symbol extractor with types, methods, constants & inheritance
 │   ├── query_uvm_db.py       # Interactive CLI explorer tool for terminal navigation
 │   ├── syntax_highlighter.py # Unified high-fidelity tokenizer for SystemVerilog, UVM, C/DPI & Makefiles
-│   ├── test_syntax_highlighter.py # Automated unit test suite for syntax tokenization
-│   └── verify_examples.py    # 27-test automated verification suite for interactive examples
+│   ├── test_syntax_highlighter.py # Automated unit test suite for syntax tokenization & clickable symbols
+│   ├── verify_code_editor_tools.py # Verification suite for code editor tools & clickable UVM symbols
+│   ├── verify_examples.py    # 28-test automated verification suite for interactive examples
+│   ├── verify_inherited_members.py # Verification suite for class inheritance & inherited members
+│   ├── verify_source_notes.py # Verification suite for source notes & Apache license hygiene
+│   └── verify_stepper_calibration.py # Verification suite for stepper scenarios & terminal logs
 ├── data/
 │   ├── uvm_source_database.json # Complete hierarchical, bidirectional & indexed database (5.55 MB)
 │   ├── uvm_source_database.sqlite # Relational 3NF SQLite database with indexes (2.11 MB)
@@ -116,7 +124,7 @@ The build scripts will:
 5. Generate `js/search_data.js` containing category trees, source directory trees, and search indices.
 6. Generate `data/rag_chunks.json` and `data/rag_embeddings.bin` for client-side semantic vector search.
 
-> **Note on version control:** `js/search_data.js` (~1.5 MB) and `data/` (~5.8 MB) are excluded from Git tracking (`.gitignore`) to avoid repository bloat and diff churn. The GitHub Actions deployment workflow automatically builds these files upon deployment.
+> **Note on version control:** `js/search_data.js` (~1.5 MB), `js/uvm_symbol_quick.js`, `js/doc_topics/` and `data/` (~5.8 MB) are excluded from Git tracking (`.gitignore`) to avoid repository bloat and diff churn. The GitHub Actions deployment workflow automatically builds these files upon deployment.
 
 ---
 
@@ -156,8 +164,8 @@ For comprehensive technical specifications, user guides, reverse-engineered arch
 - **[UVM Source Database User Guide](UVM_DATABASE_USER_GUIDE.md)**: Comprehensive user manual covering the CLI query tool (`scripts/query_uvm_db.py`), SQL cookbook recipes for `data/uvm_source_database.sqlite`, regeneration instructions, and the interactive web explorer.
 - **[RAG Technical Specification & Architecture](RAG_SPECIFICATION.md)**: Comprehensive specification of the client-side 2-level hierarchical RAG, intent catalog embedding enrichment, vector cosine similarity pipeline, and hybrid ranking.
 - **[RAG User Guide (Recherche en Langage Naturel)](RAG_USER_GUIDE.md)**: End-user handbook on using the AI natural language search, query examples by verification domain, interpreting deep-link results, and settings customization.
-- **[Product Specification & Engineering Methodology](PRODUCT_SPEC_AND_METHODOLOGY.md)**: Reverse-engineered specification, `postMessage` protocol catalog, 5 golden development rules, and 3-level verification strategy.
-- **[Lessons Learned & Technical Traps Guide](LESSONS_LEARNED.md)**: Real-world post-mortem analysis of CSS pointer-events modal bugs, smooth scrolling race conditions, legacy HTML ID mapping, search engine regex error handling, and cross-frame event capture.
+- **[Product Specification & Engineering Methodology](PRODUCT_SPEC_AND_METHODOLOGY.md)**: Reverse-engineered specification, `postMessage` protocol catalog, 15 engineering rules, and 3-level verification strategy.
+- **[Lessons Learned & Technical Traps Guide](LESSONS_LEARNED.md)**: Real-world post-mortem analysis across 33 technical cases (modal backdrops, smooth scrolling race conditions, clickable symbol disambiguation popovers, inherited members aggregation, and deep anchor navigation in retracted zones).
 
 ---
 

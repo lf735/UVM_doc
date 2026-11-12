@@ -1169,3 +1169,98 @@ Trois problèmes subtils se sont manifestés lors de l'intégration des commenta
 1. **Regex tolérante pour l'en-tête Apache** : Toujours matcher `under\s+t,?he\s+License` et valider via un script dédié (`scripts/verify_source_notes.py`) qu'aucune des 39 suites ne contient de fragment légal (`all rights reserved`, `mentor graphics`, `synopsys`).
 2. **Contrats d'API JavaScript explicites** : Exposer `studio.switchFile(filename)` (résolution par nom complet ou suffixe de chemin relatif) en plus de `switchFileTab(idx)`, et cibler `#doc-nav-studio` comme ancre canonique.
 3. **Tester l'import croisé avant chaque push** : Toujours exécuter `python scripts/build_docs.py --help` et les scripts de build complets après toute modification d'annotations de types Python.
+
+---
+
+## 31. Le Piège des Méthodes Communes Ambiguës dans le Code Studio & Inférence de Contexte Statique
+
+### Le Symptôme Observé
+> *"Dans le code d'un exemple, quand je clique sur une méthode courante comme `write()`, `get()`, `create()` ou `connect()`, le navigateur ne sait pas quelle classe ouvrir ou ouvre une classe sans rapport."*  
+> De plus, des signaux matériels ou des ports de modules SystemVerilog portant des noms courants (ex. `.reset(reset)`, `.size(size)`, `.parent(this)`) risquaient d'être marqués à tort comme symboles UVM cliquables.
+
+### L'Anatomie du Piège
+En SystemVerilog et en programmation orientée objet, de nombreuses classes sans lien de parenté direct partagent des noms de méthodes identiques :
+- `write()` est implémentée simultanément par `uvm_analysis_port`, `uvm_subscriber`, `uvm_tlm_analysis_fifo`, `uvm_reg`, `uvm_mem`, etc.
+- Un tokenizer naïf basé sur un dictionnaire de mots-clés ne peut deviner l'objet receveur de l'appel.
+- Par ailleurs, les connexions de ports matériels par nom (`.port_name(signal)`) et les arguments nommés de constructeurs ressemblent syntaxiquement à des invocations de méthodes, créant des faux-positifs perturbants dans la coloration syntaxique et l'interactivité.
+
+### La Solution Appliquée
+1. **Inférence statique de contexte dans `scripts/syntax_highlighter.py`** :
+   - **Variables typées** : Détection des déclarations `Type variable;` (ex. `uvm_phase phase;`) afin d'assigner l'attribut `data-sym-owner="uvm_phase"` lors des appels ultérieurs `phase.raise_objection(...)`.
+   - **Résolutions de portée statique** : Détection des syntaxes `Scope::method()` (ex. `uvm_config_db#(int)::set(...)`) pour associer directement `data-sym-owner="uvm_config_db"`.
+   - **Classes dérivées englobantes** : Détection des définitions virtuelles au sein de `class my_test extends uvm_test; virtual task run_phase(...);` pour assigner `data-sym-base="uvm_test"`.
+2. **Garde-fous stricts anti-faux-positifs** :
+   - Exclusion systématique des connexions de ports matériels `.reset(reset)`.
+   - Exclusion des déclarations de signaux ou variables primitives `logic`, `wire`, `int` ayant des noms partagés avec des méthodes UVM.
+   - Exclusion des arguments nommés de constructeurs `.parent(this)`.
+3. **Popover de désambiguïsation ergonomique (`sym-disambig-popover`)** :
+   - Lorsque le contexte statique ne permet pas de déduire une classe unique pour une méthode polymorphe, le clic utilisateur fait apparaître un popover contextuel élégant listant l'ensemble des classes détentrices.
+   - Prise en charge complète de l'accessibilité : focus automatique sur la première option, navigation au clavier (Flèches Haut/Bas, Entrée, Échap) et fermeture automatique lors d'un clic extérieur ou perte de focus.
+
+### La Règle d'Or
+Ne jamais naviguer à l'aveugle sur un identifiant polymorphe ou partagé. Combiner l'inférence lexicale statique en amont lors de la tokenisation et un menu de désambiguïsation interactif au runtime lorsque l'ambiguïté subsiste.
+
+---
+
+## 32. Le Piège de l'Agrégation des Méthodes Héritées & Performance DOM
+
+### Le Symptôme Observé
+> *"Dans la documentation d'une classe fille comme `uvm_driver`, il est pénible de devoir sans cesse remonter manuellement vers `uvm_component`, `uvm_report_object` et `uvm_object` pour consulter les méthodes héritées disponibles."*
+
+### L'Anatomie du Piège
+Dans l'architecture UVM 1.2, une classe de composant comme `uvm_driver` hérite de plus de 100 méthodes réparties sur 4 niveaux hiérarchiques.
+- Dupliquer l'intégralité des sections documentaires parentes dans chaque classe fille aurait multiplié par 5 la taille des fichiers HTML de documentation (`docs_view`), dégradant lourdement le temps de chargement, l'indexation et la mémoire du navigateur.
+- Insérer statiquement plus de 100 nœuds DOM lourds dans la page dès le chargement initial créait des saccades au défilement et des collisions potentielles d'identifiants d'ancres `#doc-nav-item-X`.
+- Sans système de recherche locale, retrouver une méthode spécifique (`build_phase`, `set_report_verbosity_level`, `print`) parmi une centaine de signatures s'avérait fastidieux pour l'utilisateur.
+
+### La Solution Appliquée
+1. **Extraction et indexation hiérarchique au build (`generate_quick_symbols.py`)** :
+   - Parcours complet de l'arbre d'héritage des 325 classes UVM.
+   - Résolution déterministe des chaînes d'ascendance et déduplication des méthodes surchargées (*overridden*).
+   - Export d'un dictionnaire compact des méthodes héritées avec types de retour, noms et listes complètes d'arguments.
+2. **Composant accordéon modulaire (`.inherited-methods-section`)** :
+   - Regroupement des méthodes par classe ancêtre ordonnée (du parent direct jusqu'à `uvm_void`).
+   - En-têtes repliables avec chevrons animés et badges numériques indiquant le décompte exact de méthodes héritées par ancêtre.
+   - Liens directs vers l'ancre officielle de chaque méthode dans la documentation de la classe parente.
+3. **Filtre de recherche instantané intégré (`.inherited-filter-input`)** :
+   - Champ de filtrage temps réel dans l'en-tête de la section des méthodes héritées permettant à l'ingénieur de trouver n'importe quelle méthode en tapant quelques lettres.
+4. **Rendu progressif et différé (Lazy Rendering)** :
+   - Les cartes et listes détaillées de méthodes ne sont instanciées dans le DOM que lors de l'ouverture de l'accordéon ou sur demande explicite de navigation par ancre, garantissant un affichage initial ultra-léger et fluide.
+
+### La Règle d'Or
+Pour les hiérarchies orientées objet profondes, privilégier une vue synthétique compacte avec filtre temps réel et liens profonds vers la classe de définition plutôt qu'une duplication massive du contenu éditorial.
+
+---
+
+## 33. Le Piège des Ancres Masquées dans les Zones Rétractées / Repliées & Désynchronisation d'Iframe
+
+### Le Symptôme Observé
+> *"Quand je clique sur un lien menant à une méthode héritée ou une sous-classe repliée, la page charge mais reste figée tout en haut et ne scrolle pas vers l'élément."*
+
+### L'Anatomie du Piège
+Lorsqu'un élément cible (par exemple une méthode héritée ou une sous-classe) est imbriqué dans un conteneur masqué ou replié (`display: none`, classe `.collapsed`, ou élément natif `<details>` fermé) :
+1. **Absence de boîte de rendu géométrique** : L'élément possède `offsetParent === null` et `getBoundingClientRect().top === 0`.
+2. **Échec silencieux du scrolling** : Les méthodes natives `element.scrollIntoView()` ou `window.scrollTo()` ne peuvent calculer aucune coordonnée cible valide et abandonnent silencieusement le défilement.
+3. **Désynchronisation temporelle inter-cadres (Iframe)** : Lors d'une navigation déclenchée depuis le parent (`index.html`) via `postMessage({ type: 'scrollToSection' })`, le message est souvent reçu alors que le document iframe est encore en cours d'évaluation de scripts ou de reflow de layout, ce qui fausse irrémédiablement le positionnement final.
+
+### La Solution Appliquée
+1. **Fonction ascendante d'expansion universelle `expandAllRetractedAncestors(targetEl)` dans `js/page_common.js`** :
+   - Remonte récursivement l'arbre DOM depuis le nœud cible jusqu'à la racine du document (`document.body`).
+   - Détecte et déplie automatiquement :
+     - Les sections de méthodes héritées (`.inherited-methods-section` via `_ensureExpandedAndRendered()`, ajout de `.is-expanded`, `aria-expanded="true"`, rotation du chevron).
+     - Les cartes de classes dérivées (`.derived-classes-card`, `.hierarchy-subclasses-card`).
+     - Les éléments HTML5 natifs `<details>` (`open = true`).
+     - Tous les conteneurs portant la classe `.collapsed` (suppression de la classe et restauration du style `display`).
+     - Tous les boutons ou accordéons portant `aria-expanded="false"`.
+     - Tous les éléments portant l'attribut `hidden` ou le style inline `display: none`.
+     - Tous les boutons contrôleurs associés via l'attribut `aria-controls`.
+2. **Résolution préventive `findMatchingInheritedSection(targetId)`** :
+   - Si l'élément cible n'est pas encore présent dans le DOM en raison du rendu paresseux (lazy rendering), la fonction inspecte les attributs des sections héritées dormantes, force leur dépliement et leur rendu complet avant d'ordonner le défilement.
+3. **Séquence de réessais multi-échéances dans `js/app.js`** :
+   - L'envoi du message `scrollToSection` est cadencé aux paliers stratégiques :
+     - Émission immédiate dès réception.
+     - Répétition à 80 ms, 120 ms, 320 ms et 600 ms.
+   - Cette cascade garantit la stabilisation complète du défilement, même si le navigateur subit des reflows successifs liés au chargement de styles, d'images ou au dépliement d'arborescences.
+
+### La Règle d'Or
+Tout système de navigation par ancres dans une interface moderne doit s'assurer de l'état visible et de la validité géométrique de l'élément cible et de tous ses ancêtres avant de tenter la moindre mesure ou animation de défilement.

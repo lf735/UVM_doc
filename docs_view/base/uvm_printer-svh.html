@@ -67,27 +67,27 @@
       <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       <span>Direct Subclasses (2)</span>
     </div>
-    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-19" class="derived-class-pill" data-target-id="doc-nav-item-19" title="Subclass: uvm_table_printer">uvm_table_printer</a><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-24" class="derived-class-pill" data-target-id="doc-nav-item-24" title="Subclass: uvm_tree_printer">uvm_tree_printer</a></div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_printer-svh.html#uvm_table_printer" class="derived-class-pill" data-target-id="uvm_table_printer" title="Subclass: uvm_table_printer">uvm_table_printer</a><a href="../../docs_view/base/uvm_printer-svh.html#uvm_tree_printer" class="derived-class-pill" data-target-id="uvm_tree_printer" title="Subclass: uvm_tree_printer">uvm_tree_printer</a></div>
   </div>
-</div><div class=CBody><p>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link8  >uvm_objects</a> in various formats.&nbsp; Subtypes of uvm_printer implement different print formats, or policies.</p><p>A user-defined printer format can be created, or one of the following four built-in printers can be used:</p><ul><li><a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link9  >uvm_printer</a> - provides base printer functionality; must be overridden.</li><li><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" class=LClass id=link10  >uvm_table_printer</a> - prints the object in a tabular form.</li><li><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link11  >uvm_tree_printer</a> - prints the object in a tree form.</li><li><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" class=LClass id=link12  >uvm_line_printer</a> - prints the information on a single line, but uses the same object separators as the tree printer.</li></ul><p>Printers have knobs that you use to control what and how information is printed.&nbsp; These knobs are contained in a separate knob class:</p><ul><li><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" class=LClass id=link13  >uvm_printer_knobs</a> - common printer settings</li></ul><p>For convenience, global instances of each printer type are available for direct reference in your testbenches.</p><ul><li><a href="uvm_object_globals-svh.html#doc-nav-item-26" data-target-id="doc-nav-item-26" class=LVariable id=link14  >uvm_default_tree_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-27" data-target-id="doc-nav-item-27" class=LVariable id=link15  >uvm_default_line_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-25" data-target-id="doc-nav-item-25" class=LVariable id=link16  >uvm_default_table_printer</a></li><li><a href="uvm_object_globals-svh.html#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LVariable id=link17  >uvm_default_printer</a> (set to default_table_printer by default)</li></ul><p>When <a href="uvm_object-svh.html#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link18  >uvm_object::print</a> and <a href="uvm_object-svh.html#doc-nav-item-19" data-target-id="doc-nav-item-19" class=LMethod id=link19  >uvm_object::sprint</a> are called without specifying a printer, the <a href="uvm_object_globals-svh.html#doc-nav-item-28" data-target-id="doc-nav-item-28" class=LVariable id=link20  >uvm_default_printer</a> is used.</p>
+</div><div class=CBody><p>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#uvm_object" data-target-id="uvm_object" class=LClass id=link8  >uvm_objects</a> in various formats.&nbsp; Subtypes of uvm_printer implement different print formats, or policies.</p><p>A user-defined printer format can be created, or one of the following four built-in printers can be used:</p><ul><li><a href="#uvm_printer" data-target-id="uvm_printer" class=LClass id=link9  >uvm_printer</a> - provides base printer functionality; must be overridden.</li><li><a href="#uvm_table_printer" data-target-id="uvm_table_printer" class=LClass id=link10  >uvm_table_printer</a> - prints the object in a tabular form.</li><li><a href="#uvm_tree_printer" data-target-id="uvm_tree_printer" class=LClass id=link11  >uvm_tree_printer</a> - prints the object in a tree form.</li><li><a href="#uvm_line_printer" data-target-id="uvm_line_printer" class=LClass id=link12  >uvm_line_printer</a> - prints the information on a single line, but uses the same object separators as the tree printer.</li></ul><p>Printers have knobs that you use to control what and how information is printed.&nbsp; These knobs are contained in a separate knob class:</p><ul><li><a href="#uvm_printer_knobs" data-target-id="uvm_printer_knobs" class=LClass id=link13  >uvm_printer_knobs</a> - common printer settings</li></ul><p>For convenience, global instances of each printer type are available for direct reference in your testbenches.</p><ul><li><a href="uvm_object_globals-svh.html#uvm_default_tree_printer" data-target-id="uvm_default_tree_printer" class=LVariable id=link14  >uvm_default_tree_printer</a></li><li><a href="uvm_object_globals-svh.html#uvm_default_line_printer" data-target-id="uvm_default_line_printer" class=LVariable id=link15  >uvm_default_line_printer</a></li><li><a href="uvm_object_globals-svh.html#uvm_default_table_printer" data-target-id="uvm_default_table_printer" class=LVariable id=link16  >uvm_default_table_printer</a></li><li><a href="uvm_object_globals-svh.html#uvm_default_printer" data-target-id="uvm_default_printer" class=LVariable id=link17  >uvm_default_printer</a> (set to default_table_printer by default)</li></ul><p>When <a href="uvm_object-svh.html#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link18  >uvm_object::print</a> and <a href="uvm_object-svh.html#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link19  >uvm_object::sprint</a> are called without specifying a printer, the <a href="uvm_object_globals-svh.html#uvm_default_printer" data-target-id="uvm_default_printer" class=LVariable id=link20  >uvm_default_printer</a> is used.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class="Summary ContentsSummary" id="doc-nav-contents" data-anchor="Contents"><div class="STitle">Contents</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" id=link1  >uvm_printer</a></td><td class=SDescription>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_objects</a> in various formats. </td></tr>
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_printer" data-target-id="uvm_printer" id=link1  >uvm_printer</a></td><td class=SDescription>The uvm_printer class provides an interface for printing <a href="uvm_object-svh.html#uvm_object" data-target-id="uvm_object" class=LClass id=link2  >uvm_objects</a> in various formats. </td></tr>
   <!-- index=19 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" id=link3  >uvm_table_printer</a></td><td class=SDescription>The table printer prints output in a tabular format.</td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_table_printer" data-target-id="uvm_table_printer" id=link3  >uvm_table_printer</a></td><td class=SDescription>The table printer prints output in a tabular format.</td></tr>
   <!-- index=24 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" id=link4  >uvm_tree_printer</a></td><td class=SDescription>By overriding various methods of the <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link5  >uvm_printer</a> super class, the tree printer prints output in a tree format.</td></tr>
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_tree_printer" data-target-id="uvm_tree_printer" id=link4  >uvm_tree_printer</a></td><td class=SDescription>By overriding various methods of the <a href="#uvm_printer" data-target-id="uvm_printer" class=LClass id=link5  >uvm_printer</a> super class, the tree printer prints output in a tree format.</td></tr>
   <!-- index=29 -->
 
-<tr class="SSMethod SMarked"><td class=SEntry><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" id=link6  >uvm_line_printer</a></td><td class=SDescription>The line printer prints output in a line format.</td></tr>
+<tr class="SSMethod SMarked"><td class=SEntry><a href="#uvm_line_printer" data-target-id="uvm_line_printer" id=link6  >uvm_line_printer</a></td><td class=SDescription>The line printer prints output in a line format.</td></tr>
   <!-- index=32 -->
 
-<tr class="SSMethod"><td class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link7  >uvm_printer_knobs</a></td><td class=SDescription>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SSMethod"><td class=SEntry><a href="#uvm_printer_knobs" data-target-id="uvm_printer_knobs" id=link7  >uvm_printer_knobs</a></td><td class=SDescription>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -204,7 +204,7 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Prints an object.&nbsp; Whether the object is recursed depends on a variety of knobs, such as the depth knob; if the current depth is at or below the depth setting, then the object is not recursed.</p><p>By default, the children of <a href="uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link21  >uvm_components</a> are printed.&nbsp; To turn this behavior off, you must set the <a href="uvm_component-svh.html#doc-nav-item-88" data-target-id="doc-nav-item-88" class=LVariable id=link22  >uvm_component::print_enabled</a> bit to 0 for the specific children you do not want automatically printed.</p></div></div></div>
+<div class=CBody><p>Prints an object.&nbsp; Whether the object is recursed depends on a variety of knobs, such as the depth knob; if the current depth is at or below the depth setting, then the object is not recursed.</p><p>By default, the children of <a href="uvm_component-svh.html#uvm_component" data-target-id="uvm_component" class=LClass id=link21  >uvm_components</a> are printed.&nbsp; To turn this behavior off, you must set the <a href="uvm_component-svh.html#uvm_component.print_enabled" data-target-id="uvm_component.print_enabled" class=LVariable id=link22  >uvm_component::print_enabled</a> bit to 0 for the specific children you do not want automatically printed.</p></div></div></div>
 
 
 
@@ -414,7 +414,7 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Prints the header of an array.&nbsp; This function is called before each individual element is printed.&nbsp; <a href="#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link23  >print_array_footer</a> is called to mark the completion of array printing.</p></div></div></div>
+<div class=CBody><p>Prints the header of an array.&nbsp; This function is called before each individual element is printed.&nbsp; <a href="#uvm_printer.print_array_footer" data-target-id="uvm_printer.print_array_footer" class=LMethod id=link23  >print_array_footer</a> is called to mark the completion of array printing.</p></div></div></div>
 
 
 
@@ -432,7 +432,7 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Prints a range using ellipses for values.&nbsp; This method is used when honoring the array knobs for partial printing of large arrays, <a href="#doc-nav-item-42" data-target-id="doc-nav-item-42" class=LVariable id=link24  >uvm_printer_knobs::begin_elements</a> and <a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" class=LVariable id=link25  >uvm_printer_knobs::end_elements</a>.</p><p>This function should be called after begin_elements have been printed and before end_elements have been printed.</p></div></div></div>
+<div class=CBody><p>Prints a range using ellipses for values.&nbsp; This method is used when honoring the array knobs for partial printing of large arrays, <a href="#uvm_printer_knobs.begin_elements" data-target-id="uvm_printer_knobs.begin_elements" class=LVariable id=link24  >uvm_printer_knobs::begin_elements</a> and <a href="#uvm_printer_knobs.end_elements" data-target-id="uvm_printer_knobs.end_elements" class=LVariable id=link25  >uvm_printer_knobs::end_elements</a>.</p><p>This function should be called after begin_elements have been printed and before end_elements have been printed.</p></div></div></div>
 
 
 
@@ -483,7 +483,7 @@
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-19" data-anchor="Summary-doc-nav-item-19"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=19 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-19" data-target-id="doc-nav-item-19" id=link27  >uvm_table_printer</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_table_printer" data-target-id="uvm_table_printer" id=link27  >uvm_table_printer</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The table printer prints output in a tabular format.</td></tr>
 
   <!-- HIERARCHY -->
@@ -502,7 +502,7 @@
     </div>
   </div>
   <div class="hierarchy-lineage-flow">
-    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_table_printer">uvm_table_printer</span></span>
+    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_printer-svh.html#uvm_printer" class="hierarchy-flow-node parent" data-target-id="uvm_printer" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_table_printer">uvm_table_printer</span></span>
   </div>
   
 </div>
@@ -518,16 +518,16 @@
 
   <!-- index=20 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-20" data-target-id="doc-nav-item-20" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_table_printer.Variables" data-target-id="uvm_table_printer.Variables" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=21 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-21" data-target-id="doc-nav-item-21" id=link28  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_table_printer</i>.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_table_printer.new" data-target-id="uvm_table_printer.new" id=link28  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_table_printer</i>.</td></tr>
   <!-- index=22 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-22" data-target-id="doc-nav-item-22" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_table_printer.Methods" data-target-id="uvm_table_printer.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=23 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-23" data-target-id="doc-nav-item-23" id=link29  >emit</a></td><td class=SDescription>Formats the collected information from prior calls to <i>print_*</i> into table format.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_table_printer.emit" data-target-id="uvm_table_printer.emit" id=link29  >emit</a></td><td class=SDescription>Formats the collected information from prior calls to <i>print_*</i> into table format.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -562,7 +562,7 @@
 
 
  <!--CONTENT index=24 -->
-<div class="CClass" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_tree_printer"><div class="CTopic"><h2 class=CTitle><a name="uvm_tree_printer" id="uvm_tree_printer" href="../../src_view/base/uvm_printer.svh.html#L358" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="358">uvm_tree_printer</a></h2><div class=CBody><p>By overriding various methods of the <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link35  >uvm_printer</a> super class, the tree printer prints output in a tree format.</p><p>The following shows sample output from the tree printer.</p><div class="code-block-container">
+<div class="CClass" id="doc-nav-item-24" data-doc-topic="doc-nav-item-24" data-anchor="uvm_tree_printer"><div class="CTopic"><h2 class=CTitle><a name="uvm_tree_printer" id="uvm_tree_printer" href="../../src_view/base/uvm_printer.svh.html#L358" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="358">uvm_tree_printer</a></h2><div class=CBody><p>By overriding various methods of the <a href="#uvm_printer" data-target-id="uvm_printer" class=LClass id=link35  >uvm_printer</a> super class, the tree printer prints output in a tree format.</p><p>The following shows sample output from the tree printer.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -587,8 +587,8 @@
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-24" data-anchor="Summary-doc-nav-item-24"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=24 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" id=link31  >uvm_tree_printer</a></td></tr>
-<tr class=SMain><td colspan=2 class=SWideDescription>By overriding various methods of the <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link32  >uvm_printer</a> super class, the tree printer prints output in a tree format.</td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_tree_printer" data-target-id="uvm_tree_printer" id=link31  >uvm_tree_printer</a></td></tr>
+<tr class=SMain><td colspan=2 class=SWideDescription>By overriding various methods of the <a href="#uvm_printer" data-target-id="uvm_printer" class=LClass id=link32  >uvm_printer</a> super class, the tree printer prints output in a tree format.</td></tr>
 
   <!-- HIERARCHY -->
   <tr class="SHierarchy SIndent1 "><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
@@ -606,7 +606,7 @@
     </div>
   </div>
   <div class="hierarchy-lineage-flow">
-    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_tree_printer">uvm_tree_printer</span></span>
+    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_printer-svh.html#uvm_printer" class="hierarchy-flow-node parent" data-target-id="uvm_printer" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_tree_printer">uvm_tree_printer</span></span>
   </div>
   
   <div class="hierarchy-subclasses-card collapsed">
@@ -614,7 +614,7 @@
       <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       <span>Direct Subclasses (1)</span>
     </div>
-    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-29" class="derived-class-pill" data-target-id="doc-nav-item-29" title="Subclass: uvm_line_printer">uvm_line_printer</a></div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_printer-svh.html#uvm_line_printer" class="derived-class-pill" data-target-id="uvm_line_printer" title="Subclass: uvm_line_printer">uvm_line_printer</a></div>
   </div>
 </div>
   </td></tr>
@@ -629,16 +629,16 @@
 
   <!-- index=25 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-25" data-target-id="doc-nav-item-25" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tree_printer.Variables" data-target-id="uvm_tree_printer.Variables" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=26 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-26" data-target-id="doc-nav-item-26" id=link33  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_tree_printer</i>.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_tree_printer.new" data-target-id="uvm_tree_printer.new" id=link33  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_tree_printer</i>.</td></tr>
   <!-- index=27 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-27" data-target-id="doc-nav-item-27" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tree_printer.Methods" data-target-id="uvm_tree_printer.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=28 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-28" data-target-id="doc-nav-item-28" id=link34  >emit</a></td><td class=SDescription>Formats the collected information from prior calls to <i>print_*</i> into hierarchical tree format.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tree_printer.emit" data-target-id="uvm_tree_printer.emit" id=link34  >emit</a></td><td class=SDescription>Formats the collected information from prior calls to <i>print_*</i> into hierarchical tree format.</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -691,7 +691,7 @@
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-29" data-anchor="Summary-doc-nav-item-29"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=29 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-29" data-target-id="doc-nav-item-29" id=link38  >uvm_line_printer</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_line_printer" data-target-id="uvm_line_printer" id=link38  >uvm_line_printer</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The line printer prints output in a line format.</td></tr>
 
   <!-- HIERARCHY -->
@@ -710,7 +710,7 @@
     </div>
   </div>
   <div class="hierarchy-lineage-flow">
-    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_printer-svh.html#doc-nav-item-24" class="hierarchy-flow-node parent" data-target-id="doc-nav-item-24" title="Base class: uvm_tree_printer">uvm_tree_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_line_printer">uvm_line_printer</span></span>
+    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_printer-svh.html#uvm_printer" class="hierarchy-flow-node parent" data-target-id="uvm_printer" title="Base class: uvm_printer">uvm_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_printer-svh.html#uvm_tree_printer" class="hierarchy-flow-node parent" data-target-id="uvm_tree_printer" title="Base class: uvm_tree_printer">uvm_tree_printer</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_line_printer">uvm_line_printer</span></span>
   </div>
   
 </div>
@@ -726,10 +726,10 @@
 
   <!-- index=30 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-30" data-target-id="doc-nav-item-30" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_line_printer.Variables" data-target-id="uvm_line_printer.Variables" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=31 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-31" data-target-id="doc-nav-item-31" id=link39  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_line_printer</i>. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_line_printer.new" data-target-id="uvm_line_printer.new" id=link39  >new</a></td><td class=SDescription>Creates a new instance of <i>uvm_line_printer</i>. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -744,7 +744,7 @@
  <!--CONTENT index=31 -->
 <div class="CVariable" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_line_printer.new"><div class="CTopic"><h3 class=CTitle><a name="uvm_line_printer.new" id="uvm_line_printer.new" href="../../src_view/base/uvm_printer.svh.html#L315" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="315">new</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-proto-name">new</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Creates a new instance of <i>uvm_line_printer</i>.&nbsp; It differs from the <a href="#doc-nav-item-24" data-target-id="doc-nav-item-24" class=LClass id=link40  >uvm_tree_printer</a> only in that the output contains no line-feeds and indentation.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>Creates a new instance of <i>uvm_line_printer</i>.&nbsp; It differs from the <a href="#uvm_tree_printer" data-target-id="uvm_tree_printer" class=LClass id=link40  >uvm_tree_printer</a> only in that the output contains no line-feeds and indentation.</p></div></div></div>
 
 
 
@@ -756,7 +756,7 @@
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-32" data-anchor="Summary-doc-nav-item-32"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=32 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-item-32" data-target-id="doc-nav-item-32" id=link41  >uvm_printer_knobs</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_printer_knobs" data-target-id="uvm_printer_knobs" id=link41  >uvm_printer_knobs</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The <i>uvm_printer_knobs</i> class defines the printer settings available to all printer subtypes.</td></tr>
   <tr class="SHierarchy SIndent1"><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
 <tr class="SPrototype SIndent1"><td colspan=2 class="SDescription">
@@ -786,79 +786,79 @@
 
   <!-- index=33 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-33" data-target-id="doc-nav-item-33" >Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_printer_knobs.Variables" data-target-id="uvm_printer_knobs.Variables" >Variables</a></td><td class=SDescription></td></tr>
   <!-- index=34 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-34" data-target-id="doc-nav-item-34" id=link42  >header</a></td><td class=SDescription>Indicates whether the <a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LMethod id=link43  >uvm_printer::format_header</a> function should be called when printing an object.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.header" data-target-id="uvm_printer_knobs.header" id=link42  >header</a></td><td class=SDescription>Indicates whether the <a href="#uvm_printer.format_header" data-target-id="uvm_printer.format_header" class=LMethod id=link43  >uvm_printer::format_header</a> function should be called when printing an object.</td></tr>
   <!-- index=35 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-35" data-target-id="doc-nav-item-35" id=link44  >footer</a></td><td class=SDescription>Indicates whether the <a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" class=LMethod id=link45  >uvm_printer::format_footer</a> function should be called when printing an object.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.footer" data-target-id="uvm_printer_knobs.footer" id=link44  >footer</a></td><td class=SDescription>Indicates whether the <a href="#uvm_printer.format_footer" data-target-id="uvm_printer.format_footer" class=LMethod id=link45  >uvm_printer::format_footer</a> function should be called when printing an object.</td></tr>
   <!-- index=36 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-36" data-target-id="doc-nav-item-36" id=link46  >full_name</a></td><td class=SDescription>Indicates whether <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link47  >uvm_printer::adjust_name</a> should print the full name of an identifier or just the leaf name.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.full_name" data-target-id="uvm_printer_knobs.full_name" id=link46  >full_name</a></td><td class=SDescription>Indicates whether <a href="#uvm_printer.adjust_name" data-target-id="uvm_printer.adjust_name" class=LMethod id=link47  >uvm_printer::adjust_name</a> should print the full name of an identifier or just the leaf name.</td></tr>
   <!-- index=37 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-37" data-target-id="doc-nav-item-37" id=link48  >identifier</a></td><td class=SDescription>Indicates whether <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link49  >uvm_printer::adjust_name</a> should print the identifier. </td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.identifier" data-target-id="uvm_printer_knobs.identifier" id=link48  >identifier</a></td><td class=SDescription>Indicates whether <a href="#uvm_printer.adjust_name" data-target-id="uvm_printer.adjust_name" class=LMethod id=link49  >uvm_printer::adjust_name</a> should print the identifier. </td></tr>
   <!-- index=38 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-38" data-target-id="doc-nav-item-38" id=link50  >type_name</a></td><td class=SDescription>Controls whether to print a field&rsquo;s type name.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.type_name" data-target-id="uvm_printer_knobs.type_name" id=link50  >type_name</a></td><td class=SDescription>Controls whether to print a field&rsquo;s type name.</td></tr>
   <!-- index=39 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-39" data-target-id="doc-nav-item-39" id=link51  >size</a></td><td class=SDescription>Controls whether to print a field&rsquo;s size.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.size" data-target-id="uvm_printer_knobs.size" id=link51  >size</a></td><td class=SDescription>Controls whether to print a field&rsquo;s size.</td></tr>
   <!-- index=40 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-40" data-target-id="doc-nav-item-40" id=link52  >depth</a></td><td class=SDescription>Indicates how deep to recurse when printing objects. </td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.depth" data-target-id="uvm_printer_knobs.depth" id=link52  >depth</a></td><td class=SDescription>Indicates how deep to recurse when printing objects. </td></tr>
   <!-- index=41 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-41" data-target-id="doc-nav-item-41" id=link53  >reference</a></td><td class=SDescription>Controls whether to print a unique reference ID for object handles. </td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.reference" data-target-id="uvm_printer_knobs.reference" id=link53  >reference</a></td><td class=SDescription>Controls whether to print a unique reference ID for object handles. </td></tr>
   <!-- index=42 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-42" data-target-id="doc-nav-item-42" id=link54  >begin_elements</a></td><td class=SDescription>Defines the number of elements at the head of a list to print. </td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.begin_elements" data-target-id="uvm_printer_knobs.begin_elements" id=link54  >begin_elements</a></td><td class=SDescription>Defines the number of elements at the head of a list to print. </td></tr>
   <!-- index=43 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-43" data-target-id="doc-nav-item-43" id=link55  >end_elements</a></td><td class=SDescription>This defines the number of elements at the end of a list that should be printed.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.end_elements" data-target-id="uvm_printer_knobs.end_elements" id=link55  >end_elements</a></td><td class=SDescription>This defines the number of elements at the end of a list that should be printed.</td></tr>
   <!-- index=44 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-44" data-target-id="doc-nav-item-44" id=link56  >prefix</a></td><td class=SDescription>Specifies the string prepended to each output line</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.prefix" data-target-id="uvm_printer_knobs.prefix" id=link56  >prefix</a></td><td class=SDescription>Specifies the string prepended to each output line</td></tr>
   <!-- index=45 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-45" data-target-id="doc-nav-item-45" id=link57  >indent</a></td><td class=SDescription>This knob specifies the number of spaces to use for level indentation. </td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.indent" data-target-id="uvm_printer_knobs.indent" id=link57  >indent</a></td><td class=SDescription>This knob specifies the number of spaces to use for level indentation. </td></tr>
   <!-- index=46 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-46" data-target-id="doc-nav-item-46" id=link58  >show_root</a></td><td class=SDescription>This setting indicates whether or not the initial object that is printed (when current depth is 0) prints the full path name. </td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.show_root" data-target-id="uvm_printer_knobs.show_root" id=link58  >show_root</a></td><td class=SDescription>This setting indicates whether or not the initial object that is printed (when current depth is 0) prints the full path name. </td></tr>
   <!-- index=47 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-47" data-target-id="doc-nav-item-47" id=link59  >mcd</a></td><td class=SDescription>This is a file descriptor, or multi-channel descriptor, that specifies where the print output should be directed.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.mcd" data-target-id="uvm_printer_knobs.mcd" id=link59  >mcd</a></td><td class=SDescription>This is a file descriptor, or multi-channel descriptor, that specifies where the print output should be directed.</td></tr>
   <!-- index=48 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-48" data-target-id="doc-nav-item-48" id=link60  >separator</a></td><td class=SDescription>For tree printers only, determines the opening and closing separators used for nested objects.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.separator" data-target-id="uvm_printer_knobs.separator" id=link60  >separator</a></td><td class=SDescription>For tree printers only, determines the opening and closing separators used for nested objects.</td></tr>
   <!-- index=49 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-49" data-target-id="doc-nav-item-49" id=link61  >show_radix</a></td><td class=SDescription>Indicates whether the radix string (&lsquo;h, and so on) should be prepended to an integral value when one is printed.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.show_radix" data-target-id="uvm_printer_knobs.show_radix" id=link61  >show_radix</a></td><td class=SDescription>Indicates whether the radix string (&lsquo;h, and so on) should be prepended to an integral value when one is printed.</td></tr>
   <!-- index=50 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-50" data-target-id="doc-nav-item-50" id=link62  >default_radix</a></td><td class=SDescription>This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link63  >uvm_printer::print_field</a> or <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LMethod id=link64  >uvm_printer::print_field_int</a> methods.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.default_radix" data-target-id="uvm_printer_knobs.default_radix" id=link62  >default_radix</a></td><td class=SDescription>This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the <a href="#uvm_printer.print_field" data-target-id="uvm_printer.print_field" class=LMethod id=link63  >uvm_printer::print_field</a> or <a href="#uvm_printer.print_field_int" data-target-id="uvm_printer.print_field_int" class=LMethod id=link64  >uvm_printer::print_field_int</a> methods.</td></tr>
   <!-- index=51 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-51" data-target-id="doc-nav-item-51" id=link65  >dec_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_DEC" class=LConstant id=link66  >UVM_DEC</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.dec_radix" data-target-id="uvm_printer_knobs.dec_radix" id=link65  >dec_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_DEC" class=LConstant id=link66  >UVM_DEC</a> is used for the radix of the integral object.</td></tr>
   <!-- index=52 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-52" data-target-id="doc-nav-item-52" id=link67  >bin_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_BIN" class=LConstant id=link68  >UVM_BIN</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.bin_radix" data-target-id="uvm_printer_knobs.bin_radix" id=link67  >bin_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_BIN" class=LConstant id=link68  >UVM_BIN</a> is used for the radix of the integral object.</td></tr>
   <!-- index=53 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-53" data-target-id="doc-nav-item-53" id=link69  >oct_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_OCT" class=LConstant id=link70  >UVM_OCT</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.oct_radix" data-target-id="uvm_printer_knobs.oct_radix" id=link69  >oct_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_OCT" class=LConstant id=link70  >UVM_OCT</a> is used for the radix of the integral object.</td></tr>
   <!-- index=54 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-54" data-target-id="doc-nav-item-54" id=link71  >unsigned_radix</a></td><td class=SDescription>This is the string which should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_UNSIGNED" class=LConstant id=link72  >UVM_UNSIGNED</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.unsigned_radix" data-target-id="uvm_printer_knobs.unsigned_radix" id=link71  >unsigned_radix</a></td><td class=SDescription>This is the string which should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_UNSIGNED" class=LConstant id=link72  >UVM_UNSIGNED</a> is used for the radix of the integral object.</td></tr>
   <!-- index=55 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-55" data-target-id="doc-nav-item-55" id=link73  >hex_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_HEX" class=LConstant id=link74  >UVM_HEX</a> is used for the radix of the integral object.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_printer_knobs.hex_radix" data-target-id="uvm_printer_knobs.hex_radix" id=link73  >hex_radix</a></td><td class=SDescription>This string should be prepended to the value of an integral type when a radix of <a href="uvm_object_globals-svh.html#UVM_HEX" class=LConstant id=link74  >UVM_HEX</a> is used for the radix of the integral object.</td></tr>
   <!-- index=56 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-56" data-target-id="doc-nav-item-56" >Methods</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_printer_knobs.Methods" data-target-id="uvm_printer_knobs.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=57 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-57" data-target-id="doc-nav-item-57" id=link75  >get_radix_str</a></td><td class=SDescription>Converts the radix from an enumerated to a printable radix according to the radix printing knobs (bin_radix, and so on).</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_printer_knobs.get_radix_str" data-target-id="uvm_printer_knobs.get_radix_str" id=link75  >get_radix_str</a></td><td class=SDescription>Converts the radix from an enumerated to a printable radix according to the radix printing knobs (bin_radix, and so on).</td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -873,7 +873,7 @@
  <!--CONTENT index=34 -->
 <div class="CVariable" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_printer_knobs.header"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.header" id="uvm_printer_knobs.header" href="../../src_view/base/uvm_printer.svh.html#L423" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="423">header</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-type">bit</span> <span class="sv-ident">header</span> <span class="sv-op">=</span><span class="sv-ident"> 1
-  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the <a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" class=LMethod id=link76  >uvm_printer::format_header</a> function should be called when printing an object.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the <a href="#uvm_printer.format_header" data-target-id="uvm_printer.format_header" class=LMethod id=link76  >uvm_printer::format_header</a> function should be called when printing an object.</p></div></div></div>
 
 
 
@@ -881,7 +881,7 @@
  <!--CONTENT index=35 -->
 <div class="CVariable" id="doc-nav-item-35" data-doc-topic="doc-nav-item-35" data-anchor="uvm_printer_knobs.footer"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.footer" id="uvm_printer_knobs.footer" href="../../src_view/base/uvm_printer.svh.html#L431" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="431">footer</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-type">bit</span> <span class="sv-ident">footer</span> <span class="sv-op">=</span><span class="sv-ident"> 1
-  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the <a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" class=LMethod id=link77  >uvm_printer::format_footer</a> function should be called when printing an object.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether the <a href="#uvm_printer.format_footer" data-target-id="uvm_printer.format_footer" class=LMethod id=link77  >uvm_printer::format_footer</a> function should be called when printing an object.</p></div></div></div>
 
 
 
@@ -889,7 +889,7 @@
  <!--CONTENT index=36 -->
 <div class="CVariable" id="doc-nav-item-36" data-doc-topic="doc-nav-item-36" data-anchor="uvm_printer_knobs.full_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.full_name" id="uvm_printer_knobs.full_name" href="../../src_view/base/uvm_printer.svh.html#L439" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="439">full_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-type">bit</span> <span class="sv-ident">full_name</span> <span class="sv-op">=</span><span class="sv-ident"> 0
-  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link78  >uvm_printer::adjust_name</a> should print the full name of an identifier or just the leaf name.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether <a href="#uvm_printer.adjust_name" data-target-id="uvm_printer.adjust_name" class=LMethod id=link78  >uvm_printer::adjust_name</a> should print the full name of an identifier or just the leaf name.</p></div></div></div>
 
 
 
@@ -897,7 +897,7 @@
  <!--CONTENT index=37 -->
 <div class="CVariable" id="doc-nav-item-37" data-doc-topic="doc-nav-item-37" data-anchor="uvm_printer_knobs.identifier"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.identifier" id="uvm_printer_knobs.identifier" href="../../src_view/base/uvm_printer.svh.html#L447" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="447">identifier</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-type">bit</span> <span class="sv-ident">identifier</span> <span class="sv-op">=</span><span class="sv-ident"> 1
-  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether <a href="#doc-nav-item-15" data-target-id="doc-nav-item-15" class=LMethod id=link79  >uvm_printer::adjust_name</a> should print the identifier.&nbsp; This is useful in cases where you just want the values of an object, but no identifiers.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>Indicates whether <a href="#uvm_printer.adjust_name" data-target-id="uvm_printer.adjust_name" class=LMethod id=link79  >uvm_printer::adjust_name</a> should print the identifier.&nbsp; This is useful in cases where you just want the values of an object, but no identifiers.</p></div></div></div>
 
 
 
@@ -1001,7 +1001,7 @@
  <!--CONTENT index=50 -->
 <div class="CVariable" id="doc-nav-item-50" data-doc-topic="doc-nav-item-50" data-anchor="uvm_printer_knobs.default_radix"><div class="CTopic"><h3 class=CTitle><a name="uvm_printer_knobs.default_radix" id="uvm_printer_knobs.default_radix" href="../../src_view/base/uvm_printer.svh.html#L552" class="src-code-link" data-src-file="base/uvm_printer.svh" data-src-line="552">default_radix</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_radix_enum</span> <span class="sv-ident">default_radix</span> <span class="sv-op">=</span> <span class="sv-constant">UVM_HEX</span>
-  </td></tr></table></blockquote><div class=CBody><p>This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link80  >uvm_printer::print_field</a> or <a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" class=LMethod id=link81  >uvm_printer::print_field_int</a> methods.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>This knob sets the default radix to use for integral values when no radix enum is explicitly supplied to the <a href="#uvm_printer.print_field" data-target-id="uvm_printer.print_field" class=LMethod id=link80  >uvm_printer::print_field</a> or <a href="#uvm_printer.print_field_int" data-target-id="uvm_printer.print_field_int" class=LMethod id=link81  >uvm_printer::print_field_int</a> methods.</p></div></div></div>
 
 
 

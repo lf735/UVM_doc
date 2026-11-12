@@ -53,18 +53,18 @@
     <a href="../../examples_view/phasing/run_test.html" class="example-callout-link" data-example-url="../../examples_view/phasing/run_test.html" title="Open Dynamic Test Selection">Dynamic Test Selection</a>
   </div>
   <span class="example-callout-badge">Interactive Studio</span>
-</div><div class=CBody><p>The <i>uvm_root</i> class serves as the implicit top-level and phase controller for all UVM components.&nbsp; Users do not directly instantiate <i>uvm_root</i>.&nbsp; The UVM automatically creates a single instance of <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link13  >uvm_root</a> that users can access via the global (uvm_pkg-scope) variable, <i>uvm_top</i>.</p><figure class="doc-diagram-card">
+</div><div class=CBody><p>The <i>uvm_root</i> class serves as the implicit top-level and phase controller for all UVM components.&nbsp; Users do not directly instantiate <i>uvm_root</i>.&nbsp; The UVM automatically creates a single instance of <a href="#uvm_root" data-target-id="uvm_root" class=LClass id=link13  >uvm_root</a> that users can access via the global (uvm_pkg-scope) variable, <i>uvm_top</i>.</p><figure class="doc-diagram-card">
   <div class="doc-diagram-body">
     <img src="../../images/uvm_ref_root.gif" class="doc-diagram-img" alt="UVM Ref Root" title="Click to zoom" loading="lazy">
   </div>
   <figcaption class="doc-diagram-caption">UVM Ref Root</figcaption>
-</figure><p>The <i>uvm_top</i> instance of <i>uvm_root</i> plays several key roles in the UVM.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Implicit top-level</td><td class=CDLDescription>The <i>uvm_top</i> serves as an implicit top-level component.&nbsp; Any component whose parent is specified as <i>null</i> becomes a child of <i>uvm_top</i>.&nbsp; Thus, all UVM components in simulation are descendants of <i>uvm_top</i>.</td></tr><tr><td class=CDLEntry>Phase control</td><td class=CDLDescription><i>uvm_top</i> manages the phasing for all components.</td></tr><tr><td class=CDLEntry>Search</td><td class=CDLDescription>Use <i>uvm_top</i> to search for components based on their hierarchical name.&nbsp; See <a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LMethod id=link14  >find</a> and <a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LMethod id=link15  >find_all</a>.</td></tr><tr><td class=CDLEntry>Report configuration</td><td class=CDLDescription>Use <i>uvm_top</i> to globally configure report verbosity, log files, and actions.&nbsp; For example, <i>uvm_top.set_report_verbosity_level_hier(UVM_FULL)</i> would set full verbosity for all components in simulation.</td></tr><tr><td class=CDLEntry>Global reporter</td><td class=CDLDescription>Because <i>uvm_top</i> is globally accessible (in uvm_pkg scope), UVM&rsquo;s reporting mechanism is accessible from anywhere outside <i>uvm_component</i>, such as in modules and sequences.&nbsp; See <a href="uvm_globals-svh.html#doc-nav-item-9" data-target-id="doc-nav-item-9" class=LMethod id=link16  >uvm_report_error</a>, <a href="uvm_globals-svh.html#doc-nav-item-8" data-target-id="doc-nav-item-8" class=LMethod id=link17  >uvm_report_warning</a>, and other global methods.</td></tr></table><p>The <i>uvm_top</i> instance checks during the end_of_elaboration phase if any errors have been generated so far.&nbsp; If errors are found a UVM_FATAL error is being generated as result so that the simulation will not continue to the start_of_simulation_phase.</p>
+</figure><p>The <i>uvm_top</i> instance of <i>uvm_root</i> plays several key roles in the UVM.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>Implicit top-level</td><td class=CDLDescription>The <i>uvm_top</i> serves as an implicit top-level component.&nbsp; Any component whose parent is specified as <i>null</i> becomes a child of <i>uvm_top</i>.&nbsp; Thus, all UVM components in simulation are descendants of <i>uvm_top</i>.</td></tr><tr><td class=CDLEntry>Phase control</td><td class=CDLDescription><i>uvm_top</i> manages the phasing for all components.</td></tr><tr><td class=CDLEntry>Search</td><td class=CDLDescription>Use <i>uvm_top</i> to search for components based on their hierarchical name.&nbsp; See <a href="#uvm_root.find" data-target-id="uvm_root.find" class=LMethod id=link14  >find</a> and <a href="#uvm_root.find_all" data-target-id="uvm_root.find_all" class=LMethod id=link15  >find_all</a>.</td></tr><tr><td class=CDLEntry>Report configuration</td><td class=CDLDescription>Use <i>uvm_top</i> to globally configure report verbosity, log files, and actions.&nbsp; For example, <i>uvm_top.set_report_verbosity_level_hier(UVM_FULL)</i> would set full verbosity for all components in simulation.</td></tr><tr><td class=CDLEntry>Global reporter</td><td class=CDLDescription>Because <i>uvm_top</i> is globally accessible (in uvm_pkg scope), UVM&rsquo;s reporting mechanism is accessible from anywhere outside <i>uvm_component</i>, such as in modules and sequences.&nbsp; See <a href="uvm_globals-svh.html#uvm_report_error" data-target-id="uvm_report_error" class=LMethod id=link16  >uvm_report_error</a>, <a href="uvm_globals-svh.html#uvm_report_warning" data-target-id="uvm_report_warning" class=LMethod id=link17  >uvm_report_warning</a>, and other global methods.</td></tr></table><p>The <i>uvm_top</i> instance checks during the end_of_elaboration phase if any errors have been generated so far.&nbsp; If errors are found a UVM_FATAL error is being generated as result so that the simulation will not continue to the start_of_simulation_phase.</p>
 
 <!--START_ND_SUMMARY index=0-->
 <div class="Summary ClassSummary" id="doc-nav-summary" data-anchor="Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
   <!-- index=0 -->
 
-<tr class="SClass"><td colspan=2 class=SEntry><a href="#doc-nav-main" data-target-id="doc-nav-main" >uvm_root</a></td></tr>
+<tr class="SClass"><td colspan=2 class=SEntry><a href="#uvm_root" data-target-id="uvm_root" >uvm_root</a></td></tr>
 <tr class=SMain><td colspan=2 class=SWideDescription>The <i>uvm_root</i> class serves as the implicit top-level and phase controller for all UVM components. </td></tr>
 <tr class="SHierarchy SIndent1"><td colspan=2 class="SEntry SIndent1">Class Hierarchy</td></tr>
 <tr class="SPrototype SIndent1"><td colspan=2 class="SDescription">
@@ -81,53 +81,53 @@
     </div>
   </div>
   <div class="hierarchy-lineage-flow">
-    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_misc-svh.html#doc-nav-item-1" class="hierarchy-flow-node parent" data-target-id="doc-nav-item-1" title="Base class: uvm_void">uvm_void</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_object-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_object">uvm_object</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_report_object-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_report_object">uvm_report_object</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_component-svh.html#doc-nav-main" class="hierarchy-flow-node parent" data-target-id="doc-nav-main" title="Base class: uvm_component">uvm_component</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_root">uvm_root</span></span>
+    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_misc-svh.html#uvm_void" class="hierarchy-flow-node parent" data-target-id="uvm_void" title="Base class: uvm_void">uvm_void</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_object-svh.html#uvm_object" class="hierarchy-flow-node parent" data-target-id="uvm_object" title="Base class: uvm_object">uvm_object</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_report_object-svh.html#uvm_report_object" class="hierarchy-flow-node parent" data-target-id="uvm_report_object" title="Base class: uvm_report_object">uvm_report_object</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_component-svh.html#uvm_component" class="hierarchy-flow-node parent" data-target-id="uvm_component" title="Base class: uvm_component">uvm_component</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_root">uvm_root</span></span>
   </div>
   
 </div>
 </td></tr>
   <!-- index=1 -->
 
-<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#doc-nav-item-1" data-target-id="doc-nav-item-1" id=link1  >get()</a></td><td class=SDescription>Static accessor for <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link2  >uvm_root</a>.</td></tr>
+<tr class="SMethod SIndent1 SMarked"><td class=SEntry><a href="#uvm_root.get" data-target-id="uvm_root.get" id=link1  >get()</a></td><td class=SDescription>Static accessor for <a href="#uvm_root" data-target-id="uvm_root" class=LClass id=link2  >uvm_root</a>.</td></tr>
   <!-- index=2 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-2" data-target-id="doc-nav-item-2" >Simulation Control</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_root.Simulation_Control" data-target-id="uvm_root.Simulation_Control" >Simulation Control</a></td><td class=SDescription></td></tr>
   <!-- index=3 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" id=link3  >run_test</a></td><td class=SDescription>Phases all components through all registered phases. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_root.run_test" data-target-id="uvm_root.run_test" id=link3  >run_test</a></td><td class=SDescription>Phases all components through all registered phases. </td></tr>
   <!-- index=4 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-4" data-target-id="doc-nav-item-4" id=link4  >die</a></td><td class=SDescription>This method is called by the report server if a report reaches the maximum quit count or has a UVM_EXIT action associated with it, e.g., as with fatal errors.</td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_root.die" data-target-id="uvm_root.die" id=link4  >die</a></td><td class=SDescription>This method is called by the report server if a report reaches the maximum quit count or has a UVM_EXIT action associated with it, e.g., as with fatal errors.</td></tr>
   <!-- index=5 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-5" data-target-id="doc-nav-item-5" id=link5  >set_timeout</a></td><td class=SDescription>Specifies the timeout for the simulation. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_root.set_timeout" data-target-id="uvm_root.set_timeout" id=link5  >set_timeout</a></td><td class=SDescription>Specifies the timeout for the simulation. </td></tr>
   <!-- index=6 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-6" data-target-id="doc-nav-item-6" id=link6  >finish_on_completion</a></td><td class=SDescription>If set, then run_test will call $finish after all phases are executed.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_root.finish_on_completion" data-target-id="uvm_root.finish_on_completion" id=link6  >finish_on_completion</a></td><td class=SDescription>If set, then run_test will call $finish after all phases are executed.</td></tr>
   <!-- index=7 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-7" data-target-id="doc-nav-item-7" >Topology</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_root.Topology" data-target-id="uvm_root.Topology" >Topology</a></td><td class=SDescription></td></tr>
   <!-- index=8 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-8" data-target-id="doc-nav-item-8" id=link7  >top_levels</a></td><td class=SDescription>This variable is a list of all of the top level components in UVM. </td></tr>
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_root.top_levels" data-target-id="uvm_root.top_levels" id=link7  >top_levels</a></td><td class=SDescription>This variable is a list of all of the top level components in UVM. </td></tr>
   <!-- index=9 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-9" data-target-id="doc-nav-item-9" id=link8  >find</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_root.find" data-target-id="uvm_root.find" id=link8  >find</a></td><td class=SDescription></td></tr>
   <!-- index=10 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-10" data-target-id="doc-nav-item-10" id=link9  >find_all</a></td><td class=SDescription>Returns the component handle (find) or list of components handles (find_all) matching a given string. </td></tr>
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_root.find_all" data-target-id="uvm_root.find_all" id=link9  >find_all</a></td><td class=SDescription>Returns the component handle (find) or list of components handles (find_all) matching a given string. </td></tr>
   <!-- index=11 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-11" data-target-id="doc-nav-item-11" id=link10  >print_topology</a></td><td class=SDescription>Print the verification environment&rsquo;s component topology. </td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_root.print_topology" data-target-id="uvm_root.print_topology" id=link10  >print_topology</a></td><td class=SDescription>Print the verification environment&rsquo;s component topology. </td></tr>
   <!-- index=12 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#doc-nav-item-12" data-target-id="doc-nav-item-12" id=link11  >enable_print_topology</a></td><td class=SDescription>If set, then the entire testbench topology is printed just after completion of the end_of_elaboration phase.</td></tr>
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_root.enable_print_topology" data-target-id="uvm_root.enable_print_topology" id=link11  >enable_print_topology</a></td><td class=SDescription>If set, then the entire testbench topology is printed just after completion of the end_of_elaboration phase.</td></tr>
   <!-- index=13 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-item-13" data-target-id="doc-nav-item-13" >Global Variables</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_root.Global_Variables" data-target-id="uvm_root.Global_Variables" >Global Variables</a></td><td class=SDescription></td></tr>
   <!-- index=14 -->
 
-<tr class="SVariable SIndent2"><td class=SEntry><a href="#doc-nav-item-14" data-target-id="doc-nav-item-14" id=link12  >uvm_top</a></td><td class=SDescription>This is the top-level that governs phase execution and provides component search interface. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_root.uvm_top" data-target-id="uvm_root.uvm_top" id=link12  >uvm_top</a></td><td class=SDescription>This is the top-level that governs phase execution and provides component search interface. </td></tr></table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -136,7 +136,7 @@
  <!--CONTENT index=1 -->
 <div class="CMethod" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_root.get"><div class="CTopic"><h3 class=CTitle><a name="uvm_root.get" id="uvm_root.get" href="../../src_view/base/uvm_root.svh.html#L324" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="324">get()</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">static</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_root</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Static accessor for <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link18  >uvm_root</a>.</p><p>The static accessor is provided as a convenience wrapper around retrieving the root via the <a href="uvm_coreservice-svh.html#doc-nav-item-10" data-target-id="doc-nav-item-10" class=LMethod id=link19  >uvm_coreservice_t::get_root</a> method.</p><div class="code-block-container">
+  </td></tr></table></blockquote><div class=CBody><p>Static accessor for <a href="#uvm_root" data-target-id="uvm_root" class=LClass id=link18  >uvm_root</a>.</p><p>The static accessor is provided as a convenience wrapper around retrieving the root via the <a href="uvm_coreservice-svh.html#uvm_coreservice_t.get_root" data-target-id="uvm_coreservice_t.get_root" class=LMethod id=link19  >uvm_coreservice_t::get_root</a> method.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -188,7 +188,7 @@
  <!--CONTENT index=4 -->
 <div class="CMethod" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_root.die"><div class="CTopic"><h3 class=CTitle><a name="uvm_root.die" id="uvm_root.die" href="../../src_view/base/uvm_root.svh.html#L129" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="129">die</a></h3><div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_report_object">Overrides uvm_report_object</span></div>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">die</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>This method is called by the report server if a report reaches the maximum quit count or has a UVM_EXIT action associated with it, e.g., as with fatal errors.</p><p>Calls the <a href="uvm_component-svh.html#doc-nav-item-75" data-target-id="doc-nav-item-75" class=LMethod id=link20  >uvm_component::pre_abort()</a> method on the entire <a href="uvm_component-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link21  >uvm_component</a> hierarchy in a bottom-up fashion.&nbsp; It then calls <a href="uvm_report_server-svh.html#doc-nav-item-18" data-target-id="doc-nav-item-18" class=LMethod id=link22  >uvm_report_server::report_summarize</a> and terminates the simulation with <i>$finish</i>.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>This method is called by the report server if a report reaches the maximum quit count or has a UVM_EXIT action associated with it, e.g., as with fatal errors.</p><p>Calls the <a href="uvm_component-svh.html#uvm_component.pre_abort" data-target-id="uvm_component.pre_abort" class=LMethod id=link20  >uvm_component::pre_abort()</a> method on the entire <a href="uvm_component-svh.html#uvm_component" data-target-id="uvm_component" class=LClass id=link21  >uvm_component</a> hierarchy in a bottom-up fashion.&nbsp; It then calls <a href="uvm_report_server-svh.html#uvm_report_server.report_summarize" data-target-id="uvm_report_server.report_summarize" class=LMethod id=link22  >uvm_report_server::report_summarize</a> and terminates the simulation with <i>$finish</i>.</p></div></div></div>
 
 
 
@@ -210,7 +210,7 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Specifies the timeout for the simulation.&nbsp; Default is <a href="../macros/uvm_global_defines-svh.html#doc-nav-item-5" data-target-id="doc-nav-item-5" class=LMacro id=link23  >`UVM_DEFAULT_TIMEOUT</a></p><p>The timeout is simply the maximum absolute simulation time allowed before a <i>FATAL</i> occurs.&nbsp;  If the timeout is set to 20ns, then the simulation must end before 20ns, or a <i>FATAL</i> timeout will occur.</p><p>This is provided so that the user can prevent the simulation from potentially consuming too many resources (Disk, Memory, CPU, etc) when the testbench is essentially hung.</p></div></div></div>
+<div class=CBody><p>Specifies the timeout for the simulation.&nbsp; Default is <a href="../macros/uvm_global_defines-svh.html#`UVM_DEFAULT_TIMEOUT" data-target-id="`UVM_DEFAULT_TIMEOUT" class=LMacro id=link23  >`UVM_DEFAULT_TIMEOUT</a></p><p>The timeout is simply the maximum absolute simulation time allowed before a <i>FATAL</i> occurs.&nbsp;  If the timeout is set to 20ns, then the simulation must end before 20ns, or a <i>FATAL</i> timeout will occur.</p><p>This is provided so that the user can prevent the simulation from potentially consuming too many resources (Disk, Memory, CPU, etc) when the testbench is essentially hung.</p></div></div></div>
 
 
 
@@ -232,7 +232,7 @@
  <!--CONTENT index=8 -->
 <div class="CVariable" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_root.top_levels"><div class="CTopic"><h3 class=CTitle><a name="uvm_root.top_levels" id="uvm_root.top_levels" href="../../src_view/base/uvm_root.svh.html#L175" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="175">top_levels</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">top_levels</span><span class="sv-ident">[$]
-  </span></td></tr></table></blockquote><div class=CBody><p>This variable is a list of all of the top level components in UVM.&nbsp; It includes the uvm_test_top component that is created by <a href="#doc-nav-item-3" data-target-id="doc-nav-item-3" class=LMethod id=link24  >run_test</a> as well as any other top level components that have been instantiated anywhere in the hierarchy.</p></div></div></div>
+  </span></td></tr></table></blockquote><div class=CBody><p>This variable is a list of all of the top level components in UVM.&nbsp; It includes the uvm_test_top component that is created by <a href="#uvm_root.run_test" data-target-id="uvm_root.run_test" class=LMethod id=link24  >run_test</a> as well as any other top level components that have been instantiated anywhere in the hierarchy.</p></div></div></div>
 
 
 
@@ -295,7 +295,7 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Print the verification environment&rsquo;s component topology.&nbsp; The <i>printer</i> is a <a href="uvm_printer-svh.html#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link25  >uvm_printer</a> object that controls the format of the topology printout; a <i>null</i> printer prints with the default output.</p></div></div></div>
+<div class=CBody><p>Print the verification environment&rsquo;s component topology.&nbsp; The <i>printer</i> is a <a href="uvm_printer-svh.html#uvm_printer" data-target-id="uvm_printer" class=LClass id=link25  >uvm_printer</a> object that controls the format of the topology printout; a <i>null</i> printer prints with the default output.</p></div></div></div>
 
 
 
@@ -317,7 +317,7 @@
  <!--CONTENT index=14 -->
 <div class="CVariable" id="doc-nav-item-14" data-doc-topic="doc-nav-item-14" data-anchor="uvm_root.uvm_top"><div class="CTopic"><h3 class=CTitle><a name="uvm_root.uvm_top" id="uvm_root.uvm_top" href="../../src_view/base/uvm_root.svh.html#L315" class="src-code-link" data-src-file="base/uvm_root.svh" data-src-line="315">uvm_top</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">const</span> <span class="sv-uvm-type">uvm_root</span> <span class="sv-uvm-type">uvm_top</span> <span class="sv-op">=</span> <span class="sv-uvm-type">uvm_root</span><span class="sv-ident">::</span><span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>This is the top-level that governs phase execution and provides component search interface.&nbsp; See <a href="#doc-nav-main" data-target-id="doc-nav-main" class=LClass id=link26  >uvm_root</a> for more information.</p></div></div></div>
+  </td></tr></table></blockquote><div class=CBody><p>This is the top-level that governs phase execution and provides component search interface.&nbsp; See <a href="#uvm_root" data-target-id="uvm_root" class=LClass id=link26  >uvm_root</a> for more information.</p></div></div></div>
 
 </div><!--Content-->
 

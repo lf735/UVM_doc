@@ -48,7 +48,8 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | | **Bannière "View Source" Discrète** | En-tête injecté avec bouton compact iconique (`.banner-icon-btn`) et badge de ligne, discret et sans bouton verbeux encombrant. |
 | | **Nettoyage des En-têtes Légaux** | Élimination totale des mentions parasites de copyright dans les descriptions de classes et méthodes orphelines. |
 | | **Topologie & Hiérarchie de Classes In-Situ (`class-hierarchy-widget`)** | Remplacement in-situ au même endroit de l'ancien bloc statique Natural Docs (`<div class=ClassHierarchy>`) dans le tableau Summary. Chaîne ascendante navigable (`uvm_void` ➔ ... ➔ classe courante), sous-classes directes repliables (`.hierarchy-subclasses-card`), tags de rôle architectural et badges de métriques sans duplication sur les en-têtes de sections multi-classes. |
-| | **Matrice Interactive des Méthodes Héritées** | Accordéon interactif situé sous le sommaire de chaque classe, regroupant l'ensemble des méthodes héritées par classe ancêtre avec pastilles cliquables menant directement à la documentation ou à l'implémentation de la classe d'origine. |
+| | **Matrice Interactive des Méthodes Héritées** | Accordéon interactif situé sous le sommaire de chaque classe, regroupant l'ensemble des méthodes héritées par classe ancêtre (de `uvm_void` jusqu'au parent direct). Filtre de recherche temps réel (`.inherited-filter-input`), badges de comptage de méthodes par ancêtre, signatures complètes, types de retour, listes d'arguments et pastilles cliquables menant directement à la documentation ou à l'implémentation de la classe d'origine. |
+| | **Auto-Expansion des Zones Rétractées sur Navigation d'Ancre** | Dépliement automatique et récursif de tous les conteneurs ancêtres repliés (`.inherited-methods-section`, `.derived-classes-card`, `<details>`, conteneurs `.collapsed`, attributs `aria-expanded="false"`, éléments `display: none`) lors d'une navigation par ancre (`#doc-nav-item-X`, clic sur symbole, ou message `postMessage`). Séquence de réessais multi-échéances (0, 80ms, 120ms, 320ms, 600ms) pour garantir la stabilité du défilement après chaque reflow du navigateur. |
 | | **Routage Précis des Liens Dérivés** | Redirection vers l'ancre exacte de la classe au sein de la page cible (`#doc-nav-item-X`) au lieu du haut de page générique. |
 | | **Bouton Copie d'Ancre au Survol** | Icône de chaîne de lien apparaissant au survol de chaque titre (`.doc-anchor-link-btn`) copiant le lien direct avec feedback "Link copied!". |
 | | **Protection Anti-Récursion Iframe** | Liens de fil d'Ariane (`doc-breadcrumbs`) configurés avec `target="_top"` et interceptés en JS pour éviter toute duplication en abyme du portail dans une sous-iframe. |
@@ -64,6 +65,7 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | **Exemples Interactifs (`examples_view`)** | **Source Specification & Design Notes** | Extraction automatique des commentaires introductifs (`About:`, `Title:`, `Walk through:`) et des fichiers `README.txt` sur les 39 suites avec suppression des en-têtes Apache 2.0, formatage NaturalDocs → HTML, et badge `Source: <fichier>` cliquable basculant le Code Studio sur le fichier d'origine. |
 | | **Topologie & Architecture** | Grille de topologie testbench visuelle (`.topo-grid`) mettant en valeur dynamiquement les composants sollicités à chaque étape du scénario. |
 | | **Studio Multi-Fichiers en 2 Barres** | Barre d'outils supérieure (`.studio-toolbar` : saut direct de fichier, recherche Ctrl+F, Monaco IDE, copie de code, téléchargement de fichier brut, copie de lien) + Barre d'onglets de fichiers pleine largeur inférieure avec défilement horizontal fluide et surlignage syntaxique multi-langages (SV, C/DPI, Makefiles). |
+| | **Symboles UVM Cliquables Enrichis & Popover de Désambiguïsation** | Coloration syntaxique haute fidélité (`syntax_highlighter.py`) marquant les macros, types, méthodes et constantes UVM (`clickable-uvm-sym`). Inférence statique de contexte déduisant la classe propriétaire (`data-sym-owner`, `data-sym-base`) sur les variables typées (ex. `phase.raise_objection`), les appels statiques (`uvm_config_db::set`) et les classes dérivées. Popover de désambiguïsation ergonomique (`sym-disambig-popover`) affichant les classes candidates en cas de méthode ambiguë partagée (`write`, `get`, `create`, `connect`) avec navigation clavier et lien direct. |
 | | **Console d'Exécution Multi-Simulateurs** | Sorties réelles d'exécution pour Questa, VCS et Xcelium avec segmentation ligne par ligne (`.term-line`), filtrage par sévérité (`UVM_INFO`, `UVM_WARNING`, `UVM_ERROR`, `UVM_FATAL`), bannière de résumé et mise en évidence synchronisée (`.term-line-highlight`). |
 | | **Archive ZIP Client-Side 1-Clic** | Téléchargement instantané de l'intégralité des fichiers de chaque exemple sans dépendance serveur via encodage binaire natif. |
 | | **Test Scenario Walkthrough & Animations** | Positionné en conclusion de la page après la console de simulation : scénarios pédagogiques calibrés sur les 5 piliers clés UVM (`phasing`, `objections`, `fifo`, `tlm2`, `ral`) avec animations visuelles dynamiques synchronisées, badge d'état (`.scenario-state-pill`), raccourcis *Jump to Code* / *Jump to Terminal Log*, bascule d'onglet et mise en évidence bidirectionnelle du code et des logs. |
@@ -124,25 +126,25 @@ Toutes les interactions entre le conteneur principal (`index.html` / `js/app.js`
 | Émetteur | Destinataire | `type` de Message | Paramètres | Rôle |
 | :--- | :--- | :--- | :--- | :--- |
 | `docs_view` | Parent | `openSourceView` | `{ url: string }` | Demande au parent d'ouvrir un fichier source à une ligne donnée (bascule automatique en Split-View si en mode Doc). |
-| `src_view` | Parent | `openDocView` | `{ url: string }` | Demande au parent d'ouvrir la documentation associée au fichier source en cours de consultation. |
+| `src_view` / `examples_view` | Parent | `openDocView` | `{ url: string, ownerClass?: string }` | Demande au parent d'ouvrir la documentation associée au fichier source ou au symbole UVM cliqué (avec prise en compte optionnelle de la classe propriétaire `ownerClass` pour ciblage direct). |
 | `docs_view` | Parent | `docNavigated` | `{ url: string }` | Notifie le parent qu'une nouvelle page de documentation a été chargée afin d'actualiser le titre, la sidebar et le hash URL. |
 | `src_view` | Parent | `srcNavigated` | `{ url: string }` | Notifie le parent qu'un fichier source a été chargé pour actualiser le titre, la sidebar et le hash URL. |
 | `docs_view` | Parent | `docSectionChanged` | `{ anchor: string, id: string, title: string }` | Informe le parent de la section active via le scrollspy pour synchroniser la navigation gauche. |
 | `docs_view` | Parent | `openImageModal` | `{ src: string, title: string }` | Demande l'ouverture de la visionneuse de zoom plein écran pour un diagramme technique. |
 | `docs_view` | Parent | `closeImageModal` | `{}` | Transmet la touche `Escape` pressée dans l'iframe pour fermer la visionneuse de zoom ouverte dans le parent. |
-| Parent | `docs_view` | `scrollToSection` | `{ anchor: string, id: string }` | Ordonne au document de scroller directement et précisément jusqu'à un identifiant de section spécifique. |
+| Parent | `docs_view` | `scrollToSection` | `{ anchor: string, id: string }` | Ordonne au document de scroller directement et précisément jusqu'à un identifiant de section spécifique, en auto-dépliant au préalable tout conteneur ou accordéon parent rétracté via `expandAllRetractedAncestors()`. |
 | Parent | Tous iframes | Message objet | `{ theme: 'light' \| 'dark' }` | Diffuse le changement de thème vers les iframes pour mettre à jour `data-theme` sur `<html>`. |
 
 ---
 
 ## 3. Méthodologie de Développement pour les Prochaines Implémentations
 
-Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles versions UVM, nouveau langage, export PDF, etc.), l'équipe doit suivre scrupuleusement les 5 principes directeurs suivants :
+Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles versions UVM, nouveau langage, export PDF, etc.), l'équipe doit suivre scrupuleusement les 15 règles d'ingénierie suivantes :
 
 ### Règle 1 : Zéro Dépendance Runtime Externe
 - **Principe** : L'application finale doit pouvoir être ouverte directement en double-cliquant sur `index.html` sur une machine isolée sans accès Internet.
 - **Interdiction** : Pas de CDN obligatoire au runtime, pas de bundler runtime lourd (Webpack/Vite requis pour lire le site), pas d'appels API AJAX bloquants vers un serveur distant.
-- **Conséquence** : Toutes les données d'indexation sont compilées statiquement dans [`js/search_data.js`](file:///c:/Dev/UVM_doc/js/search_data.js) sous forme d'un objet global `window.UVM_DATA`. Ce fichier volumineux (~1,5 Mo) est exclu du versionnement Git (`.gitignore`) pour éviter le bloat de l'historique et est régénéré automatiquement lors du déploiement GitHub Pages ou localement via `python scripts/build_docs.py --search-only`.
+- **Conséquence** : Toutes les données d'indexation sont compilées statiquement dans [`js/search_data.js`](file:///c:/Dev/UVM_doc/js/search_data.js), [`js/uvm_symbol_quick.js`](file:///c:/Dev/UVM_doc/js/uvm_symbol_quick.js) et le répertoire des modules JSONP par classe `js/doc_topics/`. Ces fichiers volumineux et dynamiques sont exclus du versionnement Git (`.gitignore`) pour éviter le bloat de l'historique et les conflits de diff, et sont régénérés automatiquement lors du déploiement GitHub Pages ou localement via `python scripts/build_docs.py`.
 
 ### Règle 2 : Génération en Deux Passes pour les Liens Entrecroisés
 - Lors de l'analyse et de la transformation de documents structurés :
@@ -223,6 +225,34 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
   2. **Ordre logique de lecture de la page d'exemple** : Structurer la page dans l'ordre progressif : `MainTopic` (Titre & APIs clés) → `Source Specification & Design Notes` (`#doc-nav-notes`) → `Testbench Topology` (`#doc-nav-topo`) → `Multi-File Code Studio` (`#doc-nav-studio`) → `Simulation Console` (`#doc-nav-sim`) → `Test Scenario Walkthrough` (`#doc-nav-stepper`).
   3. **Imports explicites de typage Python** : Tout script importé par la pipeline CI (`build_docs.py` ← `build_examples.py`) doit explicitement importer ses types depuis `typing` (`Dict`, `List`, `Any`) afin d'éviter toute erreur `NameError` lors de l'exécution sur GitHub Actions.
 
+### Règle 14 : Résolution Sémantique des Symboles Cliquables & Inférence de Contexte Statique
+- **Principe** : Tout symbole UVM (macro, type, méthode, constante) présent dans le code source des exemples doit être cliquable et rediriger vers sa documentation officielle sans ambiguïté.
+- **Règles d'implémentation** :
+  1. **Taxonomie et balisage sémantique** : `syntax_highlighter.py` injecte `.clickable-uvm-sym` avec `data-sym`, `data-sym-kind` (`macro`, `type`, `method`, `constant`), `data-sym-owner` et `data-sym-base`.
+  2. **Inférence statique de contexte** :
+     - Variables typées : Détection de `Type variable;` pour assigner l'attribut `data-sym-owner="Type"` lors des appels ultérieurs `variable.method()`.
+     - Portées statiques : Détection des résolutions de portée `Type::method()` pour assigner `data-sym-owner="Type"`.
+     - Classes dérivées : Détection des méthodes virtuelles redéfinies au sein de `class Derived extends Base;` pour assigner `data-sym-base="Base"`.
+  3. **Garde-fous stricts contre les faux-positifs** :
+     - Exclusion systématique des liaisons de ports matériels par nom `.nom_port(signal)`.
+     - Exclusion des déclarations de signaux ou variables primitives `logic`, `wire`, `int` de même nom qu'une méthode courante.
+     - Exclusion des arguments nommés de constructeurs ou fonctions `.parent(this)`.
+  4. **Popover de désambiguïsation ergonomique (`sym-disambig-popover`)** :
+     - Lorsque le contexte statique ne permet pas de déterminer une classe unique pour une méthode partagée (`write`, `get`, `create`, `connect`), afficher un popover contextuel listant les classes détentrices.
+     - Accessibilité & UX : focus automatique sur la première option, navigation clavier (Flèches, Entrée, Échap), fermeture sur clic extérieur ou perte de focus.
+
+### Règle 15 : Dépliement Automatique des Zones Rétractées lors de la Navigation Profonde
+- **Principe** : Aucun lien hypertexte pointant vers une ancre valide ne doit échouer à positionner la cible sous prétexte que celle-ci réside dans un conteneur replié ou différé.
+- **Règles d'implémentation** :
+  1. **Dépliement ascendant universel (`expandAllRetractedAncestors`)** :
+     - Remonter récursivement l'arbre DOM depuis la cible jusqu'à la racine du document.
+     - Déplier tout parent collapsible : sections héritées (`.inherited-methods-section`), cartes de sous-classes (`.derived-classes-card`), éléments `<details>`, classes `.collapsed`, attributs `aria-expanded="false"`, éléments masqués en `display: none` ou `hidden`, et boutons de contrôle accordéon (`aria-controls`).
+  2. **Résolution préventive des sections à rendu différé (`findMatchingInheritedSection`)** :
+     - Si l'ancre cible appartient à une section héritée non encore instanciée dans le DOM, forcer l'expansion et le rendu immédiat de la section parente avant le calcul de défilement.
+  3. **Séquence multi-échéances de recalcul géométrique** :
+     - Après l'expansion d'une zone rétractée, le redimensionnement du layout (reflow) modifie la hauteur totale du document et les coordonnées `offsetTop`.
+     - Réémettre `scrollToSection` aux paliers clés : immédiat, 80ms, 120ms, 320ms, 600ms pour garantir un positionnement au pixel près après stabilisation complète du DOM.
+
 ---
 
 ## 4. Méthodologie de Vérification & Recette Automatisée
@@ -236,11 +266,14 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 │  - scripts/verify_search_pilot.py (assertions DOM, CSS & JS du Search) │
 │  - scripts/build_docs.py (validation de génération des 146 docs & 155 src)│
 │  - scripts/build_examples.py (génération des 39 studios interactifs)    │
+│  - scripts/generate_quick_symbols.py (index rapide enrichi & héritage) │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
 │              Niveau 2 : Scripts de Vérification DOM & CSS              │
 │  - verify_examples.py (28 assertions fonctionnelles sur les studios)   │
+│  - verify_code_editor_tools.py (symboles cliquables & désambiguïsation)│
+│  - verify_inherited_members.py (intégrité des chaînes de classes & APIs)│
 │  - verify_stepper_calibration.py (calibration des 5 piliers & logs)    │
 │  - verify_source_notes.py (notes sources & 0 fuite Apache sur 39 suites)│
 │  - verify_architecture.py (25 assertions structurelles & fonctionnelles)│
@@ -256,7 +289,9 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ### 4.1 Check-list de Vérification Obligatoire
 
 Avant de valider une version :
-- [ ] **Tests Unitaires de Coloration Syntaxique** : `python scripts/test_syntax_highlighter.py` (7/7 tests validés).
+- [ ] **Tests Unitaires de Coloration Syntaxique & Symboles Cliquables** : `python scripts/test_syntax_highlighter.py` (8/8 tests validés avec `test_clickable_uvm_symbols`).
+- [ ] **Vérification des Outils Éditeur & Symboles Cliquables** : `python scripts/verify_code_editor_tools.py` (6/6 suites validées).
+- [ ] **Validation de l'Héritage et des Membres Hérités** : `python scripts/verify_inherited_members.py` (vérification intégrale des relations d'héritage et méthodes héritées).
 - [ ] **Vérification du Search Pilot & Session** : `python scripts/verify_search_pilot.py` (assertions DOM, CSS et JS validées).
 - [ ] **Compilation sans erreur** : `python scripts/build_docs.py` s'exécute avec le code de retour `0`.
 - [ ] **Génération des Exemples** : `python scripts/build_examples.py` génère les 39 suites sans warning.
@@ -264,6 +299,7 @@ Avant de valider une version :
 - [ ] **Validation des Scénarios & Logs** : `python scripts/verify_stepper_calibration.py` (5/5 piliers vérifiés).
 - [ ] **Validation des Notes Sources** : `python scripts/verify_source_notes.py` (39/39 suites validées, zéro fuite de licence Apache).
 - [ ] **Tests d'Architecture** : Exécution de `verify_architecture.py` : les 25 tests doivent être validés (`PASS`).
+- [ ] **Auto-Expansion des Ancres Rétractées** : Tester la navigation vers une méthode héritée ou une sous-classe repliée : la zone parente doit se déplier automatiquement et la méthode doit être centrée avec halo surligné.
 - [ ] **Absence de barrière d'événements** : Vérifier que tous les backdrops de modales (`#search-modal`, `#image-zoom-modal`) sont en `display: none` et `visibility: hidden` lorsqu'ils sont inactifs.
 - [ ] **Précision du scrolling** : Tester un lien vers une méthode située à plus de 15 000 px dans `uvm_component` : la section doit atterrir avec un décalage de 24 px sous le bandeau supérieur.
 - [ ] **Recherche multi-mots & Search Pilot** : Taper `component build` : sélectionner un résultat, vérifier l'apparition du Search Pilot en bas d'écran (`1 of N`), naviguer avec `Alt+]`, et vérifier la présence de la coche `✓` sur les résultats consultés.
