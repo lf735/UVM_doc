@@ -176,8 +176,39 @@ document.addEventListener('DOMContentLoaded', () => {
     return bare1 === bare2 || bare1.endsWith('/' + bare2) || bare2.endsWith('/' + bare1);
   }
 
+  function cancelPendingFrameNav(frame) {
+    if (!frame || !frame._pendingNav) return;
+    const prev = frame._pendingNav;
+    if (prev.onLoad) {
+      frame.removeEventListener('load', prev.onLoad);
+    }
+    if (Array.isArray(prev.timeouts)) {
+      prev.timeouts.forEach(id => clearTimeout(id));
+    }
+    frame._pendingNav = null;
+  }
+
   function setFrameSrc(frame, relUrl) {
     if (!frame || !relUrl) return;
+    cancelPendingFrameNav(frame);
+    const navToken = (frame._navSeq = (frame._navSeq || 0) + 1);
+    const pendingNav = { token: navToken, timeouts: [], onLoad: null };
+    frame._pendingNav = pendingNav;
+
+    const dispatchScroll = (anchor) => {
+      if (!frame._pendingNav || frame._pendingNav.token !== navToken) return;
+      try {
+        if (frame.contentWindow) {
+          frame.contentWindow.postMessage({
+            type: 'scrollToSection',
+            anchor: anchor,
+            id: anchor,
+            navToken: navToken
+          }, '*');
+        }
+      } catch (err) { }
+    };
+
     try {
       const targetUrl = new URL(relUrl, window.location.href);
       let currentPath = '';
@@ -198,70 +229,31 @@ document.addEventListener('DOMContentLoaded', () => {
             frame.contentWindow.location.hash = targetUrl.hash;
           } catch (e) { }
           if (frame.contentWindow && rawAnchor) {
-            frame.contentWindow.postMessage({
-              type: 'scrollToSection',
-              anchor: rawAnchor,
-              id: rawAnchor
-            }, '*');
-            setTimeout(() => {
-              try {
-                if (frame.contentWindow) {
-                  frame.contentWindow.postMessage({
-                    type: 'scrollToSection',
-                    anchor: rawAnchor,
-                    id: rawAnchor
-                  }, '*');
-                }
-              } catch (e) { }
-            }, 80);
+            dispatchScroll(rawAnchor);
+            pendingNav.timeouts.push(setTimeout(() => dispatchScroll(rawAnchor), 80));
           }
         } else {
           // Navigating to top of the current page
           try {
             frame.contentWindow.scrollTo({ top: 0, behavior: 'smooth' });
           } catch (e) { }
-          if (frame.contentWindow) {
-            frame.contentWindow.postMessage({
-              type: 'scrollToSection',
-              anchor: 'MainTopic',
-              id: 'MainTopic'
-            }, '*');
-          }
+          dispatchScroll('MainTopic');
         }
         return;
       }
     } catch (e) { }
 
-    // When loading a new document, ensure cross-frame scroll executes once frame is loaded
+    // When loading a new document, apply theme and execute cross-frame scroll once frame is loaded
+    let rawAnchor = '';
     try {
       const targetUrl = new URL(relUrl, window.location.href);
-      const rawAnchor = targetUrl.hash ? targetUrl.hash.replace(/^#/, '') : '';
-      if (rawAnchor) {
-        const onFrameLoaded = function () {
-          frame.removeEventListener('load', onFrameLoaded);
-          const sendScroll = () => {
-            try {
-              if (frame.contentWindow) {
-                frame.contentWindow.postMessage({
-                  type: 'scrollToSection',
-                  anchor: rawAnchor,
-                  id: rawAnchor
-                }, '*');
-              }
-            } catch (err) { }
-          };
-          sendScroll();
-          setTimeout(sendScroll, 120);
-          setTimeout(sendScroll, 320);
-          setTimeout(sendScroll, 600);
-        };
-        frame.addEventListener('load', onFrameLoaded);
-      }
+      rawAnchor = targetUrl.hash ? targetUrl.hash.replace(/^#/, '') : '';
     } catch (e) { }
 
-    // Ensure new page adheres to current theme as soon as it loads
-    const onFrameThemeLoaded = function () {
-      frame.removeEventListener('load', onFrameThemeLoaded);
+    const onFrameLoaded = function () {
+      frame.removeEventListener('load', onFrameLoaded);
+      if (!frame._pendingNav || frame._pendingNav.token !== navToken) return;
+
       const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
       try {
         if (frame.contentDocument && frame.contentDocument.documentElement) {
@@ -273,8 +265,16 @@ document.addEventListener('DOMContentLoaded', () => {
           frame.contentWindow.postMessage({ theme: currentTheme }, '*');
         }
       } catch (e) { }
+
+      if (rawAnchor) {
+        dispatchScroll(rawAnchor);
+        [120, 320, 600].forEach(delay => {
+          pendingNav.timeouts.push(setTimeout(() => dispatchScroll(rawAnchor), delay));
+        });
+      }
     };
-    frame.addEventListener('load', onFrameThemeLoaded);
+    pendingNav.onLoad = onFrameLoaded;
+    frame.addEventListener('load', onFrameLoaded);
 
     frame.src = relUrl;
   }
@@ -645,6 +645,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Cross-frame messaging listener (supports file:// and http/https)
   window.addEventListener('message', (e) => {
     if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.type === 'scrollAck' && typeof e.data.navToken === 'number') {
+      [docFrame, srcFrame].forEach(f => {
+        if (f && f._pendingNav && f._pendingNav.token === e.data.navToken) {
+          cancelPendingFrameNav(f);
+        }
+      });
+      return;
+    }
     if (e.data.type === 'openSourceView' && e.data.url) {
       window.openSourceView(e.data.url);
     } else if (e.data.type === 'openDocView' && (e.data.url || e.data.symbol)) {

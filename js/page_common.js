@@ -34,6 +34,44 @@ window.PageCommon = (function () {
   'use strict';
 
   // =========================================================================
+  // Central Cross-Frame Message Bus
+  // =========================================================================
+
+  const messageHandlers = [];
+  let messageBusBound = false;
+
+  function registerMessageHandler(handler) {
+    if (typeof handler !== 'function') return;
+    messageHandlers.push(handler);
+    if (!messageBusBound) {
+      messageBusBound = true;
+      window.addEventListener('message', function (e) {
+        if (!e.data || typeof e.data !== 'object') return;
+        if (e.source && e.source !== window && e.source !== window.parent) return;
+        for (let i = 0; i < messageHandlers.length; i++) {
+          try {
+            messageHandlers[i](e.data, e);
+          } catch (err) { }
+        }
+      });
+    }
+  }
+
+  function sendScrollAck(navToken, anchor, id) {
+    if (typeof navToken !== 'number') return;
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'scrollAck',
+          navToken: navToken,
+          anchor: anchor,
+          id: id
+        }, '*');
+      }
+    } catch (e) { }
+  }
+
+  // =========================================================================
   // Clipboard Utilities
   // =========================================================================
 
@@ -105,10 +143,10 @@ window.PageCommon = (function () {
   // =========================================================================
 
   function initTheme() {
-    window.addEventListener('message', function (e) {
-      if (e.data && e.data.theme) {
-        document.documentElement.setAttribute('data-theme', e.data.theme);
-        document.documentElement.style.colorScheme = e.data.theme;
+    registerMessageHandler(function (data) {
+      if (data.theme) {
+        document.documentElement.setAttribute('data-theme', data.theme);
+        document.documentElement.style.colorScheme = data.theme;
       }
     });
 
@@ -1100,11 +1138,11 @@ window.PageCommon = (function () {
     }
 
     // Cross-frame scrollToSection listener
-    window.addEventListener('message', function (e) {
-      if (!e.data || typeof e.data !== 'object') return;
-      if (e.data.type === 'scrollToSection') {
-        const anchor = e.data.anchor;
-        const targetId = e.data.id || anchor;
+    registerMessageHandler(function (data) {
+      if (data.type === 'scrollToSection') {
+        const anchor = data.anchor;
+        const targetId = data.id || anchor;
+        const navToken = data.navToken;
 
         // 1. Prioritize inherited methods / classes explorer if anchor matches
         const inhSec = findMatchingInheritedSection(targetId) || findMatchingInheritedSection(anchor);
@@ -1145,6 +1183,7 @@ window.PageCommon = (function () {
               setTimeout(function () {
                 expandAllRetractedAncestors(resolvedTarget);
                 scrollToElement(resolvedTarget);
+                sendScrollAck(navToken, anchor, targetId);
                 if (tocNav) {
                   const targetNavId = resolvedTarget.id || resolvedTarget.getAttribute('data-doc-topic');
                   const targetAnchor = resolvedTarget.getAttribute('data-anchor') || anchor || targetId;
@@ -1181,6 +1220,7 @@ window.PageCommon = (function () {
           requestAnimationFrame(function () {
             setTimeout(function () {
               scrollToElement(target);
+              sendScrollAck(navToken, anchor, targetId);
               if (tocNav) {
                 const targetNavId = target.id || target.getAttribute('data-doc-topic');
                 const targetAnchor = target.getAttribute('data-anchor') || anchor || targetId;
@@ -1332,11 +1372,10 @@ window.PageCommon = (function () {
 
     setTimeout(saveScrollAnchor, 150);
 
-    window.addEventListener('message', function (e) {
-      if (!e.data || typeof e.data !== 'object') return;
-      if (e.data.type === 'saveScrollAnchor') {
+    registerMessageHandler(function (data) {
+      if (data.type === 'saveScrollAnchor') {
         saveScrollAnchor();
-      } else if (e.data.type === 'restoreScrollAnchor') {
+      } else if (data.type === 'restoreScrollAnchor') {
         restoreScrollAnchor();
       }
     });
@@ -2495,9 +2534,9 @@ window.PageCommon = (function () {
         }
       });
 
-      window.addEventListener('message', function (e) {
-        if (e.data && e.data.theme && monacoEditorInstance && window.monaco) {
-          const theme = (e.data.theme === 'dark' || e.data.theme === 'night') ? 'vs-dark' : 'vs';
+      registerMessageHandler(function (data) {
+        if (data.theme && monacoEditorInstance && window.monaco) {
+          const theme = (data.theme === 'dark' || data.theme === 'night') ? 'vs-dark' : 'vs';
           monaco.editor.setTheme(theme);
         }
       });
@@ -2554,12 +2593,12 @@ window.PageCommon = (function () {
     window.addEventListener('hashchange', handleInitialHash);
     setTimeout(handleInitialHash, 100);
 
-    window.addEventListener('message', function (e) {
-      if (!e.data || typeof e.data !== 'object') return;
-      if (e.data.type === 'scrollToSection') {
-        const anchor = e.data.anchor || e.data.id;
+    registerMessageHandler(function (data) {
+      if (data.type === 'scrollToSection') {
+        const anchor = data.anchor || data.id;
         if (anchor && (anchor.startsWith('L') || anchor.startsWith('#L') || anchor.startsWith('line-'))) {
           scrollToLine(anchor);
+          sendScrollAck(data.navToken, anchor, data.id || anchor);
         }
       }
     });
