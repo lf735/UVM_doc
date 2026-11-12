@@ -195,13 +195,14 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
 - Ne jamais compter uniquement sur `opacity: 0` ou `pointer-events: none` sur un conteneur si ses enfants peuvent avoir `pointer-events: auto`.
 
 ### Règle 4 : Gestion du Défilement Isolé (Scroll Isolation)
-- Ne jamais appeler `element.scrollIntoView()` sur un sous-élément d'une barre latérale ou d'un menu si la fenêtre principale est en cours de défilement fluide.
-- Toujours utiliser `container.scrollTo({ top: ..., behavior: 'smooth' })` ciblant explicitement le conteneur concerné.
+- Ne jamais appeler `element.scrollIntoView()` sur un sous-élément d'une barre latérale, d'un menu ou d'une barre d'onglets (`studioTabs[idx]`) si la fenêtre principale ne doit pas scroller vers ce conteneur.
+- Toujours utiliser `container.scrollTo({ top: ..., behavior: 'smooth' })` (ou `studioTabBar.scrollTo({ left: ... })`) ciblant explicitement le conteneur concerné.
 
-### Règle 5 : Échappement et Modularité des Scripts Python
-- Dans le script de build Python, séparer strictement :
+### Règle 5 : Échappement, Modularité et Zéro Dépendance Tierce des Scripts Python
+- Dans les scripts de build et de test Python (`scripts/run_tests.py` et suites associées), **n'utiliser que la bibliothèque standard Python** (ex. `html.parser.HTMLParser` au lieu de `bs4`/`BeautifulSoup`, `string.Template` via `scripts/templates/`) afin de garantir l'exécution immédiate sur GitHub Actions sans `pip install` caché.
+- Séparer strictement :
   1. L'analyse syntaxique (Regex compilées, lexers SV).
-  2. Les templates de code (attention aux f-strings contenant du JavaScript : doubler toutes les accolades `{{` et `}}`).
+  2. Les templates HTML/SVG externalisés dans `scripts/templates/`.
   3. L'écriture des fichiers finaux en encodage `UTF-8` strict avec gestion propre des fichiers sources hérités en `latin-1`.
 
 ### Règle 6 : Architecture RAG Client-Side et Respect de la Confidentialité

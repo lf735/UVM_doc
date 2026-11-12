@@ -33,9 +33,10 @@ Contrairement à la lecture statique de code SystemVerilog ou à l'inspection d'
 ```
 
 #### A. Timeline & Cartes d'Étapes
-- Située en haut du studio interactif, elle présente le fil directeur de l'exécution.
-- Chaque étape affiche son numéro (ex: `1/7`), son titre, le composant émetteur, et une explication claire du mécanisme UVM sous-jacent.
-- Vous pouvez cliquer directement sur n'importe quelle puce d'étape pour naviguer instantanément.
+- Située en haut du Walkthrough, la timeline utilise une **grille responsive de boutons accessibles** (`role="tab"`, `aria-selected`, `aria-current="step"`) pour afficher toutes les étapes d'un coup d'œil sans défilement horizontal caché.
+- Un **compteur de progression** (`1 / N`) et une **pastille d'état dynamique** (`.scenario-state-pill`) indiquent en permanence l'avancement et l'état UVM courant.
+- Les dimensions de la scène d'animation (`.scenario-anim-section`) et de la carte de détail (`#step-detail-card`) sont stabilisées pour éviter tout redimensionnement ou saut de mise en page d'une étape à l'autre.
+- Chaque schéma animé intègre désormais une **légende de couleurs** (`.anim-legend`) explicitant la signification des états (actif, terminé, bloqué, en attente, drain/cleanup).
 
 #### B. Diagramme de Topologie Dynamique (Topology Tree)
 - Met en évidence visuelle le composant UVM actuellement en train d'exécuter l'action (ex: `uvm_test_top.env.agent.driver`).
@@ -44,7 +45,7 @@ Contrairement à la lecture statique de code SystemVerilog ou à l'inspection d'
 #### C. Code Studio avec Navigation et Auto-Scroll Isolé
 - Si l'étape courante concerne un fichier différent (ex: passage du `driver` au `scoreboard` ou de la `sequence` au `reg_block`), le Code Studio **active automatiquement le bon onglet de fichier**.
 - La ligne de code SystemVerilog exécutée est surlignée avec une puce indicatrice bleue (`line-stepper-active`).
-- **Défilement isolé** : Le conteneur de code défile en douceur (*smooth internal scroll*) pour centrer la ligne, **sans jamais faire sauter la page principale de votre navigateur**.
+- **Défilement isolé** : Le conteneur de code (`#studio-code-container`) et la barre d'onglets (`studioTabBar.scrollTo`) défilent en interne **sans jamais faire sauter la page principale de votre navigateur** lors des transitions d'étapes.
 
 #### D. Console de Simulation Synchronisée
 - La console de simulation (juste au-dessus du Walkthrough) affiche les logs réels segmentés ligne par ligne (`.term-line`) avec coloration syntaxique UVM (`UVM_INFO`, `UVM_WARNING`, `UVM_ERROR`, `UVM_FATAL`).
@@ -70,10 +71,10 @@ Le Test Scenario Walkthrough est déployé sur les 5 concepts clés fondamentaux
 ### 4. Guide des Commandes et de Navigation
 
 #### Commandes du Stepper
-- **Bouton `◀ Précédent`** : Revient à l'étape précédente.
-- **Bouton `Lecture / Pause ▶` (Autoplay)** : Lance la progression automatique avec un intervalle régulier (2,5 secondes). Cliquez à nouveau pour mettre en pause.
-- **Bouton `Suivant ▶`** : Avance à l'étape suivante.
-- **Clic sur une pastille d'étape** : Saute directement à l'étape désirée.
+- **Bouton `← Previous`** : Revient à l'étape précédente.
+- **Bouton `Play ▶` / `Pause ❚❚`** : Lance un **cycle unique** de progression automatique avec un intervalle de **3,8 secondes** entre chaque étape, puis s'arrête automatiquement à la dernière étape (un nouveau clic depuis la dernière étape relance le cycle depuis l'étape 1).
+- **Bouton `Next Step →`** : Avance à l'étape suivante.
+- **Clic ou navigation clavier sur les étapes** : Cliquez sur n'importe quel bouton d'étape ou naviguez au clavier avec `Flèche gauche` / `Flèche droite` (`Home` / `End` pour aller au début ou à la fin).
 
 #### Commandes des Onglets Multi-Fichiers (Code Studio)
 Pour les projets contenant de nombreux fichiers (ex: `ubus` avec 26 fichiers, `vertical_reuse` avec 21 fichiers, `primer` avec 12 fichiers) :

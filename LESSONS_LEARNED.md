@@ -1298,3 +1298,35 @@ Tout système de navigation par ancres dans une interface moderne doit s'assurer
 1. **Plafonnement DOM & cache d'index** : Mise en cache des listes filtrées par type (`cachedAllowedBaseSymbols` / `cachedAllowedAugmentedSymbols`), remplacement de `localeCompare` par une comparaison directe `<` / `>`, et limitation du rendu initial à **200 résultats** (`MAX_INDEX_RENDER = 200`) avec un bouton *« Show all (N) »* pour charger le reste à la demande.
 2. **Délégation d'événements unique** : `bindSidebarDelegation()` attache un seul écouteur `click` sur `#sidebar-content` au lieu de milliers d'écouteurs par rendu.
 3. **Parcours en une passe** : `renderSourceTree()` évalue les dossiers de manière ascendante (`childrenHtml`) et supprime `hasMatch()`, tandis que le debounce de `#sidebar-filter` passe à `200 ms`.
+
+---
+
+## 36. Le Piège du `scrollIntoView()` sur les Onglets du Code Studio & Stabilité du Walkthrough
+
+### Le Symptôme Observé
+> *"Lors de certaines transitions d'étapes dans le Test Scenario Walkthrough, la page saute brutalement vers le Code Studio ; de plus, les schémas se redimensionnent selon leur contenu et les animations sont trop rapides ou bouclent à l'infini."*
+
+### L'Anatomie du Piège
+1. **Saut vertical via `studioTabs[idx].scrollIntoView()`** : Lorsque `renderStep()` changeait de fichier cible via `switchFileTab()`, `studioTabs[idx].scrollIntoView(...)` dans `js/page_common.js` faisait scroller **tous les ancêtres scrollables, y compris `window`**, arrachant l'utilisateur hors du Walkthrough.
+2. **Instabilité dimensionnelle des modèles** : Les badges et nœuds (`.anim-actor`, `.tlm2-node`, `.phasing-badge-box`, `.anim-obj-drain-status`, `#step-active-desc`) n'avaient pas de largeurs/hauteurs minimales fixes et utilisaient `transform: scale()` sur les pulses, provoquant un redimensionnement continu entre étapes.
+3. **Accessibilité & Lecture** : Les étapes étaient des `<div>` non focusables en scroll horizontal caché, sans légende de couleurs ni arrêt en fin de cycle (`Play`).
+
+### La Solution Appliquée
+1. **Scroll horizontal isolé (`js/page_common.js`)** : `switchFileTab()` utilise désormais `studioTabBar.scrollTo({ left: targetLeft, behavior: 'smooth' })` sans jamais déplacer `window`.
+2. **Walkthrough accessible, légendé et stable (`page_builder_common.py`, `js/example_page.js`, `css/style.css`, `scripts/templates/animations/*.html`)** :
+   - Étapes converties en `<button type="button" role="tab">` en grille responsive avec navigation clavier (`Flèches`, `Home`, `End`) et compteur `1 / N`.
+   - Largeurs/hauteurs verrouillées sur `.scenario-anim-section`, les 5 modèles et `#step-detail-card`, avec légendes de couleurs `.anim-legend`.
+   - Transitions ralenties (`0.55s–0.95s`, échelonnement FIFO `65 ms` / Phasing `95 ms`) et lecture automatique en **cycle unique** (`3,8 s` par étape, arrêt via `stopAutoPlay()` à la dernière étape).
+
+---
+
+## 37. Le Piège de Dépendance Python `bs4` en CI (`verify_source_notes.py`)
+
+### Le Symptôme Observé
+> *"Le déploiement GitHub Actions échoue sur `scripts/verify_source_notes.py` avec `ModuleNotFoundError: No module named 'bs4'`."*
+
+### L'Anatomie du Piège
+Bien que toute la chaîne de build et de test repose sur la bibliothèque standard Python, `verify_source_notes.py` importait `BeautifulSoup` (`bs4`), absent de l'environnement CI minimal sans `pip install`.
+
+### La Solution Appliquée (`scripts/verify_source_notes.py`)
+Remplacement de `BeautifulSoup` par un parseur dédié `_SourceNotesParser(HTMLParser)` basé uniquement sur `html.parser.HTMLParser` (avec gestion explicite des balises auto-fermantes `VOID_TAGS`), éliminant la dépendance externe tout en réduisant le temps d'exécution de ~6,6 s à ~1,8 s.
