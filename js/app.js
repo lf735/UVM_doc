@@ -836,6 +836,106 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
+  // Augmented Search Index (Includes Inherited Methods & Elements)
+  // =========================================================================
+
+  let cachedAugmentedSearchIndex = null;
+
+  function normalizeClassNameForSearch(cat) {
+    if (!cat) return '';
+    return String(cat).replace(/\s*#\([^)]*\)/g, '').trim();
+  }
+
+  function getAugmentedSearchIndex() {
+    if (cachedAugmentedSearchIndex) return cachedAugmentedSearchIndex;
+    if (typeof UVM_DATA === 'undefined' || !Array.isArray(UVM_DATA.searchIndex)) return [];
+
+    const baseItems = UVM_DATA.searchIndex;
+    const classNodes = (UVM_DATA.classHierarchy && UVM_DATA.classHierarchy.nodes) ? UVM_DATA.classHierarchy.nodes : null;
+    if (!classNodes) {
+      cachedAugmentedSearchIndex = baseItems;
+      return cachedAugmentedSearchIndex;
+    }
+
+    const inheritableTypes = new Set([
+      'function', 'task', 'method', 'variable', 'port',
+      'constant', 'parameter', 'type', 'enum', 'enumeration'
+    ]);
+
+    const ownMembersByClass = new Map();
+    baseItems.forEach(item => {
+      if (!item || !item.name || !item.category || !inheritableTypes.has(item.type)) return;
+      const normClass = normalizeClassNameForSearch(item.category);
+      if (!normClass || !classNodes[normClass]) return;
+      if (!ownMembersByClass.has(normClass)) {
+        ownMembersByClass.set(normClass, new Map());
+      }
+      const memberMap = ownMembersByClass.get(normClass);
+      const existing = memberMap.get(item.name);
+      if (!existing || ((item.doc || '').includes('#doc-nav-') && !(existing.doc || '').includes('#doc-nav-'))) {
+        memberMap.set(item.name, item);
+      }
+    });
+
+    function resolveParentForSearch(clsName) {
+      const node = classNodes[clsName];
+      if (!node || !node.parent) return '';
+      if (node.parent === 'BASE' && clsName === 'uvm_reg_sequence') return 'uvm_sequence';
+      if (node.parent === 'IF' && clsName === 'uvm_port_base') return 'uvm_void';
+      return node.parent;
+    }
+
+    const inheritedItems = [];
+    Object.keys(classNodes).forEach(cname => {
+      const cNode = classNodes[cname];
+      if (!cNode || !cNode.parent) return;
+
+      const ancestorsNearestFirst = [];
+      let curr = resolveParentForSearch(cname);
+      const visited = new Set([cname]);
+      while (curr && !visited.has(curr) && classNodes[curr]) {
+        visited.add(curr);
+        ancestorsNearestFirst.push(curr);
+        curr = resolveParentForSearch(curr);
+      }
+      if (!ancestorsNearestFirst.length) return;
+
+      const seenNames = new Set(['new']);
+      const ownMap = ownMembersByClass.get(cname);
+      if (ownMap) {
+        ownMap.forEach((_, memberName) => seenNames.add(memberName));
+      }
+
+      const safeClass = cname.replace(/[^A-Za-z0-9_]/g, '_');
+      const baseDoc = (cNode.doc || '').split('#')[0];
+
+      ancestorsNearestFirst.forEach(anc => {
+        const ancMap = ownMembersByClass.get(anc);
+        if (!ancMap) return;
+        ancMap.forEach((ancItem, memberName) => {
+          if (seenNames.has(memberName)) return;
+          seenNames.add(memberName);
+          const safeMember = memberName.replace(/[^A-Za-z0-9_]/g, '_');
+          const inhDoc = baseDoc ? `${baseDoc}#${cname}.${memberName}` : ancItem.doc;
+          inheritedItems.push({
+            name: memberName,
+            type: ancItem.type,
+            category: cname,
+            inheritedFrom: anc,
+            isInherited: true,
+            src: ancItem.src,
+            doc: inhDoc,
+            desc: `Inherited from ${anc}${ancItem.desc ? ' — ' + ancItem.desc : ''}`
+          });
+        });
+      });
+    });
+
+    cachedAugmentedSearchIndex = baseItems.concat(inheritedItems);
+    return cachedAugmentedSearchIndex;
+  }
+
+  // =========================================================================
   // Matcher & Multi-word / Regex Search Utilities
   // =========================================================================
 
@@ -884,12 +984,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const fullDot = cat ? `${cat}.${name}` : name;
       const fullSpace = cat ? `${cat} ${name}` : name;
 
-      if (re.test(name)) return { match: true, score: 1000 };
-      if (re.test(fullColon) || re.test(fullDot)) return { match: true, score: 900 };
-      if (re.test(fullSpace)) return { match: true, score: 800 };
-      if (re.test(cat)) return { match: true, score: 600 };
-      if (re.test(desc)) return { match: true, score: 300 };
-      return { match: false, score: 0 };
+      let score = 0;
+      let catMatched = false;
+      if (re.test(name)) {
+        score = 1000;
+      } else if (re.test(fullColon) || re.test(fullDot)) {
+        score = 900;
+        catMatched = true;
+      } else if (re.test(fullSpace)) {
+        score = 800;
+        catMatched = true;
+      } else if (re.test(cat)) {
+        score = 600;
+        catMatched = true;
+      } else if (re.test(desc)) {
+        score = 300;
+      } else {
+        return { match: false, score: 0 };
+      }
+      if (item.isInherited) {
+        score = catMatched ? Math.max(50, score - 50) : Math.max(50, score - 600);
+      }
+      return { match: true, score };
     }
 
     // Multi-word mode: matches name, class (category), or two parts of expression
@@ -905,6 +1021,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const combined = `${targetName} ${targetCat} ${targetDesc}`;
     const allFound = words.every(w => combined.includes(w));
     if (!allFound) return { match: false, score: 0 };
+
+    const catMatched = targetCat ? words.some(w => targetCat.includes(w)) : false;
 
     // Calculate score based on where words were matched
     let score = 0;
@@ -924,6 +1042,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       // Mots trouvés dans la description
       score = 300;
+    }
+
+    if (item.isInherited) {
+      score = catMatched ? Math.max(50, score - 50) : Math.max(50, score - 600);
     }
 
     return { match: true, score };
@@ -1636,7 +1758,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderAlphabeticalIndex(rawQuery) {
-    const items = UVM_DATA.searchIndex || [];
+    const hasQuery = !!(rawQuery && rawQuery.trim().length > 0);
+    const items = hasQuery ? getAugmentedSearchIndex() : (UVM_DATA.searchIndex || []);
     const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
 
     const allowedTypes = new Set([
@@ -1659,6 +1782,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     matchedSymbols.sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
+      if (Boolean(a.item.isInherited) !== Boolean(b.item.isInherited)) {
+        return a.item.isInherited ? 1 : -1;
+      }
       return a.item.name.localeCompare(b.item.name);
     });
 
@@ -3387,7 +3513,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </li>`;
       return;
     }
-    const items = UVM_DATA.searchIndex || [];
+    const items = getAugmentedSearchIndex();
     const matcher = getQueryMatcher(query, modalRegexEnabled, modalCaseSensitive, modalSearchHeader);
 
     if (modalSearchRegex) {
@@ -3428,6 +3554,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     filteredSearchResults.sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
+      if (Boolean(a.item.isInherited) !== Boolean(b.item.isInherited)) {
+        return a.item.isInherited ? 1 : -1;
+      }
       const aname = (a.item.name || '').toLowerCase();
       const bname = (b.item.name || '').toLowerCase();
       const aIsMethod = a.item.type === 'function' || a.item.type === 'task' || a.item.type === 'method';
@@ -3456,9 +3585,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       (item.type === 'example' ? 'badge-example' :
                         (item.type === 'method' ? 'badge-method' : 'badge-file')))))))));
 
-      const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method' || item.type === 'variable' || item.type === 'port';
+      const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method' || item.type === 'variable' || item.type === 'port' || item.type === 'constant' || item.type === 'parameter' || item.type === 'type' || item.type === 'enum' || item.type === 'enumeration';
       const categoryTag = item.category && isMethodLike ?
         `<span style="color:var(--text-muted); font-size:0.8rem; margin-right:0.35rem">${highlightMatch(item.category, matcher)} ::</span>` : '';
+      const inheritedTag = item.isInherited && item.inheritedFrom ?
+        `<span class="res-inherited-badge" title="Inherited from ${escapeHtml(item.inheritedFrom)}">↳ ${escapeHtml(item.inheritedFrom)}</span>` : '';
 
       const isCurrent = (activeSearchSession.isActive && activeSearchSession.currentIndex === idx);
       const isViewed = activeSearchSession.viewedIndices.has(idx);
@@ -3477,9 +3608,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       html += `<li class="${itemClasses.join(' ')}" data-index="${idx}">
             <div class="res-main">
-              <div class="res-title-row" style="display:flex; align-items:center;">
+              <div class="res-title-row" style="display:flex; align-items:center; flex-wrap:wrap; gap:0.25rem;">
                 ${categoryTag}
                 <span class="res-name">${highlightMatch(item.name, matcher)}</span>
+                ${inheritedTag}
                 ${viewedBadge}
               </div>
               <span class="res-desc">${highlightMatch(item.desc || '', matcher)}</span>
