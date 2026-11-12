@@ -309,6 +309,61 @@
     return false;
   }
 
+  // =========================================================================
+  // Recent Searches Storage Helpers (localStorage)
+  // =========================================================================
+
+  const RECENT_SEARCHES_KEY = 'uvm_recent_searches';
+  const MAX_RECENT_SEARCHES = 8;
+
+  function getRecentSearches() {
+    try {
+      const stored = localStorage.getItem(RECENT_SEARCHES_KEY);
+      if (!stored) return [];
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed)) return [];
+      return parsed.map(item => {
+        if (typeof item === 'string') {
+          return { query: item, mode: 'standard' };
+        }
+        return {
+          query: item.query || '',
+          mode: item.mode === 'ai' ? 'ai' : 'standard'
+        };
+      }).filter(item => item.query && item.query.trim().length > 0);
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveRecentSearch(query, mode) {
+    const q = (query || '').trim();
+    if (!q || q.length < 2) return;
+    const m = mode === 'ai' ? 'ai' : 'standard';
+    try {
+      let list = getRecentSearches();
+      list = list.filter(item => item.query.toLowerCase() !== q.toLowerCase());
+      list.unshift({ query: q, mode: m });
+      if (list.length > MAX_RECENT_SEARCHES) list = list.slice(0, MAX_RECENT_SEARCHES);
+      localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(list));
+    } catch (e) { }
+  }
+
+  function deleteRecentSearch(query, mode) {
+    const q = (query || '').trim().toLowerCase();
+    try {
+      let list = getRecentSearches();
+      list = list.filter(item => !(item.query.toLowerCase() === q && (!mode || item.mode === mode)));
+      localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(list));
+    } catch (e) { }
+  }
+
+  function wipeRecentSearches() {
+    try {
+      localStorage.removeItem(RECENT_SEARCHES_KEY);
+    } catch (e) { }
+  }
+
   global.UvmAppUtils = {
     normalizeDocUrl,
     normalizeExampleUrl,
@@ -321,7 +376,11 @@
     matchSymbolItem,
     highlightMatch,
     isItemTypeAllowed,
-    isRagResultAllowed
+    isRagResultAllowed,
+    getRecentSearches,
+    saveRecentSearch,
+    deleteRecentSearch,
+    wipeRecentSearches
   };
 })(window);
 

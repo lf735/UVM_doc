@@ -110,7 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
     matchSymbolItem,
     highlightMatch,
     isItemTypeAllowed,
-    isRagResultAllowed
+    isRagResultAllowed,
+    getRecentSearches,
+    saveRecentSearch: saveRecentSearchStorage,
+    deleteRecentSearch,
+    wipeRecentSearches
   } = window.UvmAppUtils;
 
   function cancelPendingFrameNav(frame) {
@@ -2108,57 +2112,19 @@ document.addEventListener('DOMContentLoaded', () => {
     isActive: false
   };
 
-  // Recent Searches Manager (stored in localStorage)
-  const RECENT_SEARCHES_KEY = 'uvm_recent_searches';
-  const MAX_RECENT_SEARCHES = 8;
-
-  function getRecentSearches() {
-    try {
-      const stored = localStorage.getItem(RECENT_SEARCHES_KEY);
-      if (!stored) return [];
-      const parsed = JSON.parse(stored);
-      if (!Array.isArray(parsed)) return [];
-      return parsed.map(item => {
-        if (typeof item === 'string') {
-          return { query: item, mode: 'standard' };
-        }
-        return {
-          query: item.query || '',
-          mode: item.mode === 'ai' ? 'ai' : 'standard'
-        };
-      }).filter(item => item.query && item.query.trim().length > 0);
-    } catch (e) {
-      return [];
-    }
-  }
-
+  // Recent Searches Manager (storage helpers provided by js/app_utils.js)
   function saveRecentSearch(query, mode) {
-    const q = (query || '').trim();
-    if (!q || q.length < 2) return;
-    const m = mode === 'ai' ? 'ai' : (mode === 'standard' ? 'standard' : (modalAiEnabled ? 'ai' : 'standard'));
-    try {
-      let list = getRecentSearches();
-      list = list.filter(item => item.query.toLowerCase() !== q.toLowerCase());
-      list.unshift({ query: q, mode: m });
-      if (list.length > MAX_RECENT_SEARCHES) list = list.slice(0, MAX_RECENT_SEARCHES);
-      localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(list));
-    } catch (e) { }
+    const resolvedMode = mode === 'ai' ? 'ai' : (mode === 'standard' ? 'standard' : (modalAiEnabled ? 'ai' : 'standard'));
+    saveRecentSearchStorage(query, resolvedMode);
   }
 
   function removeRecentSearch(query, mode) {
-    const q = (query || '').trim().toLowerCase();
-    try {
-      let list = getRecentSearches();
-      list = list.filter(item => !(item.query.toLowerCase() === q && (!mode || item.mode === mode)));
-      localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(list));
-    } catch (e) { }
+    deleteRecentSearch(query, mode);
     renderRecentSearches();
   }
 
   function clearRecentSearches() {
-    try {
-      localStorage.removeItem(RECENT_SEARCHES_KEY);
-    } catch (e) { }
+    wipeRecentSearches();
     renderRecentSearches();
   }
 
@@ -2167,10 +2133,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const history = getRecentSearches();
     if (!history.length) {
       if (modalAiEnabled) {
-        // En mode IA : afficher un état vide élégant pour que la section historique reste toujours visible
         recentSearchesChips.innerHTML = `
           <div class="recent-searches-empty" style="padding:1.25rem 1.25rem; text-align:center; color:var(--text-muted); font-size:0.825rem;">
-            <span style="opacity:0.75;">Aucune recherche récente. Vos requêtes s'afficheront ici.</span>
+            <span style="opacity:0.75;">No recent searches. Your queries will appear here.</span>
           </div>`;
         modalRecentSearches.style.display = 'flex';
         if (modalSearchPrompts) modalSearchPrompts.style.display = 'flex';
