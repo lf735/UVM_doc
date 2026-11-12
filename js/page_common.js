@@ -354,8 +354,9 @@ window.PageCommon = (function () {
         const cleanTitle = item.title.replace(/"/g, '&quot;');
         const typeCls = item.type ? (' doc-toc-type-' + item.type) : '';
         const isMono = item.type === 'subitem' ? ' doc-toc-subitem' : '';
+        const itemAnchorAttr = item.anchor ? ' data-anchor="' + escapeHtml(item.anchor) + '"' : '';
         tocHtml += '<li class="doc-toc-item' + typeCls + isMono + '">';
-        tocHtml += '<a href="#' + item.id + '" data-target-id="' + item.id + '" class="doc-toc-link" title="' + cleanTitle + '">';
+        tocHtml += '<a href="#' + item.id + '" data-target-id="' + item.id + '"' + itemAnchorAttr + ' class="doc-toc-link" title="' + cleanTitle + '">';
         tocHtml += cleanTitle;
         tocHtml += '</a></li>';
         return;
@@ -365,6 +366,7 @@ window.PageCommon = (function () {
       const cleanGroupTitle = group.title.replace(/"/g, '&quot;');
       const hasSubItems = group.items.length > 0;
       const defaultCollapsedCls = (hasSubItems && group.isInheritedGroup) ? ' collapsed' : '';
+      const groupAnchorAttr = group.anchor ? ' data-anchor="' + escapeHtml(group.anchor) + '"' : '';
       tocHtml += '<li class="doc-toc-item doc-toc-group-item doc-toc-group-block' + (hasSubItems ? '' : ' no-children') + defaultCollapsedCls + '" id="block-' + group.id + '">';
       tocHtml += '<div class="doc-toc-group-header">';
       if (hasSubItems) {
@@ -374,7 +376,7 @@ window.PageCommon = (function () {
       } else {
         tocHtml += '<span class="doc-toc-dot-indicator"></span>';
       }
-      tocHtml += '<a href="#' + group.id + '" data-target-id="' + group.id + '" class="doc-toc-link doc-toc-group-title" title="' + cleanGroupTitle + '">';
+      tocHtml += '<a href="#' + group.id + '" data-target-id="' + group.id + '"' + groupAnchorAttr + ' class="doc-toc-link doc-toc-group-title" title="' + cleanGroupTitle + '">';
       tocHtml += cleanGroupTitle;
       tocHtml += '</a>';
       if (hasSubItems) {
@@ -441,7 +443,7 @@ window.PageCommon = (function () {
         }
       }
 
-      // 2. Class.member format (e.g. "uvm_objection_callback.use_uvm_seeding")
+      // 2. Class.member format (e.g. "uvm_objection.use_uvm_seeding")
       const dotIdx = targetId.lastIndexOf('.');
       if (dotIdx !== -1) {
         const rawCls = targetId.slice(0, dotIdx).trim();
@@ -449,26 +451,20 @@ window.PageCommon = (function () {
         const safeCls = rawCls.replace(/\s*#\(.*?\)/g, '').replace(/[^A-Za-z0-9_]/g, '_');
         const expectedSecId = 'doc-nav-inherited-' + safeCls;
 
-        // 2a. Match section belonging to this class
-        for (let s = 0; s < allInhSecs.length; s++) {
-          const sec = allInhSecs[s];
-          if (!sec || typeof sec._ensureExpandedAndRendered !== 'function') continue;
-          if (sec.id === expectedSecId ||
-              sec.getAttribute('data-cname') === rawCls ||
-              sec.getAttribute('data-cname') === safeCls) {
-            return sec;
-          }
-        }
-
-        // 2b. Match by ancestor or member in _inheritedTocItems
+        // Match by member in _inheritedTocItems of candidate section
         for (let s = 0; s < allInhSecs.length; s++) {
           const sec = allInhSecs[s];
           if (!sec || typeof sec._ensureExpandedAndRendered !== 'function') continue;
           if (Array.isArray(sec._inheritedTocItems)) {
+            const isTargetSec = (sec.id === expectedSecId ||
+              sec.getAttribute('data-cname') === rawCls ||
+              sec.getAttribute('data-cname') === safeCls);
+
             const hasMatch = sec._inheritedTocItems.some(function (it) {
               return it.anchor === targetId ||
                      it.derivedAnchor === targetId ||
                      it.originAnchor === targetId ||
+                     (isTargetSec && it.title === rawMember) ||
                      (it.title === rawMember && (it.originClass === rawCls || it.originClass === safeCls));
             });
             if (hasMatch) return sec;
@@ -527,6 +523,64 @@ window.PageCommon = (function () {
       }
     }
 
+    let lastHighlightEl = null;
+    let lastHighlightTime = 0;
+
+    function triggerTargetHighlight(targetEl) {
+      if (!targetEl) return;
+      let elToHighlight = targetEl;
+      if (elToHighlight.tagName === 'A' || elToHighlight.tagName === 'SPAN') {
+        const wrap = elToHighlight.closest('.inherited-topic-entry') ||
+          elToHighlight.closest('#Content > div') ||
+          elToHighlight.closest('tr') ||
+          elToHighlight.closest('.CTopic') ||
+          elToHighlight;
+        elToHighlight = wrap;
+      }
+
+      const now = Date.now();
+      // Remove any lingering browser focus ring from anchor tags or buttons
+      if (document.activeElement && document.activeElement !== document.body &&
+        document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+        try {
+          document.activeElement.blur();
+        } catch (e) { }
+      }
+
+      // Prevent double animation / overlapping if triggered repeatedly within 1.2s
+      if (lastHighlightEl === elToHighlight && (now - lastHighlightTime) < 1200) {
+        return;
+      }
+      lastHighlightEl = elToHighlight;
+      lastHighlightTime = now;
+
+      document.querySelectorAll('.doc-target-highlight').forEach(function (prev) {
+        if (prev !== elToHighlight) {
+          prev.classList.remove('doc-target-highlight');
+          if (prev._hlTimer) {
+            clearTimeout(prev._hlTimer);
+            delete prev._hlTimer;
+          }
+        }
+      });
+
+      elToHighlight.classList.remove('doc-target-highlight');
+      // Force synchronous reflow so browser plays the keyframe animation cleanly
+      void elToHighlight.offsetWidth;
+      elToHighlight.classList.add('doc-target-highlight');
+
+      if (elToHighlight._hlTimer) {
+        clearTimeout(elToHighlight._hlTimer);
+      }
+      elToHighlight._hlTimer = setTimeout(function () {
+        elToHighlight.classList.remove('doc-target-highlight');
+        delete elToHighlight._hlTimer;
+        if (lastHighlightEl === elToHighlight) {
+          lastHighlightEl = null;
+        }
+      }, 1650);
+    }
+
     function checkAndCorrectScroll() {
       if (!pendingTargetEl) {
         onManualScrollDone();
@@ -558,10 +612,7 @@ window.PageCommon = (function () {
       startManualScroll(Math.min(2400, Math.max(600, distance * 0.15 + 400)));
       performScroll(targetY);
 
-      targetEl.classList.add('doc-target-highlight');
-      setTimeout(function () {
-        targetEl.classList.remove('doc-target-highlight');
-      }, 1600);
+      triggerTargetHighlight(targetEl);
     }
 
     function scrollTocToItem(linkEl) {
@@ -612,6 +663,21 @@ window.PageCommon = (function () {
 
         if (target) {
           scrollToElement(target);
+          const semanticAnchor = link.getAttribute('data-anchor') || target.getAttribute('data-anchor') ||
+            (targetId && !targetId.startsWith('doc-nav-item-') && targetId !== 'doc-nav-main' ? targetId : '');
+          const realId = semanticAnchor || target.id || targetId;
+          try {
+            history.replaceState(null, null, '#' + realId);
+          } catch (err) { }
+          if (window.parent && window.parent !== window) {
+            try {
+              const docMatch = window.location.pathname.match(/(docs_view\/.*)$/);
+              if (docMatch && realId) {
+                const docRel = docMatch[1];
+                window.parent.postMessage({ type: 'docNavigated', url: docRel + '#' + realId }, '*');
+              }
+            } catch (err) { }
+          }
         }
       });
     });
@@ -626,28 +692,22 @@ window.PageCommon = (function () {
 
       if (href.startsWith('#')) {
         const targetId = link.getAttribute('data-target-id') || href.substring(1);
-        const inhSecPre = findMatchingInheritedSection(targetId);
-        let target = null;
-        if (!inhSecPre) {
-          target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
-          if (!target) {
-            try {
-              target = document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
-                document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
-            } catch (err) { }
+        let target = findDocTargetElement(null, targetId);
+        let inhSec = null;
+        if (target) {
+          const parentInh = target.closest ? target.closest('.inherited-methods-section') : null;
+          if (parentInh) {
+            inhSec = parentInh;
           }
         } else {
-          try {
-            target = document.getElementById(targetId) ||
-              document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
-              document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
-          } catch (err) { }
-        }
-        if (target && target.tagName === 'A' && target.closest) {
-          target = target.closest('.inherited-topic-entry') || target.closest('#Content > div') || target.closest('.CTopic') || target;
+          inhSec = findMatchingInheritedSection(targetId);
         }
 
-        const inhSec = inhSecPre || ((target && target.closest) ? target.closest('.inherited-methods-section') : findMatchingInheritedSection(targetId));
+        if (target && target.closest) {
+          const topicWrap = target.closest('.inherited-topic-entry') || target.closest('#Content > div') || target.closest('.CTopic');
+          if (topicWrap) target = topicWrap;
+        }
+
         if (inhSec && typeof inhSec._ensureExpandedAndRendered === 'function') {
           e.preventDefault();
           inhSec._ensureExpandedAndRendered(function () {
@@ -666,8 +726,9 @@ window.PageCommon = (function () {
             if (!resolvedTarget) {
               resolvedTarget = target || inhSec;
             }
-            if (resolvedTarget && resolvedTarget.tagName === 'A' && resolvedTarget.closest('.inherited-topic-entry')) {
-              resolvedTarget = resolvedTarget.closest('.inherited-topic-entry');
+            if (resolvedTarget && resolvedTarget.closest) {
+              const topicWrap = resolvedTarget.closest('.inherited-topic-entry') || resolvedTarget.closest('#Content > div') || resolvedTarget.closest('.CTopic');
+              if (topicWrap) resolvedTarget = topicWrap;
             }
             if (resolvedTarget) {
               scrollToElement(resolvedTarget);
@@ -679,13 +740,27 @@ window.PageCommon = (function () {
           e.preventDefault();
           scrollToElement(target);
 
-          const realId = target.id || target.getAttribute('data-doc-topic') || targetId;
+          const semanticAnchor = target.getAttribute('data-anchor') ||
+            (targetId && !targetId.startsWith('doc-nav-item-') && targetId !== 'doc-nav-main' ? targetId : '') ||
+            (target.id && !target.id.startsWith('doc-nav-item-') && target.id !== 'doc-nav-main' ? target.id : '');
+          const realId = semanticAnchor || target.id || target.getAttribute('data-doc-topic') || targetId;
           try {
             history.replaceState(null, null, '#' + realId);
           } catch (err) { }
 
+          if (window.parent && window.parent !== window) {
+            try {
+              const docMatch = window.location.pathname.match(/(docs_view\/.*)$/);
+              if (docMatch && realId) {
+                const docRel = docMatch[1];
+                window.parent.postMessage({ type: 'docNavigated', url: docRel + '#' + realId }, '*');
+              }
+            } catch (err) { }
+          }
+
           if (tocNav && realId) {
-            const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + realId + '"]');
+            const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + (target.id || realId) + '"]') ||
+              tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(realId) + '"]');
             if (mLink) {
               tocLinks.forEach(function (l) { l.classList.remove('active'); });
               mLink.classList.add('active');
@@ -846,14 +921,21 @@ window.PageCommon = (function () {
           variants.add(dec);
           variants.add(dec.replace(/^`/, ''));
           variants.add('`' + dec.replace(/^`/, ''));
+          variants.add(dec.replace(/\s*#\([^)]*\)/g, ''));
         } catch (e) { }
         if (str.includes('%60')) {
           const unpct = str.replace(/%60/g, '`');
           variants.add(unpct);
           variants.add(unpct.replace(/^`/, ''));
         }
+        if (str.includes('%23')) {
+          const unpct = str.replace(/%23/g, '#');
+          variants.add(unpct);
+          variants.add(unpct.replace(/\s*#\([^)]*\)/g, ''));
+        }
         variants.add(str.replace(/^`/, ''));
         variants.add('`' + str.replace(/^`/, ''));
+        variants.add(str.replace(/\s*#\([^)]*\)/g, ''));
       });
 
       // 1. Direct getElementById with variants
@@ -866,6 +948,13 @@ window.PageCommon = (function () {
 
       // 2. Exact attribute matches on data-anchor, data-doc-topic, a[name]
       for (const v of variants) {
+        try {
+          const safe = CSS.escape(v);
+          const el = document.querySelector(`[data-anchor="${safe}"]`) ||
+            document.querySelector(`[data-doc-topic="${safe}"]`) ||
+            document.querySelector(`a[name="${safe}"]`);
+          if (el) return el;
+        } catch (e) { }
         try {
           const safe = v.replace(/"/g, '\\"');
           const el = document.querySelector(`[data-anchor="${safe}"]`) ||
@@ -882,8 +971,9 @@ window.PageCommon = (function () {
         const da = c.getAttribute('data-anchor') || '';
         const dt = c.getAttribute('data-doc-topic') || '';
         const nm = c.getAttribute('name') || '';
+        const daClean = da.replace(/\s*#\([^)]*\)/g, '');
         for (const v of variants) {
-          if (da === v || dt === v || nm === v) {
+          if (da === v || dt === v || nm === v || daClean === v) {
             return c;
           }
         }
@@ -898,7 +988,7 @@ window.PageCommon = (function () {
             const c = candidates[i];
             const da = c.getAttribute('data-anchor') || '';
             const nm = c.getAttribute('name') || '';
-            if (da.endsWith('.' + shortName) || nm === shortName || da === shortName) {
+            if (da === shortName || nm === shortName || da.endsWith('.' + shortName)) {
               return c;
             }
           }
@@ -914,28 +1004,25 @@ window.PageCommon = (function () {
       if (e.data.type === 'scrollToSection') {
         const anchor = e.data.anchor;
         const targetId = e.data.id || anchor;
-        const inhSecPre = findMatchingInheritedSection(targetId) || findMatchingInheritedSection(anchor);
-        let target = null;
-        if (!inhSecPre) {
-          target = findDocTargetElement(anchor, targetId);
-        } else {
-          try {
-            target = document.getElementById(targetId) ||
-              document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
-              document.querySelector('a[name="' + CSS.escape(targetId) + '"]');
-          } catch (err) { }
-        }
 
-        if (target && target.tagName === 'A' && target.closest) {
-          const tableRow = target.closest('tr');
-          if (tableRow) {
-            target = tableRow;
-          } else {
-            target = target.closest('.inherited-topic-entry') || target.closest('.CTopic') || target.closest('#Content > div') || target;
+        // 1. Try finding native element first
+        let target = findDocTargetElement(anchor, targetId);
+        let inhSec = null;
+
+        if (target) {
+          const parentInh = target.closest ? target.closest('.inherited-methods-section') : null;
+          if (parentInh) {
+            inhSec = parentInh;
           }
+        } else {
+          inhSec = findMatchingInheritedSection(targetId) || findMatchingInheritedSection(anchor);
         }
 
-        const inhSec = inhSecPre || ((target && target.closest) ? target.closest('.inherited-methods-section') : findMatchingInheritedSection(targetId));
+        if (target && target.closest) {
+          const topicWrap = target.closest('.inherited-topic-entry') || target.closest('#Content > div') || target.closest('.CTopic');
+          if (topicWrap) target = topicWrap;
+        }
+
         if (inhSec && typeof inhSec._ensureExpandedAndRendered === 'function') {
           inhSec._ensureExpandedAndRendered(function () {
             const memberSafe = (targetId && targetId.includes('.')) ? targetId.slice(targetId.lastIndexOf('.') + 1).replace(/[^A-Za-z0-9_]/g, '_') : '';
@@ -953,15 +1040,19 @@ window.PageCommon = (function () {
             if (!resolvedTarget) {
               resolvedTarget = target || inhSec;
             }
-            if (resolvedTarget && resolvedTarget.tagName === 'A' && resolvedTarget.closest('.inherited-topic-entry')) {
-              resolvedTarget = resolvedTarget.closest('.inherited-topic-entry');
+            if (resolvedTarget && resolvedTarget.closest) {
+              const topicWrap = resolvedTarget.closest('.inherited-topic-entry') || resolvedTarget.closest('#Content > div') || resolvedTarget.closest('.CTopic');
+              if (topicWrap) resolvedTarget = topicWrap;
             }
             if (resolvedTarget) {
               scrollToElement(resolvedTarget);
               if (tocNav) {
+                const targetNavId = resolvedTarget.id || resolvedTarget.getAttribute('data-doc-topic');
+                const targetAnchor = resolvedTarget.getAttribute('data-anchor') || anchor || targetId;
                 const mLink = (memberSafe && tocNav.querySelector('.doc-toc-link[data-target-id="' + inhSec.id + '-' + memberSafe + '"]')) ||
-                  tocNav.querySelector('.doc-toc-link[data-target-id="' + targetId + '"]') ||
-                  tocNav.querySelector('.doc-toc-link[data-anchor="' + targetId + '"]') ||
+                  (targetNavId && tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]')) ||
+                  (targetAnchor && tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetAnchor) + '"]')) ||
+                  (targetId && tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetId) + '"]')) ||
                   tocNav.querySelector('.doc-toc-link[data-target-id="' + inhSec.id + '"]');
                 if (mLink) {
                   tocLinks.forEach(function (l) { l.classList.remove('active'); });
@@ -978,11 +1069,15 @@ window.PageCommon = (function () {
           });
           return;
         }
+
         if (target) {
           scrollToElement(target);
-          const targetNavId = target.id || target.getAttribute('data-doc-topic');
-          if (tocNav && targetNavId) {
-            const mLink = tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]');
+          if (tocNav) {
+            const targetNavId = target.id || target.getAttribute('data-doc-topic');
+            const targetAnchor = target.getAttribute('data-anchor') || anchor || targetId;
+            const mLink = (targetNavId && tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]')) ||
+              (targetAnchor && tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetAnchor) + '"]')) ||
+              (targetId && tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetId) + '"]'));
             if (mLink) {
               tocLinks.forEach(function (l) { l.classList.remove('active'); });
               mLink.classList.add('active');
@@ -1218,6 +1313,9 @@ window.PageCommon = (function () {
 
       e.preventDefault();
       e.stopPropagation();
+      try {
+        btn.blur();
+      } catch (err) { }
 
       const anchor = btn.getAttribute('data-anchor');
       if (!anchor) return;
@@ -1416,6 +1514,7 @@ window.PageCommon = (function () {
         document.querySelectorAll('.file-code-pane tr.active-line, .sv-code-table tr.active-line').forEach(function (tr) {
           tr.classList.remove('active-line');
         });
+        void targetRow.offsetWidth;
         targetRow.classList.add('active-line');
 
         const container = studioCodeContainer || document.getElementById('src-code-container') || document.querySelector('.code-container');

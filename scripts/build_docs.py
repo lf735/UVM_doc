@@ -939,14 +939,14 @@ def modernize_doc_files():
                 a_name = a_m.group(1) if a_m else None
                 if is_main:
                     if a_name:
-                        a_map[a_name] = 'doc-nav-main'
+                        a_map[a_name] = a_name
                         clean_a = re.sub(r'#\([^)]*\)', '', a_name)
                         if clean_a != a_name:
-                            a_map[clean_a] = 'doc-nav-main'
+                            a_map[clean_a] = a_name
                 else:
                     seq += 1
                     if a_name:
-                        target_id = f"doc-nav-item-{seq}"
+                        target_id = a_name
                         a_map[a_name] = target_id
                         clean_a = re.sub(r'#\([^)]*\)', '', a_name)
                         if clean_a != a_name:
@@ -1241,9 +1241,9 @@ def generate_orphan_doc_pages():
 
             is_main = (c_idx == 0)
             topic_id = 'doc-nav-main' if is_main else f'doc-nav-item-{c_idx}'
-            a_map[cname] = topic_id
+            a_map[cname] = cname
             if is_main:
-                a_map['MainTopic'] = 'doc-nav-main'
+                a_map['MainTopic'] = cname
 
             hierarchy_widget = pbc.render_class_hierarchy_card(
                 cname, root_rel, CLASS_TO_DOC_MAP, UVM_DB, GLOBAL_DOC_ANCHOR_MAPS
@@ -2108,9 +2108,9 @@ def build_class_hierarchy_data():
         children.sort()
 
         doc_path = CLASS_TO_DOC_MAP.get(cname)
-        target_id = 'doc-nav-main'
+        target_id = cname
         if doc_path and doc_path in GLOBAL_DOC_ANCHOR_MAPS:
-            target_id = GLOBAL_DOC_ANCHOR_MAPS[doc_path].get(cname, 'doc-nav-main')
+            target_id = GLOBAL_DOC_ANCHOR_MAPS[doc_path].get(cname, cname)
 
         src_f = cinfo.get('file', '')
         start_l = cinfo.get('start_line', 1)

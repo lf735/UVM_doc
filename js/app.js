@@ -872,7 +872,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const memberMap = ownMembersByClass.get(normClass);
       const existing = memberMap.get(item.name);
-      if (!existing || ((item.doc || '').includes('#doc-nav-') && !(existing.doc || '').includes('#doc-nav-'))) {
+      if (!existing || ((item.doc || '').includes('#') && !(existing.doc || '').includes('#'))) {
         memberMap.set(item.name, item);
       }
     });

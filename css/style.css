@@ -1257,18 +1257,110 @@ html[data-theme="dark"] .sidebar-tab-btn:hover {
   font-size: 0.74rem !important;
 }
 
-/* Subtle target flash animation when navigating */
+/* ==========================================================================
+   Target Element Highlight & Flash Animation (Discreet Pale Blue Fade)
+   ========================================================================== */
+
 .doc-target-highlight {
-  animation: docHighlightFade 1.6s ease-out;
+  animation: docHighlightFade 1.6s ease-in-out forwards;
+  border-radius: var(--radius-sm);
+  outline: none !important;
+}
+
+tr.doc-target-highlight td {
+  animation: docRowHighlightFade 1.6s ease-in-out forwards;
+  outline: none !important;
+}
+
+/* Suppress default browser focus rings / outlines / black frames on headings, anchor targets, and highlighted elements */
+:target,
+.doc-target-highlight,
+.doc-target-highlight *,
+.CTitle,
+.CTitle *,
+.CTitle a,
+.CTitle a:focus,
+.CTitle a:focus-visible,
+.CTitle a:active,
+.src-code-link,
+.src-code-link:focus,
+.src-code-link:focus-visible,
+.src-code-link:active,
+.inherited-title-main,
+.inherited-title-main *,
+.heading-anchor-btn,
+.heading-anchor-btn:focus,
+.heading-anchor-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 @keyframes docHighlightFade {
   0% {
+    background-color: transparent;
+  }
+  15% {
     background-color: var(--primary-light);
   }
-
+  40% {
+    background-color: var(--primary-light);
+  }
   100% {
     background-color: transparent;
+  }
+}
+
+@keyframes docRowHighlightFade {
+  0% {
+    background-color: transparent !important;
+  }
+  15% {
+    background-color: var(--primary-light) !important;
+  }
+  40% {
+    background-color: var(--primary-light) !important;
+  }
+  100% {
+    background-color: transparent !important;
+  }
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .doc-target-highlight {
+  animation-name: docHighlightFadeDark;
+}
+
+[data-theme="dark"] tr.doc-target-highlight td {
+  animation-name: docRowHighlightFadeDark;
+}
+
+@keyframes docHighlightFadeDark {
+  0% {
+    background-color: transparent;
+  }
+  15% {
+    background-color: rgba(138, 180, 248, 0.16);
+  }
+  40% {
+    background-color: rgba(138, 180, 248, 0.16);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes docRowHighlightFadeDark {
+  0% {
+    background-color: transparent !important;
+  }
+  15% {
+    background-color: rgba(138, 180, 248, 0.16) !important;
+  }
+  40% {
+    background-color: rgba(138, 180, 248, 0.16) !important;
+  }
+  100% {
+    background-color: transparent !important;
   }
 }
 
@@ -1506,6 +1598,7 @@ h3.CTitle {
   color: var(--text-main);
   text-decoration: none;
   transition: color 0.15s ease;
+  outline: none;
 }
 
 /* Headings or links inside headings that do NOT have a real navigational link */
