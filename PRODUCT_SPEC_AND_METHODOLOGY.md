@@ -271,13 +271,13 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
 │              Niveau 2 : Scripts de Vérification DOM & CSS              │
+│  - verify_code_containers.py (structure des blocs code & boutons copie)│
 │  - verify_examples.py (28 assertions fonctionnelles sur les studios)   │
 │  - verify_code_editor_tools.py (symboles cliquables & désambiguïsation)│
 │  - verify_inherited_members.py (intégrité des chaînes de classes & APIs)│
 │  - verify_stepper_calibration.py (calibration des 5 piliers & logs)    │
 │  - verify_source_notes.py (notes sources & 0 fuite Apache sur 39 suites)│
-│  - verify_architecture.py (25 assertions structurelles & fonctionnelles)│
-│  - verify_image_features.py (cadrage, boutons zoom, règles CSS non-bloqu)│
+│  - scripts/run_tests.py (orchestrateur unifié des 8 suites CI/local)   │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
@@ -289,7 +289,9 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ### 4.1 Check-list de Vérification Obligatoire
 
 Avant de valider une version :
+- [ ] **Suite Unifiée (CI & Local)** : `python scripts/run_tests.py` exécute les 8 suites et retourne `0` (`8/8 PASS`).
 - [ ] **Tests Unitaires de Coloration Syntaxique & Symboles Cliquables** : `python scripts/test_syntax_highlighter.py` (8/8 tests validés avec `test_clickable_uvm_symbols`).
+- [ ] **Vérification des Conteneurs de Code** : `python scripts/verify_code_containers.py` (validation des blocs code et boutons de copie).
 - [ ] **Vérification des Outils Éditeur & Symboles Cliquables** : `python scripts/verify_code_editor_tools.py` (6/6 suites validées).
 - [ ] **Validation de l'Héritage et des Membres Hérités** : `python scripts/verify_inherited_members.py` (vérification intégrale des relations d'héritage et méthodes héritées).
 - [ ] **Vérification du Search Pilot & Session** : `python scripts/verify_search_pilot.py` (assertions DOM, CSS et JS validées).
@@ -298,7 +300,6 @@ Avant de valider une version :
 - [ ] **Validation des Studios** : `python scripts/verify_examples.py` (28/28 assertions validées).
 - [ ] **Validation des Scénarios & Logs** : `python scripts/verify_stepper_calibration.py` (5/5 piliers vérifiés).
 - [ ] **Validation des Notes Sources** : `python scripts/verify_source_notes.py` (39/39 suites validées, zéro fuite de licence Apache).
-- [ ] **Tests d'Architecture** : Exécution de `verify_architecture.py` : les 25 tests doivent être validés (`PASS`).
 - [ ] **Auto-Expansion des Ancres Rétractées** : Tester la navigation vers une méthode héritée ou une sous-classe repliée : la zone parente doit se déplier automatiquement et la méthode doit être centrée avec halo surligné.
 - [ ] **Absence de barrière d'événements** : Vérifier que tous les backdrops de modales (`#search-modal`, `#image-zoom-modal`) sont en `display: none` et `visibility: hidden` lorsqu'ils sont inactifs.
 - [ ] **Précision du scrolling** : Tester un lien vers une méthode située à plus de 15 000 px dans `uvm_component` : la section doit atterrir avec un décalage de 24 px sous le bandeau supérieur.

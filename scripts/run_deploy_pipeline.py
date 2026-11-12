@@ -77,6 +77,12 @@ def main() -> None:
             print(f"  - {m.relative_to(BASE_DIR)}", file=sys.stderr)
         sys.exit(1)
 
+    # 5. Run unified verification test suites
+    run_step(
+        "Run automated verification test suites",
+        [python_exe, "scripts/run_tests.py"]
+    )
+
     print("\n🎉 All deploy.yml build steps executed and verified successfully!")
 
 if __name__ == "__main__":

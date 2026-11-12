@@ -47,6 +47,9 @@ jobs:
           echo "Verified $topic_count doc_topics bundles."
           ls -lh js/search_data.js js/uvm_symbol_quick.js data/rag_chunks.json data/rag_embeddings.bin
 
+      - name: Run automated verification test suites
+        run: python scripts/run_tests.py
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
