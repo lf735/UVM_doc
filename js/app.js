@@ -2636,13 +2636,19 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastAiRawResults = null;
   let lastAiQuery = null;
 
-  function renderStarRating(rating) {
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-      stars += i <= rating ? '★' : '☆';
-    }
-    return stars;
-  }
+  const searchModalsController = window.UvmSearchModals
+    ? window.UvmSearchModals.init({
+      onModelChange: () => {
+        lastAiRawResults = null;
+        lastAiQuery = null;
+      }
+    })
+    : null;
+  const updateCacheStatusUI = searchModalsController ? searchModalsController.updateCacheStatusUI : () => {};
+  const openAiConsentModal = searchModalsController ? searchModalsController.openAiConsentModal : () => {};
+  const closeAiConsentModal = searchModalsController ? searchModalsController.closeAiConsentModal : () => {};
+  const openSearchSettingsModal = searchModalsController ? searchModalsController.openSearchSettingsModal : () => {};
+  const closeSearchSettingsModal = searchModalsController ? searchModalsController.closeSearchSettingsModal : () => {};
 
   function renderPromptChips() {
     if (!promptsChips || !window.UVMRagEngine) return;
@@ -2658,7 +2664,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let html = '';
     prompts.slice(0, 15).forEach(p => {
       html += `
-            <button type="button" class="prompt-chip" data-query="${escapeHtml(p.query)}" title="${escapeHtml(p.category)} : cliquer pour poser cette question">
+            <button type="button" class="prompt-chip" data-query="${escapeHtml(p.query)}" title="${escapeHtml(p.category)}: click to ask this question">
               <div class="prompt-chip-top">
                 <span class="prompt-chip-cat">${escapeHtml(p.category)}</span>
                 <span class="prompt-chip-icon">↗</span>
@@ -2685,112 +2691,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function renderAiModelList(container, isConsent) {
-    if (!container || !window.UVMRagEngine) return;
-    const models = window.UVMRagEngine.models || [];
-    const currentId = window.UVMRagEngine.currentModelId;
-    let html = '';
-
-    models.forEach(m => {
-      const isSelected = m.id === currentId;
-      const recBadge = m.recommended ? `<span class="ai-badge-rec">Recommended</span>` : '';
-      const radioName = isConsent ? 'consent-model-radio' : 'settings-model-radio';
-      html += `
-            <label class="ai-model-card ${isSelected ? 'selected' : ''}" data-model-id="${m.id}" tabindex="0" role="radio" aria-checked="${isSelected}">
-              <input type="radio" name="${radioName}" value="${m.id}" class="ai-model-radio" ${isSelected ? 'checked' : ''}>
-              <div class="ai-model-info">
-                <div class="ai-model-header">
-                  <span class="ai-model-name">${escapeHtml(m.name)}</span>
-                  ${recBadge}
-                </div>
-                <div class="ai-model-desc">${escapeHtml(m.description)}</div>
-                <div class="ai-model-metrics">
-                  <span class="ai-metric-item"><strong>Speed:</strong> <span class="ai-stars">${renderStarRating(m.speedRating)}</span></span>
-                  <span class="ai-metric-item"><strong>Accuracy:</strong> <span class="ai-stars">${renderStarRating(m.accuracyRating)}</span></span>
-                  <span class="ai-metric-item"><strong>Size:</strong> ${escapeHtml(m.downloadSize)} (${escapeHtml(m.ramUsage)})</span>
-                </div>
-              </div>
-            </label>
-          `;
-    });
-
-    container.innerHTML = html;
-
-    container.querySelectorAll('.ai-model-card').forEach(card => {
-      const selectCard = () => {
-        container.querySelectorAll('.ai-model-card').forEach(c => {
-          c.classList.remove('selected');
-          c.setAttribute('aria-checked', 'false');
-        });
-        card.classList.add('selected');
-        card.setAttribute('aria-checked', 'true');
-        const radio = card.querySelector('input[type="radio"]');
-        if (radio) radio.checked = true;
-        const modelId = card.getAttribute('data-model-id');
-        window.UVMRagEngine.setModel(modelId);
-        lastAiRawResults = null;
-        lastAiQuery = null;
-      };
-
-      card.addEventListener('click', selectCard);
-      card.addEventListener('keydown', (e) => {
-        if (e.key === ' ' || e.key === 'Enter') {
-          e.preventDefault();
-          selectCard();
-        }
-      });
-    });
-  }
-
-  function updateCacheStatusUI() {
-    if (!settingsCacheStatus || !window.UVMRagEngine) return;
-    window.UVMRagEngine.getCacheInfo().then(({ count, sizeMB }) => {
-      if (settingsCacheStatus) {
-        settingsCacheStatus.textContent = sizeMB > 0 ? `Cached models storage: ~${sizeMB} MB (${count} files cached)` : 'No cached models';
-      }
-    }).catch(() => {
-      if (settingsCacheStatus) settingsCacheStatus.textContent = 'Cache status unavailable';
-    });
-  }
-
-  function openAiConsentModal() {
-    if (!aiConsentModal) return;
-    renderAiModelList(aiConsentModelList, true);
-    aiConsentModal.style.display = 'flex';
-    if (aiConsentConfirm) aiConsentConfirm.focus();
-  }
-
-  function closeAiConsentModal() {
-    if (!aiConsentModal) return;
-    aiConsentModal.style.display = 'none';
-    if (searchInput) searchInput.focus();
-  }
-
-  function openSearchSettingsModal() {
-    if (!searchSettingsModal) return;
-    renderAiModelList(settingsModelList, false);
-    if (settingsToggleHybrid && window.UVMRagEngine) {
-      settingsToggleHybrid.checked = window.UVMRagEngine.isHybrid;
-    }
-    if (settingsToggleAutoSemantic && window.UVMRagEngine) {
-      settingsToggleAutoSemantic.checked = window.UVMRagEngine.isAutoSemantic;
-    }
-    if (window.UVMRagEngine) {
-      const mode = window.UVMRagEngine.displayMode;
-      if (settingsModeConsolidated) settingsModeConsolidated.checked = (mode !== 'mixed');
-      if (settingsModeMixed) settingsModeMixed.checked = (mode === 'mixed');
-    }
-    updateCacheStatusUI();
-    searchSettingsModal.style.display = 'flex';
-    if (searchSettingsDone) searchSettingsDone.focus();
-  }
-
-  function closeSearchSettingsModal() {
-    if (!searchSettingsModal) return;
-    searchSettingsModal.style.display = 'none';
-    if (searchInput) searchInput.focus();
-  }
-
   function toggleAiSearchMode(forceState, options = {}) {
     const query = searchInput ? searchInput.value.trim() : '';
 
@@ -2807,7 +2707,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (searchInput) {
       if (modalAiEnabled) {
-        searchInput.placeholder = "Posez votre question en langage naturel (ex: 'how to pass vifs with config db')...";
+        searchInput.placeholder = "Ask a natural language question (e.g. 'how to pass vifs with config db')...";
       } else {
         searchInput.placeholder = "Search classes, functions, tasks, macros, files...";
       }
