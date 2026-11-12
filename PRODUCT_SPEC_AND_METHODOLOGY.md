@@ -135,6 +135,37 @@ Toutes les interactions entre le conteneur principal (`index.html` / `js/app.js`
 | Parent | `docs_view` | `scrollToSection` | `{ anchor: string, id: string }` | Ordonne au document de scroller directement et précisément jusqu'à un identifiant de section spécifique, en auto-dépliant au préalable tout conteneur ou accordéon parent rétracté via `expandAllRetractedAncestors()`. |
 | Parent | Tous iframes | Message objet | `{ theme: 'light' \| 'dark' }` | Diffuse le changement de thème vers les iframes pour mettre à jour `data-theme` sur `<html>`. |
 
+### 2.2 Structure des URLs et Routage Hash (`#/`)
+
+L'application principale (`index.html` / `js/app.js`) fonctionne en mode Single Page Application (SPA) compatible `file://` grâce au routage par fragment (`window.location.hash`), géré par `parseHash()` et `updateHash()` dans `js/app.js` et normalisé par `js/app_utils.js`.
+
+#### 1. Routes principales du conteneur SPA (`index.html`)
+
+| Mode d'affichage | Format du Hash | Exemple concret | Cible résolue |
+| :--- | :--- | :--- | :--- |
+| **Documentation** | `#/doc/<chemin_relatif>[#<ancre>]` | `#/doc/files/comps/uvm_driver-svh.html#uvm_driver.run_phase` | `docs_view/<chemin_relatif>[#<ancre>]` dans `#doc-frame` |
+| **Code Source** | `#/src/<chemin_relatif>[#L<ligne>]` | `#/src/comps/uvm_driver.svh#L42` | `src_view/<chemin_relatif>.html[#L<ligne>]` dans `#src-frame` |
+| **Exemple Studio** | `#/example/<categorie>/<suite>.html[#<ancre>]` | `#/example/basics/hello_world.html` | `examples_view/<categorie>/<suite>.html[#<ancre>]` dans `#doc-frame` |
+| **Index Exemples** | `#/examples` | `#/examples` | Active l'onglet `Examples` et ouvre `examples_view/basics/hello_world.html` |
+| **Split-View (Doc + Source)** | `#/split?doc=<doc_enc>&src=<src_enc>` | `#/split?doc=files%2Fcomps%2Fuvm_driver-svh.html&src=comps%2Fuvm_driver.svh` | Charge simultanément `#doc-frame` (`docs_view/` ou `examples_view/`) et `#src-frame` (`src_view/`) |
+
+#### 2. Formats des ancres intra-pages (`#<ancre>`)
+
+- **Sections globales de page (`docs_view`)** : `#MainTopic` (ou `#Overview`), `#Contents`, `#Summary`.
+- **Symboles natifs de la classe** : `#<classe>.<membre>` (ex. `#uvm_component.build_phase`) ou identifiant généré `#doc-nav-item-<n>`.
+- **Macros SystemVerilog** : `#<nom_macro>` ou encodage backtick `#%60<nom_macro>` (ex. `#%60uvm_info`), résolu par `findDocTargetElement()` avec tolérance sur les préfixes `` ` `` et suffixes `#(...)`.
+- **Sections et membres hérités (injectés par `js/doc_page.js`)** :
+  - Conteneur de section héritée : `#doc-nav-inherited-<n>`.
+  - Entrée de membre hérité : `#uvm-inh-<classe_parent>-<membre>` ou `#doc-nav-inherited-<n>-<membre>`.
+  - Lorsqu'un lien profond arrive avant l'injection asynchrone des membres hérités, `pendingSectionScroll` mémorise la cible et `retryPendingSectionScroll()` rejoue le `scrollToSection` juste après la construction du DOM hérité.
+- **Lignes de code source (`src_view` & `examples_view`)** : `#L<numero>` (ex. `#L128`), qui scrolle vers la ligne correspondante et applique la surbrillance de ligne.
+
+#### 3. Règles de normalisation (`js/app_utils.js`)
+
+- `normalizeDocUrl(url)` garantit le préfixe `docs_view/` (sauf si l'URL pointe déjà vers `examples_view/`), nettoie les `./` ou `/` initiaux et préserve intégralement le fragment `#<ancre>`.
+- `normalizeSrcUrl(url)` garantit le préfixe `src_view/` et l'extension `.html` avant `#L<ligne>`.
+- `normalizeExampleUrl(url)` garantit le préfixe `examples_view/` tout en conservant le sous-dossier de catégorie (`basics/`, `phasing/`, `sequences/`, `tlm-1/`, `tlm-2/`, `registers/`, `infrastructure/`, `integrated/`).
+
 ---
 
 ## 3. Méthodologie de Développement pour les Prochaines Implémentations

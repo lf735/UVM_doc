@@ -1264,3 +1264,37 @@ Lorsqu'un élément cible (par exemple une méthode héritée ou une sous-classe
 
 ### La Règle d'Or
 Tout système de navigation par ancres dans une interface moderne doit s'assurer de l'état visible et de la validité géométrique de l'élément cible et de tous ses ancêtres avant de tenter la moindre mesure ou animation de défilement.
+
+---
+
+## 34. Le Piège de la TOC : Double Scroll par Propagation & Sauts Intempestifs du Scroll-Spy
+
+### Le Symptôme Observé
+> *"Un clic sur Inherited dans la TOC fait scroller la page tout en haut puis redescend vers le premier élément hérité ; de plus, la TOC saute sans raison lorsqu'on parcourt la page."*
+
+### L'Anatomie du Piège
+1. **Bouillonnement de clic TOC (`initTOC` vs `initLinks`)** : Le clic sur `.doc-toc-link` dans `#doc-toc-nav` n'appelait pas `e.stopPropagation()`, si bien que l'événement remontait jusqu'à l'écouteur global `document` (`initLinks()`) qui ré-émettait un second `postMessage({ type: 'scrollToSection' })`.
+2. **Remontée aveugle sur `#Content > div`** : Dans `scrollToSection`, `resolvedTarget.closest('#Content > div')` remontait jusqu'au conteneur principal `#doc-nav-main` (`y = 0`) dès que la cible était `.inherited-methods-section` (imbriquée dans `#doc-nav-main`), déclenchant un scroll à `0` avant le saut vers la section héritée.
+3. **Scroll-spy agressif dans `scrollTocToItem()`** : `updateScrollSpy()` recentrait la TOC d'une demi-hauteur (`behavior: 'smooth'`) à **chaque frame de scroll** même si la section active n'avait pas changé, relançant l'animation en boucle, dépliant de force les groupes `.collapsed` et calculant `(0, 0)` sur des liens masqués (`offsetParent === null`).
+
+### La Solution Appliquée (`js/page_common.js`)
+1. **Isolation des clics TOC** : `e.stopPropagation()` sur `.doc-toc-link` et garde `if (!link || link.closest('#doc-toc-nav')) return;` dans `initLinks()`.
+2. **Résolution prioritaire `resolveScrollContainer(el)`** : Vérifie `.inherited-topic-entry` et `.inherited-methods-section` avant `#Content > div` / `.CTopic`.
+3. **Scroll-spy stabilisé** : Ne scrolle la TOC que lorsque `visualLink !== lastActiveTocLink`, ignore les liens masqués (`offsetParent === null`), respecte le survol/scroll manuel de l'utilisateur sur `#doc-toc-sidebar`, ne déplie pas les groupes repliés au simple défilement, et utilise un défilement minimal instantané au bord visible (le recentrage `smooth` étant réservé aux navigations explicites).
+
+---
+
+## 35. Le Piège de Performance de la Recherche Latérale (`renderAlphabeticalIndex` & Attachement DOM)
+
+### Le Symptôme Observé
+> *"Lorsque l'utilisateur tape une recherche dans le menu de gauche, la page freeze."*
+
+### L'Anatomie du Piège
+1. **Explosion combinatoire de l'index A-Z** : Au premier caractère tapé dans l'onglet A-Z, `renderAlphabeticalIndex()` appelait `getAugmentedSearchIndex()` (~30 000+ entrées avec héritage), re-filtrait tout par type, triait avec `localeCompare()` (très lent sur >20 000 éléments), puis injectait **des dizaines de milliers de nœuds `<a>` d'un seul coup** dans `sidebarContent.innerHTML`.
+2. **Réattachement massif d'écouteurs** : À chaque frappe (toutes les 150 ms), `attachSidebarListeners()` exécutait plusieurs `querySelectorAll` et attachait un `addEventListener('click')` individuel sur chaque élément rendu.
+3. **Parcours redondant de l'arborescence source** : `renderSourceTree()` appelait récursivement `hasMatch()` à chaque niveau de dossier sans mémoïsation.
+
+### La Solution Appliquée (`js/app.js`)
+1. **Plafonnement DOM & cache d'index** : Mise en cache des listes filtrées par type (`cachedAllowedBaseSymbols` / `cachedAllowedAugmentedSymbols`), remplacement de `localeCompare` par une comparaison directe `<` / `>`, et limitation du rendu initial à **200 résultats** (`MAX_INDEX_RENDER = 200`) avec un bouton *« Show all (N) »* pour charger le reste à la demande.
+2. **Délégation d'événements unique** : `bindSidebarDelegation()` attache un seul écouteur `click` sur `#sidebar-content` au lieu de milliers d'écouteurs par rendu.
+3. **Parcours en une passe** : `renderSourceTree()` évalue les dossiers de manière ascendante (`childrenHtml`) et supprime `hasMatch()`, tandis que le debounce de `#sidebar-filter` passe à `200 ms`.
