@@ -71,6 +71,54 @@ window.PageCommon = (function () {
     } catch (e) { }
   }
 
+  let uvmSymbolsWaiters = null;
+
+  function getUvmSymbols() {
+    if (window.UVM_SYMBOLS) return window.UVM_SYMBOLS;
+    try {
+      if (window.parent && window.parent !== window && window.parent.UVM_SYMBOLS) {
+        window.UVM_SYMBOLS = window.parent.UVM_SYMBOLS;
+        return window.UVM_SYMBOLS;
+      }
+    } catch (e) { }
+    return null;
+  }
+
+  function ensureUvmSymbolsLoaded(cb) {
+    const existing = getUvmSymbols();
+    if (existing) {
+      if (typeof cb === 'function') cb(existing);
+      return;
+    }
+    if (!uvmSymbolsWaiters) {
+      uvmSymbolsWaiters = [];
+      const flushWaiters = function () {
+        const syms = getUvmSymbols();
+        const q = uvmSymbolsWaiters || [];
+        uvmSymbolsWaiters = null;
+        q.forEach(function (fn) {
+          try { fn(syms); } catch (err) { }
+        });
+      };
+      const existingTag = document.querySelector('script[src*="uvm_symbol_quick.js"]');
+      if (existingTag) {
+        existingTag.addEventListener('load', flushWaiters, { once: true });
+        existingTag.addEventListener('error', flushWaiters, { once: true });
+        setTimeout(flushWaiters, 1500);
+      } else {
+        const s = document.createElement('script');
+        s.src = getDocRootRel() + 'js/uvm_symbol_quick.js';
+        s.async = true;
+        s.onload = flushWaiters;
+        s.onerror = flushWaiters;
+        document.head.appendChild(s);
+      }
+    }
+    if (typeof cb === 'function') {
+      uvmSymbolsWaiters.push(cb);
+    }
+  }
+
   // =========================================================================
   // Clipboard Utilities
   // =========================================================================
@@ -2238,7 +2286,12 @@ window.PageCommon = (function () {
       }
 
       function showTooltip(target, token) {
-        if (!window.UVM_SYMBOLS) return;
+        if (!getUvmSymbols()) {
+          ensureUvmSymbolsLoaded(function () {
+            if (currentTokenEl === target) showTooltip(target, token);
+          });
+          return;
+        }
         const cleanToken = token.trim().replace(/^`/, '');
         const owner = target.getAttribute('data-sym-owner') || '';
         const base = target.getAttribute('data-sym-base') || '';
@@ -2374,7 +2427,7 @@ window.PageCommon = (function () {
       }
 
       function setupMonacoLanguageProviders() {
-        if (window.__monacoProvidersRegistered || !window.monaco || !window.UVM_SYMBOLS) return;
+        if (window.__monacoProvidersRegistered || !window.monaco || !getUvmSymbols()) return;
         window.__monacoProvidersRegistered = true;
 
         monaco.languages.registerHoverProvider('systemverilog', {
@@ -3374,10 +3427,17 @@ window.PageCommon = (function () {
 
   function initInheritedMethodsExplorer() {
     const hierarchyWidgets = document.querySelectorAll('.class-hierarchy-widget[data-cname]');
-    if (!hierarchyWidgets.length || !window.UVM_SYMBOLS) return;
+    if (!hierarchyWidgets.length) return;
+    const syms = getUvmSymbols();
+    if (!syms) {
+      ensureUvmSymbolsLoaded(function (loaded) {
+        if (loaded) initInheritedMethodsExplorer();
+      });
+      return;
+    }
 
-    const classParents = window.UVM_SYMBOLS.classParents || {};
-    const classDocMembers = window.UVM_SYMBOLS.classDocMembers || {};
+    const classParents = syms.classParents || {};
+    const classDocMembers = syms.classDocMembers || {};
     const rootRel = getDocRootRel();
 
     hierarchyWidgets.forEach(function (hierarchyWidget) {
@@ -3862,8 +3922,8 @@ window.PageCommon = (function () {
 
   function lookupUvmSymbol(token, ownerClass, baseClass, symKind) {
     const cleanToken = String(token || '').trim().replace(/^`/, '');
-    if (!cleanToken || !window.UVM_SYMBOLS) return null;
-    const syms = window.UVM_SYMBOLS;
+    const syms = getUvmSymbols();
+    if (!cleanToken || !syms) return null;
 
     if (symKind === 'method' && syms.methods && syms.methods[cleanToken]) {
       return resolveMethodEntry(cleanToken, syms.methods[cleanToken], ownerClass, baseClass);

@@ -867,12 +867,15 @@ def render_html_shell(
         html_cls = f"doc-page {extra_html_classes}".strip()
         body_cls = f"doc-body {extra_body_classes}".strip()
 
-    # Scripts: uvm_symbol_quick.js and page_common.js are always loaded
+    # Scripts: uvm_symbol_quick.js (deferred) and page_common.js are always loaded
     scripts_list = [f"{root_rel}js/uvm_symbol_quick.js", f"{root_rel}js/page_common.js"]
     if extra_scripts:
         scripts_list.extend(extra_scripts)
 
-    scripts_markup = "\n  ".join([f'<script src="{s}"></script>' for s in scripts_list])
+    scripts_markup = "\n  ".join([
+        f'<script src="{s}" defer></script>' if s.endswith("uvm_symbol_quick.js") else f'<script src="{s}"></script>'
+        for s in scripts_list
+    ])
 
     # Payloads markup
     payloads_markup = ""
