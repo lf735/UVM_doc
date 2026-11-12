@@ -203,6 +203,17 @@ document.addEventListener('DOMContentLoaded', () => {
               anchor: rawAnchor,
               id: rawAnchor
             }, '*');
+            setTimeout(() => {
+              try {
+                if (frame.contentWindow) {
+                  frame.contentWindow.postMessage({
+                    type: 'scrollToSection',
+                    anchor: rawAnchor,
+                    id: rawAnchor
+                  }, '*');
+                }
+              } catch (e) { }
+            }, 80);
           }
         } else {
           // Navigating to top of the current page
@@ -242,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
           sendScroll();
           setTimeout(sendScroll, 120);
           setTimeout(sendScroll, 320);
+          setTimeout(sendScroll, 600);
         };
         frame.addEventListener('load', onFrameLoaded);
       }
