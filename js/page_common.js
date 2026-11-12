@@ -2678,93 +2678,6 @@ window.PageCommon = (function () {
   }
 
   // =========================================================================
-  // Simulation Console & Log Filters
-  // =========================================================================
-
-  function initSimulationConsole() {
-    const simTabs = document.querySelectorAll('.sim-tab');
-    const simCmdText = document.getElementById('sim-cmd-text');
-    const btnCopyCmd = document.getElementById('btn-copy-cmd');
-    const termFilters = document.querySelectorAll('.term-filter');
-    const terminalBody = document.getElementById('terminal-body');
-
-    if (!terminalBody && !simTabs.length) return;
-
-    const rawLogContent = terminalBody ? terminalBody.textContent : '';
-
-    // Structure terminal body into styled line elements
-    if (terminalBody && rawLogContent) {
-      const rawLogLines = rawLogContent.split('\n');
-      terminalBody.innerHTML = '';
-      rawLogLines.forEach(function (line, idx) {
-        const lineDiv = document.createElement('div');
-        lineDiv.className = 'term-line';
-        lineDiv.setAttribute('data-line', idx);
-        if (line.includes('UVM_ERROR') || line.includes('UVM_FATAL')) {
-          lineDiv.classList.add('line-error');
-        } else if (line.includes('UVM_WARNING')) {
-          lineDiv.classList.add('line-warning');
-        } else if (line.includes('UVM_INFO')) {
-          lineDiv.classList.add('line-info');
-        }
-        lineDiv.textContent = line || '\u00A0';
-        terminalBody.appendChild(lineDiv);
-      });
-    }
-
-    const SIM_COMMANDS = {
-      questa: 'make -f Makefile.questa run',
-      vcs: 'make -f Makefile.vcs run',
-      xcelium: 'make -f Makefile.ius run'
-    };
-
-    simTabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        simTabs.forEach(function (t) { t.classList.remove('active'); });
-        tab.classList.add('active');
-        const sim = tab.getAttribute('data-sim');
-        if (simCmdText && SIM_COMMANDS[sim]) {
-          simCmdText.textContent = SIM_COMMANDS[sim];
-        }
-      });
-    });
-
-    if (btnCopyCmd && simCmdText) {
-      btnCopyCmd.addEventListener('click', function () {
-        copyText(simCmdText.textContent).then(function () {
-          bindCopyFeedback(btnCopyCmd, 'Copy', 'Copied!');
-        });
-      });
-    }
-
-    termFilters.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        termFilters.forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        const level = btn.getAttribute('data-level');
-        if (!terminalBody) return;
-
-        const allLines = terminalBody.querySelectorAll('.term-line');
-        allLines.forEach(function (lineEl) {
-          const text = lineEl.textContent;
-          if (level === 'all') {
-            lineEl.style.display = '';
-          } else if (level === 'info') {
-            const show = lineEl.classList.contains('line-info') || text.includes('---') || text.includes('Report counts') || text.includes('PASSED');
-            lineEl.style.display = show ? '' : 'none';
-          } else if (level === 'warning') {
-            const show = lineEl.classList.contains('line-warning') || text.includes('---');
-            lineEl.style.display = show ? '' : 'none';
-          } else if (level === 'error') {
-            const show = lineEl.classList.contains('line-error') || text.includes('---');
-            lineEl.style.display = show ? '' : 'none';
-          }
-        });
-      });
-    });
-  }
-
-  // =========================================================================
   // Interactive Visual Flow Stepper
   // =========================================================================
 
@@ -4176,7 +4089,6 @@ window.PageCommon = (function () {
     }
 
     const studio = initCodeStudio();
-    initSimulationConsole();
 
     // Source Notes File Badge click -> switch file in Code Studio
     const notesBadge = document.querySelector('.notes-file-badge');
@@ -4235,7 +4147,6 @@ window.PageCommon = (function () {
     initTOC: initTOC,
     initHeadingAnchors: initHeadingAnchors,
     initCodeStudio: initCodeStudio,
-    initSimulationConsole: initSimulationConsole,
     initFlowStepper: initFlowStepper,
     initDerivedClasses: initDerivedClasses,
     initLinks: initLinks,

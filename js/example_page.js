@@ -5,7 +5,8 @@
  * Capabilities:
  * - Multi-File Code Studio (studioCodeContainer.scrollTo, studio-file-select, studio-tab-scroll-left) in js/page_common.js
  * - Zero-Dependency Native Client-Side ZIP Generator (crc32, createNativeZipBlob, initZipDownload) in this file
- * - Simulation Console & Interactive Visual Flow Stepper in js/page_common.js
+ * - Simulation Console & Log Filters (initSimulationConsole) in this file
+ * - Interactive Visual Flow Stepper in js/page_common.js
  */
 (function initExamplePage(global) {
   'use strict';
@@ -133,15 +134,110 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initZipDownload);
-  } else {
+  // =========================================================================
+  // Simulation Console & Log Filters
+  // =========================================================================
+
+  function initSimulationConsole() {
+    const simTabs = document.querySelectorAll('.sim-tab');
+    const simCmdText = document.getElementById('sim-cmd-text');
+    const btnCopyCmd = document.getElementById('btn-copy-cmd');
+    const termFilters = document.querySelectorAll('.term-filter');
+    const terminalBody = document.getElementById('terminal-body');
+
+    if (!terminalBody && !simTabs.length) return;
+    if (terminalBody && terminalBody.dataset.simBound) return;
+    if (terminalBody) terminalBody.dataset.simBound = '1';
+
+    const rawLogContent = terminalBody ? terminalBody.textContent : '';
+
+    // Structure terminal body into styled line elements
+    if (terminalBody && rawLogContent) {
+      const rawLogLines = rawLogContent.split('\n');
+      terminalBody.innerHTML = '';
+      rawLogLines.forEach(function (line, idx) {
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'term-line';
+        lineDiv.setAttribute('data-line', idx);
+        if (line.includes('UVM_ERROR') || line.includes('UVM_FATAL')) {
+          lineDiv.classList.add('line-error');
+        } else if (line.includes('UVM_WARNING')) {
+          lineDiv.classList.add('line-warning');
+        } else if (line.includes('UVM_INFO')) {
+          lineDiv.classList.add('line-info');
+        }
+        lineDiv.textContent = line || '\u00A0';
+        terminalBody.appendChild(lineDiv);
+      });
+    }
+
+    const SIM_COMMANDS = {
+      questa: 'make -f Makefile.questa run',
+      vcs: 'make -f Makefile.vcs run',
+      xcelium: 'make -f Makefile.ius run'
+    };
+
+    simTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        simTabs.forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        const sim = tab.getAttribute('data-sim');
+        if (simCmdText && SIM_COMMANDS[sim]) {
+          simCmdText.textContent = SIM_COMMANDS[sim];
+        }
+      });
+    });
+
+    if (btnCopyCmd && simCmdText && global.PageCommon && global.PageCommon.clipboard) {
+      btnCopyCmd.addEventListener('click', function () {
+        global.PageCommon.clipboard.copyText(simCmdText.textContent).then(function () {
+          global.PageCommon.clipboard.bindCopyFeedback(btnCopyCmd, 'Copy', 'Copied!');
+        });
+      });
+    }
+
+    termFilters.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        termFilters.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        const level = btn.getAttribute('data-level');
+        if (!terminalBody) return;
+
+        const allLines = terminalBody.querySelectorAll('.term-line');
+        allLines.forEach(function (lineEl) {
+          const text = lineEl.textContent;
+          if (level === 'all') {
+            lineEl.style.display = '';
+          } else if (level === 'info') {
+            const show = lineEl.classList.contains('line-info') || text.includes('---') || text.includes('Report counts') || text.includes('PASSED');
+            lineEl.style.display = show ? '' : 'none';
+          } else if (level === 'warning') {
+            const show = lineEl.classList.contains('line-warning') || text.includes('---');
+            lineEl.style.display = show ? '' : 'none';
+          } else if (level === 'error') {
+            const show = lineEl.classList.contains('line-error') || text.includes('---');
+            lineEl.style.display = show ? '' : 'none';
+          }
+        });
+      });
+    });
+  }
+
+  function initExampleFeatures() {
     initZipDownload();
+    initSimulationConsole();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExampleFeatures);
+  } else {
+    initExampleFeatures();
   }
 
   global.ExamplePage = {
     crc32: crc32,
     createNativeZipBlob: createNativeZipBlob,
-    initZipDownload: initZipDownload
+    initZipDownload: initZipDownload,
+    initSimulationConsole: initSimulationConsole
   };
 })(window);
