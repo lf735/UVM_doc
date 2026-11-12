@@ -27,7 +27,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install RAG embedding dependencies
-        run: pip install fastembed
+        run: pip install -r requirements-ci.txt
 
       - name: Generate search data and views
         run: python scripts/build_docs.py
@@ -35,12 +35,17 @@ jobs:
       - name: Generate RAG embeddings database
         run: python scripts/build_rag_embeddings.py
 
-      - name: Verify generated search and RAG assets
+      - name: Verify generated search, symbol, and RAG assets
         run: |
-          test -f js/search_data.js || { echo "::error::js/search_data.js not found!" ; exit 1; }
-          test -f data/rag_chunks.json || { echo "::error::data/rag_chunks.json not found!" ; exit 1; }
-          test -f data/rag_embeddings.bin || { echo "::error::data/rag_embeddings.bin not found!" ; exit 1; }
-          ls -lh js/search_data.js data/rag_chunks.json data/rag_embeddings.bin
+          test -s js/search_data.js || { echo "::error::js/search_data.js missing or empty!" ; exit 1; }
+          test -s js/uvm_symbol_quick.js || { echo "::error::js/uvm_symbol_quick.js missing or empty!" ; exit 1; }
+          test -d js/doc_topics || { echo "::error::js/doc_topics directory not found!" ; exit 1; }
+          topic_count=$(find js/doc_topics -maxdepth 1 -name '*.js' | wc -l)
+          test "$topic_count" -gt 0 || { echo "::error::js/doc_topics has no .js bundles!" ; exit 1; }
+          test -s data/rag_chunks.json || { echo "::error::data/rag_chunks.json missing or empty!" ; exit 1; }
+          test -s data/rag_embeddings.bin || { echo "::error::data/rag_embeddings.bin missing or empty!" ; exit 1; }
+          echo "Verified $topic_count doc_topics bundles."
+          ls -lh js/search_data.js js/uvm_symbol_quick.js data/rag_chunks.json data/rag_embeddings.bin
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
