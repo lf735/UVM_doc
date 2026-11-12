@@ -17,6 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 QUICK_JS = BASE_DIR / "js" / "uvm_symbol_quick.js"
 TOPICS_DIR = BASE_DIR / "js" / "doc_topics"
 PAGE_COMMON = BASE_DIR / "js" / "page_common.js"
+DOC_PAGE = BASE_DIR / "js" / "doc_page.js"
 CSS_PATH = BASE_DIR / "css" / "style.css"
 
 
@@ -162,8 +163,8 @@ def test_mro_and_ordering(class_parents, class_doc_members):
 
 
 def test_client_controller():
-    print("[3/4] Testing js/page_common.js dropdown category & file:// support...")
-    js = PAGE_COMMON.read_text(encoding="utf-8")
+    print("[3/4] Testing js/doc_page.js & js/page_common.js dropdown category & file:// support...")
+    js = DOC_PAGE.read_text(encoding="utf-8") + "\n" + PAGE_COMMON.read_text(encoding="utf-8")
     assert "querySelectorAll('.class-hierarchy-widget[data-cname]')" in js, "Missing multi-class iteration"
     assert "window.__registerUvmDocTopics" in js, "Missing JSONP bundle loader for file://"
     assert "loadUvmDocTopics" in js, "Missing dynamic script loader"

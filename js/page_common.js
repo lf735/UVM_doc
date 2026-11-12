@@ -370,6 +370,17 @@ window.PageCommon = (function () {
     return null;
   }
 
+  // Pending scrollToSection target (replayed once doc_page.js injects inherited sections)
+  let pendingSectionScroll = null;
+
+  function retryPendingSectionScroll() {
+    if (!pendingSectionScroll) return false;
+    const req = pendingSectionScroll;
+    pendingSectionScroll = null;
+    window.postMessage({ type: 'scrollToSection', anchor: req.anchor, id: req.id, navToken: req.navToken }, '*');
+    return true;
+  }
+
   // =========================================================================
   // Table of Contents (TOC) & ScrollSpy
   // =========================================================================
@@ -385,6 +396,16 @@ window.PageCommon = (function () {
     const tocEntries = [];
     const allGroups = [];
     let currentGroup = null;
+
+    function extractHeadingTitle(el, fallback) {
+      if (!el) return fallback || '';
+      const clone = el.cloneNode(true);
+      clone.querySelectorAll('.heading-anchor-btn, .anchor-copy-tooltip').forEach(function (n) {
+        n.remove();
+      });
+      const txt = (clone.innerText || clone.textContent || '').trim();
+      return txt || fallback || '';
+    }
 
     // Helper to process any inherited section and attach its items
     const processedInheritedSections = new Set();
@@ -417,7 +438,7 @@ window.PageCommon = (function () {
           data: {
             id: safeId,
             anchor: mainAnchor,
-            title: (mainTitleEl.innerText || mainTitleEl.textContent || 'Overview').trim(),
+            title: extractHeadingTitle(mainTitleEl, 'Overview'),
             type: 'main',
             el: mainTitleEl
           }
@@ -428,7 +449,7 @@ window.PageCommon = (function () {
       const topSummaryEl = mainTopicEl.querySelector('.Summary, .ContentsSummary') || contentEl.querySelector('.Summary, .ContentsSummary');
       if (topSummaryEl) {
         const sTitleEl = topSummaryEl.querySelector('.STitle');
-        const sTitleText = (sTitleEl ? (sTitleEl.innerText || sTitleEl.textContent || '') : '').trim();
+        const sTitleText = extractHeadingTitle(sTitleEl, '');
         const isContents = sTitleText.toLowerCase() === 'contents';
         const safeId = isContents ? 'doc-nav-contents' : 'doc-nav-summary';
         const safeAnchor = isContents ? 'Contents' : 'Summary';
@@ -474,7 +495,7 @@ window.PageCommon = (function () {
 
       const titleEl = topic.querySelector('.CTitle');
       if (!titleEl) return;
-      const rawTitle = (titleEl.innerText || titleEl.textContent || '').trim();
+      const rawTitle = extractHeadingTitle(titleEl, '');
       if (!rawTitle) return;
 
       const safeId = wrap.id || wrap.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
@@ -715,8 +736,11 @@ window.PageCommon = (function () {
     function triggerTargetHighlight(targetEl) {
       if (!targetEl) return;
       let elToHighlight = targetEl;
-      if (elToHighlight.tagName === 'A' || elToHighlight.tagName === 'SPAN') {
+      if (elToHighlight.classList && elToHighlight.classList.contains('inherited-methods-section')) {
+        elToHighlight = elToHighlight.querySelector('.inherited-section-header') || elToHighlight;
+      } else if (elToHighlight.tagName === 'A' || elToHighlight.tagName === 'SPAN') {
         const wrap = elToHighlight.closest('.inherited-topic-entry') ||
+          elToHighlight.closest('.inherited-section-header') ||
           elToHighlight.closest('#Content > div') ||
           elToHighlight.closest('tr') ||
           elToHighlight.closest('.CTopic') ||
@@ -802,19 +826,59 @@ window.PageCommon = (function () {
       triggerTargetHighlight(targetEl);
     }
 
-    function scrollTocToItem(linkEl) {
+    let lastActiveTocLink = null;
+    let lastTocUserInteract = 0;
+    if (tocSidebar) {
+      tocSidebar.addEventListener('wheel', function () { lastTocUserInteract = Date.now(); }, { passive: true });
+      tocSidebar.addEventListener('touchmove', function () { lastTocUserInteract = Date.now(); }, { passive: true });
+    }
+
+    function scrollTocToItem(linkEl, opts) {
       if (!linkEl || !tocSidebar) return;
+      if (linkEl.offsetParent === null) return;
+      const options = opts || {};
+      if (!options.force && (Date.now() - lastTocUserInteract < 1500 || tocSidebar.matches(':hover'))) {
+        return;
+      }
       const sidebarRect = tocSidebar.getBoundingClientRect();
       const linkRect = linkEl.getBoundingClientRect();
-      if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
-        const currentScroll = tocSidebar.scrollTop;
-        const targetOffset = linkRect.top - sidebarRect.top + currentScroll - (sidebarRect.height / 2);
-        try {
-          tocSidebar.scrollTo({ top: Math.max(0, targetOffset), behavior: 'smooth' });
-        } catch (e) {
-          tocSidebar.scrollTop = Math.max(0, targetOffset);
-        }
+      if (linkRect.height === 0 || sidebarRect.height === 0) return;
+
+      const pad = 16;
+      const isAbove = linkRect.top < sidebarRect.top + pad;
+      const isBelow = linkRect.bottom > sidebarRect.bottom - pad;
+      if (!isAbove && !isBelow) return;
+
+      const currentScroll = tocSidebar.scrollTop;
+      let targetOffset;
+      if (options.center) {
+        targetOffset = linkRect.top - sidebarRect.top + currentScroll - (sidebarRect.height / 2) + (linkRect.height / 2);
+      } else if (isAbove) {
+        targetOffset = currentScroll + (linkRect.top - sidebarRect.top) - pad;
+      } else {
+        targetOffset = currentScroll + (linkRect.bottom - sidebarRect.bottom) + pad;
       }
+      targetOffset = Math.max(0, targetOffset);
+
+      if (options.smooth) {
+        try {
+          tocSidebar.scrollTo({ top: targetOffset, behavior: 'smooth' });
+        } catch (e) {
+          tocSidebar.scrollTop = targetOffset;
+        }
+      } else {
+        tocSidebar.scrollTop = targetOffset;
+      }
+    }
+
+    function resolveScrollContainer(el) {
+      if (!el || !el.closest) return el;
+      if (el.classList && el.classList.contains('inherited-methods-section')) return el;
+      const inhEntry = el.closest('.inherited-topic-entry');
+      if (inhEntry) return inhEntry;
+      const inhSec = el.closest('.inherited-methods-section');
+      if (inhSec) return inhSec;
+      return el.closest('#Content > div') || el.closest('.CTopic') || el;
     }
 
     // Click on TOC link
@@ -822,6 +886,7 @@ window.PageCommon = (function () {
     tocLinks.forEach(function (link) {
       link.addEventListener('click', function (e) {
         e.preventDefault();
+        e.stopPropagation();
         const targetId = link.getAttribute('data-target-id');
         const target = document.getElementById(targetId) || document.querySelector('[data-doc-topic="' + targetId + '"]');
 
@@ -839,10 +904,12 @@ window.PageCommon = (function () {
           const inhSec = document.getElementById(inhSecId);
           if (inhSec && typeof inhSec._ensureExpandedAndRendered === 'function') {
             inhSec._ensureExpandedAndRendered(function () {
-              const resolvedTarget = document.getElementById(targetId);
-              if (resolvedTarget) {
-                scrollToElement(resolvedTarget);
-              }
+              requestAnimationFrame(function () {
+                const resolvedTarget = document.getElementById(targetId);
+                if (resolvedTarget) {
+                  scrollToElement(resolvedTarget);
+                }
+              });
             });
             return;
           }
@@ -869,8 +936,11 @@ window.PageCommon = (function () {
       });
     });
 
-    // Content in-page link click handling
-    contentEl.addEventListener('click', function (e) {
+    // Content in-page link click handling (bind once across TOC rebuilds)
+    if (window._uvmTocContentClickHandler) {
+      contentEl.removeEventListener('click', window._uvmTocContentClickHandler);
+    }
+    window._uvmTocContentClickHandler = function (e) {
       const link = e.target.closest('a[href*="#"]');
       if (!link) return;
       const href = link.getAttribute('href');
@@ -890,9 +960,8 @@ window.PageCommon = (function () {
           inhSec = findMatchingInheritedSection(targetId);
         }
 
-        if (target && target.closest) {
-          const topicWrap = target.closest('.inherited-topic-entry') || target.closest('#Content > div') || target.closest('.CTopic');
-          if (topicWrap) target = topicWrap;
+        if (target) {
+          target = resolveScrollContainer(target);
         }
 
         if (inhSec && typeof inhSec._ensureExpandedAndRendered === 'function') {
@@ -913,11 +982,8 @@ window.PageCommon = (function () {
             if (!resolvedTarget) {
               resolvedTarget = target || inhSec;
             }
-            if (resolvedTarget && resolvedTarget.closest) {
-              const topicWrap = resolvedTarget.closest('.inherited-topic-entry') || resolvedTarget.closest('#Content > div') || resolvedTarget.closest('.CTopic');
-              if (topicWrap) resolvedTarget = topicWrap;
-            }
             if (resolvedTarget) {
+              resolvedTarget = resolveScrollContainer(resolvedTarget);
               scrollToElement(resolvedTarget);
             }
           });
@@ -956,12 +1022,13 @@ window.PageCommon = (function () {
                 pB.classList.remove('collapsed');
                 updateToggleAllBtn();
               }
-              scrollTocToItem(mLink);
+              scrollTocToItem(mLink, { force: true, smooth: true, center: true });
             }
           }
         }
       }
-    });
+    };
+    contentEl.addEventListener('click', window._uvmTocContentClickHandler);
 
     // Group chevron toggles
     const chevronBtns = tocNav.querySelectorAll('.doc-toc-chevron-btn');
@@ -1002,7 +1069,7 @@ window.PageCommon = (function () {
     }
 
     if (toggleAllBtn) {
-      toggleAllBtn.addEventListener('click', function () {
+      toggleAllBtn.onclick = function () {
         const allBlocks = tocNav.querySelectorAll('.doc-toc-group-block');
         const anyExpanded = Array.from(allBlocks).some(function (b) { return !b.classList.contains('collapsed'); });
         if (anyExpanded) {
@@ -1011,7 +1078,7 @@ window.PageCommon = (function () {
           allBlocks.forEach(function (b) { b.classList.remove('collapsed'); });
         }
         updateToggleAllBtn();
-      });
+      };
     }
 
     // ScrollSpy
@@ -1027,8 +1094,6 @@ window.PageCommon = (function () {
         const rect = el.getBoundingClientRect();
         if (rect.top <= 100) {
           activeItem = item;
-        } else {
-          break;
         }
       }
 
@@ -1037,39 +1102,52 @@ window.PageCommon = (function () {
       }
 
       if (activeItem && activeItem.link) {
-        tocLinks.forEach(function (link) {
-          link.classList.toggle('active', link === activeItem.link);
-        });
-
+        let visualLink = activeItem.link;
         const parentBlock = activeItem.link.closest('.doc-toc-group-block');
         if (parentBlock && parentBlock.classList.contains('collapsed') && !activeItem.link.classList.contains('doc-toc-group-title')) {
-          parentBlock.classList.remove('collapsed');
-          updateToggleAllBtn();
+          const groupTitleLink = parentBlock.querySelector('.doc-toc-group-title');
+          if (groupTitleLink) visualLink = groupTitleLink;
         }
 
-        scrollTocToItem(activeItem.link);
+        const linkChanged = visualLink !== lastActiveTocLink;
+        lastActiveTocLink = visualLink;
 
-        if (window.parent && window.parent !== window) {
-          try {
-            window.parent.postMessage({
-              type: 'docSectionChanged',
-              anchor: activeItem.anchor || activeItem.id,
-              id: activeItem.id,
-              title: activeItem.title
-            }, '*');
-          } catch (err) { }
+        tocLinks.forEach(function (link) {
+          link.classList.toggle('active', link === visualLink);
+        });
+
+        if (linkChanged) {
+          scrollTocToItem(visualLink, { smooth: false, center: false });
+
+          if (window.parent && window.parent !== window) {
+            try {
+              window.parent.postMessage({
+                type: 'docSectionChanged',
+                anchor: activeItem.anchor || activeItem.id,
+                id: activeItem.id,
+                title: activeItem.title
+              }, '*');
+            } catch (err) { }
+          }
         }
       }
     }
 
-    window.addEventListener('scrollend', function () {
+    if (window._uvmTocScrollEndHandler) {
+      window.removeEventListener('scrollend', window._uvmTocScrollEndHandler);
+    }
+    window._uvmTocScrollEndHandler = function () {
       if (isManualScrolling) {
         clearTimeout(manualScrollTimer);
         checkAndCorrectScroll();
       }
-    });
+    };
+    window.addEventListener('scrollend', window._uvmTocScrollEndHandler);
 
-    window.addEventListener('scroll', function () {
+    if (window._uvmTocScrollHandler) {
+      window.removeEventListener('scroll', window._uvmTocScrollHandler);
+    }
+    window._uvmTocScrollHandler = function () {
       if (isManualScrolling) {
         clearTimeout(manualScrollTimer);
         manualScrollTimer = setTimeout(checkAndCorrectScroll, 160);
@@ -1080,7 +1158,8 @@ window.PageCommon = (function () {
         updateScrollSpy();
         scrollTimer = null;
       });
-    }, { passive: true });
+    };
+    window.addEventListener('scroll', window._uvmTocScrollHandler, { passive: true });
 
     function findDocTargetElement(anchor, targetId) {
       if (!anchor && !targetId) return null;
@@ -1185,112 +1264,116 @@ window.PageCommon = (function () {
       return null;
     }
 
-    // Cross-frame scrollToSection listener
-    registerMessageHandler(function (data) {
-      if (data.type === 'scrollToSection') {
-        const anchor = data.anchor;
-        const targetId = data.id || anchor;
-        const navToken = data.navToken;
+    // Cross-frame scrollToSection listener (register once across TOC rebuilds)
+    if (!window._uvmTocScrollMsgRegistered) {
+      window._uvmTocScrollMsgRegistered = true;
+      registerMessageHandler(function (data) {
+        if (data.type === 'scrollToSection') {
+          const anchor = data.anchor;
+          const targetId = data.id || anchor;
+          const navToken = data.navToken;
 
-        // 1. Prioritize inherited methods / classes explorer if anchor matches
-        const inhSec = findMatchingInheritedSection(targetId) || findMatchingInheritedSection(anchor);
+          // 1. Prioritize inherited methods / classes explorer if anchor matches
+          const inhSec = findMatchingInheritedSection(targetId) || findMatchingInheritedSection(anchor);
 
-        if (inhSec && typeof inhSec._ensureExpandedAndRendered === 'function') {
-          inhSec._ensureExpandedAndRendered(function () {
-            const memberSafe = (targetId && targetId.includes('.'))
-              ? targetId.slice(targetId.lastIndexOf('.') + 1).replace(/[^A-Za-z0-9_]/g, '_')
-              : (targetId ? targetId.replace(/[^A-Za-z0-9_]/g, '_') : '');
+          if (inhSec && typeof inhSec._ensureExpandedAndRendered === 'function') {
+            pendingSectionScroll = null;
+            inhSec._ensureExpandedAndRendered(function () {
+              const memberSafe = (targetId && targetId.includes('.'))
+                ? targetId.slice(targetId.lastIndexOf('.') + 1).replace(/[^A-Za-z0-9_]/g, '_')
+                : (targetId ? targetId.replace(/[^A-Za-z0-9_]/g, '_') : '');
 
-            let resolvedTarget = document.getElementById(targetId);
-            if (!resolvedTarget) {
-              try {
-                resolvedTarget = inhSec.querySelector('[data-origin-anchor="' + CSS.escape(targetId) + '"]') ||
-                  inhSec.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
-                  inhSec.querySelector('a[name="' + CSS.escape(targetId) + '"]') ||
-                  document.querySelector('[data-origin-anchor="' + CSS.escape(targetId) + '"]') ||
-                  document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]');
-              } catch (err) { }
-            }
-            if (!resolvedTarget && memberSafe) {
-              resolvedTarget = document.getElementById(inhSec.id + '-' + memberSafe) ||
-                inhSec.querySelector('.inherited-topic-entry[id$="-' + CSS.escape(memberSafe) + '"]') ||
-                inhSec.querySelector('[data-member-name="' + CSS.escape(memberSafe) + '"]');
-            }
-            if (!resolvedTarget) {
-              resolvedTarget = inhSec.querySelector('.inherited-topic-entry[data-origin-class="' + CSS.escape(targetId) + '"]');
-            }
-            if (!resolvedTarget) {
-              resolvedTarget = inhSec;
-            }
-            if (resolvedTarget && resolvedTarget.closest) {
-              const topicWrap = resolvedTarget.closest('.inherited-topic-entry') || resolvedTarget.closest('#Content > div') || resolvedTarget.closest('.CTopic');
-              if (topicWrap) resolvedTarget = topicWrap;
-            }
+              let resolvedTarget = document.getElementById(targetId);
+              if (!resolvedTarget) {
+                try {
+                  resolvedTarget = inhSec.querySelector('[data-origin-anchor="' + CSS.escape(targetId) + '"]') ||
+                    inhSec.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]') ||
+                    inhSec.querySelector('a[name="' + CSS.escape(targetId) + '"]') ||
+                    document.querySelector('[data-origin-anchor="' + CSS.escape(targetId) + '"]') ||
+                    document.querySelector('[data-anchor="' + CSS.escape(targetId) + '"]');
+                } catch (err) { }
+              }
+              if (!resolvedTarget && memberSafe) {
+                resolvedTarget = document.getElementById(inhSec.id + '-' + memberSafe) ||
+                  inhSec.querySelector('.inherited-topic-entry[id$="-' + CSS.escape(memberSafe) + '"]') ||
+                  inhSec.querySelector('[data-member-name="' + CSS.escape(memberSafe) + '"]');
+              }
+              if (!resolvedTarget) {
+                resolvedTarget = inhSec.querySelector('.inherited-topic-entry[data-origin-class="' + CSS.escape(targetId) + '"]');
+              }
+              if (!resolvedTarget) {
+                resolvedTarget = inhSec;
+              }
+              if (resolvedTarget) {
+                resolvedTarget = resolveScrollContainer(resolvedTarget);
+              }
 
+              requestAnimationFrame(function () {
+                setTimeout(function () {
+                  expandAllRetractedAncestors(resolvedTarget);
+                  scrollToElement(resolvedTarget);
+                  sendScrollAck(navToken, anchor, targetId);
+                  const liveTocNav = document.getElementById('doc-toc-nav');
+                  if (liveTocNav) {
+                    const targetNavId = resolvedTarget.id || resolvedTarget.getAttribute('data-doc-topic');
+                    const targetAnchor = resolvedTarget.getAttribute('data-anchor') || anchor || targetId;
+                    const mLink = (memberSafe && liveTocNav.querySelector('.doc-toc-link[data-target-id="' + inhSec.id + '-' + memberSafe + '"]')) ||
+                      (targetNavId && liveTocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]')) ||
+                      (targetAnchor && liveTocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetAnchor) + '"]')) ||
+                      (targetId && liveTocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetId) + '"]')) ||
+                      liveTocNav.querySelector('.doc-toc-link[data-target-id="' + inhSec.id + '"]');
+                    if (mLink) {
+                      liveTocNav.querySelectorAll('.doc-toc-link').forEach(function (l) { l.classList.remove('active'); });
+                      mLink.classList.add('active');
+                      const pB = mLink.closest('.doc-toc-group-block');
+                      if (pB && pB.classList.contains('collapsed')) {
+                        pB.classList.remove('collapsed');
+                      }
+                      scrollTocToItem(mLink, { force: true, smooth: true, center: true });
+                    }
+                  }
+                }, 40);
+              });
+            });
+            return;
+          }
+
+          // 2. Otherwise find native element on page
+          let target = findDocTargetElement(anchor, targetId);
+          if (target) {
+            pendingSectionScroll = null;
+            target = resolveScrollContainer(target);
+            expandAllRetractedAncestors(target);
             requestAnimationFrame(function () {
               setTimeout(function () {
-                expandAllRetractedAncestors(resolvedTarget);
-                scrollToElement(resolvedTarget);
+                scrollToElement(target);
                 sendScrollAck(navToken, anchor, targetId);
-                if (tocNav) {
-                  const targetNavId = resolvedTarget.id || resolvedTarget.getAttribute('data-doc-topic');
-                  const targetAnchor = resolvedTarget.getAttribute('data-anchor') || anchor || targetId;
-                  const mLink = (memberSafe && tocNav.querySelector('.doc-toc-link[data-target-id="' + inhSec.id + '-' + memberSafe + '"]')) ||
-                    (targetNavId && tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]')) ||
-                    (targetAnchor && tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetAnchor) + '"]')) ||
-                    (targetId && tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetId) + '"]')) ||
-                    tocNav.querySelector('.doc-toc-link[data-target-id="' + inhSec.id + '"]');
+                const liveTocNav = document.getElementById('doc-toc-nav');
+                if (liveTocNav) {
+                  const targetNavId = target.id || target.getAttribute('data-doc-topic');
+                  const targetAnchor = target.getAttribute('data-anchor') || anchor || targetId;
+                  const mLink = (targetNavId && liveTocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]')) ||
+                    (targetAnchor && liveTocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetAnchor) + '"]')) ||
+                    (targetId && liveTocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetId) + '"]'));
                   if (mLink) {
-                    tocLinks.forEach(function (l) { l.classList.remove('active'); });
+                    liveTocNav.querySelectorAll('.doc-toc-link').forEach(function (l) { l.classList.remove('active'); });
                     mLink.classList.add('active');
                     const pB = mLink.closest('.doc-toc-group-block');
                     if (pB && pB.classList.contains('collapsed')) {
                       pB.classList.remove('collapsed');
-                      updateToggleAllBtn();
                     }
-                    scrollTocToItem(mLink);
+                    scrollTocToItem(mLink, { force: true, smooth: true, center: true });
                   }
                 }
               }, 40);
             });
-          });
-          return;
-        }
-
-        // 2. Otherwise find native element on page
-        let target = findDocTargetElement(anchor, targetId);
-        if (target) {
-          if (target.closest) {
-            const topicWrap = target.closest('.inherited-topic-entry') || target.closest('#Content > div') || target.closest('.CTopic');
-            if (topicWrap) target = topicWrap;
+          } else if (targetId || anchor) {
+            // Inherited sections may not be injected yet (e.g. deferred uvm_symbol_quick.js)
+            pendingSectionScroll = { anchor: anchor, id: targetId, navToken: navToken };
           }
-          expandAllRetractedAncestors(target);
-          requestAnimationFrame(function () {
-            setTimeout(function () {
-              scrollToElement(target);
-              sendScrollAck(navToken, anchor, targetId);
-              if (tocNav) {
-                const targetNavId = target.id || target.getAttribute('data-doc-topic');
-                const targetAnchor = target.getAttribute('data-anchor') || anchor || targetId;
-                const mLink = (targetNavId && tocNav.querySelector('.doc-toc-link[data-target-id="' + targetNavId + '"]')) ||
-                  (targetAnchor && tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetAnchor) + '"]')) ||
-                  (targetId && tocNav.querySelector('.doc-toc-link[data-anchor="' + CSS.escape(targetId) + '"]'));
-                if (mLink) {
-                  tocLinks.forEach(function (l) { l.classList.remove('active'); });
-                  mLink.classList.add('active');
-                  const pB = mLink.closest('.doc-toc-group-block');
-                  if (pB && pB.classList.contains('collapsed')) {
-                    pB.classList.remove('collapsed');
-                    updateToggleAllBtn();
-                  }
-                  scrollTocToItem(mLink);
-                }
-              }
-            }, 40);
-          });
         }
-      }
-    });
+      });
+    }
 
     function handleHashNav(hashVal) {
       if (!hashVal) return;
@@ -2678,443 +2761,6 @@ window.PageCommon = (function () {
   }
 
   // =========================================================================
-  // Derived Classes & Component Hierarchy Cards
-  // =========================================================================
-
-  function initDerivedClasses() {
-    document.addEventListener('click', function (e) {
-      const header = e.target.closest('.derived-classes-header');
-      if (header) {
-        const card = header.closest('.derived-classes-card, .hierarchy-subclasses-card');
-        if (card) card.classList.toggle('collapsed');
-      }
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        const header = e.target.closest('.derived-classes-header');
-        if (header) {
-          e.preventDefault();
-          const card = header.closest('.derived-classes-card, .hierarchy-subclasses-card');
-          if (card) card.classList.toggle('collapsed');
-        }
-      }
-    });
-
-    // Handle click on derived-class-pill for exact in-page or cross-page jump
-    document.addEventListener('click', function (e) {
-      const pill = e.target.closest('.derived-class-pill, .hierarchy-flow-node.parent');
-      if (!pill) return;
-      const href = pill.getAttribute('href');
-      if (!href || pill.classList.contains('src-code-link')) return;
-
-      try {
-        const targetUrl = new URL(href, window.location.href);
-        const isSamePage = targetUrl.pathname === window.location.pathname;
-        const hash = targetUrl.hash;
-
-        if (isSamePage && hash) {
-          e.preventDefault();
-          history.pushState(null, '', hash);
-          const raw = decodeURIComponent(hash.replace(/^#/, ''));
-          window.postMessage({ type: 'scrollToSection', anchor: raw, id: raw }, '*');
-          return;
-        }
-
-        if (window.parent && window.parent !== window) {
-          e.preventDefault();
-          const match = targetUrl.pathname.match(/(docs_view\/.*)$/);
-          if (match) {
-            const fullDocRel = match[1] + hash;
-            window.parent.postMessage({ type: 'openDocView', url: fullDocRel }, '*');
-            return;
-          }
-        }
-      } catch (err) { }
-    });
-
-    try {
-      const curHash = (window.location.hash || '').replace(/^#/, '');
-      if (curHash) {
-        const decHash = decodeURIComponent(curHash);
-        const directTarget = document.getElementById(decHash) || document.querySelector('[name="' + CSS.escape(decHash) + '"]');
-        if (directTarget) {
-          expandAllRetractedAncestors(directTarget);
-        }
-      }
-    } catch (e) { }
-  }
-
-  // =========================================================================
-  // Inherited Methods & Elements Explorer (From Parent Docs, Oldest -> Newest)
-  // =========================================================================
-
-  const DOC_TOPIC_CACHE = Object.create(null);
-  const DOC_TOPIC_WAITERS = Object.create(null);
-
-  window.__registerUvmDocTopics = function (clsName, items) {
-    DOC_TOPIC_CACHE[clsName] = Array.isArray(items) ? items : [];
-    const waiters = DOC_TOPIC_WAITERS[clsName];
-    if (waiters) {
-      delete DOC_TOPIC_WAITERS[clsName];
-      waiters.forEach(function (fn) {
-        try { fn(DOC_TOPIC_CACHE[clsName]); } catch (e) { }
-      });
-    }
-  };
-
-  function getDocRootRel() {
-    const cleanPath = window.location.pathname.replace(/\\/g, '/');
-    const m = cleanPath.match(/docs_view\/(.*)$/);
-    if (m && m[1]) {
-      const parts = m[1].split('/').filter(Boolean);
-      return '../'.repeat(parts.length);
-    }
-    return '../../';
-  }
-
-  function loadUvmDocTopics(clsName, rootRel) {
-    if (Object.prototype.hasOwnProperty.call(DOC_TOPIC_CACHE, clsName)) {
-      return Promise.resolve(DOC_TOPIC_CACHE[clsName]);
-    }
-    return new Promise(function (resolve) {
-      if (!DOC_TOPIC_WAITERS[clsName]) {
-        DOC_TOPIC_WAITERS[clsName] = [];
-        const safeName = String(clsName).replace(/[^A-Za-z0-9_]/g, '_');
-        const script = document.createElement('script');
-        script.src = rootRel + 'js/doc_topics/' + safeName + '.js';
-        script.async = true;
-        script.onerror = function () {
-          if (!Object.prototype.hasOwnProperty.call(DOC_TOPIC_CACHE, clsName)) {
-            window.__registerUvmDocTopics(clsName, []);
-          }
-        };
-        document.head.appendChild(script);
-      }
-      DOC_TOPIC_WAITERS[clsName].push(resolve);
-    });
-  }
-
-  function initInheritedMethodsExplorer() {
-    const hierarchyWidgets = document.querySelectorAll('.class-hierarchy-widget[data-cname]');
-    if (!hierarchyWidgets.length) return;
-    const syms = getUvmSymbols();
-    if (!syms) {
-      ensureUvmSymbolsLoaded(function (loaded) {
-        if (loaded) initInheritedMethodsExplorer();
-      });
-      return;
-    }
-
-    const classParents = syms.classParents || {};
-    const classDocMembers = syms.classDocMembers || {};
-    const rootRel = getDocRootRel();
-
-    hierarchyWidgets.forEach(function (hierarchyWidget) {
-      const cname = hierarchyWidget.getAttribute('data-cname');
-      if (!cname) return;
-
-      const cNode = classParents[cname];
-      if (!cNode || !cNode.parent) return;
-
-      const summaryEl = hierarchyWidget.closest('.Summary, .ClassSummary')
-        || document.getElementById('doc-nav-summary-' + cname)
-        || hierarchyWidget.closest('.CClass');
-      if (!summaryEl || !summaryEl.parentNode) return;
-
-      function resolveParentName(clsName) {
-        const node = classParents[clsName];
-        if (!node || !node.parent) return '';
-        if (node.parent === 'BASE' && clsName === 'uvm_reg_sequence') return 'uvm_sequence';
-        if (node.parent === 'IF' && clsName === 'uvm_port_base') return 'uvm_void';
-        return node.parent;
-      }
-
-      // Build ancestor chain from direct parent upward to root
-      const ancestorsNearestFirst = [];
-      let curr = resolveParentName(cname);
-      const visited = new Set([cname]);
-      while (curr && !visited.has(curr)) {
-        visited.add(curr);
-        ancestorsNearestFirst.push(curr);
-        curr = resolveParentName(curr);
-      }
-      if (!ancestorsNearestFirst.length) return;
-
-      // Collect own documented/defined symbols on this class so redefined ones are excluded
-      const ownNames = new Set(['new']);
-      (classDocMembers[cname] || []).forEach(function (m) {
-        if (m && m.n) ownNames.add(m.n);
-      });
-      summaryEl.querySelectorAll('.STable tr:not(.SGroup):not(.SClass):not(.SMain):not(.SHierarchy):not(.SPrototype) td.SEntry a').forEach(function (a) {
-        const txt = (a.textContent || '').trim();
-        if (txt) ownNames.add(txt);
-      });
-
-      // Deduplicate nearest-to-oldest (nearest ancestor wins when overridden in hierarchy)
-      const seenNames = new Set(ownNames);
-      const retainedByAncestor = new Map();
-      ancestorsNearestFirst.forEach(function (anc) {
-        const members = classDocMembers[anc] || [];
-        const keep = [];
-        const keepSet = new Set();
-        members.forEach(function (m) {
-          if (!m || !m.n || seenNames.has(m.n)) return;
-          seenNames.add(m.n);
-          keep.push(m.n);
-          keepSet.add(m.n);
-        });
-        if (keep.length > 0) {
-          retainedByAncestor.set(anc, { names: keep, nameSet: keepSet });
-        }
-      });
-
-      if (retainedByAncestor.size === 0) return;
-
-      // Display order: oldest ancestor -> most recent parent
-      const ancestorsOldestFirst = ancestorsNearestFirst
-        .slice()
-        .reverse()
-        .filter(function (anc) { return retainedByAncestor.has(anc); });
-
-      let totalCount = 0;
-      ancestorsOldestFirst.forEach(function (anc) {
-        totalCount += retainedByAncestor.get(anc).names.length;
-      });
-
-      const inheritedSection = document.createElement('div');
-      inheritedSection.className = 'inherited-methods-section inherited-doc-category';
-      inheritedSection.id = 'doc-nav-inherited-' + cname.replace(/[^A-Za-z0-9_]/g, '_');
-      inheritedSection.setAttribute('data-cname', cname);
-
-      const inheritedPrefix = inheritedSection.id + '-';
-      const inheritedTocItems = [];
-      ancestorsOldestFirst.forEach(function (anc) {
-        const retained = retainedByAncestor.get(anc);
-        retained.names.forEach(function (name) {
-          const safeName = name.replace(/[^A-Za-z0-9_]/g, '_');
-          inheritedTocItems.push({
-            id: inheritedPrefix + safeName,
-            anchor: cname + '.' + name,
-            derivedAnchor: cname + '.' + name,
-            originAnchor: anc + '.' + name,
-            title: name,
-            originClass: anc,
-            isGroupHeader: false,
-            type: 'subitem',
-            inheritedSectionId: inheritedSection.id
-          });
-        });
-      });
-      inheritedSection._inheritedTocItems = inheritedTocItems;
-      inheritedSection._inheritedTocTitle = 'Inherited Methods & Elements';
-      inheritedSection._ancestorList = ancestorsOldestFirst;
-      inheritedSection.setAttribute('data-ancestors', ancestorsOldestFirst.join(' '));
-
-      const ancestorAnchorsHtml = ancestorsOldestFirst.map(function (anc) {
-        return `<a name="${escapeHtml(anc)}" id="${escapeHtml(anc)}" class="inherited-ancestor-anchor" style="display:block;position:relative;top:-24px;visibility:hidden;"></a>`;
-      }).join('');
-
-      const summaryBadgesHtml = ancestorsOldestFirst.map(function (anc) {
-        const ancNode = classParents[anc] || {};
-        const ancDocRaw = ancNode.doc || '';
-        if (ancDocRaw) {
-          return `<a class="inherited-origin-badge" href="${escapeHtml(rootRel + ancDocRaw)}" data-doc-href="${escapeHtml(ancDocRaw)}" title="Open ${escapeHtml(anc)} documentation">${escapeHtml(anc)}</a>`;
-        }
-        return `<span class="inherited-origin-badge">${escapeHtml(anc)}</span>`;
-      }).join('<span class="inherited-summary-arrow" aria-hidden="true">&rarr;</span>');
-
-      inheritedSection.innerHTML = `
-        <a name="Inherited_Methods" id="Inherited_Methods" style="display:block;position:relative;top:-24px;visibility:hidden;"></a>
-        <a name="inherited-methods" id="inherited-methods" style="display:block;position:relative;top:-24px;visibility:hidden;"></a>
-        <a name="doc-nav-inherited" id="doc-nav-inherited" style="display:block;position:relative;top:-24px;visibility:hidden;"></a>
-        ${ancestorAnchorsHtml}
-        <div class="inherited-section-header" role="button" tabindex="0" aria-expanded="false" title="Click to expand inherited methods and elements (not overridden)">
-          <div class="inherited-header-title">
-            <svg class="inherited-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            <span>Inherited Methods &amp; Elements (${totalCount})</span>
-          </div>
-          <span class="inherited-summary-badge">${summaryBadgesHtml}</span>
-        </div>
-        <div class="inherited-section-content" style="display: none;">
-          <div class="inherited-loading-state">Loading inherited documentation...</div>
-        </div>`;
-
-      summaryEl.parentNode.insertBefore(inheritedSection, summaryEl.nextSibling);
-
-      const toggleBtn = inheritedSection.querySelector('.inherited-section-header');
-      const contentBox = inheritedSection.querySelector('.inherited-section-content');
-      const chevron = inheritedSection.querySelector('.inherited-chevron');
-      let hasRendered = false;
-      let isLoading = false;
-
-      function renderUnifiedInheritedList() {
-        const listEl = document.createElement('div');
-        listEl.className = 'inherited-unified-list';
-        const renderedNames = new Set();
-
-        ancestorsOldestFirst.forEach(function (anc) {
-          const retained = retainedByAncestor.get(anc);
-          const items = DOC_TOPIC_CACHE[anc] || [];
-          const ancNode = classParents[anc] || {};
-          const ancDocRaw = ancNode.doc || '';
-
-          items.forEach(function (item) {
-            if (!item || !retained.nameSet.has(item.n) || renderedNames.has(item.n)) return;
-            renderedNames.add(item.n);
-
-            const entryWrap = document.createElement('div');
-            entryWrap.className = 'inherited-topic-entry';
-            entryWrap.id = inheritedPrefix + item.n.replace(/[^A-Za-z0-9_]/g, '_');
-            entryWrap.setAttribute('data-origin-class', anc);
-            entryWrap.setAttribute('data-anchor', cname + '.' + item.n);
-            entryWrap.setAttribute('data-origin-anchor', anc + '.' + item.n);
-            entryWrap.setAttribute('data-member-name', item.n);
-            if (item.s) {
-              entryWrap.setAttribute('data-src-url', rootRel + item.s);
-            }
-
-            const renderedHtml = (item.h || '').replace(/__ROOT_REL__/g, rootRel);
-            entryWrap.innerHTML = `
-              <a name="${escapeHtml(cname + '.' + item.n)}" id="${escapeHtml(cname + '.' + item.n)}" class="inherited-anchor-target" style="display:block;position:relative;top:-24px;visibility:hidden;"></a>
-              <a name="${escapeHtml(anc + '.' + item.n)}" id="${escapeHtml(anc + '.' + item.n)}" class="inherited-anchor-target" style="display:block;position:relative;top:-24px;visibility:hidden;"></a>
-              <a name="${escapeHtml(item.n)}" id="${escapeHtml(item.n)}" class="inherited-anchor-target" style="display:block;position:relative;top:-24px;visibility:hidden;"></a>
-            ` + renderedHtml;
-
-            const titleEl = entryWrap.querySelector('h3.CTitle, .CTitle');
-            if (titleEl) {
-              const textLabel = titleEl.textContent.trim();
-              const srcUrl = item.s ? (rootRel + item.s) : '';
-
-              const titleMain = document.createElement('span');
-              titleMain.className = 'inherited-title-main';
-              titleMain.innerHTML = `<a name="${escapeHtml(cname + '.' + item.n)}" id="${escapeHtml(cname + '.' + item.n)}" ${srcUrl ? `href="${escapeHtml(srcUrl)}" data-src-url="${escapeHtml(srcUrl)}" title="Open source definition"` : ''} class="src-code-link">${escapeHtml(textLabel)}</a>`;
-
-              titleEl.innerHTML = '';
-              titleEl.appendChild(titleMain);
-
-              const exactDocRaw = item.d || ancDocRaw;
-              if (exactDocRaw) {
-                const metaRight = document.createElement('span');
-                metaRight.className = 'inherited-title-meta';
-                const originBadge = document.createElement('a');
-                originBadge.className = 'inherited-origin-badge';
-                originBadge.href = rootRel + exactDocRaw;
-                originBadge.setAttribute('data-doc-href', exactDocRaw);
-                originBadge.textContent = anc + '::' + item.n;
-                originBadge.title = 'Open exact definition of ' + anc + '::' + item.n + ' in documentation';
-                metaRight.appendChild(originBadge);
-                titleEl.appendChild(metaRight);
-              }
-            }
-
-            listEl.appendChild(entryWrap);
-          });
-        });
-
-        contentBox.innerHTML = '';
-        contentBox.appendChild(listEl);
-
-        // Attach heading anchor buttons to all rendered inherited entries
-        if (typeof window._scanHeadingAnchors === 'function') {
-          window._scanHeadingAnchors(listEl);
-        }
-
-        // Clicking anywhere on an inherited entry header bar opens its corresponding source file
-        listEl.addEventListener('click', function (ev) {
-          if (ev.target.closest('.inherited-origin-badge') || ev.target.closest('.heading-anchor-btn')) return;
-          const headerTitle = ev.target.closest('.inherited-topic-entry .CTitle');
-          if (!headerTitle) return;
-          if (ev.target.closest('a.src-code-link')) return; // handled by initLinks
-          const srcAnchor = headerTitle.querySelector('a.src-code-link');
-          if (srcAnchor) {
-            ev.preventDefault();
-            srcAnchor.click();
-          }
-        });
-      }
-
-      const pendingReadyCallbacks = [];
-
-      function ensureExpandedAndRendered(onReady) {
-        const isHidden = contentBox.style.display === 'none';
-        if (isHidden) {
-          contentBox.style.display = 'block';
-          inheritedSection.classList.add('is-expanded');
-          toggleBtn.setAttribute('aria-expanded', 'true');
-          if (chevron) {
-            chevron.style.transform = 'rotate(0deg)';
-          }
-        }
-        if (hasRendered) {
-          if (typeof onReady === 'function') onReady();
-          return;
-        }
-        if (typeof onReady === 'function') {
-          pendingReadyCallbacks.push(onReady);
-        }
-        if (!isLoading) {
-          isLoading = true;
-          Promise.all(ancestorsOldestFirst.map(function (anc) {
-            return loadUvmDocTopics(anc, rootRel);
-          })).then(function () {
-            hasRendered = true;
-            isLoading = false;
-            renderUnifiedInheritedList();
-            while (pendingReadyCallbacks.length > 0) {
-              const cb = pendingReadyCallbacks.shift();
-              try { cb(); } catch (err) { }
-            }
-          });
-        }
-      }
-
-      inheritedSection._ensureExpandedAndRendered = ensureExpandedAndRendered;
-
-      function toggleSection() {
-        const isHidden = contentBox.style.display === 'none';
-        if (isHidden) {
-          ensureExpandedAndRendered();
-        } else {
-          contentBox.style.display = 'none';
-          inheritedSection.classList.remove('is-expanded');
-          toggleBtn.setAttribute('aria-expanded', 'false');
-          if (chevron) {
-            chevron.style.transform = 'rotate(-90deg)';
-          }
-        }
-      }
-
-      toggleBtn.addEventListener('click', function (e) {
-        if (e.target.closest('.inherited-summary-badge .inherited-origin-badge')) return;
-        toggleSection();
-      });
-      toggleBtn.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleSection();
-        }
-      });
-    });
-
-    // Immediate check for hash navigation to inherited sections on load
-    try {
-      const curHash = (window.location.hash || '').replace(/^#/, '');
-      if (curHash) {
-        const decHash = decodeURIComponent(curHash);
-        const inhMatch = findMatchingInheritedSection(decHash);
-        if (inhMatch && typeof inhMatch._ensureExpandedAndRendered === 'function') {
-          inhMatch._ensureExpandedAndRendered(function () {
-            setTimeout(function () {
-              window.postMessage({ type: 'scrollToSection', anchor: decHash, id: decHash }, '*');
-            }, 60);
-          });
-        }
-      }
-    } catch (e) { }
-  }
-
-  // =========================================================================
   // UVM Symbol Resolution, Disambiguation Popover & Cross-Frame Routing
   // =========================================================================
 
@@ -3466,7 +3112,7 @@ window.PageCommon = (function () {
       }
 
       const link = e.target.closest('a');
-      if (!link) return;
+      if (!link || link.closest('#doc-toc-nav')) return;
 
       const href = link.getAttribute('href');
       if (!href || href === '#' || href.startsWith('javascript:')) return;
@@ -3654,10 +3300,6 @@ window.PageCommon = (function () {
     initDiagramZoom();
     initScrollAnchor();
 
-    if (document.querySelector('.derived-classes-card, .derived-class-pill, .class-hierarchy-widget, .hierarchy-subclasses-card')) {
-      initDerivedClasses();
-      initInheritedMethodsExplorer();
-    }
     if (document.getElementById('doc-toc-sidebar')) {
       initTOC();
     }
@@ -3717,18 +3359,21 @@ window.PageCommon = (function () {
 
   return {
     clipboard: { copyText: copyText, bindCopyFeedback: bindCopyFeedback },
+    escapeHtml: escapeHtml,
+    getUvmSymbols: getUvmSymbols,
+    ensureUvmSymbolsLoaded: ensureUvmSymbolsLoaded,
     initTheme: initTheme,
     initTOC: initTOC,
     initHeadingAnchors: initHeadingAnchors,
     initCodeStudio: initCodeStudio,
     getStudioController: function () { return currentStudioController; },
-    initDerivedClasses: initDerivedClasses,
     initLinks: initLinks,
     initScrollAnchor: initScrollAnchor,
     saveScrollAnchor: saveScrollAnchor,
     restoreScrollAnchor: restoreScrollAnchor,
     expandAllRetractedAncestors: expandAllRetractedAncestors,
     findMatchingInheritedSection: findMatchingInheritedSection,
+    retryPendingSectionScroll: retryPendingSectionScroll,
     initAll: initAll
   };
 })();
