@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" class="$html_cls">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$title</title>
+  <link rel="stylesheet" href="${root_rel}css/style.css">
+</head>
+<body class="$body_cls">
+$inner_body
+  $scripts_markup
+</body>
+</html>
+

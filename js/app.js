@@ -112,69 +112,18 @@ document.addEventListener('DOMContentLoaded', () => {
   let panStartY = 0;
 
   // =========================================================================
-  // URL Normalization Helpers
+  // URL Normalization Helpers (provided by js/app_utils.js)
   // =========================================================================
 
-  function normalizeDocUrl(url) {
-    if (!url) return 'docs_view/overviews/intro-txt.html';
-    const hashIdx = url.indexOf('#');
-    let pathPart = hashIdx !== -1 ? url.substring(0, hashIdx) : url;
-    let hashPart = hashIdx !== -1 ? url.substring(hashIdx) : '';
-    let clean = pathPart.replace(/^[./]+/, '');
-    if (clean.includes('examples_view/')) {
-      clean = clean.substring(clean.indexOf('examples_view/'));
-    } else if (clean.includes('docs_view/')) {
-      clean = clean.substring(clean.indexOf('docs_view/'));
-    } else {
-      clean = 'docs_view/' + clean;
-    }
-    return clean + hashPart;
-  }
-
-  function normalizeExampleUrl(url) {
-    if (!url) return 'examples_view/basics/hello_world.html';
-    const hashIdx = url.indexOf('#');
-    let pathPart = hashIdx !== -1 ? url.substring(0, hashIdx) : url;
-    let hashPart = hashIdx !== -1 ? url.substring(hashIdx) : '';
-    let clean = pathPart.replace(/^[./]+/, '');
-    if (clean.includes('examples_view/')) {
-      clean = clean.substring(clean.indexOf('examples_view/'));
-    } else {
-      clean = 'examples_view/' + clean;
-    }
-    return clean + hashPart;
-  }
-
-  function normalizeSrcUrl(url) {
-    if (!url) return 'src_view/comps/uvm_driver.svh.html#L44';
-    const hashIdx = url.indexOf('#');
-    let pathPart = hashIdx !== -1 ? url.substring(0, hashIdx) : url;
-    let hashPart = hashIdx !== -1 ? url.substring(hashIdx) : '';
-    let clean = pathPart.replace(/^[./]+/, '');
-    if (clean.includes('src_view/')) {
-      clean = clean.substring(clean.indexOf('src_view/'));
-    } else {
-      clean = 'src_view/' + clean;
-    }
-    return clean + hashPart;
-  }
-
-  function normalizePathForCompare(p) {
-    if (!p) return '';
-    return p.split('#')[0].split('?')[0].replace(/^[./]+/, '').toLowerCase();
-  }
-
-  function urlsMatch(url1, url2) {
-    if (!url1 || !url2) return false;
-    const clean1 = normalizePathForCompare(url1);
-    const clean2 = normalizePathForCompare(url2);
-    if (!clean1 || !clean2) return false;
-    if (clean1 === clean2) return true;
-    if (clean1.endsWith('/' + clean2) || clean2.endsWith('/' + clean1)) return true;
-    const bare1 = clean1.replace(/^(docs_view|src_view|examples_view)\//, '');
-    const bare2 = clean2.replace(/^(docs_view|src_view|examples_view)\//, '');
-    return bare1 === bare2 || bare1.endsWith('/' + bare2) || bare2.endsWith('/' + bare1);
-  }
+  const {
+    normalizeDocUrl,
+    normalizeExampleUrl,
+    normalizeSrcUrl,
+    normalizePathForCompare,
+    urlsMatch,
+    escapeHtml,
+    debounce
+  } = window.UvmAppUtils;
 
   function cancelPendingFrameNav(frame) {
     if (!frame || !frame._pendingNav) return;
@@ -368,19 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // View Modes (Docs / Source / Split)
   // =========================================================================
 
-
-  // Debounce utility
-  function debounce(func, wait) {
-    let timeout;
-    const debounced = function (...args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-    debounced.cancel = function () {
-      clearTimeout(timeout);
-    };
-    return debounced;
-  }
 
   const viewBtns = document.querySelectorAll('.view-btn');
   viewBtns.forEach(btn => {
@@ -958,16 +894,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // Matcher & Multi-word / Regex Search Utilities
   // =========================================================================
-
-  function escapeHtml(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
 
   function getQueryMatcher(rawQuery, isRegex, isCaseSensitive, errorTargetEl) {
     if (!rawQuery) {

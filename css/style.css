@@ -4,6 +4,9 @@
  * Styled with Google Developers / Material Design tokens
  */
 
+@layer base, layout, components, studio, states;
+
+@layer base {
 :root {
   color-scheme: light;
   /* Google Developers Palette (Light Mode) */
@@ -246,7 +249,9 @@ html.theme-transitioning *::after {
 body.is-resizing iframe {
   pointer-events: none !important;
 }
+} /* end @layer base */
 
+@layer layout {
 /* ==========================================================================
    Header & Navigation Bar
    ========================================================================== */
@@ -955,7 +960,9 @@ html[data-theme="dark"] .sidebar-tab-btn:hover {
   width: 6px !important;
   min-width: 6px !important;
 }
+} /* end @layer layout */
 
+@layer components {
 /* ==========================================================================
    Documentation Styles (docs_view) - Google Developers / Apps Script style
    ========================================================================== */
@@ -5311,7 +5318,9 @@ body.src-viewer-body {
 [data-theme="dark"] .anchor-copy-tooltip::after {
   border-color: #374151 transparent transparent transparent;
 }
+} /* end @layer components */
 
+@layer studio {
 /* ==========================================================================
    Interactive UVM Examples Studio & Viewer (Harmonized with docs_view)
    ========================================================================== */
@@ -7635,3 +7644,4 @@ mark.find-match.find-match-current {
   border-color: var(--primary);
   background: rgba(26, 115, 232, 0.08);
 }
+} /* end @layer studio */
