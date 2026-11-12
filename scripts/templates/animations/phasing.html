@@ -1,24 +1,32 @@
-<div class="anim-phasing-wrapper">
-  <div class="phasing-tree">
-    <div class="p-node p-top highlight-build" id="pnode-top"><span>top (env)</span></div>
-    <div class="p-branches">
-      <div class="p-branch">
-        <div class="p-node p-a highlight-build" id="pnode-a1"><span>a1 (AA)</span></div>
-        <div class="p-subbranch">
-          <div class="p-node p-leaf" id="pnode-b1"><span>b1 (B)</span></div>
-          <div class="p-node p-leaf" id="pnode-d1"><span>d1 (D)</span></div>
+<div class="anim-stage-col">
+  <div class="anim-phasing-wrapper">
+    <div class="phasing-tree">
+      <div class="p-node p-top highlight-build" id="pnode-top"><span>top (env)</span></div>
+      <div class="p-branches">
+        <div class="p-branch">
+          <div class="p-node p-a highlight-build" id="pnode-a1"><span>a1 (AA)</span></div>
+          <div class="p-subbranch">
+            <div class="p-node p-leaf" id="pnode-b1"><span>b1 (B)</span></div>
+            <div class="p-node p-leaf" id="pnode-d1"><span>d1 (D)</span></div>
+          </div>
         </div>
-      </div>
-      <div class="p-branch">
-        <div class="p-node p-a highlight-build" id="pnode-a2"><span>a2 (AA)</span></div>
-        <div class="p-subbranch">
-          <div class="p-node p-leaf" id="pnode-b2"><span>b1 (B)</span></div>
-          <div class="p-node p-leaf" id="pnode-d2"><span>d1 (D)</span></div>
+        <div class="p-branch">
+          <div class="p-node p-a highlight-build" id="pnode-a2"><span>a2 (AA)</span></div>
+          <div class="p-subbranch">
+            <div class="p-node p-leaf" id="pnode-b2"><span>b1 (B)</span></div>
+            <div class="p-node p-leaf" id="pnode-d2"><span>d1 (D)</span></div>
+          </div>
         </div>
       </div>
     </div>
+    <div class="phasing-badge-box">
+      <span class="phasing-dir-badge" id="phasing-dir-badge">Top-Down Phasing (build_phase)</span>
+    </div>
   </div>
-  <div class="phasing-badge-box">
-    <span class="phasing-dir-badge" id="phasing-dir-badge">Top-Down Phasing (build_phase)</span>
+  <div class="anim-legend" aria-label="Phasing color legend">
+    <span class="legend-item"><span class="legend-dot dot-blue"></span>Top-Down (build)</span>
+    <span class="legend-item"><span class="legend-dot dot-purple"></span>Bottom-Up (elaboration)</span>
+    <span class="legend-item"><span class="legend-dot dot-green"></span>Run (concurrent)</span>
+    <span class="legend-item"><span class="legend-dot dot-amber"></span>Cleanup (extract/report)</span>
   </div>
 </div>

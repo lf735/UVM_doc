@@ -1550,8 +1550,8 @@ def build_suite_page(suite_key, meta, files):
         "primary_file": primary_file
     }
 
-def generate_all_examples():
-    """Main entrypoint to generate all 38 suites and export catalog."""
+def generate_all_examples(only_suite: str = ""):
+    """Main entrypoint to generate all 39 suites (or a single suite via --only) and export catalog."""
     print("=" * 60)
     print("  Generating UVM 1.2 Interactive Example Studios")
     print("=" * 60)
@@ -1559,6 +1559,8 @@ def generate_all_examples():
     suites_built = []
     
     for suite_key, meta in SUITES_METADATA.items():
+        if only_suite and suite_key != only_suite:
+            continue
         suite_path = EXAMPLES_SRC_DIR / suite_key
         if not suite_path.exists():
             print(f"Warning: {suite_path} does not exist!")
@@ -1631,5 +1633,9 @@ def generate_all_examples():
     }
 
 if __name__ == "__main__":
-    generate_all_examples()
+    import argparse
+    parser = argparse.ArgumentParser(description="Generate UVM 1.2 Interactive Example Studios")
+    parser.add_argument("--only", default="", help="Generate only a single suite key (e.g. simple/tlm1/fifo)")
+    args = parser.parse_args()
+    generate_all_examples(only_suite=args.only)
 

@@ -1743,11 +1743,19 @@ window.PageCommon = (function () {
         onFileTabSwitched(idx);
       }
 
-      if (studioTabs[idx]) {
-        try {
-          studioTabs[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-        } catch (e) {
-          studioTabs[idx].scrollIntoView(false);
+      if (studioTabs[idx] && studioTabBar) {
+        const tab = studioTabs[idx];
+        const tabLeft = tab.offsetLeft;
+        const tabRight = tabLeft + tab.offsetWidth;
+        const viewLeft = studioTabBar.scrollLeft;
+        const viewRight = viewLeft + studioTabBar.clientWidth;
+        if (tabLeft < viewLeft || tabRight > viewRight) {
+          const targetLeft = Math.max(0, tabLeft - (studioTabBar.clientWidth / 2) + (tab.offsetWidth / 2));
+          try {
+            studioTabBar.scrollTo({ left: targetLeft, behavior: 'smooth' });
+          } catch (e) {
+            studioTabBar.scrollLeft = targetLeft;
+          }
         }
       }
     }

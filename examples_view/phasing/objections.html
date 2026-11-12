@@ -444,19 +444,20 @@ UVM_FATAL :    0
       <div class="stepper-section" id="visual-flow-stepper">
         <div class="section-header-row">
           <div class="section-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
             <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
             <span class="scenario-state-pill" id="step-state-badge">Drain Time: 10 ns (Active Objections: 0)</span>
           </div>
           <div class="stepper-controls">
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-play">Play &#9654;</button>
-            <button type="button" class="btn btn-sm btn-primary" id="stepper-next">Next Step &rarr;</button>
+            <span class="stepper-progress-label" id="stepper-progress-label" aria-live="polite">1 / 5</span>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" aria-label="Previous step" disabled>&larr; Previous</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-play" aria-label="Auto-play scenario">Play &#9654;</button>
+            <button type="button" class="btn btn-sm btn-primary" id="stepper-next" aria-label="Next step">Next Step &rarr;</button>
           </div>
         </div>
 
-        <div class="stepper-timeline" id="stepper-timeline">
-          <div class="step-node active" data-step="1"><span class="step-num">1</span><span class="step-title">Arming Drain Time (10 ns)</span></div><div class="step-node " data-step="2"><span class="step-num">2</span><span class="step-title">Forking 4 Concurrent Threads</span></div><div class="step-node " data-step="3"><span class="step-num">3</span><span class="step-title">Threads Dropping (15 ns, 25 ns, 35 ns)</span></div><div class="step-node " data-step="4"><span class="step-num">4</span><span class="step-title">Last Thread (50 ns) &amp; Drain Trigger</span></div><div class="step-node " data-step="5"><span class="step-num">5</span><span class="step-title">Drain Expiration &amp; Termination @ 60 ns</span></div>
+        <div class="stepper-timeline" id="stepper-timeline" role="tablist" aria-label="Test scenario steps">
+          <button type="button" role="tab" id="step-tab-1" class="step-node active" data-step="1" aria-selected="true" aria-current="step" aria-controls="step-detail-card" tabindex="0"><span class="step-num" aria-hidden="true">1</span><span class="step-title">Arming Drain Time (10 ns)</span></button><button type="button" role="tab" id="step-tab-2" class="step-node " data-step="2" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">2</span><span class="step-title">Forking 4 Concurrent Threads</span></button><button type="button" role="tab" id="step-tab-3" class="step-node " data-step="3" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">3</span><span class="step-title">Threads Dropping (15 ns, 25 ns, 35 ns)</span></button><button type="button" role="tab" id="step-tab-4" class="step-node " data-step="4" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">4</span><span class="step-title">Last Thread (50 ns) &amp; Drain Trigger</span></button><button type="button" role="tab" id="step-tab-5" class="step-node " data-step="5" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">5</span><span class="step-title">Drain Expiration &amp; Termination @ 60 ns</span></button>
         </div>
         <div class="scenario-anim-section" id="scenario-anim-section" data-anim="objections">
           <div class="anim-objections-wrapper">
@@ -491,9 +492,15 @@ UVM_FATAL :    0
       <div class="gantt-bar-bg"><div class="gantt-bar gantt-drain-bar" id="gbar-drain" style="left: 83%; width: 17%;"></div></div>
     </div>
   </div>
+  <div class="anim-legend" aria-label="Objections color legend">
+    <span class="legend-item"><span class="legend-dot dot-blue"></span>Active Thread</span>
+    <span class="legend-item"><span class="legend-dot dot-green"></span>Dropped / Done</span>
+    <span class="legend-item"><span class="legend-dot dot-amber"></span>Drain Watchdog (+10ns)</span>
+  </div>
 </div>
+
         </div>
-        <div class="step-card" id="step-detail-card">
+        <div class="step-card" id="step-detail-card" role="tabpanel" aria-live="polite" aria-labelledby="step-tab-1">
           <div class="step-card-header">
             <h4 id="step-active-title">1. Arming Drain Time (10 ns)</h4>
             <span class="step-active-comp" id="step-active-comp">Target: simple_test</span>

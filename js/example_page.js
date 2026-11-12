@@ -245,6 +245,9 @@
     const studioCodeContainer = document.getElementById('studio-code-container');
     const animSection = document.getElementById('scenario-anim-section');
     const animType = animSection ? animSection.getAttribute('data-anim') : '';
+    const stepperProgressLabel = document.getElementById('stepper-progress-label');
+    const stepDetailCard = document.getElementById('step-detail-card');
+    const stepperTimeline = document.getElementById('stepper-timeline');
 
     if (!stepperSection || !stepNodes.length || stepperSection.dataset.stepperBound) return;
     stepperSection.dataset.stepperBound = '1';
@@ -347,9 +350,27 @@
       const step = stepperSteps[idx];
 
       stepNodes.forEach(function (node, i) {
-        node.classList.toggle('active', i === idx);
+        const isCurrent = i === idx;
+        node.classList.toggle('active', isCurrent);
         node.classList.toggle('completed', i < idx);
+        node.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        node.setAttribute('aria-current', isCurrent ? 'step' : 'false');
+        node.setAttribute('tabindex', isCurrent ? '0' : '-1');
       });
+
+      const activeNode = stepNodes[idx];
+      if (activeNode) {
+        if (stepDetailCard && activeNode.id) {
+          stepDetailCard.setAttribute('aria-labelledby', activeNode.id);
+        }
+        try {
+          activeNode.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        } catch (err) { }
+      }
+
+      if (stepperProgressLabel) {
+        stepperProgressLabel.textContent = `${idx + 1} / ${stepperSteps.length}`;
+      }
 
       if (stepActiveTitle) stepActiveTitle.textContent = step.title;
       if (stepActiveComp) stepActiveComp.textContent = `Target: ${step.component}`;
@@ -412,6 +433,11 @@
 
     function updateScenarioAnimation(type, idx, step) {
       if (!type) return;
+      if (animSection) {
+        animSection.classList.remove('anim-stepping');
+        void animSection.offsetWidth;
+        animSection.classList.add('anim-stepping');
+      }
 
       if (type === 'fifo') {
         const slots = document.querySelectorAll('.anim-fifo-slots .slot');
@@ -419,6 +445,10 @@
         const prodBadge = document.getElementById('fifo-prod-badge');
         const consBadge = document.getElementById('fifo-cons-badge');
         const prodActor = document.getElementById('fifo-actor-prod');
+
+        slots.forEach(function (s, i) {
+          s.style.transitionDelay = (idx === 1 ? i * 65 : 0) + 'ms';
+        });
 
         if (idx === 0) {
           slots.forEach(function (s) { s.className = 'slot'; });
@@ -519,43 +549,69 @@
         }
       } else if (type === 'ral') {
         const blocks = ['ral-block-seq', 'ral-block-adapt', 'ral-block-bus', 'ral-block-dut', 'ral-block-mirror'];
+        const arrows = ['ral-arr-1', 'ral-arr-2', 'ral-arr-3', 'ral-arr-4'];
         blocks.forEach(function (b) {
           const el = document.getElementById(b);
           if (el) el.classList.remove('active', 'completed');
         });
+        arrows.forEach(function (a) {
+          const el = document.getElementById(a);
+          if (el) el.classList.remove('active', 'done');
+        });
 
         if (idx === 0) {
           const b = document.getElementById('ral-block-seq');
+          const a1 = document.getElementById('ral-arr-1');
           if (b) b.classList.add('active');
+          if (a1) a1.classList.add('active');
         } else if (idx === 1) {
           const b1 = document.getElementById('ral-block-seq');
           const b2 = document.getElementById('ral-block-adapt');
+          const a1 = document.getElementById('ral-arr-1');
+          const a2 = document.getElementById('ral-arr-2');
           if (b1) b1.classList.add('completed');
           if (b2) b2.classList.add('active');
+          if (a1) a1.classList.add('done');
+          if (a2) a2.classList.add('active');
         } else if (idx === 2) {
           ['ral-block-seq', 'ral-block-adapt'].forEach(function (id) {
             const el = document.getElementById(id);
             if (el) el.classList.add('completed');
           });
+          ['ral-arr-1', 'ral-arr-2'].forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('done');
+          });
           const b3 = document.getElementById('ral-block-bus');
           const b4 = document.getElementById('ral-block-dut');
+          const a3 = document.getElementById('ral-arr-3');
           if (b3) b3.classList.add('active');
           if (b4) b4.classList.add('active');
+          if (a3) a3.classList.add('active');
         } else if (idx === 3) {
           blocks.forEach(function (id) {
             const el = document.getElementById(id);
             if (el) el.classList.add('completed');
           });
+          arrows.forEach(function (id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('done');
+          });
           const bm = document.getElementById('ral-block-mirror');
+          const a4 = document.getElementById('ral-arr-4');
           if (bm) bm.classList.add('active');
+          if (a4) a4.classList.add('active');
         }
       } else if (type === 'phasing') {
         const dirBadge = document.getElementById('phasing-dir-badge');
         const allNodes = document.querySelectorAll('.p-node');
-        allNodes.forEach(function (n) { n.className = n.className.replace(/highlight-\w+/g, '').trim(); });
+        allNodes.forEach(function (n, i) {
+          n.className = n.className.replace(/highlight-\w+/g, '').trim();
+          n.style.transitionDelay = (i * 95) + 'ms';
+        });
 
         if (idx === 0) {
-          if (dirBadge) dirBadge.textContent = 'Top-Down Phasing (build_phase)';
+          if (dirBadge) dirBadge.textContent = '↓ Top-Down Phasing (build_phase)';
           const top = document.getElementById('pnode-top');
           const a1 = document.getElementById('pnode-a1');
           const a2 = document.getElementById('pnode-a2');
@@ -563,20 +619,20 @@
           if (a1) a1.classList.add('highlight-build');
           if (a2) a2.classList.add('highlight-build');
         } else if (idx === 1) {
-          if (dirBadge) dirBadge.textContent = 'Bottom-Up Phasing (end_of_elaboration)';
+          if (dirBadge) dirBadge.textContent = '↑ Bottom-Up Phasing (end_of_elaboration)';
           const b1 = document.getElementById('pnode-b1');
           const d1 = document.getElementById('pnode-d1');
           const b2 = document.getElementById('pnode-b2');
           const d2 = document.getElementById('pnode-d2');
           [b1, d1, b2, d2].forEach(function (n) { if (n) n.classList.add('highlight-elaboration'); });
         } else if (idx === 2) {
-          if (dirBadge) dirBadge.textContent = 'Time-Consuming Phasing (run_phase @ 0ns)';
+          if (dirBadge) dirBadge.textContent = '⚡ Time-Consuming Phasing (run_phase @ 0ns)';
           allNodes.forEach(function (n) { n.classList.add('highlight-run'); });
         } else if (idx === 3) {
-          if (dirBadge) dirBadge.textContent = 'Advancing Simulation Time (t = 500ns)';
+          if (dirBadge) dirBadge.textContent = '⏱ Advancing Simulation Time (t = 500ns)';
           allNodes.forEach(function (n) { n.classList.add('highlight-run'); });
         } else if (idx === 4) {
-          if (dirBadge) dirBadge.textContent = 'Cleanup & Reporting (extract, check, report)';
+          if (dirBadge) dirBadge.textContent = '✓ Cleanup & Reporting (extract, check, report)';
           allNodes.forEach(function (n) { n.classList.add('highlight-cleanup'); });
         }
       }
@@ -629,19 +685,45 @@
       });
     });
 
+    if (stepperTimeline) {
+      stepperTimeline.addEventListener('keydown', function (e) {
+        let nextIdx = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          nextIdx = (currentStepIdx + 1) % stepperSteps.length;
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          nextIdx = (currentStepIdx - 1 + stepperSteps.length) % stepperSteps.length;
+        } else if (e.key === 'Home') {
+          nextIdx = 0;
+        } else if (e.key === 'End') {
+          nextIdx = stepperSteps.length - 1;
+        }
+        if (nextIdx !== null) {
+          e.preventDefault();
+          stopAutoPlay();
+          renderStep(nextIdx);
+          if (stepNodes[nextIdx]) {
+            stepNodes[nextIdx].focus();
+          }
+        }
+      });
+    }
+
     if (stepPlayBtn) {
       stepPlayBtn.addEventListener('click', function () {
         if (playInterval) {
           stopAutoPlay();
         } else {
+          if (currentStepIdx >= stepperSteps.length - 1) {
+            renderStep(0);
+          }
           stepPlayBtn.textContent = 'Pause ❚❚';
           playInterval = setInterval(function () {
             if (currentStepIdx >= stepperSteps.length - 1) {
-              renderStep(0);
+              stopAutoPlay();
             } else {
               renderStep(currentStepIdx + 1);
             }
-          }, 2500);
+          }, 3800);
         }
       });
     }

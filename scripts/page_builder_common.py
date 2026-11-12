@@ -342,10 +342,15 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]], anim_type: str = ""
         return ""
 
     stepper_nodes_html = ''.join([
-        f'<div class="step-node {("active" if i == 0 else "")}" data-step="{i+1}">'
-        f'<span class="step-num">{i+1}</span>'
+        f'<button type="button" role="tab" id="step-tab-{i+1}" '
+        f'class="step-node {("active" if i == 0 else "")}" data-step="{i+1}" '
+        f'aria-selected="{("true" if i == 0 else "false")}" '
+        f'aria-current="{("step" if i == 0 else "false")}" '
+        f'aria-controls="step-detail-card" '
+        f'tabindex="{("0" if i == 0 else "-1")}">'
+        f'<span class="step-num" aria-hidden="true">{i+1}</span>'
         f'<span class="step-title">{html.escape(s["title"].split(". ")[1] if ". " in s["title"] else s["title"])}</span>'
-        f'</div>'
+        f'</button>'
         for i, s in enumerate(stepper_steps)
     ])
 
@@ -359,6 +364,8 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]], anim_type: str = ""
           {render_scenario_animation(anim_type)}
         </div>'''
 
+    total_steps = len(stepper_steps)
+
     return f'''<!-- Interactive Visual Flow Stepper Section -->
 <div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
   <div class="CTopic">
@@ -367,22 +374,23 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]], anim_type: str = ""
       <div class="stepper-section" id="visual-flow-stepper">
         <div class="section-header-row">
           <div class="section-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
             <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
             {state_badge_html}
           </div>
           <div class="stepper-controls">
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" disabled>&larr; Previous</button>
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-play">Play &#9654;</button>
-            <button type="button" class="btn btn-sm btn-primary" id="stepper-next">Next Step &rarr;</button>
+            <span class="stepper-progress-label" id="stepper-progress-label" aria-live="polite">1 / {total_steps}</span>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" aria-label="Previous step" disabled>&larr; Previous</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-play" aria-label="Auto-play scenario">Play &#9654;</button>
+            <button type="button" class="btn btn-sm btn-primary" id="stepper-next" aria-label="Next step">Next Step &rarr;</button>
           </div>
         </div>
 
-        <div class="stepper-timeline" id="stepper-timeline">
+        <div class="stepper-timeline" id="stepper-timeline" role="tablist" aria-label="Test scenario steps">
           {stepper_nodes_html}
         </div>
 {anim_markup}
-        <div class="step-card" id="step-detail-card">
+        <div class="step-card" id="step-detail-card" role="tabpanel" aria-live="polite" aria-labelledby="step-tab-1">
           <div class="step-card-header">
             <h4 id="step-active-title">{html.escape(first.get("title", ""))}</h4>
             <span class="step-active-comp" id="step-active-comp">Target: {html.escape(first.get("component", ""))}</span>

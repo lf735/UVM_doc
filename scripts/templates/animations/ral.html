@@ -1,31 +1,38 @@
-<div class="anim-ral-wrapper">
-  <div class="ral-step-block active" id="ral-block-seq">
-    <span class="b-icon">📝</span>
-    <span class="b-title">Sequence</span>
-    <code class="b-sub">model.write()</code>
+<div class="anim-stage-col">
+  <div class="anim-ral-wrapper">
+    <div class="ral-step-block active" id="ral-block-seq">
+      <span class="b-icon">📝</span>
+      <span class="b-title">Sequence</span>
+      <code class="b-sub">model.write()</code>
+    </div>
+    <div class="ral-arrow" id="ral-arr-1">➔</div>
+    <div class="ral-step-block" id="ral-block-adapt">
+      <span class="b-icon">⚙️</span>
+      <span class="b-title">Adapter</span>
+      <code class="b-sub">reg2bus (0x30)</code>
+    </div>
+    <div class="ral-arrow" id="ral-arr-2">➔</div>
+    <div class="ral-step-block" id="ral-block-bus">
+      <span class="b-icon">⚡</span>
+      <span class="b-title">APB Bus</span>
+      <code class="b-sub">PSEL, PENABLE</code>
+    </div>
+    <div class="ral-arrow" id="ral-arr-3">➔</div>
+    <div class="ral-step-block" id="ral-block-dut">
+      <span class="b-icon">💾</span>
+      <span class="b-title">DUT Memory</span>
+      <code class="b-sub">TABLES[12]</code>
+    </div>
+    <div class="ral-arrow" id="ral-arr-4">↻</div>
+    <div class="ral-step-block" id="ral-block-mirror">
+      <span class="b-icon">🪞</span>
+      <span class="b-title">RAL Mirror</span>
+      <code class="b-sub">0x3F8A019B</code>
+    </div>
   </div>
-  <div class="ral-arrow" id="ral-arr-1">➔</div>
-  <div class="ral-step-block" id="ral-block-adapt">
-    <span class="b-icon">⚙️</span>
-    <span class="b-title">Adapter</span>
-    <code class="b-sub">reg2bus (0x30)</code>
-  </div>
-  <div class="ral-arrow" id="ral-arr-2">➔</div>
-  <div class="ral-step-block" id="ral-block-bus">
-    <span class="b-icon">⚡</span>
-    <span class="b-title">APB Bus</span>
-    <code class="b-sub">PSEL, PENABLE</code>
-  </div>
-  <div class="ral-arrow" id="ral-arr-3">➔</div>
-  <div class="ral-step-block" id="ral-block-dut">
-    <span class="b-icon">💾</span>
-    <span class="b-title">DUT Memory</span>
-    <code class="b-sub">TABLES[12]</code>
-  </div>
-  <div class="ral-arrow" id="ral-arr-4">↻</div>
-  <div class="ral-step-block" id="ral-block-mirror">
-    <span class="b-icon">🪞</span>
-    <span class="b-title">RAL Mirror</span>
-    <code class="b-sub">0x3F8A019B</code>
+  <div class="anim-legend" aria-label="RAL color legend">
+    <span class="legend-item"><span class="legend-dot dot-blue"></span>Active Stage</span>
+    <span class="legend-item"><span class="legend-dot dot-green"></span>Completed Stage</span>
+    <span class="legend-item"><span class="legend-dot dot-muted"></span>Pending Stage</span>
   </div>
 </div>
