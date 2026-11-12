@@ -1135,7 +1135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebarFilterClear.style.display = e.target.value.length > 0 ? 'inline-flex' : 'none';
       }
       renderSidebar();
-    }, 150));
+    }, 200));
 
     sidebarFilter.addEventListener('keydown', (e) => {
       if (e.key === 'r' && e.altKey) {
@@ -1406,8 +1406,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return '';
       } else if (node.type === 'dir') {
-        if (hasMatch(node, matcher)) {
-          const childrenHtml = (node.children || []).map(child => renderNode(child, depth + 1)).join('');
+        const children = node.children || [];
+        let childrenHtml = '';
+        for (let i = 0; i < children.length; i++) {
+          childrenHtml += renderNode(children[i], depth + 1);
+        }
+        if (childrenHtml) {
           return `<div class="nav-group">
             <div class="nav-group-header" style="padding-left: ${depth * 12 + 8}px">
               <span style="display:flex;align-items:center;gap:0.35rem;font-family:var(--font-mono)">
@@ -1426,22 +1430,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return '';
     }
 
-    function hasMatch(node, matcher) {
-      if (node.type === 'file') {
-        return sourceNodeMatches(node, matcher);
-      }
-      if (node.children) {
-        return node.children.some(c => hasMatch(c, matcher));
-      }
-      return false;
-    }
-
     const html = (root.children || []).map(child => renderNode(child, 0)).join('');
     sidebarContent.innerHTML = html || '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem">No matching files</div>';
     attachSidebarListeners();
   }
 
   let currentActiveIndexKey = null;
+  let cachedAllowedBaseSymbols = null;
+  let cachedAllowedAugmentedSymbols = null;
+  const INDEX_ALLOWED_TYPES = new Set([
+    'class', 'macro', 'function', 'task', 'method',
+    'variable', 'constant', 'parameter', 'type', 'enum', 'enumeration', 'port'
+  ]);
 
   function getSymbolIndexKey(item) {
     if (!item) return '';
@@ -1450,72 +1450,102 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderAlphabeticalIndex(rawQuery) {
     const hasQuery = !!(rawQuery && rawQuery.trim().length > 0);
-    const items = hasQuery ? getAugmentedSearchIndex() : (UVM_DATA.searchIndex || []);
+    let sourcePool;
+    if (hasQuery) {
+      if (!cachedAllowedAugmentedSymbols) {
+        cachedAllowedAugmentedSymbols = getAugmentedSearchIndex().filter(x => x && INDEX_ALLOWED_TYPES.has(x.type));
+      }
+      sourcePool = cachedAllowedAugmentedSymbols;
+    } else {
+      if (!cachedAllowedBaseSymbols) {
+        cachedAllowedBaseSymbols = (UVM_DATA.searchIndex || []).filter(x => x && INDEX_ALLOWED_TYPES.has(x.type));
+      }
+      sourcePool = cachedAllowedBaseSymbols;
+    }
+
     const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
-
-    const allowedTypes = new Set([
-      'class', 'macro', 'function', 'task', 'method',
-      'variable', 'constant', 'parameter', 'type', 'enum', 'enumeration', 'port'
-    ]);
-
-    const allSymbols = items.filter(x => {
-      if (!isItemTypeAllowed(x.type, sidebarFilterTypes)) return false;
-      return allowedTypes.has(x.type);
-    });
+    const filterAll = sidebarFilterTypes.has('all') || sidebarFilterTypes.size === 0;
 
     const matchedSymbols = [];
-    allSymbols.forEach(item => {
+    for (let i = 0; i < sourcePool.length; i++) {
+      const item = sourcePool[i];
+      if (!filterAll && !isItemTypeAllowed(item.type, sidebarFilterTypes)) continue;
       const matchRes = matchSymbolItem(item, matcher);
       if (matchRes.match) {
         matchedSymbols.push({ item, score: matchRes.score });
       }
-    });
+    }
 
     matchedSymbols.sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
       if (Boolean(a.item.isInherited) !== Boolean(b.item.isInherited)) {
         return a.item.isInherited ? 1 : -1;
       }
-      return a.item.name.localeCompare(b.item.name);
+      const an = a.item.name;
+      const bn = b.item.name;
+      return an < bn ? -1 : (an > bn ? 1 : 0);
     });
 
-    let html = '';
-    matchedSymbols.forEach(({ item }) => {
-      const badgeClass = item.type === 'class' ? 'badge-class' :
-        (item.type === 'macro' ? 'badge-macro' :
-          (item.type === 'function' ? 'badge-function' :
-            (item.type === 'task' ? 'badge-task' :
-              (item.type === 'variable' ? 'badge-variable' :
-                (item.type === 'constant' || item.type === 'parameter' ? 'badge-constant' :
-                  (item.type === 'type' || item.type === 'enum' || item.type === 'enumeration' ? 'badge-type' :
-                    (item.type === 'port' ? 'badge-port' :
-                      (item.type === 'example' ? 'badge-example' : 'badge-method'))))))));
-      const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method' || item.type === 'variable' || item.type === 'port';
-      const ownerInfo = item.category && isMethodLike ?
-        `<span class="az-symbol-owner" style="font-size:0.68rem; color:var(--text-muted); margin-left:auto; margin-right:0.35rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px;">${highlightMatch(item.category, matcher)}</span>` : '';
-      const itemKey = getSymbolIndexKey(item);
-      let isActive = false;
-      if (currentActiveIndexKey) {
-        isActive = (itemKey === currentActiveIndexKey);
-      } else {
-        const cleanDoc = currentDocUrl ? currentDocUrl.replace(/^[./]+/, '') : '';
-        const cleanSrc = currentSrcUrl ? currentSrcUrl.replace(/^[./]+/, '') : '';
-        if (item.doc && cleanDoc && (item.doc === cleanDoc || item.doc.replace(/^[./]+/, '') === cleanDoc)) {
-          isActive = true;
-        } else if (item.src && cleanSrc && (item.src === cleanSrc || item.src.replace(/^[./]+/, '') === cleanSrc)) {
-          isActive = true;
+    const cleanDoc = currentDocUrl ? currentDocUrl.replace(/^[./]+/, '') : '';
+    const cleanSrc = currentSrcUrl ? currentSrcUrl.replace(/^[./]+/, '') : '';
+
+    function renderSymbolRange(startIdx, endIdx) {
+      let chunkHtml = '';
+      const limit = Math.min(endIdx, matchedSymbols.length);
+      for (let i = startIdx; i < limit; i++) {
+        const item = matchedSymbols[i].item;
+        const badgeClass = item.type === 'class' ? 'badge-class' :
+          (item.type === 'macro' ? 'badge-macro' :
+            (item.type === 'function' ? 'badge-function' :
+              (item.type === 'task' ? 'badge-task' :
+                (item.type === 'variable' ? 'badge-variable' :
+                  (item.type === 'constant' || item.type === 'parameter' ? 'badge-constant' :
+                    (item.type === 'type' || item.type === 'enum' || item.type === 'enumeration' ? 'badge-type' :
+                      (item.type === 'port' ? 'badge-port' :
+                        (item.type === 'example' ? 'badge-example' : 'badge-method'))))))));
+        const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method' || item.type === 'variable' || item.type === 'port';
+        const ownerInfo = item.category && isMethodLike ?
+          `<span class="az-symbol-owner" style="font-size:0.68rem; color:var(--text-muted); margin-left:auto; margin-right:0.35rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:110px;">${highlightMatch(item.category, matcher)}</span>` : '';
+        const itemKey = getSymbolIndexKey(item);
+        let isActive = false;
+        if (currentActiveIndexKey) {
+          isActive = (itemKey === currentActiveIndexKey);
+        } else {
+          if (item.doc && cleanDoc && (item.doc === cleanDoc || item.doc.replace(/^[./]+/, '') === cleanDoc)) {
+            isActive = true;
+          } else if (item.src && cleanSrc && (item.src === cleanSrc || item.src.replace(/^[./]+/, '') === cleanSrc)) {
+            isActive = true;
+          }
         }
-      }
-      html += `<div class="nav-single-item">
-            <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" data-index-key="${escapeHtml(itemKey)}" class="nav-item-link az-index-link ${isActive ? 'active' : ''}" title="${item.desc || item.name}">
+        chunkHtml += `<div class="nav-single-item">
+            <a href="#" data-doc-href="${item.doc || ''}" data-src-href="${item.src || ''}" data-index-key="${escapeHtml(itemKey)}" class="nav-item-link az-index-link ${isActive ? 'active' : ''}" title="${escapeHtml(item.desc || item.name)}">
               <span class="az-symbol-name">${highlightMatch(item.name, matcher)}</span>
               ${ownerInfo}
               <span class="res-badge ${badgeClass}">${item.type}</span>
             </a>
           </div>`;
-    });
+      }
+      return chunkHtml;
+    }
+
+    const MAX_INDEX_RENDER = 200;
+    let html = renderSymbolRange(0, MAX_INDEX_RENDER);
+    if (matchedSymbols.length > MAX_INDEX_RENDER) {
+      html += `<div id="az-show-more-wrap" style="padding: 0.75rem; text-align: center; border-top: 1px solid var(--border-color);">
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.4rem;">Showing ${MAX_INDEX_RENDER} of ${matchedSymbols.length} results</div>
+        <button type="button" id="az-show-all-btn" style="padding: 0.3rem 0.75rem; font-size: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-surface); color: var(--text-primary); cursor: pointer;">Show all (${matchedSymbols.length})</button>
+      </div>`;
+    }
 
     sidebarContent.innerHTML = html || '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem">No matching symbols</div>';
+    const showAllBtn = document.getElementById('az-show-all-btn');
+    if (showAllBtn) {
+      showAllBtn.addEventListener('click', () => {
+        const wrap = document.getElementById('az-show-more-wrap');
+        if (wrap) wrap.remove();
+        sidebarContent.insertAdjacentHTML('beforeend', renderSymbolRange(MAX_INDEX_RENDER, matchedSymbols.length));
+      });
+    }
     attachSidebarListeners();
   }
 
@@ -1554,9 +1584,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let textMatches = true;
       if (matcher && matcher.clean) {
-        const cLower = node.name.toLowerCase();
-        const sLower = (node.summary || '').toLowerCase();
-        textMatches = matcher.words.every(w => cLower.includes(w) || sLower.includes(w));
+        if (matcher.type === 'regex') {
+          textMatches = matcher.valid && matcher.regex ? (matcher.regex.test(node.name) || (node.summary && matcher.regex.test(node.summary))) : false;
+        } else if (matcher.words && matcher.words.length > 0) {
+          const cLower = node.name.toLowerCase();
+          const sLower = (node.summary || '').toLowerCase();
+          textMatches = matcher.words.every(w => cLower.includes(w) || sLower.includes(w));
+        }
       }
 
       const selfMatches = roleMatches && textMatches;
@@ -1778,31 +1812,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function attachSidebarListeners() {
-    // Collapsible group headers: Clicking chevron button toggles expand/collapse
-    sidebarContent.querySelectorAll('.nav-group-chevron-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+  function bindSidebarDelegation() {
+    if (!sidebarContent || sidebarContent._delegatedBound) return;
+    sidebarContent._delegatedBound = true;
+
+    sidebarContent.addEventListener('click', (e) => {
+      // 1. Collapsible group headers: Clicking chevron button toggles expand/collapse
+      const chevronBtn = e.target.closest('.nav-group-chevron-btn');
+      if (chevronBtn) {
         e.stopPropagation();
-        const group = btn.closest('.nav-group');
+        const group = chevronBtn.closest('.nav-group');
         if (group) group.classList.toggle('collapsed');
         updateSidebarToggleAllBtn();
-      });
-    });
+        return;
+      }
 
-    // Clicking on header (when it doesn't have an overview link) toggles expand/collapse
-    sidebarContent.querySelectorAll('.nav-group-header').forEach(header => {
-      header.addEventListener('click', (e) => {
-        if (e.target.closest('a') || e.target.closest('.nav-group-chevron-btn')) {
-          return;
-        }
-        header.closest('.nav-group').classList.toggle('collapsed');
-        updateSidebarToggleAllBtn();
-      });
-    });
-
-    // Navigation links (doc & src & group overview title links)
-    sidebarContent.querySelectorAll('[data-doc-href], [data-src-href]').forEach(link => {
-      link.addEventListener('click', (e) => {
+      // 2. Navigation links (doc & src & group overview title links)
+      const link = e.target.closest('[data-doc-href], [data-src-href]');
+      if (link) {
         e.preventDefault();
         e.stopPropagation();
         const docHref = link.getAttribute('data-doc-href');
@@ -1813,14 +1840,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Immediately highlight the clicked item for instant, reliable visual feedback
-        sidebarContent.querySelectorAll('.nav-item-link, .file-tree-item, .hierarchy-link').forEach(el => el.classList.remove('active'));
-        sidebarContent.querySelectorAll('.hierarchy-row').forEach(el => el.classList.remove('active'));
+        sidebarContent.querySelectorAll('.nav-item-link.active, .file-tree-item.active, .hierarchy-link.active, .hierarchy-row.active')
+          .forEach(el => el.classList.remove('active'));
         link.classList.add('active');
         const row = link.closest('.hierarchy-row');
         if (row) row.classList.add('active');
         try {
           link.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-        } catch (e) { }
+        } catch (err) { }
 
         // Make sure all ancestor groups are expanded so the active item is in plain view
         let p = link.parentElement;
@@ -1855,8 +1882,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth <= 860 && sidebar) {
           sidebar.classList.remove('open');
         }
-      });
+        return;
+      }
+
+      // 3. Clicking on header (when it doesn't have an overview link) toggles expand/collapse
+      const header = e.target.closest('.nav-group-header');
+      if (header && !e.target.closest('a')) {
+        const group = header.closest('.nav-group');
+        if (group) group.classList.toggle('collapsed');
+        updateSidebarToggleAllBtn();
+      }
     });
+  }
+
+  function attachSidebarListeners() {
+    bindSidebarDelegation();
 
     // Ensure parent groups of active doc item are expanded so it is visible
     const activeItem = sidebarContent.querySelector('.nav-item-link.active, .file-tree-item.active, .hierarchy-link.active');
