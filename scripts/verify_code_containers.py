@@ -39,7 +39,10 @@ def main():
     print("=" * 60)
 
     src_files = list(SRC_VIEW_DIR.rglob("*.html"))
-    assert_test(len(src_files) == 155, f"All 155 source views generated ({len(src_files)} found)")
+    uvm_src_files = [f for f in src_files if "examples" not in f.relative_to(SRC_VIEW_DIR).parts]
+    ex_src_files = [f for f in src_files if "examples" in f.relative_to(SRC_VIEW_DIR).parts]
+    assert_test(len(uvm_src_files) == 155, f"All 155 UVM library source views generated ({len(uvm_src_files)} found)")
+    assert_test(len(ex_src_files) >= 200, f"All example source views generated under src_view/examples/ ({len(ex_src_files)} found)")
 
     ex_files = list(EXAMPLES_VIEW_DIR.rglob("*.html"))
     assert_test(len(ex_files) >= 38, f"All example studios generated ({len(ex_files)} found)")

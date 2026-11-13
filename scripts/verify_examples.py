@@ -215,6 +215,26 @@ def main():
                 f"All Key UVM APIs resolve cleanly ({len(unresolved_apis)} unresolved)",
                 f"Unresolved: {unresolved_apis}")
 
+    # Test 14: Standalone src_view/examples/ pages & unified openSourceView/studioFileChanged wiring
+    ex_src_dir = BASE_DIR / "src_view" / "examples"
+    ex_src_pages = list(ex_src_dir.rglob("*.html")) if ex_src_dir.exists() else []
+    assert_test(len(ex_src_pages) >= 200, f"Standalone src_view/examples/ pages generated ({len(ex_src_pages)} found)")
+    sample_ex_src = (ex_src_dir / "phasing" / "basic" / "test.sv.html")
+    if sample_ex_src.exists():
+        sample_html = sample_ex_src.read_text(encoding="utf-8")
+        has_no_meta_badges = ('lines</span>' not in sample_html and 'KB</span>' not in sample_html)
+        assert_test(has_no_meta_badges, "src_view/examples/ omits line-count and file-size badges")
+
+    ex_page_js = (BASE_DIR / "js" / "example_page.js").read_text(encoding="utf-8")
+    assert_test("initBannerFilesPopover" in ex_page_js and "'openSourceView'" in ex_page_js,
+                "example_page.js opens example files via standard openSourceView")
+    assert_test("'studioFileChanged'" in ex_page_js,
+                "example_page.js syncs studio tab changes via studioFileChanged")
+
+    app_js_src = (BASE_DIR / "js" / "app.js").read_text(encoding="utf-8")
+    assert_test("studioFileChanged" in app_js_src and "focusSearchInput" in app_js_src,
+                "app.js handles studioFileChanged and focusSearchInput")
+
     print("=" * 60)
     print(f"  Test Results: {PASSED_TESTS}/{TOTAL_TESTS} passed ({FAILED_TESTS} failed)")
     print("=" * 60)

@@ -332,6 +332,10 @@ Avant de valider une version :
 - [ ] **Validation des Studios** : `python scripts/verify_examples.py` (28/28 assertions validées).
 - [ ] **Validation des Scénarios & Logs** : `python scripts/verify_stepper_calibration.py` (5/5 piliers vérifiés).
 - [ ] **Validation des Notes Sources** : `python scripts/verify_source_notes.py` (39/39 suites validées, zéro fuite de licence Apache).
+- [ ] **Suite Unifiée Complète** : `python scripts/run_tests.py` (8/8 suites au vert, incluant `verify_code_containers.py` et `verify_code_editor_tools.py` sur les 155 sources UVM + pages `src_view/examples/`).
+- [ ] **Ouverture & URL des Sources d'Exemple** : Cliquer sur un fichier dans la bannière d'un exemple ouvre `src_view/examples/<catégorie>/<suite>/<fichier>.html` en Split View sur desktop (`#/split?doc=...&src=examples/...`) ou en vue Source sur mobile (`#/src/examples/...`), et changer d'onglet dans le Code Studio en Split View synchronise le panneau droit et l'URL.
+- [ ] **Focus Clavier Immédiat en Recherche Modale** : Cliquer sur la barre de recherche ou appuyer sur `/` active immédiatement la saisie clavier et présélectionne la requête en cours.
+- [ ] **Serveur Local (`start_server.bat`)** : `python scripts/serve.py` refuse le double-bind silencieux sous Windows (`allow_reuse_address = False`) et `start_server.bat` accepte un port alternatif en argument.
 - [ ] **Auto-Expansion des Ancres Rétractées** : Tester la navigation vers une méthode héritée ou une sous-classe repliée : la zone parente doit se déplier automatiquement et la méthode doit être centrée avec halo surligné.
 - [ ] **Absence de barrière d'événements** : Vérifier que tous les backdrops de modales (`#search-modal`, `#image-zoom-modal`) sont en `display: none` et `visibility: hidden` lorsqu'ils sont inactifs.
 - [ ] **Précision du scrolling** : Tester un lien vers une méthode située à plus de 15 000 px dans `uvm_component` : la section doit atterrir avec un décalage de 24 px sous le bandeau supérieur.

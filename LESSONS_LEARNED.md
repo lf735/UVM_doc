@@ -1330,3 +1330,47 @@ Bien que toute la chaîne de build et de test repose sur la bibliothèque standa
 
 ### La Solution Appliquée (`scripts/verify_source_notes.py`)
 Remplacement de `BeautifulSoup` par un parseur dédié `_SourceNotesParser(HTMLParser)` basé uniquement sur `html.parser.HTMLParser` (avec gestion explicite des balises auto-fermantes `VOID_TAGS`), éliminant la dépendance externe tout en réduisant le temps d'exécution de ~6,6 s à ~1,8 s.
+
+---
+
+## 38. Le Piège des Sources d'Exemple Synthétiques (`srcdoc` / `exfile`) vs Pages `src_view/examples/` Réelles
+
+### Le Symptôme Observé
+> *"Ouvrir un fichier depuis un exemple doit l'afficher dans une vue source standard (avec Split View sur grand écran, switch de vue sur mobile, et mise à jour d'URL identique aux `src_view/` classiques)."*
+
+### L'Anatomie du Piège
+1. **Dérive des cas particuliers (`srcdoc` + `?exfile=...`)** : Injecter le code d'un exemple dans `srcFrame.srcdoc` avec un paramètre d'URL spécifique `&exfile=` cassait le rechargement, les ancres `#L...`, la vue mobile (`#/src/...`) et la synchronisation lors du changement d'onglet dans le Code Studio.
+2. **Extraction du nom de fichier polluée par l'icône d'onglet** : `#zip-payload` stockait son JSON dans l'attribut `data-zip` (et non `textContent`). Le fallback lisait `.studio-tab.textContent.trim()`, produisant `"📄test.sv"` au lieu de `"test.sv"`.
+
+### La Solution Appliquée
+1. **Génération statique unifiée (`scripts/build_examples.py`, `scripts/page_builder_common.py`)** : Chaque fichier des 39 suites d'exemples possède désormais sa propre page HTML sous `src_view/examples/<catégorie>/<exemple>/<fichier>.html` générée via `render_source_viewer()` (sans badges redondants de lignes/taille).
+2. **Routage standard (`js/example_page.js`, `js/app.js`)** : Le popover de la bannière (`.banner-files-popover`) envoie `openSourceView` et les onglets du Code Studio envoient `studioFileChanged` en mode `split` avec l'URL canonique `src_view/examples/...`. Les URLs suivent exactement `#/split?doc=...&src=examples/...` et `#/src/examples/...`.
+3. **Lecture fiable du nom de fichier (`js/example_page.js`)** : Lecture prioritaire de `data-zip`, puis `.file-code-pane[data-filename]`, puis `.tab-name` / `title` sur `.studio-tab`.
+
+---
+
+## 39. Le Piège du `focus()` Bloqué par `transition: visibility` dans la Recherche Modale
+
+### Le Symptôme Observé
+> *"Lors du clic sur la recherche modale, le champ de recherche n'est pas actif / présélectionné pour taper directement au clavier."*
+
+### L'Anatomie du Piège
+`.search-modal-backdrop` utilisait `visibility: hidden` avec `transition: opacity 0.2s ease, visibility 0.2s ease`. Lors de l'ajout de `.open`, un `focus()` synchrone pouvait être ignoré par le navigateur tant que la visibilité ou le cycle de clic sur `#search-trigger` n'était pas finalisé.
+
+### La Solution Appliquée (`css/style.css`, `js/app.js`)
+- Sur `.search-modal-backdrop.open`, passage immédiat à `visibility: visible` (`transition: opacity 0.2s ease, visibility 0s`).
+- Ajout de `focusSearchInput(selectAll)` dans `js/app.js`, exécutant `focus({ preventScroll: true })` et `select()` immédiatement, au `requestAnimationFrame`, puis à `+50 ms`.
+
+---
+
+## 40. Le Piège du `allow_reuse_address = True` de `ThreadingHTTPServer` sous Windows (`serve.py`)
+
+### Le Symptôme Observé
+> *"Le script `start_server.bat` ne lance pas bien le serveur lorsque le port 8000 est déjà occupé."*
+
+### L'Anatomie du Piège
+Sous Windows, `http.server.ThreadingHTTPServer` active `allow_reuse_address = True` (`SO_REUSEADDR`), ce qui permet à un second processus de se lier silencieusement sur `0.0.0.0:8000` en parallèle d'un serveur existant au lieu de signaler le conflit. Lorsque `DualStackHTTPServer` (`allow_reuse_address = False`) levait `OSError` pour port occupé, le `except OSError` basculait à tort vers `ThreadingHTTPServer`.
+
+### La Solution Appliquée (`scripts/serve.py`, `start_server.bat`)
+- `scripts/serve.py` définit `IPv4HTTPServer` avec `allow_reuse_address = False` et ne bascule sur IPv4 que si l'erreur est `EAFNOSUPPORT` / `EPROTONOSUPPORT`. En cas de port occupé, il affiche une erreur explicite et quitte avec le code `1`.
+- `start_server.bat` accepte un port optionnel en argument (`start_server.bat 8001`) et exécute `pause` si le serveur échoue à démarrer.

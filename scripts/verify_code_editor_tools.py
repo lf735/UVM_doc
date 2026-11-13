@@ -76,7 +76,10 @@ def test_js_controllers():
 def test_source_views():
     print("[4/5] Testing src_view/*.html pages...")
     src_files = list(SRC_DIR.glob("**/*.html"))
-    assert len(src_files) == 155, f"Expected 155 source views, found {len(src_files)}"
+    uvm_src_files = [f for f in src_files if "examples" not in f.relative_to(SRC_DIR).parts]
+    ex_src_files = [f for f in src_files if "examples" in f.relative_to(SRC_DIR).parts]
+    assert len(uvm_src_files) == 155, f"Expected 155 UVM library source views, found {len(uvm_src_files)}"
+    assert len(ex_src_files) >= 200, f"Expected example source views under src_view/examples/, found {len(ex_src_files)}"
     checked = 0
     for f in src_files:
         content = f.read_text(encoding="utf-8")
