@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UVM 1.2 Docs — Mobile Preview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #141517;
+      color: #e8eaed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .toolbar {
+      width: 100%;
+      background: #1f2023;
+      border-bottom: 1px solid #36393f;
+      padding: 0.65rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+    .toolbar-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+      color: #8ab4f8;
+    }
+    button, select {
+      background: #26282c;
+      color: #e8eaed;
+      border: 1px solid #36393f;
+      border-radius: 8px;
+      padding: 0.4rem 0.75rem;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+    button:hover, select:hover {
+      border-color: #8ab4f8;
+    }
+    .dims {
+      font-family: Consolas, monospace;
+      font-size: 0.8rem;
+      color: #9aa0a6;
+      padding: 0.35rem 0.6rem;
+      background: #18191b;
+      border-radius: 6px;
+      border: 1px solid #2c2f34;
+    }
+    .stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      width: 100%;
+      overflow: auto;
+    }
+    .device-frame {
+      background: #000;
+      border-radius: 28px;
+      padding: 12px;
+      border: 3px solid #36393f;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+      transition: width 0.2s ease, height 0.2s ease;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 18px;
+      background: #fff;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <span class="toolbar-title">Mobile Preview</span>
+    <select id="preset">
+      <option value="375x667">iPhone SE (375×667)</option>
+      <option value="390x844" selected>iPhone 14 (390×844)</option>
+      <option value="412x915">Pixel 7 (412×915)</option>
+      <option value="768x1024">iPad Mini (768×1024)</option>
+    </select>
+    <button id="rotate">Pivoter</button>
+    <button id="reload">Recharger</button>
+    <span class="dims" id="dims">390 × 844</span>
+  </div>
+  <div class="stage">
+    <div class="device-frame" id="frame-box" style="width: 414px; height: 868px;">
+      <iframe id="preview-frame" src="index.html"></iframe>
+    </div>
+  </div>
+  <script>
+    const preset = document.getElementById('preset');
+    const rotateBtn = document.getElementById('rotate');
+    const reloadBtn = document.getElementById('reload');
+    const frameBox = document.getElementById('frame-box');
+    const previewFrame = document.getElementById('preview-frame');
+    const dims = document.getElementById('dims');
+
+    let w = 390, h = 844;
+    function applySize() {
+      frameBox.style.width = (w + 24) + 'px';
+      frameBox.style.height = (h + 24) + 'px';
+      dims.textContent = w + ' × ' + h;
+    }
+    preset.addEventListener('change', () => {
+      const [pw, ph] = preset.value.split('x').map(Number);
+      w = pw; h = ph;
+      applySize();
+    });
+    rotateBtn.addEventListener('click', () => {
+      const tmp = w; w = h; h = tmp;
+      applySize();
+    });
+    reloadBtn.addEventListener('click', () => {
+      previewFrame.contentWindow.location.reload();
+    });
+  </script>
+</body>
+</html>
+

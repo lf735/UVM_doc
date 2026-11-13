@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Image Zoom Modal Controller (provided by js/app_modals.js)
   const imageModalController = window.UvmImageModal ? window.UvmImageModal.init() : null;
-  const openImageZoomModal = imageModalController ? imageModalController.open : () => {};
-  const closeImageZoomModal = imageModalController ? imageModalController.close : () => {};
+  const openImageZoomModal = imageModalController ? imageModalController.open : () => { };
+  const closeImageZoomModal = imageModalController ? imageModalController.close : () => { };
 
   // State
   let currentMode = 'docs'; // 'docs' | 'source' | 'split'
@@ -370,6 +370,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setViewMode(mode, updateHistory = true) {
+    if (window.innerWidth <= 860 && mode === 'split') {
+      mode = 'docs';
+    }
     if (currentMode === mode && !updateHistory) return;
 
     // Preserve the exact scroll reading level of the active doc frame before mode class switch
@@ -451,9 +454,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setFrameSrc(srcFrame, fullSrc);
     updateSrcTitle(fullSrc);
 
-    // Switch to split view so user sees both doc and source without resetting reading position
-    if (currentMode !== 'split') {
-      setViewMode('split', true);
+    // On mobile, open full source view directly (no split view); on desktop, switch to split view
+    const targetMode = window.innerWidth <= 860 ? 'source' : 'split';
+    if (currentMode !== targetMode) {
+      setViewMode(targetMode, true);
     } else {
       updateHash();
     }
@@ -1962,7 +1966,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const docHref = el.getAttribute('data-doc-href') || '';
           const srcHref = el.getAttribute('data-src-href') || '';
           const matchExact = (docHref && url && docHref.includes('#') && (docHref === url || url.endsWith(docHref))) ||
-                             (srcHref && url && srcHref.includes('#') && (srcHref === url || url.endsWith(srcHref)));
+            (srcHref && url && srcHref.includes('#') && (srcHref === url || url.endsWith(srcHref)));
           if (matchExact && !found) {
             el.classList.add('active');
             found = true;
@@ -2421,6 +2425,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  const modalSearchClose = document.getElementById('modal-search-close');
+  if (modalSearchClose) {
+    modalSearchClose.addEventListener('click', closeSearchModal);
+  }
+
   // RAG State & Helpers
   let modalAiEnabled = false;
   let activeAiSearchId = 0;
@@ -2435,11 +2444,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
     : null;
-  const updateCacheStatusUI = searchModalsController ? searchModalsController.updateCacheStatusUI : () => {};
-  const openAiConsentModal = searchModalsController ? searchModalsController.openAiConsentModal : () => {};
-  const closeAiConsentModal = searchModalsController ? searchModalsController.closeAiConsentModal : () => {};
-  const openSearchSettingsModal = searchModalsController ? searchModalsController.openSearchSettingsModal : () => {};
-  const closeSearchSettingsModal = searchModalsController ? searchModalsController.closeSearchSettingsModal : () => {};
+  const updateCacheStatusUI = searchModalsController ? searchModalsController.updateCacheStatusUI : () => { };
+  const openAiConsentModal = searchModalsController ? searchModalsController.openAiConsentModal : () => { };
+  const closeAiConsentModal = searchModalsController ? searchModalsController.closeAiConsentModal : () => { };
+  const openSearchSettingsModal = searchModalsController ? searchModalsController.openSearchSettingsModal : () => { };
+  const closeSearchSettingsModal = searchModalsController ? searchModalsController.closeSearchSettingsModal : () => { };
 
   function renderPromptChips() {
     if (!promptsChips || !window.UVMRagEngine) return;
@@ -3340,7 +3349,31 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) { }
       }
     });
+
+    // Auto-close mobile drawer when selecting an item or clicking outside
+    sidebar.addEventListener('click', (e) => {
+      if (window.innerWidth <= 860 && e.target.closest('.nav-item-link, .file-tree-item, .nav-group-title-link')) {
+        sidebar.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    const mainViewport = document.querySelector('.main-viewport');
+    if (mainViewport) {
+      mainViewport.addEventListener('click', () => {
+        if (window.innerWidth <= 860 && sidebar.classList.contains('open')) {
+          sidebar.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
   }
+
+  // Ensure mobile viewports never stay in split mode on resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 860 && currentMode === 'split') {
+      setViewMode('docs', false);
+    }
+  });
 
   // Initialize
   updateSidebarPillsForTab();
