@@ -1792,14 +1792,23 @@ window.PageCommon = (function () {
     }
 
     // Smooth Line Scrolling & Centering helper
+    let lastScrolledLine = null;
+    let lastScrolledTime = 0;
+
     function scrollToLine(lineHashOrNum) {
       if (!lineHashOrNum) return;
       const lineStr = String(lineHashOrNum).replace(/^#?L?/, '');
+      const now = Date.now();
+      if (lastScrolledLine === lineStr && (now - lastScrolledTime) < 400) {
+        return;
+      }
       const selector = `#L${lineStr}`;
       const targetRow = document.querySelector(`.file-code-pane tr${selector}`) ||
         document.querySelector(`.sv-code-table tr${selector}`) ||
         document.getElementById(`L${lineStr}`);
       if (targetRow) {
+        lastScrolledLine = lineStr;
+        lastScrolledTime = now;
         document.querySelectorAll('.file-code-pane tr.active-line, .sv-code-table tr.active-line').forEach(function (tr) {
           tr.classList.remove('active-line');
         });

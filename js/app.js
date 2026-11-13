@@ -163,15 +163,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const rawAnchor = targetUrl.hash ? targetUrl.hash.replace(/^#/, '') : '';
 
-      // If already on the same page, do not reload the iframe; scroll only if anchor specified
+      // If already on the same page, do not reload the iframe; scroll smoothly via postMessage
       if (currentPath === targetUrl.pathname) {
         if (targetUrl.hash) {
-          try {
-            frame.contentWindow.location.hash = targetUrl.hash;
-          } catch (e) { }
           if (frame.contentWindow && rawAnchor) {
             dispatchScroll(rawAnchor);
-            pendingNav.timeouts.push(setTimeout(() => dispatchScroll(rawAnchor), 80));
+          } else {
+            try {
+              frame.contentWindow.location.hash = targetUrl.hash;
+            } catch (e) { }
           }
         } else {
           // Navigating to top of the current page
