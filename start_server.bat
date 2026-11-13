@@ -3,6 +3,7 @@ setlocal enabledelayedexpansion
 cd /d "%~dp0"
 
 set PORT=8000
+if not "%~1"=="" set PORT=%~1
 
 echo ============================================================
 echo   UVM 1.2 Documentation Server
@@ -19,3 +20,8 @@ echo Press Ctrl+C to stop the server.
 echo.
 
 python scripts\serve.py %PORT%
+if errorlevel 1 (
+    echo.
+    echo [ERROR] Server failed to start on port %PORT%.
+    pause
+)
