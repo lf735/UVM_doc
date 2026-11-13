@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Image Zoom Modal Controller (provided by js/app_modals.js)
   const imageModalController = window.UvmImageModal ? window.UvmImageModal.init() : null;
-  const openImageZoomModal = imageModalController ? imageModalController.open : () => {};
-  const closeImageZoomModal = imageModalController ? imageModalController.close : () => {};
+  const openImageZoomModal = imageModalController ? imageModalController.open : () => { };
+  const closeImageZoomModal = imageModalController ? imageModalController.close : () => { };
 
   // State
   let currentMode = 'docs'; // 'docs' | 'source' | 'split'
@@ -390,6 +390,21 @@ document.addEventListener('DOMContentLoaded', () => {
     viewBtns.forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
     });
+
+    const expandSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>';
+    const collapseSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20" /><polyline points="20 10 14 10 14 4" /><line x1="14" y1="10" x2="21" y2="3" /><line x1="3" y1="21" x2="10" y2="14" /></svg>';
+    const btnFullDoc = document.getElementById('open-full-doc');
+    if (btnFullDoc) {
+      const isFullDoc = mode === 'docs';
+      btnFullDoc.title = isFullDoc ? 'Restore split view' : 'Expand documentation full width';
+      btnFullDoc.innerHTML = isFullDoc ? collapseSvg : expandSvg;
+    }
+    const btnFullSrc = document.getElementById('open-full-src');
+    if (btnFullSrc) {
+      const isFullSrc = mode === 'source';
+      btnFullSrc.title = isFullSrc ? 'Restore split view' : 'Expand source code full width';
+      btnFullSrc.innerHTML = isFullSrc ? collapseSvg : expandSvg;
+    }
 
     if (mode !== 'split') {
       if (docPane) { docPane.style.width = ''; docPane.style.flex = ''; }
@@ -1947,7 +1962,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const docHref = el.getAttribute('data-doc-href') || '';
           const srcHref = el.getAttribute('data-src-href') || '';
           const matchExact = (docHref && url && docHref.includes('#') && (docHref === url || url.endsWith(docHref))) ||
-                             (srcHref && url && srcHref.includes('#') && (srcHref === url || url.endsWith(srcHref)));
+            (srcHref && url && srcHref.includes('#') && (srcHref === url || url.endsWith(srcHref)));
           if (matchExact && !found) {
             el.classList.add('active');
             found = true;
@@ -2116,14 +2131,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Pane actions: Open Full View & Copy Link
+  // Pane actions: Toggle Full View <-> Split View
   const openFullDoc = document.getElementById('open-full-doc');
   if (openFullDoc) {
-    openFullDoc.addEventListener('click', () => setViewMode('docs', true));
+    openFullDoc.addEventListener('click', () => {
+      setViewMode(currentMode === 'docs' ? 'split' : 'docs', true);
+    });
   }
   const openFullSrc = document.getElementById('open-full-src');
   if (openFullSrc) {
-    openFullSrc.addEventListener('click', () => setViewMode('source', true));
+    openFullSrc.addEventListener('click', () => {
+      setViewMode(currentMode === 'source' ? 'split' : 'source', true);
+    });
   }
 
   // =========================================================================
@@ -2416,11 +2435,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
     : null;
-  const updateCacheStatusUI = searchModalsController ? searchModalsController.updateCacheStatusUI : () => {};
-  const openAiConsentModal = searchModalsController ? searchModalsController.openAiConsentModal : () => {};
-  const closeAiConsentModal = searchModalsController ? searchModalsController.closeAiConsentModal : () => {};
-  const openSearchSettingsModal = searchModalsController ? searchModalsController.openSearchSettingsModal : () => {};
-  const closeSearchSettingsModal = searchModalsController ? searchModalsController.closeSearchSettingsModal : () => {};
+  const updateCacheStatusUI = searchModalsController ? searchModalsController.updateCacheStatusUI : () => { };
+  const openAiConsentModal = searchModalsController ? searchModalsController.openAiConsentModal : () => { };
+  const closeAiConsentModal = searchModalsController ? searchModalsController.closeAiConsentModal : () => { };
+  const openSearchSettingsModal = searchModalsController ? searchModalsController.openSearchSettingsModal : () => { };
+  const closeSearchSettingsModal = searchModalsController ? searchModalsController.closeSearchSettingsModal : () => { };
 
   function renderPromptChips() {
     if (!promptsChips || !window.UVMRagEngine) return;
