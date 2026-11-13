@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Image Zoom Modal Controller (provided by js/app_modals.js)
   const imageModalController = window.UvmImageModal ? window.UvmImageModal.init() : null;
-  const openImageZoomModal = imageModalController ? imageModalController.open : () => { };
-  const closeImageZoomModal = imageModalController ? imageModalController.close : () => { };
+  const openImageZoomModal = imageModalController ? imageModalController.open : () => {};
+  const closeImageZoomModal = imageModalController ? imageModalController.close : () => {};
 
   // State
   let currentMode = 'docs'; // 'docs' | 'source' | 'split'
@@ -1962,7 +1962,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const docHref = el.getAttribute('data-doc-href') || '';
           const srcHref = el.getAttribute('data-src-href') || '';
           const matchExact = (docHref && url && docHref.includes('#') && (docHref === url || url.endsWith(docHref))) ||
-            (srcHref && url && srcHref.includes('#') && (srcHref === url || url.endsWith(srcHref)));
+                             (srcHref && url && srcHref.includes('#') && (srcHref === url || url.endsWith(srcHref)));
           if (matchExact && !found) {
             el.classList.add('active');
             found = true;
@@ -2435,11 +2435,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
     : null;
-  const updateCacheStatusUI = searchModalsController ? searchModalsController.updateCacheStatusUI : () => { };
-  const openAiConsentModal = searchModalsController ? searchModalsController.openAiConsentModal : () => { };
-  const closeAiConsentModal = searchModalsController ? searchModalsController.closeAiConsentModal : () => { };
-  const openSearchSettingsModal = searchModalsController ? searchModalsController.openSearchSettingsModal : () => { };
-  const closeSearchSettingsModal = searchModalsController ? searchModalsController.closeSearchSettingsModal : () => { };
+  const updateCacheStatusUI = searchModalsController ? searchModalsController.updateCacheStatusUI : () => {};
+  const openAiConsentModal = searchModalsController ? searchModalsController.openAiConsentModal : () => {};
+  const closeAiConsentModal = searchModalsController ? searchModalsController.closeAiConsentModal : () => {};
+  const openSearchSettingsModal = searchModalsController ? searchModalsController.openSearchSettingsModal : () => {};
+  const closeSearchSettingsModal = searchModalsController ? searchModalsController.closeSearchSettingsModal : () => {};
 
   function renderPromptChips() {
     if (!promptsChips || !window.UVMRagEngine) return;
@@ -3315,12 +3315,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // Mobile Drawer Toggle
+  // Sidebar Toggle (Desktop Collapsible & Mobile Drawer)
   // =========================================================================
 
   if (menuToggle && sidebar) {
+    try {
+      if (localStorage.getItem('sidebarCollapsed') === '1' && window.innerWidth > 860) {
+        sidebar.classList.add('collapsed');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      } else {
+        menuToggle.setAttribute('aria-expanded', 'true');
+      }
+    } catch (e) { }
+
     menuToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
+      if (window.innerWidth <= 860) {
+        const isOpen = sidebar.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+      } else {
+        const isCollapsed = sidebar.classList.toggle('collapsed');
+        menuToggle.setAttribute('aria-expanded', String(!isCollapsed));
+        try {
+          localStorage.setItem('sidebarCollapsed', isCollapsed ? '1' : '0');
+        } catch (e) { }
+      }
     });
   }
 
