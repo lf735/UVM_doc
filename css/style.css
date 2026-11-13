@@ -2807,58 +2807,142 @@ code {
   font-weight: 600;
 }
 
-/* Method Prototypes & Signatures (Google API Reference Card Style) */
+/* Method Prototypes & Signatures (Aligned with .code-block-container without header) */
+blockquote:has(> .Prototype) {
+  margin: 1.25rem 0;
+  padding: 0;
+  border: none;
+}
+
 .Prototype {
-  background: var(--surface-alt);
-  color: var(--text-main);
+  display: block;
+  width: 100%;
+  background: var(--code-bg);
+  color: var(--code-text);
   border: 1px solid var(--border-color);
-  border-left: 4px solid var(--primary);
   border-radius: var(--radius-md);
-  padding: 0.85rem 1.25rem;
+  padding: 1rem 1.25rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   line-height: 1.6;
-  margin: 0.75rem 0 1rem 0;
+  margin: 1.25rem 0;
   box-shadow: var(--shadow-sm);
   overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.Prototype:hover {
+  border-color: var(--border-subtle-hover);
+}
+
+blockquote > .Prototype {
+  margin: 0;
+}
+
+.Prototype::-webkit-scrollbar {
+  height: 6px;
+}
+
+.Prototype::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.Prototype::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+.Prototype::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+.Prototype > tbody {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+}
+
+.Prototype > tbody > tr,
+.Prototype > tbody > tr > td {
+  display: block;
+  padding: 0;
+  border: none;
+  background: transparent !important;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
 }
 
 .Prototype table {
   border-collapse: collapse;
+  width: auto;
+  margin: 0;
+  background: transparent;
+}
+
+.Prototype table td {
+  padding: 0.05rem 0;
+  border: none;
+  background: transparent !important;
+  vertical-align: baseline;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.Prototype table td:first-child:not([colspan]) {
+  width: 1.5rem;
+  min-width: 1.5rem;
+  user-select: none;
 }
 
 .PBeforeParameters {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: inherit;
   color: var(--text-main);
-  padding-bottom: 2px;
+  padding-bottom: 0.2rem !important;
+}
+
+.PTypePrefix {
+  font-family: var(--font-mono);
+  font-size: inherit;
+  padding-right: 0.25rem !important;
 }
 
 .PType {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: inherit;
   color: var(--sv-uvm-type);
+  padding-right: 0.35rem !important;
 }
 
 .PParameter {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: inherit;
   font-weight: 500;
   color: var(--text-main);
+  width: auto !important;
 }
 
 .PDefaultValuePrefix {
   color: var(--sv-op);
+  padding: 0 0.2rem !important;
 }
 
 .PDefaultValue {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: inherit;
   color: var(--sv-default-val);
+  width: auto !important;
 }
 
 .PAfterParameters {
   color: var(--sv-op);
+  padding-top: 0.2rem !important;
 }
 
 /* ==========================================================================
