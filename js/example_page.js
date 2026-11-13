@@ -741,7 +741,8 @@
     const zipPayloadEl = document.getElementById('zip-payload');
     if (zipPayloadEl) {
       try {
-        const parsed = JSON.parse(zipPayloadEl.textContent);
+        const rawZip = zipPayloadEl.getAttribute('data-zip') || zipPayloadEl.textContent;
+        const parsed = rawZip ? JSON.parse(rawZip) : null;
         if (Array.isArray(parsed)) {
           zipFiles = parsed;
           fileNames = parsed.map(f => f && f.name).filter(Boolean);
@@ -749,7 +750,15 @@
       } catch (e) { }
     }
     if (!fileNames.length) {
-      fileNames = Array.from(document.querySelectorAll('.studio-tab')).map(t => t.textContent.trim()).filter(Boolean);
+      fileNames = Array.from(document.querySelectorAll('.file-code-pane[data-filename]'))
+        .map(p => (p.getAttribute('data-filename') || '').trim())
+        .filter(Boolean);
+    }
+    if (!fileNames.length) {
+      fileNames = Array.from(document.querySelectorAll('.studio-tab')).map(t => {
+        const nameEl = t.querySelector('.tab-name');
+        return (nameEl ? nameEl.textContent : (t.getAttribute('title') || t.textContent)).trim();
+      }).filter(Boolean);
     }
     if (!fileNames.length) return;
 
@@ -758,6 +767,39 @@
     filesBadge.setAttribute('role', 'button');
     filesBadge.setAttribute('tabindex', '0');
     filesBadge.setAttribute('aria-expanded', 'false');
+
+    function getExampleSrcUrl(name) {
+      const m = window.location.pathname.replace(/\\/g, '/').match(/examples_view\/(.+?)\.html$/);
+      if (!m || !name) return '';
+      return `src_view/examples/${m[1]}/${name}.html`;
+    }
+
+    function postExampleFileToParent(msgType, name) {
+      if (!(window.parent && window.parent !== window)) return false;
+      const srcUrl = getExampleSrcUrl(name);
+      if (!srcUrl) return false;
+      window.parent.postMessage({ type: msgType, url: srcUrl }, '*');
+      return true;
+    }
+
+    if (window.parent && window.parent !== window) {
+      document.querySelectorAll('.studio-tab').forEach((tab, idx) => {
+        tab.addEventListener('click', () => {
+          const nameEl = tab.querySelector('.tab-name');
+          const name = tab.getAttribute('data-filename') || (nameEl ? nameEl.textContent.trim() : '') || tab.getAttribute('title') || fileNames[idx];
+          postExampleFileToParent('studioFileChanged', name);
+        });
+      });
+      const studioSelect = document.getElementById('studio-file-select');
+      if (studioSelect) {
+        studioSelect.addEventListener('change', () => {
+          const idx = parseInt(studioSelect.value, 10);
+          if (!isNaN(idx) && fileNames[idx]) {
+            postExampleFileToParent('studioFileChanged', fileNames[idx]);
+          }
+        });
+      }
+    }
     filesBadge.title = 'Click to view example files';
 
     let popover = null;
@@ -787,17 +829,7 @@
         item.setAttribute('role', 'menuitem');
         item.textContent = name;
         item.addEventListener('click', () => {
-          const pane = document.getElementById(`file-pane-${idx}`) ||
-            Array.from(document.querySelectorAll('.file-code-pane')).find(p => p.getAttribute('data-filename') === name);
-          const zipEntry = zipFiles.find(f => f && f.name === name) || zipFiles[idx];
-          if (window.parent && window.parent !== window && pane) {
-            window.parent.postMessage({
-              type: 'openExampleSource',
-              fileName: name,
-              tableHtml: pane.innerHTML,
-              rawContent: zipEntry ? zipEntry.content : ''
-            }, '*');
-          } else {
+          if (!postExampleFileToParent('openSourceView', name)) {
             if (studio && typeof studio.switchFile === 'function') {
               studio.switchFile(name);
             } else if (studio && typeof studio.switchFileTab === 'function') {

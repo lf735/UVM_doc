@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" class="src-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>examples/integrated/codec/README.txt | UVM 1.2 Source Code</title>
+  <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body class="src-viewer-body">
+  <div class="src-sticky-bar studio-toolbar">
+    <div class="src-breadcrumbs">
+      <a href="../../../../index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
+      <span class="sep">/</span>
+      <span class="src-cur-file">examples/integrated/codec/README.txt</span>
+      <span class="badge badge-info">1 lines</span>
+      <span class="badge badge-secondary">3.1 KB</span>
+    </div>
+    <div class="src-actions studio-toolbar-actions">
+      
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-toggle-find" title="Find in file (Ctrl+F)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Find</span>
+      </button>
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-toggle-wrap" title="Toggle Word Wrap (Alt+Z)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><polyline points="14 16 18 12 14 8"/><path d="M21 18H9a4 4 0 0 1 0-8h6"/></svg>
+        <span>Wrap</span>
+      </button>
+      <button type="button" class="btn btn-outline studio-action-btn btn-monaco-ide" id="btn-toggle-monaco" title="Toggle Monaco VS Code Editor">
+        <svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>
+        <span>Monaco IDE</span>
+      </button>
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-copy-code" title="Copy raw source code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Code</span>
+      </button>
+      <a href="../../../../uvm-1.2/examples/integrated/codec/README.txt" download class="btn btn-outline studio-action-btn" id="btn-download-raw" title="Download raw source file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Raw</span>
+      </a>
+    </div>
+  </div>
+  <div class="code-container src-code-container" id="src-code-container">
+    <div class="code-find-widget" id="code-find-widget" style="display:none;" role="search" aria-label="Find in file">
+      <div class="find-input-wrap">
+        <input type="text" id="find-input" placeholder="Find in file (Ctrl+F)..." autocomplete="off" spellcheck="false">
+        <span class="find-count" id="find-count">0 of 0</span>
+      </div>
+      <div class="find-actions">
+        <button type="button" class="find-btn" id="find-case-toggle" title="Match Case (Alt+C)">Aa</button>
+        <button type="button" class="find-btn" id="find-word-toggle" title="Match Whole Word (Alt+W)">\b</button>
+        <button type="button" class="find-btn" id="find-prev" title="Previous Match (Shift+Enter)">▲</button>
+        <button type="button" class="find-btn" id="find-next" title="Next Match (Enter)">▼</button>
+        <button type="button" class="find-btn" id="find-close" title="Close (Esc)">✕</button>
+      </div>
+    </div>
+    <div class="code-quick-info-tooltip" id="code-quick-info" style="display:none;"></div>
+    <div id="monaco-editor-pane" style="display:none;"></div>
+<div class="file-code-pane active" id="file-pane-0" data-filename="examples/integrated/codec/README.txt"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// -------------------------------------------------------------</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//    Copyright 2011 Synopsys, Inc.</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//    All Rights Reserved Worldwide</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//    Licensed under the Apache License, Version 2.0 (the</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//    &quot;License&quot;); you may not use this file except in</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//    compliance with the License.  You may obtain a copy of</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//    the License at</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//        http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">// </span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//    Unless required by applicable law or agreed to in</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//    writing, software distributed under the License is</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//    CONDITIONS OF ANY KIND, either express or implied.  See</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//    the License for the specific language governing</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//    permissions and limitations under the License.</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code"><span class="sv-comment">// -------------------------------------------------------------</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code"><span class="sv-ident">This</span> <span class="sv-ident">is</span> <span class="sv-ident">an</span> <span class="sv-keyword">end</span><span class="sv-op">-</span><span class="sv-ident">to</span><span class="sv-op">-</span><span class="sv-keyword">end</span> <span class="sv-ident">phasing</span> <span class="sv-ident">example</span> <span class="sv-ident">involving</span> <span class="sv-ident">a</span> <span class="sv-ident">non</span><span class="sv-op">-</span><span class="sv-ident">trivial</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code"><span class="sv-op">(</span><span class="sv-ident">yet</span> <span class="sv-ident">simple</span><span class="sv-op">)</span> <span class="sv-ident">DUT</span><span class="sv-op">.</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-number">1</span><span class="sv-op">.</span> <span class="sv-ident">DUT</span> <span class="sv-ident">SPECIFICATION</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-ident">The</span> <span class="sv-ident">DUT</span> <span class="sv-ident">is</span> <span class="sv-ident">a</span> <span class="sv-ident">full</span><span class="sv-op">-</span><span class="sv-ident">duplex</span> <span class="sv-ident">parallel</span><span class="sv-op">-</span><span class="sv-ident">to</span><span class="sv-op">-</span><span class="sv-ident">serial</span> <span class="sv-ident">codec</span><span class="sv-op">.</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-ident">Bytes</span> <span class="sv-ident">written</span> <span class="sv-ident">to</span> <span class="sv-ident">the</span> <span class="sv-ident">TxFIFO</span> <span class="sv-ident">are</span> <span class="sv-ident">transmitted</span> <span class="sv-ident">MSB</span><span class="sv-op">-</span><span class="sv-ident">first</span> <span class="sv-ident">in</span> <span class="sv-ident">order</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-ident">received</span><span class="sv-op">.</span> <span class="sv-ident">If</span> <span class="sv-ident">there</span> <span class="sv-ident">are</span> <span class="sv-ident">no</span> <span class="sv-ident">bytes</span> <span class="sv-ident">to</span> <span class="sv-ident">be</span> <span class="sv-ident">transmitted</span><span class="sv-op">,</span> <span class="sv-ident">IDLE</span> <span class="sv-ident">is</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-ident">transmitted</span><span class="sv-op">.</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-ident">Received</span> <span class="sv-ident">bytes</span> <span class="sv-ident">are</span> <span class="sv-ident">added</span> <span class="sv-ident">to</span> <span class="sv-ident">the</span> <span class="sv-ident">RxFIFO</span> <span class="sv-keyword">if</span> <span class="sv-ident">it</span> <span class="sv-ident">is</span> <span class="sv-ident">not</span> <span class="sv-ident">full</span><span class="sv-op">.</span> <span class="sv-ident">SYNC</span><span class="sv-op">,</span> <span class="sv-ident">IDLE</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code"><span class="sv-ident">and</span> <span class="sv-ident">ESC</span> <span class="sv-ident">characters</span> <span class="sv-ident">are</span> <span class="sv-ident">ignored</span><span class="sv-op">.</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-ident">The</span> <span class="sv-type">bit</span> <span class="sv-ident">stream</span> <span class="sv-ident">is</span> <span class="sv-ident">identical</span> <span class="sv-ident">in</span> <span class="sv-ident">both</span> <span class="sv-ident">direction</span><span class="sv-op">.</span> <span class="sv-ident">There</span> <span class="sv-ident">is</span> <span class="sv-ident">a</span> <span class="sv-ident">SYNC</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code"><span class="sv-method">character</span> <span class="sv-op">(</span>0<span class="sv-ident">xB2</span><span class="sv-op">)</span> <span class="sv-ident">inserted</span> <span class="sv-ident">every</span> <span class="sv-number">7</span> <span class="sv-ident">bytes</span><span class="sv-op">.</span> <span class="sv-ident">IDLE</span> <span class="sv-method">characters</span> <span class="sv-op">(</span>0<span class="sv-ident">x81</span><span class="sv-op">)</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code"><span class="sv-ident">represent</span> <span class="sv-ident">invalid</span> <span class="sv-ident">data</span><span class="sv-op">,</span> <span class="sv-ident">unless</span> <span class="sv-ident">escaped</span> <span class="sv-ident">by</span> <span class="sv-ident">a</span> <span class="sv-ident">preceeding</span> <span class="sv-ident">ESC</span> <span class="sv-ident">character</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code"><span class="sv-op">(</span>0<span class="sv-ident">xE7</span><span class="sv-op">)</span><span class="sv-op">.</span> <span class="sv-ident">If</span> <span class="sv-ident">an</span> <span class="sv-ident">IDLE</span> <span class="sv-ident">or</span> <span class="sv-ident">ESC</span> <span class="sv-ident">character</span> <span class="sv-ident">must</span> <span class="sv-ident">be</span> <span class="sv-ident">transmitted</span> <span class="sv-ident">as</span> <span class="sv-ident">valid</span> <span class="sv-ident">data</span><span class="sv-op">,</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code"><span class="sv-ident">they</span> <span class="sv-ident">must</span> <span class="sv-ident">be</span> <span class="sv-ident">preceeded</span> <span class="sv-ident">by</span> <span class="sv-ident">a</span> <span class="sv-ident">ESC</span> <span class="sv-ident">characted</span><span class="sv-op">.</span> <span class="sv-ident">The</span> <span class="sv-ident">SYNC</span> <span class="sv-ident">character</span><span class="sv-op">,</span> <span class="sv-ident">when</span></td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code"><span class="sv-ident">found</span> <span class="sv-ident">in</span> <span class="sv-ident">a</span> <span class="sv-ident">position</span> <span class="sv-ident">other</span> <span class="sv-ident">than</span> <span class="sv-ident">the</span> <span class="sv-ident">SYNC</span> <span class="sv-ident">slot</span> <span class="sv-ident">is</span> <span class="sv-ident">a</span> <span class="sv-ident">valid</span> <span class="sv-ident">character</span><span class="sv-op">.</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code"><span class="sv-ident">For</span> <span class="sv-ident">example</span><span class="sv-op">,</span> <span class="sv-ident">the</span> <span class="sv-ident">phrase</span> 0<span class="sv-ident">xADB2EF81E7FEED</span> <span class="sv-ident">could</span> <span class="sv-ident">be</span> <span class="sv-ident">transmitted</span> <span class="sv-ident">as</span><span class="sv-op">:</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">   <span class="sv-ident">B2</span> <span class="sv-number">81</span> <span class="sv-number">81</span> <span class="sv-number">81</span> <span class="sv-number">81</span> <span class="sv-ident">AD</span> <span class="sv-ident">B2</span> <span class="sv-ident">B2</span> <span class="sv-number">81</span> <span class="sv-ident">EF</span> <span class="sv-number">81</span> <span class="sv-ident">E7</span> <span class="sv-number">81</span> <span class="sv-ident">E7</span> <span class="sv-ident">B2</span> <span class="sv-ident">E7</span> <span class="sv-number">81</span> <span class="sv-ident">E7</span> <span class="sv-ident">FE</span> <span class="sv-ident">ED</span> <span class="sv-number">81</span> <span class="sv-ident">B2</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">   <span class="sv-ident">SS</span> <span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-ident">vv</span> <span class="sv-ident">vv</span> <span class="sv-ident">SS</span> <span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-ident">vv</span> <span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-ident">EE</span> <span class="sv-ident">vv</span> <span class="sv-ident">EE</span> <span class="sv-ident">SS</span> <span class="sv-ident">vv</span> <span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-ident">EE</span> <span class="sv-ident">vv</span> <span class="sv-ident">vv</span> <span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-ident">SS</span></td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code"><span class="sv-ident">SS</span> <span class="sv-op">=</span> <span class="sv-ident">SYNC</span></td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code"><span class="sv-ident">EE</span> <span class="sv-op">=</span> <span class="sv-ident">ESC</span></td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code"><span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-op">=</span> <span class="sv-ident">IDLE</span></td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code"><span class="sv-ident">vv</span> <span class="sv-op">=</span> <span class="sv-ident">Valid</span> <span class="sv-ident">data</span></td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code"><span class="sv-ident">Bits</span> <span class="sv-ident">are</span> <span class="sv-ident">valid</span> <span class="sv-ident">at</span> <span class="sv-ident">the</span> <span class="sv-ident">rising</span> <span class="sv-qualifier">edge</span> <span class="sv-ident">of</span> <span class="sv-ident">the</span> <span class="sv-ident">clock</span><span class="sv-op">.</span></td></tr>
+<tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code"><span class="sv-ident">The</span> <span class="sv-ident">following</span> <span class="sv-ident">host</span><span class="sv-op">-</span><span class="sv-ident">accessible</span> <span class="sv-ident">registers</span> <span class="sv-ident">are</span> <span class="sv-ident">available</span><span class="sv-op">:</span></td></tr>
+<tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code"><span class="sv-ident">Address</span>	      <span class="sv-ident">Bits</span>	<span class="sv-ident">Name</span></td></tr>
+<tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code">0<span class="sv-ident">x0000</span>			<span class="sv-ident">IntSrc</span>	  <span class="sv-ident">Interrupt</span> <span class="sv-ident">Source</span></td></tr>
+<tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">  <span class="sv-ident">RO</span>	      <span class="sv-number">0</span><span class="sv-op">:</span><span class="sv-number">0</span>	<span class="sv-ident">TxEmpty</span>	  <span class="sv-ident">Tx</span> <span class="sv-ident">FIFO</span> <span class="sv-ident">is</span> <span class="sv-ident">empty</span></td></tr>
+<tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code">  <span class="sv-ident">RO</span>	      <span class="sv-number">1</span><span class="sv-op">:</span><span class="sv-number">1</span>	<span class="sv-ident">TxLow</span>	  <span class="sv-ident">Tx</span> <span class="sv-ident">is</span> <span class="sv-ident">at</span> <span class="sv-ident">or</span> <span class="sv-ident">below</span> <span class="sv-ident">low</span> <span class="sv-ident">water</span> <span class="sv-ident">mark</span></td></tr>
+<tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code">  <span class="sv-ident">RO</span>	      <span class="sv-number">2</span><span class="sv-op">:</span><span class="sv-number">2</span>	<span class="sv-ident">TxFull</span>	  <span class="sv-ident">Tx</span> <span class="sv-ident">FIFO</span> <span class="sv-ident">is</span> <span class="sv-method">full</span> <span class="sv-op">(</span><span class="sv-number">32</span><span class="sv-op">)</span></td></tr>
+<tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code">  <span class="sv-ident">RO</span>	      <span class="sv-number">4</span><span class="sv-op">:</span><span class="sv-number">4</span>	<span class="sv-ident">RxEmpty</span>	  <span class="sv-ident">Rx</span> <span class="sv-ident">FIFO</span> <span class="sv-ident">is</span> <span class="sv-ident">empty</span></td></tr>
+<tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code">  <span class="sv-ident">RO</span>	      <span class="sv-number">5</span><span class="sv-op">:</span><span class="sv-number">5</span> 	<span class="sv-ident">RxHigh</span>	  <span class="sv-ident">Rx</span> <span class="sv-ident">FIFO</span> <span class="sv-ident">is</span> <span class="sv-ident">at</span> <span class="sv-ident">or</span> <span class="sv-ident">above</span> <span class="sv-ident">high</span> <span class="sv-ident">water</span> <span class="sv-ident">mark</span></td></tr>
+<tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code">  <span class="sv-ident">RO</span>	      <span class="sv-number">6</span><span class="sv-op">:</span><span class="sv-number">6</span>	<span class="sv-ident">RxFull</span>	  <span class="sv-ident">Rx</span> <span class="sv-ident">FIFO</span> <span class="sv-ident">is</span> <span class="sv-method">full</span> <span class="sv-op">(</span><span class="sv-number">32</span><span class="sv-op">)</span></td></tr>
+<tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code">  <span class="sv-ident">W1C</span>	      <span class="sv-number">8</span><span class="sv-op">:</span><span class="sv-number">8</span>	<span class="sv-ident">SA</span>	  <span class="sv-ident">Symbol</span> <span class="sv-ident">alignment</span> <span class="sv-ident">has</span> <span class="sv-ident">been</span> <span class="sv-ident">acquired</span> <span class="sv-ident">or</span> <span class="sv-ident">lost</span></td></tr>
+<tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code">				  <span class="sv-ident">Resets</span> <span class="sv-ident">to</span> <span class="sv-number">&#x27;b000010001</span></td></tr>
+<tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code">0<span class="sv-ident">x0004</span>			<span class="sv-ident">IntMask</span>	  <span class="sv-ident">Interrupt</span> <span class="sv-ident">Mask</span></td></tr>
+<tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code">  <span class="sv-ident">RW</span>          <span class="sv-number">8</span><span class="sv-op">:</span><span class="sv-number">0</span>       <span class="sv-ident">If</span> <span class="sv-string">&#x27;0&#x27;</span><span class="sv-op">,</span> <span class="sv-ident">masks</span> <span class="sv-ident">the</span> <span class="sv-ident">corresponding</span> <span class="sv-ident">interrupt</span> <span class="sv-ident">source</span></td></tr>
+<tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code">				  <span class="sv-ident">Resets</span> <span class="sv-ident">to</span> <span class="sv-ident">all</span> <span class="sv-number">0</span>&#x27;<span class="sv-ident">s</span></td></tr>
+<tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code">0<span class="sv-ident">x0010</span>			<span class="sv-ident">TxStatus</span></td></tr>
+<tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code">  <span class="sv-ident">RW</span>          <span class="sv-number">0</span><span class="sv-op">:</span><span class="sv-number">0</span>       <span class="sv-ident">TxEn</span>      <span class="sv-ident">Enable</span> <span class="sv-ident">transmit</span> <span class="sv-ident">path</span></td></tr>
+<tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code">				  <span class="sv-ident">Resets</span> <span class="sv-ident">to</span> <span class="sv-number">0</span></td></tr>
+<tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code">0<span class="sv-ident">x0014</span>			<span class="sv-ident">TxLWM</span></td></tr>
+<tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code">  <span class="sv-ident">RW</span>          <span class="sv-number">4</span><span class="sv-op">:</span><span class="sv-number">0</span>       <span class="sv-ident">TxLWM</span>     <span class="sv-ident">Low</span> <span class="sv-ident">water</span> <span class="sv-ident">mark</span> <span class="sv-keyword">for</span> <span class="sv-ident">the</span> <span class="sv-ident">Tx</span> <span class="sv-ident">FIFO</span></td></tr>
+<tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code">				  <span class="sv-ident">Resets</span> <span class="sv-ident">to</span> <span class="sv-number">8</span><span class="sv-op">.</span></td></tr>
+<tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code">0<span class="sv-ident">x0020</span>			<span class="sv-ident">RxStatus</span></td></tr>
+<tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code">  <span class="sv-ident">RW</span>          <span class="sv-number">0</span><span class="sv-op">:</span><span class="sv-number">0</span>       <span class="sv-ident">RxEn</span>      <span class="sv-ident">Enable</span> <span class="sv-ident">receive</span> <span class="sv-ident">path</span></td></tr>
+<tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code">  <span class="sv-ident">RO</span>          <span class="sv-number">1</span><span class="sv-op">:</span><span class="sv-number">1</span>       <span class="sv-ident">ALIGN</span>     <span class="sv-ident">Symbol</span> <span class="sv-ident">alignment</span> <span class="sv-ident">status</span></td></tr>
+<tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code">				  <span class="sv-ident">Resets</span> <span class="sv-ident">to</span> <span class="sv-ident">all</span> <span class="sv-number">0</span>&#x27;<span class="sv-ident">s</span></td></tr>
+<tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code">0<span class="sv-ident">x0024</span>			<span class="sv-ident">RxHWM</span></td></tr>
+<tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code">  <span class="sv-ident">RW</span>          <span class="sv-number">4</span><span class="sv-op">:</span><span class="sv-number">0</span>       <span class="sv-ident">RxHWM</span>     <span class="sv-ident">High</span> <span class="sv-ident">water</span> <span class="sv-ident">mark</span> <span class="sv-keyword">for</span> <span class="sv-ident">the</span> <span class="sv-ident">Rx</span> <span class="sv-ident">FIFO</span></td></tr>
+<tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code">				  <span class="sv-ident">Resets</span> <span class="sv-ident">to</span> <span class="sv-number">16</span><span class="sv-op">.</span></td></tr>
+<tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L96"><td class="ln" data-line="96"><a href="#L96">96</a></td><td class="code">0<span class="sv-ident">x0100</span>		        <span class="sv-ident">TxRx</span></td></tr>
+<tr id="L97"><td class="ln" data-line="97"><a href="#L97">97</a></td><td class="code">  <span class="sv-ident">WO</span>	      <span class="sv-number">7</span><span class="sv-op">:</span><span class="sv-number">0</span>	<span class="sv-ident">TxData</span>    <span class="sv-ident">Write</span> <span class="sv-ident">data</span> <span class="sv-ident">to</span> <span class="sv-ident">TxFIFO</span> <span class="sv-keyword">if</span> <span class="sv-ident">not</span> <span class="sv-ident">full</span></td></tr>
+<tr id="L98"><td class="ln" data-line="98"><a href="#L98">98</a></td><td class="code">  <span class="sv-ident">RO</span>	      <span class="sv-number">7</span><span class="sv-op">:</span><span class="sv-number">0</span>	<span class="sv-ident">RxData</span>	  <span class="sv-ident">Read</span> <span class="sv-ident">data</span> <span class="sv-ident">from</span> <span class="sv-ident">RxFIFO</span> <span class="sv-keyword">if</span> <span class="sv-ident">not</span> <span class="sv-ident">empty</span></td></tr>
+<tr id="L99"><td class="ln" data-line="99"><a href="#L99">99</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L100"><td class="ln" data-line="100"><a href="#L100">100</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L101"><td class="ln" data-line="101"><a href="#L101">101</a></td><td class="code"><span class="sv-ident">All</span> <span class="sv-ident">unspecified</span> <span class="sv-ident">bits</span> <span class="sv-ident">are</span> <span class="sv-ident">RO</span> <span class="sv-ident">and</span> <span class="sv-ident">read</span> <span class="sv-ident">at</span> <span class="sv-number">0</span>&#x27;<span class="sv-ident">s</span><span class="sv-op">.</span></td></tr></tbody></table></div>
+</div>
+  <textarea id="raw-source-text" style="display:none">// 
+// -------------------------------------------------------------
+//    Copyright 2011 Synopsys, Inc.
+//    All Rights Reserved Worldwide
+// 
+//    Licensed under the Apache License, Version 2.0 (the
+//    &quot;License&quot;); you may not use this file except in
+//    compliance with the License.  You may obtain a copy of
+//    the License at
+// 
+//        http://www.apache.org/licenses/LICENSE-2.0
+// 
+//    Unless required by applicable law or agreed to in
+//    writing, software distributed under the License is
+//    distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR
+//    CONDITIONS OF ANY KIND, either express or implied.  See
+//    the License for the specific language governing
+//    permissions and limitations under the License.
+// -------------------------------------------------------------
+//
+
+
+This is an end-to-end phasing example involving a non-trivial
+(yet simple) DUT.
+
+
+1. DUT SPECIFICATION
+
+The DUT is a full-duplex parallel-to-serial codec.
+
+Bytes written to the TxFIFO are transmitted MSB-first in order
+received. If there are no bytes to be transmitted, IDLE is
+transmitted.
+
+Received bytes are added to the RxFIFO if it is not full. SYNC, IDLE
+and ESC characters are ignored.
+
+The bit stream is identical in both direction. There is a SYNC
+character (0xB2) inserted every 7 bytes. IDLE characters (0x81)
+represent invalid data, unless escaped by a preceeding ESC character
+(0xE7). If an IDLE or ESC character must be transmitted as valid data,
+they must be preceeded by a ESC characted. The SYNC character, when
+found in a position other than the SYNC slot is a valid character.
+
+For example, the phrase 0xADB2EF81E7FEED could be transmitted as:
+
+   B2 81 81 81 81 AD B2 B2 81 EF 81 E7 81 E7 B2 E7 81 E7 FE ED 81 B2
+   SS .. .. .. .. vv vv SS .. vv .. EE vv EE SS vv .. EE vv vv .. SS
+
+SS = SYNC
+EE = ESC
+.. = IDLE
+vv = Valid data
+
+Bits are valid at the rising edge of the clock.
+
+
+
+
+The following host-accessible registers are available:
+
+
+Address	      Bits	Name
+
+0x0000			IntSrc	  Interrupt Source
+  RO	      0:0	TxEmpty	  Tx FIFO is empty
+  RO	      1:1	TxLow	  Tx is at or below low water mark
+  RO	      2:2	TxFull	  Tx FIFO is full (32)
+  RO	      4:4	RxEmpty	  Rx FIFO is empty
+  RO	      5:5 	RxHigh	  Rx FIFO is at or above high water mark
+  RO	      6:6	RxFull	  Rx FIFO is full (32)
+  W1C	      8:8	SA	  Symbol alignment has been acquired or lost
+				  Resets to &#x27;b000010001
+
+0x0004			IntMask	  Interrupt Mask
+  RW          8:0       If &#x27;0&#x27;, masks the corresponding interrupt source
+				  Resets to all 0&#x27;s
+
+0x0010			TxStatus
+  RW          0:0       TxEn      Enable transmit path
+				  Resets to 0
+
+0x0014			TxLWM
+  RW          4:0       TxLWM     Low water mark for the Tx FIFO
+				  Resets to 8.
+
+0x0020			RxStatus
+  RW          0:0       RxEn      Enable receive path
+  RO          1:1       ALIGN     Symbol alignment status
+				  Resets to all 0&#x27;s
+
+0x0024			RxHWM
+  RW          4:0       RxHWM     High water mark for the Rx FIFO
+				  Resets to 16.
+
+0x0100		        TxRx
+  WO	      7:0	TxData    Write data to TxFIFO if not full
+  RO	      7:0	RxData	  Read data from RxFIFO if not empty
+
+
+All unspecified bits are RO and read at 0&#x27;s.
+</textarea>
+  <script src="../../../../js/uvm_symbol_quick.js" defer></script>
+  <script src="../../../../js/page_common.js"></script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" class="src-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>examples/infrastructure/callbacks/top.sv | UVM 1.2 Source Code</title>
+  <link rel="stylesheet" href="../../../../css/style.css">
+</head>
+<body class="src-viewer-body">
+  <div class="src-sticky-bar studio-toolbar">
+    <div class="src-breadcrumbs">
+      <a href="../../../../index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
+      <span class="sep">/</span>
+      <span class="src-cur-file">examples/infrastructure/callbacks/top.sv</span>
+      <span class="badge badge-info">1 lines</span>
+      <span class="badge badge-secondary">9.8 KB</span>
+    </div>
+    <div class="src-actions studio-toolbar-actions">
+      
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-toggle-find" title="Find in file (Ctrl+F)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Find</span>
+      </button>
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-toggle-wrap" title="Toggle Word Wrap (Alt+Z)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><polyline points="14 16 18 12 14 8"/><path d="M21 18H9a4 4 0 0 1 0-8h6"/></svg>
+        <span>Wrap</span>
+      </button>
+      <button type="button" class="btn btn-outline studio-action-btn btn-monaco-ide" id="btn-toggle-monaco" title="Toggle Monaco VS Code Editor">
+        <svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>
+        <span>Monaco IDE</span>
+      </button>
+      <button type="button" class="btn btn-outline studio-action-btn" id="btn-copy-code" title="Copy raw source code">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>Copy Code</span>
+      </button>
+      <a href="../../../../uvm-1.2/examples/simple/callbacks/top.sv" download class="btn btn-outline studio-action-btn" id="btn-download-raw" title="Download raw source file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Raw</span>
+      </a>
+    </div>
+  </div>
+  <div class="code-container src-code-container" id="src-code-container">
+    <div class="code-find-widget" id="code-find-widget" style="display:none;" role="search" aria-label="Find in file">
+      <div class="find-input-wrap">
+        <input type="text" id="find-input" placeholder="Find in file (Ctrl+F)..." autocomplete="off" spellcheck="false">
+        <span class="find-count" id="find-count">0 of 0</span>
+      </div>
+      <div class="find-actions">
+        <button type="button" class="find-btn" id="find-case-toggle" title="Match Case (Alt+C)">Aa</button>
+        <button type="button" class="find-btn" id="find-word-toggle" title="Match Whole Word (Alt+W)">\b</button>
+        <button type="button" class="find-btn" id="find-prev" title="Previous Match (Shift+Enter)">▲</button>
+        <button type="button" class="find-btn" id="find-next" title="Next Match (Enter)">▼</button>
+        <button type="button" class="find-btn" id="find-close" title="Close (Esc)">✕</button>
+      </div>
+    </div>
+    <div class="code-quick-info-tooltip" id="code-quick-info" style="display:none;"></div>
+    <div id="monaco-editor-pane" style="display:none;"></div>
+<div class="file-code-pane active" id="file-pane-0" data-filename="examples/infrastructure/callbacks/top.sv"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Mentor Graphics Corporation</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">//   Copyright 2007-2010 Cadence Design Systems, Inc. </span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-comment">//   Copyright 2010 Synopsys, Inc.</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-comment">//   All Rights Reserved Worldwide</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-comment">//   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-comment">//   use this file except in compliance with the License.  You may obtain a copy</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-comment">//   of the License at</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-comment">//       http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code"><span class="sv-comment">//   Unless required by applicable law or agreed to in writing, software</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-comment">//   distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-comment">//   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-comment">//   License for the specific language governing permissions and limitations</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code"><span class="sv-comment">//   under the License.</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code"><span class="sv-preproc">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code"><span class="sv-comment">// Title: Typical Callback Application</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code"><span class="sv-comment">// This example demonstrates callback usage. The component developer defines a</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code"><span class="sv-comment">// driver and driver-specific callback class. The callback class defines the</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code"><span class="sv-comment">// hooks available for users to override. The component using the callbacks</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code"><span class="sv-comment">// (i.e. calling the callback methods) also defines corresponding virtual</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code"><span class="sv-comment">// methods for each callback hook. The developer implements each virtual methods</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code"><span class="sv-comment">// to call the corresponding callback method in all registered callback objects</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code"><span class="sv-comment">// using default algorithm. The end-user may then define either a callback or</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-comment">// driver subtype to extend driver behavior.</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code"><span class="sv-comment">// Group: Component Developer Use Model</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code"><span class="sv-comment">// Component developers defines transaction, driver, and callback classes.</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code"><span class="sv-keyword-decl">package</span> <span class="sv-ident">bus_driver_pkg</span><span class="sv-op">;</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code"><span class="sv-keyword-decl">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" data-sym-kind="class" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code"><span class="sv-keyword-decl">typedef</span> <span class="sv-keyword-decl">class</span> <span class="sv-ident">bus_driver</span><span class="sv-op">;</span></td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code"><span class="sv-keyword-decl">typedef</span> <span class="sv-keyword-decl">class</span> <span class="sv-ident">bus_driver_cb</span><span class="sv-op">;</span></td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code"><span class="sv-keyword-decl">typedef</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_callbacks" data-sym-kind="class" title="Click to view uvm_callbacks documentation">uvm_callbacks</span> <span class="sv-op">#(</span><span class="sv-ident">bus_driver</span><span class="sv-op">,</span><span class="sv-ident">bus_driver_cb</span><span class="sv-op">)</span> <span class="sv-ident">bus_driver_cbs_t</span><span class="sv-op">;</span></td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L53"><td class="ln" data-line="53"><a href="#L53">53</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L54"><td class="ln" data-line="54"><a href="#L54">54</a></td><td class="code"><span class="sv-comment">// <span class="sv-comment-tag">CLASS:</span> bus_tr</span></td></tr>
+<tr id="L55"><td class="ln" data-line="55"><a href="#L55">55</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L56"><td class="ln" data-line="56"><a href="#L56">56</a></td><td class="code"><span class="sv-comment">// A basic bus transaction. </span></td></tr>
+<tr id="L57"><td class="ln" data-line="57"><a href="#L57">57</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L58"><td class="ln" data-line="58"><a href="#L58">58</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L59"><td class="ln" data-line="59"><a href="#L59">59</a></td><td class="code"><span class="sv-keyword-decl">class</span> <span class="sv-ident">bus_tr</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_transaction" data-sym-kind="class" title="Click to view uvm_transaction documentation">uvm_transaction</span><span class="sv-op">;</span></td></tr>
+<tr id="L60"><td class="ln" data-line="60"><a href="#L60">60</a></td><td class="code">  <span class="sv-qualifier">rand</span> <span class="sv-type">int</span> <span class="sv-ident">addr</span><span class="sv-op">;</span></td></tr>
+<tr id="L61"><td class="ln" data-line="61"><a href="#L61">61</a></td><td class="code">  <span class="sv-qualifier">rand</span> <span class="sv-type">int</span> <span class="sv-ident">data</span><span class="sv-op">;</span></td></tr>
+<tr id="L62"><td class="ln" data-line="62"><a href="#L62">62</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" data-sym-base="uvm_transaction" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L63"><td class="ln" data-line="63"><a href="#L63">63</a></td><td class="code">    <span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" data-sym-base="uvm_transaction" title="Click to view convert2string method documentation">convert2string</span> <span class="sv-op">=</span> <span class="sv-system-tf">$sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;addr=<span class="sv-string-escape">%0h</span> data=<span class="sv-string-escape">%0h</span>&quot;</span><span class="sv-op">,</span><span class="sv-ident">addr</span><span class="sv-op">,</span><span class="sv-ident">data</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L64"><td class="ln" data-line="64"><a href="#L64">64</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L65"><td class="ln" data-line="65"><a href="#L65">65</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L66"><td class="ln" data-line="66"><a href="#L66">66</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L67"><td class="ln" data-line="67"><a href="#L67">67</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L68"><td class="ln" data-line="68"><a href="#L68">68</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L69"><td class="ln" data-line="69"><a href="#L69">69</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L70"><td class="ln" data-line="70"><a href="#L70">70</a></td><td class="code"><span class="sv-comment">// <span class="sv-comment-tag">CLASS:</span> bus_driver_cb</span></td></tr>
+<tr id="L71"><td class="ln" data-line="71"><a href="#L71">71</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L72"><td class="ln" data-line="72"><a href="#L72">72</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L73"><td class="ln" data-line="73"><a href="#L73">73</a></td><td class="code"><span class="sv-comment">// The callback class defines an interface consisting of one or more function</span></td></tr>
+<tr id="L74"><td class="ln" data-line="74"><a href="#L74">74</a></td><td class="code"><span class="sv-comment">// or task prototypes. The signatures of each method have no restrictions.</span></td></tr>
+<tr id="L75"><td class="ln" data-line="75"><a href="#L75">75</a></td><td class="code"><span class="sv-comment">// The component developer knows best the intended semantic of multiple</span></td></tr>
+<tr id="L76"><td class="ln" data-line="76"><a href="#L76">76</a></td><td class="code"><span class="sv-comment">// registered callbacks. Thus the algorithm for traversal the callback queue</span></td></tr>
+<tr id="L77"><td class="ln" data-line="77"><a href="#L77">77</a></td><td class="code"><span class="sv-comment">// should reside in the callback class itself. We could provide convenience</span></td></tr>
+<tr id="L78"><td class="ln" data-line="78"><a href="#L78">78</a></td><td class="code"><span class="sv-comment">// macros that implement the most common traversal methods, such as sequential</span></td></tr>
+<tr id="L79"><td class="ln" data-line="79"><a href="#L79">79</a></td><td class="code"><span class="sv-comment">// in-order execution.</span></td></tr>
+<tr id="L80"><td class="ln" data-line="80"><a href="#L80">80</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L81"><td class="ln" data-line="81"><a href="#L81">81</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L82"><td class="ln" data-line="82"><a href="#L82">82</a></td><td class="code"><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">class</span> <span class="sv-ident">bus_driver_cb</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_callback" data-sym-kind="class" title="Click to view uvm_callback documentation">uvm_callback</span><span class="sv-op">;</span> </td></tr>
+<tr id="L83"><td class="ln" data-line="83"><a href="#L83">83</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L84"><td class="ln" data-line="84"><a href="#L84">84</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">trans_received</span><span class="sv-op">(</span><span class="sv-ident">bus_driver</span> <span class="sv-ident">driver</span><span class="sv-op">,</span> <span class="sv-ident">bus_tr</span> <span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L85"><td class="ln" data-line="85"><a href="#L85">85</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr>
+<tr id="L86"><td class="ln" data-line="86"><a href="#L86">86</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L87"><td class="ln" data-line="87"><a href="#L87">87</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L88"><td class="ln" data-line="88"><a href="#L88">88</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method">trans_executed</span><span class="sv-op">(</span><span class="sv-ident">bus_driver</span> <span class="sv-ident">driver</span><span class="sv-op">,</span> <span class="sv-ident">bus_tr</span> <span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L89"><td class="ln" data-line="89"><a href="#L89">89</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L90"><td class="ln" data-line="90"><a href="#L90">90</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L91"><td class="ln" data-line="91"><a href="#L91">91</a></td><td class="code">  <span class="sv-keyword-decl">function</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;bus_driver_cb_inst&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L92"><td class="ln" data-line="92"><a href="#L92">92</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L93"><td class="ln" data-line="93"><a href="#L93">93</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L94"><td class="ln" data-line="94"><a href="#L94">94</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L95"><td class="ln" data-line="95"><a href="#L95">95</a></td><td class="code">  <span class="sv-qualifier">static</span> <span class="sv-type">string</span> <span class="sv-ident">type_name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;bus_driver_cb&quot;</span><span class="sv-op">;</span></td></tr>
+<tr id="L96"><td class="ln" data-line="96"><a href="#L96">96</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L97"><td class="ln" data-line="97"><a href="#L97">97</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-method clickable-uvm-sym" data-sym="get_type_name" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view get_type_name method documentation">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L98"><td class="ln" data-line="98"><a href="#L98">98</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-ident">type_name</span><span class="sv-op">;</span></td></tr>
+<tr id="L99"><td class="ln" data-line="99"><a href="#L99">99</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L100"><td class="ln" data-line="100"><a href="#L100">100</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L101"><td class="ln" data-line="101"><a href="#L101">101</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L102"><td class="ln" data-line="102"><a href="#L102">102</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L103"><td class="ln" data-line="103"><a href="#L103">103</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L104"><td class="ln" data-line="104"><a href="#L104">104</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L105"><td class="ln" data-line="105"><a href="#L105">105</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L106"><td class="ln" data-line="106"><a href="#L106">106</a></td><td class="code"><span class="sv-comment">// <span class="sv-comment-tag">CLASS:</span> bus_driver</span></td></tr>
+<tr id="L107"><td class="ln" data-line="107"><a href="#L107">107</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L108"><td class="ln" data-line="108"><a href="#L108">108</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L109"><td class="ln" data-line="109"><a href="#L109">109</a></td><td class="code"><span class="sv-comment">// With the following implementation of bus_driver, users can implement</span></td></tr>
+<tr id="L110"><td class="ln" data-line="110"><a href="#L110">110</a></td><td class="code"><span class="sv-comment">// the callback &quot;hooks&quot; by either...</span></td></tr>
+<tr id="L111"><td class="ln" data-line="111"><a href="#L111">111</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L112"><td class="ln" data-line="112"><a href="#L112">112</a></td><td class="code"><span class="sv-comment">// - extending bus_driver and overriding one or more of the virtual</span></td></tr>
+<tr id="L113"><td class="ln" data-line="113"><a href="#L113">113</a></td><td class="code"><span class="sv-comment">//   methods, trans_received or trans_executed. Then, configure the</span></td></tr>
+<tr id="L114"><td class="ln" data-line="114"><a href="#L114">114</a></td><td class="code"><span class="sv-comment">//   factory to use the new type via a type or instance override.</span></td></tr>
+<tr id="L115"><td class="ln" data-line="115"><a href="#L115">115</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L116"><td class="ln" data-line="116"><a href="#L116">116</a></td><td class="code"><span class="sv-comment">// - extending bus_driver_cb and overriding one or more of the virtual</span></td></tr>
+<tr id="L117"><td class="ln" data-line="117"><a href="#L117">117</a></td><td class="code"><span class="sv-comment">//   methods, trans_received or trans_executed. Then, register an</span></td></tr>
+<tr id="L118"><td class="ln" data-line="118"><a href="#L118">118</a></td><td class="code"><span class="sv-comment">//   instance of the new callback type with an instance of bus_driver.</span></td></tr>
+<tr id="L119"><td class="ln" data-line="119"><a href="#L119">119</a></td><td class="code"><span class="sv-comment">//   This requires access to the handle of the bus_driver.</span></td></tr>
+<tr id="L120"><td class="ln" data-line="120"><a href="#L120">120</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L121"><td class="ln" data-line="121"><a href="#L121">121</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L122"><td class="ln" data-line="122"><a href="#L122">122</a></td><td class="code"><span class="sv-keyword-decl">class</span> <span class="sv-ident">bus_driver</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" data-sym-kind="class" title="Click to view uvm_component documentation">uvm_component</span><span class="sv-op">;</span></td></tr>
+<tr id="L123"><td class="ln" data-line="123"><a href="#L123">123</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L124"><td class="ln" data-line="124"><a href="#L124">124</a></td><td class="code">  <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_blocking_put_imp" data-sym-kind="class" title="Click to view uvm_blocking_put_imp documentation">uvm_blocking_put_imp</span> <span class="sv-op">#(</span><span class="sv-ident">bus_tr</span><span class="sv-op">,</span><span class="sv-ident">bus_driver</span><span class="sv-op">)</span> <span class="sv-ident">in</span><span class="sv-op">;</span></td></tr>
+<tr id="L125"><td class="ln" data-line="125"><a href="#L125">125</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L126"><td class="ln" data-line="126"><a href="#L126">126</a></td><td class="code">  <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_register_cb" data-sym-kind="macro" title="Click to view `uvm_register_cb macro documentation">`uvm_register_cb</span><span class="sv-op">(</span><span class="sv-ident">bus_driver</span><span class="sv-op">,</span> <span class="sv-ident">bus_driver_cb</span><span class="sv-op">)</span></td></tr>
+<tr id="L127"><td class="ln" data-line="127"><a href="#L127">127</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L128"><td class="ln" data-line="128"><a href="#L128">128</a></td><td class="code">  <span class="sv-keyword-decl">function</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_component" title="Click to view new method documentation">new</span> <span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" data-sym-kind="class" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span><span class="sv-op">=</span><span class="sv-constant">null</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L129"><td class="ln" data-line="129"><a href="#L129">129</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_component" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L130"><td class="ln" data-line="130"><a href="#L130">130</a></td><td class="code">    <span class="sv-ident">in</span> <span class="sv-op">=</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_component" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-string">&quot;in&quot;</span><span class="sv-op">,</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L131"><td class="ln" data-line="131"><a href="#L131">131</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L132"><td class="ln" data-line="132"><a href="#L132">132</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L133"><td class="ln" data-line="133"><a href="#L133">133</a></td><td class="code">  <span class="sv-qualifier">static</span> <span class="sv-type">string</span> <span class="sv-ident">type_name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;bus_driver&quot;</span><span class="sv-op">;</span></td></tr>
+<tr id="L134"><td class="ln" data-line="134"><a href="#L134">134</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L135"><td class="ln" data-line="135"><a href="#L135">135</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-method clickable-uvm-sym" data-sym="get_type_name" data-sym-kind="method" data-sym-base="uvm_component" title="Click to view get_type_name method documentation">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L136"><td class="ln" data-line="136"><a href="#L136">136</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-ident">type_name</span><span class="sv-op">;</span></td></tr>
+<tr id="L137"><td class="ln" data-line="137"><a href="#L137">137</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L138"><td class="ln" data-line="138"><a href="#L138">138</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L139"><td class="ln" data-line="139"><a href="#L139">139</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">trans_received</span><span class="sv-op">(</span><span class="sv-ident">bus_tr</span> <span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L140"><td class="ln" data-line="140"><a href="#L140">140</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_do_callbacks_exit_on" data-sym-kind="macro" title="Click to view `uvm_do_callbacks_exit_on macro documentation">`uvm_do_callbacks_exit_on</span><span class="sv-op">(</span><span class="sv-ident">bus_driver</span><span class="sv-op">,</span><span class="sv-ident">bus_driver_cb</span><span class="sv-op">,</span><span class="sv-method">trans_received</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span><span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-number">1</span><span class="sv-op">)</span></td></tr>
+<tr id="L141"><td class="ln" data-line="141"><a href="#L141">141</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L142"><td class="ln" data-line="142"><a href="#L142">142</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L143"><td class="ln" data-line="143"><a href="#L143">143</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method">trans_executed</span><span class="sv-op">(</span><span class="sv-ident">bus_tr</span> <span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L144"><td class="ln" data-line="144"><a href="#L144">144</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_do_callbacks" data-sym-kind="macro" title="Click to view `uvm_do_callbacks macro documentation">`uvm_do_callbacks</span><span class="sv-op">(</span><span class="sv-ident">bus_driver</span><span class="sv-op">,</span><span class="sv-ident">bus_driver_cb</span><span class="sv-op">,</span><span class="sv-method">trans_executed</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span><span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">)</span></td></tr>
+<tr id="L145"><td class="ln" data-line="145"><a href="#L145">145</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L146"><td class="ln" data-line="146"><a href="#L146">146</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L147"><td class="ln" data-line="147"><a href="#L147">147</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method clickable-uvm-sym" data-sym="put" data-sym-kind="method" data-sym-base="uvm_component" title="Click to view put method documentation">put</span><span class="sv-op">(</span><span class="sv-ident">bus_tr</span> <span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L148"><td class="ln" data-line="148"><a href="#L148">148</a></td><td class="code">    <span class="sv-method clickable-uvm-sym" data-sym="uvm_report_info" data-sym-kind="method" data-sym-base="uvm_component" title="Click to view uvm_report_info method documentation">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;bus_tr received&quot;</span><span class="sv-op">,</span><span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L149"><td class="ln" data-line="149"><a href="#L149">149</a></td><td class="code">    <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-op">!</span><span class="sv-method">trans_received</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L150"><td class="ln" data-line="150"><a href="#L150">150</a></td><td class="code">      <span class="sv-method clickable-uvm-sym" data-sym="uvm_report_info" data-sym-kind="method" data-sym-base="uvm_component" title="Click to view uvm_report_info method documentation">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;bus_tr dropped&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L151"><td class="ln" data-line="151"><a href="#L151">151</a></td><td class="code">          <span class="sv-string">&quot;user callback indicated DROPPED<span class="sv-string-escape">\n</span>&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L152"><td class="ln" data-line="152"><a href="#L152">152</a></td><td class="code">      <span class="sv-keyword">return</span><span class="sv-op">;</span></td></tr>
+<tr id="L153"><td class="ln" data-line="153"><a href="#L153">153</a></td><td class="code">    <span class="sv-keyword">end</span></td></tr>
+<tr id="L154"><td class="ln" data-line="154"><a href="#L154">154</a></td><td class="code">    <span class="sv-op">#</span><span class="sv-number">100</span><span class="sv-op">;</span></td></tr>
+<tr id="L155"><td class="ln" data-line="155"><a href="#L155">155</a></td><td class="code">    <span class="sv-method">trans_executed</span><span class="sv-op">(</span><span class="sv-ident">t</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L156"><td class="ln" data-line="156"><a href="#L156">156</a></td><td class="code">    <span class="sv-method clickable-uvm-sym" data-sym="uvm_report_info" data-sym-kind="method" data-sym-base="uvm_component" title="Click to view uvm_report_info method documentation">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;bus_tr executed&quot;</span><span class="sv-op">,</span><span class="sv-op">{</span><span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;<span class="sv-string-escape">\n</span>&quot;</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L157"><td class="ln" data-line="157"><a href="#L157">157</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L158"><td class="ln" data-line="158"><a href="#L158">158</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L159"><td class="ln" data-line="159"><a href="#L159">159</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L160"><td class="ln" data-line="160"><a href="#L160">160</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L161"><td class="ln" data-line="161"><a href="#L161">161</a></td><td class="code"><span class="sv-keyword-decl">endpackage</span> <span class="sv-comment">// bus_driver_pkg</span></td></tr>
+<tr id="L162"><td class="ln" data-line="162"><a href="#L162">162</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L163"><td class="ln" data-line="163"><a href="#L163">163</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L164"><td class="ln" data-line="164"><a href="#L164">164</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L165"><td class="ln" data-line="165"><a href="#L165">165</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L166"><td class="ln" data-line="166"><a href="#L166">166</a></td><td class="code"><span class="sv-comment">// Group: End-User Use Model</span></td></tr>
+<tr id="L167"><td class="ln" data-line="167"><a href="#L167">167</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L168"><td class="ln" data-line="168"><a href="#L168">168</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L169"><td class="ln" data-line="169"><a href="#L169">169</a></td><td class="code"><span class="sv-comment">// The end-user simply needs to extend the callback base class, overriding any or</span></td></tr>
+<tr id="L170"><td class="ln" data-line="170"><a href="#L170">170</a></td><td class="code"><span class="sv-comment">// all of the prototypes provided in the developer-supplied callback interface.</span></td></tr>
+<tr id="L171"><td class="ln" data-line="171"><a href="#L171">171</a></td><td class="code"><span class="sv-comment">// Then, register an instance of the callback class with any object designed to</span></td></tr>
+<tr id="L172"><td class="ln" data-line="172"><a href="#L172">172</a></td><td class="code"><span class="sv-comment">// use the base callback type.</span></td></tr>
+<tr id="L173"><td class="ln" data-line="173"><a href="#L173">173</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L174"><td class="ln" data-line="174"><a href="#L174">174</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L175"><td class="ln" data-line="175"><a href="#L175">175</a></td><td class="code"><span class="sv-keyword-decl">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" data-sym-kind="class" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L176"><td class="ln" data-line="176"><a href="#L176">176</a></td><td class="code"><span class="sv-keyword-decl">import</span> <span class="sv-ident">bus_driver_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L177"><td class="ln" data-line="177"><a href="#L177">177</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L178"><td class="ln" data-line="178"><a href="#L178">178</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L179"><td class="ln" data-line="179"><a href="#L179">179</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L180"><td class="ln" data-line="180"><a href="#L180">180</a></td><td class="code"><span class="sv-comment">// <span class="sv-comment-tag">CLASS:</span> my_bus_driver_cb</span></td></tr>
+<tr id="L181"><td class="ln" data-line="181"><a href="#L181">181</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L182"><td class="ln" data-line="182"><a href="#L182">182</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L183"><td class="ln" data-line="183"><a href="#L183">183</a></td><td class="code"><span class="sv-comment">// This class defines a subtype of the driver developer&#x27;s base callback class.</span></td></tr>
+<tr id="L184"><td class="ln" data-line="184"><a href="#L184">184</a></td><td class="code"><span class="sv-comment">// In this case, both available driver callback methods are defined. The </span></td></tr>
+<tr id="L185"><td class="ln" data-line="185"><a href="#L185">185</a></td><td class="code"><span class="sv-comment">// ~trans_received~ method randomly chooses whether to return 0 or 1. When 1,</span></td></tr>
+<tr id="L186"><td class="ln" data-line="186"><a href="#L186">186</a></td><td class="code"><span class="sv-comment">// the driver will &quot;drop&quot; the received transaction.</span></td></tr>
+<tr id="L187"><td class="ln" data-line="187"><a href="#L187">187</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L188"><td class="ln" data-line="188"><a href="#L188">188</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L189"><td class="ln" data-line="189"><a href="#L189">189</a></td><td class="code"><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_bus_driver_cb</span> <span class="sv-keyword-decl">extends</span> <span class="sv-ident">bus_driver_cb</span><span class="sv-op">;</span></td></tr>
+<tr id="L190"><td class="ln" data-line="190"><a href="#L190">190</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L191"><td class="ln" data-line="191"><a href="#L191">191</a></td><td class="code">  <span class="sv-keyword-decl">function</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;bus_driver_cb_inst&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L192"><td class="ln" data-line="192"><a href="#L192">192</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L193"><td class="ln" data-line="193"><a href="#L193">193</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L194"><td class="ln" data-line="194"><a href="#L194">194</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L195"><td class="ln" data-line="195"><a href="#L195">195</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">bit</span> <span class="sv-method">trans_received</span><span class="sv-op">(</span><span class="sv-ident">bus_driver</span> <span class="sv-ident">driver</span><span class="sv-op">,</span> <span class="sv-ident">bus_tr</span> <span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L196"><td class="ln" data-line="196"><a href="#L196">196</a></td><td class="code">    <span class="sv-qualifier">static</span> <span class="sv-type">bit</span> <span class="sv-ident">drop</span> <span class="sv-op">=</span> <span class="sv-number">0</span><span class="sv-op">;</span></td></tr>
+<tr id="L197"><td class="ln" data-line="197"><a href="#L197">197</a></td><td class="code">    <span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="uvm_report_info" data-sym-kind="method" title="Click to view uvm_report_info method documentation">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;trans_received_cb&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L198"><td class="ln" data-line="198"><a href="#L198">198</a></td><td class="code">      <span class="sv-op">{</span><span class="sv-string">&quot;  bus_driver=&quot;</span><span class="sv-op">,</span><span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="get_full_name" data-sym-kind="method" title="Click to view get_full_name method documentation">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot; tr=&quot;</span><span class="sv-op">,</span><span class="sv-ident">tr</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L199"><td class="ln" data-line="199"><a href="#L199">199</a></td><td class="code">    <span class="sv-ident">drop</span> <span class="sv-op">=</span> <span class="sv-number">1</span> <span class="sv-op">-</span> <span class="sv-ident">drop</span><span class="sv-op">;</span></td></tr>
+<tr id="L200"><td class="ln" data-line="200"><a href="#L200">200</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-ident">drop</span><span class="sv-op">;</span></td></tr>
+<tr id="L201"><td class="ln" data-line="201"><a href="#L201">201</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L202"><td class="ln" data-line="202"><a href="#L202">202</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L203"><td class="ln" data-line="203"><a href="#L203">203</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method">trans_executed</span><span class="sv-op">(</span><span class="sv-ident">bus_driver</span> <span class="sv-ident">driver</span><span class="sv-op">,</span> <span class="sv-ident">bus_tr</span> <span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L204"><td class="ln" data-line="204"><a href="#L204">204</a></td><td class="code">    <span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="uvm_report_info" data-sym-kind="method" title="Click to view uvm_report_info method documentation">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;trans_executed_cb&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L205"><td class="ln" data-line="205"><a href="#L205">205</a></td><td class="code">      <span class="sv-op">{</span><span class="sv-string">&quot;  bus_driver=&quot;</span><span class="sv-op">,</span><span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="get_full_name" data-sym-kind="method" title="Click to view get_full_name method documentation">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot; tr=&quot;</span><span class="sv-op">,</span><span class="sv-ident">tr</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L206"><td class="ln" data-line="206"><a href="#L206">206</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L207"><td class="ln" data-line="207"><a href="#L207">207</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L208"><td class="ln" data-line="208"><a href="#L208">208</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-method clickable-uvm-sym" data-sym="get_type_name" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view get_type_name method documentation">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L209"><td class="ln" data-line="209"><a href="#L209">209</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-string">&quot;my_bus_driver_cb&quot;</span><span class="sv-op">;</span></td></tr>
+<tr id="L210"><td class="ln" data-line="210"><a href="#L210">210</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L211"><td class="ln" data-line="211"><a href="#L211">211</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L212"><td class="ln" data-line="212"><a href="#L212">212</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L213"><td class="ln" data-line="213"><a href="#L213">213</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L214"><td class="ln" data-line="214"><a href="#L214">214</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L215"><td class="ln" data-line="215"><a href="#L215">215</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L216"><td class="ln" data-line="216"><a href="#L216">216</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L217"><td class="ln" data-line="217"><a href="#L217">217</a></td><td class="code"><span class="sv-comment">// <span class="sv-comment-tag">CLASS:</span> my_bus_driver_cb2</span></td></tr>
+<tr id="L218"><td class="ln" data-line="218"><a href="#L218">218</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L219"><td class="ln" data-line="219"><a href="#L219">219</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L220"><td class="ln" data-line="220"><a href="#L220">220</a></td><td class="code"><span class="sv-comment">// This class defines a subtype of the driver developer&#x27;s base callback class.</span></td></tr>
+<tr id="L221"><td class="ln" data-line="221"><a href="#L221">221</a></td><td class="code"><span class="sv-comment">// In this case, only one of the two available methods are defined.</span></td></tr>
+<tr id="L222"><td class="ln" data-line="222"><a href="#L222">222</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L223"><td class="ln" data-line="223"><a href="#L223">223</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L224"><td class="ln" data-line="224"><a href="#L224">224</a></td><td class="code"><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_bus_driver_cb2</span> <span class="sv-keyword-decl">extends</span> <span class="sv-ident">bus_driver_cb</span><span class="sv-op">;</span></td></tr>
+<tr id="L225"><td class="ln" data-line="225"><a href="#L225">225</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L226"><td class="ln" data-line="226"><a href="#L226">226</a></td><td class="code">  <span class="sv-keyword-decl">function</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;bus_driver_cb_inst&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L227"><td class="ln" data-line="227"><a href="#L227">227</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L228"><td class="ln" data-line="228"><a href="#L228">228</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L229"><td class="ln" data-line="229"><a href="#L229">229</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L230"><td class="ln" data-line="230"><a href="#L230">230</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method">trans_executed</span><span class="sv-op">(</span><span class="sv-ident">bus_driver</span> <span class="sv-ident">driver</span><span class="sv-op">,</span> <span class="sv-ident">bus_tr</span> <span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L231"><td class="ln" data-line="231"><a href="#L231">231</a></td><td class="code">    <span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="uvm_report_info" data-sym-kind="method" title="Click to view uvm_report_info method documentation">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;trans_executed_cb2&quot;</span><span class="sv-op">,</span></td></tr>
+<tr id="L232"><td class="ln" data-line="232"><a href="#L232">232</a></td><td class="code">      <span class="sv-op">{</span><span class="sv-string">&quot;  bus_driver=&quot;</span><span class="sv-op">,</span><span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="get_full_name" data-sym-kind="method" title="Click to view get_full_name method documentation">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot; tr=&quot;</span><span class="sv-op">,</span><span class="sv-ident">tr</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L233"><td class="ln" data-line="233"><a href="#L233">233</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L234"><td class="ln" data-line="234"><a href="#L234">234</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L235"><td class="ln" data-line="235"><a href="#L235">235</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-method clickable-uvm-sym" data-sym="get_type_name" data-sym-kind="method" data-sym-base="uvm_callback" title="Click to view get_type_name method documentation">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L236"><td class="ln" data-line="236"><a href="#L236">236</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-string">&quot;my_bus_driver_cb2&quot;</span><span class="sv-op">;</span></td></tr>
+<tr id="L237"><td class="ln" data-line="237"><a href="#L237">237</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L238"><td class="ln" data-line="238"><a href="#L238">238</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L239"><td class="ln" data-line="239"><a href="#L239">239</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L240"><td class="ln" data-line="240"><a href="#L240">240</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L241"><td class="ln" data-line="241"><a href="#L241">241</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L242"><td class="ln" data-line="242"><a href="#L242">242</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L243"><td class="ln" data-line="243"><a href="#L243">243</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L244"><td class="ln" data-line="244"><a href="#L244">244</a></td><td class="code"><span class="sv-comment">// MODULE: top</span></td></tr>
+<tr id="L245"><td class="ln" data-line="245"><a href="#L245">245</a></td><td class="code"><span class="sv-comment">//</span></td></tr>
+<tr id="L246"><td class="ln" data-line="246"><a href="#L246">246</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L247"><td class="ln" data-line="247"><a href="#L247">247</a></td><td class="code"><span class="sv-comment">// In this simple example, we don&#x27;t build a complete environment, but this does</span></td></tr>
+<tr id="L248"><td class="ln" data-line="248"><a href="#L248">248</a></td><td class="code"><span class="sv-comment">// not detract from the example&#x27;s purpose. In the top module, we instantiate</span></td></tr>
+<tr id="L249"><td class="ln" data-line="249"><a href="#L249">249</a></td><td class="code"><span class="sv-comment">// the bus_driver, and one instance each of our custom callback classes. </span></td></tr>
+<tr id="L250"><td class="ln" data-line="250"><a href="#L250">250</a></td><td class="code"><span class="sv-comment">// To register the callbacks with the driver, we get the global callback pool</span></td></tr>
+<tr id="L251"><td class="ln" data-line="251"><a href="#L251">251</a></td><td class="code"><span class="sv-comment">// that is typed to our specific driver-callback combination. We associate</span></td></tr>
+<tr id="L252"><td class="ln" data-line="252"><a href="#L252">252</a></td><td class="code"><span class="sv-comment">// (register) the callback objects with driver using the callback pool&#x27;s </span></td></tr>
+<tr id="L253"><td class="ln" data-line="253"><a href="#L253">253</a></td><td class="code"><span class="sv-comment">// ~add_cb~ method. After calling ~display~ just to show that the</span></td></tr>
+<tr id="L254"><td class="ln" data-line="254"><a href="#L254">254</a></td><td class="code"><span class="sv-comment">// registration was successful, we push several transactions into the driver.</span></td></tr>
+<tr id="L255"><td class="ln" data-line="255"><a href="#L255">255</a></td><td class="code"><span class="sv-comment">// Our custom callbacks get called as the driver receives each transaction.</span></td></tr>
+<tr id="L256"><td class="ln" data-line="256"><a href="#L256">256</a></td><td class="code"><span class="sv-comment">//------------------------------------------------------------------------------</span></td></tr>
+<tr id="L257"><td class="ln" data-line="257"><a href="#L257">257</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L258"><td class="ln" data-line="258"><a href="#L258">258</a></td><td class="code"><span class="sv-keyword-decl">module</span> <span class="sv-ident">top</span><span class="sv-op">;</span></td></tr>
+<tr id="L259"><td class="ln" data-line="259"><a href="#L259">259</a></td><td class="code">  <span class="sv-keyword-decl">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" data-sym-kind="class" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L260"><td class="ln" data-line="260"><a href="#L260">260</a></td><td class="code">  <span class="sv-keyword-decl">import</span> <span class="sv-ident">bus_driver_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L261"><td class="ln" data-line="261"><a href="#L261">261</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L262"><td class="ln" data-line="262"><a href="#L262">262</a></td><td class="code">  <span class="sv-ident">bus_tr</span>            <span class="sv-ident">tr</span>     <span class="sv-op">=</span> <span class="sv-ident">new</span><span class="sv-op">;</span></td></tr>
+<tr id="L263"><td class="ln" data-line="263"><a href="#L263">263</a></td><td class="code">  <span class="sv-ident">bus_driver</span>        <span class="sv-ident">driver</span> <span class="sv-op">=</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-string">&quot;driver&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L264"><td class="ln" data-line="264"><a href="#L264">264</a></td><td class="code">  <span class="sv-ident">my_bus_driver_cb</span>  <span class="sv-ident">cb1</span>    <span class="sv-op">=</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-string">&quot;cb1&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L265"><td class="ln" data-line="265"><a href="#L265">265</a></td><td class="code">  <span class="sv-ident">my_bus_driver_cb2</span> <span class="sv-ident">cb2</span>    <span class="sv-op">=</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-string">&quot;cb2&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L266"><td class="ln" data-line="266"><a href="#L266">266</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L267"><td class="ln" data-line="267"><a href="#L267">267</a></td><td class="code">  <span class="sv-keyword-decl">initial</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L268"><td class="ln" data-line="268"><a href="#L268">268</a></td><td class="code">    <span class="sv-ident">bus_driver_cbs_t</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="add" data-sym-kind="method" title="Click to view add method documentation">add</span><span class="sv-op">(</span><span class="sv-ident">driver</span><span class="sv-op">,</span><span class="sv-ident">cb1</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L269"><td class="ln" data-line="269"><a href="#L269">269</a></td><td class="code">    <span class="sv-ident">bus_driver_cbs_t</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="add" data-sym-kind="method" title="Click to view add method documentation">add</span><span class="sv-op">(</span><span class="sv-ident">driver</span><span class="sv-op">,</span><span class="sv-ident">cb2</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L270"><td class="ln" data-line="270"><a href="#L270">270</a></td><td class="code">    <span class="sv-ident">bus_driver_cbs_t</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="display" data-sym-kind="method" title="Click to view display method documentation">display</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L271"><td class="ln" data-line="271"><a href="#L271">271</a></td><td class="code">    <span class="sv-keyword">for</span> <span class="sv-op">(</span><span class="sv-type">int</span> <span class="sv-ident">i</span><span class="sv-op">=</span><span class="sv-number">1</span><span class="sv-op">;</span> <span class="sv-ident">i</span><span class="sv-op">&lt;=</span><span class="sv-number">5</span><span class="sv-op">;</span> <span class="sv-ident">i</span><span class="sv-op">++</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L272"><td class="ln" data-line="272"><a href="#L272">272</a></td><td class="code">      <span class="sv-ident">tr</span><span class="sv-op">.</span><span class="sv-ident">addr</span> <span class="sv-op">=</span> <span class="sv-ident">i</span><span class="sv-op">;</span></td></tr>
+<tr id="L273"><td class="ln" data-line="273"><a href="#L273">273</a></td><td class="code">      <span class="sv-ident">tr</span><span class="sv-op">.</span><span class="sv-ident">data</span> <span class="sv-op">=</span> <span class="sv-number">6</span><span class="sv-op">-</span><span class="sv-ident">i</span><span class="sv-op">;</span></td></tr>
+<tr id="L274"><td class="ln" data-line="274"><a href="#L274">274</a></td><td class="code">      <span class="sv-ident">driver</span><span class="sv-op">.</span><span class="sv-ident">in</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="put" data-sym-kind="method" data-sym-owner="uvm_blocking_put_imp" title="Click to view put method documentation">put</span><span class="sv-op">(</span><span class="sv-ident">tr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L275"><td class="ln" data-line="275"><a href="#L275">275</a></td><td class="code">    <span class="sv-keyword">end</span></td></tr>
+<tr id="L276"><td class="ln" data-line="276"><a href="#L276">276</a></td><td class="code">    <span class="sv-keyword">begin</span></td></tr>
+<tr id="L277"><td class="ln" data-line="277"><a href="#L277">277</a></td><td class="code">       <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_report_server" data-sym-kind="class" title="Click to view uvm_report_server documentation">uvm_report_server</span> <span class="sv-ident">svr</span><span class="sv-op">;</span></td></tr>
+<tr id="L278"><td class="ln" data-line="278"><a href="#L278">278</a></td><td class="code">       <span class="sv-ident">svr</span> <span class="sv-op">=</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_report_server" data-sym-kind="class" title="Click to view uvm_report_server documentation">uvm_report_server</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="get_server" data-sym-kind="method" data-sym-owner="uvm_report_server" title="Click to view get_server method documentation">get_server</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L279"><td class="ln" data-line="279"><a href="#L279">279</a></td><td class="code">       <span class="sv-ident">svr</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="summarize" data-sym-kind="method" data-sym-owner="uvm_report_server" title="Click to view summarize method documentation">summarize</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L280"><td class="ln" data-line="280"><a href="#L280">280</a></td><td class="code">    <span class="sv-keyword">end</span></td></tr>
+<tr id="L281"><td class="ln" data-line="281"><a href="#L281">281</a></td><td class="code">  <span class="sv-keyword">end</span></td></tr>
+<tr id="L282"><td class="ln" data-line="282"><a href="#L282">282</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L283"><td class="ln" data-line="283"><a href="#L283">283</a></td><td class="code"><span class="sv-keyword-decl">endmodule</span></td></tr>
+<tr id="L284"><td class="ln" data-line="284"><a href="#L284">284</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L285"><td class="ln" data-line="285"><a href="#L285">285</a></td><td class="code">&nbsp;</td></tr></tbody></table></div>
+</div>
+  <textarea id="raw-source-text" style="display:none">//------------------------------------------------------------------------------
+//   Copyright 2007-2010 Mentor Graphics Corporation
+//   Copyright 2007-2010 Cadence Design Systems, Inc. 
+//   Copyright 2010 Synopsys, Inc.
+//   All Rights Reserved Worldwide
+//
+//   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not
+//   use this file except in compliance with the License.  You may obtain a copy
+//   of the License at
+//
+//       http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT
+//   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+//   License for the specific language governing permissions and limitations
+//   under the License.
+//------------------------------------------------------------------------------
+
+`include &quot;uvm_macros.svh&quot;
+
+//------------------------------------------------------------------------------
+// Title: Typical Callback Application
+//
+// This example demonstrates callback usage. The component developer defines a
+// driver and driver-specific callback class. The callback class defines the
+// hooks available for users to override. The component using the callbacks
+// (i.e. calling the callback methods) also defines corresponding virtual
+// methods for each callback hook. The developer implements each virtual methods
+// to call the corresponding callback method in all registered callback objects
+// using default algorithm. The end-user may then define either a callback or
+// driver subtype to extend driver behavior.
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+//
+// Group: Component Developer Use Model
+//
+//------------------------------------------------------------------------------
+// Component developers defines transaction, driver, and callback classes.
+//------------------------------------------------------------------------------
+
+package bus_driver_pkg;
+
+import uvm_pkg::*;
+
+typedef class bus_driver;
+typedef class bus_driver_cb;
+typedef uvm_callbacks #(bus_driver,bus_driver_cb) bus_driver_cbs_t;
+
+
+//------------------------------------------------------------------------------
+//
+// CLASS: bus_tr
+//
+// A basic bus transaction. 
+//------------------------------------------------------------------------------
+
+class bus_tr extends uvm_transaction;
+  rand int addr;
+  rand int data;
+  virtual function string convert2string();
+    convert2string = $sformatf(&quot;addr=%0h data=%0h&quot;,addr,data);
+  endfunction
+endclass
+
+
+//------------------------------------------------------------------------------
+//
+// CLASS: bus_driver_cb
+//
+//------------------------------------------------------------------------------
+// The callback class defines an interface consisting of one or more function
+// or task prototypes. The signatures of each method have no restrictions.
+// The component developer knows best the intended semantic of multiple
+// registered callbacks. Thus the algorithm for traversal the callback queue
+// should reside in the callback class itself. We could provide convenience
+// macros that implement the most common traversal methods, such as sequential
+// in-order execution.
+//------------------------------------------------------------------------------
+
+virtual class bus_driver_cb extends uvm_callback; 
+
+  virtual function bit trans_received(bus_driver driver, bus_tr tr);
+    return 0;
+  endfunction
+
+  virtual task trans_executed(bus_driver driver, bus_tr tr);
+  endtask
+
+  function new(string name=&quot;bus_driver_cb_inst&quot;);
+    super.new(name);
+  endfunction
+
+  static string type_name = &quot;bus_driver_cb&quot;;
+
+  virtual function string get_type_name();
+    return type_name;
+  endfunction
+
+endclass
+
+
+//------------------------------------------------------------------------------
+//
+// CLASS: bus_driver
+//
+//------------------------------------------------------------------------------
+// With the following implementation of bus_driver, users can implement
+// the callback &quot;hooks&quot; by either...
+//
+// - extending bus_driver and overriding one or more of the virtual
+//   methods, trans_received or trans_executed. Then, configure the
+//   factory to use the new type via a type or instance override.
+//
+// - extending bus_driver_cb and overriding one or more of the virtual
+//   methods, trans_received or trans_executed. Then, register an
+//   instance of the new callback type with an instance of bus_driver.
+//   This requires access to the handle of the bus_driver.
+//------------------------------------------------------------------------------
+
+class bus_driver extends uvm_component;
+
+  uvm_blocking_put_imp #(bus_tr,bus_driver) in;
+
+  `uvm_register_cb(bus_driver, bus_driver_cb)
+
+  function new (string name, uvm_component parent=null);
+    super.new(name,parent);
+    in = new(&quot;in&quot;,this);
+  endfunction
+
+  static string type_name = &quot;bus_driver&quot;;
+
+  virtual function string get_type_name();
+    return type_name;
+  endfunction
+
+  virtual function bit trans_received(bus_tr tr);
+    `uvm_do_callbacks_exit_on(bus_driver,bus_driver_cb,trans_received(this,tr),1)
+  endfunction
+
+  virtual task trans_executed(bus_tr tr);
+    `uvm_do_callbacks(bus_driver,bus_driver_cb,trans_executed(this,tr))
+  endtask
+
+  virtual task put(bus_tr t);
+    uvm_report_info(&quot;bus_tr received&quot;,t.convert2string());
+    if (!trans_received(t)) begin
+      uvm_report_info(&quot;bus_tr dropped&quot;,
+          &quot;user callback indicated DROPPED\n&quot;);
+      return;
+    end
+    #100;
+    trans_executed(t);
+    uvm_report_info(&quot;bus_tr executed&quot;,{t.convert2string(),&quot;\n&quot;});
+  endtask
+
+endclass
+
+endpackage // bus_driver_pkg
+
+
+//------------------------------------------------------------------------------
+//
+// Group: End-User Use Model
+//
+//------------------------------------------------------------------------------
+// The end-user simply needs to extend the callback base class, overriding any or
+// all of the prototypes provided in the developer-supplied callback interface.
+// Then, register an instance of the callback class with any object designed to
+// use the base callback type.
+//------------------------------------------------------------------------------
+
+import uvm_pkg::*;
+import bus_driver_pkg::*;
+
+//------------------------------------------------------------------------------
+//
+// CLASS: my_bus_driver_cb
+//
+//------------------------------------------------------------------------------
+// This class defines a subtype of the driver developer&#x27;s base callback class.
+// In this case, both available driver callback methods are defined. The 
+// ~trans_received~ method randomly chooses whether to return 0 or 1. When 1,
+// the driver will &quot;drop&quot; the received transaction.
+//------------------------------------------------------------------------------
+
+class my_bus_driver_cb extends bus_driver_cb;
+
+  function new(string name=&quot;bus_driver_cb_inst&quot;);
+    super.new(name);
+  endfunction
+
+  virtual function bit trans_received(bus_driver driver, bus_tr tr);
+    static bit drop = 0;
+    driver.uvm_report_info(&quot;trans_received_cb&quot;,
+      {&quot;  bus_driver=&quot;,driver.get_full_name(),&quot; tr=&quot;,tr.convert2string()});
+    drop = 1 - drop;
+    return drop;
+  endfunction
+
+  virtual task trans_executed(bus_driver driver, bus_tr tr);
+    driver.uvm_report_info(&quot;trans_executed_cb&quot;,
+      {&quot;  bus_driver=&quot;,driver.get_full_name(),&quot; tr=&quot;,tr.convert2string()});
+  endtask
+
+  virtual function string get_type_name();
+    return &quot;my_bus_driver_cb&quot;;
+  endfunction
+
+endclass
+
+
+//------------------------------------------------------------------------------
+//
+// CLASS: my_bus_driver_cb2
+//
+//------------------------------------------------------------------------------
+// This class defines a subtype of the driver developer&#x27;s base callback class.
+// In this case, only one of the two available methods are defined.
+//------------------------------------------------------------------------------
+
+class my_bus_driver_cb2 extends bus_driver_cb;
+
+  function new(string name=&quot;bus_driver_cb_inst&quot;);
+    super.new(name);
+  endfunction
+
+  virtual task trans_executed(bus_driver driver, bus_tr tr);
+    driver.uvm_report_info(&quot;trans_executed_cb2&quot;,
+      {&quot;  bus_driver=&quot;,driver.get_full_name(),&quot; tr=&quot;,tr.convert2string()});
+  endtask
+
+  virtual function string get_type_name();
+    return &quot;my_bus_driver_cb2&quot;;
+  endfunction
+
+endclass
+
+
+//------------------------------------------------------------------------------
+//
+// MODULE: top
+//
+//------------------------------------------------------------------------------
+// In this simple example, we don&#x27;t build a complete environment, but this does
+// not detract from the example&#x27;s purpose. In the top module, we instantiate
+// the bus_driver, and one instance each of our custom callback classes. 
+// To register the callbacks with the driver, we get the global callback pool
+// that is typed to our specific driver-callback combination. We associate
+// (register) the callback objects with driver using the callback pool&#x27;s 
+// ~add_cb~ method. After calling ~display~ just to show that the
+// registration was successful, we push several transactions into the driver.
+// Our custom callbacks get called as the driver receives each transaction.
+//------------------------------------------------------------------------------
+
+module top;
+  import uvm_pkg::*;
+  import bus_driver_pkg::*;
+
+  bus_tr            tr     = new;
+  bus_driver        driver = new(&quot;driver&quot;);
+  my_bus_driver_cb  cb1    = new(&quot;cb1&quot;);
+  my_bus_driver_cb2 cb2    = new(&quot;cb2&quot;);
+
+  initial begin
+    bus_driver_cbs_t::add(driver,cb1);
+    bus_driver_cbs_t::add(driver,cb2);
+    bus_driver_cbs_t::display();
+    for (int i=1; i&lt;=5; i++) begin
+      tr.addr = i;
+      tr.data = 6-i;
+      driver.in.put(tr);
+    end
+    begin
+       uvm_report_server svr;
+       svr = uvm_report_server::get_server();
+       svr.summarize();
+    end
+  end
+
+endmodule
+
+
+</textarea>
+  <script src="../../../../js/uvm_symbol_quick.js" defer></script>
+  <script src="../../../../js/page_common.js"></script>
+</body>
+</html>

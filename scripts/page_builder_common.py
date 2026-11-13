@@ -808,7 +808,8 @@ def render_source_viewer(
     rows: List[str],
     syms: List[Dict[str, Any]],
     doc_rel: Optional[str] = None,
-    root_rel: str = "../../"
+    root_rel: str = "../../",
+    raw_href: Optional[str] = None
 ) -> str:
     """
     Renders a unified, syntax-highlighted source view page (single file) for src_view/.
@@ -826,7 +827,8 @@ def render_source_viewer(
         <span>Documentation</span>
       </a>'''
 
-    raw_href = f"{root_rel}uvm-1.2/src/{rel_path}"
+    if not raw_href:
+        raw_href = f"{root_rel}uvm-1.2/src/{rel_path}"
 
     # Symbol jump select
     sym_options = "".join([

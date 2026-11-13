@@ -1445,6 +1445,28 @@ def build_suite_page(suite_key, meta, files):
             "size_kb": round(len(content.encode('utf-8')) / 1024, 1)
         })
 
+    # Generate standalone src_view/examples/ HTML pages for each file so they behave identically to normal src_view files
+    ex_src_base = BASE_DIR / "src_view" / "examples" / cat_slug / Path(suite_key).name
+    for fd in files_data:
+        rel_name = fd["name"]
+        src_rel_path = f"examples/{cat_slug}/{Path(suite_key).name}/{rel_name}"
+        out_src_file = ex_src_base / f"{rel_name}.html"
+        out_src_file.parent.mkdir(parents=True, exist_ok=True)
+        src_depth = len(src_rel_path.split('/'))
+        src_root_rel = "../" * src_depth
+        raw_href = f"{src_root_rel}uvm-1.2/examples/{suite_key}/{rel_name}"
+        src_html = pbc.render_source_viewer(
+            rel_path=src_rel_path,
+            code=fd["raw_content"],
+            rows=[fd["table_html"]],
+            syms=[],
+            doc_rel=None,
+            root_rel=src_root_rel,
+            raw_href=raw_href
+        )
+        with open(out_src_file, 'w', encoding='utf-8', newline='\n') as sf:
+            sf.write(src_html)
+
     # Prepare JSON files bundle for client-side zero-dependency ZIP download
     zip_payload = [{"name": fd["name"], "content": fd["raw_content"]} for fd in files_data]
     zip_json_escaped = html.escape(json.dumps(zip_payload))

@@ -623,78 +623,10 @@ document.addEventListener('DOMContentLoaded', () => {
       window.openDocView(e.data.url, e.data.symbol, e.data.ownerClass);
     } else if (e.data.type === 'openExampleView' && e.data.url) {
       window.openExampleView(e.data.url);
-    } else if (e.data.type === 'openExampleSource' && e.data.tableHtml) {
-      const fileName = e.data.fileName || 'example.sv';
-      const safeName = fileName.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      const cssHref = new URL('css/style.css', window.location.href).href;
-      const commonJs = new URL('js/page_common.js', window.location.href).href;
-      const srcJs = new URL('js/src_page.js', window.location.href).href;
-      const themeAttr = document.documentElement.getAttribute('data-theme') || 'light';
-      const rawText = e.data.rawContent || '';
-      const rawEscaped = rawText.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-      const lineCount = rawText ? rawText.split(/\r?\n/).length : 0;
-      const sizeKb = (new Blob([rawText]).size / 1024).toFixed(1);
-      const docHtml = `<!DOCTYPE html>
-<html lang="en" class="src-page" data-theme="${themeAttr}">
-<head>
-  <meta charset="UTF-8">
-  <meta name="color-scheme" content="light dark">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${safeName} | UVM 1.2 Source Code</title>
-  <link rel="stylesheet" href="${cssHref}">
-</head>
-<body class="src-viewer-body">
-  <div class="src-sticky-bar studio-toolbar">
-    <div class="src-breadcrumbs">
-      <span class="src-nav-home">example</span>
-      <span class="sep">/</span>
-      <span class="src-cur-file">${safeName}</span>
-      ${lineCount ? `<span class="badge badge-info">${lineCount} lines</span>` : ''}
-      ${rawText ? `<span class="badge badge-secondary">${sizeKb} KB</span>` : ''}
-    </div>
-    <div class="src-actions studio-toolbar-actions">
-      <button type="button" class="btn btn-outline studio-action-btn" id="btn-toggle-find" title="Find in file (Ctrl+F)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <span>Find</span>
-      </button>
-      <button type="button" class="btn btn-outline studio-action-btn" id="btn-toggle-wrap" title="Toggle Word Wrap (Alt+Z)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><polyline points="14 16 18 12 14 8"/><path d="M21 18H9a4 4 0 0 1 0-8h6"/></svg>
-        <span>Wrap</span>
-      </button>
-      <button type="button" class="btn btn-outline studio-action-btn" id="btn-copy-code" title="Copy raw source code" aria-label="Copy code">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        <span>Copy Code</span>
-      </button>
-    </div>
-  </div>
-  <div class="code-container src-code-container" id="src-code-container">
-    <div class="code-find-widget" id="code-find-widget" style="display:none;" role="search" aria-label="Find in file">
-      <div class="find-input-wrap">
-        <input type="text" id="find-input" placeholder="Find in file (Ctrl+F)..." autocomplete="off" spellcheck="false">
-        <span class="find-count" id="find-count">0 of 0</span>
-      </div>
-      <div class="find-actions">
-        <button type="button" class="find-btn" id="find-case-toggle" title="Match Case (Alt+C)">Aa</button>
-        <button type="button" class="find-btn" id="find-word-toggle" title="Match Whole Word (Alt+W)">\\b</button>
-        <button type="button" class="find-btn" id="find-prev" title="Previous Match (Shift+Enter)">&#9650;</button>
-        <button type="button" class="find-btn" id="find-next" title="Next Match (Enter)">&#9660;</button>
-        <button type="button" class="find-btn" id="find-close" title="Close (Esc)">&#10005;</button>
-      </div>
-    </div>
-    <div class="code-quick-info-tooltip" id="code-quick-info" style="display:none;"></div>
-    <div class="file-code-pane active" id="file-pane-0" data-filename="${safeName}">${e.data.tableHtml}</div>
-  </div>
-  <textarea id="raw-source-text" style="display:none;" aria-hidden="true">${rawEscaped}</textarea>
-  <script src="${commonJs}"></script>
-  <script src="${srcJs}"></script>
-</body>
-</html>`;
-      if (srcFrame) {
-        srcFrame.removeAttribute('src');
-        srcFrame.srcdoc = docHtml;
+    } else if (e.data.type === 'studioFileChanged' && e.data.url) {
+      if (currentMode === 'split') {
+        loadSource(e.data.url, true, false);
       }
-      if (srcPaneTitle) srcPaneTitle.textContent = fileName;
-      setViewMode(window.innerWidth <= 860 ? 'source' : 'split', false);
     } else if (e.data.type === 'exampleNavigated' && e.data.url) {
       let fullEx = normalizeExampleUrl(e.data.url);
       if (!fullEx.includes('#') && currentDocUrl && currentDocUrl.includes('#') && currentDocUrl.split('#')[0] === fullEx) {
