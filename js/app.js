@@ -588,19 +588,28 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.data.type === 'openExampleView' && e.data.url) {
       window.openExampleView(e.data.url);
     } else if (e.data.type === 'exampleNavigated' && e.data.url) {
-      const fullEx = normalizeExampleUrl(e.data.url);
+      let fullEx = normalizeExampleUrl(e.data.url);
+      if (!fullEx.includes('#') && currentDocUrl && currentDocUrl.includes('#') && currentDocUrl.split('#')[0] === fullEx) {
+        fullEx = currentDocUrl;
+      }
       currentDocUrl = fullEx;
       updateDocTitle(fullEx);
       highlightActiveSidebar(fullEx);
       updateHash();
     } else if (e.data.type === 'docNavigated' && e.data.url) {
-      const fullDoc = normalizeDocUrl(e.data.url);
+      let fullDoc = normalizeDocUrl(e.data.url);
+      if (!fullDoc.includes('#') && currentDocUrl && currentDocUrl.includes('#') && currentDocUrl.split('#')[0] === fullDoc) {
+        fullDoc = currentDocUrl;
+      }
       currentDocUrl = fullDoc;
       updateDocTitle(fullDoc);
       highlightActiveSidebar(fullDoc);
       updateHash();
     } else if (e.data.type === 'srcNavigated' && e.data.url) {
-      const fullSrc = normalizeSrcUrl(e.data.url);
+      let fullSrc = normalizeSrcUrl(e.data.url);
+      if (!fullSrc.includes('#') && currentSrcUrl && currentSrcUrl.includes('#') && currentSrcUrl.split('#')[0] === fullSrc) {
+        fullSrc = currentSrcUrl;
+      }
       currentSrcUrl = fullSrc;
       updateSrcTitle(fullSrc);
       highlightActiveSidebar(fullSrc);
