@@ -85,12 +85,12 @@
 
   --sidebar-width: 340px;
   --header-height: 56px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --shadow-sm: 0 1px 2px 0 rgba(60, 64, 67, 0.08), 0 1px 3px 1px rgba(60, 64, 67, 0.04);
-  --shadow-md: 0 1px 3px 0 rgba(60, 64, 67, 0.12), 0 4px 8px 3px rgba(60, 64, 67, 0.06);
-  --shadow-lg: 0 4px 12px rgba(60, 64, 67, 0.15), 0 8px 24px rgba(60, 64, 67, 0.1);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 28px rgba(15, 23, 42, 0.12), 0 4px 10px rgba(15, 23, 42, 0.06);
   --font-sans: "Google Sans", "Google Sans Text", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   --font-mono: Consolas, "Cascadia Mono", "Roboto Mono", SFMono-Regular, Menlo, Monaco, monospace;
   --font-main: var(--font-sans);
@@ -98,20 +98,20 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  /* Google Developers Palette (Dark Mode) */
-  --bg-color: #1f1f1f;
-  --surface-color: #202124;
-  --surface-alt: #282a2d;
-  --surface-active: #303134;
-  --sidebar-bg: #202124;
+  /* Google Material 3 / Developer Docs Palette (Dark Mode) */
+  --bg-color: #18191b;
+  --surface-color: #1f2023;
+  --surface-alt: #26282c;
+  --surface-active: #2e3035;
+  --sidebar-bg: #1b1c1f;
 
   --text-main: #e8eaed;
   --text-muted: #9aa0a6;
   --text-subtle: #80868b;
 
-  --border-color: #3c4043;
-  --border-subtle: #4a4a4a;
-  --border-subtle-hover: #5f6368;
+  --border-color: #36393f;
+  --border-subtle: #2c2f34;
+  --border-subtle-hover: #4e535c;
 
   --primary: #8ab4f8;
   --primary-hover: #aecbfa;
@@ -140,8 +140,8 @@
   --scrollbar-thumb-hover: #5f6368;
 
   /* Syntax Highlighting (Dark - Modern High-Contrast Developer Dark Palette) */
-  --code-bg: #282a2d;
-  --code-gutter-bg: #202124;
+  --code-bg: #232529;
+  --code-gutter-bg: #1b1c1f;
   --code-text: #e8eaed;
   --code-active-line: rgba(138, 180, 248, 0.16);
   --code-active-border: #8ab4f8;
@@ -205,7 +205,10 @@ body {
   font-family: var(--font-sans);
   background-color: var(--bg-color);
   color: var(--text-main);
-  line-height: 1.6;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body#app-container {
@@ -259,7 +262,11 @@ body.is-resizing iframe {
 .app-header {
   height: var(--header-height);
   background-color: var(--surface-color);
-  border-bottom: 1px solid var(--border-color);
+  background-color: color-mix(in srgb, var(--surface-color) 92%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -788,8 +795,8 @@ html[data-theme="dark"] .sidebar-tab-btn:hover {
   color: var(--primary) !important;
   background: var(--primary-light) !important;
   font-weight: 600;
-  border-left: 3px solid var(--primary);
-  padding-left: calc(0.55rem - 3px);
+  box-shadow: inset 3px 0 0 var(--primary);
+  padding-left: 0.65rem;
 }
 
 /* File Tree in Sidebar */
@@ -875,16 +882,30 @@ html[data-theme="dark"] .sidebar-tab-btn:hover {
 
 /* Split Divider */
 .split-divider {
-  width: 6px;
-  min-width: 6px;
-  max-width: 6px;
-  flex: 0 0 6px !important;
+  width: 4px;
+  min-width: 4px;
+  max-width: 4px;
+  flex: 0 0 4px !important;
   flex-shrink: 0 !important;
-  background: var(--border-color);
+  background: var(--border-subtle);
   cursor: col-resize;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease;
   position: relative;
   z-index: 10;
+}
+
+.split-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 36px;
+  border-radius: 9999px;
+  background: var(--text-subtle);
+  opacity: 0.35;
+  transition: opacity 0.2s ease, background-color 0.2s ease, height 0.2s ease;
 }
 
 /* Invisible hit area so divider is easily grabbable */
@@ -893,13 +914,20 @@ html[data-theme="dark"] .sidebar-tab-btn:hover {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: -4px;
-  right: -4px;
+  left: -5px;
+  right: -5px;
   z-index: 2;
 }
 
 .split-divider:hover,
 .split-divider.active {
+  background: var(--primary-light);
+}
+
+.split-divider:hover::before,
+.split-divider.active::before {
+  opacity: 1;
+  height: 52px;
   background: var(--primary);
 }
 
@@ -1012,8 +1040,8 @@ html[data-theme="dark"] .sidebar-tab-btn:hover {
   max-height: calc(100vh - 3.5rem);
   overflow-y: auto;
   overflow-x: hidden;
-  padding-left: 0.75rem;
-  border-left: 1px solid var(--border-color);
+  padding-left: 0.85rem;
+  border-left: 1px solid var(--border-subtle);
   background: transparent !important;
   font-size: 0.8rem;
   user-select: none;
@@ -1765,19 +1793,20 @@ h3.CTitle {
 /* Inline code pill */
 code {
   font-family: var(--font-mono);
-  font-size: 0.88em;
+  font-size: 0.86em;
   background-color: var(--surface-active);
   color: var(--text-main);
-  padding: 0.15rem 0.4rem;
+  padding: 0.12rem 0.38rem;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
 }
 
 /* Description Lists (Google Developers parameter & term tables) */
 .CDescriptionList {
   width: 100%;
   margin: 1.25rem 0;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -1843,21 +1872,26 @@ code {
   border-bottom: 1px solid var(--border-subtle);
   font-size: 0.875rem;
   color: var(--text-main);
+  transition: background-color 0.12s ease;
+}
+
+.STable tr:last-child td {
+  border-bottom: none;
 }
 
 .STable tr:hover:not(.SGroup):not(.SHierarchy) td {
-  background-color: var(--surface-active);
+  background-color: var(--surface-alt);
 }
 
 .SGroup td {
   background: var(--surface-alt) !important;
-  color: var(--text-main) !important;
-  font-weight: 600;
-  font-size: 0.8rem;
+  color: var(--text-muted) !important;
+  font-weight: 700;
+  font-size: 0.74rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  letter-spacing: 0.06em;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   padding: 0.55rem 1rem;
 }
 
@@ -2830,11 +2864,6 @@ blockquote:has(> .Prototype) {
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: thin;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.Prototype:hover {
-  border-color: var(--border-subtle-hover);
 }
 
 blockquote > .Prototype {
@@ -2956,11 +2985,6 @@ blockquote > .Prototype {
   margin: 1.25rem 0;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.code-block-container:hover {
-  border-color: var(--border-subtle-hover);
 }
 
 .code-block-header {
