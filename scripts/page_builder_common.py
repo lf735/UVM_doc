@@ -847,8 +847,6 @@ def render_source_viewer(
       <a href="{root_rel}index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
       <span class="sep">/</span>
       <span class="src-cur-file">{html.escape(rel_path)}</span>
-      <span class="badge badge-info">{line_count} lines</span>
-      <span class="badge badge-secondary">{file_size_kb} KB</span>
     </div>
     <div class="src-actions studio-toolbar-actions">
       {sym_select}
