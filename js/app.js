@@ -2396,6 +2396,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function focusSearchInput(selectAll = false) {
+    if (!searchInput) return;
+    const applyFocus = () => {
+      if (!searchModal || !searchModal.classList.contains('open')) return;
+      try {
+        searchInput.focus({ preventScroll: true });
+      } catch (e) {
+        searchInput.focus();
+      }
+      if (selectAll && searchInput.value) {
+        searchInput.select();
+      }
+    };
+    applyFocus();
+    requestAnimationFrame(applyFocus);
+    setTimeout(applyFocus, 50);
+  }
+
   function openSearchModal(options = {}) {
     if (!searchModal) return;
     searchModal.classList.add('open');
@@ -2408,8 +2426,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (modalSearchClear) modalSearchClear.style.display = 'inline-flex';
       if (modalRecentSearches) modalRecentSearches.style.display = 'none';
       if (searchResults) searchResults.style.display = 'block';
-      searchInput.focus();
-      searchInput.select();
+      focusSearchInput(true);
       executeSearch(activeSearchSession.query);
     } else {
       searchInput.value = '';
@@ -2436,7 +2453,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalSearchPrompts) modalSearchPrompts.style.display = 'none';
       }
       renderRecentSearches();
-      searchInput.focus();
+      focusSearchInput(true);
       searchSelectedIndex = -1;
       executeSearch('');
     }
