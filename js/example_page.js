@@ -731,13 +731,121 @@
     renderStep(0);
   }
 
+  function initBannerFilesPopover(studio) {
+    const banner = document.querySelector('.example-source-banner');
+    const filesBadge = banner ? banner.querySelector('.badge-files') : null;
+    if (!banner || !filesBadge || filesBadge.dataset.popoverBound) return;
+
+    let zipFiles = [];
+    let fileNames = [];
+    const zipPayloadEl = document.getElementById('zip-payload');
+    if (zipPayloadEl) {
+      try {
+        const parsed = JSON.parse(zipPayloadEl.textContent);
+        if (Array.isArray(parsed)) {
+          zipFiles = parsed;
+          fileNames = parsed.map(f => f && f.name).filter(Boolean);
+        }
+      } catch (e) { }
+    }
+    if (!fileNames.length) {
+      fileNames = Array.from(document.querySelectorAll('.studio-tab')).map(t => t.textContent.trim()).filter(Boolean);
+    }
+    if (!fileNames.length) return;
+
+    filesBadge.dataset.popoverBound = '1';
+    filesBadge.classList.add('is-interactive');
+    filesBadge.setAttribute('role', 'button');
+    filesBadge.setAttribute('tabindex', '0');
+    filesBadge.setAttribute('aria-expanded', 'false');
+    filesBadge.title = 'Click to view example files';
+
+    let popover = null;
+
+    function closePopover() {
+      if (popover && popover.parentNode) {
+        popover.parentNode.removeChild(popover);
+      }
+      popover = null;
+      filesBadge.setAttribute('aria-expanded', 'false');
+    }
+
+    function togglePopover(e) {
+      e.stopPropagation();
+      if (popover) {
+        closePopover();
+        return;
+      }
+      popover = document.createElement('div');
+      popover.className = 'banner-files-popover';
+      popover.setAttribute('role', 'menu');
+
+      fileNames.forEach((name, idx) => {
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'banner-files-popover-item';
+        item.setAttribute('role', 'menuitem');
+        item.textContent = name;
+        item.addEventListener('click', () => {
+          const pane = document.getElementById(`file-pane-${idx}`) ||
+            Array.from(document.querySelectorAll('.file-code-pane')).find(p => p.getAttribute('data-filename') === name);
+          const zipEntry = zipFiles.find(f => f && f.name === name) || zipFiles[idx];
+          if (window.parent && window.parent !== window && pane) {
+            window.parent.postMessage({
+              type: 'openExampleSource',
+              fileName: name,
+              tableHtml: pane.innerHTML,
+              rawContent: zipEntry ? zipEntry.content : ''
+            }, '*');
+          } else {
+            if (studio && typeof studio.switchFile === 'function') {
+              studio.switchFile(name);
+            } else if (studio && typeof studio.switchFileTab === 'function') {
+              studio.switchFileTab(idx);
+            }
+            const studioContainer = document.querySelector('.studio-container') || document.getElementById('studio-code-container');
+            if (studioContainer) {
+              studioContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+          closePopover();
+        });
+        popover.appendChild(item);
+      });
+
+      banner.appendChild(popover);
+      filesBadge.setAttribute('aria-expanded', 'true');
+    }
+
+    filesBadge.addEventListener('click', togglePopover);
+    filesBadge.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        togglePopover(e);
+      } else if (e.key === 'Escape') {
+        closePopover();
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (popover && !popover.contains(e.target) && e.target !== filesBadge) {
+        closePopover();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popover) {
+        closePopover();
+      }
+    });
+  }
+
   function initExampleFeatures() {
     initZipDownload();
     initSimulationConsole();
+    const studio = global.PageCommon && global.PageCommon.getStudioController
+      ? global.PageCommon.getStudioController()
+      : null;
+    initBannerFilesPopover(studio);
     if (document.getElementById('visual-flow-stepper')) {
-      const studio = global.PageCommon && global.PageCommon.getStudioController
-        ? global.PageCommon.getStudioController()
-        : null;
       initFlowStepper(studio);
     }
   }
