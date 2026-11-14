@@ -66,6 +66,11 @@ def test_css_shell_scroll_isolation():
         "Mobile overflow-x: hidden rule must exclude app shell and src-page"
     )
 
+    # 3. .CBody lists must restore left padding after global reset (* { padding: 0; margin: 0; })
+    assert re.search(r"\.CBody\s+ul,\s*\.CBody\s+ol\s*\{[^}]*padding-left:", content), (
+        ".CBody ul, .CBody ol must define padding-left so bullets do not render in the margin"
+    )
+
     print("PASS: css/style.css shell scroll isolation and mobile header rules verified.")
 
 

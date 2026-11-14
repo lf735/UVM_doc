@@ -1391,3 +1391,17 @@ Sous Windows, `http.server.ThreadingHTTPServer` active `allow_reuse_address = Tr
 1. **Isolation stricte par `overflow: clip` (`css/style.css`)** : Remplacement/complément d'`overflow: hidden` par `overflow: clip` + `overscroll-behavior: none` sur `html:has(> body#app-container)`, `body#app-container`, `.app-layout`, `.app-viewport`, `.pane`, `html.src-page` et `body.src-viewer-body`, avec `height: 100dvh` et un layout flex (`flex: 0 0 auto` sur `.app-header`, `flex: 1 1 auto; min-height: 0` sur `.app-layout`).
 2. **Épinglage mobile et épuration du header (`css/style.css`)** : Sous `@media (max-width: 860px)`, `body#app-container` et `.app-header` sont fixés (`position: fixed`), `.view-switcher` est masqué (`display: none`), et la règle `overflow-x: hidden` exclut la coquille et les pages source.
 3. **Verrou JS et synchronisation des icônes (`js/app.js`)** : Ajout de `resetShellScroll()` (branché sur `window` et `document` en capture, et après `parseHash()`) et extraction de `updatePaneExpandButtons(mode)` appelé à l'initialisation, dans `setViewMode()` et sur `resize`.
+
+---
+
+## 42. Le Piège du Reset Global `* { margin: 0; padding: 0; }` sur les Listes à Puces (`.CBody`)
+
+### Le Symptôme Observé
+> *"Les bullet points sont affichés dans la marge."*
+
+### L'Anatomie du Piège
+Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met à zéro le `padding-left` par défaut des navigateurs sur `<ul>` et `<ol>`. Comme `list-style-position` vaut `outside` par défaut et qu'aucune règle spécifique ne restaurait le retrait sur `.CBody ul` / `.CBody ol`, les puces des pages de documentation Natural Docs se retrouvaient projetées hors du bloc de texte, dans la marge gauche.
+
+### La Solution Appliquée (`css/style.css`, `scripts/verify_shell_layout.py`)
+- Ajout explicite de `padding-left: 1.5rem;`, `margin: 0.5rem 0 1rem 0;`, `list-style-type: disc;` / `decimal;` et d'un espacement de ligne sur `.CBody ul`, `.CBody ol`, `.CBody li` et les sous-listes imbriquées.
+- Ajout d'une assertion de non-régression dans `scripts/verify_shell_layout.py` vérifiant la présence de `padding-left` sur `.CBody ul, .CBody ol`.
