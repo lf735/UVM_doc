@@ -397,34 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
     });
 
-    const isMobileView = window.innerWidth <= 860;
-    const expandSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>';
-    const collapseSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20" /><polyline points="20 10 14 10 14 4" /><line x1="14" y1="10" x2="21" y2="3" /><line x1="3" y1="21" x2="10" y2="14" /></svg>';
-    const codeSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>';
-    const docSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>';
-
-    const btnFullDoc = document.getElementById('open-full-doc');
-    if (btnFullDoc) {
-      if (isMobileView) {
-        btnFullDoc.title = 'Switch to Source view';
-        btnFullDoc.innerHTML = codeSvg;
-      } else {
-        const isFullDoc = mode === 'docs';
-        btnFullDoc.title = isFullDoc ? 'Restore split view' : 'Expand documentation full width';
-        btnFullDoc.innerHTML = isFullDoc ? collapseSvg : expandSvg;
-      }
-    }
-    const btnFullSrc = document.getElementById('open-full-src');
-    if (btnFullSrc) {
-      if (isMobileView) {
-        btnFullSrc.title = 'Switch to Documentation view';
-        btnFullSrc.innerHTML = docSvg;
-      } else {
-        const isFullSrc = mode === 'source';
-        btnFullSrc.title = isFullSrc ? 'Restore split view' : 'Expand source code full width';
-        btnFullSrc.innerHTML = isFullSrc ? collapseSvg : expandSvg;
-      }
-    }
+    updatePaneExpandButtons(mode);
 
     if (mode !== 'split') {
       if (docPane) { docPane.style.width = ''; docPane.style.flex = ''; }
@@ -3414,10 +3387,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Ensure mobile viewports never stay in split mode on resize
+  function updatePaneExpandButtons(mode) {
+    const isMobileView = window.innerWidth <= 860;
+    const expandSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>';
+    const collapseSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20" /><polyline points="20 10 14 10 14 4" /><line x1="14" y1="10" x2="21" y2="3" /><line x1="3" y1="21" x2="10" y2="14" /></svg>';
+    const codeSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>';
+    const docSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>';
+
+    const btnFullDoc = document.getElementById('open-full-doc');
+    if (btnFullDoc) {
+      if (isMobileView) {
+        btnFullDoc.title = 'Switch to Source view';
+        btnFullDoc.innerHTML = codeSvg;
+      } else {
+        const isFullDoc = mode === 'docs';
+        btnFullDoc.title = isFullDoc ? 'Restore split view' : 'Expand documentation full width';
+        btnFullDoc.innerHTML = isFullDoc ? collapseSvg : expandSvg;
+      }
+    }
+    const btnFullSrc = document.getElementById('open-full-src');
+    if (btnFullSrc) {
+      if (isMobileView) {
+        btnFullSrc.title = 'Switch to Documentation view';
+        btnFullSrc.innerHTML = docSvg;
+      } else {
+        const isFullSrc = mode === 'source';
+        btnFullSrc.title = isFullSrc ? 'Restore split view' : 'Expand source code full width';
+        btnFullSrc.innerHTML = isFullSrc ? collapseSvg : expandSvg;
+      }
+    }
+  }
+
+  // Ensure mobile viewports never stay in split mode on resize and keep pane toggle icons in sync
   window.addEventListener('resize', () => {
     if (window.innerWidth <= 860 && currentMode === 'split') {
       setViewMode('docs', false);
+    } else {
+      updatePaneExpandButtons(currentMode);
     }
   });
 
@@ -3451,6 +3457,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSidebarPillsForTab();
   renderSidebar();
   parseHash();
+  updatePaneExpandButtons(currentMode);
   resetShellScroll();
 });
 
