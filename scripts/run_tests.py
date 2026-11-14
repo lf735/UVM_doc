@@ -20,6 +20,7 @@ TEST_SUITES = [
     ("Interactive Examples Studios", "verify_examples.py"),
     ("Inherited Members & Class Hierarchy", "verify_inherited_members.py"),
     ("Search Pilot & Session Persistence", "verify_search_pilot.py"),
+    ("Shell Layout & Mobile Header", "verify_shell_layout.py"),
     ("Source Notes & License Hygiene", "verify_source_notes.py"),
     ("Stepper Calibration & Log Sync", "verify_stepper_calibration.py"),
 ]

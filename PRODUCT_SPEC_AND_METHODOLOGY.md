@@ -197,6 +197,8 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
 ### Règle 4 : Gestion du Défilement Isolé (Scroll Isolation)
 - Ne jamais appeler `element.scrollIntoView()` sur un sous-élément d'une barre latérale, d'un menu ou d'une barre d'onglets (`studioTabs[idx]`) si la fenêtre principale ne doit pas scroller vers ce conteneur.
 - Toujours utiliser `container.scrollTo({ top: ..., behavior: 'smooth' })` (ou `studioTabBar.scrollTo({ left: ... })`) ciblant explicitement le conteneur concerné.
+- Pour la coquille applicative (`html:has(> body#app-container)`, `body#app-container`, `.app-layout`, `.app-viewport`, `.pane`) et les visionneuses sources (`html.src-page`, `body.src-viewer-body`), utiliser `overflow: clip` (en complément du fallback `overflow: hidden`), `100dvh` et `overscroll-behavior: none`, accompagnés d'un verrou JS (`resetShellScroll()`). Contrairement à `overflow: hidden`, `overflow: clip` ne crée pas de conteneur de défilement et empêche la navigation par ancre (`#...`) ou `scrollIntoView()` de faire défiler la barre de titre hors de l'écran.
+- En mode mobile (`<= 860px`), épingler `.app-header` et `body#app-container` en `position: fixed` (`padding-top: var(--header-height)`), masquer `.view-switcher` (redondant avec `#open-full-doc` / `#open-full-src`), et synchroniser l'icône de `#open-full-doc` dès l'initialisation via `updatePaneExpandButtons(currentMode)`.
 
 ### Règle 5 : Échappement, Modularité et Zéro Dépendance Tierce des Scripts Python
 - Dans les scripts de build et de test Python (`scripts/run_tests.py` et suites associées), **n'utiliser que la bibliothèque standard Python** (ex. `html.parser.HTMLParser` au lieu de `bs4`/`BeautifulSoup`, `string.Template` via `scripts/templates/`) afin de garantir l'exécution immédiate sur GitHub Actions sans `pip install` caché.
@@ -321,7 +323,8 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ### 4.1 Check-list de Vérification Obligatoire
 
 Avant de valider une version :
-- [ ] **Suite Unifiée (CI & Local)** : `python scripts/run_tests.py` exécute les 8 suites et retourne `0` (`8/8 PASS`).
+- [ ] **Suite Unifiée (CI & Local)** : `python scripts/run_tests.py` exécute les 9 suites et retourne `0` (`9/9 PASS`).
+- [ ] **Vérification du Shell, Ancres & Mobile** : `python scripts/verify_shell_layout.py` valide `overflow: clip`, le verrouillage `position: fixed` de `.app-header` sur mobile (`<= 860px`), le masquage de `.view-switcher` sur mobile et la synchronisation initiale de `#open-full-doc`.
 - [ ] **Tests Unitaires de Coloration Syntaxique & Symboles Cliquables** : `python scripts/test_syntax_highlighter.py` (8/8 tests validés avec `test_clickable_uvm_symbols`).
 - [ ] **Vérification des Conteneurs de Code** : `python scripts/verify_code_containers.py` (validation des blocs code et boutons de copie).
 - [ ] **Vérification des Outils Éditeur & Symboles Cliquables** : `python scripts/verify_code_editor_tools.py` (6/6 suites validées).
@@ -332,7 +335,8 @@ Avant de valider une version :
 - [ ] **Validation des Studios** : `python scripts/verify_examples.py` (28/28 assertions validées).
 - [ ] **Validation des Scénarios & Logs** : `python scripts/verify_stepper_calibration.py` (5/5 piliers vérifiés).
 - [ ] **Validation des Notes Sources** : `python scripts/verify_source_notes.py` (39/39 suites validées, zéro fuite de licence Apache).
-- [ ] **Suite Unifiée Complète** : `python scripts/run_tests.py` (8/8 suites au vert, incluant `verify_code_containers.py` et `verify_code_editor_tools.py` sur les 155 sources UVM + pages `src_view/examples/`).
+- [ ] **Suite Unifiée Complète** : `python scripts/run_tests.py` (9/9 suites au vert, incluant `verify_code_containers.py` et `verify_code_editor_tools.py` sur les 155 sources UVM + pages `src_view/examples/`).
+- [ ] **Stabilité de la Barre de Titre (Ancres & Mobile)** : Ouvrir une URL avec ancre (`#/doc/...#...` ou `#/src/...#L...`) sur desktop et mobile (`<= 860px`) : `.app-header` reste fixée en haut, `.view-switcher` est masqué sur mobile et `#open-full-doc` affiche d'emblée l'icône Source.
 - [ ] **Ouverture & URL des Sources d'Exemple** : Cliquer sur un fichier dans la bannière d'un exemple ouvre `src_view/examples/<catégorie>/<suite>/<fichier>.html` en Split View sur desktop (`#/split?doc=...&src=examples/...`) ou en vue Source sur mobile (`#/src/examples/...`), et changer d'onglet dans le Code Studio en Split View synchronise le panneau droit et l'URL.
 - [ ] **Focus Clavier Immédiat en Recherche Modale** : Cliquer sur la barre de recherche ou appuyer sur `/` active immédiatement la saisie clavier et présélectionne la requête en cours.
 - [ ] **Serveur Local (`start_server.bat`)** : `python scripts/serve.py` refuse le double-bind silencieux sous Windows (`allow_reuse_address = False`) et `start_server.bat` accepte un port alternatif en argument.

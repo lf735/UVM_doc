@@ -1374,3 +1374,20 @@ Sous Windows, `http.server.ThreadingHTTPServer` active `allow_reuse_address = Tr
 ### La Solution Appliquée (`scripts/serve.py`, `start_server.bat`)
 - `scripts/serve.py` définit `IPv4HTTPServer` avec `allow_reuse_address = False` et ne bascule sur IPv4 que si l'erreur est `EAFNOSUPPORT` / `EPROTONOSUPPORT`. En cas de port occupé, il affiche une erreur explicite et quitte avec le code `1`.
 - `start_server.bat` accepte un port optionnel en argument (`start_server.bat 8001`) et exécute `pause` si le serveur échoue à démarrer.
+
+---
+
+## 41. Le Piège d'`overflow: hidden` face aux Ancres, la Barre de Titre Mobile et l'Icône `#open-full-doc`
+
+### Le Symptôme Observé
+> *"Lorsque l'utilisateur arrive sur une page à partir d'une URL avec ancre, la page est scrollée et la barre de titre devient invisible. En mobile, la barre de titre doit rester en haut quoi qu'il arrive, l'icône `#open-full-doc` n'est pas la bonne à l'ouverture, et le `.view-switcher` n'est plus nécessaire."*
+
+### L'Anatomie du Piège
+1. **`overflow: hidden` reste un conteneur scrollable** : En CSS, `overflow: hidden` masque les barres de défilement mais n'empêche pas le navigateur de scroller le conteneur via la navigation native par fragment (`#ancre` dans une iframe), `focus()` ou `scrollIntoView()`. La coquille (`body#app-container`, `.app-layout`, `.pane`, `body.src-viewer-body`) et `html` pouvaient ainsi défiler verticalement et faire disparaître `.app-header` (ou `.src-sticky-bar`).
+2. **Mobile `100vh` vs `100dvh` et défilement du viewport** : Sur navigateur mobile, `100vh` correspond à la hauteur sans barre d'adresse, supérieure au viewport visible réel (`100dvh`), créant un débordement exploitable par le scroll tactile ou les ancres. De plus, la règle `@media (max-width: 860px)` appliquait `overflow-x: hidden` à `html, body`, réactivant un scroll vertical sur `html`.
+3. **Désynchronisation initiale de `#open-full-doc`** : En HTML, `#open-full-doc` démarrait avec l'icône d'agrandissement (`expandSvg`). Or, à l'ouverture sans hash, `currentMode` valait déjà `'docs'`, donc `setViewMode()` n'était pas rappelé et l'icône Source (`codeSvg`) n'était pas injectée en mobile.
+
+### La Solution Appliquée (`css/style.css`, `js/app.js`, `scripts/verify_shell_layout.py`)
+1. **Isolation stricte par `overflow: clip` (`css/style.css`)** : Remplacement/complément d'`overflow: hidden` par `overflow: clip` + `overscroll-behavior: none` sur `html:has(> body#app-container)`, `body#app-container`, `.app-layout`, `.app-viewport`, `.pane`, `html.src-page` et `body.src-viewer-body`, avec `height: 100dvh` et un layout flex (`flex: 0 0 auto` sur `.app-header`, `flex: 1 1 auto; min-height: 0` sur `.app-layout`).
+2. **Épinglage mobile et épuration du header (`css/style.css`)** : Sous `@media (max-width: 860px)`, `body#app-container` et `.app-header` sont fixés (`position: fixed`), `.view-switcher` est masqué (`display: none`), et la règle `overflow-x: hidden` exclut la coquille et les pages source.
+3. **Verrou JS et synchronisation des icônes (`js/app.js`)** : Ajout de `resetShellScroll()` (branché sur `window` et `document` en capture, et après `parseHash()`) et extraction de `updatePaneExpandButtons(mode)` appelé à l'initialisation, dans `setViewMode()` et sur `resize`.
