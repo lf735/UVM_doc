@@ -211,9 +211,21 @@
     text-rendering: optimizeLegibility;
   }
 
-  body#app-container {
+  html:has(> body#app-container) {
     height: 100%;
     overflow: hidden;
+    overflow: clip;
+    overscroll-behavior: none;
+  }
+
+  body#app-container {
+    height: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow: clip;
+    overscroll-behavior: none;
   }
 
   /* Global instant theme switching - disables all transitions during theme toggle */
@@ -262,6 +274,7 @@
    ========================================================================== */
 
   .app-header {
+    flex: 0 0 auto;
     height: var(--header-height);
     background-color: var(--surface-color);
     background-color: color-mix(in srgb, var(--surface-color) 92%, transparent);
@@ -435,9 +448,12 @@
 
   .app-layout {
     display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
     height: calc(100vh - var(--header-height));
     width: 100%;
     overflow: hidden;
+    overflow: clip;
     position: relative;
   }
 
@@ -850,6 +866,7 @@
     height: 100%;
     display: flex;
     overflow: hidden;
+    overflow: clip;
     background: var(--surface-color);
     position: relative;
   }
@@ -860,6 +877,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    overflow: clip;
     position: relative;
   }
 
@@ -3216,6 +3234,7 @@
   html.src-page {
     height: 100%;
     overflow: hidden;
+    overflow: clip;
   }
 
   body.src-viewer-body {
@@ -3223,10 +3242,13 @@
     padding: 0 !important;
     height: 100%;
     height: 100vh;
+    height: 100dvh;
     max-height: 100vh;
+    max-height: 100dvh;
     display: flex;
     flex-direction: column;
     overflow: hidden !important;
+    overflow: clip !important;
     background: var(--code-bg) !important;
     color: var(--code-text);
     -webkit-overflow-scrolling: touch;
@@ -4488,16 +4510,35 @@
 
   @media (max-width: 860px) {
 
-    html,
-    body {
+    html:not(.src-page):not(:has(> body#app-container)),
+    body:not(#app-container):not(.src-viewer-body) {
       overflow-x: hidden;
       touch-action: pan-x pan-y;
       -webkit-text-size-adjust: 100%;
     }
 
+    body#app-container {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      padding-top: var(--header-height);
+    }
+
     .app-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       padding: 0 0.65rem;
       gap: 0.5rem;
+    }
+
+    .app-layout {
+      height: auto;
+      flex: 1 1 auto;
+      min-height: 0;
     }
 
     .brand-section {

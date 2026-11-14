@@ -3421,9 +3421,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Prevent the outer app shell from ever scrolling (e.g. via iframe anchor/fragment navigation or scrollIntoView)
+  function resetShellScroll() {
+    if (window.scrollY !== 0 || window.scrollX !== 0) {
+      window.scrollTo(0, 0);
+    }
+    if (document.documentElement.scrollTop !== 0) {
+      document.documentElement.scrollTop = 0;
+    }
+    if (document.body && document.body.scrollTop !== 0) {
+      document.body.scrollTop = 0;
+    }
+    document.querySelectorAll('.app-layout, .app-viewport, .pane').forEach((el) => {
+      if (el.scrollTop !== 0) el.scrollTop = 0;
+      if (el.scrollLeft !== 0) el.scrollLeft = 0;
+    });
+  }
+
+  window.addEventListener('scroll', resetShellScroll, { passive: true });
+  document.addEventListener('scroll', (e) => {
+    const t = e.target;
+    if (t === document || t === document.documentElement || t === document.body ||
+      (t && t.matches && t.matches('.app-layout, .app-viewport, .pane'))) {
+      resetShellScroll();
+    }
+  }, { capture: true, passive: true });
+
   // Initialize
   updateSidebarPillsForTab();
   renderSidebar();
   parseHash();
+  resetShellScroll();
 });
 
