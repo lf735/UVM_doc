@@ -71,17 +71,22 @@ def test_css_shell_scroll_isolation():
         ".CBody ul, .CBody ol must define padding-left so bullets do not render in the margin"
     )
 
-    # 4. Responsive compact TOC (@media (max-width: 1000px))
+    # 4. Responsive compact TOC (@media (max-width: 1000px)) & TOC scroll isolation
+    assert re.search(r"\.doc-toc-sidebar\s*\{[^}]*overscroll-behavior:\s*contain;", content), (
+        "Desktop .doc-toc-sidebar must set overscroll-behavior: contain"
+    )
     assert re.search(r"\.doc-toc-mobile-trigger\s*\{[^}]*display:\s*none;", content), (
         "Desktop .doc-toc-mobile-trigger must be hidden by default"
     )
     toc_mobile_css = extract_media_block(content, "@media (max-width: 1000px)")
     for required_tok in (
+        "overflow-x: clip;",
         ".doc-toc-sidebar",
         "position: sticky;",
         ".doc-toc-mobile-trigger",
         ".doc-toc-sidebar.is-pinned .doc-toc-mobile-trigger",
         ".doc-toc-sidebar.toc-mobile-open .doc-toc-inner",
+        "overscroll-behavior: contain;",
         "scroll-margin-top: 56px;",
     ):
         assert required_tok in toc_mobile_css, f"Missing '{required_tok}' in @media (max-width: 1000px)"
@@ -129,6 +134,8 @@ def test_mobile_toc_controller():
         r"function\s+setMobileTocOpen\s*\(",
         r"function\s+updatePinnedState\s*\(",
         r"function\s+updateMobileCurrentLabel\s*\(",
+        r"_uvmTocWheelHandler",
+        r"_uvmTocTouchMoveHandler",
     ]
     for pat in required_patterns:
         assert re.search(pat, content), f"Missing required pattern in js/page_common.js: {pat}"

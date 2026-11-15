@@ -883,8 +883,42 @@ window.PageCommon = (function () {
     let lastActiveTocLink = null;
     let lastTocUserInteract = 0;
     if (tocSidebar) {
-      tocSidebar.addEventListener('wheel', function () { lastTocUserInteract = Date.now(); }, { passive: true });
-      tocSidebar.addEventListener('touchmove', function () { lastTocUserInteract = Date.now(); }, { passive: true });
+      if (window._uvmTocWheelHandler) {
+        tocSidebar.removeEventListener('wheel', window._uvmTocWheelHandler);
+      }
+      window._uvmTocWheelHandler = function (e) {
+        lastTocUserInteract = Date.now();
+        if (e.ctrlKey) return;
+        const compact = isCompactTocMode();
+        if (compact && (!tocInner || !tocInner.contains(e.target))) return;
+        const scrollBox = compact ? tocInner : tocSidebar;
+        if (!scrollBox) return;
+
+        const maxScroll = scrollBox.scrollHeight - scrollBox.clientHeight;
+        if (maxScroll <= 1) {
+          e.preventDefault();
+          return;
+        }
+        if ((e.deltaY < 0 && scrollBox.scrollTop <= 0) ||
+            (e.deltaY > 0 && scrollBox.scrollTop >= maxScroll - 1)) {
+          e.preventDefault();
+        }
+      };
+      tocSidebar.addEventListener('wheel', window._uvmTocWheelHandler, { passive: false });
+
+      if (window._uvmTocTouchMoveHandler) {
+        tocSidebar.removeEventListener('touchmove', window._uvmTocTouchMoveHandler);
+      }
+      window._uvmTocTouchMoveHandler = function (e) {
+        lastTocUserInteract = Date.now();
+        const compact = isCompactTocMode();
+        if (compact && (!tocInner || !tocInner.contains(e.target))) return;
+        const scrollBox = compact ? tocInner : tocSidebar;
+        if (scrollBox && scrollBox.scrollHeight <= scrollBox.clientHeight + 1) {
+          e.preventDefault();
+        }
+      };
+      tocSidebar.addEventListener('touchmove', window._uvmTocTouchMoveHandler, { passive: false });
     }
 
     function scrollTocToItem(linkEl, opts) {
