@@ -392,6 +392,36 @@ window.PageCommon = (function () {
     const toggleAllBtn = document.getElementById('doc-toc-toggle-all');
     if (!contentEl || !tocSidebar || !tocNav) return;
 
+    const tocInner = tocSidebar.querySelector('.doc-toc-inner');
+    if (tocInner && !tocInner.id) {
+      tocInner.id = 'doc-toc-inner';
+    }
+    let mobileTriggerBtn = document.getElementById('doc-toc-mobile-trigger');
+    if (!mobileTriggerBtn && tocInner) {
+      mobileTriggerBtn = document.createElement('button');
+      mobileTriggerBtn.className = 'doc-toc-mobile-trigger';
+      mobileTriggerBtn.id = 'doc-toc-mobile-trigger';
+      mobileTriggerBtn.type = 'button';
+      mobileTriggerBtn.setAttribute('aria-expanded', 'false');
+      mobileTriggerBtn.setAttribute('aria-controls', 'doc-toc-inner');
+      mobileTriggerBtn.title = 'Toggle table of contents';
+      mobileTriggerBtn.innerHTML =
+        '<span class="doc-toc-mobile-left">' +
+          '<svg class="doc-toc-mobile-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+            '<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>' +
+            '<line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>' +
+          '</svg>' +
+          '<span class="doc-toc-mobile-label">On this page</span>' +
+          '<span class="doc-toc-mobile-sep" aria-hidden="true">&rsaquo;</span>' +
+          '<span class="doc-toc-mobile-current" id="doc-toc-mobile-current">Overview</span>' +
+        '</span>' +
+        '<svg class="doc-toc-mobile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+          '<polyline points="6 9 12 15 18 9"/>' +
+        '</svg>';
+      tocSidebar.insertBefore(mobileTriggerBtn, tocInner);
+    }
+    const mobileCurrentEl = document.getElementById('doc-toc-mobile-current');
+
     let topicSeq = 0;
     const tocEntries = [];
     const allGroups = [];
@@ -695,10 +725,34 @@ window.PageCommon = (function () {
     let manualScrollTimer = null;
     let pendingTargetEl = null;
 
+    function isCompactTocMode() {
+      return window.innerWidth <= 1000 && tocSidebar && tocSidebar.style.display !== 'none';
+    }
+
+    function getScrollOffset() {
+      return isCompactTocMode() ? 56 : 24;
+    }
+
+    function updateMobileCurrentLabel(title) {
+      if (!mobileCurrentEl || !title) return;
+      mobileCurrentEl.textContent = title;
+    }
+
+    function updatePinnedState() {
+      if (!tocSidebar) return;
+      if (!isCompactTocMode()) {
+        tocSidebar.classList.remove('is-pinned');
+        return;
+      }
+      const rect = tocSidebar.getBoundingClientRect();
+      tocSidebar.classList.toggle('is-pinned', rect.top <= 12);
+    }
+
     function onManualScrollDone() {
       isManualScrolling = false;
       pendingTargetEl = null;
       updateScrollSpy();
+      updatePinnedState();
     }
 
     function startManualScroll(duration) {
@@ -711,7 +765,7 @@ window.PageCommon = (function () {
       if (!targetEl) return 0;
       const rect = targetEl.getBoundingClientRect();
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      return Math.max(0, currentScroll + rect.top - 24);
+      return Math.max(0, currentScroll + rect.top - getScrollOffset());
     }
 
     function performScroll(targetY) {
@@ -798,7 +852,7 @@ window.PageCommon = (function () {
       }
       const targetEl = pendingTargetEl;
       const rect = targetEl.getBoundingClientRect();
-      if (Math.abs(rect.top - 24) > 6) {
+      if (Math.abs(rect.top - getScrollOffset()) > 6) {
         const adjustedY = getTargetScrollY(targetEl);
         performScroll(adjustedY);
         pendingTargetEl = null;
@@ -836,11 +890,12 @@ window.PageCommon = (function () {
     function scrollTocToItem(linkEl, opts) {
       if (!linkEl || !tocSidebar) return;
       if (linkEl.offsetParent === null) return;
+      const scrollBox = (window.innerWidth <= 1000 && tocInner) ? tocInner : tocSidebar;
       const options = opts || {};
-      if (!options.force && (Date.now() - lastTocUserInteract < 1500 || tocSidebar.matches(':hover'))) {
+      if (!options.force && (Date.now() - lastTocUserInteract < 1500 || scrollBox.matches(':hover'))) {
         return;
       }
-      const sidebarRect = tocSidebar.getBoundingClientRect();
+      const sidebarRect = scrollBox.getBoundingClientRect();
       const linkRect = linkEl.getBoundingClientRect();
       if (linkRect.height === 0 || sidebarRect.height === 0) return;
 
@@ -849,7 +904,7 @@ window.PageCommon = (function () {
       const isBelow = linkRect.bottom > sidebarRect.bottom - pad;
       if (!isAbove && !isBelow) return;
 
-      const currentScroll = tocSidebar.scrollTop;
+      const currentScroll = scrollBox.scrollTop;
       let targetOffset;
       if (options.center) {
         targetOffset = linkRect.top - sidebarRect.top + currentScroll - (sidebarRect.height / 2) + (linkRect.height / 2);
@@ -862,14 +917,65 @@ window.PageCommon = (function () {
 
       if (options.smooth) {
         try {
-          tocSidebar.scrollTo({ top: targetOffset, behavior: 'smooth' });
+          scrollBox.scrollTo({ top: targetOffset, behavior: 'smooth' });
         } catch (e) {
-          tocSidebar.scrollTop = targetOffset;
+          scrollBox.scrollTop = targetOffset;
         }
       } else {
-        tocSidebar.scrollTop = targetOffset;
+        scrollBox.scrollTop = targetOffset;
       }
     }
+
+    function setMobileTocOpen(isOpen) {
+      if (!tocSidebar || !mobileTriggerBtn) return;
+      const nextState = !!isOpen && isCompactTocMode();
+      tocSidebar.classList.toggle('toc-mobile-open', nextState);
+      mobileTriggerBtn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
+      if (nextState && lastActiveTocLink) {
+        requestAnimationFrame(function () {
+          scrollTocToItem(lastActiveTocLink, { force: true, smooth: false, center: true });
+        });
+      }
+    }
+
+    if (mobileTriggerBtn) {
+      mobileTriggerBtn.onclick = function (e) {
+        e.stopPropagation();
+        setMobileTocOpen(!tocSidebar.classList.contains('toc-mobile-open'));
+      };
+    }
+
+    if (window._uvmTocMobileDocClickHandler) {
+      document.removeEventListener('click', window._uvmTocMobileDocClickHandler);
+    }
+    window._uvmTocMobileDocClickHandler = function (e) {
+      if (tocSidebar.classList.contains('toc-mobile-open') && !tocSidebar.contains(e.target)) {
+        setMobileTocOpen(false);
+      }
+    };
+    document.addEventListener('click', window._uvmTocMobileDocClickHandler);
+
+    if (window._uvmTocMobileKeyHandler) {
+      document.removeEventListener('keydown', window._uvmTocMobileKeyHandler);
+    }
+    window._uvmTocMobileKeyHandler = function (e) {
+      if (e.key === 'Escape' && tocSidebar.classList.contains('toc-mobile-open')) {
+        setMobileTocOpen(false);
+        if (mobileTriggerBtn) mobileTriggerBtn.focus();
+      }
+    };
+    document.addEventListener('keydown', window._uvmTocMobileKeyHandler);
+
+    if (window._uvmTocMobileResizeHandler) {
+      window.removeEventListener('resize', window._uvmTocMobileResizeHandler);
+    }
+    window._uvmTocMobileResizeHandler = function () {
+      if (!isCompactTocMode() && tocSidebar.classList.contains('toc-mobile-open')) {
+        setMobileTocOpen(false);
+      }
+      updatePinnedState();
+    };
+    window.addEventListener('resize', window._uvmTocMobileResizeHandler, { passive: true });
 
     function resolveScrollContainer(el) {
       if (!el || !el.closest) return el;
@@ -892,6 +998,9 @@ window.PageCommon = (function () {
 
         tocLinks.forEach(function (l) { l.classList.remove('active'); });
         link.classList.add('active');
+        lastActiveTocLink = link;
+        updateMobileCurrentLabel((link.textContent || '').trim());
+        setMobileTocOpen(false);
 
         const parentGroupBlock = link.closest('.doc-toc-group-block');
         if (parentGroupBlock && parentGroupBlock.classList.contains('collapsed')) {
@@ -1086,13 +1195,14 @@ window.PageCommon = (function () {
     function updateScrollSpy() {
       if (isManualScrolling) return;
 
+      const spyThreshold = isCompactTocMode() ? 140 : 100;
       let activeItem = null;
       for (let i = 0; i < allNavItems.length; i++) {
         const item = allNavItems[i];
         const el = item.el || document.getElementById(item.id);
         if (!el || el.offsetParent === null) continue;
         const rect = el.getBoundingClientRect();
-        if (rect.top <= 100) {
+        if (rect.top <= spyThreshold) {
           activeItem = item;
         }
       }
@@ -1102,6 +1212,7 @@ window.PageCommon = (function () {
       }
 
       if (activeItem && activeItem.link) {
+        updateMobileCurrentLabel(activeItem.title);
         let visualLink = activeItem.link;
         const parentBlock = activeItem.link.closest('.doc-toc-group-block');
         if (parentBlock && parentBlock.classList.contains('collapsed') && !activeItem.link.classList.contains('doc-toc-group-title')) {
@@ -1148,6 +1259,7 @@ window.PageCommon = (function () {
       window.removeEventListener('scroll', window._uvmTocScrollHandler);
     }
     window._uvmTocScrollHandler = function () {
+      updatePinnedState();
       if (isManualScrolling) {
         clearTimeout(manualScrollTimer);
         manualScrollTimer = setTimeout(checkAndCorrectScroll, 160);
@@ -1387,7 +1499,10 @@ window.PageCommon = (function () {
     if (window.location.hash) handleHashNav(window.location.hash);
     window.addEventListener('hashchange', function () { handleHashNav(window.location.hash); });
     window.addEventListener('load', function () { if (window.location.hash) handleHashNav(window.location.hash); });
-    setTimeout(updateScrollSpy, 120);
+    setTimeout(function () {
+      updateScrollSpy();
+      updatePinnedState();
+    }, 120);
   }
 
   // =========================================================================

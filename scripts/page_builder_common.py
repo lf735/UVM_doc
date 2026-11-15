@@ -105,10 +105,25 @@ def render_banner(info_html: str, actions_html: str = "", extra_classes: str = "
 
 def render_toc_sidebar() -> str:
     """
-    Renders the sticky In-Page Table of Contents ("On this page") sidebar.
+    Renders the sticky In-Page Table of Contents ("On this page") sidebar,
+    including the compact sticky trigger bar for viewports <= 1000px.
     """
     return '''<aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
-  <div class="doc-toc-inner">
+  <button class="doc-toc-mobile-trigger" id="doc-toc-mobile-trigger" type="button" aria-expanded="false" aria-controls="doc-toc-inner" title="Toggle table of contents">
+    <span class="doc-toc-mobile-left">
+      <svg class="doc-toc-mobile-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+        <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+      </svg>
+      <span class="doc-toc-mobile-label">On this page</span>
+      <span class="doc-toc-mobile-sep" aria-hidden="true">&rsaquo;</span>
+      <span class="doc-toc-mobile-current" id="doc-toc-mobile-current">Overview</span>
+    </span>
+    <svg class="doc-toc-mobile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </button>
+  <div class="doc-toc-inner" id="doc-toc-inner">
     <div class="doc-toc-header">
       <span class="doc-toc-title">On this page</span>
       <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">

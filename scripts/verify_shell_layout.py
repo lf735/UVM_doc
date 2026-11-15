@@ -71,7 +71,22 @@ def test_css_shell_scroll_isolation():
         ".CBody ul, .CBody ol must define padding-left so bullets do not render in the margin"
     )
 
-    print("PASS: css/style.css shell scroll isolation and mobile header rules verified.")
+    # 4. Responsive compact TOC (@media (max-width: 1000px))
+    assert re.search(r"\.doc-toc-mobile-trigger\s*\{[^}]*display:\s*none;", content), (
+        "Desktop .doc-toc-mobile-trigger must be hidden by default"
+    )
+    toc_mobile_css = extract_media_block(content, "@media (max-width: 1000px)")
+    for required_tok in (
+        ".doc-toc-sidebar",
+        "position: sticky;",
+        ".doc-toc-mobile-trigger",
+        ".doc-toc-sidebar.is-pinned .doc-toc-mobile-trigger",
+        ".doc-toc-sidebar.toc-mobile-open .doc-toc-inner",
+        "scroll-margin-top: 56px;",
+    ):
+        assert required_tok in toc_mobile_css, f"Missing '{required_tok}' in @media (max-width: 1000px)"
+
+    print("PASS: css/style.css shell scroll isolation, mobile header, and compact TOC rules verified.")
 
 
 def test_js_guards():
@@ -101,9 +116,30 @@ def test_js_guards():
     print("PASS: js/app.js shell scroll guard and mobile button sync verified.")
 
 
+def test_mobile_toc_controller():
+    pc_path = Path("js/page_common.js")
+    assert pc_path.exists(), "js/page_common.js not found"
+    content = pc_path.read_text(encoding="utf-8")
+
+    required_patterns = [
+        r"doc-toc-mobile-trigger",
+        r"doc-toc-mobile-current",
+        r"function\s+isCompactTocMode\s*\(",
+        r"function\s+getScrollOffset\s*\(",
+        r"function\s+setMobileTocOpen\s*\(",
+        r"function\s+updatePinnedState\s*\(",
+        r"function\s+updateMobileCurrentLabel\s*\(",
+    ]
+    for pat in required_patterns:
+        assert re.search(pat, content), f"Missing required pattern in js/page_common.js: {pat}"
+
+    print("PASS: js/page_common.js compact responsive TOC controller verified.")
+
+
 def main() -> int:
     test_css_shell_scroll_isolation()
     test_js_guards()
+    test_mobile_toc_controller()
     print("ALL SHELL LAYOUT & MOBILE CHECKS PASSED.")
     return 0
 
