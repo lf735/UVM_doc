@@ -165,7 +165,13 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pool#(KEY,T).next" data-target-id="uvm_pool#(KEY,T).next" id=link20  >next</a></td><td class=SDescription>Returns the key of the next item in the pool.</td></tr>
   <!-- index=14 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_pool#(KEY,T).prev" data-target-id="uvm_pool#(KEY,T).prev" id=link21  >prev</a></td><td class=SDescription>Returns the key of the previous item in the pool.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_pool#(KEY,T).prev" data-target-id="uvm_pool#(KEY,T).prev" id=link21  >prev</a></td><td class=SDescription>Returns the key of the previous item in the pool.</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1003" data-target-id="doc-nav-group-ast-1003">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">create</a></td><td class=SDescription><code>uvm_object create(string name=&quot;&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">do_copy</a></td><td class=SDescription><code>void do_copy(uvm_object rhs)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">do_print</a></td><td class=SDescription><code>void do_print(uvm_printer printer)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -362,7 +368,40 @@
 
 
  <!--CONTENT index=15 -->
-<div class="CClass" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_object_string_pool#(T)"><div class="CTopic"><h2 class=CTitle><a name="uvm_object_string_pool#(T)" id="uvm_object_string_pool#(T)" href="../../src_view/base/uvm_pool.svh.html#L247" class="src-code-link" data-src-file="base/uvm_pool.svh" data-src-line="247">uvm_object_string_pool #(T)</a></h2><div class=CBody><p>This provides a specialization of the generic <a href="#uvm_pool#(KEY,T)" data-target-id="uvm_pool#(KEY,T)" class=LClass id=link31  >uvm_pool #(KEY,T)</a> class for an associative array of <a href="uvm_object-svh.html#uvm_object" data-target-id="uvm_object" class=LClass id=link32  >uvm_object</a>-based objects indexed by string.&nbsp; Specializations of this class include the <i>uvm_event_pool</i> (a uvm_object_string_pool storing <i>uvm_event#(uvm_object)</i>) and <i>uvm_barrier_pool</i> (a uvm_obejct_string_pool storing <a href="uvm_barrier-svh.html#uvm_barrier" data-target-id="uvm_barrier" class=LClass id=link33  >uvm_barrier</a>).</p>
+
+<div class="CGroup" id="doc-nav-group-ast-1003" data-doc-topic="doc-nav-group-ast-1003" data-anchor="uvm_pool.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_pool.Additional_APIs" id="uvm_pool.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_pool.create">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pool.create" id="uvm_pool.create" href="../../src_view/base/uvm_pool.svh.html#L196" class="src-code-link" data-src-file="base/uvm_pool.svh" data-src-line="196">create</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_object</span></span> <span class="sv-proto-name"><span class="sv-proto-name">create</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_pool.svh.html#L196" class="src-code-link undoc-src-link" data-src-file="base/uvm_pool.svh" data-src-line="196">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_pool.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pool.get_type_name" id="uvm_pool.get_type_name" href="../../src_view/base/uvm_pool.svh.html#L202" class="src-code-link" data-src-file="base/uvm_pool.svh" data-src-line="202">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_pool.svh.html#L202" class="src-code-link undoc-src-link" data-src-file="base/uvm_pool.svh" data-src-line="202">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_pool.do_copy">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pool.do_copy" id="uvm_pool.do_copy" href="../../src_view/base/uvm_pool.svh.html#L206" class="src-code-link" data-src-file="base/uvm_pool.svh" data-src-line="206">do_copy</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_copy</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_pool.svh.html#L206" class="src-code-link undoc-src-link" data-src-file="base/uvm_pool.svh" data-src-line="206">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_pool.do_print">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pool.do_print" id="uvm_pool.do_print" href="../../src_view/base/uvm_pool.svh.html#L215" class="src-code-link" data-src-file="base/uvm_pool.svh" data-src-line="215">do_print</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_print</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_printer</span> <span class="sv-ident">printer</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_pool.svh.html#L215" class="src-code-link undoc-src-link" data-src-file="base/uvm_pool.svh" data-src-line="215">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-15" data-doc-topic="doc-nav-item-15" data-anchor="uvm_object_string_pool#(T)"><div class="CTopic"><h2 class=CTitle><a name="uvm_object_string_pool#(T)" id="uvm_object_string_pool#(T)" href="../../src_view/base/uvm_pool.svh.html#L247" class="src-code-link" data-src-file="base/uvm_pool.svh" data-src-line="247">uvm_object_string_pool #(T)</a></h2><div class=CBody><p>This provides a specialization of the generic <a href="#uvm_pool#(KEY,T)" data-target-id="uvm_pool#(KEY,T)" class=LClass id=link31  >uvm_pool #(KEY,T)</a> class for an associative array of <a href="uvm_object-svh.html#uvm_object" data-target-id="uvm_object" class=LClass id=link32  >uvm_object</a>-based objects indexed by string.&nbsp; Specializations of this class include the <i>uvm_event_pool</i> (a uvm_object_string_pool storing <i>uvm_event#(uvm_object)</i>) and <i>uvm_barrier_pool</i> (a uvm_obejct_string_pool storing <a href="uvm_barrier-svh.html#uvm_barrier" data-target-id="uvm_barrier" class=LClass id=link33  >uvm_barrier</a>).</p>
 
 <!--START_ND_SUMMARY index=15-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-15" data-anchor="uvm_object_string_pool#(T).Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -431,7 +470,10 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_object_string_pool#(T).get" data-target-id="uvm_object_string_pool#(T).get" id=link29  >get</a></td><td class=SDescription>Returns the object item at the given string <i>key</i>.</td></tr>
   <!-- index=22 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_object_string_pool#(T).delete" data-target-id="uvm_object_string_pool#(T).delete" id=link30  >delete</a></td><td class=SDescription>Removes the item with the given string <i>key</i> from the pool.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_object_string_pool#(T).delete" data-target-id="uvm_object_string_pool#(T).delete" id=link30  >delete</a></td><td class=SDescription>Removes the item with the given string <i>key</i> from the pool.</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">do_print</a></td><td class=SDescription><code>void do_print(uvm_printer printer)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -522,6 +564,16 @@
     </table></blockquote>
 <div class=CBody><p>Removes the item with the given string <i>key</i> from the pool.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_object_string_pool.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_object_string_pool.Additional_APIs" id="uvm_object_string_pool.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_object_string_pool.do_print">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_object_string_pool.do_print" id="uvm_object_string_pool.do_print" href="../../src_view/base/uvm_pool.svh.html#L328" class="src-code-link" data-src-file="base/uvm_pool.svh" data-src-line="328">do_print</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_pool">Overrides uvm_pool</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_print</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_printer</span> <span class="sv-ident">printer</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_pool.svh.html#L328" class="src-code-link undoc-src-link" data-src-file="base/uvm_pool.svh" data-src-line="328">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

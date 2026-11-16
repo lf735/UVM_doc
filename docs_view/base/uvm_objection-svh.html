@@ -107,7 +107,7 @@
       <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       <span>Direct Subclasses (1)</span>
     </div>
-    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_objection-svh.html#doc-nav-main" class="derived-class-pill" data-target-id="doc-nav-main" title="Subclass: uvm_test_done_objection">uvm_test_done_objection</a></div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_objection-svh.html#uvm_test_done_objection" class="derived-class-pill" data-target-id="uvm_test_done_objection" title="Subclass: uvm_test_done_objection">uvm_test_done_objection</a></div>
   </div>
 </div>
   </td></tr>
@@ -179,7 +179,15 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_objection.get_drain_time" data-target-id="uvm_objection.get_drain_time" id=link26  >get_drain_time</a></td><td class=SDescription>Returns the current drain time set for the given <i>object</i> (default: 0 ns).</td></tr>
   <!-- index=21 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_objection.display_objections" data-target-id="uvm_objection.display_objections" id=link27  >display_objections</a></td><td class=SDescription>Displays objection information about the given <i>object</i>. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_objection.display_objections" data-target-id="uvm_objection.display_objections" id=link27  >display_objections</a></td><td class=SDescription>Displays objection information about the given <i>object</i>. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1003" data-target-id="doc-nav-group-ast-1003">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">wait_for_total_count</a></td><td class=SDescription><code> wait_for_total_count(uvm_object obj=null, int count=0)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">convert2string</a></td><td class=SDescription><code>string convert2string()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">get_type</a></td><td class=SDescription><code>type_id get_type()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">create</a></td><td class=SDescription><code>uvm_object create(string name=&quot;&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">do_copy</a></td><td class=SDescription><code>void do_copy(uvm_object rhs)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -563,7 +571,140 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CClass" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_objection_callback"><div class="CTopic"><h2 class=CTitle><a name="uvm_objection_callback" id="uvm_objection_callback" href="../../src_view/base/uvm_objection.svh.html#L1420" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1420">uvm_objection_callback</a></h2><div class=CBody><p>The uvm_objection is the callback type that defines the callback implementations for an objection callback.&nbsp; A user uses the callback type uvm_objection_cbs_t to add callbacks to specific objections.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
+
+<div class="CGroup" id="doc-nav-group-ast-1003" data-doc-topic="doc-nav-group-ast-1003" data-anchor="uvm_objection.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_objection.Additional_APIs" id="uvm_objection.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_objection.wait_for_total_count">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.wait_for_total_count" id="uvm_objection.wait_for_total_count" href="../../src_view/base/uvm_objection.svh.html#L921" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="921">wait_for_total_count</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">wait_for_total_count</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">=</span><span class="sv-constant">null</span><span class="sv-op">,</span> <span class="sv-type">int</span> <span class="sv-ident">count</span><span class="sv-op">=</span><span class="sv-ident">0</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L921" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="921">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_objection.convert2string">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.convert2string" id="uvm_objection.convert2string" href="../../src_view/base/uvm_objection.svh.html#L1058" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1058">convert2string</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-proto-name">convert2string</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1058" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1058">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_objection.get_type">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.get_type" id="uvm_objection.get_type" href="../../src_view/base/uvm_objection.svh.html#L1080" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1080">get_type</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-proto-name">type_id</span></span> <span class="sv-proto-name"><span class="sv-proto-name">get_type</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1080" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1080">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_objection.create">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.create" id="uvm_objection.create" href="../../src_view/base/uvm_objection.svh.html#L1084" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1084">create</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_object</span></span> <span class="sv-proto-name"><span class="sv-proto-name">create</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1084" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1084">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_objection.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.get_type_name" id="uvm_objection.get_type_name" href="../../src_view/base/uvm_objection.svh.html#L1089" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1089">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1089" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1089">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_objection.do_copy">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.do_copy" id="uvm_objection.do_copy" href="../../src_view/base/uvm_objection.svh.html#L1093" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1093">do_copy</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_copy</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1093" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1093">see source code</a></span></span></p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_objection (9)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_objection.m_report">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_report" id="uvm_objection.m_report" href="../../src_view/base/uvm_objection.svh.html#L164" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="164">m_report</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_report</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">source_obj</span><span class="sv-op">,</span> <span class="sv-type">string</span> <span class="sv-ident">description</span><span class="sv-op">,</span> <span class="sv-type">int</span> <span class="sv-ident">count</span><span class="sv-op">,</span> <span class="sv-type">string</span> <span class="sv-ident">action</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L164" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="164">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_objection.m_get_parent">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_get_parent" id="uvm_objection.m_get_parent" href="../../src_view/base/uvm_objection.svh.html#L204" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="204">m_get_parent</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_object</span></span> <span class="sv-proto-name"><span class="sv-ident">m_get_parent</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L204" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="204">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_objection.m_propagate">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_propagate" id="uvm_objection.m_propagate" href="../../src_view/base/uvm_objection.svh.html#L235" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="235">m_propagate</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_propagate</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Propagate the objection to the objects parent. If the object is a component, the parent is just the hierarchical parent. If the object is a sequence, the parent is the parent sequence if one exists, or it is the attached sequencer if there is no parent sequence.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_objection.m_raise">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_raise" id="uvm_objection.m_raise" href="../../src_view/base/uvm_objection.svh.html#L342" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="342">m_raise</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_raise</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L342" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="342">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_objection.m_drop">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_drop" id="uvm_objection.m_drop" href="../../src_view/base/uvm_objection.svh.html#L535" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="535">m_drop</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_drop</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L535" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="535">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1015" data-doc-topic="doc-nav-item-ast-1015" data-anchor="uvm_objection.m_execute_scheduled_forks">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_execute_scheduled_forks" id="uvm_objection.m_execute_scheduled_forks" href="../../src_view/base/uvm_objection.svh.html#L687" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="687">m_execute_scheduled_forks</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">m_execute_scheduled_forks</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L687" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="687">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1016" data-doc-topic="doc-nav-item-ast-1016" data-anchor="uvm_objection.m_forked_drain">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_forked_drain" id="uvm_objection.m_forked_drain" href="../../src_view/base/uvm_objection.svh.html#L742" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="742">m_forked_drain</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">m_forked_drain</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L742" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="742">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1017" data-doc-topic="doc-nav-item-ast-1017" data-anchor="uvm_objection.m_init_objections">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_init_objections" id="uvm_objection.m_init_objections" href="../../src_view/base/uvm_objection.svh.html#L788" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="788">m_init_objections</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_init_objections</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L788" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="788">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1018" data-doc-topic="doc-nav-item-ast-1018" data-anchor="uvm_objection.m_display_objections">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection.m_display_objections" id="uvm_objection.m_display_objections" href="../../src_view/base/uvm_objection.svh.html#L982" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="982">m_display_objections</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">m_display_objections</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">=</span><span class="sv-constant">null</span><span class="sv-op">,</span> <span class="sv-type">bit</span> <span class="sv-ident">show_header</span><span class="sv-op">=</span><span class="sv-ident">1</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L982" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="982">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details><div class="CClass" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_objection_callback"><div class="CTopic"><h2 class=CTitle><a name="uvm_objection_callback" id="uvm_objection_callback" href="../../src_view/base/uvm_objection.svh.html#L1420" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1420">uvm_objection_callback</a></h2><div class=CBody><p>The uvm_objection is the callback type that defines the callback implementations for an objection callback.&nbsp; A user uses the callback type uvm_objection_cbs_t to add callbacks to specific objections.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -623,7 +764,7 @@
       <svg class="derived-classes-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       <span>Direct Subclasses (1)</span>
     </div>
-    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_heartbeat-svh.html#doc-nav-main" class="derived-class-pill" data-target-id="doc-nav-main" title="Subclass: uvm_heartbeat_callback">uvm_heartbeat_callback</a></div>
+    <div class="derived-classes-list"><a href="../../docs_view/base/uvm_heartbeat-svh.html#doc-nav-item-ast-1002" class="derived-class-pill" data-target-id="doc-nav-item-ast-1002" title="Subclass: uvm_heartbeat_callback">uvm_heartbeat_callback</a></div>
   </div>
 </div>
   </td></tr>
@@ -647,7 +788,10 @@
 <tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_objection_callback.dropped" data-target-id="uvm_objection_callback.dropped" id=link52  >dropped</a></td><td class=SDescription>Objection dropped callback function. </td></tr>
   <!-- index=26 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_objection_callback.all_dropped" data-target-id="uvm_objection_callback.all_dropped" id=link53  >all_dropped</a></td><td class=SDescription>Objection all_dropped callback function. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_objection_callback.all_dropped" data-target-id="uvm_objection_callback.all_dropped" id=link53  >all_dropped</a></td><td class=SDescription>Objection all_dropped callback function. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">new</a></td><td class=SDescription><code>void new(string name)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -728,6 +872,283 @@
     </table></blockquote>
 <div class=CBody><p>Objection all_dropped callback function.&nbsp; Called by <a href="#uvm_objection.all_dropped" data-target-id="uvm_objection.all_dropped" class=LMethod id=link56  >uvm_objection::all_dropped</a>.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_objection_callback.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_objection_callback.Additional_APIs" id="uvm_objection_callback.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_objection_callback.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection_callback.new" id="uvm_objection_callback.new" href="../../src_view/base/uvm_objection.svh.html#L1421" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1421">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_callback">Overrides uvm_callback</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1421" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1421">see source code</a></span></span></p></div>
+</div>
+</div>
+
+<div class="CClass" id="doc-nav-item-ast-1019" data-doc-topic="doc-nav-item-ast-1019" data-anchor="uvm_objection_events">
+<div class="CTopic" >
+  <h2 class="CTitle"><a name="uvm_objection_events" id="uvm_objection_events" href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="34">uvm_objection_events</a></h2>
+  
+  <div class="class-hierarchy-widget" data-cname="uvm_objection_events">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Class Hierarchy &amp; Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_objection_events">uvm_objection_events</span></span>
+  </div>
+  
+</div>
+  <div class="CBody">
+    <p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L34" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="34">see source code</a></span></span></p>
+    
+    
+  </div>
+</div>
+</div>
+<div class="CClass" id="doc-nav-item-ast-1020" data-doc-topic="doc-nav-item-ast-1020" data-anchor="uvm_test_done_objection">
+<div class="CTopic" >
+  <h2 class="CTitle"><a name="uvm_test_done_objection" id="uvm_test_done_objection" href="../../src_view/base/uvm_objection.svh.html#L1118" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1118">uvm_test_done_objection</a></h2>
+  
+  <div class="class-hierarchy-widget" data-cname="uvm_test_done_objection">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Class Hierarchy &amp; Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-object">Object</span>
+      
+      <span class="hierarchy-method-badge">13 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_misc-svh.html#uvm_void" class="hierarchy-flow-node parent" data-target-id="uvm_void" title="Base class: uvm_void">uvm_void</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_object-svh.html#uvm_object" class="hierarchy-flow-node parent" data-target-id="uvm_object" title="Base class: uvm_object">uvm_object</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_report_object-svh.html#uvm_report_object" class="hierarchy-flow-node parent" data-target-id="uvm_report_object" title="Base class: uvm_report_object">uvm_report_object</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_objection-svh.html#uvm_objection" class="hierarchy-flow-node parent" data-target-id="uvm_objection" title="Base class: uvm_objection">uvm_objection</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_test_done_objection">uvm_test_done_objection</span></span>
+  </div>
+  
+</div>
+  <div class="CBody">
+    <p>Provides built-in end-of-test coordination</p>
+    <p><b>Base Class:</b> <code>uvm_objection</code></p>
+    
+  </div>
+</div>
+<div class="Summary ClassSummary" id="doc-nav-summary-uvm_test_done_objection" data-anchor="uvm_test_done_objection.Summary">
+<div class="STitle">Methods Summary: uvm_test_done_objection</div>
+<div class="SBorder">
+<table border="0" cellspacing="0" cellpadding="0" class="STable">
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1021" data-target-id="doc-nav-item-ast-1021">new</a></td>
+  <td class="SDescription"><code>void new(string name=&quot;uvm_test_done&quot;)</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1022" data-target-id="doc-nav-item-ast-1022">qualify</a></td>
+  <td class="SDescription"><code>void qualify(uvm_object obj=null,)</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1023" data-target-id="doc-nav-item-ast-1023">stop_request</a></td>
+  <td class="SDescription"><code>void stop_request()</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1024" data-target-id="doc-nav-item-ast-1024">all_dropped</a></td>
+  <td class="SDescription"><code> all_dropped(uvm_object obj,)</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1025" data-target-id="doc-nav-item-ast-1025">raise_objection</a></td>
+  <td class="SDescription"><code>void raise_objection(uvm_object obj=null,)</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1026" data-target-id="doc-nav-item-ast-1026">drop_objection</a></td>
+  <td class="SDescription"><code>void drop_objection(uvm_object obj=null,)</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1027" data-target-id="doc-nav-item-ast-1027">force_stop</a></td>
+  <td class="SDescription"><code> force_stop(uvm_object obj=null)</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1028" data-target-id="doc-nav-item-ast-1028">get_type</a></td>
+  <td class="SDescription"><code>type_id get_type()</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1029" data-target-id="doc-nav-item-ast-1029">create</a></td>
+  <td class="SDescription"><code>uvm_object create(string name=&quot;&quot;)</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1030" data-target-id="doc-nav-item-ast-1030">get_type_name</a></td>
+  <td class="SDescription"><code>string get_type_name()</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1031" data-target-id="doc-nav-item-ast-1031">get</a></td>
+  <td class="SDescription"><code>uvm_test_done_objection get()</code></td>
+</tr>
+</table></div></div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1021" data-doc-topic="doc-nav-item-ast-1021" data-anchor="uvm_test_done_objection.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.new" id="uvm_test_done_objection.new" href="../../src_view/base/uvm_objection.svh.html#L1133" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1133">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_objection">Overrides uvm_objection</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-uvm-type">uvm_test_done</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1133" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1133">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1022" data-doc-topic="doc-nav-item-ast-1022" data-anchor="uvm_test_done_objection.qualify">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.qualify" id="uvm_test_done_objection.qualify" href="../../src_view/base/uvm_objection.svh.html#L1143" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1143">qualify</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">qualify</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">=</span><span class="sv-constant">null</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Checks that the given ~object~ is derived from either &lt;uvm_component&gt; or &lt;uvm_sequence_base&gt;.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1023" data-doc-topic="doc-nav-item-ast-1023" data-anchor="uvm_test_done_objection.stop_request">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.stop_request" id="uvm_test_done_objection.stop_request" href="../../src_view/base/uvm_objection.svh.html#L1196" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1196">stop_request</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">stop_request</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1196" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1196">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1024" data-doc-topic="doc-nav-item-ast-1024" data-anchor="uvm_test_done_objection.all_dropped">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.all_dropped" id="uvm_test_done_objection.all_dropped" href="../../src_view/base/uvm_objection.svh.html#L1231" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1231">all_dropped</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_objection">Overrides uvm_objection</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">all_dropped</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>This callback is called when the given ~object&#x27;s~ objection count reaches zero; if the ~object~ is the implicit top-level, &lt;uvm_root&gt; then it means there are no more objections raised for the ~uvm_test_done~ objection. Thus, after calling &lt;uvm_objection::all_dropped&gt;, this method will call</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1025" data-doc-topic="doc-nav-item-ast-1025" data-anchor="uvm_test_done_objection.raise_objection">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.raise_objection" id="uvm_test_done_objection.raise_objection" href="../../src_view/base/uvm_objection.svh.html#L1288" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1288">raise_objection</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_objection">Overrides uvm_objection</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">raise_objection</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">=</span><span class="sv-constant">null</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Calls &lt;uvm_objection::raise_objection&gt; after calling &lt;qualify&gt;. If the ~object~ is not provided or is ~null~, then the implicit top-level component, ~uvm_top~, is chosen.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1026" data-doc-topic="doc-nav-item-ast-1026" data-anchor="uvm_test_done_objection.drop_objection">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.drop_objection" id="uvm_test_done_objection.drop_objection" href="../../src_view/base/uvm_objection.svh.html#L1315" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1315">drop_objection</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_objection">Overrides uvm_objection</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">drop_objection</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">=</span><span class="sv-constant">null</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Calls &lt;uvm_objection::drop_objection&gt; after calling &lt;qualify&gt;. If the ~object~ is not provided or is ~null~, then the implicit top-level component, ~uvm_top~, is chosen.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1027" data-doc-topic="doc-nav-item-ast-1027" data-anchor="uvm_test_done_objection.force_stop">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.force_stop" id="uvm_test_done_objection.force_stop" href="../../src_view/base/uvm_objection.svh.html#L1332" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1332">force_stop</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">force_stop</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">obj</span><span class="sv-op">=</span><span class="sv-constant">null</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1332" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1332">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1028" data-doc-topic="doc-nav-item-ast-1028" data-anchor="uvm_test_done_objection.get_type">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.get_type" id="uvm_test_done_objection.get_type" href="../../src_view/base/uvm_objection.svh.html#L1346" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1346">get_type</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_objection">Overrides uvm_objection</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-proto-name">type_id</span></span> <span class="sv-proto-name"><span class="sv-proto-name">get_type</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1346" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1346">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1029" data-doc-topic="doc-nav-item-ast-1029" data-anchor="uvm_test_done_objection.create">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.create" id="uvm_test_done_objection.create" href="../../src_view/base/uvm_objection.svh.html#L1350" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1350">create</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_objection">Overrides uvm_objection</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_object</span></span> <span class="sv-proto-name"><span class="sv-proto-name">create</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1350" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1350">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1030" data-doc-topic="doc-nav-item-ast-1030" data-anchor="uvm_test_done_objection.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.get_type_name" id="uvm_test_done_objection.get_type_name" href="../../src_view/base/uvm_objection.svh.html#L1355" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1355">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_objection">Overrides uvm_objection</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1355" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1355">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1031" data-doc-topic="doc-nav-item-ast-1031" data-anchor="uvm_test_done_objection.get">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.get" id="uvm_test_done_objection.get" href="../../src_view/base/uvm_objection.svh.html#L1359" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1359">get</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_test_done_objection</span></span> <span class="sv-proto-name"><span class="sv-proto-name">get</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1359" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1359">see source code</a></span></span></p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal Methods: uvm_test_done_objection (2)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1032" data-doc-topic="doc-nav-item-ast-1032" data-anchor="uvm_test_done_objection.m_do_stop_all">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.m_do_stop_all" id="uvm_test_done_objection.m_do_stop_all" href="../../src_view/base/uvm_objection.svh.html#L1163" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1163">m_do_stop_all</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">m_do_stop_all</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1163" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1163">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1033" data-doc-topic="doc-nav-item-ast-1033" data-anchor="uvm_test_done_objection.m_stop_request">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_test_done_objection.m_stop_request" id="uvm_test_done_objection.m_stop_request" href="../../src_view/base/uvm_objection.svh.html#L1205" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1205">m_stop_request</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">m_stop_request</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1205" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1205">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details>
+<div class="CClass" id="doc-nav-item-ast-1034" data-doc-topic="doc-nav-item-ast-1034" data-anchor="uvm_objection_context_object">
+<div class="CTopic" >
+  <h2 class="CTitle"><a name="uvm_objection_context_object" id="uvm_objection_context_object" href="../../src_view/base/uvm_objection.svh.html#L1370" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1370">uvm_objection_context_object</a></h2>
+  
+  <div class="class-hierarchy-widget" data-cname="uvm_objection_context_object">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Class Hierarchy &amp; Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      <span class="hierarchy-method-badge">1 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_objection_context_object">uvm_objection_context_object</span></span>
+  </div>
+  
+</div>
+  <div class="CBody">
+    <p>Have a pool of context objects to use</p>
+    
+    
+  </div>
+</div>
+<div class="Summary ClassSummary" id="doc-nav-summary-uvm_objection_context_object" data-anchor="uvm_objection_context_object.Summary">
+<div class="STitle">Methods Summary: uvm_objection_context_object</div>
+<div class="SBorder">
+<table border="0" cellspacing="0" cellpadding="0" class="STable">
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1035" data-target-id="doc-nav-item-ast-1035">clear</a></td>
+  <td class="SDescription"><code>void clear()</code></td>
+</tr>
+</table></div></div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1035" data-doc-topic="doc-nav-item-ast-1035" data-anchor="uvm_objection_context_object.clear">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_objection_context_object.clear" id="uvm_objection_context_object.clear" href="../../src_view/base/uvm_objection.svh.html#L1379" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1379">clear</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">clear</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_objection.svh.html#L1379" class="src-code-link undoc-src-link" data-src-file="base/uvm_objection.svh" data-src-line="1379">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

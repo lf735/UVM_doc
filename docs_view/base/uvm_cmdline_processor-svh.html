@@ -182,7 +182,11 @@
 <tr class="SVariable SIndent2"><td class=SEntry><a href="#uvm_cmdline_processor.+uvm_set_config_string" data-target-id="uvm_cmdline_processor.+uvm_set_config_string" >+uvm_set_config_string</a></td><td class=SDescription><i>+uvm_set_config_int=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt;</i> and <i>+uvm_set_config_string=&lt;comp&gt;,&lt;field&gt;,&lt;value&gt;</i> work like their procedural counterparts: set_config_int() and set_config_string(). </td></tr>
   <!-- index=32 -->
 
-<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_cmdline_processor.+uvm_set_default_sequence" data-target-id="uvm_cmdline_processor.+uvm_set_default_sequence" >+uvm_set_default_sequence</a></td><td class=SDescription>The <i>+uvm_set_default_sequence=&lt;seqr&gt;,&lt;phase&gt;,&lt;type&gt;</i> plusarg allows the user to define a default sequence from the command line, using the <i>typename</i> of that sequence. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SVariable SIndent2 SMarked"><td class=SEntry><a href="#uvm_cmdline_processor.+uvm_set_default_sequence" data-target-id="uvm_cmdline_processor.+uvm_set_default_sequence" >+uvm_set_default_sequence</a></td><td class=SDescription>The <i>+uvm_set_default_sequence=&lt;seqr&gt;,&lt;phase&gt;,&lt;type&gt;</i> plusarg allows the user to define a default sequence from the command line, using the <i>typename</i> of that sequence. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">get_uvm_args</a></td><td class=SDescription><code>void get_uvm_args(output string args[$])</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">new</a></td><td class=SDescription><code>void new(string name = &quot;&quot;)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -618,6 +622,73 @@
                                         <span class="sv-ident">f</span><span class="sv-op">.</span><span class="sv-method">find_wrapper_by_name</span><span class="sv-op">(</span><span class="sv-string">&quot;seq_type&quot;</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_cmdline_processor.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_cmdline_processor.Additional_APIs" id="uvm_cmdline_processor.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_cmdline_processor.get_uvm_args">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_cmdline_processor.get_uvm_args" id="uvm_cmdline_processor.get_uvm_args" href="../../src_view/base/uvm_cmdline_processor.svh.html#L105" class="src-code-link" data-src-file="base/uvm_cmdline_processor.svh" data-src-line="105">get_uvm_args</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">get_uvm_args</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-type">string</span> <span class="sv-ident">args</span><span class="sv-ident">[$]</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_cmdline_processor.svh.html#L105" class="src-code-link undoc-src-link" data-src-file="base/uvm_cmdline_processor.svh" data-src-line="105">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_cmdline_processor.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_cmdline_processor.new" id="uvm_cmdline_processor.new" href="../../src_view/base/uvm_cmdline_processor.svh.html#L241" class="src-code-link" data-src-file="base/uvm_cmdline_processor.svh" data-src-line="241">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_report_object">Overrides uvm_report_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> &quot;&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_cmdline_processor.svh.html#L241" class="src-code-link undoc-src-link" data-src-file="base/uvm_cmdline_processor.svh" data-src-line="241">see source code</a></span></span></p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_cmdline_processor (1)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_cmdline_processor.m_convert_verb">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_cmdline_processor.m_convert_verb" id="uvm_cmdline_processor.m_convert_verb" href="../../src_view/base/uvm_cmdline_processor.svh.html#L438" class="src-code-link" data-src-file="base/uvm_cmdline_processor.svh" data-src-line="438">m_convert_verb</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">m_convert_verb</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">verb_str</span><span class="sv-op">,</span> <span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_verbosity</span> <span class="sv-ident">verb_enum</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_cmdline_processor.svh.html#L438" class="src-code-link undoc-src-link" data-src-file="base/uvm_cmdline_processor.svh" data-src-line="438">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details>
+
+<div class="CClass" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_cmd_line_verb">
+<div class="CTopic" >
+  <h2 class="CTitle"><a name="uvm_cmd_line_verb" id="uvm_cmd_line_verb" href="../../src_view/base/uvm_cmdline_processor.svh.html#L27" class="src-code-link" data-src-file="base/uvm_cmdline_processor.svh" data-src-line="27">uvm_cmd_line_verb</a></h2>
+  
+  <div class="class-hierarchy-widget" data-cname="uvm_cmd_line_verb">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Class Hierarchy &amp; Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_cmd_line_verb">uvm_cmd_line_verb</span></span>
+  </div>
+  
+</div>
+  <div class="CBody">
+    <p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_cmdline_processor.svh.html#L27" class="src-code-link undoc-src-link" data-src-file="base/uvm_cmdline_processor.svh" data-src-line="27">see source code</a></span></span></p>
+    
+    
+  </div>
+</div>
+</div>
 </div><!--Content-->
 
 

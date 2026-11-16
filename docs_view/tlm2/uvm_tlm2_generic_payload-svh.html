@@ -281,7 +281,16 @@
 <tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_generic_payload.pre_randomize" data-target-id="uvm_tlm_generic_payload.pre_randomize" id=link79  >pre_randomize()</a></td><td class=SDescription>Prepare this class instance for randomization</td></tr>
   <!-- index=49 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_generic_payload.post_randomize" data-target-id="uvm_tlm_generic_payload.post_randomize" id=link80  >post_randomize()</a></td><td class=SDescription>Clean-up this class instance after randomization</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_generic_payload.post_randomize" data-target-id="uvm_tlm_generic_payload.post_randomize" id=link80  >post_randomize()</a></td><td class=SDescription>Clean-up this class instance after randomization</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1007" data-target-id="doc-nav-group-ast-1007">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">do_print</a></td><td class=SDescription><code>void do_print(uvm_printer printer)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">do_copy</a></td><td class=SDescription><code>void do_copy(uvm_object rhs)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1010" data-target-id="doc-nav-item-ast-1010">do_compare</a></td><td class=SDescription><code>bit do_compare(uvm_object rhs, uvm_comparer comparer)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1011" data-target-id="doc-nav-item-ast-1011">do_pack</a></td><td class=SDescription><code>void do_pack(uvm_packer packer)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1012" data-target-id="doc-nav-item-ast-1012">do_unpack</a></td><td class=SDescription><code>void do_unpack(uvm_packer packer)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1013" data-target-id="doc-nav-item-ast-1013">do_record</a></td><td class=SDescription><code>void do_record(uvm_recorder recorder)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1014" data-target-id="doc-nav-item-ast-1014">convert2string</a></td><td class=SDescription><code>string convert2string()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -786,7 +795,64 @@
 
 
  <!--CONTENT index=51 -->
-<div class="CClass" id="doc-nav-item-51" data-doc-topic="doc-nav-item-51" data-anchor="uvm_tlm_extension_base"><div class="CTopic"><h2 class=CTitle><a name="uvm_tlm_extension_base" id="uvm_tlm_extension_base" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L947" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="947">uvm_tlm_extension_base</a></h2><div class=CBody><p>The class uvm_tlm_extension_base is the non-parameterized base class for all generic payload extensions.&nbsp;  It includes the utility do_copy() and create().&nbsp;  The pure virtual function get_type_handle() allows you to get a unique handle that represents the derived type.&nbsp;  This is implemented in derived classes.</p><p>This class is never used directly by users.&nbsp; The <a href="#uvm_tlm_extension" data-target-id="uvm_tlm_extension" class=LClass id=link149  >uvm_tlm_extension</a> class is used instead.</p>
+
+<div class="CGroup" id="doc-nav-group-ast-1007" data-doc-topic="doc-nav-group-ast-1007" data-anchor="uvm_tlm_generic_payload.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_tlm_generic_payload.Additional_APIs" id="uvm_tlm_generic_payload.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_tlm_generic_payload.do_print">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_generic_payload.do_print" id="uvm_tlm_generic_payload.do_print" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L386" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="386">do_print</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_sequence_item">Overrides uvm_sequence_item</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_print</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_printer</span> <span class="sv-ident">printer</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L386" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="386">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_tlm_generic_payload.do_copy">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_generic_payload.do_copy" id="uvm_tlm_generic_payload.do_copy" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L423" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="423">do_copy</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_transaction">Overrides uvm_transaction</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_copy</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L423" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="423">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_tlm_generic_payload.do_compare">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_generic_payload.do_compare" id="uvm_tlm_generic_payload.do_compare" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L446" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="446">do_compare</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_compare</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_comparer</span> <span class="sv-ident">comparer</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L446" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="446">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_tlm_generic_payload.do_pack">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_generic_payload.do_pack" id="uvm_tlm_generic_payload.do_pack" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L511" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="511">do_pack</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_pack</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_packer</span> <span class="sv-ident">packer</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L511" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="511">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_tlm_generic_payload.do_unpack">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_generic_payload.do_unpack" id="uvm_tlm_generic_payload.do_unpack" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L541" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="541">do_unpack</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_unpack</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_packer</span> <span class="sv-ident">packer</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L541" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="541">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_tlm_generic_payload.do_record">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_generic_payload.do_record" id="uvm_tlm_generic_payload.do_record" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L563" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="563">do_record</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_transaction">Overrides uvm_transaction</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_record</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_recorder</span> <span class="sv-ident">recorder</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L563" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="563">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_tlm_generic_payload.convert2string">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_generic_payload.convert2string" id="uvm_tlm_generic_payload.convert2string" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L587" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="587">convert2string</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-proto-name">convert2string</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L587" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="587">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-51" data-doc-topic="doc-nav-item-51" data-anchor="uvm_tlm_extension_base"><div class="CTopic"><h2 class=CTitle><a name="uvm_tlm_extension_base" id="uvm_tlm_extension_base" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L947" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="947">uvm_tlm_extension_base</a></h2><div class=CBody><p>The class uvm_tlm_extension_base is the non-parameterized base class for all generic payload extensions.&nbsp;  It includes the utility do_copy() and create().&nbsp;  The pure virtual function get_type_handle() allows you to get a unique handle that represents the derived type.&nbsp;  This is implemented in derived classes.</p><p>This class is never used directly by users.&nbsp; The <a href="#uvm_tlm_extension" data-target-id="uvm_tlm_extension" class=LClass id=link149  >uvm_tlm_extension</a> class is used instead.</p>
 
 <!--START_ND_SUMMARY index=51-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-51" data-anchor="uvm_tlm_extension_base.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -846,7 +912,10 @@
 <tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_extension_base.get_type_handle_name" data-target-id="uvm_tlm_extension_base.get_type_handle_name" id=link147  >get_type_handle_name</a></td><td class=SDescription>An interface to polymorphically retrieve the name that uniquely identifies the type of the sub-class</td></tr>
   <!-- index=56 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_extension_base.create" data-target-id="uvm_tlm_extension_base.create" id=link148  >create</a></td><td class=SDescription></td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_extension_base.create" data-target-id="uvm_tlm_extension_base.create" id=link148  >create</a></td><td class=SDescription></td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1005" data-target-id="doc-nav-group-ast-1005">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">do_copy</a></td><td class=SDescription><code>void do_copy(uvm_object rhs)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -911,7 +980,16 @@
 
 
  <!--CONTENT index=57 -->
-<div class="CClass" id="doc-nav-item-57" data-doc-topic="doc-nav-item-57" data-anchor="uvm_tlm_extension"><div class="CTopic"><h2 class=CTitle><a name="uvm_tlm_extension" id="uvm_tlm_extension" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1012" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1012">uvm_tlm_extension</a></h2><div class=CBody><p>TLM extension class.&nbsp; The class is parameterized with arbitrary type which represents the type of the extension.&nbsp; An instance of the generic payload can contain one extension object of each type; it cannot contain two instances of the same extension type.</p><p>The extension type can be identified using the <a href="#uvm_tlm_extension.ID" data-target-id="uvm_tlm_extension.ID" class=LMethod id=link156  >ID()</a> method.</p><p>To implement a generic payload extension, simply derive a new class from this class and specify the name of the derived class as the extension parameter.</p><div class="code-block-container">
+
+<div class="CGroup" id="doc-nav-group-ast-1005" data-doc-topic="doc-nav-group-ast-1005" data-anchor="uvm_tlm_extension_base.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_tlm_extension_base.Additional_APIs" id="uvm_tlm_extension_base.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_tlm_extension_base.do_copy">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_extension_base.do_copy" id="uvm_tlm_extension_base.do_copy" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L969" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="969">do_copy</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_copy</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object</span> <span class="sv-ident">rhs</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L969" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="969">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-57" data-doc-topic="doc-nav-item-57" data-anchor="uvm_tlm_extension"><div class="CTopic"><h2 class=CTitle><a name="uvm_tlm_extension" id="uvm_tlm_extension" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1012" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1012">uvm_tlm_extension</a></h2><div class=CBody><p>TLM extension class.&nbsp; The class is parameterized with arbitrary type which represents the type of the extension.&nbsp; An instance of the generic payload can contain one extension object of each type; it cannot contain two instances of the same extension type.</p><p>The extension type can be identified using the <a href="#uvm_tlm_extension.ID" data-target-id="uvm_tlm_extension.ID" class=LMethod id=link156  >ID()</a> method.</p><p>To implement a generic payload extension, simply derive a new class from this class and specify the name of the derived class as the extension parameter.</p><div class="code-block-container">
   <div class="code-block-header">
     <div class="code-block-lang">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
@@ -990,7 +1068,12 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_extension.new" data-target-id="uvm_tlm_extension.new" id=link154  >new</a></td><td class=SDescription>creates a new extension object.</td></tr>
   <!-- index=60 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_extension.ID" data-target-id="uvm_tlm_extension.ID" id=link155  >ID()</a></td><td class=SDescription>Return the unique ID of this TLM extension type. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_tlm_extension.ID" data-target-id="uvm_tlm_extension.ID" id=link155  >ID()</a></td><td class=SDescription>Return the unique ID of this TLM extension type. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">get_type_handle</a></td><td class=SDescription><code>uvm_tlm_extension_base get_type_handle()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">get_type_handle_name</a></td><td class=SDescription><code>string get_type_handle_name()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">create</a></td><td class=SDescription><code>uvm_object create(string name=&quot;&quot;)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -1025,6 +1108,32 @@
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">static</span> <span class="sv-keyword-decl">function</span> <span class="sv-ident">this_type</span> <span class="sv-proto-name">ID</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Return the unique ID of this TLM extension type.&nbsp; This method is used to identify the type of the extension to retrieve from a <a href="#uvm_tlm_generic_payload" data-target-id="uvm_tlm_generic_payload" class=LClass id=link157  >uvm_tlm_generic_payload</a> instance, using the <a href="#uvm_tlm_generic_payload.get_extension" data-target-id="uvm_tlm_generic_payload.get_extension" class=LMethod id=link158  >uvm_tlm_generic_payload::get_extension()</a> method.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_tlm_extension.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_tlm_extension.Additional_APIs" id="uvm_tlm_extension.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_tlm_extension.get_type_handle">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_extension.get_type_handle" id="uvm_tlm_extension.get_type_handle" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1039" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1039">get_type_handle</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_tlm_extension_base">Overrides uvm_tlm_extension_base</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_tlm_extension_base</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_handle</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1039" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1039">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_tlm_extension.get_type_handle_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_extension.get_type_handle_name" id="uvm_tlm_extension.get_type_handle_name" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1043" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1043">get_type_handle_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_tlm_extension_base">Overrides uvm_tlm_extension_base</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_handle_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1043" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1043">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_tlm_extension.create">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_extension.create" id="uvm_tlm_extension.create" href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1047" class="src-code-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1047">create</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_tlm_extension_base">Overrides uvm_tlm_extension_base</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_object</span></span> <span class="sv-proto-name"><span class="sv-proto-name">create</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm2/uvm_tlm2_generic_payload.svh.html#L1047" class="src-code-link undoc-src-link" data-src-file="tlm2/uvm_tlm2_generic_payload.svh" data-src-line="1047">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

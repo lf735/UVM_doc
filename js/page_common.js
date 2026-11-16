@@ -518,7 +518,7 @@ window.PageCommon = (function () {
       const mainTitleEl = mainTopicEl.querySelector('.CTitle, h1, h2');
       if (mainTitleEl) {
         const safeId = 'doc-nav-main';
-        mainTitleEl.id = safeId;
+        if (!mainTitleEl.id) mainTitleEl.id = 'doc-nav-main-title';
         const mainA = mainTitleEl.querySelector('a[name]');
         const mainAnchor = mainA ? mainA.getAttribute('name') : 'MainTopic';
         mainTitleEl.setAttribute('data-anchor', mainAnchor);
@@ -571,10 +571,47 @@ window.PageCommon = (function () {
     }
 
     // 2. Scan all topics under #Content (excluding #doc-nav-main / MainTopic)
-    const topicWrappers = contentEl.querySelectorAll('#Content > div');
+    const topicWrappers = contentEl.querySelectorAll('#Content > div, #Content > details.internal-details-section');
 
     topicWrappers.forEach(function (wrap) {
       if (wrap.id === 'doc-nav-main' || wrap.querySelector('#MainTopic')) return;
+
+      if (wrap.matches && wrap.matches('details.internal-details-section')) {
+        const intId = wrap.id || ('doc-nav-internal-' + (++topicSeq));
+        wrap.id = intId;
+        const headerSpan = wrap.querySelector('.internal-header-title > span:last-child');
+        const rawIntTitle = headerSpan ? headerSpan.textContent.replace(/\s*\(\d+\)\s*$/, '').trim() : 'Internal Details';
+        const intGroup = {
+          id: intId,
+          anchor: intId,
+          title: rawIntTitle,
+          el: wrap,
+          items: [],
+          isCollapsedByDefault: true
+        };
+        wrap.querySelectorAll('.internal-section-body > div').forEach(function (subEl) {
+          const subTitleEl = subEl.querySelector('.CTitle');
+          const subTitle = extractHeadingTitle(subTitleEl, '');
+          if (!subTitle) return;
+          const subId = subEl.id || subEl.getAttribute('data-doc-topic') || ('doc-nav-item-' + (++topicSeq));
+          subEl.id = subId;
+          subEl.setAttribute('data-doc-topic', subId);
+          const subAnchor = subEl.getAttribute('data-anchor') || subId;
+          intGroup.items.push({
+            id: subId,
+            anchor: subAnchor,
+            title: subTitle,
+            el: subEl,
+            isGroupHeader: false,
+            type: 'subitem'
+          });
+        });
+        if (intGroup.items.length > 0) {
+          tocEntries.push({ kind: 'group', data: intGroup, el: wrap });
+          allGroups.push(intGroup);
+        }
+        return;
+      }
 
       const cls = wrap.className || '';
       const isCClass = cls.indexOf('CClass') !== -1 || cls.indexOf('CSection') !== -1;
@@ -726,7 +763,7 @@ window.PageCommon = (function () {
       const group = entry.data;
       const cleanGroupTitle = group.title.replace(/"/g, '&quot;');
       const hasSubItems = group.items.length > 0;
-      const defaultCollapsedCls = (hasSubItems && group.isInheritedGroup) ? ' collapsed' : '';
+      const defaultCollapsedCls = (hasSubItems && (group.isInheritedGroup || group.isCollapsedByDefault)) ? ' collapsed' : '';
       const groupAnchorAttr = group.anchor ? ' data-anchor="' + escapeHtml(group.anchor) + '"' : '';
       const groupHref = escapeHtml(group.anchor || group.id);
       tocHtml += '<li class="doc-toc-item doc-toc-group-item doc-toc-group-block' + (hasSubItems ? '' : ' no-children') + defaultCollapsedCls + '" id="block-' + group.id + '">';

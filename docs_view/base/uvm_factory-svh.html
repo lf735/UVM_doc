@@ -699,7 +699,11 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_default_factory.print" data-target-id="uvm_default_factory.print" id=link52  >print</a></td><td class=SDescription>Prints the state of the uvm_factory, including registered types, instance overrides, and type overrides.</td></tr>
   <!-- index=42 -->
 
-<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_default_factory.Usage" data-target-id="uvm_default_factory.Usage" >Usage</a></td><td class=SDescription>Using the factory involves three basic operations</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_default_factory.Usage" data-target-id="uvm_default_factory.Usage" >Usage</a></td><td class=SDescription>Using the factory involves three basic operations</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">find_wrapper_by_name</a></td><td class=SDescription><code>uvm_object_wrapper find_wrapper_by_name(string type_name)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">check_inst_override_exists</a></td><td class=SDescription><code>bit check_inst_override_exists(uvm_object_wrapper original_type,)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -1370,7 +1374,60 @@
 
 
  <!--CONTENT index=43 -->
-<div class="CClass" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_object_wrapper"><div class="CTopic"><h2 class=CTitle><a name="uvm_object_wrapper" id="uvm_object_wrapper" href="../../src_view/base/uvm_factory.svh.html#L810" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="810">uvm_object_wrapper</a></h2><div class=CBody><p>The uvm_object_wrapper provides an abstract interface for creating object and component proxies.&nbsp; Instances of these lightweight proxies, representing every <a href="uvm_object-svh.html#uvm_object" data-target-id="uvm_object" class=LClass id=link72  >uvm_object</a>-based and <a href="uvm_component-svh.html#uvm_component" data-target-id="uvm_component" class=LClass id=link73  >uvm_component</a>-based object available in the test environment, are registered with the <a href="#uvm_factory" data-target-id="uvm_factory" class=LClass id=link74  >uvm_factory</a>.&nbsp; When the factory is called upon to create an object or component, it finds and delegates the request to the appropriate proxy.</p>
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_default_factory.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_default_factory.Additional_APIs" id="uvm_default_factory.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_default_factory.find_wrapper_by_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_factory.find_wrapper_by_name" id="uvm_default_factory.find_wrapper_by_name" href="../../src_view/base/uvm_factory.svh.html#L1314" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="1314">find_wrapper_by_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_factory">Overrides uvm_factory</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_object_wrapper</span></span> <span class="sv-proto-name"><span class="sv-ident">find_wrapper_by_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">type_name</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>find_wrapper_by_name</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_default_factory.check_inst_override_exists">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_factory.check_inst_override_exists" id="uvm_default_factory.check_inst_override_exists" href="../../src_view/base/uvm_factory.svh.html#L1063" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="1063">check_inst_override_exists</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">check_inst_override_exists</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_object_wrapper</span> <span class="sv-ident">original_type</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>check_inst_override_exists</p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_default_factory (3)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_default_factory.m_debug_create">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_factory.m_debug_create" id="uvm_default_factory.m_debug_create" href="../../src_view/base/uvm_factory.svh.html#L1673" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="1673">m_debug_create</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_debug_create</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">requested_type_name</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_debug_create</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_default_factory.m_debug_display">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_factory.m_debug_display" id="uvm_default_factory.m_debug_display" href="../../src_view/base/uvm_factory.svh.html#L1722" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="1722">m_debug_display</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_debug_display</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">requested_type_name</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_debug_display</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_default_factory.m_has_wildcard">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_factory.m_has_wildcard" id="uvm_default_factory.m_has_wildcard" href="../../src_view/base/uvm_factory.svh.html#L1182" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="1182">m_has_wildcard</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">m_has_wildcard</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">nm</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_factory.svh.html#L1182" class="src-code-link undoc-src-link" data-src-file="base/uvm_factory.svh" data-src-line="1182">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details><div class="CClass" id="doc-nav-item-43" data-doc-topic="doc-nav-item-43" data-anchor="uvm_object_wrapper"><div class="CTopic"><h2 class=CTitle><a name="uvm_object_wrapper" id="uvm_object_wrapper" href="../../src_view/base/uvm_factory.svh.html#L810" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="810">uvm_object_wrapper</a></h2><div class=CBody><p>The uvm_object_wrapper provides an abstract interface for creating object and component proxies.&nbsp; Instances of these lightweight proxies, representing every <a href="uvm_object-svh.html#uvm_object" data-target-id="uvm_object" class=LClass id=link72  >uvm_object</a>-based and <a href="uvm_component-svh.html#uvm_component" data-target-id="uvm_component" class=LClass id=link73  >uvm_component</a>-based object available in the test environment, are registered with the <a href="#uvm_factory" data-target-id="uvm_factory" class=LClass id=link74  >uvm_factory</a>.&nbsp; When the factory is called upon to create an object or component, it finds and delegates the request to the appropriate proxy.</p>
 
 <!--START_ND_SUMMARY index=43-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-43" data-anchor="uvm_object_wrapper.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -1475,6 +1532,80 @@
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">pure</span> <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-proto-name">get_type_name</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Derived classes implement this method to return the type name of the object created by <a href="#uvm_object_wrapper.create_component" data-target-id="uvm_object_wrapper.create_component" class=LMethod id=link77  >create_component</a> or <a href="#uvm_object_wrapper.create_object" data-target-id="uvm_object_wrapper.create_object" class=LMethod id=link78  >create_object</a>.&nbsp; The factory uses this name when matching against the requested type in name-based lookups.</p></div></div></div>
 
+
+<div class="CClass" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_factory_queue_class">
+<div class="CTopic" >
+  <h2 class="CTitle"><a name="uvm_factory_queue_class" id="uvm_factory_queue_class" href="../../src_view/base/uvm_factory.svh.html#L32" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="32">uvm_factory_queue_class</a></h2>
+  
+  <div class="class-hierarchy-widget" data-cname="uvm_factory_queue_class">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Class Hierarchy &amp; Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_factory_queue_class">uvm_factory_queue_class</span></span>
+  </div>
+  
+</div>
+  <div class="CBody">
+    <p>Instance overrides by requested type lookup</p>
+    
+    
+  </div>
+</div>
+</div>
+<div class="CClass" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_factory_override">
+<div class="CTopic" >
+  <h2 class="CTitle"><a name="uvm_factory_override" id="uvm_factory_override" href="../../src_view/base/uvm_factory.svh.html#L853" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="853">uvm_factory_override</a></h2>
+  
+  <div class="class-hierarchy-widget" data-cname="uvm_factory_override">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Class Hierarchy &amp; Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-utility">Utility</span>
+      
+      <span class="hierarchy-method-badge">1 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_factory_override">uvm_factory_override</span></span>
+  </div>
+  
+</div>
+  <div class="CBody">
+    <p>Internal class.</p>
+    
+    
+  </div>
+</div>
+<div class="Summary ClassSummary" id="doc-nav-summary-uvm_factory_override" data-anchor="uvm_factory_override.Summary">
+<div class="STitle">Methods Summary: uvm_factory_override</div>
+<div class="SBorder">
+<table border="0" cellspacing="0" cellpadding="0" class="STable">
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">new</a></td>
+  <td class="SDescription"><code>void new(string full_inst_path=&quot;&quot;,)</code></td>
+</tr>
+</table></div></div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_factory_override.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_factory_override.new" id="uvm_factory_override.new" href="../../src_view/base/uvm_factory.svh.html#L861" class="src-code-link" data-src-file="base/uvm_factory.svh" data-src-line="861">new</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">full_inst_path</span><span class="sv-op">=</span>&quot;&quot;<span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_factory.svh.html#L861" class="src-code-link undoc-src-link" data-src-file="base/uvm_factory.svh" data-src-line="861">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

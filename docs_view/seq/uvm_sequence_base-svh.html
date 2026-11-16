@@ -347,7 +347,18 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_sequence_base.get_response_queue_depth" data-target-id="uvm_sequence_base.get_response_queue_depth" id=link56  >get_response_queue_depth</a></td><td class=SDescription>Returns the current depth setting for the response queue.</td></tr>
   <!-- index=50 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_sequence_base.clear_response_queue" data-target-id="uvm_sequence_base.clear_response_queue" id=link57  >clear_response_queue</a></td><td class=SDescription>Empties the response queue for this sequence.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_sequence_base.clear_response_queue" data-target-id="uvm_sequence_base.clear_response_queue" id=link57  >clear_response_queue</a></td><td class=SDescription>Empties the response queue for this sequence.</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">put_base_response</a></td><td class=SDescription><code>void put_base_response(input uvm_sequence_item response)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">put_response</a></td><td class=SDescription><code>void put_response(uvm_sequence_item response_item)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">get_base_response</a></td><td class=SDescription><code> get_base_response(output uvm_sequence_item response, input int transaction_id = -1)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">num_sequences</a></td><td class=SDescription><code>int num_sequences()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">get_seq_kind</a></td><td class=SDescription><code>int get_seq_kind(string type_name)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">get_sequence</a></td><td class=SDescription><code>uvm_sequence_base get_sequence(int unsigned req_kind)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">do_sequence_kind</a></td><td class=SDescription><code> do_sequence_kind(int unsigned req_kind)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">get_sequence_by_name</a></td><td class=SDescription><code>uvm_sequence_base get_sequence_by_name(string seq_name)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1010" data-target-id="doc-nav-item-ast-1010">create_and_start_sequence_by_name</a></td><td class=SDescription><code> create_and_start_sequence_by_name(string seq_name)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -1056,6 +1067,140 @@
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-proto-name">clear_response_queue</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Empties the response queue for this sequence.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_sequence_base.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_sequence_base.Additional_APIs" id="uvm_sequence_base.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_sequence_base.put_base_response">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.put_base_response" id="uvm_sequence_base.put_base_response" href="../../src_view/seq/uvm_sequence_base.svh.html#L1189" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1189">put_base_response</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">put_base_response</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-uvm-type">uvm_sequence_item</span> <span class="sv-ident">response</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1189" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1189">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_sequence_base.put_response">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.put_response" id="uvm_sequence_base.put_response" href="../../src_view/seq/uvm_sequence_base.svh.html#L1205" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1205">put_response</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">put_response</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_sequence_item</span> <span class="sv-ident">response_item</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1205" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1205">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_sequence_base.get_base_response">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.get_base_response" id="uvm_sequence_base.get_base_response" href="../../src_view/seq/uvm_sequence_base.svh.html#L1212" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1212">get_base_response</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">get_base_response</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_sequence_item</span> <span class="sv-ident">response</span><span class="sv-op">,</span> <span class="sv-qualifier">input</span> <span class="sv-type">int</span> <span class="sv-ident">transaction_id</span> <span class="sv-op">=</span><span class="sv-ident"> -1</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1212" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1212">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_sequence_base.num_sequences">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.num_sequences" id="uvm_sequence_base.num_sequences" href="../../src_view/seq/uvm_sequence_base.svh.html#L1263" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1263">num_sequences</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">int</span></span> <span class="sv-proto-name"><span class="sv-ident">num_sequences</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1263" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1263">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_sequence_base.get_seq_kind">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.get_seq_kind" id="uvm_sequence_base.get_seq_kind" href="../../src_view/seq/uvm_sequence_base.svh.html#L1277" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1277">get_seq_kind</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">int</span></span> <span class="sv-proto-name"><span class="sv-ident">get_seq_kind</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">type_name</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1277" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1277">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_sequence_base.get_sequence">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.get_sequence" id="uvm_sequence_base.get_sequence" href="../../src_view/seq/uvm_sequence_base.svh.html#L1292" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1292">get_sequence</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_sequence_base</span></span> <span class="sv-proto-name"><span class="sv-ident">get_sequence</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-ident">req_kind</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1292" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1292">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_sequence_base.do_sequence_kind">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.do_sequence_kind" id="uvm_sequence_base.do_sequence_kind" href="../../src_view/seq/uvm_sequence_base.svh.html#L1319" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1319">do_sequence_kind</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">do_sequence_kind</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-ident">req_kind</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1319" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1319">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_sequence_base.get_sequence_by_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.get_sequence_by_name" id="uvm_sequence_base.get_sequence_by_name" href="../../src_view/seq/uvm_sequence_base.svh.html#L1344" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1344">get_sequence_by_name</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_sequence_base</span></span> <span class="sv-proto-name"><span class="sv-ident">get_sequence_by_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">seq_name</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1344" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1344">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_sequence_base.create_and_start_sequence_by_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.create_and_start_sequence_by_name" id="uvm_sequence_base.create_and_start_sequence_by_name" href="../../src_view/seq/uvm_sequence_base.svh.html#L1362" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1362">create_and_start_sequence_by_name</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">create_and_start_sequence_by_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">seq_name</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1362" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1362">see source code</a></span></span></p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_sequence_base (6)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_sequence_base.m_init_phase_daps">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.m_init_phase_daps" id="uvm_sequence_base.m_init_phase_daps" href="../../src_view/seq/uvm_sequence_base.svh.html#L511" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="511">m_init_phase_daps</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_init_phase_daps</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">bit</span> <span class="sv-proto-name">create</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L511" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="511">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_sequence_base.m_safe_raise_starting_phase">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.m_safe_raise_starting_phase" id="uvm_sequence_base.m_safe_raise_starting_phase" href="../../src_view/seq/uvm_sequence_base.svh.html#L674" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="674">m_safe_raise_starting_phase</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_safe_raise_starting_phase</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">description</span> <span class="sv-op">=</span> &quot;&quot;<span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_safe_raise_starting_phase</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_sequence_base.m_safe_drop_starting_phase">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.m_safe_drop_starting_phase" id="uvm_sequence_base.m_safe_drop_starting_phase" href="../../src_view/seq/uvm_sequence_base.svh.html#L682" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="682">m_safe_drop_starting_phase</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_safe_drop_starting_phase</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">description</span> <span class="sv-op">=</span> &quot;&quot;<span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_safe_drop_starting_phase</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_sequence_base.m_kill">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.m_kill" id="uvm_sequence_base.m_kill" href="../../src_view/seq/uvm_sequence_base.svh.html#L914" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="914">m_kill</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_kill</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L914" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="914">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1015" data-doc-topic="doc-nav-item-ast-1015" data-anchor="uvm_sequence_base.m_get_sqr_sequence_id">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.m_get_sqr_sequence_id" id="uvm_sequence_base.m_get_sqr_sequence_id" href="../../src_view/seq/uvm_sequence_base.svh.html#L1380" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1380">m_get_sqr_sequence_id</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">int</span></span> <span class="sv-proto-name"><span class="sv-ident">m_get_sqr_sequence_id</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">int</span> <span class="sv-ident">sequencer_id</span><span class="sv-op">,</span> <span class="sv-type">bit</span> <span class="sv-ident">update_sequence_id</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1380" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1380">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1016" data-doc-topic="doc-nav-item-ast-1016" data-anchor="uvm_sequence_base.m_set_sqr_sequence_id">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence_base.m_set_sqr_sequence_id" id="uvm_sequence_base.m_set_sqr_sequence_id" href="../../src_view/seq/uvm_sequence_base.svh.html#L1398" class="src-code-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1398">m_set_sqr_sequence_id</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_set_sqr_sequence_id</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">int</span> <span class="sv-ident">sequencer_id</span><span class="sv-op">,</span> <span class="sv-type">int</span> <span class="sv-ident">sequence_id</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence_base.svh.html#L1398" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence_base.svh" data-src-line="1398">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details>
 </div><!--Content-->
 
 

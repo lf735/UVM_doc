@@ -97,7 +97,24 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_indirect_data.new" data-target-id="uvm_reg_indirect_data.new" id=link5  >new</a></td><td class=SDescription>Create an instance of this class</td></tr>
   <!-- index=3 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_indirect_data.configure" data-target-id="uvm_reg_indirect_data.configure" id=link6  >configure</a></td><td class=SDescription>Configure the indirect data register.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_indirect_data.configure" data-target-id="uvm_reg_indirect_data.configure" id=link6  >configure</a></td><td class=SDescription>Configure the indirect data register.</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">build</a></td><td class=SDescription><code>void build()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">add_frontdoors</a></td><td class=SDescription><code>void add_frontdoors(uvm_reg_map map)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">do_predict</a></td><td class=SDescription><code>void do_predict(uvm_reg_item      rw,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">get_local_map</a></td><td class=SDescription><code>uvm_reg_map get_local_map(uvm_reg_map map, string caller=&quot;&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">add_field</a></td><td class=SDescription><code>void add_field(uvm_reg_field field)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">set</a></td><td class=SDescription><code>void set(uvm_reg_data_t  value,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">get</a></td><td class=SDescription><code>uvm_reg_data_t get(string  fname = &quot;&quot;,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">get_indirect_reg</a></td><td class=SDescription><code>uvm_reg get_indirect_reg(string  fname = &quot;&quot;,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1010" data-target-id="doc-nav-item-ast-1010">needs_update</a></td><td class=SDescription><code>bit needs_update()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1011" data-target-id="doc-nav-item-ast-1011">write</a></td><td class=SDescription><code> write(output uvm_status_e      status,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1012" data-target-id="doc-nav-item-ast-1012">read</a></td><td class=SDescription><code> read(output uvm_status_e      status,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1013" data-target-id="doc-nav-item-ast-1013">poke</a></td><td class=SDescription><code> poke(output uvm_status_e      status,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1014" data-target-id="doc-nav-item-ast-1014">peek</a></td><td class=SDescription><code> peek(output uvm_status_e      status,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1015" data-target-id="doc-nav-item-ast-1015">update</a></td><td class=SDescription><code> update(output uvm_status_e      status,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1016" data-target-id="doc-nav-item-ast-1016">mirror</a></td><td class=SDescription><code> mirror(output uvm_status_e      status,)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -165,6 +182,186 @@
     </table></blockquote>
 <div class=CBody><p>Configure the indirect data register.</p><p>The <i>idx</i> register specifies the index, in the <i>reg_a</i> register array, of the register to access.&nbsp; The <i>idx</i> must be written to first.&nbsp; A read or write operation to this register will subsequently read or write the indexed register in the register array.</p><p>The number of bits in each register in the register array must be equal to <i>n_bits</i> of this register.</p><p>See <a href="uvm_reg-svh.html#uvm_reg.configure" data-target-id="uvm_reg.configure" class=LMethod id=link7  >uvm_reg::configure()</a> for the remaining arguments.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_reg_indirect_data.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_reg_indirect_data.Additional_APIs" id="uvm_reg_indirect_data.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_reg_indirect_data.build">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.build" id="uvm_reg_indirect_data.build" href="../../src_view/reg/uvm_reg_indirect.svh.html#L57" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="57">build</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">build</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L57" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="57">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_reg_indirect_data.add_frontdoors">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.add_frontdoors" id="uvm_reg_indirect_data.add_frontdoors" href="../../src_view/reg/uvm_reg_indirect.svh.html#L98" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="98">add_frontdoors</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">add_frontdoors</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_map</span> <span class="sv-ident">map</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L98" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="98">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_reg_indirect_data.do_predict">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.do_predict" id="uvm_reg_indirect_data.do_predict" href="../../src_view/reg/uvm_reg_indirect.svh.html#L114" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="114">do_predict</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">do_predict</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_item</span>      <span class="sv-ident">rw</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L114" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="114">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_reg_indirect_data.get_local_map">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.get_local_map" id="uvm_reg_indirect_data.get_local_map" href="../../src_view/reg/uvm_reg_indirect.svh.html#L131" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="131">get_local_map</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_reg_map</span></span> <span class="sv-proto-name"><span class="sv-ident">get_local_map</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_map</span> <span class="sv-ident">map</span><span class="sv-op">,</span> <span class="sv-type">string</span> <span class="sv-ident">caller</span><span class="sv-op">=</span>&quot;&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L131" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="131">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_reg_indirect_data.add_field">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.add_field" id="uvm_reg_indirect_data.add_field" href="../../src_view/reg/uvm_reg_indirect.svh.html#L138" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="138">add_field</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">add_field</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_field</span> <span class="sv-ident">field</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L138" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="138">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_reg_indirect_data.set">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.set" id="uvm_reg_indirect_data.set" href="../../src_view/reg/uvm_reg_indirect.svh.html#L142" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="142">set</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">set</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_data_t</span>  <span class="sv-ident">value</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L142" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="142">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_reg_indirect_data.get">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.get" id="uvm_reg_indirect_data.get" href="../../src_view/reg/uvm_reg_indirect.svh.html#L148" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="148">get</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_reg_data_t</span></span> <span class="sv-proto-name"><span class="sv-proto-name">get</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span>  <span class="sv-ident">fname</span> <span class="sv-op">=</span> &quot;&quot;<span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L148" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="148">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_reg_indirect_data.get_indirect_reg">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.get_indirect_reg" id="uvm_reg_indirect_data.get_indirect_reg" href="../../src_view/reg/uvm_reg_indirect.svh.html#L154" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="154">get_indirect_reg</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_reg</span></span> <span class="sv-proto-name"><span class="sv-ident">get_indirect_reg</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span>  <span class="sv-ident">fname</span> <span class="sv-op">=</span> &quot;&quot;<span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L154" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="154">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_reg_indirect_data.needs_update">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.needs_update" id="uvm_reg_indirect_data.needs_update" href="../../src_view/reg/uvm_reg_indirect.svh.html#L160" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="160">needs_update</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">needs_update</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L160" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="160">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_reg_indirect_data.write">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.write" id="uvm_reg_indirect_data.write" href="../../src_view/reg/uvm_reg_indirect.svh.html#L164" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="164">write</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-proto-name">write</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_status_e</span>      <span class="sv-ident">status</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L164" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="164">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_reg_indirect_data.read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.read" id="uvm_reg_indirect_data.read" href="../../src_view/reg/uvm_reg_indirect.svh.html#L211" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="211">read</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">read</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_status_e</span>      <span class="sv-ident">status</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L211" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="211">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_reg_indirect_data.poke">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.poke" id="uvm_reg_indirect_data.poke" href="../../src_view/reg/uvm_reg_indirect.svh.html#L234" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="234">poke</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">poke</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_status_e</span>      <span class="sv-ident">status</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L234" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="234">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_reg_indirect_data.peek">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.peek" id="uvm_reg_indirect_data.peek" href="../../src_view/reg/uvm_reg_indirect.svh.html#L245" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="245">peek</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-proto-name">peek</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_status_e</span>      <span class="sv-ident">status</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L245" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="245">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1015" data-doc-topic="doc-nav-item-ast-1015" data-anchor="uvm_reg_indirect_data.update">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.update" id="uvm_reg_indirect_data.update" href="../../src_view/reg/uvm_reg_indirect.svh.html#L256" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="256">update</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">update</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_status_e</span>      <span class="sv-ident">status</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L256" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="256">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1016" data-doc-topic="doc-nav-item-ast-1016" data-anchor="uvm_reg_indirect_data.mirror">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_data.mirror" id="uvm_reg_indirect_data.mirror" href="../../src_view/reg/uvm_reg_indirect.svh.html#L267" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="267">mirror</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg">Overrides uvm_reg</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">mirror</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_status_e</span>      <span class="sv-ident">status</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L267" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="267">see source code</a></span></span></p></div>
+</div>
+</div>
+
+<div class="CClass" id="doc-nav-item-ast-1017" data-doc-topic="doc-nav-item-ast-1017" data-anchor="uvm_reg_indirect_ftdr_seq">
+<div class="CTopic" >
+  <h2 class="CTitle"><a name="uvm_reg_indirect_ftdr_seq" id="uvm_reg_indirect_ftdr_seq" href="../../src_view/reg/uvm_reg_indirect.svh.html#L282" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="282">uvm_reg_indirect_ftdr_seq</a></h2>
+  
+  <div class="class-hierarchy-widget" data-cname="uvm_reg_indirect_ftdr_seq">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Class Hierarchy &amp; Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-reg">Register Model</span>
+      
+      <span class="hierarchy-method-badge">2 methods</span>
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-step"><span class="hierarchy-flow-node parent static">BASE</span><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_sequence" class="hierarchy-flow-node parent" data-target-id="uvm_reg_sequence" title="Base class: uvm_reg_sequence">uvm_reg_sequence</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/reg/uvm_reg_sequence-svh.html#uvm_reg_frontdoor" class="hierarchy-flow-node parent" data-target-id="uvm_reg_frontdoor" title="Base class: uvm_reg_frontdoor">uvm_reg_frontdoor</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_reg_indirect_ftdr_seq">uvm_reg_indirect_ftdr_seq</span></span>
+  </div>
+  
+</div>
+  <div class="CBody">
+    <p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L282" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="282">see source code</a></span></span></p>
+    <p><b>Base Class:</b> <code>uvm_reg_frontdoor</code></p>
+    
+  </div>
+</div>
+<div class="Summary ClassSummary" id="doc-nav-summary-uvm_reg_indirect_ftdr_seq" data-anchor="uvm_reg_indirect_ftdr_seq.Summary">
+<div class="STitle">Methods Summary: uvm_reg_indirect_ftdr_seq</div>
+<div class="SBorder">
+<table border="0" cellspacing="0" cellpadding="0" class="STable">
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1018" data-target-id="doc-nav-item-ast-1018">new</a></td>
+  <td class="SDescription"><code>void new(uvm_reg addr_reg,)</code></td>
+</tr>
+<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#doc-nav-item-ast-1019" data-target-id="doc-nav-item-ast-1019">body</a></td>
+  <td class="SDescription"><code> body()</code></td>
+</tr>
+</table></div></div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1018" data-doc-topic="doc-nav-item-ast-1018" data-anchor="uvm_reg_indirect_ftdr_seq.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_ftdr_seq.new" id="uvm_reg_indirect_ftdr_seq.new" href="../../src_view/reg/uvm_reg_indirect.svh.html#L287" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="287">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg_frontdoor">Overrides uvm_reg_frontdoor</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg</span> <span class="sv-ident">addr_reg</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L287" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="287">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1019" data-doc-topic="doc-nav-item-ast-1019" data-anchor="uvm_reg_indirect_ftdr_seq.body">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_indirect_ftdr_seq.body" id="uvm_reg_indirect_ftdr_seq.body" href="../../src_view/reg/uvm_reg_indirect.svh.html#L296" class="src-code-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="296">body</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_reg_sequence">Overrides uvm_reg_sequence</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-proto-name">body</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_indirect.svh.html#L296" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_indirect.svh" data-src-line="296">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

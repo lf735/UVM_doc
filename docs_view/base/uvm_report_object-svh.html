@@ -210,7 +210,20 @@
 <tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_object.get_report_handler" data-target-id="uvm_report_object.get_report_handler" id=link30  >get_report_handler</a></td><td class=SDescription>Returns the underlying report handler to which most reporting tasks are delegated.</td></tr>
   <!-- index=34 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_object.reset_report_handler" data-target-id="uvm_report_object.reset_report_handler" id=link31  >reset_report_handler</a></td><td class=SDescription>Resets the underlying report handler to its default settings. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_object.reset_report_handler" data-target-id="uvm_report_object.reset_report_handler" id=link31  >reset_report_handler</a></td><td class=SDescription>Resets the underlying report handler to its default settings. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">report_info_hook</a></td><td class=SDescription><code>bit report_info_hook()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">report_error_hook</a></td><td class=SDescription><code>bit report_error_hook()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">report_warning_hook</a></td><td class=SDescription><code>bit report_warning_hook()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">report_fatal_hook</a></td><td class=SDescription><code>bit report_fatal_hook()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">report_hook</a></td><td class=SDescription><code>bit report_hook()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">report_header</a></td><td class=SDescription><code>void report_header(UVM_FILE file = 0)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">report_summarize</a></td><td class=SDescription><code>void report_summarize(UVM_FILE file = 0)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">die</a></td><td class=SDescription><code>void die()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1010" data-target-id="doc-nav-item-ast-1010">set_report_max_quit_count</a></td><td class=SDescription><code>void set_report_max_quit_count(int max_count)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1011" data-target-id="doc-nav-item-ast-1011">get_report_server</a></td><td class=SDescription><code>uvm_report_server get_report_server()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1012" data-target-id="doc-nav-item-ast-1012">dump_report_state</a></td><td class=SDescription><code>void dump_report_state()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -849,6 +862,116 @@
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-ident">reset_report_handler</span>
   </td></tr></table></blockquote><div class=CBody><p>Resets the underlying report handler to its default settings.&nbsp; This clears any settings made with the <i>set_report_*</i> methods (see below).</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_report_object.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_report_object.Additional_APIs" id="uvm_report_object.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_report_object.report_info_hook">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.report_info_hook" id="uvm_report_object.report_info_hook" href="../../src_view/base/uvm_report_object.svh.html#L489" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="489">report_info_hook</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">report_info_hook</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Function- report_info_hook</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_report_object.report_error_hook">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.report_error_hook" id="uvm_report_object.report_error_hook" href="../../src_view/base/uvm_report_object.svh.html#L498" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="498">report_error_hook</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">report_error_hook</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L498" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="498">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_report_object.report_warning_hook">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.report_warning_hook" id="uvm_report_object.report_warning_hook" href="../../src_view/base/uvm_report_object.svh.html#L507" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="507">report_warning_hook</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">report_warning_hook</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L507" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="507">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_report_object.report_fatal_hook">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.report_fatal_hook" id="uvm_report_object.report_fatal_hook" href="../../src_view/base/uvm_report_object.svh.html#L516" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="516">report_fatal_hook</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">report_fatal_hook</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L516" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="516">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_report_object.report_hook">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.report_hook" id="uvm_report_object.report_hook" href="../../src_view/base/uvm_report_object.svh.html#L533" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="533">report_hook</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">report_hook</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>These hook methods can be defined in derived classes to perform additional actions when reports are issued. They are called only if the &lt;UVM_CALL_HOOK&gt; bit is specified in the action associated with the report. The default implementations return 1, which allows the report to be processed. If an override returns 0, then the report is not processed.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_report_object.report_header">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.report_header" id="uvm_report_object.report_header" href="../../src_view/base/uvm_report_object.svh.html#L548" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="548">report_header</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">report_header</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">UVM_FILE</span> <span class="sv-ident">file</span> <span class="sv-op">=</span><span class="sv-ident"> 0</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L548" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="548">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_report_object.report_summarize">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.report_summarize" id="uvm_report_object.report_summarize" href="../../src_view/base/uvm_report_object.svh.html#L569" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="569">report_summarize</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">report_summarize</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">UVM_FILE</span> <span class="sv-ident">file</span> <span class="sv-op">=</span><span class="sv-ident"> 0</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L569" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="569">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_report_object.die">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.die" id="uvm_report_object.die" href="../../src_view/base/uvm_report_object.svh.html#L590" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="590">die</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">die</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L590" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="590">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_report_object.set_report_max_quit_count">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.set_report_max_quit_count" id="uvm_report_object.set_report_max_quit_count" href="../../src_view/base/uvm_report_object.svh.html#L611" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="611">set_report_max_quit_count</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">set_report_max_quit_count</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">int</span> <span class="sv-ident">max_count</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L611" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="611">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_report_object.get_report_server">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.get_report_server" id="uvm_report_object.get_report_server" href="../../src_view/base/uvm_report_object.svh.html#L623" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="623">get_report_server</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_report_server</span></span> <span class="sv-proto-name"><span class="sv-ident">get_report_server</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L623" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="623">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_report_object.dump_report_state">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.dump_report_state" id="uvm_report_object.dump_report_state" href="../../src_view/base/uvm_report_object.svh.html#L639" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="639">dump_report_state</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">dump_report_state</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L639" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="639">see source code</a></span></span></p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_report_object (1)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_report_object.m_get_report_object">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_object.m_get_report_object" id="uvm_report_object.m_get_report_object" href="../../src_view/base/uvm_report_object.svh.html#L650" class="src-code-link" data-src-file="base/uvm_report_object.svh" data-src-line="650">m_get_report_object</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_report_object</span></span> <span class="sv-proto-name"><span class="sv-ident">m_get_report_object</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_object.svh.html#L650" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_object.svh" data-src-line="650">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details>
 </div><!--Content-->
 
 

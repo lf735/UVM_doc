@@ -138,7 +138,11 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_sequence#(REQ,RSP).get_current_item" data-target-id="uvm_sequence#(REQ,RSP).get_current_item" id=link11  >get_current_item</a></td><td class=SDescription>Returns the request item currently being executed by the sequencer. </td></tr>
   <!-- index=8 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_sequence#(REQ,RSP).get_response" data-target-id="uvm_sequence#(REQ,RSP).get_response" id=link12  >get_response</a></td><td class=SDescription>By default, sequences must retrieve responses by calling get_response. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_sequence#(REQ,RSP).get_response" data-target-id="uvm_sequence#(REQ,RSP).get_response" id=link12  >get_response</a></td><td class=SDescription>By default, sequences must retrieve responses by calling get_response. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">put_response</a></td><td class=SDescription><code>void put_response(uvm_sequence_item response_item)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">do_print</a></td><td class=SDescription><code>void do_print(uvm_printer printer)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -241,6 +245,24 @@
     </table></blockquote>
 <div class=CBody><p>By default, sequences must retrieve responses by calling get_response.&nbsp; If no transaction_id is specified, this task will return the next response sent to this sequence.&nbsp;  If no response is available in the response queue, the method will block until a response is received.</p><p>If a transaction_id is parameter is specified, the task will block until a response with that transaction_id is received in the response queue.</p><p>The default size of the response queue is 8.&nbsp;  The get_response method must be called soon enough to avoid an overflow of the response queue to prevent responses from being dropped.</p><p>If a response is dropped in the response queue, an error will be reported unless the error reporting is disabled via set_response_queue_error_report_disabled.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_sequence.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_sequence.Additional_APIs" id="uvm_sequence.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_sequence.put_response">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence.put_response" id="uvm_sequence.put_response" href="../../src_view/seq/uvm_sequence.svh.html#L130" class="src-code-link" data-src-file="seq/uvm_sequence.svh" data-src-line="130">put_response</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_sequence_base">Overrides uvm_sequence_base</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">put_response</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_sequence_item</span> <span class="sv-ident">response_item</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence.svh.html#L130" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence.svh" data-src-line="130">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_sequence.do_print">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_sequence.do_print" id="uvm_sequence.do_print" href="../../src_view/seq/uvm_sequence.svh.html#L141" class="src-code-link" data-src-file="seq/uvm_sequence.svh" data-src-line="141">do_print</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_sequence_item">Overrides uvm_sequence_item</span><span class="badge-subclass" title="Overridden in 3 derived class(es)">Overridden in 3 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_print</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_printer</span> <span class="sv-ident">printer</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/seq/uvm_sequence.svh.html#L141" class="src-code-link undoc-src-link" data-src-file="seq/uvm_sequence.svh" data-src-line="141">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

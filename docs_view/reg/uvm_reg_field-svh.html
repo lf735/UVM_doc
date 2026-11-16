@@ -215,7 +215,18 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reg_field.pre_read" data-target-id="uvm_reg_field.pre_read" id=link37  >pre_read</a></td><td class=SDescription>Called before field read.</td></tr>
   <!-- index=40 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_field.post_read" data-target-id="uvm_reg_field.post_read" id=link38  >post_read</a></td><td class=SDescription>Called after field read.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_reg_field.post_read" data-target-id="uvm_reg_field.post_read" id=link38  >post_read</a></td><td class=SDescription>Called after field read.</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">get_register</a></td><td class=SDescription><code>uvm_reg get_register()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">XpredictX</a></td><td class=SDescription><code>uvm_reg_data_t XpredictX(uvm_reg_data_t cur_val,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">XupdateX</a></td><td class=SDescription><code>uvm_reg_data_t XupdateX()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">Xcheck_accessX</a></td><td class=SDescription><code>bit Xcheck_accessX(input uvm_reg_item rw,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">do_write</a></td><td class=SDescription><code> do_write(uvm_reg_item rw)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">do_read</a></td><td class=SDescription><code> do_read(uvm_reg_item rw)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">do_predict</a></td><td class=SDescription><code>void do_predict(uvm_reg_item rw,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">pre_randomize</a></td><td class=SDescription><code>void pre_randomize()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1010" data-target-id="doc-nav-item-ast-1010">post_randomize</a></td><td class=SDescription><code>void post_randomize()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -1030,6 +1041,100 @@
     </table></blockquote>
 <div class=CBody><p>Called after field read.</p><p>If the specified readback data or~status~ in the <i>rw</i> argument is modified, the updated readback data or status will be returned by the register operation.</p><p>The field callback methods are invoked after the callback methods on the containing register.&nbsp; The registered callback methods are invoked before the invocation of this method.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_reg_field.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_reg_field.Additional_APIs" id="uvm_reg_field.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_reg_field.get_register">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.get_register" id="uvm_reg_field.get_register" href="../../src_view/reg/uvm_reg_field.svh.html#L150" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="150">get_register</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_reg</span></span> <span class="sv-proto-name"><span class="sv-ident">get_register</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L150" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="150">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_reg_field.XpredictX">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.XpredictX" id="uvm_reg_field.XpredictX" href="../../src_view/reg/uvm_reg_field.svh.html#L672" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="672">XpredictX</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_reg_data_t</span></span> <span class="sv-proto-name"><span class="sv-ident">XpredictX</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_data_t</span> <span class="sv-ident">cur_val</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L672" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="672">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_reg_field.XupdateX">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.XupdateX" id="uvm_reg_field.XupdateX" href="../../src_view/reg/uvm_reg_field.svh.html#L677" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="677">XupdateX</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_reg_data_t</span></span> <span class="sv-proto-name"><span class="sv-ident">XupdateX</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L677" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="677">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_reg_field.Xcheck_accessX">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.Xcheck_accessX" id="uvm_reg_field.Xcheck_accessX" href="../../src_view/reg/uvm_reg_field.svh.html#L680" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="680">Xcheck_accessX</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">Xcheck_accessX</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-uvm-type">uvm_reg_item</span> <span class="sv-ident">rw</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L680" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="680">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_reg_field.do_write">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.do_write" id="uvm_reg_field.do_write" href="../../src_view/reg/uvm_reg_field.svh.html#L684" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="684">do_write</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">do_write</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_item</span> <span class="sv-ident">rw</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L684" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="684">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_reg_field.do_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.do_read" id="uvm_reg_field.do_read" href="../../src_view/reg/uvm_reg_field.svh.html#L685" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="685">do_read</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">do_read</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_item</span> <span class="sv-ident">rw</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L685" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="685">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_reg_field.do_predict">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.do_predict" id="uvm_reg_field.do_predict" href="../../src_view/reg/uvm_reg_field.svh.html#L686" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="686">do_predict</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">do_predict</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg_item</span> <span class="sv-ident">rw</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L686" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="686">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_reg_field.pre_randomize">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.pre_randomize" id="uvm_reg_field.pre_randomize" href="../../src_view/reg/uvm_reg_field.svh.html#L692" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="692">pre_randomize</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">pre_randomize</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L692" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="692">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_reg_field.post_randomize">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.post_randomize" id="uvm_reg_field.post_randomize" href="../../src_view/reg/uvm_reg_field.svh.html#L693" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="693">post_randomize</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">post_randomize</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L693" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="693">see source code</a></span></span></p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_reg_field (1)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_reg_field.m_predefine_policies">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reg_field.m_predefine_policies" id="uvm_reg_field.m_predefine_policies" href="../../src_view/reg/uvm_reg_field.svh.html#L244" class="src-code-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="244">m_predefine_policies</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">m_predefine_policies</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/reg/uvm_reg_field.svh.html#L244" class="src-code-link undoc-src-link" data-src-file="reg/uvm_reg_field.svh" data-src-line="244">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details>
 </div><!--Content-->
 
 

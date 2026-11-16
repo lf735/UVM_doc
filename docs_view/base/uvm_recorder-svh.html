@@ -226,7 +226,18 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_recorder.do_record_time" data-target-id="uvm_recorder.do_record_time" id=link46  >do_record_time</a></td><td class=SDescription>Records a time field.</td></tr>
   <!-- index=39 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_recorder.do_record_generic" data-target-id="uvm_recorder.do_record_generic" id=link47  >do_record_generic</a></td><td class=SDescription>Records a name/value pair, where <i>value</i> has been converted to a string.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_recorder.do_record_generic" data-target-id="uvm_recorder.do_record_generic" id=link47  >do_record_generic</a></td><td class=SDescription>Records a name/value pair, where <i>value</i> has been converted to a string.</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1011" data-target-id="doc-nav-group-ast-1011">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1012" data-target-id="doc-nav-item-ast-1012">new</a></td><td class=SDescription><code>void new(string name = &quot;uvm_recorder&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1013" data-target-id="doc-nav-item-ast-1013">open_file</a></td><td class=SDescription><code>bit open_file()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1014" data-target-id="doc-nav-item-ast-1014">create_stream</a></td><td class=SDescription><code>integer create_stream(string name,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1015" data-target-id="doc-nav-item-ast-1015">set_attribute</a></td><td class=SDescription><code>void set_attribute(integer txh,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1016" data-target-id="doc-nav-item-ast-1016">check_handle_kind</a></td><td class=SDescription><code>integer check_handle_kind(string htype, integer handle)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1017" data-target-id="doc-nav-item-ast-1017">begin_tr</a></td><td class=SDescription><code>integer begin_tr(string txtype,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1018" data-target-id="doc-nav-item-ast-1018">end_tr</a></td><td class=SDescription><code>void end_tr(integer handle, time end_time=0)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1019" data-target-id="doc-nav-item-ast-1019">link_tr</a></td><td class=SDescription><code>void link_tr(integer h1,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1020" data-target-id="doc-nav-item-ast-1020">free_tr</a></td><td class=SDescription><code>void free_tr(integer handle)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -785,7 +796,116 @@
 
 
  <!--CONTENT index=40 -->
-<div class="CClass" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_text_recorder"><div class="CTopic"><h2 class=CTitle><a name="uvm_text_recorder" id="uvm_text_recorder" href="../../src_view/base/uvm_recorder.svh.html#L729" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="729">uvm_text_recorder</a></h2><div class=CBody><p>The <i>uvm_text_recorder</i> is the default recorder implementation for the <a href="uvm_tr_database-svh.html#uvm_text_tr_database" data-target-id="uvm_text_tr_database" class=LClass id=link104  >uvm_text_tr_database</a>.</p>
+
+<div class="CGroup" id="doc-nav-group-ast-1011" data-doc-topic="doc-nav-group-ast-1011" data-anchor="uvm_recorder.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_recorder.Additional_APIs" id="uvm_recorder.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_recorder.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.new" id="uvm_recorder.new" href="../../src_view/base/uvm_recorder.svh.html#L134" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="134">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> &quot;<span class="sv-uvm-type">uvm_recorder</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L134" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="134">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_recorder.open_file">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.open_file" id="uvm_recorder.open_file" href="../../src_view/base/uvm_recorder.svh.html#L642" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="642">open_file</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">open_file</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L642" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="642">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_recorder.create_stream">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.create_stream" id="uvm_recorder.create_stream" href="../../src_view/base/uvm_recorder.svh.html#L649" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="649">create_stream</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">integer</span></span> <span class="sv-proto-name"><span class="sv-ident">create_stream</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L649" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="649">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1015" data-doc-topic="doc-nav-item-ast-1015" data-anchor="uvm_recorder.set_attribute">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.set_attribute" id="uvm_recorder.set_attribute" href="../../src_view/base/uvm_recorder.svh.html#L667" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="667">set_attribute</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">set_attribute</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">txh</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L667" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="667">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1016" data-doc-topic="doc-nav-item-ast-1016" data-anchor="uvm_recorder.check_handle_kind">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.check_handle_kind" id="uvm_recorder.check_handle_kind" href="../../src_view/base/uvm_recorder.svh.html#L678" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="678">check_handle_kind</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">integer</span></span> <span class="sv-proto-name"><span class="sv-ident">check_handle_kind</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">htype</span><span class="sv-op">,</span> <span class="sv-type">integer</span> <span class="sv-ident">handle</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L678" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="678">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1017" data-doc-topic="doc-nav-item-ast-1017" data-anchor="uvm_recorder.begin_tr">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.begin_tr" id="uvm_recorder.begin_tr" href="../../src_view/base/uvm_recorder.svh.html#L686" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="686">begin_tr</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">integer</span></span> <span class="sv-proto-name"><span class="sv-ident">begin_tr</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">txtype</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L686" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="686">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1018" data-doc-topic="doc-nav-item-ast-1018" data-anchor="uvm_recorder.end_tr">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.end_tr" id="uvm_recorder.end_tr" href="../../src_view/base/uvm_recorder.svh.html#L699" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="699">end_tr</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">end_tr</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">handle</span><span class="sv-op">,</span> <span class="sv-type">time</span> <span class="sv-ident">end_time</span><span class="sv-op">=</span><span class="sv-ident">0</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L699" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="699">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1019" data-doc-topic="doc-nav-item-ast-1019" data-anchor="uvm_recorder.link_tr">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.link_tr" id="uvm_recorder.link_tr" href="../../src_view/base/uvm_recorder.svh.html#L706" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="706">link_tr</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">link_tr</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">h1</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L706" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="706">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1020" data-doc-topic="doc-nav-item-ast-1020" data-anchor="uvm_recorder.free_tr">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.free_tr" id="uvm_recorder.free_tr" href="../../src_view/base/uvm_recorder.svh.html#L716" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="716">free_tr</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">free_tr</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">handle</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L716" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="716">see source code</a></span></span></p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_recorder (3)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1021" data-doc-topic="doc-nav-item-ast-1021" data-anchor="uvm_recorder.m_do_open">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.m_do_open" id="uvm_recorder.m_do_open" href="../../src_view/base/uvm_recorder.svh.html#L283" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="283">m_do_open</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_do_open</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_tr_stream</span> <span class="sv-ident">stream</span><span class="sv-op">,</span> <span class="sv-type">time</span> <span class="sv-ident">open_time</span><span class="sv-op">,</span> <span class="sv-type">string</span> <span class="sv-ident">type_name</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L283" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="283">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1022" data-doc-topic="doc-nav-item-ast-1022" data-anchor="uvm_recorder.m_free_id">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.m_free_id" id="uvm_recorder.m_free_id" href="../../src_view/base/uvm_recorder.svh.html#L321" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="321">m_free_id</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_free_id</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">id</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L321" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="321">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1023" data-doc-topic="doc-nav-item-ast-1023" data-anchor="uvm_recorder.m_set_attribute">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_recorder.m_set_attribute" id="uvm_recorder.m_set_attribute" href="../../src_view/base/uvm_recorder.svh.html#L659" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="659">m_set_attribute</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_set_attribute</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">txh</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L659" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="659">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details><div class="CClass" id="doc-nav-item-40" data-doc-topic="doc-nav-item-40" data-anchor="uvm_text_recorder"><div class="CTopic"><h2 class=CTitle><a name="uvm_text_recorder" id="uvm_text_recorder" href="../../src_view/base/uvm_recorder.svh.html#L729" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="729">uvm_text_recorder</a></h2><div class=CBody><p>The <i>uvm_text_recorder</i> is the default recorder implementation for the <a href="uvm_tr_database-svh.html#uvm_text_tr_database" data-target-id="uvm_text_tr_database" class=LClass id=link104  >uvm_text_tr_database</a>.</p>
 
 <!--START_ND_SUMMARY index=40-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-40" data-anchor="uvm_text_recorder.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -868,7 +988,17 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_text_recorder.write_attribute" data-target-id="uvm_text_recorder.write_attribute" id=link102  >write_attribute</a></td><td class=SDescription>Outputs an integral attribute to the textual log</td></tr>
   <!-- index=55 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_text_recorder.write_attribute_int" data-target-id="uvm_text_recorder.write_attribute_int" id=link103  >write_attribute_int</a></td><td class=SDescription>Outputs an integral attribute to the textual log</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_text_recorder.write_attribute_int" data-target-id="uvm_text_recorder.write_attribute_int" id=link103  >write_attribute_int</a></td><td class=SDescription>Outputs an integral attribute to the textual log</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">open_file</a></td><td class=SDescription><code>bit open_file()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">create_stream</a></td><td class=SDescription><code>integer create_stream(string name,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">set_attribute</a></td><td class=SDescription><code>void set_attribute(integer txh,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">check_handle_kind</a></td><td class=SDescription><code>integer check_handle_kind(string htype, integer handle)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">begin_tr</a></td><td class=SDescription><code>integer begin_tr(string txtype,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">end_tr</a></td><td class=SDescription><code>void end_tr(integer handle, time end_time=0)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">link_tr</a></td><td class=SDescription><code>void link_tr(integer h1,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">free_tr</a></td><td class=SDescription><code>void free_tr(integer handle)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -1141,6 +1271,92 @@
     </table></blockquote>
 <div class=CBody><p>Outputs an integral attribute to the textual log</p><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>nm</td><td class=CDLDescription>Name of the attribute</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value</td></tr><tr><td class=CDLEntry>radix</td><td class=CDLDescription>Radix of the output</td></tr><tr><td class=CDLEntry>numbits</td><td class=CDLDescription>number of valid bits</td></tr></table></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_text_recorder.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_text_recorder.Additional_APIs" id="uvm_text_recorder.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_text_recorder.open_file">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.open_file" id="uvm_text_recorder.open_file" href="../../src_view/base/uvm_recorder.svh.html#L1008" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1008">open_file</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">open_file</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1008" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1008">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_text_recorder.create_stream">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.create_stream" id="uvm_text_recorder.create_stream" href="../../src_view/base/uvm_recorder.svh.html#L1019" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1019">create_stream</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">integer</span></span> <span class="sv-proto-name"><span class="sv-ident">create_stream</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1019" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1019">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_text_recorder.set_attribute">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.set_attribute" id="uvm_text_recorder.set_attribute" href="../../src_view/base/uvm_recorder.svh.html#L1047" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1047">set_attribute</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">set_attribute</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">txh</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1047" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1047">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_text_recorder.check_handle_kind">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.check_handle_kind" id="uvm_text_recorder.check_handle_kind" href="../../src_view/base/uvm_recorder.svh.html#L1070" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1070">check_handle_kind</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">integer</span></span> <span class="sv-proto-name"><span class="sv-ident">check_handle_kind</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">htype</span><span class="sv-op">,</span> <span class="sv-type">integer</span> <span class="sv-ident">handle</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1070" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1070">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_text_recorder.begin_tr">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.begin_tr" id="uvm_text_recorder.begin_tr" href="../../src_view/base/uvm_recorder.svh.html#L1079" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1079">begin_tr</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">integer</span></span> <span class="sv-proto-name"><span class="sv-ident">begin_tr</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">txtype</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1079" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1079">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_text_recorder.end_tr">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.end_tr" id="uvm_text_recorder.end_tr" href="../../src_view/base/uvm_recorder.svh.html#L1103" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1103">end_tr</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">end_tr</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">handle</span><span class="sv-op">,</span> <span class="sv-type">time</span> <span class="sv-ident">end_time</span><span class="sv-op">=</span><span class="sv-ident">0</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1103" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1103">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_text_recorder.link_tr">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.link_tr" id="uvm_text_recorder.link_tr" href="../../src_view/base/uvm_recorder.svh.html#L1116" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1116">link_tr</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">link_tr</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">h1</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1116" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1116">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_text_recorder.free_tr">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.free_tr" id="uvm_text_recorder.free_tr" href="../../src_view/base/uvm_recorder.svh.html#L1128" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1128">free_tr</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">free_tr</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">handle</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1128" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1128">see source code</a></span></span></p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_text_recorder (1)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_text_recorder.m_set_attribute">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_text_recorder.m_set_attribute" id="uvm_text_recorder.m_set_attribute" href="../../src_view/base/uvm_recorder.svh.html#L1034" class="src-code-link" data-src-file="base/uvm_recorder.svh" data-src-line="1034">m_set_attribute</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span><span class="badge-override" title="Overrides base method from uvm_recorder">Overrides uvm_recorder</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_set_attribute</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">integer</span> <span class="sv-ident">txh</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_recorder.svh.html#L1034" class="src-code-link undoc-src-link" data-src-file="base/uvm_recorder.svh" data-src-line="1034">see source code</a></span></span></p></div>
+</div>
+</div>
+  </div>
+</details>
 </div><!--Content-->
 
 

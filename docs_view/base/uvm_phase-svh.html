@@ -242,7 +242,21 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_phase.end_prematurely" data-target-id="uvm_phase.end_prematurely" id=link42  >end_prematurely</a></td><td class=SDescription>Set a flag to cause the phase to end prematurely. </td></tr>
   <!-- index=40 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_phase.get_jump_target" data-target-id="uvm_phase.get_jump_target" id=link43  >get_jump_target</a></td><td class=SDescription>Return handle to the target phase of the current jump, or <i>null</i> if no jump is in progress. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_phase.get_jump_target" data-target-id="uvm_phase.get_jump_target" id=link43  >get_jump_target</a></td><td class=SDescription>Return handle to the target phase of the current jump, or <i>null</i> if no jump is in progress. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1003" data-target-id="doc-nav-group-ast-1003">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">execute</a></td><td class=SDescription><code>void execute(uvm_component comp,)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">get_begin_node</a></td><td class=SDescription><code>uvm_phase get_begin_node()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">get_predecessors_for_successors</a></td><td class=SDescription><code>void get_predecessors_for_successors(output bit pred_of_succ[uvm_phase])</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">clear</a></td><td class=SDescription><code>void clear(uvm_phase_state state = UVM_PHASE_DORMANT)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">clear_successors</a></td><td class=SDescription><code>void clear_successors()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">execute_phase</a></td><td class=SDescription><code> execute_phase()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1010" data-target-id="doc-nav-item-ast-1010">wait_for_self_and_siblings_to_drop</a></td><td class=SDescription><code> wait_for_self_and_siblings_to_drop()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1011" data-target-id="doc-nav-item-ast-1011">kill</a></td><td class=SDescription><code>void kill()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1012" data-target-id="doc-nav-item-ast-1012">kill_successors</a></td><td class=SDescription><code>void kill_successors()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1013" data-target-id="doc-nav-item-ast-1013">convert2string</a></td><td class=SDescription><code>string convert2string()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1014" data-target-id="doc-nav-item-ast-1014">is_domain</a></td><td class=SDescription><code>bit is_domain()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1015" data-target-id="doc-nav-item-ast-1015">jump_all</a></td><td class=SDescription><code>void jump_all</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -865,7 +879,212 @@
 
 
  <!--CONTENT index=41 -->
-<div class="CClass" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_phase_state_change"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_state_change" id="uvm_phase_state_change" href="../../src_view/base/uvm_phase.svh.html#L674" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="674">uvm_phase_state_change</a></h2><div class=CBody><p>Phase state transition descriptor.&nbsp; Used to describe the phase transition that caused a &lt;uvm_phase_cb::phase_state_changed()&gt; callback to be invoked.</p>
+
+<div class="CGroup" id="doc-nav-group-ast-1003" data-doc-topic="doc-nav-group-ast-1003" data-anchor="uvm_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_phase.Additional_APIs" id="uvm_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_phase.execute">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.execute" id="uvm_phase.execute" href="../../src_view/base/uvm_phase.svh.html#L569" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="569">execute</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 3 derived class(es)">Overridden in 3 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">execute</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Provide the required per-component execution flow. Called by traverse()</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_phase.get_begin_node">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.get_begin_node" id="uvm_phase.get_begin_node" href="../../src_view/base/uvm_phase.svh.html#L580" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="580">get_begin_node</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_phase</span></span> <span class="sv-proto-name"><span class="sv-ident">get_begin_node</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_phase.svh.html#L580" class="src-code-link undoc-src-link" data-src-file="base/uvm_phase.svh" data-src-line="580">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_phase.get_predecessors_for_successors">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.get_predecessors_for_successors" id="uvm_phase.get_predecessors_for_successors" href="../../src_view/base/uvm_phase.svh.html#L1722" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1722">get_predecessors_for_successors</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">get_predecessors_for_successors</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-type">bit</span> <span class="sv-ident">pred_of_succ</span><span class="sv-ident">[</span><span class="sv-uvm-type">uvm_phase</span><span class="sv-ident">]</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Internal implementation, more efficient than calling get_predessor_nodes on all of the successors returned by get_adjacent_successor_nodes</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_phase.clear">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.clear" id="uvm_phase.clear" href="../../src_view/base/uvm_phase.svh.html#L2095" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2095">clear</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">clear</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase_state</span> <span class="sv-ident">state</span> <span class="sv-op">=</span> <span class="sv-uvm-type">UVM_PHASE_DORMANT</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>clear for internal graph maintenance after a forward jump</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_phase.clear_successors">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.clear_successors" id="uvm_phase.clear_successors" href="../../src_view/base/uvm_phase.svh.html#L2109" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2109">clear_successors</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">clear_successors</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>clear_successors for internal graph maintenance after a forward jump - called only by execute_phase() - depth-first traversal of the DAG, calliing clear() on each node - do not clear the end phase or beyond</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_phase.execute_phase">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.execute_phase" id="uvm_phase.execute_phase" href="../../src_view/base/uvm_phase.svh.html#L1297" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1297">execute_phase</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">execute_phase</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>execute_phase</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_phase.wait_for_self_and_siblings_to_drop">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.wait_for_self_and_siblings_to_drop" id="uvm_phase.wait_for_self_and_siblings_to_drop" href="../../src_view/base/uvm_phase.svh.html#L2127" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2127">wait_for_self_and_siblings_to_drop</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">wait_for_self_and_siblings_to_drop</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Implementation - Overall Control wait_for_self_and_siblings_to_drop This task loops until this phase instance and all its siblings, either sync&#x27;d or sharing a common successor, have all objections dropped.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_phase.kill">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.kill" id="uvm_phase.kill" href="../../src_view/base/uvm_phase.svh.html#L2166" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2166">kill</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">kill</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>kill</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_phase.kill_successors">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.kill_successors" id="uvm_phase.kill_successors" href="../../src_view/base/uvm_phase.svh.html#L2183" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2183">kill_successors</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">kill_successors</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>kill_successors</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_phase.convert2string">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.convert2string" id="uvm_phase.convert2string" href="../../src_view/base/uvm_phase.svh.html#L625" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="625">convert2string</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-proto-name">convert2string</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_phase.svh.html#L625" class="src-code-link undoc-src-link" data-src-file="base/uvm_phase.svh" data-src-line="625">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_phase.is_domain">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.is_domain" id="uvm_phase.is_domain" href="../../src_view/base/uvm_phase.svh.html#L649" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="649">is_domain</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">is_domain</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_phase.svh.html#L649" class="src-code-link undoc-src-link" data-src-file="base/uvm_phase.svh" data-src-line="649">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1015" data-doc-topic="doc-nav-item-ast-1015" data-anchor="uvm_phase.jump_all">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.jump_all" id="uvm_phase.jump_all" href="../../src_view/base/uvm_phase.svh.html#L2079" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2079">jump_all</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">jump_all</span></span> <span class="sv-params"></span></td></tr></table></blockquote>
+  <div class="CBody"><p>jump_all</p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Internal / Implementation Details: uvm_phase (12)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.</p>
+  <div class="internal-section-body">
+<div class="CMethod" id="doc-nav-item-ast-1016" data-doc-topic="doc-nav-item-ast-1016" data-anchor="uvm_phase.m_wait_for_pred">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_wait_for_pred" id="uvm_phase.m_wait_for_pred" href="../../src_view/base/uvm_phase.svh.html#L1756" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1756">m_wait_for_pred</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">m_wait_for_pred</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_wait_for_pred</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1017" data-doc-topic="doc-nav-item-ast-1017" data-anchor="uvm_phase.m_run_phases">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_run_phases" id="uvm_phase.m_run_phases" href="../../src_view/base/uvm_phase.svh.html#L2196" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2196">m_run_phases</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">m_run_phases</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_run_phases</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1018" data-doc-topic="doc-nav-item-ast-1018" data-anchor="uvm_phase.m_terminate_phase">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_terminate_phase" id="uvm_phase.m_terminate_phase" href="../../src_view/base/uvm_phase.svh.html#L2224" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2224">m_terminate_phase</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_terminate_phase</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>terminate_phase</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1019" data-doc-topic="doc-nav-item-ast-1019" data-anchor="uvm_phase.m_print_termination_state">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_print_termination_state" id="uvm_phase.m_print_termination_state" href="../../src_view/base/uvm_phase.svh.html#L2233" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="2233">m_print_termination_state</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_print_termination_state</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p>print_termination_state</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1020" data-doc-topic="doc-nav-item-ast-1020" data-anchor="uvm_phase.m_aa2string">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_aa2string" id="uvm_phase.m_aa2string" href="../../src_view/base/uvm_phase.svh.html#L635" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="635">m_aa2string</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">m_aa2string</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">bit</span> <span class="sv-ident">aa</span><span class="sv-ident">[</span><span class="sv-uvm-type">uvm_phase</span><span class="sv-ident">]</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_phase.svh.html#L635" class="src-code-link undoc-src-link" data-src-file="base/uvm_phase.svh" data-src-line="635">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1021" data-doc-topic="doc-nav-item-ast-1021" data-anchor="uvm_phase.m_get_transitive_children">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_get_transitive_children" id="uvm_phase.m_get_transitive_children" href="../../src_view/base/uvm_phase.svh.html#L653" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="653">m_get_transitive_children</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_get_transitive_children</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">ref</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phases</span><span class="sv-ident">[$]</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_phase.svh.html#L653" class="src-code-link undoc-src-link" data-src-file="base/uvm_phase.svh" data-src-line="653">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1022" data-doc-topic="doc-nav-item-ast-1022" data-anchor="uvm_phase.m_print_successors">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_print_successors" id="uvm_phase.m_print_successors" href="../../src_view/base/uvm_phase.svh.html#L1123" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1123">m_print_successors</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_print_successors</span></span> <span class="sv-params"></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_print_successors</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1023" data-doc-topic="doc-nav-item-ast-1023" data-anchor="uvm_phase.m_find_predecessor">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_find_predecessor" id="uvm_phase.m_find_predecessor" href="../../src_view/base/uvm_phase.svh.html#L1141" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1141">m_find_predecessor</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_phase</span></span> <span class="sv-proto-name"><span class="sv-ident">m_find_predecessor</span></span> <span class="sv-params"></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_find_predecessor</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1024" data-doc-topic="doc-nav-item-ast-1024" data-anchor="uvm_phase.m_find_predecessor_by_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_find_predecessor_by_name" id="uvm_phase.m_find_predecessor_by_name" href="../../src_view/base/uvm_phase.svh.html#L1167" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1167">m_find_predecessor_by_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_phase</span></span> <span class="sv-proto-name"><span class="sv-ident">m_find_predecessor_by_name</span></span> <span class="sv-params"></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_find_predecessor_by_name</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1025" data-doc-topic="doc-nav-item-ast-1025" data-anchor="uvm_phase.m_find_successor">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_find_successor" id="uvm_phase.m_find_successor" href="../../src_view/base/uvm_phase.svh.html#L1190" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1190">m_find_successor</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_phase</span></span> <span class="sv-proto-name"><span class="sv-ident">m_find_successor</span></span> <span class="sv-params"></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_find_successor</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1026" data-doc-topic="doc-nav-item-ast-1026" data-anchor="uvm_phase.m_find_successor_by_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_find_successor_by_name" id="uvm_phase.m_find_successor_by_name" href="../../src_view/base/uvm_phase.svh.html#L1218" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1218">m_find_successor_by_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_phase</span></span> <span class="sv-proto-name"><span class="sv-ident">m_find_successor_by_name</span></span> <span class="sv-params"></span></td></tr></table></blockquote>
+  <div class="CBody"><p>m_find_successor_by_name</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1027" data-doc-topic="doc-nav-item-ast-1027" data-anchor="uvm_phase.m_report_null_objection">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase.m_report_null_objection" id="uvm_phase.m_report_null_objection" href="../../src_view/base/uvm_phase.svh.html#L1807" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="1807">m_report_null_objection</a></h3>
+  <div class="method-meta-bar"><span class="badge-internal" title="Internal UVM implementation member">Internal</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">m_report_null_objection</span></span> <span class="sv-params"></span></td></tr></table></blockquote>
+  <div class="CBody"><p>Implementation - Synchronization</p></div>
+</div>
+</div>
+  </div>
+</details><div class="CClass" id="doc-nav-item-41" data-doc-topic="doc-nav-item-41" data-anchor="uvm_phase_state_change"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_state_change" id="uvm_phase_state_change" href="../../src_view/base/uvm_phase.svh.html#L674" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="674">uvm_phase_state_change</a></h2><div class=CBody><p>Phase state transition descriptor.&nbsp; Used to describe the phase transition that caused a &lt;uvm_phase_cb::phase_state_changed()&gt; callback to be invoked.</p>
 
 <!--START_ND_SUMMARY index=41-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-41" data-anchor="uvm_phase_state_change.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -915,7 +1134,10 @@
 <tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_phase_state_change.get_prev_state" data-target-id="uvm_phase_state_change.get_prev_state" id=link56  >get_prev_state()</a></td><td class=SDescription>Returns the state the phase just transitioned from.</td></tr>
   <!-- index=45 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_phase_state_change.jump_to" data-target-id="uvm_phase_state_change.jump_to" id=link57  >jump_to()</a></td><td class=SDescription>If the current state is <i>UVM_PHASE_ENDED</i> or <i>UVM_PHASE_JUMPING</i> because of a phase jump, returns the phase that is the target of jump. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_phase_state_change.jump_to" data-target-id="uvm_phase_state_change.jump_to" id=link57  >jump_to()</a></td><td class=SDescription>If the current state is <i>UVM_PHASE_ENDED</i> or <i>UVM_PHASE_JUMPING</i> because of a phase jump, returns the phase that is the target of jump. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">new</a></td><td class=SDescription><code>void new(string name = &quot;uvm_phase_state_change&quot;)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -952,7 +1174,16 @@
 
 
  <!--CONTENT index=46 -->
-<div class="CClass" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_phase_cb"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_cb" id="uvm_phase_cb" href="../../src_view/base/uvm_phase.svh.html#L730" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="730">uvm_phase_cb</a></h2><div class=CBody><p>This class defines a callback method that is invoked by the phaser during the execution of a specific node in the phase graph or all phase nodes.&nbsp; User-defined callback extensions can be used to integrate data types that are not natively phase-aware with the UVM phasing.</p>
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_phase_state_change.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_phase_state_change.Additional_APIs" id="uvm_phase_state_change.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_phase_state_change.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_phase_state_change.new" id="uvm_phase_state_change.new" href="../../src_view/base/uvm_phase.svh.html#L683" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="683">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> &quot;<span class="sv-uvm-type">uvm_phase_state_change</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_phase.svh.html#L683" class="src-code-link undoc-src-link" data-src-file="base/uvm_phase.svh" data-src-line="683">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-46" data-doc-topic="doc-nav-item-46" data-anchor="uvm_phase_cb"><div class="CTopic"><h2 class=CTitle><a name="uvm_phase_cb" id="uvm_phase_cb" href="../../src_view/base/uvm_phase.svh.html#L730" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="730">uvm_phase_cb</a></h2><div class=CBody><p>This class defines a callback method that is invoked by the phaser during the execution of a specific node in the phase graph or all phase nodes.&nbsp; User-defined callback extensions can be used to integrate data types that are not natively phase-aware with the UVM phasing.</p>
 
 <!--START_ND_SUMMARY index=46-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-46" data-anchor="uvm_phase_cb.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -1106,6 +1337,15 @@
 </table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1029" data-doc-topic="doc-nav-group-ast-1029" data-anchor="Additional_Macros"><div class="CTopic"><h3 class="CTitle"><a name="Additional_Macros" id="Additional_Macros">Additional Macros</a></h3></div></div>
+<div class="CMacro" id="doc-nav-item-ast-1028" data-doc-topic="doc-nav-item-ast-1028" data-anchor="UVM_PH_TRACE">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="UVM_PH_TRACE" id="UVM_PH_TRACE" href="../../src_view/base/uvm_phase.svh.html#L775" class="src-code-link" data-src-file="base/uvm_phase.svh" data-src-line="775">UVM_PH_TRACE</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Macro</span></div>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_phase.svh.html#L775" class="src-code-link undoc-src-link" data-src-file="base/uvm_phase.svh" data-src-line="775">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

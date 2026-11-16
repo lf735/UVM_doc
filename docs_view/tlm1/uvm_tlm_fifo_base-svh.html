@@ -133,7 +133,27 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_tlm_fifo_base#(T).Methods" data-target-id="uvm_tlm_fifo_base#(T).Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=7 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_fifo_base#(T).new" data-target-id="uvm_tlm_fifo_base#(T).new" id=link9  >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the normal uvm_component constructor arguments. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_tlm_fifo_base#(T).new" data-target-id="uvm_tlm_fifo_base#(T).new" id=link9  >new</a></td><td class=SDescription>The <i>name</i> and <i>parent</i> are the normal uvm_component constructor arguments. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">build_phase</a></td><td class=SDescription><code>void build_phase(uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">flush</a></td><td class=SDescription><code>void flush()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">size</a></td><td class=SDescription><code>int size()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">put</a></td><td class=SDescription><code> put(T t)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">get</a></td><td class=SDescription><code> get(output T t)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">peek</a></td><td class=SDescription><code> peek(output T t)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">try_put</a></td><td class=SDescription><code>bit try_put(T t)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">try_get</a></td><td class=SDescription><code>bit try_get(output T t)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1010" data-target-id="doc-nav-item-ast-1010">try_peek</a></td><td class=SDescription><code>bit try_peek(output T t)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1011" data-target-id="doc-nav-item-ast-1011">can_put</a></td><td class=SDescription><code>bit can_put()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1012" data-target-id="doc-nav-item-ast-1012">can_get</a></td><td class=SDescription><code>bit can_get()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1013" data-target-id="doc-nav-item-ast-1013">can_peek</a></td><td class=SDescription><code>bit can_peek()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1014" data-target-id="doc-nav-item-ast-1014">ok_to_put</a></td><td class=SDescription><code>uvm_tlm_event ok_to_put()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1015" data-target-id="doc-nav-item-ast-1015">ok_to_get</a></td><td class=SDescription><code>uvm_tlm_event ok_to_get()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1016" data-target-id="doc-nav-item-ast-1016">ok_to_peek</a></td><td class=SDescription><code>uvm_tlm_event ok_to_peek()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1017" data-target-id="doc-nav-item-ast-1017">is_empty</a></td><td class=SDescription><code>bit is_empty()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1018" data-target-id="doc-nav-item-ast-1018">is_full</a></td><td class=SDescription><code>bit is_full()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1019" data-target-id="doc-nav-item-ast-1019">used</a></td><td class=SDescription><code>int used()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -249,6 +269,196 @@
     </table></blockquote>
 <div class=CBody><p>The <i>name</i> and <i>parent</i> are the normal uvm_component constructor arguments.&nbsp; The <i>parent</i> should be <i>null</i> if the uvm_tlm_fifo is going to be used in a statically elaborated construct (e.g., a module).&nbsp; The <i>size</i> indicates the maximum size of the FIFO.&nbsp; A value of zero indicates no upper bound.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_tlm_fifo_base.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_tlm_fifo_base.Additional_APIs" id="uvm_tlm_fifo_base.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_tlm_fifo_base.build_phase">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.build_phase" id="uvm_tlm_fifo_base.build_phase" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L166" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="166">build_phase</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_component">Overrides uvm_component</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">build_phase</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L166" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="166">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_tlm_fifo_base.flush">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.flush" id="uvm_tlm_fifo_base.flush" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L171" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="171">flush</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_component">Overrides uvm_component</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">flush</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L171" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="171">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_tlm_fifo_base.size">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.size" id="uvm_tlm_fifo_base.size" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L175" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="175">size</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">int</span></span> <span class="sv-proto-name"><span class="sv-ident">size</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L175" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="175">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_tlm_fifo_base.put">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.put" id="uvm_tlm_fifo_base.put" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L180" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="180">put</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-proto-name">put</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L180" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="180">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_tlm_fifo_base.get">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.get" id="uvm_tlm_fifo_base.get" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L184" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="184">get</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-proto-name">get</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L184" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="184">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_tlm_fifo_base.peek">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.peek" id="uvm_tlm_fifo_base.peek" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L188" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="188">peek</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-proto-name">peek</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L188" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="188">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_tlm_fifo_base.try_put">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.try_put" id="uvm_tlm_fifo_base.try_put" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L192" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="192">try_put</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-proto-name">try_put</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L192" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="192">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_tlm_fifo_base.try_get">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.try_get" id="uvm_tlm_fifo_base.try_get" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L197" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="197">try_get</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-proto-name">try_get</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L197" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="197">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_tlm_fifo_base.try_peek">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.try_peek" id="uvm_tlm_fifo_base.try_peek" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L202" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="202">try_peek</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-proto-name">try_peek</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L202" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="202">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_tlm_fifo_base.can_put">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.can_put" id="uvm_tlm_fifo_base.can_put" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L207" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="207">can_put</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-proto-name">can_put</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L207" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="207">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_tlm_fifo_base.can_get">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.can_get" id="uvm_tlm_fifo_base.can_get" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L212" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="212">can_get</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-proto-name">can_get</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L212" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="212">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_tlm_fifo_base.can_peek">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.can_peek" id="uvm_tlm_fifo_base.can_peek" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L217" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="217">can_peek</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">can_peek</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L217" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="217">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_tlm_fifo_base.ok_to_put">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.ok_to_put" id="uvm_tlm_fifo_base.ok_to_put" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L222" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="222">ok_to_put</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_tlm_event</span></span> <span class="sv-proto-name"><span class="sv-ident">ok_to_put</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L222" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="222">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1015" data-doc-topic="doc-nav-item-ast-1015" data-anchor="uvm_tlm_fifo_base.ok_to_get">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.ok_to_get" id="uvm_tlm_fifo_base.ok_to_get" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L227" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="227">ok_to_get</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_tlm_event</span></span> <span class="sv-proto-name"><span class="sv-ident">ok_to_get</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L227" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="227">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1016" data-doc-topic="doc-nav-item-ast-1016" data-anchor="uvm_tlm_fifo_base.ok_to_peek">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.ok_to_peek" id="uvm_tlm_fifo_base.ok_to_peek" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L232" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="232">ok_to_peek</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-uvm-type">uvm_tlm_event</span></span> <span class="sv-proto-name"><span class="sv-ident">ok_to_peek</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L232" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="232">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1017" data-doc-topic="doc-nav-item-ast-1017" data-anchor="uvm_tlm_fifo_base.is_empty">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.is_empty" id="uvm_tlm_fifo_base.is_empty" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L237" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="237">is_empty</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">is_empty</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L237" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="237">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1018" data-doc-topic="doc-nav-item-ast-1018" data-anchor="uvm_tlm_fifo_base.is_full">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.is_full" id="uvm_tlm_fifo_base.is_full" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L242" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="242">is_full</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">bit</span></span> <span class="sv-proto-name"><span class="sv-ident">is_full</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L242" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="242">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1019" data-doc-topic="doc-nav-item-ast-1019" data-anchor="uvm_tlm_fifo_base.used">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_tlm_fifo_base.used" id="uvm_tlm_fifo_base.used" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L247" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="247">used</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">int</span></span> <span class="sv-proto-name"><span class="sv-ident">used</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L247" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="247">see source code</a></span></span></p></div>
+</div>
+</div>
+
+<div class="CClass" id="doc-nav-item-ast-1020" data-doc-topic="doc-nav-item-ast-1020" data-anchor="uvm_tlm_event">
+<div class="CTopic" >
+  <h2 class="CTitle"><a name="uvm_tlm_event" id="uvm_tlm_event" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L26" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="26">uvm_tlm_event</a></h2>
+  
+  <div class="class-hierarchy-widget" data-cname="uvm_tlm_event">
+  <div class="hierarchy-widget-header">
+    <div class="hierarchy-widget-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M10 6.5h4M17.5 10v4"/></svg>
+      <span>Class Hierarchy &amp; Topology</span>
+    </div>
+    <div class="hierarchy-widget-badges">
+      <span class="hierarchy-role-tag role-tlm">TLM Channel</span>
+      
+      
+    </div>
+  </div>
+  <div class="hierarchy-lineage-flow">
+    <span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_tlm_event">uvm_tlm_event</span></span>
+  </div>
+  
+</div>
+  <div class="CBody">
+    <p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L26" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="26">see source code</a></span></span></p>
+    
+    
+  </div>
+</div>
+</div>
+<div class="CGroup" id="doc-nav-group-ast-1023" data-doc-topic="doc-nav-group-ast-1023" data-anchor="Additional_Macros"><div class="CTopic"><h3 class="CTitle"><a name="Additional_Macros" id="Additional_Macros">Additional Macros</a></h3></div></div>
+<div class="CMacro" id="doc-nav-item-ast-1021" data-doc-topic="doc-nav-item-ast-1021" data-anchor="UVM_TLM_FIFO_TASK_ERROR">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="UVM_TLM_FIFO_TASK_ERROR" id="UVM_TLM_FIFO_TASK_ERROR" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L23" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="23">UVM_TLM_FIFO_TASK_ERROR</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Macro</span></div>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L23" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="23">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMacro" id="doc-nav-item-ast-1022" data-doc-topic="doc-nav-item-ast-1022" data-anchor="UVM_TLM_FIFO_FUNCTION_ERROR">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="UVM_TLM_FIFO_FUNCTION_ERROR" id="UVM_TLM_FIFO_FUNCTION_ERROR" href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L24" class="src-code-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="24">UVM_TLM_FIFO_FUNCTION_ERROR</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Macro</span></div>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_tlm_fifo_base.svh.html#L24" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_tlm_fifo_base.svh" data-src-line="24">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

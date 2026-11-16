@@ -3022,6 +3022,175 @@
     padding: 1px 7px;
   }
 
+  [data-theme="dark"] .badge-subclass {
+    border-color: rgba(138, 180, 248, 0.32);
+  }
+
+  .badge-ast-extracted {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--surface-alt);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1px 7px;
+  }
+
+  .badge-internal {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent-amber);
+    background: var(--accent-amber-bg);
+    border: 1px solid var(--accent-amber-border);
+    border-radius: 10px;
+    padding: 1px 7px;
+  }
+
+  /* Collapsible Internal Implementation Details (m_* / M_*) */
+  .internal-details-section {
+    margin: 1.5rem 0 2rem 0;
+    border: 1px solid var(--accent-amber-border);
+    border-left: 3px solid var(--accent-amber);
+    border-radius: var(--radius-md);
+    background: var(--surface-alt);
+    overflow: hidden;
+  }
+
+  .internal-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    background: color-mix(in srgb, var(--accent-amber-bg) 55%, var(--surface-alt));
+    transition: background-color 0.15s ease;
+  }
+
+  .internal-section-header::-webkit-details-marker {
+    display: none;
+  }
+
+  .internal-section-header:hover {
+    background: var(--accent-amber-bg);
+  }
+
+  .internal-header-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .internal-chevron {
+    transition: transform 0.18s ease;
+    color: var(--accent-amber);
+    flex-shrink: 0;
+  }
+
+  .internal-details-section[open] .internal-chevron {
+    transform: rotate(90deg);
+  }
+
+  .internal-section-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding: 0.65rem 1rem 0.45rem 1rem;
+    margin: 0;
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .internal-section-note code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+  }
+
+  .internal-section-body {
+    padding: 0.5rem 1rem 1rem 1rem;
+    background: var(--surface-color);
+  }
+
+  [data-theme="dark"] .internal-details-section {
+    background: var(--surface-color);
+    border-color: rgba(253, 214, 99, 0.25);
+    border-left-color: var(--accent-amber);
+  }
+
+  [data-theme="dark"] .internal-section-header {
+    background: rgba(253, 214, 99, 0.08);
+    color: var(--text-main);
+  }
+
+  [data-theme="dark"] .internal-section-header:hover {
+    background: rgba(253, 214, 99, 0.14);
+  }
+
+  [data-theme="dark"] .internal-section-note {
+    background: var(--surface-color);
+    border-top-color: var(--border-subtle);
+  }
+
+  [data-theme="dark"] .internal-section-note code {
+    background: var(--surface-alt);
+    border-color: var(--border-color);
+  }
+
+  .undocumented-notice {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-sm);
+    background: var(--surface-alt);
+    border: 1px solid var(--border-subtle);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .undocumented-notice .undoc-icon {
+    color: var(--text-subtle);
+    flex-shrink: 0;
+  }
+
+  .undocumented-notice .undoc-src-link {
+    color: var(--primary);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .undocumented-notice .undoc-src-link:hover {
+    text-decoration: underline;
+  }
+
+  [data-theme="dark"] .undocumented-notice {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+  }
+
+  [data-theme="dark"] .undocumented-notice .undoc-icon {
+    color: var(--text-muted);
+  }
+
+  [data-theme="dark"] .undocumented-notice .undoc-src-link {
+    color: var(--primary);
+  }
+
   /* Document Breadcrumbs */
   .doc-breadcrumbs {
     position: sticky;

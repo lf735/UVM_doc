@@ -291,12 +291,17 @@ DOC_HEADINGS_MAP = {}
 GLOBAL_DOC_ANCHOR_MAPS = {}
 DOC_BREADCRUMBS_MAP = {}
 
-# Orphan doc files (classes in UVM 1.2 src without Accellera legacy HTML doc pages)
+# Orphan doc files (files in UVM 1.2 src without Accellera legacy HTML doc pages)
 ORPHAN_DOC_FILES = [
     ("base/uvm_spell_chkr-svh.html", "base/uvm_spell_chkr.svh", "uvm_spell_chkr", "Spell Checker Utility"),
     ("base/uvm_resource_specializations-svh.html", "base/uvm_resource_specializations.svh", "uvm_resource_specializations", "Specialized Resource Types"),
+    ("base/uvm_version-svh.html", "base/uvm_version.svh", "uvm_version", "UVM Version & Revision"),
     ("seq/uvm_sequence_builtin-svh.html", "seq/uvm_sequence_builtin.svh", "uvm_sequence_builtin", "Builtin Sequences"),
     ("seq/uvm_sequencer_analysis_fifo-svh.html", "seq/uvm_sequencer_analysis_fifo.svh", "uvm_sequencer_analysis_fifo", "Sequencer Analysis FIFO"),
+    ("macros/uvm_phase_defines-svh.html", "macros/uvm_phase_defines.svh", "uvm_phase_defines", "Phase Defines"),
+    ("macros/uvm_printer_defines-svh.html", "macros/uvm_printer_defines.svh", "uvm_printer_defines", "Printer Defines"),
+    ("macros/uvm_deprecated_defines-svh.html", "macros/uvm_deprecated_defines.svh", "uvm_deprecated_defines", "Deprecated Defines"),
+    ("dpi/uvm_dpi-svh.html", "dpi/uvm_dpi.svh", "uvm_dpi", "DPI-C Interface"),
     ("deprecated/uvm_resource_converter-svh.html", "deprecated/uvm_resource_converter.svh", "uvm_resource_converter", "Resource Converter (Deprecated)")
 ]
 
@@ -889,6 +894,448 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
 
     return w_body
 
+def _clean_ast_doc(doc_obj, fallback):
+    """Extract clean summary text from AST doc object, stripping license boilerplate."""
+    raw = doc_obj.get('summary', '') if isinstance(doc_obj, dict) else (doc_obj or '')
+    if raw:
+        low = raw.lower()
+        if any(tok in low for tok in ('copyright', 'all rights reserved', 'apache license', 'licensed under')):
+            raw = ''
+    return html.escape(raw.strip()) if raw and raw.strip() else fallback
+
+
+def _render_undocumented_notice(root_rel, src_file, src_line):
+    """Render a visual notice linking directly to the SystemVerilog source line when undocumented."""
+    src_href = f"{root_rel}src_view/{src_file}.html#L{src_line}"
+    return (
+        f'<span class="undocumented-notice">'
+        f'<svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">'
+        f'<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'
+        f'<span>Not officially documented &mdash; '
+        f'<a href="{src_href}" class="src-code-link undoc-src-link" data-src-file="{html.escape(src_file)}" data-src-line="{src_line}">see source code</a>'
+        f'</span></span>'
+    )
+
+
+def _is_internal_symbol(name):
+    """Return True for UVM internal implementation symbols (m_*, M_*)."""
+    return bool(name) and (name.startswith('m_') or name.startswith('M_') or name in ('get_t', 'process_container_c', 'sev_id_struct'))
+
+
+def _render_internal_collapsible(title_label, inner_html, section_id=None, note_html=None):
+    """Wrap internal symbols in a clearly marked collapsible <details> section."""
+    note = note_html or 'Internal UVM implementation symbols (<code>m_*</code> / <code>M_*</code>) extracted from source. Not part of the public IEEE 1800.2 / Accellera API.'
+    id_attr = f' id="{section_id}"' if section_id else ''
+    return f'''<details class="internal-details-section"{id_attr}>
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>{html.escape(title_label)}</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">{note}</p>
+  <div class="internal-section-body">
+{inner_html}
+  </div>
+</details>'''
+
+
+def _render_ast_method_entry(cname, mname, minfo, fallback_src, root_rel, item_id, is_internal=False, show_ast_badge=True):
+    """Render a standardized .CMethod block from UVM AST database metadata."""
+    decl = minfo.get('decl') or {}
+    decl_f = decl.get('file') or fallback_src
+    decl_l = decl.get('start_line') or 1
+    impl = minfo.get('impl')
+    impl_l = impl.get('start_line') if isinstance(impl, dict) else None
+    impl_f = impl.get('file') if isinstance(impl, dict) and impl.get('file') else None
+    target_f = impl_f if (impl_f and impl_l) else decl_f
+    target_l = impl_l if (impl_f and impl_l) else decl_l
+
+    m_kind = minfo.get('kind', 'function')
+    m_ret = minfo.get('return_type') or ('void' if m_kind == 'function' else '')
+    m_params = minfo.get('parameters_raw', '()')
+    overridden_from = minfo.get('overridden_from')
+    overridden_by = minfo.get('overridden_by', [])
+
+    badges = []
+    if is_internal:
+        badges.append('<span class="badge-internal" title="Internal UVM implementation member">Internal</span>')
+    if overridden_from:
+        badges.append(f'<span class="badge-override" title="Overrides base method from {html.escape(overridden_from)}">Overrides {html.escape(overridden_from)}</span>')
+    if overridden_by:
+        badges.append(f'<span class="badge-subclass" title="Overridden in {len(overridden_by)} derived class(es)">Overridden in {len(overridden_by)} subclasses</span>')
+
+    meta_bar = f'<div class="method-meta-bar">{"".join(badges)}</div>' if badges else ''
+    ret_part = f'<span class="sv-type">{html.escape(m_ret)}</span> ' if m_ret else ''
+    proto_html = (
+        f'<table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td>'
+        f'<span class="sv-keyword">{html.escape(m_kind)}</span> {ret_part}'
+        f'<span class="sv-proto-name">{html.escape(mname)}</span> '
+        f'<span class="sv-params">{html.escape(m_params)}</span>'
+        f'</td></tr></table>'
+    )
+    m_doc = _clean_ast_doc(minfo.get('doc'), _render_undocumented_notice(root_rel, target_f, target_l))
+    anchor = f"{cname}.{mname}"
+
+    return f'''<div class="CMethod" id="{item_id}" data-doc-topic="{item_id}" data-anchor="{html.escape(anchor)}">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="{html.escape(anchor)}" id="{html.escape(anchor)}" href="{root_rel}src_view/{target_f}.html#L{target_l}" class="src-code-link" data-src-file="{target_f}" data-src-line="{target_l}">{html.escape(mname)}</a></h3>
+  {meta_bar}
+  <blockquote>{proto_html}</blockquote>
+  <div class="CBody"><p>{m_doc}</p></div>
+</div>
+</div>'''
+
+
+def _render_ast_symbol_entry(sym_name, sym_type, sym_file, sym_line, root_rel, item_id, owner_cls=None, extra_desc=None, is_internal=False):
+    """Render a non-method symbol (port, variable, type, macro, function) from AST."""
+    anchor = f"{owner_cls}.{sym_name}" if owner_cls else sym_name
+    cls_css = 'CMacro' if sym_type == 'macro' else ('CPort' if sym_type == 'port' else ('CType' if sym_type == 'type' else 'CVariable'))
+    badges = [f'<span class="badge-subclass">{html.escape(sym_type.capitalize())}</span>']
+    if is_internal:
+        badges.append('<span class="badge-internal" title="Internal UVM implementation symbol">Internal</span>')
+    meta_bar = f'<div class="method-meta-bar">{"".join(badges)}</div>'
+    desc = extra_desc or _render_undocumented_notice(root_rel, sym_file, sym_line)
+
+    return f'''<div class="{cls_css}" id="{item_id}" data-doc-topic="{item_id}" data-anchor="{html.escape(anchor)}">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="{html.escape(anchor)}" id="{html.escape(anchor)}" href="{root_rel}src_view/{sym_file}.html#L{sym_line}" class="src-code-link" data-src-file="{sym_file}" data-src-line="{sym_line}">{html.escape(sym_name)}</a></h3>
+  {meta_bar}
+  <div class="CBody"><p>{desc}</p></div>
+</div>
+</div>'''
+
+
+def _render_ast_class_block(cname, src_rel, root_rel, seq_counter, a_map, is_main=False, is_internal=False):
+    """Render a complete .CClass block (hierarchy, summary, public & internal members) from UVM_DB."""
+    c_info = UVM_DB.get('classes', {}).get(cname, {})
+    c_file = c_info.get('file') or src_rel
+    c_line = c_info.get('start_line', 1)
+    c_doc = _clean_ast_doc(c_info.get('doc'), _render_undocumented_notice(root_rel, c_file, c_line))
+    c_params = c_info.get('parameters_raw')
+    c_parent = c_info.get('parent')
+
+    seq_counter[0] += 1
+    topic_id = 'doc-nav-main' if is_main else f'doc-nav-item-ast-{seq_counter[0]}'
+    a_map[cname] = topic_id
+    if is_main:
+        a_map['MainTopic'] = topic_id
+
+    hierarchy_widget = pbc.render_class_hierarchy_card(
+        cname, root_rel, CLASS_TO_DOC_MAP, UVM_DB, GLOBAL_DOC_ANCHOR_MAPS
+    )
+
+    badges = []
+    if is_internal:
+        badges.append('<span class="badge-internal" title="Internal UVM implementation class">Internal</span>')
+    meta_bar = f'<div class="method-meta-bar">{"".join(badges)}</div>' if badges else ''
+
+    parts = [f'''<div class="CClass" id="{topic_id}" data-doc-topic="{topic_id}" data-anchor="{html.escape(cname)}">
+<div class="CTopic" {"id='MainTopic'" if is_main else ""}>
+  <h2 class="CTitle"><a name="{html.escape(cname)}" id="{html.escape(cname)}" href="{root_rel}src_view/{c_file}.html#L{c_line}" class="src-code-link" data-src-file="{c_file}" data-src-line="{c_line}">{html.escape(cname)}</a></h2>
+  {meta_bar}
+  {hierarchy_widget}
+  <div class="CBody">
+    <p>{c_doc}</p>
+    {f"<p><b>Base Class:</b> <code>{html.escape(c_parent)}</code></p>" if c_parent else ""}
+    {f"<p><b>Parameters:</b> <code>#({html.escape(c_params)})</code></p>" if c_params else ""}
+  </div>
+</div>''']
+
+    methods = c_info.get('methods', {})
+    pub_methods = [(m, mi) for m, mi in methods.items() if not _is_internal_symbol(m)]
+    int_methods = [(m, mi) for m, mi in methods.items() if _is_internal_symbol(m)]
+
+    if pub_methods:
+        sum_id = f"doc-nav-summary-{cname}"
+        parts.append(f'''<div class="Summary ClassSummary" id="{sum_id}" data-anchor="{html.escape(cname)}.Summary">
+<div class="STitle">Methods Summary: {html.escape(cname)}</div>
+<div class="SBorder">
+<table border="0" cellspacing="0" cellpadding="0" class="STable">''')
+        for mname, minfo in pub_methods:
+            seq_counter[0] += 1
+            m_item_id = f"doc-nav-item-ast-{seq_counter[0]}"
+            minfo['_ast_nav_id'] = m_item_id
+            a_map[f"{cname}.{mname}"] = m_item_id
+            m_ret = minfo.get('return_type') or ''
+            m_params = minfo.get('parameters_raw', '()')
+            parts.append(f'''<tr class="SMethod SIndent1">
+  <td class="SEntry"><a href="#{m_item_id}" data-target-id="{m_item_id}">{html.escape(mname)}</a></td>
+  <td class="SDescription"><code>{html.escape(m_ret)} {html.escape(mname)}{html.escape(m_params)}</code></td>
+</tr>''')
+        parts.append('</table></div></div>')
+        parts.append('</div>')
+
+        for mname, minfo in pub_methods:
+            m_id = minfo.get('_ast_nav_id')
+            parts.append(_render_ast_method_entry(cname, mname, minfo, c_file, root_rel, m_id, is_internal=False))
+    else:
+        parts.append('</div>')
+
+    if int_methods:
+        int_html_parts = []
+        for mname, minfo in int_methods:
+            seq_counter[0] += 1
+            m_id = f"doc-nav-item-ast-{seq_counter[0]}"
+            a_map[f"{cname}.{mname}"] = m_id
+            int_html_parts.append(_render_ast_method_entry(cname, mname, minfo, c_file, root_rel, m_id, is_internal=True))
+        parts.append(_render_internal_collapsible(
+            f"Internal Methods: {cname} ({len(int_methods)})",
+            "\n".join(int_html_parts)
+        ))
+
+    block_html = "\n".join(parts)
+    if is_internal:
+        return _render_internal_collapsible(f"Internal Class: {cname}", block_html)
+    return block_html
+
+
+def _inject_rows_into_class_summary(slice_html, sum_rows, cname, seq_counter):
+    """Inject Summary rows into the class's .Summary.ClassSummary STable (not CDescriptionList or Prototype)."""
+    rows_html = "\n".join(sum_rows)
+    cs_m = re.search(r'<div\s+class=["\']Summary ClassSummary["\'][^>]*>', slice_html)
+    if cs_m:
+        tbl_m = re.search(r'<table\b[^>]*class=["\']?STable["\']?[^>]*>', slice_html[cs_m.end():])
+        if tbl_m:
+            pos = cs_m.end() + tbl_m.end()
+            depth = 1
+            tag_re = re.compile(r'<table\b|</table>', re.IGNORECASE)
+            for tm in tag_re.finditer(slice_html, pos):
+                if tm.group(0).lower().startswith('<table'):
+                    depth += 1
+                else:
+                    depth -= 1
+                    if depth == 0:
+                        close_idx = tm.start()
+                        return slice_html[:close_idx] + "\n" + rows_html + "\n" + slice_html[close_idx:]
+    # Class had no ClassSummary block (e.g. only ContentsSummary): create one inside CClass
+    seq_counter[0] += 1
+    sum_id = f"doc-nav-summary-ast-{seq_counter[0]}"
+    sum_anchor = f"{cname}.Summary"
+    new_summary = (
+        f'\n<div class="Summary ClassSummary" id="{sum_id}" data-anchor="{html.escape(sum_anchor)}">'
+        f'<div class="STitle">Summary</div>'
+        f'<div class="SBorder"><table border="0" cellspacing="0" cellpadding="0" class="STable">\n'
+        f'{rows_html}\n</table></div></div>'
+    )
+    end_nd = '<!--END_ND_SUMMARY-->'
+    if end_nd in slice_html:
+        return slice_html.replace(end_nd, end_nd + new_summary, 1)
+    cbody_end = slice_html.find('</div></div></div>')
+    if cbody_end != -1:
+        return slice_html[:cbody_end] + new_summary + slice_html[cbody_end:]
+    return slice_html + new_summary
+
+
+def inject_missing_ast_content(body_content, rel_path, associated_src, root_rel, local_map):
+    """
+    Inject missing AST-extracted members (public into Summary + body with Source AST badge,
+    internal m_* into collapsible Internal section) and missing classes/macros for associated_src.
+    """
+    if not associated_src or associated_src not in UVM_DB.get('files', {}):
+        return body_content
+
+    existing_anchors = set()
+    for m in re.finditer(r'(?:data-anchor|name)=["\']([^"\']+)["\']', body_content):
+        a = m.group(1)
+        existing_anchors.add(a)
+        existing_anchors.add(re.sub(r'#\([^)]*\)', '', a))
+
+    seq_counter = [1000]
+
+    # Pre-index class-scoped non-method symbols (ports, variables, types) from UVM_DB
+    class_extra_syms = {}
+    file_macros_list = []
+    for sym in UVM_DB.get('symbols_index', []):
+        s_cls = sym.get('class')
+        s_type = sym.get('type')
+        s_file = sym.get('file')
+        if s_cls and s_type in ('port', 'variable', 'type'):
+            class_extra_syms.setdefault(s_cls, []).append(sym)
+        elif s_file == associated_src and s_type == 'macro':
+            file_macros_list.append(sym)
+
+    # 1. Identify classes already documented on this page and inject missing members
+    class_blocks = list(re.finditer(r'<div class=["\']CClass["\'][^>]*data-anchor=["\']([^"\']+)["\']', body_content))
+    documented_cnames = []
+    for idx_cb, cb_m in enumerate(class_blocks):
+        raw_cname = cb_m.group(1)
+        clean_cname = re.sub(r'#\([^)]*\)', '', raw_cname).split('#')[0].strip()
+        if clean_cname in UVM_DB.get('classes', {}):
+            documented_cnames.append((cb_m.start(), clean_cname))
+
+    # Process in reverse order so string insertions preserve earlier offsets
+    for idx_pos in range(len(documented_cnames) - 1, -1, -1):
+        cb_start, cname = documented_cnames[idx_pos]
+        cb_end = documented_cnames[idx_pos + 1][0] if (idx_pos + 1 < len(documented_cnames)) else len(body_content)
+        slice_html = body_content[cb_start:cb_end]
+
+        c_info = UVM_DB['classes'][cname]
+        c_file = c_info.get('file') or associated_src
+        methods = c_info.get('methods', {})
+
+        pub_missing_methods = []
+        int_missing_methods = []
+        for mname, minfo in methods.items():
+            if f"{cname}.{mname}" in existing_anchors or mname in existing_anchors:
+                continue
+            if _is_internal_symbol(mname):
+                int_missing_methods.append((mname, minfo))
+            else:
+                pub_missing_methods.append((mname, minfo))
+
+        pub_missing_syms = []
+        int_missing_syms = []
+        for sym in class_extra_syms.get(cname, []):
+            sname = sym.get('short_name') or sym.get('name', '').split('::')[-1]
+            if not sname or f"{cname}.{sname}" in existing_anchors or sname in existing_anchors:
+                continue
+            if _is_internal_symbol(sname):
+                int_missing_syms.append((sname, sym))
+            else:
+                pub_missing_syms.append((sname, sym))
+
+        if not (pub_missing_methods or int_missing_methods or pub_missing_syms or int_missing_syms):
+            continue
+
+        # Build public Summary rows + public detail blocks
+        sum_rows = []
+        pub_detail_blocks = []
+        if pub_missing_methods or pub_missing_syms:
+            seq_counter[0] += 1
+            grp_id = f"doc-nav-group-ast-{seq_counter[0]}"
+            grp_anchor = f"{cname}.Additional_APIs"
+            local_map[grp_anchor] = grp_id
+            sum_rows.append(f'<tr class="SGroup SIndent1"><td class=SEntry><a href="#{grp_id}" data-target-id="{grp_id}">Additional APIs</a></td><td class=SDescription></td></tr>')
+            pub_detail_blocks.append(
+                f'<div class="CGroup" id="{grp_id}" data-doc-topic="{grp_id}" data-anchor="{html.escape(grp_anchor)}">'
+                f'<div class="CTopic"><h3 class="CTitle"><a name="{html.escape(grp_anchor)}" id="{html.escape(grp_anchor)}">Additional APIs</a></h3></div></div>'
+            )
+            for mname, minfo in pub_missing_methods:
+                seq_counter[0] += 1
+                m_id = f"doc-nav-item-ast-{seq_counter[0]}"
+                local_map[f"{cname}.{mname}"] = m_id
+                existing_anchors.add(f"{cname}.{mname}")
+                m_ret = minfo.get('return_type') or ''
+                m_params = minfo.get('parameters_raw', '()')
+                sum_rows.append(f'<tr class="SMethod SIndent2"><td class=SEntry><a href="#{m_id}" data-target-id="{m_id}">{html.escape(mname)}</a></td><td class=SDescription><code>{html.escape(m_ret)} {html.escape(mname)}{html.escape(m_params)}</code></td></tr>')
+                pub_detail_blocks.append(_render_ast_method_entry(cname, mname, minfo, c_file, root_rel, m_id, is_internal=False))
+
+            for sname, sym in pub_missing_syms:
+                seq_counter[0] += 1
+                s_id = f"doc-nav-item-ast-{seq_counter[0]}"
+                local_map[f"{cname}.{sname}"] = s_id
+                existing_anchors.add(f"{cname}.{sname}")
+                stype = sym.get('type', 'variable')
+                sfile = sym.get('file') or c_file
+                sline = sym.get('line') or 1
+                sum_rows.append(f'<tr class="SMethod SIndent2"><td class=SEntry><a href="#{s_id}" data-target-id="{s_id}">{html.escape(sname)}</a></td><td class=SDescription>{html.escape(stype)} in <code>{html.escape(cname)}</code></td></tr>')
+                pub_detail_blocks.append(_render_ast_symbol_entry(sname, stype, sfile, sline, root_rel, s_id, owner_cls=cname, is_internal=False))
+
+        # Inject Summary rows into the class's .Summary.ClassSummary STable
+        if sum_rows:
+            slice_html = _inject_rows_into_class_summary(slice_html, sum_rows, cname, seq_counter)
+
+        # Build collapsible Internal section if any m_* members are missing
+        internal_block_html = ""
+        if int_missing_methods or int_missing_syms:
+            int_parts = []
+            for mname, minfo in int_missing_methods:
+                seq_counter[0] += 1
+                m_id = f"doc-nav-item-ast-{seq_counter[0]}"
+                local_map[f"{cname}.{mname}"] = m_id
+                existing_anchors.add(f"{cname}.{mname}")
+                int_parts.append(_render_ast_method_entry(cname, mname, minfo, c_file, root_rel, m_id, is_internal=True))
+            for sname, sym in int_missing_syms:
+                seq_counter[0] += 1
+                s_id = f"doc-nav-item-ast-{seq_counter[0]}"
+                local_map[f"{cname}.{sname}"] = s_id
+                existing_anchors.add(f"{cname}.{sname}")
+                int_parts.append(_render_ast_symbol_entry(
+                    sname, sym.get('type', 'variable'), sym.get('file') or c_file, sym.get('line') or 1,
+                    root_rel, s_id, owner_cls=cname, is_internal=True
+                ))
+            total_int = len(int_missing_methods) + len(int_missing_syms)
+            internal_block_html = _render_internal_collapsible(
+                f"Internal / Implementation Details: {cname} ({total_int})",
+                "\n".join(int_parts)
+            )
+
+        appended_html = "\n".join(pub_detail_blocks) + ("\n" + internal_block_html if internal_block_html else "")
+        if appended_html.strip():
+            # Insert before trailing </div><!--Content--> if at end of document
+            end_marker = '</div><!--Content-->'
+            if idx_pos == len(documented_cnames) - 1 and end_marker in slice_html:
+                slice_html = slice_html.replace(end_marker, "\n" + appended_html + "\n" + end_marker, 1)
+            else:
+                slice_html = slice_html + "\n" + appended_html
+
+        body_content = body_content[:cb_start] + slice_html + body_content[cb_end:]
+
+    # 2. Inject missing classes defined in associated_src (e.g. uvm_callbacks_base, uvm_test_done_objection, m_*)
+    file_classes = UVM_DB['files'][associated_src].get('classes', [])
+    missing_file_classes = [
+        c for c in file_classes
+        if c not in existing_anchors and not re.match(r'^uvm_.*_(port|export|imp)$', c)
+    ]
+    missing_class_blocks = []
+    for mc in missing_file_classes:
+        is_int_cls = _is_internal_symbol(mc)
+        missing_class_blocks.append(_render_ast_class_block(mc, associated_src, root_rel, seq_counter, local_map, is_main=False, is_internal=is_int_cls))
+        existing_anchors.add(mc)
+
+    # 3. Inject missing macros defined in associated_src
+    file_macros = UVM_DB['files'][associated_src].get('macros', [])
+    pub_macro_blocks = []
+    int_macro_blocks = []
+    for mname in file_macros:
+        if mname in existing_anchors or f"`{mname}" in existing_anchors:
+            continue
+        m_info = UVM_DB.get('macros', {}).get(mname, {})
+        m_line = (m_info.get('start_line') or m_info.get('line') or 1) if isinstance(m_info, dict) else 1
+        m_params = m_info.get('params_raw', '') if isinstance(m_info, dict) else ''
+        m_doc = _clean_ast_doc(m_info.get('doc') if isinstance(m_info, dict) else None, _render_undocumented_notice(root_rel, associated_src, m_line))
+        if m_params:
+            m_doc = f"<code>`{html.escape(mname)}({html.escape(m_params)})</code> &mdash; {m_doc}"
+        seq_counter[0] += 1
+        mac_id = f"doc-nav-item-ast-{seq_counter[0]}"
+        local_map[mname] = mac_id
+        existing_anchors.add(mname)
+        is_int_mac = _is_internal_symbol(mname)
+        block = _render_ast_symbol_entry(mname, 'macro', associated_src, m_line, root_rel, mac_id, extra_desc=m_doc, is_internal=is_int_mac)
+        if is_int_mac:
+            int_macro_blocks.append(block)
+        else:
+            pub_macro_blocks.append(block)
+
+    extra_tail = []
+    if missing_class_blocks:
+        extra_tail.extend(missing_class_blocks)
+    if pub_macro_blocks:
+        seq_counter[0] += 1
+        mac_grp_id = f"doc-nav-group-ast-{seq_counter[0]}"
+        extra_tail.append(
+            f'<div class="CGroup" id="{mac_grp_id}" data-doc-topic="{mac_grp_id}" data-anchor="Additional_Macros">'
+            f'<div class="CTopic"><h3 class="CTitle"><a name="Additional_Macros" id="Additional_Macros">Additional Macros</a></h3></div></div>'
+        )
+        extra_tail.extend(pub_macro_blocks)
+    if int_macro_blocks:
+        extra_tail.append(_render_internal_collapsible(
+            f"Internal Macros ({len(int_macro_blocks)})",
+            "\n".join(int_macro_blocks)
+        ))
+
+    if extra_tail:
+        tail_html = "\n".join(extra_tail)
+        if '</div><!--Content-->' in body_content:
+            body_content = body_content.replace('</div><!--Content-->', "\n" + tail_html + "\n</div><!--Content-->", 1)
+        else:
+            body_content = body_content + "\n" + tail_html
+
+    return body_content
+
+
 def modernize_doc_files():
     """Modernize all 146 doc files from uvm-1.2/docs/html/files/ into docs_view/."""
     print("Modernizing UVM documentation pages...")
@@ -951,6 +1398,12 @@ def modernize_doc_files():
                         clean_a = re.sub(r'#\([^)]*\)', '', a_name)
                         if clean_a != a_name:
                             a_map[clean_a] = target_id
+
+            assoc_src = DOC_TO_SRC_MAP.get(rel_path)
+            if assoc_src and assoc_src in UVM_DB.get('files', {}):
+                for fc in UVM_DB['files'][assoc_src].get('classes', []):
+                    if fc not in a_map:
+                        a_map[fc] = fc
 
             global_doc_anchor_maps[rel_path] = a_map
 
@@ -1096,6 +1549,9 @@ def modernize_doc_files():
 
             body_content = re.sub(r'href=["\']([^"\']+)["\']', rewrite_doc_href, body_content)
 
+            # Inject missing AST-extracted members, classes, macros, and collapsible internal sections
+            body_content = inject_missing_ast_content(body_content, rel_path, associated_src, root_rel, local_map)
+
             # Syntax highlight documentation code blocks (<pre>)
             body_content = process_doc_code_blocks(body_content)
 
@@ -1233,6 +1689,139 @@ def generate_orphan_doc_pages():
         seq = 0
         a_map = {}
 
+        if src_rel == 'dpi/uvm_dpi.svh':
+            dpi_db = UVM_DB.get('dpi', {})
+            bindings = dpi_db.get('bindings', [])
+            c_funcs = dpi_db.get('c_functions', [])
+            body_parts.append(f'''<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_dpi">
+<div class="CTopic" id="MainTopic">
+  <h1 class="CTitle"><a name="uvm_dpi" id="uvm_dpi" href="{root_rel}src_view/{src_rel}.html#L1" class="src-code-link" data-src-file="{src_rel}" data-src-line="1">{html.escape(page_title)}</a></h1>
+  <div class="method-meta-bar"><span class="badge-subclass">{len(bindings)} SV&harr;C Bindings</span></div>
+  <div class="CBody"><p>SystemVerilog <code>import "DPI-C"</code> declarations and C/C++ simulator implementations extracted from <code>src/dpi/</code>.</p></div>
+</div>
+</div>''')
+            if bindings:
+                body_parts.append('<div class="Summary" id="doc-nav-summary" data-anchor="uvm_dpi.Summary"><div class="STitle">DPI-C Imports Summary</div><div class="SBorder"><table border="0" cellspacing="0" cellpadding="0" class="STable">')
+                for b in bindings:
+                    sv = b.get('sv_import', {})
+                    bname = sv.get('name', '')
+                    if not bname:
+                        continue
+                    seq += 1
+                    bid = f"doc-nav-item-dpi-{seq}"
+                    sv['_nav_id'] = bid
+                    a_map[bname] = bid
+                    ret = sv.get('return_type') or 'void'
+                    params = sv.get('parameters_raw') or ''
+                    body_parts.append(f'<tr class="SMethod SIndent1"><td class="SEntry"><a href="#{bid}" data-target-id="{bid}">{html.escape(bname)}</a></td><td class="SDescription"><code>{html.escape(ret)} {html.escape(bname)}({html.escape(params)})</code></td></tr>')
+                body_parts.append('</table></div></div>')
+                body_parts.append('<div class="CGroup"><div class="CTopic"><h2 class="CTitle">DPI-C Bindings (SystemVerilog &harr; C)</h2></div></div>')
+                for b in bindings:
+                    sv = b.get('sv_import', {})
+                    bname = sv.get('name', '')
+                    if not bname:
+                        continue
+                    bid = sv.get('_nav_id')
+                    sv_f = sv.get('file') or src_rel
+                    sv_l = sv.get('line') or 1
+                    ret = sv.get('return_type') or 'void'
+                    params = sv.get('parameters_raw') or ''
+                    bdoc = _clean_ast_doc(sv.get('doc'), f"DPI-C imported function <code>{html.escape(bname)}</code>.")
+                    c_impls = b.get('c_implementations', [])
+                    c_links = []
+                    for ci in c_impls:
+                        cf = ci.get('file', '')
+                        cl = ci.get('line', 1)
+                        tgt = ci.get('simulator_target', 'c')
+                        c_links.append(f'<a href="{root_rel}src_view/{cf}.html#L{cl}" class="src-code-link badge-subclass" data-src-file="{cf}" data-src-line="{cl}">{html.escape(tgt)}: {html.escape(cf)}#L{cl}</a>')
+                    c_links_html = f'<div class="method-meta-bar">{"".join(c_links)}</div>' if c_links else ''
+                    proto_html = f'<table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">{html.escape(ret)}</span> <span class="sv-proto-name">{html.escape(bname)}</span> <span class="sv-params">({html.escape(params)})</span></td></tr></table>'
+                    body_parts.append(f'''<div class="CMethod" id="{bid}" data-doc-topic="{bid}" data-anchor="{html.escape(bname)}">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="{html.escape(bname)}" id="{html.escape(bname)}" href="{root_rel}src_view/{sv_f}.html#L{sv_l}" class="src-code-link" data-src-file="{sv_f}" data-src-line="{sv_l}">{html.escape(bname)}</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  {c_links_html}
+  <blockquote>{proto_html}</blockquote>
+  <div class="CBody"><p>{bdoc}</p></div>
+</div>
+</div>''')
+            if c_funcs:
+                c_parts = []
+                for cf_info in c_funcs:
+                    cname_fn = cf_info.get('name', '')
+                    if not cname_fn:
+                        continue
+                    seq += 1
+                    cid = f"doc-nav-item-dpi-c-{seq}"
+                    cfile = cf_info.get('file', 'dpi/uvm_common.c')
+                    cline = cf_info.get('line', 1)
+                    cret = cf_info.get('return_type', 'void')
+                    cparams = cf_info.get('parameters', '')
+                    ctgt = cf_info.get('simulator_target', 'generic')
+                    cdoc = _clean_ast_doc(cf_info.get('doc'), f"C function <code>{html.escape(cname_fn)}({html.escape(cparams)})</code> &rarr; <code>{html.escape(cret)}</code> ({html.escape(ctgt)}).")
+                    c_parts.append(_render_ast_symbol_entry(cname_fn, 'function', cfile, cline, root_rel, cid, owner_cls='c', extra_desc=cdoc, is_internal=True))
+                if c_parts:
+                    body_parts.append(_render_internal_collapsible(
+                        f"C/C++ Implementation Functions ({len(c_parts)})",
+                        "\n".join(c_parts),
+                        note_html="Low-level C/C++ DPI helper and simulator-specific functions in <code>src/dpi/</code>."
+                    ))
+        elif not classes_in_file:
+            # File-level macros / functions / constants (e.g. uvm_version.svh, macros/*_defines.svh)
+            file_info = UVM_DB.get('files', {}).get(src_rel, {})
+            f_macros = file_info.get('macros', [])
+            f_syms = [s for s in UVM_DB.get('symbols_index', []) if s.get('file') == src_rel and s.get('type') != 'macro']
+            body_parts.append(f'''<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="{html.escape(main_cname)}">
+<div class="CTopic" id="MainTopic">
+  <h1 class="CTitle"><a name="{html.escape(main_cname)}" id="{html.escape(main_cname)}" href="{root_rel}src_view/{src_rel}.html#L1" class="src-code-link" data-src-file="{src_rel}" data-src-line="1">{html.escape(page_title)}</a></h1>
+  <div class="CBody"><p>Definitions and macros from <code>src/{html.escape(src_rel)}</code>.</p></div>
+</div>
+</div>''')
+            pub_items = []
+            int_items = []
+            sum_rows = []
+            for mname in f_macros:
+                m_info = UVM_DB.get('macros', {}).get(mname, {})
+                mline = (m_info.get('start_line') or m_info.get('line') or 1) if isinstance(m_info, dict) else 1
+                mparams = m_info.get('params_raw', '') if isinstance(m_info, dict) else ''
+                mdoc = _clean_ast_doc(m_info.get('doc') if isinstance(m_info, dict) else None, _render_undocumented_notice(root_rel, src_rel, mline))
+                if mparams:
+                    mdoc = f"<code>`{html.escape(mname)}({html.escape(mparams)})</code> &mdash; {mdoc}"
+                seq += 1
+                mid = f"doc-nav-item-ast-{seq}"
+                a_map[mname] = mid
+                is_int = _is_internal_symbol(mname)
+                entry = _render_ast_symbol_entry(mname, 'macro', src_rel, mline, root_rel, mid, extra_desc=mdoc, is_internal=is_int)
+                if is_int:
+                    int_items.append(entry)
+                else:
+                    sum_rows.append(f'<tr class="SMethod SIndent1"><td class="SEntry"><a href="#{mid}" data-target-id="{mid}">`{html.escape(mname)}</a></td><td class="SDescription">Macro (line {mline})</td></tr>')
+                    pub_items.append(entry)
+            for s in f_syms:
+                sname = s.get('short_name') or s.get('name', '')
+                if not sname:
+                    continue
+                seq += 1
+                sid = f"doc-nav-item-ast-{seq}"
+                a_map[sname] = sid
+                is_int = _is_internal_symbol(sname)
+                entry = _render_ast_symbol_entry(sname, s.get('type', 'function'), src_rel, s.get('line', 1), root_rel, sid, is_internal=is_int)
+                if is_int:
+                    int_items.append(entry)
+                else:
+                    sum_rows.append(f'<tr class="SMethod SIndent1"><td class="SEntry"><a href="#{sid}" data-target-id="{sid}">{html.escape(sname)}</a></td><td class="SDescription">{html.escape(s.get("type", "symbol"))} (line {s.get("line", 1)})</td></tr>')
+                    pub_items.append(entry)
+            if sum_rows:
+                body_parts.append(f'<div class="Summary" id="doc-nav-summary" data-anchor="{html.escape(main_cname)}.Summary"><div class="STitle">Summary</div><div class="SBorder"><table border="0" cellspacing="0" cellpadding="0" class="STable">{"".join(sum_rows)}</table></div></div>')
+            if pub_items:
+                body_parts.append(f'<div class="CGroup"><div class="CTopic"><h2 class="CTitle">Definitions</h2></div></div>')
+                body_parts.extend(pub_items)
+            if int_items:
+                body_parts.append(_render_internal_collapsible(
+                    f"Internal / Implementation Macros & Symbols ({len(int_items)})",
+                    "\n".join(int_items)
+                ))
+
         for c_idx, cname in enumerate(classes_in_file):
             c_info = UVM_DB.get('classes', {}).get(cname, {})
             c_line = c_info.get('start_line', 1)
@@ -1266,15 +1855,17 @@ def generate_orphan_doc_pages():
 </div>
 </div>''')
 
-            # Summary table of methods
+            # Summary table of methods (split public vs internal m_*)
             methods = c_info.get('methods', {})
-            if methods:
+            pub_methods = [(m, mi) for m, mi in methods.items() if not _is_internal_symbol(m)]
+            int_methods = [(m, mi) for m, mi in methods.items() if _is_internal_symbol(m)]
+            if pub_methods:
                 sum_id = f"doc-nav-summary-{cname}"
                 body_parts.append(f'''<div class="Summary" id="{sum_id}" data-anchor="{cname}.Summary">
 <div class="STitle">Methods Summary: {cname}</div>
 <div class="SBody">
 <table border="0" cellspacing="0" cellpadding="0" class="STable">''')
-                for mname, minfo in methods.items():
+                for mname, minfo in pub_methods:
                     seq += 1
                     m_item_id = f"doc-nav-item-m-{seq}"
                     minfo['_nav_id'] = m_item_id
@@ -1290,38 +1881,21 @@ def generate_orphan_doc_pages():
 
                 # Method definitions
                 body_parts.append(f'''<div class="CGroup"><div class="CTopic"><h2 class="CTitle">Methods: {cname}</h2></div></div>''')
-                for mname, minfo in methods.items():
+                for mname, minfo in pub_methods:
                     m_id = minfo.get('_nav_id', f"doc-nav-item-m-{seq}")
-                    decl_l = minfo['decl']['start_line']
-                    impl = minfo.get('impl')
-                    impl_l = impl['start_line'] if impl else None
-                    impl_f = impl['file'] if impl and impl.get('file') else None
-                    target_m_f = impl_f if (impl_f and impl_l) else src_rel
-                    target_m_l = impl_l if (impl_f and impl_l) else decl_l
-                    m_kind = minfo.get('kind', 'function')
-                    m_ret = minfo.get('return_type') or 'void'
-                    m_params = minfo.get('parameters_raw', '()')
-                    overridden_from = minfo.get('overridden_from')
-                    overridden_by = minfo.get('overridden_by', [])
+                    body_parts.append(_render_ast_method_entry(cname, mname, minfo, src_rel, root_rel, m_id, is_internal=False, show_ast_badge=False))
 
-                    badges = []
-                    if overridden_from:
-                        badges.append(f'<span class="badge-override" title="Overrides base method from {overridden_from}">Overrides {overridden_from}</span>')
-                    if overridden_by:
-                        badges.append(f'<span class="badge-subclass" title="Overridden in {len(overridden_by)} derived class(es)">Overridden in {len(overridden_by)} subclasses</span>')
-
-                    meta_bar = f'<div class="method-meta-bar">{"".join(badges)}</div>' if badges else ''
-                    proto_html = f'<table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">{m_kind}</span> <span class="sv-type">{m_ret}</span> <span class="sv-proto-name">{mname}</span> <span class="sv-params">{m_params}</span></td></tr></table>'
-                    m_doc = minfo.get('doc', {}).get('summary', '') if minfo.get('doc') else f"Method <code>{mname}</code> of class <code>{cname}</code>."
-
-                    body_parts.append(f'''<div class="CMethod" id="{m_id}" data-doc-topic="{m_id}" data-anchor="{cname}.{mname}">
-<div class="CTopic">
-  <h3 class="CTitle"><a name="{cname}.{mname}" id="{cname}.{mname}" href="{root_rel}src_view/{target_m_f}.html#L{target_m_l}" class="src-code-link" data-src-file="{target_m_f}" data-src-line="{target_m_l}">{mname}</a></h3>
-  {meta_bar}
-  <blockquote>{proto_html}</blockquote>
-  <div class="CBody"><p>{m_doc}</p></div>
-</div>
-</div>''')
+            if int_methods:
+                int_parts = []
+                for mname, minfo in int_methods:
+                    seq += 1
+                    m_id = f"doc-nav-item-m-{seq}"
+                    a_map[f"{cname}.{mname}"] = m_id
+                    int_parts.append(_render_ast_method_entry(cname, mname, minfo, src_rel, root_rel, m_id, is_internal=True, show_ast_badge=True))
+                body_parts.append(_render_internal_collapsible(
+                    f"Internal / Implementation Details: {cname} ({len(int_methods)})",
+                    "\n".join(int_parts)
+                ))
 
         body_parts.append('</div>')
         body_content = "\n".join(body_parts)
@@ -1462,19 +2036,34 @@ def parse_navigation_and_categories():
         if cat.get('title') == 'Base':
             cat['children'].extend([
                 {'type': 'file', 'title': 'uvm_spell_chkr', 'href': 'docs_view/base/uvm_spell_chkr-svh.html'},
-                {'type': 'file', 'title': 'uvm_resource_specializations', 'href': 'docs_view/base/uvm_resource_specializations-svh.html'}
+                {'type': 'file', 'title': 'uvm_resource_specializations', 'href': 'docs_view/base/uvm_resource_specializations-svh.html'},
+                {'type': 'file', 'title': 'uvm_version', 'href': 'docs_view/base/uvm_version-svh.html'}
             ])
         elif cat.get('title') == 'Sequences':
             cat['children'].extend([
                 {'type': 'file', 'title': 'uvm_sequence_builtin', 'href': 'docs_view/seq/uvm_sequence_builtin-svh.html'},
                 {'type': 'file', 'title': 'uvm_sequencer_analysis_fifo', 'href': 'docs_view/seq/uvm_sequencer_analysis_fifo-svh.html'}
             ])
+        elif cat.get('title') == 'Macros':
+            cat['children'].extend([
+                {'type': 'file', 'title': 'Phase Defines', 'href': 'docs_view/macros/uvm_phase_defines-svh.html'},
+                {'type': 'file', 'title': 'Printer Defines', 'href': 'docs_view/macros/uvm_printer_defines-svh.html'}
+            ])
+
+    categories.append({
+        'type': 'group',
+        'title': 'DPI-C Interface',
+        'children': [
+            {'type': 'file', 'title': 'uvm_dpi', 'href': 'docs_view/dpi/uvm_dpi-svh.html'}
+        ]
+    })
 
     categories.append({
         'type': 'group',
         'title': 'Deprecated',
         'children': [
-            {'type': 'file', 'title': 'uvm_resource_converter', 'href': 'docs_view/deprecated/uvm_resource_converter-svh.html'}
+            {'type': 'file', 'title': 'uvm_resource_converter', 'href': 'docs_view/deprecated/uvm_resource_converter-svh.html'},
+            {'type': 'file', 'title': 'uvm_deprecated_defines', 'href': 'docs_view/macros/uvm_deprecated_defines-svh.html'}
         ]
     })
     return categories

@@ -155,7 +155,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_pre_reset_phase.Methods" data-target-id="uvm_pre_reset_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=3 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pre_reset_phase.get" data-target-id="uvm_pre_reset_phase.get" id=link21  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pre_reset_phase.get" data-target-id="uvm_pre_reset_phase.get" id=link21  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1045" data-target-id="doc-nav-group-ast-1045">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1046" data-target-id="doc-nav-item-ast-1046">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1047" data-target-id="doc-nav-item-ast-1047">new</a></td><td class=SDescription><code>void new(string name=&quot;pre_reset&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1048" data-target-id="doc-nav-item-ast-1048">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -176,7 +181,32 @@
 
 
  <!--CONTENT index=4 -->
-<div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_reset_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_reset_phase" id="uvm_reset_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L122" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="122">uvm_reset_phase</a></h2><div class=CBody><p>Reset is asserted.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link31  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.reset_phase" data-target-id="uvm_component.reset_phase" class=LMethod id=link32  >uvm_component::reset_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the hardware reset signal is ready to be asserted.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Assert reset signals.</li><li>Components connected to virtual interfaces should drive their output to their specified reset or idle value.</li><li>Components and environments should initialize their state variables.</li><li>Clock generators start generating active edges.</li><li>De-assert the reset signal(s)  just before exit.</li><li>Wait for the reset signal(s) to be de-asserted.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>Reset signal has just been de-asserted.</li><li>Main or base clock is working and stable.</li><li>At least one active clock edge has occurred.</li><li>Output signals and state variables have been initialized.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1045" data-doc-topic="doc-nav-group-ast-1045" data-anchor="uvm_pre_reset_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_pre_reset_phase.Additional_APIs" id="uvm_pre_reset_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1046" data-doc-topic="doc-nav-item-ast-1046" data-anchor="uvm_pre_reset_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_reset_phase.exec_task" id="uvm_pre_reset_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L75" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="75">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L75" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="75">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1047" data-doc-topic="doc-nav-item-ast-1047" data-anchor="uvm_pre_reset_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_reset_phase.new" id="uvm_pre_reset_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L88" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="88">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">pre_reset</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L88" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="88">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1048" data-doc-topic="doc-nav-item-ast-1048" data-anchor="uvm_pre_reset_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_reset_phase.get_type_name" id="uvm_pre_reset_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L91" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="91">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L91" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="91">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_reset_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_reset_phase" id="uvm_reset_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L122" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="122">uvm_reset_phase</a></h2><div class=CBody><p>Reset is asserted.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link31  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.reset_phase" data-target-id="uvm_component.reset_phase" class=LMethod id=link32  >uvm_component::reset_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the hardware reset signal is ready to be asserted.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Assert reset signals.</li><li>Components connected to virtual interfaces should drive their output to their specified reset or idle value.</li><li>Components and environments should initialize their state variables.</li><li>Clock generators start generating active edges.</li><li>De-assert the reset signal(s)  just before exit.</li><li>Wait for the reset signal(s) to be de-asserted.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>Reset signal has just been de-asserted.</li><li>Main or base clock is working and stable.</li><li>At least one active clock edge has occurred.</li><li>Output signals and state variables have been initialized.</li></ul>
 
 <!--START_ND_SUMMARY index=4-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-4" data-anchor="uvm_reset_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -220,7 +250,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_reset_phase.Methods" data-target-id="uvm_reset_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=6 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reset_phase.get" data-target-id="uvm_reset_phase.get" id=link30  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_reset_phase.get" data-target-id="uvm_reset_phase.get" id=link30  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1041" data-target-id="doc-nav-group-ast-1041">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1042" data-target-id="doc-nav-item-ast-1042">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1043" data-target-id="doc-nav-item-ast-1043">new</a></td><td class=SDescription><code>void new(string name=&quot;reset&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1044" data-target-id="doc-nav-item-ast-1044">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -241,7 +276,32 @@
 
 
  <!--CONTENT index=7 -->
-<div class="CClass" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_post_reset_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_post_reset_phase" id="uvm_post_reset_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L163" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="163">uvm_post_reset_phase</a></h2><div class=CBody><p>After reset is de-asserted.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link39  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.post_reset_phase" data-target-id="uvm_component.post_reset_phase" class=LMethod id=link40  >uvm_component::post_reset_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the DUT reset signal has been de-asserted.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Components should start behavior appropriate for reset being inactive.&nbsp; For example, components may start to transmit idle transactions or interface training and rate negotiation.&nbsp; This behavior typically continues beyond the end of this phase.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>The testbench and the DUT are in a known, active state.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1041" data-doc-topic="doc-nav-group-ast-1041" data-anchor="uvm_reset_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_reset_phase.Additional_APIs" id="uvm_reset_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1042" data-doc-topic="doc-nav-item-ast-1042" data-anchor="uvm_reset_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reset_phase.exec_task" id="uvm_reset_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L123" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="123">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L123" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="123">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1043" data-doc-topic="doc-nav-item-ast-1043" data-anchor="uvm_reset_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reset_phase.new" id="uvm_reset_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L136" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="136">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">reset</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L136" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="136">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1044" data-doc-topic="doc-nav-item-ast-1044" data-anchor="uvm_reset_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_reset_phase.get_type_name" id="uvm_reset_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L139" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="139">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L139" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="139">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_post_reset_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_post_reset_phase" id="uvm_post_reset_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L163" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="163">uvm_post_reset_phase</a></h2><div class=CBody><p>After reset is de-asserted.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link39  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.post_reset_phase" data-target-id="uvm_component.post_reset_phase" class=LMethod id=link40  >uvm_component::post_reset_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the DUT reset signal has been de-asserted.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Components should start behavior appropriate for reset being inactive.&nbsp; For example, components may start to transmit idle transactions or interface training and rate negotiation.&nbsp; This behavior typically continues beyond the end of this phase.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>The testbench and the DUT are in a known, active state.</li></ul>
 
 <!--START_ND_SUMMARY index=7-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-7" data-anchor="uvm_post_reset_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -285,7 +345,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_post_reset_phase.Methods" data-target-id="uvm_post_reset_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=9 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_post_reset_phase.get" data-target-id="uvm_post_reset_phase.get" id=link38  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_post_reset_phase.get" data-target-id="uvm_post_reset_phase.get" id=link38  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1037" data-target-id="doc-nav-group-ast-1037">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1038" data-target-id="doc-nav-item-ast-1038">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1039" data-target-id="doc-nav-item-ast-1039">new</a></td><td class=SDescription><code>void new(string name=&quot;post_reset&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1040" data-target-id="doc-nav-item-ast-1040">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -306,7 +371,32 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CClass" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_pre_configure_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_pre_configure_phase" id="uvm_pre_configure_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L206" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="206">uvm_pre_configure_phase</a></h2><div class=CBody><p>Before the DUT is configured by the SW.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link47  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.pre_configure_phase" data-target-id="uvm_component.pre_configure_phase" class=LMethod id=link48  >uvm_component::pre_configure_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the DUT has been completed reset and is ready to be configured.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Procedurally modify the DUT configuration information as described in the environment (and that will be eventually uploaded into the DUT).</li><li>Wait for components required for DUT configuration to complete training and rate negotiation.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>DUT configuration information is defined.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1037" data-doc-topic="doc-nav-group-ast-1037" data-anchor="uvm_post_reset_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_post_reset_phase.Additional_APIs" id="uvm_post_reset_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1038" data-doc-topic="doc-nav-item-ast-1038" data-anchor="uvm_post_reset_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_reset_phase.exec_task" id="uvm_post_reset_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L164" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="164">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L164" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="164">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1039" data-doc-topic="doc-nav-item-ast-1039" data-anchor="uvm_post_reset_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_reset_phase.new" id="uvm_post_reset_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L177" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="177">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">post_reset</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L177" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="177">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1040" data-doc-topic="doc-nav-item-ast-1040" data-anchor="uvm_post_reset_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_reset_phase.get_type_name" id="uvm_post_reset_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L180" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="180">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L180" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="180">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_pre_configure_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_pre_configure_phase" id="uvm_pre_configure_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L206" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="206">uvm_pre_configure_phase</a></h2><div class=CBody><p>Before the DUT is configured by the SW.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link47  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.pre_configure_phase" data-target-id="uvm_component.pre_configure_phase" class=LMethod id=link48  >uvm_component::pre_configure_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the DUT has been completed reset and is ready to be configured.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Procedurally modify the DUT configuration information as described in the environment (and that will be eventually uploaded into the DUT).</li><li>Wait for components required for DUT configuration to complete training and rate negotiation.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>DUT configuration information is defined.</li></ul>
 
 <!--START_ND_SUMMARY index=10-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-10" data-anchor="uvm_pre_configure_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -350,7 +440,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_pre_configure_phase.Methods" data-target-id="uvm_pre_configure_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=12 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pre_configure_phase.get" data-target-id="uvm_pre_configure_phase.get" id=link46  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pre_configure_phase.get" data-target-id="uvm_pre_configure_phase.get" id=link46  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1033" data-target-id="doc-nav-group-ast-1033">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1034" data-target-id="doc-nav-item-ast-1034">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1035" data-target-id="doc-nav-item-ast-1035">new</a></td><td class=SDescription><code>void new(string name=&quot;pre_configure&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1036" data-target-id="doc-nav-item-ast-1036">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -371,7 +466,32 @@
 
 
  <!--CONTENT index=13 -->
-<div class="CClass" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_configure_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_configure_phase" id="uvm_configure_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L248" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="248">uvm_configure_phase</a></h2><div class=CBody><p>The SW configures the DUT.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link55  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.configure_phase" data-target-id="uvm_component.configure_phase" class=LMethod id=link56  >uvm_component::configure_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the DUT is ready to be configured.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Components required for DUT configuration execute transactions normally.</li><li>Set signals and program the DUT and memories (e.g. read/write operations and sequences) to match the desired configuration for the test and environment.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>The DUT has been configured and is ready to operate normally.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1033" data-doc-topic="doc-nav-group-ast-1033" data-anchor="uvm_pre_configure_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_pre_configure_phase.Additional_APIs" id="uvm_pre_configure_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1034" data-doc-topic="doc-nav-item-ast-1034" data-anchor="uvm_pre_configure_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_configure_phase.exec_task" id="uvm_pre_configure_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L207" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="207">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L207" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="207">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1035" data-doc-topic="doc-nav-item-ast-1035" data-anchor="uvm_pre_configure_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_configure_phase.new" id="uvm_pre_configure_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L220" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="220">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">pre_configure</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L220" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="220">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1036" data-doc-topic="doc-nav-item-ast-1036" data-anchor="uvm_pre_configure_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_configure_phase.get_type_name" id="uvm_pre_configure_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L223" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="223">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L223" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="223">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_configure_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_configure_phase" id="uvm_configure_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L248" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="248">uvm_configure_phase</a></h2><div class=CBody><p>The SW configures the DUT.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link55  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.configure_phase" data-target-id="uvm_component.configure_phase" class=LMethod id=link56  >uvm_component::configure_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the DUT is ready to be configured.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Components required for DUT configuration execute transactions normally.</li><li>Set signals and program the DUT and memories (e.g. read/write operations and sequences) to match the desired configuration for the test and environment.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>The DUT has been configured and is ready to operate normally.</li></ul>
 
 <!--START_ND_SUMMARY index=13-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-13" data-anchor="uvm_configure_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -415,7 +535,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_configure_phase.Methods" data-target-id="uvm_configure_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=15 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_configure_phase.get" data-target-id="uvm_configure_phase.get" id=link54  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_configure_phase.get" data-target-id="uvm_configure_phase.get" id=link54  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1029" data-target-id="doc-nav-group-ast-1029">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1030" data-target-id="doc-nav-item-ast-1030">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1031" data-target-id="doc-nav-item-ast-1031">new</a></td><td class=SDescription><code>void new(string name=&quot;configure&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1032" data-target-id="doc-nav-item-ast-1032">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -436,7 +561,32 @@
 
 
  <!--CONTENT index=16 -->
-<div class="CClass" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_post_configure_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_post_configure_phase" id="uvm_post_configure_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L290" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="290">uvm_post_configure_phase</a></h2><div class=CBody><p>After the SW has configured the DUT.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link63  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.post_configure_phase" data-target-id="uvm_component.post_configure_phase" class=LMethod id=link64  >uvm_component::post_configure_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the configuration information has been fully uploaded.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Wait for configuration information to fully propagate and take effect.</li><li>Wait for components to complete training and rate negotiation.</li><li>Enable the DUT.</li><li>Sample DUT configuration coverage.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>The DUT has been fully configured and enabled and is ready to start operating normally.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1029" data-doc-topic="doc-nav-group-ast-1029" data-anchor="uvm_configure_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_configure_phase.Additional_APIs" id="uvm_configure_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1030" data-doc-topic="doc-nav-item-ast-1030" data-anchor="uvm_configure_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_configure_phase.exec_task" id="uvm_configure_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L249" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="249">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L249" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="249">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1031" data-doc-topic="doc-nav-item-ast-1031" data-anchor="uvm_configure_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_configure_phase.new" id="uvm_configure_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L262" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="262">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">configure</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L262" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="262">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1032" data-doc-topic="doc-nav-item-ast-1032" data-anchor="uvm_configure_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_configure_phase.get_type_name" id="uvm_configure_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L265" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="265">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L265" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="265">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-16" data-doc-topic="doc-nav-item-16" data-anchor="uvm_post_configure_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_post_configure_phase" id="uvm_post_configure_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L290" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="290">uvm_post_configure_phase</a></h2><div class=CBody><p>After the SW has configured the DUT.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link63  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.post_configure_phase" data-target-id="uvm_component.post_configure_phase" class=LMethod id=link64  >uvm_component::post_configure_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the configuration information has been fully uploaded.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Wait for configuration information to fully propagate and take effect.</li><li>Wait for components to complete training and rate negotiation.</li><li>Enable the DUT.</li><li>Sample DUT configuration coverage.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>The DUT has been fully configured and enabled and is ready to start operating normally.</li></ul>
 
 <!--START_ND_SUMMARY index=16-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-16" data-anchor="uvm_post_configure_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -480,7 +630,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_post_configure_phase.Methods" data-target-id="uvm_post_configure_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=18 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_post_configure_phase.get" data-target-id="uvm_post_configure_phase.get" id=link62  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_post_configure_phase.get" data-target-id="uvm_post_configure_phase.get" id=link62  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1025" data-target-id="doc-nav-group-ast-1025">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1026" data-target-id="doc-nav-item-ast-1026">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1027" data-target-id="doc-nav-item-ast-1027">new</a></td><td class=SDescription><code>void new(string name=&quot;post_configure&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1028" data-target-id="doc-nav-item-ast-1028">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -501,7 +656,32 @@
 
 
  <!--CONTENT index=19 -->
-<div class="CClass" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_pre_main_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_pre_main_phase" id="uvm_pre_main_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L329" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="329">uvm_pre_main_phase</a></h2><div class=CBody><p>Before the primary test stimulus starts.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link71  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.pre_main_phase" data-target-id="uvm_component.pre_main_phase" class=LMethod id=link72  >uvm_component::pre_main_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the DUT has been fully configured.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Wait for components to complete training and rate negotiation.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All components have completed training and rate negotiation.</li><li>All components are ready to generate and/or observe normal stimulus.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1025" data-doc-topic="doc-nav-group-ast-1025" data-anchor="uvm_post_configure_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_post_configure_phase.Additional_APIs" id="uvm_post_configure_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1026" data-doc-topic="doc-nav-item-ast-1026" data-anchor="uvm_post_configure_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_configure_phase.exec_task" id="uvm_post_configure_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L291" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="291">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L291" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="291">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1027" data-doc-topic="doc-nav-item-ast-1027" data-anchor="uvm_post_configure_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_configure_phase.new" id="uvm_post_configure_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L304" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="304">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">post_configure</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L304" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="304">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1028" data-doc-topic="doc-nav-item-ast-1028" data-anchor="uvm_post_configure_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_configure_phase.get_type_name" id="uvm_post_configure_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L307" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="307">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L307" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="307">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-19" data-doc-topic="doc-nav-item-19" data-anchor="uvm_pre_main_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_pre_main_phase" id="uvm_pre_main_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L329" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="329">uvm_pre_main_phase</a></h2><div class=CBody><p>Before the primary test stimulus starts.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link71  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.pre_main_phase" data-target-id="uvm_component.pre_main_phase" class=LMethod id=link72  >uvm_component::pre_main_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>Indicates that the DUT has been fully configured.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Wait for components to complete training and rate negotiation.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All components have completed training and rate negotiation.</li><li>All components are ready to generate and/or observe normal stimulus.</li></ul>
 
 <!--START_ND_SUMMARY index=19-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-19" data-anchor="uvm_pre_main_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -545,7 +725,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_pre_main_phase.Methods" data-target-id="uvm_pre_main_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=21 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pre_main_phase.get" data-target-id="uvm_pre_main_phase.get" id=link70  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pre_main_phase.get" data-target-id="uvm_pre_main_phase.get" id=link70  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1021" data-target-id="doc-nav-group-ast-1021">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1022" data-target-id="doc-nav-item-ast-1022">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1023" data-target-id="doc-nav-item-ast-1023">new</a></td><td class=SDescription><code>void new(string name=&quot;pre_main&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1024" data-target-id="doc-nav-item-ast-1024">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -566,7 +751,32 @@
 
 
  <!--CONTENT index=22 -->
-<div class="CClass" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_main_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_main_phase" id="uvm_main_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L372" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="372">uvm_main_phase</a></h2><div class=CBody><p>Primary test stimulus.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link79  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.main_phase" data-target-id="uvm_component.main_phase" class=LMethod id=link80  >uvm_component::main_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>The stimulus associated with the test objectives is ready to be applied.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Components execute transactions normally.</li><li>Data stimulus sequences are started.</li><li>Wait for a time-out or certain amount of time, or completion of stimulus sequences.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>Enough stimulus has been applied to meet the primary stimulus objective of the test.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1021" data-doc-topic="doc-nav-group-ast-1021" data-anchor="uvm_pre_main_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_pre_main_phase.Additional_APIs" id="uvm_pre_main_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1022" data-doc-topic="doc-nav-item-ast-1022" data-anchor="uvm_pre_main_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_main_phase.exec_task" id="uvm_pre_main_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L330" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="330">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L330" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="330">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1023" data-doc-topic="doc-nav-item-ast-1023" data-anchor="uvm_pre_main_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_main_phase.new" id="uvm_pre_main_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L343" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="343">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">pre_main</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L343" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="343">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1024" data-doc-topic="doc-nav-item-ast-1024" data-anchor="uvm_pre_main_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_main_phase.get_type_name" id="uvm_pre_main_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L346" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="346">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L346" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="346">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_main_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_main_phase" id="uvm_main_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L372" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="372">uvm_main_phase</a></h2><div class=CBody><p>Primary test stimulus.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link79  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.main_phase" data-target-id="uvm_component.main_phase" class=LMethod id=link80  >uvm_component::main_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>The stimulus associated with the test objectives is ready to be applied.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Components execute transactions normally.</li><li>Data stimulus sequences are started.</li><li>Wait for a time-out or certain amount of time, or completion of stimulus sequences.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>Enough stimulus has been applied to meet the primary stimulus objective of the test.</li></ul>
 
 <!--START_ND_SUMMARY index=22-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-22" data-anchor="uvm_main_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -610,7 +820,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_main_phase.Methods" data-target-id="uvm_main_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=24 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_main_phase.get" data-target-id="uvm_main_phase.get" id=link78  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_main_phase.get" data-target-id="uvm_main_phase.get" id=link78  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1017" data-target-id="doc-nav-group-ast-1017">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1018" data-target-id="doc-nav-item-ast-1018">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1019" data-target-id="doc-nav-item-ast-1019">new</a></td><td class=SDescription><code>void new(string name=&quot;main&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1020" data-target-id="doc-nav-item-ast-1020">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -631,7 +846,32 @@
 
 
  <!--CONTENT index=25 -->
-<div class="CClass" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_post_main_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_post_main_phase" id="uvm_post_main_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L411" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="411">uvm_post_main_phase</a></h2><div class=CBody><p>After enough of the primary test stimulus.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link87  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.post_main_phase" data-target-id="uvm_component.post_main_phase" class=LMethod id=link88  >uvm_component::post_main_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>The primary stimulus objective of the test has been met.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Included for symmetry.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>None.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1017" data-doc-topic="doc-nav-group-ast-1017" data-anchor="uvm_main_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_main_phase.Additional_APIs" id="uvm_main_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1018" data-doc-topic="doc-nav-item-ast-1018" data-anchor="uvm_main_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_main_phase.exec_task" id="uvm_main_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L373" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="373">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L373" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="373">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1019" data-doc-topic="doc-nav-item-ast-1019" data-anchor="uvm_main_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_main_phase.new" id="uvm_main_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L386" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="386">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">main</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L386" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="386">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1020" data-doc-topic="doc-nav-item-ast-1020" data-anchor="uvm_main_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_main_phase.get_type_name" id="uvm_main_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L389" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="389">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L389" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="389">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-25" data-doc-topic="doc-nav-item-25" data-anchor="uvm_post_main_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_post_main_phase" id="uvm_post_main_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L411" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="411">uvm_post_main_phase</a></h2><div class=CBody><p>After enough of the primary test stimulus.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link87  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.post_main_phase" data-target-id="uvm_component.post_main_phase" class=LMethod id=link88  >uvm_component::post_main_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>The primary stimulus objective of the test has been met.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Included for symmetry.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>None.</li></ul>
 
 <!--START_ND_SUMMARY index=25-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-25" data-anchor="uvm_post_main_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -675,7 +915,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_post_main_phase.Methods" data-target-id="uvm_post_main_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=27 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_post_main_phase.get" data-target-id="uvm_post_main_phase.get" id=link86  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_post_main_phase.get" data-target-id="uvm_post_main_phase.get" id=link86  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1013" data-target-id="doc-nav-group-ast-1013">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1014" data-target-id="doc-nav-item-ast-1014">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1015" data-target-id="doc-nav-item-ast-1015">new</a></td><td class=SDescription><code>void new(string name=&quot;post_main&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1016" data-target-id="doc-nav-item-ast-1016">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -696,7 +941,32 @@
 
 
  <!--CONTENT index=28 -->
-<div class="CClass" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_pre_shutdown_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_pre_shutdown_phase" id="uvm_pre_shutdown_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L450" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="450">uvm_pre_shutdown_phase</a></h2><div class=CBody><p>Before things settle down.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link95  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.pre_shutdown_phase" data-target-id="uvm_component.pre_shutdown_phase" class=LMethod id=link96  >uvm_component::pre_shutdown_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>None.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Included for symmetry.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>None.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1013" data-doc-topic="doc-nav-group-ast-1013" data-anchor="uvm_post_main_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_post_main_phase.Additional_APIs" id="uvm_post_main_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_post_main_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_main_phase.exec_task" id="uvm_post_main_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L412" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="412">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L412" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="412">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1015" data-doc-topic="doc-nav-item-ast-1015" data-anchor="uvm_post_main_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_main_phase.new" id="uvm_post_main_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L425" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="425">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">post_main</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L425" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="425">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1016" data-doc-topic="doc-nav-item-ast-1016" data-anchor="uvm_post_main_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_main_phase.get_type_name" id="uvm_post_main_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L428" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="428">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L428" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="428">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-28" data-doc-topic="doc-nav-item-28" data-anchor="uvm_pre_shutdown_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_pre_shutdown_phase" id="uvm_pre_shutdown_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L450" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="450">uvm_pre_shutdown_phase</a></h2><div class=CBody><p>Before things settle down.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link95  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.pre_shutdown_phase" data-target-id="uvm_component.pre_shutdown_phase" class=LMethod id=link96  >uvm_component::pre_shutdown_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>None.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Included for symmetry.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>None.</li></ul>
 
 <!--START_ND_SUMMARY index=28-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-28" data-anchor="uvm_pre_shutdown_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -740,7 +1010,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_pre_shutdown_phase.Methods" data-target-id="uvm_pre_shutdown_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=30 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pre_shutdown_phase.get" data-target-id="uvm_pre_shutdown_phase.get" id=link94  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_pre_shutdown_phase.get" data-target-id="uvm_pre_shutdown_phase.get" id=link94  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1009" data-target-id="doc-nav-group-ast-1009">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1010" data-target-id="doc-nav-item-ast-1010">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1011" data-target-id="doc-nav-item-ast-1011">new</a></td><td class=SDescription><code>void new(string name=&quot;pre_shutdown&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1012" data-target-id="doc-nav-item-ast-1012">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -761,7 +1036,32 @@
 
 
  <!--CONTENT index=31 -->
-<div class="CClass" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_shutdown_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_shutdown_phase" id="uvm_shutdown_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L492" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="492">uvm_shutdown_phase</a></h2><div class=CBody><p>Letting things settle down.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link103  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.shutdown_phase" data-target-id="uvm_component.shutdown_phase" class=LMethod id=link104  >uvm_component::shutdown_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>None.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Wait for all data to be drained out of the DUT.</li><li>Extract data still buffered in the DUT, usually through read/write operations or sequences.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All data has been drained or extracted from the DUT.</li><li>All interfaces are idle.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1009" data-doc-topic="doc-nav-group-ast-1009" data-anchor="uvm_pre_shutdown_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_pre_shutdown_phase.Additional_APIs" id="uvm_pre_shutdown_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1010" data-doc-topic="doc-nav-item-ast-1010" data-anchor="uvm_pre_shutdown_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_shutdown_phase.exec_task" id="uvm_pre_shutdown_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L451" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="451">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L451" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="451">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_pre_shutdown_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_shutdown_phase.new" id="uvm_pre_shutdown_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L464" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="464">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">pre_shutdown</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L464" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="464">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_pre_shutdown_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_pre_shutdown_phase.get_type_name" id="uvm_pre_shutdown_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L467" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="467">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L467" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="467">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-31" data-doc-topic="doc-nav-item-31" data-anchor="uvm_shutdown_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_shutdown_phase" id="uvm_shutdown_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L492" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="492">uvm_shutdown_phase</a></h2><div class=CBody><p>Letting things settle down.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link103  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.shutdown_phase" data-target-id="uvm_component.shutdown_phase" class=LMethod id=link104  >uvm_component::shutdown_phase</a> method.</p><h4 class=CHeading>Upon Entry</h4><ul><li>None.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Wait for all data to be drained out of the DUT.</li><li>Extract data still buffered in the DUT, usually through read/write operations or sequences.</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All data has been drained or extracted from the DUT.</li><li>All interfaces are idle.</li></ul>
 
 <!--START_ND_SUMMARY index=31-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-31" data-anchor="uvm_shutdown_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -805,7 +1105,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_shutdown_phase.Methods" data-target-id="uvm_shutdown_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=33 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_shutdown_phase.get" data-target-id="uvm_shutdown_phase.get" id=link102  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_shutdown_phase.get" data-target-id="uvm_shutdown_phase.get" id=link102  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1005" data-target-id="doc-nav-group-ast-1005">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">new</a></td><td class=SDescription><code>void new(string name=&quot;shutdown&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -826,7 +1131,32 @@
 
 
  <!--CONTENT index=34 -->
-<div class="CClass" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_post_shutdown_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_post_shutdown_phase" id="uvm_post_shutdown_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L535" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="535">uvm_post_shutdown_phase</a></h2><div class=CBody><p>After things have settled down.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link111  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.post_shutdown_phase" data-target-id="uvm_component.post_shutdown_phase" class=LMethod id=link112  >uvm_component::post_shutdown_phase</a> method.&nbsp;  The end of this phase is synchronized to the end of the <a href="uvm_common_phases-svh.html#uvm_run_phase" data-target-id="uvm_run_phase" class=LClass id=link113  >uvm_run_phase</a> phase unless a user defined phase is added after this phase.</p><h4 class=CHeading>Upon Entry</h4><ul><li>No more &ldquo;data&rdquo; stimulus is applied to the DUT.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Perform final checks that require run-time access to the DUT (e.g. read accounting registers or dump the content of memories).</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All run-time checks have been satisfied.</li><li>The <a href="uvm_common_phases-svh.html#uvm_run_phase" data-target-id="uvm_run_phase" class=LClass id=link114  >uvm_run_phase</a> phase is ready to end.</li></ul>
+
+<div class="CGroup" id="doc-nav-group-ast-1005" data-doc-topic="doc-nav-group-ast-1005" data-anchor="uvm_shutdown_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_shutdown_phase.Additional_APIs" id="uvm_shutdown_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_shutdown_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_shutdown_phase.exec_task" id="uvm_shutdown_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L493" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="493">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L493" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="493">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_shutdown_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_shutdown_phase.new" id="uvm_shutdown_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L506" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="506">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">shutdown</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L506" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="506">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_shutdown_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_shutdown_phase.get_type_name" id="uvm_shutdown_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L509" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="509">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L509" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="509">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-34" data-doc-topic="doc-nav-item-34" data-anchor="uvm_post_shutdown_phase"><div class="CTopic"><h2 class=CTitle><a name="uvm_post_shutdown_phase" id="uvm_post_shutdown_phase" href="../../src_view/base/uvm_runtime_phases.svh.html#L535" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="535">uvm_post_shutdown_phase</a></h2><div class=CBody><p>After things have settled down.</p><p><a href="uvm_task_phase-svh.html#uvm_task_phase" data-target-id="uvm_task_phase" class=LClass id=link111  >uvm_task_phase</a> that calls the <a href="uvm_component-svh.html#uvm_component.post_shutdown_phase" data-target-id="uvm_component.post_shutdown_phase" class=LMethod id=link112  >uvm_component::post_shutdown_phase</a> method.&nbsp;  The end of this phase is synchronized to the end of the <a href="uvm_common_phases-svh.html#uvm_run_phase" data-target-id="uvm_run_phase" class=LClass id=link113  >uvm_run_phase</a> phase unless a user defined phase is added after this phase.</p><h4 class=CHeading>Upon Entry</h4><ul><li>No more &ldquo;data&rdquo; stimulus is applied to the DUT.</li></ul><h4 class=CHeading>Typical Uses</h4><ul><li>Perform final checks that require run-time access to the DUT (e.g. read accounting registers or dump the content of memories).</li></ul><h4 class=CHeading>Exit Criteria</h4><ul><li>All run-time checks have been satisfied.</li><li>The <a href="uvm_common_phases-svh.html#uvm_run_phase" data-target-id="uvm_run_phase" class=LClass id=link114  >uvm_run_phase</a> phase is ready to end.</li></ul>
 
 <!--START_ND_SUMMARY index=34-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-34" data-anchor="uvm_post_shutdown_phase.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -870,7 +1200,12 @@
 <tr class="SGroup SIndent1"><td class=SEntry><a href="#uvm_post_shutdown_phase.Methods" data-target-id="uvm_post_shutdown_phase.Methods" >Methods</a></td><td class=SDescription></td></tr>
   <!-- index=36 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_post_shutdown_phase.get" data-target-id="uvm_post_shutdown_phase.get" id=link110  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_post_shutdown_phase.get" data-target-id="uvm_post_shutdown_phase.get" id=link110  >get</a></td><td class=SDescription>Returns the singleton phase handle</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">exec_task</a></td><td class=SDescription><code> exec_task(uvm_component comp, uvm_phase phase)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">new</a></td><td class=SDescription><code>void new(string name=&quot;post_shutdown&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -887,6 +1222,32 @@
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">static</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_post_shutdown_phase</span> <span class="sv-proto-name">get</span><span class="sv-op">(</span><span class="sv-op">)</span>
   </td></tr></table></blockquote><div class=CBody><p>Returns the singleton phase handle</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_post_shutdown_phase.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_post_shutdown_phase.Additional_APIs" id="uvm_post_shutdown_phase.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_post_shutdown_phase.exec_task">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_shutdown_phase.exec_task" id="uvm_post_shutdown_phase.exec_task" href="../../src_view/base/uvm_runtime_phases.svh.html#L536" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="536">exec_task</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">exec_task</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L536" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="536">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_post_shutdown_phase.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_shutdown_phase.new" id="uvm_post_shutdown_phase.new" href="../../src_view/base/uvm_runtime_phases.svh.html#L549" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="549">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_task_phase">Overrides uvm_task_phase</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">post_shutdown</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L549" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="549">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_post_shutdown_phase.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_post_shutdown_phase.get_type_name" id="uvm_post_shutdown_phase.get_type_name" href="../../src_view/base/uvm_runtime_phases.svh.html#L552" class="src-code-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="552">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_runtime_phases.svh.html#L552" class="src-code-link undoc-src-link" data-src-file="base/uvm_runtime_phases.svh" data-src-line="552">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

@@ -1424,3 +1424,34 @@ Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met �
 1. **Nettoyage & normalisation AST** : Exclusion de `docs_view/index/`, suppression du chrome NaturalDocs (`Source: src/...`, `On this page Collapse all`), normalisation des noms paramétrés (`re.sub(r'\s*#\(.*$', '', ...)`), `context_header` compact plaçant `[Intents]` en tête, et tri de `relatedExamples` par spécificité.
 2. **Calibrage du routeur & du reranking** : Filtrage des verbes anglais génériques (`GENERIC_METHOD_WORDS`) dans `classifyIntent()`, saturation lissée du BM25 multi-champs (`title: 6.0`, `coveredApis: 0.65`), **Exact Target Class Boost** (`+0.12` / `+0.22`), priors modérés (`+0.08` / `+0.12`) et diversification Top-5 conditionnée par un plancher (`>= 0.62 * topScore`).
 3. **Context Bundles & UI** : Affichage de la chaîne d'ancêtres (`Extends: ...`), de la signature, des badges déplacés dans la colonne de droite, des liens croisés (exemples/macros/classes liées), suppression du `padding` horizontal sur `.rag-highlight`, et cache-busting `?v=2.3`.
+
+---
+
+## 44. Le Piège du Remplacement Naïf `replace('</table>', ..., 1)` sur HTML NaturalDocs (`build_docs.py`)
+
+### Le Symptôme Observé
+> *"Certains `Additional APIs` apparaissent dans la description de la classe, dans la déclaration `Prototype`, ou dans `Contents` au lieu du tableau `Summary` de la classe, et leurs détails se retrouvent mélangés sous le dernier groupe du TOC."*
+
+### L'Anatomie du Piège
+1. **Tables multiples avant et dans `ClassSummary`** : Un bloc `.CClass` NaturalDocs contient souvent un tableau `<table class="CDescriptionList">` dans `.CBody`, et `ClassSummary` contient lui-même des `<table>` imbriqués pour `<table class="Prototype">`. Un simple `slice_html.replace('</table>', ..., 1)` injecte les lignes dans le premier `</table>` rencontré (hors `STable`), cassant le rendu de `uvm_component`, `uvm_callback`, `uvm_port_base`, etc.
+2. **Classes sans `ClassSummary`** : Certaines classes (ex. `uvm_event_base`, `uvm_printer`, `uvm_sequence_library`) ne possèdent qu'un bloc `ContentsSummary` en tête de page : `replace('</table>', ...)` polluait alors la table `Contents` globale.
+3. **Niveau de titre `<h2>` vs `<h3>` dans `extract_doc_headings()`** : Injecter un `CGroup` sans en-tête mélangeait les membres AST dans le dernier groupe NaturalDocs du TOC ; à l'inverse, utiliser `<h2 class="CTitle">` pour `Additional Macros` activait le mode `has_h2 = True` dans `extract_doc_headings()`, rétrogradant les `CGroup` `<h3>` de la page.
+
+### La Solution Appliquée (`scripts/build_docs.py`)
+- Ajout de `_inject_rows_into_class_summary()` qui cible exclusivement `<div class="Summary ClassSummary">` puis sa `<table class="STable">` en comptant la profondeur d'imbrication `<table` / `</table>` jusqu'à `depth == 0` (et crée un bloc `.Summary.ClassSummary` dédié si la classe en était dépourvue).
+- Ajout d'un `<div class="CGroup"><div class="CTopic"><h3 class="CTitle">Additional APIs</h3></div></div>` relié au lien `SGroup` du tableau `Summary`, et passage de `Additional Macros` à `<h3 class="CTitle">`.
+
+---
+
+## 45. Le Piège des Ancres `Summary`/`Contents`, du Glitch Scrollspy et du Mode Sombre des Nouveaux Composants (`page_common.js`, `css/style.css`)
+
+### Le Symptôme Observé
+> *"Les clics sur `Summary` et `Contents` dans le TOC créent un glitch de scroll ; les sections internes repliables n'apparaissent pas dans le TOC et les nouveaux badges/notices manquent de contraste en mode sombre."*
+
+### L'Anatomie du Piège
+1. **Concurrence Scrollspy vs Scroll Programmatique** : Cliquer sur `Contents` ou `<Classe>.Summary` déclenchait un défilement vers une ancre courte dont la hauteur était réévaluée en cours de scroll, faisant rebondir le `scrollspy` sur un titre voisin.
+2. **Composants injectés sans parité `[data-theme="dark"]`** : Les nouveaux composants (`.internal-details-section`, `.internal-section-header`, `.internal-section-note`, `.undocumented-notice`, `.badge-subclass`) utilisaient des couleurs ou bordures calibrées pour le fond clair, réduisant le contraste sur `#1f2023`.
+
+### La Solution Appliquée (`scripts/build_docs.py`, `js/page_common.js`, `css/style.css`)
+- **Ancres sémantiques & TOC** : Génération d'ancres `<Classe>.Summary` et `Contents`, intégration des `.internal-details-section` dans le TOC avec dépliement automatique au clic, et suspension temporaire du scrollspy lors des navigations déclenchées depuis le TOC.
+- **Mode sombre & UX** : Adaptation complète sous `[data-theme="dark"]` dans `css/style.css`, remplacement de `"Undocumented"` par `.undocumented-notice` (*« Not officially documented, see source code »* avec lien direct `#Lxx`), et préservation du mode Split lors de la copie de liens dans `page_common.js`.

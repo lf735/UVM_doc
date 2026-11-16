@@ -158,7 +158,13 @@
 <tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_report_server.set_server" data-target-id="uvm_report_server.set_server" id=link20  >set_server</a></td><td class=SDescription>Sets the global report server to use for reporting.</td></tr>
   <!-- index=20 -->
 
-<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_server.get_server" data-target-id="uvm_report_server.get_server" id=link21  >get_server</a></td><td class=SDescription>Gets the global report server used for reporting.</td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_report_server.get_server" data-target-id="uvm_report_server.get_server" id=link21  >get_server</a></td><td class=SDescription>Gets the global report server used for reporting.</td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1010" data-target-id="doc-nav-group-ast-1010">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1011" data-target-id="doc-nav-item-ast-1011">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1012" data-target-id="doc-nav-item-ast-1012">new</a></td><td class=SDescription><code>void new(string name=&quot;base&quot;)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1013" data-target-id="doc-nav-item-ast-1013">process_report_message</a></td><td class=SDescription><code>void process_report_message(uvm_report_message report_message)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1014" data-target-id="doc-nav-item-ast-1014">summarize</a></td><td class=SDescription><code>void summarize(UVM_FILE file=0)</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -488,7 +494,40 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CClass" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_default_report_server"><div class="CTopic"><h2 class=CTitle><a name="uvm_default_report_server" id="uvm_default_report_server" href="../../src_view/base/uvm_report_server.svh.html#L245" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="245">uvm_default_report_server</a></h2><div class=CBody><p>Default implementation of the UVM report server.</p>
+
+<div class="CGroup" id="doc-nav-group-ast-1010" data-doc-topic="doc-nav-group-ast-1010" data-anchor="uvm_report_server.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_report_server.Additional_APIs" id="uvm_report_server.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1011" data-doc-topic="doc-nav-item-ast-1011" data-anchor="uvm_report_server.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_server.get_type_name" id="uvm_report_server.get_type_name" href="../../src_view/base/uvm_report_server.svh.html#L49" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="49">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L49" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="49">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1012" data-doc-topic="doc-nav-item-ast-1012" data-anchor="uvm_report_server.new">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_server.new" id="uvm_report_server.new" href="../../src_view/base/uvm_report_server.svh.html#L52" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="52">new</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_object">Overrides uvm_object</span><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">new</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span>&quot;<span class="sv-ident">base</span>&quot;<span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L52" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="52">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1013" data-doc-topic="doc-nav-item-ast-1013" data-anchor="uvm_report_server.process_report_message">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_server.process_report_message" id="uvm_report_server.process_report_message" href="../../src_view/base/uvm_report_server.svh.html#L140" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="140">process_report_message</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass" title="Overridden in 1 derived class(es)">Overridden in 1 subclasses</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">process_report_message</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_report_message</span> <span class="sv-ident">report_message</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L140" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="140">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1014" data-doc-topic="doc-nav-item-ast-1014" data-anchor="uvm_report_server.summarize">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_report_server.summarize" id="uvm_report_server.summarize" href="../../src_view/base/uvm_report_server.svh.html#L180" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="180">summarize</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">summarize</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">UVM_FILE</span> <span class="sv-ident">file</span><span class="sv-op">=</span><span class="sv-ident">0</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L180" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="180">see source code</a></span></span></p></div>
+</div>
+</div><div class="CClass" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_default_report_server"><div class="CTopic"><h2 class=CTitle><a name="uvm_default_report_server" id="uvm_default_report_server" href="../../src_view/base/uvm_report_server.svh.html#L245" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="245">uvm_default_report_server</a></h2><div class=CBody><p>Default implementation of the UVM report server.</p>
 
 <!--START_ND_SUMMARY index=21-->
 <div class="Summary ClassSummary" id="doc-nav-summary-doc-nav-item-21" data-anchor="uvm_default_report_server.Summary"><div class="STitle">Summary</div><div class=SBorder><table border=0 cellspacing=0 cellpadding=0 class=STable>
@@ -616,7 +655,17 @@
 <tr class="SMethod SIndent2 SMarked"><td class=SEntry><a href="#uvm_default_report_server.compose_report_message" data-target-id="uvm_default_report_server.compose_report_message" id=link55  >compose_report_message</a></td><td class=SDescription>Constructs the actual string sent to the file or command line from the severity, component name, report id, and the message itself.</td></tr>
   <!-- index=51 -->
 
-<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_default_report_server.report_summarize" data-target-id="uvm_default_report_server.report_summarize" id=link56  >report_summarize</a></td><td class=SDescription>Outputs statistical information on the reports issued by this central report server. </td></tr></table></div></div><!--END_ND_SUMMARY-->
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#uvm_default_report_server.report_summarize" data-target-id="uvm_default_report_server.report_summarize" id=link56  >report_summarize</a></td><td class=SDescription>Outputs statistical information on the reports issued by this central report server. </td></tr>
+<tr class="SGroup SIndent1"><td class=SEntry><a href="#doc-nav-group-ast-1001" data-target-id="doc-nav-group-ast-1001">Additional APIs</a></td><td class=SDescription></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1002" data-target-id="doc-nav-item-ast-1002">get_type_name</a></td><td class=SDescription><code>string get_type_name()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1003" data-target-id="doc-nav-item-ast-1003">do_print</a></td><td class=SDescription><code>void do_print(uvm_printer printer)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1004" data-target-id="doc-nav-item-ast-1004">get_severity_set</a></td><td class=SDescription><code>void get_severity_set(output uvm_severity q[$])</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1005" data-target-id="doc-nav-item-ast-1005">get_id_set</a></td><td class=SDescription><code>void get_id_set(output string q[$])</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1006" data-target-id="doc-nav-item-ast-1006">f_display</a></td><td class=SDescription><code>void f_display(UVM_FILE file, string str)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1007" data-target-id="doc-nav-item-ast-1007">process_report_message</a></td><td class=SDescription><code>void process_report_message(uvm_report_message report_message)</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1008" data-target-id="doc-nav-item-ast-1008">process_report</a></td><td class=SDescription><code>void process_report()</code></td></tr>
+<tr class="SMethod SIndent2"><td class=SEntry><a href="#doc-nav-item-ast-1009" data-target-id="doc-nav-item-ast-1009">compose_message</a></td><td class=SDescription><code>string compose_message()</code></td></tr>
+</table></div></div><!--END_ND_SUMMARY-->
 </div></div></div>
 
 
@@ -1001,6 +1050,72 @@
     </table></blockquote>
 <div class=CBody><p>Outputs statistical information on the reports issued by this central report server.&nbsp; This information will be sent to the command line if <i>file</i> is 0, or to the file descriptor <i>file</i> if it is not 0.</p><p>The <a href="uvm_globals-svh.html#run_test" data-target-id="run_test" class=LMethod id=link60  >run_test</a> method in uvm_top calls this method.</p></div></div></div>
 
+
+<div class="CGroup" id="doc-nav-group-ast-1001" data-doc-topic="doc-nav-group-ast-1001" data-anchor="uvm_default_report_server.Additional_APIs"><div class="CTopic"><h3 class="CTitle"><a name="uvm_default_report_server.Additional_APIs" id="uvm_default_report_server.Additional_APIs">Additional APIs</a></h3></div></div>
+<div class="CMethod" id="doc-nav-item-ast-1002" data-doc-topic="doc-nav-item-ast-1002" data-anchor="uvm_default_report_server.get_type_name">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_report_server.get_type_name" id="uvm_default_report_server.get_type_name" href="../../src_view/base/uvm_report_server.svh.html#L288" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="288">get_type_name</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_report_server">Overrides uvm_report_server</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L288" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="288">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1003" data-doc-topic="doc-nav-item-ast-1003" data-anchor="uvm_default_report_server.do_print">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_report_server.do_print" id="uvm_default_report_server.do_print" href="../../src_view/base/uvm_report_server.svh.html#L331" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="331">do_print</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-proto-name">do_print</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_printer</span> <span class="sv-ident">printer</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L331" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="331">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1004" data-doc-topic="doc-nav-item-ast-1004" data-anchor="uvm_default_report_server.get_severity_set">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_report_server.get_severity_set" id="uvm_default_report_server.get_severity_set" href="../../src_view/base/uvm_report_server.svh.html#L531" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="531">get_severity_set</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_report_server">Overrides uvm_report_server</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">get_severity_set</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-uvm-type">uvm_severity</span> <span class="sv-ident">q</span><span class="sv-ident">[$]</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L531" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="531">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1005" data-doc-topic="doc-nav-item-ast-1005" data-anchor="uvm_default_report_server.get_id_set">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_report_server.get_id_set" id="uvm_default_report_server.get_id_set" href="../../src_view/base/uvm_report_server.svh.html#L537" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="537">get_id_set</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_report_server">Overrides uvm_report_server</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">get_id_set</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-qualifier">output</span> <span class="sv-type">string</span> <span class="sv-ident">q</span><span class="sv-ident">[$]</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L537" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="537">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1006" data-doc-topic="doc-nav-item-ast-1006" data-anchor="uvm_default_report_server.f_display">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_report_server.f_display" id="uvm_default_report_server.f_display" href="../../src_view/base/uvm_report_server.svh.html#L548" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="548">f_display</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">f_display</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">UVM_FILE</span> <span class="sv-ident">file</span><span class="sv-op">,</span> <span class="sv-type">string</span> <span class="sv-ident">str</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L548" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="548">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1007" data-doc-topic="doc-nav-item-ast-1007" data-anchor="uvm_default_report_server.process_report_message">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_report_server.process_report_message" id="uvm_default_report_server.process_report_message" href="../../src_view/base/uvm_report_server.svh.html#L560" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="560">process_report_message</a></h3>
+  <div class="method-meta-bar"><span class="badge-override" title="Overrides base method from uvm_report_server">Overrides uvm_report_server</span></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">process_report_message</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_report_message</span> <span class="sv-ident">report_message</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L560" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="560">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1008" data-doc-topic="doc-nav-item-ast-1008" data-anchor="uvm_default_report_server.process_report">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_report_server.process_report" id="uvm_default_report_server.process_report" href="../../src_view/base/uvm_report_server.svh.html#L862" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="862">process_report</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">void</span></span> <span class="sv-proto-name"><span class="sv-ident">process_report</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L862" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="862">see source code</a></span></span></p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-ast-1009" data-doc-topic="doc-nav-item-ast-1009" data-anchor="uvm_default_report_server.compose_message">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_default_report_server.compose_message" id="uvm_default_report_server.compose_message" href="../../src_view/base/uvm_report_server.svh.html#L897" class="src-code-link" data-src-file="base/uvm_report_server.svh" data-src-line="897">compose_message</a></h3>
+  
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">compose_message</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
+  <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/base/uvm_report_server.svh.html#L897" class="src-code-link undoc-src-link" data-src-file="base/uvm_report_server.svh" data-src-line="897">see source code</a></span></span></p></div>
+</div>
+</div>
 </div><!--Content-->
 
 

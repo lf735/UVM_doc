@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en" class="doc-page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DPI-C Interface | UVM 1.2 Documentation</title>
+  <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body class="doc-body">
+    <div class="doc-page-container">
+    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="../../index.html#/doc/overviews/intro-txt.html" class="doc-breadcrumb-item doc-breadcrumb-link doc-breadcrumb-home" data-doc-href="docs_view/overviews/intro-txt.html">Home</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">DPI-C Interface</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">DPI-C Interface</span>
+</nav>
+    <div class="doc-source-banner">
+  <div class="banner-info">
+    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <span class="file-label">Source:</span>
+    <a href="../../src_view/dpi/uvm_dpi.svh.html#L1" class="banner-file-link src-code-link" data-src-url="../../src_view/dpi/uvm_dpi.svh.html#L1" title="Open source code at line 1"><code>src/dpi/uvm_dpi.svh</code></a>
+  </div>
+  <div class="banner-actions">
+    <a href="../../src_view/dpi/uvm_dpi.svh.html#L1" class="banner-icon-btn src-code-link" data-src-url="../../src_view/dpi/uvm_dpi.svh.html#L1" title="Open source code at line 1" aria-label="Open source code at line 1">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    </a>
+  </div>
+</div>
+    <div class="doc-layout-wrapper">
+      <div class="doc-main-content">
+        <div id="Content">
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_dpi">
+<div class="CTopic" id="MainTopic">
+  <h1 class="CTitle"><a name="uvm_dpi" id="uvm_dpi" href="../../src_view/dpi/uvm_dpi.svh.html#L1" class="src-code-link" data-src-file="dpi/uvm_dpi.svh" data-src-line="1">DPI-C Interface</a></h1>
+  <div class="method-meta-bar"><span class="badge-subclass">15 SV&harr;C Bindings</span></div>
+  <div class="CBody"><p>SystemVerilog <code>import "DPI-C"</code> declarations and C/C++ simulator implementations extracted from <code>src/dpi/</code>.</p></div>
+</div>
+</div>
+<div class="Summary" id="doc-nav-summary" data-anchor="uvm_dpi.Summary"><div class="STitle">DPI-C Imports Summary</div><div class="SBorder"><table border="0" cellspacing="0" cellpadding="0" class="STable">
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-1" data-target-id="doc-nav-item-dpi-1">uvm_hdl_check_path</a></td><td class="SDescription"><code>int uvm_hdl_check_path(string path)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-2" data-target-id="doc-nav-item-dpi-2">uvm_hdl_deposit</a></td><td class="SDescription"><code>int uvm_hdl_deposit(string path, uvm_hdl_data_t value)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-3" data-target-id="doc-nav-item-dpi-3">uvm_hdl_force</a></td><td class="SDescription"><code>int uvm_hdl_force(string path, uvm_hdl_data_t value)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-4" data-target-id="doc-nav-item-dpi-4">uvm_hdl_release_and_read</a></td><td class="SDescription"><code>int uvm_hdl_release_and_read(string path, inout uvm_hdl_data_t value)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-5" data-target-id="doc-nav-item-dpi-5">uvm_hdl_release</a></td><td class="SDescription"><code>int uvm_hdl_release(string path)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-6" data-target-id="doc-nav-item-dpi-6">uvm_hdl_read</a></td><td class="SDescription"><code>int uvm_hdl_read(string path, output uvm_hdl_data_t value)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-7" data-target-id="doc-nav-item-dpi-7">uvm_re_match</a></td><td class="SDescription"><code>int uvm_re_match(string re, string str)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-8" data-target-id="doc-nav-item-dpi-8">uvm_dump_re_cache</a></td><td class="SDescription"><code>void uvm_dump_re_cache()</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-9" data-target-id="doc-nav-item-dpi-9">uvm_glob_to_re</a></td><td class="SDescription"><code>string uvm_glob_to_re(string glob)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-10" data-target-id="doc-nav-item-dpi-10">uvm_dpi_get_next_arg_c</a></td><td class="SDescription"><code>string uvm_dpi_get_next_arg_c(int init)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-11" data-target-id="doc-nav-item-dpi-11">uvm_dpi_get_tool_name_c</a></td><td class="SDescription"><code>string uvm_dpi_get_tool_name_c()</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-12" data-target-id="doc-nav-item-dpi-12">uvm_dpi_get_tool_version_c</a></td><td class="SDescription"><code>string uvm_dpi_get_tool_version_c()</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-13" data-target-id="doc-nav-item-dpi-13">uvm_dpi_regcomp</a></td><td class="SDescription"><code>chandle uvm_dpi_regcomp(string regex)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-14" data-target-id="doc-nav-item-dpi-14">uvm_dpi_regexec</a></td><td class="SDescription"><code>int uvm_dpi_regexec(chandle preg, string str)</code></td></tr>
+<tr class="SMethod SIndent1"><td class="SEntry"><a href="#doc-nav-item-dpi-15" data-target-id="doc-nav-item-dpi-15">uvm_dpi_regfree</a></td><td class="SDescription"><code>void uvm_dpi_regfree(chandle preg)</code></td></tr>
+</table></div></div>
+<div class="CGroup"><div class="CTopic"><h2 class="CTitle">DPI-C Bindings (SystemVerilog &harr; C)</h2></div></div>
+<div class="CMethod" id="doc-nav-item-dpi-1" data-doc-topic="doc-nav-item-dpi-1" data-anchor="uvm_hdl_check_path">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_hdl_check_path" id="uvm_hdl_check_path" href="../../src_view/dpi/uvm_hdl.svh.html#L59" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="59">uvm_hdl_check_path</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_hdl_inca.c.html#L549" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="549">inca: dpi/uvm_hdl_inca.c#L549</a><a href="../../src_view/dpi/uvm_hdl_questa.c.html#L339" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="339">questa: dpi/uvm_hdl_questa.c#L339</a><a href="../../src_view/dpi/uvm_hdl_vcs.c.html#L184" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="184">vcs: dpi/uvm_hdl_vcs.c#L184</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">int</span> <span class="sv-proto-name">uvm_hdl_check_path</span> <span class="sv-params">(string path)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>Checks that the given HDL ~path~ exists. Returns 0 if NOT found, 1 otherwise.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-2" data-doc-topic="doc-nav-item-dpi-2" data-anchor="uvm_hdl_deposit">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_hdl_deposit" id="uvm_hdl_deposit" href="../../src_view/dpi/uvm_hdl.svh.html#L67" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="67">uvm_hdl_deposit</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_hdl_inca.c.html#L597" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="597">inca: dpi/uvm_hdl_inca.c#L597</a><a href="../../src_view/dpi/uvm_hdl_questa.c.html#L371" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="371">questa: dpi/uvm_hdl_questa.c#L371</a><a href="../../src_view/dpi/uvm_hdl_vcs.c.html#L335" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="335">vcs: dpi/uvm_hdl_vcs.c#L335</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">int</span> <span class="sv-proto-name">uvm_hdl_deposit</span> <span class="sv-params">(string path, uvm_hdl_data_t value)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>Sets the given HDL ~path~ to the specified ~value~. Returns 1 if the call succeeded, 0 otherwise.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-3" data-doc-topic="doc-nav-item-dpi-3" data-anchor="uvm_hdl_force">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_hdl_force" id="uvm_hdl_force" href="../../src_view/dpi/uvm_hdl.svh.html#L74" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="74">uvm_hdl_force</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_hdl_inca.c.html#L618" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="618">inca: dpi/uvm_hdl_inca.c#L618</a><a href="../../src_view/dpi/uvm_hdl_questa.c.html#L381" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="381">questa: dpi/uvm_hdl_questa.c#L381</a><a href="../../src_view/dpi/uvm_hdl_vcs.c.html#L361" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="361">vcs: dpi/uvm_hdl_vcs.c#L361</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">int</span> <span class="sv-proto-name">uvm_hdl_force</span> <span class="sv-params">(string path, uvm_hdl_data_t value)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>Forces the ~value~ on the given ~path~. Returns 1 if the call succeeded, 0 otherwise.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-4" data-doc-topic="doc-nav-item-dpi-4" data-anchor="uvm_hdl_release_and_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_hdl_release_and_read" id="uvm_hdl_release_and_read" href="../../src_view/dpi/uvm_hdl.svh.html#L105" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="105">uvm_hdl_release_and_read</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_hdl_inca.c.html#L639" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="639">inca: dpi/uvm_hdl_inca.c#L639</a><a href="../../src_view/dpi/uvm_hdl_questa.c.html#L391" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="391">questa: dpi/uvm_hdl_questa.c#L391</a><a href="../../src_view/dpi/uvm_hdl_vcs.c.html#L389" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="389">vcs: dpi/uvm_hdl_vcs.c#L389</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">int</span> <span class="sv-proto-name">uvm_hdl_release_and_read</span> <span class="sv-params">(string path, inout uvm_hdl_data_t value)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>Releases a value previously set with &lt;uvm_hdl_force&gt;. Returns 1 if the call succeeded, 0 otherwise. ~value~ is set to the HDL value after the release. For &#x27;reg&#x27;, the value will still be the forced value until it has been procedurally reassigned. For &#x27;wire&#x27;, the value will change immediately to the resolved value of its continuous drivers, if any. If none, its value remains as forced until the next direct assignment.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-5" data-doc-topic="doc-nav-item-dpi-5" data-anchor="uvm_hdl_release">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_hdl_release" id="uvm_hdl_release" href="../../src_view/dpi/uvm_hdl.svh.html#L113" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="113">uvm_hdl_release</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_hdl_inca.c.html#L662" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="662">inca: dpi/uvm_hdl_inca.c#L662</a><a href="../../src_view/dpi/uvm_hdl_questa.c.html#L400" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="400">questa: dpi/uvm_hdl_questa.c#L400</a><a href="../../src_view/dpi/uvm_hdl_vcs.c.html#L398" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="398">vcs: dpi/uvm_hdl_vcs.c#L398</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">int</span> <span class="sv-proto-name">uvm_hdl_release</span> <span class="sv-params">(string path)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>Releases a value previously set with &lt;uvm_hdl_force&gt;. Returns 1 if the call succeeded, 0 otherwise.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-6" data-doc-topic="doc-nav-item-dpi-6" data-anchor="uvm_hdl_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_hdl_read" id="uvm_hdl_read" href="../../src_view/dpi/uvm_hdl.svh.html#L121" class="src-code-link" data-src-file="dpi/uvm_hdl.svh" data-src-line="121">uvm_hdl_read</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_hdl_inca.c.html#L575" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="575">inca: dpi/uvm_hdl_inca.c#L575</a><a href="../../src_view/dpi/uvm_hdl_questa.c.html#L362" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="362">questa: dpi/uvm_hdl_questa.c#L362</a><a href="../../src_view/dpi/uvm_hdl_vcs.c.html#L286" class="src-code-link badge-subclass" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="286">vcs: dpi/uvm_hdl_vcs.c#L286</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">int</span> <span class="sv-proto-name">uvm_hdl_read</span> <span class="sv-params">(string path, output uvm_hdl_data_t value)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>Gets the value at the given ~path~. Returns 1 if the call succeeded, 0 otherwise.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-7" data-doc-topic="doc-nav-item-dpi-7" data-anchor="uvm_re_match">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_re_match" id="uvm_re_match" href="../../src_view/dpi/uvm_regex.svh.html#L23" class="src-code-link" data-src-file="dpi/uvm_regex.svh" data-src-line="23">uvm_re_match</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_regex.cc.html#L40" class="src-code-link badge-subclass" data-src-file="dpi/uvm_regex.cc" data-src-line="40">generic: dpi/uvm_regex.cc#L40</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">int</span> <span class="sv-proto-name">uvm_re_match</span> <span class="sv-params">(string re, string str)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_re_match</code>.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-8" data-doc-topic="doc-nav-item-dpi-8" data-anchor="uvm_dump_re_cache">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_dump_re_cache" id="uvm_dump_re_cache" href="../../src_view/dpi/uvm_regex.svh.html#L24" class="src-code-link" data-src-file="dpi/uvm_regex.svh" data-src-line="24">uvm_dump_re_cache</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_regex.cc.html#L247" class="src-code-link badge-subclass" data-src-file="dpi/uvm_regex.cc" data-src-line="247">generic: dpi/uvm_regex.cc#L247</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">void</span> <span class="sv-proto-name">uvm_dump_re_cache</span> <span class="sv-params">()</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_dump_re_cache</code>.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-9" data-doc-topic="doc-nav-item-dpi-9" data-anchor="uvm_glob_to_re">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_glob_to_re" id="uvm_glob_to_re" href="../../src_view/dpi/uvm_regex.svh.html#L25" class="src-code-link" data-src-file="dpi/uvm_regex.svh" data-src-line="25">uvm_glob_to_re</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_regex.cc.html#L121" class="src-code-link badge-subclass" data-src-file="dpi/uvm_regex.cc" data-src-line="121">generic: dpi/uvm_regex.cc#L121</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">string</span> <span class="sv-proto-name">uvm_glob_to_re</span> <span class="sv-params">(string glob)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_glob_to_re</code>.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-10" data-doc-topic="doc-nav-item-dpi-10" data-anchor="uvm_dpi_get_next_arg_c">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_dpi_get_next_arg_c" id="uvm_dpi_get_next_arg_c" href="../../src_view/dpi/uvm_svcmd_dpi.svh.html#L27" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.svh" data-src-line="27">uvm_dpi_get_next_arg_c</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L58" class="src-code-link badge-subclass" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="58">generic: dpi/uvm_svcmd_dpi.c#L58</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">string</span> <span class="sv-proto-name">uvm_dpi_get_next_arg_c</span> <span class="sv-params">(int init)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_dpi_get_next_arg_c</code>.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-11" data-doc-topic="doc-nav-item-dpi-11" data-anchor="uvm_dpi_get_tool_name_c">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_dpi_get_tool_name_c" id="uvm_dpi_get_tool_name_c" href="../../src_view/dpi/uvm_svcmd_dpi.svh.html#L28" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.svh" data-src-line="28">uvm_dpi_get_tool_name_c</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L84" class="src-code-link badge-subclass" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="84">generic: dpi/uvm_svcmd_dpi.c#L84</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">string</span> <span class="sv-proto-name">uvm_dpi_get_tool_name_c</span> <span class="sv-params">()</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_dpi_get_tool_name_c</code>.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-12" data-doc-topic="doc-nav-item-dpi-12" data-anchor="uvm_dpi_get_tool_version_c">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_dpi_get_tool_version_c" id="uvm_dpi_get_tool_version_c" href="../../src_view/dpi/uvm_svcmd_dpi.svh.html#L29" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.svh" data-src-line="29">uvm_dpi_get_tool_version_c</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L91" class="src-code-link badge-subclass" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="91">generic: dpi/uvm_svcmd_dpi.c#L91</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">string</span> <span class="sv-proto-name">uvm_dpi_get_tool_version_c</span> <span class="sv-params">()</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_dpi_get_tool_version_c</code>.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-13" data-doc-topic="doc-nav-item-dpi-13" data-anchor="uvm_dpi_regcomp">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_dpi_regcomp" id="uvm_dpi_regcomp" href="../../src_view/dpi/uvm_svcmd_dpi.svh.html#L43" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.svh" data-src-line="43">uvm_dpi_regcomp</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L98" class="src-code-link badge-subclass" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="98">generic: dpi/uvm_svcmd_dpi.c#L98</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">chandle</span> <span class="sv-proto-name">uvm_dpi_regcomp</span> <span class="sv-params">(string regex)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_dpi_regcomp</code>.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-14" data-doc-topic="doc-nav-item-dpi-14" data-anchor="uvm_dpi_regexec">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_dpi_regexec" id="uvm_dpi_regexec" href="../../src_view/dpi/uvm_svcmd_dpi.svh.html#L44" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.svh" data-src-line="44">uvm_dpi_regexec</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L120" class="src-code-link badge-subclass" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="120">generic: dpi/uvm_svcmd_dpi.c#L120</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">int</span> <span class="sv-proto-name">uvm_dpi_regexec</span> <span class="sv-params">(chandle preg, string str)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_dpi_regexec</code>.</p></div>
+</div>
+</div>
+<div class="CMethod" id="doc-nav-item-dpi-15" data-doc-topic="doc-nav-item-dpi-15" data-anchor="uvm_dpi_regfree">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="uvm_dpi_regfree" id="uvm_dpi_regfree" href="../../src_view/dpi/uvm_svcmd_dpi.svh.html#L45" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.svh" data-src-line="45">uvm_dpi_regfree</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">DPI-C</span></div>
+  <div class="method-meta-bar"><a href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L129" class="src-code-link badge-subclass" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="129">generic: dpi/uvm_svcmd_dpi.c#L129</a></div>
+  <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword">import "DPI-C" function</span> <span class="sv-type">void</span> <span class="sv-proto-name">uvm_dpi_regfree</span> <span class="sv-params">(chandle preg)</span></td></tr></table></blockquote>
+  <div class="CBody"><p>DPI-C imported function <code>uvm_dpi_regfree</code>.</p></div>
+</div>
+</div>
+<details class="internal-details-section">
+  <summary class="internal-section-header">
+    <span class="internal-header-title">
+      <svg class="internal-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>C/C++ Implementation Functions (62)</span>
+    </span>
+    <span class="badge-internal">Internal</span>
+  </summary>
+  <p class="internal-section-note">Low-level C/C++ DPI helper and simulator-specific functions in <code>src/dpi/</code>.</p>
+  <div class="internal-section-body">
+<div class="CVariable" id="doc-nav-item-dpi-c-16" data-doc-topic="doc-nav-item-dpi-c-16" data-anchor="c.m__uvm_report_dpi">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.m__uvm_report_dpi" id="c.m__uvm_report_dpi" href="../../src_view/dpi/uvm_common.c.html#L24" class="src-code-link" data-src-file="dpi/uvm_common.c" data-src-line="24">m__uvm_report_dpi</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>m__uvm_report_dpi(int,const char*,const char*,int,const char*, int)</code> &rarr; <code>void</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-17" data-doc-topic="doc-nav-item-dpi-c-17" data-anchor="c.int_str_max">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.int_str_max" id="c.int_str_max" href="../../src_view/dpi/uvm_common.c.html#L44" class="src-code-link" data-src-file="dpi/uvm_common.c" data-src-line="44">int_str_max</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>int_str_max(int radix_bits)</code> &rarr; <code>int</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-18" data-doc-topic="doc-nav-item-dpi-c-18" data-anchor="c.int_str_max">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.int_str_max" id="c.int_str_max" href="../../src_view/dpi/uvm_dpi.h.html#L62" class="src-code-link" data-src-file="dpi/uvm_dpi.h" data-src-line="62">int_str_max</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>int_str_max(int)</code> &rarr; <code>int</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-19" data-doc-topic="doc-nav-item-dpi-c-19" data-anchor="c.m_uvm_error">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.m_uvm_error" id="c.m_uvm_error" href="../../src_view/dpi/uvm_hdl_inca.c.html#L32" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="32">m_uvm_error</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>m_uvm_error(const char *ID, const char *msg, ...)</code> &rarr; <code>void</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-20" data-doc-topic="doc-nav-item-dpi-c-20" data-anchor="c.uvm_hdl_set_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_vlog" id="c.uvm_hdl_set_vlog" href="../../src_view/dpi/uvm_hdl_inca.c.html#L33" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="33">uvm_hdl_set_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_set_vlog(char *path, p_vpi_vecval value, PLI_INT32 flag)</code> &rarr; <code>int</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-21" data-doc-topic="doc-nav-item-dpi-c-21" data-anchor="c.m_uvm_get_object_handle">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.m_uvm_get_object_handle" id="c.m_uvm_get_object_handle" href="../../src_view/dpi/uvm_hdl_inca.c.html#L34" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="34">m_uvm_get_object_handle</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>m_uvm_get_object_handle(const char* path, vhpiHandleT *handle,int *language)</code> &rarr; <code>void</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-22" data-doc-topic="doc-nav-item-dpi-c-22" data-anchor="c.uvm_hdl_get_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_vlog" id="c.uvm_hdl_get_vlog" href="../../src_view/dpi/uvm_hdl_inca.c.html#L35" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="35">uvm_hdl_get_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_get_vlog(char *path, p_vpi_vecval value, PLI_INT32 flag)</code> &rarr; <code>int</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-23" data-doc-topic="doc-nav-item-dpi-c-23" data-anchor="c.uvm_hdl_max_width">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_max_width" id="c.uvm_hdl_max_width" href="../../src_view/dpi/uvm_hdl_inca.c.html#L36" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="36">uvm_hdl_max_width</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_max_width()</code> &rarr; <code>int</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-24" data-doc-topic="doc-nav-item-dpi-c-24" data-anchor="c.m_uvm_get_object_handle">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.m_uvm_get_object_handle" id="c.m_uvm_get_object_handle" href="../../src_view/dpi/uvm_hdl_inca.c.html#L45" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="45">m_uvm_get_object_handle</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>UVM HDL access C code.</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-25" data-doc-topic="doc-nav-item-dpi-c-25" data-anchor="c.is_valid_path_slice">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.is_valid_path_slice" id="c.is_valid_path_slice" href="../../src_view/dpi/uvm_hdl_inca.c.html#L55" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="55">is_valid_path_slice</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>returns 0 if the name is NOT a slice returns 1 if the name is a slice</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-26" data-doc-topic="doc-nav-item-dpi-c-26" data-anchor="c.uvm_hdl_set_vlog_partsel">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_vlog_partsel" id="c.uvm_hdl_set_vlog_partsel" href="../../src_view/dpi/uvm_hdl_inca.c.html#L84" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="84">uvm_hdl_set_vlog_partsel</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_set_vlog_partsel(char *path, p_vpi_vecval value, PLI_INT32 flag)</code> &rarr; <code>int</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-27" data-doc-topic="doc-nav-item-dpi-c-27" data-anchor="c.uvm_hdl_get_vlog_partsel">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_vlog_partsel" id="c.uvm_hdl_get_vlog_partsel" href="../../src_view/dpi/uvm_hdl_inca.c.html#L142" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="142">uvm_hdl_get_vlog_partsel</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path with part-select, break into individual bit accesses path = pointer to user string value = pointer to logic vector flag = deposit vs force/release options, etc /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-28" data-doc-topic="doc-nav-item-dpi-c-28" data-anchor="c.clear_value">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.clear_value" id="c.clear_value" href="../../src_view/dpi/uvm_hdl_inca.c.html#L197" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="197">clear_value</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>clear_value(p_vpi_vecval value)</code> &rarr; <code>void</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-29" data-doc-topic="doc-nav-item-dpi-c-29" data-anchor="c.uvm_hdl_max_width">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_max_width" id="c.uvm_hdl_max_width" href="../../src_view/dpi/uvm_hdl_inca.c.html#L216" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="216">uvm_hdl_max_width</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_max_width()</code> &rarr; <code>int</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-30" data-doc-topic="doc-nav-item-dpi-c-30" data-anchor="c.uvm_hdl_set_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_vlog" id="c.uvm_hdl_set_vlog" href="../../src_view/dpi/uvm_hdl_inca.c.html#L233" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="233">uvm_hdl_set_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-31" data-doc-topic="doc-nav-item-dpi-c-31" data-anchor="c.vhpi2val">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.vhpi2val" id="c.vhpi2val" href="../../src_view/dpi/uvm_hdl_inca.c.html#L275" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="275">vhpi2val</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>vhpi2val(int aval,int bval)</code> &rarr; <code>vhpiEnumT</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-32" data-doc-topic="doc-nav-item-dpi-c-32" data-anchor="c.uvm_hdl_set_vhdl">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_vhdl" id="c.uvm_hdl_set_vhdl" href="../../src_view/dpi/uvm_hdl_inca.c.html#L280" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="280">uvm_hdl_set_vhdl</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_set_vhdl(char* path, p_vpi_vecval value, PLI_INT32 flag)</code> &rarr; <code>int</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-33" data-doc-topic="doc-nav-item-dpi-c-33" data-anchor="c.uvm_hdl_get_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_vlog" id="c.uvm_hdl_get_vlog" href="../../src_view/dpi/uvm_hdl_inca.c.html#L356" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="356">uvm_hdl_get_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI and return its &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-34" data-doc-topic="doc-nav-item-dpi-c-34" data-anchor="c.uvm_hdl_get_vhdl">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_vhdl" id="c.uvm_hdl_get_vhdl" href="../../src_view/dpi/uvm_hdl_inca.c.html#L406" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="406">uvm_hdl_get_vhdl</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_get_vhdl(char* path, p_vpi_vecval value)</code> &rarr; <code>int</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-35" data-doc-topic="doc-nav-item-dpi-c-35" data-anchor="c.uvm_hdl_check_path">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_check_path" id="c.uvm_hdl_check_path" href="../../src_view/dpi/uvm_hdl_inca.c.html#L549" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="549">uvm_hdl_check_path</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI, but don&#x27;t set or get. Just check.</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-36" data-doc-topic="doc-nav-item-dpi-c-36" data-anchor="c.m_uvm_error">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.m_uvm_error" id="c.m_uvm_error" href="../../src_view/dpi/uvm_hdl_inca.c.html#L559" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="559">m_uvm_error</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>m_uvm_error(const char *id, const char *msg, ...)</code> &rarr; <code>void</code> (inca).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-37" data-doc-topic="doc-nav-item-dpi-c-37" data-anchor="c.uvm_hdl_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_read" id="c.uvm_hdl_read" href="../../src_view/dpi/uvm_hdl_inca.c.html#L575" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="575">uvm_hdl_read</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and return its &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-38" data-doc-topic="doc-nav-item-dpi-c-38" data-anchor="c.uvm_hdl_deposit">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_deposit" id="c.uvm_hdl_deposit" href="../../src_view/dpi/uvm_hdl_inca.c.html#L597" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="597">uvm_hdl_deposit</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-39" data-doc-topic="doc-nav-item-dpi-c-39" data-anchor="c.uvm_hdl_force">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_force" id="c.uvm_hdl_force" href="../../src_view/dpi/uvm_hdl_inca.c.html#L618" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="618">uvm_hdl_force</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-40" data-doc-topic="doc-nav-item-dpi-c-40" data-anchor="c.uvm_hdl_release_and_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_release_and_read" id="c.uvm_hdl_release_and_read" href="../../src_view/dpi/uvm_hdl_inca.c.html#L639" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="639">uvm_hdl_release_and_read</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and release it. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-41" data-doc-topic="doc-nav-item-dpi-c-41" data-anchor="c.uvm_hdl_release">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_release" id="c.uvm_hdl_release" href="../../src_view/dpi/uvm_hdl_inca.c.html#L662" class="src-code-link" data-src-file="dpi/uvm_hdl_inca.c" data-src-line="662">uvm_hdl_release</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and release it. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-42" data-doc-topic="doc-nav-item-dpi-c-42" data-anchor="c.uvm_hdl_max_width">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_max_width" id="c.uvm_hdl_max_width" href="../../src_view/dpi/uvm_hdl_questa.c.html#L41" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="41">uvm_hdl_max_width</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>UVM HDL access C code.</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-43" data-doc-topic="doc-nav-item-dpi-c-43" data-anchor="c.uvm_hdl_set_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_vlog" id="c.uvm_hdl_set_vlog" href="../../src_view/dpi/uvm_hdl_questa.c.html#L55" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="55">uvm_hdl_set_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_set_vlog(char *path, p_vpi_vecval value, PLI_INT32 flag)</code> &rarr; <code>int</code> (questa).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-44" data-doc-topic="doc-nav-item-dpi-c-44" data-anchor="c.uvm_hdl_get_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_vlog" id="c.uvm_hdl_get_vlog" href="../../src_view/dpi/uvm_hdl_questa.c.html#L56" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="56">uvm_hdl_get_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_get_vlog(char *path, p_vpi_vecval value, PLI_INT32 flag)</code> &rarr; <code>int</code> (questa).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-45" data-doc-topic="doc-nav-item-dpi-c-45" data-anchor="c.uvm_hdl_set_vlog_partsel">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_vlog_partsel" id="c.uvm_hdl_set_vlog_partsel" href="../../src_view/dpi/uvm_hdl_questa.c.html#L65" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="65">uvm_hdl_set_vlog_partsel</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path with part-select, break into individual bit accesses path = pointer to user string value = pointer to logic vector flag = deposit vs force/release options, etc /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-46" data-doc-topic="doc-nav-item-dpi-c-46" data-anchor="c.uvm_hdl_get_vlog_partsel">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_vlog_partsel" id="c.uvm_hdl_get_vlog_partsel" href="../../src_view/dpi/uvm_hdl_questa.c.html#L120" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="120">uvm_hdl_get_vlog_partsel</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path with part-select, break into individual bit accesses path = pointer to user string value = pointer to logic vector flag = deposit vs force/release options, etc /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-47" data-doc-topic="doc-nav-item-dpi-c-47" data-anchor="c.uvm_hdl_set_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_vlog" id="c.uvm_hdl_set_vlog" href="../../src_view/dpi/uvm_hdl_questa.c.html#L180" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="180">uvm_hdl_set_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-48" data-doc-topic="doc-nav-item-dpi-c-48" data-anchor="c.uvm_hdl_get_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_vlog" id="c.uvm_hdl_get_vlog" href="../../src_view/dpi/uvm_hdl_questa.c.html#L246" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="246">uvm_hdl_get_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI and return its &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-49" data-doc-topic="doc-nav-item-dpi-c-49" data-anchor="c.uvm_hdl_check_path">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_check_path" id="c.uvm_hdl_check_path" href="../../src_view/dpi/uvm_hdl_questa.c.html#L339" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="339">uvm_hdl_check_path</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI, but don&#x27;t set or get. Just check.</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-50" data-doc-topic="doc-nav-item-dpi-c-50" data-anchor="c.uvm_hdl_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_read" id="c.uvm_hdl_read" href="../../src_view/dpi/uvm_hdl_questa.c.html#L362" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="362">uvm_hdl_read</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and return its &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-51" data-doc-topic="doc-nav-item-dpi-c-51" data-anchor="c.uvm_hdl_deposit">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_deposit" id="c.uvm_hdl_deposit" href="../../src_view/dpi/uvm_hdl_questa.c.html#L371" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="371">uvm_hdl_deposit</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-52" data-doc-topic="doc-nav-item-dpi-c-52" data-anchor="c.uvm_hdl_force">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_force" id="c.uvm_hdl_force" href="../../src_view/dpi/uvm_hdl_questa.c.html#L381" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="381">uvm_hdl_force</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-53" data-doc-topic="doc-nav-item-dpi-c-53" data-anchor="c.uvm_hdl_release_and_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_release_and_read" id="c.uvm_hdl_release_and_read" href="../../src_view/dpi/uvm_hdl_questa.c.html#L391" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="391">uvm_hdl_release_and_read</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and release it. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-54" data-doc-topic="doc-nav-item-dpi-c-54" data-anchor="c.uvm_hdl_release">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_release" id="c.uvm_hdl_release" href="../../src_view/dpi/uvm_hdl_questa.c.html#L400" class="src-code-link" data-src-file="dpi/uvm_hdl_questa.c" data-src-line="400">uvm_hdl_release</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the FLI, and release it. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-55" data-doc-topic="doc-nav-item-dpi-c-55" data-anchor="c.uvm_hdl_max_width">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_max_width" id="c.uvm_hdl_max_width" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L50" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="50">uvm_hdl_max_width</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>UVM HDL access C code.</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-56" data-doc-topic="doc-nav-item-dpi-c-56" data-anchor="c.uvm_hdl_set_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_vlog" id="c.uvm_hdl_set_vlog" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L67" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="67">uvm_hdl_set_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-57" data-doc-topic="doc-nav-item-dpi-c-57" data-anchor="c.uvm_hdl_get_vlog">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_vlog" id="c.uvm_hdl_get_vlog" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L118" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="118">uvm_hdl_get_vlog</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI and return its &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-58" data-doc-topic="doc-nav-item-dpi-c-58" data-anchor="c.uvm_hdl_check_path">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_check_path" id="c.uvm_hdl_check_path" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L184" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="184">uvm_hdl_check_path</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI, but don&#x27;t set or get. Just check.</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-59" data-doc-topic="doc-nav-item-dpi-c-59" data-anchor="c.uvm_hdl_dtob">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_dtob" id="c.uvm_hdl_dtob" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L219" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="219">uvm_hdl_dtob</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>decimal to hex conversion /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-60" data-doc-topic="doc-nav-item-dpi-c-60" data-anchor="c.uvm_hdl_get_mhdl">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_get_mhdl" id="c.uvm_hdl_get_mhdl" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L246" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="246">uvm_hdl_get_mhdl</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_get_mhdl(char *path, p_vpi_vecval value)</code> &rarr; <code>int</code> (vcs).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-61" data-doc-topic="doc-nav-item-dpi-c-61" data-anchor="c.uvm_hdl_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_read" id="c.uvm_hdl_read" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L286" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="286">uvm_hdl_read</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the VHPI, and return its &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-62" data-doc-topic="doc-nav-item-dpi-c-62" data-anchor="c.uvm_hdl_set_mhdl">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_set_mhdl" id="c.uvm_hdl_set_mhdl" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L310" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="310">uvm_hdl_set_mhdl</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_hdl_set_mhdl(char *path, p_vpi_vecval value, mhpiPutValueFlagsT flags)</code> &rarr; <code>int</code> (vcs).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-63" data-doc-topic="doc-nav-item-dpi-c-63" data-anchor="c.uvm_hdl_deposit">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_deposit" id="c.uvm_hdl_deposit" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L335" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="335">uvm_hdl_deposit</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the VHPI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-64" data-doc-topic="doc-nav-item-dpi-c-64" data-anchor="c.uvm_hdl_force">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_force" id="c.uvm_hdl_force" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L361" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="361">uvm_hdl_force</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the VHPI, and set it to &#x27;value&#x27;. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-65" data-doc-topic="doc-nav-item-dpi-c-65" data-anchor="c.uvm_hdl_release_and_read">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_release_and_read" id="c.uvm_hdl_release_and_read" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L389" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="389">uvm_hdl_release_and_read</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the VHPI, and release it. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-66" data-doc-topic="doc-nav-item-dpi-c-66" data-anchor="c.uvm_hdl_release">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_hdl_release" id="c.uvm_hdl_release" href="../../src_view/dpi/uvm_hdl_vcs.c.html#L398" class="src-code-link" data-src-file="dpi/uvm_hdl_vcs.c" data-src-line="398">uvm_hdl_release</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>Given a path, look the path name up using the PLI or the VHPI, and release it. /</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-67" data-doc-topic="doc-nav-item-dpi-c-67" data-anchor="c.uvm_re_match">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_re_match" id="c.uvm_re_match" href="../../src_view/dpi/uvm_regex.cc.html#L40" class="src-code-link" data-src-file="dpi/uvm_regex.cc" data-src-line="40">uvm_re_match</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>uvm_re_match</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-68" data-doc-topic="doc-nav-item-dpi-c-68" data-anchor="c.uvm_glob_to_re">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_glob_to_re" id="c.uvm_glob_to_re" href="../../src_view/dpi/uvm_regex.cc.html#L121" class="src-code-link" data-src-file="dpi/uvm_regex.cc" data-src-line="121">uvm_glob_to_re</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>uvm_glob_to_re</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-69" data-doc-topic="doc-nav-item-dpi-c-69" data-anchor="c.uvm_dump_re_cache">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_dump_re_cache" id="c.uvm_dump_re_cache" href="../../src_view/dpi/uvm_regex.cc.html#L247" class="src-code-link" data-src-file="dpi/uvm_regex.cc" data-src-line="247">uvm_dump_re_cache</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>uvm_dump_re_cache</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-70" data-doc-topic="doc-nav-item-dpi-c-70" data-anchor="c.push_data">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.push_data" id="c.push_data" href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L36" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="36">push_data</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>push_data(int lvl,char *entry, int cmd)</code> &rarr; <code>void</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-71" data-doc-topic="doc-nav-item-dpi-c-71" data-anchor="c.walk_level">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.walk_level" id="c.walk_level" href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L44" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="44">walk_level</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>walk one level (potentially recursive)</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-72" data-doc-topic="doc-nav-item-dpi-c-72" data-anchor="c.uvm_dpi_get_next_arg_c">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_dpi_get_next_arg_c" id="c.uvm_dpi_get_next_arg_c" href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L58" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="58">uvm_dpi_get_next_arg_c</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_dpi_get_next_arg_c(int init)</code> &rarr; <code>const char *</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-73" data-doc-topic="doc-nav-item-dpi-c-73" data-anchor="c.uvm_dpi_get_tool_name_c">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_dpi_get_tool_name_c" id="c.uvm_dpi_get_tool_name_c" href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L84" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="84">uvm_dpi_get_tool_name_c</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_dpi_get_tool_name_c()</code> &rarr; <code>char*</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-74" data-doc-topic="doc-nav-item-dpi-c-74" data-anchor="c.uvm_dpi_get_tool_version_c">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_dpi_get_tool_version_c" id="c.uvm_dpi_get_tool_version_c" href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L91" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="91">uvm_dpi_get_tool_version_c</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_dpi_get_tool_version_c()</code> &rarr; <code>char*</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-75" data-doc-topic="doc-nav-item-dpi-c-75" data-anchor="c.uvm_dpi_regcomp">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_dpi_regcomp" id="c.uvm_dpi_regcomp" href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L98" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="98">uvm_dpi_regcomp</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_dpi_regcomp(char* pattern)</code> &rarr; <code>regex_t*</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-76" data-doc-topic="doc-nav-item-dpi-c-76" data-anchor="c.uvm_dpi_regexec">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_dpi_regexec" id="c.uvm_dpi_regexec" href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L120" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="120">uvm_dpi_regexec</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_dpi_regexec(regex_t* re, char* str)</code> &rarr; <code>int</code> (generic).</p></div>
+</div>
+</div>
+<div class="CVariable" id="doc-nav-item-dpi-c-77" data-doc-topic="doc-nav-item-dpi-c-77" data-anchor="c.uvm_dpi_regfree">
+<div class="CTopic">
+  <h3 class="CTitle"><a name="c.uvm_dpi_regfree" id="c.uvm_dpi_regfree" href="../../src_view/dpi/uvm_svcmd_dpi.c.html#L129" class="src-code-link" data-src-file="dpi/uvm_svcmd_dpi.c" data-src-line="129">uvm_dpi_regfree</a></h3>
+  <div class="method-meta-bar"><span class="badge-subclass">Function</span><span class="badge-internal" title="Internal UVM implementation symbol">Internal</span></div>
+  <div class="CBody"><p>C function <code>uvm_dpi_regfree(regex_t* re)</code> &rarr; <code>void</code> (generic).</p></div>
+</div>
+</div>
+  </div>
+</details>
+</div>
+      </div>
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+  <button class="doc-toc-mobile-trigger" id="doc-toc-mobile-trigger" type="button" aria-expanded="false" aria-controls="doc-toc-inner" title="Toggle table of contents">
+    <span class="doc-toc-mobile-left">
+      <svg class="doc-toc-mobile-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+        <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+      </svg>
+      <span class="doc-toc-mobile-label">On this page</span>
+      <span class="doc-toc-mobile-sep" aria-hidden="true">&rsaquo;</span>
+      <span class="doc-toc-mobile-current" id="doc-toc-mobile-current">Overview</span>
+    </span>
+    <svg class="doc-toc-mobile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </button>
+  <div class="doc-toc-inner" id="doc-toc-inner">
+    <div class="doc-toc-header">
+      <span class="doc-toc-title">On this page</span>
+      <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+        <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="4 14 12 6 20 14"/>
+        </svg>
+        <span class="toc-toggle-text">Collapse all</span>
+      </button>
+    </div>
+    <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+  </div>
+</aside>
+    </div>
+  </div>
+  <script src="../../js/uvm_symbol_quick.js" defer></script>
+  <script src="../../js/page_common.js"></script>
+  <script src="../../js/doc_page.js"></script>
+</body>
+
+</html>

@@ -44,8 +44,9 @@ Le projet **UVM 1.2 Interactive Documentation & Source Explorer** vise à transf
 | | **Respect de la Casse** | Bascule `Aa` (`Alt+C`) pour différencier les identifiants sensibles à la casse. |
 | | **Filtres Multi-Sélection Multi-Lignes**| Pilules (`All`, `Classes`, `Functions`, `Tasks`, `Macros`, `Files`, `Examples`, `Beginner`, `Intermediate`, `Advanced`) réparties sur plusieurs lignes (`flex-wrap`). |
 | | **Bouton Effacer (`Clear / ×`)** | Nettoyage instantané du champ au clic ou via une première pression sur la touche `Escape`. |
-| **Documentation (`docs_view`)** | **Fil d'Ariane Cliquable Hiérarchique** | Navigation ascendant complète reliant la page courante à ses sections parentes avec aperçu direct, sans insertion du dossier technique `Overviews`. |
-| | **Bannière "View Source" Discrète** | En-tête injecté avec bouton compact iconique (`.banner-icon-btn`) et badge de ligne, discret et sans bouton verbeux encombrant. |
+| **Documentation (`docs_view`)** | **Fil d'Ariane Cliquable Flottant** | Navigation ascendante complète (`sticky` floating pill avec `backdrop-filter`) reliant la page courante à ses sections parentes avec aperçu direct, sans insertion du dossier technique `Overviews`. |
+| | **Bannière "View Source" & Copie Split-Safe** | En-tête injecté avec bouton compact iconique (`.banner-icon-btn`), badge de ligne, et copie de lien préservant le contexte Split-View (`#/split?doc=...&src=...`) sans ancre `#MainTopic` superflue sur les titres de page. |
+| | **Complétion AST & Sections Internes (`Additional APIs`, `uvm_dpi`, `m_*`)** | Injection ciblée des membres, classes, macros et bindings DPI-C (SV ↔ C) extraits de l'AST dans `.Summary.ClassSummary > .STable` avec groupe dédié `Additional APIs` dans le corps et le TOC. Isolation des symboles internes (`m_*` / `M_*`) dans une section repliable `.internal-details-section` référencée dans le TOC, et remplacement des descriptions manquantes par `.undocumented-notice` avec lien direct vers la ligne source (`src_view`). |
 | | **Nettoyage des En-têtes Légaux** | Élimination totale des mentions parasites de copyright dans les descriptions de classes et méthodes orphelines. |
 | | **Topologie & Hiérarchie de Classes In-Situ (`class-hierarchy-widget`)** | Remplacement in-situ au même endroit de l'ancien bloc statique Natural Docs (`<div class=ClassHierarchy>`) dans le tableau Summary. Chaîne ascendante navigable (`uvm_void` ➔ ... ➔ classe courante), sous-classes directes repliables (`.hierarchy-subclasses-card`), tags de rôle architectural et badges de métriques sans duplication sur les en-têtes de sections multi-classes. |
 | | **Matrice Interactive des Méthodes Héritées** | Accordéon interactif situé sous le sommaire de chaque classe, regroupant l'ensemble des méthodes héritées par classe ancêtre (de `uvm_void` jusqu'au parent direct). Filtre de recherche temps réel (`.inherited-filter-input`), badges de comptage de méthodes par ancêtre, signatures complètes, types de retour, listes d'arguments et pastilles cliquables menant directement à la documentation ou à l'implémentation de la classe d'origine. |
@@ -286,6 +287,13 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
   3. **Séquence multi-échéances de recalcul géométrique** :
      - Après l'expansion d'une zone rétractée, le redimensionnement du layout (reflow) modifie la hauteur totale du document et les coordonnées `offsetTop`.
      - Réémettre `scrollToSection` aux paliers clés : immédiat, 80ms, 120ms, 320ms, 600ms pour garantir un positionnement au pixel près après stabilisation complète du DOM.
+
+### Règle 16 : Injection DOM Sémantique & Parité Thème Sombre des Composants Injectés
+- **Principe** : Toute injection de contenu AST dans du HTML NaturalDocs hérité doit cibler la structure sémantique exacte et respecter les deux thèmes (`light` et `[data-theme="dark"]`).
+- **Règles d'implémentation** :
+  1. **Ciblage par profondeur de balises** : Ne jamais utiliser `replace('</table>', ..., 1)` sur un fragment contenant `CDescriptionList` ou `Prototype` ; cibler `.Summary.ClassSummary > .STable` en comptant l'imbrication `<table` / `</table>` (ou créer un bloc `ClassSummary` dédié si absent).
+  2. **Hiérarchie TOC cohérente** : Utiliser `<h3 class="CTitle">` pour tout `<div class="CGroup">` injecté afin de ne pas déclencher le mode `has_h2` dans `extract_doc_headings()`.
+  3. **Parité `[data-theme="dark"]`** : Chaque nouveau composant UI (`.internal-details-section`, `.undocumented-notice`, `.badge-*`) doit disposer de ses variables/surcharges `[data-theme="dark"]` dans `css/style.css`.
 
 ---
 
