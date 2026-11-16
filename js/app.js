@@ -716,29 +716,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  let suppressNextHashChange = false;
+
   function updateHash() {
+    let nextHash = '';
     if (currentMode === 'split') {
       const isExample = currentDocUrl.includes('examples_view/');
       const doc = isExample
         ? 'examples_view/' + currentDocUrl.replace(/^examples_view\//, '')
         : currentDocUrl.replace(/^docs_view\//, '');
       const src = currentSrcUrl.replace(/^src_view\//, '');
-      window.location.hash = `#/split?doc=${encodeURIComponent(doc)}&src=${encodeURIComponent(src)}`;
+      nextHash = `#/split?doc=${encodeURIComponent(doc)}&src=${encodeURIComponent(src)}`;
     } else if (currentMode === 'source') {
       const src = currentSrcUrl.replace(/^src_view\//, '');
-      window.location.hash = `#/src/${src}`;
+      nextHash = `#/src/${src}`;
     } else {
       if (currentDocUrl.includes('examples_view/')) {
         const ex = currentDocUrl.replace(/^examples_view\//, '');
-        window.location.hash = `#/example/${ex}`;
+        nextHash = `#/example/${ex}`;
       } else {
         const doc = currentDocUrl.replace(/^docs_view\//, '');
-        window.location.hash = `#/doc/${doc}`;
+        nextHash = `#/doc/${doc}`;
       }
+    }
+    if (window.location.hash !== nextHash) {
+      suppressNextHashChange = true;
+      window.location.hash = nextHash;
     }
   }
 
-  window.addEventListener('hashchange', parseHash);
+  window.addEventListener('hashchange', function () {
+    if (suppressNextHashChange) {
+      suppressNextHashChange = false;
+      return;
+    }
+    parseHash();
+  });
 
   function loadDoc(url, pushState = true, autoPair = true) {
     const fullDoc = normalizeDocUrl(url);

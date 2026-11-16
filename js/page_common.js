@@ -545,12 +545,13 @@ window.PageCommon = (function () {
         const label = isContents ? 'Contents' : 'Summary';
 
         topSummaryEl.id = topSummaryEl.id || safeId;
-        topSummaryEl.setAttribute('data-anchor', safeAnchor);
+        const resolvedSummaryAnchor = topSummaryEl.getAttribute('data-anchor') || safeAnchor;
+        topSummaryEl.setAttribute('data-anchor', resolvedSummaryAnchor);
         tocEntries.push({
           kind: 'item',
           data: {
             id: topSummaryEl.id,
-            anchor: safeAnchor,
+            anchor: resolvedSummaryAnchor,
             title: label,
             type: isContents ? 'contents' : 'summary',
             el: topSummaryEl
@@ -616,7 +617,7 @@ window.PageCommon = (function () {
         const classSummary = wrap.querySelector('.Summary, .ClassSummary');
         if (classSummary) {
           classSummary.id = classSummary.id || ('doc-nav-summary-' + safeId);
-          classSummary.setAttribute('data-anchor', classSummary.getAttribute('data-anchor') || 'Summary');
+          classSummary.setAttribute('data-anchor', classSummary.getAttribute('data-anchor') || (aName ? (aName + '.Summary') : 'Summary'));
           tocEntries.push({
             kind: 'item',
             data: {
@@ -714,8 +715,9 @@ window.PageCommon = (function () {
         const typeCls = item.type ? (' doc-toc-type-' + item.type) : '';
         const isMono = item.type === 'subitem' ? ' doc-toc-subitem' : '';
         const itemAnchorAttr = item.anchor ? ' data-anchor="' + escapeHtml(item.anchor) + '"' : '';
+        const itemHref = escapeHtml(item.anchor || item.id);
         tocHtml += '<li class="doc-toc-item' + typeCls + isMono + '">';
-        tocHtml += '<a href="#' + item.id + '" data-target-id="' + item.id + '"' + itemAnchorAttr + ' class="doc-toc-link" title="' + cleanTitle + '">';
+        tocHtml += '<a href="#' + itemHref + '" data-target-id="' + item.id + '"' + itemAnchorAttr + ' class="doc-toc-link" title="' + cleanTitle + '">';
         tocHtml += cleanTitle;
         tocHtml += '</a></li>';
         return;
@@ -726,6 +728,7 @@ window.PageCommon = (function () {
       const hasSubItems = group.items.length > 0;
       const defaultCollapsedCls = (hasSubItems && group.isInheritedGroup) ? ' collapsed' : '';
       const groupAnchorAttr = group.anchor ? ' data-anchor="' + escapeHtml(group.anchor) + '"' : '';
+      const groupHref = escapeHtml(group.anchor || group.id);
       tocHtml += '<li class="doc-toc-item doc-toc-group-item doc-toc-group-block' + (hasSubItems ? '' : ' no-children') + defaultCollapsedCls + '" id="block-' + group.id + '">';
       tocHtml += '<div class="doc-toc-group-header">';
       if (hasSubItems) {
@@ -735,7 +738,7 @@ window.PageCommon = (function () {
       } else {
         tocHtml += '<span class="doc-toc-dot-indicator"></span>';
       }
-      tocHtml += '<a href="#' + group.id + '" data-target-id="' + group.id + '"' + groupAnchorAttr + ' class="doc-toc-link doc-toc-group-title" title="' + cleanGroupTitle + '">';
+      tocHtml += '<a href="#' + groupHref + '" data-target-id="' + group.id + '"' + groupAnchorAttr + ' class="doc-toc-link doc-toc-group-title" title="' + cleanGroupTitle + '">';
       tocHtml += cleanGroupTitle;
       tocHtml += '</a>';
       if (hasSubItems) {
@@ -750,8 +753,9 @@ window.PageCommon = (function () {
           const extraCls = sub.isGroupHeader ? ' doc-toc-subgroup-header' : '';
           const inhAttr = sub.inheritedSectionId ? ' data-inherited-section-id="' + sub.inheritedSectionId + '"' : '';
           const anchorAttr = sub.anchor ? ' data-anchor="' + escapeHtml(sub.anchor) + '"' : '';
+          const subHref = escapeHtml(sub.anchor || sub.id);
           tocHtml += '<li class="doc-toc-item doc-toc-subitem' + extraCls + '">';
-          tocHtml += '<a href="#' + sub.id + '" data-target-id="' + sub.id + '"' + inhAttr + anchorAttr + ' class="doc-toc-link' + (sub.isGroupHeader ? ' doc-toc-subgroup-link' : '') + '" title="' + cleanSubTitle + '">';
+          tocHtml += '<a href="#' + subHref + '" data-target-id="' + sub.id + '"' + inhAttr + anchorAttr + ' class="doc-toc-link' + (sub.isGroupHeader ? ' doc-toc-subgroup-link' : '') + '" title="' + cleanSubTitle + '">';
           tocHtml += cleanSubTitle;
           tocHtml += '</a></li>';
         });
@@ -827,19 +831,12 @@ window.PageCommon = (function () {
       return Math.max(0, currentScroll + rect.top - getScrollOffset());
     }
 
-    function performScroll(targetY) {
-      const scrollEl = document.scrollingElement || document.documentElement || document.body;
+    function performScroll(targetY, instant) {
+      const behavior = instant ? 'auto' : 'smooth';
       try {
-        window.scrollTo({ top: targetY, behavior: 'smooth' });
+        window.scrollTo({ top: targetY, behavior: behavior });
       } catch (e) {
         window.scrollTo(0, targetY);
-      }
-      if (scrollEl && Math.abs(scrollEl.scrollTop - targetY) > 5) {
-        try {
-          scrollEl.scrollTo({ top: targetY, behavior: 'smooth' });
-        } catch (e) {
-          scrollEl.scrollTop = targetY;
-        }
       }
     }
 
@@ -910,12 +907,12 @@ window.PageCommon = (function () {
         return;
       }
       const targetEl = pendingTargetEl;
-      const rect = targetEl.getBoundingClientRect();
-      if (Math.abs(rect.top - getScrollOffset()) > 6) {
-        const adjustedY = getTargetScrollY(targetEl);
-        performScroll(adjustedY);
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const adjustedY = getTargetScrollY(targetEl);
+      if (Math.abs(adjustedY - currentScroll) > 6) {
+        performScroll(adjustedY, true);
         pendingTargetEl = null;
-        setTimeout(onManualScrollDone, 100);
+        setTimeout(onManualScrollDone, 60);
       } else {
         onManualScrollDone();
       }
@@ -1072,11 +1069,13 @@ window.PageCommon = (function () {
 
     function resolveScrollContainer(el) {
       if (!el || !el.closest) return el;
-      if (el.classList && el.classList.contains('inherited-methods-section')) return el;
+      if (el.classList && (el.classList.contains('inherited-methods-section') || el.classList.contains('Summary'))) return el;
       const inhEntry = el.closest('.inherited-topic-entry');
       if (inhEntry) return inhEntry;
       const inhSec = el.closest('.inherited-methods-section');
       if (inhSec) return inhSec;
+      const summarySec = el.closest('.Summary');
+      if (summarySec) return summarySec;
       return el.closest('#Content > div') || el.closest('.CTopic') || el;
     }
 
@@ -1759,15 +1758,20 @@ window.PageCommon = (function () {
 
     function setupHeading(heading) {
       if (heading.querySelector('.heading-anchor-btn')) return;
-      const anchor = getHeadingAnchor(heading);
-      if (!anchor) return;
+      const isPageTitle = heading.tagName === 'H1' && !!heading.closest('#doc-nav-main, #MainTopic');
+      const anchor = isPageTitle ? '' : getHeadingAnchor(heading);
+      if (!isPageTitle && !anchor) return;
 
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'heading-anchor-btn';
-      btn.setAttribute('aria-label', 'Copy link to this section');
-      btn.setAttribute('title', 'Copy link to this section');
-      btn.setAttribute('data-anchor', anchor);
+      btn.setAttribute('aria-label', isPageTitle ? 'Copy link to this page' : 'Copy link to this section');
+      btn.setAttribute('title', isPageTitle ? 'Copy link to this page' : 'Copy link to this section');
+      if (isPageTitle) {
+        btn.setAttribute('data-page-link', '1');
+      } else {
+        btn.setAttribute('data-anchor', anchor);
+      }
       btn.innerHTML = LINK_ICON_SVG;
 
       const tip = document.createElement('span');
@@ -1807,14 +1811,15 @@ window.PageCommon = (function () {
         btn.blur();
       } catch (err) { }
 
+      const isPageLink = btn.getAttribute('data-page-link') === '1';
       const anchor = btn.getAttribute('data-anchor');
-      if (!anchor) return;
+      if (!isPageLink && !anchor) return;
 
-      const hash = '#' + anchor;
+      const hash = isPageLink ? '' : ('#' + anchor);
       try {
-        history.pushState(null, '', hash);
+        history.pushState(null, '', hash || (window.location.pathname + window.location.search));
       } catch (err) {
-        window.location.hash = hash;
+        if (hash) window.location.hash = hash;
       }
 
       let fullUrl = '';
@@ -1837,7 +1842,8 @@ window.PageCommon = (function () {
             fullUrl = `${parentBase}#/example/${exClean}${hash}`;
             window.parent.postMessage({ type: 'exampleNavigated', url: exRel + hash }, '*');
           } else {
-            fullUrl = `${parentBase}#/doc/${docRel}${hash}`;
+            const docClean = docRel.replace(/^docs_view\//, '');
+            fullUrl = `${parentBase}#/doc/${docClean}${hash}`;
             window.parent.postMessage({ type: 'docNavigated', url: docRel + hash }, '*');
           }
         } catch (err) {

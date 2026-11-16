@@ -1061,7 +1061,12 @@ def modernize_doc_files():
                         return f'<div class="Summary ContentsSummary" id="doc-nav-contents" data-anchor="Contents"><div class="STitle">Contents</div>'
                     else:
                         sum_id = f"doc-nav-summary-{safe_id}" if not is_main else "doc-nav-summary"
-                        sum_anchor = f"Summary-{safe_id}" if not is_main else "Summary"
+                        if a_name:
+                            sum_anchor = f"{a_name}.Summary"
+                        elif is_main:
+                            sum_anchor = "Summary"
+                        else:
+                            sum_anchor = f"Summary-{safe_id}"
                         return f'<div class="Summary ClassSummary" id="{sum_id}" data-anchor="{sum_anchor}"><div class="STitle">{st_title}</div>'
 
                 w_body = re.sub(r'<div class=["\']?Summary["\']?>[\s\S]*?<div class=["\']?STitle["\']?>[\s\S]*?</div>', tag_summary_block, w_body)
@@ -1265,7 +1270,7 @@ def generate_orphan_doc_pages():
             methods = c_info.get('methods', {})
             if methods:
                 sum_id = f"doc-nav-summary-{cname}"
-                body_parts.append(f'''<div class="Summary" id="{sum_id}" data-anchor="Summary-{cname}">
+                body_parts.append(f'''<div class="Summary" id="{sum_id}" data-anchor="{cname}.Summary">
 <div class="STitle">Methods Summary: {cname}</div>
 <div class="SBody">
 <table border="0" cellspacing="0" cellpadding="0" class="STable">''')
