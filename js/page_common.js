@@ -804,6 +804,23 @@ window.PageCommon = (function () {
     tocHtml += '</ul>';
     tocNav.innerHTML = tocHtml;
 
+    if (typeof wildcardManifest !== 'undefined' && wildcardManifest && currentWildcardVariant) {
+      const curPat = wildcardManifest.pattern;
+      const w = document.createTreeWalker(tocNav, NodeFilter.SHOW_TEXT, null);
+      let tn;
+      while ((tn = w.nextNode())) {
+        if (tn.nodeValue && tn.nodeValue.indexOf(currentWildcardVariant) !== -1) {
+          tn.__wildcardOrig = tn.nodeValue.split(currentWildcardVariant).join(curPat);
+        }
+      }
+      tocNav.querySelectorAll('a.doc-toc-link[title]').forEach(a => {
+        const t = a.getAttribute('title') || '';
+        if (t.indexOf(currentWildcardVariant) !== -1) {
+          a.dataset.wildcardOrigTitle = t.split(currentWildcardVariant).join(curPat);
+        }
+      });
+    }
+
     const allNavItems = [];
     tocEntries.forEach(function (entry) {
       if (entry.kind === 'item') {
@@ -835,6 +852,20 @@ window.PageCommon = (function () {
 
     function updateMobileCurrentLabel(title) {
       if (!mobileCurrentEl || !title) return;
+      if (typeof wildcardManifest !== 'undefined' && wildcardManifest) {
+        let orig = title;
+        if (currentWildcardVariant && orig.indexOf(currentWildcardVariant) !== -1) {
+          orig = orig.split(currentWildcardVariant).join(wildcardManifest.pattern);
+        }
+        if (orig.indexOf(wildcardManifest.pattern) !== -1) {
+          mobileCurrentEl.dataset.wildcardOrig = orig;
+          mobileCurrentEl.textContent = currentWildcardVariant
+            ? orig.split(wildcardManifest.pattern).join(currentWildcardVariant)
+            : orig;
+          return;
+        }
+        delete mobileCurrentEl.dataset.wildcardOrig;
+      }
       mobileCurrentEl.textContent = title;
     }
 
@@ -1341,7 +1372,7 @@ window.PageCommon = (function () {
       }
 
       if (activeItem && activeItem.link) {
-        updateMobileCurrentLabel(activeItem.title);
+        updateMobileCurrentLabel((activeItem.link.textContent || activeItem.title || '').trim());
         let visualLink = activeItem.link;
         const parentBlock = activeItem.link.closest('.doc-toc-group-block');
         if (parentBlock && parentBlock.classList.contains('collapsed') && !activeItem.link.classList.contains('doc-toc-group-title')) {
@@ -1510,9 +1541,22 @@ window.PageCommon = (function () {
       window._uvmTocScrollMsgRegistered = true;
       registerMessageHandler(function (data) {
         if (data.type === 'scrollToSection') {
-          const anchor = data.anchor;
-          const targetId = data.id || anchor;
+          let anchor = data.anchor;
+          let targetId = data.id || anchor;
           const navToken = data.navToken;
+
+          if (wildcardManifest && wildcardManifest.variants) {
+            const wResolved = resolveWildcardTarget(targetId) || resolveWildcardTarget(anchor);
+            if (wResolved) {
+              applyWildcardVariant(wResolved.variant ? wResolved.variant.name : '', false);
+              if (wResolved.resolvedId) {
+                anchor = wResolved.resolvedId;
+                targetId = wResolved.resolvedId;
+              }
+            } else if (targetId === 'MainTopic' && currentWildcardVariant) {
+              applyWildcardVariant('', false);
+            }
+          }
 
           // 1. Prioritize inherited methods / classes explorer if anchor matches
           const inhSec = findMatchingInheritedSection(targetId) || findMatchingInheritedSection(anchor);
@@ -1849,10 +1893,11 @@ window.PageCommon = (function () {
       } catch (err) { }
 
       const isPageLink = btn.getAttribute('data-page-link') === '1';
-      const anchor = btn.getAttribute('data-anchor');
+      let anchor = btn.getAttribute('data-anchor') || '';
       if (!isPageLink && !anchor) return;
+      anchor = resolveWildcardCopyAnchor(anchor, isPageLink);
 
-      const hash = isPageLink ? '' : ('#' + anchor);
+      const hash = anchor ? ('#' + anchor) : '';
       try {
         history.pushState(null, '', hash || (window.location.pathname + window.location.search));
       } catch (err) {
@@ -3268,11 +3313,14 @@ window.PageCommon = (function () {
         if (ev.key === 'Escape') closeSymbolDisambigPopover();
       });
       document.addEventListener('mousedown', function (ev) {
-        if (popover.classList.contains('visible') && !popover.contains(ev.target) && !ev.target.closest('.clickable-uvm-sym')) {
+        if (popover.classList.contains('visible') && !popover.contains(ev.target) && !ev.target.closest('.clickable-uvm-sym, .wildcard-src-trigger')) {
           closeSymbolDisambigPopover();
         }
       });
-      window.addEventListener('scroll', closeSymbolDisambigPopover, { passive: true, capture: true });
+      window.addEventListener('scroll', function (ev) {
+        if (popover.classList.contains('visible') && ev.target && popover.contains(ev.target)) return;
+        closeSymbolDisambigPopover();
+      }, { passive: true, capture: true });
     }
     activeDisambigPopover = popover;
 
@@ -3317,7 +3365,11 @@ window.PageCommon = (function () {
       if (docBtn) {
         docBtn.addEventListener('click', function () {
           closeSymbolDisambigPopover();
-          dispatchOpenDoc(cand.doc_url || undefined, resolved.name, cand.class || '');
+          if (resolved.preferSource && cand.file) {
+            dispatchOpenSource('src_view/' + cand.file + '.html#L' + (cand.line || 1));
+          } else {
+            dispatchOpenDoc(cand.doc_url || undefined, resolved.name, cand.class || '');
+          }
         });
       }
       const srcBtn = rowEl.querySelector('.sdp-src-btn');
@@ -3420,6 +3472,12 @@ window.PageCommon = (function () {
 
       // 3. Source Code Links
       if (link.classList.contains('src-code-link') || href.includes('src_view/')) {
+        if (link.classList.contains('wildcard-src-trigger') && !currentWildcardVariant) {
+          e.preventDefault();
+          e.stopPropagation();
+          showWildcardDisambigPopover(link);
+          return;
+        }
         e.preventDefault();
         saveScrollAnchor();
         const targetHref = new URL(link.getAttribute('href'), window.location.href).href;
@@ -3555,6 +3613,325 @@ window.PageCommon = (function () {
   }
 
   // =========================================================================
+  // Wildcard Variant Selector & Disambiguation (TLM1 uvm_*_port/export/imp)
+  // =========================================================================
+
+  let currentWildcardVariant = '';
+  let wildcardManifest = null;
+
+  function showWildcardDisambigPopover(anchorEl) {
+    if (!wildcardManifest || !wildcardManifest.variants) return;
+    const grp = anchorEl.getAttribute('data-wildcard-group') || '';
+    const member = anchorEl.getAttribute('data-wildcard-member') || '';
+    const list = grp
+      ? wildcardManifest.variants.filter(v => v.group === grp)
+      : wildcardManifest.variants;
+    const candidates = (list.length ? list : wildcardManifest.variants).map(v => ({
+      class: v.name,
+      file: v.file,
+      line: v.line,
+      ret: v.params ? `#(${v.params})` : '',
+      doc_url: `docs_view/${wildcardManifest.page}#${v.docTopic}`
+    }));
+    showSymbolDisambigPopover(anchorEl, {
+      name: member ? `${wildcardManifest.pattern}::${member}` : wildcardManifest.pattern,
+      kind: member ? 'method' : 'class',
+      preferSource: true,
+      candidates: candidates
+    });
+  }
+
+  function replaceAllWildcardPatterns(text, variant, pattern) {
+    if (!text || !variant) return text;
+    const m = variant.name.match(/^uvm_(.+)_(port|export|imp)$/);
+    if (!m) return text.split(pattern).join(variant.name);
+    const stem = m[1];
+    return text
+      .split('uvm_*_port').join(`uvm_${stem}_port`)
+      .split('uvm_*_export').join(`uvm_${stem}_export`)
+      .split('uvm_*_imp').join(`uvm_${stem}_imp`);
+  }
+
+  function collectWildcardTextNodes(rootEl) {
+    const nodes = [];
+    if (!rootEl) return nodes;
+    const walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, null);
+    let node;
+    while ((node = walker.nextNode())) {
+      if (node.parentElement && node.parentElement.closest('#wildcard-selector-bar, #wildcard-variant-select, script, style')) continue;
+      if (node.__wildcardOrig !== undefined || (node.nodeValue && /uvm_\*_(?:port|export|imp)/.test(node.nodeValue))) {
+        if (node.__wildcardOrig === undefined) {
+          node.__wildcardOrig = node.nodeValue;
+        }
+        nodes.push(node);
+      }
+    }
+    return nodes;
+  }
+
+  function applyWildcardVariant(variantName, savePref) {
+    if (!wildcardManifest) return;
+    const pattern = wildcardManifest.pattern;
+    const variant = wildcardManifest.variants.find(v => v.name === variantName) || null;
+    currentWildcardVariant = variant ? variant.name : '';
+
+    const selectEl = document.getElementById('wildcard-variant-select');
+    if (selectEl && selectEl.value !== currentWildcardVariant) {
+      selectEl.value = currentWildcardVariant;
+    }
+
+    const contentEl = document.getElementById('Content');
+    const hiddenTopicIds = new Set();
+    if (contentEl) {
+      const classEls = Array.from(contentEl.querySelectorAll(':scope > .CClass'));
+      classEls.forEach(cEl => {
+        const shouldHide = Boolean(variant && variant.docTopic && cEl.id !== variant.docTopic);
+        let cur = cEl;
+        while (cur && (cur === cEl || !cur.classList.contains('CClass'))) {
+          if (shouldHide) {
+            cur.classList.add('wildcard-group-hidden');
+            if (cur.id) hiddenTopicIds.add(cur.id);
+          } else {
+            cur.classList.remove('wildcard-group-hidden');
+          }
+          cur = cur.nextElementSibling;
+        }
+      });
+    }
+
+    const roots = [contentEl, document.getElementById('doc-toc-sidebar'), document.querySelector('.doc-breadcrumbs')];
+    if (document.title && (window.__wildcardOrigDocTitle !== undefined || /uvm_\*_(?:port|export|imp)/.test(document.title))) {
+      if (window.__wildcardOrigDocTitle === undefined) window.__wildcardOrigDocTitle = document.title;
+      document.title = variant
+        ? replaceAllWildcardPatterns(window.__wildcardOrigDocTitle, variant, pattern)
+        : window.__wildcardOrigDocTitle;
+    }
+    roots.forEach(r => {
+      collectWildcardTextNodes(r).forEach(node => {
+        node.nodeValue = variant
+          ? replaceAllWildcardPatterns(node.__wildcardOrig, variant, pattern)
+          : node.__wildcardOrig;
+      });
+    });
+
+    if (contentEl) {
+      contentEl.querySelectorAll('.CBody > p').forEach(p => {
+        if (p.classList.contains('wildcard-resolved-iface')) return;
+        const txt = (p.textContent || '').toLowerCase();
+        const nextEl = p.nextElementSibling;
+        if (txt.includes('asterisk') && nextEl && nextEl.classList.contains('code-block-container')) {
+          let resolvedEl = nextEl.nextElementSibling;
+          if (!resolvedEl || !resolvedEl.classList.contains('wildcard-resolved-iface')) {
+            resolvedEl = document.createElement('p');
+            resolvedEl.className = 'wildcard-resolved-iface wildcard-group-hidden';
+            nextEl.parentNode.insertBefore(resolvedEl, nextEl.nextSibling);
+          }
+          if (variant) {
+            const m = variant.name.match(/^uvm_(.+)_(port|export|imp)$/);
+            const stem = m ? m[1] : variant.name;
+            p.classList.add('wildcard-group-hidden');
+            nextEl.classList.add('wildcard-group-hidden');
+            resolvedEl.innerHTML = `Interface type: <code>${escapeHtml(stem)}</code> (resolved for <code>${escapeHtml(variant.name)}</code>).`;
+            resolvedEl.classList.remove('wildcard-group-hidden');
+          } else {
+            p.classList.remove('wildcard-group-hidden');
+            nextEl.classList.remove('wildcard-group-hidden');
+            resolvedEl.classList.add('wildcard-group-hidden');
+          }
+        }
+      });
+      contentEl.querySelectorAll('a[href*="uvm_*_"]:not(.wildcard-src-trigger)').forEach(a => {
+        if (a.dataset.wildcardOrigHref === undefined) {
+          a.dataset.wildcardOrigHref = a.getAttribute('href') || '';
+        }
+        if (variant) {
+          const m = variant.name.match(/^uvm_(.+)_(port|export|imp)$/);
+          const stem = m ? m[1] : '';
+          a.setAttribute('href', stem
+            ? a.dataset.wildcardOrigHref.replace(/uvm_\*_(port|export|imp)(?:#\([^)]*\))?/, `uvm_${stem}_$1`)
+            : a.dataset.wildcardOrigHref);
+        } else {
+          a.setAttribute('href', a.dataset.wildcardOrigHref);
+        }
+      });
+    }
+
+    if (contentEl) {
+      contentEl.querySelectorAll('.ContentsSummary tr.SSMethod').forEach(tr => {
+        const link = tr.querySelector('a[data-target-id], a[href^="#"]');
+        const tid = link ? (link.getAttribute('data-target-id') || '').replace(/^#/, '') : '';
+        const targetEl = tid ? contentEl.querySelector(`[data-anchor="${CSS.escape(tid)}"]`) : null;
+        if (variant && targetEl && targetEl.classList.contains('wildcard-group-hidden')) {
+          tr.classList.add('wildcard-group-hidden');
+        } else {
+          tr.classList.remove('wildcard-group-hidden');
+        }
+      });
+    }
+
+    const tocSidebar = document.getElementById('doc-toc-sidebar');
+    if (tocSidebar) {
+      tocSidebar.querySelectorAll('.doc-toc-group-block, .doc-toc-item').forEach(el => {
+        const link = el.querySelector(':scope > .doc-toc-link, :scope > .doc-toc-group-header > .doc-toc-link');
+        const tid = link ? link.getAttribute('data-target-id') : '';
+        if (tid && hiddenTopicIds.has(tid)) {
+          el.classList.add('wildcard-group-hidden');
+        } else {
+          el.classList.remove('wildcard-group-hidden');
+        }
+      });
+      tocSidebar.querySelectorAll('a.doc-toc-link[title]').forEach(a => {
+        if (a.dataset.wildcardOrigTitle === undefined) {
+          const t = a.getAttribute('title') || '';
+          if (t.indexOf(pattern) !== -1) {
+            a.dataset.wildcardOrigTitle = t;
+          }
+        }
+        if (a.dataset.wildcardOrigTitle !== undefined) {
+          a.setAttribute('title', variant
+            ? replaceAllWildcardPatterns(a.dataset.wildcardOrigTitle, variant, pattern)
+            : a.dataset.wildcardOrigTitle);
+        }
+      });
+      const mobileCurr = document.getElementById('doc-toc-mobile-current');
+      if (mobileCurr && mobileCurr.dataset.wildcardOrig) {
+        mobileCurr.textContent = variant
+          ? replaceAllWildcardPatterns(mobileCurr.dataset.wildcardOrig, variant, pattern)
+          : mobileCurr.dataset.wildcardOrig;
+      }
+    }
+
+    document.querySelectorAll('a.wildcard-src-trigger').forEach(link => {
+      if (!link.dataset.origHref) {
+        link.dataset.origHref = link.getAttribute('href') || '';
+        link.dataset.origSrcLine = link.getAttribute('data-src-line') || '1';
+      }
+      if (variant) {
+        const prefix = link.dataset.origHref.split('src_view/')[0] || '';
+        link.setAttribute('href', `${prefix}src_view/${variant.file}.html#L${variant.line}`);
+        link.setAttribute('data-src-line', String(variant.line));
+        link.setAttribute('title', `Open ${variant.name} source at line ${variant.line}`);
+      } else {
+        link.setAttribute('href', link.dataset.origHref);
+        link.setAttribute('data-src-line', link.dataset.origSrcLine);
+        link.removeAttribute('title');
+      }
+    });
+
+    const hintEl = document.getElementById('wildcard-hint');
+    if (hintEl) {
+      hintEl.textContent = variant
+        ? `Showing ${variant.name} (${variant.file}:${variant.line}) — links open this class directly`
+        : 'All variants shown — click any source link to choose implementation';
+    }
+
+    if (savePref) {
+      try {
+        const nextUrl = currentWildcardVariant
+          ? '#' + encodeURIComponent(currentWildcardVariant)
+          : window.location.pathname + window.location.search;
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', nextUrl);
+        }
+      } catch (e) { }
+      if (window.parent && window.parent !== window) {
+        try {
+          window.parent.postMessage({
+            type: 'wildcardVariantChanged',
+            docRel: wildcardManifest.page,
+            variant: currentWildcardVariant
+          }, '*');
+        } catch (e) { }
+      }
+    }
+  }
+
+  function resolveWildcardCopyAnchor(anchor, isPageLink) {
+    if (!wildcardManifest || !currentWildcardVariant) {
+      return isPageLink ? '' : anchor;
+    }
+    if (isPageLink) return currentWildcardVariant;
+    if (anchor && anchor.indexOf(wildcardManifest.pattern) !== -1) {
+      const escaped = wildcardManifest.pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return anchor.replace(new RegExp(escaped + '(?:#\\([^)]*\\))?'), currentWildcardVariant);
+    }
+    return anchor;
+  }
+
+  function resolveWildcardTarget(rawTarget) {
+    if (!wildcardManifest || !wildcardManifest.variants || !rawTarget) return null;
+    if (wildcardManifest.pattern && rawTarget.indexOf(wildcardManifest.pattern) === 0) {
+      let resolvedId = 'doc-nav-main';
+      try {
+        const exactEl = document.querySelector(`[data-anchor="${CSS.escape(rawTarget)}"]`);
+        if (exactEl && exactEl.id) {
+          resolvedId = exactEl.id;
+        } else {
+          const wantReqRsp = rawTarget.indexOf('REQ') !== -1 && rawTarget.indexOf('RSP') !== -1;
+          const matchVar = wildcardManifest.variants.find(item => wantReqRsp ? item.group === 'REQ_RSP' : item.group === 'T') || wildcardManifest.variants[0];
+          if (matchVar && matchVar.docTopic) resolvedId = matchVar.docTopic;
+        }
+      } catch (e) { }
+      return { variant: null, suffix: '', resolvedId: resolvedId };
+    }
+    const dotIdx = rawTarget.indexOf('.');
+    const base = dotIdx !== -1 ? rawTarget.slice(0, dotIdx) : rawTarget;
+    const suffix = dotIdx !== -1 ? rawTarget.slice(dotIdx + 1) : '';
+    const v = wildcardManifest.variants.find(item => item.name === base);
+    if (!v) return null;
+    let resolvedId = v.docTopic || 'doc-nav-main';
+    if (suffix && v.docTopic) {
+      const topicEl = document.getElementById(v.docTopic);
+      const classAnchor = topicEl ? topicEl.getAttribute('data-anchor') : '';
+      if (classAnchor) {
+        try {
+          const memberEl = document.querySelector(`[data-anchor="${CSS.escape(classAnchor + '.' + suffix)}"]`);
+          if (memberEl && memberEl.id) resolvedId = memberEl.id;
+        } catch (e) { }
+      }
+    }
+    return { variant: v, suffix: suffix, resolvedId: resolvedId };
+  }
+
+  function syncWildcardFromHash() {
+    if (!wildcardManifest) return;
+    const rawHash = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
+    if (!rawHash) return;
+    const wResolved = resolveWildcardTarget(rawHash);
+    if (wResolved) {
+      applyWildcardVariant(wResolved.variant ? wResolved.variant.name : '', false);
+      if (wResolved.resolvedId) {
+        window.postMessage({ type: 'scrollToSection', anchor: wResolved.resolvedId, id: wResolved.resolvedId }, '*');
+      }
+    }
+  }
+
+  function initWildcardVariantController() {
+    const manifestEl = document.getElementById('uvm-wildcard-variants');
+    const selectEl = document.getElementById('wildcard-variant-select');
+    if (!manifestEl || !selectEl) return;
+    try {
+      wildcardManifest = JSON.parse(manifestEl.textContent);
+    } catch (e) {
+      return;
+    }
+
+    selectEl.addEventListener('change', function () {
+      applyWildcardVariant(selectEl.value, true);
+    });
+
+    const rawHash = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
+    const hashResolved = rawHash ? resolveWildcardTarget(rawHash) : null;
+    if (hashResolved) {
+      applyWildcardVariant(hashResolved.variant ? hashResolved.variant.name : '', false);
+    } else {
+      applyWildcardVariant('', false);
+    }
+
+    window.addEventListener('hashchange', syncWildcardFromHash);
+  }
+
+  // =========================================================================
   // Universal Initializer (Executes for any page type on DOMContentLoaded)
   // =========================================================================
 
@@ -3571,6 +3948,7 @@ window.PageCommon = (function () {
     if (document.getElementById('doc-toc-sidebar')) {
       initTOC();
     }
+    initWildcardVariantController();
     if (document.querySelector('.CTitle, .STitle, .IHeading')) {
       initHeadingAnchors();
     }

@@ -169,10 +169,64 @@ def test_mobile_toc_controller():
     print("PASS: js/page_common.js compact responsive TOC controller and split-safe copy-link verified.")
 
 
+def test_wildcard_variant_integration():
+    import json
+    for doc_rel in (
+        "docs_view/tlm1/uvm_ports-svh.html",
+        "docs_view/tlm1/uvm_exports-svh.html",
+        "docs_view/tlm1/uvm_imps-svh.html",
+    ):
+        p = Path(doc_rel)
+        assert p.exists(), f"Missing wildcard doc page: {doc_rel}"
+        txt = p.read_text(encoding="utf-8")
+        nav_m = re.search(r'<nav class="doc-breadcrumbs"[^>]*>([\s\S]*?)</nav>', txt)
+        assert nav_m and 'id="wildcard-variant-select"' in nav_m.group(1), (
+            f"{doc_rel} must embed #wildcard-variant-select inside .doc-breadcrumbs"
+        )
+        assert not re.search(r'<option value="uvm_[^"]+">[^<]*\(L\d+\)</option>', nav_m.group(1)), (
+            f"{doc_rel} variant options must not display line numbers"
+        )
+        m_json = re.search(r'<script type="application/json" id="uvm-wildcard-variants">(.*?)</script>', txt, re.S)
+        assert m_json, f"Missing #uvm-wildcard-variants JSON manifest in {doc_rel}"
+        manifest = json.loads(m_json.group(1))
+        assert len(manifest.get("variants", [])) == 21, (
+            f"Expected 21 concrete variants in {doc_rel}, got {len(manifest.get('variants', []))}"
+        )
+        assert "wildcard-src-trigger" in txt, f"Missing .wildcard-src-trigger links in {doc_rel}"
+
+    sd_txt = Path("js/search_data.js").read_text(encoding="utf-8")
+    for w_entry in ("uvm_*_port#(T)", "uvm_*_export#(T)", "uvm_*_imp#(T,IMP)"):
+        assert w_entry in sd_txt, f"Missing wildcard entry {w_entry} in js/search_data.js"
+    for c_entry in ("#uvm_blocking_put_port", "#uvm_transport_imp"):
+        assert c_entry in sd_txt, f"Missing unique variant anchor {c_entry} in js/search_data.js"
+
+    pc_txt = Path("js/page_common.js").read_text(encoding="utf-8")
+    for tok in (
+        "initWildcardVariantController",
+        "applyWildcardVariant",
+        "replaceAllWildcardPatterns",
+        "resolveWildcardCopyAnchor",
+        "resolveWildcardTarget",
+        "showWildcardDisambigPopover",
+        "popover.contains(ev.target)",
+    ):
+        assert tok in pc_txt, f"Missing '{tok}' in js/page_common.js"
+    assert "sessionStorage.setItem('uvm_wildcard_variant:'" not in pc_txt, (
+        "Wildcard variant selection must not persist in sessionStorage across navigation"
+    )
+
+    css_txt = Path("css/style.css").read_text(encoding="utf-8")
+    assert ".doc-breadcrumb-variant-select" in css_txt and ".wildcard-group-hidden" in css_txt, (
+        "css/style.css must define .doc-breadcrumb-variant-select and .wildcard-group-hidden"
+    )
+    print("PASS: TLM1 wildcard variant selector, unique anchors, search index, and popover scroll verified.")
+
+
 def main() -> int:
     test_css_shell_scroll_isolation()
     test_js_guards()
     test_mobile_toc_controller()
+    test_wildcard_variant_integration()
     print("ALL SHELL LAYOUT & MOBILE CHECKS PASSED.")
     return 0
 

@@ -700,6 +700,38 @@ def strip_title_source_link(w_body):
 
     return re.sub(r'(<h[1-6]\s+class=["\']?CTitle["\']?[^>]*>)([\s\S]*?)(</h[1-6]>)', clean_title_anchor, w_body, count=1)
 
+def _match_wildcard_classes(clean_a, raw_a, associated_src):
+    """Return concrete classes in associated_src matching a wildcard TLM1 class topic."""
+    if not clean_a or '*' not in clean_a or not associated_src:
+        return []
+    f_classes = UVM_DB.get('files', {}).get(associated_src, {}).get('classes', [])
+    prefix, suffix = clean_a.split('*', 1)
+    candidates = [c for c in f_classes if c.startswith(prefix) and c.endswith(suffix)]
+    if not candidates:
+        return []
+    is_req_rsp = 'REQ' in (raw_a or '') and 'RSP' in (raw_a or '')
+    matched = []
+    for cname in candidates:
+        params = UVM_DB.get('classes', {}).get(cname, {}).get('parameters_raw', '') or ''
+        c_is_req_rsp = ('REQ' in params and 'RSP' in params)
+        if is_req_rsp == c_is_req_rsp:
+            matched.append(cname)
+    return matched or candidates
+
+
+def _tag_wildcard_src_link(w_body, pattern, group_key, member_name=None):
+    """Mark the first src-code-link in w_body with wildcard metadata for interactive disambiguation."""
+    extra = f' data-wildcard-pattern="{html.escape(pattern)}" data-wildcard-group="{html.escape(group_key)}"'
+    if member_name:
+        extra += f' data-wildcard-member="{html.escape(member_name)}"'
+    return re.sub(
+        r'class=(["\']?)([^"\'>]*\bsrc-code-link\b[^"\'>]*)\1',
+        lambda m: f'class="{m.group(2)} wildcard-src-trigger"{extra}',
+        w_body,
+        count=1
+    )
+
+
 def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src, root_rel):
     """Enrich topic HTML with exact AST source links, decl/impl buttons, derived classes, and badges."""
     clean_a = re.sub(r'#\([^)]*\)', '', a_name) if a_name else None
@@ -717,8 +749,14 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
     # to be duplicated onto the top-level section header when multiple classes exist on one page.
     elif cls_name == 'CClass':
         target_cname = None
+        is_wildcard_class = bool(clean_a and '*' in clean_a)
+        wildcard_group = ('REQ_RSP' if ('REQ' in (a_name or '') and 'RSP' in (a_name or '')) else 'T') if is_wildcard_class else None
         if clean_a and clean_a in UVM_DB.get('classes', {}):
             target_cname = clean_a
+        elif is_wildcard_class:
+            w_matched = _match_wildcard_classes(clean_a, a_name, associated_src)
+            if w_matched:
+                target_cname = w_matched[0]
         elif associated_src and associated_src in UVM_DB.get('files', {}):
             f_classes = UVM_DB['files'][associated_src].get('classes', [])
             for fc in f_classes:
@@ -744,6 +782,8 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
             w_body = re.sub(r'href=["\'][^"\']*src_view/[^"\']*["\']', f'href="{root_rel}src_view/{decl_f}.html#L{start_l}"', w_body, count=1)
             w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{start_l}"', w_body, count=1)
             w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{decl_f}"', w_body, count=1)
+            if is_wildcard_class:
+                w_body = _tag_wildcard_src_link(w_body, clean_a, wildcard_group)
 
             hierarchy_widget = pbc.render_class_hierarchy_card(
                 target_cname, root_rel, CLASS_TO_DOC_MAP, UVM_DB, GLOBAL_DOC_ANCHOR_MAPS
@@ -832,6 +872,12 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
             w_body = re.sub(r'data-src-line=["\']\d+["\']', f'data-src-line="{target_l}"', w_body, count=1)
             w_body = re.sub(r'data-src-file=["\'][^"\']*["\']', f'data-src-file="{target_f}"', w_body, count=1)
 
+        if a_name and '*' in a_name and '.' in a_name:
+            w_cn, w_mn = a_name.split('.', 1)
+            w_clean_cn = re.sub(r'#\([^)]*\)', '', w_cn).strip()
+            w_group = 'REQ_RSP' if ('REQ' in w_cn and 'RSP' in w_cn) else 'T'
+            w_body = _tag_wildcard_src_link(w_body, w_clean_cn, w_group, member_name=w_mn)
+
             badges = []
             if overridden_from:
                 badges.append(f'<span class="badge-override" title="Overrides base method from {overridden_from}">Overrides {overridden_from}</span>')
@@ -869,6 +915,13 @@ def enrich_topic_body(w_body, w_start, is_main, a_name, rel_path, associated_src
                 sym_match = next((s for s in f_syms if s['name'] == norm_clean), None)
             if not sym_match:
                 sym_match = next((s for s in f_syms if s['name'] == clean_a), None)
+            if not sym_match and '*' in sym_clean:
+                if 'uvm_field' in sym_clean and 'flag' in sym_clean:
+                    sym_match = next((s for s in f_syms if s['name'] == 'UVM_ALL_ON'), None)
+                if not sym_match:
+                    w_prefix = sym_clean.split('*', 1)[0].lstrip('`')
+                    if w_prefix:
+                        sym_match = next((s for s in f_syms if s['name'].startswith(w_prefix)), None)
             if not sym_match:
                 sym_match = next((s for s in f_syms if sym_clean in s['name'] or s['name'] in sym_clean), None)
 
@@ -1126,6 +1179,75 @@ def _inject_rows_into_class_summary(slice_html, sum_rows, cname, seq_counter):
     if cbody_end != -1:
         return slice_html[:cbody_end] + new_summary + slice_html[cbody_end:]
     return slice_html + new_summary
+
+
+def _inject_wildcard_selector(body_content, rel_path, associated_src, local_map, global_doc_anchor_maps):
+    """Inject a page-level variant selector bar and JSON manifest on TLM1 wildcard doc pages."""
+    wildcard_map = {
+        'tlm1/uvm_ports.svh': 'uvm_*_port',
+        'tlm1/uvm_exports.svh': 'uvm_*_export',
+        'tlm1/uvm_imps.svh': 'uvm_*_imp',
+    }
+    pattern = wildcard_map.get(associated_src)
+    if not pattern:
+        return body_content, ''
+    f_classes = UVM_DB.get('files', {}).get(associated_src, {}).get('classes', [])
+    if not f_classes:
+        return body_content, ''
+
+    t_topic = None
+    req_topic = None
+    for m in re.finditer(r'<div class="CClass" id="([^"]+)"[^>]*data-anchor="([^"]+)"', body_content):
+        tid, anc = m.group(1), m.group(2)
+        if 'REQ' in anc and 'RSP' in anc:
+            req_topic = tid
+        elif not t_topic:
+            t_topic = tid
+
+    variants = []
+    t_opts = []
+    req_opts = []
+    for cname in f_classes:
+        ci = UVM_DB.get('classes', {}).get(cname, {})
+        params = ci.get('parameters_raw', '') or ''
+        grp = 'REQ_RSP' if ('REQ' in params and 'RSP' in params) else 'T'
+        doc_topic = (req_topic if grp == 'REQ_RSP' else t_topic) or t_topic or 'doc-nav-main'
+        local_map[cname] = cname
+        global_doc_anchor_maps.setdefault(rel_path, {})[cname] = cname
+        v_obj = {
+            'name': cname,
+            'file': associated_src,
+            'line': ci.get('start_line', 1),
+            'group': grp,
+            'params': params,
+            'docTopic': doc_topic
+        }
+        variants.append(v_obj)
+        opt = f'<option value="{html.escape(cname)}">{html.escape(cname)}</option>'
+        if grp == 'REQ_RSP':
+            req_opts.append(opt)
+        else:
+            t_opts.append(opt)
+
+    opts_html = f'<option value="">{html.escape(pattern)} (All)</option>'
+    if t_opts:
+        opts_html += f'<optgroup label="Unidirectional #(T)">{"".join(t_opts)}</optgroup>'
+    if req_opts:
+        opts_html += f'<optgroup label="Bidirectional #(REQ,RSP)">{"".join(req_opts)}</optgroup>'
+
+    payload_json = json.dumps({
+        'pattern': pattern,
+        'page': rel_path,
+        'variants': variants
+    }).replace('</', '<\\/')
+
+    manifest_script = f'<script type="application/json" id="uvm-wildcard-variants">{payload_json}</script>'
+    select_html = (
+        f'<span class="doc-breadcrumb-sep">/</span>'
+        f'<select id="wildcard-variant-select" class="doc-breadcrumb-variant-select" '
+        f'aria-label="Select concrete UVM variant" title="Switch wildcard variant">{opts_html}</select>'
+    )
+    return body_content + '\n' + manifest_script, select_html
 
 
 def inject_missing_ast_content(body_content, rel_path, associated_src, root_rel, local_map):
@@ -1552,6 +1674,11 @@ def modernize_doc_files():
             # Inject missing AST-extracted members, classes, macros, and collapsible internal sections
             body_content = inject_missing_ast_content(body_content, rel_path, associated_src, root_rel, local_map)
 
+            # Inject page-level wildcard variant selector into doc-breadcrumbs on TLM1 wildcard pages
+            body_content, wildcard_breadcrumb_html = _inject_wildcard_selector(
+                body_content, rel_path, associated_src, local_map, global_doc_anchor_maps
+            )
+
             # Syntax highlight documentation code blocks (<pre>)
             body_content = process_doc_code_blocks(body_content)
 
@@ -1584,6 +1711,8 @@ def modernize_doc_files():
 
             # Breadcrumb navigation
             breadcrumbs_html = build_breadcrumbs_html(rel_path, page_title, root_rel)
+            if wildcard_breadcrumb_html and '</nav>' in breadcrumbs_html:
+                breadcrumbs_html = breadcrumbs_html.replace('</nav>', f'  {wildcard_breadcrumb_html}\n</nav>', 1)
 
             modern_html = pbc.render_html_shell(
                 title=f"{page_title} | UVM 1.2 Documentation",
@@ -2243,6 +2372,27 @@ def build_search_index(categories):
                     'src': src_link,
                     'desc': f"UVM Class Reference: {name}"
                 })
+
+    # Ensure TLM1 wildcard meta-classes (uvm_*_port/export/imp) appear in Search & Index A-Z
+    wildcard_index_entries = [
+        ('uvm_*_port#(T)', 'tlm1/uvm_ports-svh.html', 'uvm_*_port#(T)', 'tlm1/uvm_ports.svh', 81),
+        ('uvm_*_port#(REQ,RSP)', 'tlm1/uvm_ports-svh.html', 'uvm_*_port#(REQ,RSP)', 'tlm1/uvm_ports.svh', 203),
+        ('uvm_*_export#(T)', 'tlm1/uvm_exports-svh.html', 'uvm_*_export#(T)', 'tlm1/uvm_exports.svh', 80),
+        ('uvm_*_export#(REQ,RSP)', 'tlm1/uvm_exports-svh.html', 'uvm_*_export#(REQ,RSP)', 'tlm1/uvm_exports.svh', 200),
+        ('uvm_*_imp#(T,IMP)', 'tlm1/uvm_imps-svh.html', 'uvm_*_imp#(T,IMP)', 'tlm1/uvm_imps.svh', 82),
+        ('uvm_*_imp#(REQ,RSP,IMP,REQ_IMP,RSP_IMP)', 'tlm1/uvm_imps-svh.html', 'uvm_*_imp#(REQ,RSP,IMP,REQ_IMP,RSP_IMP)', 'tlm1/uvm_imps.svh', 232),
+    ]
+    for w_name, w_doc, w_raw_anchor, w_src, w_line in wildcard_index_entries:
+        if not any(x['name'] == w_name for x in search_items):
+            w_target = GLOBAL_DOC_ANCHOR_MAPS.get(w_doc, {}).get(w_raw_anchor, w_raw_anchor)
+            search_items.append({
+                'name': w_name,
+                'type': 'class',
+                'category': 'Tlm1',
+                'doc': f"docs_view/{w_doc}#{w_target}",
+                'src': f"src_view/{w_src}.html#L{w_line}",
+                'desc': f"TLM1 Wildcard Class Family defined in src/{w_src}"
+            })
 
     # 5. Extract methods from Methods*.html index files
     method_index_files = sorted((DOCS_DIR / "index").glob("Methods*.html"))

@@ -1455,3 +1455,19 @@ Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met �
 ### La Solution Appliquée (`scripts/build_docs.py`, `js/page_common.js`, `css/style.css`)
 - **Ancres sémantiques & TOC** : Génération d'ancres `<Classe>.Summary` et `Contents`, intégration des `.internal-details-section` dans le TOC avec dépliement automatique au clic, et suspension temporaire du scrollspy lors des navigations déclenchées depuis le TOC.
 - **Mode sombre & UX** : Adaptation complète sous `[data-theme="dark"]` dans `css/style.css`, remplacement de `"Undocumented"` par `.undocumented-notice` (*« Not officially documented, see source code »* avec lien direct `#Lxx`), et préservation du mode Split lors de la copie de liens dans `page_common.js`.
+
+---
+
+## 46. Le Piège des Classes Wildcard TLM1 (`uvm_*_port/export/imp`), du Scroll Capturé et de l'Indexation (`build_docs.py`, `page_common.js`)
+
+### Le Symptôme Observé
+> *"Les classes `uvm_*_port/export/imp` n'apparaissent pas dans l'index, leurs liens pointent vers `uvm_port_base.svh`, le TOC mobile ne suit pas le changement de variante et scroller dans le popover de désambiguïsation le referme immédiatement."*
+
+### L'Anatomie du Piège
+1. **Index `Classes.html` en `<td class=IEntry>`** : `build_search_index()` cherchait `<div class=IEntry>`, manquant les 6 méta-classes wildcard de `Classes.html` qui utilisent `<td class=IEntry>`.
+2. **Destruction des nœuds TOC par `PC.initTOC()` & `mobileCurrentEl.textContent`** : `doc_page.js` rappelle `PC.initTOC()` après le chargement initial (écrasant les références `__wildcardOrig`), et `updateMobileCurrentLabel()` remplaçait `mobileCurrentEl.textContent`, détruisant le nœud texte suivi.
+3. **Écouteur `scroll` avec `{ capture: true }`** : `window.addEventListener('scroll', closeSymbolDisambigPopover, { passive: true, capture: true })` interceptait le défilement interne de `.sdp-list` dans `#sym-disambig-popover` et refermait le menu dès la première impulsion de molette.
+
+### La Solution Appliquée (`scripts/build_docs.py`, `js/page_common.js`, `css/style.css`)
+- **Sélecteur dans `.doc-breadcrumbs` + Popover & URLs uniques** : sélecteur `#wildcard-variant-select` sans numéro de ligne, mode `_*_` par défaut sans persistance `sessionStorage`, masquage de la famille non concernée (`#(T)` vs `#(REQ,RSP)`), substitution transversale `*_port`/`*_export`/`*_imp` (texte, liens croisés, bloc *"asterisk"*, copie de lien, TOC et `#doc-toc-mobile-current` via `dataset.wildcardOrig`), et indexation explicite des 6 méta-classes wildcard + 63 URLs concrètes dans `search_data.js`.
+- **Guard de scroll interne sur le popover** : ignorer `scroll` lorsque `popover.contains(ev.target)`.

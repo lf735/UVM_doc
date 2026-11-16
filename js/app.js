@@ -618,6 +618,13 @@ document.addEventListener('DOMContentLoaded', () => {
       updateDocTitle(fullDoc);
       highlightActiveSidebar(fullDoc);
       updateHash();
+    } else if (e.data.type === 'wildcardVariantChanged') {
+      const baseDoc = (currentDocUrl || '').split('#')[0];
+      if (baseDoc) {
+        currentDocUrl = e.data.variant ? (baseDoc + '#' + encodeURIComponent(e.data.variant)) : baseDoc;
+        updateDocTitle(currentDocUrl);
+        updateHash();
+      }
     } else if (e.data.type === 'srcNavigated' && e.data.url) {
       let fullSrc = normalizeSrcUrl(e.data.url);
       if (!fullSrc.includes('#') && currentSrcUrl && currentSrcUrl.includes('#') && currentSrcUrl.split('#')[0] === fullSrc) {
