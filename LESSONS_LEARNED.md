@@ -1405,3 +1405,22 @@ Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met �
 ### La Solution Appliquée (`css/style.css`, `scripts/verify_shell_layout.py`)
 - Ajout explicite de `padding-left: 1.5rem;`, `margin: 0.5rem 0 1rem 0;`, `list-style-type: disc;` / `decimal;` et d'un espacement de ligne sur `.CBody ul`, `.CBody ol`, `.CBody li` et les sous-listes imbriquées.
 - Ajout d'une assertion de non-régression dans `scripts/verify_shell_layout.py` vérifiant la présence de `padding-left` sur `.CBody ul, .CBody ol`.
+
+---
+
+## 43. Le Piège du RAG Plat & des Heuristiques Non Calibrées sur Documentation POO (`build_rag_embeddings.py`, `rag_engine.js`)
+
+### Le Symptôme Observé
+> *"Un RAG plat sur HTML NaturalDocs rate l'héritage POO ; inversement, des priors additifs trop agressifs, des `context_header` surchargés ou l'indexation de `docs_view/index/` dégradent fortement la pertinence des résultats."*
+
+### L'Anatomie du Piège
+1. **Pollution par `docs_view/index/`** : Sans exclusion explicite du dossier `index/`, les 26 pages d'index alphabétiques (`Classes.html`, `Ports.html`, `General*.html`...) contenant tous les noms de symboles de la librairie obtenaient un score lexical maximal (`1.0`) et remontaient dans le Top 5.
+2. **Désynchronisation AST sur classes paramétrées (`uvm_driver#(REQ,RSP)`)** : Extraire l'ancre HTML brute sans supprimer `#(...)` empêchait la correspondance avec les clés canoniques de `data/uvm_source_database.json` (`uvm_driver`), laissant `chunkId: null` dans `data/rag_graph.json`.
+3. **Dilution et troncature à 256 tokens** : Injecter 15 APIs et des en-têtes verbeux avant `[Intents]` poussait le contenu sémantique au-delà de la limite de tokens de `all-MiniLM-L6-v2` et faisait matcher des exemples intégrés (`apb`, `ubus`) devant la classe exacte recherchée.
+4. **Faux positifs du routeur `INHERITED_MEMBER`** : Déclencher la résolution d'héritage dès qu'un mot de la question figurait dans les 888 noms de méthodes (`register`, `type`, `configure`, `set`, `get`) déroutait des questions conceptuelles (*"How to register a factory type override in uvm_test?"*).
+5. **Priors additifs surdimensionnés & détails UI** : Ajouter `+0.20`/`+0.28` à des scores cosinus compris entre `0.3` et `0.7` propulsait des overviews/exemples peu pertinents devant les classes exactes. Côté UI, `padding: 0 0.15rem` sur `.rag-highlight` créait un espace visuel après les mots surlignés, et l'absence de `?v=...` maintenait les anciens scripts/JSON en cache.
+
+### La Solution Appliquée (`scripts/build_rag_embeddings.py`, `js/rag_engine.js`, `js/app.js`, `css/style.css`, `index.html`)
+1. **Nettoyage & normalisation AST** : Exclusion de `docs_view/index/`, suppression du chrome NaturalDocs (`Source: src/...`, `On this page Collapse all`), normalisation des noms paramétrés (`re.sub(r'\s*#\(.*$', '', ...)`), `context_header` compact plaçant `[Intents]` en tête, et tri de `relatedExamples` par spécificité.
+2. **Calibrage du routeur & du reranking** : Filtrage des verbes anglais génériques (`GENERIC_METHOD_WORDS`) dans `classifyIntent()`, saturation lissée du BM25 multi-champs (`title: 6.0`, `coveredApis: 0.65`), **Exact Target Class Boost** (`+0.12` / `+0.22`), priors modérés (`+0.08` / `+0.12`) et diversification Top-5 conditionnée par un plancher (`>= 0.62 * topScore`).
+3. **Context Bundles & UI** : Affichage de la chaîne d'ancêtres (`Extends: ...`), de la signature, des badges déplacés dans la colonne de droite, des liens croisés (exemples/macros/classes liées), suppression du `padding` horizontal sur `.rag-highlight`, et cache-busting `?v=2.3`.

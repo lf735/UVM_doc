@@ -1,5 +1,8 @@
 # Spécification Technique & Architecture Détaillée du Moteur RAG UVM 1.2
 
+> [!NOTE]
+> Ce document décrit la conception initiale (V1). L'architecture actuelle **V2 (Graph-Enhanced Client-Side RAG)** est documentée dans [RAG_V2_ARCHITECTURE_SPEC.md](file:///c:/Users/uf755lfr/Perso/UVM_doc/RAG_V2_ARCHITECTURE_SPEC.md).
+
 Ce document constitue la spécification de conception, d'architecture et d'implémentation du système de **Recherche en Langage Naturel & RAG (Retrieval-Augmented Generation) Vectoriel Client-Side** pour la documentation UVM 1.2.
 
 ---

@@ -2983,7 +2983,9 @@ document.addEventListener('DOMContentLoaded', () => {
         highlightedTitle: r.highlightedTitle,
         title: r.title,
         breadcrumb: r.breadcrumb,
-        type: r.type
+        type: r.type,
+        contextBundle: r.contextBundle || null,
+        intentProfile: r.intentProfile || null
       }));
 
       searchSelectedIndex = -1;
@@ -3002,6 +3004,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       let html = '';
+
       filteredSearchResults.forEach((res, idx) => {
         const pct = res.matchPct;
         const badgeClass = pct >= 80 ? 'rag-match-high' : (pct >= 65 ? 'rag-match-med' : 'rag-match-low');
@@ -3061,26 +3064,105 @@ document.addEventListener('DOMContentLoaded', () => {
           </svg>
         </span>` : '';
 
+        // Context Bundle HTML (inheritance chain, signature, badges, cross-links)
+        let contextChainHtml = '';
+        let contextSigHtml = '';
+        let contextBadgesHtml = '';
+        let contextLinksHtml = '';
+        const cb = res.contextBundle;
+        if (cb) {
+          if (cb.inheritanceChain && cb.inheritanceChain.length > 1) {
+            const ancestorsOnly = cb.inheritanceChain.filter(n => !n.current);
+            if (ancestorsOnly.length > 0) {
+              contextChainHtml = `<div class="rag-inheritance-chain"><span class="rag-chain-label">Extends:</span>${ancestorsOnly.map((node, nIdx) => {
+                const sep = nIdx > 0 ? '<span class="rag-chain-sep">›</span>' : '';
+                return node.url
+                  ? `${sep}<button type="button" class="rag-context-link rag-chain-node" data-context-url="${escapeHtml(node.url)}" data-context-name="${escapeHtml(node.name)}">${escapeHtml(node.name)}</button>`
+                  : `${sep}<span class="rag-chain-node">${escapeHtml(node.name)}</span>`;
+              }).join('')}</div>`;
+            }
+          }
+          if (cb.signature) {
+            contextSigHtml = `<div class="rag-context-sig"><code>${escapeHtml(cb.signature)}</code></div>`;
+          }
+          if (cb.badges && cb.badges.length > 0) {
+            contextBadgesHtml = cb.badges.map(b => {
+              const isDep = b === 'deprecated';
+              const isInh = b.startsWith('inherited');
+              const cls = isDep ? 'rag-ctx-badge deprecated' : (isInh ? 'rag-ctx-badge inherited' : 'rag-ctx-badge');
+              return `<span class="${cls}">${isDep ? '⚠️ ' : ''}${escapeHtml(b)}</span>`;
+            }).join('');
+          }
+          const links = [];
+          if (cb.crossLinks) {
+            (cb.crossLinks.examples || []).forEach(ex => {
+              links.push(`<button type="button" class="rag-context-link rag-cross-pill example" data-context-url="${escapeHtml(ex.url)}" data-context-name="${escapeHtml(ex.title)}">💡 ${escapeHtml(ex.title)}</button>`);
+            });
+            (cb.crossLinks.macros || []).forEach(mac => {
+              links.push(`<button type="button" class="rag-context-link rag-cross-pill macro" data-context-url="${escapeHtml(mac.url)}" data-context-name="${escapeHtml(mac.name)}">🧩 ${escapeHtml(mac.name)}</button>`);
+            });
+            (cb.crossLinks.relatedClasses || []).forEach(rc => {
+              links.push(`<button type="button" class="rag-context-link rag-cross-pill related" data-context-url="${escapeHtml(rc.url)}" data-context-name="${escapeHtml(rc.name)}">🔗 ${escapeHtml(rc.name)}</button>`);
+            });
+          }
+          if (links.length > 0) {
+            contextLinksHtml = `<div class="rag-cross-links">${links.join('')}</div>`;
+          }
+        }
+
+        // Avoid repeating the card title at the end of the breadcrumb
+        let displayBreadcrumb = res.breadcrumb || '';
+        const bcParts = displayBreadcrumb.split(' > ');
+        if (bcParts.length > 1) {
+          const lastPart = bcParts[bcParts.length - 1].trim().toLowerCase();
+          const titleClean = (res.title || '').replace(/^Interactive Example:\s*/i, '').trim().toLowerCase();
+          if (lastPart === titleClean || titleClean.startsWith(lastPart)) {
+            displayBreadcrumb = bcParts.slice(0, -1).join(' > ');
+          }
+        }
+
         html += `<li class="${itemClasses.join(' ')}" data-index="${idx}">
               <div class="res-main">
                 <div class="res-title-row" style="display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap;">
-                  <span style="color:var(--text-muted); font-size:0.775rem;">${escapeHtml(res.breadcrumb)}</span>
+                  <span style="color:var(--text-muted); font-size:0.775rem;">${escapeHtml(displayBreadcrumb)}</span>
                 </div>
-                <div class="rag-res-title" style="font-weight:600; font-size:0.925rem; color:var(--text-main); margin-top:0.15rem; display:flex; align-items:center;">
+                <div class="rag-res-title" style="font-weight:600; font-size:0.925rem; color:var(--text-main); margin-top:0.15rem; display:flex; align-items:center; gap:0.35rem;">
                   <span>${res.highlightedTitle || escapeHtml(res.title)}</span>
                   ${viewedBadge}
                 </div>
+                ${contextChainHtml}
+                ${contextSigHtml}
                 ${sectionsPillsHtml}
                 <div class="rag-snippet">${res.snippet}</div>
+                ${contextLinksHtml}
               </div>
-              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.35rem; flex-shrink:0;">
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0.3rem; flex-shrink:0;">
                 <span class="rag-match-badge ${badgeClass}">${pct}% match</span>
                 <span class="res-badge ${typeBadgeClass}">${displayType}</span>
+                ${contextBadgesHtml}
               </div>
             </li>`;
       });
 
       searchResults.innerHTML = html;
+
+      // Bind Context Bundle links (inheritance chain, cross-links, comparison links)
+      searchResults.querySelectorAll('.rag-context-link').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetUrl = btn.getAttribute('data-context-url');
+          const targetName = btn.getAttribute('data-context-name') || 'UVM Reference';
+          if (!targetUrl) return;
+          selectSearchResult({
+            name: targetName,
+            category: 'Reference',
+            type: targetUrl.includes('examples_view/') ? 'example' : 'class',
+            doc: targetUrl,
+            src: (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc) ? UVM_DATA.docToSrc[targetUrl.split('#')[0]] : null,
+            desc: ''
+          });
+        });
+      });
 
 
       // Bind section pills

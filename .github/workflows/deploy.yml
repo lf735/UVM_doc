@@ -43,9 +43,10 @@ jobs:
           topic_count=$(find js/doc_topics -maxdepth 1 -name '*.js' | wc -l)
           test "$topic_count" -gt 0 || { echo "::error::js/doc_topics has no .js bundles!" ; exit 1; }
           test -s data/rag_chunks.json || { echo "::error::data/rag_chunks.json missing or empty!" ; exit 1; }
+          test -s data/rag_graph.json || { echo "::error::data/rag_graph.json missing or empty!" ; exit 1; }
           test -s data/rag_embeddings.bin || { echo "::error::data/rag_embeddings.bin missing or empty!" ; exit 1; }
           echo "Verified $topic_count doc_topics bundles."
-          ls -lh js/search_data.js js/uvm_symbol_quick.js data/rag_chunks.json data/rag_embeddings.bin
+          ls -lh js/search_data.js js/uvm_symbol_quick.js data/rag_chunks.json data/rag_graph.json data/rag_embeddings.bin
 
       - name: Run automated verification test suites
         run: python scripts/run_tests.py

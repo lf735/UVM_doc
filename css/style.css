@@ -5240,7 +5240,7 @@
     background: rgba(139, 92, 246, 0.18);
     color: inherit;
     font-weight: 600;
-    padding: 0 0.15rem;
+    padding: 0;
     border-radius: 2px;
   }
 
@@ -5730,6 +5730,139 @@
   [data-theme="dark"] .snippet-source-tag {
     color: #c4b5fd;
     background: rgba(139, 92, 246, 0.25);
+  }
+
+  /* RAG V2 Context Bundles & Comparison Card */
+  .rag-inheritance-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 0.22rem;
+    font-size: 0.72rem;
+    font-family: var(--font-mono, monospace);
+    color: var(--text-muted);
+  }
+
+  .rag-chain-node {
+    background: none;
+    border: none;
+    padding: 0.05rem 0.25rem;
+    border-radius: 3px;
+    font: inherit;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .rag-chain-node:hover {
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--primary, #2563eb);
+  }
+
+  .rag-chain-current {
+    font-weight: 600;
+    color: var(--text-main);
+    padding: 0.05rem 0.25rem;
+  }
+
+  .rag-chain-sep {
+    opacity: 0.55;
+  }
+
+  .rag-context-sig {
+    margin-top: 0.25rem;
+    font-size: 0.73rem;
+    color: var(--text-main);
+    background: rgba(100, 116, 139, 0.08);
+    border-left: 2px solid rgba(59, 130, 246, 0.45);
+    padding: 0.18rem 0.45rem;
+    border-radius: 0 4px 4px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .rag-context-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .rag-chain-label {
+    font-weight: 600;
+    opacity: 0.75;
+    margin-right: 0.15rem;
+  }
+
+  .rag-ctx-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.1rem 0.42rem;
+    border-radius: 999px;
+    border: 1px solid rgba(100, 116, 139, 0.25);
+    background: rgba(100, 116, 139, 0.1);
+    color: var(--text-muted);
+    font-family: var(--font-mono, monospace);
+    white-space: nowrap;
+  }
+
+  .rag-ctx-badge.inherited {
+    border-color: rgba(14, 165, 233, 0.35);
+    background: rgba(14, 165, 233, 0.14);
+    color: #0284c7;
+  }
+
+  .rag-ctx-badge.deprecated {
+    border-color: rgba(239, 68, 68, 0.35);
+    background: rgba(239, 68, 68, 0.14);
+    color: #dc2626;
+  }
+
+  .rag-cross-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.35rem;
+  }
+
+  .rag-cross-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.7rem;
+    padding: 0.12rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary, rgba(148, 163, 184, 0.08));
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .rag-cross-pill:hover {
+    border-color: var(--primary, #2563eb);
+    color: var(--primary, #2563eb);
+    transform: translateY(-1px);
+  }
+
+  .rag-cross-pill.example {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #059669;
+  }
+
+  [data-theme="dark"] .rag-ctx-badge.inherited {
+    color: #38bdf8;
+  }
+
+  [data-theme="dark"] .rag-ctx-badge.deprecated {
+    color: #f87171;
+  }
+
+  [data-theme="dark"] .rag-cross-pill.example {
+    color: #34d399;
   }
 
   /* =========================================================================
