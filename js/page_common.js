@@ -382,6 +382,65 @@ window.PageCommon = (function () {
   }
 
   // =========================================================================
+  // Sticky Breadcrumbs Metrics & Pinned State
+  // =========================================================================
+
+  function getBreadcrumbsHeight() {
+    const bc = document.querySelector('.doc-breadcrumbs');
+    if (!bc) return 0;
+    const rect = bc.getBoundingClientRect();
+    return rect.height > 0 ? Math.ceil(rect.height) : 0;
+  }
+
+  function initBreadcrumbs() {
+    const bc = document.querySelector('.doc-breadcrumbs');
+    if (!bc) {
+      document.documentElement.style.setProperty('--doc-breadcrumbs-height', '0px');
+      return;
+    }
+
+    function syncMetrics() {
+      const h = getBreadcrumbsHeight();
+      document.documentElement.style.setProperty('--doc-breadcrumbs-height', h + 'px');
+    }
+
+    function syncPinned() {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const rect = bc.getBoundingClientRect();
+      bc.classList.toggle('is-pinned', scrollY > 4 && rect.top <= 1);
+    }
+
+    syncMetrics();
+    syncPinned();
+
+    if (typeof ResizeObserver === 'function') {
+      if (window._uvmBreadcrumbsResizeObserver) {
+        window._uvmBreadcrumbsResizeObserver.disconnect();
+      }
+      window._uvmBreadcrumbsResizeObserver = new ResizeObserver(function () {
+        syncMetrics();
+        syncPinned();
+      });
+      window._uvmBreadcrumbsResizeObserver.observe(bc);
+    }
+
+    if (window._uvmBreadcrumbsResizeHandler) {
+      window.removeEventListener('resize', window._uvmBreadcrumbsResizeHandler);
+    }
+    window._uvmBreadcrumbsResizeHandler = function () {
+      syncMetrics();
+      syncPinned();
+    };
+    window.addEventListener('resize', window._uvmBreadcrumbsResizeHandler, { passive: true });
+
+    if (window._uvmBreadcrumbsScrollHandler) {
+      window.removeEventListener('scroll', window._uvmBreadcrumbsScrollHandler);
+    }
+    window._uvmBreadcrumbsScrollHandler = syncPinned;
+    window.addEventListener('scroll', window._uvmBreadcrumbsScrollHandler, { passive: true });
+  }
+
+  // =========================================================================
   // Table of Contents (TOC) & ScrollSpy
   // =========================================================================
 
@@ -407,16 +466,16 @@ window.PageCommon = (function () {
       mobileTriggerBtn.title = 'Toggle table of contents';
       mobileTriggerBtn.innerHTML =
         '<span class="doc-toc-mobile-left">' +
-          '<svg class="doc-toc-mobile-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
-            '<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>' +
-            '<line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>' +
-          '</svg>' +
-          '<span class="doc-toc-mobile-label">On this page</span>' +
-          '<span class="doc-toc-mobile-sep" aria-hidden="true">&rsaquo;</span>' +
-          '<span class="doc-toc-mobile-current" id="doc-toc-mobile-current">Overview</span>' +
+        '<svg class="doc-toc-mobile-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+        '<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>' +
+        '<line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>' +
+        '</svg>' +
+        '<span class="doc-toc-mobile-label">On this page</span>' +
+        '<span class="doc-toc-mobile-sep" aria-hidden="true">&rsaquo;</span>' +
+        '<span class="doc-toc-mobile-current" id="doc-toc-mobile-current">Overview</span>' +
         '</span>' +
         '<svg class="doc-toc-mobile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
-          '<polyline points="6 9 12 15 18 9"/>' +
+        '<polyline points="6 9 12 15 18 9"/>' +
         '</svg>';
       tocSidebar.insertBefore(mobileTriggerBtn, tocInner);
     }
@@ -730,7 +789,7 @@ window.PageCommon = (function () {
     }
 
     function getScrollOffset() {
-      return isCompactTocMode() ? 56 : 24;
+      return getBreadcrumbsHeight() + (isCompactTocMode() ? 56 : 24);
     }
 
     function updateMobileCurrentLabel(title) {
@@ -745,7 +804,7 @@ window.PageCommon = (function () {
         return;
       }
       const rect = tocSidebar.getBoundingClientRect();
-      tocSidebar.classList.toggle('is-pinned', rect.top <= 12);
+      tocSidebar.classList.toggle('is-pinned', rect.top <= getBreadcrumbsHeight() + 12);
     }
 
     function onManualScrollDone() {
@@ -900,7 +959,7 @@ window.PageCommon = (function () {
           return;
         }
         if ((e.deltaY < 0 && scrollBox.scrollTop <= 0) ||
-            (e.deltaY > 0 && scrollBox.scrollTop >= maxScroll - 1)) {
+          (e.deltaY > 0 && scrollBox.scrollTop >= maxScroll - 1)) {
           e.preventDefault();
         }
       };
@@ -1229,7 +1288,7 @@ window.PageCommon = (function () {
     function updateScrollSpy() {
       if (isManualScrolling) return;
 
-      const spyThreshold = isCompactTocMode() ? 140 : 100;
+      const spyThreshold = getBreadcrumbsHeight() + (isCompactTocMode() ? 100 : 76);
       let activeItem = null;
       for (let i = 0; i < allNavItems.length; i++) {
         const item = allNavItems[i];
@@ -1557,11 +1616,12 @@ window.PageCommon = (function () {
     let minDistance = Infinity;
     const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 800;
 
+    const topTarget = getBreadcrumbsHeight() + 24;
     for (let i = 0; i < headings.length; i++) {
       const el = headings[i];
       const rect = el.getBoundingClientRect();
       if (rect.top >= -40 && rect.top <= viewportHeight * 0.6) {
-        const dist = Math.abs(rect.top - 24);
+        const dist = Math.abs(rect.top - topTarget);
         if (dist < minDistance) {
           minDistance = dist;
           bestEl = el;
@@ -3464,6 +3524,7 @@ window.PageCommon = (function () {
     initLinks();
     initCodeBlocks();
     initDiagramZoom();
+    initBreadcrumbs();
     initScrollAnchor();
 
     if (document.getElementById('doc-toc-sidebar')) {

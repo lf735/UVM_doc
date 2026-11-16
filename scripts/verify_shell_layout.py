@@ -91,7 +91,21 @@ def test_css_shell_scroll_isolation():
     ):
         assert required_tok in toc_mobile_css, f"Missing '{required_tok}' in @media (max-width: 1000px)"
 
-    print("PASS: css/style.css shell scroll isolation, mobile header, and compact TOC rules verified.")
+    # 5. Sticky .doc-breadcrumbs & non-scrolling .doc-body wrapper
+    assert re.search(r"\.doc-body\s*\{[^}]*overflow-x:\s*clip;[^}]*overflow-y:\s*visible;", content), (
+        ".doc-body must use overflow-x: clip; overflow-y: visible; so sticky breadcrumbs and TOC work reliably"
+    )
+    assert re.search(r"\.doc-breadcrumbs\s*\{[^}]*position:\s*sticky;[^}]*top:\s*0;", content), (
+        ".doc-breadcrumbs must use position: sticky; top: 0;"
+    )
+    assert re.search(r"\.doc-breadcrumbs\.is-pinned\s*\{", content), (
+        ".doc-breadcrumbs.is-pinned must define pinned elevation/border styling"
+    )
+    assert "--doc-breadcrumbs-height" in content, (
+        "css/style.css must offset sticky TOC and scroll-margin-top by --doc-breadcrumbs-height"
+    )
+
+    print("PASS: css/style.css shell scroll isolation, mobile header, sticky breadcrumbs, and compact TOC rules verified.")
 
 
 def test_js_guards():
@@ -129,6 +143,9 @@ def test_mobile_toc_controller():
     required_patterns = [
         r"doc-toc-mobile-trigger",
         r"doc-toc-mobile-current",
+        r"function\s+getBreadcrumbsHeight\s*\(",
+        r"function\s+initBreadcrumbs\s*\(",
+        r"--doc-breadcrumbs-height",
         r"function\s+isCompactTocMode\s*\(",
         r"function\s+getScrollOffset\s*\(",
         r"function\s+setMobileTocOpen\s*\(",
