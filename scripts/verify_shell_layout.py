@@ -157,7 +157,16 @@ def test_mobile_toc_controller():
     for pat in required_patterns:
         assert re.search(pat, content), f"Missing required pattern in js/page_common.js: {pat}"
 
-    print("PASS: js/page_common.js compact responsive TOC controller verified.")
+    # Verify heading-anchor-btn copy-link uses postMessage instead of mutating window.parent.location.hash (preserves split mode)
+    idx_anchor = content.find("function initHeadingAnchors")
+    assert idx_anchor != -1, "Missing initHeadingAnchors in js/page_common.js"
+    idx_anchor_end = content.find("function initCodeStudio", idx_anchor)
+    anchor_block = content[idx_anchor:idx_anchor_end]
+    assert "window.parent.location.hash =" not in anchor_block, (
+        "initHeadingAnchors must not mutate window.parent.location.hash directly (breaks split view)"
+    )
+
+    print("PASS: js/page_common.js compact responsive TOC controller and split-safe copy-link verified.")
 
 
 def main() -> int:

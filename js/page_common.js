@@ -1835,11 +1835,9 @@ window.PageCommon = (function () {
           if (isExample) {
             const exClean = exRel.replace(/^examples_view\//, '');
             fullUrl = `${parentBase}#/example/${exClean}${hash}`;
-            try { window.parent.location.hash = `#/example/${exClean}${hash}`; } catch (err) { }
             window.parent.postMessage({ type: 'exampleNavigated', url: exRel + hash }, '*');
           } else {
             fullUrl = `${parentBase}#/doc/${docRel}${hash}`;
-            try { window.parent.location.hash = `#/doc/${docRel}${hash}`; } catch (err) { }
             window.parent.postMessage({ type: 'docNavigated', url: docRel + hash }, '*');
           }
         } catch (err) {
