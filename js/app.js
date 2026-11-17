@@ -2343,10 +2343,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function notifySearchPilotVisibility(visible) {
+    if (docFrame && docFrame.contentWindow) {
+      try {
+        docFrame.contentWindow.postMessage({ type: 'searchNavBarVisibility', visible: !!visible }, '*');
+      } catch (e) { }
+    }
+  }
+
+  if (docFrame) {
+    docFrame.addEventListener('load', () => {
+      const isVisible = !!(searchNavBar && searchNavBar.style.display !== 'none' && activeSearchSession.isActive);
+      notifySearchPilotVisibility(isVisible);
+    });
+  }
+
   function updateSearchPilotBar() {
     if (!searchNavBar) return;
     if (!activeSearchSession.isActive || !activeSearchSession.results || activeSearchSession.results.length === 0) {
       searchNavBar.style.display = 'none';
+      notifySearchPilotVisibility(false);
       return;
     }
     const total = activeSearchSession.results.length;
@@ -2370,6 +2386,7 @@ document.addEventListener('DOMContentLoaded', () => {
       searchNavNext.classList.toggle('disabled', activeSearchSession.currentIndex >= total - 1);
     }
     searchNavBar.style.display = 'flex';
+    notifySearchPilotVisibility(true);
   }
 
   function closeSearchPilot() {
@@ -2377,6 +2394,7 @@ document.addEventListener('DOMContentLoaded', () => {
       searchNavBar.style.display = 'none';
     }
     activeSearchSession.isActive = false;
+    notifySearchPilotVisibility(false);
   }
 
   function navigateSearchResult(delta) {

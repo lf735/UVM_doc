@@ -233,6 +233,19 @@
     const stepPrevBtn = document.getElementById('stepper-prev');
     const stepNextBtn = document.getElementById('stepper-next');
     const stepPlayBtn = document.getElementById('stepper-play');
+    const stepResetBtn = document.getElementById('stepper-reset');
+    const stepSpeedSelect = document.getElementById('stepper-speed');
+    const stickyBar = document.getElementById('stepper-sticky-bar');
+    const stickyPrevMajorBtn = document.getElementById('sticky-stepper-prev-major');
+    const stickyPrevBtn = document.getElementById('sticky-stepper-prev');
+    const stickyNextBtn = document.getElementById('sticky-stepper-next');
+    const stickyNextMajorBtn = document.getElementById('sticky-stepper-next-major');
+    const stickyPlayBtn = document.getElementById('sticky-stepper-play');
+    const stickyResetBtn = document.getElementById('sticky-stepper-reset');
+    const stickySpeedSelect = document.getElementById('sticky-stepper-speed');
+    const stickyProgress = document.getElementById('sticky-stepper-progress');
+    const stickyTitle = document.getElementById('sticky-stepper-title');
+    const stickyState = document.getElementById('sticky-stepper-state');
     const stepActiveTitle = document.getElementById('step-active-title');
     const stepActiveComp = document.getElementById('step-active-comp');
     const stepActiveDesc = document.getElementById('step-active-desc');
@@ -271,7 +284,416 @@
     } catch (e) { }
 
     let currentStepIdx = 0;
+    let currentTraceIdx = 0;
     let playInterval = null;
+    let isSteppingMode = false;
+    let playbackSpeed = 1;
+    let stepToLogLineIdx = [];
+    let executionTrace = [];
+    let majorStepToTraceIdx = [];
+
+    function isExecutableLogLine(text) {
+      const t = text.trim();
+      if (!t) return false;
+      if (t.startsWith('---') || t.startsWith('***')) return false;
+      if (t.startsWith('Questa/VCS') || t.startsWith('Example:')) return false;
+      if (t.startsWith('UVM_INFO :') || t.startsWith('UVM_WARNING :') || t.startsWith('UVM_ERROR :') || t.startsWith('UVM_FATAL :')) return false;
+      if (t.startsWith('[')) return false;
+      if (/^(Name\s+Type|uvm_test_top|env\s+|agent\s+)/.test(t)) return false;
+      return /^(UVM_INFO|UVM_WARNING|UVM_ERROR|UVM_FATAL|\d+\s*:)/.test(t);
+    }
+
+    function parseLogFileLine(text) {
+      const m = text.match(/\b([\w./-]+\.(?:svh?|v|c|h))\((\d+)\)/i);
+      if (!m) return null;
+      return { file: m[1], line: parseInt(m[2], 10) };
+    }
+
+    function parseLogTime(text) {
+      const m = text.match(/@\s*(\d+\s*\w+)|^(\d+)\s*:/);
+      if (!m) return '';
+      return m[1] ? m[1] : `${m[2]} ns`;
+    }
+
+    function findMatchingLogLineIdx(step, allLines) {
+      if (!step || !step.log_snippet || !allLines.length) return -1;
+      const snippet = step.log_snippet.trim();
+      if (!snippet) return -1;
+
+      for (let i = 0; i < allLines.length; i++) {
+        const lineText = allLines[i].textContent.trim();
+        if (lineText.includes(snippet) || (snippet.length > 12 && snippet.includes(lineText))) {
+          return i;
+        }
+      }
+
+      const tokens = snippet.split(/[\s:\[\]@\(\)]+/).filter(function (t) { return t.length > 4; });
+      for (let i = 0; i < allLines.length; i++) {
+        const lineText = allLines[i].textContent;
+        const matchCount = tokens.filter(function (t) { return lineText.includes(t); }).length;
+        if (matchCount >= 2 || (tokens.length === 1 && matchCount === 1)) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function isExecutableCodeText(rawText) {
+      const t = rawText.replace(/\/\/.*$/, '').trim();
+      if (!t) return false;
+      if (t.startsWith('/*') || t.startsWith('*') || t.startsWith('*/')) return false;
+      if (/^(begin|end|endclass|endfunction|endtask|endmodule|endpackage|endinterface|endprogram|else\s+begin|else|\{|\}|;)$/i.test(t)) return false;
+      if (/^(class|virtual\s+class|import|typedef|package|module|interface|program|function|virtual\s+function|task|virtual\s+task|endcase)\b/i.test(t)) return false;
+      return true;
+    }
+
+    function stripSvComment(rawText) {
+      return rawText.replace(/\/\/.*$/, '').trim();
+    }
+
+    function findBlockEnd(lineMap, maxLine, startLn) {
+      let depth = 0;
+      let sawBegin = false;
+      for (let ln = startLn; ln <= maxLine; ln++) {
+        const t = stripSvComment(lineMap.get(ln) || '');
+        if (!t) continue;
+        const begins = (t.match(/\b(begin|fork)\b/g) || []).length;
+        const ends = (t.match(/\b(end|join|join_any|join_none)\b/g) || []).length;
+        if (begins > 0) sawBegin = true;
+        depth += begins - ends;
+        if (sawBegin && depth <= 0) return ln;
+        if (!sawBegin && ln > startLn && t.endsWith(';')) return ln;
+      }
+      return startLn;
+    }
+
+    function findEnclosingMethodStart(lineMap, targetLn) {
+      for (let ln = targetLn; ln >= Math.max(1, targetLn - 40); ln--) {
+        const t = stripSvComment(lineMap.get(ln) || '');
+        if (/^(?:virtual\s+)?(?:function|task|initial)\b/i.test(t)) return ln;
+        if (ln < targetLn && /^(endfunction|endtask|endmodule|endclass)\b/i.test(t)) return ln + 1;
+      }
+      return Math.max(1, targetLn - 15);
+    }
+
+    function findEnclosingLoop(lineMap, maxLine, lnA, lnB) {
+      const minLn = Math.max(1, Math.min(lnA, lnB) - 35);
+      for (let ln = Math.min(lnA, lnB); ln >= minLn; ln--) {
+        const t = stripSvComment(lineMap.get(ln) || '');
+        if (/^(for|repeat|foreach|while)\s*\(/i.test(t)) {
+          const endLn = findBlockEnd(lineMap, maxLine, ln);
+          if (lnA > ln && lnA <= endLn && lnB > ln && lnB <= endLn) {
+            return { start: ln, end: endLn };
+          }
+        }
+        if (/^(endfunction|endtask|endmodule)\b/i.test(t)) break;
+      }
+      return null;
+    }
+
+    function collectControlFlowSteps(lineMap, maxLine, fromLn, toLn, ctx, outSteps) {
+      let ln = fromLn;
+      let parenDepth = 0;
+      let inMultiLineLog = false;
+
+      while (ln <= toLn) {
+        const rawTxt = lineMap.get(ln);
+        if (rawTxt === undefined) {
+          ln++;
+          continue;
+        }
+        const cleaned = stripSvComment(rawTxt);
+        if (!cleaned) {
+          ln++;
+          continue;
+        }
+
+        if (/^(endfunction|endtask|endmodule|endclass)\b/i.test(cleaned)) {
+          break;
+        }
+
+        // Skip continuation lines of a multi-line statement (e.g. $sformatf args on next line)
+        if (parenDepth > 0 || inMultiLineLog) {
+          parenDepth += (cleaned.match(/\(/g) || []).length - (cleaned.match(/\)/g) || []).length;
+          if (parenDepth <= 0 && cleaned.endsWith(';')) {
+            parenDepth = 0;
+            inMultiLineLog = false;
+          }
+          ln++;
+          continue;
+        }
+
+        // If we hit an `else` while stepping forward after an `if` branch, skip the untaken `else` block
+        if (/^(?:end\s+)?else\b/i.test(cleaned)) {
+          const elseEnd = findBlockEnd(lineMap, maxLine, ln);
+          if (elseEnd < toLn) {
+            ln = elseEnd + 1;
+            continue;
+          }
+          // If target is inside else, just skip the `else` keyword line itself
+          ln++;
+          continue;
+        }
+
+        // If we hit `if (...)`, check if `toLn` is past the `if` body and inside `else`
+        if (/^if\s*\(/i.test(cleaned)) {
+          const ifEnd = findBlockEnd(lineMap, maxLine, ln);
+          const nextAfterIf = stripSvComment(lineMap.get(ifEnd + 1) || '');
+          const hasElse = /^(?:end\s+)?else\b/i.test(cleaned) || /^else\b/i.test(nextAfterIf);
+          // Emit the `if (...)` condition check line
+          outSteps.push({
+            termIdx: ctx.termIdx,
+            majorIdx: ctx.majorIdx,
+            file: ctx.file,
+            line: ln,
+            timeStr: ctx.timeStr,
+            text: `L${ln}: ${cleaned}`,
+            isCodeOnly: true
+          });
+          if (hasElse && toLn > ifEnd) {
+            const elseStart = /^else\b/i.test(nextAfterIf) ? ifEnd + 1 : ifEnd;
+            const elseEnd = findBlockEnd(lineMap, maxLine, elseStart);
+            if (toLn <= elseEnd) {
+              // Target is in the `else` branch -> jump over `if` body into `else`
+              ln = elseStart + 1;
+              continue;
+            }
+          }
+          ln++;
+          continue;
+        }
+
+        // Skip unlogged `uvm_info`/`uvm_error`/`$display` statements that didn't emit a log line
+        if (/^(`uvm_(?:info|warning|error|fatal)|uvm_report_(?:info|warning|error|fatal)|\$(?:display|write))\b/i.test(cleaned)) {
+          const pOpen = (cleaned.match(/\(/g) || []).length;
+          const pClose = (cleaned.match(/\)/g) || []).length;
+          if (pOpen > pClose || !cleaned.endsWith(';')) {
+            parenDepth = Math.max(0, pOpen - pClose);
+            inMultiLineLog = true;
+          }
+          ln++;
+          continue;
+        }
+
+        if (isExecutableCodeText(rawTxt)) {
+          outSteps.push({
+            termIdx: ctx.termIdx,
+            majorIdx: ctx.majorIdx,
+            file: ctx.file,
+            line: ln,
+            timeStr: ctx.timeStr,
+            text: `L${ln}: ${cleaned}`,
+            isCodeOnly: true
+          });
+          const pOpen = (cleaned.match(/\(/g) || []).length;
+          const pClose = (cleaned.match(/\)/g) || []).length;
+          if (pOpen > pClose) {
+            parenDepth = pOpen - pClose;
+          }
+        }
+        ln++;
+      }
+    }
+
+    function getFileLinesMap(filename) {
+      if (!filename || !filesList.length) return null;
+      const fileIndex = filesList.findIndex(function (f) { return f.name.includes(filename); });
+      if (fileIndex === -1) return null;
+      const map = new Map();
+      const rawContent = filesList[fileIndex] && filesList[fileIndex].content;
+      if (typeof rawContent === 'string' && rawContent.length > 0) {
+        const lines = rawContent.split(/\r?\n/);
+        for (let i = 0; i < lines.length; i++) {
+          map.set(i + 1, lines[i]);
+        }
+        return map;
+      }
+      const pane = document.getElementById(`file-pane-${fileIndex}`);
+      if (!pane) return null;
+      const rows = pane.querySelectorAll('tr[id^="L"], tr[data-line]');
+      rows.forEach(function (tr) {
+        const idAttr = tr.getAttribute('id') || '';
+        const ln = tr.hasAttribute('data-line')
+          ? parseInt(tr.getAttribute('data-line'), 10)
+          : (idAttr.startsWith('L') ? parseInt(idAttr.slice(1), 10) : NaN);
+        if (!isNaN(ln)) {
+          const codeCell = tr.querySelector('td.code, td.C, td:last-child');
+          map.set(ln, codeCell ? codeCell.textContent : tr.textContent);
+        }
+      });
+      return map;
+    }
+
+    function buildLogStepMapping() {
+      stepToLogLineIdx = stepperSteps.map(function () { return -1; });
+      executionTrace = [];
+      majorStepToTraceIdx = stepperSteps.map(function () { return 0; });
+      if (!terminalBody) return;
+      const allLines = terminalBody.querySelectorAll('.term-line');
+      if (!allLines.length) return;
+
+      const logLineToMajorStep = new Map();
+      stepperSteps.forEach(function (step, sIdx) {
+        const lineIdx = findMatchingLogLineIdx(step, allLines);
+        stepToLogLineIdx[sIdx] = lineIdx;
+        if (lineIdx !== -1 && !logLineToMajorStep.has(lineIdx)) {
+          logLineToMajorStep.set(lineIdx, sIdx);
+        }
+      });
+
+      const logPoints = [];
+      let activeMajor = 0;
+      for (let i = 0; i < allLines.length; i++) {
+        const lineEl = allLines[i];
+        const text = lineEl.textContent.trim();
+        if (logLineToMajorStep.has(i)) {
+          activeMajor = logLineToMajorStep.get(i);
+        }
+        if (isExecutableLogLine(text) || logLineToMajorStep.has(i)) {
+          const fl = parseLogFileLine(text);
+          const majorStep = stepperSteps[activeMajor] || {};
+          logPoints.push({
+            termIdx: i,
+            lineEl: lineEl,
+            isMajorStart: logLineToMajorStep.has(i),
+            majorIdx: activeMajor,
+            file: fl ? fl.file : (majorStep.highlight_file || ''),
+            line: fl ? fl.line : (majorStep.highlight_line || 0),
+            timeStr: parseLogTime(text),
+            text: text
+          });
+        }
+      }
+
+      const fileCache = new Map();
+      function getLines(fname) {
+        if (!fname) return null;
+        if (!fileCache.has(fname)) {
+          fileCache.set(fname, getFileLinesMap(fname));
+        }
+        return fileCache.get(fname);
+      }
+
+      const recordedMajor = new Set();
+      for (let p = 0; p < logPoints.length; p++) {
+        const cur = logPoints[p];
+        const prev = p > 0 ? logPoints[p - 1] : null;
+        const lineMap = getLines(cur.file);
+        const maxLine = lineMap ? lineMap.size : 0;
+
+        if (lineMap && cur.file && cur.line > 0) {
+          const curMethodStart = findEnclosingMethodStart(lineMap, cur.line);
+          const prevMethodStart = (prev && prev.file === cur.file) ? findEnclosingMethodStart(lineMap, prev.line) : -1;
+          const sameMethod = prev && prev.file === cur.file && curMethodStart === prevMethodStart;
+
+          if (sameMethod && cur.line > prev.line + 1 && (cur.line - prev.line) <= 60) {
+            // Forward step inside the same method, respecting if/else & multi-line statements
+            collectControlFlowSteps(lineMap, maxLine, prev.line + 1, cur.line - 1, prev, executionTrace);
+          } else if (sameMethod && cur.line <= prev.line) {
+            // Loop back-edge: finish loop body -> loop header -> re-enter down to cur.line - 1
+            const loop = findEnclosingLoop(lineMap, maxLine, prev.line, cur.line);
+            if (loop) {
+              collectControlFlowSteps(lineMap, maxLine, prev.line + 1, loop.end - 1, prev, executionTrace);
+              const headerTxt = stripSvComment(lineMap.get(loop.start) || '');
+              if (headerTxt) {
+                executionTrace.push({
+                  termIdx: prev.termIdx,
+                  majorIdx: prev.majorIdx,
+                  file: cur.file,
+                  line: loop.start,
+                  timeStr: prev.timeStr,
+                  text: `L${loop.start}: ${headerTxt}`,
+                  isCodeOnly: true
+                });
+              }
+              collectControlFlowSteps(lineMap, maxLine, loop.start + 1, cur.line - 1, prev, executionTrace);
+            }
+          } else if (!sameMethod && cur.line > curMethodStart) {
+            // Entering a new method/file: step forward from method header down to cur.line - 1
+            const ctx = {
+              termIdx: prev ? prev.termIdx : cur.termIdx,
+              majorIdx: cur.majorIdx,
+              file: cur.file,
+              timeStr: prev ? prev.timeStr : cur.timeStr
+            };
+            collectControlFlowSteps(lineMap, maxLine, curMethodStart + 1, cur.line - 1, ctx, executionTrace);
+          }
+        }
+
+        const traceIdx = executionTrace.length;
+        if (cur.isMajorStart && !recordedMajor.has(cur.majorIdx)) {
+          majorStepToTraceIdx[cur.majorIdx] = traceIdx;
+          recordedMajor.add(cur.majorIdx);
+        }
+
+        executionTrace.push({
+          termIdx: cur.termIdx,
+          majorIdx: cur.majorIdx,
+          file: cur.file,
+          line: cur.line,
+          timeStr: cur.timeStr,
+          text: cur.text,
+          isCodeOnly: false
+        });
+
+        cur.lineEl.setAttribute('data-trace-idx', String(traceIdx));
+        cur.lineEl.setAttribute('data-step-idx', String(cur.majorIdx));
+        cur.lineEl.classList.add('term-line-clickable');
+        cur.lineEl.title = `Line ${traceIdx + 1} (Step ${cur.majorIdx + 1}) — Click to jump here`;
+      }
+
+      terminalBody.addEventListener('click', function (e) {
+        const lineEl = e.target.closest('.term-line[data-trace-idx]');
+        if (!lineEl) return;
+        const tIdx = parseInt(lineEl.getAttribute('data-trace-idx'), 10);
+        if (!isNaN(tIdx)) {
+          stopAutoPlay();
+          isSteppingMode = true;
+          renderTraceStep(tIdx);
+        }
+      });
+    }
+
+    function buildCodeStepMarkers() {
+      if (!studioCodeContainer || !filesList.length) return;
+      const rowMap = new Map();
+      stepperSteps.forEach(function (step, sIdx) {
+        if (!step.highlight_file || !step.highlight_line) return;
+        const fileIndex = filesList.findIndex(function (f) { return f.name.includes(step.highlight_file); });
+        if (fileIndex === -1) return;
+        const pane = document.getElementById(`file-pane-${fileIndex}`);
+        if (!pane) return;
+        const targetRow = pane.querySelector(`tr[data-line="${step.highlight_line}"], tr#L${step.highlight_line}`);
+        if (!targetRow) return;
+        if (!rowMap.has(targetRow)) {
+          rowMap.set(targetRow, []);
+        }
+        rowMap.get(targetRow).push(sIdx);
+      });
+
+      rowMap.forEach(function (stepIndices, row) {
+        const lnCell = row.querySelector('td.L, td:first-child');
+        if (!lnCell || lnCell.querySelector('.code-step-marker')) return;
+        const firstIdx = stepIndices[0];
+        const marker = document.createElement('button');
+        marker.type = 'button';
+        marker.className = 'code-step-marker';
+        marker.setAttribute('data-step-idx', String(firstIdx));
+        marker.textContent = String(firstIdx + 1);
+        marker.title = `Step ${firstIdx + 1}: ${stepperSteps[firstIdx].title}`;
+        marker.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          stopAutoPlay();
+          isSteppingMode = true;
+          renderStep(firstIdx);
+        });
+        lnCell.appendChild(marker);
+      });
+    }
+
+    buildLogStepMapping();
+    buildCodeStepMarkers();
 
     function scrollToHighlightedCode() {
       const activeIdx = studioController ? studioController.getCurrentFileIdx() : 0;
@@ -288,64 +710,94 @@
       }
     }
 
-    function scrollToHighlightedLog() {
-      const step = stepperSteps[currentStepIdx];
-      if (!terminalBody || !step || !step.log_snippet) return;
-      const snippet = step.log_snippet.trim();
-      if (!snippet) return;
-
-      // Clear previous line highlights
-      terminalBody.querySelectorAll('.term-line.term-line-highlight').forEach(function (el) {
-        el.classList.remove('term-line-highlight');
+    function clearConsoleSteppingClasses() {
+      if (!terminalBody) return;
+      terminalBody.querySelectorAll('.term-line').forEach(function (el) {
+        el.classList.remove('term-line-highlight', 'term-line-past', 'term-line-future');
       });
+    }
+
+    function scrollToHighlightedLog(explicitTermIdx, shouldScroll) {
+      const step = stepperSteps[currentStepIdx];
+      if (!terminalBody || !step) return;
 
       const allLines = terminalBody.querySelectorAll('.term-line');
       if (!allLines.length) return;
 
-      let targetEl = null;
+      clearConsoleSteppingClasses();
 
-      // 1. Direct substring match
-      for (let i = 0; i < allLines.length; i++) {
-        const lineText = allLines[i].textContent.trim();
-        if (lineText.includes(snippet) || (snippet.length > 12 && snippet.includes(lineText))) {
-          targetEl = allLines[i];
-          break;
-        }
+      let targetIdx = (typeof explicitTermIdx === 'number' && explicitTermIdx >= 0)
+        ? explicitTermIdx
+        : stepToLogLineIdx[currentStepIdx];
+      if (targetIdx === undefined || targetIdx === -1) {
+        targetIdx = findMatchingLogLineIdx(step, allLines);
       }
+      const targetEl = targetIdx >= 0 && targetIdx < allLines.length ? allLines[targetIdx] : null;
 
-      // 2. Token-based fallback matching for robust partial hits
-      if (!targetEl) {
-        const tokens = snippet.split(/[\s:\[\]@\(\)]+/).filter(function (t) { return t.length > 4; });
+      if (isSteppingMode && targetIdx >= 0) {
         for (let i = 0; i < allLines.length; i++) {
-          const lineText = allLines[i].textContent;
-          const matchCount = tokens.filter(function (t) { return lineText.includes(t); }).length;
-          if (matchCount >= 2 || (tokens.length === 1 && matchCount === 1)) {
-            targetEl = allLines[i];
-            break;
+          if (i <= targetIdx) {
+            allLines[i].classList.add('term-line-past');
+          } else {
+            allLines[i].classList.add('term-line-future');
           }
         }
       }
 
       if (targetEl) {
-        // Ensure line is visible if a filter was active
         if (targetEl.style.display === 'none') {
           const allBtn = document.querySelector('.term-filter[data-level="all"]');
           if (allBtn) allBtn.click();
         }
 
         targetEl.classList.add('term-line-highlight');
-        const targetTop = targetEl.offsetTop - terminalBody.offsetTop;
-        terminalBody.scrollTo({
-          top: Math.max(0, targetTop - (terminalBody.clientHeight / 2) + 20),
-          behavior: 'smooth'
-        });
+        if (shouldScroll) {
+          const targetTop = targetEl.offsetTop - terminalBody.offsetTop;
+          terminalBody.scrollTo({
+            top: Math.max(0, targetTop - (terminalBody.clientHeight / 2) + 20),
+            behavior: 'smooth'
+          });
+        }
       }
     }
 
-    function renderStep(idx) {
+    function highlightCodeAt(file, line) {
+      if (file && studioController && studioController.switchFileTab) {
+        const fileIndex = filesList.findIndex(function (f) { return f.name.includes(file); });
+        if (fileIndex !== -1 && fileIndex !== studioController.getCurrentFileIdx()) {
+          studioController.switchFileTab(fileIndex);
+        }
+      }
+
+      if (line) {
+        const activeIdx = studioController ? studioController.getCurrentFileIdx() : 0;
+        const activePane = document.getElementById(`file-pane-${activeIdx}`);
+        const targetRow = activePane ? activePane.querySelector(`tr[data-line="${line}"], tr#L${line}`) : null;
+        if (targetRow) {
+          document.querySelectorAll('.file-code-pane tr.stepper-highlight').forEach(function (tr) {
+            tr.classList.remove('stepper-highlight');
+          });
+          targetRow.classList.add('stepper-highlight');
+          if (studioCodeContainer) {
+            const rowTop = targetRow.offsetTop;
+            studioCodeContainer.scrollTo({
+              top: Math.max(0, rowTop - (studioCodeContainer.clientHeight / 2)),
+              behavior: 'smooth'
+            });
+          }
+        }
+      }
+    }
+
+    function renderStep(idx, traceOverride) {
       if (idx < 0) idx = 0;
       if (idx >= stepperSteps.length) idx = stepperSteps.length - 1;
       currentStepIdx = idx;
+
+      if (!traceOverride && executionTrace.length > 0 && majorStepToTraceIdx[idx] !== undefined) {
+        currentTraceIdx = majorStepToTraceIdx[idx];
+      }
+      const activeTrace = traceOverride || executionTrace[currentTraceIdx] || null;
 
       const step = stepperSteps[idx];
 
@@ -363,19 +815,47 @@
         if (stepDetailCard && activeNode.id) {
           stepDetailCard.setAttribute('aria-labelledby', activeNode.id);
         }
-        try {
-          activeNode.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-        } catch (err) { }
+        if (stepperTimeline) {
+          const nodeLeft = activeNode.offsetLeft;
+          const nodeRight = nodeLeft + activeNode.offsetWidth;
+          const viewLeft = stepperTimeline.scrollLeft;
+          const viewRight = viewLeft + stepperTimeline.clientWidth;
+          if (nodeLeft < viewLeft || nodeRight > viewRight) {
+            stepperTimeline.scrollLeft = Math.max(0, nodeLeft - (stepperTimeline.clientWidth / 2) + (activeNode.offsetWidth / 2));
+          }
+        }
       }
 
       if (stepperProgressLabel) {
         stepperProgressLabel.textContent = `${idx + 1} / ${stepperSteps.length}`;
       }
+      if (stickyProgress) {
+        if (executionTrace.length > 0) {
+          stickyProgress.textContent = `Step ${idx + 1}/${stepperSteps.length} · Line ${currentTraceIdx + 1}/${executionTrace.length}`;
+        } else {
+          stickyProgress.textContent = `${idx + 1} / ${stepperSteps.length}`;
+        }
+        const hoverText = (activeTrace && isSteppingMode) ? `${step.title} — ${activeTrace.text}` : step.title;
+        stickyProgress.setAttribute('title', hoverText);
+        stickyProgress.setAttribute('data-tooltip', hoverText);
+      }
+      if (stickyState) {
+        const stateText = (activeTrace && activeTrace.timeStr) ? `${activeTrace.timeStr}` : (step.state || '');
+        if (stateText) {
+          stickyState.textContent = stateText;
+          stickyState.style.display = 'inline-flex';
+        } else {
+          stickyState.style.display = 'none';
+        }
+      }
+      if (stickyBar) {
+        stickyBar.classList.toggle('is-stepping', isSteppingMode);
+      }
 
       if (stepActiveTitle) stepActiveTitle.textContent = step.title;
       if (stepActiveComp) stepActiveComp.textContent = `Target: ${step.component}`;
       if (stepActiveDesc) stepActiveDesc.textContent = step.desc;
-      if (stepActiveLog) stepActiveLog.textContent = step.log_snippet;
+      if (stepActiveLog) stepActiveLog.textContent = activeTrace ? activeTrace.text : step.log_snippet;
 
       if (stepStateBadge) {
         if (step.state) {
@@ -388,6 +868,15 @@
 
       if (stepPrevBtn) stepPrevBtn.disabled = idx === 0;
       if (stepNextBtn) stepNextBtn.disabled = idx === stepperSteps.length - 1;
+      if (stickyPrevMajorBtn) stickyPrevMajorBtn.disabled = idx === 0;
+      if (stickyNextMajorBtn) stickyNextMajorBtn.disabled = idx === stepperSteps.length - 1;
+      if (stickyPrevBtn) stickyPrevBtn.disabled = executionTrace.length ? currentTraceIdx === 0 : idx === 0;
+      if (stickyNextBtn) stickyNextBtn.disabled = executionTrace.length ? currentTraceIdx >= executionTrace.length - 1 : idx === stepperSteps.length - 1;
+
+      document.querySelectorAll('.code-step-marker').forEach(function (m) {
+        const mIdx = parseInt(m.getAttribute('data-step-idx'), 10);
+        m.classList.toggle('active', mIdx === idx);
+      });
 
       // Topology card highlight
       document.querySelectorAll('.topo-card').forEach(function (card) {
@@ -397,38 +886,28 @@
         card.classList.toggle('highlighted', match);
       });
 
-      // Synchronize with Code Studio
-      if (step.highlight_file && studioController && studioController.switchFileTab) {
-        const fileIndex = filesList.findIndex(function (f) { return f.name.includes(step.highlight_file); });
-        if (fileIndex !== -1 && fileIndex !== studioController.getCurrentFileIdx()) {
-          studioController.switchFileTab(fileIndex);
-        }
-      }
-
-      if (step.highlight_line) {
-        const activeIdx = studioController ? studioController.getCurrentFileIdx() : 0;
-        const activePane = document.getElementById(`file-pane-${activeIdx}`);
-        const targetRow = activePane ? activePane.querySelector(`tr[data-line="${step.highlight_line}"], tr#L${step.highlight_line}`) : null;
-        if (targetRow) {
-          document.querySelectorAll('.file-code-pane tr.stepper-highlight').forEach(function (tr) {
-            tr.classList.remove('stepper-highlight');
-          });
-          targetRow.classList.add('stepper-highlight');
-          if (studioCodeContainer) {
-            const rowTop = targetRow.offsetTop;
-            studioCodeContainer.scrollTo({
-              top: Math.max(0, rowTop - (studioCodeContainer.clientHeight / 2)),
-              behavior: 'smooth'
-            });
-          }
-        }
-      }
+      // Synchronize with Code Studio (use fine-grained trace file/line if available)
+      const targetFile = (activeTrace && activeTrace.file) ? activeTrace.file : step.highlight_file;
+      const targetLine = (activeTrace && activeTrace.line) ? activeTrace.line : step.highlight_line;
+      highlightCodeAt(targetFile, targetLine);
 
       // Synchronize with simulation log trace
-      scrollToHighlightedLog();
+      scrollToHighlightedLog(activeTrace ? activeTrace.termIdx : undefined);
 
       // Synchronize with visual concept animation
       updateScenarioAnimation(animType, idx, step);
+    }
+
+    function renderTraceStep(tIdx) {
+      if (!executionTrace.length) {
+        renderStep(tIdx);
+        return;
+      }
+      if (tIdx < 0) tIdx = 0;
+      if (tIdx >= executionTrace.length) tIdx = executionTrace.length - 1;
+      currentTraceIdx = tIdx;
+      const traceItem = executionTrace[tIdx];
+      renderStep(traceItem.majorIdx, traceItem);
     }
 
     function updateScenarioAnimation(type, idx, step) {
@@ -638,30 +1117,139 @@
       }
     }
 
+    function updatePlayButtons(isPlaying) {
+      const label = isPlaying ? 'Pause ❚❚' : 'Play ▶';
+      if (stepPlayBtn) stepPlayBtn.textContent = label;
+      if (stickyPlayBtn) {
+        stickyPlayBtn.innerHTML = isPlaying
+          ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>'
+          : '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>';
+        stickyPlayBtn.setAttribute('title', isPlaying ? 'Pause (Space)' : 'Play line-by-line (Space)');
+      }
+    }
+
     function stopAutoPlay() {
       if (playInterval) {
         clearInterval(playInterval);
         playInterval = null;
-        if (stepPlayBtn) stepPlayBtn.textContent = 'Play ▶';
+      }
+      updatePlayButtons(false);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      isSteppingMode = true;
+      const hasTrace = executionTrace.length > 0;
+      if (hasTrace) {
+        if (currentTraceIdx >= executionTrace.length - 1) {
+          renderTraceStep(0);
+        } else {
+          renderTraceStep(currentTraceIdx);
+        }
+      } else {
+        if (currentStepIdx >= stepperSteps.length - 1) {
+          renderStep(0);
+        } else {
+          renderStep(currentStepIdx);
+        }
+      }
+      updatePlayButtons(true);
+      const baseDelay = hasTrace ? 1600 : 3800;
+      const delayMs = Math.max(400, Math.round(baseDelay / playbackSpeed));
+      playInterval = setInterval(function () {
+        if (hasTrace) {
+          if (currentTraceIdx >= executionTrace.length - 1) {
+            stopAutoPlay();
+          } else {
+            renderTraceStep(currentTraceIdx + 1);
+          }
+        } else {
+          if (currentStepIdx >= stepperSteps.length - 1) {
+            stopAutoPlay();
+          } else {
+            renderStep(currentStepIdx + 1);
+          }
+        }
+      }, delayMs);
+    }
+
+    function toggleAutoPlay() {
+      if (playInterval) {
+        stopAutoPlay();
+      } else {
+        startAutoPlay();
       }
     }
 
-    if (stepPrevBtn) {
-      stepPrevBtn.addEventListener('click', function () {
-        stopAutoPlay();
-        renderStep(currentStepIdx - 1);
-      });
+    function resetStepperMode() {
+      stopAutoPlay();
+      isSteppingMode = false;
+      currentTraceIdx = 0;
+      renderStep(0);
+      clearConsoleSteppingClasses();
     }
 
-    if (stepNextBtn) {
-      stepNextBtn.addEventListener('click', function () {
-        stopAutoPlay();
+    function setPlaybackSpeed(newSpeed) {
+      const val = parseFloat(newSpeed);
+      if (isNaN(val) || val <= 0) return;
+      playbackSpeed = val;
+      if (stepSpeedSelect) stepSpeedSelect.value = String(newSpeed);
+      if (stickySpeedSelect) stickySpeedSelect.value = String(newSpeed);
+      if (playInterval) {
+        startAutoPlay();
+      }
+    }
+
+    function goPrevMajorStep() {
+      stopAutoPlay();
+      isSteppingMode = true;
+      renderStep(currentStepIdx - 1);
+    }
+
+    function goNextMajorStep() {
+      stopAutoPlay();
+      isSteppingMode = true;
+      renderStep(currentStepIdx + 1);
+    }
+
+    function goPrevLine() {
+      stopAutoPlay();
+      isSteppingMode = true;
+      if (executionTrace.length) {
+        renderTraceStep(currentTraceIdx - 1);
+      } else {
+        renderStep(currentStepIdx - 1);
+      }
+    }
+
+    function goNextLine() {
+      stopAutoPlay();
+      isSteppingMode = true;
+      if (executionTrace.length) {
+        renderTraceStep(currentTraceIdx + 1);
+      } else {
         renderStep(currentStepIdx + 1);
-      });
+      }
+    }
+
+    if (stepPrevBtn) stepPrevBtn.addEventListener('click', goPrevMajorStep);
+    if (stickyPrevMajorBtn) stickyPrevMajorBtn.addEventListener('click', goPrevMajorStep);
+    if (stepNextBtn) stepNextBtn.addEventListener('click', goNextMajorStep);
+    if (stickyNextMajorBtn) stickyNextMajorBtn.addEventListener('click', goNextMajorStep);
+    if (stickyPrevBtn) stickyPrevBtn.addEventListener('click', goPrevLine);
+    if (stickyNextBtn) stickyNextBtn.addEventListener('click', goNextLine);
+    if (stepResetBtn) stepResetBtn.addEventListener('click', resetStepperMode);
+    if (stickyResetBtn) stickyResetBtn.addEventListener('click', resetStepperMode);
+    if (stepSpeedSelect) {
+      stepSpeedSelect.addEventListener('change', function () { setPlaybackSpeed(stepSpeedSelect.value); });
+    }
+    if (stickySpeedSelect) {
+      stickySpeedSelect.addEventListener('change', function () { setPlaybackSpeed(stickySpeedSelect.value); });
     }
 
     if (btnJumpCode) {
       btnJumpCode.addEventListener('click', function () {
+        isSteppingMode = true;
         scrollToHighlightedCode();
         if (studioCodeContainer) {
           studioCodeContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -671,7 +1259,9 @@
 
     if (btnJumpLog) {
       btnJumpLog.addEventListener('click', function () {
-        scrollToHighlightedLog();
+        isSteppingMode = true;
+        const activeTrace = executionTrace[currentTraceIdx];
+        scrollToHighlightedLog(activeTrace ? activeTrace.termIdx : undefined, true);
         if (terminalBody) {
           terminalBody.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
@@ -681,6 +1271,7 @@
     stepNodes.forEach(function (node, idx) {
       node.addEventListener('click', function () {
         stopAutoPlay();
+        isSteppingMode = true;
         renderStep(idx);
       });
     });
@@ -700,6 +1291,7 @@
         if (nextIdx !== null) {
           e.preventDefault();
           stopAutoPlay();
+          isSteppingMode = true;
           renderStep(nextIdx);
           if (stepNodes[nextIdx]) {
             stepNodes[nextIdx].focus();
@@ -708,27 +1300,48 @@
       });
     }
 
-    if (stepPlayBtn) {
-      stepPlayBtn.addEventListener('click', function () {
-        if (playInterval) {
-          stopAutoPlay();
-        } else {
-          if (currentStepIdx >= stepperSteps.length - 1) {
-            renderStep(0);
+    if (stepPlayBtn) stepPlayBtn.addEventListener('click', toggleAutoPlay);
+    if (stickyPlayBtn) stickyPlayBtn.addEventListener('click', toggleAutoPlay);
+
+    document.addEventListener('keydown', function (e) {
+      if (!isSteppingMode) return;
+      const tag = document.activeElement ? document.activeElement.tagName : '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (document.activeElement && document.activeElement.closest('.monaco-editor')) return;
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goNextLine();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goPrevLine();
+      } else if (e.key === ' ') {
+        e.preventDefault();
+        toggleAutoPlay();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        resetStepperMode();
+      }
+    });
+
+    if (stickyBar) {
+      try {
+        if (window.parent && window.parent !== window) {
+          const pSearchBar = window.parent.document.getElementById('search-nav-bar');
+          if (pSearchBar && pSearchBar.style.display !== 'none') {
+            stickyBar.classList.add('has-search-pilot');
           }
-          stepPlayBtn.textContent = 'Pause ❚❚';
-          playInterval = setInterval(function () {
-            if (currentStepIdx >= stepperSteps.length - 1) {
-              stopAutoPlay();
-            } else {
-              renderStep(currentStepIdx + 1);
-            }
-          }, 3800);
+        }
+      } catch (e) { }
+      window.addEventListener('message', function (e) {
+        if (e && e.data && e.data.type === 'searchNavBarVisibility') {
+          stickyBar.classList.toggle('has-search-pilot', !!e.data.visible);
         }
       });
     }
 
     renderStep(0);
+    clearConsoleSteppingClasses();
   }
 
   function initBannerFilesPopover(studio) {

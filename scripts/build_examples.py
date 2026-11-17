@@ -772,7 +772,304 @@ STEPPER_DATA = {
     ]
 }
 
-def generate_simulation_log(suite_key, meta):
+def _extract_sv_string_arg(text):
+    """Best-effort cleanup of a SystemVerilog string or $sformatf expression for log display."""
+    t = text.strip()
+    m_sf = re.match(r'^\$sformatf\s*\(\s*"([^"]*)"', t)
+    if m_sf:
+        fmt = m_sf.group(1)
+        fmt = re.sub(r'%0?[dxhobsfg]', '<val>', fmt)
+        return fmt
+    m_q = re.match(r'^"([^"]*)"$', t)
+    if m_q:
+        return m_q.group(1)
+    t = re.sub(r'"([^"]*)"', r'\1', t)
+    t = re.sub(r'\s+', ' ', t)
+    return t[:110]
+
+
+def extract_sv_execution_events(files_data, meta):
+    """
+    Statically parse .sv/.svh files of an example suite to extract authentic,
+    line-anchored execution events ordered by the UVM lifecycle.
+    """
+    PHASE_ORDER = {
+        "new": 0,
+        "run_test": 1,
+        "build": 10,
+        "build_phase": 10,
+        "connect": 20,
+        "connect_phase": 20,
+        "end_of_elaboration": 30,
+        "end_of_elaboration_phase": 30,
+        "start_of_simulation": 40,
+        "start_of_simulation_phase": 40,
+        "pre_reset_phase": 45,
+        "reset_phase": 46,
+        "configure_phase": 47,
+        "main_phase": 48,
+        "run": 50,
+        "run_phase": 50,
+        "body": 52,
+        "extract": 60,
+        "extract_phase": 60,
+        "check": 70,
+        "check_phase": 70,
+        "report": 80,
+        "report_phase": 80,
+        "final_phase": 90,
+    }
+
+    primary_file = meta.get("primary_file", "")
+    sv_files = [
+        fd for fd in files_data
+        if fd["name"].endswith((".sv", ".svh")) and not fd["name"].startswith("Makefile")
+    ]
+    sv_files.sort(key=lambda fd: (0 if fd["name"] == primary_file else 1, fd["name"]))
+
+    topo_names = [t.get("name", "") for t in meta.get("topology", []) if t.get("name")]
+    default_comp = topo_names[0] if topo_names else "uvm_test_top"
+
+    raw_events = []
+    re_class_or_mod = re.compile(r'^\s*(?:virtual\s+)?(?:class|module)\s+([a-zA-Z_]\w*)')
+    re_func_or_task = re.compile(r'^\s*(?:virtual\s+)?(?:function|task)\s+(?:automatic\s+)?(?:[\w:]+\s+)?([a-zA-Z_]\w*)\s*\(')
+    re_uvm_msg = re.compile(r'`uvm_(info|warning|error|fatal)\s*\(\s*([^,]+?)\s*,\s*(.+?)\s*(?:,\s*UVM_\w+\s*)?\)')
+    re_uvm_rep = re.compile(r'uvm_report_(info|warning|error|fatal)\s*\(\s*([^,]+?)\s*,\s*(.+?)\s*(?:,|\))')
+    re_display = re.compile(r'\$(?:display|write)\s*\(\s*"([^"]*)"')
+    re_objection = re.compile(r'\b(raise_objection|drop_objection)\s*\(')
+    re_run_test = re.compile(r'\brun_test\s*\(')
+
+    for fd in sv_files:
+        fname = fd["name"]
+        lines = fd["raw_content"].splitlines()
+        cur_scope = default_comp
+        cur_method = "module_init"
+        in_block_comment = False
+
+        for line_no, raw_line in enumerate(lines, start=1):
+            stripped = raw_line.strip()
+            if in_block_comment:
+                if "*/" in stripped:
+                    in_block_comment = False
+                continue
+            if stripped.startswith("/*"):
+                if "*/" not in stripped:
+                    in_block_comment = True
+                continue
+            if not stripped or stripped.startswith("//"):
+                continue
+
+            code_line = stripped.split("//")[0].strip()
+            if not code_line:
+                continue
+
+            m_cls = re_class_or_mod.match(code_line)
+            if m_cls:
+                cur_scope = m_cls.group(1)
+
+            m_fn = re_func_or_task.match(code_line)
+            if m_fn:
+                cur_method = m_fn.group(1)
+                if cur_method in PHASE_ORDER and cur_method not in ("new", "body"):
+                    raw_events.append({
+                        "kind": "phase",
+                        "severity": "UVM_INFO",
+                        "file": fname,
+                        "line": line_no,
+                        "scope": cur_scope,
+                        "method": cur_method,
+                        "tag": "PH_TRACE",
+                        "msg": f"Executing {cur_scope}::{cur_method}()",
+                        "order": PHASE_ORDER[cur_method],
+                    })
+                    continue
+
+            m_uvm = re_uvm_msg.search(code_line)
+            if m_uvm:
+                sev = f"UVM_{m_uvm.group(1).upper()}"
+                tag_raw = _extract_sv_string_arg(m_uvm.group(2))
+                if "get_type_name" in tag_raw or not tag_raw:
+                    tag = cur_scope.upper()[:16]
+                else:
+                    tag = re.sub(r'[^A-Za-z0-9_]', '', tag_raw)[:18] or "INFO"
+                msg = _extract_sv_string_arg(m_uvm.group(3))
+                order = PHASE_ORDER.get(cur_method, 55)
+                raw_events.append({
+                    "kind": "log",
+                    "severity": sev,
+                    "file": fname,
+                    "line": line_no,
+                    "scope": cur_scope,
+                    "method": cur_method,
+                    "tag": tag,
+                    "msg": msg or f"Report from {cur_scope}::{cur_method}",
+                    "order": order,
+                })
+                continue
+
+            m_rep = re_uvm_rep.search(code_line)
+            if m_rep:
+                sev = f"UVM_{m_rep.group(1).upper()}"
+                tag = re.sub(r'[^A-Za-z0-9_]', '', _extract_sv_string_arg(m_rep.group(2)))[:18] or "REPORT"
+                msg = _extract_sv_string_arg(m_rep.group(3))
+                raw_events.append({
+                    "kind": "log",
+                    "severity": sev,
+                    "file": fname,
+                    "line": line_no,
+                    "scope": cur_scope,
+                    "method": cur_method,
+                    "tag": tag,
+                    "msg": msg or f"Report in {cur_scope}::{cur_method}",
+                    "order": PHASE_ORDER.get(cur_method, 55),
+                })
+                continue
+
+            m_disp = re_display.search(code_line)
+            if m_disp:
+                msg = re.sub(r'%0?[dxhobsfg]', '<val>', m_disp.group(1)).strip()
+                if msg:
+                    raw_events.append({
+                        "kind": "display",
+                        "severity": "UVM_INFO",
+                        "file": fname,
+                        "line": line_no,
+                        "scope": cur_scope,
+                        "method": cur_method,
+                        "tag": "STDOUT",
+                        "msg": msg,
+                        "order": PHASE_ORDER.get(cur_method, 55),
+                    })
+                continue
+
+            m_obj = re_objection.search(code_line)
+            if m_obj:
+                act = m_obj.group(1)
+                raw_events.append({
+                    "kind": "objection",
+                    "severity": "UVM_INFO",
+                    "file": fname,
+                    "line": line_no,
+                    "scope": cur_scope,
+                    "method": cur_method,
+                    "tag": "OBJTN",
+                    "msg": f"{cur_scope} calls phase.{act}(this)",
+                    "order": 49 if act == "raise_objection" else 59,
+                })
+                continue
+
+            if re_run_test.search(code_line):
+                raw_events.append({
+                    "kind": "run_test",
+                    "severity": "UVM_INFO",
+                    "file": fname,
+                    "line": line_no,
+                    "scope": cur_scope,
+                    "method": "initial",
+                    "tag": "RNTST",
+                    "msg": "Invoking run_test() to start UVM phasing",
+                    "order": 1,
+                })
+
+    # Sort stably by lifecycle order, then file priority, then line number
+    file_rank = {fd["name"]: idx for idx, fd in enumerate(sv_files)}
+    raw_events.sort(key=lambda ev: (ev["order"], file_rank.get(ev["file"], 99), ev["line"]))
+
+    # Deduplicate same file+line and assign simulated timestamps
+    seen_fl = set()
+    events = []
+    sim_time = 0
+    for ev in raw_events:
+        key = (ev["file"], ev["line"])
+        if key in seen_fl:
+            continue
+        seen_fl.add(key)
+        if ev["order"] >= 50 and ev["kind"] in ("log", "display", "objection"):
+            sim_time += 10
+        elif ev["order"] >= 60:
+            sim_time = max(sim_time, 100)
+        ev["time_ns"] = sim_time
+        # Map scope to closest topology node if available
+        matched_topo = [t for t in topo_names if t.lower() in ev["scope"].lower() or ev["scope"].lower() in t.lower()]
+        ev["component"] = ", ".join(matched_topo[:2]) if matched_topo else ev["scope"]
+        events.append(ev)
+
+    return events
+
+
+def build_auto_stepper_data(suite_key, meta, events):
+    """Build 5 to 15 readable step-by-step entries coupled to extracted logs and SV lines."""
+    if suite_key in STEPPER_DATA:
+        return STEPPER_DATA[suite_key]
+
+    if not events:
+        return []
+
+    # Prioritize explicit log/display/objection/run_test events, then phase hooks
+    log_like = [e for e in events if e["kind"] in ("run_test", "log", "display", "objection")]
+    phase_like = [e for e in events if e["kind"] == "phase"]
+
+    selected = list(log_like)
+    if len(selected) < 5:
+        for p in phase_like:
+            if len(selected) >= 8:
+                break
+            if not any(s["file"] == p["file"] and abs(s["line"] - p["line"]) <= 2 for s in selected):
+                selected.append(p)
+        selected.sort(key=lambda ev: (ev["order"], ev["time_ns"], ev["line"]))
+
+    # If too many events, collapse consecutive bursts from same (file, tag, method)
+    if len(selected) > 14:
+        compact = []
+        last_sig = None
+        for ev in selected:
+            sig = (ev["file"], ev["tag"], ev["method"])
+            if sig == last_sig and len(compact) >= 3:
+                continue
+            compact.append(ev)
+            last_sig = sig
+        selected = compact
+
+    # Hard cap at 15 evenly sampled steps while keeping first and last
+    if len(selected) > 15:
+        idxs = [round(i * (len(selected) - 1) / 14) for i in range(15)]
+        selected = [selected[i] for i in dict.fromkeys(idxs)]
+
+    steps = []
+    for i, ev in enumerate(selected, start=1):
+        phase_label = ev["method"].replace("_phase", "").upper()
+        state_str = f"Sim Time: {ev['time_ns']} ns ({phase_label})"
+        log_line = f"{ev['severity']} {ev['file']}({ev['line']}) @ {ev['time_ns']} ns: {ev['scope']} [{ev['tag']}] {ev['msg']}"
+
+        if ev["kind"] == "run_test":
+            title = f"{i}. Test Launch (run_test)"
+            desc = f"Entry point in {ev['file']} line {ev['line']}: UVM begins testbench elaboration and phasing."
+        elif ev["kind"] == "phase":
+            title = f"{i}. {ev['scope']} :: {ev['method']}()"
+            desc = f"UVM invokes {ev['method']}() on {ev['scope']} ({ev['file']}:{ev['line']})."
+        elif ev["kind"] == "objection":
+            title = f"{i}. Objection Control ({ev['scope']})"
+            desc = f"{ev['msg']} at {ev['file']}:{ev['line']} to coordinate simulation lifetime."
+        else:
+            short_msg = ev["msg"] if len(ev["msg"]) <= 44 else ev["msg"][:41] + "..."
+            title = f"{i}. [{ev['tag']}] {short_msg}"
+            desc = f"In {ev['scope']}::{ev['method']}() ({ev['file']}:{ev['line']}): {ev['msg']}"
+
+        steps.append({
+            "step": i,
+            "title": title,
+            "state": state_str,
+            "component": ev["component"],
+            "highlight_file": ev["file"],
+            "highlight_line": ev["line"],
+            "log_snippet": log_line,
+            "desc": desc,
+        })
+
+    return steps
+
+
+def generate_simulation_log(suite_key, meta, events=None):
     """Generate authentic, realistic simulation log tailored to each example's scenario."""
     title = meta["title"]
     
@@ -936,8 +1233,39 @@ UVM_ERROR :    0
 UVM_FATAL :    0
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **"""
 
-    cat = meta["category"]
-    
+    if events:
+        log_lines = [
+            "----------------------------------------------------------------",
+            "Questa/VCS/Xcelium UVM 1.2 Simulation Log",
+            f"Example: {title} ({suite_key})",
+            "----------------------------------------------------------------",
+        ]
+        sev_counts = {"UVM_INFO": 0, "UVM_WARNING": 0, "UVM_ERROR": 0, "UVM_FATAL": 0}
+        id_counts = {}
+        for ev in events:
+            sev = ev["severity"]
+            tag = ev["tag"]
+            sev_counts[sev] = sev_counts.get(sev, 0) + 1
+            id_counts[tag] = id_counts.get(tag, 0) + 1
+            log_lines.append(
+                f"{sev} {ev['file']}({ev['line']}) @ {ev['time_ns']} ns: {ev['scope']} [{tag}] {ev['msg']}"
+            )
+        log_lines.extend([
+            "",
+            "--- UVM Report Summary ---",
+            "",
+            "** Report counts by severity",
+            f"UVM_INFO :   {sev_counts['UVM_INFO']}",
+            f"UVM_WARNING :    {sev_counts['UVM_WARNING']}",
+            f"UVM_ERROR :    {sev_counts['UVM_ERROR']}",
+            f"UVM_FATAL :    {sev_counts['UVM_FATAL']}",
+            "** Report counts by id",
+        ])
+        for tag, cnt in id_counts.items():
+            log_lines.append(f"[{tag}]     {cnt}")
+        log_lines.append("** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **")
+        return "\n".join(log_lines)
+
     log_lines = [
         "----------------------------------------------------------------",
         "Questa/VCS/Xcelium UVM 1.2 Simulation Log",
@@ -1471,11 +1799,12 @@ def build_suite_page(suite_key, meta, files):
     zip_payload = [{"name": fd["name"], "content": fd["raw_content"]} for fd in files_data]
     zip_json_escaped = html.escape(json.dumps(zip_payload))
 
-    # Stepper data if present
-    stepper_list = STEPPER_DATA.get(suite_key, [])
+    # Extract SV execution events and build stepper + coherent simulation log
+    sv_events = extract_sv_execution_events(files_data, meta)
+    stepper_list = build_auto_stepper_data(suite_key, meta, sv_events)
 
     # Simulation log
-    sim_log = generate_simulation_log(suite_key, meta)
+    sim_log = generate_simulation_log(suite_key, meta, events=sv_events)
 
     # Topology nodes
     topo_nodes = meta.get("topology", [])
@@ -1510,7 +1839,7 @@ def build_suite_page(suite_key, meta, files):
     stepper_block = pbc.render_flow_stepper(stepper_list, anim_type)
     topo_block = pbc.render_topology_grid(topo_nodes)
     primary_file = meta.get("primary_file", files_data[0]["name"] if files_data else "")
-    studio_block = pbc.render_code_studio(files_data, primary_file, "../../")
+    studio_block = pbc.render_code_studio(files_data, primary_file, "../../", stepper_steps=stepper_list)
     sim_block = pbc.render_simulation_console(sim_log)
 
     body_content = f"{main_topic_html}\n{source_notes_block}\n{topo_block}\n{studio_block}\n{sim_block}\n{stepper_block}"

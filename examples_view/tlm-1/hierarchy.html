@@ -117,6 +117,38 @@
   <div class="CTopic">
     <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
     <div class="CBody">
+      <div class="stepper-sticky-bar" id="stepper-sticky-bar" aria-label="Step-by-step execution controls">
+        <div class="stepper-sticky-info">
+          <span class="stepper-sticky-badge">Run Trace</span>
+          <span class="stepper-progress-label stepper-progress-hover" id="sticky-stepper-progress" title="1. Test Launch (run_test)">Step 1/6</span>
+          <span class="scenario-state-pill" id="sticky-stepper-state">Sim Time: 0 ns (INITIAL)</span>
+        </div>
+        <div class="stepper-sticky-actions">
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-prev-major" title="Previous major step" aria-label="Previous major step" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-prev" title="Previous line (Left Arrow)" aria-label="Previous line" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-primary stepper-icon-btn" id="sticky-stepper-play" title="Play / Pause (Space)" aria-label="Play or pause">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-next" title="Next line (Right Arrow)" aria-label="Next line">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-next-major" title="Next major step" aria-label="Next major step">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-reset" title="Reset &amp; show full log (Esc)" aria-label="Reset">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+          </button>
+          <select class="stepper-speed-select" id="sticky-stepper-speed" aria-label="Playback speed" title="Playback speed">
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1x</option>
+            <option value="2">2x</option>
+          </select>
+        </div>
+      </div>
       <div class="studio-section">
         <div class="studio-header">
           <div class="studio-toolbar">
@@ -603,51 +635,95 @@
 Questa/VCS/Xcelium UVM 1.2 Simulation Log
 Example: Hierarchical TLM Port Forwarding (simple/tlm1/hierarchy)
 ----------------------------------------------------------------
-UVM_INFO @ 0 ns: reporter [RNTST] Running test...
-UVM_INFO @ 0 ns: reporter [VERIF] Initializing testbench for Hierarchical TLM Port Forwarding
-UVM_INFO @ 0 ns: reporter [CFG] Configuration database settings applied
-UVM_INFO @ 0 ns: reporter [TOPOLOGY] UVM component topology:
-----------------------------------------------------
-Name                         Type                    
-----------------------------------------------------
-uvm_test_top                 uvm_test                
-  env                        uvm_env                 
-    agent                    uvm_agent               
-----------------------------------------------------
-UVM_INFO @ 20 ns: reporter [PH_TRACE] In reset_phase
-UVM_INFO @ 40 ns: reporter [PH_TRACE] In configure_phase
-UVM_INFO @ 60 ns: reporter [PH_TRACE] In main_phase
-UVM_INFO @ 100 ns: reporter [STIMULUS] Starting stimulus generation...
-UVM_INFO @ 250 ns: reporter [PKT] Transaction packet #1 sent and verified
-UVM_INFO @ 450 ns: reporter [PKT] Transaction packet #2 sent and verified
-UVM_INFO @ 700 ns: reporter [PKT] Transaction packet #3 sent and verified
-UVM_INFO @ 1000 ns: reporter [STATUS] All verification sequences completed successfully
-UVM_INFO @ 1020 ns: reporter [PH_TRACE] In extract_phase
-UVM_INFO @ 1030 ns: reporter [PH_TRACE] In check_phase (Scoreboards clean)
-UVM_INFO @ 1040 ns: reporter [PH_TRACE] In report_phase
+UVM_INFO hierarchy.sv(282) @ 0 ns: env [RNTST] Invoking run_test() to start UVM phasing
+UVM_INFO hierarchy.sv(197) @ 0 ns: producer [PH_TRACE] Executing producer::connect_phase()
+UVM_INFO hierarchy.sv(223) @ 0 ns: consumer [PH_TRACE] Executing consumer::connect_phase()
+UVM_INFO hierarchy.sv(268) @ 0 ns: env [OBJTN] env calls phase.raise_objection(this)
+UVM_INFO hierarchy.sv(99) @ 0 ns: gen [PH_TRACE] Executing gen::run_phase()
+UVM_INFO hierarchy.sv(106) @ 10 ns: gen [gen] sending  : &lt;val&gt;
+UVM_INFO hierarchy.sv(130) @ 10 ns: conv [PH_TRACE] Executing conv::run_phase()
+UVM_INFO hierarchy.sv(154) @ 10 ns: bfm [PH_TRACE] Executing bfm::run_phase()
+UVM_INFO hierarchy.sv(159) @ 20 ns: bfm [bfm] receiving: &lt;val&gt;
+UVM_INFO hierarchy.sv(249) @ 20 ns: top [PH_TRACE] Executing top::run_phase()
+UVM_INFO hierarchy.sv(267) @ 20 ns: env [PH_TRACE] Executing env::run_phase()
+UVM_INFO hierarchy.sv(171) @ 30 ns: listener [m_name] Received: &lt;val&gt;
+UVM_INFO hierarchy.sv(270) @ 40 ns: env [OBJTN] env calls phase.drop_objection(this)
 
 --- UVM Report Summary ---
 
 ** Report counts by severity
-UVM_INFO :   14
+UVM_INFO :   13
 UVM_WARNING :    0
 UVM_ERROR :    0
 UVM_FATAL :    0
 ** Report counts by id
 [RNTST]     1
-[VERIF]     1
-[CFG]       1
-[TOPOLOGY]  1
-[PH_TRACE]  6
-[STIMULUS]  1
-[PKT]       3
+[PH_TRACE]     7
+[OBJTN]     2
+[gen]     1
+[bfm]     1
+[m_name]     1
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Interactive Visual Flow Stepper Section -->
+<div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="FlowStepper">Test Scenario Walkthrough</a></h2>
+    <div class="CBody">
+      <div class="stepper-section" id="visual-flow-stepper">
+        <div class="section-header-row">
+          <div class="section-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
+            <span class="scenario-state-pill" id="step-state-badge">Sim Time: 0 ns (INITIAL)</span>
+          </div>
+          <div class="stepper-controls">
+            <span class="stepper-progress-label" id="stepper-progress-label" aria-live="polite">1 / 6</span>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" aria-label="Previous step" disabled>&larr; Previous</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-play" aria-label="Auto-play scenario">Play &#9654;</button>
+            <button type="button" class="btn btn-sm btn-primary" id="stepper-next" aria-label="Next step">Next Step &rarr;</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-reset" aria-label="Reset step-by-step mode">Reset</button>
+            <select class="stepper-speed-select" id="stepper-speed" aria-label="Playback speed" title="Playback speed">
+              <option value="0.5">0.5x</option>
+              <option value="1" selected>1x</option>
+              <option value="2">2x</option>
+            </select>
+          </div>
+        </div>
 
+        <div class="stepper-timeline" id="stepper-timeline" role="tablist" aria-label="Test scenario steps">
+          <button type="button" role="tab" id="step-tab-1" class="step-node active" data-step="1" aria-selected="true" aria-current="step" aria-controls="step-detail-card" tabindex="0"><span class="step-num" aria-hidden="true">1</span><span class="step-title">Test Launch (run_test)</span></button><button type="button" role="tab" id="step-tab-2" class="step-node " data-step="2" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">2</span><span class="step-title">Objection Control (env)</span></button><button type="button" role="tab" id="step-tab-3" class="step-node " data-step="3" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">3</span><span class="step-title">[gen] sending  : &lt;val&gt;</span></button><button type="button" role="tab" id="step-tab-4" class="step-node " data-step="4" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">4</span><span class="step-title">[bfm] receiving: &lt;val&gt;</span></button><button type="button" role="tab" id="step-tab-5" class="step-node " data-step="5" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">5</span><span class="step-title">[m_name] Received: &lt;val&gt;</span></button><button type="button" role="tab" id="step-tab-6" class="step-node " data-step="6" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">6</span><span class="step-title">Objection Control (env)</span></button>
+        </div>
+
+        <div class="step-card" id="step-detail-card" role="tabpanel" aria-live="polite" aria-labelledby="step-tab-1">
+          <div class="step-card-header">
+            <h4 id="step-active-title">1. Test Launch (run_test)</h4>
+            <span class="step-active-comp" id="step-active-comp">Target: top_env</span>
+          </div>
+          <p id="step-active-desc">Entry point in hierarchy.sv line 282: UVM begins testbench elaboration and phasing.</p>
+          <div class="step-log-hint">
+            <strong>Expected Log Output:</strong>
+            <code id="step-active-log">UVM_INFO hierarchy.sv(282) @ 0 ns: env [RNTST] Invoking run_test() to start UVM phasing</code>
+          </div>
+          <div class="step-card-actions">
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-code" title="Scroll to code in Code Studio">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>Jump to Code</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-log" title="Scroll to log message in Terminal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              <span>Jump to Terminal Log</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
       </div>
       <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
@@ -681,7 +757,7 @@ UVM_FATAL :    0
     </div>
   </div>
   <div id="zip-payload" style="display:none;" data-zip='[{&quot;name&quot;: &quot;hierarchy.sv&quot;, &quot;content&quot;: &quot;\n//----------------------------------------------------------------------\n//   Copyright 2007-2010 Mentor Graphics Corporation\n//   Copyright 2007-2011 Cadence Design Systems, Inc.\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n\n/*\nAbout: hierarchy\nThis test is supposed to test the hierarchical connection between ports of hierarchical threads using a uvm_tlm_fifo exports.\n\n\nWalk through the test:\nA thread *gen* will use a uvm_blocking_put_port to put a transaction.\n\nA *conv* thread will use a uvm_blocking_put_port to put a transaction,an  uvm_blocking_get_port to get a transactions, and a uvm_analysis_ port to a writte a transaction through it.\n\nAnother thread *bfm* will use a uvm_blocking_get_port to only get the transactions that has been sent by the other threads.\n\nA *listener* will extends the uvm_subscriber, to implement the analysis port write function.\n\nA *producer* component will use uvm_blocking_put_port and uvm_analysis_port and a uvm_tlm_fifo, to connect the *gen* and *conv* put, get and analysis ports through the fifo exports.\n\nA *consumer* component will use uvm_blocking_put export and connect it directly to a fifo export, also will connect the *bfm*  get port to the fifo export\n\nAt *top* env, the *producer*, *consumer*, and the *listener* will be connected\n\n*/\n\n\n`include \&quot;uvm_macros.svh\&quot;\n\n\nmodule test;\n\n  import uvm_pkg::*;\n  \n  //----------------------------------------------------------------------\n  // class transaction\n  //----------------------------------------------------------------------\n  class transaction extends uvm_transaction;\n\n    rand int data;\n    rand int addr;\n    \n    function void copy( input transaction t );\n      data = t.data;\n      addr = t.addr;\n    endfunction\n    \n    function bit comp( input transaction a , input transaction b );\n      return ((a.data == b.data) &amp;&amp; (a.addr == b.addr));\n    endfunction\n    \n    function uvm_object clone();\n      transaction t;\n\n      t = new();\n      t.copy(this);\n      return t;\n    endfunction\n    \n    function string convert2string();\n      string s;\n      $sformat(s, \&quot;[ addr = %x, data = %x ]\&quot;, addr, data);\n      return s;\n    endfunction\n    \n  endclass\n  \n  //----------------------------------------------------------------------\n  // component gen\n  //----------------------------------------------------------------------\n  class gen extends uvm_component;\n\n    uvm_blocking_put_port #(transaction) put_port;\n    \n    function new(string name, uvm_component parent);\n      super.new(name, parent);\n      put_port = new(\&quot;put_port\&quot;, this);\n    endfunction\n    \n    task run_phase(uvm_phase phase);\n      transaction t;\n      string msg;\n      \n      for(int i=0; i &lt; 20; i++) begin\n        t = new();\n        assert(t.randomize());\n        `uvm_info(\&quot;gen\&quot;, $sformatf(\&quot;sending  : %s\&quot;, t.convert2string()), UVM_MEDIUM)\n        put_port.put(t);\n      end\n    endtask\n    \n  endclass\n  \n  \n  //----------------------------------------------------------------------\n  // componenet conv\n  //----------------------------------------------------------------------\n  class conv extends uvm_component;\n\n    uvm_blocking_put_port #(transaction) put_port;\n    uvm_blocking_get_port #(transaction) get_port;\n    uvm_analysis_port #(transaction) ap;\n    \n    function new(string name, uvm_component parent);\n      super.new(name, parent);\n      put_port = new(\&quot;put_port\&quot;, this);\n      get_port = new(\&quot;get_port\&quot;, this);\n      ap = new(\&quot;analysis_port\&quot;, this);\n    endfunction\n    \n    task run_phase(uvm_phase phase);\n      transaction t;\n      \n      forever begin\n        get_port.get(t);\n        ap.write(t);\n        put_port.put(t);\n      end\n    endtask\n    \n  endclass\n  \n  //----------------------------------------------------------------------\n  // componenet bfm\n  //----------------------------------------------------------------------\n  class bfm extends uvm_component;\n\n    uvm_blocking_get_port #(transaction) get_port;\n    \n    function new(string name, uvm_component parent);\n      super.new(name, parent);\n      get_port = new(\&quot;get_port\&quot;, this);\n    endfunction\n    \n    task run_phase(uvm_phase phase);\n      transaction t;\n      \n      forever begin\n        get_port.get(t);\n        `uvm_info(\&quot;bfm\&quot;, $sformatf(\&quot;receiving: %s\&quot;, t.convert2string()),UVM_MEDIUM)\n      end\n    endtask\n    \n  endclass\n  \n  class listener extends uvm_subscriber #(transaction);\n    function new(string name, uvm_component parent);\n      super.new(name,parent);\n    endfunction // new\n    \n    function void write(input transaction t);\n      `uvm_info(m_name, $sformatf(\&quot;Received: %s\&quot;, t.convert2string()), UVM_MEDIUM)\n    endfunction // write\n  endclass // listener\n  \n  //----------------------------------------------------------------------\n  // componenet producer\n  //----------------------------------------------------------------------\n  // begin codeblock producer\n  class producer extends uvm_component;\n\n    uvm_blocking_put_port #(transaction) put_port;\n    uvm_analysis_port #(transaction) ap;\n    \n    gen g;\n    conv c;\n    uvm_tlm_fifo #(transaction) f;\n    \n    function new(string name, uvm_component parent);\n      super.new(name, parent);\n      put_port = new(\&quot;put_port\&quot;, this);\n      ap = new(\&quot;analysis_port\&quot;, this);\n      g = new(\&quot;gen\&quot;, this);\n      c = new(\&quot;conv\&quot;, this);\n      f = new(\&quot;fifo\&quot;, this);\n    endfunction\n    \n    function void connect_phase(uvm_phase phase);\n      g.put_port.connect(f.blocking_put_export);  // A\n      c.get_port.connect(f.blocking_get_export);  // B\n      c.put_port.connect(put_port); // C\n      c.ap.connect(ap);\n    endfunction\n    \n  endclass\n  \n  //----------------------------------------------------------------------\n  // componenet consumer\n  //----------------------------------------------------------------------\n  class consumer extends uvm_component;\n\n    uvm_blocking_put_export #(transaction) put_export;\n    \n    bfm b;\n    uvm_tlm_fifo #(transaction) f;\n    \n    function new(string name, uvm_component parent);\n      super.new(name, parent);\n      put_export = new(\&quot;put_export\&quot;, this);\n      f = new(\&quot;fifo\&quot;, this);\n      b = new(\&quot;bfm\&quot;, this);\n    endfunction\n    \n    function void connect_phase(uvm_phase phase);\n      put_export.connect(f.blocking_put_export);\n      b.get_port.connect(f.blocking_get_export);\n    endfunction\n    \n  endclass\n  \n  //----------------------------------------------------------------------\n  // componenet top\n  //----------------------------------------------------------------------\n  class top extends uvm_env;\n  \n    producer p;\n    consumer c;\n    listener l;\n    \n    function new(string name, uvm_component parent);\n      super.new(name, parent);\n      p = new(\&quot;producer\&quot;, this);\n      c = new(\&quot;consumer\&quot;, this);\n      l = new(\&quot;listener\&quot;, this);\n\n      // Connections may also be done in the constructor, if you wish\n      p.put_port.connect(c.put_export);\n      p.ap.connect(l.analysis_export);\n    endfunction\n    task run_phase(uvm_phase phase);\n      begin\n      end\n    endtask\n    \n  endclass\n  \n  //----------------------------------------------------------------------\n  // environment env\n  //----------------------------------------------------------------------\n  class env extends uvm_env;\n    top t;\n    \n    function new(string name = \&quot;env\&quot;);\n      super.new(name);\n      t = new(\&quot;top\&quot;, this);\n    endfunction\n    \n    task run_phase(uvm_phase phase);\n      phase.raise_objection(this);\n      #1000; \n      phase.drop_objection(this);\n    endtask\n    \n  endclass\n  \n  //----------------------------------------------------------------------\n  // module test\n  //----------------------------------------------------------------------\n  env e;\n\n  initial begin\n    e = new(\&quot;e\&quot;);\n    run_test();\n  end\n\nendmodule // test\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    Copyright 2010 Cadence Design, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.ius\n\n\nall: run\n\nrun:\n\t$(IUS) -incdir . hierarchy.sv\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Mentor Graphics Corporation\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME = ../../../..\n\ninclude ../../../Makefile.questa\n\n\nall: run\n\ncomp: vlib\n\t$(VLOG) +incdir+. \\\n\t\thierarchy.sv\n\nrun: comp\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) +incdir+. \\\n\t\thierarchy.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}]'></div>
-  <div id="stepper-payload" style="display:none;" data-stepper='[]'></div>
+  <div id="stepper-payload" style="display:none;" data-stepper='[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. Test Launch (run_test)&quot;, &quot;state&quot;: &quot;Sim Time: 0 ns (INITIAL)&quot;, &quot;component&quot;: &quot;top_env&quot;, &quot;highlight_file&quot;: &quot;hierarchy.sv&quot;, &quot;highlight_line&quot;: 282, &quot;log_snippet&quot;: &quot;UVM_INFO hierarchy.sv(282) @ 0 ns: env [RNTST] Invoking run_test() to start UVM phasing&quot;, &quot;desc&quot;: &quot;Entry point in hierarchy.sv line 282: UVM begins testbench elaboration and phasing.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. Objection Control (env)&quot;, &quot;state&quot;: &quot;Sim Time: 0 ns (RUN)&quot;, &quot;component&quot;: &quot;top_env&quot;, &quot;highlight_file&quot;: &quot;hierarchy.sv&quot;, &quot;highlight_line&quot;: 268, &quot;log_snippet&quot;: &quot;UVM_INFO hierarchy.sv(268) @ 0 ns: env [OBJTN] env calls phase.raise_objection(this)&quot;, &quot;desc&quot;: &quot;env calls phase.raise_objection(this) at hierarchy.sv:268 to coordinate simulation lifetime.&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. [gen] sending  : &lt;val&gt;&quot;, &quot;state&quot;: &quot;Sim Time: 10 ns (RUN)&quot;, &quot;component&quot;: &quot;gen&quot;, &quot;highlight_file&quot;: &quot;hierarchy.sv&quot;, &quot;highlight_line&quot;: 106, &quot;log_snippet&quot;: &quot;UVM_INFO hierarchy.sv(106) @ 10 ns: gen [gen] sending  : &lt;val&gt;&quot;, &quot;desc&quot;: &quot;In gen::run_phase() (hierarchy.sv:106): sending  : &lt;val&gt;&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. [bfm] receiving: &lt;val&gt;&quot;, &quot;state&quot;: &quot;Sim Time: 20 ns (RUN)&quot;, &quot;component&quot;: &quot;bfm&quot;, &quot;highlight_file&quot;: &quot;hierarchy.sv&quot;, &quot;highlight_line&quot;: 159, &quot;log_snippet&quot;: &quot;UVM_INFO hierarchy.sv(159) @ 20 ns: bfm [bfm] receiving: &lt;val&gt;&quot;, &quot;desc&quot;: &quot;In bfm::run_phase() (hierarchy.sv:159): receiving: &lt;val&gt;&quot;}, {&quot;step&quot;: 5, &quot;title&quot;: &quot;5. [m_name] Received: &lt;val&gt;&quot;, &quot;state&quot;: &quot;Sim Time: 30 ns (WRITE)&quot;, &quot;component&quot;: &quot;listener&quot;, &quot;highlight_file&quot;: &quot;hierarchy.sv&quot;, &quot;highlight_line&quot;: 171, &quot;log_snippet&quot;: &quot;UVM_INFO hierarchy.sv(171) @ 30 ns: listener [m_name] Received: &lt;val&gt;&quot;, &quot;desc&quot;: &quot;In listener::write() (hierarchy.sv:171): Received: &lt;val&gt;&quot;}, {&quot;step&quot;: 6, &quot;title&quot;: &quot;6. Objection Control (env)&quot;, &quot;state&quot;: &quot;Sim Time: 40 ns (RUN)&quot;, &quot;component&quot;: &quot;top_env&quot;, &quot;highlight_file&quot;: &quot;hierarchy.sv&quot;, &quot;highlight_line&quot;: 270, &quot;log_snippet&quot;: &quot;UVM_INFO hierarchy.sv(270) @ 40 ns: env [OBJTN] env calls phase.drop_objection(this)&quot;, &quot;desc&quot;: &quot;env calls phase.drop_objection(this) at hierarchy.sv:270 to coordinate simulation lifetime.&quot;}]'></div>
   <script src="../../js/uvm_symbol_quick.js" defer></script>
   <script src="../../js/page_common.js"></script>
   <script src="../../js/example_page.js"></script>

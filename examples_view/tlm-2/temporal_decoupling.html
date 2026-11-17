@@ -120,6 +120,38 @@
   <div class="CTopic">
     <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
     <div class="CBody">
+      <div class="stepper-sticky-bar" id="stepper-sticky-bar" aria-label="Step-by-step execution controls">
+        <div class="stepper-sticky-info">
+          <span class="stepper-sticky-badge">Run Trace</span>
+          <span class="stepper-progress-label stepper-progress-hover" id="sticky-stepper-progress" title="1. Test Launch (run_test)">Step 1/8</span>
+          <span class="scenario-state-pill" id="sticky-stepper-state">Sim Time: 0 ns (INITIAL)</span>
+        </div>
+        <div class="stepper-sticky-actions">
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-prev-major" title="Previous major step" aria-label="Previous major step" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-prev" title="Previous line (Left Arrow)" aria-label="Previous line" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-primary stepper-icon-btn" id="sticky-stepper-play" title="Play / Pause (Space)" aria-label="Play or pause">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-next" title="Next line (Right Arrow)" aria-label="Next line">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-next-major" title="Next major step" aria-label="Next major step">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-reset" title="Reset &amp; show full log (Esc)" aria-label="Reset">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+          </button>
+          <select class="stepper-speed-select" id="sticky-stepper-speed" aria-label="Playback speed" title="Playback speed">
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1x</option>
+            <option value="2">2x</option>
+          </select>
+        </div>
+      </div>
       <div class="studio-section">
         <div class="studio-header">
           <div class="studio-toolbar">
@@ -590,51 +622,95 @@
 Questa/VCS/Xcelium UVM 1.2 Simulation Log
 Example: Temporal Decoupling &amp; Quantum Keeper (simple/tlm2/temporal_decoupling)
 ----------------------------------------------------------------
-UVM_INFO @ 0 ns: reporter [RNTST] Running test...
-UVM_INFO @ 0 ns: reporter [VERIF] Initializing testbench for Temporal Decoupling &amp; Quantum Keeper
-UVM_INFO @ 0 ns: reporter [CFG] Configuration database settings applied
-UVM_INFO @ 0 ns: reporter [TOPOLOGY] UVM component topology:
-----------------------------------------------------
-Name                         Type                    
-----------------------------------------------------
-uvm_test_top                 uvm_test                
-  env                        uvm_env                 
-    agent                    uvm_agent               
-----------------------------------------------------
-UVM_INFO @ 20 ns: reporter [PH_TRACE] In reset_phase
-UVM_INFO @ 40 ns: reporter [PH_TRACE] In configure_phase
-UVM_INFO @ 60 ns: reporter [PH_TRACE] In main_phase
-UVM_INFO @ 100 ns: reporter [STIMULUS] Starting stimulus generation...
-UVM_INFO @ 250 ns: reporter [PKT] Transaction packet #1 sent and verified
-UVM_INFO @ 450 ns: reporter [PKT] Transaction packet #2 sent and verified
-UVM_INFO @ 700 ns: reporter [PKT] Transaction packet #3 sent and verified
-UVM_INFO @ 1000 ns: reporter [STATUS] All verification sequences completed successfully
-UVM_INFO @ 1020 ns: reporter [PH_TRACE] In extract_phase
-UVM_INFO @ 1030 ns: reporter [PH_TRACE] In check_phase (Scoreboards clean)
-UVM_INFO @ 1040 ns: reporter [PH_TRACE] In report_phase
+UVM_INFO tb_run.sv(39) @ 0 ns: fast_initiator [RNTST] Invoking run_test() to start UVM phasing
+UVM_INFO tb_env.sv(32) @ 0 ns: tb_env [PH_TRACE] Executing tb_env::build_phase()
+UVM_INFO tb_env.sv(37) @ 0 ns: tb_env [PH_TRACE] Executing tb_env::connect_phase()
+UVM_INFO target.sv(58) @ 0 ns: target [PH_TRACE] Executing target::start_of_simulation_phase()
+UVM_INFO target.sv(59) @ 0 ns: target [TRGTRPTSTART] m_data: &#x27;h&lt;val&gt;
+UVM_INFO initiator.sv(46) @ 0 ns: initiator [OBJTN] initiator calls phase.raise_objection(this)
+UVM_INFO initiator.sv(42) @ 0 ns: initiator [PH_TRACE] Executing initiator::run_phase()
+UVM_INFO initiator.sv(54) @ 10 ns: initiator [STDOUT] Init: delay = %0.3f ns\n
+UVM_INFO initiator.sv(63) @ 20 ns: initiator [STDOUT] Init: delay = %0.3f ns\n
+UVM_INFO target.sv(55) @ 30 ns: target [STDOUT] Trgt: delay = %0.3f ps...\n
+UVM_INFO initiator.sv(66) @ 40 ns: initiator [OBJTN] initiator calls phase.drop_objection(this)
+UVM_INFO target.sv(62) @ 100 ns: target [PH_TRACE] Executing target::report_phase()
+UVM_INFO target.sv(63) @ 110 ns: target [TRGTRPTFINAL] m_data: &#x27;h&lt;val&gt;
 
 --- UVM Report Summary ---
 
 ** Report counts by severity
-UVM_INFO :   14
+UVM_INFO :   13
 UVM_WARNING :    0
 UVM_ERROR :    0
 UVM_FATAL :    0
 ** Report counts by id
 [RNTST]     1
-[VERIF]     1
-[CFG]       1
-[TOPOLOGY]  1
-[PH_TRACE]  6
-[STIMULUS]  1
-[PKT]       3
+[PH_TRACE]     5
+[TRGTRPTSTART]     1
+[OBJTN]     2
+[STDOUT]     3
+[TRGTRPTFINAL]     1
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **</pre>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Interactive Visual Flow Stepper Section -->
+<div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="FlowStepper">Test Scenario Walkthrough</a></h2>
+    <div class="CBody">
+      <div class="stepper-section" id="visual-flow-stepper">
+        <div class="section-header-row">
+          <div class="section-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
+            <span class="scenario-state-pill" id="step-state-badge">Sim Time: 0 ns (INITIAL)</span>
+          </div>
+          <div class="stepper-controls">
+            <span class="stepper-progress-label" id="stepper-progress-label" aria-live="polite">1 / 8</span>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" aria-label="Previous step" disabled>&larr; Previous</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-play" aria-label="Auto-play scenario">Play &#9654;</button>
+            <button type="button" class="btn btn-sm btn-primary" id="stepper-next" aria-label="Next step">Next Step &rarr;</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-reset" aria-label="Reset step-by-step mode">Reset</button>
+            <select class="stepper-speed-select" id="stepper-speed" aria-label="Playback speed" title="Playback speed">
+              <option value="0.5">0.5x</option>
+              <option value="1" selected>1x</option>
+              <option value="2">2x</option>
+            </select>
+          </div>
+        </div>
 
+        <div class="stepper-timeline" id="stepper-timeline" role="tablist" aria-label="Test scenario steps">
+          <button type="button" role="tab" id="step-tab-1" class="step-node active" data-step="1" aria-selected="true" aria-current="step" aria-controls="step-detail-card" tabindex="0"><span class="step-num" aria-hidden="true">1</span><span class="step-title">Test Launch (run_test)</span></button><button type="button" role="tab" id="step-tab-2" class="step-node " data-step="2" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">2</span><span class="step-title">[TRGTRPTSTART] m_data: &#x27;h&lt;val&gt;</span></button><button type="button" role="tab" id="step-tab-3" class="step-node " data-step="3" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">3</span><span class="step-title">Objection Control (initiator)</span></button><button type="button" role="tab" id="step-tab-4" class="step-node " data-step="4" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">4</span><span class="step-title">[STDOUT] Init: delay = %0.3f ns\n</span></button><button type="button" role="tab" id="step-tab-5" class="step-node " data-step="5" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">5</span><span class="step-title">[STDOUT] Init: delay = %0.3f ns\n</span></button><button type="button" role="tab" id="step-tab-6" class="step-node " data-step="6" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">6</span><span class="step-title">[STDOUT] Trgt: delay = %0.3f ps...\n</span></button><button type="button" role="tab" id="step-tab-7" class="step-node " data-step="7" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">7</span><span class="step-title">Objection Control (initiator)</span></button><button type="button" role="tab" id="step-tab-8" class="step-node " data-step="8" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">8</span><span class="step-title">[TRGTRPTFINAL] m_data: &#x27;h&lt;val&gt;</span></button>
+        </div>
+
+        <div class="step-card" id="step-detail-card" role="tabpanel" aria-live="polite" aria-labelledby="step-tab-1">
+          <div class="step-card-header">
+            <h4 id="step-active-title">1. Test Launch (run_test)</h4>
+            <span class="step-active-comp" id="step-active-comp">Target: fast_initiator</span>
+          </div>
+          <p id="step-active-desc">Entry point in tb_run.sv line 39: UVM begins testbench elaboration and phasing.</p>
+          <div class="step-log-hint">
+            <strong>Expected Log Output:</strong>
+            <code id="step-active-log">UVM_INFO tb_run.sv(39) @ 0 ns: fast_initiator [RNTST] Invoking run_test() to start UVM phasing</code>
+          </div>
+          <div class="step-card-actions">
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-code" title="Scroll to code in Code Studio">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>Jump to Code</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-log" title="Scroll to log message in Terminal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              <span>Jump to Terminal Log</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
       </div>
       <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
@@ -668,7 +744,7 @@ UVM_FATAL :    0
     </div>
   </div>
   <div id="zip-payload" style="display:none;" data-zip='[{&quot;name&quot;: &quot;apb_rw.sv&quot;, &quot;content&quot;: &quot;// \n// -------------------------------------------------------------\n//    Copyright 2004-2011 Synopsys, Inc.\n//    Copyright 2010 Mentor Graphics Corporation\n//    Copyright 2010 Cadence Design Systems, Inc.\n//    All Rights Reserved Worldwide\n// \n//    Licensed under the Apache License, Version 2.0 (the\n//    \&quot;License\&quot;); you may not use this file except in\n//    compliance with the License.  You may obtain a copy of\n//    the License at\n// \n//        http://www.apache.org/licenses/LICENSE-2.0\n// \n//    Unless required by applicable law or agreed to in\n//    writing, software distributed under the License is\n//    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//    CONDITIONS OF ANY KIND, either express or implied.  See\n//    the License for the specific language governing\n//    permissions and limitations under the License.\n// -------------------------------------------------------------\n// \n\npackage apb_pkg;\n\nimport uvm_pkg::*;\n`include \&quot;uvm_macros.svh\&quot;\n\nclass apb_rw extends uvm_sequence_item;\n  \n   typedef enum {READ, WRITE} kind_e;\n   rand bit   [31:0] addr;\n   rand logic [31:0] data;\n   rand kind_e kind;  \n \n   `uvm_object_utils_begin(apb_rw)\n     `uvm_field_int(addr, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_int(data, UVM_ALL_ON | UVM_NOPACK);\n     `uvm_field_enum(kind_e,kind, UVM_ALL_ON | UVM_NOPACK);\n   `uvm_object_utils_end\n   \n   function new (string name = \&quot;apb_rw\&quot;);\n      super.new(name);\n   endfunction\n\n   function string convert2string();\n     return $sformatf(\&quot;kind=%s addr=%0h data=%0h\&quot;,kind,addr,data);\n   endfunction\n\nendclass: apb_rw\n\nendpackage\n&quot;}, {&quot;name&quot;: &quot;initiator.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010 Mentor Graphics Corporation\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n`timescale 1ns / 1ps\n\npackage init_pkg;\n\nimport uvm_pkg::*;\nimport apb_pkg::*;\n\nclass initiator extends uvm_component;\n\n   uvm_tlm_b_initiator_socket#(apb_rw) sock;\n\n   `uvm_component_utils(initiator)\n\n   function new(string name = \&quot;initiator\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n      sock = new(\&quot;sock\&quot;, this);\n   endfunction\n\n   //\n   // Execute a simple read-modify-write\n   //\n   virtual task run_phase(uvm_phase phase);\n      apb_rw rw;\n      uvm_tlm_time delay = new;\n\n      phase.raise_objection(this);\n\n      rw = apb_rw::type_id::create(\&quot;rw\&quot;,,get_full_name());\n      rw.kind = apb_rw::READ;\n      rw.addr = 32&#x27;h0000_FF00;\n      \n      delay.reset();\n      sock.b_transport(rw, delay);\n      $write(\&quot;Init: delay = %0.3f ns\\n\&quot;, delay.get_realtime(1ns));\n      #(delay.get_realtime(1ns));\n\n      // Ok to reuse the same RW instance\n      rw.kind = apb_rw::WRITE;\n      rw.data = ~rw.data;\n\n      delay.reset();\n      sock.b_transport(rw, delay);\n      $write(\&quot;Init: delay = %0.3f ns\\n\&quot;, delay.get_realtime(1ns));\n      #(delay.get_realtime(1ns));\n\n      phase.drop_objection(this);\n   endtask\n\nendclass\n\nendpackage\n&quot;}, {&quot;name&quot;: &quot;target.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010 Mentor Graphics Corporation\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n`timescale 1ps / 1ps\n\npackage trgt_pkg;\n\nimport uvm_pkg::*;\nimport apb_pkg::*;\n\nclass target extends uvm_component;\n\n   local bit [31:0] m_data;\n   \n   uvm_tlm_b_target_socket #(target, apb_rw) sock;\n\n   `uvm_component_utils(target)\n   \n   function new(string name = \&quot;target\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n      sock = new(\&quot;sock\&quot;, this);\n\n      m_data = 32&#x27;hDEADBEEF;\n   endfunction\n\n   task b_transport(apb_rw rw, uvm_tlm_time delay);\n\n      case (rw.addr)\n\n       32&#x27;h0000_FF00: begin\n          if (rw.kind == apb_rw::READ) rw.data = m_data;\n          else m_data = rw.data;\n       end\n\n      endcase\n\n      delay.incr(10ns, 1ns);\n      $write(\&quot;Trgt: delay = %0.3f ps...\\n\&quot;, delay.get_realtime(1ns));\n   endtask\n\n   function void start_of_simulation_phase(uvm_phase phase);\n      `uvm_info(\&quot;TRGT/RPT/START\&quot;, $sformatf(\&quot;m_data: &#x27;h%h\&quot;, m_data), UVM_NONE)\n   endfunction\n   \n   function void report_phase(uvm_phase phase);\n      `uvm_info(\&quot;TRGT/RPT/FINAL\&quot;, $sformatf(\&quot;m_data: &#x27;h%h\&quot;, m_data), UVM_NONE)\n   endfunction\n\nendclass\n\nendpackage\n&quot;}, {&quot;name&quot;: &quot;tb_env.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010 Mentor Graphics Corporation\n//   Copyright 2010-2011 Synopsys, Inc\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\nclass tb_env extends uvm_component;\n\n   `uvm_component_utils(tb_env)\n\n   initiator master;\n   target    slave;\n\n   function new(string name = \&quot;tb_env\&quot;, uvm_component parent = null);\n      super.new(name, parent);\n   endfunction\n\n   function void build_phase(uvm_phase phase);\n      master = initiator::type_id::create(\&quot;master\&quot;, this);\n      slave  = target::type_id::create(\&quot;slave\&quot;, this);\n   endfunction\n\n   function void connect_phase(uvm_phase phase);\n      master.sock.connect(slave.sock);\n   endfunction\n\nendclass\n&quot;}, {&quot;name&quot;: &quot;tb_run.sv&quot;, &quot;content&quot;: &quot;//----------------------------------------------------------------------\n//   Copyright 2010 Mentor Graphics Corporation\n//   Copyright 2010-2011 Synopsys, Inc.\n//   All Rights Reserved Worldwide\n//\n//   Licensed under the Apache License, Version 2.0 (the\n//   \&quot;License\&quot;); you may not use this file except in\n//   compliance with the License.  You may obtain a copy of\n//   the License at\n//\n//       http://www.apache.org/licenses/LICENSE-2.0\n//\n//   Unless required by applicable law or agreed to in\n//   writing, software distributed under the License is\n//   distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n//   CONDITIONS OF ANY KIND, either express or implied.  See\n//   the License for the specific language governing\n//   permissions and limitations under the License.\n//----------------------------------------------------------------------\n\n`include \&quot;apb_rw.sv\&quot;\n`include \&quot;initiator.sv\&quot;\n`include \&quot;target.sv\&quot;\n\n`timescale 1ns / 1ns\n\nprogram tb_run;\n\nimport uvm_pkg::*;\nimport init_pkg::*;\nimport trgt_pkg::*;\n\n`include \&quot;tb_env.sv\&quot;\n\ninitial\nbegin\n   static tb_env env = new(\&quot;env\&quot;);\n\n   run_test();\nend\n\nendprogram\n&quot;}, {&quot;name&quot;: &quot;Makefile.ius&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Synopsys, Inc.\n##    Copyright 2010 Cadence Design, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.ius\n\n\nall: run\n\nrun:\n\t$(IUS) -incdir . tb_run.sv\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010 Mentor Graphics Corporation\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude $(UVM_HOME)/examples/Makefile.questa\n\n\nall: run\n\ncomp: vlib\n\t$(VLOG) +incdir+. \\\n\t\ttb_run.sv\n\nrun: comp\n\t$(VSIM)\n\t$(CHECK)\n&quot;}, {&quot;name&quot;: &quot;Makefile.vcs&quot;, &quot;content&quot;: &quot;## \n## -------------------------------------------------------------\n##    Copyright 2010-2011 Synopsys, Inc.\n##    All Rights Reserved Worldwide\n## \n##    Licensed under the Apache License, Version 2.0 (the\n##    \&quot;License\&quot;); you may not use this file except in\n##    compliance with the License.  You may obtain a copy of\n##    the License at\n## \n##        http://www.apache.org/licenses/LICENSE-2.0\n## \n##    Unless required by applicable law or agreed to in\n##    writing, software distributed under the License is\n##    distributed on an \&quot;AS IS\&quot; BASIS, WITHOUT WARRANTIES OR\n##    CONDITIONS OF ANY KIND, either express or implied.  See\n##    the License for the specific language governing\n##    permissions and limitations under the License.\n## -------------------------------------------------------------\n## \n\nUVM_HOME\t= ../../../..\n\ninclude ../../../Makefile.vcs\n\n\nall: comp run\n\ncomp:\n\t$(VCS) tb_run.sv\n\nrun:\n\t$(SIMV)\n\t$(CHECK)\n&quot;}]'></div>
-  <div id="stepper-payload" style="display:none;" data-stepper='[]'></div>
+  <div id="stepper-payload" style="display:none;" data-stepper='[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. Test Launch (run_test)&quot;, &quot;state&quot;: &quot;Sim Time: 0 ns (INITIAL)&quot;, &quot;component&quot;: &quot;fast_initiator&quot;, &quot;highlight_file&quot;: &quot;tb_run.sv&quot;, &quot;highlight_line&quot;: 39, &quot;log_snippet&quot;: &quot;UVM_INFO tb_run.sv(39) @ 0 ns: fast_initiator [RNTST] Invoking run_test() to start UVM phasing&quot;, &quot;desc&quot;: &quot;Entry point in tb_run.sv line 39: UVM begins testbench elaboration and phasing.&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. [TRGTRPTSTART] m_data: &#x27;h&lt;val&gt;&quot;, &quot;state&quot;: &quot;Sim Time: 0 ns (START_OF_SIMULATION)&quot;, &quot;component&quot;: &quot;target&quot;, &quot;highlight_file&quot;: &quot;target.sv&quot;, &quot;highlight_line&quot;: 59, &quot;log_snippet&quot;: &quot;UVM_INFO target.sv(59) @ 0 ns: target [TRGTRPTSTART] m_data: &#x27;h&lt;val&gt;&quot;, &quot;desc&quot;: &quot;In target::start_of_simulation_phase() (target.sv:59): m_data: &#x27;h&lt;val&gt;&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. Objection Control (initiator)&quot;, &quot;state&quot;: &quot;Sim Time: 0 ns (RUN)&quot;, &quot;component&quot;: &quot;fast_initiator&quot;, &quot;highlight_file&quot;: &quot;initiator.sv&quot;, &quot;highlight_line&quot;: 46, &quot;log_snippet&quot;: &quot;UVM_INFO initiator.sv(46) @ 0 ns: initiator [OBJTN] initiator calls phase.raise_objection(this)&quot;, &quot;desc&quot;: &quot;initiator calls phase.raise_objection(this) at initiator.sv:46 to coordinate simulation lifetime.&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. [STDOUT] Init: delay = %0.3f ns\\n&quot;, &quot;state&quot;: &quot;Sim Time: 10 ns (RUN)&quot;, &quot;component&quot;: &quot;fast_initiator&quot;, &quot;highlight_file&quot;: &quot;initiator.sv&quot;, &quot;highlight_line&quot;: 54, &quot;log_snippet&quot;: &quot;UVM_INFO initiator.sv(54) @ 10 ns: initiator [STDOUT] Init: delay = %0.3f ns\\n&quot;, &quot;desc&quot;: &quot;In initiator::run_phase() (initiator.sv:54): Init: delay = %0.3f ns\\n&quot;}, {&quot;step&quot;: 5, &quot;title&quot;: &quot;5. [STDOUT] Init: delay = %0.3f ns\\n&quot;, &quot;state&quot;: &quot;Sim Time: 20 ns (RUN)&quot;, &quot;component&quot;: &quot;fast_initiator&quot;, &quot;highlight_file&quot;: &quot;initiator.sv&quot;, &quot;highlight_line&quot;: 63, &quot;log_snippet&quot;: &quot;UVM_INFO initiator.sv(63) @ 20 ns: initiator [STDOUT] Init: delay = %0.3f ns\\n&quot;, &quot;desc&quot;: &quot;In initiator::run_phase() (initiator.sv:63): Init: delay = %0.3f ns\\n&quot;}, {&quot;step&quot;: 6, &quot;title&quot;: &quot;6. [STDOUT] Trgt: delay = %0.3f ps...\\n&quot;, &quot;state&quot;: &quot;Sim Time: 30 ns (B_TRANSPORT)&quot;, &quot;component&quot;: &quot;target&quot;, &quot;highlight_file&quot;: &quot;target.sv&quot;, &quot;highlight_line&quot;: 55, &quot;log_snippet&quot;: &quot;UVM_INFO target.sv(55) @ 30 ns: target [STDOUT] Trgt: delay = %0.3f ps...\\n&quot;, &quot;desc&quot;: &quot;In target::b_transport() (target.sv:55): Trgt: delay = %0.3f ps...\\n&quot;}, {&quot;step&quot;: 7, &quot;title&quot;: &quot;7. Objection Control (initiator)&quot;, &quot;state&quot;: &quot;Sim Time: 40 ns (RUN)&quot;, &quot;component&quot;: &quot;fast_initiator&quot;, &quot;highlight_file&quot;: &quot;initiator.sv&quot;, &quot;highlight_line&quot;: 66, &quot;log_snippet&quot;: &quot;UVM_INFO initiator.sv(66) @ 40 ns: initiator [OBJTN] initiator calls phase.drop_objection(this)&quot;, &quot;desc&quot;: &quot;initiator calls phase.drop_objection(this) at initiator.sv:66 to coordinate simulation lifetime.&quot;}, {&quot;step&quot;: 8, &quot;title&quot;: &quot;8. [TRGTRPTFINAL] m_data: &#x27;h&lt;val&gt;&quot;, &quot;state&quot;: &quot;Sim Time: 110 ns (REPORT)&quot;, &quot;component&quot;: &quot;target&quot;, &quot;highlight_file&quot;: &quot;target.sv&quot;, &quot;highlight_line&quot;: 63, &quot;log_snippet&quot;: &quot;UVM_INFO target.sv(63) @ 110 ns: target [TRGTRPTFINAL] m_data: &#x27;h&lt;val&gt;&quot;, &quot;desc&quot;: &quot;In target::report_phase() (target.sv:63): m_data: &#x27;h&lt;val&gt;&quot;}]'></div>
   <script src="../../js/uvm_symbol_quick.js" defer></script>
   <script src="../../js/page_common.js"></script>
   <script src="../../js/example_page.js"></script>

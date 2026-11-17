@@ -182,7 +182,7 @@ def render_code_container(panes_html: str, container_id: str = "studio-code-cont
 </div>'''
 
 
-def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root_rel: str) -> str:
+def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root_rel: str, stepper_steps: Optional[List[Dict[str, Any]]] = None) -> str:
     """
     Renders the complete Multi-File Code Studio component:
     - Quick file select dropdown with folder hierarchy
@@ -234,10 +234,50 @@ def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root
     ])
     code_container_html = render_code_container(panes_html, container_id="studio-code-container", extra_classes="studio-code-container")
 
+    sticky_stepper_html = ""
+    if stepper_steps:
+        first_step = stepper_steps[0]
+        total_steps = len(stepper_steps)
+        first_state = first_step.get("state", "")
+        sticky_state_html = f'<span class="scenario-state-pill" id="sticky-stepper-state">{html.escape(first_state)}</span>' if first_state else '<span class="scenario-state-pill" id="sticky-stepper-state" style="display:none;"></span>'
+        sticky_stepper_html = f'''      <div class="stepper-sticky-bar" id="stepper-sticky-bar" aria-label="Step-by-step execution controls">
+        <div class="stepper-sticky-info">
+          <span class="stepper-sticky-badge">Run Trace</span>
+          <span class="stepper-progress-label stepper-progress-hover" id="sticky-stepper-progress" title="{html.escape(first_step.get("title", ""))}">Step 1/{total_steps}</span>
+          {sticky_state_html}
+        </div>
+        <div class="stepper-sticky-actions">
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-prev-major" title="Previous major step" aria-label="Previous major step" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-prev" title="Previous line (Left Arrow)" aria-label="Previous line" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-primary stepper-icon-btn" id="sticky-stepper-play" title="Play / Pause (Space)" aria-label="Play or pause">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-next" title="Next line (Right Arrow)" aria-label="Next line">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-next-major" title="Next major step" aria-label="Next major step">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-reset" title="Reset &amp; show full log (Esc)" aria-label="Reset">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+          </button>
+          <select class="stepper-speed-select" id="sticky-stepper-speed" aria-label="Playback speed" title="Playback speed">
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1x</option>
+            <option value="2">2x</option>
+          </select>
+        </div>
+      </div>'''
+
     return f'''<div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
   <div class="CTopic">
     <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
     <div class="CBody">
+{sticky_stepper_html}
       <div class="studio-section">
         <div class="studio-header">
           <div class="studio-toolbar">
@@ -398,6 +438,12 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]], anim_type: str = ""
             <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" aria-label="Previous step" disabled>&larr; Previous</button>
             <button type="button" class="btn btn-sm btn-outline" id="stepper-play" aria-label="Auto-play scenario">Play &#9654;</button>
             <button type="button" class="btn btn-sm btn-primary" id="stepper-next" aria-label="Next step">Next Step &rarr;</button>
+            <button type="button" class="btn btn-sm btn-outline" id="stepper-reset" aria-label="Reset step-by-step mode">Reset</button>
+            <select class="stepper-speed-select" id="stepper-speed" aria-label="Playback speed" title="Playback speed">
+              <option value="0.5">0.5x</option>
+              <option value="1" selected>1x</option>
+              <option value="2">2x</option>
+            </select>
           </div>
         </div>
 
