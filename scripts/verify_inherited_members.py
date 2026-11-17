@@ -6,7 +6,7 @@ Automated verification for the Inherited Methods & Elements collapsible category
 - Ensures js/uvm_symbol_quick.js contains classParents & classDocMembers
 - Validates MRO non-overridden resolution & oldest-to-newest ordering
 - Validates coverage of both methods and non-method elements (variables, ports, types, params)
-- Verifies js/page_common.js & css/style.css offline (file://) compatibility and click routing
+- Verifies js/page_common.js & css/style.css local (file://) compatibility and click routing
 """
 
 import json

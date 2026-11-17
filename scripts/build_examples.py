@@ -11,7 +11,7 @@ Features:
 - Simulation Console with authentic UVM report logs and Questa/VCS/Xcelium commands
 - Visual Flow Stepper for the 5 pillar examples (Phases, Objections, TLM-1 FIFO, TLM-2, RAL Primer)
 - Client-side 1-click Raw & Native ZIP downloads
-- Zero-dependency static build fully compliant with Rule 1 (100% offline file:// compatible)
+- Zero-dependency static build fully compliant with Rule 1 (100% self-contained file:// compatible)
 """
 
 import os

@@ -146,8 +146,8 @@ En cliquant sur l'icône **⚙️ (Paramètres)** en haut à droite de la modale
 ### Mes questions ou mon code sont-ils envoyés sur un serveur distant ?
 **Absolument pas.** L'ensemble des calculs vectoriels (tokenisation, embedding ONNX, produit scalaire) s'exécute à 100% sur le processeur de votre machine au sein du navigateur web. Aucune donnée ne quitte votre ordinateur.
 
-### Cela fonctionne-t-il hors-ligne ?
-**Oui.** Après le téléchargement initial du modèle lors de votre première activation, tous les fichiers sont mis en cache persistant (`Cache API`). Le moteur fonctionne ensuite sans aucune connexion Internet.
+### Le modèle est-il mis en cache localement ?
+**Oui.** Après le téléchargement initial du modèle lors de votre première activation, tous les fichiers sont mis en cache persistant (`Cache API`) dans votre navigateur pour des ouvertures instantanées.
 
 ### Le modèle consomme-t-il la mémoire vive de mon navigateur en permanence ?
 **Non.** Le système dispose d'une gestion hygiénique de la RAM : le modèle est automatiquement déchargé de la mémoire vive dès la fermeture de la fenêtre de recherche ou après 3 minutes d'inactivité.

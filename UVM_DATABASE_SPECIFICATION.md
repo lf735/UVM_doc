@@ -342,7 +342,7 @@ Pour éliminer les redirections erronées vers les commentaires d'en-tête ou ve
 
 1. **Génération Déterministe & Rapide** : Le script Python standard s'exécute en **moins de 45 secondes** pour parser plus de 100 000 lignes de SystemVerilog et générer les bases JSON, SQLite et JS.
 2. **Indépendance vis-à-vis des outils externes** : Aucun binaire lourd (Cygwin, gcc, etc.) n'est requis ; uniquement Python 3.x et sa bibliothèque standard (`sqlite3`, `json`, `re`, `pathlib`).
-3. **Fonctionnement 100% Hors-Ligne & Standalone** :
+3. **Fonctionnement 100% Autonome & Standalone** :
    - `uvm_source_database.json` est prêt pour les serveurs HTTP ou les parseurs de code.
    - `uvm_source_database.sqlite` permet toutes les jointures relationnelles SQL en local.
    - `uvm_source_database.js` permet d'ouvrir `uvm_database_explorer.html` d'un simple double-clic dans Windows Explorer sans serveur web local.

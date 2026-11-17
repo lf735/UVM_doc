@@ -2,7 +2,7 @@
 
 A modern, dynamic web documentation platform and SystemVerilog source code explorer for **Universal Verification Methodology (UVM 1.2)**.
 
-Ready for local offline browsing and automated continuous deployment to **GitHub Pages**.
+Ready for local browsing and automated continuous deployment to **GitHub Pages**.
 
 ---
 
@@ -31,7 +31,7 @@ Ready for local offline browsing and automated continuous deployment to **GitHub
 - **Instant Symbol & Full-Text Search**: Live search modal across 880+ classes, methods, macros, and source files with keyboard navigation (`/` or `Ctrl+K`).
 - **Dark & Light Mode**: Seamless theme switching with local storage persistence and real-time iframe synchronization.
 - **100% English Documentation**: All menus, titles, descriptions, and user interface elements in English.
-- **Zero-Dependency Static Build**: Generated with Python standard library; fully functional offline without external servers.
+- **Zero-Dependency Static Build**: Generated with Python standard library; fully functional without external backend servers.
 
 ---
 
@@ -71,7 +71,7 @@ UVM_doc/
 ├── data/
 │   ├── uvm_source_database.json # Complete hierarchical, bidirectional & indexed database (5.55 MB)
 │   ├── uvm_source_database.sqlite # Relational 3NF SQLite database with indexes (2.11 MB)
-│   ├── uvm_source_database.js   # Browser JS bundle for offline file:// execution (5.59 MB)
+│   ├── uvm_source_database.js   # Browser JS bundle for local file:// execution (5.59 MB)
 │   └── uvm_dpi_database.json    # Dedicated DPI SystemVerilog <-> C bindings database (24 KB)
 ├── docs_view/                # Modernized, responsive UVM 1.2 reference HTML pages
 ├── examples_view/            # 38 interactive UVM 1.2 multi-file example studios

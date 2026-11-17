@@ -72,7 +72,7 @@ def main():
     assert_test(all_have_topo, "All 39 suites possess Testbench Architecture Topology Grid")
     assert_test(all_have_terminal, "All 39 suites possess Simulation Execution Console & Command Card")
     assert_test(all_have_zip_payload, "All 39 suites possess Embedded Zero-Dependency Native ZIP Payload")
-    assert_test(all_have_no_external_scripts, "Zero external script dependencies (Rule 1: 100% offline file:// compatible)")
+    assert_test(all_have_no_external_scripts, "Zero external script dependencies (Rule 1: 100% self-contained file:// compatible)")
 
     # Test 3: Visual Flow Stepper on 5 pillar examples
     pillar_examples = [

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" class="doc-page home-page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Home | UVM 1.2 Interactive Documentation &amp; Source Explorer</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="doc-body home-body">
+  <main class="home-container">
+    <!-- Hero & Quick Entry -->
+    <section class="home-hero" aria-labelledby="home-hero-title">
+      <div class="home-hero-badge">
+        <span class="home-hero-dot"></span>
+        <span>Accellera UVM 1.2 &middot; Interactive Reference</span>
+      </div>
+      <h1 id="home-hero-title" class="home-hero-title">UVM 1.2 Interactive Reference &amp; Source Explorer</h1>
+      <p class="home-hero-subtitle">
+        Explore <strong>328</strong> classes, <strong>3,688</strong> symbols, <strong>155</strong> SystemVerilog/C source files, and <strong>39</strong> interactive simulation studios.
+      </p>
+
+      <div class="home-search-row">
+        <button type="button" id="home-search-btn" class="home-search-btn" aria-label="Open global search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="home-search-placeholder">Search classes, methods, macros, files, or examples...</span>
+          <span class="home-search-keys">
+            <kbd>/</kbd>
+            <kbd>Ctrl+K</kbd>
+          </span>
+        </button>
+      </div>
+
+      <div class="home-quick-tabs" role="navigation" aria-label="Workspace sections">
+        <button type="button" class="home-tab-pill" data-tab="docs">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>Docs</span>
+        </button>
+        <button type="button" class="home-tab-pill" data-tab="source">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          <span>Sources</span>
+        </button>
+        <button type="button" class="home-tab-pill" data-tab="examples">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>Examples</span>
+        </button>
+        <button type="button" class="home-tab-pill" data-tab="hierarchy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="3" width="6" height="4" rx="1"></rect>
+            <rect x="2" y="17" width="6" height="4" rx="1"></rect>
+            <rect x="9" y="17" width="6" height="4" rx="1"></rect>
+            <rect x="16" y="17" width="6" height="4" rx="1"></rect>
+            <path d="M12 7v5M5 12h14M5 12v5M12 12v5M19 12v5"></path>
+          </svg>
+          <span>Hierarchy</span>
+        </button>
+        <button type="button" class="home-tab-pill" data-tab="index">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="11" y2="6"></line>
+            <line x1="3" y1="12" x2="9" y2="12"></line>
+            <line x1="3" y1="18" x2="7" y2="18"></line>
+            <path d="M15 18l3-6 3 6"></path>
+            <line x1="16.5" y1="15" x2="19.5" y2="15"></line>
+          </svg>
+          <span>Index A-Z</span>
+        </button>
+        <button type="button" class="home-tab-pill home-tab-pill-subtle" data-doc="docs_view/overviews/intro-txt.html">
+          <span>Legacy Class Reference Intro</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Personal Workspace: Pinned Bookmarks & Recently Viewed -->
+    <section class="home-section" id="home-workspace-section" aria-labelledby="home-workspace-heading">
+      <div class="home-section-header">
+        <div>
+          <h2 id="home-workspace-heading" class="home-section-title">Personal Workspace</h2>
+          <p class="home-section-desc">Resume your recent pages or pin key references using the star icon in the pane header.</p>
+        </div>
+      </div>
+
+      <div class="home-workspace-grid">
+        <div class="home-workspace-panel">
+          <div class="home-panel-header">
+            <span class="home-panel-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              Pinned Bookmarks
+            </span>
+            <span class="home-panel-count" id="home-bookmarks-count">0</span>
+          </div>
+          <div class="home-workspace-list" id="home-bookmarks-list">
+            <div class="home-empty-state">No pinned pages yet. Click the <strong>★</strong> button in the top-right pane header on any page to pin it here.</div>
+          </div>
+        </div>
+
+        <div class="home-workspace-panel">
+          <div class="home-panel-header">
+            <span class="home-panel-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              Recently Viewed
+            </span>
+            <button type="button" class="home-clear-btn" id="home-clear-recent" style="display:none;">Clear</button>
+          </div>
+          <div class="home-workspace-list" id="home-recent-list">
+            <div class="home-empty-state">Pages you open across Docs, Sources, and Examples will appear here automatically.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive UVM Testbench Architecture -->
+    <section class="home-section" id="home-arch-section" aria-labelledby="home-arch-heading">
+      <div class="home-section-header">
+        <div>
+          <h2 id="home-arch-heading" class="home-section-title">Interactive UVM Testbench Architecture</h2>
+          <p class="home-section-desc">Click any component in the hierarchy to jump directly to its UVM 1.2 reference documentation.</p>
+        </div>
+      </div>
+
+      <div class="home-arch-diagram">
+        <div class="home-arch-tier">
+          <button type="button" class="home-arch-node home-arch-test" data-doc="docs_view/comps/uvm_test-svh.html">
+            <span class="home-arch-name">uvm_test</span>
+            <span class="home-arch-role">Top-level test configuration &amp; phase control</span>
+          </button>
+        </div>
+
+        <div class="home-arch-connector" aria-hidden="true"></div>
+
+        <div class="home-arch-tier home-arch-env-box">
+          <button type="button" class="home-arch-node home-arch-env" data-doc="docs_view/comps/uvm_env-svh.html">
+            <span class="home-arch-name">uvm_env</span>
+            <span class="home-arch-role">Verification environment container</span>
+          </button>
+
+          <div class="home-arch-env-children">
+            <div class="home-arch-agent-box">
+              <button type="button" class="home-arch-node home-arch-agent" data-doc="docs_view/comps/uvm_agent-svh.html">
+                <span class="home-arch-name">uvm_agent</span>
+                <span class="home-arch-role">Protocol-specific active/passive unit</span>
+              </button>
+
+              <div class="home-arch-agent-sub">
+                <button type="button" class="home-arch-node home-arch-seq" data-doc="docs_view/seq/uvm_sequence-svh.html">
+                  <span class="home-arch-name">uvm_sequence</span>
+                  <span class="home-arch-role">Stimulus generator</span>
+                </button>
+                <span class="home-arch-arrow" aria-hidden="true">&rarr;</span>
+                <button type="button" class="home-arch-node" data-doc="docs_view/seq/uvm_sequencer-svh.html">
+                  <span class="home-arch-name">uvm_sequencer</span>
+                  <span class="home-arch-role">Arbitration &amp; TLM pull</span>
+                </button>
+                <span class="home-arch-arrow" aria-hidden="true">&rarr;</span>
+                <button type="button" class="home-arch-node" data-doc="docs_view/comps/uvm_driver-svh.html">
+                  <span class="home-arch-name">uvm_driver</span>
+                  <span class="home-arch-role">Pin-level bus driver</span>
+                </button>
+              </div>
+
+              <div class="home-arch-monitor-row">
+                <button type="button" class="home-arch-node" data-doc="docs_view/comps/uvm_monitor-svh.html">
+                  <span class="home-arch-name">uvm_monitor</span>
+                  <span class="home-arch-role">Passive bus observation &amp; analysis port</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="home-arch-side-stack">
+              <button type="button" class="home-arch-node" data-doc="docs_view/comps/uvm_scoreboard-svh.html">
+                <span class="home-arch-name">uvm_scoreboard</span>
+                <span class="home-arch-role">Functional checking &amp; reference model</span>
+              </button>
+              <button type="button" class="home-arch-node" data-doc="docs_view/reg/uvm_reg_block-svh.html">
+                <span class="home-arch-name">uvm_reg_block</span>
+                <span class="home-arch-role">Register Abstraction Layer (RAL)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Building Blocks -->
+    <section class="home-section" id="home-core-section" aria-labelledby="home-core-heading">
+      <div class="home-section-header">
+        <div>
+          <h2 id="home-core-heading" class="home-section-title">Core Building Blocks</h2>
+          <p class="home-section-desc">Most frequently consulted UVM 1.2 base classes, mechanisms, and macro references.</p>
+        </div>
+      </div>
+
+      <div class="home-cards-grid">
+        <button type="button" class="home-card" data-doc="docs_view/base/uvm_component-svh.html">
+          <div class="home-card-top">
+            <span class="home-card-title">uvm_component</span>
+            <span class="home-badge home-badge-class">Class</span>
+          </div>
+          <p class="home-card-desc">Base class for all static hierarchy elements with phasing, config, and reporting.</p>
+        </button>
+
+        <button type="button" class="home-card" data-doc="docs_view/base/uvm_object-svh.html">
+          <div class="home-card-top">
+            <span class="home-card-title">uvm_object</span>
+            <span class="home-badge home-badge-class">Class</span>
+          </div>
+          <p class="home-card-desc">Root class for transient data items, transactions, and policy-driven copy/print/compare.</p>
+        </button>
+
+        <button type="button" class="home-card" data-doc="docs_view/seq/uvm_sequence-svh.html">
+          <div class="home-card-top">
+            <span class="home-card-title">uvm_sequence</span>
+            <span class="home-badge home-badge-class">Class</span>
+          </div>
+          <p class="home-card-desc">Procedural stimulus generation running on a sequencer via body() and start_item/finish_item.</p>
+        </button>
+
+        <button type="button" class="home-card" data-doc="docs_view/comps/uvm_driver-svh.html">
+          <div class="home-card-top">
+            <span class="home-card-title">uvm_driver</span>
+            <span class="home-badge home-badge-class">Class</span>
+          </div>
+          <p class="home-card-desc">Pulls sequence items from seq_item_port and drives pin-level DUT interfaces.</p>
+        </button>
+
+        <button type="button" class="home-card" data-doc="docs_view/base/uvm_config_db-svh.html">
+          <div class="home-card-top">
+            <span class="home-card-title">uvm_config_db</span>
+            <span class="home-badge home-badge-class">API</span>
+          </div>
+          <p class="home-card-desc">Typed hierarchical configuration database for virtual interfaces and component settings.</p>
+        </button>
+
+        <button type="button" class="home-card" data-doc="docs_view/base/uvm_factory-svh.html">
+          <div class="home-card-top">
+            <span class="home-card-title">uvm_factory</span>
+            <span class="home-badge home-badge-class">API</span>
+          </div>
+          <p class="home-card-desc">Dynamic type and instance overrides for reusable testbench customization without edits.</p>
+        </button>
+
+        <button type="button" class="home-card" data-doc="docs_view/overviews/phasing-txt.html">
+          <div class="home-card-top">
+            <span class="home-card-title">Phasing Overview</span>
+            <span class="home-badge home-badge-guide">Guide</span>
+          </div>
+          <p class="home-card-desc">Build, connect, run, and cleanup phase execution order, domains, and synchronization.</p>
+        </button>
+
+        <button type="button" class="home-card" data-doc="docs_view/overviews/macros-txt.html">
+          <div class="home-card-top">
+            <span class="home-card-title">UVM Macros</span>
+            <span class="home-badge home-badge-macro">Macros</span>
+          </div>
+          <p class="home-card-desc">Field automation, factory registration (`uvm_component_utils), reporting, and sequences.</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- Featured Interactive Examples -->
+    <section class="home-section" id="home-examples-section" aria-labelledby="home-examples-heading">
+      <div class="home-section-header">
+        <div>
+          <h2 id="home-examples-heading" class="home-section-title">Featured Interactive Examples</h2>
+          <p class="home-section-desc">Step-by-step code walkthroughs with simulated execution logs and clickable UVM symbols.</p>
+        </div>
+      </div>
+
+      <div class="home-cards-grid home-examples-grid">
+        <button type="button" class="home-card" data-example="examples_view/basics/hello_world.html">
+          <div class="home-card-top">
+            <span class="home-card-title">Hello World</span>
+            <span class="home-badge home-badge-beginner">Beginner</span>
+          </div>
+          <p class="home-card-desc">Minimal UVM component, factory registration, and run_test() entry point.</p>
+        </button>
+
+        <button type="button" class="home-card" data-example="examples_view/phasing/basic.html">
+          <div class="home-card-top">
+            <span class="home-card-title">Phasing</span>
+            <span class="home-badge home-badge-beginner">Beginner</span>
+          </div>
+          <p class="home-card-desc">Top-down vs bottom-up execution across build, connect, run, and report phases.</p>
+        </button>
+
+        <button type="button" class="home-card" data-example="examples_view/phasing/objections.html">
+          <div class="home-card-top">
+            <span class="home-card-title">Objections</span>
+            <span class="home-badge home-badge-intermediate">Intermediate</span>
+          </div>
+          <p class="home-card-desc">Coordinating simulation end-of-test with raise_objection and drop_objection.</p>
+        </button>
+
+        <button type="button" class="home-card" data-example="examples_view/tlm-1/fifo.html">
+          <div class="home-card-top">
+            <span class="home-card-title">TLM-1 FIFO</span>
+            <span class="home-badge home-badge-intermediate">Intermediate</span>
+          </div>
+          <p class="home-card-desc">Decoupled producer/consumer communication using uvm_tlm_fifo and put/get ports.</p>
+        </button>
+
+        <button type="button" class="home-card" data-example="examples_view/tlm-2/blocking_simple.html">
+          <div class="home-card-top">
+            <span class="home-card-title">TLM-2 Blocking</span>
+            <span class="home-badge home-badge-advanced">Advanced</span>
+          </div>
+          <p class="home-card-desc">Generic payload transport across initiator and target sockets with b_transport.</p>
+        </button>
+
+        <button type="button" class="home-card" data-example="examples_view/registers/primer.html">
+          <div class="home-card-top">
+            <span class="home-card-title">Register Layer (RAL)</span>
+            <span class="home-badge home-badge-advanced">Advanced</span>
+          </div>
+          <p class="home-card-desc">Hardware register modeling, bus adapter mapping, and frontdoor read/write sequences.</p>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/home.js"></script>
+</body>
+
+</html>

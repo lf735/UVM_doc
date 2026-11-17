@@ -356,5 +356,5 @@ Avant de valider une version :
 - [ ] **Recherche multi-mots & Search Pilot** : Taper `component build` : sélectionner un résultat, vérifier l'apparition du Search Pilot en bas d'écran (`1 of N`), naviguer avec `Alt+]`, et vérifier la présence de la coche `✓` sur les résultats consultés.
 - [ ] **Cycle de sélection & Historique IA** : Aucun élément ne doit rester surligné après un clic (`searchSelectedIndex = -1`). En mode IA, la section d'historique doit toujours être visible sous les prompts (avec état vide ou requêtes enregistrées), et la touche `Entrée` doit mémoriser immédiatement la requête.
 - [ ] **Mode Regex** : Taper une regex partielle `uvm_[` : la bordure doit devenir ambre/rouge sans générer d'exception console.
-- [ ] **Fonctionnement hors-ligne** : Ouvrir `index.html` via le protocole `file:///` dans un navigateur sans connexion réseau active.
+- [ ] **Fonctionnement autonome (`file:///`)** : Ouvrir `index.html` directement via le protocole `file:///` dans un navigateur.
 

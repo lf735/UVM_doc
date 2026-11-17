@@ -15,7 +15,7 @@ Ce guide vous accompagne pour naviguer, interroger et exploiter la base de donn�
 | **[scripts/build_uvm_source_db.py](file:///c:/Dev/UVM_doc/scripts/build_uvm_source_db.py)** | Script Python | **Générateur / Parseur de la base** : analyse les 155 sources et reconstruit l'ensemble des bases de données JSON, SQLite et JS. |
 | **[data/uvm_source_database.json](file:///c:/Dev/UVM_doc/data/uvm_source_database.json)** | JSON (5.55 Mo) | **Base de données principale** : hiérarchique, bidirectionnelle et indexée, idéale pour l'intégration dans des scripts Python/JS ou des pipelines RAG. |
 | **[data/uvm_source_database.sqlite](file:///c:/Dev/UVM_doc/data/uvm_source_database.sqlite)** | SQLite (2.11 Mo) | **Base relationnelle normalisée** : idéale pour les requêtes SQL analytiques, les jointures complexes et les audits de code. |
-| **[data/uvm_source_database.js](file:///c:/Dev/UVM_doc/data/uvm_source_database.js)** | JS (5.59 Mo) | **Bundle JavaScript** pour l'exécution locale 100% hors-ligne dans un navigateur web sans contrainte CORS. |
+| **[data/uvm_source_database.js](file:///c:/Dev/UVM_doc/data/uvm_source_database.js)** | JS (5.59 Mo) | **Bundle JavaScript** pour l'exécution locale autonome dans un navigateur web sans contrainte CORS. |
 | **[data/uvm_dpi_database.json](file:///c:/Dev/UVM_doc/data/uvm_dpi_database.json)** | JSON (24 Ko) | **Sous-base DPI** reliant chaque import SystemVerilog aux implémentations C des simulateurs (Questa, VCS, Incisive). |
 
 ---

@@ -80,20 +80,20 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-      <a href="#/doc/overviews/intro-txt.html" class="brand-link">
-        <img src="images/favicon_light.svg" alt="UVM Logo" class="brand-icon" id="brand-logo">
-        <script>
-          (function () {
-            try {
-              var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-              var logo = document.getElementById('brand-logo');
-              if (logo) logo.src = isDark ? 'images/favicon_dark.svg' : 'images/favicon_light.svg';
-            } catch (e) { }
-          })();
-        </script>
-        <span>UVM Docs</span>
-        <span class="brand-badge">1.2</span>
-      </a>
+        <a href="#/home" class="brand-link">
+          <img src="images/favicon_light.svg" alt="UVM Logo" class="brand-icon" id="brand-logo">
+          <script>
+            (function () {
+              try {
+                var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                var logo = document.getElementById('brand-logo');
+                if (logo) logo.src = isDark ? 'images/favicon_dark.svg' : 'images/favicon_light.svg';
+              } catch (e) { }
+            })();
+          </script>
+          <span>UVM Docs</span>
+          <span class="brand-badge">1.2</span>
+        </a>
     </div>
 
     <!-- Global Search Input Trigger -->
@@ -262,19 +262,25 @@
             </svg>
             <span id="doc-pane-title">Reference Documentation</span>
           </div>
-          <div>
-            <button class="icon-btn" id="open-full-doc" title="Expand documentation full width">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="15 3 21 3 21 9" />
-                <polyline points="9 21 3 21 3 15" />
-                <line x1="21" y1="3" x2="14" y2="10" />
-                <line x1="3" y1="21" x2="10" y2="14" />
-              </svg>
-            </button>
+            <div class="pane-header-actions">
+              <button class="icon-btn" id="doc-bookmark-btn" title="Pin this page to Home" aria-pressed="false"
+                style="display:none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              </button>
+              <button class="icon-btn" id="open-full-doc" title="Expand documentation full width">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 3 21 3 21 9" />
+                  <polyline points="9 21 3 21 3 15" />
+                  <line x1="21" y1="3" x2="14" y2="10" />
+                  <line x1="3" y1="21" x2="10" y2="14" />
+                </svg>
+              </button>
+            </div>
           </div>
-        </div>
-        <iframe id="doc-frame" class="pane-frame" src="docs_view/overviews/intro-txt.html"
-          title="UVM Reference Documentation"></iframe>
+          <iframe id="doc-frame" class="pane-frame" src="home.html" title="UVM Reference Documentation"></iframe>
       </section>
 
       <!-- Draggable Split Divider -->

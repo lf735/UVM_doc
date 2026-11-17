@@ -1,7 +1,7 @@
 /**
  * UVM 1.2 Interactive Documentation - Image Zoom Lightbox Modal Controller
  * Exposed via window.UvmImageModal (and window.openImageZoomModal / window.closeImageZoomModal).
- * Offline file:// compatible (classic IIFE).
+ * Local file:// compatible (classic IIFE).
  */
 (function (global) {
   'use strict';

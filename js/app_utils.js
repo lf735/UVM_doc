@@ -1,6 +1,6 @@
 /**
  * UVM 1.2 Interactive Documentation - Shared App Utilities
- * Pure, stateless helpers exposed via window.UvmAppUtils (offline file:// safe).
+ * Pure, stateless helpers exposed via window.UvmAppUtils (local file:// safe).
  */
 (function (global) {
   'use strict';

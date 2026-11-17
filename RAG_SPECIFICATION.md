@@ -19,7 +19,7 @@ La recherche historique par index textuel (`js/search_data.js`) excelle sur les 
 - **Synonymes et acronymes** : `vif` $\leftrightarrow$ `virtual interface` $\leftrightarrow$ `uvm_config_db`.
 
 ### 1.3 Objectifs & Contraintes
-1. **100% Client-Side & Hors-Ligne** : Aucune API payante (OpenAI, Gemini...), aucun serveur backend, aucune fuite de données (confidentialité IP/DUT absolue).
+1. **100% Client-Side & Autonome** : Aucune API payante (OpenAI, Gemini...), aucun serveur backend, aucune fuite de données (confidentialité IP/DUT absolue).
 2. **Empreinte Ressource Contrôlée** : Modèle d'inférence compact ($\le 25\text{ Mo}$), mémoire RAM volatile libérée à l'inactivité, persistance en cache navigateur (`Cache API`).
 3. **Performance Temps Réel** : Inférence de la requête $< 150\text{ ms}$ (WASM/ONNX), comparaison vectorielle $< 5\text{ ms}$ sur l'ensemble de la base.
 4. **Intégration CI/CD Transparente** : Génération automatique des vecteurs lors du déploiement GitHub Actions (`deploy.yml`), sans quota GitHub Copilot.
@@ -30,7 +30,7 @@ La recherche historique par index textuel (`js/search_data.js`) excelle sur les 
 
 ```mermaid
 flowchart TD
-    subgraph BuildTime["1. Phase Hors-Ligne (Build / CI)"]
+    subgraph BuildTime["1. Phase de Build (Build / CI)"]
         HTML["Documentation HTML (docs_view/)"] --> Chunker["Chunker Hiérarchique 2 Niveaux"]
         Catalog["Catalogue d'Intentions (rag_intent_catalog.json)"] --> Chunker
         Chunker --> Chunks["data/rag_chunks.json (Parents + Enfants)"]
@@ -153,7 +153,7 @@ Pour permettre à l'utilisateur de choisir son compromis vitesse/précision ou d
 > [!IMPORTANT]
 > Un vecteur de requête généré par le modèle $A$ ne peut **jamais** être comparé avec des vecteurs de corpus générés par le modèle $B$. Même avec une dimension identique de 384 dimensions, les axes latents sont orthogonaux et produiraient des similarités cosinus erronées.
 > 
-> Par conséquent, le script hors-ligne `scripts/build_rag_embeddings.py` calcule et exporte **un fichier binaire d'embeddings dédié pour chaque modèle** (`data/rag_embeddings_<model_id>.bin`). Lorsque l'utilisateur sélectionne un modèle dans l'interface, le moteur charge à la volée la base binaire correspondante.
+> Par conséquent, le script de build `scripts/build_rag_embeddings.py` calcule et exporte **un fichier binaire d'embeddings dédié pour chaque modèle** (`data/rag_embeddings_<model_id>.bin`). Lorsque l'utilisateur sélectionne un modèle dans l'interface, le moteur charge à la volée la base binaire correspondante.
 
 ### 5.3 Formats de Données (`data/`)
 - `data/rag_chunks.json` (2,4 Mo) : Tableau de $2\,122$ segments hiérarchiques avec introductions enrichies (jusqu'à 2 500 caractères) et méthodes fonctionnelles (jusqu'à 1 200 caractères).
