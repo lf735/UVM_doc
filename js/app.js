@@ -927,17 +927,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateDocTitle(url) {
     if (!docPaneTitle) return;
-    if (url.includes('examples_view/')) {
-      if (isHomeUrl(url)) {
-        docPaneTitle.textContent = 'Home — UVM 1.2 Explorer';
-      } else if (url.includes('examples_view/')) {
-        const clean = url.replace('examples_view/', '').replace('.html', '').split('#')[0];
-        docPaneTitle.textContent = `Example: ${clean}`;
-      } else {
-        const clean = url.replace('docs_view/', '').replace('.html', '').split('#')[0];
-        docPaneTitle.textContent = clean;
-      }
-      updateBookmarkButtonState();
       if (isHomeUrl(url)) {
         docPaneTitle.textContent = 'Home — UVM 1.2 Explorer';
       } else if (url.includes('examples_view/')) {
