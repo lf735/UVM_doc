@@ -1484,5 +1484,25 @@ Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met �
 ### Les Solutions Appliquées
 - **Mini-simulateur symbolique UVM ([uvm_sim_trace.py](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/uvm_sim_trace.py))** : parseur AST-lite multi-lignes (flush sur macros `` `uvm_* `` sans `;`), `BUILTIN_UVM_PARENTS`, résolution du test racine (`+UVM_TESTNAME` / `run_test`), roue temporelle coopérative unifiée (`self.pq`) avec `#delay` (y compris `#15 stmt;` via `SeqNode` et unités `1us`), `fork/join/join_any/join_none`, FIFO `put`/`get`/`peek`, évaluation de `$sformatf`/`$psprintf`, `$urandom`/`$urandom_range`, arithmétique via `ast.parse` et `get_name()`/`set_name()`, et suppression des branches d'erreur sur le chemin nominal.
 - **Séparation Console vs Walkthrough ([build_examples.py](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/build_examples.py), [example_page.js](file:///c:/Users/uf755lfr/Perso/UVM_doc/js/example_page.js))** : seuls les vrais messages (`RNTST`, `` `uvm_info ``, `$display`) vont dans `#terminal-body`, tandis que les jalons `phase`/`objection` sont tissés dans `executionTrace` sans vol de focus sur les logs.
-- **Barre flottante & UI ([page_builder_common.py](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/page_builder_common.py), [app.js](file:///c:/Users/uf755lfr/Perso/UVM_doc/js/app.js), [css/style.css](file:///c:/Users/uf755lfr/Perso/UVM_doc/css/style.css))** : barre flottante iconique (`#stepper-sticky-bar`) avec décalage dynamique `.has-search-pilot` via `postMessage`, gouttière élargie à `58px` avec `.code-step-marker` en `position: absolute`, et réinitialisation (`resetStepperMode`) ramenant à la première ligne exécutable.
+- **Barre flottante & UI ([page_builder_common.py](file:///c:/Users/lf-pc/UVM_doc/scripts/page_builder_common.py), [app.js](file:///c:/Users/lf-pc/UVM_doc/js/app.js), [css/style.css](file:///c:/Users/lf-pc/UVM_doc/css/style.css))** : barre flottante iconique (`#stepper-sticky-bar`) avec décalage dynamique `.has-search-pilot` via `postMessage`, gouttière élargie à `58px` avec `.code-step-marker` en `position: absolute`, et réinitialisation (`resetStepperMode`) ramenant à la première ligne exécutable.
 - **Rendu Markdown natif** : adoption directe de `markdown-it-py` (`MarkdownIt("commonmark", {"breaks": True, "html": True}).enable(["table", "strikethrough"])`) dans `build_examples.py`, avec styles CSS natifs pour `h1`–`h4`, `ul`, `ol`, `blockquote`, `pre` et `table` sous `.source-notes-body`.
+
+---
+
+## 48. Le Piège des Redéclarations `const`/`let` et de la Validation JS Uniquement Lexicale (`app.js`, `verify_js_syntax.py`)
+
+### Le Symptôme Observé
+> *"Uncaught SyntaxError: Identifier 'fullDoc' has already been declared (at app.js?v=2.3:878:11)"*  
+> L'ensemble de l'application SPA (`index.html`) refusait de s'initialiser au chargement du navigateur, alors que toutes les suites de tests Python passaient au vert.
+
+### L'Anatomie du Piège
+1. **Résidu de patch dans `loadDoc()` (`js/app.js`)** : Lors de l'ajout de la gestion de `home.html` via `isHomeUrl(url)`, l'ancienne ligne `const fullDoc = normalizeDocUrl(url);` est restée juste au-dessus de `const fullDoc = isHomeUrl(url) ? 'home.html' : normalizeDocUrl(url);` (accompagnée d'un appel dupliqué à `recordRecentVisit('doc', fullDoc);`). En JavaScript strict/ES6+, redéclarer un identifiant `const` ou `let` dans le même bloc lève une `SyntaxError` bloquante à l'analyse du fichier avant même l'exécution de la première ligne.
+2. **Angle mort des tests Python basés sur des regex** : Les vérifications existantes (ex. `verify_search_pilot.py`) contrôlaient uniquement l'équilibre des accolades/parenthèses (`{}` / `()`) et la présence de motifs textuels. Un fichier syntaxiquement invalide au sens V8 (redéclaration `const`/`let`, virgule manquante, mot-clé invalide) passait donc sans alerte.
+
+### La Solution Appliquée (`js/app.js`, `scripts/verify_js_syntax.py`, `scripts/run_tests.py`)
+1. **Correction de `loadDoc()`** : Suppression de la déclaration redondante `const fullDoc = normalizeDocUrl(url);` et de l'appel en double à `recordRecentVisit('doc', fullDoc);` dans `js/app.js`.
+2. **Validation V8 systématique en CI et en local** : Création de `scripts/verify_js_syntax.py` (enregistré en première position dans `scripts/run_tests.py`), qui exécute :
+   - `node --check` sur tous les fichiers `js/*.js` ;
+   - `new vm.Script(...)` en une passe Node sur tous les bundles `js/doc_topics/*.js` ;
+   - `new vm.Script(...)` sur tous les blocs `<script>` inline des pages HTML racines (`index.html`, `home.html`, `mobile_preview.html`, `uvm_database_explorer.html`).
+   - En CI (`CI=true`), l'absence de `node` fait échouer immédiatement la suite afin de ne jamais valider silencieusement du JavaScript cassé.

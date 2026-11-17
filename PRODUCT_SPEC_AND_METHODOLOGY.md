@@ -306,6 +306,7 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
 │                   Niveau 1 : Tests Unitaires Statiques                  │
+│  - scripts/verify_js_syntax.py (syntaxe V8 `node --check` & inline)    │
 │  - scripts/test_syntax_highlighter.py (assertions lexer & tokens)      │
 │  - scripts/verify_search_pilot.py (assertions DOM, CSS & JS du Search) │
 │  - scripts/build_docs.py (validation de génération des 146 docs & 155 src)│
@@ -321,7 +322,7 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 │  - verify_inherited_members.py (intégrité des chaînes de classes & APIs)│
 │  - verify_stepper_calibration.py (calibration des 5 piliers & logs)    │
 │  - verify_source_notes.py (notes sources & 0 fuite Apache sur 39 suites)│
-│  - scripts/run_tests.py (orchestrateur unifié des 8 suites CI/local)   │
+│  - scripts/run_tests.py (orchestrateur unifié des 11 suites CI/local)  │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
@@ -333,7 +334,8 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ### 4.1 Check-list de Vérification Obligatoire
 
 Avant de valider une version :
-- [ ] **Suite Unifiée (CI & Local)** : `python scripts/run_tests.py` exécute les 9 suites et retourne `0` (`9/9 PASS`).
+- [ ] **Suite Unifiée (CI & Local)** : `python scripts/run_tests.py` exécute les 11 suites et retourne `0` (`11/11 PASS`).
+- [ ] **Vérification Syntaxique JavaScript (V8)** : `python scripts/verify_js_syntax.py` valide tous les fichiers `js/*.js` (`node --check`), les bundles `js/doc_topics/*.js` et les blocs `<script>` inline des pages HTML racines (`0` `SyntaxError` / redéclaration `const`/`let`).
 - [ ] **Vérification du Shell, Ancres & Mobile** : `python scripts/verify_shell_layout.py` valide `overflow: clip`, le verrouillage `position: fixed` de `.app-header` sur mobile (`<= 860px`), le masquage de `.view-switcher` sur mobile et la synchronisation initiale de `#open-full-doc`.
 - [ ] **Tests Unitaires de Coloration Syntaxique & Symboles Cliquables** : `python scripts/test_syntax_highlighter.py` (8/8 tests validés avec `test_clickable_uvm_symbols`).
 - [ ] **Vérification des Conteneurs de Code** : `python scripts/verify_code_containers.py` (validation des blocs code et boutons de copie).
@@ -345,7 +347,7 @@ Avant de valider une version :
 - [ ] **Validation des Studios** : `python scripts/verify_examples.py` (28/28 assertions validées).
 - [ ] **Validation des Scénarios & Logs** : `python scripts/verify_stepper_calibration.py` (5/5 piliers vérifiés).
 - [ ] **Validation des Notes Sources** : `python scripts/verify_source_notes.py` (39/39 suites validées, zéro fuite de licence Apache).
-- [ ] **Suite Unifiée Complète** : `python scripts/run_tests.py` (9/9 suites au vert, incluant `verify_code_containers.py` et `verify_code_editor_tools.py` sur les 155 sources UVM + pages `src_view/examples/`).
+- [ ] **Suite Unifiée Complète** : `python scripts/run_tests.py` (11/11 suites au vert, incluant `verify_js_syntax.py`, `verify_code_containers.py` et `verify_code_editor_tools.py` sur les 155 sources UVM + pages `src_view/examples/`).
 - [ ] **Stabilité de la Barre de Titre (Ancres & Mobile)** : Ouvrir une URL avec ancre (`#/doc/...#...` ou `#/src/...#L...`) sur desktop et mobile (`<= 860px`) : `.app-header` reste fixée en haut, `.view-switcher` est masqué sur mobile et `#open-full-doc` affiche d'emblée l'icône Source.
 - [ ] **Ouverture & URL des Sources d'Exemple** : Cliquer sur un fichier dans la bannière d'un exemple ouvre `src_view/examples/<catégorie>/<suite>/<fichier>.html` en Split View sur desktop (`#/split?doc=...&src=examples/...`) ou en vue Source sur mobile (`#/src/examples/...`), et changer d'onglet dans le Code Studio en Split View synchronise le panneau droit et l'URL.
 - [ ] **Focus Clavier Immédiat en Recherche Modale** : Cliquer sur la barre de recherche ou appuyer sur `/` active immédiatement la saisie clavier et présélectionne la requête en cours.

@@ -874,12 +874,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function loadDoc(url, pushState = true, autoPair = true) {
-    const fullDoc = normalizeDocUrl(url);
     const fullDoc = isHomeUrl(url) ? 'home.html' : normalizeDocUrl(url);
     currentDocUrl = fullDoc;
     setFrameSrc(docFrame, fullDoc);
     updateDocTitle(fullDoc);
-    recordRecentVisit('doc', fullDoc);
     recordRecentVisit('doc', fullDoc);
 
     if (autoPair && currentMode === 'split') {

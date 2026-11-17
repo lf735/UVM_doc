@@ -61,11 +61,13 @@ UVM_doc/
 │   ├── build_uvm_source_db.py # Python parser extracting classes, methods, overrides, and macros
 │   ├── generate_quick_symbols.py # Fast symbol extractor with types, methods, constants & inheritance
 │   ├── query_uvm_db.py       # Interactive CLI explorer tool for terminal navigation
+│   ├── run_tests.py          # Unified test runner executing all verification suites
 │   ├── syntax_highlighter.py # Unified high-fidelity tokenizer for SystemVerilog, UVM, C/DPI & Makefiles
 │   ├── test_syntax_highlighter.py # Automated unit test suite for syntax tokenization & clickable symbols
 │   ├── verify_code_editor_tools.py # Verification suite for code editor tools & clickable UVM symbols
 │   ├── verify_examples.py    # 28-test automated verification suite for interactive examples
 │   ├── verify_inherited_members.py # Verification suite for class inheritance & inherited members
+│   ├── verify_js_syntax.py   # V8 JavaScript syntax & redeclaration verification suite
 │   ├── verify_source_notes.py # Verification suite for source notes & Apache license hygiene
 │   └── verify_stepper_calibration.py # Verification suite for stepper scenarios & terminal logs
 ├── data/

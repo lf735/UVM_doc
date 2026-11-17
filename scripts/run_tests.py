@@ -14,6 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = BASE_DIR / "scripts"
 
 TEST_SUITES = [
+    ("JavaScript Syntax & Redeclaration Hygiene", "verify_js_syntax.py"),
     ("Syntax Highlighter Unit Tests", "test_syntax_highlighter.py"),
     ("Code Containers Verification", "verify_code_containers.py"),
     ("Code Editor Tools & Clickable Symbols", "verify_code_editor_tools.py"),
