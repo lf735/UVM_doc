@@ -22,6 +22,7 @@ from pathlib import Path
 from collections import OrderedDict
 from typing import Dict, List, Any
 import page_builder_common as pbc
+import uvm_sim_trace
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 EXAMPLES_SRC_DIR = BASE_DIR / "uvm-1.2" / "examples"
@@ -790,9 +791,13 @@ def _extract_sv_string_arg(text):
 
 def extract_sv_execution_events(files_data, meta):
     """
-    Statically parse .sv/.svh files of an example suite to extract authentic,
-    line-anchored execution events ordered by the UVM lifecycle.
+    Symbolically simulate .sv/.svh files of an example suite to produce authentic,
+    chronological, line-anchored execution events ordered by the UVM lifecycle.
     """
+    sim_events = uvm_sim_trace.simulate_example_suite(files_data, meta)
+    if sim_events:
+        return sim_events
+
     PHASE_ORDER = {
         "new": 0,
         "run_test": 1,
@@ -1005,50 +1010,74 @@ def build_auto_stepper_data(suite_key, meta, events):
     if not events:
         return []
 
-    # Prioritize explicit log/display/objection/run_test events, then phase hooks
-    log_like = [e for e in events if e["kind"] in ("run_test", "log", "display", "objection")]
-    phase_like = [e for e in events if e["kind"] == "phase"]
+    # Slice walkthrough into clean, well-paced UVM milestones (target 5..12 steps)
+    # 1. Always keep run_test, objections, and non-duplicate log/display events
+    # 2. Include key structural phase milestones (build, connect, end_of_elaboration, report)
+    # 3. Collapse repetitive loop bursts of the same (file, line, tag)
+    selected_indices = set()
+    seen_log_sigs = {}
+    key_phases = {"build_phase", "build", "connect_phase", "connect", "end_of_elaboration_phase", "run_phase", "report_phase", "report"}
+    seen_phases = set()
 
-    selected = list(log_like)
-    if len(selected) < 5:
-        for p in phase_like:
-            if len(selected) >= 8:
-                break
-            if not any(s["file"] == p["file"] and abs(s["line"] - p["line"]) <= 2 for s in selected):
-                selected.append(p)
-        selected.sort(key=lambda ev: (ev["order"], ev["time_ns"], ev["line"]))
+    for idx, ev in enumerate(events):
+        kind = ev["kind"]
+        if kind == "run_test":
+            selected_indices.add(idx)
+        elif kind == "objection":
+            # Keep first raise and last drop to avoid objection spam
+            sig = ("obj", ev["file"], ev["line"])
+            if sig not in seen_log_sigs:
+                seen_log_sigs[sig] = idx
+                selected_indices.add(idx)
+        elif kind in ("log", "display"):
+            sig = (ev["file"], ev["line"], ev["tag"])
+            count = seen_log_sigs.get(sig, 0)
+            seen_log_sigs[sig] = count + 1
+            if count == 0:
+                selected_indices.add(idx)
+        elif kind == "phase" and ev["method"] in key_phases:
+            if ev["method"] not in seen_phases and ("uvm_test_top" in ev["scope"] or len(seen_phases) < 3):
+                seen_phases.add(ev["method"])
+                selected_indices.add(idx)
 
-    # If too many events, collapse consecutive bursts from same (file, tag, method)
-    if len(selected) > 14:
-        compact = []
-        last_sig = None
-        for ev in selected:
-            sig = (ev["file"], ev["tag"], ev["method"])
-            if sig == last_sig and len(compact) >= 3:
-                continue
-            compact.append(ev)
-            last_sig = sig
-        selected = compact
+    # Ensure at least 4 steps if more events exist
+    if len(selected_indices) < 4:
+        for idx, ev in enumerate(events):
+            if idx not in selected_indices:
+                selected_indices.add(idx)
+                if len(selected_indices) >= min(6, len(events)):
+                    break
 
-    # Hard cap at 15 evenly sampled steps while keeping first and last
-    if len(selected) > 15:
-        idxs = [round(i * (len(selected) - 1) / 14) for i in range(15)]
-        selected = [selected[i] for i in dict.fromkeys(idxs)]
+    ordered = sorted(selected_indices)
+    if len(ordered) > 12:
+        # Keep first (launch/build), last (report/drop), and evenly sample the middle
+        middle = ordered[1:-1]
+        picks = [middle[round(i * (len(middle) - 1) / 9)] for i in range(10)]
+        ordered = [ordered[0]] + list(dict.fromkeys(picks)) + [ordered[-1]]
+
+    selected = [events[idx] for idx in ordered]
 
     steps = []
     for i, ev in enumerate(selected, start=1):
         phase_label = ev["method"].replace("_phase", "").upper()
         state_str = f"Sim Time: {ev['time_ns']} ns ({phase_label})"
-        log_line = f"{ev['severity']} {ev['file']}({ev['line']}) @ {ev['time_ns']} ns: {ev['scope']} [{ev['tag']}] {ev['msg']}"
+        is_real_log = ev["kind"] in ("run_test", "log", "display")
+        log_line = (
+            f"{ev['severity']} {ev['file']}({ev['line']}) @ {ev['time_ns']} ns: {ev['scope']} [{ev['tag']}] {ev['msg']}"
+            if is_real_log
+            else ""
+        )
 
         if ev["kind"] == "run_test":
             title = f"{i}. Test Launch (run_test)"
             desc = f"Entry point in {ev['file']} line {ev['line']}: UVM begins testbench elaboration and phasing."
         elif ev["kind"] == "phase":
             title = f"{i}. {ev['scope']} :: {ev['method']}()"
+            state_str = f"Sim Time: {ev['time_ns']} ns (Phase: {ev['method']})"
             desc = f"UVM invokes {ev['method']}() on {ev['scope']} ({ev['file']}:{ev['line']})."
         elif ev["kind"] == "objection":
             title = f"{i}. Objection Control ({ev['scope']})"
+            state_str = f"Sim Time: {ev['time_ns']} ns ({ev['msg']})"
             desc = f"{ev['msg']} at {ev['file']}:{ev['line']} to coordinate simulation lifetime."
         else:
             short_msg = ev["msg"] if len(ev["msg"]) <= 44 else ev["msg"][:41] + "..."
@@ -1234,6 +1263,7 @@ UVM_FATAL :    0
 ** SIMULATION PASSED (0 ERRORS, 0 WARNINGS) **"""
 
     if events:
+        real_log_events = [ev for ev in events if ev["kind"] in ("run_test", "log", "display")]
         log_lines = [
             "----------------------------------------------------------------",
             "Questa/VCS/Xcelium UVM 1.2 Simulation Log",
@@ -1242,7 +1272,7 @@ UVM_FATAL :    0
         ]
         sev_counts = {"UVM_INFO": 0, "UVM_WARNING": 0, "UVM_ERROR": 0, "UVM_FATAL": 0}
         id_counts = {}
-        for ev in events:
+        for ev in real_log_events:
             sev = ev["severity"]
             tag = ev["tag"]
             sev_counts[sev] = sev_counts.get(sev, 0) + 1

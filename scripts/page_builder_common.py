@@ -239,10 +239,11 @@ def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root
         first_step = stepper_steps[0]
         total_steps = len(stepper_steps)
         first_state = first_step.get("state", "")
-        sticky_state_html = f'<span class="scenario-state-pill" id="sticky-stepper-state">{html.escape(first_state)}</span>' if first_state else '<span class="scenario-state-pill" id="sticky-stepper-state" style="display:none;"></span>'
+        m_time = re.search(r'(\d+\s*(?:fs|ps|ns|us|ms|s))\b', first_state, re.I)
+        initial_time_str = m_time.group(1) if m_time else "0 ns"
+        sticky_state_html = f'<span class="scenario-state-pill" id="sticky-stepper-state">{html.escape(initial_time_str)}</span>'
         sticky_stepper_html = f'''      <div class="stepper-sticky-bar" id="stepper-sticky-bar" aria-label="Step-by-step execution controls">
         <div class="stepper-sticky-info">
-          <span class="stepper-sticky-badge">Run Trace</span>
           <span class="stepper-progress-label stepper-progress-hover" id="sticky-stepper-progress" title="{html.escape(first_step.get("title", ""))}">Step 1/{total_steps}</span>
           {sticky_state_html}
         </div>
@@ -435,15 +436,6 @@ def render_flow_stepper(stepper_steps: List[Dict[str, Any]], anim_type: str = ""
           </div>
           <div class="stepper-controls">
             <span class="stepper-progress-label" id="stepper-progress-label" aria-live="polite">1 / {total_steps}</span>
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-prev" aria-label="Previous step" disabled>&larr; Previous</button>
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-play" aria-label="Auto-play scenario">Play &#9654;</button>
-            <button type="button" class="btn btn-sm btn-primary" id="stepper-next" aria-label="Next step">Next Step &rarr;</button>
-            <button type="button" class="btn btn-sm btn-outline" id="stepper-reset" aria-label="Reset step-by-step mode">Reset</button>
-            <select class="stepper-speed-select" id="stepper-speed" aria-label="Playback speed" title="Playback speed">
-              <option value="0.5">0.5x</option>
-              <option value="1" selected>1x</option>
-              <option value="2">2x</option>
-            </select>
           </div>
         </div>
 

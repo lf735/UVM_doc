@@ -495,9 +495,17 @@
       }
     }
 
+    function findStudioFileIndex(filename) {
+      if (!filename || !filesList.length) return -1;
+      let idx = filesList.findIndex(function (f) { return f.name === filename; });
+      if (idx !== -1) return idx;
+      idx = filesList.findIndex(function (f) { return f.name.endsWith('/' + filename) || f.name.endsWith('\\' + filename); });
+      if (idx !== -1) return idx;
+      return filesList.findIndex(function (f) { return f.name.includes(filename); });
+    }
+
     function getFileLinesMap(filename) {
-      if (!filename || !filesList.length) return null;
-      const fileIndex = filesList.findIndex(function (f) { return f.name.includes(filename); });
+      const fileIndex = findStudioFileIndex(filename);
       if (fileIndex === -1) return null;
       const map = new Map();
       const rawContent = filesList[fileIndex] && filesList[fileIndex].content;
@@ -541,28 +549,79 @@
         }
       });
 
-      const logPoints = [];
-      let activeMajor = 0;
+      const rawLogPoints = [];
       for (let i = 0; i < allLines.length; i++) {
         const lineEl = allLines[i];
         const text = lineEl.textContent.trim();
-        if (logLineToMajorStep.has(i)) {
-          activeMajor = logLineToMajorStep.get(i);
-        }
-        if (isExecutableLogLine(text) || logLineToMajorStep.has(i)) {
+        const matchedStep = logLineToMajorStep.has(i) ? logLineToMajorStep.get(i) : -1;
+        if (isExecutableLogLine(text) || matchedStep !== -1) {
           const fl = parseLogFileLine(text);
-          const majorStep = stepperSteps[activeMajor] || {};
-          logPoints.push({
+          rawLogPoints.push({
             termIdx: i,
             lineEl: lineEl,
-            isMajorStart: logLineToMajorStep.has(i),
-            majorIdx: activeMajor,
-            file: fl ? fl.file : (majorStep.highlight_file || ''),
-            line: fl ? fl.line : (majorStep.highlight_line || 0),
+            matchedStep: matchedStep,
+            file: fl ? fl.file : '',
+            line: fl ? fl.line : 0,
             timeStr: parseLogTime(text),
             text: text
           });
         }
+      }
+
+      // Weave major steps without console logs (phase/objection) in exact chronological order
+      const logPoints = [];
+      let rpIdx = 0;
+      let lastTermIdx = rawLogPoints.length ? rawLogPoints[0].termIdx : -1;
+      for (let sIdx = 0; sIdx < stepperSteps.length; sIdx++) {
+        const step = stepperSteps[sIdx];
+        const targetLogIdx = stepToLogLineIdx[sIdx];
+        if (targetLogIdx !== -1) {
+          while (rpIdx < rawLogPoints.length && rawLogPoints[rpIdx].termIdx <= targetLogIdx) {
+            const rp = rawLogPoints[rpIdx++];
+            const isStart = rp.termIdx === targetLogIdx;
+            const prevStep = stepperSteps[Math.max(0, sIdx - 1)] || {};
+            logPoints.push({
+              termIdx: rp.termIdx,
+              lineEl: rp.lineEl,
+              isMajorStart: isStart,
+              majorIdx: isStart ? sIdx : Math.max(0, sIdx - 1),
+              file: rp.file || (isStart ? step.highlight_file : prevStep.highlight_file) || '',
+              line: rp.line || (isStart ? step.highlight_line : prevStep.highlight_line) || 0,
+              timeStr: rp.timeStr,
+              text: rp.text,
+              isCodeOnly: false
+            });
+            lastTermIdx = rp.termIdx;
+          }
+        } else {
+          logPoints.push({
+            termIdx: lastTermIdx,
+            lineEl: null,
+            isMajorStart: true,
+            majorIdx: sIdx,
+            file: step.highlight_file || '',
+            line: step.highlight_line || 0,
+            timeStr: step.state || '',
+            text: step.title || '',
+            isCodeOnly: true
+          });
+        }
+      }
+      while (rpIdx < rawLogPoints.length) {
+        const rp = rawLogPoints[rpIdx++];
+        const lastIdx = Math.max(0, stepperSteps.length - 1);
+        const lastStep = stepperSteps[lastIdx] || {};
+        logPoints.push({
+          termIdx: rp.termIdx,
+          lineEl: rp.lineEl,
+          isMajorStart: false,
+          majorIdx: lastIdx,
+          file: rp.file || lastStep.highlight_file || '',
+          line: rp.line || lastStep.highlight_line || 0,
+          timeStr: rp.timeStr,
+          text: rp.text,
+          isCodeOnly: false
+        });
       }
 
       const fileCache = new Map();
@@ -633,13 +692,15 @@
           line: cur.line,
           timeStr: cur.timeStr,
           text: cur.text,
-          isCodeOnly: false
+          isCodeOnly: !!cur.isCodeOnly
         });
 
-        cur.lineEl.setAttribute('data-trace-idx', String(traceIdx));
-        cur.lineEl.setAttribute('data-step-idx', String(cur.majorIdx));
-        cur.lineEl.classList.add('term-line-clickable');
-        cur.lineEl.title = `Line ${traceIdx + 1} (Step ${cur.majorIdx + 1}) — Click to jump here`;
+        if (cur.lineEl) {
+          cur.lineEl.setAttribute('data-trace-idx', String(traceIdx));
+          cur.lineEl.setAttribute('data-step-idx', String(cur.majorIdx));
+          cur.lineEl.classList.add('term-line-clickable');
+          cur.lineEl.title = `Line ${traceIdx + 1} (Step ${cur.majorIdx + 1}) — Click to jump here`;
+        }
       }
 
       terminalBody.addEventListener('click', function (e) {
@@ -659,7 +720,7 @@
       const rowMap = new Map();
       stepperSteps.forEach(function (step, sIdx) {
         if (!step.highlight_file || !step.highlight_line) return;
-        const fileIndex = filesList.findIndex(function (f) { return f.name.includes(step.highlight_file); });
+        const fileIndex = findStudioFileIndex(step.highlight_file);
         if (fileIndex === -1) return;
         const pane = document.getElementById(`file-pane-${fileIndex}`);
         if (!pane) return;
@@ -679,8 +740,9 @@
         marker.type = 'button';
         marker.className = 'code-step-marker';
         marker.setAttribute('data-step-idx', String(firstIdx));
+        marker.setAttribute('data-step-indices', stepIndices.join(','));
         marker.textContent = String(firstIdx + 1);
-        marker.title = `Step ${firstIdx + 1}: ${stepperSteps[firstIdx].title}`;
+        marker.title = stepIndices.map(function (si) { return `Step ${si + 1}: ${stepperSteps[si].title}`; }).join(' | ');
         marker.addEventListener('click', function (e) {
           e.preventDefault();
           e.stopPropagation();
@@ -763,7 +825,7 @@
 
     function highlightCodeAt(file, line) {
       if (file && studioController && studioController.switchFileTab) {
-        const fileIndex = filesList.findIndex(function (f) { return f.name.includes(file); });
+        const fileIndex = findStudioFileIndex(file);
         if (fileIndex !== -1 && fileIndex !== studioController.getCurrentFileIdx()) {
           studioController.switchFileTab(fileIndex);
         }
@@ -840,13 +902,10 @@
         stickyProgress.setAttribute('data-tooltip', hoverText);
       }
       if (stickyState) {
-        const stateText = (activeTrace && activeTrace.timeStr) ? `${activeTrace.timeStr}` : (step.state || '');
-        if (stateText) {
-          stickyState.textContent = stateText;
-          stickyState.style.display = 'inline-flex';
-        } else {
-          stickyState.style.display = 'none';
-        }
+        const rawTime = (activeTrace && activeTrace.timeStr) ? activeTrace.timeStr : (step.state || '');
+        const mTime = String(rawTime).match(/(\d+\s*(?:fs|ps|ns|us|ms|s))\b/i);
+        stickyState.textContent = mTime ? mTime[1] : '0 ns';
+        stickyState.style.display = 'inline-flex';
       }
       if (stickyBar) {
         stickyBar.classList.toggle('is-stepping', isSteppingMode);
@@ -855,7 +914,19 @@
       if (stepActiveTitle) stepActiveTitle.textContent = step.title;
       if (stepActiveComp) stepActiveComp.textContent = `Target: ${step.component}`;
       if (stepActiveDesc) stepActiveDesc.textContent = step.desc;
-      if (stepActiveLog) stepActiveLog.textContent = activeTrace ? activeTrace.text : step.log_snippet;
+      if (stepActiveLog) {
+        const logHintBox = stepActiveLog.closest('.step-log-hint');
+        if (step.log_snippet) {
+          stepActiveLog.textContent = step.log_snippet;
+          if (logHintBox) logHintBox.style.display = '';
+        } else if (activeTrace && activeTrace.text) {
+          stepActiveLog.textContent = activeTrace.text;
+          if (logHintBox) logHintBox.style.display = '';
+        } else {
+          stepActiveLog.textContent = '(No console log emitted at this step)';
+          if (logHintBox) logHintBox.style.display = '';
+        }
+      }
 
       if (stepStateBadge) {
         if (step.state) {
@@ -874,8 +945,9 @@
       if (stickyNextBtn) stickyNextBtn.disabled = executionTrace.length ? currentTraceIdx >= executionTrace.length - 1 : idx === stepperSteps.length - 1;
 
       document.querySelectorAll('.code-step-marker').forEach(function (m) {
-        const mIdx = parseInt(m.getAttribute('data-step-idx'), 10);
-        m.classList.toggle('active', mIdx === idx);
+        const rawList = m.getAttribute('data-step-indices') || m.getAttribute('data-step-idx') || '';
+        const list = rawList.split(',').map(function (s) { return parseInt(s, 10); });
+        m.classList.toggle('active', list.indexOf(idx) !== -1);
       });
 
       // Topology card highlight
@@ -1185,7 +1257,11 @@
       stopAutoPlay();
       isSteppingMode = false;
       currentTraceIdx = 0;
-      renderStep(0);
+      if (executionTrace.length > 0) {
+        renderTraceStep(0);
+      } else {
+        renderStep(0);
+      }
       clearConsoleSteppingClasses();
     }
 
