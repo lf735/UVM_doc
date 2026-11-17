@@ -1471,3 +1471,18 @@ Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met �
 ### La Solution Appliquée (`scripts/build_docs.py`, `js/page_common.js`, `css/style.css`)
 - **Sélecteur dans `.doc-breadcrumbs` + Popover & URLs uniques** : sélecteur `#wildcard-variant-select` sans numéro de ligne, mode `_*_` par défaut sans persistance `sessionStorage`, masquage de la famille non concernée (`#(T)` vs `#(REQ,RSP)`), substitution transversale `*_port`/`*_export`/`*_imp` (texte, liens croisés, bloc *"asterisk"*, copie de lien, TOC et `#doc-toc-mobile-current` via `dataset.wildcardOrig`), et indexation explicite des 6 méta-classes wildcard + 63 URLs concrètes dans `search_data.js`.
 - **Guard de scroll interne sur le popover** : ignorer `scroll` lorsque `popover.contains(ev.target)`.
+
+---
+
+## 47. Le Piège du Pas à Pas Ligne par Ligne, du Simulateur Symbolique UVM et du Rendu Markdown (`uvm_sim_trace.py`, `example_page.js`, `build_examples.py`)
+
+### Les Symptômes Observés
+1. **Logs génériques et faux `UVM_FATAL [NOVIF]`** : 34 des 39 exemples affichaient un log générique ; un simple extracteur regex émettait les gardes d'erreur (`if (!uvm_config_db::get(...)) uvm_fatal("NOVIF")`), cassait `$sformatf(...)` multi-lignes, mélangeait `raise_objection` avant `run_phase()` et polluait la console avec `[PH_TRACE]`/`[OBJTN]`.
+2. **Traceur pas-à-pas bloqué ou désordonné** : `getFileLinesMap()` cherchait `tr[data-line]` alors que `data-line` est sur `<td class="ln">` (le `<tr>` porte `id="L..."`), les conditions `if`/`else` et boucles étaient parcourues linéairement, `.code-step-marker` créait une 2e ligne dans une gouttière de `45px`, et `stepper-sticky-bar` se superposait à `#search-nav-bar`.
+3. **Markdown tronqué dans les notes sources** : `python-markdown` ignorait les listes collées aux paragraphes ou imbriquées avec 2-3 espaces.
+
+### Les Solutions Appliquées
+- **Mini-simulateur symbolique UVM ([uvm_sim_trace.py](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/uvm_sim_trace.py))** : parseur AST-lite multi-lignes (flush sur macros `` `uvm_* `` sans `;`), `BUILTIN_UVM_PARENTS`, résolution du test racine (`+UVM_TESTNAME` / `run_test`), roue temporelle coopérative unifiée (`self.pq`) avec `#delay` (y compris `#15 stmt;` via `SeqNode` et unités `1us`), `fork/join/join_any/join_none`, FIFO `put`/`get`/`peek`, évaluation de `$sformatf`/`$psprintf`, `$urandom`/`$urandom_range`, arithmétique via `ast.parse` et `get_name()`/`set_name()`, et suppression des branches d'erreur sur le chemin nominal.
+- **Séparation Console vs Walkthrough ([build_examples.py](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/build_examples.py), [example_page.js](file:///c:/Users/uf755lfr/Perso/UVM_doc/js/example_page.js))** : seuls les vrais messages (`RNTST`, `` `uvm_info ``, `$display`) vont dans `#terminal-body`, tandis que les jalons `phase`/`objection` sont tissés dans `executionTrace` sans vol de focus sur les logs.
+- **Barre flottante & UI ([page_builder_common.py](file:///c:/Users/uf755lfr/Perso/UVM_doc/scripts/page_builder_common.py), [app.js](file:///c:/Users/uf755lfr/Perso/UVM_doc/js/app.js), [css/style.css](file:///c:/Users/uf755lfr/Perso/UVM_doc/css/style.css))** : barre flottante iconique (`#stepper-sticky-bar`) avec décalage dynamique `.has-search-pilot` via `postMessage`, gouttière élargie à `58px` avec `.code-step-marker` en `position: absolute`, et réinitialisation (`resetStepperMode`) ramenant à la première ligne exécutable.
+- **Rendu Markdown natif** : adoption directe de `markdown-it-py` (`MarkdownIt("commonmark", {"breaks": True, "html": True}).enable(["table", "strikethrough"])`) dans `build_examples.py`, avec styles CSS natifs pour `h1`–`h4`, `ul`, `ol`, `blockquote`, `pre` et `table` sous `.source-notes-body`.

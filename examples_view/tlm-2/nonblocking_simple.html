@@ -85,45 +85,90 @@
     </div>
     <div class="CBody source-notes-body">
       <p>This simple nonblocking examples uses a USB 2.0 BULK transfer as an example.</p>
-<p>Instead of translating the transfer into a series of packets transmitted back and forth between the host and device, a single transfer is exchanged and the timing points (i.e. calls to nb_transport_fw/bw()) are used in lieu packet transfers.</p>
-<p>For a normal host-&gt;device bulk transfer, the following timing points occur until a UVM_TLM_COMPLETED sync value is received by either the host or the device.</p>
-<p>1. nb_transport_fw(xfer, ph)</p>
-<ul class="notes-list">
+<p>Instead of translating the transfer into a series of packets transmitted<br />
+back and forth between the host and device, a single transfer is exchanged<br />
+and the timing points (i.e. calls to nb_transport_fw/bw()) are used in lieu<br />
+packet transfers.</p>
+<p>For a normal host-&gt;device bulk transfer, the following timing points occur<br />
+until a UVM_TLM_COMPLETED sync value is received<br />
+by either the host or the device.</p>
+<ol>
+<li>
+<p>nb_transport_fw(xfer, ph)</p>
+<ul>
 <li>xfer.kind == OUT</li>
 <li>ph == USB_TLM_TOKEN</li>
 </ul>
-<p>&gt; Device responds with UVM_TLM_ACCEPTED, or &gt; Device responds with UVM_TLM_COMPLETED</p>
-<p>2. nb_transport_fw(xfer, ph)</p>
-<ul class="notes-list">
+<blockquote>
+<p>Device responds with UVM_TLM_ACCEPTED, or<br />
+Device responds with UVM_TLM_COMPLETED</p>
+</blockquote>
+</li>
+<li>
+<p>nb_transport_fw(xfer, ph)</p>
+<ul>
 <li>xfer.data contains bulk data</li>
 <li>ph == USB_TLM_DATA</li>
 </ul>
-<p>&gt; Device responds with UVM_TLM_ACCEPTED, or &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == ACK/NAK/STALL/NYET and ph updated to UVM_TLM_HANDSHAKE</p>
-<p>3. nb_transport_bw(xfer, ph)</p>
-<ul class="notes-list">
+<blockquote>
+<p>Device responds with UVM_TLM_ACCEPTED, or<br />
+Device responds with UVM_TLM_COMPLETED, xfer.status == ACK/NAK/STALL/NYET<br />
+and ph updated to UVM_TLM_HANDSHAKE</p>
+</blockquote>
+</li>
+<li>
+<p>nb_transport_bw(xfer, ph)</p>
+<ul>
 <li>xfer.status == ACK/NACK/STALL/NYET</li>
 <li>ph == USB_TLM_HANDSKAHE</li>
 </ul>
-<p>&gt; Host responds with UVM_TLM_COMPLETED</p>
-<p>For a device-&gt;host bulk transfer, the following timing points occur until a UVM_TLM_COMPLETED sync value is received by either the host or the device.</p>
-<p>1. nb_transport_fw(xfer, ph)</p>
-<ul class="notes-list">
+<blockquote>
+<p>Host responds with UVM_TLM_COMPLETED</p>
+</blockquote>
+</li>
+</ol>
+<p>For a device-&gt;host bulk transfer, the following timing points occur<br />
+until a UVM_TLM_COMPLETED sync value is received<br />
+by either the host or the device.</p>
+<ol>
+<li>
+<p>nb_transport_fw(xfer, ph)</p>
+<ul>
 <li>xfer.kind == IN</li>
 <li>ph == USB_TLM_TOKEN</li>
 </ul>
-<p>&gt; Device responds with UVM_TLM_ACCEPTED, or &gt; Device responds with UVM_TLM_UPDATED, xfer.data contains bulk data and ph updated to UVM_TLM_DATA (goto step 3), or &gt; Device responds with UVM_TLM_COMPLETED, xfer.status == NAK/STALL and ph updated to UVM_TLM_HANDSHAKE</p>
-<p>2. nb_transport_bw(xfer, ph)</p>
-<ul class="notes-list">
+<blockquote>
+<p>Device responds with UVM_TLM_ACCEPTED, or<br />
+Device responds with UVM_TLM_UPDATED, xfer.data contains bulk data<br />
+and ph updated to UVM_TLM_DATA (goto step 3), or<br />
+Device responds with UVM_TLM_COMPLETED, xfer.status == NAK/STALL<br />
+and ph updated to UVM_TLM_HANDSHAKE</p>
+</blockquote>
+</li>
+<li>
+<p>nb_transport_bw(xfer, ph)</p>
+<ul>
 <li>xfer.data contains bulk data</li>
 <li>ph == USB_TLM_DATA</li>
 </ul>
-<p>&gt; Host responds with UVM_TLM_ACCEPTED, or &gt; Host responds with UVM_TLM_COMPLETED, xfer.status == ACK and ph updated to UVM_TLM_HANDSHAKE</p>
-<p>3. nb_transport_fw(xfer, ph)</p>
-<ul class="notes-list">
+<blockquote>
+<p>Host responds with UVM_TLM_ACCEPTED, or<br />
+Host responds with UVM_TLM_COMPLETED, xfer.status == ACK<br />
+and ph updated to UVM_TLM_HANDSHAKE</p>
+</blockquote>
+</li>
+<li>
+<p>nb_transport_fw(xfer, ph)</p>
+<ul>
 <li>xfer.status == ACK</li>
 <li>ph == USB_TLM_HANDSKAHE</li>
 </ul>
-<p>&gt; Device responds with UVM_TLM_COMPLETED</p>
+<blockquote>
+<p>Device responds with UVM_TLM_COMPLETED</p>
+</blockquote>
+</li>
+</ol>
+
     </div>
   </div>
 </div>

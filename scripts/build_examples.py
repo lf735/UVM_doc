@@ -23,6 +23,9 @@ from collections import OrderedDict
 from typing import Dict, List, Any
 import page_builder_common as pbc
 import uvm_sim_trace
+from markdown_it import MarkdownIt
+
+MD_PARSER = MarkdownIt("commonmark", {"breaks": True, "html": True}).enable(["table", "strikethrough"])
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 EXAMPLES_SRC_DIR = BASE_DIR / "uvm-1.2" / "examples"
@@ -1525,80 +1528,6 @@ def strip_apache_license(text: str) -> str:
         text = text[m.end():]
     return text.strip()
 
-def natural_docs_to_html(raw_text: str) -> str:
-    """Converts NaturalDocs-style documentation text into clean, structured HTML."""
-    if not raw_text:
-        return ""
-
-    # Replace inline tilde tags ~method~ with <code>method</code>
-    raw_text = re.sub(r'~([^~]+)~', r'<code>\1</code>', raw_text)
-
-    lines = raw_text.splitlines()
-    html_out = []
-    in_list = False
-    para_lines = []
-
-    def flush_para():
-        nonlocal para_lines
-        if para_lines:
-            text = ' '.join(para_lines).strip()
-            if text:
-                html_out.append(f'<p>{html.escape(text)}</p>')
-            para_lines = []
-
-    def flush_list():
-        nonlocal in_list
-        if in_list:
-            html_out.append('</ul>')
-            in_list = False
-
-    for line in lines:
-        s = line.strip()
-        if not s:
-            flush_para()
-            flush_list()
-            continue
-
-        # Subheading: 'About: <title>', 'Title: <title>', 'Begindoc: <title>', 'Walk through the test:' or '1. DUT SPECIFICATION'
-        m_head = re.match(r'^(?:About|Title|Begindoc|Group):\s*(.*)$', s, re.IGNORECASE)
-        m_section = re.match(r'^(\d+\.\s+[A-Z0-9_\s\-]+)$', s)
-        m_walk = re.match(r'^(Walk through.*?):?$', s, re.IGNORECASE)
-
-        if m_head:
-            flush_para()
-            flush_list()
-            title = m_head.group(1).strip()
-            if title:
-                html_out.append(f'<h4 class="notes-subheading">{html.escape(title)}</h4>')
-            continue
-        elif m_section:
-            flush_para()
-            flush_list()
-            html_out.append(f'<h4 class="notes-subheading">{html.escape(m_section.group(1).strip())}</h4>')
-            continue
-        elif m_walk:
-            flush_para()
-            flush_list()
-            html_out.append(f'<h4 class="notes-subheading">{html.escape(m_walk.group(1).strip())}</h4>')
-            continue
-
-        # Bullet list item (- item or * item)
-        m_bullet = re.match(r'^[\-\*]\s+(.*)$', s)
-        if m_bullet:
-            flush_para()
-            if not in_list:
-                html_out.append('<ul class="notes-list">')
-                in_list = True
-            html_out.append(f'<li>{html.escape(m_bullet.group(1).strip())}</li>')
-            continue
-        else:
-            flush_list()
-            para_lines.append(s)
-
-    flush_para()
-    flush_list()
-    return '\n'.join(html_out)
-
 def extract_suite_source_notes(suite_dir: Path, suite_key: str, meta: Dict[str, Any], files_data: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Extracts introductory and specification comments for an example suite.
@@ -1609,7 +1538,7 @@ def extract_suite_source_notes(suite_dir: Path, suite_key: str, meta: Dict[str, 
         return {
             "source_file": entry["source_file"],
             "raw_text": entry["raw_text"],
-            "notes_html": natural_docs_to_html(entry["raw_text"])
+            "notes_html": MD_PARSER.render(entry["raw_text"])
         }
 
     # 1. Check README.txt or README.md
@@ -1632,7 +1561,7 @@ def extract_suite_source_notes(suite_dir: Path, suite_key: str, meta: Dict[str, 
                 return {
                     "source_file": readme_name,
                     "raw_text": cleaned_text,
-                    "notes_html": natural_docs_to_html(cleaned_text)
+                    "notes_html": MD_PARSER.render(cleaned_text)
                 }
 
     # 2. Check primary file and other files
@@ -1704,15 +1633,15 @@ def extract_suite_source_notes(suite_dir: Path, suite_key: str, meta: Dict[str, 
         return {
             "source_file": best_file,
             "raw_text": best_text,
-            "notes_html": natural_docs_to_html(best_text)
+            "notes_html": MD_PARSER.render(best_text)
         }
 
     # Fallback to meta summary if comments were sparse
-    fallback_text = f"About: {meta['title']}\n\n{meta['summary']}"
+    fallback_text = f"#### {meta['title']}\n\n{meta['summary']}"
     return {
         "source_file": primary_file or (files_data[0]["name"] if files_data else "source"),
         "raw_text": fallback_text,
-        "notes_html": natural_docs_to_html(fallback_text)
+        "notes_html": MD_PARSER.render(fallback_text)
     }
 
 # Map each interactive example suite to its primary paired UVM source implementation

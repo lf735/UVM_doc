@@ -10,6 +10,7 @@ import re
 import html
 import json
 import posixpath
+import markdown as md_lib
 from pathlib import Path
 from collections import OrderedDict
 from functools import lru_cache
