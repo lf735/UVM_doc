@@ -56,13 +56,14 @@ UVM_doc/
 │   ├── app.js                # Core SPA application (router, search, theme, split view)
 │   ├── doc_page.js           # Shared controller for docs_view reference pages
 │   ├── example_page.js       # Controller for interactive example studios & ZIP downloads
-│   ├── tutorial_page.js      # Controller for 13-chapter tutorial, Cytoscape, Mermaid, diff2html & quizzes
+│   ├── tutorial_page.js      # Controller for modular tutorial, Cytoscape, Mermaid, diff2html & quizzes
+│   ├── tutorial_meta.js      # Generated tutorial manifest for home.html progress & featured cards
 │   ├── rag_engine.js         # Client-side RAG & vector similarity search engine
 │   └── search_data.js        # Generated index (untracked, built at deployment & locally)
 ├── scripts/
 │   ├── build_docs.py         # Python build script generating docs_view, src_view, tutorial_view, and nav data
 │   ├── build_examples.py     # Python generator for all 39 interactive example studios
-│   ├── build_tutorial.py     # Jinja2 + markdown-it-py generator for the 13 tutorial chapters
+│   ├── build_tutorial.py     # Jinja2 + markdown-it-py + PyYAML modular generator for tutorial chapters
 │   ├── build_rag_embeddings.py # Generates intelligent chunks & dense vector embeddings
 │   ├── build_uvm_source_db.py # Python parser extracting classes, methods, overrides, and macros
 │   ├── generate_quick_symbols.py # Fast symbol extractor with types, methods, constants & inheritance
@@ -72,7 +73,7 @@ UVM_doc/
 │   ├── test_syntax_highlighter.py # Automated unit test suite for syntax tokenization & clickable symbols
 │   ├── verify_code_editor_tools.py # Verification suite for code editor tools & clickable UVM symbols
 │   ├── verify_examples.py    # Automated verification suite for interactive examples
-│   ├── verify_tutorial.py    # BeautifulSoup verification suite for the 13 tutorial chapters & Capstone
+│   ├── verify_tutorial.py    # Data-driven verification suite for tutorial chapters, Capstone & cross-links
 │   ├── verify_inherited_members.py # Verification suite for class inheritance & inherited members
 │   ├── verify_js_syntax.py   # V8 JavaScript syntax & redeclaration verification suite
 │   ├── verify_source_notes.py # Verification suite for source notes & Apache license hygiene
@@ -83,9 +84,10 @@ UVM_doc/
 │   ├── uvm_source_database.js   # Browser JS bundle for local file:// execution (5.59 MB)
 │   └── uvm_dpi_database.json    # Dedicated DPI SystemVerilog <-> C bindings database (24 KB)
 ├── docs_view/                # Modernized, responsive UVM 1.2 reference HTML pages
-├── examples_view/            # 38 interactive UVM 1.2 multi-file example studios
-├── tutorial_src/             # Progressive SystemVerilog/C Packet-ALU sources (Ch.03 - Ch.13)
-├── tutorial_view/            # Generated 13-chapter interactive UVM 1.2 tutorial pages
+├── examples_view/            # 39 interactive UVM 1.2 multi-file example studios
+├── tutorial_content/         # Modular tutorial manifest, capstone graph YAML, and per-chapter .md files
+├── tutorial_src/             # Progressive SystemVerilog/C Packet-ALU sources
+├── tutorial_view/            # Generated interactive UVM 1.2 tutorial pages (<slug>.html)
 ├── src_view/                 # Syntax-highlighted HTML views of all source files
 ├── uvm-1.2/                  # Official Accellera UVM 1.2 distribution
 │   ├── src/                  # Raw SystemVerilog and C source tree
@@ -139,6 +141,13 @@ The build scripts will:
 
 > **Note on version control:** `js/search_data.js` (~1.5 MB), `js/uvm_symbol_quick.js`, `js/doc_topics/` and `data/` (~5.8 MB) are excluded from Git tracking (`.gitignore`) to avoid repository bloat and diff churn. The GitHub Actions deployment workflow automatically builds these files upon deployment.
 
+### Customizing the Step-by-Step Tutorial
+
+The tutorial is driven by `tutorial_content/`:
+- **Reorder, add, or remove chapters**: edit `tutorial_content/tutorial_manifest.yaml` (`parts` and ordered `chapters` slugs). Chapter numbers (`01..N`), diff inheritance (`inherit_from: auto`), sidebar navigation, `js/tutorial_meta.js` (`home.html` cards & counters), Capstone layers (`tutorial_content/tutorial_capstone_graph.yaml`), and `verify_tutorial.py` assertions adapt automatically.
+- **Edit chapter content**: modify `tutorial_content/chapters/<slug>.md` (YAML frontmatter + Markdown prose, Mermaid diagrams, quizzes, steppers, and links).
+- **Rebuild & verify**: run `python scripts/build_docs.py`, `python scripts/build_rag_embeddings.py`, and `python scripts/run_tests.py`.
+
 ---
 
 ## ✨ Natural Language Semantic Search (Client-Side RAG)
@@ -178,7 +187,7 @@ For comprehensive technical specifications, user guides, reverse-engineered arch
 - **[RAG Technical Specification & Architecture](RAG_SPECIFICATION.md)**: Comprehensive specification of the client-side 2-level hierarchical RAG, intent catalog embedding enrichment, vector cosine similarity pipeline, and hybrid ranking.
 - **[RAG User Guide (Recherche en Langage Naturel)](RAG_USER_GUIDE.md)**: End-user handbook on using the AI natural language search, query examples by verification domain, interpreting deep-link results, and settings customization.
 - **[Product Specification & Engineering Methodology](PRODUCT_SPEC_AND_METHODOLOGY.md)**: Reverse-engineered specification, `postMessage` protocol catalog, 15 engineering rules, and 3-level verification strategy.
-- **[Lessons Learned & Technical Traps Guide](LESSONS_LEARNED.md)**: Real-world post-mortem analysis across 33 technical cases (modal backdrops, smooth scrolling race conditions, clickable symbol disambiguation popovers, inherited members aggregation, and deep anchor navigation in retracted zones).
+- **[Lessons Learned & Technical Traps Guide](LESSONS_LEARNED.md)**: Real-world post-mortem analysis across 49 technical cases (modal backdrops, smooth scrolling race conditions, clickable symbol disambiguation popovers, inherited members aggregation, CSS `@layer` cascade, vector SVG zoom, and modular tutorial architecture).
 
 ---
 

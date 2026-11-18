@@ -1506,3 +1506,27 @@ Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met �
    - `new vm.Script(...)` en une passe Node sur tous les bundles `js/doc_topics/*.js` ;
    - `new vm.Script(...)` sur tous les blocs `<script>` inline des pages HTML racines (`index.html`, `home.html`, `mobile_preview.html`, `uvm_database_explorer.html`).
    - En CI (`CI=true`), l'absence de `node` fait échouer immédiatement la suite afin de ne jamais valider silencieusement du JavaScript cassé.
+
+---
+
+## 49. Le Piège des Panneaux Interactifs, Superpositions CSS/Iframe, Zoom SVG et Couplage Rigide des Chapitres (`tutorial_page.js`, `app_modals.js`, `style.css`, `build_tutorial.py`)
+
+### Les Symptômes Observés
+1. **Bouton contextuel `#doc-tutorial-back-btn` incliquable** : visible visuellement dans `.pane-header`, mais les clics passaient au travers vers `#doc-frame`.
+2. **Bouton chapitre suivant (`a.btn-primary`) illisible** : texte bleu sur fond bleu dans `.tut-footer-nav`.
+3. **Diffs `diff2html` repliés ou en-têtes redondants** : la liste `.d2h-file-list` était masquée par défaut derrière *show*, et `.d2h-file-header` réapparaissait malgré `@layer components`, ou s'affichait à droite du nom de fichier dans `li`.
+4. **Zoom SVG pixelisé dans `#image-zoom-modal`** : zoomer sur un diagramme Mermaid sérialisé en `data:image/svg+xml` floutait le texte et les traits.
+5. **Erreur de syntaxe Mermaid sur `callbacks_reporting`** : backticks `` ` `` et flèches `->` dans les labels d'arêtes (`|"`uvm_do_callbacks(pre_drive)"|`).
+6. **Couplage rigide sur le nombre de chapitres (`13`) et préfixes `chXX_`** : ajouter, supprimer ou réordonner un chapitre obligeait à modifier plusieurs fichiers JS/HTML/YAML/tests.
+
+### Les Solutions Appliquées
+- **Hygiène CSS (`style.css`)** :
+  - Ajout de `pointer-events: auto;` sur `.doc-tutorial-back-btn` (car `.pane-header` impose `pointer-events: none;`).
+  - Spécificité explicite `.tut-footer-nav a.btn-primary { color: #ffffff; }` pour surpasser `.doc-main-content a { color: var(--primary); }`, et override `#1a73e8` en mode sombre.
+  - `display: none !important;` sur `.d2h-file-header` (les styles CDN hors `@layer` dominent `@layer components`) + `li` en `display: flex; flex-wrap: wrap;` avec `.d2h-file-wrapper { flex: 0 0 100%; }` pour intégrer le diff en accordéon pleine largeur sous la ligne du fichier.
+- **Superposition plein écran multi-cadres (`app.js`, `tutorial_page.js`, `style.css`)** :
+  - `setTutorialPanelFullscreen` bascule `body.tut-panel-fullscreen-overlay` sur `#doc-pane` (`position: fixed; inset: 0; z-index: 2600;`) via `postMessage` pour couvrir toute la fenêtre (comme `#image-zoom-modal` et `#search-modal`), avec `#tut-insp-toggle` en icône seule hors de `#tut-cy-inspector` et `#tut-cy-fit` dans `.tut-cy-stage`.
+- **Zoom SVG vectoriel (`app_modals.js`, `page_common.js`)** :
+  - Pour les sources SVG (`.svg` ou `data:image/svg+xml`), garantie d'un `viewBox` et zoom par dimensions CSS (`width`/`height = baseNatural * currentZoom`) sans `transform: scale(...)`, forçant Chromium à re-rasteriser le vecteur à pleine netteté.
+- **Architecture tutoriel modulaire (`tutorial_content/`, `build_tutorial.py`, `verify_tutorial.py`)** :
+  - Manifeste unique `tutorial_content/tutorial_manifest.yaml`, chapitres isolés en `tutorial_content/chapters/<slug>.md` (YAML frontmatter + Markdown), graphe Capstone piloté par `layerSlug`/`chapterSlug` (`tutorial_content/tutorial_capstone_graph.yaml`), URLs stables `tutorial_view/<slug>.html`, `js/tutorial_meta.js` généré pour `home.html`, et assertions dynamiques dans `verify_tutorial.py`.

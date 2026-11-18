@@ -133,6 +133,8 @@ Toutes les interactions entre le conteneur principal (`index.html` / `js/app.js`
 | `tutorial_view` / `home.html` | Parent | `openTutorialView` | `{ url: string }` | Ouvre un chapitre du tutoriel pas à pas dans `#doc-frame` et active l'onglet latéral `Tutorial`. |
 | `tutorial_view` | Parent | `tutorialNavigated` | `{ url: string }` | Notifie le parent qu'un chapitre tutoriel a été chargé pour actualiser le titre, la sidebar et le hash `#/tutorial/...`. |
 | `tutorial_view` | Parent | `tutorialProgressUpdated` | `{ progress: object }` | Synchronise la barre de progression du tutoriel dans la sidebar et sur `home.html`. |
+| `tutorial_view` | Parent | `setTutorialPanelFullscreen` | `{ active: boolean }` | Active ou désactive la superposition plein écran (`body.tut-panel-fullscreen-overlay` sur `#doc-pane`) pour les panneaux interactifs `.tut-interactive-panel` / `.capstone-explorer`. |
+| Parent | `tutorial_view` | `exitTutorialPanelFullscreen` | `{}` | Transmet la touche `Escape` pressée dans le parent pour quitter le mode plein écran du panneau interactif. |
 | `docs_view` | Parent | `docNavigated` | `{ url: string }` | Notifie le parent qu'une nouvelle page de documentation a été chargée afin d'actualiser le titre, la sidebar et le hash URL. |
 | `src_view` | Parent | `srcNavigated` | `{ url: string }` | Notifie le parent qu'un fichier source a été chargé pour actualiser le titre, la sidebar et le hash URL. |
 | `docs_view` | Parent | `docSectionChanged` | `{ anchor: string, id: string, title: string }` | Informe le parent de la section active via le scrollspy pour synchroniser la navigation gauche. |
@@ -153,8 +155,8 @@ L'application principale (`index.html` / `js/app.js`) fonctionne en mode Single 
 | **Code Source** | `#/src/<chemin_relatif>[#L<ligne>]` | `#/src/comps/uvm_driver.svh#L42` | `src_view/<chemin_relatif>.html[#L<ligne>]` dans `#src-frame` |
 | **Exemple Studio** | `#/example/<categorie>/<suite>.html[#<ancre>]` | `#/example/basics/hello_world.html` | `examples_view/<categorie>/<suite>.html[#<ancre>]` dans `#doc-frame` |
 | **Index Exemples** | `#/examples` | `#/examples` | Active l'onglet `Examples` et ouvre `examples_view/basics/hello_world.html` |
-| **Chapitre Tutoriel** | `#/tutorial/<chapitre>.html[#<ancre>]` | `#/tutorial/ch03_minimal_stimuli.html` | `tutorial_view/<chapitre>.html[#<ancre>]` dans `#doc-frame` |
-| **Index Tutoriel** | `#/tutorial` | `#/tutorial` | Active l'onglet `Tutorial` et ouvre `tutorial_view/ch01_verification_vcycle.html` |
+| **Chapitre Tutoriel** | `#/tutorial/<slug>.html[#<ancre>]` | `#/tutorial/minimal_stimuli.html` | `tutorial_view/<slug>.html[#<ancre>]` dans `#doc-frame` |
+| **Index Tutoriel** | `#/tutorial` | `#/tutorial` | Active l'onglet `Tutorial` et ouvre le premier chapitre du manifeste (`tutorial_view/verification_vcycle.html`) |
 | **Split-View (Doc + Source)** | `#/split?doc=<doc_enc>&src=<src_enc>` | `#/split?doc=files%2Fcomps%2Fuvm_driver-svh.html&src=comps%2Fuvm_driver.svh` | Charge simultanément `#doc-frame` (`docs_view/`, `examples_view/` ou `tutorial_view/`) et `#src-frame` (`src_view/`) |
 
 #### 2. Formats des ancres intra-pages (`#<ancre>`)
@@ -325,8 +327,9 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 │  - verify_code_editor_tools.py (symboles cliquables & désambiguïsation)│
 │  - verify_inherited_members.py (intégrité des chaînes de classes & APIs)│
 │  - verify_stepper_calibration.py (calibration des 5 piliers & logs)    │
+│  - verify_tutorial.py (validation data-driven du tutoriel & Capstone)   │
 │  - verify_source_notes.py (notes sources & 0 fuite Apache sur 39 suites)│
-│  - scripts/run_tests.py (orchestrateur unifié des 11 suites CI/local)  │
+│  - scripts/run_tests.py (orchestrateur unifié des 12 suites CI/local)  │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │
 ┌───────────────────────────────────▼────────────────────────────────────┐
@@ -338,7 +341,8 @@ Chaque évolution doit être validée par une suite de vérifications à trois n
 ### 4.1 Check-list de Vérification Obligatoire
 
 Avant de valider une version :
-- [ ] **Suite Unifiée (CI & Local)** : `python scripts/run_tests.py` exécute les 11 suites et retourne `0` (`11/11 PASS`).
+- [ ] **Suite Unifiée (CI & Local)** : `python scripts/run_tests.py` exécute les 12 suites et retourne `0` (`12/12 PASS`).
+- [ ] **Tutoriel Modulaire (`tutorial_content/`)** : `tutorial_manifest.yaml` + `chapters/<slug>.md` + `tutorial_capstone_graph.yaml` génèrent `tutorial_view/<slug>.html`, `src_view/tutorial/<slug>/` et `js/tutorial_meta.js` sans compteurs codés en dur ; `verify_tutorial.py` valide la correspondance 1:1.
 - [ ] **Vérification Syntaxique JavaScript (V8)** : `python scripts/verify_js_syntax.py` valide tous les fichiers `js/*.js` (`node --check`), les bundles `js/doc_topics/*.js` et les blocs `<script>` inline des pages HTML racines (`0` `SyntaxError` / redéclaration `const`/`let`).
 - [ ] **Vérification du Shell, Ancres & Mobile** : `python scripts/verify_shell_layout.py` valide `overflow: clip`, le verrouillage `position: fixed` de `.app-header` sur mobile (`<= 860px`), le masquage de `.view-switcher` sur mobile et la synchronisation initiale de `#open-full-doc`.
 - [ ] **Tests Unitaires de Coloration Syntaxique & Symboles Cliquables** : `python scripts/test_syntax_highlighter.py` (8/8 tests validés avec `test_clickable_uvm_symbols`).
