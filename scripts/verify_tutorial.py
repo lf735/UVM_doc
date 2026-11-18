@@ -1,25 +1,24 @@
 #!/usr/bin/env python3
 """
 Automated Verification Suite for the UVM 1.2 Step-by-Step Interactive Tutorial.
-Uses BeautifulSoup (bs4) to validate:
-1. All 13 chapter HTML pages in tutorial_view/ and standalone src_view/tutorial/ views.
-2. Code Studio, Simulation Console, Flow Stepper, ZIP payload, Diff payload, and Quizzes.
-3. Chapter 13 Capstone 4-in-1 dynamic explorer (nodes, layers, chapter back-links, doc links).
-4. Link and anchor integrity for 100% of docs_view/ and examples_view/ cross-links.
-5. Integration in js/search_data.js, index.html, home.html, js/app.js, js/tutorial_page.js, and css/style.css.
-6. RAG indexing of all 13 chapters in data/rag_chunks.json (when generated).
+Data-driven from config/tutorial_manifest.yaml & tutorial_content/chapters/*.md
+so adding, removing, or reordering chapters never breaks static count assertions.
 """
 
 import json
-import re
 import sys
 from pathlib import Path
 from bs4 import BeautifulSoup
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "scripts"))
+
+import build_tutorial  # noqa: E402
+
 TUTORIAL_VIEW_DIR = BASE_DIR / "tutorial_view"
 SRC_TUTORIAL_DIR = BASE_DIR / "src_view" / "tutorial"
 SEARCH_DATA_FILE = BASE_DIR / "js" / "search_data.js"
+TUTORIAL_META_FILE = BASE_DIR / "js" / "tutorial_meta.js"
 RAG_CHUNKS_FILE = BASE_DIR / "data" / "rag_chunks.json"
 
 TOTAL_TESTS = 0
@@ -53,9 +52,19 @@ def main() -> int:
     print("  UVM 1.2 Step-by-Step Tutorial Verification Suite")
     print("=" * 64)
 
+    manifest, chapters = build_tutorial.load_tutorial_curriculum()
+    expected_chapters = len(chapters)
+    expected_parts = len({ch["part_id"] for ch in chapters})
+    expected_slugs = {ch["slug"] for ch in chapters}
+
     assert_test(TUTORIAL_VIEW_DIR.is_dir(), "tutorial_view/ directory exists")
-    html_files = sorted(TUTORIAL_VIEW_DIR.glob("ch*.html"))
-    assert_test(len(html_files) == 13, f"All 13 tutorial chapters generated ({len(html_files)} found)")
+    html_files = sorted(TUTORIAL_VIEW_DIR.glob("*.html"))
+    found_slugs = {hf.stem for hf in html_files}
+    assert_test(
+        found_slugs == expected_slugs,
+        f"tutorial_view/ matches manifest 1:1 ({len(found_slugs)}/{expected_chapters} chapters)",
+        f"missing={expected_slugs - found_slugs}, stale={found_slugs - expected_slugs}",
+    )
 
     broken_links = []
     missing_studio_features = []
@@ -64,19 +73,24 @@ def main() -> int:
     capstone_issues = []
 
     anchor_cache: dict[tuple[str, str], bool] = {}
+    code_chapters = 0
+    diff_chapters = 0
 
-    for hf in html_files:
+    for ch in chapters:
+        slug = ch["slug"]
+        hf = TUTORIAL_VIEW_DIR / f"{slug}.html"
+        if not hf.is_file():
+            continue
         raw = hf.read_text(encoding="utf-8")
         soup = BeautifulSoup(raw, "html.parser")
 
-        # Validate quizzes on every chapter
         if not soup.find(id="tut-quiz-payload") or not soup.find(id="tut-quiz-container"):
             missing_quizzes.append(hf.name)
 
-        # Validate Mermaid diagrams exist
-        assert_test(bool(soup.select("pre.mermaid")) or hf.name.startswith("ch13"), f"{hf.name} contains Mermaid or Capstone diagram")
+        widget = ch.get("interactive_widget")
+        if widget != "capstone":
+            assert_test(bool(soup.select("pre.mermaid")), f"{hf.name} contains Mermaid diagram")
 
-        # Validate all doc and example links resolve with valid anchors
         for el in soup.select("[data-doc-href], [data-example-url]"):
             rel_target = el.get("data-doc-href") or el.get("data-example-url")
             if not rel_target:
@@ -93,54 +107,66 @@ def main() -> int:
                 if not anchor_cache[key]:
                     broken_links.append((hf.name, rel_target, f"missing anchor #{anchor}"))
 
-        # Practical chapters ch03..ch13
-        ch_num = int(hf.name[2:4])
-        if ch_num >= 3:
+        if ch.get("src_dir"):
+            code_chapters += 1
             for req_id in ("zip-payload", "stepper-payload", "visual-flow-stepper", "terminal-body", "code-find-widget", "btn-toggle-monaco"):
                 if not soup.find(id=req_id):
                     missing_studio_features.append((hf.name, req_id))
             if not soup.select(".clickable-uvm-sym"):
                 missing_studio_features.append((hf.name, "clickable-uvm-sym"))
-        if ch_num >= 4:
+
+        if ch.get("inherit_from"):
+            diff_chapters += 1
             if not soup.find(id="tut-diff-payload") or not soup.find(id="tut-diff-container"):
                 missing_diffs.append(hf.name)
 
-        if ch_num == 1:
-            assert_test(bool(soup.find(id="tut-cy-graph")) and bool(soup.find(id="tut-graph-payload")),
-                        "Ch.01 contains Cytoscape interactive V-Cycle diagram & payload")
-        if ch_num == 2:
-            assert_test(bool(soup.select(".tut-scm-tab")) and bool(soup.find(id="tut-scm-detail")),
-                        "Ch.02 contains interactive Stimuli/Checks/Metrics matrix")
-        if ch_num == 13:
+        if widget == "vcycle":
+            assert_test(
+                bool(soup.find(id="tut-cy-graph")) and bool(soup.find(id="tut-graph-payload")),
+                f"{hf.name} contains Cytoscape interactive V-Cycle diagram & payload",
+            )
+        if widget == "scm_matrix":
+            assert_test(
+                bool(soup.select(".tut-scm-tab")) and bool(soup.find(id="tut-scm-detail")),
+                f"{hf.name} contains interactive Stimuli/Checks/Metrics matrix",
+            )
+        if widget == "capstone":
             if not soup.find(id="capstone-explorer") or not soup.find(id="tut-layer-slider"):
                 capstone_issues.append("Missing #capstone-explorer or #tut-layer-slider")
             gp_el = soup.find(id="tut-graph-payload")
             if not gp_el:
-                capstone_issues.append("Missing #tut-graph-payload in Ch.13")
+                capstone_issues.append(f"Missing #tut-graph-payload in {hf.name}")
             else:
                 gp = json.loads(gp_el.get("data-tut-graph", "{}"))
                 nodes = gp.get("nodes", [])
                 if len(nodes) < 15:
                     capstone_issues.append(f"Expected >= 15 capstone nodes, found {len(nodes)}")
-                if len(gp.get("layers", [])) < 10:
-                    capstone_issues.append("Expected >= 10 layer slider definitions")
+                if len(gp.get("layers", [])) < 2:
+                    capstone_issues.append("Expected >= 2 layer slider definitions")
                 for n in nodes:
                     ch_url = n.get("chapterUrl", "")
                     doc_url = n.get("docUrl", "")
-                    if not ch_url or not (BASE_DIR / ch_url).is_file():
+                    if ch_url and not (BASE_DIR / ch_url).is_file():
                         capstone_issues.append(f"Invalid node chapterUrl: {ch_url}")
                     if not doc_url or not (BASE_DIR / doc_url.split("#")[0]).is_file():
                         capstone_issues.append(f"Invalid node docUrl: {doc_url}")
 
-    assert_test(len(missing_quizzes) == 0, "All 13 chapters include interactive Self-Check Quizzes", str(missing_quizzes))
-    assert_test(len(missing_studio_features) == 0, "Chapters 03-13 include Code Studio, Stepper, Console & ZIP payloads", str(missing_studio_features))
-    assert_test(len(missing_diffs) == 0, "Chapters 04-13 include unified diff payloads & diff2html containers", str(missing_diffs))
+    assert_test(len(missing_quizzes) == 0, f"All {expected_chapters} chapters include interactive Self-Check Quizzes", str(missing_quizzes))
+    assert_test(len(missing_studio_features) == 0, f"All {code_chapters} code chapters include Code Studio, Stepper, Console & ZIP payloads", str(missing_studio_features))
+    assert_test(len(missing_diffs) == 0, f"All {diff_chapters} incremental chapters include unified diff payloads & diff2html containers", str(missing_diffs))
     assert_test(len(broken_links) == 0, "100% of chapter doc/example cross-links resolve with valid anchors", str(broken_links))
-    assert_test(len(capstone_issues) == 0, "Chapter 13 Capstone 4-in-1 explorer, layers & click-back links valid", str(capstone_issues))
+    assert_test(len(capstone_issues) == 0, "Capstone 4-in-1 explorer, layers & click-back links valid", str(capstone_issues))
 
     # Standalone src_view/tutorial/ checks
-    tut_src_pages = list(SRC_TUTORIAL_DIR.rglob("*.html")) if SRC_TUTORIAL_DIR.is_dir() else []
-    assert_test(len(tut_src_pages) >= 150, f"Standalone src_view/tutorial/ pages generated ({len(tut_src_pages)} found)")
+    tut_src_dirs = {d.name for d in SRC_TUTORIAL_DIR.iterdir() if d.is_dir()} if SRC_TUTORIAL_DIR.is_dir() else set()
+    expected_code_slugs = {ch["slug"] for ch in chapters if ch.get("src_dir")}
+    assert_test(
+        tut_src_dirs == expected_code_slugs,
+        f"src_view/tutorial/ folders match manifest code chapters ({len(tut_src_dirs)}/{len(expected_code_slugs)})",
+    )
+
+    # Check js/tutorial_meta.js
+    assert_test(TUTORIAL_META_FILE.is_file(), "js/tutorial_meta.js exists")
 
     # Check search_data.js integration
     assert_test(SEARCH_DATA_FILE.is_file(), "js/search_data.js exists")
@@ -153,19 +179,29 @@ def main() -> int:
 
         tut_tree = uvm_data.get("tutorialTree", [])
         total_tree_chapters = sum(len(p.get("children", [])) for p in tut_tree)
-        assert_test(len(tut_tree) == 5 and total_tree_chapters == 13,
-                    f"search_data.js tutorialTree has 5 parts & 13 chapters ({len(tut_tree)} parts, {total_tree_chapters} chapters)")
+        assert_test(
+            len(tut_tree) == expected_parts and total_tree_chapters == expected_chapters,
+            f"search_data.js tutorialTree has {expected_parts} parts & {expected_chapters} chapters ({len(tut_tree)} parts, {total_tree_chapters} chapters)",
+        )
 
         tut_search = [x for x in uvm_data.get("searchIndex", []) if x.get("type") == "tutorial"]
-        assert_test(len(tut_search) == 13, f"searchIndex contains all 13 tutorial entries ({len(tut_search)} found)")
+        assert_test(
+            len(tut_search) == expected_chapters,
+            f"searchIndex contains all {expected_chapters} tutorial entries ({len(tut_search)} found)",
+        )
 
         tut_to_src = uvm_data.get("tutorialToSrc", {})
-        assert_test(len(tut_to_src) >= 11, f"tutorialToSrc maps practical chapters for Split View ({len(tut_to_src)} mapped)")
+        assert_test(
+            len(tut_to_src) == code_chapters,
+            f"tutorialToSrc maps all {code_chapters} code chapters for Split View ({len(tut_to_src)} mapped)",
+        )
 
     # Check SPA & frontend wiring
     index_html = (BASE_DIR / "index.html").read_text(encoding="utf-8")
-    assert_test('data-tab="tutorial"' in index_html and 'id="doc-tutorial-back-btn"' in index_html and 'data-type="tutorial"' in index_html,
-                "index.html integrates Tutorial sidebar tab, Back button, and Search filter pill")
+    assert_test(
+        'data-tab="tutorial"' in index_html and 'id="doc-tutorial-back-btn"' in index_html and 'data-type="tutorial"' in index_html,
+        "index.html integrates Tutorial sidebar tab, Back button, and Search filter pill",
+    )
 
     app_js = (BASE_DIR / "js" / "app.js").read_text(encoding="utf-8")
     for tok in ("openTutorialView", "renderTutorialTree", "#/tutorial/", "tutorialProgressUpdated", "badge-tutorial"):
@@ -183,7 +219,10 @@ def main() -> int:
     if RAG_CHUNKS_FILE.is_file():
         chunks = json.loads(RAG_CHUNKS_FILE.read_text(encoding="utf-8"))
         tut_parents = [c for c in chunks if c.get("type") == "tutorial" and c.get("level") == "parent"]
-        assert_test(len(tut_parents) == 13, f"data/rag_chunks.json indexes all 13 tutorial chapters ({len(tut_parents)} found)")
+        assert_test(
+            len(tut_parents) == expected_chapters,
+            f"data/rag_chunks.json indexes all {expected_chapters} tutorial chapters ({len(tut_parents)} found)",
+        )
 
     print("=" * 64)
     print(f"  Test Results: {PASSED_TESTS}/{TOTAL_TESTS} passed ({FAILED_TESTS} failed)")

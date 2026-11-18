@@ -1,0 +1,431 @@
+# -----------------------------------------------------------------------------
+# Interactive Graph Specifications for Cytoscape.js (Ch.01 V-Cycle & Ch.13 Capstone)
+# -----------------------------------------------------------------------------
+
+vcycle_nodes:
+  - id: spec
+    label: "1. System Spec & Arch"
+    role: architect
+    phase: left_top
+    x: 90
+    y: 70
+    owner: "System Architect"
+    deliverables: "Functional spec, register map (IP-XACT/CSV), latency & bandwidth budgets, interface protocols."
+    handoff: "Passes architectural spec & register definitions to both RTL Designer and Verification Architect."
+    docUrl: "docs_view/overviews/intro-txt.html"
+  - id: uarch
+    label: "2. Micro-Architecture"
+    role: designer
+    phase: left_mid
+    x: 165
+    y: 165
+    owner: "RTL Designer"
+    deliverables: "Pipeline stages, FIFO sizing, FSM state encoding, backpressure strategy, clock/reset domain plan."
+    handoff: "Reviews corner cases & error behaviors with Verifier to capture in the vPlan."
+    docUrl: "docs_view/overviews/components-txt.html"
+  - id: rtl
+    label: "3. RTL Design (DUT)"
+    role: designer
+    phase: bottom_left
+    x: 255
+    y: 260
+    owner: "RTL Designer"
+    deliverables: "Synthesizable SystemVerilog modules (pkt_alu.sv), lint-clean RTL, basic smoke bring-up."
+    handoff: "Freezes RTL interface contract (pin list + timing) for UVM virtual interfaces & SVA."
+    docUrl: "docs_view/overviews/intro-txt.html"
+  - id: vplan
+    label: "4. Verification Plan (vPlan)"
+    role: verifier
+    phase: bottom_right
+    x: 425
+    y: 260
+    owner: "Verification Engineer"
+    deliverables: "Feature-to-metric matrix, stimulus scenarios, checkers/SVA list, functional & code coverage targets."
+    handoff: "Mapped back to System Spec requirements (Architect) and driven by UVM testbench."
+    docUrl: "docs_view/overviews/sequences-txt.html"
+  - id: block_verif
+    label: "5. Block UVM Testbench"
+    role: verifier
+    phase: right_mid
+    x: 515
+    y: 165
+    owner: "Verification Engineer"
+    deliverables: "Agents, sequences, scoreboard, C/DPI reference model, RAL, functional coverage, regressions."
+    handoff: "Closes 100% functional/code coverage at IP level before subsystem vertical reuse."
+    docUrl: "docs_view/comps/uvm_env-svh.html"
+  - id: signoff
+    label: "6. SoC Reuse & Sign-Off"
+    role: architect
+    phase: right_top
+    x: 590
+    y: 70
+    owner: "Architect + Verifier + Designer"
+    deliverables: "Vertical UVM_PASSIVE reuse in SoC, zero open UVM_ERRORs, 100% vPlan coverage sign-off."
+    handoff: "Formal tape-out readiness review signed off jointly by Architect, Designer, and Verifier."
+    docUrl: "docs_view/comps/uvm_agent-svh.html"
+
+vcycle_edges:
+  - source: spec
+    target: uarch
+    label: "Arch Spec"
+  - source: uarch
+    target: rtl
+    label: "Micro-Arch"
+  - source: rtl
+    target: vplan
+    label: "RTL Contract"
+  - source: vplan
+    target: block_verif
+    label: "Metrics & Tests"
+  - source: block_verif
+    target: signoff
+    label: "Closure"
+  - source: spec
+    target: signoff
+    label: "Requirements Traceability"
+    style: dashed
+  - source: uarch
+    target: block_verif
+    label: "Corner-Case Review"
+    style: dashed
+
+capstone_layers:
+  - layerSlug: minimal_stimuli
+    label: "Minimal Stimuli (Seq -> Seqr -> Drv -> DUT)"
+  - layerSlug: agent_factory_config
+    label: "Agent, Env, Factory & ConfigDB"
+  - layerSlug: monitor_scoreboard
+    label: "Monitor, TLM-1 & Scoreboard"
+  - layerSlug: coverage_sva
+    label: "Functional Coverage & SVA"
+  - layerSlug: pipelined_layered_vseq
+    label: "Pipelining, APB Agent, Layered Seq & Virtual Seq"
+  - layerSlug: callbacks_reporting
+    label: "Callbacks, Report Catcher & Cmdline"
+  - layerSlug: phasing_sync_heartbeat
+    label: "Sub-Phases, Domains, Barriers & Heartbeat"
+  - layerSlug: ral
+    label: "Register Abstraction Layer (RAL)"
+  - layerSlug: tlm2_sockets
+    label: "TLM-2.0 Sockets & Temporal Decoupling"
+  - layerSlug: dpi_vertical_reuse
+    label: "DPI-C C Model & Vertical Subsystem Reuse"
+  - layerSlug: capstone
+    label: "Complete Unified Environment"
+
+capstone_nodes:
+  - id: grp_subsys
+    label: "soc_subsys_env (Ch.12)"
+    kind: container
+    layerSlug: dpi_vertical_reuse
+    chapterSlug: dpi_vertical_reuse
+    docUrl: "docs_view/comps/uvm_env-svh.html"
+    studioFile: "soc_subsys_env.sv"
+    role: "Vertical Reuse Container"
+    summary: "Top subsystem wrapper instantiating block_alu_env and supporting UVM_PASSIVE vertical SoC reuse."
+    ports: ["cfg: soc_subsys_cfg"]
+
+  - id: grp_env
+    label: "alu_env (Ch.04+)"
+    parent: grp_subsys
+    kind: container
+    layerSlug: agent_factory_config
+    chapterSlug: agent_factory_config
+    docUrl: "docs_view/comps/uvm_env-svh.html"
+    studioFile: "alu_env.sv"
+    role: "Verification Environment"
+    summary: "Reusable block-level UVM environment coordinating agents, virtual sequencer, scoreboard, coverage, RAL, TLM-2, and heartbeat."
+    ports: ["cfg: alu_env_cfg"]
+
+  - id: uvm_test
+    label: "alu_capstone_full_test\n(uvm_test)"
+    kind: test
+    layerSlug: minimal_stimuli
+    x: 430
+    y: 45
+    chapterSlug: minimal_stimuli
+    docUrl: "docs_view/comps/uvm_test-svh.html"
+    studioFile: "alu_test.sv"
+    role: "Test & Phase Controller"
+    summary: "Top-level UVM test managing factory overrides, cmdline flags (+INJECT_ERR), reset/configure/main/shutdown sub-phases, and objections."
+    ports: ["run_phase / sub-phases", "uvm_cmdline_processor"]
+
+  - id: v_seqr
+    label: "alu_virtual_sequencer\n(Ch.07)"
+    parent: grp_env
+    kind: seq
+    layerSlug: pipelined_layered_vseq
+    x: 245
+    y: 155
+    chapterSlug: pipelined_layered_vseq
+    docUrl: "docs_view/seq/uvm_sequencer-svh.html"
+    studioFile: "alu_virtual_sequencer.sv"
+    role: "Multi-Interface Coordinator"
+    summary: "Holds sub-sequencer references (alu_sqr, apb_sqr) so virtual sequences synchronize register config and data streams via uvm_barrier & uvm_event."
+    ports: ["alu_sqr -> data_agent.seqr", "apb_sqr -> apb_agt.seqr"]
+
+  - id: layered_seq
+    label: "alu_virtual_seq &\nLayered Frame Seq"
+    kind: seq
+    layerSlug: pipelined_layered_vseq
+    x: 75
+    y: 155
+    chapterSlug: pipelined_layered_vseq
+    docUrl: "docs_view/seq/uvm_sequence-svh.html"
+    studioFile: "alu_seq.sv"
+    role: "Stimulus & Protocol Layering"
+    summary: "Translates high-level macro frames (x+y)*scale into pipelined alu_item bursts and coordinates concurrent streams."
+    ports: ["start_item / finish_item", "get_response(rsp)"]
+
+  - id: data_seqr
+    label: "data_agent.seqr\n(uvm_sequencer)"
+    parent: grp_env
+    kind: seq
+    layerSlug: minimal_stimuli
+    x: 165
+    y: 260
+    chapterSlug: minimal_stimuli
+    docUrl: "docs_view/seq/uvm_sequencer-svh.html"
+    studioFile: "alu_agent.sv"
+    role: "Sequence Arbitration"
+    summary: "Arbitrates concurrent sequences (SEQ_ARB_STRICT_FIFO, lock/grab) and routes alu_item requests/responses."
+    ports: ["seq_item_export (TLM pull)"]
+
+  - id: data_drv
+    label: "alu_driver\n(Pipelined + CB)"
+    parent: grp_env
+    kind: driver
+    layerSlug: minimal_stimuli
+    x: 165
+    y: 365
+    chapterSlug: minimal_stimuli
+    docUrl: "docs_view/comps/uvm_driver-svh.html"
+    studioFile: "alu_driver.sv"
+    role: "Pin-Level Driver"
+    summary: "Drives Valid/Ready transactions onto alu_if, triggers pre_drive callbacks, and returns tagged responses asynchronously via put(rsp)."
+    ports: ["seq_item_port", "virtual alu_if"]
+
+  - id: err_cb
+    label: "alu_err_inject_cb\n(uvm_callback)"
+    kind: hook
+    layerSlug: callbacks_reporting
+    x: 35
+    y: 365
+    chapterSlug: callbacks_reporting
+    docUrl: "docs_view/base/uvm_callback-svh.html"
+    studioFile: "alu_driver_cb.sv"
+    role: "Non-Intrusive Fault Hook"
+    summary: "Registered via `uvm_register_cb to mutate selected transactions into ALU_INVAL without editing driver source."
+    ports: ["pre_drive(drv, req)"]
+
+  - id: data_mon
+    label: "alu_monitor\n(Passive)"
+    parent: grp_env
+    kind: monitor
+    layerSlug: monitor_scoreboard
+    x: 330
+    y: 365
+    chapterSlug: monitor_scoreboard
+    docUrl: "docs_view/comps/uvm_monitor-svh.html"
+    studioFile: "alu_monitor.sv"
+    role: "Bus Observation"
+    summary: "Passively samples accepted inputs (req_ap) and DUT outputs (rsp_ap) on alu_if clocking block and broadcasts via TLM analysis ports."
+    ports: ["req_ap (analysis_port)", "rsp_ap (analysis_port)"]
+
+  - id: apb_agt
+    label: "apb_agt + apb_domain\n(Ch.07 / Ch.09)"
+    parent: grp_env
+    kind: agent
+    layerSlug: pipelined_layered_vseq
+    x: 490
+    y: 260
+    chapterSlug: pipelined_layered_vseq
+    docUrl: "docs_view/comps/uvm_agent-svh.html"
+    studioFile: "apb_agent_pkg.sv"
+    role: "APB3 Register Agent"
+    summary: "Drives and monitors APB3 SETUP/ACCESS cycles on apb_if within its own synchronized uvm_domain."
+    ports: ["ap (analysis_port)", "virtual apb_if"]
+
+  - id: ral_block
+    label: "pkt_alu_reg_block\n(RAL + Adapter + Predictor)"
+    parent: grp_env
+    kind: ral
+    layerSlug: ral
+    x: 685
+    y: 225
+    chapterSlug: ral
+    docUrl: "docs_view/reg/uvm_reg_block-svh.html"
+    studioFile: "pkt_alu_reg_block.sv"
+    role: "Register Abstraction Layer"
+    summary: "Models CTRL, STATUS, SAT_LIMIT, PKT_COUNT with apb_reg_adapter & explicit uvm_reg_predictor keeping desired/mirrored values synced."
+    ports: ["apb_map", "reg_predictor.bus_in", "HDL backdoor"]
+
+  - id: tlm2_bridge
+    label: "alu_tlm2_bridge\n(nb_initiator_socket)"
+    parent: grp_env
+    kind: tlm
+    layerSlug: tlm2_sockets
+    x: 495
+    y: 365
+    chapterSlug: tlm2_sockets
+    docUrl: "docs_view/tlm2/uvm_tlm2_sockets-svh.html"
+    studioFile: "alu_tlm2_bridge.sv"
+    role: "TLM-1 to TLM-2.0 Bridge"
+    summary: "Converts alu_item into uvm_tlm_generic_payload and communicates via 4-phase nb_transport_fw/bw with uvm_tlm_time quantum."
+    ports: ["req_imp", "nb_init_socket"]
+
+  - id: ref_model
+    label: "alu_ref_model\n(TLM-2 Target + DPI-C)"
+    parent: grp_env
+    kind: check
+    layerSlug: monitor_scoreboard
+    x: 685
+    y: 365
+    chapterSlug: dpi_vertical_reuse
+    docUrl: "docs_view/dpi/uvm_dpi-svh.html"
+    studioFile: "alu_ref_model.sv"
+    role: "Golden Reference Predictor"
+    summary: "Receives transactions and calls the C reference model across SystemVerilog DPI-C to predict exact DUT outputs."
+    ports: ["nb_target_socket", "DPI-C pkt_alu_dpi_calc"]
+
+  - id: c_model
+    label: "pkt_alu_ref.c\n(C Golden Model)"
+    kind: external
+    layerSlug: dpi_vertical_reuse
+    x: 845
+    y: 365
+    chapterSlug: dpi_vertical_reuse
+    docUrl: "docs_view/dpi/uvm_dpi-svh.html"
+    studioFile: "c_model/pkt_alu_ref.c"
+    role: "C/C++ Reference Implementation"
+    summary: "Compiled C model invoked directly by alu_ref_model via import \"DPI-C\" for algorithmic reuse."
+    ports: ["C ABI pkt_alu_dpi_calc()"]
+
+  - id: scoreboard
+    label: "alu_scoreboard\n(TLM FIFOs + RAL Aware)"
+    parent: grp_env
+    kind: check
+    layerSlug: monitor_scoreboard
+    x: 685
+    y: 475
+    chapterSlug: monitor_scoreboard
+    docUrl: "docs_view/comps/uvm_scoreboard-svh.html"
+    studioFile: "alu_scoreboard.sv"
+    role: "Self-Checking Comparator"
+    summary: "Buffers observed requests and responses in uvm_tlm_analysis_fifos, reads RAL mirror (SAT_LIMIT/CTRL), and checks expected vs actual."
+    ports: ["req_export", "rsp_export", "reg_model mirror"]
+
+  - id: cov_sub
+    label: "alu_cov_subscriber\n(covergroup)"
+    parent: grp_env
+    kind: metric
+    layerSlug: coverage_sva
+    x: 330
+    y: 475
+    chapterSlug: coverage_sva
+    docUrl: "docs_view/comps/uvm_subscriber-svh.html"
+    studioFile: "alu_cov_subscriber.sv"
+    role: "Functional Coverage Metrics"
+    summary: "Samples opcodes, operand corner cases, error flags, and cross coverage from monitor analysis broadcasts."
+    ports: ["analysis_export"]
+
+  - id: dut_sva
+    label: "pkt_alu (RTL DUT)\n+ alu_if SVA Assertions"
+    kind: dut
+    layerSlug: minimal_stimuli
+    x: 245
+    y: 580
+    chapterSlug: coverage_sva
+    docUrl: "docs_view/overviews/intro-txt.html"
+    studioFile: "dut/pkt_alu.sv"
+    role: "Hardware Design + Protocol SVA"
+    summary: "Dual-interface Packet-ALU RTL coupled with SystemVerilog Assertions checking Valid/Ready stability and reset hygiene."
+    ports: ["alu_if (Valid/Ready)", "apb_if (APB3)"]
+
+  - id: infra_ctrl
+    label: "Report Catcher &\nHeartbeat Watchdog"
+    parent: grp_env
+    kind: hook
+    layerSlug: callbacks_reporting
+    x: 685
+    y: 120
+    chapterSlug: phasing_sync_heartbeat
+    docUrl: "docs_view/base/uvm_heartbeat-svh.html"
+    studioFile: "alu_report_catcher.sv"
+    role: "Diagnostics & Liveness"
+    summary: "uvm_report_catcher filters expected injected faults; uvm_heartbeat monitors driver liveness against simulation hangs."
+    ports: ["uvm_report_cb", "hb_trig (uvm_event)"]
+
+capstone_edges:
+  - source: uvm_test
+    target: v_seqr
+    label: "starts vseq"
+    layerSlug: pipelined_layered_vseq
+  - source: uvm_test
+    target: infra_ctrl
+    label: "configures CB / HB"
+    layerSlug: callbacks_reporting
+  - source: layered_seq
+    target: v_seqr
+    label: "p_sequencer"
+    layerSlug: pipelined_layered_vseq
+  - source: v_seqr
+    target: data_seqr
+    label: "alu_sqr"
+    layerSlug: pipelined_layered_vseq
+  - source: v_seqr
+    target: apb_agt
+    label: "apb_sqr"
+    layerSlug: pipelined_layered_vseq
+  - source: data_seqr
+    target: data_drv
+    label: "seq_item_port"
+    layerSlug: minimal_stimuli
+  - source: err_cb
+    target: data_drv
+    label: "pre_drive CB"
+    layerSlug: callbacks_reporting
+  - source: data_drv
+    target: dut_sva
+    label: "alu_if pins"
+    layerSlug: minimal_stimuli
+  - source: apb_agt
+    target: dut_sva
+    label: "apb_if pins"
+    layerSlug: pipelined_layered_vseq
+  - source: dut_sva
+    target: data_mon
+    label: "mon_cb"
+    layerSlug: monitor_scoreboard
+  - source: data_mon
+    target: scoreboard
+    label: "req_ap / rsp_ap"
+    layerSlug: monitor_scoreboard
+  - source: data_mon
+    target: cov_sub
+    label: "req_ap -> write()"
+    layerSlug: coverage_sva
+  - source: data_mon
+    target: tlm2_bridge
+    label: "req_ap"
+    layerSlug: tlm2_sockets
+  - source: tlm2_bridge
+    target: ref_model
+    label: "nb_transport_fw/bw"
+    layerSlug: tlm2_sockets
+  - source: ref_model
+    target: c_model
+    label: "DPI-C call"
+    layerSlug: dpi_vertical_reuse
+  - source: ref_model
+    target: scoreboard
+    label: "predict()"
+    layerSlug: monitor_scoreboard
+  - source: apb_agt
+    target: ral_block
+    label: "bus_in -> predictor"
+    layerSlug: ral
+  - source: ral_block
+    target: scoreboard
+    label: "get_mirrored_value()"
+    layerSlug: ral

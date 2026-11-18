@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en" class="doc-page example-page tutorial-page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>03. Minimal Stimuli Environment: Every Piece Explained | UVM 1.2 Step-by-Step Tutorial</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/diff2html@3.4.48/bundles/css/diff2html.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="doc-body example-body tutorial-body">
+    <div class="doc-page-container">
+    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="../index.html#/tutorial" class="doc-breadcrumb-item doc-breadcrumb-link doc-breadcrumb-home">Tutorial</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">II. Stimuli &amp; Core Testbench Infrastructure</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">03. Minimal Stimuli Env</span>
+</nav>
+    <div class="doc-source-banner example-source-banner tutorial-banner">
+  <div class="banner-info">
+    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span class="file-label">Course:</span><code class="banner-file-code">Chapter 03/13</code><span class="badge badge-diff badge-diff-beginner">Beginner</span> <span class="badge badge-files">7 files</span>
+  </div>
+  <div class="banner-actions">
+    <button type="button" class="btn btn-primary" id="btn-download-zip" title="Download chapter SystemVerilog project (.zip)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Download (.zip)</span></button>
+  </div>
+</div>
+    <div class="doc-layout-wrapper">
+      <div class="doc-main-content">
+        <div id="Content">
+          <div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
+  <div class="CTopic" id="MainTopic">
+    <div class="tut-chapter-kicker">
+      <span class="tut-part-badge">II. Stimuli & Core Testbench Infrastructure</span>
+      <span class="tut-step-counter">Chapter 3 of 13</span>
+      <span class="tut-completion-pill" id="tut-completion-pill" data-chapter-slug="minimal_stimuli">Not completed</span>
+    </div>
+    <h1 class="CTitle"><a name="03. Minimal Stimuli Environment: Every Piece Explained">03. Minimal Stimuli Environment: Every Piece Explained</a></h1>
+    <div class="CBody">
+      <p class="example-summary-desc">Build the smallest possible UVM stimuli environment—no agent, no env, no scoreboard yet—and dissect every single line: alu_if, uvm_sequence_item, uvm_sequence, uvm_sequencer, uvm_driver, uvm_config_db, run_test(), and phase objections.</p>
+
+      
+      <div class="tut-objectives-card">
+        <div class="tut-objectives-header">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4"></path>
+            <path d="M12 8h.01"></path>
+          </svg>
+          <span>Learning Objectives</span>
+        </div>
+        <ul class="tut-objectives-list">
+          
+          <li>Connect a physical SystemVerilog interface (`alu_if`) to a UVM driver via `uvm_config_db#(virtual alu_if)`.</li>
+          
+          <li>Define a constrained-random transaction (`alu_item`) extending `uvm_sequence_item`.</li>
+          
+          <li>Implement the classic 4-step sequence/driver handshake: `start_item` / `finish_item` ↔ `get_next_item` / `item_done`.</li>
+          
+          <li>Control simulation lifetime deterministically with `phase.raise_objection()` and `phase.drop_objection()`.</li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="example-api-pills">
+        <span class="api-label">Key UVM APIs:</span>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_sequence_item">uvm_sequence_item</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_sequence">uvm_sequence</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_sequencer">uvm_sequencer</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_driver">uvm_driver</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_config_db">uvm_config_db</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_objection">uvm_objection</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="run_test">run_test</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="`uvm_object_utils">`uvm_object_utils</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="`uvm_component_utils">`uvm_component_utils</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Course Theory & Diagrams -->
+<div class="CGroup" id="doc-nav-course" data-doc-topic="doc-nav-course" data-anchor="CourseGuide">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="CourseGuide">Core Concepts &amp; Walkthrough</a></h2>
+    <div class="CBody tut-prose">
+      <h2>3.1 Stripping UVM Down to Pure Stimuli</h2>
+<p>Many beginners feel overwhelmed because tutorials throw <code>agent</code>, <code>env</code>, <code>factory</code>, <code>scoreboard</code>, and <code>RAL</code> at them on page 1. Here, we <strong>intentionally start with zero checking and zero containers</strong>: just the <strong>5 essential stimuli pieces</strong> wired inside <code>alu_minimal_test</code>.</p>
+<div class="tut-mermaid-wrap"><pre class="mermaid">sequenceDiagram
+    participant Seq as alu_smoke_seq
+    participant Sqr as uvm_sequencer
+    participant Drv as alu_driver
+    participant VIF as alu_if / DUT
+
+    Seq-&gt;&gt;Sqr: start_item(req)
+    Sqr--&gt;&gt;Seq: grant
+    Note over Seq: req.randomize() (late randomization!)
+    Seq-&gt;&gt;Sqr: finish_item(req)
+    Drv-&gt;&gt;Sqr: seq_item_port.get_next_item(req)
+    Sqr--&gt;&gt;Drv: req
+    Drv-&gt;&gt;VIF: drive in_valid, op, a, b, tag
+    VIF--&gt;&gt;Drv: in_ready == 1
+    Drv-&gt;&gt;Sqr: seq_item_port.item_done()
+    Sqr--&gt;&gt;Seq: finish_item() unblocks</pre></div>
+<hr />
+<h2>3.2 Anatomy of Every File in This Minimal Environment</h2>
+<ol>
+<li><strong><code>alu_if.sv</code> (Physical &amp; Clocking Bridge):</strong>
+Wraps the wires connecting <code>tb_top</code> and <code>pkt_alu_basic</code>. Using a <code>clocking drv_cb @(posedge clk)</code> prevents SystemVerilog race conditions between RTL <code>always_ff</code> and testbench assignments.</li>
+<li><strong><code>alu_item.sv</code> (The Transaction):</strong>
+Extends <code>uvm_sequence_item</code> (which inherits from <code>uvm_object</code>, <em>not</em> <code>uvm_component</code>—items are transient data created dynamically during simulation). Registers with <code>`uvm_object_utils_begin</code> and defines <code>rand</code> properties + constraints (<code>c_valid_op</code>, <code>c_operand_range</code>).</li>
+<li><strong><code>alu_seq.sv</code> (The Stimulus Recipe):</strong>
+Extends <code>uvm_sequence #(alu_item)</code>. In <code>body()</code>, each item uses <strong>late randomization</strong>:
+<ul>
+<li><code>start_item(req)</code> waits until the sequencer grants bus access,</li>
+<li><code>req.randomize()</code> solves constraints right when the driver is ready,</li>
+<li><code>finish_item(req)</code> hands the item to the driver and blocks until <code>item_done()</code>.</li>
+</ul>
+</li>
+<li><strong><code>alu_driver.sv</code> (The Pin Wiggler):</strong>
+Extends <code>uvm_driver #(alu_item)</code>. In <code>build_phase()</code>, it fetches <code>virtual alu_if vif</code> from <code>uvm_config_db</code>. In <code>run_phase()</code>, an infinite <code>forever</code> loop pulls items via <code>seq_item_port.get_next_item(req)</code>, drives the <code>Valid/Ready</code> handshake, and calls <code>seq_item_port.item_done()</code>.</li>
+<li><strong><code>alu_minimal_test.sv</code> &amp; <code>tb_top.sv</code> (Wiring &amp; Objections):</strong>
+<ul>
+<li><code>tb_top</code> instantiates <code>pkt_alu_basic</code> + <code>alu_if</code>, publishes <code>u_alu_if</code> into <code>uvm_config_db</code>, and calls <code>run_test(&quot;alu_minimal_test&quot;)</code>.</li>
+<li><code>alu_minimal_test</code> creates <code>seqr</code> and <code>drv</code>, connects <code>drv.seq_item_port.connect(seqr.seq_item_export)</code>, and wraps <code>seq.start(seqr)</code> inside <strong><code>phase.raise_objection(this)</code> / <code>phase.drop_objection(this)</code></strong>—without an objection, <code>run_phase</code> exits immediately at <code>0 ns</code>!</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Conceptual / Architecture Diagram (Cytoscape.js) -->
+
+<div class="CGroup" id="doc-nav-arch" data-doc-topic="doc-nav-arch" data-anchor="Architecture">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Architecture">Interactive Testbench Architecture (Ch. 3)</a></h2>
+    <div class="CBody">
+      <div class="tut-interactive-panel">
+        <div class="tut-toolbar-row">
+          <div class="tut-legend">
+            <span class="tut-leg-item"><span class="tut-dot tut-dot-new"></span> Added / Updated in Ch. 3</span>
+            <span class="tut-leg-item"><span class="tut-dot tut-dot-base"></span> Inherited Foundation</span>
+          </div>
+          <div class="tut-graph-actions">
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="tut-cy-fullscreen" title="Toggle Fullscreen Overlay">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+              <span>Fullscreen</span>
+            </button>
+          </div>
+        </div>
+        <div class="tut-cy-split">
+          <div class="tut-cy-stage">
+            <div id="tut-cy-graph" class="tut-cy-canvas" aria-label="Progressive testbench diagram"></div>
+            <button type="button" class="btn btn-xs btn-outline tut-insp-toggle-btn" id="tut-insp-toggle" aria-expanded="true" aria-label="Hide Inspector" title="Hide Inspector">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line><polyline points="10 9 13 12 10 15"></polyline></svg>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn tut-cy-fit-btn" id="tut-cy-fit" title="Fit diagram to view">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+              <span>Fit</span>
+            </button>
+          </div>
+          <aside class="tut-cy-inspector" id="tut-cy-inspector">
+            <div class="tut-insp-badge" id="tut-insp-role">Architecture Inspector</div>
+            <div class="tut-insp-body" id="tut-insp-body">
+              <h3 id="tut-insp-title">Click any testbench block</h3>
+              <p id="tut-insp-desc">Click any component node in the diagram to inspect its ports, jump to its SystemVerilog tab in the Code Studio below, or open its UVM 1.2 reference manual.</p>
+              <div class="tut-insp-meta" id="tut-insp-extra"></div>
+              <div class="tut-insp-actions" id="tut-insp-actions"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Unified Diff Viewer vs. Previous Chapter (diff2html) -->
+
+
+<!-- Multi-File Code Studio -->
+
+<div class="CGroup" id="doc-nav-studio" data-doc-topic="doc-nav-studio" data-anchor="Studio">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Studio">Multi-File Code Studio</a></h2>
+    <div class="CBody">
+      <div class="stepper-sticky-bar" id="stepper-sticky-bar" aria-label="Step-by-step execution controls">
+        <div class="stepper-sticky-info">
+          <span class="stepper-progress-label stepper-progress-hover" id="sticky-stepper-progress" title="1. Top Module &amp; ConfigDB Set">Step 1/6</span>
+          <span class="scenario-state-pill" id="sticky-stepper-state">0 ns</span>
+        </div>
+        <div class="stepper-sticky-actions">
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-prev-major" title="Previous major step" aria-label="Previous major step" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-prev" title="Previous line (Left Arrow)" aria-label="Previous line" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-primary stepper-icon-btn" id="sticky-stepper-play" title="Play / Pause (Space)" aria-label="Play or pause">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-next" title="Next line (Right Arrow)" aria-label="Next line">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-next-major" title="Next major step" aria-label="Next major step">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline stepper-icon-btn" id="sticky-stepper-reset" title="Reset &amp; show full log (Esc)" aria-label="Reset">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+          </button>
+          <select class="stepper-speed-select" id="sticky-stepper-speed" aria-label="Playback speed" title="Playback speed">
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1x</option>
+            <option value="2">2x</option>
+          </select>
+        </div>
+      </div>
+      <div class="studio-section">
+        <div class="studio-header">
+          <div class="studio-toolbar">
+            <div class="studio-toolbar-left">
+              <div class="studio-file-select-wrapper" title="Jump directly to any file in this studio">
+                <select class="studio-file-select" id="studio-file-select" aria-label="Select file">
+                  <option value="0">📄 alu_driver.sv</option><option value="1">📄 alu_if.sv</option><option value="2">📄 alu_item.sv</option><option value="3">📄 alu_minimal_test.sv</option><option value="4">📄 alu_seq.sv</option><option value="5">📄 Makefile.questa</option><option value="6">📄 tb_top.sv</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="studio-toolbar-actions">
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-toggle-find" title="Find in file (Ctrl+F)" aria-label="Find in file">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-toggle-wrap" title="Toggle Word Wrap (Alt+Z)" aria-label="Toggle Word Wrap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><polyline points="14 16 18 12 14 8"/><path d="M21 18H9a4 4 0 0 1 0-8h6"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn btn-monaco-ide" id="btn-toggle-monaco" title="Toggle Monaco VS Code Editor" aria-label="Monaco IDE">
+                <svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>
+                <span>Monaco</span>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-download-raw" title="Download active file" aria-label="Download file">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-example-link" title="Copy shareable link" aria-label="Copy link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="studio-tab-bar-wrapper">
+            <button type="button" class="studio-tab-scroll-btn scroll-left" id="studio-tab-scroll-left" title="Scroll tabs left" aria-label="Scroll tabs left">&#10094;</button>
+            <div class="studio-tab-bar" id="studio-tab-bar">
+              <button type="button" class="studio-tab active" data-file-idx="0" title="alu_driver.sv"><span class="tab-icon">📄</span><span class="tab-name">alu_driver.sv</span></button><button type="button" class="studio-tab " data-file-idx="1" title="alu_if.sv"><span class="tab-icon">📄</span><span class="tab-name">alu_if.sv</span></button><button type="button" class="studio-tab " data-file-idx="2" title="alu_item.sv"><span class="tab-icon">📄</span><span class="tab-name">alu_item.sv</span></button><button type="button" class="studio-tab " data-file-idx="3" title="alu_minimal_test.sv"><span class="tab-icon">📄</span><span class="tab-name">alu_minimal_test.sv</span></button><button type="button" class="studio-tab " data-file-idx="4" title="alu_seq.sv"><span class="tab-icon">📄</span><span class="tab-name">alu_seq.sv</span></button><button type="button" class="studio-tab " data-file-idx="5" title="Makefile.questa"><span class="tab-icon">📄</span><span class="tab-name">Makefile.questa</span></button><button type="button" class="studio-tab " data-file-idx="6" title="tb_top.sv"><span class="tab-icon">📄</span><span class="tab-name">tb_top.sv</span></button>
+            </div>
+            <button type="button" class="studio-tab-scroll-btn scroll-right" id="studio-tab-scroll-right" title="Scroll tabs right" aria-label="Scroll tabs right">&#10095;</button>
+          </div>
+        </div>
+
+        <div class="code-container studio-code-container" id="studio-code-container">
+    <div class="code-find-widget" id="code-find-widget" style="display:none;" role="search" aria-label="Find in file">
+      <div class="find-input-wrap">
+        <input type="text" id="find-input" placeholder="Find in file (Ctrl+F)..." autocomplete="off" spellcheck="false">
+        <span class="find-count" id="find-count">0 of 0</span>
+      </div>
+      <div class="find-actions">
+        <button type="button" class="find-btn" id="find-case-toggle" title="Match Case (Alt+C)">Aa</button>
+        <button type="button" class="find-btn" id="find-word-toggle" title="Match Whole Word (Alt+W)">\b</button>
+        <button type="button" class="find-btn" id="find-prev" title="Previous Match (Shift+Enter)">▲</button>
+        <button type="button" class="find-btn" id="find-next" title="Next Match (Enter)">▼</button>
+        <button type="button" class="find-btn" id="find-close" title="Close (Esc)">✕</button>
+      </div>
+    </div>
+    <div class="code-quick-info-tooltip" id="code-quick-info" style="display:none;"></div>
+    <div id="monaco-editor-pane" style="display:none;"></div>
+<div class="file-code-pane active" id="file-pane-0" data-filename="alu_driver.sv"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// alu_driver.sv - Minimal Pin-Level Bus Driver (Chapter 3)</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-preproc">`ifndef</span> <span class="sv-ident">ALU_DRIVER_SV</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-preproc">`define</span> <span class="sv-ident">ALU_DRIVER_SV</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-keyword-decl">class</span> <span class="sv-ident">alu_driver</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_driver" data-sym-kind="class" title="Click to view uvm_driver documentation">uvm_driver</span> <span class="sv-op">#(</span><span class="sv-ident">alu_item</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code">  <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_component_utils" data-sym-kind="macro" title="Click to view `uvm_component_utils macro documentation">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">alu_driver</span><span class="sv-op">)</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-ident">alu_if</span> <span class="sv-ident">vif</span><span class="sv-op">;</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code">  <span class="sv-keyword-decl">function</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_driver" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;alu_driver&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" data-sym-kind="class" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-constant">null</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_driver" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method clickable-uvm-sym" data-sym="build_phase" data-sym-kind="method" data-sym-base="uvm_driver" title="Click to view build_phase method documentation">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" data-sym-kind="class" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="build_phase" data-sym-kind="method" data-sym-base="uvm_driver" title="Click to view build_phase method documentation">build_phase</span><span class="sv-op">(</span><span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code">    <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-op">!</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_config_db" data-sym-kind="class" title="Click to view uvm_config_db documentation">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-qualifier">virtual</span> <span class="sv-ident">alu_if</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="get" data-sym-kind="method" data-sym-owner="uvm_config_db" title="Click to view get method documentation">get</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;vif&quot;</span><span class="sv-op">,</span> <span class="sv-ident">vif</span><span class="sv-op">)</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">      <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_fatal" data-sym-kind="macro" title="Click to view `uvm_fatal macro documentation">`uvm_fatal</span><span class="sv-op">(</span><span class="sv-string">&quot;DRV&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;Virtual interface &#x27;vif&#x27; not found in uvm_config_db&quot;</span><span class="sv-op">)</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">    <span class="sv-keyword">end</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method clickable-uvm-sym" data-sym="run_phase" data-sym-kind="method" data-sym-base="uvm_driver" title="Click to view run_phase method documentation">run_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" data-sym-kind="class" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">    <span class="sv-ident">alu_item</span> <span class="sv-ident">req</span><span class="sv-op">;</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">    <span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-method">reset_signals</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">    @<span class="sv-op">(</span><span class="sv-qualifier">posedge</span> <span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">rst_n</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">    @<span class="sv-op">(</span><span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">    <span class="sv-keyword">forever</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">      <span class="sv-ident">seq_item_port</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="get_next_item" data-sym-kind="method" data-sym-owner="uvm_driver#(REQ,RSP)" title="Click to view get_next_item method documentation">get_next_item</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">      <span class="sv-method">drive_item</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">      <span class="sv-ident">seq_item_port</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="item_done" data-sym-kind="method" data-sym-owner="uvm_driver#(REQ,RSP)" title="Click to view item_done method documentation">item_done</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">    <span class="sv-keyword">end</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method">drive_item</span><span class="sv-op">(</span><span class="sv-ident">alu_item</span> <span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_info" data-sym-kind="macro" title="Click to view `uvm_info macro documentation">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;DRV&quot;</span><span class="sv-op">,</span> <span class="sv-system-tf">$sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;Driving <span class="sv-string-escape">%s</span>&quot;</span><span class="sv-op">,</span> <span class="sv-ident">req</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" data-sym-owner="uvm_sequence#(REQ,RSP)" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_MEDIUM" data-sym-kind="constant" title="Click to view UVM_MEDIUM constant documentation">UVM_MEDIUM</span><span class="sv-op">)</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">    <span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">.</span><span class="sv-ident">in_valid</span> <span class="sv-op">&lt;=</span> <span class="sv-number">1&#x27;b1</span><span class="sv-op">;</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">    <span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">.</span><span class="sv-ident">op</span>       <span class="sv-op">&lt;=</span> <span class="sv-ident">req</span><span class="sv-op">.</span><span class="sv-ident">op</span><span class="sv-op">;</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">    <span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">.</span><span class="sv-ident">a</span>        <span class="sv-op">&lt;=</span> <span class="sv-ident">req</span><span class="sv-op">.</span><span class="sv-ident">a</span><span class="sv-op">;</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">    <span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">.</span><span class="sv-ident">b</span>        <span class="sv-op">&lt;=</span> <span class="sv-ident">req</span><span class="sv-op">.</span><span class="sv-ident">b</span><span class="sv-op">;</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">    <span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">.</span><span class="sv-ident">tag</span>      <span class="sv-op">&lt;=</span> <span class="sv-ident">req</span><span class="sv-op">.</span><span class="sv-ident">tag</span><span class="sv-op">;</span></td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">    <span class="sv-keyword">do</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">      @<span class="sv-op">(</span><span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">    <span class="sv-keyword">end</span> <span class="sv-keyword">while</span> <span class="sv-op">(</span><span class="sv-op">!</span><span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">.</span><span class="sv-ident">in_ready</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code">    <span class="sv-ident">vif</span><span class="sv-op">.</span><span class="sv-ident">drv_cb</span><span class="sv-op">.</span><span class="sv-ident">in_valid</span> <span class="sv-op">&lt;=</span> <span class="sv-number">1&#x27;b0</span><span class="sv-op">;</span></td></tr>
+<tr id="L49"><td class="ln" data-line="49"><a href="#L49">49</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L50"><td class="ln" data-line="50"><a href="#L50">50</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L51"><td class="ln" data-line="51"><a href="#L51">51</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L52"><td class="ln" data-line="52"><a href="#L52">52</a></td><td class="code"><span class="sv-preproc">`endif</span></td></tr></tbody></table></div><div class="file-code-pane" id="file-pane-1" data-filename="alu_if.sv"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// alu_if.sv - Minimal Valid/Ready Virtual Interface (Chapter 3)</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-keyword-decl">interface</span> <span class="sv-method">alu_if</span> <span class="sv-op">(</span><span class="sv-qualifier">input</span> <span class="sv-type">logic</span> <span class="sv-ident">clk</span><span class="sv-op">,</span> <span class="sv-qualifier">input</span> <span class="sv-type">logic</span> <span class="sv-ident">rst_n</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code">  <span class="sv-type">logic</span>        <span class="sv-ident">in_valid</span><span class="sv-op">;</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code">  <span class="sv-type">logic</span>        <span class="sv-ident">in_ready</span><span class="sv-op">;</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code">  <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">2</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span>  <span class="sv-ident">op</span><span class="sv-op">;</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code">  <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">15</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">a</span><span class="sv-op">;</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code">  <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">15</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">b</span><span class="sv-op">;</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code">  <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">3</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span>  <span class="sv-ident">tag</span><span class="sv-op">;</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code">  <span class="sv-type">logic</span>        <span class="sv-ident">out_valid</span><span class="sv-op">;</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code">  <span class="sv-type">logic</span>        <span class="sv-ident">out_ready</span><span class="sv-op">;</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code">  <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">31</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">result</span><span class="sv-op">;</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code">  <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">3</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span>  <span class="sv-ident">out_tag</span><span class="sv-op">;</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code">  <span class="sv-type">logic</span>        <span class="sv-ident">err_flag</span><span class="sv-op">;</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code">  <span class="sv-comment">// Synchronous driver clocking block avoids race conditions with RTL</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">  <span class="sv-keyword-decl">clocking</span> <span class="sv-ident">drv_cb</span> @<span class="sv-op">(</span><span class="sv-qualifier">posedge</span> <span class="sv-ident">clk</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">    <span class="sv-keyword">default</span> <span class="sv-qualifier">input</span> <span class="sv-op">#</span>1<span class="sv-ident">step</span> <span class="sv-qualifier">output</span> <span class="sv-op">#</span><span class="sv-number">1</span><span class="sv-op">;</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">    <span class="sv-qualifier">output</span> <span class="sv-ident">in_valid</span><span class="sv-op">,</span> <span class="sv-ident">op</span><span class="sv-op">,</span> <span class="sv-ident">a</span><span class="sv-op">,</span> <span class="sv-ident">b</span><span class="sv-op">,</span> <span class="sv-ident">tag</span><span class="sv-op">,</span> <span class="sv-ident">out_ready</span><span class="sv-op">;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">    <span class="sv-qualifier">input</span>  <span class="sv-ident">in_ready</span><span class="sv-op">,</span> <span class="sv-ident">out_valid</span><span class="sv-op">,</span> <span class="sv-ident">result</span><span class="sv-op">,</span> <span class="sv-ident">out_tag</span><span class="sv-op">,</span> <span class="sv-ident">err_flag</span><span class="sv-op">;</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">  <span class="sv-keyword-decl">endclocking</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">  <span class="sv-keyword-decl">task</span> <span class="sv-qualifier">automatic</span> <span class="sv-method">reset_signals</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">    <span class="sv-ident">in_valid</span>  <span class="sv-op">&lt;=</span> <span class="sv-number">1&#x27;b0</span><span class="sv-op">;</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">    <span class="sv-ident">op</span>        <span class="sv-op">&lt;=</span> <span class="sv-number">3&#x27;d0</span><span class="sv-op">;</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">    <span class="sv-ident">a</span>         <span class="sv-op">&lt;=</span> <span class="sv-number">16&#x27;d0</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">    <span class="sv-ident">b</span>         <span class="sv-op">&lt;=</span> <span class="sv-number">16&#x27;d0</span><span class="sv-op">;</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">    <span class="sv-ident">tag</span>       <span class="sv-op">&lt;=</span> <span class="sv-number">4&#x27;d0</span><span class="sv-op">;</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">    <span class="sv-ident">out_ready</span> <span class="sv-op">&lt;=</span> <span class="sv-number">1&#x27;b1</span><span class="sv-op">;</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code"><span class="sv-keyword-decl">endinterface</span></td></tr></tbody></table></div><div class="file-code-pane" id="file-pane-2" data-filename="alu_item.sv"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// alu_item.sv - Minimal Sequence Item / Transaction (Chapter 3)</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-preproc">`ifndef</span> <span class="sv-ident">ALU_ITEM_SV</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-preproc">`define</span> <span class="sv-ident">ALU_ITEM_SV</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-keyword-decl">typedef</span> <span class="sv-keyword-decl">enum</span> <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">2</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-op">{</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code">  <span class="sv-ident">ALU_ADD</span>    <span class="sv-op">=</span> <span class="sv-number">3&#x27;d0</span><span class="sv-op">,</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code">  <span class="sv-ident">ALU_SUB</span>    <span class="sv-op">=</span> <span class="sv-number">3&#x27;d1</span><span class="sv-op">,</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code">  <span class="sv-ident">ALU_MUL</span>    <span class="sv-op">=</span> <span class="sv-number">3&#x27;d2</span><span class="sv-op">,</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code">  <span class="sv-ident">ALU_XOR</span>    <span class="sv-op">=</span> <span class="sv-number">3&#x27;d3</span><span class="sv-op">,</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code">  <span class="sv-ident">ALU_PASS_A</span> <span class="sv-op">=</span> <span class="sv-number">3&#x27;d4</span><span class="sv-op">,</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code">  <span class="sv-ident">ALU_INVAL</span>  <span class="sv-op">=</span> <span class="sv-number">3&#x27;d5</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-op">}</span> <span class="sv-ident">alu_op_e</span><span class="sv-op">;</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code"><span class="sv-keyword-decl">class</span> <span class="sv-ident">alu_item</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_sequence_item" data-sym-kind="class" title="Click to view uvm_sequence_item documentation">uvm_sequence_item</span><span class="sv-op">;</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code">  <span class="sv-qualifier">rand</span> <span class="sv-ident">alu_op_e</span>     <span class="sv-ident">op</span><span class="sv-op">;</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code">  <span class="sv-qualifier">rand</span> <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">15</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">a</span><span class="sv-op">;</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">  <span class="sv-qualifier">rand</span> <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">15</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">b</span><span class="sv-op">;</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">  <span class="sv-qualifier">rand</span> <span class="sv-type">logic</span> <span class="sv-op">[</span><span class="sv-number">3</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span>  <span class="sv-ident">tag</span><span class="sv-op">;</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">  <span class="sv-comment">// Keep valid operations dominant in smoke stimulus</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">  <span class="sv-keyword-decl">constraint</span> <span class="sv-ident">c_valid_op</span> <span class="sv-op">{</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">    <span class="sv-ident">op</span> <span class="sv-keyword-decl">inside</span> <span class="sv-op">{</span><span class="sv-ident">ALU_ADD</span><span class="sv-op">,</span> <span class="sv-ident">ALU_SUB</span><span class="sv-op">,</span> <span class="sv-ident">ALU_MUL</span><span class="sv-op">,</span> <span class="sv-ident">ALU_XOR</span><span class="sv-op">,</span> <span class="sv-ident">ALU_PASS_A</span><span class="sv-op">}</span><span class="sv-op">;</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">  <span class="sv-op">}</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">  <span class="sv-keyword-decl">constraint</span> <span class="sv-ident">c_operand_range</span> <span class="sv-op">{</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">    <span class="sv-ident">a</span> <span class="sv-keyword-decl">inside</span> <span class="sv-op">{</span><span class="sv-op">[</span><span class="sv-number">16&#x27;h0001</span> <span class="sv-op">:</span> <span class="sv-number">16&#x27;h0FFF</span><span class="sv-op">]</span><span class="sv-op">}</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">    <span class="sv-ident">b</span> <span class="sv-keyword-decl">inside</span> <span class="sv-op">{</span><span class="sv-op">[</span><span class="sv-number">16&#x27;h0001</span> <span class="sv-op">:</span> <span class="sv-number">16&#x27;h0FFF</span><span class="sv-op">]</span><span class="sv-op">}</span><span class="sv-op">;</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">  <span class="sv-op">}</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">  <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_object_utils_begin" data-sym-kind="macro" title="Click to view `uvm_object_utils_begin macro documentation">`uvm_object_utils_begin</span><span class="sv-op">(</span><span class="sv-ident">alu_item</span><span class="sv-op">)</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_field_enum" data-sym-kind="macro" title="Click to view `uvm_field_enum macro documentation">`uvm_field_enum</span><span class="sv-op">(</span><span class="sv-ident">alu_op_e</span><span class="sv-op">,</span> <span class="sv-ident">op</span><span class="sv-op">,</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_ALL_ON" data-sym-kind="constant" title="Click to view UVM_ALL_ON constant documentation">UVM_ALL_ON</span><span class="sv-op">)</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_field_int" data-sym-kind="macro" title="Click to view `uvm_field_int macro documentation">`uvm_field_int</span><span class="sv-op">(</span><span class="sv-ident">a</span><span class="sv-op">,</span>   <span class="sv-constant clickable-uvm-sym" data-sym="UVM_ALL_ON" data-sym-kind="constant" title="Click to view UVM_ALL_ON constant documentation">UVM_ALL_ON</span> <span class="sv-op">|</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_HEX" data-sym-kind="constant" title="Click to view UVM_HEX constant documentation">UVM_HEX</span><span class="sv-op">)</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_field_int" data-sym-kind="macro" title="Click to view `uvm_field_int macro documentation">`uvm_field_int</span><span class="sv-op">(</span><span class="sv-ident">b</span><span class="sv-op">,</span>   <span class="sv-constant clickable-uvm-sym" data-sym="UVM_ALL_ON" data-sym-kind="constant" title="Click to view UVM_ALL_ON constant documentation">UVM_ALL_ON</span> <span class="sv-op">|</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_HEX" data-sym-kind="constant" title="Click to view UVM_HEX constant documentation">UVM_HEX</span><span class="sv-op">)</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_field_int" data-sym-kind="macro" title="Click to view `uvm_field_int macro documentation">`uvm_field_int</span><span class="sv-op">(</span><span class="sv-ident">tag</span><span class="sv-op">,</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_ALL_ON" data-sym-kind="constant" title="Click to view UVM_ALL_ON constant documentation">UVM_ALL_ON</span> <span class="sv-op">|</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_DEC" data-sym-kind="constant" title="Click to view UVM_DEC constant documentation">UVM_DEC</span><span class="sv-op">)</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">  <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_object_utils_end" data-sym-kind="macro" title="Click to view `uvm_object_utils_end macro documentation">`uvm_object_utils_end</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">  <span class="sv-keyword-decl">function</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_sequence_item" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;alu_item&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_sequence_item" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" data-sym-base="uvm_sequence_item" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">    <span class="sv-keyword">return</span> <span class="sv-system-tf">$sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;tag=<span class="sv-string-escape">%0d</span> op=<span class="sv-string-escape">%s</span> a=0x<span class="sv-string-escape">%04h</span> b=0x<span class="sv-string-escape">%04h</span>&quot;</span><span class="sv-op">,</span> <span class="sv-ident">tag</span><span class="sv-op">,</span> <span class="sv-ident">op</span><span class="sv-op">.</span><span class="sv-method">name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">a</span><span class="sv-op">,</span> <span class="sv-ident">b</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L48"><td class="ln" data-line="48"><a href="#L48">48</a></td><td class="code"><span class="sv-preproc">`endif</span></td></tr></tbody></table></div><div class="file-code-pane" id="file-pane-3" data-filename="alu_minimal_test.sv"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// alu_minimal_test.sv - Bare-Minimum UVM Test (No Agent/Env Yet) (Chapter 3)</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-preproc">`ifndef</span> <span class="sv-ident">ALU_MINIMAL_TEST_SV</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-preproc">`define</span> <span class="sv-ident">ALU_MINIMAL_TEST_SV</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-keyword-decl">class</span> <span class="sv-ident">alu_minimal_test</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_test" data-sym-kind="class" title="Click to view uvm_test documentation">uvm_test</span><span class="sv-op">;</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code">  <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_component_utils" data-sym-kind="macro" title="Click to view `uvm_component_utils macro documentation">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">alu_minimal_test</span><span class="sv-op">)</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code">  <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_sequencer" data-sym-kind="class" title="Click to view uvm_sequencer documentation">uvm_sequencer</span> <span class="sv-op">#(</span><span class="sv-ident">alu_item</span><span class="sv-op">)</span> <span class="sv-ident">seqr</span><span class="sv-op">;</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code">  <span class="sv-ident">alu_driver</span>                <span class="sv-ident">drv</span><span class="sv-op">;</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code">  <span class="sv-keyword-decl">function</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_test" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;alu_minimal_test&quot;</span><span class="sv-op">,</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_component" data-sym-kind="class" title="Click to view uvm_component documentation">uvm_component</span> <span class="sv-ident">parent</span> <span class="sv-op">=</span> <span class="sv-constant">null</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_test" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-ident">parent</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method clickable-uvm-sym" data-sym="build_phase" data-sym-kind="method" data-sym-base="uvm_test" title="Click to view build_phase method documentation">build_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" data-sym-kind="class" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="build_phase" data-sym-kind="method" data-sym-base="uvm_test" title="Click to view build_phase method documentation">build_phase</span><span class="sv-op">(</span><span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">    <span class="sv-ident">seqr</span> <span class="sv-op">=</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_sequencer" data-sym-kind="class" title="Click to view uvm_sequencer documentation">uvm_sequencer</span><span class="sv-op">#(</span><span class="sv-ident">alu_item</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="type_id" data-sym-kind="method" data-sym-owner="uvm_sequencer" title="Click to view type_id method documentation">type_id</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="create" data-sym-kind="method" data-sym-owner="uvm_component_registry" title="Click to view create method documentation">create</span><span class="sv-op">(</span><span class="sv-string">&quot;seqr&quot;</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">    <span class="sv-ident">drv</span>  <span class="sv-op">=</span> <span class="sv-ident">alu_driver</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="type_id" data-sym-kind="method" title="Click to view type_id method documentation">type_id</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="create" data-sym-kind="method" data-sym-owner="uvm_object_registry" title="Click to view create method documentation">create</span><span class="sv-op">(</span><span class="sv-string">&quot;drv&quot;</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method clickable-uvm-sym" data-sym="connect_phase" data-sym-kind="method" data-sym-base="uvm_test" title="Click to view connect_phase method documentation">connect_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" data-sym-kind="class" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="connect_phase" data-sym-kind="method" data-sym-base="uvm_test" title="Click to view connect_phase method documentation">connect_phase</span><span class="sv-op">(</span><span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">    <span class="sv-ident">drv</span><span class="sv-op">.</span><span class="sv-ident">seq_item_port</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="connect" data-sym-kind="method" data-sym-owner="uvm_driver#(REQ,RSP)" title="Click to view connect method documentation">connect</span><span class="sv-op">(</span><span class="sv-ident">seqr</span><span class="sv-op">.</span><span class="sv-ident">seq_item_export</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method clickable-uvm-sym" data-sym="run_phase" data-sym-kind="method" data-sym-base="uvm_test" title="Click to view run_phase method documentation">run_phase</span><span class="sv-op">(</span><span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_phase" data-sym-kind="class" title="Click to view uvm_phase documentation">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">    <span class="sv-ident">alu_smoke_seq</span> <span class="sv-ident">seq</span><span class="sv-op">;</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">    <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="raise_objection" data-sym-kind="method" data-sym-owner="uvm_phase" title="Click to view raise_objection method documentation">raise_objection</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;Starting minimal stimulus&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">    <span class="sv-ident">seq</span> <span class="sv-op">=</span> <span class="sv-ident">alu_smoke_seq</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="type_id" data-sym-kind="method" title="Click to view type_id method documentation">type_id</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="create" data-sym-kind="method" data-sym-owner="uvm_object_registry" title="Click to view create method documentation">create</span><span class="sv-op">(</span><span class="sv-string">&quot;seq&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">    <span class="sv-ident">seq</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="start" data-sym-kind="method" title="Click to view start method documentation">start</span><span class="sv-op">(</span><span class="sv-ident">seqr</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">    <span class="sv-op">#</span><span class="sv-number">40ns</span><span class="sv-op">;</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">    <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="drop_objection" data-sym-kind="method" data-sym-owner="uvm_phase" title="Click to view drop_objection method documentation">drop_objection</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;Finished minimal stimulus&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code"><span class="sv-preproc">`endif</span></td></tr></tbody></table></div><div class="file-code-pane" id="file-pane-4" data-filename="alu_seq.sv"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// alu_seq.sv - Minimal Stimulus Sequence (Chapter 3)</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-preproc">`ifndef</span> <span class="sv-ident">ALU_SEQ_SV</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code"><span class="sv-preproc">`define</span> <span class="sv-ident">ALU_SEQ_SV</span></td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-keyword-decl">class</span> <span class="sv-ident">alu_smoke_seq</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_sequence" data-sym-kind="class" title="Click to view uvm_sequence documentation">uvm_sequence</span> <span class="sv-op">#(</span><span class="sv-ident">alu_item</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code">  <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_object_utils" data-sym-kind="macro" title="Click to view `uvm_object_utils macro documentation">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">alu_smoke_seq</span><span class="sv-op">)</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code">  <span class="sv-qualifier">rand</span> <span class="sv-type">int</span> <span class="sv-type">unsigned</span> <span class="sv-ident">num_items</span> <span class="sv-op">=</span> <span class="sv-number">4</span><span class="sv-op">;</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code">  <span class="sv-keyword-decl">function</span> <span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_sequence" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;alu_smoke_seq&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code">    <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="new" data-sym-kind="method" data-sym-base="uvm_sequence" title="Click to view new method documentation">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code">  <span class="sv-keyword-decl">endfunction</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code">  <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">task</span> <span class="sv-method clickable-uvm-sym" data-sym="body" data-sym-kind="method" data-sym-base="uvm_sequence" title="Click to view body method documentation">body</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code">    <span class="sv-ident">alu_item</span> <span class="sv-ident">req</span><span class="sv-op">;</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_info" data-sym-kind="macro" title="Click to view `uvm_info macro documentation">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;SEQ&quot;</span><span class="sv-op">,</span> <span class="sv-system-tf">$sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;Starting smoke sequence (<span class="sv-string-escape">%0d</span> items)&quot;</span><span class="sv-op">,</span> <span class="sv-ident">num_items</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_LOW" data-sym-kind="constant" title="Click to view UVM_LOW constant documentation">UVM_LOW</span><span class="sv-op">)</span></td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">    <span class="sv-keyword">for</span> <span class="sv-op">(</span><span class="sv-type">int</span> <span class="sv-ident">i</span> <span class="sv-op">=</span> <span class="sv-number">0</span><span class="sv-op">;</span> <span class="sv-ident">i</span> <span class="sv-op">&lt;</span> <span class="sv-ident">num_items</span><span class="sv-op">;</span> <span class="sv-ident">i</span><span class="sv-op">++</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">      <span class="sv-ident">req</span> <span class="sv-op">=</span> <span class="sv-ident">alu_item</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="type_id" data-sym-kind="method" title="Click to view type_id method documentation">type_id</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="create" data-sym-kind="method" data-sym-owner="uvm_object_registry" title="Click to view create method documentation">create</span><span class="sv-op">(</span><span class="sv-system-tf">$sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;req_<span class="sv-string-escape">%0d</span>&quot;</span><span class="sv-op">,</span> <span class="sv-ident">i</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">      <span class="sv-method clickable-uvm-sym" data-sym="start_item" data-sym-kind="method" data-sym-base="uvm_sequence" title="Click to view start_item method documentation">start_item</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">      <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-op">!</span><span class="sv-ident">req</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span> <span class="sv-keyword-decl">with</span> <span class="sv-op">{</span> <span class="sv-ident">tag</span> <span class="sv-op">==</span> <span class="sv-qualifier">local</span><span class="sv-op">::</span><span class="sv-ident">i</span><span class="sv-op">[</span><span class="sv-number">3</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span><span class="sv-op">;</span> <span class="sv-op">}</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">        <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_fatal" data-sym-kind="macro" title="Click to view `uvm_fatal macro documentation">`uvm_fatal</span><span class="sv-op">(</span><span class="sv-string">&quot;SEQ&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;Randomization failed for alu_item&quot;</span><span class="sv-op">)</span></td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">      <span class="sv-keyword">end</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">      <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_info" data-sym-kind="macro" title="Click to view `uvm_info macro documentation">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;SEQ&quot;</span><span class="sv-op">,</span> <span class="sv-system-tf">$sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;Sending <span class="sv-string-escape">%s</span>&quot;</span><span class="sv-op">,</span> <span class="sv-ident">req</span><span class="sv-op">.</span><span class="sv-method clickable-uvm-sym" data-sym="convert2string" data-sym-kind="method" data-sym-owner="uvm_sequence#(REQ,RSP)" title="Click to view convert2string method documentation">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_MEDIUM" data-sym-kind="constant" title="Click to view UVM_MEDIUM constant documentation">UVM_MEDIUM</span><span class="sv-op">)</span></td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">      <span class="sv-method clickable-uvm-sym" data-sym="finish_item" data-sym-kind="method" data-sym-base="uvm_sequence" title="Click to view finish_item method documentation">finish_item</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">    <span class="sv-keyword">end</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">    <span class="sv-macro clickable-uvm-sym" data-sym="`uvm_info" data-sym-kind="macro" title="Click to view `uvm_info macro documentation">`uvm_info</span><span class="sv-op">(</span><span class="sv-string">&quot;SEQ&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;Completed smoke sequence&quot;</span><span class="sv-op">,</span> <span class="sv-constant clickable-uvm-sym" data-sym="UVM_LOW" data-sym-kind="constant" title="Click to view UVM_LOW constant documentation">UVM_LOW</span><span class="sv-op">)</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">  <span class="sv-keyword-decl">endtask</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code"><span class="sv-keyword-decl">endclass</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code"><span class="sv-preproc">`endif</span></td></tr></tbody></table></div><div class="file-code-pane" id="file-pane-5" data-filename="Makefile.questa"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment"># Makefile.questa - Chapter 3 Minimal Stimuli Environment</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-proto-name">UVM_HOME</span> <span class="sv-op">?=</span> <span class="sv-string">$(QUESTA_HOME)/verilog_src/uvm-1.2</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-proto-name" style="font-weight:700">all</span><span class="sv-op">:</span> comp run</td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-proto-name" style="font-weight:700">comp</span><span class="sv-op">:</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code"><span class="sv-ident">	vlib work</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code"><span class="sv-ident">	vlog +incdir+$(UVM_HOME)/src +incdir+. \</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code"><span class="sv-ident">		$(UVM_HOME)/src/uvm_pkg.sv \</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code"><span class="sv-ident">		../dut/pkt_alu_basic.sv \</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code"><span class="sv-ident">		alu_if.sv \</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code"><span class="sv-ident">		tb_top.sv</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code"><span class="sv-proto-name" style="font-weight:700">run</span><span class="sv-op">:</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code"><span class="sv-ident">	vsim -c -do &quot;run -all; quit -f&quot; tb_top +UVM_VERBOSITY=UVM_MEDIUM</span></td></tr></tbody></table></div><div class="file-code-pane" id="file-pane-6" data-filename="tb_top.sv"><table class="sv-code-table"><tbody><tr id="L1"><td class="ln" data-line="1"><a href="#L1">1</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L2"><td class="ln" data-line="2"><a href="#L2">2</a></td><td class="code"><span class="sv-comment">// tb_top.sv - Top Module Connecting RTL DUT &amp; Minimal UVM Testbench (Ch.3)</span></td></tr>
+<tr id="L3"><td class="ln" data-line="3"><a href="#L3">3</a></td><td class="code"><span class="sv-comment">// -----------------------------------------------------------------------------</span></td></tr>
+<tr id="L4"><td class="ln" data-line="4"><a href="#L4">4</a></td><td class="code"><span class="sv-preproc">`timescale</span> <span class="sv-number">1ns</span><span class="sv-op">/</span><span class="sv-number">1ps</span></td></tr>
+<tr id="L5"><td class="ln" data-line="5"><a href="#L5">5</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L6"><td class="ln" data-line="6"><a href="#L6">6</a></td><td class="code"><span class="sv-keyword-decl">module</span> <span class="sv-ident">tb_top</span><span class="sv-op">;</span></td></tr>
+<tr id="L7"><td class="ln" data-line="7"><a href="#L7">7</a></td><td class="code">  <span class="sv-keyword-decl">import</span> <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_pkg" data-sym-kind="class" title="Click to view uvm_pkg documentation">uvm_pkg</span><span class="sv-op">::</span><span class="sv-op">*</span><span class="sv-op">;</span></td></tr>
+<tr id="L8"><td class="ln" data-line="8"><a href="#L8">8</a></td><td class="code">  <span class="sv-preproc">`include</span> <span class="sv-string">&quot;uvm_macros.svh&quot;</span></td></tr>
+<tr id="L9"><td class="ln" data-line="9"><a href="#L9">9</a></td><td class="code">  <span class="sv-preproc">`include</span> <span class="sv-string">&quot;alu_item.sv&quot;</span></td></tr>
+<tr id="L10"><td class="ln" data-line="10"><a href="#L10">10</a></td><td class="code">  <span class="sv-preproc">`include</span> <span class="sv-string">&quot;alu_seq.sv&quot;</span></td></tr>
+<tr id="L11"><td class="ln" data-line="11"><a href="#L11">11</a></td><td class="code">  <span class="sv-preproc">`include</span> <span class="sv-string">&quot;alu_driver.sv&quot;</span></td></tr>
+<tr id="L12"><td class="ln" data-line="12"><a href="#L12">12</a></td><td class="code">  <span class="sv-preproc">`include</span> <span class="sv-string">&quot;alu_minimal_test.sv&quot;</span></td></tr>
+<tr id="L13"><td class="ln" data-line="13"><a href="#L13">13</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L14"><td class="ln" data-line="14"><a href="#L14">14</a></td><td class="code">  <span class="sv-type">logic</span> <span class="sv-ident">clk</span> <span class="sv-op">=</span> <span class="sv-number">1&#x27;b0</span><span class="sv-op">;</span></td></tr>
+<tr id="L15"><td class="ln" data-line="15"><a href="#L15">15</a></td><td class="code">  <span class="sv-type">logic</span> <span class="sv-ident">rst_n</span> <span class="sv-op">=</span> <span class="sv-number">1&#x27;b0</span><span class="sv-op">;</span></td></tr>
+<tr id="L16"><td class="ln" data-line="16"><a href="#L16">16</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L17"><td class="ln" data-line="17"><a href="#L17">17</a></td><td class="code">  <span class="sv-keyword-decl">always</span> <span class="sv-op">#</span><span class="sv-number">5ns</span> <span class="sv-ident">clk</span> <span class="sv-op">=</span> <span class="sv-op">~</span><span class="sv-ident">clk</span><span class="sv-op">;</span></td></tr>
+<tr id="L18"><td class="ln" data-line="18"><a href="#L18">18</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L19"><td class="ln" data-line="19"><a href="#L19">19</a></td><td class="code">  <span class="sv-keyword-decl">initial</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L20"><td class="ln" data-line="20"><a href="#L20">20</a></td><td class="code">    <span class="sv-ident">rst_n</span> <span class="sv-op">=</span> <span class="sv-number">1&#x27;b0</span><span class="sv-op">;</span></td></tr>
+<tr id="L21"><td class="ln" data-line="21"><a href="#L21">21</a></td><td class="code">    <span class="sv-op">#</span><span class="sv-number">25ns</span><span class="sv-op">;</span></td></tr>
+<tr id="L22"><td class="ln" data-line="22"><a href="#L22">22</a></td><td class="code">    <span class="sv-ident">rst_n</span> <span class="sv-op">=</span> <span class="sv-number">1&#x27;b1</span><span class="sv-op">;</span></td></tr>
+<tr id="L23"><td class="ln" data-line="23"><a href="#L23">23</a></td><td class="code">  <span class="sv-keyword">end</span></td></tr>
+<tr id="L24"><td class="ln" data-line="24"><a href="#L24">24</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L25"><td class="ln" data-line="25"><a href="#L25">25</a></td><td class="code">  <span class="sv-ident">alu_if</span> <span class="sv-method">u_alu_if</span> <span class="sv-op">(</span><span class="sv-op">.</span><span class="sv-method">clk</span><span class="sv-op">(</span><span class="sv-ident">clk</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">rst_n</span><span class="sv-op">(</span><span class="sv-ident">rst_n</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L26"><td class="ln" data-line="26"><a href="#L26">26</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L27"><td class="ln" data-line="27"><a href="#L27">27</a></td><td class="code">  <span class="sv-ident">pkt_alu_basic</span> <span class="sv-method">u_dut</span> <span class="sv-op">(</span></td></tr>
+<tr id="L28"><td class="ln" data-line="28"><a href="#L28">28</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">clk</span>       <span class="sv-op">(</span><span class="sv-ident">clk</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L29"><td class="ln" data-line="29"><a href="#L29">29</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">rst_n</span>     <span class="sv-op">(</span><span class="sv-ident">rst_n</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L30"><td class="ln" data-line="30"><a href="#L30">30</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">in_valid</span>  <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">in_valid</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L31"><td class="ln" data-line="31"><a href="#L31">31</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">in_ready</span>  <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">in_ready</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L32"><td class="ln" data-line="32"><a href="#L32">32</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">op</span>        <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">op</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L33"><td class="ln" data-line="33"><a href="#L33">33</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">a</span>         <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">a</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L34"><td class="ln" data-line="34"><a href="#L34">34</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">b</span>         <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">b</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L35"><td class="ln" data-line="35"><a href="#L35">35</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">tag</span>       <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">tag</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L36"><td class="ln" data-line="36"><a href="#L36">36</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">out_valid</span> <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">out_valid</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L37"><td class="ln" data-line="37"><a href="#L37">37</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">out_ready</span> <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">out_ready</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L38"><td class="ln" data-line="38"><a href="#L38">38</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">result</span>    <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">result</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L39"><td class="ln" data-line="39"><a href="#L39">39</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">out_tag</span>   <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">out_tag</span><span class="sv-op">)</span><span class="sv-op">,</span></td></tr>
+<tr id="L40"><td class="ln" data-line="40"><a href="#L40">40</a></td><td class="code">    <span class="sv-op">.</span><span class="sv-method">err_flag</span>  <span class="sv-op">(</span><span class="sv-ident">u_alu_if</span><span class="sv-op">.</span><span class="sv-ident">err_flag</span><span class="sv-op">)</span></td></tr>
+<tr id="L41"><td class="ln" data-line="41"><a href="#L41">41</a></td><td class="code">  <span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L42"><td class="ln" data-line="42"><a href="#L42">42</a></td><td class="code">&nbsp;</td></tr>
+<tr id="L43"><td class="ln" data-line="43"><a href="#L43">43</a></td><td class="code">  <span class="sv-keyword-decl">initial</span> <span class="sv-keyword">begin</span></td></tr>
+<tr id="L44"><td class="ln" data-line="44"><a href="#L44">44</a></td><td class="code">    <span class="sv-uvm-type clickable-uvm-sym" data-sym="uvm_config_db" data-sym-kind="class" title="Click to view uvm_config_db documentation">uvm_config_db</span><span class="sv-op">#(</span><span class="sv-qualifier">virtual</span> <span class="sv-ident">alu_if</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method clickable-uvm-sym" data-sym="set" data-sym-kind="method" data-sym-owner="uvm_config_db" title="Click to view set method documentation">set</span><span class="sv-op">(</span><span class="sv-constant">null</span><span class="sv-op">,</span> <span class="sv-string">&quot;uvm_test_top.drv&quot;</span><span class="sv-op">,</span> <span class="sv-string">&quot;vif&quot;</span><span class="sv-op">,</span> <span class="sv-ident">u_alu_if</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L45"><td class="ln" data-line="45"><a href="#L45">45</a></td><td class="code">    <span class="sv-method clickable-uvm-sym" data-sym="run_test" data-sym-kind="method" title="Click to view run_test method documentation">run_test</span><span class="sv-op">(</span><span class="sv-string">&quot;alu_minimal_test&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></td></tr>
+<tr id="L46"><td class="ln" data-line="46"><a href="#L46">46</a></td><td class="code">  <span class="sv-keyword">end</span></td></tr>
+<tr id="L47"><td class="ln" data-line="47"><a href="#L47">47</a></td><td class="code"><span class="sv-keyword-decl">endmodule</span></td></tr></tbody></table></div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Simulation Output Console -->
+
+<div class="CGroup" id="doc-nav-sim" data-doc-topic="doc-nav-sim" data-anchor="Simulation">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Simulation">Simulation &amp; Execution Output</a></h2>
+    <div class="CBody">
+      <div class="sim-section">
+        <!-- Simulator Command Selector -->
+        <div class="sim-cmd-card">
+          <div class="sim-tabs">
+            <button type="button" class="sim-tab active" data-sim="questa">Questa / ModelSim</button>
+            <button type="button" class="sim-tab" data-sim="vcs">Synopsys VCS</button>
+            <button type="button" class="sim-tab" data-sim="xcelium">Cadence Xcelium</button>
+          </div>
+          <div class="sim-cmd-box">
+            <code id="sim-cmd-text">make -f Makefile.questa run</code>
+            <button type="button" class="btn btn-sm btn-outline" id="btn-copy-cmd" title="Copy command">Copy</button>
+          </div>
+        </div>
+
+        <!-- Terminal Log -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <span class="terminal-title">Simulation Output Console (UVM 1.2 Execution Log)</span>
+            <div class="terminal-filters">
+              <button type="button" class="term-filter active" data-level="all">All</button>
+              <button type="button" class="term-filter" data-level="info">Info</button>
+              <button type="button" class="term-filter" data-level="warning">Warning</button>
+              <button type="button" class="term-filter" data-level="error">Error</button>
+            </div>
+          </div>
+          <pre class="terminal-body" id="terminal-body"># ** Note: (vsim-3813) Design is being optimized...
+UVM_INFO @ 0: reporter [RNTST] Running test alu_minimal_test...
+UVM_INFO alu_seq.sv(15) @ 25: uvm_test_top.seqr@@seq [SEQ] Starting smoke sequence (4 items)
+UVM_INFO alu_seq.sv(22) @ 25: uvm_test_top.seqr@@seq [SEQ] Sending tag=0 op=ALU_ADD a=0x03a4 b=0x012f
+UVM_INFO alu_driver.sv(38) @ 30: uvm_test_top.drv [DRV] Driving tag=0 op=ALU_ADD a=0x03a4 b=0x012f
+UVM_INFO alu_seq.sv(22) @ 40: uvm_test_top.seqr@@seq [SEQ] Sending tag=1 op=ALU_MUL a=0x0042 b=0x0018
+UVM_INFO alu_driver.sv(38) @ 40: uvm_test_top.drv [DRV] Driving tag=1 op=ALU_MUL a=0x0042 b=0x0018
+UVM_INFO alu_seq.sv(22) @ 50: uvm_test_top.seqr@@seq [SEQ] Sending tag=2 op=ALU_XOR a=0x0a11 b=0x05ff
+UVM_INFO alu_driver.sv(38) @ 50: uvm_test_top.drv [DRV] Driving tag=2 op=ALU_XOR a=0x0a11 b=0x05ff
+UVM_INFO alu_seq.sv(22) @ 60: uvm_test_top.seqr@@seq [SEQ] Sending tag=3 op=ALU_SUB a=0x0900 b=0x0100
+UVM_INFO alu_driver.sv(38) @ 60: uvm_test_top.drv [DRV] Driving tag=3 op=ALU_SUB a=0x0900 b=0x0100
+UVM_INFO alu_seq.sv(26) @ 70: uvm_test_top.seqr@@seq [SEQ] Completed smoke sequence
+UVM_INFO @ 110: reporter [TEST_DONE] &#x27;run&#x27; phase is ready to proceed to the &#x27;extract&#x27; phase
+--- UVM Report Summary ---
+UVM_INFO :    11
+UVM_WARNING : 0
+UVM_ERROR :   0
+UVM_FATAL :   0
+</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Interactive Visual Flow Stepper -->
+
+<!-- Interactive Visual Flow Stepper Section -->
+<div class="CGroup" id="doc-nav-stepper" data-doc-topic="doc-nav-stepper" data-anchor="FlowStepper">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="FlowStepper">Test Scenario Walkthrough</a></h2>
+    <div class="CBody">
+      <div class="stepper-section" id="visual-flow-stepper">
+        <div class="section-header-row">
+          <div class="section-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <span class="section-title-text">Interactive Scenario &amp; Verification Intent</span>
+            <span class="scenario-state-pill" id="step-state-badge">0 ns · INIT</span>
+          </div>
+          <div class="stepper-controls">
+            <span class="stepper-progress-label" id="stepper-progress-label" aria-live="polite">1 / 6</span>
+          </div>
+        </div>
+
+        <div class="stepper-timeline" id="stepper-timeline" role="tablist" aria-label="Test scenario steps">
+          <button type="button" role="tab" id="step-tab-1" class="step-node active" data-step="1" aria-selected="true" aria-current="step" aria-controls="step-detail-card" tabindex="0"><span class="step-num" aria-hidden="true">1</span><span class="step-title">Top Module &amp; ConfigDB Set</span></button><button type="button" role="tab" id="step-tab-2" class="step-node " data-step="2" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">2</span><span class="step-title">Build &amp; Connect Driver &lt;-&gt; Sequencer</span></button><button type="button" role="tab" id="step-tab-3" class="step-node " data-step="3" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">3</span><span class="step-title">Raise Objection &amp; Start Sequence</span></button><button type="button" role="tab" id="step-tab-4" class="step-node " data-step="4" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">4</span><span class="step-title">Late Randomization &amp; finish_item</span></button><button type="button" role="tab" id="step-tab-5" class="step-node " data-step="5" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">5</span><span class="step-title">Pin-Level Driving &amp; item_done</span></button><button type="button" role="tab" id="step-tab-6" class="step-node " data-step="6" aria-selected="false" aria-current="false" aria-controls="step-detail-card" tabindex="-1"><span class="step-num" aria-hidden="true">6</span><span class="step-title">Drop Objection &amp; Shutdown</span></button>
+        </div>
+
+        <div class="step-card" id="step-detail-card" role="tabpanel" aria-live="polite" aria-labelledby="step-tab-1">
+          <div class="step-card-header">
+            <h4 id="step-active-title">1. Top Module &amp; ConfigDB Set</h4>
+            <span class="step-active-comp" id="step-active-comp">Target: tb_top</span>
+          </div>
+          <p id="step-active-desc">tb_top publishes physical alu_if into uvm_config_db and invokes run_test(&quot;alu_minimal_test&quot;).</p>
+          <div class="step-log-hint">
+            <strong>Expected Log Output:</strong>
+            <code id="step-active-log">Running test alu_minimal_test</code>
+          </div>
+          <div class="step-card-actions">
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-code" title="Scroll to code in Code Studio">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>Jump to Code</span>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline" id="btn-jump-log" title="Scroll to log message in Terminal">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+              <span>Jump to Terminal Log</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Associated UVM 1.2 Docs & Examples -->
+<div class="CGroup" id="doc-nav-links" data-doc-topic="doc-nav-links" data-anchor="RelatedDocs">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="RelatedDocs">Associated UVM 1.2 Docs &amp; Interactive Examples</a></h2>
+    <div class="CBody">
+      <div class="tut-refs-grid">
+        
+        <a href="../docs_view/seq/uvm_sequence_item-svh.html#uvm_sequence_item" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/seq/uvm_sequence_item-svh.html#uvm_sequence_item">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_sequence_item</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Base class for sequence transactions.</p>
+        </a>
+        
+        <a href="../docs_view/seq/uvm_sequence-svh.html#uvm_sequence" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/seq/uvm_sequence-svh.html#uvm_sequence">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_sequence</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Procedural stimulus generator via body().</p>
+        </a>
+        
+        <a href="../docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/seq/uvm_sequencer-svh.html#uvm_sequencer">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_sequencer</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Arbitrates and supplies items to driver via seq_item_export.</p>
+        </a>
+        
+        <a href="../docs_view/comps/uvm_driver-svh.html#uvm_driver" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/comps/uvm_driver-svh.html#uvm_driver">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_driver</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Pulls items on seq_item_port and drives virtual interface pins.</p>
+        </a>
+        
+        <a href="../docs_view/base/uvm_config_db-svh.html#uvm_config_db" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/base/uvm_config_db-svh.html#uvm_config_db">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_config_db</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Passes virtual interface handle from tb_top module into UVM classes.</p>
+        </a>
+        
+        <a href="../docs_view/base/uvm_objection-svh.html#uvm_objection" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/base/uvm_objection-svh.html#uvm_objection">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_objection</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Keeps run_phase alive while stimulus executes.</p>
+        </a>
+        
+        <a href="../docs_view/base/uvm_globals-svh.html" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/base/uvm_globals-svh.html">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_globals (run_test)</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Global run_test() entry point starting UVM phasing.</p>
+        </a>
+        
+        
+        <a href="../examples_view/basics/trivial.html" class="tut-ref-card tut-ref-ex example-callout-link" data-example-url="examples_view/basics/trivial.html">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">Trivial Component</span>
+            <span class="tut-ref-badge tut-ref-badge-ex">Accellera Studio</span>
+          </div>
+          <p class="tut-ref-desc">Minimal uvm_component & run_test().</p>
+        </a>
+        
+        <a href="../examples_view/infrastructure/interfaces.html" class="tut-ref-card tut-ref-ex example-callout-link" data-example-url="examples_view/infrastructure/interfaces.html">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">Virtual Interface Connection</span>
+            <span class="tut-ref-badge tut-ref-badge-ex">Accellera Studio</span>
+          </div>
+          <p class="tut-ref-desc">Bridging physical interfaces via uvm_config_db.</p>
+        </a>
+        
+        <a href="../examples_view/sequences/basic_read_write_sequence.html" class="tut-ref-card tut-ref-ex example-callout-link" data-example-url="examples_view/sequences/basic_read_write_sequence.html">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">Basic Read/Write Sequence</span>
+            <span class="tut-ref-badge tut-ref-badge-ex">Accellera Studio</span>
+          </div>
+          <p class="tut-ref-desc">Sequence/driver handshake fundamentals.</p>
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Self-Check Knowledge Quiz -->
+
+<div class="CGroup" id="doc-nav-quiz" data-doc-topic="doc-nav-quiz" data-anchor="SelfCheck">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="SelfCheck">Self-Check Knowledge Quiz</a></h2>
+    <div class="CBody">
+      <div class="tut-quiz-container" id="tut-quiz-container" data-chapter-slug="minimal_stimuli"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Chapter Completion & Prev / Next Navigation Footer -->
+<div class="tut-footer-nav" id="tut-footer-nav">
+  <div class="tut-footer-left">
+    
+    <a href="../tutorial_view/verification_principles.html" class="btn btn-outline tut-nav-btn tutorial-link" data-tutorial-href="tutorial_view/verification_principles.html">
+      &larr; Ch. 2: 02. Stimuli, Checks & Metrics
+    </a>
+    
+  </div>
+  <div class="tut-footer-center">
+    <button type="button" class="btn btn-primary tut-complete-btn" id="tut-mark-complete-btn" data-chapter-slug="minimal_stimuli">
+      Mark Chapter 3 Complete
+    </button>
+  </div>
+  <div class="tut-footer-right">
+    
+    <a href="../tutorial_view/agent_factory_config.html" class="btn btn-primary tut-nav-btn tutorial-link" data-tutorial-href="tutorial_view/agent_factory_config.html">
+      Ch. 4: 04. Agent, Factory & ConfigDB &rarr;
+    </a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+  <button class="doc-toc-mobile-trigger" id="doc-toc-mobile-trigger" type="button" aria-expanded="false" aria-controls="doc-toc-inner" title="Toggle table of contents">
+    <span class="doc-toc-mobile-left">
+      <svg class="doc-toc-mobile-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+        <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+      </svg>
+      <span class="doc-toc-mobile-label">On this page</span>
+      <span class="doc-toc-mobile-sep" aria-hidden="true">&rsaquo;</span>
+      <span class="doc-toc-mobile-current" id="doc-toc-mobile-current">Overview</span>
+    </span>
+    <svg class="doc-toc-mobile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </button>
+  <div class="doc-toc-inner" id="doc-toc-inner">
+    <div class="doc-toc-header">
+      <span class="doc-toc-title">On this page</span>
+      <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+        <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="4 14 12 6 20 14"/>
+        </svg>
+        <span class="toc-toggle-text">Collapse all</span>
+      </button>
+    </div>
+    <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+  </div>
+</aside>
+    </div>
+  </div>
+  <div id="zip-payload" style="display:none;" data-zip='[{&quot;name&quot;: &quot;alu_driver.sv&quot;, &quot;content&quot;: &quot;// -----------------------------------------------------------------------------\n// alu_driver.sv - Minimal Pin-Level Bus Driver (Chapter 3)\n// -----------------------------------------------------------------------------\n`ifndef ALU_DRIVER_SV\n`define ALU_DRIVER_SV\n\nclass alu_driver extends uvm_driver #(alu_item);\n  `uvm_component_utils(alu_driver)\n\n  virtual alu_if vif;\n\n  function new(string name = \&quot;alu_driver\&quot;, uvm_component parent = null);\n    super.new(name, parent);\n  endfunction\n\n  virtual function void build_phase(uvm_phase phase);\n    super.build_phase(phase);\n    if (!uvm_config_db#(virtual alu_if)::get(this, \&quot;\&quot;, \&quot;vif\&quot;, vif)) begin\n      `uvm_fatal(\&quot;DRV\&quot;, \&quot;Virtual interface &#x27;vif&#x27; not found in uvm_config_db\&quot;)\n    end\n  endfunction\n\n  virtual task run_phase(uvm_phase phase);\n    alu_item req;\n    vif.reset_signals();\n    @(posedge vif.rst_n);\n    @(vif.drv_cb);\n\n    forever begin\n      seq_item_port.get_next_item(req);\n      drive_item(req);\n      seq_item_port.item_done();\n    end\n  endtask\n\n  virtual task drive_item(alu_item req);\n    `uvm_info(\&quot;DRV\&quot;, $sformatf(\&quot;Driving %s\&quot;, req.convert2string()), UVM_MEDIUM)\n    vif.drv_cb.in_valid &lt;= 1&#x27;b1;\n    vif.drv_cb.op       &lt;= req.op;\n    vif.drv_cb.a        &lt;= req.a;\n    vif.drv_cb.b        &lt;= req.b;\n    vif.drv_cb.tag      &lt;= req.tag;\n\n    do begin\n      @(vif.drv_cb);\n    end while (!vif.drv_cb.in_ready);\n\n    vif.drv_cb.in_valid &lt;= 1&#x27;b0;\n  endtask\nendclass\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;alu_if.sv&quot;, &quot;content&quot;: &quot;// -----------------------------------------------------------------------------\n// alu_if.sv - Minimal Valid/Ready Virtual Interface (Chapter 3)\n// -----------------------------------------------------------------------------\ninterface alu_if (input logic clk, input logic rst_n);\n  logic        in_valid;\n  logic        in_ready;\n  logic [2:0]  op;\n  logic [15:0] a;\n  logic [15:0] b;\n  logic [3:0]  tag;\n\n  logic        out_valid;\n  logic        out_ready;\n  logic [31:0] result;\n  logic [3:0]  out_tag;\n  logic        err_flag;\n\n  // Synchronous driver clocking block avoids race conditions with RTL\n  clocking drv_cb @(posedge clk);\n    default input #1step output #1;\n    output in_valid, op, a, b, tag, out_ready;\n    input  in_ready, out_valid, result, out_tag, err_flag;\n  endclocking\n\n  task automatic reset_signals();\n    in_valid  &lt;= 1&#x27;b0;\n    op        &lt;= 3&#x27;d0;\n    a         &lt;= 16&#x27;d0;\n    b         &lt;= 16&#x27;d0;\n    tag       &lt;= 4&#x27;d0;\n    out_ready &lt;= 1&#x27;b1;\n  endtask\nendinterface\n&quot;}, {&quot;name&quot;: &quot;alu_item.sv&quot;, &quot;content&quot;: &quot;// -----------------------------------------------------------------------------\n// alu_item.sv - Minimal Sequence Item / Transaction (Chapter 3)\n// -----------------------------------------------------------------------------\n`ifndef ALU_ITEM_SV\n`define ALU_ITEM_SV\n\ntypedef enum logic [2:0] {\n  ALU_ADD    = 3&#x27;d0,\n  ALU_SUB    = 3&#x27;d1,\n  ALU_MUL    = 3&#x27;d2,\n  ALU_XOR    = 3&#x27;d3,\n  ALU_PASS_A = 3&#x27;d4,\n  ALU_INVAL  = 3&#x27;d5\n} alu_op_e;\n\nclass alu_item extends uvm_sequence_item;\n  rand alu_op_e     op;\n  rand logic [15:0] a;\n  rand logic [15:0] b;\n  rand logic [3:0]  tag;\n\n  // Keep valid operations dominant in smoke stimulus\n  constraint c_valid_op {\n    op inside {ALU_ADD, ALU_SUB, ALU_MUL, ALU_XOR, ALU_PASS_A};\n  }\n\n  constraint c_operand_range {\n    a inside {[16&#x27;h0001 : 16&#x27;h0FFF]};\n    b inside {[16&#x27;h0001 : 16&#x27;h0FFF]};\n  }\n\n  `uvm_object_utils_begin(alu_item)\n    `uvm_field_enum(alu_op_e, op, UVM_ALL_ON)\n    `uvm_field_int(a,   UVM_ALL_ON | UVM_HEX)\n    `uvm_field_int(b,   UVM_ALL_ON | UVM_HEX)\n    `uvm_field_int(tag, UVM_ALL_ON | UVM_DEC)\n  `uvm_object_utils_end\n\n  function new(string name = \&quot;alu_item\&quot;);\n    super.new(name);\n  endfunction\n\n  virtual function string convert2string();\n    return $sformatf(\&quot;tag=%0d op=%s a=0x%04h b=0x%04h\&quot;, tag, op.name(), a, b);\n  endfunction\nendclass\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;alu_minimal_test.sv&quot;, &quot;content&quot;: &quot;// -----------------------------------------------------------------------------\n// alu_minimal_test.sv - Bare-Minimum UVM Test (No Agent/Env Yet) (Chapter 3)\n// -----------------------------------------------------------------------------\n`ifndef ALU_MINIMAL_TEST_SV\n`define ALU_MINIMAL_TEST_SV\n\nclass alu_minimal_test extends uvm_test;\n  `uvm_component_utils(alu_minimal_test)\n\n  uvm_sequencer #(alu_item) seqr;\n  alu_driver                drv;\n\n  function new(string name = \&quot;alu_minimal_test\&quot;, uvm_component parent = null);\n    super.new(name, parent);\n  endfunction\n\n  virtual function void build_phase(uvm_phase phase);\n    super.build_phase(phase);\n    seqr = uvm_sequencer#(alu_item)::type_id::create(\&quot;seqr\&quot;, this);\n    drv  = alu_driver::type_id::create(\&quot;drv\&quot;, this);\n  endfunction\n\n  virtual function void connect_phase(uvm_phase phase);\n    super.connect_phase(phase);\n    drv.seq_item_port.connect(seqr.seq_item_export);\n  endfunction\n\n  virtual task run_phase(uvm_phase phase);\n    alu_smoke_seq seq;\n    phase.raise_objection(this, \&quot;Starting minimal stimulus\&quot;);\n    seq = alu_smoke_seq::type_id::create(\&quot;seq\&quot;);\n    seq.start(seqr);\n    #40ns;\n    phase.drop_objection(this, \&quot;Finished minimal stimulus\&quot;);\n  endtask\nendclass\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;alu_seq.sv&quot;, &quot;content&quot;: &quot;// -----------------------------------------------------------------------------\n// alu_seq.sv - Minimal Stimulus Sequence (Chapter 3)\n// -----------------------------------------------------------------------------\n`ifndef ALU_SEQ_SV\n`define ALU_SEQ_SV\n\nclass alu_smoke_seq extends uvm_sequence #(alu_item);\n  `uvm_object_utils(alu_smoke_seq)\n\n  rand int unsigned num_items = 4;\n\n  function new(string name = \&quot;alu_smoke_seq\&quot;);\n    super.new(name);\n  endfunction\n\n  virtual task body();\n    alu_item req;\n    `uvm_info(\&quot;SEQ\&quot;, $sformatf(\&quot;Starting smoke sequence (%0d items)\&quot;, num_items), UVM_LOW)\n\n    for (int i = 0; i &lt; num_items; i++) begin\n      req = alu_item::type_id::create($sformatf(\&quot;req_%0d\&quot;, i));\n      start_item(req);\n      if (!req.randomize() with { tag == local::i[3:0]; }) begin\n        `uvm_fatal(\&quot;SEQ\&quot;, \&quot;Randomization failed for alu_item\&quot;)\n      end\n      `uvm_info(\&quot;SEQ\&quot;, $sformatf(\&quot;Sending %s\&quot;, req.convert2string()), UVM_MEDIUM)\n      finish_item(req);\n    end\n\n    `uvm_info(\&quot;SEQ\&quot;, \&quot;Completed smoke sequence\&quot;, UVM_LOW)\n  endtask\nendclass\n\n`endif\n&quot;}, {&quot;name&quot;: &quot;Makefile.questa&quot;, &quot;content&quot;: &quot;# Makefile.questa - Chapter 3 Minimal Stimuli Environment\nUVM_HOME ?= $(QUESTA_HOME)/verilog_src/uvm-1.2\n\nall: comp run\n\ncomp:\n\tvlib work\n\tvlog +incdir+$(UVM_HOME)/src +incdir+. \\\n\t\t$(UVM_HOME)/src/uvm_pkg.sv \\\n\t\t../dut/pkt_alu_basic.sv \\\n\t\talu_if.sv \\\n\t\ttb_top.sv\n\nrun:\n\tvsim -c -do \&quot;run -all; quit -f\&quot; tb_top +UVM_VERBOSITY=UVM_MEDIUM\n&quot;}, {&quot;name&quot;: &quot;tb_top.sv&quot;, &quot;content&quot;: &quot;// -----------------------------------------------------------------------------\n// tb_top.sv - Top Module Connecting RTL DUT &amp; Minimal UVM Testbench (Ch.3)\n// -----------------------------------------------------------------------------\n`timescale 1ns/1ps\n\nmodule tb_top;\n  import uvm_pkg::*;\n  `include \&quot;uvm_macros.svh\&quot;\n  `include \&quot;alu_item.sv\&quot;\n  `include \&quot;alu_seq.sv\&quot;\n  `include \&quot;alu_driver.sv\&quot;\n  `include \&quot;alu_minimal_test.sv\&quot;\n\n  logic clk = 1&#x27;b0;\n  logic rst_n = 1&#x27;b0;\n\n  always #5ns clk = ~clk;\n\n  initial begin\n    rst_n = 1&#x27;b0;\n    #25ns;\n    rst_n = 1&#x27;b1;\n  end\n\n  alu_if u_alu_if (.clk(clk), .rst_n(rst_n));\n\n  pkt_alu_basic u_dut (\n    .clk       (clk),\n    .rst_n     (rst_n),\n    .in_valid  (u_alu_if.in_valid),\n    .in_ready  (u_alu_if.in_ready),\n    .op        (u_alu_if.op),\n    .a         (u_alu_if.a),\n    .b         (u_alu_if.b),\n    .tag       (u_alu_if.tag),\n    .out_valid (u_alu_if.out_valid),\n    .out_ready (u_alu_if.out_ready),\n    .result    (u_alu_if.result),\n    .out_tag   (u_alu_if.out_tag),\n    .err_flag  (u_alu_if.err_flag)\n  );\n\n  initial begin\n    uvm_config_db#(virtual alu_if)::set(null, \&quot;uvm_test_top.drv\&quot;, \&quot;vif\&quot;, u_alu_if);\n    run_test(\&quot;alu_minimal_test\&quot;);\n  end\nendmodule\n&quot;}]'></div>
+  <div id="tut-diff-meta-payload" style="display:none;" data-tut-diff-meta='{&quot;alu_driver.sv&quot;: {&quot;status&quot;: &quot;new&quot;, &quot;added_lines&quot;: []}, &quot;alu_if.sv&quot;: {&quot;status&quot;: &quot;new&quot;, &quot;added_lines&quot;: []}, &quot;alu_item.sv&quot;: {&quot;status&quot;: &quot;new&quot;, &quot;added_lines&quot;: []}, &quot;alu_minimal_test.sv&quot;: {&quot;status&quot;: &quot;new&quot;, &quot;added_lines&quot;: []}, &quot;alu_seq.sv&quot;: {&quot;status&quot;: &quot;new&quot;, &quot;added_lines&quot;: []}, &quot;Makefile.questa&quot;: {&quot;status&quot;: &quot;new&quot;, &quot;added_lines&quot;: []}, &quot;tb_top.sv&quot;: {&quot;status&quot;: &quot;new&quot;, &quot;added_lines&quot;: []}}'></div>
+  <div id="stepper-payload" style="display:none;" data-stepper='[{&quot;step&quot;: 1, &quot;title&quot;: &quot;1. Top Module &amp; ConfigDB Set&quot;, &quot;component&quot;: &quot;tb_top&quot;, &quot;file&quot;: &quot;tb_top.sv&quot;, &quot;line&quot;: 44, &quot;state&quot;: &quot;0 ns \u00b7 INIT&quot;, &quot;desc&quot;: &quot;tb_top publishes physical alu_if into uvm_config_db and invokes run_test(\&quot;alu_minimal_test\&quot;).&quot;, &quot;log_snippet&quot;: &quot;Running test alu_minimal_test&quot;}, {&quot;step&quot;: 2, &quot;title&quot;: &quot;2. Build &amp; Connect Driver &lt;-&gt; Sequencer&quot;, &quot;component&quot;: &quot;alu_minimal_test&quot;, &quot;file&quot;: &quot;alu_minimal_test.sv&quot;, &quot;line&quot;: 23, &quot;state&quot;: &quot;0 ns \u00b7 BUILD/CONNECT&quot;, &quot;desc&quot;: &quot;alu_minimal_test instantiates seqr and drv, then connects drv.seq_item_port to seqr.seq_item_export.&quot;, &quot;log_snippet&quot;: &quot;Running test alu_minimal_test&quot;}, {&quot;step&quot;: 3, &quot;title&quot;: &quot;3. Raise Objection &amp; Start Sequence&quot;, &quot;component&quot;: &quot;alu_minimal_test&quot;, &quot;file&quot;: &quot;alu_minimal_test.sv&quot;, &quot;line&quot;: 28, &quot;state&quot;: &quot;25 ns \u00b7 RUN&quot;, &quot;desc&quot;: &quot;Test raises objection so run_phase stays active, creates alu_smoke_seq, and launches seq.start(seqr).&quot;, &quot;log_snippet&quot;: &quot;Starting smoke sequence&quot;}, {&quot;step&quot;: 4, &quot;title&quot;: &quot;4. Late Randomization &amp; finish_item&quot;, &quot;component&quot;: &quot;alu_smoke_seq&quot;, &quot;file&quot;: &quot;alu_seq.sv&quot;, &quot;line&quot;: 19, &quot;state&quot;: &quot;25 ns \u00b7 HANDSHAKE&quot;, &quot;desc&quot;: &quot;start_item waits for sequencer grant, randomizes req, and hands off via finish_item(req).&quot;, &quot;log_snippet&quot;: &quot;Sending tag=0 op=ALU_ADD&quot;}, {&quot;step&quot;: 5, &quot;title&quot;: &quot;5. Pin-Level Driving &amp; item_done&quot;, &quot;component&quot;: &quot;alu_driver&quot;, &quot;file&quot;: &quot;alu_driver.sv&quot;, &quot;line&quot;: 39, &quot;state&quot;: &quot;30 ns \u00b7 PIN DRIVE&quot;, &quot;desc&quot;: &quot;Driver asserts in_valid and op/a/b/tag on clocking block drv_cb until in_ready=1, then calls item_done().&quot;, &quot;log_snippet&quot;: &quot;Driving tag=0 op=ALU_ADD&quot;}, {&quot;step&quot;: 6, &quot;title&quot;: &quot;6. Drop Objection &amp; Shutdown&quot;, &quot;component&quot;: &quot;alu_minimal_test&quot;, &quot;file&quot;: &quot;alu_minimal_test.sv&quot;, &quot;line&quot;: 32, &quot;state&quot;: &quot;110 ns \u00b7 DONE&quot;, &quot;desc&quot;: &quot;Once all 4 items finish and drain #40ns, drop_objection() allows UVM to enter extract/report phases.&quot;, &quot;log_snippet&quot;: &quot;TEST_DONE&quot;}]'></div>
+  <div id="tut-quiz-payload" style="display:none;" data-tut-quiz='[{&quot;q&quot;: &quot;What happens if you forget phase.raise_objection(this) in alu_minimal_test::run_phase?&quot;, &quot;options&quot;: [&quot;UVM waits forever until $finish is called&quot;, &quot;run_phase terminates immediately at 0 ns before any stimulus runs&quot;, &quot;The sequencer automatically raises an objection for every item&quot;], &quot;answer&quot;: 1, &quot;explanation&quot;: &quot;In UVM 1.2, time-consuming run phases end immediately when the total objection count drops to zero.&quot;}, {&quot;q&quot;: &quot;Why does alu_smoke_seq call req.randomize() AFTER start_item(req) instead of before?&quot;, &quot;options&quot;: [&quot;Late randomization guarantees constraints can reflect the latest DUT/scoreboard state at the moment the driver is ready&quot;, &quot;SystemVerilog forbids calling randomize() before start_item()&quot;, &quot;Because start_item() allocates the memory for req&quot;], &quot;answer&quot;: 0, &quot;explanation&quot;: &quot;start_item() blocks until sequencer arbitration completes, so randomizing afterwards ensures the transaction reflects current hardware state.&quot;}]'></div>
+  <div id="tut-graph-payload" style="display:none;" data-tut-graph='{&quot;mode&quot;: &quot;arch_diff&quot;, &quot;chapterNum&quot;: 3, &quot;nodes&quot;: [{&quot;id&quot;: &quot;uvm_test&quot;, &quot;label&quot;: &quot;alu_capstone_full_test\n(uvm_test)&quot;, &quot;kind&quot;: &quot;test&quot;, &quot;layerSlug&quot;: &quot;minimal_stimuli&quot;, &quot;x&quot;: 430, &quot;y&quot;: 45, &quot;chapterSlug&quot;: &quot;minimal_stimuli&quot;, &quot;docUrl&quot;: &quot;docs_view/comps/uvm_test-svh.html&quot;, &quot;studioFile&quot;: &quot;alu_test.sv&quot;, &quot;role&quot;: &quot;Test &amp; Phase Controller&quot;, &quot;summary&quot;: &quot;Top-level UVM test managing factory overrides, cmdline flags (+INJECT_ERR), reset/configure/main/shutdown sub-phases, and objections.&quot;, &quot;ports&quot;: [&quot;run_phase / sub-phases&quot;, &quot;uvm_cmdline_processor&quot;], &quot;layer&quot;: 3, &quot;chapterNum&quot;: 3, &quot;chapterUrl&quot;: &quot;tutorial_view/minimal_stimuli.html&quot;, &quot;isNew&quot;: true}, {&quot;id&quot;: &quot;data_seqr&quot;, &quot;label&quot;: &quot;data_agent.seqr\n(uvm_sequencer)&quot;, &quot;kind&quot;: &quot;seq&quot;, &quot;layerSlug&quot;: &quot;minimal_stimuli&quot;, &quot;x&quot;: 165, &quot;y&quot;: 260, &quot;chapterSlug&quot;: &quot;minimal_stimuli&quot;, &quot;docUrl&quot;: &quot;docs_view/seq/uvm_sequencer-svh.html&quot;, &quot;studioFile&quot;: &quot;alu_agent.sv&quot;, &quot;role&quot;: &quot;Sequence Arbitration&quot;, &quot;summary&quot;: &quot;Arbitrates concurrent sequences (SEQ_ARB_STRICT_FIFO, lock/grab) and routes alu_item requests/responses.&quot;, &quot;ports&quot;: [&quot;seq_item_export (TLM pull)&quot;], &quot;layer&quot;: 3, &quot;chapterNum&quot;: 3, &quot;chapterUrl&quot;: &quot;tutorial_view/minimal_stimuli.html&quot;, &quot;isNew&quot;: true}, {&quot;id&quot;: &quot;data_drv&quot;, &quot;label&quot;: &quot;alu_driver\n(Pipelined + CB)&quot;, &quot;kind&quot;: &quot;driver&quot;, &quot;layerSlug&quot;: &quot;minimal_stimuli&quot;, &quot;x&quot;: 165, &quot;y&quot;: 365, &quot;chapterSlug&quot;: &quot;minimal_stimuli&quot;, &quot;docUrl&quot;: &quot;docs_view/comps/uvm_driver-svh.html&quot;, &quot;studioFile&quot;: &quot;alu_driver.sv&quot;, &quot;role&quot;: &quot;Pin-Level Driver&quot;, &quot;summary&quot;: &quot;Drives Valid/Ready transactions onto alu_if, triggers pre_drive callbacks, and returns tagged responses asynchronously via put(rsp).&quot;, &quot;ports&quot;: [&quot;seq_item_port&quot;, &quot;virtual alu_if&quot;], &quot;layer&quot;: 3, &quot;chapterNum&quot;: 3, &quot;chapterUrl&quot;: &quot;tutorial_view/minimal_stimuli.html&quot;, &quot;isNew&quot;: true}, {&quot;id&quot;: &quot;dut_sva&quot;, &quot;label&quot;: &quot;pkt_alu (RTL DUT)\n+ alu_if SVA Assertions&quot;, &quot;kind&quot;: &quot;dut&quot;, &quot;layerSlug&quot;: &quot;minimal_stimuli&quot;, &quot;x&quot;: 245, &quot;y&quot;: 580, &quot;chapterSlug&quot;: &quot;coverage_sva&quot;, &quot;docUrl&quot;: &quot;docs_view/overviews/intro-txt.html&quot;, &quot;studioFile&quot;: &quot;dut/pkt_alu.sv&quot;, &quot;role&quot;: &quot;Hardware Design + Protocol SVA&quot;, &quot;summary&quot;: &quot;Dual-interface Packet-ALU RTL coupled with SystemVerilog Assertions checking Valid/Ready stability and reset hygiene.&quot;, &quot;ports&quot;: [&quot;alu_if (Valid/Ready)&quot;, &quot;apb_if (APB3)&quot;], &quot;layer&quot;: 3, &quot;chapterNum&quot;: 6, &quot;chapterUrl&quot;: &quot;tutorial_view/coverage_sva.html&quot;, &quot;isNew&quot;: true}], &quot;edges&quot;: [{&quot;source&quot;: &quot;data_seqr&quot;, &quot;target&quot;: &quot;data_drv&quot;, &quot;label&quot;: &quot;seq_item_port&quot;, &quot;layerSlug&quot;: &quot;minimal_stimuli&quot;, &quot;layer&quot;: 3}, {&quot;source&quot;: &quot;data_drv&quot;, &quot;target&quot;: &quot;dut_sva&quot;, &quot;label&quot;: &quot;alu_if pins&quot;, &quot;layerSlug&quot;: &quot;minimal_stimuli&quot;, &quot;layer&quot;: 3}, {&quot;source&quot;: &quot;uvm_test&quot;, &quot;target&quot;: &quot;data_seqr&quot;, &quot;label&quot;: &quot;seq.start()&quot;, &quot;layer&quot;: 3}]}'></div>
+  <script src="../js/uvm_symbol_quick.js" defer></script>
+  <script src="../js/page_common.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/diff2html@3.4.48/bundles/js/diff2html-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="../js/example_page.js"></script>
+  <script src="../js/tutorial_page.js"></script>
+</body>
+
+</html>

@@ -609,9 +609,16 @@
       const pillsEl = document.getElementById('capstone-layer-pills');
       const resetBtn = document.getElementById('capstone-layer-reset');
       const layersMeta = payload.layers || [];
+      const minLayerNum = layersMeta.length ? Math.min.apply(null, layersMeta.map(function (l) { return l.layer; })) : 1;
+      const maxLayerNum = layersMeta.length ? Math.max.apply(null, layersMeta.map(function (l) { return l.layer; })) : (payload.chapterNum || 13);
+
+      if (slider) {
+        slider.min = String(minLayerNum);
+        slider.max = String(maxLayerNum);
+      }
 
       function applyLayer(maxLayer) {
-        const mLayer = parseInt(maxLayer, 10) || 13;
+        const mLayer = parseInt(maxLayer, 10) || maxLayerNum;
         if (slider) slider.value = String(mLayer);
         const found = layersMeta.find(function (l) { return l.layer === mLayer; });
         if (labelEl) {
@@ -619,10 +626,10 @@
         }
         cyInstance.elements().removeClass('dimmed');
         cyInstance.nodes().forEach(function (n) {
-          if ((n.data('layer') || 3) > mLayer) n.addClass('dimmed');
+          if ((n.data('layer') || minLayerNum) > mLayer) n.addClass('dimmed');
         });
         cyInstance.edges().forEach(function (e) {
-          if ((e.data('layer') || 3) > mLayer) e.addClass('dimmed');
+          if ((e.data('layer') || minLayerNum) > mLayer) e.addClass('dimmed');
         });
         if (pillsEl) {
           pillsEl.querySelectorAll('.capstone-layer-pill').forEach(function (p) {
@@ -648,9 +655,9 @@
         slider.addEventListener('input', function () { applyLayer(slider.value); });
       }
       if (resetBtn) {
-        resetBtn.addEventListener('click', function () { applyLayer(13); });
+        resetBtn.addEventListener('click', function () { applyLayer(maxLayerNum); });
       }
-      applyLayer(13);
+      applyLayer(maxLayerNum);
 
       // Sync Flow Stepper -> Cytoscape active node pulse
       const stepperPayloadEl = document.getElementById('stepper-payload');

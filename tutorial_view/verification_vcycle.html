@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" class="doc-page example-page tutorial-page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var p = window.parent && window.parent.document && window.parent.document.documentElement.getAttribute('data-theme');
+        var t = p || localStorage.getItem('theme');
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          document.documentElement.style.colorScheme = t;
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>01. Verification Fundamentals, V-Cycle &amp; Role Split | UVM 1.2 Step-by-Step Tutorial</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/diff2html@3.4.48/bundles/css/diff2html.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="doc-body example-body tutorial-body">
+    <div class="doc-page-container">
+    <nav class="doc-breadcrumbs" aria-label="Breadcrumb navigation">
+  <a href="../index.html#/tutorial" class="doc-breadcrumb-item doc-breadcrumb-link doc-breadcrumb-home">Tutorial</a>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item">I. Verification Foundations &amp; Methodology</span>
+  <span class="doc-breadcrumb-sep">/</span>
+  <span class="doc-breadcrumb-item active">01. V-Cycle &amp; Team Roles</span>
+</nav>
+    <div class="doc-source-banner example-source-banner tutorial-banner">
+  <div class="banner-info">
+    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span class="file-label">Course:</span><code class="banner-file-code">Chapter 01/13</code><span class="badge badge-diff badge-diff-beginner">Beginner</span> <span class="badge badge-files">Concept Guide</span>
+  </div>
+  
+</div>
+    <div class="doc-layout-wrapper">
+      <div class="doc-main-content">
+        <div id="Content">
+          <div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
+  <div class="CTopic" id="MainTopic">
+    <div class="tut-chapter-kicker">
+      <span class="tut-part-badge">I. Verification Foundations & Methodology</span>
+      <span class="tut-step-counter">Chapter 1 of 13</span>
+      <span class="tut-completion-pill" id="tut-completion-pill" data-chapter-slug="verification_vcycle">Not completed</span>
+    </div>
+    <h1 class="CTitle"><a name="01. Verification Fundamentals, V-Cycle & Role Split">01. Verification Fundamentals, V-Cycle & Role Split</a></h1>
+    <div class="CBody">
+      <p class="example-summary-desc">Understand why verification consumes 60-70% of ASIC/FPGA project effort, how the hardware V-Cycle connects specification to sign-off, and how responsibilities split cleanly across the System Architect, RTL Designer, and Verification Engineer.</p>
+
+      
+      <div class="tut-objectives-card">
+        <div class="tut-objectives-header">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4"></path>
+            <path d="M12 8h.01"></path>
+          </svg>
+          <span>Learning Objectives</span>
+        </div>
+        <ul class="tut-objectives-list">
+          
+          <li>Explain the purpose of functional verification versus RTL design and why self-verification creates blind spots.</li>
+          
+          <li>Map every phase of the hardware V-Cycle from Architecture Specification down to RTL and back up to Sign-Off.</li>
+          
+          <li>Define the exact deliverables and handoff contracts between System Architect, RTL Designer, and Verifier.</li>
+          
+          <li>Understand how a Verification Plan (vPlan) connects architectural features to measurable UVM coverage closure.</li>
+          
+        </ul>
+      </div>
+      
+
+      <div class="example-api-pills">
+        <span class="api-label">Key UVM APIs:</span>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_test">uvm_test</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_env">uvm_env</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_agent">uvm_agent</a>
+        
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="uvm_component">uvm_component</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Course Theory & Diagrams -->
+<div class="CGroup" id="doc-nav-course" data-doc-topic="doc-nav-course" data-anchor="CourseGuide">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="CourseGuide">Core Concepts &amp; Walkthrough</a></h2>
+    <div class="CBody tut-prose">
+      <h2>1.1 Why Verification Exists (And Why Designers Don't Verify Their Own RTL)</h2>
+<p>In modern ASIC and FPGA projects, <strong>verification typically accounts for 60% to 70% of engineering time and compute resources</strong>. The objective is fundamentally asymmetric compared to hardware design:</p>
+<ul>
+<li><strong>RTL Design</strong> builds a <em>specific</em> hardware micro-architecture that satisfies timing, area, and power budgets.</li>
+<li><strong>Functional Verification</strong> tries to <em>break</em> that implementation under every legal (and illegal) sequence of inputs, corner cases, backpressure stalls, and register configurations before tape-out.</li>
+</ul>
+<blockquote>
+<p><strong>Golden Rule of Independent Verification:</strong> Never verify a block solely using the same mental assumptions used to design it. If a designer misreads an ambiguous sentence in a specification, writing both the RTL and the testbench perpetuates the exact same bug in both places.</p>
+</blockquote>
+<hr />
+<h2>1.2 The Hardware V-Cycle</h2>
+<p>The <strong>V-Cycle</strong> models how abstraction descends from system requirements down to synthesizable SystemVerilog RTL (left leg), and then climbs back up through block, subsystem, and SoC verification to tape-out sign-off (right leg).</p>
+<div class="tut-mermaid-wrap"><pre class="mermaid">flowchart LR
+    S1[&quot;System Spec (Architect)&quot;] --&gt; S2[&quot;Micro-Arch (Designer)&quot;]
+    S2 --&gt; S3[&quot;RTL Coding (Designer)&quot;]
+    S3 --&gt; V1[&quot;vPlan &amp; Block TB (Verifier)&quot;]
+    V1 --&gt; V2[&quot;Block Closure (Verifier)&quot;]
+    V2 --&gt; V3[&quot;SoC Reuse &amp; Sign-Off (All)&quot;]
+    S1 -. &quot;Requirement Traceability&quot; .-&gt; V3
+    S2 -. &quot;Corner-Case Review&quot; .-&gt; V1</pre></div>
+<p>Each descending step creates a <strong>specification contract</strong>, and each ascending step validates that contract independently:</p>
+<ol>
+<li><strong>System Specification -&gt; Verification Plan (vPlan):</strong> Every architectural requirement (e.g., <em>&quot;saturate arithmetic overflow when <code>CTRL.SAT_EN=1</code>&quot;</em>) receives a unique requirement ID mapped to stimulus scenarios, assertions, and coverage bins.</li>
+<li><strong>Micro-Architecture -&gt; Corner-Case Checklist:</strong> Pipeline hazards, FIFO full/empty transitions, reset synchronization, and bus wait-states are translated into constrained-random constraints and SVA properties.</li>
+<li><strong>RTL Freeze -&gt; Block UVM Verification:</strong> Once port lists and protocols stabilize, the Verification Engineer exercises the DUT inside an automated self-checking UVM testbench.</li>
+<li><strong>Block Closure -&gt; Subsystem / SoC Vertical Reuse:</strong> Clean UVM environments switch their block agents from <code>UVM_ACTIVE</code> to <code>UVM_PASSIVE</code> so the exact same scoreboard and coverage collectors keep checking inside full-chip simulations.</li>
+</ol>
+<hr />
+<h2>1.3 Role Split: Architect vs. Designer vs. Verifier</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Responsibility</th>
+<th style="text-align:left">System Architect</th>
+<th style="text-align:left">RTL Designer</th>
+<th style="text-align:left">Verification Engineer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Primary Artifact</strong></td>
+<td style="text-align:left">System Spec, Memory/Register Map (IP-XACT), Interface Specs</td>
+<td style="text-align:left">Synthesizable RTL (<code>pkt_alu.sv</code>), Lint/CDC-clean code</td>
+<td style="text-align:left">vPlan, UVM Testbench, Reference Model, Coverage &amp; Sign-off Report</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Mental Model</strong></td>
+<td style="text-align:left"><em>What</em> the IP must do externally (protocols, throughput, registers)</td>
+<td style="text-align:left"><em>How</em> silicon implements it cycle-by-cycle (FSMs, flops, muxes)</td>
+<td style="text-align:left"><em>How it could fail</em> (races, stalls, overflow, reset, illegal sequences)</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Interface Ownership</strong></td>
+<td style="text-align:left">Defines bus protocol &amp; register reset values</td>
+<td style="text-align:left">Implements RTL pins &amp; timing constraints</td>
+<td style="text-align:left">Writes <code>interface</code> + SVA assertions + BFM Driver/Monitor</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Debug Ownership</strong></td>
+<td style="text-align:left">Resolves spec ambiguities</td>
+<td style="text-align:left">Fixes confirmed RTL bugs &amp; updates waveforms</td>
+<td style="text-align:left">Triages failures, distinguishes TB vs RTL bugs, closes coverage holes</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Sign-Off Gate</strong></td>
+<td style="text-align:left">Confirms architectural intent</td>
+<td style="text-align:left">Confirms synthesis/lint/CDC clean</td>
+<td style="text-align:left">Confirms 0 errors, 100% functional + code coverage closure</td>
+</tr>
+</tbody>
+</table>
+<p>Explore the <strong>Interactive V-Cycle &amp; Role Matrix</strong> below to inspect every stage, deliverable, and handoff contract.</p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Conceptual / Architecture Diagram (Cytoscape.js) -->
+
+<div class="CGroup" id="doc-nav-vcycle" data-doc-topic="doc-nav-vcycle" data-anchor="InteractiveVCycle">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="InteractiveVCycle">Interactive V-Cycle &amp; Role Explorer</a></h2>
+    <div class="CBody">
+      <div class="tut-interactive-panel">
+        <div class="tut-toolbar-row">
+          <div class="tut-role-filters" role="group" aria-label="Filter by team role">
+            <button type="button" class="tut-filter-btn active" data-role="all" title="Show all roles">All</button>
+            <button type="button" class="tut-filter-btn" data-role="architect" title="System Architect">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline></svg>
+              <span>Architect</span>
+            </button>
+            <button type="button" class="tut-filter-btn" data-role="designer" title="RTL Designer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+              <span>Designer</span>
+            </button>
+            <button type="button" class="tut-filter-btn" data-role="verifier" title="Verification Engineer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+              <span>Verifier</span>
+            </button>
+          </div>
+          <div class="tut-graph-actions">
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="tut-cy-fullscreen" title="Toggle Fullscreen Overlay">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+              <span>Fullscreen</span>
+            </button>
+          </div>
+        </div>
+        <div class="tut-cy-split">
+          <div class="tut-cy-stage">
+            <div id="tut-cy-graph" class="tut-cy-canvas" aria-label="Interactive V-Cycle diagram"></div>
+            <button type="button" class="btn btn-xs btn-outline tut-insp-toggle-btn" id="tut-insp-toggle" aria-expanded="true" aria-label="Hide Inspector" title="Hide Inspector">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line><polyline points="10 9 13 12 10 15"></polyline></svg>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn tut-cy-fit-btn" id="tut-cy-fit" title="Fit diagram to view">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+              <span>Fit</span>
+            </button>
+          </div>
+          <aside class="tut-cy-inspector" id="tut-cy-inspector">
+            <div class="tut-insp-badge" id="tut-insp-role">Select a stage</div>
+            <div class="tut-insp-body" id="tut-insp-body">
+              <h3 id="tut-insp-title">Click any V-Cycle node</h3>
+              <p id="tut-insp-desc">Click any stage on the left to inspect its owner, primary deliverables, handoff contract, and associated UVM documentation.</p>
+              <div class="tut-insp-meta" id="tut-insp-extra"></div>
+              <div class="tut-insp-actions" id="tut-insp-actions"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Unified Diff Viewer vs. Previous Chapter (diff2html) -->
+
+
+<!-- Multi-File Code Studio -->
+
+
+<!-- Simulation Output Console -->
+
+
+<!-- Interactive Visual Flow Stepper -->
+
+
+<!-- Associated UVM 1.2 Docs & Examples -->
+<div class="CGroup" id="doc-nav-links" data-doc-topic="doc-nav-links" data-anchor="RelatedDocs">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="RelatedDocs">Associated UVM 1.2 Docs &amp; Interactive Examples</a></h2>
+    <div class="CBody">
+      <div class="tut-refs-grid">
+        
+        <a href="../docs_view/overviews/intro-txt.html" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/overviews/intro-txt.html">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">UVM 1.2 Introduction</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">High-level UVM goals, reuse model, and class library overview.</p>
+        </a>
+        
+        <a href="../docs_view/overviews/components-txt.html" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/overviews/components-txt.html">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">UVM Components Overview</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Role of structured hierarchical components in scalable verification.</p>
+        </a>
+        
+        <a href="../docs_view/comps/uvm_test-svh.html#uvm_test" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/comps/uvm_test-svh.html#uvm_test">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_test</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Top-level test class configuring environments and scenarios.</p>
+        </a>
+        
+        <a href="../docs_view/comps/uvm_env-svh.html#uvm_env" class="tut-ref-card tut-ref-doc" data-doc-href="docs_view/comps/uvm_env-svh.html#uvm_env">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">uvm_env</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          <p class="tut-ref-desc">Reusable verification environment container.</p>
+        </a>
+        
+        
+        <a href="../examples_view/basics/trivial.html" class="tut-ref-card tut-ref-ex example-callout-link" data-example-url="examples_view/basics/trivial.html">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">Trivial Component</span>
+            <span class="tut-ref-badge tut-ref-badge-ex">Accellera Studio</span>
+          </div>
+          <p class="tut-ref-desc">Smallest possible UVM component lifecycle.</p>
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Self-Check Knowledge Quiz -->
+
+<div class="CGroup" id="doc-nav-quiz" data-doc-topic="doc-nav-quiz" data-anchor="SelfCheck">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="SelfCheck">Self-Check Knowledge Quiz</a></h2>
+    <div class="CBody">
+      <div class="tut-quiz-container" id="tut-quiz-container" data-chapter-slug="verification_vcycle"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Chapter Completion & Prev / Next Navigation Footer -->
+<div class="tut-footer-nav" id="tut-footer-nav">
+  <div class="tut-footer-left">
+    
+  </div>
+  <div class="tut-footer-center">
+    <button type="button" class="btn btn-primary tut-complete-btn" id="tut-mark-complete-btn" data-chapter-slug="verification_vcycle">
+      Mark Chapter 1 Complete
+    </button>
+  </div>
+  <div class="tut-footer-right">
+    
+    <a href="../tutorial_view/verification_principles.html" class="btn btn-primary tut-nav-btn tutorial-link" data-tutorial-href="tutorial_view/verification_principles.html">
+      Ch. 2: 02. Stimuli, Checks & Metrics &rarr;
+    </a>
+    
+  </div>
+</div>
+        </div>
+      </div>
+      <aside class="doc-toc-sidebar" id="doc-toc-sidebar" aria-label="On this page">
+  <button class="doc-toc-mobile-trigger" id="doc-toc-mobile-trigger" type="button" aria-expanded="false" aria-controls="doc-toc-inner" title="Toggle table of contents">
+    <span class="doc-toc-mobile-left">
+      <svg class="doc-toc-mobile-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+        <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+      </svg>
+      <span class="doc-toc-mobile-label">On this page</span>
+      <span class="doc-toc-mobile-sep" aria-hidden="true">&rsaquo;</span>
+      <span class="doc-toc-mobile-current" id="doc-toc-mobile-current">Overview</span>
+    </span>
+    <svg class="doc-toc-mobile-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"/>
+    </svg>
+  </button>
+  <div class="doc-toc-inner" id="doc-toc-inner">
+    <div class="doc-toc-header">
+      <span class="doc-toc-title">On this page</span>
+      <button class="doc-toc-toggle-all-btn" id="doc-toc-toggle-all" type="button" title="Collapse or expand all sections">
+        <svg class="toc-toggle-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="4 14 12 6 20 14"/>
+        </svg>
+        <span class="toc-toggle-text">Collapse all</span>
+      </button>
+    </div>
+    <nav class="doc-toc-nav" id="doc-toc-nav"></nav>
+  </div>
+</aside>
+    </div>
+  </div>
+  <div id="tut-quiz-payload" style="display:none;" data-tut-quiz='[{&quot;q&quot;: &quot;Why should the RTL designer and verification engineer work from an independent interpretation of the architecture spec?&quot;, &quot;options&quot;: [&quot;To double the amount of SystemVerilog code written on the project&quot;, &quot;To prevent identical spec misinterpretations from hiding bugs in both RTL and testbench&quot;, &quot;Because UVM forbids RTL modules from being compiled in the same simulator&quot;], &quot;answer&quot;: 1, &quot;explanation&quot;: &quot;Independent testbench modeling catches spec ambiguities and implementation assumptions that a single author would replicate in both RTL and test.&quot;}, {&quot;q&quot;: &quot;Which document links the System Architect&#x27;s requirements on the left side of the V-Cycle to measurable UVM closure on the right side?&quot;, &quot;options&quot;: [&quot;Makefile.questa&quot;, &quot;The Verification Plan (vPlan)&quot;, &quot;The RTL synthesis netlist&quot;], &quot;answer&quot;: 1, &quot;explanation&quot;: &quot;The vPlan maps every architectural feature and corner case to specific stimuli, checkers/assertions, and functional coverage targets.&quot;}]'></div>
+  <div id="tut-graph-payload" style="display:none;" data-tut-graph='{&quot;mode&quot;: &quot;vcycle&quot;, &quot;nodes&quot;: [{&quot;id&quot;: &quot;spec&quot;, &quot;label&quot;: &quot;1. System Spec &amp; Arch&quot;, &quot;role&quot;: &quot;architect&quot;, &quot;phase&quot;: &quot;left_top&quot;, &quot;x&quot;: 90, &quot;y&quot;: 70, &quot;owner&quot;: &quot;System Architect&quot;, &quot;deliverables&quot;: &quot;Functional spec, register map (IP-XACT/CSV), latency &amp; bandwidth budgets, interface protocols.&quot;, &quot;handoff&quot;: &quot;Passes architectural spec &amp; register definitions to both RTL Designer and Verification Architect.&quot;, &quot;docUrl&quot;: &quot;docs_view/overviews/intro-txt.html&quot;}, {&quot;id&quot;: &quot;uarch&quot;, &quot;label&quot;: &quot;2. Micro-Architecture&quot;, &quot;role&quot;: &quot;designer&quot;, &quot;phase&quot;: &quot;left_mid&quot;, &quot;x&quot;: 165, &quot;y&quot;: 165, &quot;owner&quot;: &quot;RTL Designer&quot;, &quot;deliverables&quot;: &quot;Pipeline stages, FIFO sizing, FSM state encoding, backpressure strategy, clock/reset domain plan.&quot;, &quot;handoff&quot;: &quot;Reviews corner cases &amp; error behaviors with Verifier to capture in the vPlan.&quot;, &quot;docUrl&quot;: &quot;docs_view/overviews/components-txt.html&quot;}, {&quot;id&quot;: &quot;rtl&quot;, &quot;label&quot;: &quot;3. RTL Design (DUT)&quot;, &quot;role&quot;: &quot;designer&quot;, &quot;phase&quot;: &quot;bottom_left&quot;, &quot;x&quot;: 255, &quot;y&quot;: 260, &quot;owner&quot;: &quot;RTL Designer&quot;, &quot;deliverables&quot;: &quot;Synthesizable SystemVerilog modules (pkt_alu.sv), lint-clean RTL, basic smoke bring-up.&quot;, &quot;handoff&quot;: &quot;Freezes RTL interface contract (pin list + timing) for UVM virtual interfaces &amp; SVA.&quot;, &quot;docUrl&quot;: &quot;docs_view/overviews/intro-txt.html&quot;}, {&quot;id&quot;: &quot;vplan&quot;, &quot;label&quot;: &quot;4. Verification Plan (vPlan)&quot;, &quot;role&quot;: &quot;verifier&quot;, &quot;phase&quot;: &quot;bottom_right&quot;, &quot;x&quot;: 425, &quot;y&quot;: 260, &quot;owner&quot;: &quot;Verification Engineer&quot;, &quot;deliverables&quot;: &quot;Feature-to-metric matrix, stimulus scenarios, checkers/SVA list, functional &amp; code coverage targets.&quot;, &quot;handoff&quot;: &quot;Mapped back to System Spec requirements (Architect) and driven by UVM testbench.&quot;, &quot;docUrl&quot;: &quot;docs_view/overviews/sequences-txt.html&quot;}, {&quot;id&quot;: &quot;block_verif&quot;, &quot;label&quot;: &quot;5. Block UVM Testbench&quot;, &quot;role&quot;: &quot;verifier&quot;, &quot;phase&quot;: &quot;right_mid&quot;, &quot;x&quot;: 515, &quot;y&quot;: 165, &quot;owner&quot;: &quot;Verification Engineer&quot;, &quot;deliverables&quot;: &quot;Agents, sequences, scoreboard, C/DPI reference model, RAL, functional coverage, regressions.&quot;, &quot;handoff&quot;: &quot;Closes 100% functional/code coverage at IP level before subsystem vertical reuse.&quot;, &quot;docUrl&quot;: &quot;docs_view/comps/uvm_env-svh.html&quot;}, {&quot;id&quot;: &quot;signoff&quot;, &quot;label&quot;: &quot;6. SoC Reuse &amp; Sign-Off&quot;, &quot;role&quot;: &quot;architect&quot;, &quot;phase&quot;: &quot;right_top&quot;, &quot;x&quot;: 590, &quot;y&quot;: 70, &quot;owner&quot;: &quot;Architect + Verifier + Designer&quot;, &quot;deliverables&quot;: &quot;Vertical UVM_PASSIVE reuse in SoC, zero open UVM_ERRORs, 100% vPlan coverage sign-off.&quot;, &quot;handoff&quot;: &quot;Formal tape-out readiness review signed off jointly by Architect, Designer, and Verifier.&quot;, &quot;docUrl&quot;: &quot;docs_view/comps/uvm_agent-svh.html&quot;}], &quot;edges&quot;: [{&quot;source&quot;: &quot;spec&quot;, &quot;target&quot;: &quot;uarch&quot;, &quot;label&quot;: &quot;Arch Spec&quot;}, {&quot;source&quot;: &quot;uarch&quot;, &quot;target&quot;: &quot;rtl&quot;, &quot;label&quot;: &quot;Micro-Arch&quot;}, {&quot;source&quot;: &quot;rtl&quot;, &quot;target&quot;: &quot;vplan&quot;, &quot;label&quot;: &quot;RTL Contract&quot;}, {&quot;source&quot;: &quot;vplan&quot;, &quot;target&quot;: &quot;block_verif&quot;, &quot;label&quot;: &quot;Metrics &amp; Tests&quot;}, {&quot;source&quot;: &quot;block_verif&quot;, &quot;target&quot;: &quot;signoff&quot;, &quot;label&quot;: &quot;Closure&quot;}, {&quot;source&quot;: &quot;spec&quot;, &quot;target&quot;: &quot;signoff&quot;, &quot;label&quot;: &quot;Requirements Traceability&quot;, &quot;style&quot;: &quot;dashed&quot;}, {&quot;source&quot;: &quot;uarch&quot;, &quot;target&quot;: &quot;block_verif&quot;, &quot;label&quot;: &quot;Corner-Case Review&quot;, &quot;style&quot;: &quot;dashed&quot;}]}'></div>
+  <script src="../js/uvm_symbol_quick.js" defer></script>
+  <script src="../js/page_common.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/diff2html@3.4.48/bundles/js/diff2html-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="../js/example_page.js"></script>
+  <script src="../js/tutorial_page.js"></script>
+</body>
+
+</html>

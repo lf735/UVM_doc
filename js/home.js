@@ -7,22 +7,13 @@
   const BOOKMARKS_KEY = 'uvm_pinned_bookmarks';
   const RECENT_KEY = 'uvm_recent_history';
   const TUTORIAL_PROGRESS_KEY = 'uvm_tutorial_progress';
-  const TOTAL_TUTORIAL_CHAPTERS = 13;
-  const TUTORIAL_CHAPTER_URLS = [
-    'tutorial_view/ch01_verification_vcycle.html',
-    'tutorial_view/ch02_verification_principles.html',
-    'tutorial_view/ch03_minimal_stimuli.html',
-    'tutorial_view/ch04_agent_factory_config.html',
-    'tutorial_view/ch05_monitor_scoreboard.html',
-    'tutorial_view/ch06_coverage_sva.html',
-    'tutorial_view/ch07_pipelined_layered_vseq.html',
-    'tutorial_view/ch08_callbacks_reporting.html',
-    'tutorial_view/ch09_phasing_sync_heartbeat.html',
-    'tutorial_view/ch10_ral.html',
-    'tutorial_view/ch11_tlm2_sockets.html',
-    'tutorial_view/ch12_dpi_vertical_reuse.html',
-    'tutorial_view/ch13_capstone.html'
-  ];
+
+  function getTutorialMeta() {
+    if (typeof TUTORIAL_META !== 'undefined' && TUTORIAL_META) {
+      return TUTORIAL_META;
+    }
+    return { totalChapters: 0, defaultUrl: '', chapters: [], featured: [] };
+  }
 
   function applyTheme(theme) {
     if (theme !== 'light' && theme !== 'dark') return;
@@ -168,11 +159,37 @@
     });
   }
 
+  function renderTutorialFeaturedCards() {
+    const gridEl = document.getElementById('home-tutorial-cards');
+    if (!gridEl) return;
+    const meta = getTutorialMeta();
+    const cards = Array.isArray(meta.featured) ? meta.featured : [];
+    gridEl.innerHTML = cards.map((card) => `
+      <button type="button" class="home-card" data-tutorial="${escapeHtml(card.href)}">
+        <div class="home-card-top">
+          <span class="home-card-title">${escapeHtml(card.title)}</span>
+          <span class="home-badge ${escapeHtml(card.badge_class || 'home-badge-beginner')}">${escapeHtml(card.badge || '')}</span>
+        </div>
+        <p class="home-card-desc">${escapeHtml(card.desc || '')}</p>
+      </button>
+    `).join('');
+    gridEl.querySelectorAll('[data-tutorial]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-tutorial');
+        if (url) postToParent({ type: 'openTutorialView', url });
+      });
+    });
+  }
+
   function renderTutorialProgress() {
     const textEl = document.getElementById('home-tutorial-progress-text');
     const fillEl = document.getElementById('home-tutorial-progress-fill');
     const ctaEl = document.getElementById('home-tutorial-cta');
     if (!textEl && !fillEl) return;
+
+    const meta = getTutorialMeta();
+    const chapters = Array.isArray(meta.chapters) ? meta.chapters : [];
+    const total = meta.totalChapters || chapters.length || 0;
 
     let completed = {};
     try {
@@ -180,91 +197,90 @@
       completed = (parsed && parsed.completed) || {};
     } catch (e) { }
 
-    const doneCount = Object.keys(completed).filter(k => completed[k]).length;
-    const pct = Math.min(100, Math.round((doneCount / TOTAL_TUTORIAL_CHAPTERS) * 100));
-    if (textEl) textEl.textContent = `${doneCount} / ${TOTAL_TUTORIAL_CHAPTERS} chapters`;
+    const activeSlugs = new Set(chapters.map((c) => c.slug));
+    const doneCount = Object.keys(completed).filter((k) => completed[k] && (activeSlugs.size === 0 || activeSlugs.has(k))).length;
+    const pct = total > 0 ? Math.min(100, Math.round((doneCount / total) * 100)) : 0;
+    if (textEl) textEl.textContent = `${doneCount} / ${total} chapters`;
     if (fillEl) fillEl.style.width = `${pct}%`;
 
-    if (ctaEl) {
-      const nextUrl = TUTORIAL_CHAPTER_URLS.find(u => {
-        const slug = u.replace(/^tutorial_view\//, '').replace(/\.html$/, '');
-        return !completed[slug];
-      }) || TUTORIAL_CHAPTER_URLS[TUTORIAL_CHAPTER_URLS.length - 1];
-      ctaEl.setAttribute('data-tutorial', nextUrl);
-      const labelSpan = ctaEl.querySelector('span');
-      if (labelSpan) {
-        labelSpan.innerHTML = doneCount > 0 ? 'Resume Course &rarr;' : 'Start Course &rarr;';
+      if (ctaEl && chapters.length > 0) {
+        const nextCh = chapters.find((c) => !completed[c.slug]) || chapters[chapters.length - 1];
+        ctaEl.setAttribute('data-tutorial', nextCh.href);
+        const labelSpan = ctaEl.querySelector('span');
+        if (labelSpan) {
+          labelSpan.innerHTML = doneCount > 0 ? 'Resume Course &rarr;' : 'Start Course &rarr;';
+        }
       }
     }
-  }
 
-  function renderWorkspace() {
-    renderBookmarks();
-    renderRecent();
-    renderTutorialProgress();
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const searchBtn = document.getElementById('home-search-btn');
-    if (searchBtn) {
-      searchBtn.addEventListener('click', () => {
-        postToParent({ type: 'openSearchModal' });
-      });
+    function renderWorkspace() {
+      renderBookmarks();
+      renderRecent();
+      renderTutorialProgress();
     }
 
-    document.querySelectorAll('[data-tab]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const tab = btn.getAttribute('data-tab');
-        if (tab) postToParent({ type: 'switchSidebarTab', tab });
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchBtn = document.getElementById('home-search-btn');
+      if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+          postToParent({ type: 'openSearchModal' });
+        });
+      }
+
+      document.querySelectorAll('[data-tab]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const tab = btn.getAttribute('data-tab');
+          if (tab) postToParent({ type: 'switchSidebarTab', tab });
+        });
       });
-    });
 
-    document.querySelectorAll('[data-doc]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const url = btn.getAttribute('data-doc');
-        if (url) postToParent({ type: 'openDocView', url });
+      document.querySelectorAll('[data-doc]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const url = btn.getAttribute('data-doc');
+          if (url) postToParent({ type: 'openDocView', url });
+        });
       });
-    });
 
-    document.querySelectorAll('[data-example]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const url = btn.getAttribute('data-example');
-        if (url) postToParent({ type: 'openExampleView', url });
+      document.querySelectorAll('[data-example]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const url = btn.getAttribute('data-example');
+          if (url) postToParent({ type: 'openExampleView', url });
+        });
       });
-    });
 
-    document.querySelectorAll('[data-tutorial]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const url = btn.getAttribute('data-tutorial');
-        if (url) postToParent({ type: 'openTutorialView', url });
+      document.querySelectorAll('[data-tutorial]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const url = btn.getAttribute('data-tutorial');
+          if (url) postToParent({ type: 'openTutorialView', url });
+        });
       });
-    });
 
-    const clearRecentBtn = document.getElementById('home-clear-recent');
-    if (clearRecentBtn) {
-      clearRecentBtn.addEventListener('click', () => {
-        writeStorageArray(RECENT_KEY, []);
-        renderRecent();
-      });
-    }
+      const clearRecentBtn = document.getElementById('home-clear-recent');
+      if (clearRecentBtn) {
+        clearRecentBtn.addEventListener('click', () => {
+          writeStorageArray(RECENT_KEY, []);
+          renderRecent();
+        });
+      }
 
-    renderWorkspace();
-  });
-
-  window.addEventListener('message', (e) => {
-    if (!e.data || typeof e.data !== 'object') return;
-    if (e.data.theme) {
-      applyTheme(e.data.theme);
-    } else if (e.data.type === 'workspaceDataUpdated' || e.data.type === 'tutorialProgressUpdated') {
+      renderTutorialFeaturedCards();
       renderWorkspace();
-    }
-  });
+    });
 
-  window.addEventListener('storage', (e) => {
-    if (e.key === BOOKMARKS_KEY || e.key === RECENT_KEY || e.key === TUTORIAL_PROGRESS_KEY) {
-      renderWorkspace();
-    } else if (e.key === 'theme' && e.newValue) {
-      applyTheme(e.newValue);
-    }
-  });
-})();
+    window.addEventListener('message', (e) => {
+      if (!e.data || typeof e.data !== 'object') return;
+      if (e.data.theme) {
+        applyTheme(e.data.theme);
+      } else if (e.data.type === 'workspaceDataUpdated' || e.data.type === 'tutorialProgressUpdated') {
+        renderWorkspace();
+      }
+    });
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === BOOKMARKS_KEY || e.key === RECENT_KEY || e.key === TUTORIAL_PROGRESS_KEY) {
+        renderWorkspace();
+      } else if (e.key === 'theme' && e.newValue) {
+        applyTheme(e.newValue);
+      }
+    });
+  }) ();

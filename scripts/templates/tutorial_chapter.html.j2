@@ -176,10 +176,10 @@
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
               <span>Progressive Build-Up Replay:</span>
-              <strong id="capstone-layer-label">Ch.13: Complete Unified Environment</strong>
+              <strong id="capstone-layer-label">{{ capstone_meta.max_label if capstone_meta else 'Complete Unified Environment' }}</strong>
             </div>
             <div class="capstone-slider-actions">
-              <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="capstone-layer-reset" title="Show all layers through Ch.13">
+              <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="capstone-layer-reset" title="Show all layers through {{ capstone_meta.max_short if capstone_meta else 'Final' }}">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline></svg>
                 <span>Full</span>
               </button>
@@ -190,9 +190,9 @@
             </div>
           </div>
           <div class="capstone-slider-controls">
-            <span class="capstone-range-bound">Ch.03</span>
-            <input type="range" id="tut-layer-slider" min="3" max="13" value="13" step="1" aria-label="Replay testbench layers from Chapter 3 to Chapter 13">
-            <span class="capstone-range-bound">Ch.13</span>
+            <span class="capstone-range-bound">{{ capstone_meta.min_short if capstone_meta else 'Ch.01' }}</span>
+            <input type="range" id="tut-layer-slider" min="{{ capstone_meta.min_num if capstone_meta else 1 }}" max="{{ capstone_meta.max_num if capstone_meta else total_chapters }}" value="{{ capstone_meta.max_num if capstone_meta else total_chapters }}" step="1" aria-label="Replay testbench layers">
+            <span class="capstone-range-bound">{{ capstone_meta.max_short if capstone_meta else 'Final' }}</span>
           </div>
           <div class="capstone-layer-pills" id="capstone-layer-pills"></div>
         </div>

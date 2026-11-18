@@ -38,11 +38,23 @@ def test_home_links_resolve() -> None:
         f"Missing workspace tab buttons in home.html: {tab_targets}"
     )
 
-    tut_targets = re.findall(r'data-tutorial="([^"]+)"', home_html)
-    assert len(tut_targets) >= 4, f"Expected >= 4 data-tutorial targets in home.html, found {len(tut_targets)}"
-    for target in tut_targets:
-        clean = target.split("#")[0]
-        assert (BASE_DIR / clean).is_file(), f"Broken data-tutorial link in home.html: {target}"
+    tut_meta_file = BASE_DIR / "js" / "tutorial_meta.js"
+    assert tut_meta_file.is_file(), "Missing js/tutorial_meta.js"
+    assert 'id="home-tutorial-cards"' in home_html, "Missing #home-tutorial-cards in home.html"
+    meta_txt = tut_meta_file.read_text(encoding="utf-8")
+    prefix = "const TUTORIAL_META = "
+    idx = meta_txt.find(prefix)
+    assert idx >= 0, "Invalid js/tutorial_meta.js format"
+    import json
+    tut_meta = json.loads(meta_txt[idx + len(prefix):].strip().rstrip(";"))
+    featured = tut_meta.get("featured", [])
+    assert len(featured) >= 1, f"Expected >= 1 featured tutorial card in tutorial_meta.js, found {len(featured)}"
+    for card in featured:
+        clean = card.get("href", "").split("#")[0]
+        assert clean and (BASE_DIR / clean).is_file(), f"Broken featured tutorial link: {card}"
+    for ch in tut_meta.get("chapters", []):
+        clean = ch.get("href", "").split("#")[0]
+        assert clean and (BASE_DIR / clean).is_file(), f"Broken chapter link in tutorial_meta.js: {ch}"
 
 
 def test_shell_and_routing_integration() -> None:
