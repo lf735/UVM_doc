@@ -623,6 +623,119 @@ def extract_chunks_and_graph():
             chunks.append(studio_chunk)
             child_count += 1
 
+    # 3b. Process Step-by-Step Interactive Tutorial Chapters (tutorial_view/)
+    tutorial_view_dir = BASE_DIR / "tutorial_view"
+    tutorials_meta = {}
+    api_to_tutorials = defaultdict(list)
+    try:
+        import build_tutorial
+        tut_chapters = getattr(build_tutorial, "ALL_CHAPTERS", [])
+    except Exception as e:
+        print(f"Warning: could not import build_tutorial: {e}")
+        tut_chapters = []
+
+    if tutorial_view_dir.exists() and tut_chapters:
+        print(f"Extracting RAG chunks from {len(tut_chapters)} interactive tutorial chapters...")
+        for ch in tut_chapters:
+            slug = ch["slug"]
+            rel_file = f"tutorial_view/{slug}.html"
+            full_file = tutorial_view_dir / f"{slug}.html"
+            if not full_file.exists():
+                continue
+
+            title = ch["title"]
+            part_title = ch["part_title"]
+            diff = ch["difficulty"]
+            summary = ch["summary"]
+            apis = list(dict.fromkeys([a for a in ch.get("apis", []) if a]))[:10]
+            objectives_txt = " ".join(ch.get("objectives", []))
+            prose_plain = clean_html(re.sub(r'[#*`|>_~\[\]]+', ' ', re.sub(r'```[\s\S]*?```', ' ', ch.get("markdown_body", ""))))
+
+            intents, synonyms = match_intents(
+                f"{title} {' '.join(apis[:4])} {part_title} tutorial verification course",
+                catalog,
+                max_intents=3,
+                max_synonyms=6
+            )
+            intent_suffix = f" [Intents: {', '.join(intents)}] [Keywords: {', '.join(synonyms)}]" if (intents or synonyms) else ""
+
+            parent_id = len(chunks)
+            parent_chunk = {
+                "id": parent_id,
+                "level": "parent",
+                "parentId": None,
+                "docUrl": rel_file,
+                "url": f"{rel_file}#MainTopic",
+                "anchor": "MainTopic",
+                "title": f"Tutorial: {title}",
+                "pageHeading": title,
+                "class": title,
+                "category": f"Tutorial - {part_title}",
+                "type": "tutorial",
+                "difficulty": diff,
+                "breadcrumb": f"Tutorial > {part_title} > {title}",
+                "coveredApis": apis,
+                "synonyms": synonyms,
+                "text": f"{summary} Objectives: {objectives_txt} {prose_plain[:500]}",
+                "context_header": f"[UVM 1.2 Tutorial Ch.{ch['num']:02d}: {title}] [Part: {part_title}] [APIs: {', '.join(apis[:5])}]{intent_suffix}"
+            }
+            chunks.append(parent_chunk)
+            parent_count += 1
+
+            tutorials_meta[rel_file] = {
+                "chunkId": parent_id,
+                "title": title,
+                "apis": apis,
+                "difficulty": diff,
+                "part": part_title
+            }
+            for api in apis:
+                norm_api = api.lstrip("`")
+                if rel_file not in api_to_tutorials[norm_api]:
+                    api_to_tutorials[norm_api].append(rel_file)
+
+            # Level 2: Child Concepts & Walkthrough Chunk
+            child_anchor = "CapstoneExplorer" if ch.get("interactive_widget") == "capstone" else "CourseGuide"
+            child_chunk = {
+                "id": len(chunks),
+                "level": "child",
+                "parentId": parent_id,
+                "docUrl": rel_file,
+                "url": f"{rel_file}#{child_anchor}",
+                "anchor": child_anchor,
+                "title": f"{title} > Course Walkthrough",
+                "rawTitle": "Course Walkthrough",
+                "class": title,
+                "category": f"Tutorial - {part_title}",
+                "type": "tutorial",
+                "breadcrumb": f"Tutorial > {part_title} > {title} > Walkthrough",
+                "text": prose_plain[:1150],
+                "context_header": f"[UVM 1.2 Tutorial Walkthrough] [Chapter: {title}] [APIs: {', '.join(apis)}]"
+            }
+            chunks.append(child_chunk)
+            child_count += 1
+
+            # Level 2: Child Stepper Chunk (when present)
+            if ch.get("stepper"):
+                stepper_txt = " ".join([f"{s['title']} ({s['component']}): {s['desc']}" for s in ch["stepper"]])
+                chunks.append({
+                    "id": len(chunks),
+                    "level": "child",
+                    "parentId": parent_id,
+                    "docUrl": rel_file,
+                    "url": f"{rel_file}#FlowStepper",
+                    "anchor": "FlowStepper",
+                    "title": f"{title} > Execution Stepper",
+                    "rawTitle": "Execution Stepper",
+                    "class": title,
+                    "category": f"Tutorial - {part_title}",
+                    "type": "tutorial",
+                    "breadcrumb": f"Tutorial > {part_title} > {title} > Execution Stepper",
+                    "text": stepper_txt[:1150],
+                    "context_header": f"[UVM 1.2 Tutorial Execution Stepper] [Chapter: {title}]"
+                })
+                child_count += 1
+
     # 4. Assemble Lightweight Relational Graph (data/rag_graph.json)
     graph_classes = {}
     for cls_name, cls_info in db_classes.items():
@@ -740,6 +853,7 @@ def extract_chunks_and_graph():
             "methodsIndexed": len(methods_index),
             "macros": len(graph_macros),
             "examples": len(examples_meta),
+            "tutorials": len(tutorials_meta),
             "overviews": len(overview_meta)
         },
         "nodes": {
@@ -747,6 +861,7 @@ def extract_chunks_and_graph():
             "methodsIndex": dict(methods_index),
             "macros": graph_macros,
             "examples": examples_meta,
+            "tutorials": tutorials_meta,
             "overviews": dict(api_to_overviews),
             "overviewMeta": overview_meta
         },

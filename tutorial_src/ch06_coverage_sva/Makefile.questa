@@ -1,0 +1,15 @@
+# Makefile.questa - Chapter 6 Functional Coverage & SVA
+UVM_HOME ?= $(QUESTA_HOME)/verilog_src/uvm-1.2
+
+all: comp run
+
+comp:
+	vlib work
+	vlog +incdir+$(UVM_HOME)/src +incdir+. \
+		$(UVM_HOME)/src/uvm_pkg.sv \
+		../dut/pkt_alu_basic.sv \
+		alu_if.sv \
+		tb_top.sv
+
+run:
+	vsim -c -coverage -do "run -all; coverage report -detail; quit -f" tb_top +UVM_TESTNAME=alu_base_test

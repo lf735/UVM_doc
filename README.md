@@ -9,13 +9,17 @@ Ready for local browsing and automated continuous deployment to **GitHub Pages**
 ## 🚀 Key Features
 
 - **Dynamic Interactive Web Portal**: Fast, responsive layout with single-page navigation and deep-linking.
+- **Interactive UVM 1.2 Step-by-Step Tutorial Course (13 Chapters)**:
+  - Guided progression from verification fundamentals (V-Cycle, Architect / Designer / Verifier role split, Stimuli / Checks / Metrics separation) through minimal stimuli to production techniques (Factory, Scoreboard, SVA, Coverage, Layered & Virtual Sequences, Callbacks, Report Catcher, Phasing/Heartbeat, RAL, TLM-2.0 Sockets, DPI-C, and Vertical Reuse).
+  - Interactive Cytoscape.js architecture diagrams, Mermaid sequence/flow diagrams, `diff2html` incremental diffs, self-check quizzes with `localStorage` progress tracking, and a **4-in-1 Dynamic Capstone Explorer** with layer build-up replay and click-back navigation.
+  - Contextual `← Back to Tutorial` return navigation whenever jumping into reference docs or example studios.
 - **Interactive UVM 1.2 Examples Studio**:
   - Full interactive integration of all **38 official Accellera UVM 1.2 example suites** (309 source files across `uvm-1.2/examples/`).
   - **Multi-File Code Studio**: Tabbed viewer across all project files with syntax highlighting, line anchors (`#Lxx`), and clickable UVM class references.
   - **Clickable UVM Symbols & Disambiguation Popover**: Enriched tokenization across all studios for UVM macros, types, methods, and constants with static context inference (owner/base class detection). When clicking ambiguous methods implemented across multiple classes, an interactive popover enables instant direct navigation to the exact class documentation.
   - **Visual Flow Stepper**: Interactive step-by-step execution timeline on the 5 pillar examples (*Phases, Objections, TLM-1 FIFO, TLM-2 Non-Blocking, RAL Primer*) with topology highlighting, synchronous code focusing, and terminal log inspection.
   - **Simulation Console**: Tabbed execution commands for Questa, VCS, and Xcelium with authentic Accellera UVM report simulation logs and severity filters.
-  - **Zero-Dependency Dual Downloads**: 1-click download of individual raw files or client-side native ZIP archive creation for the complete example suite.
+  - **Dual File & Archive Downloads**: 1-click download of individual raw files or client-side ZIP archive creation for complete project suites.
   - **Bidirectional Linking**: Reference documentation pages feature contextual *"💡 Practical Example"* callouts linking directly into the interactive studios.
 - **Interactive Inherited Class Members View**: Complete ancestor hierarchy display on class documentation pages (`docs_view`) showing all inherited tasks and functions, dynamic instant search filtering, method signatures, argument lists, and direct links to parent documentation.
 - **AST-Augmented API & DPI Coverage**: Automatic completion of missing public APIs (`Additional APIs`), macros, orphan classes, and `uvm_dpi` SV↔C bindings from the SystemVerilog/C AST, collapsible `Internal / Implementation Details` sections for `m_*` symbols integrated into the TOC, and direct source links for undocumented members.
@@ -31,7 +35,7 @@ Ready for local browsing and automated continuous deployment to **GitHub Pages**
 - **Instant Symbol & Full-Text Search**: Live search modal across 880+ classes, methods, macros, and source files with keyboard navigation (`/` or `Ctrl+K`).
 - **Dark & Light Mode**: Seamless theme switching with local storage persistence and real-time iframe synchronization.
 - **100% English Documentation**: All menus, titles, descriptions, and user interface elements in English.
-- **Zero-Dependency Static Build**: Generated with Python standard library; fully functional without external backend servers.
+- **Static Site Generation**: Pre-built via Python build scripts (`requirements-ci.txt`); runs on GitHub Pages or any static HTTP server without backend application servers.
 
 ---
 
@@ -51,12 +55,14 @@ UVM_doc/
 ├── js/
 │   ├── app.js                # Core SPA application (router, search, theme, split view)
 │   ├── doc_page.js           # Shared controller for docs_view reference pages
-│   ├── example_page.js       # Controller for interactive example studios & native ZIP generator
+│   ├── example_page.js       # Controller for interactive example studios & ZIP downloads
+│   ├── tutorial_page.js      # Controller for 13-chapter tutorial, Cytoscape, Mermaid, diff2html & quizzes
 │   ├── rag_engine.js         # Client-side RAG & vector similarity search engine
 │   └── search_data.js        # Generated index (untracked, built at deployment & locally)
 ├── scripts/
-│   ├── build_docs.py         # Python build script generating docs_view, src_view, and nav data
+│   ├── build_docs.py         # Python build script generating docs_view, src_view, tutorial_view, and nav data
 │   ├── build_examples.py     # Python generator for all 39 interactive example studios
+│   ├── build_tutorial.py     # Jinja2 + markdown-it-py generator for the 13 tutorial chapters
 │   ├── build_rag_embeddings.py # Generates intelligent chunks & dense vector embeddings
 │   ├── build_uvm_source_db.py # Python parser extracting classes, methods, overrides, and macros
 │   ├── generate_quick_symbols.py # Fast symbol extractor with types, methods, constants & inheritance
@@ -65,7 +71,8 @@ UVM_doc/
 │   ├── syntax_highlighter.py # Unified high-fidelity tokenizer for SystemVerilog, UVM, C/DPI & Makefiles
 │   ├── test_syntax_highlighter.py # Automated unit test suite for syntax tokenization & clickable symbols
 │   ├── verify_code_editor_tools.py # Verification suite for code editor tools & clickable UVM symbols
-│   ├── verify_examples.py    # 28-test automated verification suite for interactive examples
+│   ├── verify_examples.py    # Automated verification suite for interactive examples
+│   ├── verify_tutorial.py    # BeautifulSoup verification suite for the 13 tutorial chapters & Capstone
 │   ├── verify_inherited_members.py # Verification suite for class inheritance & inherited members
 │   ├── verify_js_syntax.py   # V8 JavaScript syntax & redeclaration verification suite
 │   ├── verify_source_notes.py # Verification suite for source notes & Apache license hygiene
@@ -77,7 +84,9 @@ UVM_doc/
 │   └── uvm_dpi_database.json    # Dedicated DPI SystemVerilog <-> C bindings database (24 KB)
 ├── docs_view/                # Modernized, responsive UVM 1.2 reference HTML pages
 ├── examples_view/            # 38 interactive UVM 1.2 multi-file example studios
-├── src_view/                 # Syntax-highlighted HTML views of all 155 source files
+├── tutorial_src/             # Progressive SystemVerilog/C Packet-ALU sources (Ch.03 - Ch.13)
+├── tutorial_view/            # Generated 13-chapter interactive UVM 1.2 tutorial pages
+├── src_view/                 # Syntax-highlighted HTML views of all source files
 ├── uvm-1.2/                  # Official Accellera UVM 1.2 distribution
 │   ├── src/                  # Raw SystemVerilog and C source tree
 │   └── docs/                 # Original reference documentation assets

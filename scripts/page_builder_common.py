@@ -783,6 +783,7 @@ def render_html_shell(
     extra_html_classes: str = "",
     extra_body_classes: str = "",
     extra_scripts: Optional[List[str]] = None,
+    extra_head_html: str = "",
     data_payloads: Optional[Dict[str, str]] = None,
     include_toc: bool = True,
     is_full_page: bool = False
@@ -850,6 +851,7 @@ def render_html_shell(
         html_cls=html_cls,
         title=html.escape(title),
         root_rel=root_rel,
+        extra_head_html=extra_head_html,
         body_cls=body_cls,
         inner_body=inner_body,
         scripts_markup=scripts_markup,

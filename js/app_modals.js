@@ -27,6 +27,9 @@
     let panStartX = 0;
     let panStartY = 0;
     let animTimer = null;
+    let isVectorSvg = false;
+    let baseNaturalW = 0;
+    let baseNaturalH = 0;
 
     // Multi-touch / Pointer Events state
     const activePointers = new Map();
@@ -56,7 +59,17 @@
 
     function updateImageTransform() {
       if (!imageModalStage) return;
-      imageModalStage.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${currentZoom})`;
+      if (isVectorSvg && imageModalImg && baseNaturalW > 0 && baseNaturalH > 0) {
+        imageModalImg.style.width = `${Math.round(baseNaturalW * currentZoom)}px`;
+        imageModalImg.style.height = `${Math.round(baseNaturalH * currentZoom)}px`;
+        imageModalStage.style.transform = `translate3d(${panX}px, ${panY}px, 0)`;
+      } else {
+        if (imageModalImg) {
+          imageModalImg.style.width = '';
+          imageModalImg.style.height = '';
+        }
+        imageModalStage.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${currentZoom})`;
+      }
       if (imageZoomLevel) {
         imageZoomLevel.textContent = `${Math.round(currentZoom * 100)}%`;
       }
@@ -83,8 +96,13 @@
       const vpH = imageModalViewport.clientHeight;
       if (!vpW || !vpH) return;
 
-      const cardW = imageModalImg.offsetWidth || ((imageModalImg.naturalWidth || 600) + 40);
-      const cardH = imageModalImg.offsetHeight || ((imageModalImg.naturalHeight || 400) + 40);
+      imageModalImg.style.width = '';
+      imageModalImg.style.height = '';
+      baseNaturalW = imageModalImg.naturalWidth || 600;
+      baseNaturalH = imageModalImg.naturalHeight || 400;
+
+      const cardW = imageModalImg.offsetWidth || (baseNaturalW + 40);
+      const cardH = imageModalImg.offsetHeight || (baseNaturalH + 40);
 
       const isCompact = vpW <= 640;
       const padX = isCompact ? 24 : 64;
@@ -120,6 +138,11 @@
       if (imageModalTitle) {
         imageModalTitle.textContent = diagramTitle;
       }
+      isVectorSvg = /^data:image\/svg\+xml/i.test(src || '') || /\.svg(\?|#|$)/i.test((src || '').split('?')[0]);
+      baseNaturalW = 0;
+      baseNaturalH = 0;
+      imageModalImg.style.width = '';
+      imageModalImg.style.height = '';
       activePointers.clear();
       isPanning = false;
       setStageAnimated(false);
@@ -154,7 +177,12 @@
       if (document.activeElement && imageZoomModal.contains(document.activeElement)) {
         document.activeElement.blur();
       }
+      isVectorSvg = false;
+      baseNaturalW = 0;
+      baseNaturalH = 0;
       if (imageModalImg) {
+        imageModalImg.style.width = '';
+        imageModalImg.style.height = '';
         imageModalImg.src = '';
       }
     }

@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const srcPane = document.getElementById('src-pane');
   const docPaneTitle = document.getElementById('doc-pane-title');
   const docBookmarkBtn = document.getElementById('doc-bookmark-btn');
+  const docTutorialBackBtn = document.getElementById('doc-tutorial-back-btn');
   const srcPaneTitle = document.getElementById('src-pane-title');
   const themeToggle = document.getElementById('theme-toggle');
   const menuToggle = document.getElementById('menu-toggle');
@@ -86,7 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentMode = 'docs'; // 'docs' | 'source' | 'split'
   let currentDocUrl = 'home.html';
   let currentSrcUrl = 'src_view/comps/uvm_driver.svh.html#L44';
-  let activeSidebarTab = 'docs'; // 'docs' | 'source' | 'index'
+  let activeSidebarTab = 'docs'; // 'docs' | 'source' | 'examples' | 'tutorial' | 'hierarchy' | 'index'
+  let lastTutorialContext = null;
   let searchFilterTypes = new Set(['all']);
   let sidebarFilterTypes = new Set(['all']);
   let modalRegexEnabled = false;
@@ -102,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const {
     normalizeDocUrl,
     normalizeExampleUrl,
+    normalizeTutorialUrl,
     normalizeSrcUrl,
     normalizePathForCompare,
     urlsMatch,
@@ -329,6 +332,15 @@ document.addEventListener('DOMContentLoaded', () => {
               setFrameSrc(srcFrame, pairedSrc);
               updateSrcTitle(pairedSrc);
             }
+          } else if (currentDocUrl.includes('tutorial_view/')) {
+            // Auto pair tutorial chapter with its primary SystemVerilog file
+            const tutClean = currentDocUrl.replace(/^tutorial_view\//, '').split('#')[0];
+            if (typeof UVM_DATA !== 'undefined' && UVM_DATA.tutorialToSrc && UVM_DATA.tutorialToSrc[tutClean]) {
+              const pairedSrc = UVM_DATA.tutorialToSrc[tutClean];
+              currentSrcUrl = pairedSrc;
+              setFrameSrc(srcFrame, pairedSrc);
+              updateSrcTitle(pairedSrc);
+            }
           } else {
             // Auto pair with corresponding source code if available
             const docClean = currentDocUrl.replace(/^docs_view\//, '');
@@ -455,13 +467,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  function updateTutorialBackBtn() {
+    if (!docTutorialBackBtn) return;
+    if (!lastTutorialContext || !lastTutorialContext.url || currentDocUrl.includes('tutorial_view/') || isHomeUrl(currentDocUrl)) {
+      docTutorialBackBtn.style.display = 'none';
+      return;
+    }
+    const label = lastTutorialContext.title ? lastTutorialContext.title.replace(/^\s*(\d+\.)?\s*/, (m) => m) : 'Tutorial';
+    const shortLabel = label.length > 28 ? label.slice(0, 26) + '...' : label;
+    docTutorialBackBtn.textContent = `\u2190 Back to ${shortLabel}`;
+    docTutorialBackBtn.title = `Return to ${lastTutorialContext.title || 'Tutorial'}`;
+    docTutorialBackBtn.style.display = 'inline-flex';
+  }
+
+  if (docTutorialBackBtn) {
+    docTutorialBackBtn.addEventListener('click', () => {
+      if (lastTutorialContext && lastTutorialContext.url) {
+        const backUrl = lastTutorialContext.url;
+        lastTutorialContext = null;
+        updateTutorialBackBtn();
+        window.openTutorialView(backUrl);
+      }
+    });
+  }
+
   // Global handler for when a page requests to view an example
-  window.openExampleView = function (exUrl) {
+  window.openExampleView = function (exUrl, fromTutorial) {
+    if (fromTutorial && fromTutorial.url) {
+      lastTutorialContext = fromTutorial;
+    }
     const fullEx = normalizeExampleUrl(exUrl);
     currentDocUrl = fullEx;
     setFrameSrc(docFrame, fullEx);
     updateDocTitle(fullEx);
     recordRecentVisit('example', fullEx);
+    updateTutorialBackBtn();
 
     if (currentMode === 'source') {
       setViewMode('docs', true);
@@ -472,10 +512,33 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightActiveSidebar(fullEx);
   };
 
+  // Global handler for opening a step-by-step tutorial chapter
+  window.openTutorialView = function (tutUrl) {
+    document.body.classList.remove('tut-panel-fullscreen-overlay');
+    lastTutorialContext = null;
+    const fullTut = normalizeTutorialUrl(tutUrl);
+    currentDocUrl = fullTut;
+    setFrameSrc(docFrame, fullTut);
+    updateDocTitle(fullTut);
+    recordRecentVisit('tutorial', fullTut);
+    updateTutorialBackBtn();
+
+    if (currentMode === 'source') {
+      setViewMode('docs', true);
+    } else {
+      updateHash();
+    }
+    switchSidebarTab('tutorial');
+    highlightActiveSidebar(fullTut);
+  };
+
   let lastOpenDoc = { url: '', time: 0 };
 
   // Global handler for when a source page requests to view documentation
-  window.openDocView = function (docUrl, symbol, ownerClass) {
+  window.openDocView = function (docUrl, symbol, ownerClass, fromTutorial) {
+    if (fromTutorial && fromTutorial.url) {
+      lastTutorialContext = fromTutorial;
+    }
     let rawSymbol = symbol || '';
     let resolvedOwner = ownerClass || '';
     if (rawSymbol.includes('::') && !resolvedOwner) {
@@ -574,6 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setFrameSrc(docFrame, fullDoc);
     updateDocTitle(fullDoc);
     recordRecentVisit('doc', fullDoc);
+    updateTutorialBackBtn();
 
     // Preserve doc mode if user is already in doc mode; switch to split only if in source mode
     if (currentMode === 'source') {
@@ -600,6 +664,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const clean = String(url || '').split('#')[0].split('?')[0];
     if (type === 'example') {
       return clean.replace(/^examples_view\//, '').replace(/\.html$/, '');
+    }
+    if (type === 'tutorial') {
+      return clean.replace(/^tutorial_view\//, '').replace(/\.html$/, '').replace(/_/g, ' ');
     }
     if (type === 'source') {
       return clean.replace(/^src_view\//, '').replace(/\.html$/, '');
@@ -659,7 +726,9 @@ document.addEventListener('DOMContentLoaded', () => {
     docBookmarkBtn.addEventListener('click', () => {
       if (isHomeUrl(currentDocUrl)) return;
       const cleanUrl = String(currentDocUrl || '').split('#')[0];
-      const type = cleanUrl.includes('examples_view/') ? 'example' : 'doc';
+      const type = cleanUrl.includes('examples_view/')
+        ? 'example'
+        : (cleanUrl.includes('tutorial_view/') ? 'tutorial' : 'doc');
       const bookmarks = readWorkspaceList(UVM_BOOKMARKS_KEY);
       const existingIdx = bookmarks.findIndex(b => b && b.url === cleanUrl);
       if (existingIdx >= 0) {
@@ -691,13 +760,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.data.type === 'openSourceView' && e.data.url) {
       window.openSourceView(e.data.url);
     } else if (e.data.type === 'openDocView' && (e.data.url || e.data.symbol)) {
-      window.openDocView(e.data.url, e.data.symbol, e.data.ownerClass);
+      window.openDocView(e.data.url, e.data.symbol, e.data.ownerClass, e.data.fromTutorial);
     } else if (e.data.type === 'openExampleView' && e.data.url) {
-      window.openExampleView(e.data.url);
+      window.openExampleView(e.data.url, e.data.fromTutorial);
+    } else if (e.data.type === 'openTutorialView' && e.data.url) {
+      window.openTutorialView(e.data.url);
+    } else if (e.data.type === 'tutorialProgressUpdated') {
+      if (activeSidebarTab === 'tutorial') {
+        renderSidebar();
+        highlightActiveSidebar(currentDocUrl);
+      }
+      if (isHomeUrl(currentDocUrl) && docFrame && docFrame.contentWindow) {
+        try {
+          docFrame.contentWindow.postMessage({ type: 'tutorialProgressUpdated' }, '*');
+        } catch (err) { }
+      }
     } else if (e.data.type === 'openSearchModal') {
       openSearchModal();
     } else if (e.data.type === 'switchSidebarTab' && e.data.tab) {
       switchSidebarTab(e.data.tab);
+      if (e.data.tab === 'tutorial' && !currentDocUrl.includes('tutorial_view/')) {
+        window.openTutorialView('tutorial_view/ch01_verification_vcycle.html');
+      }
       if (sidebar && window.innerWidth <= 860) {
         sidebar.classList.add('open');
       }
@@ -705,6 +789,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentMode === 'split') {
         loadSource(e.data.url, true, false);
       }
+    } else if (e.data.type === 'tutorialNavigated' && e.data.url) {
+      let fullTut = normalizeTutorialUrl(e.data.url);
+      if (!fullTut.includes('#') && currentDocUrl && currentDocUrl.includes('#') && currentDocUrl.split('#')[0] === fullTut) {
+        fullTut = currentDocUrl;
+      }
+      lastTutorialContext = null;
+      currentDocUrl = fullTut;
+      updateDocTitle(fullTut);
+      recordRecentVisit('tutorial', fullTut);
+      updateTutorialBackBtn();
+      highlightActiveSidebar(fullTut);
+      updateHash();
     } else if (e.data.type === 'exampleNavigated' && e.data.url) {
       let fullEx = normalizeExampleUrl(e.data.url);
       if (!fullEx.includes('#') && currentDocUrl && currentDocUrl.includes('#') && currentDocUrl.split('#')[0] === fullEx) {
@@ -746,6 +842,19 @@ document.addEventListener('DOMContentLoaded', () => {
       openImageZoomModal(e.data.src, e.data.title);
     } else if (e.data.type === 'closeImageModal') {
       closeImageZoomModal();
+    } else if (e.data.type === 'setTutorialPanelFullscreen') {
+      document.body.classList.toggle('tut-panel-fullscreen-overlay', !!e.data.active);
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('tut-panel-fullscreen-overlay')) {
+      document.body.classList.remove('tut-panel-fullscreen-overlay');
+      try {
+        if (docFrame && docFrame.contentWindow) {
+          docFrame.contentWindow.postMessage({ type: 'exitTutorialPanelFullscreen' }, '*');
+        }
+      } catch (err) { }
     }
   });
 
@@ -772,9 +881,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const exampleCategories = ['basics/', 'infrastructure/', 'phasing/', 'sequences/', 'tlm-1/', 'tlm-2/', 'registers/', 'integrated/'];
       const isEx = rawDoc && (rawDoc.includes('examples_view/') || exampleCategories.some(cat => rawDoc.startsWith(cat) || rawDoc.includes('/' + cat)));
+      const isTut = rawDoc && rawDoc.includes('tutorial_view/');
 
-      const fullDoc = rawDoc ? (isEx ? normalizeExampleUrl(rawDoc) : normalizeDocUrl(rawDoc)) : currentDocUrl;
-      const fullSrc = rawSrc ? normalizeSrcUrl(rawSrc) : currentSrcUrl;
+      const fullDoc = rawDoc ? (isEx ? normalizeExampleUrl(rawDoc) : (isTut ? normalizeTutorialUrl(rawDoc) : normalizeDocUrl(rawDoc))) : currentDocUrl;
+      let pairedFallbackSrc = currentSrcUrl;
+      if (!rawSrc && fullDoc && fullDoc.includes('tutorial_view/') && typeof UVM_DATA !== 'undefined' && UVM_DATA.tutorialToSrc) {
+        const tutClean = fullDoc.replace(/^tutorial_view\//, '').split('#')[0];
+        if (UVM_DATA.tutorialToSrc[tutClean]) pairedFallbackSrc = UVM_DATA.tutorialToSrc[tutClean];
+      } else if (!rawSrc && fullDoc && fullDoc.includes('examples_view/') && typeof UVM_DATA !== 'undefined' && UVM_DATA.exampleToSrc) {
+        const exClean = fullDoc.replace(/^examples_view\//, '').split('#')[0];
+        if (UVM_DATA.exampleToSrc[exClean]) pairedFallbackSrc = UVM_DATA.exampleToSrc[exClean];
+      }
+      const fullSrc = rawSrc ? normalizeSrcUrl(rawSrc) : pairedFallbackSrc;
 
       const docChanged = currentDocUrl !== fullDoc;
       const srcChanged = currentSrcUrl !== fullSrc;
@@ -798,6 +916,8 @@ document.addEventListener('DOMContentLoaded', () => {
       highlightActiveSidebar(fullDoc);
       if (isEx || fullDoc.includes('examples_view/')) {
         switchSidebarTab('examples');
+      } else if (isTut || fullDoc.includes('tutorial_view/')) {
+        switchSidebarTab('tutorial');
       }
     } else if (hash.startsWith('#/src/')) {
       const srcPath = normalizeSrcUrl(hash.substring(6));
@@ -806,6 +926,26 @@ document.addEventListener('DOMContentLoaded', () => {
       setFrameSrc(srcFrame, srcPath);
       updateSrcTitle(srcPath);
       highlightActiveSidebar(srcPath);
+    } else if (hash.startsWith('#/tutorial/')) {
+      const tutPath = normalizeTutorialUrl(hash.substring(11));
+      lastTutorialContext = null;
+      currentDocUrl = tutPath;
+      setViewMode('docs', false);
+      setFrameSrc(docFrame, tutPath);
+      updateDocTitle(tutPath);
+      updateTutorialBackBtn();
+      switchSidebarTab('tutorial');
+      highlightActiveSidebar(tutPath);
+    } else if (hash === '#/tutorial') {
+      switchSidebarTab('tutorial');
+      const defaultTut = 'tutorial_view/ch01_verification_vcycle.html';
+      lastTutorialContext = null;
+      currentDocUrl = defaultTut;
+      setViewMode('docs', false);
+      setFrameSrc(docFrame, defaultTut);
+      updateDocTitle(defaultTut);
+      updateTutorialBackBtn();
+      highlightActiveSidebar(defaultTut);
     } else if (hash.startsWith('#/example/')) {
       const exPath = normalizeExampleUrl(hash.substring(10));
       currentDocUrl = exPath;
@@ -840,9 +980,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let nextHash = '';
     if (currentMode === 'split') {
       const isExample = currentDocUrl.includes('examples_view/');
+      const isTutorial = currentDocUrl.includes('tutorial_view/');
       const doc = isExample
         ? 'examples_view/' + currentDocUrl.replace(/^examples_view\//, '')
-        : currentDocUrl.replace(/^docs_view\//, '');
+        : (isTutorial
+          ? 'tutorial_view/' + currentDocUrl.replace(/^tutorial_view\//, '')
+          : currentDocUrl.replace(/^docs_view\//, ''));
       const src = currentSrcUrl.replace(/^src_view\//, '');
       nextHash = `#/split?doc=${encodeURIComponent(doc)}&src=${encodeURIComponent(src)}`;
     } else if (currentMode === 'source') {
@@ -852,6 +995,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentDocUrl.includes('examples_view/')) {
         const ex = currentDocUrl.replace(/^examples_view\//, '');
         nextHash = `#/example/${ex}`;
+      } else if (currentDocUrl.includes('tutorial_view/')) {
+        const tut = currentDocUrl.replace(/^tutorial_view\//, '');
+        nextHash = `#/tutorial/${tut}`;
       } else if (isHomeUrl(currentDocUrl)) {
         nextHash = '#/home';
       } else {
@@ -879,6 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setFrameSrc(docFrame, fullDoc);
     updateDocTitle(fullDoc);
     recordRecentVisit('doc', fullDoc);
+    updateTutorialBackBtn();
 
     if (autoPair && currentMode === 'split') {
       // In split mode, check if we should pair with its source file
@@ -930,11 +1077,15 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (url.includes('examples_view/')) {
         const clean = url.replace('examples_view/', '').replace('.html', '').split('#')[0];
         docPaneTitle.textContent = `Example: ${clean}`;
+      } else if (url.includes('tutorial_view/')) {
+        const clean = url.replace('tutorial_view/', '').replace('.html', '').split('#')[0].replace(/_/g, ' ');
+        docPaneTitle.textContent = `Tutorial: ${clean}`;
       } else {
         const clean = url.replace('docs_view/', '').replace('.html', '').split('#')[0];
         docPaneTitle.textContent = clean;
       }
       updateBookmarkButtonState();
+      updateTutorialBackBtn();
     }
 
     function updateSrcTitle(url) {
@@ -1238,6 +1389,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="sidebar-pill" data-type="intermediate">Intermediate</button>
             <button class="sidebar-pill" data-type="advanced">Advanced</button>
           `;
+      } else if (activeSidebarTab === 'tutorial') {
+        sidebarPillsContainer.style.display = 'flex';
+        sidebarPillsContainer.innerHTML = `
+            <button class="sidebar-pill active" data-type="all">All</button>
+            <button class="sidebar-pill" data-type="beginner">Beginner</button>
+            <button class="sidebar-pill" data-type="intermediate">Intermediate</button>
+            <button class="sidebar-pill" data-type="advanced">Advanced</button>
+            <button class="sidebar-pill" data-type="completed">Completed</button>
+          `;
       } else if (activeSidebarTab === 'hierarchy') {
         sidebarPillsContainer.style.display = 'flex';
         sidebarPillsContainer.innerHTML = `
@@ -1367,11 +1527,100 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSourceTree(rawQuery);
       } else if (activeSidebarTab === 'examples') {
         renderExamplesTree(rawQuery);
+      } else if (activeSidebarTab === 'tutorial') {
+        renderTutorialTree(rawQuery);
       } else if (activeSidebarTab === 'hierarchy') {
         renderHierarchyTree(rawQuery);
       } else if (activeSidebarTab === 'index') {
         renderAlphabeticalIndex(rawQuery);
       }
+    }
+
+    function readTutorialCompletedMap() {
+      try {
+        const parsed = JSON.parse(localStorage.getItem('uvm_tutorial_progress') || '{}');
+        return (parsed && parsed.completed) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function renderTutorialTree(rawQuery) {
+      const tutTree = UVM_DATA.tutorialTree || [];
+      const matcher = getQueryMatcher(rawQuery, sidebarRegexEnabled, false, sidebarFilter);
+      const completedMap = readTutorialCompletedMap();
+
+      let totalChapters = 0;
+      let completedCount = 0;
+      tutTree.forEach(part => {
+        (part.children || []).forEach(ch => {
+          totalChapters++;
+          if (completedMap[ch.slug]) completedCount++;
+        });
+      });
+
+      const pct = totalChapters > 0 ? Math.round((completedCount / totalChapters) * 100) : 0;
+      let html = `<div class="tut-sidebar-progress">
+        <div class="tut-sidebar-progress-top">
+          <span>Course Progress</span>
+          <strong>${completedCount} / ${totalChapters} (${pct}%)</strong>
+        </div>
+        <div class="tut-sidebar-progress-track">
+          <div class="tut-sidebar-progress-fill" style="width:${pct}%"></div>
+        </div>
+      </div>`;
+
+      let renderedItems = 0;
+      tutTree.forEach(part => {
+        const subItems = (part.children || []).filter(ch => {
+          const isDone = !!completedMap[ch.slug];
+          if (sidebarFilterTypes.has('completed') && !isDone) return false;
+          if (sidebarFilterTypes.has('beginner') || sidebarFilterTypes.has('intermediate') || sidebarFilterTypes.has('advanced')) {
+            const diff = (ch.difficulty || 'beginner').toLowerCase();
+            if (!sidebarFilterTypes.has(diff)) return false;
+          }
+          if (!matcher) return true;
+          const haystack = `${ch.title} ${ch.full_title || ''} ${ch.difficulty} ${ch.summary || ''}`.toLowerCase();
+          if (matcher.type === 'regex') {
+            return matcher.regex ? matcher.regex.test(haystack) : true;
+          }
+          return matcher.words.every(w => haystack.includes(w));
+        });
+
+        const partMatches = matcher && matcher.type === 'words' && matcher.words.every(w => part.title.toLowerCase().includes(w));
+        if (subItems.length > 0 || partMatches) {
+          renderedItems += subItems.length;
+          html += `<div class="nav-group">
+            <div class="nav-group-header">
+              <span>${highlightMatch(part.title, matcher)}</span>
+              <span style="font-size:0.7rem; opacity:0.6; margin-left:auto; margin-right:0.5rem; background:var(--surface-color); padding:0.1rem 0.4rem; border-radius:9999px;">${subItems.length}</span>
+              <svg class="nav-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <ul class="nav-group-items">
+              ${subItems.map(ch => {
+            const isActive = urlsMatch(ch.href, currentDocUrl);
+            const isDone = !!completedMap[ch.slug];
+            const doneBadge = isDone
+              ? '<span class="tut-done-check" title="Completed">&#10003;</span>'
+              : '';
+            return `<li>
+                  <a href="#" data-doc-href="${ch.href}" class="nav-item-link ${isActive ? 'active' : ''}" title="${escapeHtml(ch.summary || '')}">
+                    ${doneBadge}
+                    <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${highlightMatch(ch.title, matcher)}</span>
+                    <span class="badge badge-diff-${(ch.difficulty || 'beginner').toLowerCase()}" style="font-size:0.65rem; padding:0.1rem 0.35rem; margin-left:auto; flex-shrink:0;">${ch.difficulty}</span>
+                  </a>
+                </li>`;
+          }).join('')}
+            </ul>
+          </div>`;
+        }
+      });
+
+      if (renderedItems === 0) {
+        html += '<div style="padding:1.5rem; text-align:center; color:var(--text-muted); font-size:0.85rem">No matching chapters</div>';
+      }
+      sidebarContent.innerHTML = html;
+      attachSidebarListeners();
     }
 
     function renderExamplesTree(rawQuery) {
@@ -2029,6 +2278,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
           if (activeSidebarTab === 'source' || (!docHref && srcHref)) {
             if (srcHref) loadSource(srcHref);
+          } else if (docHref && docHref.includes('tutorial_view/')) {
+            if (currentMode === 'split' && srcHref) {
+              loadDoc(docHref, true, false);
+              loadSource(srcHref, true, false);
+            } else {
+              window.openTutorialView(docHref);
+            }
           } else if (docHref) {
             if (currentMode === 'split' && srcHref) {
               loadDoc(docHref, true, false);
@@ -2117,19 +2373,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const isSrcUrl = url && (url.includes('src_view/') || url.endsWith('.sv') || url.endsWith('.svh') || url.endsWith('.v') || url.endsWith('.c') || url.endsWith('.h'));
       const isExUrl = url && url.includes('examples_view/');
-      const isDocUrl = url && !isSrcUrl && !isExUrl;
+      const isTutUrl = url && url.includes('tutorial_view/');
+      const isDocUrl = url && !isSrcUrl && !isExUrl && !isTutUrl;
 
-      // Guard: Never clear documentation/example active selection when a source file navigates, and vice versa
+      // Guard: Never clear documentation/example/tutorial active selection when a source file navigates, and vice versa
       if (url) {
-        if ((activeSidebarTab === 'docs' || activeSidebarTab === 'examples' || activeSidebarTab === 'hierarchy') && isSrcUrl) return;
-        if (activeSidebarTab === 'source' && (isDocUrl || isExUrl)) return;
+        if ((activeSidebarTab === 'docs' || activeSidebarTab === 'examples' || activeSidebarTab === 'tutorial' || activeSidebarTab === 'hierarchy') && isSrcUrl) return;
+        if (activeSidebarTab === 'source' && (isDocUrl || isExUrl || isTutUrl)) return;
       }
 
       let targetUrl = url;
       if (!targetUrl) {
         if (activeSidebarTab === 'source') {
           targetUrl = currentSrcUrl;
-        } else if (activeSidebarTab === 'examples' || activeSidebarTab === 'docs' || activeSidebarTab === 'hierarchy') {
+        } else if (activeSidebarTab === 'examples' || activeSidebarTab === 'tutorial' || activeSidebarTab === 'docs' || activeSidebarTab === 'hierarchy') {
           targetUrl = currentDocUrl;
         } else {
           targetUrl = currentDocUrl || currentSrcUrl;
@@ -2565,12 +2822,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modalSearchHeader) modalSearchHeader.classList.remove('regex-error');
         if (modalSearchRegex) modalSearchRegex.classList.remove('regex-error');
 
-        // Context-aware filter selection: if user was browsing Examples, auto-select Example filter
+        // Context-aware filter selection: if user was browsing Examples or Tutorial, auto-select filter
         if (activeSidebarTab === 'examples') {
           searchFilterTypes.clear();
           searchFilterTypes.add('example');
           searchFilterPills.forEach(p => {
             p.classList.toggle('active', p.getAttribute('data-type') === 'example');
+          });
+        } else if (activeSidebarTab === 'tutorial') {
+          searchFilterTypes.clear();
+          searchFilterTypes.add('tutorial');
+          searchFilterPills.forEach(p => {
+            p.classList.toggle('active', p.getAttribute('data-type') === 'tutorial');
           });
         }
         syncModalDiffPillsVisibility();
@@ -3166,7 +3429,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const badgeClass = pct >= 80 ? 'rag-match-high' : (pct >= 65 ? 'rag-match-med' : 'rag-match-low');
 
           let displayType = res.targetType || res.type || 'class';
-          if (searchFilterTypes.has('example') || (res.targetUrl && res.targetUrl.includes('examples_view/'))) {
+          if (searchFilterTypes.has('tutorial') || (res.targetUrl && res.targetUrl.includes('tutorial_view/'))) {
+            displayType = 'tutorial';
+          } else if (searchFilterTypes.has('example') || (res.targetUrl && res.targetUrl.includes('examples_view/'))) {
             displayType = 'example';
           } else if (searchFilterTypes.has('class') && (res.type === 'class' || res.type === 'overview')) {
             displayType = 'class';
@@ -3189,7 +3454,8 @@ document.addEventListener('DOMContentLoaded', () => {
                       (displayType === 'type' || displayType === 'enum' || displayType === 'enumeration' ? 'badge-type' :
                         (displayType === 'port' ? 'badge-port' :
                           (displayType === 'example' ? 'badge-example' :
-                            (displayType === 'method' ? 'badge-method' : 'badge-file')))))))));
+                            (displayType === 'tutorial' ? 'badge-tutorial' :
+                              (displayType === 'method' ? 'badge-method' : 'badge-file'))))))))));
 
           let sectionsPillsHtml = '';
           if (res.targetSections && res.targetSections.length > 0) {
@@ -3446,7 +3712,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     (item.type === 'type' || item.type === 'enum' || item.type === 'enumeration' ? 'badge-type' :
                       (item.type === 'port' ? 'badge-port' :
                         (item.type === 'example' ? 'badge-example' :
-                          (item.type === 'method' ? 'badge-method' : 'badge-file')))))))));
+                          (item.type === 'tutorial' ? 'badge-tutorial' :
+                            (item.type === 'method' ? 'badge-method' : 'badge-file'))))))))));
 
         const isMethodLike = item.type === 'function' || item.type === 'task' || item.type === 'method' || item.type === 'variable' || item.type === 'port' || item.type === 'constant' || item.type === 'parameter' || item.type === 'type' || item.type === 'enum' || item.type === 'enumeration';
         const categoryTag = item.category && isMethodLike ?
@@ -3531,14 +3798,17 @@ document.addEventListener('DOMContentLoaded', () => {
       currentActiveIndexKey = getSymbolIndexKey(item);
 
       const isExample = (item.type === 'example' || (item.doc && item.doc.includes('examples_view/')));
+      const isTutorial = (item.type === 'tutorial' || (item.doc && item.doc.includes('tutorial_view/')));
 
       if (currentMode === 'split') {
         if (item.doc) {
-          currentDocUrl = isExample ? normalizeExampleUrl(item.doc) : normalizeDocUrl(item.doc);
+          currentDocUrl = isExample
+            ? normalizeExampleUrl(item.doc)
+            : (isTutorial ? normalizeTutorialUrl(item.doc) : normalizeDocUrl(item.doc));
           setFrameSrc(docFrame, currentDocUrl);
           updateDocTitle(currentDocUrl);
         }
-        if (item.src && !item.src.includes('examples_view/')) {
+        if (item.src && !item.src.includes('examples_view/') && !item.src.includes('tutorial_view/')) {
           currentSrcUrl = normalizeSrcUrl(item.src);
           setFrameSrc(srcFrame, currentSrcUrl);
           updateSrcTitle(currentSrcUrl);
@@ -3547,6 +3817,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const exClean = currentDocUrl.replace(/^examples_view\//, '');
             if (typeof UVM_DATA !== 'undefined' && UVM_DATA.exampleToSrc && UVM_DATA.exampleToSrc[exClean]) {
               currentSrcUrl = UVM_DATA.exampleToSrc[exClean];
+              setFrameSrc(srcFrame, currentSrcUrl);
+              updateSrcTitle(currentSrcUrl);
+            }
+          } else if (isTutorial) {
+            const tutClean = currentDocUrl.replace(/^tutorial_view\//, '').split('#')[0];
+            if (typeof UVM_DATA !== 'undefined' && UVM_DATA.tutorialToSrc && UVM_DATA.tutorialToSrc[tutClean]) {
+              currentSrcUrl = UVM_DATA.tutorialToSrc[tutClean];
               setFrameSrc(srcFrame, currentSrcUrl);
               updateSrcTitle(currentSrcUrl);
             }
@@ -3563,10 +3840,14 @@ document.addEventListener('DOMContentLoaded', () => {
         highlightActiveSidebar(item.doc || item.src);
         if (isExample) {
           switchSidebarTab('examples');
+        } else if (isTutorial) {
+          switchSidebarTab('tutorial');
         }
       } else {
         if (isExample) {
           window.openExampleView(item.doc);
+        } else if (isTutorial) {
+          window.openTutorialView(item.doc);
         } else if (item.doc) {
           if (currentMode === 'split' && item.src) {
             loadDoc(item.doc, true, false);

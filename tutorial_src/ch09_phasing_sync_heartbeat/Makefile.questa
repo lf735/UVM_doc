@@ -1,0 +1,16 @@
+# Makefile.questa - Chapter 9 Phasing Domains, Barriers & Heartbeat
+UVM_HOME ?= $(QUESTA_HOME)/verilog_src/uvm-1.2
+
+all: comp run
+
+comp:
+	vlib work
+	vlog +incdir+$(UVM_HOME)/src +incdir+. \
+		$(UVM_HOME)/src/uvm_pkg.sv \
+		../dut/pkt_alu.sv \
+		alu_if.sv \
+		apb_if.sv \
+		tb_top.sv
+
+run:
+	vsim -c -do "run -all; quit -f" tb_top +UVM_TESTNAME=alu_base_test

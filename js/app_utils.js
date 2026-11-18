@@ -29,6 +29,10 @@
     return normalizeViewUrl(url, 'examples_view/basics/hello_world.html', 'examples_view/');
   }
 
+  function normalizeTutorialUrl(url) {
+    return normalizeViewUrl(url, 'tutorial_view/ch01_verification_vcycle.html', 'tutorial_view/');
+  }
+
   function normalizeSrcUrl(url) {
     return normalizeViewUrl(url, 'src_view/comps/uvm_driver.svh.html#L44', 'src_view/');
   }
@@ -45,8 +49,8 @@
     if (!clean1 || !clean2) return false;
     if (clean1 === clean2) return true;
     if (clean1.endsWith('/' + clean2) || clean2.endsWith('/' + clean1)) return true;
-    const bare1 = clean1.replace(/^(docs_view|src_view|examples_view)\//, '');
-    const bare2 = clean2.replace(/^(docs_view|src_view|examples_view)\//, '');
+    const bare1 = clean1.replace(/^(docs_view|src_view|examples_view|tutorial_view)\//, '');
+    const bare2 = clean2.replace(/^(docs_view|src_view|examples_view|tutorial_view)\//, '');
     return bare1 === bare2 || bare1.endsWith('/' + bare2) || bare2.endsWith('/' + bare1);
   }
 
@@ -236,6 +240,9 @@
     if (itemType === 'studio' || itemType === 'stepper' || itemType === 'example') {
       return filterSet.has('example');
     }
+    if (itemType === 'tutorial') {
+      return filterSet.has('tutorial');
+    }
     if (itemType === 'overview') {
       return filterSet.has('class') || filterSet.has('file');
     }
@@ -247,6 +254,17 @@
 
     const url = (r.targetUrl || (r.chunk && r.chunk.url) || '').toLowerCase();
     const isExample = url.includes('examples_view/') || r.type === 'example' || r.type === 'studio' || r.type === 'stepper' || r.targetType === 'example';
+    const isTutorial = url.includes('tutorial_view/') || r.type === 'tutorial' || r.targetType === 'tutorial';
+
+    if (filterSet.has('tutorial')) {
+      if (isTutorial) {
+        return true;
+      }
+      if (filterSet.size === 1) return false;
+    }
+    if (isTutorial && !filterSet.has('tutorial')) {
+      return false;
+    }
 
     if (filterSet.has('example')) {
       if (isExample) {
@@ -367,6 +385,7 @@
   global.UvmAppUtils = {
     normalizeDocUrl,
     normalizeExampleUrl,
+    normalizeTutorialUrl,
     normalizeSrcUrl,
     normalizePathForCompare,
     urlsMatch,

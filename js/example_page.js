@@ -121,16 +121,28 @@
       }
       if (!filesList || filesList.length === 0) return;
 
-      const zipBlob = createNativeZipBlob(filesList);
-      const url = URL.createObjectURL(zipBlob);
-      const a = document.createElement('a');
       const pageTitle = (document.title.split('|')[0] || 'uvm_archive').trim().toLowerCase().replace(/[^a-z0-9_]/g, '_');
-      a.href = url;
-      a.download = `${pageTitle}.zip`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      function triggerDownload(blob) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${pageTitle}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      if (typeof global.JSZip === 'function') {
+        const zip = new global.JSZip();
+        filesList.forEach(function (f) {
+          zip.file(f.name, f.content);
+        });
+        zip.generateAsync({ type: 'blob' }).then(triggerDownload);
+        return;
+      }
+
+      triggerDownload(createNativeZipBlob(filesList));
     });
   }
 
@@ -1458,9 +1470,16 @@
     filesBadge.setAttribute('aria-expanded', 'false');
 
     function getExampleSrcUrl(name) {
-      const m = window.location.pathname.replace(/\\/g, '/').match(/examples_view\/(.+?)\.html$/);
-      if (!m || !name) return '';
-      return `src_view/examples/${m[1]}/${name}.html`;
+      const p = window.location.pathname.replace(/\\/g, '/');
+      const mEx = p.match(/examples_view\/(.+?)\.html$/);
+      if (mEx && name) {
+        return `src_view/examples/${mEx[1]}/${name}.html`;
+      }
+      const mTut = p.match(/tutorial_view\/(.+?)\.html$/);
+      if (mTut && name) {
+        return `src_view/tutorial/${mTut[1]}/${name}.html`;
+      }
+      return '';
     }
 
     function postExampleFileToParent(msgType, name) {

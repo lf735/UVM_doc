@@ -128,8 +128,11 @@ Toutes les interactions entre le conteneur principal (`index.html` / `js/app.js`
 
 | Émetteur | Destinataire | `type` de Message | Paramètres | Rôle |
 | :--- | :--- | :--- | :--- | :--- |
-| `docs_view` | Parent | `openSourceView` | `{ url: string }` | Demande au parent d'ouvrir un fichier source à une ligne donnée (bascule automatique en Split-View si en mode Doc). |
-| `src_view` / `examples_view` | Parent | `openDocView` | `{ url: string, ownerClass?: string }` | Demande au parent d'ouvrir la documentation associée au fichier source ou au symbole UVM cliqué (avec prise en compte optionnelle de la classe propriétaire `ownerClass` pour ciblage direct). |
+| `docs_view` / `tutorial_view` | Parent | `openSourceView` | `{ url: string }` | Demande au parent d'ouvrir un fichier source à une ligne donnée (bascule automatique en Split-View si en mode Doc). |
+| `src_view` / `examples_view` / `tutorial_view` | Parent | `openDocView` | `{ url: string, ownerClass?: string, fromTutorial?: object }` | Demande au parent d'ouvrir la documentation associée au fichier source ou au symbole UVM cliqué (avec conservation optionnelle du contexte retour tutoriel). |
+| `tutorial_view` / `home.html` | Parent | `openTutorialView` | `{ url: string }` | Ouvre un chapitre du tutoriel pas à pas dans `#doc-frame` et active l'onglet latéral `Tutorial`. |
+| `tutorial_view` | Parent | `tutorialNavigated` | `{ url: string }` | Notifie le parent qu'un chapitre tutoriel a été chargé pour actualiser le titre, la sidebar et le hash `#/tutorial/...`. |
+| `tutorial_view` | Parent | `tutorialProgressUpdated` | `{ progress: object }` | Synchronise la barre de progression du tutoriel dans la sidebar et sur `home.html`. |
 | `docs_view` | Parent | `docNavigated` | `{ url: string }` | Notifie le parent qu'une nouvelle page de documentation a été chargée afin d'actualiser le titre, la sidebar et le hash URL. |
 | `src_view` | Parent | `srcNavigated` | `{ url: string }` | Notifie le parent qu'un fichier source a été chargé pour actualiser le titre, la sidebar et le hash URL. |
 | `docs_view` | Parent | `docSectionChanged` | `{ anchor: string, id: string, title: string }` | Informe le parent de la section active via le scrollspy pour synchroniser la navigation gauche. |
@@ -150,7 +153,9 @@ L'application principale (`index.html` / `js/app.js`) fonctionne en mode Single 
 | **Code Source** | `#/src/<chemin_relatif>[#L<ligne>]` | `#/src/comps/uvm_driver.svh#L42` | `src_view/<chemin_relatif>.html[#L<ligne>]` dans `#src-frame` |
 | **Exemple Studio** | `#/example/<categorie>/<suite>.html[#<ancre>]` | `#/example/basics/hello_world.html` | `examples_view/<categorie>/<suite>.html[#<ancre>]` dans `#doc-frame` |
 | **Index Exemples** | `#/examples` | `#/examples` | Active l'onglet `Examples` et ouvre `examples_view/basics/hello_world.html` |
-| **Split-View (Doc + Source)** | `#/split?doc=<doc_enc>&src=<src_enc>` | `#/split?doc=files%2Fcomps%2Fuvm_driver-svh.html&src=comps%2Fuvm_driver.svh` | Charge simultanément `#doc-frame` (`docs_view/` ou `examples_view/`) et `#src-frame` (`src_view/`) |
+| **Chapitre Tutoriel** | `#/tutorial/<chapitre>.html[#<ancre>]` | `#/tutorial/ch03_minimal_stimuli.html` | `tutorial_view/<chapitre>.html[#<ancre>]` dans `#doc-frame` |
+| **Index Tutoriel** | `#/tutorial` | `#/tutorial` | Active l'onglet `Tutorial` et ouvre `tutorial_view/ch01_verification_vcycle.html` |
+| **Split-View (Doc + Source)** | `#/split?doc=<doc_enc>&src=<src_enc>` | `#/split?doc=files%2Fcomps%2Fuvm_driver-svh.html&src=comps%2Fuvm_driver.svh` | Charge simultanément `#doc-frame` (`docs_view/`, `examples_view/` ou `tutorial_view/`) et `#src-frame` (`src_view/`) |
 
 #### 2. Formats des ancres intra-pages (`#<ancre>`)
 
@@ -173,12 +178,11 @@ L'application principale (`index.html` / `js/app.js`) fonctionne en mode Single 
 
 ## 3. Méthodologie de Développement pour les Prochaines Implémentations
 
-Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles versions UVM, nouveau langage, export PDF, etc.), l'équipe doit suivre scrupuleusement les 15 règles d'ingénierie suivantes :
+Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles versions UVM, nouveau langage, tutoriels interactifs, etc.), l'équipe doit suivre les règles d'ingénierie suivantes (privilégier les bibliothèques tierces éprouvées pour éviter de réinventer la roue) :
 
-### Règle 1 : Zéro Dépendance Runtime Externe
-- **Principe** : L'application finale doit pouvoir être ouverte directement en double-cliquant sur `index.html` sur une machine isolée sans accès Internet.
-- **Interdiction** : Pas de CDN obligatoire au runtime, pas de bundler runtime lourd (Webpack/Vite requis pour lire le site), pas d'appels API AJAX bloquants vers un serveur distant.
-- **Conséquence** : Toutes les données d'indexation sont compilées statiquement dans [`js/search_data.js`](file:///c:/Dev/UVM_doc/js/search_data.js), [`js/uvm_symbol_quick.js`](file:///c:/Dev/UVM_doc/js/uvm_symbol_quick.js) et le répertoire des modules JSONP par classe `js/doc_topics/`. Ces fichiers volumineux et dynamiques sont exclus du versionnement Git (`.gitignore`) pour éviter le bloat de l'historique et les conflits de diff, et sont régénérés automatiquement lors du déploiement GitHub Pages ou localement via `python scripts/build_docs.py`.
+### Règle 1 : Bibliothèques Tierces & Compilation des Index Statiques
+- **Principe** : Privilégier l'utilisation de bibliothèques tierces éprouvées côté build Python (`requirements-ci.txt` : `Jinja2`, `markdown-it-py`, `PyYAML`, `beautifulsoup4`, `fastembed`, etc.) et côté frontend (CDN : `Cytoscape.js`, `Mermaid.js`, `diff2html`, `JSZip`, `Monaco Editor`, `Transformers.js`) plutôt que de réimplémenter des moteurs complexes en interne.
+- **Compilation des données** : Toutes les données d'indexation restent compilées statiquement dans [`js/search_data.js`](file:///c:/Dev/UVM_doc/js/search_data.js), [`js/uvm_symbol_quick.js`](file:///c:/Dev/UVM_doc/js/uvm_symbol_quick.js) et le répertoire des modules JSONP par classe `js/doc_topics/`. Ces fichiers volumineux et dynamiques sont exclus du versionnement Git (`.gitignore`) pour éviter le bloat de l'historique et les conflits de diff, et sont régénérés automatiquement lors du déploiement GitHub Pages ou localement via `python scripts/build_docs.py`.
 
 ### Règle 2 : Génération en Deux Passes pour les Liens Entrecroisés
 - Lors de l'analyse et de la transformation de documents structurés :
@@ -203,8 +207,8 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
 - Pour la coquille applicative (`html:has(> body#app-container)`, `body#app-container`, `.app-layout`, `.app-viewport`, `.pane`) et les visionneuses sources (`html.src-page`, `body.src-viewer-body`), utiliser `overflow: clip` (en complément du fallback `overflow: hidden`), `100dvh` et `overscroll-behavior: none`, accompagnés d'un verrou JS (`resetShellScroll()`). Contrairement à `overflow: hidden`, `overflow: clip` ne crée pas de conteneur de défilement et empêche la navigation par ancre (`#...`) ou `scrollIntoView()` de faire défiler la barre de titre hors de l'écran.
 - En mode mobile (`<= 860px`), épingler `.app-header` et `body#app-container` en `position: fixed` (`padding-top: var(--header-height)`), masquer `.view-switcher` (redondant avec `#open-full-doc` / `#open-full-src`), et synchroniser l'icône de `#open-full-doc` dès l'initialisation via `updatePaneExpandButtons(currentMode)`.
 
-### Règle 5 : Échappement, Modularité et Zéro Dépendance Tierce des Scripts Python
-- Dans les scripts de build et de test Python (`scripts/run_tests.py` et suites associées), **n'utiliser que la bibliothèque standard Python** (ex. `html.parser.HTMLParser` au lieu de `bs4`/`BeautifulSoup`, `string.Template` via `scripts/templates/`) afin de garantir l'exécution immédiate sur GitHub Actions sans `pip install` caché.
+### Règle 5 : Échappement, Modularité et Dépendances Python Déclarées
+- Dans les scripts de build et de test Python (`scripts/run_tests.py` et suites associées), déclarer toute dépendance tierce dans `requirements-ci.txt` (`Jinja2`, `markdown-it-py`, `PyYAML`, `beautifulsoup4`, `fastembed`, `numpy`) afin de garantir leur installation automatique sur GitHub Actions et en local.
 - Séparer strictement :
   1. L'analyse syntaxique (Regex compilées, lexers SV).
   2. Les templates HTML/SVG externalisés dans `scripts/templates/`.

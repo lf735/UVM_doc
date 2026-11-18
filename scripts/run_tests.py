@@ -19,6 +19,7 @@ TEST_SUITES = [
     ("Code Containers Verification", "verify_code_containers.py"),
     ("Code Editor Tools & Clickable Symbols", "verify_code_editor_tools.py"),
     ("Interactive Examples Studios", "verify_examples.py"),
+    ("Interactive UVM Tutorial", "verify_tutorial.py"),
     ("Inherited Members & Class Hierarchy", "verify_inherited_members.py"),
     ("Home Page & Workspace Integration", "verify_home_page.py"),
     ("Search Pilot & Session Persistence", "verify_search_pilot.py"),

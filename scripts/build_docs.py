@@ -22,6 +22,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR / "scripts"))
 import build_examples
+import build_tutorial
 import generate_quick_symbols
 import syntax_highlighter as sh
 import page_builder_common as pbc
@@ -2914,6 +2915,12 @@ def generate_search_and_nav_data():
     examples_tree = examples_catalog.get("examplesTree", [])
     example_to_src = examples_catalog.get("exampleToSrc", {})
 
+    # Generate and integrate step-by-step interactive tutorial
+    tutorial_catalog = build_tutorial.generate_all_tutorial()
+    search_items.extend(tutorial_catalog.get("searchItems", []))
+    tutorial_tree = tutorial_catalog.get("tutorialTree", [])
+    tutorial_to_src = tutorial_catalog.get("tutorialToSrc", {})
+
     # Pre-calculate Doc <-> Source cross-referencing maps
     def get_target_line(src):
         for sym in FILE_SYMBOLS.get(src, []):
@@ -2932,11 +2939,13 @@ def generate_search_and_nav_data():
         "categories": categories,
         "sourceTree": source_tree,
         "examplesTree": examples_tree,
+        "tutorialTree": tutorial_tree,
         "classHierarchy": class_hierarchy,
         "searchIndex": search_items,
         "docToSrc": doc_to_src,
         "srcToDoc": src_to_doc,
         "exampleToSrc": example_to_src,
+        "tutorialToSrc": tutorial_to_src,
         "docHeadings": DOC_HEADINGS_MAP
     }
 

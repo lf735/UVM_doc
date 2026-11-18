@@ -1,0 +1,17 @@
+# Makefile.questa - Chapter 13 Capstone Complete UVM 1.2 Environment
+UVM_HOME ?= $(QUESTA_HOME)/verilog_src/uvm-1.2
+
+all: comp run
+
+comp:
+	vlib work
+	vlog +incdir+$(UVM_HOME)/src +incdir+. \
+		$(UVM_HOME)/src/uvm_pkg.sv \
+		../dut/pkt_alu.sv \
+		alu_if.sv \
+		apb_if.sv \
+		tb_top.sv \
+		../c_model/pkt_alu_ref.c
+
+run:
+	vsim -c -coverage -do "run -all; coverage report -detail; quit -f" tb_top +UVM_TESTNAME=alu_capstone_full_test +INJECT_ERR=1

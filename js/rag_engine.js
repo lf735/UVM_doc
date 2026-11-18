@@ -933,7 +933,7 @@
         if (!pChunk) continue;
 
         let effectiveParentScore = (entry.parentScore !== null) ? entry.parentScore : (entry.topScore * 0.78);
-        const pType = pChunk.type || (docUrl.includes('examples_view/') ? 'example' : 'class');
+        const pType = pChunk.type || (docUrl.includes('examples_view/') ? 'example' : (docUrl.includes('tutorial_view/') ? 'tutorial' : 'class'));
         const clsName = pChunk.class || pChunk.title;
         const clsLower = (clsName || '').toLowerCase();
 
@@ -1023,7 +1023,7 @@
       for (const [docUrl, entry] of docsMap.entries()) {
         if (entry.propagated && !rawResults.some(r => r.docUrl === docUrl)) {
           const pChunk = entry.parentChunk;
-          const pType = pChunk.type || (docUrl.includes('examples_view/') ? 'example' : 'overview');
+          const pType = pChunk.type || (docUrl.includes('examples_view/') ? 'example' : (docUrl.includes('tutorial_view/') ? 'tutorial' : 'overview'));
           rawResults.push({
             docUrl,
             pChunk,
@@ -1188,7 +1188,7 @@
 
         const snippet = this.extractSmartSnippet(chunk.text, rawQuery);
         const matchPct = Math.round(Math.max(0, Math.min(1, (item.score + 0.2) / 1.1)) * 100);
-        const chunkType = chunk.type || (chunk.url && chunk.url.includes('examples_view/') ? 'example' : 'class');
+        const chunkType = chunk.type || (chunk.url && chunk.url.includes('examples_view/') ? 'example' : (chunk.url && chunk.url.includes('tutorial_view/') ? 'tutorial' : 'class'));
         const contextBundle = this.buildContextBundle(chunk, chunk, null);
 
         results.push({

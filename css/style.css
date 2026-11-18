@@ -522,9 +522,9 @@
   }
 
   .sidebar-tab-btn .tab-label {
-    font-size: 0.69rem;
+    font-size: 0.64rem;
     font-weight: 600;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.005em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -9063,7 +9063,7 @@
     color: var(--text-main);
   }
 
-  .source-notes-body blockquote > p {
+  .source-notes-body blockquote>p {
     margin: 0;
   }
 
@@ -9867,6 +9867,1061 @@
 
     .home-arch-arrow {
       display: none;
+    }
+  }
+}
+
+@layer components {
+  /* ==========================================================================
+     Step-by-Step UVM Tutorial, Cytoscape Explorer, diff2html & Capstone 4-in-1
+     ========================================================================== */
+
+  .badge-tutorial {
+    background: #ede9fe !important;
+    color: #6d28d9 !important;
+  }
+
+  html[data-theme="dark"] .badge-tutorial {
+    background: #3b0764 !important;
+    color: #d8b4fe !important;
+  }
+
+  .doc-tutorial-back-btn {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .doc-tutorial-back-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+  }
+
+  /* Sidebar Tutorial Progress Header */
+  .tut-sidebar-progress {
+    padding: 0.65rem 0.75rem;
+    margin: 0.4rem 0.5rem 0.6rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    background: var(--surface-alt);
+  }
+
+  .tut-sidebar-progress-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    margin-bottom: 0.38rem;
+  }
+
+  .tut-sidebar-progress-top strong {
+    color: var(--primary);
+  }
+
+  .tut-sidebar-progress-track,
+  .home-tutorial-progress-track {
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--border-subtle);
+    overflow: hidden;
+  }
+
+  .tut-sidebar-progress-fill,
+  .home-tutorial-progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #1a73e8, #10b981);
+    transition: width 0.25s ease;
+  }
+
+  .tut-done-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 999px;
+    background: #10b981;
+    color: #ffffff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-right: 0.3rem;
+  }
+
+  /* Home Page Tutorial Section */
+  .home-tutorial-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .home-tutorial-progress-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 260px;
+  }
+
+  .home-tutorial-progress-box .home-tutorial-progress-track {
+    width: 110px;
+    flex-shrink: 0;
+  }
+
+  .home-tutorial-progress-text {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .home-tutorial-cta {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .home-tutorial-cta:hover {
+    background: #1557b0;
+    color: #ffffff;
+  }
+
+  /* Chapter Header & Objectives */
+  .tut-chapter-kicker {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .tut-part-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .tut-step-counter {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .tut-completion-pill {
+    margin-left: auto;
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 0.18rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-alt);
+    color: var(--text-muted);
+  }
+
+  .tut-completion-pill.is-completed {
+    background: rgba(16, 185, 129, 0.14);
+    border-color: #10b981;
+    color: #059669;
+  }
+
+  html[data-theme="dark"] .tut-completion-pill.is-completed {
+    color: #34d399;
+  }
+
+  .tut-objectives-card {
+    margin: 0.9rem 0 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary);
+    background: var(--surface-alt);
+  }
+
+  .tut-objectives-header {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.45rem;
+  }
+
+  .tut-objectives-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--text-main);
+  }
+
+  /* Markdown Prose & Mermaid */
+  .tut-prose h2 {
+    margin: 1.4rem 0 0.6rem;
+    font-size: 1.12rem;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 0.35rem;
+  }
+
+  .tut-prose p {
+    margin: 0.6rem 0;
+    line-height: 1.65;
+  }
+
+  .tut-prose blockquote {
+    margin: 0.85rem 0;
+    padding: 0.75rem 1rem;
+    border-left: 4px solid var(--primary);
+    background: var(--surface-alt);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .tut-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.9rem 0;
+    font-size: 0.86rem;
+  }
+
+  .tut-prose th,
+  .tut-prose td {
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--border-subtle);
+    text-align: left;
+  }
+
+  .tut-prose th {
+    background: var(--surface-alt);
+    font-weight: 600;
+  }
+
+  .tut-mermaid-wrap {
+    position: relative;
+    margin: 0.75rem 0;
+    padding: 0.7rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-subtle);
+    background: var(--surface-color);
+    overflow-x: auto;
+    text-align: center;
+  }
+
+  .tut-mermaid-wrap svg {
+    cursor: zoom-in;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .tut-svg-zoom-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    opacity: 0.8;
+    z-index: 2;
+  }
+
+  .tut-mermaid-wrap:hover .tut-svg-zoom-btn {
+    opacity: 1;
+  }
+
+  /* Interactive Cytoscape Graph + Inspector */
+  .tut-interactive-panel,
+  .capstone-explorer {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--surface-alt);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  body.tut-panel-fullscreen-overlay #doc-pane {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2600 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    flex: none !important;
+    display: flex !important;
+    background: rgba(15, 23, 42, 0.72) !important;
+    backdrop-filter: blur(4px);
+    padding: 1rem !important;
+  }
+
+  body.tut-panel-fullscreen-overlay #doc-pane .pane-header {
+    display: none !important;
+  }
+
+  body.tut-panel-fullscreen-overlay #doc-frame {
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  .tut-interactive-panel.tut-panel-fullscreen,
+  .capstone-explorer.tut-panel-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    border-radius: 0;
+    border: none;
+    padding: 0.65rem;
+    overflow: auto;
+  }
+
+  .tut-interactive-panel.tut-panel-fullscreen .tut-cy-split,
+  .capstone-explorer.tut-panel-fullscreen .tut-cy-split {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .tut-interactive-panel.tut-panel-fullscreen .tut-cy-canvas {
+    height: calc(100vh - 110px);
+    min-height: 360px;
+  }
+
+  .capstone-explorer.tut-panel-fullscreen .capstone-cy-canvas {
+    height: calc(100vh - 235px);
+    min-height: 360px;
+  }
+
+  .tut-toolbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tut-graph-actions,
+  .capstone-slider-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .tut-role-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .tut-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.24rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-main);
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .tut-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .tut-filter-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+  }
+
+  .tut-legend {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .tut-leg-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .tut-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    display: inline-block;
+  }
+
+  .tut-dot-new {
+    background: #10b981;
+  }
+
+  .tut-dot-base {
+    background: #94a3b8;
+  }
+
+  .tut-cy-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(240px, 1fr);
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .tut-cy-split.is-inspector-collapsed {
+    grid-template-columns: 1fr;
+  }
+
+  .tut-cy-stage {
+    position: relative;
+    min-width: 0;
+  }
+
+  .tut-cy-stage .tut-insp-toggle-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-color);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tut-cy-stage .tut-cy-fit-btn {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    background: var(--surface-color);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .tut-cy-canvas {
+    width: 100%;
+    height: 410px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+  }
+
+  .capstone-cy-split {
+    grid-template-columns: 1fr;
+  }
+
+  .capstone-cy-split.is-inspector-collapsed {
+    grid-template-columns: 1fr;
+  }
+
+  .capstone-cy-canvas {
+    height: 470px;
+  }
+
+  .tut-cy-inspector {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--surface-color);
+    padding: 0.65rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .tut-insp-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    flex: 1;
+  }
+
+  .tut-cy-split.is-inspector-collapsed .tut-cy-inspector {
+    display: none;
+  }
+
+  .tut-insp-badge {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+
+  .tut-cy-inspector h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-main);
+  }
+
+  .tut-cy-inspector p {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  .tut-insp-kv {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    padding: 0.55rem 0.65rem;
+    border-radius: 8px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .tut-insp-ports,
+  .tut-scm-apis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+  }
+
+  .tut-mini-chip {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.73rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 6px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+  }
+
+  .tut-insp-actions {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding-top: 0.4rem;
+  }
+
+  /* Capstone Layer Slider */
+  .capstone-slider-bar {
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .capstone-slider-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .capstone-slider-title {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.86rem;
+    color: var(--text-main);
+  }
+
+  .capstone-slider-title strong {
+    color: var(--primary);
+  }
+
+  .capstone-slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .capstone-slider-controls input[type="range"] {
+    flex: 1;
+    accent-color: var(--primary);
+    cursor: pointer;
+  }
+
+  .capstone-range-bound {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .capstone-layer-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .capstone-layer-pill {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-alt);
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .capstone-layer-pill.included {
+    border-color: #10b981;
+    color: #059669;
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  html[data-theme="dark"] .capstone-layer-pill.included {
+    color: #34d399;
+  }
+
+  .capstone-layer-pill.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+  }
+
+  html[data-theme="dark"] .capstone-layer-pill.active,
+  html[data-theme="dark"] .tut-filter-btn.active,
+  html[data-theme="dark"] .tut-scm-tab.active,
+  html[data-theme="dark"] .home-tutorial-cta,
+  html[data-theme="dark"] .tut-interactive-panel .btn-primary,
+  html[data-theme="dark"] .capstone-explorer .btn-primary,
+  html[data-theme="dark"] .tut-footer-nav .btn-primary {
+    background: #1a73e8;
+    border-color: #1a73e8;
+    color: #ffffff;
+  }
+
+  /* Chapter 2 Interactive SCM Matrix */
+  .tut-scm-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .tut-scm-tab {
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-alt);
+    color: var(--text-main);
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .tut-scm-tab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+  }
+
+  .tut-scm-card {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--surface-color);
+    padding: 1rem 1.1rem;
+  }
+
+  .tut-scm-header h3 {
+    margin: 0.4rem 0 0.3rem;
+    font-size: 1.02rem;
+  }
+
+  .tut-scm-rules {
+    margin: 0.75rem 0;
+    padding-left: 1.2rem;
+    line-height: 1.55;
+    font-size: 0.88rem;
+  }
+
+  .tut-scm-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  /* Code Studio Diff Badges & Added Lines */
+  .tut-tab-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.08rem 0.32rem;
+    border-radius: 4px;
+    margin-left: 0.35rem;
+  }
+
+  .tut-tab-new {
+    background: rgba(16, 185, 129, 0.18);
+    color: #059669;
+  }
+
+  .tut-tab-mod {
+    background: rgba(245, 158, 11, 0.18);
+    color: #d97706;
+  }
+
+  html[data-theme="dark"] .tut-tab-new {
+    color: #34d399;
+  }
+
+  html[data-theme="dark"] .tut-tab-mod {
+    color: #fbbf24;
+  }
+
+  .sv-code-table tr.tut-line-added {
+    background: rgba(16, 185, 129, 0.08);
+  }
+
+  .sv-code-table tr.tut-line-added td:first-child {
+    box-shadow: inset 3px 0 0 #10b981;
+  }
+
+  .tut-diff-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-alt);
+  }
+
+  .tut-diff-summary {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .tut-diff-controls {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tut-diff-container {
+    margin-top: 0.55rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .tut-diff-container .d2h-file-list {
+    display: block !important;
+  }
+
+  .tut-diff-container .d2h-file-wrapper {
+    display: none;
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0.45rem 0 0.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .tut-diff-container .d2h-file-wrapper .d2h-file-header {
+    display: none !important;
+  }
+
+  .tut-diff-container .d2h-file-wrapper.is-diff-open {
+    display: block;
+  }
+
+  .tut-diff-container .d2h-file-list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    transition: background-color 0.12s ease;
+    border-radius: 6px;
+    padding: 0.25rem 0.45rem;
+  }
+
+  .tut-diff-container .d2h-file-list li:hover {
+    background: var(--surface-alt);
+  }
+
+  .tut-diff-container .d2h-file-list li.is-diff-active {
+    background: var(--primary-light);
+    font-weight: 600;
+  }
+
+  .tut-diff-hint {
+    font-weight: 400;
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    margin-left: 0.4rem;
+  }
+
+  /* Associated UVM Docs & Examples Grid */
+  .tut-refs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .tut-ref-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    text-decoration: none;
+    color: var(--text-main);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .tut-ref-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 3px 10px rgba(26, 115, 232, 0.1);
+  }
+
+  .tut-ref-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+  }
+
+  .tut-ref-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--primary);
+  }
+
+  .tut-ref-badge {
+    font-size: 0.66rem;
+    font-weight: 700;
+    padding: 0.12rem 0.42rem;
+    border-radius: 999px;
+    background: var(--primary-light);
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .tut-ref-badge-ex {
+    background: #ccfbf1;
+    color: #0f766e;
+  }
+
+  html[data-theme="dark"] .tut-ref-badge-ex {
+    background: #134e4a;
+    color: #5eead4;
+  }
+
+  .tut-ref-desc {
+    margin: 0;
+    font-size: 0.79rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+
+  /* Self-Check Knowledge Quiz */
+  .tut-quiz-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .tut-quiz-card {
+    padding: 0.95rem 1.05rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+  }
+
+  .tut-quiz-q {
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .tut-quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .tut-quiz-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    background: var(--surface-alt);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.85rem;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .tut-quiz-opt:hover {
+    border-color: var(--primary);
+  }
+
+  .tut-quiz-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .tut-quiz-opt.is-correct {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.12);
+  }
+
+  .tut-quiz-opt.is-wrong {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.12);
+  }
+
+  .tut-quiz-feedback {
+    margin-top: 0.6rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.83rem;
+    line-height: 1.45;
+  }
+
+  .tut-quiz-feedback.is-ok {
+    background: rgba(16, 185, 129, 0.12);
+    color: #065f46;
+  }
+
+  .tut-quiz-feedback.is-err {
+    background: rgba(239, 68, 68, 0.12);
+    color: #991b1b;
+  }
+
+  html[data-theme="dark"] .tut-quiz-feedback.is-ok {
+    color: #6ee7b7;
+  }
+
+  html[data-theme="dark"] .tut-quiz-feedback.is-err {
+    color: #fca5a5;
+  }
+
+  /* Chapter Prev / Complete / Next Footer */
+  .tut-footer-nav {
+    margin-top: 1.75rem;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-alt);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .tut-footer-nav a.btn-primary,
+  .tut-footer-nav a.btn-primary:hover,
+  .tut-footer-nav .btn-primary {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .tut-footer-nav a.btn-outline,
+  .tut-footer-nav a.btn-outline:hover {
+    color: var(--text-main);
+    text-decoration: none;
+  }
+
+  .tut-footer-left {
+    justify-self: start;
+  }
+
+  .tut-footer-center {
+    justify-self: center;
+  }
+
+  .tut-footer-right {
+    justify-self: end;
+  }
+
+  .tut-complete-btn.is-completed {
+    background: #10b981;
+    border-color: #10b981;
+    color: #ffffff;
+  }
+
+  @media (max-width: 860px) {
+    .tut-cy-split {
+      grid-template-columns: 1fr;
+    }
+
+    .tut-cy-canvas,
+    .capstone-cy-canvas {
+      height: 320px;
+    }
+
+    .tut-footer-nav {
+      grid-template-columns: 1fr;
+      justify-items: stretch;
+    }
+
+    .tut-footer-left,
+    .tut-footer-center,
+    .tut-footer-right {
+      justify-self: stretch;
+    }
+
+    .tut-nav-btn,
+    .tut-complete-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .doc-tutorial-back-btn {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.45rem;
     }
   }
 }

@@ -1,0 +1,334 @@
+<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main">
+  <div class="CTopic" id="MainTopic">
+    <div class="tut-chapter-kicker">
+      <span class="tut-part-badge">{{ chapter.part_title }}</span>
+      <span class="tut-step-counter">Chapter {{ chapter.num }} of {{ total_chapters }}</span>
+      <span class="tut-completion-pill" id="tut-completion-pill" data-chapter-slug="{{ chapter.slug }}">Not completed</span>
+    </div>
+    <h1 class="CTitle"><a name="{{ chapter.title }}">{{ chapter.title }}</a></h1>
+    <div class="CBody">
+      <p class="example-summary-desc">{{ chapter.summary }}</p>
+
+      {% if chapter.objectives %}
+      <div class="tut-objectives-card">
+        <div class="tut-objectives-header">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4"></path>
+            <path d="M12 8h.01"></path>
+          </svg>
+          <span>Learning Objectives</span>
+        </div>
+        <ul class="tut-objectives-list">
+          {% for obj in chapter.objectives %}
+          <li>{{ obj }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <div class="example-api-pills">
+        <span class="api-label">Key UVM APIs:</span>
+        {% for api in chapter.apis %}
+        <a href="#" class="api-pill clickable-uvm-sym" data-sym="{{ api }}">{{ api }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Course Theory & Diagrams -->
+<div class="CGroup" id="doc-nav-course" data-doc-topic="doc-nav-course" data-anchor="CourseGuide">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="CourseGuide">Core Concepts &amp; Walkthrough</a></h2>
+    <div class="CBody tut-prose">
+      {{ prose_html | safe }}
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Conceptual / Architecture Diagram (Cytoscape.js) -->
+{% if chapter.interactive_widget == 'vcycle' %}
+<div class="CGroup" id="doc-nav-vcycle" data-doc-topic="doc-nav-vcycle" data-anchor="InteractiveVCycle">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="InteractiveVCycle">Interactive V-Cycle &amp; Role Explorer</a></h2>
+    <div class="CBody">
+      <div class="tut-interactive-panel">
+        <div class="tut-toolbar-row">
+          <div class="tut-role-filters" role="group" aria-label="Filter by team role">
+            <button type="button" class="tut-filter-btn active" data-role="all" title="Show all roles">All</button>
+            <button type="button" class="tut-filter-btn" data-role="architect" title="System Architect">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline></svg>
+              <span>Architect</span>
+            </button>
+            <button type="button" class="tut-filter-btn" data-role="designer" title="RTL Designer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+              <span>Designer</span>
+            </button>
+            <button type="button" class="tut-filter-btn" data-role="verifier" title="Verification Engineer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+              <span>Verifier</span>
+            </button>
+          </div>
+          <div class="tut-graph-actions">
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="tut-cy-fullscreen" title="Toggle Fullscreen Overlay">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+              <span>Fullscreen</span>
+            </button>
+          </div>
+        </div>
+        <div class="tut-cy-split">
+          <div class="tut-cy-stage">
+            <div id="tut-cy-graph" class="tut-cy-canvas" aria-label="Interactive V-Cycle diagram"></div>
+            <button type="button" class="btn btn-xs btn-outline tut-insp-toggle-btn" id="tut-insp-toggle" aria-expanded="true" aria-label="Hide Inspector" title="Hide Inspector">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line><polyline points="10 9 13 12 10 15"></polyline></svg>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn tut-cy-fit-btn" id="tut-cy-fit" title="Fit diagram to view">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+              <span>Fit</span>
+            </button>
+          </div>
+          <aside class="tut-cy-inspector" id="tut-cy-inspector">
+            <div class="tut-insp-badge" id="tut-insp-role">Select a stage</div>
+            <div class="tut-insp-body" id="tut-insp-body">
+              <h3 id="tut-insp-title">Click any V-Cycle node</h3>
+              <p id="tut-insp-desc">Click any stage on the left to inspect its owner, primary deliverables, handoff contract, and associated UVM documentation.</p>
+              <div class="tut-insp-meta" id="tut-insp-extra"></div>
+              <div class="tut-insp-actions" id="tut-insp-actions"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% elif chapter.interactive_widget == 'scm_matrix' %}
+<div class="CGroup" id="doc-nav-scm" data-doc-topic="doc-nav-scm" data-anchor="StimuliChecksMetrics">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="StimuliChecksMetrics">Interactive Stimuli / Checks / Metrics Matrix</a></h2>
+    <div class="CBody">
+      <div class="tut-scm-tabs" role="tablist" aria-label="Verification pillars">
+        <button type="button" class="tut-scm-tab active" data-pillar="stimuli" role="tab" aria-selected="true">1. Stimuli Pillar</button>
+        <button type="button" class="tut-scm-tab" data-pillar="checks" role="tab" aria-selected="false">2. Checks Pillar</button>
+        <button type="button" class="tut-scm-tab" data-pillar="metrics" role="tab" aria-selected="false">3. Metrics Pillar</button>
+        <button type="button" class="tut-scm-tab" data-pillar="antipattern" role="tab" aria-selected="false">Anti-Pattern Simulator</button>
+      </div>
+      <div class="tut-scm-card" id="tut-scm-detail"></div>
+    </div>
+  </div>
+</div>
+{% elif chapter.interactive_widget == 'arch_diff' %}
+<div class="CGroup" id="doc-nav-arch" data-doc-topic="doc-nav-arch" data-anchor="Architecture">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="Architecture">Interactive Testbench Architecture (Ch. {{ chapter.num }})</a></h2>
+    <div class="CBody">
+      <div class="tut-interactive-panel">
+        <div class="tut-toolbar-row">
+          <div class="tut-legend">
+            <span class="tut-leg-item"><span class="tut-dot tut-dot-new"></span> Added / Updated in Ch. {{ chapter.num }}</span>
+            <span class="tut-leg-item"><span class="tut-dot tut-dot-base"></span> Inherited Foundation</span>
+          </div>
+          <div class="tut-graph-actions">
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="tut-cy-fullscreen" title="Toggle Fullscreen Overlay">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+              <span>Fullscreen</span>
+            </button>
+          </div>
+        </div>
+        <div class="tut-cy-split">
+          <div class="tut-cy-stage">
+            <div id="tut-cy-graph" class="tut-cy-canvas" aria-label="Progressive testbench diagram"></div>
+            <button type="button" class="btn btn-xs btn-outline tut-insp-toggle-btn" id="tut-insp-toggle" aria-expanded="true" aria-label="Hide Inspector" title="Hide Inspector">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line><polyline points="10 9 13 12 10 15"></polyline></svg>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn tut-cy-fit-btn" id="tut-cy-fit" title="Fit diagram to view">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+              <span>Fit</span>
+            </button>
+          </div>
+          <aside class="tut-cy-inspector" id="tut-cy-inspector">
+            <div class="tut-insp-badge" id="tut-insp-role">Architecture Inspector</div>
+            <div class="tut-insp-body" id="tut-insp-body">
+              <h3 id="tut-insp-title">Click any testbench block</h3>
+              <p id="tut-insp-desc">Click any component node in the diagram to inspect its ports, jump to its SystemVerilog tab in the Code Studio below, or open its UVM 1.2 reference manual.</p>
+              <div class="tut-insp-meta" id="tut-insp-extra"></div>
+              <div class="tut-insp-actions" id="tut-insp-actions"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% elif chapter.interactive_widget == 'capstone' %}
+<div class="CGroup" id="doc-nav-capstone" data-doc-topic="doc-nav-capstone" data-anchor="CapstoneExplorer">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="CapstoneExplorer">4-in-1 Dynamic Verification Environment Explorer</a></h2>
+    <div class="CBody">
+      <div class="capstone-explorer" id="capstone-explorer">
+        <!-- Progressive Layer Build-Up Slider -->
+        <div class="capstone-slider-bar">
+          <div class="capstone-slider-head">
+            <div class="capstone-slider-title">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              <span>Progressive Build-Up Replay:</span>
+              <strong id="capstone-layer-label">Ch.13: Complete Unified Environment</strong>
+            </div>
+            <div class="capstone-slider-actions">
+              <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="capstone-layer-reset" title="Show all layers through Ch.13">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline></svg>
+                <span>Full</span>
+              </button>
+              <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="tut-cy-fullscreen" title="Toggle Fullscreen Overlay">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                <span>Fullscreen</span>
+              </button>
+            </div>
+          </div>
+          <div class="capstone-slider-controls">
+            <span class="capstone-range-bound">Ch.03</span>
+            <input type="range" id="tut-layer-slider" min="3" max="13" value="13" step="1" aria-label="Replay testbench layers from Chapter 3 to Chapter 13">
+            <span class="capstone-range-bound">Ch.13</span>
+          </div>
+          <div class="capstone-layer-pills" id="capstone-layer-pills"></div>
+        </div>
+
+        <!-- Interactive Compound Graph + Component Back-Link Inspector -->
+        <div class="tut-cy-split capstone-cy-split">
+          <div class="tut-cy-stage">
+            <div id="tut-cy-graph" class="tut-cy-canvas capstone-cy-canvas" aria-label="Complete dynamic UVM testbench map"></div>
+            <button type="button" class="btn btn-xs btn-outline tut-insp-toggle-btn" id="tut-insp-toggle" aria-expanded="true" aria-label="Hide Inspector" title="Hide Inspector">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="15" x2="21" y2="15"></line><polyline points="9 10 12 13 15 10"></polyline></svg>
+            </button>
+            <button type="button" class="btn btn-xs btn-outline tut-icon-btn tut-cy-fit-btn" id="tut-cy-fit" title="Fit diagram to view">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+              <span>Fit</span>
+            </button>
+          </div>
+          <aside class="tut-cy-inspector capstone-inspector" id="tut-cy-inspector">
+            <div class="tut-insp-badge" id="tut-insp-role">Dynamic Inspector</div>
+            <div class="tut-insp-body" id="tut-insp-body">
+              <h3 id="tut-insp-title">Click any component block</h3>
+              <p id="tut-insp-desc">Select any node on the architecture map to highlight its TLM &amp; pin connections, inspect its ports, jump back to the tutorial chapter that built it, or open its SystemVerilog/C implementation and UVM reference doc.</p>
+              <div class="tut-insp-meta" id="tut-insp-extra"></div>
+              <div class="tut-insp-actions" id="tut-insp-actions"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Unified Diff Viewer vs. Previous Chapter (diff2html) -->
+{% if diff_text %}
+<div class="CGroup" id="doc-nav-diff" data-doc-topic="doc-nav-diff" data-anchor="ChapterDiff">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="ChapterDiff">Incremental Changes (Ch. {{ chapter.num - 1 }} &rarr; Ch. {{ chapter.num }})</a></h2>
+    <div class="CBody">
+      <div class="tut-diff-toolbar">
+        <span class="tut-diff-summary">{{ diff_summary }}</span>
+        <div class="tut-diff-controls">
+          <button type="button" class="btn btn-xs btn-outline tut-icon-btn active" data-diff-format="line-by-line" title="Unified Diff">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            <span>Unified</span>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline tut-icon-btn" data-diff-format="side-by-side" title="Side-by-Side Diff">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>
+            <span>Split</span>
+          </button>
+          <button type="button" class="btn btn-xs btn-outline tut-icon-btn" id="tut-toggle-diff-panel" title="Show or hide modified files list">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>Files</span>
+          </button>
+        </div>
+      </div>
+      <div id="tut-diff-container" class="tut-diff-container"></div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Multi-File Code Studio -->
+{% if studio_html %}
+{{ studio_html | safe }}
+{% endif %}
+
+<!-- Simulation Output Console -->
+{% if sim_html %}
+{{ sim_html | safe }}
+{% endif %}
+
+<!-- Interactive Visual Flow Stepper -->
+{% if stepper_html %}
+{{ stepper_html | safe }}
+{% endif %}
+
+<!-- Associated UVM 1.2 Docs & Examples -->
+<div class="CGroup" id="doc-nav-links" data-doc-topic="doc-nav-links" data-anchor="RelatedDocs">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="RelatedDocs">Associated UVM 1.2 Docs &amp; Interactive Examples</a></h2>
+    <div class="CBody">
+      <div class="tut-refs-grid">
+        {% for doc in chapter.docs_links %}
+        <a href="{{ root_rel }}{{ doc.url }}" class="tut-ref-card tut-ref-doc" data-doc-href="{{ doc.url }}">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">{{ doc.label }}</span>
+            <span class="tut-ref-badge">UVM Doc</span>
+          </div>
+          {% if doc.desc %}<p class="tut-ref-desc">{{ doc.desc }}</p>{% endif %}
+        </a>
+        {% endfor %}
+        {% for ex in chapter.example_links %}
+        <a href="{{ root_rel }}{{ ex.url }}" class="tut-ref-card tut-ref-ex example-callout-link" data-example-url="{{ ex.url }}">
+          <div class="tut-ref-top">
+            <span class="tut-ref-title">{{ ex.label }}</span>
+            <span class="tut-ref-badge tut-ref-badge-ex">Accellera Studio</span>
+          </div>
+          {% if ex.desc %}<p class="tut-ref-desc">{{ ex.desc }}</p>{% endif %}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Self-Check Knowledge Quiz -->
+{% if chapter.quizzes %}
+<div class="CGroup" id="doc-nav-quiz" data-doc-topic="doc-nav-quiz" data-anchor="SelfCheck">
+  <div class="CTopic">
+    <h2 class="CTitle"><a name="SelfCheck">Self-Check Knowledge Quiz</a></h2>
+    <div class="CBody">
+      <div class="tut-quiz-container" id="tut-quiz-container" data-chapter-slug="{{ chapter.slug }}"></div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Chapter Completion & Prev / Next Navigation Footer -->
+<div class="tut-footer-nav" id="tut-footer-nav">
+  <div class="tut-footer-left">
+    {% if prev_chapter %}
+    <a href="{{ root_rel }}{{ prev_chapter.href }}" class="btn btn-outline tut-nav-btn tutorial-link" data-tutorial-href="{{ prev_chapter.href }}">
+      &larr; Ch. {{ prev_chapter.num }}: {{ prev_chapter.short_title }}
+    </a>
+    {% endif %}
+  </div>
+  <div class="tut-footer-center">
+    <button type="button" class="btn btn-primary tut-complete-btn" id="tut-mark-complete-btn" data-chapter-slug="{{ chapter.slug }}">
+      Mark Chapter {{ chapter.num }} Complete
+    </button>
+  </div>
+  <div class="tut-footer-right">
+    {% if next_chapter %}
+    <a href="{{ root_rel }}{{ next_chapter.href }}" class="btn btn-primary tut-nav-btn tutorial-link" data-tutorial-href="{{ next_chapter.href }}">
+      Ch. {{ next_chapter.num }}: {{ next_chapter.short_title }} &rarr;
+    </a>
+    {% endif %}
+  </div>
+</div>

@@ -3094,19 +3094,34 @@ window.PageCommon = (function () {
       .replace(/"/g, '&quot;');
   }
 
+  function getCurrentTutorialContext() {
+    try {
+      const p = window.location.pathname.replace(/\\/g, '/');
+      const m = p.match(/(tutorial_view\/[^/]+\.html)$/);
+      if (m) {
+        return { url: m[1], title: document.title.split('|')[0].trim() };
+      }
+    } catch (e) { }
+    return null;
+  }
+
   function dispatchOpenDoc(docUrl, symbol, ownerClass) {
+    const fromTut = getCurrentTutorialContext();
     if (window.parent && window.parent !== window) {
-      try {
-        if (window.parent.openDocView) {
-          window.parent.openDocView(docUrl || undefined, symbol, ownerClass || undefined);
-          return;
-        }
-      } catch (err) { }
+      if (!fromTut) {
+        try {
+          if (window.parent.openDocView) {
+            window.parent.openDocView(docUrl || undefined, symbol, ownerClass || undefined);
+            return;
+          }
+        } catch (err) { }
+      }
       window.parent.postMessage({
         type: 'openDocView',
         symbol: symbol,
         ownerClass: ownerClass || undefined,
-        url: docUrl || undefined
+        url: docUrl || undefined,
+        fromTutorial: fromTut || undefined
       }, '*');
       return;
     }
@@ -3459,14 +3474,29 @@ window.PageCommon = (function () {
         e.preventDefault();
         const exTarget = link.getAttribute('data-example-url') || link.getAttribute('href');
         const targetHref = new URL(exTarget, window.location.href).href;
+        const fromTut = getCurrentTutorialContext();
         if (window.parent && window.parent !== window) {
-          window.parent.postMessage({ type: 'openExampleView', url: targetHref }, '*');
+          window.parent.postMessage({ type: 'openExampleView', url: targetHref, fromTutorial: fromTut || undefined }, '*');
+          return;
         }
         try {
           if (window.parent && window.parent.openExampleView) {
             window.parent.openExampleView(targetHref);
           }
         } catch (err) { }
+        return;
+      }
+
+      // 2b. Tutorial Links
+      const tutHrefAttr = link.getAttribute('data-tutorial-href');
+      if (tutHrefAttr || link.classList.contains('tutorial-link') || href.includes('tutorial_view/')) {
+        e.preventDefault();
+        const relTut = tutHrefAttr || (href.match(/(tutorial_view\/.*)$/) ? href.match(/(tutorial_view\/.*)$/)[1] : '');
+        if (relTut && window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'openTutorialView', url: relTut }, '*');
+        } else {
+          window.location.href = new URL(href, window.location.href).href;
+        }
         return;
       }
 
@@ -3505,6 +3535,18 @@ window.PageCommon = (function () {
       // 4. Breadcrumb Navigation
       if (link.classList.contains('doc-breadcrumb-link')) {
         e.preventDefault();
+        const rawHref = link.getAttribute('href') || '';
+        if (rawHref.includes('#/tutorial')) {
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: 'switchSidebarTab', tab: 'tutorial' }, '*');
+            return;
+          }
+        } else if (rawHref.includes('#/examples')) {
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: 'switchSidebarTab', tab: 'examples' }, '*');
+            return;
+          }
+        }
         const docHref = link.getAttribute('data-doc-href') || 'docs_view/overviews/intro-txt.html';
         const cleanHashDoc = docHref.replace(/^docs_view\//, '');
         if (window.parent && window.parent !== window) {
@@ -3523,27 +3565,33 @@ window.PageCommon = (function () {
     try {
       if (window.self === window.top) {
         const isExample = window.location.pathname.includes('examples_view/');
+        const isTutorial = window.location.pathname.includes('tutorial_view/');
         const isSrc = window.location.pathname.includes('src_view/');
-        const match = window.location.pathname.match(/(?:docs_view|examples_view|src_view)\/(.*)$/);
+        const match = window.location.pathname.match(/(?:docs_view|examples_view|tutorial_view|src_view)\/(.*)$/);
         if (match) {
           const relPath = match[1];
           const depth = relPath.split('/').length;
           const rootRel = '../'.repeat(depth + 1);
-          const routePrefix = isExample ? '#/example/' : (isSrc ? '#/src/' : '#/doc/');
+          const routePrefix = isExample ? '#/example/' : (isTutorial ? '#/tutorial/' : (isSrc ? '#/src/' : '#/doc/'));
           window.location.replace(rootRel + 'index.html' + routePrefix + relPath + window.location.hash);
         }
       }
     } catch (e) { }
 
-    // Notify parent when document/example/source is loaded
+    // Notify parent when document/example/tutorial/source is loaded
     try {
       if (window.parent && window.parent !== window) {
         const isExample = window.location.pathname.includes('examples_view/');
+        const isTutorial = window.location.pathname.includes('tutorial_view/');
         const isSrc = window.location.pathname.includes('src_view/');
         if (isExample) {
           const match = window.location.pathname.match(/(examples_view\/.*)$/);
           const exRel = match ? (match[1] + (window.location.hash || '')) : '';
           window.parent.postMessage({ type: 'exampleNavigated', url: exRel, title: document.title }, '*');
+        } else if (isTutorial) {
+          const match = window.location.pathname.match(/(tutorial_view\/.*)$/);
+          const tutRel = match ? (match[1] + (window.location.hash || '')) : '';
+          window.parent.postMessage({ type: 'tutorialNavigated', url: tutRel, title: document.title }, '*');
         } else if (isSrc) {
           const match = window.location.pathname.match(/(src_view\/.*)$/);
           const srcRel = match ? (match[1] + (window.location.hash || '')) : '';
@@ -3561,19 +3609,57 @@ window.PageCommon = (function () {
   // Media Lightbox & Code Blocks
   // =========================================================================
 
+  function serializeSvgToDataUrl(svgEl) {
+    if (!svgEl) return '';
+    const clone = svgEl.cloneNode(true);
+    if (!clone.getAttribute('xmlns')) {
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    }
+    const rect = svgEl.getBoundingClientRect();
+    const curW = clone.getAttribute('width');
+    const curH = clone.getAttribute('height');
+    const wNum = (!curW || curW.includes('%')) ? Math.round(rect.width) : parseFloat(curW);
+    const hNum = (!curH || curH.includes('%')) ? Math.round(rect.height) : parseFloat(curH);
+    if ((!curW || curW.includes('%')) && rect.width > 0) {
+      clone.setAttribute('width', String(wNum));
+    }
+    if ((!curH || curH.includes('%')) && rect.height > 0) {
+      clone.setAttribute('height', String(hNum));
+    }
+    if (!clone.getAttribute('viewBox') && wNum > 0 && hNum > 0) {
+      clone.setAttribute('viewBox', `0 0 ${wNum} ${hNum}`);
+    }
+    clone.style.maxWidth = 'none';
+    const xml = new XMLSerializer().serializeToString(clone);
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+  }
+
   function initDiagramZoom() {
     document.addEventListener('click', function (e) {
-      const zoomBtn = e.target.closest('.doc-img-zoom-btn');
+      const zoomBtn = e.target.closest('.doc-img-zoom-btn, .tut-svg-zoom-btn');
       const img = e.target.closest('.doc-diagram-img');
-      if (zoomBtn || img) {
+      const svgEl = e.target.closest('.tut-mermaid-wrap svg, .doc-diagram-card svg');
+      if (zoomBtn || img || svgEl) {
         e.preventDefault();
         e.stopPropagation();
-        const card = (zoomBtn || img).closest('.doc-diagram-card');
+        const card = (zoomBtn || img || svgEl).closest('.doc-diagram-card, .tut-mermaid-wrap');
         const targetImg = card ? card.querySelector('.doc-diagram-img') : img;
-        if (targetImg) {
+        const targetSvg = card ? card.querySelector('svg:not(.zoom-icon)') : svgEl;
+        let fullSrc = '';
+        let title = 'UVM Diagram';
+
+        if (targetImg && targetImg.src) {
+          fullSrc = targetImg.src;
           const titleEl = card ? card.querySelector('.doc-diagram-caption, .doc-diagram-label span') : null;
-          const title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'UVM Diagram');
-          const fullSrc = targetImg.src;
+          title = titleEl ? titleEl.textContent.trim() : (targetImg.alt || 'UVM Diagram');
+        } else if (targetSvg) {
+          fullSrc = serializeSvgToDataUrl(targetSvg);
+          const topic = targetSvg.closest('.CTopic');
+          const headingEl = topic ? topic.querySelector('.CTitle') : null;
+          title = (targetSvg.getAttribute('aria-label') || (headingEl ? headingEl.textContent.trim() : '') || 'Diagram');
+        }
+
+        if (fullSrc) {
           if (window.parent && window.parent !== window) {
             window.parent.postMessage({ type: 'openImageModal', src: fullSrc, title: title }, '*');
           } else {

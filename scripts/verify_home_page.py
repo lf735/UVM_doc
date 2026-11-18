@@ -34,9 +34,15 @@ def test_home_links_resolve() -> None:
         assert (BASE_DIR / clean).is_file(), f"Broken data-example link in home.html: {target}"
 
     tab_targets = re.findall(r'data-tab="([^"]+)"', home_html)
-    assert set(["docs", "source", "examples", "hierarchy", "index"]).issubset(set(tab_targets)), (
+    assert set(["docs", "source", "examples", "tutorial", "hierarchy", "index"]).issubset(set(tab_targets)), (
         f"Missing workspace tab buttons in home.html: {tab_targets}"
     )
+
+    tut_targets = re.findall(r'data-tutorial="([^"]+)"', home_html)
+    assert len(tut_targets) >= 4, f"Expected >= 4 data-tutorial targets in home.html, found {len(tut_targets)}"
+    for target in tut_targets:
+        clean = target.split("#")[0]
+        assert (BASE_DIR / clean).is_file(), f"Broken data-tutorial link in home.html: {target}"
 
 
 def test_shell_and_routing_integration() -> None:

@@ -177,6 +177,15 @@
           </svg>
           <span class="tab-label">Examples</span>
         </button>
+        <button class="sidebar-tab-btn" data-tab="tutorial" role="tab" aria-selected="false"
+          title="Step-by-Step UVM 1.2 Tutorial">
+          <svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+          </svg>
+          <span class="tab-label">Tutorial</span>
+        </button>
         <button class="sidebar-tab-btn" data-tab="hierarchy" role="tab" aria-selected="false"
           title="Class Hierarchy Tree">
           <svg class="tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -263,6 +272,10 @@
             <span id="doc-pane-title">Reference Documentation</span>
           </div>
             <div class="pane-header-actions">
+              <button class="btn btn-xs btn-outline doc-tutorial-back-btn" id="doc-tutorial-back-btn"
+                title="Return to Tutorial Chapter" style="display:none;">
+                &larr; Back to Tutorial
+              </button>
               <button class="icon-btn" id="doc-bookmark-btn" title="Pin this page to Home" aria-pressed="false"
                 style="display:none;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -377,6 +390,7 @@
         <button class="filter-pill" data-type="port">Ports</button>
         <button class="filter-pill" data-type="file">Source Files</button>
         <button class="filter-pill" data-type="example">Examples</button>
+        <button class="filter-pill" data-type="tutorial">Tutorial</button>
         <span class="filter-pills-sep" id="modal-filter-diff-sep"
           style="display:none; width:1px; height:18px; background:var(--border-color); margin:0 0.25rem;"></span>
         <button class="filter-pill filter-pill-diff" id="pill-diff-beginner" data-type="beginner"
