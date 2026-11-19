@@ -51,16 +51,13 @@ def test_css_shell_scroll_isolation():
         for prop in props:
             assert prop in body, f"Missing '{prop}' in CSS rule for {selector}"
 
-    # 2. Mobile (@media (max-width: 860px)) header pinning & view-switcher hiding
+    # 2. Mobile (@media (max-width: 860px)) header pinning
     mobile_css = extract_media_block(content, "@media (max-width: 860px)")
     assert "body#app-container" in mobile_css, "Missing mobile body#app-container rule"
     assert "position: fixed;" in mobile_css, "Mobile shell/header must use position: fixed"
     assert "padding-top: var(--header-height);" in mobile_css, "Mobile body#app-container must reserve header height"
     assert re.search(r"\.app-header\s*\{[^}]*position:\s*fixed;[^}]*top:\s*0;", mobile_css), (
         "Mobile .app-header must be fixed at top: 0"
-    )
-    assert re.search(r"\.view-switcher\s*\{[^}]*display:\s*none;", mobile_css), (
-        "Mobile .view-switcher must be hidden (display: none)"
     )
     assert "html:not(.src-page):not(:has(> body#app-container))" in mobile_css, (
         "Mobile overflow-x: hidden rule must exclude app shell and src-page"

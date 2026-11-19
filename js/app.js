@@ -317,58 +317,47 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
 
 
-  const viewBtns = document.querySelectorAll('.view-btn');
-  viewBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const mode = btn.getAttribute('data-mode');
-      if (mode === 'split') {
-        if (currentMode === 'docs') {
-          if (currentDocUrl.includes('examples_view/')) {
-            // Auto pair example with corresponding UVM source code
-            const exClean = currentDocUrl.replace(/^examples_view\//, '');
-            if (typeof UVM_DATA !== 'undefined' && UVM_DATA.exampleToSrc && UVM_DATA.exampleToSrc[exClean]) {
-              const pairedSrc = UVM_DATA.exampleToSrc[exClean];
-              currentSrcUrl = pairedSrc;
-              setFrameSrc(srcFrame, pairedSrc);
-              updateSrcTitle(pairedSrc);
-            }
-          } else if (currentDocUrl.includes('tutorial_view/')) {
-            // Auto pair tutorial chapter with its primary SystemVerilog file
-            const tutClean = currentDocUrl.replace(/^tutorial_view\//, '').split('#')[0];
-            if (typeof UVM_DATA !== 'undefined' && UVM_DATA.tutorialToSrc && UVM_DATA.tutorialToSrc[tutClean]) {
-              const pairedSrc = UVM_DATA.tutorialToSrc[tutClean];
-              currentSrcUrl = pairedSrc;
-              setFrameSrc(srcFrame, pairedSrc);
-              updateSrcTitle(pairedSrc);
-            }
-          } else {
-            // Auto pair with corresponding source code if available
-            const docClean = currentDocUrl.replace(/^docs_view\//, '');
-            if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
-              const pairedSrc = UVM_DATA.docToSrc[docClean];
-              currentSrcUrl = pairedSrc;
-              setFrameSrc(srcFrame, pairedSrc);
-              updateSrcTitle(pairedSrc);
-            }
-          }
-        } else if (currentMode === 'source') {
-          // Auto pair with corresponding doc if available
-          const srcClean = currentSrcUrl.replace(/^src_view\//, '').split('#')[0];
-          if (typeof UVM_DATA !== 'undefined' && UVM_DATA.srcToDoc && UVM_DATA.srcToDoc[srcClean]) {
-            const pairedDoc = UVM_DATA.srcToDoc[srcClean];
-            currentDocUrl = pairedDoc;
-            setFrameSrc(docFrame, pairedDoc);
-            updateDocTitle(pairedDoc);
-          }
+  function autoPairSplitPane() {
+    if (currentMode === 'docs') {
+      if (currentDocUrl.includes('examples_view/')) {
+        // Auto pair example with corresponding UVM source code
+        const exClean = currentDocUrl.replace(/^examples_view\//, '');
+        if (typeof UVM_DATA !== 'undefined' && UVM_DATA.exampleToSrc && UVM_DATA.exampleToSrc[exClean]) {
+          const pairedSrc = UVM_DATA.exampleToSrc[exClean];
+          currentSrcUrl = pairedSrc;
+          setFrameSrc(srcFrame, pairedSrc);
+          updateSrcTitle(pairedSrc);
         }
-      } else if (mode === 'source') {
-        switchSidebarTab('source');
-      } else if (mode === 'docs') {
-        switchSidebarTab('docs');
+      } else if (currentDocUrl.includes('tutorial_view/')) {
+        // Auto pair tutorial chapter with its primary SystemVerilog file
+        const tutClean = currentDocUrl.replace(/^tutorial_view\//, '').split('#')[0];
+        if (typeof UVM_DATA !== 'undefined' && UVM_DATA.tutorialToSrc && UVM_DATA.tutorialToSrc[tutClean]) {
+          const pairedSrc = UVM_DATA.tutorialToSrc[tutClean];
+          currentSrcUrl = pairedSrc;
+          setFrameSrc(srcFrame, pairedSrc);
+          updateSrcTitle(pairedSrc);
+        }
+      } else {
+        // Auto pair with corresponding source code if available
+        const docClean = currentDocUrl.replace(/^docs_view\//, '');
+        if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
+          const pairedSrc = UVM_DATA.docToSrc[docClean];
+          currentSrcUrl = pairedSrc;
+          setFrameSrc(srcFrame, pairedSrc);
+          updateSrcTitle(pairedSrc);
+        }
       }
-      setViewMode(mode, true);
-    });
-  });
+    } else if (currentMode === 'source') {
+      // Auto pair with corresponding doc if available
+      const srcClean = currentSrcUrl.replace(/^src_view\//, '').split('#')[0];
+      if (typeof UVM_DATA !== 'undefined' && UVM_DATA.srcToDoc && UVM_DATA.srcToDoc[srcClean]) {
+        const pairedDoc = UVM_DATA.srcToDoc[srcClean];
+        currentDocUrl = pairedDoc;
+        setFrameSrc(docFrame, pairedDoc);
+        updateDocTitle(pairedDoc);
+      }
+    }
+  }
 
   function switchSidebarTab(tabName) {
     if (activeSidebarTab === tabName) return;
@@ -405,10 +394,6 @@ document.addEventListener('DOMContentLoaded', () => {
     currentMode = mode;
     appContainer.classList.remove('mode-docs', 'mode-source', 'mode-split');
     appContainer.classList.add(`mode-${mode}`);
-
-    viewBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
-    });
 
     updatePaneExpandButtons(mode);
     updateBookmarkButtonState();
@@ -2542,7 +2527,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.innerWidth <= 860) {
         setViewMode('source', true);
       } else {
-        setViewMode(currentMode === 'docs' ? 'split' : 'docs', true);
+        const nextMode = currentMode === 'docs' ? 'split' : 'docs';
+        if (nextMode === 'split') autoPairSplitPane();
+        setViewMode(nextMode, true);
       }
     });
   }
@@ -2552,7 +2539,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.innerWidth <= 860) {
         setViewMode('docs', true);
       } else {
-        setViewMode(currentMode === 'source' ? 'split' : 'source', true);
+        const nextMode = currentMode === 'source' ? 'split' : 'source';
+        if (nextMode === 'split') autoPairSplitPane();
+        setViewMode(nextMode, true);
       }
     });
   }
