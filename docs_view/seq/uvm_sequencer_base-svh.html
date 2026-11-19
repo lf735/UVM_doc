@@ -278,63 +278,35 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Start the default sequence for this phase, if any.&nbsp; The default sequence is configured via resources using either a sequence instance or sequence type (object wrapper).&nbsp; If both are used, the sequence instance takes precedence.&nbsp; When attempting to override a previous default sequence setting, you must override both the instance and type (wrapper) resources, else your override may not take effect.</p><p>When setting the resource using <i>set</i>, the 1st argument specifies the context pointer, usually <i>this</i> for components or <i>null</i> when executed from outside the component hierarchy (i.e. in module).&nbsp; The 2nd argument is the instance string, which is a path name to the target sequencer, relative to the context pointer.&nbsp;  The path must include the name of the phase with a &ldquo;_phase&rdquo; suffix.&nbsp; The 3rd argument is the resource name, which is &ldquo;default_sequence&rdquo;.&nbsp; The 4th argument is either an object wrapper for the sequence type, or an instance of a sequence.</p><p>Configuration by instances allows pre-initialization, setting rand_mode, use of inline constraints, etc.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Start the default sequence for this phase, if any.&nbsp; The default sequence is configured via resources using either a sequence instance or sequence type (object wrapper).&nbsp; If both are used, the sequence instance takes precedence.&nbsp; When attempting to override a previous default sequence setting, you must override both the instance and type (wrapper) resources, else your override may not take effect.</p><p>When setting the resource using <i>set</i>, the 1st argument specifies the context pointer, usually <i>this</i> for components or <i>null</i> when executed from outside the component hierarchy (i.e. in module).&nbsp; The 2nd argument is the instance string, which is a path name to the target sequencer, relative to the context pointer.&nbsp;  The path must include the name of the phase with a &ldquo;_phase&rdquo; suffix.&nbsp; The 3rd argument is the resource name, which is &ldquo;default_sequence&rdquo;.&nbsp; The 4th argument is either an object wrapper for the sequence type, or an instance of a sequence.</p><p>Configuration by instances allows pre-initialization, setting rand_mode, use of inline constraints, etc.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">myseq_t</span> <span class="sv-ident">myseq</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;myseq&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-ident">myseq</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span> <span class="sv-keyword-decl">with</span> <span class="sv-op">{</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-op">}</span><span class="sv-op">;</span>
 <span class="sv-uvm-type">uvm_config_db</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_sequence_base</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-constant">null</span><span class="sv-op">,</span> <span class="sv-string">&quot;top.agent.myseqr.main_phase&quot;</span><span class="sv-op">,</span>
                                         <span class="sv-string">&quot;default_sequence&quot;</span><span class="sv-op">,</span>
                                         <span class="sv-ident">myseq</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>Configuration by type is shorter and can be substituted via the factory.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>Configuration by type is shorter and can be substituted via the factory.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_config_db</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_object_wrapper</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-constant">null</span><span class="sv-op">,</span> <span class="sv-string">&quot;top.agent.myseqr.main_phase&quot;</span><span class="sv-op">,</span>
                                          <span class="sv-string">&quot;default_sequence&quot;</span><span class="sv-op">,</span>
                                          <span class="sv-ident">myseq_type</span><span class="sv-op">::</span><span class="sv-method">type_id</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>The uvm_resource_db can similarly be used.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>The uvm_resource_db can similarly be used.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">myseq_t</span> <span class="sv-ident">myseq</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;myseq&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-ident">myseq</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span> <span class="sv-keyword-decl">with</span> <span class="sv-op">{</span> <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span> <span class="sv-op">}</span><span class="sv-op">;</span>
 <span class="sv-uvm-type">uvm_resource_db</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_sequence_base</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-string">&quot;.myseqr.main_phase&quot;</span><span class="sv-op">,</span>
                                           <span class="sv-string">&quot;default_sequence&quot;</span><span class="sv-op">,</span>
                                           <span class="sv-ident">myseq</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_object_wrapper</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-string">&quot;.myseqr.main_phase&quot;</span><span class="sv-op">,</span>
                                            <span class="sv-string">&quot;default_sequence&quot;</span><span class="sv-op">,</span>
                                            <span class="sv-ident">myseq_t</span><span class="sv-op">::</span><span class="sv-method">type_id</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span>

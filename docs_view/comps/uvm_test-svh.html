@@ -43,29 +43,15 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_test"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_test" id="uvm_test" href="../../src_view/comps/uvm_test.svh.html#L62" class="src-code-link" data-src-file="comps/uvm_test.svh" data-src-line="62">uvm_test</a></h1><div class=CBody><p>This class is the virtual base class for the user-defined tests.</p><p>The uvm_test virtual class should be used as the base class for user-defined tests.&nbsp; Doing so provides the ability to select which test to execute using the UVM_TESTNAME command line or argument to the <a href="../base/uvm_root-svh.html#uvm_root.run_test" data-target-id="uvm_root.run_test" class=LMethod id=link8  >uvm_root::run_test</a> task.</p><p>For example</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>Command Line</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_test"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_test" id="uvm_test" href="../../src_view/comps/uvm_test.svh.html#L62" class="src-code-link" data-src-file="comps/uvm_test.svh" data-src-line="62">uvm_test</a></h1><div class=CBody><p>This class is the virtual base class for the user-defined tests.</p><p>The uvm_test virtual class should be used as the base class for user-defined tests.&nbsp; Doing so provides the ability to select which test to execute using the UVM_TESTNAME command line or argument to the <a href="../base/uvm_root-svh.html#uvm_root.run_test" data-target-id="uvm_root.run_test" class=LMethod id=link8  >uvm_root::run_test</a> task.</p><p>For example</p><div class="code-block-container" data-lang="Command Line">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">prompt</span><span class="sv-op">&gt;</span> <span class="sv-ident">SIM_COMMAND</span> <span class="sv-op">+</span><span class="sv-ident">UVM_TESTNAME</span><span class="sv-op">=</span><span class="sv-ident">test_bus_retry</span></code></pre>
-</div><p>The global run_test() task should be specified inside an initial block such as</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>The global run_test() task should be specified inside an initial block such as</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">initial</span> <span class="sv-method">run_test</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Multiple tests, identified by their type name, are compiled in and then selected for execution from the command line without need for recompilation.&nbsp; Random seed selection is also available on the command line.</p><p>If +UVM_TESTNAME=test_name is specified, then an object of type &lsquo;test_name&rsquo; is created by factory and phasing begins.&nbsp; Here, it is presumed that the test will instantiate the test environment, or the test environment will have already been instantiated before the call to run_test().</p><p>If the specified test_name cannot be created by the <a href="../base/uvm_factory-svh.html#uvm_factory" data-target-id="uvm_factory" class=LClass id=link9  >uvm_factory</a>, then a fatal error occurs.&nbsp; If run_test() is called without UVM_TESTNAME being specified, then all components constructed before the call to run_test will be cycled through their simulation phases.</p><p>Deriving from uvm_test will allow you to distinguish tests from other component types that inherit from uvm_component directly.&nbsp; Such tests will automatically inherit features that may be added to uvm_test in the future.</p>
 

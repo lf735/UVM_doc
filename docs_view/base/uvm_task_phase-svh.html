@@ -50,17 +50,10 @@
     <a href="../../examples_view/phasing/basic.html" class="example-callout-link" data-example-url="../../examples_view/phasing/basic.html" title="Open Phased Execution Lifecycle">Phased Execution Lifecycle</a>
   </div>
   <span class="example-callout-badge">Interactive Studio</span>
-</div><div class=CBody><p>Base class for all task phases.&nbsp; It forks a call to <a href="uvm_phase-svh.html#uvm_phase.exec_task" data-target-id="uvm_phase.exec_task" class=LMethod id=link9  >uvm_phase::exec_task()</a> for each component in the hierarchy.</p><p>The completion of the task does not imply, nor is it required for, the end of phase.&nbsp; Once the phase completes, any remaining forked <a href="uvm_phase-svh.html#uvm_phase.exec_task" data-target-id="uvm_phase.exec_task" class=LMethod id=link10  >uvm_phase::exec_task()</a> threads are forcibly and immediately killed.</p><p>By default, the way for a task phase to extend over time is if there is at least one component that raises an objection.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class=CBody><p>Base class for all task phases.&nbsp; It forks a call to <a href="uvm_phase-svh.html#uvm_phase.exec_task" data-target-id="uvm_phase.exec_task" class=LMethod id=link9  >uvm_phase::exec_task()</a> for each component in the hierarchy.</p><p>The completion of the task does not imply, nor is it required for, the end of phase.&nbsp; Once the phase completes, any remaining forked <a href="uvm_phase-svh.html#uvm_phase.exec_task" data-target-id="uvm_phase.exec_task" class=LMethod id=link10  >uvm_phase::exec_task()</a> threads are forcibly and immediately killed.</p><p>By default, the way for a task phase to extend over time is if there is at least one component that raises an objection.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_comp</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
    <span class="sv-keyword-decl">task</span> <span class="sv-method">main_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
       <span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">raise_objection</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span> <span class="sv-string">&quot;Applying stimulus&quot;</span><span class="sv-op">)</span>

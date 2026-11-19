@@ -65,17 +65,10 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_analysis_port"><div class="CTopic"><h2 class=CTitle><a name="uvm_analysis_port" id="uvm_analysis_port" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L56" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="56">uvm_analysis_port</a></h2><div class=CBody><p>Broadcasts a value to all subscribers implementing a <a href="#uvm_analysis_imp" data-target-id="uvm_analysis_imp" class=LClass id=link10  >uvm_analysis_imp</a>.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_analysis_port"><div class="CTopic"><h2 class=CTitle><a name="uvm_analysis_port" id="uvm_analysis_port" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L56" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="56">uvm_analysis_port</a></h2><div class=CBody><p>Broadcasts a value to all subscribers implementing a <a href="#uvm_analysis_imp" data-target-id="uvm_analysis_imp" class=LClass id=link10  >uvm_analysis_imp</a>.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mon</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-uvm-type">uvm_analysis_port</span><span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">)</span> <span class="sv-ident">ap</span><span class="sv-op">;</span>
 
@@ -196,17 +189,10 @@
   <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">function</span></span> <span class="sv-type"><span class="sv-type">string</span></span> <span class="sv-proto-name"><span class="sv-ident">get_type_name</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
   <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../src_view/tlm1/uvm_analysis_port.svh.html#L64" class="src-code-link undoc-src-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="64">see source code</a></span></span></p></div>
 </div>
-</div><div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_analysis_imp"><div class="CTopic"><h2 class=CTitle><a name="uvm_analysis_imp" id="uvm_analysis_imp" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L110" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="110">uvm_analysis_imp</a></h2><div class=CBody><p>Receives all transactions broadcasted by a <a href="#uvm_analysis_port" data-target-id="uvm_analysis_port" class=LClass id=link13  >uvm_analysis_port</a>.&nbsp; It serves as the termination point of an analysis port/export/imp connection.&nbsp; The component attached to the <i>imp</i> class--called a <i>subscriber</i>-- implements the analysis interface.</p><p>Will invoke the <i>write(T)</i> method in the parent component.&nbsp; The implementation of the <i>write(T)</i> method must not modify the value passed to it.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_analysis_imp"><div class="CTopic"><h2 class=CTitle><a name="uvm_analysis_imp" id="uvm_analysis_imp" href="../../src_view/tlm1/uvm_analysis_port.svh.html#L110" class="src-code-link" data-src-file="tlm1/uvm_analysis_port.svh" data-src-line="110">uvm_analysis_imp</a></h2><div class=CBody><p>Receives all transactions broadcasted by a <a href="#uvm_analysis_port" data-target-id="uvm_analysis_port" class=LClass id=link13  >uvm_analysis_port</a>.&nbsp; It serves as the termination point of an analysis port/export/imp connection.&nbsp; The component attached to the <i>imp</i> class--called a <i>subscriber</i>-- implements the analysis interface.</p><p>Will invoke the <i>write(T)</i> method in the parent component.&nbsp; The implementation of the <i>write(T)</i> method must not modify the value passed to it.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">sb</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-uvm-type">uvm_analysis_imp</span><span class="sv-op">#(</span><span class="sv-ident">trans</span><span class="sv-op">,</span> <span class="sv-ident">sb</span><span class="sv-op">)</span> <span class="sv-ident">ap</span><span class="sv-op">;</span>
 

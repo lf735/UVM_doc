@@ -59,17 +59,10 @@
     <span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_misc-svh.html#uvm_void" class="hierarchy-flow-node parent" data-target-id="uvm_void" title="Base class: uvm_void">uvm_void</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_object-svh.html#uvm_object" class="hierarchy-flow-node parent" data-target-id="uvm_object" title="Base class: uvm_object">uvm_object</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/base/uvm_transaction-svh.html#uvm_transaction" class="hierarchy-flow-node parent" data-target-id="uvm_transaction" title="Base class: uvm_transaction">uvm_transaction</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/seq/uvm_sequence_item-svh.html#uvm_sequence_item" class="hierarchy-flow-node parent" data-target-id="uvm_sequence_item" title="Base class: uvm_sequence_item">uvm_sequence_item</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/seq/uvm_sequence_base-svh.html#uvm_sequence_base" class="hierarchy-flow-node parent" data-target-id="uvm_sequence_base" title="Base class: uvm_sequence_base">uvm_sequence_base</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step"><a href="../../docs_view/seq/uvm_sequence-svh.html#uvm_sequence#(REQ,RSP)" class="hierarchy-flow-node parent" data-target-id="uvm_sequence#(REQ,RSP)" title="Base class: uvm_sequence">uvm_sequence</a><svg class="hierarchy-flow-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span><span class="hierarchy-flow-step current-step"><span class="hierarchy-flow-node current" title="Current class: uvm_sequence_library">uvm_sequence_library</span></span>
   </div>
   
-</div><div class=CBody><p>The <i>uvm_sequence_library</i> is a sequence that contains a list of registered sequence types.&nbsp; It can be configured to create and execute these sequences any number of times using one of several modes of operation, including a user-defined mode.</p><p>When started (as any other sequence), the sequence library will randomly select and execute a sequence from its <i>sequences</i> queue.&nbsp; If in <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_RAND" class=LConstant id=link9  >UVM_SEQ_LIB_RAND</a> mode, its <a href="#uvm_sequence_library.select_rand" data-target-id="uvm_sequence_library.select_rand" class=LVariable id=link10  >select_rand</a> property is randomized and used as an index into <i>sequences</i>.&nbsp;  When in <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_RANDC" class=LConstant id=link11  >UVM_SEQ_LIB_RANDC</a> mode, the <a href="#uvm_sequence_library.select_randc" data-target-id="uvm_sequence_library.select_randc" class=LVariable id=link12  >select_randc</a> property is used.&nbsp; When in <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_ITEM" class=LConstant id=link13  >UVM_SEQ_LIB_ITEM</a> mode, only sequence items of the <i>REQ</i> type are generated and executed--no sequences are executed.&nbsp; Finally, when in <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_USER" class=LConstant id=link14  >UVM_SEQ_LIB_USER</a> mode, the <a href="#uvm_sequence_library.select_sequence" data-target-id="uvm_sequence_library.select_sequence" class=LMethod id=link15  >select_sequence</a> method is called to obtain the index for selecting the next sequence to start.&nbsp; Users can override this method in subtypes to implement custom selection algorithms.</p><p>Creating a subtype of a sequence library requires invocation of the <a href="../macros/uvm_sequence_defines-svh.html#`uvm_sequence_library_utils" data-target-id="`uvm_sequence_library_utils" class=LMacro >`uvm_sequence_library_utils</a> macro in its declaration and calling the <a href="#uvm_sequence_library.init_sequence_library" data-target-id="uvm_sequence_library.init_sequence_library" class=LMethod id=link16  >init_sequence_library</a> method in its constructor.&nbsp; The macro and function are needed to populate the sequence library with any sequences that were statically registered with it or any of its base classes.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class=CBody><p>The <i>uvm_sequence_library</i> is a sequence that contains a list of registered sequence types.&nbsp; It can be configured to create and execute these sequences any number of times using one of several modes of operation, including a user-defined mode.</p><p>When started (as any other sequence), the sequence library will randomly select and execute a sequence from its <i>sequences</i> queue.&nbsp; If in <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_RAND" class=LConstant id=link9  >UVM_SEQ_LIB_RAND</a> mode, its <a href="#uvm_sequence_library.select_rand" data-target-id="uvm_sequence_library.select_rand" class=LVariable id=link10  >select_rand</a> property is randomized and used as an index into <i>sequences</i>.&nbsp;  When in <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_RANDC" class=LConstant id=link11  >UVM_SEQ_LIB_RANDC</a> mode, the <a href="#uvm_sequence_library.select_randc" data-target-id="uvm_sequence_library.select_randc" class=LVariable id=link12  >select_randc</a> property is used.&nbsp; When in <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_ITEM" class=LConstant id=link13  >UVM_SEQ_LIB_ITEM</a> mode, only sequence items of the <i>REQ</i> type are generated and executed--no sequences are executed.&nbsp; Finally, when in <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_USER" class=LConstant id=link14  >UVM_SEQ_LIB_USER</a> mode, the <a href="#uvm_sequence_library.select_sequence" data-target-id="uvm_sequence_library.select_sequence" class=LMethod id=link15  >select_sequence</a> method is called to obtain the index for selecting the next sequence to start.&nbsp; Users can override this method in subtypes to implement custom selection algorithms.</p><p>Creating a subtype of a sequence library requires invocation of the <a href="../macros/uvm_sequence_defines-svh.html#`uvm_sequence_library_utils" data-target-id="`uvm_sequence_library_utils" class=LMacro >`uvm_sequence_library_utils</a> macro in its declaration and calling the <a href="#uvm_sequence_library.init_sequence_library" data-target-id="uvm_sequence_library.init_sequence_library" class=LMethod id=link16  >init_sequence_library</a> method in its constructor.&nbsp; The macro and function are needed to populate the sequence library with any sequences that were statically registered with it or any of its base classes.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_seq_lib</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_sequence_library</span> <span class="sv-op">#(</span><span class="sv-ident">my_item</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">my_seq_lib</span><span class="sv-op">)</span>
   <span class="sv-macro">`uvm_sequence_library_utils</span><span class="sv-op">(</span><span class="sv-ident">my_seq_lib</span><span class="sv-op">)</span>
@@ -136,17 +129,10 @@
  <!--CONTENT index=4 -->
 <div class="CVariable" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_sequence_library.selection_mode"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequence_library.selection_mode" id="uvm_sequence_library.selection_mode" href="../../src_view/seq/uvm_sequence_library.svh.html#L129" class="src-code-link" data-src-file="seq/uvm_sequence_library.svh" data-src-line="129">selection_mode</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-uvm-type">uvm_sequence_lib_mode</span> <span class="sv-ident">selection_mode</span>
-  </td></tr></table></blockquote><div class=CBody><p>Specifies the mode used to select sequences for execution</p><p>If you do not have access to an instance of the library, use the configuration resource interface.</p><p>The following example sets the <i>config_seq_lib</i> as the default sequence for the &lsquo;main&rsquo; phase on the sequencer to be located at &ldquo;env.agent.sequencer&rdquo; and set the selection mode to <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_RANDC" class=LConstant id=link17  >UVM_SEQ_LIB_RANDC</a>.&nbsp; If the settings are being done from within a component, the first argument must be <i>this</i> and the second argument a path relative to that component.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+  </td></tr></table></blockquote><div class=CBody><p>Specifies the mode used to select sequences for execution</p><p>If you do not have access to an instance of the library, use the configuration resource interface.</p><p>The following example sets the <i>config_seq_lib</i> as the default sequence for the &lsquo;main&rsquo; phase on the sequencer to be located at &ldquo;env.agent.sequencer&rdquo; and set the selection mode to <a href="../base/uvm_object_globals-svh.html#UVM_SEQ_LIB_RANDC" class=LConstant id=link17  >UVM_SEQ_LIB_RANDC</a>.&nbsp; If the settings are being done from within a component, the first argument must be <i>this</i> and the second argument a path relative to that component.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_config_db</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_object_wrapper</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-constant">null</span><span class="sv-op">,</span>
                                    <span class="sv-string">&quot;env.agent.sequencer.main_phase&quot;</span><span class="sv-op">,</span>
                                    <span class="sv-string">&quot;default_sequence&quot;</span><span class="sv-op">,</span>
@@ -156,17 +142,10 @@
                                    <span class="sv-string">&quot;env.agent.sequencer.main_phase&quot;</span><span class="sv-op">,</span>
                                    <span class="sv-string">&quot;default_sequence.selection_mode&quot;</span><span class="sv-op">,</span>
                                    <span class="sv-ident">UVM_SEQ_LIB_RANDC</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>Alternatively, you may create an instance of the sequence library a priori, initialize all its parameters, randomize it, then set it to run as-is on the sequencer.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>Alternatively, you may create an instance of the sequence library a priori, initialize all its parameters, randomize it, then set it to run as-is on the sequencer.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">main_seq_lib</span> <span class="sv-ident">my_seq_lib</span><span class="sv-op">;</span>
 <span class="sv-ident">my_seq_lib</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;my_seq_lib&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
@@ -361,17 +340,10 @@
 
 
  <!--CONTENT index=20 -->
-<div class="CMacro" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_sequence_library.uvm_sequence_library_utils"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequence_library.uvm_sequence_library_utils" id="uvm_sequence_library.uvm_sequence_library_utils" href="../../src_view/macros/uvm_sequence_defines.svh.html#L391" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="391">uvm_sequence_library_utils</a></h3><div class=CBody><p>All subtypes of this class must invoke the `uvm_sequence_library_utils macro.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CMacro" id="doc-nav-item-20" data-doc-topic="doc-nav-item-20" data-anchor="uvm_sequence_library.uvm_sequence_library_utils"><div class="CTopic"><h3 class=CTitle><a name="uvm_sequence_library.uvm_sequence_library_utils" id="uvm_sequence_library.uvm_sequence_library_utils" href="../../src_view/macros/uvm_sequence_defines.svh.html#L391" class="src-code-link" data-src-file="macros/uvm_sequence_defines.svh" data-src-line="391">uvm_sequence_library_utils</a></h3><div class=CBody><p>All subtypes of this class must invoke the `uvm_sequence_library_utils macro.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_seq_lib</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_sequence_library</span> <span class="sv-op">#(</span><span class="sv-ident">my_item</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-macro">`uvm_object_utils</span><span class="sv-op">(</span><span class="sv-ident">my_seq_lib</span><span class="sv-op">)</span>
   <span class="sv-macro">`uvm_sequence_library_utils</span><span class="sv-op">(</span><span class="sv-ident">my_seq_lib</span><span class="sv-op">)</span>
@@ -472,17 +444,10 @@
 </div>
 </div>
   </div>
-</details><div class="CClass" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_sequence_library_cfg"><div class="CTopic"><h2 class=CTitle><a name="uvm_sequence_library_cfg" id="uvm_sequence_library_cfg" href="../../src_view/seq/uvm_sequence_library.svh.html#L368" class="src-code-link" data-src-file="seq/uvm_sequence_library.svh" data-src-line="368">uvm_sequence_library_cfg</a></h2><div class=CBody><p>A convenient container class for configuring all the sequence library parameters using a single <i>set</i> command.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</details><div class="CClass" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_sequence_library_cfg"><div class="CTopic"><h2 class=CTitle><a name="uvm_sequence_library_cfg" id="uvm_sequence_library_cfg" href="../../src_view/seq/uvm_sequence_library.svh.html#L368" class="src-code-link" data-src-file="seq/uvm_sequence_library.svh" data-src-line="368">uvm_sequence_library_cfg</a></h2><div class=CBody><p>A convenient container class for configuring all the sequence library parameters using a single <i>set</i> command.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_sequence_library_cfg</span> <span class="sv-ident">cfg</span><span class="sv-op">;</span>
 <span class="sv-ident">cfg</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;seqlib_cfg&quot;</span><span class="sv-op">,</span> <span class="sv-ident">UVM_SEQ_LIB_RANDC</span><span class="sv-op">,</span> <span class="sv-number">1000</span><span class="sv-op">,</span> <span class="sv-number">2000</span><span class="sv-op">)</span><span class="sv-op">;</span>
 

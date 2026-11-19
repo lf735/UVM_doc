@@ -735,7 +735,7 @@ def render_example_callout(ex_rel: str, ex_title: str, root_rel: str) -> str:
 
 def render_code_block(clean_code: str, lang: Optional[str] = None) -> str:
     """
-    Renders a syntax-highlighted code block with language badge and copy button.
+    Renders a syntax-highlighted code block with a discreet copy icon button.
     """
     if not lang:
         if any(clean_code.startswith(x) for x in ('prompt>', '<sim command', 'SIM_COMMAND')) or '+UVM_' in clean_code or '+uvm_' in clean_code:
@@ -747,17 +747,10 @@ def render_code_block(clean_code: str, lang: Optional[str] = None) -> str:
 
     highlighted = sh.highlight_doc_snippet(clean_code)
 
-    return f'''<div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>{lang}</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+    return f'''<div class="code-block-container" data-lang="{html.escape(lang)}">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code>{highlighted}</code></pre>
 </div>'''
 

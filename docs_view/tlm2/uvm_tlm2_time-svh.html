@@ -195,17 +195,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Return the current canonical time value, scaled for the caller&rsquo;s timescale</p><p><i>scaled</i> must be a time literal value that corresponds to the number of seconds specified in <i>secs</i> (1ns by default).&nbsp; It must be a time literal value that is greater or equal to the current timescale.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>C / DPI</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Return the current canonical time value, scaled for the caller&rsquo;s timescale</p><p><i>scaled</i> must be a time literal value that corresponds to the number of seconds specified in <i>secs</i> (1ns by default).&nbsp; It must be a time literal value that is greater or equal to the current timescale.</p><div class="code-block-container" data-lang="C / DPI">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-op">#(</span><span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-method">get_realtime</span><span class="sv-op">(</span><span class="sv-number">1ns</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-op">#(</span><span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-method">get_realtime</span><span class="sv-op">(</span><span class="sv-number">1fs</span><span class="sv-op">,</span> <span class="sv-number">1.0e-15</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
@@ -234,17 +227,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Increment the time value by the specified number of scaled time unit</p><p><i>t</i> is a time value expressed in the scale and precision of the caller.&nbsp; <i>scaled</i> must be a time literal value that corresponds to the number of seconds specified in <i>secs</i> (1ns by default).&nbsp; It must be a time literal value that is greater or equal to the current timescale.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Increment the time value by the specified number of scaled time unit</p><p><i>t</i> is a time value expressed in the scale and precision of the caller.&nbsp; <i>scaled</i> must be a time literal value that corresponds to the number of seconds specified in <i>secs</i> (1ns by default).&nbsp; It must be a time literal value that is greater or equal to the current timescale.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-method">incr</span><span class="sv-op">(</span><span class="sv-number">1.5ns</span><span class="sv-op">,</span> <span class="sv-number">1ns</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-method">incr</span><span class="sv-op">(</span><span class="sv-number">1.5ns</span><span class="sv-op">,</span> <span class="sv-number">1ps</span><span class="sv-op">,</span> <span class="sv-number">1.0e-12</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
@@ -267,17 +253,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Decrement the time value by the specified number of scaled time unit</p><p><i>t</i> is a time value expressed in the scale and precision of the caller.&nbsp; <i>scaled</i> must be a time literal value that corresponds to the number of seconds specified in <i>secs</i> (1ns by default).&nbsp; It must be a time literal value that is greater or equal to the current timescale.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Decrement the time value by the specified number of scaled time unit</p><p><i>t</i> is a time value expressed in the scale and precision of the caller.&nbsp; <i>scaled</i> must be a time literal value that corresponds to the number of seconds specified in <i>secs</i> (1ns by default).&nbsp; It must be a time literal value that is greater or equal to the current timescale.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-method">decr</span><span class="sv-op">(</span><span class="sv-number">200ps</span><span class="sv-op">,</span> <span class="sv-number">1ns</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -295,17 +274,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Return the current canonical time value, in the number of specified time unit, regardless of the current timescale of the caller.</p><p><i>secs</i> is the number of seconds in the desired time unit e.g.&nbsp; 1e-9 for nanoseconds.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Return the current canonical time value, in the number of specified time unit, regardless of the current timescale of the caller.</p><p><i>secs</i> is the number of seconds in the desired time unit e.g.&nbsp; 1e-9 for nanoseconds.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-system-tf">$write</span><span class="sv-op">(</span><span class="sv-string">&quot;%.3f ps<span class="sv-string-escape">\n</span>&quot;</span><span class="sv-op">,</span> <span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-method">get_abstime</span><span class="sv-op">(</span>1<span class="sv-ident">e</span><span class="sv-op">-</span><span class="sv-number">12</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -325,17 +297,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Set the current canonical time value, to the number of specified time unit, regardless of the current timescale of the caller.</p><p><i>secs</i> is the number of seconds in the time unit in the value <i>t</i> e.g.&nbsp; 1e-9 for nanoseconds.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Set the current canonical time value, to the number of specified time unit, regardless of the current timescale of the caller.</p><p><i>secs</i> is the number of seconds in the time unit in the value <i>t</i> e.g.&nbsp; 1e-9 for nanoseconds.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">delay</span><span class="sv-op">.</span><span class="sv-method">set_abstime</span><span class="sv-op">(</span><span class="sv-number">1.5</span><span class="sv-op">,</span> 1<span class="sv-ident">e</span><span class="sv-op">-</span><span class="sv-number">12</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -343,17 +308,10 @@
 
 
  <!--CONTENT index=10 -->
-<div class="CGroup" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_tlm_time.Why_is_this_necessary"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_time.Why_is_this_necessary" id="uvm_tlm_time.Why_is_this_necessary">Why is this necessary</a></h3><div class=CBody><p>Integers are not sufficient, on their own, to represent time without any ambiguity: you need to know the scale of that integer value.&nbsp; That scale is information conveyed outside of that integer.&nbsp; In SystemVerilog, it is based on the timescale that was active when the code was compiled.&nbsp; SystemVerilog properly scales time literals, but not integer values.&nbsp; That&rsquo;s because it does not know the difference between an integer that carries an integer value and an integer that carries a time value.&nbsp; The &lsquo;time&rsquo; variables are simply 64-bit integers, they are not scaled back and forth to the underlying precision.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CGroup" id="doc-nav-item-10" data-doc-topic="doc-nav-item-10" data-anchor="uvm_tlm_time.Why_is_this_necessary"><div class="CTopic"><h3 class=CTitle><a name="uvm_tlm_time.Why_is_this_necessary" id="uvm_tlm_time.Why_is_this_necessary">Why is this necessary</a></h3><div class=CBody><p>Integers are not sufficient, on their own, to represent time without any ambiguity: you need to know the scale of that integer value.&nbsp; That scale is information conveyed outside of that integer.&nbsp; In SystemVerilog, it is based on the timescale that was active when the code was compiled.&nbsp; SystemVerilog properly scales time literals, but not integer values.&nbsp; That&rsquo;s because it does not know the difference between an integer that carries an integer value and an integer that carries a time value.&nbsp; The &lsquo;time&rsquo; variables are simply 64-bit integers, they are not scaled back and forth to the underlying precision.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-preproc">`timescale</span> <span class="sv-number">1ns</span><span class="sv-op">/</span><span class="sv-number">1ps</span>
 
 <span class="sv-keyword-decl">module</span> <span class="sv-method">m</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
@@ -374,32 +332,18 @@
    <span class="sv-system-tf">$write</span><span class="sv-op">(</span><span class="sv-string">&quot;T=<span class="sv-string-escape">%f</span> ns (3.020)<span class="sv-string-escape">\n</span>&quot;</span><span class="sv-op">,</span> <span class="sv-system-tf">$realtime</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword">end</span>
 <span class="sv-keyword-decl">endmodule</span></code></pre>
-</div><p>yields</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>yields</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-number">1.500000 ns</span> <span class="sv-op">(</span><span class="sv-number">1.5</span><span class="sv-op">)</span>
 <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-number">3.500000 ns</span> <span class="sv-op">(</span><span class="sv-number">3.0</span><span class="sv-op">)</span>
 <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-number">3.510000 ns</span> <span class="sv-op">(</span><span class="sv-number">3.010</span><span class="sv-op">)</span>
 <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-number">3.510000 ns</span> <span class="sv-op">(</span><span class="sv-number">3.020</span><span class="sv-op">)</span></code></pre>
-</div><p>Within SystemVerilog, we have to worry about</p><ul><li>different time scale</li><li>different time precision</li></ul><p>Because each endpoint in a socket could be coded in different packages and thus be executing under different timescale directives, a simple integer cannot be used to exchange time information across a socket.</p><p>For example</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>Within SystemVerilog, we have to worry about</p><ul><li>different time scale</li><li>different time precision</li></ul><p>Because each endpoint in a socket could be coded in different packages and thus be executing under different timescale directives, a simple integer cannot be used to exchange time information across a socket.</p><p>For example</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-preproc">`timescale</span> <span class="sv-number">1ns</span><span class="sv-op">/</span><span class="sv-number">1ps</span>
 
 <span class="sv-keyword-decl">package</span> <span class="sv-ident">a_pkg</span><span class="sv-op">;</span>
@@ -429,29 +373,15 @@
    <span class="sv-system-tf">$write</span><span class="sv-op">(</span><span class="sv-string">&quot;T=<span class="sv-string-escape">%0d</span> ps (10,000)<span class="sv-string-escape">\n</span>&quot;</span><span class="sv-op">,</span> <span class="sv-system-tf">$realtime</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword">end</span>
 <span class="sv-keyword-decl">endprogram</span></code></pre>
-</div><p>yields</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>yields</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-number">10 ps</span> <span class="sv-op">(</span><span class="sv-number">10</span><span class="sv-op">,</span><span class="sv-number">000</span><span class="sv-op">)</span></code></pre>
-</div><p>Scaling is needed every time you make a procedural call to code that may interpret a time value in a different timescale.</p><p>Using the uvm_tlm_time type</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>Scaling is needed every time you make a procedural call to code that may interpret a time value in a different timescale.</p><p>Using the uvm_tlm_time type</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-preproc">`timescale</span> <span class="sv-number">1ns</span><span class="sv-op">/</span><span class="sv-number">1ps</span>
 
    <span class="sv-keyword-decl">package</span> <span class="sv-ident">a_pkg</span><span class="sv-op">;</span>
@@ -484,17 +414,10 @@
       <span class="sv-system-tf">$write</span><span class="sv-op">(</span><span class="sv-string">&quot;T=<span class="sv-string-escape">%0d</span> ps (10,000)<span class="sv-string-escape">\n</span>&quot;</span><span class="sv-op">,</span> <span class="sv-system-tf">$realtime</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword">end</span>
 <span class="sv-keyword-decl">endprogram</span></code></pre>
-</div><p>yields</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>yields</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-number">10000 ps</span> <span class="sv-op">(</span><span class="sv-number">10</span><span class="sv-op">,</span><span class="sv-number">000</span><span class="sv-op">)</span></code></pre>
 </div><p>A similar procedure is required when crossing any simulator or language boundary, such as interfacing between SystemVerilog and SystemC.</p></div></div></div>
 

@@ -38,56 +38,28 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="User-Defined_Phases"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="User-Defined_Phases" id="User-Defined_Phases">User-Defined Phases</a></h1><div class=CBody><p>To define your own custom phase, use the following pattern.</p><p>1.&nbsp; Extend the appropriate base class for your phase type.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CSection" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="User-Defined_Phases"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="User-Defined_Phases" id="User-Defined_Phases">User-Defined Phases</a></h1><div class=CBody><p>To define your own custom phase, use the following pattern.</p><p>1.&nbsp; Extend the appropriate base class for your phase type.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_PHASE_phase</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_task_phase</span><span class="sv-op">;</span>
 <span class="sv-keyword-decl">class</span> <span class="sv-ident">my_PHASE_phase</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_topdown_phase</span><span class="sv-op">;</span>
 <span class="sv-keyword-decl">class</span> <span class="sv-ident">my_PHASE_phase</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_bottomup_phase</span><span class="sv-op">;</span></code></pre>
-</div><p>2.&nbsp; Optionally, implement your exec_task or exec_func method.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>2.&nbsp; Optionally, implement your exec_task or exec_func method.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-method">exec_task</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">schedule</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">exec_func</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">comp</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">schedule</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>If implemented, these methods usually call the related method on the component</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>If implemented, these methods usually call the related method on the component</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">comp</span><span class="sv-op">.</span><span class="sv-method">PHASE_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>3.&nbsp; Since the phase class is a singleton, providing an accessor method allows for easy global use, and protecting the constructor prevents misuse.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>3.&nbsp; Since the phase class is a singleton, providing an accessor method allows for easy global use, and protecting the constructor prevents misuse.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_PHASE_phase</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_topdown_phase</span><span class="sv-op">;</span>  <span class="sv-ident">or</span> <span class="sv-uvm-type">uvm_task_phase</span><span class="sv-op">/</span><span class="sv-uvm-type">uvm_bottomum_phase</span>
   <span class="sv-qualifier">static</span> <span class="sv-qualifier">local</span> <span class="sv-ident">my_PHASE_phase</span> <span class="sv-ident">m_inst</span><span class="sv-op">;</span>      <span class="sv-ident">Local</span> <span class="sv-ident">reference</span> <span class="sv-ident">to</span> <span class="sv-ident">global</span> <span class="sv-ident">IMP</span>
   <span class="sv-qualifier">protected</span> <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;PHASE&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>    <span class="sv-ident">Protected</span> <span class="sv-ident">constructor</span> <span class="sv-keyword">for</span> <span class="sv-ident">singleton</span>
@@ -100,17 +72,10 @@
   <span class="sv-keyword-decl">endfunction</span> <span class="sv-op">:</span> <span class="sv-method">get</span>
    <span class="sv-ident">Optionally</span> <span class="sv-ident">implement</span> <span class="sv-ident">exec_func</span><span class="sv-op">/</span><span class="sv-ident">exec_task</span>
 <span class="sv-keyword-decl">endclass</span> <span class="sv-op">:</span> <span class="sv-ident">my_PHASE_phase</span></code></pre>
-</div><p>4.&nbsp; Insert the phase in a phase schedule or domain using the <a href="../base/uvm_phase-svh.html#uvm_phase.add" data-target-id="uvm_phase.add" class=LMethod id=link1  >uvm_phase::add</a> method:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>4.&nbsp; Insert the phase in a phase schedule or domain using the <a href="../base/uvm_phase-svh.html#uvm_phase.add" data-target-id="uvm_phase.add" class=LMethod id=link1  >uvm_phase::add</a> method:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">my_schedule</span><span class="sv-op">.</span><span class="sv-method">add</span><span class="sv-op">(</span><span class="sv-ident">my_PHASE_class</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div>
 

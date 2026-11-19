@@ -323,34 +323,20 @@
  <!--CONTENT index=11 -->
 <div class="CMethod" id="doc-nav-item-11" data-doc-topic="doc-nav-item-11" data-anchor="uvm_object.get_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_object.get_type" id="uvm_object.get_type" href="../../src_view/base/uvm_object.svh.html#L163" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="163">get_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">static</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_object_wrapper</span> <span class="sv-proto-name">get_type</span> <span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Returns the type-proxy (wrapper) for this object.&nbsp; The <a href="uvm_factory-svh.html#uvm_factory" data-target-id="uvm_factory" class=LClass id=link64  >uvm_factory</a>&rsquo;s type-based override and creation methods take arguments of <a href="uvm_factory-svh.html#uvm_object_wrapper" data-target-id="uvm_object_wrapper" class=LClass id=link65  >uvm_object_wrapper</a>.&nbsp; This method, if implemented, can be used as convenient means of supplying those arguments.</p><p>The default implementation of this method produces an error and returns <i>null</i>.&nbsp; To enable use of this method, a user&rsquo;s subtype must implement a version that returns the subtype&rsquo;s wrapper.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the type-proxy (wrapper) for this object.&nbsp; The <a href="uvm_factory-svh.html#uvm_factory" data-target-id="uvm_factory" class=LClass id=link64  >uvm_factory</a>&rsquo;s type-based override and creation methods take arguments of <a href="uvm_factory-svh.html#uvm_object_wrapper" data-target-id="uvm_object_wrapper" class=LClass id=link65  >uvm_object_wrapper</a>.&nbsp; This method, if implemented, can be used as convenient means of supplying those arguments.</p><p>The default implementation of this method produces an error and returns <i>null</i>.&nbsp; To enable use of this method, a user&rsquo;s subtype must implement a version that returns the subtype&rsquo;s wrapper.</p><h4 class=CHeading>For example</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">cmd</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-keyword-decl">typedef</span> <span class="sv-uvm-type">uvm_object_registry</span> <span class="sv-op">#(</span><span class="sv-ident">cmd</span><span class="sv-op">)</span> <span class="sv-method">type_id</span><span class="sv-op">;</span>
   <span class="sv-qualifier">static</span> <span class="sv-keyword-decl">function</span> <span class="sv-method">type_id</span> <span class="sv-method">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-keyword">return</span> <span class="sv-method">type_id</span><span class="sv-op">::</span><span class="sv-method">get</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-keyword-decl">endfunction</span>
 <span class="sv-keyword-decl">endclass</span></code></pre>
-</div><h4 class=CHeading>Then, to use</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><h4 class=CHeading>Then, to use</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-method">set_type_override</span><span class="sv-op">(</span><span class="sv-ident">cmd</span><span class="sv-op">::</span><span class="sv-method">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-ident">subcmd</span><span class="sv-op">::</span><span class="sv-method">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>This function is implemented by the `uvm_*_utils macros, if employed.</p></div></div></div>
 
@@ -360,17 +346,10 @@
  <!--CONTENT index=12 -->
 <div class="CMethod" id="doc-nav-item-12" data-doc-topic="doc-nav-item-12" data-anchor="uvm_object.get_object_type"><div class="CTopic"><h3 class=CTitle><a name="uvm_object.get_object_type" id="uvm_object.get_object_type" href="../../src_view/base/uvm_object.svh.html#L194" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="194">get_object_type</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_object_wrapper</span> <span class="sv-proto-name">get_object_type</span> <span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>Returns the type-proxy (wrapper) for this object.&nbsp; The <a href="uvm_factory-svh.html#uvm_factory" data-target-id="uvm_factory" class=LClass id=link66  >uvm_factory</a>&rsquo;s type-based override and creation methods take arguments of <a href="uvm_factory-svh.html#uvm_object_wrapper" data-target-id="uvm_object_wrapper" class=LClass id=link67  >uvm_object_wrapper</a>.&nbsp; This method, if implemented, can be used as convenient means of supplying those arguments.&nbsp; This method is the same as the static <a href="#uvm_object.get_type" data-target-id="uvm_object.get_type" class=LMethod id=link68  >get_type</a> method, but uses an already allocated object to determine the type-proxy to access (instead of using the static object).</p><p>The default implementation of this method does a factory lookup of the proxy using the return value from <a href="#uvm_object.get_type_name" data-target-id="uvm_object.get_type_name" class=LMethod id=link69  >get_type_name</a>.&nbsp; If the type returned by <a href="#uvm_object.get_type_name" data-target-id="uvm_object.get_type_name" class=LMethod id=link70  >get_type_name</a> is not registered with the factory, then a <i>null</i> handle is returned.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+  </td></tr></table></blockquote><div class=CBody><p>Returns the type-proxy (wrapper) for this object.&nbsp; The <a href="uvm_factory-svh.html#uvm_factory" data-target-id="uvm_factory" class=LClass id=link66  >uvm_factory</a>&rsquo;s type-based override and creation methods take arguments of <a href="uvm_factory-svh.html#uvm_object_wrapper" data-target-id="uvm_object_wrapper" class=LClass id=link67  >uvm_object_wrapper</a>.&nbsp; This method, if implemented, can be used as convenient means of supplying those arguments.&nbsp; This method is the same as the static <a href="#uvm_object.get_type" data-target-id="uvm_object.get_type" class=LMethod id=link68  >get_type</a> method, but uses an already allocated object to determine the type-proxy to access (instead of using the static object).</p><p>The default implementation of this method does a factory lookup of the proxy using the return value from <a href="#uvm_object.get_type_name" data-target-id="uvm_object.get_type_name" class=LMethod id=link69  >get_type_name</a>.&nbsp; If the type returned by <a href="#uvm_object.get_type_name" data-target-id="uvm_object.get_type_name" class=LMethod id=link70  >get_type_name</a> is not registered with the factory, then a <i>null</i> handle is returned.</p><h4 class=CHeading>For example</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">cmd</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-keyword-decl">typedef</span> <span class="sv-uvm-type">uvm_object_registry</span> <span class="sv-op">#(</span><span class="sv-ident">cmd</span><span class="sv-op">)</span> <span class="sv-method">type_id</span><span class="sv-op">;</span>
   <span class="sv-qualifier">static</span> <span class="sv-keyword-decl">function</span> <span class="sv-method">type_id</span> <span class="sv-method">get_type</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
@@ -388,17 +367,10 @@
  <!--CONTENT index=13 -->
 <div class="CMethod" id="doc-nav-item-13" data-doc-topic="doc-nav-item-13" data-anchor="uvm_object.get_type_name"><div class="CTopic"><h3 class=CTitle><a name="uvm_object.get_type_name" id="uvm_object.get_type_name" href="../../src_view/base/uvm_object.svh.html#L220" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="220">get_type_name</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-proto-name">get_type_name</span> <span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>This function returns the type name of the object, which is typically the type identifier enclosed in quotes.&nbsp; It is used for various debugging functions in the library, and it is used by the factory for creating objects.</p><p>This function must be defined in every derived class.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+  </td></tr></table></blockquote><div class=CBody><p>This function returns the type name of the object, which is typically the type identifier enclosed in quotes.&nbsp; It is used for various debugging functions in the library, and it is used by the factory for creating objects.</p><p>This function must be defined in every derived class.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
   <span class="sv-qualifier">const</span> <span class="sv-qualifier">static</span> <span class="sv-type">string</span> <span class="sv-ident">type_name</span> <span class="sv-op">=</span> <span class="sv-string">&quot;mytype&quot;</span><span class="sv-op">;</span>
@@ -430,17 +402,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>create</i> method allocates a new object of the same type as this object and returns it via a base uvm_object handle.&nbsp; Every class deriving from uvm_object, directly or indirectly, must implement the create method.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>The <i>create</i> method allocates a new object of the same type as this object and returns it via a base uvm_object handle.&nbsp; Every class deriving from uvm_object, directly or indirectly, must implement the create method.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
   <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_object</span> <span class="sv-method">create</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">=</span><span class="sv-string">&quot;&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
@@ -513,17 +478,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_print</i> method is the user-definable hook called by <a href="#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link83  >print</a> and <a href="#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link84  >sprint</a> that allows users to customize what gets printed or sprinted beyond the field information provided by the `uvm_field_* macros, <a href="../macros/uvm_object_defines-svh.html#Utility_and_Field_Macros_for_Components_and_Objects" data-target-id="Utility_and_Field_Macros_for_Components_and_Objects" class=LSection >Utility and Field Macros for Components and Objects</a>.</p><p>The <i>printer</i> argument is the policy object that governs the format and content of the output.&nbsp; To ensure correct <a href="#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link85  >print</a> and <a href="#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link86  >sprint</a> operation, and to ensure a consistent output format, the <i>printer</i> must be used by all <a href="#uvm_object.do_print" data-target-id="uvm_object.do_print" class=LMethod id=link87  >do_print</a> implementations.&nbsp; That is, instead of using <i>$display</i> or string concatenations directly, a <i>do_print</i> implementation must call through the <i>printer&rsquo;s</i> API to add information to be printed or sprinted.</p><h4 class=CHeading>An example implementation of <i>do_print</i> is as follows</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>The <i>do_print</i> method is the user-definable hook called by <a href="#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link83  >print</a> and <a href="#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link84  >sprint</a> that allows users to customize what gets printed or sprinted beyond the field information provided by the `uvm_field_* macros, <a href="../macros/uvm_object_defines-svh.html#Utility_and_Field_Macros_for_Components_and_Objects" data-target-id="Utility_and_Field_Macros_for_Components_and_Objects" class=LSection >Utility and Field Macros for Components and Objects</a>.</p><p>The <i>printer</i> argument is the policy object that governs the format and content of the output.&nbsp; To ensure correct <a href="#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link85  >print</a> and <a href="#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link86  >sprint</a> operation, and to ensure a consistent output format, the <i>printer</i> must be used by all <a href="#uvm_object.do_print" data-target-id="uvm_object.do_print" class=LMethod id=link87  >do_print</a> implementations.&nbsp; That is, instead of using <i>$display</i> or string concatenations directly, a <i>do_print</i> implementation must call through the <i>printer&rsquo;s</i> API to add information to be printed or sprinted.</p><h4 class=CHeading>An example implementation of <i>do_print</i> is as follows</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-ident">data_obj</span> <span class="sv-ident">data</span><span class="sv-op">;</span>
   <span class="sv-type">int</span> <span class="sv-ident">f1</span><span class="sv-op">;</span>
@@ -532,17 +490,10 @@
     <span class="sv-ident">printer</span><span class="sv-op">.</span><span class="sv-method">print_field_int</span><span class="sv-op">(</span><span class="sv-string">&quot;f1&quot;</span><span class="sv-op">,</span> <span class="sv-ident">f1</span><span class="sv-op">,</span> <span class="sv-system-tf">$bits</span><span class="sv-op">(</span><span class="sv-ident">f1</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-constant">UVM_DEC</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-ident">printer</span><span class="sv-op">.</span><span class="sv-method">print_object</span><span class="sv-op">(</span><span class="sv-string">&quot;data&quot;</span><span class="sv-op">,</span> <span class="sv-ident">data</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-keyword-decl">endfunction</span></code></pre>
-</div><h4 class=CHeading>Then, to print and sprint the object, you could write</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><h4 class=CHeading>Then, to print and sprint the object, you could write</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">mytype</span> <span class="sv-ident">t</span> <span class="sv-op">=</span> <span class="sv-ident">new</span><span class="sv-op">;</span>
 <span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-method">print</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-uvm-type">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;Received&quot;</span><span class="sv-op">,</span><span class="sv-ident">t</span><span class="sv-op">.</span><span class="sv-method">sprint</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
@@ -554,17 +505,10 @@
  <!--CONTENT index=21 -->
 <div class="CMethod" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_object.convert2string"><div class="CTopic"><h3 class=CTitle><a name="uvm_object.convert2string" id="uvm_object.convert2string" href="../../src_view/base/uvm_object.svh.html#L46" class="src-code-link" data-src-file="base/uvm_object.svh" data-src-line="46">convert2string</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-proto-name">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span>
-  </td></tr></table></blockquote><div class=CBody><p>This virtual function is a user-definable hook, called directly by the user, that allows users to provide object information in the form of a string.&nbsp; Unlike <a href="#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link89  >sprint</a>, there is no requirement to use a <a href="uvm_printer-svh.html#uvm_printer" data-target-id="uvm_printer" class=LClass id=link90  >uvm_printer</a> policy object.&nbsp; As such, the format and content of the output is fully customizable, which may be suitable for applications not requiring the consistent formatting offered by the <a href="#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link91  >print</a>/<a href="#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link92  >sprint</a>/<a href="#uvm_object.do_print" data-target-id="uvm_object.do_print" class=LMethod id=link93  >do_print</a> API.</p><p>Fields declared in <a href="../macros/uvm_object_defines-svh.html#Utility_Macros" data-target-id="Utility_Macros" class=LGroup id=link94  >Utility Macros</a> macros (`uvm_field_*), if used, will not automatically appear in calls to convert2string.</p><p>An example implementation of convert2string follows.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+  </td></tr></table></blockquote><div class=CBody><p>This virtual function is a user-definable hook, called directly by the user, that allows users to provide object information in the form of a string.&nbsp; Unlike <a href="#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link89  >sprint</a>, there is no requirement to use a <a href="uvm_printer-svh.html#uvm_printer" data-target-id="uvm_printer" class=LClass id=link90  >uvm_printer</a> policy object.&nbsp; As such, the format and content of the output is fully customizable, which may be suitable for applications not requiring the consistent formatting offered by the <a href="#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link91  >print</a>/<a href="#uvm_object.sprint" data-target-id="uvm_object.sprint" class=LMethod id=link92  >sprint</a>/<a href="#uvm_object.do_print" data-target-id="uvm_object.do_print" class=LMethod id=link93  >do_print</a> API.</p><p>Fields declared in <a href="../macros/uvm_object_defines-svh.html#Utility_Macros" data-target-id="Utility_Macros" class=LGroup id=link94  >Utility Macros</a> macros (`uvm_field_*), if used, will not automatically appear in calls to convert2string.</p><p>An example implementation of convert2string follows.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">base</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-type">string</span> <span class="sv-ident">field</span> <span class="sv-op">=</span> <span class="sv-string">&quot;foo&quot;</span><span class="sv-op">;</span>
   <span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">string</span> <span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
@@ -590,30 +534,16 @@
        <span class="sv-ident">child</span><span class="sv-op">.</span><span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">;</span>
   <span class="sv-keyword-decl">endfunction</span>
 <span class="sv-keyword-decl">endclass</span></code></pre>
-</div><h4 class=CHeading>Then, to display an object, you could write</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><h4 class=CHeading>Then, to display an object, you could write</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">obj</span> <span class="sv-ident">o</span> <span class="sv-op">=</span> <span class="sv-ident">new</span><span class="sv-op">;</span>
 <span class="sv-uvm-type">uvm_report_info</span><span class="sv-op">(</span><span class="sv-string">&quot;BusMaster&quot;</span><span class="sv-op">,</span><span class="sv-op">{</span><span class="sv-string">&quot;Sending:<span class="sv-string-escape">\n</span> &quot;</span><span class="sv-op">,</span><span class="sv-ident">o</span><span class="sv-op">.</span><span class="sv-method">convert2string</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><h4 class=CHeading>The output will look similar to</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><h4 class=CHeading>The output will look similar to</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-constant">UVM_INFO</span> @ <span class="sv-number">0</span><span class="sv-op">:</span> <span class="sv-ident">reporter</span> <span class="sv-op">[</span><span class="sv-ident">BusMaster</span><span class="sv-op">]</span> <span class="sv-ident">Sending</span><span class="sv-op">:</span>
    <span class="sv-ident">base_field</span><span class="sv-op">=</span><span class="sv-ident">foo</span> <span class="sv-method">write</span><span class="sv-op">=</span><span class="sv-number">1</span> <span class="sv-ident">addr</span><span class="sv-op">=</span><span class="sv-number">00000123</span> <span class="sv-ident">data</span><span class="sv-op">=</span><span class="sv-number">00000456</span> <span class="sv-ident">child_field</span><span class="sv-op">=</span><span class="sv-ident">bar</span></code></pre>
 </div></div></div></div>
@@ -656,17 +586,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_record</i> method is the user-definable hook called by the <a href="#uvm_object.record" data-target-id="uvm_object.record" class=LMethod id=link97  >record</a> method.&nbsp; A derived class should override this method to include its fields in a record operation.</p><p>The <i>recorder</i> argument is policy object for recording this object.&nbsp; A do_record implementation should call the appropriate recorder methods for each of its fields.&nbsp; Vendor-specific recording implementations are encapsulated in the <i>recorder</i> policy, thereby insulating user-code from vendor-specific behavior.&nbsp; See <a href="uvm_recorder-svh.html#uvm_recorder" data-target-id="uvm_recorder" class=LClass id=link98  >uvm_recorder</a> for more information.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>The <i>do_record</i> method is the user-definable hook called by the <a href="#uvm_object.record" data-target-id="uvm_object.record" class=LMethod id=link97  >record</a> method.&nbsp; A derived class should override this method to include its fields in a record operation.</p><p>The <i>recorder</i> argument is policy object for recording this object.&nbsp; A do_record implementation should call the appropriate recorder methods for each of its fields.&nbsp; Vendor-specific recording implementations are encapsulated in the <i>recorder</i> policy, thereby insulating user-code from vendor-specific behavior.&nbsp; See <a href="uvm_recorder-svh.html#uvm_recorder" data-target-id="uvm_recorder" class=LClass id=link98  >uvm_recorder</a> for more information.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-ident">data_obj</span> <span class="sv-ident">data</span><span class="sv-op">;</span>
   <span class="sv-type">int</span> <span class="sv-ident">f1</span><span class="sv-op">;</span>
@@ -712,17 +635,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_copy</i> method is the user-definable hook called by the <a href="#uvm_object.copy" data-target-id="uvm_object.copy" class=LMethod id=link100  >copy</a> method.&nbsp; A derived class should override this method to include its fields in a <a href="#uvm_object.copy" data-target-id="uvm_object.copy" class=LMethod id=link101  >copy</a> operation.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>The <i>do_copy</i> method is the user-definable hook called by the <a href="#uvm_object.copy" data-target-id="uvm_object.copy" class=LMethod id=link100  >copy</a> method.&nbsp; A derived class should override this method to include its fields in a <a href="#uvm_object.copy" data-target-id="uvm_object.copy" class=LMethod id=link101  >copy</a> operation.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
   <span class="sv-type">int</span> <span class="sv-ident">f1</span><span class="sv-op">;</span>
@@ -778,17 +694,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_compare</i> method is the user-definable hook called by the <a href="#uvm_object.compare" data-target-id="uvm_object.compare" class=LMethod id=link104  >compare</a> method.&nbsp; A derived class should override this method to include its fields in a compare operation.&nbsp; It should return 1 if the comparison succeeds, 0 otherwise.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>The <i>do_compare</i> method is the user-definable hook called by the <a href="#uvm_object.compare" data-target-id="uvm_object.compare" class=LMethod id=link104  >compare</a> method.&nbsp; A derived class should override this method to include its fields in a compare operation.&nbsp; It should return 1 if the comparison succeeds, 0 otherwise.</p><h4 class=CHeading>A typical implementation is as follows</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
   <span class="sv-type">int</span> <span class="sv-ident">f1</span><span class="sv-op">;</span>
@@ -892,17 +801,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_pack</i> method is the user-definable hook called by the <a href="#uvm_object.pack" data-target-id="uvm_object.pack" class=LMethod id=link108  >pack</a> methods.&nbsp; A derived class should override this method to include its fields in a pack operation.</p><p>The <i>packer</i> argument is the policy object for packing.&nbsp; The policy object should be used to pack objects.</p><p>A typical example of an object packing itself is as follows</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>The <i>do_pack</i> method is the user-definable hook called by the <a href="#uvm_object.pack" data-target-id="uvm_object.pack" class=LMethod id=link108  >pack</a> methods.&nbsp; A derived class should override this method to include its fields in a pack operation.</p><p>The <i>packer</i> argument is the policy object for packing.&nbsp; The policy object should be used to pack objects.</p><p>A typical example of an object packing itself is as follows</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mysubtype</span> <span class="sv-keyword-decl">extends</span> <span class="sv-ident">mysupertype</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
   <span class="sv-type">shortint</span> <span class="sv-ident">myshort</span><span class="sv-op">;</span>
@@ -1011,17 +913,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>The <i>do_unpack</i> method is the user-definable hook called by the <a href="#uvm_object.unpack" data-target-id="uvm_object.unpack" class=LMethod id=link112  >unpack</a> method.&nbsp; A derived class should override this method to include its fields in an unpack operation.</p><p>The <i>packer</i> argument is the policy object for both packing and unpacking.&nbsp; It must be the same packer used to pack the object into bits.&nbsp; Also, do_unpack must unpack fields in the same order in which they were packed.&nbsp; See <a href="uvm_packer-svh.html#uvm_packer" data-target-id="uvm_packer" class=LClass id=link113  >uvm_packer</a> for more information.</p><p>The following implementation corresponds to the example given in do_pack.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>The <i>do_unpack</i> method is the user-definable hook called by the <a href="#uvm_object.unpack" data-target-id="uvm_object.unpack" class=LMethod id=link112  >unpack</a> method.&nbsp; A derived class should override this method to include its fields in an unpack operation.</p><p>The <i>packer</i> argument is the policy object for both packing and unpacking.&nbsp; It must be the same packer used to pack the object into bits.&nbsp; Also, do_unpack must unpack fields in the same order in which they were packed.&nbsp; See <a href="uvm_packer-svh.html#uvm_packer" data-target-id="uvm_packer" class=LClass id=link113  >uvm_packer</a> for more information.</p><p>The following implementation corresponds to the example given in do_pack.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">do_unpack</span> <span class="sv-op">(</span><span class="sv-uvm-type">uvm_packer</span> <span class="sv-ident">packer</span><span class="sv-op">)</span><span class="sv-op">;</span>
  <span class="sv-type">int</span> <span class="sv-ident">sz</span><span class="sv-op">;</span>
   <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">do_unpack</span><span class="sv-op">(</span><span class="sv-ident">packer</span><span class="sv-op">)</span><span class="sv-op">;</span> <span class="sv-comment">// unpack super&#x27;s properties</span>
@@ -1120,17 +1015,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>These methods provide write access to integral, string, and uvm_object-based properties indexed by a <i>field_name</i> string.&nbsp; The object designer choose which, if any, properties will be accessible, and overrides the appropriate methods depending on the properties&rsquo; types.&nbsp; For objects, the optional <i>clone</i> argument specifies whether to clone the <i>value</i> argument before assignment.</p><p>The global <a href="uvm_globals-svh.html#uvm_is_match" data-target-id="uvm_is_match" class=LMethod id=link115  >uvm_is_match</a> function is used to match the field names, so <i>field_name</i> may contain wildcards.</p><p>An example implementation of all three methods is as follows.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>These methods provide write access to integral, string, and uvm_object-based properties indexed by a <i>field_name</i> string.&nbsp; The object designer choose which, if any, properties will be accessible, and overrides the appropriate methods depending on the properties&rsquo; types.&nbsp; For objects, the optional <i>clone</i> argument specifies whether to clone the <i>value</i> argument before assignment.</p><p>The global <a href="uvm_globals-svh.html#uvm_is_match" data-target-id="uvm_is_match" class=LMethod id=link115  >uvm_is_match</a> function is used to match the field names, so <i>field_name</i> may contain wildcards.</p><p>An example implementation of all three methods is as follows.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mytype</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
 
   <span class="sv-qualifier">local</span> <span class="sv-type">int</span> <span class="sv-ident">myint</span><span class="sv-op">;</span>

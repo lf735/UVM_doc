@@ -241,44 +241,23 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Sets the propagation mode for this objection.</p><p>By default, objections support hierarchical propagation for components.&nbsp;  For example, if we have the following basic component tree:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Sets the propagation mode for this objection.</p><p>By default, objections support hierarchical propagation for components.&nbsp;  For example, if we have the following basic component tree:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span><span class="sv-op">.</span><span class="sv-ident">child</span></code></pre>
-</div><p>Any objections raised by &lsquo;child&rsquo; would get propagated down to parent, and then to uvm_test_top.&nbsp;  Resulting in the following counts and totals:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>Any objections raised by &lsquo;child&rsquo; would get propagated down to parent, and then to uvm_test_top.&nbsp;  Resulting in the following counts and totals:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code>                     <span class="sv-op">|</span> <span class="sv-ident">count</span> <span class="sv-op">|</span> <span class="sv-ident">total</span> <span class="sv-op">|</span>
 <span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span><span class="sv-op">.</span><span class="sv-ident">child</span> <span class="sv-op">|</span>     <span class="sv-number">1</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span>
 <span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span>       <span class="sv-op">|</span>     <span class="sv-number">0</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span>
 <span class="sv-uvm-type">uvm_top</span>              <span class="sv-op">|</span>     <span class="sv-number">0</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span></code></pre>
-</div><p>While propagations such as these can be useful, if they are unused by the testbench then they are simply an unnecessary performance hit.&nbsp;  If the testbench is not going to use this functionality, then the performance can be improved by setting the propagation mode to 0.</p><p>When propagation mode is set to 0, all intermediate callbacks between the <i>source</i> and <i>top</i> will be skipped.&nbsp;  This would result in the following counts and totals for the above objection:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>While propagations such as these can be useful, if they are unused by the testbench then they are simply an unnecessary performance hit.&nbsp;  If the testbench is not going to use this functionality, then the performance can be improved by setting the propagation mode to 0.</p><p>When propagation mode is set to 0, all intermediate callbacks between the <i>source</i> and <i>top</i> will be skipped.&nbsp;  This would result in the following counts and totals for the above objection:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code>                     <span class="sv-op">|</span> <span class="sv-ident">count</span> <span class="sv-op">|</span> <span class="sv-ident">total</span> <span class="sv-op">|</span>
 <span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span><span class="sv-op">.</span><span class="sv-ident">child</span> <span class="sv-op">|</span>     <span class="sv-number">1</span> <span class="sv-op">|</span>    <span class="sv-number">1</span>  <span class="sv-op">|</span>
 <span class="sv-uvm-type">uvm_top</span><span class="sv-op">.</span><span class="sv-ident">parent</span>       <span class="sv-op">|</span>     <span class="sv-number">0</span> <span class="sv-op">|</span>    <span class="sv-number">0</span>  <span class="sv-op">|</span>
@@ -699,17 +678,10 @@
 </div>
 </div>
   </div>
-</details><div class="CClass" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_objection_callback"><div class="CTopic"><h2 class=CTitle><a name="uvm_objection_callback" id="uvm_objection_callback" href="../../src_view/base/uvm_objection.svh.html#L1420" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1420">uvm_objection_callback</a></h2><div class=CBody><p>The uvm_objection is the callback type that defines the callback implementations for an objection callback.&nbsp; A user uses the callback type uvm_objection_cbs_t to add callbacks to specific objections.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</details><div class="CClass" id="doc-nav-item-22" data-doc-topic="doc-nav-item-22" data-anchor="uvm_objection_callback"><div class="CTopic"><h2 class=CTitle><a name="uvm_objection_callback" id="uvm_objection_callback" href="../../src_view/base/uvm_objection.svh.html#L1420" class="src-code-link" data-src-file="base/uvm_objection.svh" data-src-line="1420">uvm_objection_callback</a></h2><div class=CBody><p>The uvm_objection is the callback type that defines the callback implementations for an objection callback.&nbsp; A user uses the callback type uvm_objection_cbs_t to add callbacks to specific objections.</p><h4 class=CHeading>For example</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_objection_cb</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_objection_callback</span><span class="sv-op">;</span>
   <span class="sv-keyword-decl">function</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>
     <span class="sv-constant">super</span><span class="sv-op">.</span><span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span>

@@ -67,17 +67,10 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_reg_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_shared_access_seq" id="uvm_reg_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the register, the register is not tested.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_reg_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_shared_access_seq" id="uvm_reg_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L57" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="57">uvm_reg_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared register by writing through each address map then reading it via every other address maps in which the register is readable and the backdoor, making sure that the resulting value matches the mirrored value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the register, the register is not tested.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-type">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-ident">r0</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">,</span>
                            <span class="sv-string">&quot;NO_REG_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Registers that contain fields with unknown access policies cannot be tested.</p><p>The DUT should be idle and not modify any register during this test.</p>
@@ -174,17 +167,10 @@
   <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-proto-name">body</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
   <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L70" class="src-code-link undoc-src-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="70">see source code</a></span></span></p></div>
 </div>
-</div><div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_mem_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_mem_shared_access_seq" id="uvm_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L206" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="206">uvm_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the memory, the memory is not tested.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_mem_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_mem_shared_access_seq" id="uvm_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L206" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="206">uvm_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of a shared memory by writing through each address map then reading it via every other address maps in which the memory is readable and the backdoor, making sure that the resulting value matches the written value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the memory, the memory is not tested.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-type">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-ident">mem0</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">,</span>
                            <span class="sv-string">&quot;NO_MEM_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>The DUT should be idle and not modify the memory during this test.</p>
@@ -281,17 +267,10 @@
   <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-proto-name">body</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
   <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L218" class="src-code-link undoc-src-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="218">see source code</a></span></span></p></div>
 </div>
-</div><div class="CClass" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_reg_mem_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_mem_shared_access_seq" id="uvm_reg_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L354" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="354">uvm_reg_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#uvm_reg_shared_access_seq" data-target-id="uvm_reg_shared_access_seq" class=LClass id=link19  >uvm_reg_shared_access_seq</a> and <a href="#uvm_mem_shared_access_seq" data-target-id="uvm_mem_shared_access_seq" class=LClass id=link20  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class="CClass" id="doc-nav-item-7" data-doc-topic="doc-nav-item-7" data-anchor="uvm_reg_mem_shared_access_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_mem_shared_access_seq" id="uvm_reg_mem_shared_access_seq" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L354" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="354">uvm_reg_mem_shared_access_seq</a></h2><div class=CBody><p>Verify the accessibility of all shared registers and memories in a block by executing the <a href="#uvm_reg_shared_access_seq" data-target-id="uvm_reg_shared_access_seq" class=LClass id=link19  >uvm_reg_shared_access_seq</a> and <a href="#uvm_mem_shared_access_seq" data-target-id="uvm_mem_shared_access_seq" class=LClass id=link20  >uvm_mem_shared_access_seq</a> sequence respectively on every register and memory within it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo;, &ldquo;NO_MEM_TESTS&rdquo;, &ldquo;NO_REG_SHARED_ACCESS_TEST&rdquo; or &ldquo;NO_MEM_SHARED_ACCESS_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-type">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;.*&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span>
                            <span class="sv-string">&quot;NO_REG_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div>
@@ -380,17 +359,10 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CVariable" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_reg_mem_shared_access_seq.model"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.model" id="uvm_reg_mem_shared_access_seq.model" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L367" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="367">model</a></h3><div class=CBody><p>The block to be tested</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CVariable" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_reg_mem_shared_access_seq.model"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_mem_shared_access_seq.model" id="uvm_reg_mem_shared_access_seq.model" href="../../../src_view/reg/sequences/uvm_reg_mem_shared_access_seq.svh.html#L367" class="src-code-link" data-src-file="reg/sequences/uvm_reg_mem_shared_access_seq.svh" data-src-line="367">model</a></h3><div class=CBody><p>The block to be tested</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_reg_block</span> <span class="sv-ident">model</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 

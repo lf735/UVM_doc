@@ -64,17 +64,10 @@
 
 
  <!--CONTENT index=1 -->
-<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_reg_single_bit_bash_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_single_bit_bash_seq" id="uvm_reg_single_bit_bash_seq" href="../../../src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L54" class="src-code-link" data-src-file="reg/sequences/uvm_reg_bit_bash_seq.svh" data-src-line="54">uvm_reg_single_bit_bash_seq</a></h2><div class=CBody><p>Verify the implementation of a single register by attempting to write 1&rsquo;s and 0&rsquo;s to every bit in it, via every address map in which the register is mapped, making sure that the resulting value matches the mirrored value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_BIT_BASH_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the register, the register is not tested.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CClass" id="doc-nav-item-1" data-doc-topic="doc-nav-item-1" data-anchor="uvm_reg_single_bit_bash_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_single_bit_bash_seq" id="uvm_reg_single_bit_bash_seq" href="../../../src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L54" class="src-code-link" data-src-file="reg/sequences/uvm_reg_bit_bash_seq.svh" data-src-line="54">uvm_reg_single_bit_bash_seq</a></h2><div class=CBody><p>Verify the implementation of a single register by attempting to write 1&rsquo;s and 0&rsquo;s to every bit in it, via every address map in which the register is mapped, making sure that the resulting value matches the mirrored value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_BIT_BASH_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the register, the register is not tested.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-type">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-ident">r0</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">}</span><span class="sv-op">,</span>
                            <span class="sv-string">&quot;NO_REG_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Registers that contain fields with unknown access policies cannot be tested.</p><p>The DUT should be idle and not modify any register during this test.</p>
@@ -180,17 +173,10 @@
   <blockquote><table border="0" cellspacing="0" cellpadding="0" class="Prototype"><tr><td><span class="sv-keyword"><span class="sv-keyword-decl">task</span></span> <span class="sv-proto-name"><span class="sv-ident">bash_kth_bit</span></span> <span class="sv-params"><span class="sv-op">(</span><span class="sv-uvm-type">uvm_reg</span>         <span class="sv-ident">rg</span><span class="sv-op">,</span><span class="sv-op">)</span></span></td></tr></table></blockquote>
   <div class="CBody"><p><span class="undocumented-notice"><svg class="undoc-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span>Not officially documented &mdash; <a href="../../../src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L143" class="src-code-link undoc-src-link" data-src-file="reg/sequences/uvm_reg_bit_bash_seq.svh" data-src-line="143">see source code</a></span></span></p></div>
 </div>
-</div><div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_reg_bit_bash_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_bit_bash_seq" id="uvm_reg_bit_bash_seq" href="../../../src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L203" class="src-code-link" data-src-file="reg/sequences/uvm_reg_bit_bash_seq.svh" data-src-line="203">uvm_reg_bit_bash_seq</a></h2><div class=CBody><p>Verify the implementation of all registers in a block by executing the <a href="#uvm_reg_single_bit_bash_seq" data-target-id="uvm_reg_single_bit_bash_seq" class=LClass id=link12  >uvm_reg_single_bit_bash_seq</a> sequence on it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_BIT_BASH_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class="CClass" id="doc-nav-item-4" data-doc-topic="doc-nav-item-4" data-anchor="uvm_reg_bit_bash_seq"><div class="CTopic"><h2 class=CTitle><a name="uvm_reg_bit_bash_seq" id="uvm_reg_bit_bash_seq" href="../../../src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L203" class="src-code-link" data-src-file="reg/sequences/uvm_reg_bit_bash_seq.svh" data-src-line="203">uvm_reg_bit_bash_seq</a></h2><div class=CBody><p>Verify the implementation of all registers in a block by executing the <a href="#uvm_reg_single_bit_bash_seq" data-target-id="uvm_reg_single_bit_bash_seq" class=LClass id=link12  >uvm_reg_single_bit_bash_seq</a> sequence on it.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_BIT_BASH_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block, the block is not tested.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-type">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;.*&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span>
                            <span class="sv-string">&quot;NO_REG_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div>
@@ -276,17 +262,10 @@
 
 
  <!--CONTENT index=6 -->
-<div class="CVariable" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_reg_bit_bash_seq.model"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_bit_bash_seq.model" id="uvm_reg_bit_bash_seq.model" href="../../../src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L216" class="src-code-link" data-src-file="reg/sequences/uvm_reg_bit_bash_seq.svh" data-src-line="216">model</a></h3><div class=CBody><p>The block to be tested.&nbsp; Declared in the base class.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CVariable" id="doc-nav-item-6" data-doc-topic="doc-nav-item-6" data-anchor="uvm_reg_bit_bash_seq.model"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_bit_bash_seq.model" id="uvm_reg_bit_bash_seq.model" href="../../../src_view/reg/sequences/uvm_reg_bit_bash_seq.svh.html#L216" class="src-code-link" data-src-file="reg/sequences/uvm_reg_bit_bash_seq.svh" data-src-line="216">model</a></h3><div class=CBody><p>The block to be tested.&nbsp; Declared in the base class.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_reg_block</span> <span class="sv-ident">model</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 

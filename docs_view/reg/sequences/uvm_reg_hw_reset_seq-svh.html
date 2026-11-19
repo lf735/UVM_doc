@@ -45,17 +45,10 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_reg_hw_reset_seq"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_reg_hw_reset_seq" id="uvm_reg_hw_reset_seq" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">uvm_reg_hw_reset_seq</a></h1><div class=CBody><p>Test the hard reset values of registers</p><p>The test sequence performs the following steps</p><p>1. resets the DUT and the block abstraction class associated with this sequence.</p><p>2. reads all of the registers in the block, via all of the available address maps, comparing the value read with the expected reset value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_HW_RESET_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block or register, the block or register is not tested.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_reg_hw_reset_seq"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_reg_hw_reset_seq" id="uvm_reg_hw_reset_seq" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L48" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="48">uvm_reg_hw_reset_seq</a></h1><div class=CBody><p>Test the hard reset values of registers</p><p>The test sequence performs the following steps</p><p>1. resets the DUT and the block abstraction class associated with this sequence.</p><p>2. reads all of the registers in the block, via all of the available address maps, comparing the value read with the expected reset value.</p><p>If bit-type resource named &ldquo;NO_REG_TESTS&rdquo; or &ldquo;NO_REG_HW_RESET_TEST&rdquo; in the &ldquo;REG::&rdquo; namespace matches the full name of the block or register, the block or register is not tested.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_resource_db</span><span class="sv-op">#(</span><span class="sv-type">bit</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-op">{</span><span class="sv-string">&quot;REG::&quot;</span><span class="sv-op">,</span><span class="sv-ident">regmodel</span><span class="sv-op">.</span><span class="sv-ident">blk</span><span class="sv-op">.</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;.*&quot;</span><span class="sv-op">}</span><span class="sv-op">,</span>
                            <span class="sv-string">&quot;NO_REG_TESTS&quot;</span><span class="sv-op">,</span> <span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>This is usually the first test executed on any DUT.</p>
@@ -138,17 +131,10 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CVariable" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_reg_hw_reset_seq.model"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_hw_reset_seq.model" id="uvm_reg_hw_reset_seq.model" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L69" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="69">model</a></h3><div class=CBody><p>The block to be tested.&nbsp; Declared in the base class.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CVariable" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_reg_hw_reset_seq.model"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_hw_reset_seq.model" id="uvm_reg_hw_reset_seq.model" href="../../../src_view/reg/sequences/uvm_reg_hw_reset_seq.svh.html#L69" class="src-code-link" data-src-file="reg/sequences/uvm_reg_hw_reset_seq.svh" data-src-line="69">model</a></h3><div class=CBody><p>The block to be tested.&nbsp; Declared in the base class.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_reg_block</span> <span class="sv-ident">model</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 

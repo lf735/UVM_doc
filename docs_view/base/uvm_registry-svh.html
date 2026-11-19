@@ -453,46 +453,25 @@
 
 
  <!--CONTENT index=17 -->
-<div class="CGroup" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_object_registry#(T,Tname).Usage"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).Usage" id="uvm_object_registry#(T,Tname).Usage">Usage</a></h3><div class=CBody><p>This section describes usage for the uvm_*_registry classes.</p><p>The wrapper classes are used to register lightweight proxies of objects and components.</p><p>To register a particular component type, you need only typedef a specialization of its proxy class, which is typically done inside the class.</p><p>For example, to register a UVM component of type <i>mycomp</i></p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CGroup" id="doc-nav-item-17" data-doc-topic="doc-nav-item-17" data-anchor="uvm_object_registry#(T,Tname).Usage"><div class="CTopic"><h3 class=CTitle><a name="uvm_object_registry#(T,Tname).Usage" id="uvm_object_registry#(T,Tname).Usage">Usage</a></h3><div class=CBody><p>This section describes usage for the uvm_*_registry classes.</p><p>The wrapper classes are used to register lightweight proxies of objects and components.</p><p>To register a particular component type, you need only typedef a specialization of its proxy class, which is typically done inside the class.</p><p>For example, to register a UVM component of type <i>mycomp</i></p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mycomp</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-keyword-decl">typedef</span> <span class="sv-uvm-type">uvm_component_registry</span> <span class="sv-op">#(</span><span class="sv-ident">mycomp</span><span class="sv-op">,</span><span class="sv-string">&quot;mycomp&quot;</span><span class="sv-op">)</span> <span class="sv-method">type_id</span><span class="sv-op">;</span>
 <span class="sv-keyword-decl">endclass</span></code></pre>
-</div><p>However, because of differences between simulators, it is necessary to use a macro to ensure vendor interoperability with factory registration.&nbsp; To register a UVM component of type <i>mycomp</i> in a vendor-independent way, you would write instead:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>However, because of differences between simulators, it is necessary to use a macro to ensure vendor interoperability with factory registration.&nbsp; To register a UVM component of type <i>mycomp</i> in a vendor-independent way, you would write instead:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mycomp</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">mycomp</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
 <span class="sv-keyword-decl">endclass</span></code></pre>
-</div><p>The <a href="../macros/uvm_object_defines-svh.html#`uvm_component_utils" data-target-id="`uvm_component_utils" class=LMacro >`uvm_component_utils</a> macro is for non-parameterized classes.&nbsp; In this example, the typedef underlying the macro specifies the <i>Tname</i> parameter as &ldquo;mycomp&rdquo;, and <i>mycomp</i>&rsquo;s get_type_name() is defined to return the same.&nbsp; With <i>Tname</i> defined, you can use the factory&rsquo;s name-based methods to set overrides and create objects and components of non-parameterized types.</p><p>For parameterized types, the type name changes with each specialization, so you cannot specify a <i>Tname</i> inside a parameterized class and get the behavior you want; the same type name string would be registered for all specializations of the class!&nbsp; (The factory would produce warnings for each specialization beyond the first.)&nbsp; To avoid the warnings and simulator interoperability issues with parameterized classes, you must register parameterized classes with a different macro.</p><p>For example, to register a UVM component of type driver #(T), you would write:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>The <a href="../macros/uvm_object_defines-svh.html#`uvm_component_utils" data-target-id="`uvm_component_utils" class=LMacro >`uvm_component_utils</a> macro is for non-parameterized classes.&nbsp; In this example, the typedef underlying the macro specifies the <i>Tname</i> parameter as &ldquo;mycomp&rdquo;, and <i>mycomp</i>&rsquo;s get_type_name() is defined to return the same.&nbsp; With <i>Tname</i> defined, you can use the factory&rsquo;s name-based methods to set overrides and create objects and components of non-parameterized types.</p><p>For parameterized types, the type name changes with each specialization, so you cannot specify a <i>Tname</i> inside a parameterized class and get the behavior you want; the same type name string would be registered for all specializations of the class!&nbsp; (The factory would produce warnings for each specialization beyond the first.)&nbsp; To avoid the warnings and simulator interoperability issues with parameterized classes, you must register parameterized classes with a different macro.</p><p>For example, to register a UVM component of type driver #(T), you would write:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">driver</span> <span class="sv-op">#(</span><span class="sv-type">type</span> <span class="sv-ident">T</span><span class="sv-op">=</span><span class="sv-type">int</span><span class="sv-op">)</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-macro">`uvm_component_param_utils</span><span class="sv-op">(</span><span class="sv-ident">driver</span> <span class="sv-op">#(</span><span class="sv-ident">T</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>

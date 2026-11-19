@@ -391,17 +391,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Static accessor, returns a recorder reference for a given unique id.</p><p>If no recorder exists with the given <i>id</i>, or if the recorder with that <i>id</i> has been freed, then <i>null</i> is returned.</p><p>This method can be used to access the recorder associated with a call to <a href="uvm_transaction-svh.html#uvm_transaction.begin_tr" data-target-id="uvm_transaction.begin_tr" class=LMethod id=link58  >uvm_transaction::begin_tr</a> or <a href="uvm_component-svh.html#uvm_component.begin_tr" data-target-id="uvm_component.begin_tr" class=LMethod id=link59  >uvm_component::begin_tr</a>.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Static accessor, returns a recorder reference for a given unique id.</p><p>If no recorder exists with the given <i>id</i>, or if the recorder with that <i>id</i> has been freed, then <i>null</i> is returned.</p><p>This method can be used to access the recorder associated with a call to <a href="uvm_transaction-svh.html#uvm_transaction.begin_tr" data-target-id="uvm_transaction.begin_tr" class=LMethod id=link58  >uvm_transaction::begin_tr</a> or <a href="uvm_component-svh.html#uvm_component.begin_tr" data-target-id="uvm_component.begin_tr" class=LMethod id=link59  >uvm_component::begin_tr</a>.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-type">integer</span> <span class="sv-ident">handle</span> <span class="sv-op">=</span> <span class="sv-ident">tr</span><span class="sv-op">.</span><span class="sv-method">begin_tr</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-uvm-type">uvm_recorder</span> <span class="sv-ident">recorder</span> <span class="sv-op">=</span> <span class="sv-uvm-type">uvm_recorder</span><span class="sv-op">::</span><span class="sv-method">get_recorder_from_handle</span><span class="sv-op">(</span><span class="sv-ident">handle</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">recorder</span> <span class="sv-op">!=</span> <span class="sv-constant">null</span><span class="sv-op">)</span> <span class="sv-keyword">begin</span>
@@ -571,17 +564,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Records a name/value pair, where <i>value</i> has been converted to a string.</p><h4 class=CHeading>For example</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Records a name/value pair, where <i>value</i> has been converted to a string.</p><h4 class=CHeading>For example</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">recorder</span><span class="sv-op">.</span><span class="sv-method">record_generic</span><span class="sv-op">(</span><span class="sv-string">&quot;myvar&quot;</span><span class="sv-op">,</span><span class="sv-string">&quot;var_type&quot;</span><span class="sv-op">,</span> <span class="sv-system-tf">$sformatf</span><span class="sv-op">(</span><span class="sv-string">&quot;<span class="sv-string-escape">%0d</span>&quot;</span><span class="sv-op">,</span><span class="sv-ident">myvar</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-number">32</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><h4 class=CHeading>Parameters</h4><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>name</td><td class=CDLDescription>Name of the field</td></tr><tr><td class=CDLEntry>value</td><td class=CDLDescription>Value of the field</td></tr><tr><td class=CDLEntry>type_name</td><td class=CDLDescription><i>optional</i> Type name of the field</td></tr></table></div></div></div>
 

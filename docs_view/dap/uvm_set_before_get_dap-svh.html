@@ -45,17 +45,10 @@
 
 
  <!--CONTENT index=0 -->
-<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_set_before_get_dap"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_set_before_get_dap" id="uvm_set_before_get_dap" href="../../src_view/dap/uvm_set_before_get_dap.svh.html#L68" class="src-code-link" data-src-file="dap/uvm_set_before_get_dap.svh" data-src-line="68">uvm_set_before_get_dap</a></h1><div class=CBody><p>Provides a &lsquo;Set Before Get&rsquo; Data Access Policy.</p><p>The &lsquo;Set Before Get&rsquo; Data Access Policy enforces that the value must be written at <i>least</i> once before it is read.&nbsp;  This DAP can be used to pass shared information to multiple components during standard configuration, even if that information hasn&rsquo;t yet been determined.</p><p>Such DAP objects can be useful for passing a &lsquo;placeholder&rsquo; reference, before the information is actually available.&nbsp;  A good example of this would be the virtual sequencer:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CClass" id="doc-nav-main" data-doc-topic="doc-nav-main" data-anchor="uvm_set_before_get_dap"><div class="CTopic" id="MainTopic"><h1 class=CTitle><a name="uvm_set_before_get_dap" id="uvm_set_before_get_dap" href="../../src_view/dap/uvm_set_before_get_dap.svh.html#L68" class="src-code-link" data-src-file="dap/uvm_set_before_get_dap.svh" data-src-line="68">uvm_set_before_get_dap</a></h1><div class=CBody><p>Provides a &lsquo;Set Before Get&rsquo; Data Access Policy.</p><p>The &lsquo;Set Before Get&rsquo; Data Access Policy enforces that the value must be written at <i>least</i> once before it is read.&nbsp;  This DAP can be used to pass shared information to multiple components during standard configuration, even if that information hasn&rsquo;t yet been determined.</p><p>Such DAP objects can be useful for passing a &lsquo;placeholder&rsquo; reference, before the information is actually available.&nbsp;  A good example of this would be the virtual sequencer:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">typedef</span> <span class="sv-uvm-type">uvm_set_before_get_dap</span><span class="sv-op">#(</span><span class="sv-uvm-type">uvm_sequencer_base</span><span class="sv-op">)</span> <span class="sv-ident">seqr_dap_t</span><span class="sv-op">;</span>
 <span class="sv-ident">virtual_seqeuncer_type</span> <span class="sv-ident">virtual_sequencer</span><span class="sv-op">;</span>
 <span class="sv-ident">agent_type</span> <span class="sv-ident">my_agent</span><span class="sv-op">;</span>

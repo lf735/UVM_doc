@@ -159,17 +159,10 @@
 
 
  <!--CONTENT index=8 -->
-<div class="CType" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_hdl_path_slice"><div class="CTopic"><h3 class=CTitle><a name="uvm_hdl_path_slice" id="uvm_hdl_path_slice" href="../../src_view/reg/uvm_reg_model.svh.html#L125" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="125">uvm_hdl_path_slice</a></h3><div class=CBody><p>Slice of an HDL path</p><p>Struct that specifies the HDL variable that corresponds to all or a portion of a register.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>path</td><td class=CDLDescription>Path to the HDL variable.</td></tr><tr><td class=CDLEntry>offset</td><td class=CDLDescription>Offset of the LSB in the register that this variable implements</td></tr><tr><td class=CDLEntry>size</td><td class=CDLDescription>Number of bits (toward the MSB) that this variable implements</td></tr></table><p>If the HDL variable implements all of the register, <i>offset</i> and <i>size</i> are specified as -1.&nbsp; For example:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CType" id="doc-nav-item-8" data-doc-topic="doc-nav-item-8" data-anchor="uvm_hdl_path_slice"><div class="CTopic"><h3 class=CTitle><a name="uvm_hdl_path_slice" id="uvm_hdl_path_slice" href="../../src_view/reg/uvm_reg_model.svh.html#L125" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="125">uvm_hdl_path_slice</a></h3><div class=CBody><p>Slice of an HDL path</p><p>Struct that specifies the HDL variable that corresponds to all or a portion of a register.</p><table border=0 cellspacing=0 cellpadding=0 class=CDescriptionList><tr><td class=CDLEntry>path</td><td class=CDLDescription>Path to the HDL variable.</td></tr><tr><td class=CDLEntry>offset</td><td class=CDLDescription>Offset of the LSB in the register that this variable implements</td></tr><tr><td class=CDLEntry>size</td><td class=CDLDescription>Number of bits (toward the MSB) that this variable implements</td></tr></table><p>If the HDL variable implements all of the register, <i>offset</i> and <i>size</i> are specified as -1.&nbsp; For example:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">r1</span><span class="sv-op">.</span><span class="sv-method">add_hdl_path</span><span class="sv-op">(</span><span class="sv-string">&#x27;{ &#x27;</span><span class="sv-op">{</span><span class="sv-string">&quot;r1&quot;</span><span class="sv-op">,</span> <span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">}</span> <span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -249,33 +242,19 @@
 
 
  <!--CONTENT index=21 -->
-<div class="CClass" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_hdl_path_concat"><div class="CTopic"><h2 class=CTitle><a name="uvm_hdl_path_concat" id="uvm_hdl_path_concat" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">uvm_hdl_path_concat</a></h2><div class=CBody><p>Concatenation of HDL variables</p><p>A dArray of <a href="#uvm_hdl_path_slice" data-target-id="uvm_hdl_path_slice" class=LType id=link26  >uvm_hdl_path_slice</a> specifying a concatenation of HDL variables that implement a register in the HDL.</p><p>Slices must be specified in most-to-least significant order.&nbsp; Slices must not overlap.&nbsp; Gaps may exist in the concatenation if portions of the registers are not implemented.</p><p>For example, the following register</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CClass" id="doc-nav-item-21" data-doc-topic="doc-nav-item-21" data-anchor="uvm_hdl_path_concat"><div class="CTopic"><h2 class=CTitle><a name="uvm_hdl_path_concat" id="uvm_hdl_path_concat" href="../../src_view/reg/uvm_reg_model.svh.html#L346" class="src-code-link" data-src-file="reg/uvm_reg_model.svh" data-src-line="346">uvm_hdl_path_concat</a></h2><div class=CBody><p>Concatenation of HDL variables</p><p>A dArray of <a href="#uvm_hdl_path_slice" data-target-id="uvm_hdl_path_slice" class=LType id=link26  >uvm_hdl_path_slice</a> specifying a concatenation of HDL variables that implement a register in the HDL.</p><p>Slices must be specified in most-to-least significant order.&nbsp; Slices must not overlap.&nbsp; Gaps may exist in the concatenation if portions of the registers are not implemented.</p><p>For example, the following register</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code>       <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">1</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span> <span class="sv-number">0</span>
 <span class="sv-ident">Bits</span><span class="sv-op">:</span>  <span class="sv-number">5</span> <span class="sv-number">4</span> <span class="sv-number">3</span> <span class="sv-number">2</span> <span class="sv-number">1</span> <span class="sv-number">0</span> <span class="sv-number">9</span> <span class="sv-number">8</span> <span class="sv-number">7</span> <span class="sv-number">6</span> <span class="sv-number">5</span> <span class="sv-number">4</span> <span class="sv-number">3</span> <span class="sv-number">2</span> <span class="sv-number">1</span> <span class="sv-number">0</span>
       <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">--</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">--</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">-</span><span class="sv-op">+</span>
       <span class="sv-op">|</span><span class="sv-ident">A</span><span class="sv-op">|</span><span class="sv-ident">xxx</span><span class="sv-op">|</span>      <span class="sv-ident">B</span>      <span class="sv-op">|</span><span class="sv-ident">xxx</span><span class="sv-op">|</span>   <span class="sv-ident">C</span>   <span class="sv-op">|</span>
       <span class="sv-op">+</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">--</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">--</span><span class="sv-op">-</span><span class="sv-op">+</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">--</span><span class="sv-op">-</span><span class="sv-op">+</span></code></pre>
-</div><p>If the register is implemented using a single HDL variable, The array should specify a single slice with its <i>offset</i> and <i>size</i> specified as -1.&nbsp; For example:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>If the register is implemented using a single HDL variable, The array should specify a single slice with its <i>offset</i> and <i>size</i> specified as -1.&nbsp; For example:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">concat</span><span class="sv-op">.</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-string">&#x27;{ &#x27;</span><span class="sv-op">{</span><span class="sv-string">&quot;r1&quot;</span><span class="sv-op">,</span> <span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">,</span> <span class="sv-op">-</span><span class="sv-number">1</span><span class="sv-op">}</span> <span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div>
 

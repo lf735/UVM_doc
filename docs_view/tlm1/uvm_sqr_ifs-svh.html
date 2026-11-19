@@ -188,17 +188,10 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Indicates that the request is completed to the sequencer.&nbsp;  Any <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.wait_for_item_done" data-target-id="uvm_sequence_base.wait_for_item_done" class=LMethod id=link21  >uvm_sequence_base::wait_for_item_done</a> calls made by a sequence for this item will return.</p><p>The current item is removed from the sequencer FIFO.</p><p>If a response item is provided, then it will be sent back to the requesting sequence.&nbsp; The response item must have its sequence ID and transaction ID set correctly, using the <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item.set_id_info" data-target-id="uvm_sequence_item.set_id_info" class=LMethod id=link22  >uvm_sequence_item::set_id_info</a> method:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Indicates that the request is completed to the sequencer.&nbsp;  Any <a href="../seq/uvm_sequence_base-svh.html#uvm_sequence_base.wait_for_item_done" data-target-id="uvm_sequence_base.wait_for_item_done" class=LMethod id=link21  >uvm_sequence_base::wait_for_item_done</a> calls made by a sequence for this item will return.</p><p>The current item is removed from the sequencer FIFO.</p><p>If a response item is provided, then it will be sent back to the requesting sequence.&nbsp; The response item must have its sequence ID and transaction ID set correctly, using the <a href="../seq/uvm_sequence_item-svh.html#uvm_sequence_item.set_id_info" data-target-id="uvm_sequence_item.set_id_info" class=LMethod id=link22  >uvm_sequence_item::set_id_info</a> method:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">rsp</span><span class="sv-op">.</span><span class="sv-method">set_id_info</span><span class="sv-op">(</span><span class="sv-ident">req</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Before <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" data-target-id="uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link23  >item_done</a> is called, any calls to peek will retrieve the current item that was obtained by <a href="#uvm_sqr_if_base#(REQ,RSP).get_next_item" data-target-id="uvm_sqr_if_base#(REQ,RSP).get_next_item" class=LMethod id=link24  >get_next_item</a>.&nbsp;  After <a href="#uvm_sqr_if_base#(REQ,RSP).item_done" data-target-id="uvm_sqr_if_base#(REQ,RSP).item_done" class=LMethod id=link25  >item_done</a> is called, peek will cause the sequencer to arbitrate for a new item.</p></div></div></div>
 

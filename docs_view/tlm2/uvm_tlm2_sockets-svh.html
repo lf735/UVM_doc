@@ -202,17 +202,10 @@
     <a href="../../examples_view/tlm-2/blocking_simple.html" class="example-callout-link" data-example-url="../../examples_view/tlm-2/blocking_simple.html" title="Open Blocking TLM-2 Transport (b_transport)">Blocking TLM-2 Transport (b_transport)</a>
   </div>
   <span class="example-callout-badge">Interactive Studio</span>
-</div><div class=CBody><p>IS-A forward imp; has no backward path except via the payload contents.</p><p>The component instantiating this socket must implement a b_transport() method with the following signature</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class=CBody><p>IS-A forward imp; has no backward path except via the payload contents.</p><p>The component instantiating this socket must implement a b_transport() method with the following signature</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">task</span> <span class="sv-method">b_transport</span><span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">,</span> <span class="sv-uvm-type">uvm_tlm_time</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div>
 
@@ -339,17 +332,10 @@
     <a href="../../examples_view/tlm-2/nonblocking_simple.html" class="example-callout-link" data-example-url="../../examples_view/tlm-2/nonblocking_simple.html" title="Open Non-Blocking 4-Phase Protocol">Non-Blocking 4-Phase Protocol</a>
   </div>
   <span class="example-callout-badge">Interactive Studio</span>
-</div><div class=CBody><p>IS-A forward port; HAS-A backward imp</p><p>The component instantiating this socket must implement a nb_transport_bw() method with the following signature</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class=CBody><p>IS-A forward port; HAS-A backward imp</p><p>The component instantiating this socket must implement a nb_transport_bw() method with the following signature</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_tlm_sync_e</span> <span class="sv-method">nb_transport_bw</span><span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">,</span> <span class="sv-qualifier">ref</span> <span class="sv-ident">P</span> <span class="sv-ident">p</span><span class="sv-op">,</span> <span class="sv-qualifier">input</span> <span class="sv-uvm-type">uvm_tlm_time</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div>
 
@@ -480,17 +466,10 @@
     <a href="../../examples_view/tlm-2/nonblocking_simple.html" class="example-callout-link" data-example-url="../../examples_view/tlm-2/nonblocking_simple.html" title="Open Non-Blocking 4-Phase Protocol">Non-Blocking 4-Phase Protocol</a>
   </div>
   <span class="example-callout-badge">Interactive Studio</span>
-</div><div class=CBody><p>IS-A forward imp; HAS-A backward port</p><p>The component instantiating this socket must implement a nb_transport_fw() method with the following signature</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><div class=CBody><p>IS-A forward imp; HAS-A backward port</p><p>The component instantiating this socket must implement a nb_transport_fw() method with the following signature</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">function</span> <span class="sv-uvm-type">uvm_tlm_sync_e</span> <span class="sv-method">nb_transport_fw</span><span class="sv-op">(</span><span class="sv-ident">T</span> <span class="sv-ident">t</span><span class="sv-op">,</span> <span class="sv-qualifier">ref</span> <span class="sv-ident">P</span> <span class="sv-ident">p</span><span class="sv-op">,</span> <span class="sv-qualifier">input</span> <span class="sv-uvm-type">uvm_tlm_time</span> <span class="sv-ident">delay</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div>
 

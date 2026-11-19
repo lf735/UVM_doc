@@ -3687,6 +3687,7 @@ window.PageCommon = (function () {
   }
 
   function initCodeBlocks() {
+    const checkSvg = '<svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
     document.addEventListener('click', function (e) {
       const btn = e.target.closest('.code-copy-btn');
       if (!btn) return;
@@ -3697,13 +3698,26 @@ window.PageCommon = (function () {
       const text = codeEl.innerText || codeEl.textContent;
       copyText(text).then(function () {
         const copyTextSpan = btn.querySelector('.copy-text');
-        const orig = copyTextSpan ? copyTextSpan.textContent : 'Copy';
-        btn.classList.add('copied');
-        if (copyTextSpan) copyTextSpan.textContent = 'Copied!';
-        setTimeout(function () {
-          btn.classList.remove('copied');
-          if (copyTextSpan) copyTextSpan.textContent = orig;
-        }, 2000);
+        if (copyTextSpan) {
+          const orig = copyTextSpan.textContent;
+          btn.classList.add('copied');
+          copyTextSpan.textContent = 'Copied!';
+          setTimeout(function () {
+            btn.classList.remove('copied');
+            copyTextSpan.textContent = orig;
+          }, 2000);
+        } else {
+          if (!btn.dataset.origHtml) btn.dataset.origHtml = btn.innerHTML;
+          const origTitle = btn.getAttribute('title') || 'Copy code';
+          btn.classList.add('copied');
+          btn.innerHTML = checkSvg;
+          btn.setAttribute('title', 'Copied!');
+          setTimeout(function () {
+            btn.classList.remove('copied');
+            if (btn.dataset.origHtml) btn.innerHTML = btn.dataset.origHtml;
+            btn.setAttribute('title', origTitle);
+          }, 2000);
+        }
       });
     });
   }

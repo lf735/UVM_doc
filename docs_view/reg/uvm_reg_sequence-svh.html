@@ -190,17 +190,10 @@
 
 
  <!--CONTENT index=2 -->
-<div class="CParameter" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_reg_sequence.BASE"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_sequence.BASE" id="uvm_reg_sequence.BASE" href="../../src_view/reg/uvm_reg_sequence.svh.html#L89" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="89">BASE</a></h3><div class=CBody><p>Specifies the sequence type to extend from.</p><p>When used as a translation sequence running on a bus sequencer, <i>BASE</i> must be compatible with the sequence type expected by the bus sequencer.</p><p>When used as a test sequence running on a particular sequencer, <i>BASE</i> must be compatible with the sequence type expected by that sequencer.</p><p>When used as a virtual test sequence without a sequencer, <i>BASE</i> does not need to be specified, i.e. the default specialization is adequate.</p><p>To maximize opportunities for reuse, user-defined RegModel sequences should &ldquo;promote&rdquo; the BASE parameter.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CParameter" id="doc-nav-item-2" data-doc-topic="doc-nav-item-2" data-anchor="uvm_reg_sequence.BASE"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_sequence.BASE" id="uvm_reg_sequence.BASE" href="../../src_view/reg/uvm_reg_sequence.svh.html#L89" class="src-code-link" data-src-file="reg/uvm_reg_sequence.svh" data-src-line="89">BASE</a></h3><div class=CBody><p>Specifies the sequence type to extend from.</p><p>When used as a translation sequence running on a bus sequencer, <i>BASE</i> must be compatible with the sequence type expected by the bus sequencer.</p><p>When used as a test sequence running on a particular sequencer, <i>BASE</i> must be compatible with the sequence type expected by that sequencer.</p><p>When used as a virtual test sequence without a sequencer, <i>BASE</i> does not need to be specified, i.e. the default specialization is adequate.</p><p>To maximize opportunities for reuse, user-defined RegModel sequences should &ldquo;promote&rdquo; the BASE parameter.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">my_reg_sequence</span> <span class="sv-op">#(</span><span class="sv-type">type</span> <span class="sv-ident">BASE</span><span class="sv-op">=</span><span class="sv-uvm-type">uvm_sequence</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_reg_item</span><span class="sv-op">)</span><span class="sv-op">)</span>
                               <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_reg_sequence</span> <span class="sv-op">#(</span><span class="sv-ident">BASE</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>This way, the RegModel sequence can be extended from user-defined base sequences.</p></div></div></div>
@@ -282,29 +275,15 @@
 
 
  <!--CONTENT index=9 -->
-<div class="CGroup" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_reg_sequence.Convenience_Write/Read_API"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_sequence.Convenience_Write/Read_API" id="uvm_reg_sequence.Convenience_Write/Read_API">Convenience Write/<span class=HB> </span>Read API</a></h3><div class=CBody><p>The following methods delegate to the corresponding method in the register or memory element.&nbsp; They allow a sequence <i>body()</i> to do reads and writes without having to explicitly supply itself to <i>parent</i> sequence argument.&nbsp; Thus, a register write</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class="CGroup" id="doc-nav-item-9" data-doc-topic="doc-nav-item-9" data-anchor="uvm_reg_sequence.Convenience_Write/Read_API"><div class="CTopic"><h3 class=CTitle><a name="uvm_reg_sequence.Convenience_Write/Read_API" id="uvm_reg_sequence.Convenience_Write/Read_API">Convenience Write/<span class=HB> </span>Read API</a></h3><div class=CBody><p>The following methods delegate to the corresponding method in the register or memory element.&nbsp; They allow a sequence <i>body()</i> to do reads and writes without having to explicitly supply itself to <i>parent</i> sequence argument.&nbsp; Thus, a register write</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>can be written instead as</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>can be written instead as</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">write_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -365,29 +344,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Writes the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.write" data-target-id="uvm_reg.write" class=LMethod id=link37  >uvm_reg::write</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Writes the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.write" data-target-id="uvm_reg.write" class=LMethod id=link37  >uvm_reg::write</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">write_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -448,29 +413,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Reads the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.read" data-target-id="uvm_reg.read" class=LMethod id=link38  >uvm_reg::read</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Reads the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.read" data-target-id="uvm_reg.read" class=LMethod id=link38  >uvm_reg::read</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">read_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">read</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -521,29 +472,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Pokes the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.poke" data-target-id="uvm_reg.poke" class=LMethod id=link39  >uvm_reg::poke</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Pokes the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.poke" data-target-id="uvm_reg.poke" class=LMethod id=link39  >uvm_reg::poke</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">poke_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">poke</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -594,29 +531,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Peeks the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.peek" data-target-id="uvm_reg.peek" class=LMethod id=link40  >uvm_reg::peek</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Peeks the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.peek" data-target-id="uvm_reg.peek" class=LMethod id=link40  >uvm_reg::peek</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">peek_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">peek</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -672,29 +595,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Updates the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.update" data-target-id="uvm_reg.update" class=LMethod id=link41  >uvm_reg::update</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Updates the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.update" data-target-id="uvm_reg.update" class=LMethod id=link41  >uvm_reg::update</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">update_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">update</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -755,29 +664,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Mirrors the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.mirror" data-target-id="uvm_reg.mirror" class=LMethod id=link42  >uvm_reg::mirror</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Mirrors the given register <i>rg</i> using <a href="uvm_reg-svh.html#uvm_reg.mirror" data-target-id="uvm_reg.mirror" class=LMethod id=link42  >uvm_reg::mirror</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">mirror_reg</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">UVM_CHECK</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">mirror</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">UVM_CHECK</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -843,29 +738,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Writes the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.write" data-target-id="uvm_mem.write" class=LMethod id=link43  >uvm_mem::write</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Writes the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.write" data-target-id="uvm_mem.write" class=LMethod id=link43  >uvm_mem::write</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">write_mem</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">write</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -931,29 +812,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Reads the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.read" data-target-id="uvm_mem.read" class=LMethod id=link44  >uvm_mem::read</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Reads the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.read" data-target-id="uvm_mem.read" class=LMethod id=link44  >uvm_mem::read</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">read_mem</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">read</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -1009,29 +876,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Pokes the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.poke" data-target-id="uvm_mem.poke" class=LMethod id=link45  >uvm_mem::poke</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Pokes the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.poke" data-target-id="uvm_mem.poke" class=LMethod id=link45  >uvm_mem::poke</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">poke_mem</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">poke</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 
@@ -1087,29 +940,15 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Peeks the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.peek" data-target-id="uvm_mem.peek" class=LMethod id=link46  >uvm_mem::peek</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Peeks the given memory <i>mem</i> using <a href="uvm_mem-svh.html#uvm_mem.peek" data-target-id="uvm_mem.peek" class=LMethod id=link46  >uvm_mem::peek</a>, supplying &lsquo;this&rsquo; as the <i>parent</i> argument.&nbsp; Thus,</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-method">peek_mem</span><span class="sv-op">(</span><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">,</span> <span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>is equivalent to</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>is equivalent to</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">model</span><span class="sv-op">.</span><span class="sv-ident">regA</span><span class="sv-op">.</span><span class="sv-method">peek</span><span class="sv-op">(</span><span class="sv-ident">status</span><span class="sv-op">,</span> <span class="sv-ident">offset</span><span class="sv-op">,</span> <span class="sv-ident">value</span><span class="sv-op">,</span> <span class="sv-op">.</span><span class="sv-method">parent</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div></div></div></div>
 

@@ -451,17 +451,10 @@
       <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>This function populates the end of the <i>children</i> array with the list of this component&rsquo;s children.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>This function populates the end of the <i>children</i> array with the list of this component&rsquo;s children.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">array</span><span class="sv-op">[</span>$<span class="sv-op">]</span><span class="sv-op">;</span>
 <span class="sv-ident">my_comp</span><span class="sv-op">.</span><span class="sv-method">get_children</span><span class="sv-op">(</span><span class="sv-ident">array</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword">foreach</span><span class="sv-op">(</span><span class="sv-ident">array</span><span class="sv-op">[</span><span class="sv-ident">i</span><span class="sv-op">]</span><span class="sv-op">)</span>
@@ -516,17 +509,10 @@
       <td class=PAfterParameters colspan=4><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>These methods are used to iterate through this component&rsquo;s children, if any.&nbsp; For example, given a component with an object handle, <i>comp</i>, the following code calls <a href="uvm_object-svh.html#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link133  >uvm_object::print</a> for each child:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>These methods are used to iterate through this component&rsquo;s children, if any.&nbsp; For example, given a component with an object handle, <i>comp</i>, the following code calls <a href="uvm_object-svh.html#uvm_object.print" data-target-id="uvm_object.print" class=LMethod id=link133  >uvm_object::print</a> for each child:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-type">string</span> <span class="sv-ident">name</span><span class="sv-op">;</span>
 <span class="sv-uvm-type">uvm_component</span> <span class="sv-ident">child</span><span class="sv-op">;</span>
 <span class="sv-keyword">if</span> <span class="sv-op">(</span><span class="sv-ident">comp</span><span class="sv-op">.</span><span class="sv-method">get_first_child</span><span class="sv-op">(</span><span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">)</span>
@@ -956,17 +942,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Invoked when all objections to ending the given <i>phase</i> and all sibling phases have been dropped, thus indicating that <i>phase</i> is ready to begin a clean exit.&nbsp; Sibling phases are any phases that have a common successor phase in the schedule plus any phases that sync&rsquo;d to the current phase.&nbsp; Components needing to consume delta cycles or advance time to perform a clean exit from the phase may raise the phase&rsquo;s objection.</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Invoked when all objections to ending the given <i>phase</i> and all sibling phases have been dropped, thus indicating that <i>phase</i> is ready to begin a clean exit.&nbsp; Sibling phases are any phases that have a common successor phase in the schedule plus any phases that sync&rsquo;d to the current phase.&nbsp; Components needing to consume delta cycles or advance time to perform a clean exit from the phase may raise the phase&rsquo;s objection.</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">phase</span><span class="sv-op">.</span><span class="sv-method">raise_objection</span><span class="sv-op">(</span><span class="sv-constant">this</span><span class="sv-op">,</span><span class="sv-string">&quot;Reason&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>It is the responsibility of this component to drop the objection once it is ready for this phase to end (and processes killed).&nbsp; If no objection to the given <i>phase</i> or sibling phases are raised, then phase_ended() is called after a delta cycle.&nbsp;  If any objection is raised, then when all objections to ending the given <i>phase</i> and siblings are dropped, another iteration of phase_ready_to_end is called.&nbsp;  To prevent endless iterations due to coding error, after 20 iterations, phase_ended() is called regardless of whether previous iteration had any objections raised.</p></div></div></div>
 
@@ -1104,17 +1083,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Check all configuration settings in a components configuration table to determine if the setting has been used, overridden or not used.&nbsp; When <i>recurse</i> is 1 (default), configuration for this and all child components are recursively checked.&nbsp; This function is automatically called in the check phase, but can be manually called at any time.</p><p>To get all configuration information prior to the run phase, do something like this in your top object:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Check all configuration settings in a components configuration table to determine if the setting has been used, overridden or not used.&nbsp; When <i>recurse</i> is 1 (default), configuration for this and all child components are recursively checked.&nbsp; This function is automatically called in the check phase, but can be manually called at any time.</p><p>To get all configuration information prior to the run phase, do something like this in your top object:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-method">start_of_simulation_phase</span><span class="sv-op">(</span><span class="sv-uvm-type">uvm_phase</span> <span class="sv-ident">phase</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-method">check_config_usage</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword-decl">endfunction</span></code></pre>
@@ -1306,17 +1278,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.create_component_by_name" data-target-id="uvm_factory.create_component_by_name" class=LMethod id=link176  >uvm_factory::create_component_by_name</a>, this method calls upon the factory to create a new child component whose type corresponds to the preregistered type name, <i>requested_type_name</i>, and instance name, <i>name</i>.&nbsp; This method is equivalent to:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.create_component_by_name" data-target-id="uvm_factory.create_component_by_name" class=LMethod id=link176  >uvm_factory::create_component_by_name</a>, this method calls upon the factory to create a new child component whose type corresponds to the preregistered type name, <i>requested_type_name</i>, and instance name, <i>name</i>.&nbsp; This method is equivalent to:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-method">create_component_by_name</span><span class="sv-op">(</span><span class="sv-ident">requested_type_name</span><span class="sv-op">,</span>
                                  <span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">name</span><span class="sv-op">,</span> <span class="sv-constant">this</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>If the factory determines that a type or instance override exists, the type of the component created may be different than the requested type.&nbsp; See <a href="#uvm_component.set_type_override" data-target-id="uvm_component.set_type_override" class=LMethod id=link177  >set_type_override</a> and <a href="#uvm_component.set_inst_override" data-target-id="uvm_component.set_inst_override" class=LMethod id=link178  >set_inst_override</a>.&nbsp; See also <a href="uvm_factory-svh.html#uvm_factory" data-target-id="uvm_factory" class=LClass id=link179  >uvm_factory</a> for details on factory operation.</p></div></div></div>
@@ -1341,17 +1306,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.create_object_by_name" data-target-id="uvm_factory.create_object_by_name" class=LMethod id=link180  >uvm_factory::create_object_by_name</a>, this method calls upon the factory to create a new object whose type corresponds to the preregistered type name, <i>requested_type_name</i>, and instance name, <i>name</i>.&nbsp; This method is equivalent to:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.create_object_by_name" data-target-id="uvm_factory.create_object_by_name" class=LMethod id=link180  >uvm_factory::create_object_by_name</a>, this method calls upon the factory to create a new object whose type corresponds to the preregistered type name, <i>requested_type_name</i>, and instance name, <i>name</i>.&nbsp; This method is equivalent to:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-method">create_object_by_name</span><span class="sv-op">(</span><span class="sv-ident">requested_type_name</span><span class="sv-op">,</span>
                               <span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span> <span class="sv-ident">name</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>If the factory determines that a type or instance override exists, the type of the object created may be different than the requested type.&nbsp;  See <a href="uvm_factory-svh.html#uvm_factory" data-target-id="uvm_factory" class=LClass id=link181  >uvm_factory</a> for details on factory operation.</p></div></div></div>
@@ -1380,17 +1338,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.set_type_override_by_type" data-target-id="uvm_factory.set_type_override_by_type" class=LMethod id=link182  >uvm_factory::set_type_override_by_type</a>, this method registers a factory override for components and objects created at this level of hierarchy or below.&nbsp; This method is equivalent to:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.set_type_override_by_type" data-target-id="uvm_factory.set_type_override_by_type" class=LMethod id=link182  >uvm_factory::set_type_override_by_type</a>, this method registers a factory override for components and objects created at this level of hierarchy or below.&nbsp; This method is equivalent to:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-method">set_type_override_by_type</span><span class="sv-op">(</span><span class="sv-ident">original_type</span><span class="sv-op">,</span> <span class="sv-ident">override_type</span><span class="sv-op">,</span><span class="sv-ident">replace</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>The <i>relative_inst_path</i> is relative to this component and may include wildcards.&nbsp; The <i>original_type</i> represents the type that is being overridden.&nbsp; In subsequent calls to <a href="uvm_factory-svh.html#uvm_factory.create_object_by_type" data-target-id="uvm_factory.create_object_by_type" class=LMethod id=link183  >uvm_factory::create_object_by_type</a> or <a href="uvm_factory-svh.html#uvm_factory.create_component_by_type" data-target-id="uvm_factory.create_component_by_type" class=LMethod id=link184  >uvm_factory::create_component_by_type</a>, if the requested_type matches the <i>original_type</i> and the instance paths match, the factory will produce the <i>override_type</i>.</p><p>The original and override type arguments are lightweight proxies to the types they represent.&nbsp; See <a href="#uvm_component.set_inst_override_by_type" data-target-id="uvm_component.set_inst_override_by_type" class=LMethod id=link185  >set_inst_override_by_type</a> for information on usage.</p></div></div></div>
 
@@ -1412,32 +1363,18 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.set_inst_override_by_type" data-target-id="uvm_factory.set_inst_override_by_type" class=LMethod id=link186  >uvm_factory::set_inst_override_by_type</a>, this method registers a factory override for components and objects created at this level of hierarchy or below.&nbsp; In typical usage, this method is equivalent to:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.set_inst_override_by_type" data-target-id="uvm_factory.set_inst_override_by_type" class=LMethod id=link186  >uvm_factory::set_inst_override_by_type</a>, this method registers a factory override for components and objects created at this level of hierarchy or below.&nbsp; In typical usage, this method is equivalent to:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-method">set_inst_override_by_type</span><span class="sv-op">(</span> <span class="sv-ident">original_type</span><span class="sv-op">,</span>
                                    <span class="sv-ident">override_type</span><span class="sv-op">,</span>
                                    <span class="sv-op">{</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;.&quot;</span><span class="sv-op">,</span>
                                     <span class="sv-ident">relative_inst_path</span><span class="sv-op">}</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
-</div><p>The <i>relative_inst_path</i> is relative to this component and may include wildcards.&nbsp; The <i>original_type</i> represents the type that is being overridden.&nbsp; In subsequent calls to <a href="uvm_factory-svh.html#uvm_factory.create_object_by_type" data-target-id="uvm_factory.create_object_by_type" class=LMethod id=link187  >uvm_factory::create_object_by_type</a> or <a href="uvm_factory-svh.html#uvm_factory.create_component_by_type" data-target-id="uvm_factory.create_component_by_type" class=LMethod id=link188  >uvm_factory::create_component_by_type</a>, if the requested_type matches the <i>original_type</i> and the instance paths match, the factory will produce the <i>override_type</i>.</p><p>The original and override types are lightweight proxies to the types they represent.&nbsp; They can be obtained by calling <i>type::get_type()</i>, if implemented by <i>type</i>, or by directly calling <i>type::type_id::get()</i>, where <i>type</i> is the user type and <i>type_id</i> is the name of the typedef to <a href="uvm_registry-svh.html#uvm_object_registry#(T,Tname)" data-target-id="uvm_object_registry#(T,Tname)" class=LClass id=link189  >uvm_object_registry #(T,Tname)</a> or <a href="uvm_registry-svh.html#uvm_component_registry#(T,Tname)" data-target-id="uvm_component_registry#(T,Tname)" class=LClass id=link190  >uvm_component_registry #(T,Tname)</a>.</p><p>If you are employing the `uvm_*_utils macros, the typedef and the get_type method will be implemented for you.&nbsp; For details on the utils macros refer to <a href="../macros/uvm_object_defines-svh.html#Utility_and_Field_Macros_for_Components_and_Objects" data-target-id="Utility_and_Field_Macros_for_Components_and_Objects" class=LSection >Utility and Field Macros for Components and Objects</a>.</p><h4 class=CHeading>The following example shows `uvm_*_utils usage</h4><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+</div><p>The <i>relative_inst_path</i> is relative to this component and may include wildcards.&nbsp; The <i>original_type</i> represents the type that is being overridden.&nbsp; In subsequent calls to <a href="uvm_factory-svh.html#uvm_factory.create_object_by_type" data-target-id="uvm_factory.create_object_by_type" class=LMethod id=link187  >uvm_factory::create_object_by_type</a> or <a href="uvm_factory-svh.html#uvm_factory.create_component_by_type" data-target-id="uvm_factory.create_component_by_type" class=LMethod id=link188  >uvm_factory::create_component_by_type</a>, if the requested_type matches the <i>original_type</i> and the instance paths match, the factory will produce the <i>override_type</i>.</p><p>The original and override types are lightweight proxies to the types they represent.&nbsp; They can be obtained by calling <i>type::get_type()</i>, if implemented by <i>type</i>, or by directly calling <i>type::type_id::get()</i>, where <i>type</i> is the user type and <i>type_id</i> is the name of the typedef to <a href="uvm_registry-svh.html#uvm_object_registry#(T,Tname)" data-target-id="uvm_object_registry#(T,Tname)" class=LClass id=link189  >uvm_object_registry #(T,Tname)</a> or <a href="uvm_registry-svh.html#uvm_component_registry#(T,Tname)" data-target-id="uvm_component_registry#(T,Tname)" class=LClass id=link190  >uvm_component_registry #(T,Tname)</a>.</p><p>If you are employing the `uvm_*_utils macros, the typedef and the get_type method will be implemented for you.&nbsp; For details on the utils macros refer to <a href="../macros/uvm_object_defines-svh.html#Utility_and_Field_Macros_for_Components_and_Objects" data-target-id="Utility_and_Field_Macros_for_Components_and_Objects" class=LSection >Utility and Field Macros for Components and Objects</a>.</p><h4 class=CHeading>The following example shows `uvm_*_utils usage</h4><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">comp</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_component</span><span class="sv-op">;</span>
   <span class="sv-macro">`uvm_component_utils</span><span class="sv-op">(</span><span class="sv-ident">comp</span><span class="sv-op">)</span>
   <span class="sv-op">.</span><span class="sv-op">.</span><span class="sv-op">.</span>
@@ -1483,17 +1420,10 @@
       <td class=PAfterParameters colspan=5><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.set_type_override_by_name" data-target-id="uvm_factory.set_type_override_by_name" class=LMethod id=link191  >uvm_factory::set_type_override_by_name</a>, this method configures the factory to create an object of type <i>override_type_name</i> whenever the factory is asked to produce a type represented by <i>original_type_name</i>.&nbsp;  This method is equivalent to:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.set_type_override_by_name" data-target-id="uvm_factory.set_type_override_by_name" class=LMethod id=link191  >uvm_factory::set_type_override_by_name</a>, this method configures the factory to create an object of type <i>override_type_name</i> whenever the factory is asked to produce a type represented by <i>original_type_name</i>.&nbsp;  This method is equivalent to:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-method">set_type_override_by_name</span><span class="sv-op">(</span><span class="sv-ident">original_type_name</span><span class="sv-op">,</span>
                                   <span class="sv-ident">override_type_name</span><span class="sv-op">,</span> <span class="sv-ident">replace</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>The <i>original_type_name</i> typically refers to a preregistered type in the factory.&nbsp; It may, however, be any arbitrary string.&nbsp; Subsequent calls to create_component or create_object with the same string and matching instance path will produce the type represented by override_type_name.&nbsp; The <i>override_type_name</i> must refer to a preregistered type in the factory.</p></div></div></div>
@@ -1516,17 +1446,10 @@
       <td class=PAfterParameters colspan=3><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.set_inst_override_by_name" data-target-id="uvm_factory.set_inst_override_by_name" class=LMethod id=link192  >uvm_factory::set_inst_override_by_name</a>, this method registers a factory override for components created at this level of hierarchy or below.&nbsp; In typical usage, this method is equivalent to:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>A convenience function for <a href="uvm_factory-svh.html#uvm_factory.set_inst_override_by_name" data-target-id="uvm_factory.set_inst_override_by_name" class=LMethod id=link192  >uvm_factory::set_inst_override_by_name</a>, this method registers a factory override for components created at this level of hierarchy or below.&nbsp; In typical usage, this method is equivalent to:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-ident">factory</span><span class="sv-op">.</span><span class="sv-method">set_inst_override_by_name</span><span class="sv-op">(</span><span class="sv-ident">original_type_name</span><span class="sv-op">,</span>
                                   <span class="sv-ident">override_type_name</span><span class="sv-op">,</span>
                                   <span class="sv-op">{</span><span class="sv-method">get_full_name</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">,</span><span class="sv-string">&quot;.&quot;</span><span class="sv-op">,</span>
@@ -1750,17 +1673,10 @@
  <!--CONTENT index=75 -->
 <div class="CMethod" id="doc-nav-item-75" data-doc-topic="doc-nav-item-75" data-anchor="uvm_component.pre_abort"><div class="CTopic"><h3 class=CTitle><a name="uvm_component.pre_abort" id="uvm_component.pre_abort" href="../../src_view/base/uvm_component.svh.html#L60" class="src-code-link" data-src-file="base/uvm_component.svh" data-src-line="60">pre_abort</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-qualifier">virtual</span> <span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-ident">pre_abort</span>
-  </td></tr></table></blockquote><div class=CBody><p>This callback is executed when the message system is executing a <a href="uvm_object_globals-svh.html#UVM_EXIT" class=LConstant id=link198  >UVM_EXIT</a> action.&nbsp; The exit action causes an immediate termination of the simulation, but the pre_abort callback hook gives components an opportunity to provide additional information to the user before the termination happens.&nbsp; For example, a test may want to executed the report function of a particular component even when an error condition has happened to force a premature termination you would write a function like:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+  </td></tr></table></blockquote><div class=CBody><p>This callback is executed when the message system is executing a <a href="uvm_object_globals-svh.html#UVM_EXIT" class=LConstant id=link198  >UVM_EXIT</a> action.&nbsp; The exit action causes an immediate termination of the simulation, but the pre_abort callback hook gives components an opportunity to provide additional information to the user before the termination happens.&nbsp; For example, a test may want to executed the report function of a particular component even when an error condition has happened to force a premature termination you would write a function like:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">function</span> <span class="sv-type">void</span> <span class="sv-ident">mycomponent</span><span class="sv-op">::</span><span class="sv-method">pre_abort</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
   <span class="sv-method">report</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">;</span>
 <span class="sv-keyword-decl">endfunction</span></code></pre>

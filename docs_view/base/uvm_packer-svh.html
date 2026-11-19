@@ -283,17 +283,10 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Packs bits from an unpacked array of ints into the pack array.</p><p>The bits are appended to the internal pack array.&nbsp; This method allows for fields of arbitrary length to be passed in, using the SystemVerilog <i>stream</i> operator.</p><p>For example</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Packs bits from an unpacked array of ints into the pack array.</p><p>The bits are appended to the internal pack array.&nbsp; This method allows for fields of arbitrary length to be passed in, using the SystemVerilog <i>stream</i> operator.</p><p>For example</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-type">bit</span><span class="sv-op">[</span><span class="sv-number">511</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">my_field</span><span class="sv-op">;</span>
 <span class="sv-keyword">begin</span>
   <span class="sv-type">int</span> <span class="sv-ident">my_stream</span><span class="sv-op">[</span><span class="sv-op">]</span><span class="sv-op">;</span>
@@ -482,17 +475,10 @@
       <td class=PAfterParameters colspan=6><span class="sv-op">)</span></td></tr>
       </table></td></tr>
     </table></blockquote>
-<div class=CBody><p>Unpacks bits from the pack array into an unpacked array of ints.</p><p>The unpacked array is unpacked from the internal pack array.&nbsp; This method allows for fields of arbitrary length to be passed in without expanding into a pre-defined integral type first.</p><p>For example</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+<div class=CBody><p>Unpacks bits from the pack array into an unpacked array of ints.</p><p>The unpacked array is unpacked from the internal pack array.&nbsp; This method allows for fields of arbitrary length to be passed in without expanding into a pre-defined integral type first.</p><p>For example</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-type">bit</span><span class="sv-op">[</span><span class="sv-number">511</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">my_field</span><span class="sv-op">;</span>
 <span class="sv-keyword">begin</span>
   <span class="sv-type">int</span> <span class="sv-ident">my_stream</span><span class="sv-op">[</span><span class="sv-op">]</span> <span class="sv-op">=</span> <span class="sv-ident">new</span><span class="sv-op">[</span><span class="sv-number">16</span><span class="sv-op">]</span><span class="sv-op">;</span> <span class="sv-comment">// 512/32 = 16</span>
@@ -595,17 +581,10 @@
  <!--CONTENT index=27 -->
 <div class="CVariable" id="doc-nav-item-27" data-doc-topic="doc-nav-item-27" data-anchor="uvm_packer.big_endian"><div class="CTopic"><h3 class=CTitle><a name="uvm_packer.big_endian" id="uvm_packer.big_endian" href="../../src_view/base/uvm_packer.svh.html#L358" class="src-code-link" data-src-file="base/uvm_packer.svh" data-src-line="358">big_endian</a></h3>
     <blockquote><table border=0 cellspacing=0 cellpadding=0 class=Prototype><tr><td><span class="sv-type">bit</span> <span class="sv-ident">big_endian</span> <span class="sv-op">=</span><span class="sv-ident"> 1
-  </span></td></tr></table></blockquote><div class=CBody><p>This bit determines the order that integral data is packed (using <a href="#uvm_packer.pack_field" data-target-id="uvm_packer.pack_field" class=LMethod id=link46  >pack_field</a>, <a href="#uvm_packer.pack_field_int" data-target-id="uvm_packer.pack_field_int" class=LMethod id=link47  >pack_field_int</a>, <a href="#uvm_packer.pack_time" data-target-id="uvm_packer.pack_time" class=LMethod id=link48  >pack_time</a>, or <a href="#uvm_packer.pack_real" data-target-id="uvm_packer.pack_real" class=LMethod id=link49  >pack_real</a>) and how the data is unpacked from the pack array (using <a href="#uvm_packer.unpack_field" data-target-id="uvm_packer.unpack_field" class=LMethod id=link50  >unpack_field</a>, <a href="#uvm_packer.unpack_field_int" data-target-id="uvm_packer.unpack_field_int" class=LMethod id=link51  >unpack_field_int</a>, <a href="#uvm_packer.unpack_time" data-target-id="uvm_packer.unpack_time" class=LMethod id=link52  >unpack_time</a>, or <a href="#uvm_packer.unpack_real" data-target-id="uvm_packer.unpack_real" class=LMethod id=link53  >unpack_real</a>).&nbsp; When the bit is set, data is associated msb to lsb; otherwise, it is associated lsb to msb.</p><p>The following code illustrates how data can be associated msb to lsb and lsb to msb:</p><div class="code-block-container">
-  <div class="code-block-header">
-    <div class="code-block-lang">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      <span>SystemVerilog</span>
-    </div>
-    <button class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
-      <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span class="copy-text">Copy</span>
-    </button>
-  </div>
+  </span></td></tr></table></blockquote><div class=CBody><p>This bit determines the order that integral data is packed (using <a href="#uvm_packer.pack_field" data-target-id="uvm_packer.pack_field" class=LMethod id=link46  >pack_field</a>, <a href="#uvm_packer.pack_field_int" data-target-id="uvm_packer.pack_field_int" class=LMethod id=link47  >pack_field_int</a>, <a href="#uvm_packer.pack_time" data-target-id="uvm_packer.pack_time" class=LMethod id=link48  >pack_time</a>, or <a href="#uvm_packer.pack_real" data-target-id="uvm_packer.pack_real" class=LMethod id=link49  >pack_real</a>) and how the data is unpacked from the pack array (using <a href="#uvm_packer.unpack_field" data-target-id="uvm_packer.unpack_field" class=LMethod id=link50  >unpack_field</a>, <a href="#uvm_packer.unpack_field_int" data-target-id="uvm_packer.unpack_field_int" class=LMethod id=link51  >unpack_field_int</a>, <a href="#uvm_packer.unpack_time" data-target-id="uvm_packer.unpack_time" class=LMethod id=link52  >unpack_time</a>, or <a href="#uvm_packer.unpack_real" data-target-id="uvm_packer.unpack_real" class=LMethod id=link53  >unpack_real</a>).&nbsp; When the bit is set, data is associated msb to lsb; otherwise, it is associated lsb to msb.</p><p>The following code illustrates how data can be associated msb to lsb and lsb to msb:</p><div class="code-block-container" data-lang="SystemVerilog">
+  <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
+    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+  </button>
   <pre class="code-block-content"><code><span class="sv-keyword-decl">class</span> <span class="sv-ident">mydata</span> <span class="sv-keyword-decl">extends</span> <span class="sv-uvm-type">uvm_object</span><span class="sv-op">;</span>
 
   <span class="sv-type">logic</span><span class="sv-op">[</span><span class="sv-number">15</span><span class="sv-op">:</span><span class="sv-number">0</span><span class="sv-op">]</span> <span class="sv-ident">value</span> <span class="sv-op">=</span> <span class="sv-number">&#x27;h1234</span><span class="sv-op">;</span>
