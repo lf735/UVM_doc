@@ -337,6 +337,21 @@ def init_doc_breadcrumbs_map(categories):
 
     traverse(categories, [])
 
+def _is_comment_only_line(s):
+    """Return True if a stripped line contains only comment syntax (no code)."""
+    if not s:
+        return False
+    if s.startswith('//'):
+        return True
+    if s.startswith('/*'):
+        if '*/' in s:
+            rem = re.sub(r'/\*.*?\*/', '', s).strip()
+            return not rem or rem.startswith('//')
+        return True
+    if s.startswith('*'):
+        return True
+    return False
+
 def build_doc_source_banner(src_rel, line_num, root_rel):
     """Render a compact single-link source banner for documentation pages."""
     src_view_url = f"{root_rel}src_view/{src_rel}.html#L{line_num}"
@@ -565,7 +580,7 @@ def index_source_symbols():
                         decl_line = None
                         for j in range(line_no, min(line_no + 60, len(lines))):
                             l_str = lines[j].strip()
-                            if not l_str or l_str.startswith('//') or l_str.startswith('/*') or l_str.startswith('*'):
+                            if not l_str or _is_comment_only_line(l_str):
                                 continue
                             decl_line = j + 1
                             break
@@ -2232,7 +2247,7 @@ def find_actual_decl_in_file(rel_file, sym_name, sym_type=None):
     candidates = []
     for idx, l in enumerate(lines, 1):
         s = l.strip()
-        is_comment = s.startswith('//') or s.startswith('/*') or s.startswith('*')
+        is_comment = _is_comment_only_line(s)
         if not is_comment and pat.search(l):
             candidates.append((idx, l))
 

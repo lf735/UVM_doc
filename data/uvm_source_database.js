@@ -15712,8 +15712,8 @@ window.UVM_SOURCE_DATABASE = {
           "parameters_raw": "(string field_name,)",
           "doc": {
             "title": "",
-            "summary": "protected*/ bit  m_build_done; protected*/ int  m_phasing_active;",
-            "full_text": "protected*/ bit  m_build_done;\nprotected*/ int  m_phasing_active;"
+            "summary": "set_int_local (override)",
+            "full_text": "set_int_local (override)"
           },
           "overrides": false,
           "overridden_from": null,
@@ -74310,11 +74310,7 @@ window.UVM_SOURCE_DATABASE = {
             }
           ],
           "parameters_raw": "(uvm_reg_data_t expected,)",
-          "doc": {
-            "title": "",
-            "summary": "local*/ extern function bit Xis_locked_by_fieldX();",
-            "full_text": "local*/ extern function bit Xis_locked_by_fieldX();"
-          },
+          "doc": null,
           "overrides": false,
           "overridden_from": null,
           "root_ancestor": null,
@@ -111003,11 +110999,7 @@ window.UVM_SOURCE_DATABASE = {
       "category": "misc",
       "body_snippet": "/* null */",
       "is_deprecated": false,
-      "doc": {
-        "title": "",
-        "summary": "`define uvm_cb_trace_noobj(CB,OPER) /* null",
-        "full_text": "`define uvm_cb_trace_noobj(CB,OPER) /* null"
-      }
+      "doc": null
     },
     "uvm_cb_trace_noobj": {
       "name": "uvm_cb_trace_noobj",
@@ -156266,7 +156258,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_component",
       "file": "base/uvm_component.svh",
       "line": 1633,
-      "summary": "protected*/ bit  m_build_done; protected*/ int  m_phasing_active;"
+      "summary": "set_int_local (override)"
     },
     {
       "name": "uvm_component::m_add_child",
@@ -168672,7 +168664,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": "uvm_reg",
       "file": "reg/uvm_reg.svh",
       "line": 671,
-      "summary": "local*/ extern function bit Xis_locked_by_fieldX();"
+      "summary": ""
     },
     {
       "name": "uvm_reg::do_write",
@@ -176774,7 +176766,7 @@ window.UVM_SOURCE_DATABASE = {
       "class": null,
       "file": "macros/uvm_callback_defines.svh",
       "line": 295,
-      "summary": "`define uvm_cb_trace_noobj(CB,OPER) /* null"
+      "summary": ""
     },
     {
       "name": "uvm_cb_trace_noobj",

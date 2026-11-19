@@ -199,6 +199,22 @@ def parse_parameters(param_str):
         })
     return params
 
+def _is_comment_only_line(s):
+    """Return True if a stripped line contains only comment syntax (no code)."""
+    if not s:
+        return False
+    if s.startswith('//'):
+        return True
+    if s.startswith('/*'):
+        if '*/' in s:
+            rem = re.sub(r'/\*.*?\*/', '', s).strip()
+            return not rem or rem.startswith('//')
+        return True
+    if s.startswith('*'):
+        return True
+    return False
+
+
 def parse_doc_above(lines, line_idx):
     """Extract doc comments situated immediately above a declaration."""
     comment_lines = []
@@ -209,10 +225,28 @@ def parse_doc_above(lines, line_idx):
         if line_idx - idx > 3:
             return None
 
+    in_block_comment = False
     while idx >= 0:
         l = lines[idx]
         stripped = l.strip()
-        if stripped.startswith('//') or stripped.startswith('*') or stripped.startswith('/*') or stripped.endswith('*/'):
+        if in_block_comment:
+            if '/*' in stripped:
+                before = stripped.split('/*', 1)[0].strip()
+                if before:
+                    break
+                comment_lines.insert(0, l)
+                in_block_comment = False
+                idx -= 1
+                continue
+            comment_lines.insert(0, l)
+            idx -= 1
+            continue
+
+        if _is_comment_only_line(stripped):
+            comment_lines.insert(0, l)
+            idx -= 1
+        elif stripped.endswith('*/') and '/*' not in stripped:
+            in_block_comment = True
             comment_lines.insert(0, l)
             idx -= 1
         elif not stripped and comment_lines:
@@ -894,7 +928,7 @@ def build_database():
         candidates = []
         for idx, l in enumerate(lines, 1):
             s = l.strip()
-            is_comment = s.startswith('//') or s.startswith('/*') or s.startswith('*')
+            is_comment = _is_comment_only_line(s)
             if not is_comment and pat.search(l):
                 candidates.append((idx, l))
 
