@@ -897,12 +897,20 @@ def render_source_viewer(
         {sym_options}
       </select>''' if sym_options else ""
 
+    # Breadcrumb path segments (no dead home link on 'src')
+    path_parts = ["src"] + [p for p in rel_path.replace("\\", "/").split("/") if p]
+    crumb_items = []
+    for idx, part in enumerate(path_parts):
+        if idx > 0:
+            crumb_items.append('<span class="sep">/</span>')
+        cls = "src-cur-file" if idx == len(path_parts) - 1 else "src-crumb-dir"
+        crumb_items.append(f'<span class="{cls}">{html.escape(part)}</span>')
+    breadcrumbs_inner = "\n      ".join(crumb_items)
+
     # Sticky Toolbar
     toolbar_html = f'''  <div class="src-sticky-bar studio-toolbar">
     <div class="src-breadcrumbs">
-      <a href="{root_rel}index.html#/src" target="_parent" class="src-nav-home" title="UVM Source Tree">src</a>
-      <span class="sep">/</span>
-      <span class="src-cur-file">{html.escape(rel_path)}</span>
+      {breadcrumbs_inner}
     </div>
     <div class="src-actions studio-toolbar-actions">
       {sym_select}

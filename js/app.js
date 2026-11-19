@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } else {
         // Auto pair with corresponding source code if available
-        const docClean = currentDocUrl.replace(/^docs_view\//, '');
+        const docClean = currentDocUrl.replace(/^docs_view\//, '').split('#')[0];
         if (typeof UVM_DATA !== 'undefined' && UVM_DATA.docToSrc && UVM_DATA.docToSrc[docClean]) {
           const pairedSrc = UVM_DATA.docToSrc[docClean];
           currentSrcUrl = pairedSrc;
@@ -3909,7 +3909,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updatePaneExpandButtons(mode) {
     const isMobileView = window.innerWidth <= 860;
     const expandSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9" /><polyline points="9 21 3 21 3 15" /><line x1="21" y1="3" x2="14" y2="10" /><line x1="3" y1="21" x2="10" y2="14" /></svg>';
-    const collapseSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 14 10 14 10 20" /><polyline points="20 10 14 10 14 4" /><line x1="14" y1="10" x2="21" y2="3" /><line x1="3" y1="21" x2="10" y2="14" /></svg>';
+    const splitSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><line x1="12" y1="3" x2="12" y2="21" /></svg>';
     const codeSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg>';
     const docSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>';
 
@@ -3917,22 +3917,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnFullDoc) {
       if (isMobileView) {
         btnFullDoc.title = 'Switch to Source view';
+        btnFullDoc.setAttribute('aria-label', btnFullDoc.title);
         btnFullDoc.innerHTML = codeSvg;
       } else {
         const isFullDoc = mode === 'docs';
-        btnFullDoc.title = isFullDoc ? 'Restore split view' : 'Expand documentation full width';
-        btnFullDoc.innerHTML = isFullDoc ? collapseSvg : expandSvg;
+        btnFullDoc.title = isFullDoc ? 'Open source in split view' : 'Expand documentation full width';
+        btnFullDoc.setAttribute('aria-label', btnFullDoc.title);
+        btnFullDoc.innerHTML = isFullDoc ? splitSvg : expandSvg;
       }
     }
     const btnFullSrc = document.getElementById('open-full-src');
     if (btnFullSrc) {
       if (isMobileView) {
         btnFullSrc.title = 'Switch to Documentation view';
+        btnFullSrc.setAttribute('aria-label', btnFullSrc.title);
         btnFullSrc.innerHTML = docSvg;
       } else {
         const isFullSrc = mode === 'source';
-        btnFullSrc.title = isFullSrc ? 'Restore split view' : 'Expand source code full width';
-        btnFullSrc.innerHTML = isFullSrc ? collapseSvg : expandSvg;
+        btnFullSrc.title = isFullSrc ? 'Open documentation in split view' : 'Expand source code full width';
+        btnFullSrc.setAttribute('aria-label', btnFullSrc.title);
+        btnFullSrc.innerHTML = isFullSrc ? splitSvg : expandSvg;
       }
     }
   }

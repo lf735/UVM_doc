@@ -3723,16 +3723,22 @@
   .src-breadcrumbs {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.3rem;
     font-size: 0.85rem;
     font-family: var(--font-mono);
     padding-right: 2.5rem;
   }
 
-  .src-nav-home {
-    color: var(--primary);
-    text-decoration: none;
-    font-weight: 700;
+  .src-breadcrumbs .sep {
+    color: var(--text-light);
+    font-weight: 400;
+    user-select: none;
+  }
+
+  .src-crumb-dir {
+    color: var(--text-muted);
+    font-weight: 500;
   }
 
   .src-cur-file {

@@ -337,6 +337,22 @@ def init_doc_breadcrumbs_map(categories):
 
     traverse(categories, [])
 
+def build_doc_source_banner(src_rel, line_num, root_rel):
+    """Render a compact single-link source banner for documentation pages."""
+    src_view_url = f"{root_rel}src_view/{src_rel}.html#L{line_num}"
+    info_html = (
+        '<svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" '
+        'stroke="currentColor" stroke-width="2">'
+        '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'
+        '</svg>'
+        '<span class="file-label">Source</span>'
+        f'<a href="{src_view_url}" class="banner-file-link src-code-link" '
+        f'data-src-url="{src_view_url}" title="Open source code at line {line_num}">'
+        f'<code>src/{html.escape(src_rel)}</code>'
+        '</a>'
+    )
+    return pbc.render_banner(info_html)
+
 def build_breadcrumbs_html(doc_rel, page_title, root_rel):
     """Generate clickable breadcrumbs navigation HTML for a documentation page."""
     norm_doc = doc_rel.replace('\\', '/')
@@ -1696,19 +1712,7 @@ def modernize_doc_files():
             # Injected "View Source Code" badge only if real source exists
             view_source_banner = ""
             if associated_src and (SRC_DIR / associated_src).exists():
-                src_view_url = f"{root_rel}src_view/{associated_src}.html#L{target_line}"
-                view_source_banner = f'''<div class="doc-source-banner">
-                  <div class="banner-info">
-                    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    <span class="file-label">Source:</span>
-                    <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}" title="Open source code at line {target_line}"><code>src/{html.escape(associated_src)}</code></a>
-                  </div>
-                  <div class="banner-actions">
-                    <a href="{src_view_url}" class="banner-icon-btn src-code-link" data-src-url="{src_view_url}" title="Open source code at line {target_line}" aria-label="Open source code at line {target_line}">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                    </a>
-                  </div>
-                </div>'''
+                view_source_banner = build_doc_source_banner(associated_src, target_line, root_rel)
 
             # Breadcrumb navigation
             breadcrumbs_html = build_breadcrumbs_html(rel_path, page_title, root_rel)
@@ -1799,21 +1803,8 @@ def generate_orphan_doc_pages():
         first_cname = classes_in_file[0] if classes_in_file else main_cname
         first_line = UVM_DB.get('classes', {}).get(first_cname, {}).get('start_line', 1)
 
-        src_view_url = f"{root_rel}src_view/{src_rel}.html#L{first_line}"
         breadcrumbs = build_breadcrumbs_html(doc_rel, page_title, root_rel)
-
-        banner = f'''<div class="doc-source-banner">
-  <div class="banner-info">
-    <svg class="banner-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-    <span class="file-label">Source:</span>
-    <a href="{src_view_url}" class="banner-file-link src-code-link" data-src-url="{src_view_url}" title="Open source code at line {first_line}"><code>src/{html.escape(src_rel)}</code></a>
-  </div>
-  <div class="banner-actions">
-    <a href="{src_view_url}" class="banner-icon-btn src-code-link" data-src-url="{src_view_url}" title="Open source code at line {first_line}" aria-label="Open source code at line {first_line}">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-    </a>
-  </div>
-</div>'''
+        banner = build_doc_source_banner(src_rel, first_line, root_rel)
 
         body_parts = ['<div id="Content">']
         seq = 0
