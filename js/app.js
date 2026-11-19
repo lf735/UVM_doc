@@ -456,15 +456,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateTutorialBackBtn() {
     if (!docTutorialBackBtn) return;
-    if (!lastTutorialContext || !lastTutorialContext.url || currentDocUrl.includes('tutorial_view/') || isHomeUrl(currentDocUrl)) {
+    const samePage = lastTutorialContext && lastTutorialContext.url && currentDocUrl &&
+      currentDocUrl.split('#')[0] === lastTutorialContext.url.split('#')[0];
+    const inTutorial = currentDocUrl.includes('tutorial_view/');
+    const inExample = currentDocUrl.includes('examples_view/');
+    const ctxKind = (lastTutorialContext && lastTutorialContext.kind) || 'tutorial';
+    if (!lastTutorialContext || !lastTutorialContext.url || samePage || isHomeUrl(currentDocUrl) ||
+        (ctxKind === 'tutorial' && inTutorial) || (ctxKind === 'example' && inExample)) {
       docTutorialBackBtn.style.display = 'none';
       if (docPane) docPane.classList.remove('has-tutorial-back');
       return;
     }
-    const label = lastTutorialContext.title ? lastTutorialContext.title.replace(/^\s*(\d+\.)?\s*/, (m) => m) : 'Tutorial';
+    const fallbackLabel = ctxKind === 'example' ? 'Example' : 'Tutorial';
+    const label = lastTutorialContext.title ? lastTutorialContext.title.replace(/^\s*(\d+\.)?\s*/, (m) => m) : fallbackLabel;
     const shortLabel = label.length > 28 ? label.slice(0, 26) + '...' : label;
     docTutorialBackBtn.textContent = `\u2190 Back to ${shortLabel}`;
-    docTutorialBackBtn.title = `Return to ${lastTutorialContext.title || 'Tutorial'}`;
+    docTutorialBackBtn.title = `Return to ${lastTutorialContext.title || fallbackLabel}`;
     docTutorialBackBtn.style.display = 'inline-flex';
     if (docPane) docPane.classList.add('has-tutorial-back');
   }
@@ -473,9 +480,14 @@ document.addEventListener('DOMContentLoaded', () => {
     docTutorialBackBtn.addEventListener('click', () => {
       if (lastTutorialContext && lastTutorialContext.url) {
         const backUrl = lastTutorialContext.url;
+        const backKind = lastTutorialContext.kind || 'tutorial';
         lastTutorialContext = null;
         updateTutorialBackBtn();
-        window.openTutorialView(backUrl);
+        if (backKind === 'example') {
+          window.openExampleView(backUrl);
+        } else {
+          window.openTutorialView(backUrl);
+        }
       }
     });
   }
@@ -484,6 +496,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.openExampleView = function (exUrl, fromTutorial) {
     if (fromTutorial && fromTutorial.url) {
       lastTutorialContext = fromTutorial;
+    } else {
+      lastTutorialContext = null;
     }
     const fullEx = normalizeExampleUrl(exUrl);
     currentDocUrl = fullEx;
@@ -806,9 +820,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!fullEx.includes('#') && currentDocUrl && currentDocUrl.includes('#') && currentDocUrl.split('#')[0] === fullEx) {
         fullEx = currentDocUrl;
       }
+      if (lastTutorialContext && lastTutorialContext.kind === 'example') {
+        lastTutorialContext = null;
+      }
       currentDocUrl = fullEx;
       updateDocTitle(fullEx);
       recordRecentVisit('example', fullEx);
+      updateTutorialBackBtn();
       highlightActiveSidebar(fullEx);
       updateHash();
     } else if (e.data.type === 'docNavigated' && e.data.url) {

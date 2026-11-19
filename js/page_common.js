@@ -3094,21 +3094,25 @@ window.PageCommon = (function () {
       .replace(/"/g, '&quot;');
   }
 
-  function getCurrentTutorialContext() {
+  function getCurrentBackContext() {
     try {
       const p = window.location.pathname.replace(/\\/g, '/');
-      const m = p.match(/(tutorial_view\/[^/]+\.html)$/);
-      if (m) {
-        return { url: m[1], title: document.title.split('|')[0].trim() };
+      const tutMatch = p.match(/(tutorial_view\/[^/]+\.html)$/);
+      if (tutMatch) {
+        return { kind: 'tutorial', url: tutMatch[1], title: document.title.split('|')[0].trim() };
+      }
+      const exMatch = p.match(/(examples_view\/[^/]+\/[^/]+\.html)$/);
+      if (exMatch) {
+        return { kind: 'example', url: exMatch[1], title: document.title.split('|')[0].trim() };
       }
     } catch (e) { }
     return null;
   }
 
   function dispatchOpenDoc(docUrl, symbol, ownerClass) {
-    const fromTut = getCurrentTutorialContext();
+    const fromCtx = getCurrentBackContext();
     if (window.parent && window.parent !== window) {
-      if (!fromTut) {
+      if (!fromCtx) {
         try {
           if (window.parent.openDocView) {
             window.parent.openDocView(docUrl || undefined, symbol, ownerClass || undefined);
@@ -3121,7 +3125,7 @@ window.PageCommon = (function () {
         symbol: symbol,
         ownerClass: ownerClass || undefined,
         url: docUrl || undefined,
-        fromTutorial: fromTut || undefined
+        fromTutorial: fromCtx || undefined
       }, '*');
       return;
     }
@@ -3474,7 +3478,8 @@ window.PageCommon = (function () {
         e.preventDefault();
         const exTarget = link.getAttribute('data-example-url') || link.getAttribute('href');
         const targetHref = new URL(exTarget, window.location.href).href;
-        const fromTut = getCurrentTutorialContext();
+        const backCtx = getCurrentBackContext();
+        const fromTut = backCtx && backCtx.kind === 'tutorial' ? backCtx : null;
         if (window.parent && window.parent !== window) {
           window.parent.postMessage({ type: 'openExampleView', url: targetHref, fromTutorial: fromTut || undefined }, '*');
           return;
@@ -3549,7 +3554,12 @@ window.PageCommon = (function () {
         }
         const docHref = link.getAttribute('data-doc-href') || 'docs_view/overviews/intro-txt.html';
         const cleanHashDoc = docHref.replace(/^docs_view\//, '');
+        const fromCtx = getCurrentBackContext();
         if (window.parent && window.parent !== window) {
+          if (fromCtx) {
+            window.parent.postMessage({ type: 'openDocView', url: docHref, fromTutorial: fromCtx }, '*');
+            return;
+          }
           try {
             window.parent.location.hash = '#/doc/' + cleanHashDoc;
             return;
