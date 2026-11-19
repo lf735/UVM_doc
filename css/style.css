@@ -5192,7 +5192,18 @@
     }
 
     .SBorder {
-      overflow-x: auto;
+      overflow-x: hidden;
+    }
+
+    .STable {
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .STable td,
+    .STable th {
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
   }
 
@@ -5228,6 +5239,36 @@
 
     .CDescriptionList .CDLDescription {
       padding: 0.25rem 0.85rem 0.65rem;
+    }
+
+    .STable,
+    .STable tbody,
+    .STable tr,
+    .STable td,
+    .STable th {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .STable td.SEntry {
+      border-bottom: none;
+      padding: 0.6rem 0.85rem 0.15rem;
+    }
+
+    .STable td.SDescription,
+    .STable td.SWideDescription {
+      padding: 0.1rem 0.85rem 0.6rem;
+    }
+
+    .STable td.SDescription:empty {
+      display: none;
+    }
+
+    .STable tr.SGroup td {
+      padding: 0.5rem 0.85rem;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .doc-source-banner {
