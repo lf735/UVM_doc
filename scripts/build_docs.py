@@ -1274,8 +1274,25 @@ def _inject_wildcard_selector(body_content, rel_path, associated_src, local_map,
     }).replace('</', '<\\/')
 
     manifest_script = f'<script type="application/json" id="uvm-wildcard-variants">{payload_json}</script>'
+    in_page_bar = (
+        f'<div class="wildcard-selector-bar" id="wildcard-selector-bar">'
+        f'<div class="wildcard-selector-controls">'
+        f'<span class="wildcard-badge">Variant</span>'
+        f'<select id="wildcard-page-variant-select" class="wildcard-variant-select" '
+        f'aria-label="Select concrete UVM variant" title="Switch wildcard variant">{opts_html}</select>'
+        f'</div>'
+        f'<span class="wildcard-hint" id="wildcard-hint">Showing all {len(variants)} {html.escape(pattern)} variants</span>'
+        f'</div>'
+    )
+    if '<!--START_ND_SUMMARY' in body_content:
+        body_content = body_content.replace('<!--START_ND_SUMMARY', in_page_bar + '\n<!--START_ND_SUMMARY', 1)
+    elif '<div class=CBody>' in body_content:
+        body_content = body_content.replace('<div class=CBody>', '<div class=CBody>' + in_page_bar, 1)
+    elif '<div class="CBody">' in body_content:
+        body_content = body_content.replace('<div class="CBody">', '<div class="CBody">' + in_page_bar, 1)
+
     select_html = (
-        f'<span class="doc-breadcrumb-sep">/</span>'
+        f'<span class="doc-breadcrumb-sep doc-breadcrumb-variant-sep">/</span>'
         f'<select id="wildcard-variant-select" class="doc-breadcrumb-variant-select" '
         f'aria-label="Select concrete UVM variant" title="Switch wildcard variant">{opts_html}</select>'
     )

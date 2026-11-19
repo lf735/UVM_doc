@@ -3188,33 +3188,32 @@
 
   .doc-breadcrumb-variant-select {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 0.76rem;
     font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 6px;
-    border: 1px solid rgba(26, 115, 232, 0.28);
-    background: rgba(26, 115, 232, 0.08);
-    color: var(--primary);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--surface-alt);
+    color: var(--text-main);
     cursor: pointer;
     max-width: 240px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .doc-breadcrumb-variant-select:hover {
+    border-color: var(--border-subtle-hover);
   }
 
   .doc-breadcrumb-variant-select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+    box-shadow: 0 0 0 2px var(--primary-light);
   }
 
-  [data-theme="dark"] .doc-breadcrumb-variant-select {
-    background: rgba(138, 180, 248, 0.12);
-    border-color: rgba(138, 180, 248, 0.32);
-    color: var(--primary);
-  }
-
-  [data-theme="dark"] .doc-breadcrumb-variant-select option,
-  [data-theme="dark"] .doc-breadcrumb-variant-select optgroup {
+  .doc-breadcrumb-variant-select option,
+  .doc-breadcrumb-variant-select optgroup {
     background: var(--surface-color);
-    color: var(--text-primary);
+    color: var(--text-main);
   }
 
   /* Wildcard Variant Selector Bar */
@@ -3224,11 +3223,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    margin: 0 0 18px 0;
-    padding: 10px 14px;
-    background: var(--surface-subtle);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
+    margin: 0.75rem 0 1.25rem 0;
+    padding: 0.65rem 0.9rem;
+    background: var(--surface-alt);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
   }
 
   .wildcard-selector-controls {
@@ -3258,20 +3257,22 @@
 
   .wildcard-variant-select {
     font-family: var(--font-mono);
-    font-size: 13px;
-    padding: 5px 10px;
-    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--radius-sm);
     border: 1px solid var(--border-color);
     background: var(--surface-color);
-    color: var(--text-primary);
+    color: var(--text-main);
     cursor: pointer;
     min-width: 240px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
   .wildcard-variant-select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+    box-shadow: 0 0 0 2px var(--primary-light);
   }
 
   .wildcard-hint {

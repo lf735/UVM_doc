@@ -820,6 +820,9 @@ window.PageCommon = (function () {
         }
       });
     }
+    if (typeof wildcardManifest !== 'undefined' && wildcardManifest && currentWildcardVariant) {
+      applyWildcardVariant(currentWildcardVariant, false);
+    }
 
     const allNavItems = [];
     tocEntries.forEach(function (entry) {
@@ -3789,6 +3792,10 @@ window.PageCommon = (function () {
     if (selectEl && selectEl.value !== currentWildcardVariant) {
       selectEl.value = currentWildcardVariant;
     }
+    const pageSelectEl = document.getElementById('wildcard-page-variant-select');
+    if (pageSelectEl && pageSelectEl.value !== currentWildcardVariant) {
+      pageSelectEl.value = currentWildcardVariant;
+    }
 
     const contentEl = document.getElementById('Content');
     const hiddenTopicIds = new Set();
@@ -3801,6 +3808,9 @@ window.PageCommon = (function () {
           if (shouldHide) {
             cur.classList.add('wildcard-group-hidden');
             if (cur.id) hiddenTopicIds.add(cur.id);
+            cur.querySelectorAll('[id]').forEach(desc => {
+              if (desc.id) hiddenTopicIds.add(desc.id);
+            });
           } else {
             cur.classList.remove('wildcard-group-hidden');
           }
@@ -4019,16 +4029,24 @@ window.PageCommon = (function () {
   function initWildcardVariantController() {
     const manifestEl = document.getElementById('uvm-wildcard-variants');
     const selectEl = document.getElementById('wildcard-variant-select');
-    if (!manifestEl || !selectEl) return;
+    const pageSelectEl = document.getElementById('wildcard-page-variant-select');
+    if (!manifestEl || (!selectEl && !pageSelectEl)) return;
     try {
       wildcardManifest = JSON.parse(manifestEl.textContent);
     } catch (e) {
       return;
     }
 
-    selectEl.addEventListener('change', function () {
-      applyWildcardVariant(selectEl.value, true);
-    });
+    if (selectEl) {
+      selectEl.addEventListener('change', function () {
+        applyWildcardVariant(selectEl.value, true);
+      });
+    }
+    if (pageSelectEl) {
+      pageSelectEl.addEventListener('change', function () {
+        applyWildcardVariant(pageSelectEl.value, true);
+      });
+    }
 
     const rawHash = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
     const hashResolved = rawHash ? resolveWildcardTarget(rawHash) : null;
