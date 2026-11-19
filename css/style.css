@@ -435,6 +435,11 @@
     transition: width 0.22s ease, min-width 0.22s ease, opacity 0.18s ease, transform 0.25s ease;
   }
 
+  .sidebar-backdrop,
+  .sidebar-edge-zone {
+    display: none;
+  }
+
   @media (min-width: 861px) {
     .app-sidebar.collapsed {
       width: 0;
@@ -5113,10 +5118,44 @@
       z-index: 200;
       box-shadow: var(--shadow-lg);
       transform: translateX(-100%);
+      touch-action: pan-y;
     }
 
     .app-sidebar.open {
       transform: translateX(0);
+    }
+
+    .app-sidebar.is-swiping,
+    .sidebar-backdrop.is-swiping {
+      transition: none !important;
+    }
+
+    .sidebar-backdrop {
+      display: block;
+      position: fixed;
+      inset: var(--header-height) 0 0 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(1px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 190;
+      transition: opacity 0.25s ease;
+    }
+
+    .sidebar-backdrop.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar-edge-zone {
+      display: block;
+      position: fixed;
+      left: 0;
+      top: var(--header-height);
+      bottom: 0;
+      width: 18px;
+      z-index: 185;
+      touch-action: pan-y;
     }
 
     .mode-split #src-pane,

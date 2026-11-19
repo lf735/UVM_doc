@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const menuToggle = document.getElementById('menu-toggle');
   const sidebar = document.getElementById('sidebar');
+  const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+  const sidebarEdgeZone = document.getElementById('sidebar-edge-zone');
   const sidebarContent = document.getElementById('sidebar-content');
   const sidebarFilter = document.getElementById('sidebar-filter');
   const sidebarFilterClear = document.getElementById('sidebar-filter-clear');
@@ -779,7 +781,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.openTutorialView(getDefaultTutorialUrl());
       }
       if (sidebar && window.innerWidth <= 860) {
-        sidebar.classList.add('open');
+        setMobileSidebarOpen(true);
       }
     } else if (e.data.type === 'studioFileChanged' && e.data.url) {
       if (currentMode === 'split') {
@@ -2292,7 +2294,7 @@ document.addEventListener('DOMContentLoaded', () => {
           loadSource(srcHref);
         }
         if (window.innerWidth <= 860 && sidebar) {
-          sidebar.classList.remove('open');
+          setMobileSidebarOpen(false);
         }
         return;
       }
@@ -3865,6 +3867,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sidebar Toggle (Desktop Collapsible & Mobile Drawer)
   // =========================================================================
 
+  function setMobileSidebarOpen(isOpen) {
+    if (!sidebar) return;
+    sidebar.classList.remove('is-swiping');
+    sidebar.style.transform = '';
+    sidebar.classList.toggle('open', isOpen);
+    if (sidebarBackdrop) {
+      sidebarBackdrop.classList.remove('is-swiping');
+      sidebarBackdrop.style.opacity = '';
+      sidebarBackdrop.classList.toggle('visible', isOpen);
+    }
+    if (menuToggle) {
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    }
+  }
+
   if (menuToggle && sidebar) {
     try {
       if (localStorage.getItem('sidebarCollapsed') === '1' && window.innerWidth > 860) {
@@ -3877,8 +3894,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     menuToggle.addEventListener('click', () => {
       if (window.innerWidth <= 860) {
-        const isOpen = sidebar.classList.toggle('open');
-        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        setMobileSidebarOpen(!sidebar.classList.contains('open'));
       } else {
         const isCollapsed = sidebar.classList.toggle('collapsed');
         menuToggle.setAttribute('aria-expanded', String(!isCollapsed));
@@ -3888,21 +3904,111 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Auto-close mobile drawer when selecting an item or clicking outside
+    // Auto-close mobile drawer when selecting an item or clicking backdrop
     sidebar.addEventListener('click', (e) => {
       if (window.innerWidth <= 860 && e.target.closest('.nav-item-link, .file-tree-item, .nav-group-title-link')) {
-        sidebar.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
+        setMobileSidebarOpen(false);
       }
     });
-    const mainViewport = document.querySelector('.main-viewport');
-    if (mainViewport) {
-      mainViewport.addEventListener('click', () => {
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener('click', () => {
         if (window.innerWidth <= 860 && sidebar.classList.contains('open')) {
-          sidebar.classList.remove('open');
-          menuToggle.setAttribute('aria-expanded', 'false');
+          setMobileSidebarOpen(false);
         }
       });
+    }
+
+    // Touch swipe gestures for mobile drawer (swipe left to close, left-edge swipe right to open)
+    let swipeState = null;
+
+    function beginDrawerSwipe(e, mode) {
+      if (window.innerWidth > 860 || !e.touches || e.touches.length !== 1) return;
+      const touch = e.touches[0];
+      const width = sidebar.getBoundingClientRect().width || Math.min(window.innerWidth * 0.85, 320);
+      swipeState = {
+        mode,
+        startX: touch.clientX,
+        startY: touch.clientY,
+        lastX: touch.clientX,
+        startTime: Date.now(),
+        width,
+        active: false,
+        cancelled: false
+      };
+    }
+
+    function moveDrawerSwipe(e) {
+      if (!swipeState || swipeState.cancelled || !e.touches || e.touches.length !== 1) return;
+      const touch = e.touches[0];
+      const dx = touch.clientX - swipeState.startX;
+      const dy = touch.clientY - swipeState.startY;
+      swipeState.lastX = touch.clientX;
+
+      if (!swipeState.active) {
+        if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) {
+          swipeState.cancelled = true;
+          return;
+        }
+        const isValidDir = swipeState.mode === 'close' ? dx < -10 : dx > 10;
+        if (!isValidDir || Math.abs(dx) <= Math.abs(dy) * 1.15) return;
+        swipeState.active = true;
+        sidebar.classList.add('is-swiping');
+        if (sidebarBackdrop) sidebarBackdrop.classList.add('is-swiping');
+      }
+
+      const w = swipeState.width;
+      const offset = swipeState.mode === 'close'
+        ? Math.max(-w, Math.min(0, dx))
+        : Math.max(-w, Math.min(0, -w + dx));
+      sidebar.style.transform = `translateX(${offset}px)`;
+      if (sidebarBackdrop) {
+        sidebarBackdrop.style.opacity = String(Math.max(0, Math.min(1, 1 + offset / w)));
+      }
+    }
+
+    function endDrawerSwipe() {
+      if (!swipeState) return;
+      const st = swipeState;
+      swipeState = null;
+      if (!st.active) return;
+
+      const dx = st.lastX - st.startX;
+      const elapsed = Math.max(1, Date.now() - st.startTime);
+      const velocity = dx / elapsed; // px/ms
+      const threshold = st.width * 0.3;
+
+      if (st.mode === 'close') {
+        const shouldClose = dx < -threshold || (dx < -30 && velocity < -0.3);
+        setMobileSidebarOpen(!shouldClose);
+      } else {
+        const shouldOpen = dx > threshold || (dx > 30 && velocity > 0.3);
+        setMobileSidebarOpen(shouldOpen);
+      }
+    }
+
+    sidebar.addEventListener('touchstart', (e) => {
+      if (sidebar.classList.contains('open')) beginDrawerSwipe(e, 'close');
+    }, { passive: true });
+    sidebar.addEventListener('touchmove', moveDrawerSwipe, { passive: true });
+    sidebar.addEventListener('touchend', endDrawerSwipe, { passive: true });
+    sidebar.addEventListener('touchcancel', endDrawerSwipe, { passive: true });
+
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener('touchstart', (e) => {
+        if (sidebar.classList.contains('open')) beginDrawerSwipe(e, 'close');
+      }, { passive: true });
+      sidebarBackdrop.addEventListener('touchmove', moveDrawerSwipe, { passive: true });
+      sidebarBackdrop.addEventListener('touchend', endDrawerSwipe, { passive: true });
+      sidebarBackdrop.addEventListener('touchcancel', endDrawerSwipe, { passive: true });
+    }
+
+    if (sidebarEdgeZone) {
+      sidebarEdgeZone.addEventListener('touchstart', (e) => {
+        if (!sidebar.classList.contains('open')) beginDrawerSwipe(e, 'open');
+      }, { passive: true });
+      sidebarEdgeZone.addEventListener('touchmove', moveDrawerSwipe, { passive: true });
+      sidebarEdgeZone.addEventListener('touchend', endDrawerSwipe, { passive: true });
+      sidebarEdgeZone.addEventListener('touchcancel', endDrawerSwipe, { passive: true });
     }
   }
 
@@ -3943,6 +4049,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Ensure mobile viewports never stay in split mode on resize and keep pane toggle icons in sync
   window.addEventListener('resize', () => {
+    if (window.innerWidth > 860 && sidebar && sidebar.classList.contains('open')) {
+      setMobileSidebarOpen(false);
+    }
     if (window.innerWidth <= 860 && currentMode === 'split') {
       setViewMode('docs', false);
     } else {
