@@ -458,6 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!docTutorialBackBtn) return;
     if (!lastTutorialContext || !lastTutorialContext.url || currentDocUrl.includes('tutorial_view/') || isHomeUrl(currentDocUrl)) {
       docTutorialBackBtn.style.display = 'none';
+      if (docPane) docPane.classList.remove('has-tutorial-back');
       return;
     }
     const label = lastTutorialContext.title ? lastTutorialContext.title.replace(/^\s*(\d+\.)?\s*/, (m) => m) : 'Tutorial';
@@ -465,6 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
     docTutorialBackBtn.textContent = `\u2190 Back to ${shortLabel}`;
     docTutorialBackBtn.title = `Return to ${lastTutorialContext.title || 'Tutorial'}`;
     docTutorialBackBtn.style.display = 'inline-flex';
+    if (docPane) docPane.classList.add('has-tutorial-back');
   }
 
   if (docTutorialBackBtn) {

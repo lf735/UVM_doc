@@ -3306,7 +3306,7 @@
     font-size: 0.8rem;
     color: var(--text-muted);
     margin: 0 -3rem 0.75rem -3rem;
-    padding: 0.55rem 4rem 0.55rem 3rem;
+    padding: 0.55rem 5.5rem 0.55rem 3rem;
     background: var(--surface-color);
     background: color-mix(in srgb, var(--surface-color) 92%, transparent);
     backdrop-filter: blur(10px);
@@ -3732,7 +3732,7 @@
     gap: 0.3rem;
     font-size: 0.85rem;
     font-family: var(--font-mono);
-    padding-right: 2.5rem;
+    padding-right: 3.25rem;
   }
 
   .src-breadcrumbs .sep {
@@ -5108,6 +5108,10 @@
       right: 0.65rem;
     }
 
+    #doc-pane.has-tutorial-back .pane-header {
+      padding: 0.4rem 0.65rem;
+    }
+
     .app-sidebar {
       position: absolute;
       left: 0;
@@ -5175,7 +5179,7 @@
 
     .doc-breadcrumbs {
       margin: 0 -1rem 0.65rem -1rem;
-      padding: 0.45rem 3.25rem 0.45rem 1rem;
+      padding: 0.45rem 5.25rem 0.45rem 1rem;
       min-height: 2.5rem;
     }
 
@@ -5196,7 +5200,7 @@
 
     .doc-breadcrumbs {
       margin: 0 -0.75rem 0.65rem -0.75rem;
-      padding: 0.45rem 3.1rem 0.45rem 0.75rem;
+      padding: 0.45rem 5.25rem 0.45rem 0.75rem;
     }
 
     .CDescriptionList,
@@ -9931,6 +9935,31 @@
   .doc-tutorial-back-btn:hover {
     background: var(--primary);
     color: #ffffff;
+  }
+
+  #doc-pane.has-tutorial-back .pane-header {
+    position: static;
+    flex-shrink: 0;
+    width: 100%;
+    padding: 0.4rem 1.25rem;
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--border-color);
+    pointer-events: auto;
+    z-index: 25;
+  }
+
+  #doc-pane.has-tutorial-back .pane-header-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 0.35rem;
+  }
+
+  #doc-pane.has-tutorial-back .doc-tutorial-back-btn {
+    margin-right: auto;
+    min-width: 0;
+    max-width: calc(100% - 76px);
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* Sidebar Tutorial Progress Header */
