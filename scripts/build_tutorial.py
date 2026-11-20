@@ -401,9 +401,14 @@ def build_chapter_page(
 
     if curr_files:
         diff_text, diff_summary, diff_meta = compute_chapter_diff(chapter, curr_files, prev_resolved_files)
+        shared_class_base_map = pbc.sh.build_suite_class_base_map(
+            [(fn, inf["content"]) for fn, inf in curr_files.items()]
+        )
         for fname, info in curr_files.items():
             content = info["content"]
-            rows, line_count = pbc.highlight_code_lines(content, fname, clickable_sym_links=True)
+            rows, line_count = pbc.highlight_code_lines(
+                content, fname, clickable_sym_links=True, shared_class_base_map=shared_class_base_map
+            )
             files_data.append({
                 "name": fname,
                 "raw_content": content,

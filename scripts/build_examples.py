@@ -32,9 +32,11 @@ EXAMPLES_SRC_DIR = BASE_DIR / "uvm-1.2" / "examples"
 OUTPUT_EXAMPLES_VIEW = BASE_DIR / "examples_view"
 OUTPUT_JS_DIR = BASE_DIR / "js"
 
-def highlight_code_lines(code, filename):
+def highlight_code_lines(code, filename, shared_class_base_map=None):
     """Highlight code lines and return (lines_html, total_lines)."""
-    rows, count = pbc.highlight_code_lines(code, filename, clickable_sym_links=True)
+    rows, count = pbc.highlight_code_lines(
+        code, filename, clickable_sym_links=True, shared_class_base_map=shared_class_base_map
+    )
     return '\n'.join(rows), count
 
 # Metadata catalogue for all 38 suites
@@ -1713,8 +1715,8 @@ def build_suite_page(suite_key, meta, files):
     ex_rel = f"{cat_slug}/{Path(suite_key).name}.html"
     paired_src = EXAMPLE_TO_SRC_MAP.get(ex_rel, "src_view/base/uvm_component.svh.html#L44")
 
-    # Pre-render all files
-    files_data = []
+    # Pre-load raw contents so we can build a shared class-inheritance map across all suite files
+    raw_files = []
     for rel_name, full_path in files:
         try:
             with open(full_path, 'r', encoding='utf-8', errors='replace') as f:
@@ -1722,8 +1724,14 @@ def build_suite_page(suite_key, meta, files):
         except Exception:
             with open(full_path, 'r', encoding='latin-1', errors='replace') as f:
                 content = f.read()
-        
-        table_html, line_count = highlight_code_lines(content, rel_name)
+        raw_files.append((rel_name, content))
+
+    shared_class_base_map = pbc.sh.build_suite_class_base_map(raw_files)
+
+    # Pre-render all files
+    files_data = []
+    for rel_name, content in raw_files:
+        table_html, line_count = highlight_code_lines(content, rel_name, shared_class_base_map=shared_class_base_map)
         files_data.append({
             "name": rel_name,
             "raw_content": content,

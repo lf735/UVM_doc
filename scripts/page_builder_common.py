@@ -43,13 +43,23 @@ def get_rel_root(depth_or_path: Union[int, Path, str]) -> str:
     return "../" * depth if depth > 0 else "./"
 
 
-def highlight_code_lines(code: str, filename: str, clickable_sym_links: bool = False) -> Tuple[List[str], int]:
+def highlight_code_lines(
+    code: str,
+    filename: str,
+    clickable_sym_links: bool = False,
+    shared_class_base_map: Optional[Dict[str, str]] = None
+) -> Tuple[List[str], int]:
     """
-    Renders syntax-highlighted HTML table rows with line numbers.
+    Renders syntax-highlighted HTML table rows.
     Delegates to syntax_highlighter.py.
     Returns: (list_of_html_rows, line_count)
     """
-    return sh.highlight_source_code_table_rows(code, filename, clickable_sym_links=clickable_sym_links)
+    return sh.highlight_source_code_table_rows(
+        code,
+        filename,
+        clickable_sym_links=clickable_sym_links,
+        shared_class_base_map=shared_class_base_map
+    )
 
 
 def render_breadcrumbs(items: List[Dict[str, Any]], root_rel: str) -> str:
@@ -148,37 +158,18 @@ def render_code_pane(table_html: str, pane_id: str = "file-pane-0", is_active: b
     return f'<div class="file-code-pane{active_cls}" id="{pane_id}"{data_attr}><table class="sv-code-table"><tbody>{table_html}</tbody></table></div>'
 
 
-def render_code_container(panes_html: str, container_id: str = "studio-code-container", extra_classes: str = "") -> str:
+def render_code_container(panes_html: str = "", container_id: str = "studio-code-container", extra_classes: str = "") -> str:
     """
-    Renders the unified code container wrapping code panes with integrated editor widgets:
-    - Code Find Widget (Ctrl+F)
-    - Quick Info Tooltip Popover (Hover)
-    - Monaco IDE Pane (Activated on demand)
-    Carries both .code-container and contextual classes (.studio-code-container, .src-code-container)
-    for 100% backward compatibility.
+    Renders the unified Monaco code container with an offline plain-text fallback.
+    Carries both .code-container and contextual classes (.studio-code-container, .src-code-container).
     """
-    classes = f"code-container {extra_classes}".strip()
-    find_widget_html = '''    <div class="code-find-widget" id="code-find-widget" style="display:none;" role="search" aria-label="Find in file">
-      <div class="find-input-wrap">
-        <input type="text" id="find-input" placeholder="Find in file (Ctrl+F)..." autocomplete="off" spellcheck="false">
-        <span class="find-count" id="find-count">0 of 0</span>
-      </div>
-      <div class="find-actions">
-        <button type="button" class="find-btn" id="find-case-toggle" title="Match Case (Alt+C)">Aa</button>
-        <button type="button" class="find-btn" id="find-word-toggle" title="Match Whole Word (Alt+W)">\\b</button>
-        <button type="button" class="find-btn" id="find-prev" title="Previous Match (Shift+Enter)">▲</button>
-        <button type="button" class="find-btn" id="find-next" title="Next Match (Enter)">▼</button>
-        <button type="button" class="find-btn" id="find-close" title="Close (Esc)">✕</button>
-      </div>
-    </div>'''
-
-    quick_info_html = '    <div class="code-quick-info-tooltip" id="code-quick-info" style="display:none;"></div>'
-    monaco_pane_html = '    <div id="monaco-editor-pane" style="display:none;"></div>'
+    classes = f"code-container monaco-active {extra_classes}".strip()
+    monaco_pane_html = '    <div id="monaco-editor-pane" class="active"></div>'
+    fallback_pre_html = '    <pre id="monaco-fallback-pre" class="monaco-fallback-pre" style="display:none;"></pre>'
 
     return f'''<div class="{classes}" id="{container_id}">
-{find_widget_html}
-{quick_info_html}
 {monaco_pane_html}
+{fallback_pre_html}
 {panes_html}
 </div>'''
 
@@ -228,12 +219,8 @@ def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root
         for i, fd in enumerate(files_data)
     ])
 
-    # 3. Panes
-    panes_html = ''.join([
-        render_code_pane(fd["table_html"], pane_id=f"file-pane-{i}", is_active=(i == 0), filename=fd["name"])
-        for i, fd in enumerate(files_data)
-    ])
-    code_container_html = render_code_container(panes_html, container_id="studio-code-container", extra_classes="studio-code-container")
+    # 3. Monaco Code Container (renders directly from #zip-payload)
+    code_container_html = render_code_container("", container_id="studio-code-container", extra_classes="studio-code-container")
 
     sticky_stepper_html = ""
     if stepper_steps:
@@ -297,10 +284,6 @@ def render_code_studio(files_data: List[Dict[str, Any]], primary_file: str, root
               </button>
               <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-toggle-wrap" title="Toggle Word Wrap (Alt+Z)" aria-label="Toggle Word Wrap">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><polyline points="14 16 18 12 14 8"/><path d="M21 18H9a4 4 0 0 1 0-8h6"/></svg>
-              </button>
-              <button type="button" class="btn btn-sm btn-outline studio-action-btn btn-monaco-ide" id="btn-toggle-monaco" title="Toggle Monaco VS Code Editor" aria-label="Monaco IDE">
-                <svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>
-                <span>Monaco</span>
               </button>
               <button type="button" class="btn btn-sm btn-outline studio-action-btn" id="btn-copy-code" title="Copy active file code" aria-label="Copy code">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -745,7 +728,7 @@ def render_code_block(clean_code: str, lang: Optional[str] = None) -> str:
         else:
             lang = "SystemVerilog"
 
-    highlighted = sh.highlight_doc_snippet(clean_code)
+    highlighted = sh.highlight_doc_snippet(clean_code, lang=lang)
 
     return f'''<div class="code-block-container" data-lang="{html.escape(lang)}">
   <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
@@ -915,10 +898,6 @@ def render_source_viewer(
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><polyline points="14 16 18 12 14 8"/><path d="M21 18H9a4 4 0 0 1 0-8h6"/></svg>
         <span>Wrap</span>
       </button>
-      <button type="button" class="btn btn-outline studio-action-btn btn-monaco-ide" id="btn-toggle-monaco" title="Toggle Monaco VS Code Editor">
-        <svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>
-        <span>Monaco IDE</span>
-      </button>
       <button type="button" class="btn btn-outline studio-action-btn" id="btn-copy-code" title="Copy raw source code">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
         <span>Copy Code</span>
@@ -930,8 +909,7 @@ def render_source_viewer(
     </div>
   </div>'''
 
-    pane_html = render_code_pane("".join(rows), pane_id="file-pane-0", is_active=True, filename=rel_path)
-    container_html = render_code_container(pane_html, container_id="src-code-container", extra_classes="src-code-container")
+    container_html = render_code_container("", container_id="src-code-container", extra_classes="src-code-container")
     raw_textarea = f'  <textarea id="raw-source-text" style="display:none">{html.escape(code)}</textarea>'
 
     body_content = f"{toolbar_html}\n  {container_html}\n{raw_textarea}"

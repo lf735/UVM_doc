@@ -335,6 +335,12 @@ def build_inherited_doc_bundles(db: dict, by_exact: dict) -> tuple:
         owner: [{"n": t["n"], "k": t["k"]} for t in items]
         for owner, items in topics_by_class.items()
     }
+    member_doc_urls = {
+        (owner, t["n"]): t["d"]
+        for owner, items in topics_by_class.items()
+        for t in items
+        if t.get("d")
+    }
 
     # Write per-class JSONP modules in js/doc_topics/
     DOC_TOPICS_DIR.mkdir(parents=True, exist_ok=True)
@@ -360,7 +366,7 @@ def build_inherited_doc_bundles(db: dict, by_exact: dict) -> tuple:
         f"Generated {len(expected_files)} documented topic bundles in {DOC_TOPICS_DIR} "
         f"({sum(len(v) for v in topics_by_class.values())} member docs)."
     )
-    return class_parents, class_doc_members
+    return class_parents, class_doc_members, member_doc_urls
 
 
 def generate_quick_symbols():
@@ -372,22 +378,105 @@ def generate_quick_symbols():
     by_exact = doc_maps["by_exact"]
     by_name = doc_maps["by_name"]
 
+    class_parents, class_doc_members, member_doc_urls = build_inherited_doc_bundles(db, by_exact)
+    db_classes = db.get("classes", {})
+
+    # Cache valid HTML IDs and data-anchors in docs_view for 100% valid doc_urls
+    doc_html_index = {}
+
+    def _get_doc_html_meta(rel_doc: str) -> tuple:
+        if rel_doc not in doc_html_index:
+            fpath = BASE_DIR / rel_doc
+            ids_set = set()
+            anchor_to_id = {}
+            if fpath.is_file():
+                txt = fpath.read_text(encoding="utf-8", errors="replace")
+                ids_set.update(re.findall(r'\bid=["\']([^"\']+)["\']', txt))
+                ids_set.update(re.findall(r'\bname=["\']([^"\']+)["\']', txt))
+                for m_da in re.finditer(r'id=["\']([^"\']+)["\'][^>]*data-anchor=["\']([^"\']+)["\']', txt):
+                    anchor_to_id[m_da.group(2)] = m_da.group(1)
+            doc_html_index[rel_doc] = (ids_set, anchor_to_id)
+        return doc_html_index[rel_doc]
+
+    def _validate_doc_url(url: str, sym_name: str = "") -> str:
+        if not url:
+            return ""
+        rel_doc, sep, anc = url.partition("#")
+        if not (BASE_DIR / rel_doc).is_file():
+            return ""
+        if not anc:
+            return rel_doc
+        ids_set, anchor_to_id = _get_doc_html_meta(rel_doc)
+        if anc in ids_set:
+            return url
+        if anc in anchor_to_id:
+            return f"{rel_doc}#{anchor_to_id[anc]}"
+        # TLM1 wildcard class fallback (e.g. uvm_nonblocking_put_export -> uvm_*_export#(T))
+        sname = (sym_name or anc).lower()
+        is_req_rsp = any(k in sname for k in ("master", "slave", "transport"))
+        for da, tid in anchor_to_id.items():
+            if "uvm_*_" in da and "." not in da:
+                if is_req_rsp and "REQ" in da:
+                    return f"{rel_doc}#{tid}"
+                if not is_req_rsp and "REQ" not in da:
+                    return f"{rel_doc}#{tid}"
+        for da, tid in anchor_to_id.items():
+            if "uvm_*_" in da and "." not in da:
+                return f"{rel_doc}#{tid}"
+        return rel_doc
+
+    def _lookup_exact_owner_doc(name: str, owner_cls: str) -> str:
+        if (owner_cls, name) in member_doc_urls:
+            return member_doc_urls[(owner_cls, name)]
+        if (name, owner_cls) in by_exact:
+            return by_exact[(name, owner_cls)]
+        for (n, c), d in by_exact.items():
+            if n == name and c.split("#", 1)[0] == owner_cls:
+                return d
+        return ""
+
     def resolve_doc(name: str, owner: str = "", src_file: str = "") -> str:
         if owner:
             base_owner = owner.split("#", 1)[0].strip()
             for key_owner in (owner, base_owner):
-                if (name, key_owner) in by_exact:
-                    return by_exact[(name, key_owner)]
-            for (n, c), d in by_exact.items():
-                if n == name and c.split("#", 1)[0] == base_owner:
-                    return d
-            # For class-scoped symbols not in by_exact, stay on the owning source file's doc page
+                hit = _lookup_exact_owner_doc(name, key_owner)
+                if hit:
+                    return hit
+
+            # Walk inheritance / override metadata from uvm_source_database.json
+            cinfo = db_classes.get(base_owner, {})
+            m_meta = cinfo.get("methods", {}).get(name, {}) if isinstance(cinfo, dict) else {}
+            cand_ancestors = []
+            for key in ("overridden_from", "root_ancestor"):
+                anc = m_meta.get(key)
+                if anc and anc not in cand_ancestors:
+                    cand_ancestors.append(anc)
+            for anc in (cinfo.get("ancestors") or []):
+                anc_clean = anc.split("#", 1)[0].strip()
+                if anc_clean and anc_clean not in cand_ancestors:
+                    cand_ancestors.append(anc_clean)
+            curr = class_parents.get(base_owner, {}).get("parent", "")
+            seen_anc = set(cand_ancestors) | {base_owner}
+            while curr and curr not in seen_anc:
+                seen_anc.add(curr)
+                cand_ancestors.append(curr)
+                curr = class_parents.get(curr, {}).get("parent", "")
+
+            for anc in cand_ancestors:
+                hit = _lookup_exact_owner_doc(name, anc)
+                if hit:
+                    return hit
+
+            # For class-scoped symbols not in by_exact, stay on the owning class/source file's doc page
+            cls_doc = class_parents.get(base_owner, {}).get("doc", "")
+            if cls_doc:
+                return cls_doc
             file_doc = fallback_doc_url(src_file)
             if file_doc:
                 return file_doc
         if name in by_name:
-            return by_name[name]
-        return fallback_doc_url(src_file)
+            return _validate_doc_url(by_name[name], name)
+        return _validate_doc_url(fallback_doc_url(src_file), name)
 
     classes_dict = {}
     for name, c in db.get("classes", {}).items():
@@ -399,7 +488,7 @@ def generate_quick_symbols():
             "file": src_file,
             "line": c.get("start_line", 1),
             "doc": summary,
-            "doc_url": resolve_doc(name, "", src_file),
+            "doc_url": _validate_doc_url(resolve_doc(name, "", src_file), name),
             "extends": c.get("extends_base") or "",
             "params": c.get("parameters_raw") or "",
             "is_virtual": bool(c.get("is_virtual"))
@@ -417,6 +506,12 @@ def generate_quick_symbols():
             or resolve_doc(f"`{name}", "", src_file)
             or resolve_doc(name, "", src_file)
         )
+        if not doc_url:
+            if src_file == "tlm1/uvm_tlm_imps.svh":
+                doc_url = "docs_view/tlm1/uvm_imps-svh.html"
+            elif src_file == "uvm_macros.svh":
+                doc_url = "docs_view/macros/uvm_version_defines-svh.html"
+        doc_url = _validate_doc_url(doc_url, name)
         macro_entry = {
             "type": "macro",
             "file": src_file,
@@ -447,7 +542,7 @@ def generate_quick_symbols():
 
     # Index documented global functions/tasks from searchIndex (e.g. uvm_report_info, run_test, etc.)
     for (sname, scat), doc_url in by_exact.items():
-        if scat in ("Global", "Globals") and not sname.startswith("`"):
+        if scat in ("Global", "Globals") and not sname.startswith("`") and sname != "new":
             existing = methods_dict.setdefault(sname, [])
             if not any(e.get("class") == "Global" for e in existing):
                 existing.insert(0, {
@@ -478,6 +573,8 @@ def generate_quick_symbols():
             "doc": clean_summary(s.get("summary") or ""),
             "doc_url": resolve_doc(sname, owner, src_file)
         }
+        if s.get("var_type"):
+            entry["var_type"] = s.get("var_type")
         if stype == "constant":
             if sname not in constants_dict:
                 constants_dict[sname] = entry
@@ -485,8 +582,32 @@ def generate_quick_symbols():
             if sname not in types_dict and sname not in classes_dict:
                 types_dict[sname] = entry
         elif stype in ("variable", "port"):
-            if sname not in vars_dict:
+            prev = vars_dict.get(sname)
+            if not prev or (not prev.get("var_type") and entry.get("var_type")) or ("#" not in (prev.get("doc_url") or "") and "#" in (entry.get("doc_url") or "")):
                 vars_dict[sname] = entry
+
+    # Build per-class field/port map with var_type & doc_url for chained/inherited lookup
+    class_fields = {}
+    for cname, cinfo in db_classes.items():
+        fields_map = cinfo.get("fields", {})
+        if not fields_map:
+            continue
+        out_f = {}
+        for fname, finfo in fields_map.items():
+            vtype = finfo.get("var_type") or ""
+            durl = resolve_doc(fname, cname, finfo.get("file", cinfo.get("file", "")))
+            if vtype in db_classes or "#" in durl:
+                f_obj = {
+                    "kind": finfo.get("kind", "variable"),
+                    "file": finfo.get("file", cinfo.get("file", "")),
+                    "line": finfo.get("line", 1),
+                    "doc_url": durl
+                }
+                if vtype:
+                    f_obj["var_type"] = vtype
+                out_f[fname] = f_obj
+        if out_f:
+            class_fields[cname] = out_f
 
     # Ensure core UVM global variables & standard constants have reliable metadata
     core_globals = {
@@ -512,8 +633,6 @@ def generate_quick_symbols():
     for gname, ginfo in core_globals.items():
         vars_dict[gname] = ginfo
 
-    class_parents, class_doc_members = build_inherited_doc_bundles(db, by_exact)
-
     payload = {
         "metadata": {
             "version": "UVM 1.2",
@@ -531,6 +650,7 @@ def generate_quick_symbols():
         "constants": constants_dict,
         "types": types_dict,
         "vars": vars_dict,
+        "classFields": class_fields,
         "classParents": class_parents,
         "classDocMembers": class_doc_members
     }

@@ -774,6 +774,9 @@
       const activePane = document.getElementById(`file-pane-${activeIdx}`);
       const step = stepperSteps[currentStepIdx];
       if (!step || !step.highlight_line) return;
+      if (studioController && studioController.scrollToLine) {
+        studioController.scrollToLine(step.highlight_line);
+      }
       const targetRow = activePane ? activePane.querySelector(`tr[data-line="${step.highlight_line}"], tr#L${step.highlight_line}`) : null;
       if (targetRow && studioCodeContainer) {
         const rowTop = targetRow.offsetTop;
@@ -844,6 +847,9 @@
       }
 
       if (line) {
+        if (studioController && studioController.scrollToLine) {
+          studioController.scrollToLine(line);
+        }
         const activeIdx = studioController ? studioController.getCurrentFileIdx() : 0;
         const activePane = document.getElementById(`file-pane-${activeIdx}`);
         const targetRow = activePane ? activePane.querySelector(`tr[data-line="${line}"], tr#L${line}`) : null;

@@ -480,12 +480,13 @@ def build_database():
                 end_token = f"end{m_kind}"
                 impl_end_line = impl_start_line
                 calls_super = False
-                j = i + 1
+                j = i
                 while j < len(lines):
                     l_sub = lines[j]
-                    if f"super.{meth_name}" in l_sub:
+                    clean_sub = re.sub(r'//.*', '', re.sub(r'"[^"]*"', '""', l_sub))
+                    if f"super.{meth_name}" in clean_sub:
                         calls_super = True
-                    if re.match(rf'^\s*{end_token}\b', l_sub):
+                    if re.search(rf'\b{end_token}\b', clean_sub):
                         impl_end_line = j + 1
                         break
                     j += 1
@@ -537,6 +538,7 @@ def build_database():
                 endclass_line = class_start_line
                 class_depth = 1
                 methods_in_class = {}
+                fields_in_class = {}
                 k = h_idx + 1
 
                 while k < len(lines):
@@ -620,9 +622,10 @@ def build_database():
                             end_tok = f"end{m_kind}"
                             sub_k = decl_k
                             while sub_k < len(lines):
-                                if f"super.{m_name}" in lines[sub_k]:
+                                clean_sub = re.sub(r'//.*', '', re.sub(r'"[^"]*"', '""', lines[sub_k]))
+                                if f"super.{m_name}" in clean_sub:
                                     calls_super = True
-                                if re.match(rf'^\s*{end_tok}\b', lines[sub_k]):
+                                if re.search(rf'\b{end_tok}\b', clean_sub):
                                     impl_end = sub_k + 1
                                     break
                                 sub_k += 1
@@ -665,6 +668,39 @@ def build_database():
                             "is_override_of_pure_virtual": False,
                             "overridden_by": []
                         }
+                    elif (
+                        not k_strip.startswith('//')
+                        and not k_strip.startswith('*')
+                        and not k_strip.startswith('`')
+                        and 'typedef' not in k_strip
+                        and not re.match(r'^\s*(?:constraint|covergroup|property|sequence|begin|end|if|else|for|while|case|return)\b', k_strip)
+                    ):
+                        clean_f = re.sub(r'//.*$', '', k_line).strip()
+                        m_fld = re.match(
+                            r'^(?:(?:local|protected|static|const|rand|randc|virtual)\s+)*'
+                            r'(?:(parameter|localparam)\s+)?'
+                            r'([A-Za-z_][A-Za-z0-9_:]*)'
+                            r'(?:\s*#\s*\([^;]*?\))?'
+                            r'(?:\s*(?:signed|unsigned)\b)?'
+                            r'(?:\s*\[[^\]]+\])*'
+                            r'\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:\[[^\]]*\])*\s*(?:=[^;]*)?;',
+                            clean_f
+                        )
+                        if m_fld:
+                            is_param = bool(m_fld.group(1))
+                            f_type = m_fld.group(2).split('::')[-1]
+                            f_name = m_fld.group(3)
+                            if f_type not in ('return', 'begin', 'end', 'if', 'else', 'for', 'while', 'case', 'import', 'export'):
+                                f_vis = 'local' if re.search(r'\blocal\b', clean_f) else ('protected' if re.search(r'\bprotected\b', clean_f) else 'public')
+                                f_kind = 'parameter' if is_param else ('port' if re.search(r'_(?:port|export|imp|socket)\b', f_type) else 'variable')
+                                fields_in_class[f_name] = {
+                                    "name": f_name,
+                                    "kind": f_kind,
+                                    "var_type": f_type,
+                                    "visibility": f_vis,
+                                    "file": rel_path,
+                                    "line": k_no
+                                }
 
                     k += 1
 
@@ -684,7 +720,8 @@ def build_database():
                     "depth": 0,
                     "is_deprecated": 'deprecated' in rel_path.lower(),
                     "doc": class_doc,
-                    "methods": methods_in_class
+                    "methods": methods_in_class,
+                    "fields": fields_in_class
                 }
                 files_db[rel_path]["classes"].append(class_name)
                 i = k  # advance past class
@@ -1012,11 +1049,22 @@ def build_database():
 
             sv_rel = doc_file.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
             line_no = find_decl_line(sv_rel, name, sym_type, None)
+            var_type = ""
+            if sym_type in ("variable", "port"):
+                flines = get_lines(sv_rel)
+                if 1 <= line_no <= len(flines):
+                    m_vt = re.match(
+                        r'^\s*(?:(?:local|protected|static|const|rand|randc|virtual)\s+)*([A-Za-z_][A-Za-z0-9_:]*)',
+                        re.sub(r'//.*$', '', flines[line_no - 1])
+                    )
+                    if m_vt:
+                        var_type = m_vt.group(1).split('::')[-1]
 
             symbols_index.append({
                 "name": name,
                 "type": sym_type,
                 "class": None,
+                "var_type": var_type or None,
                 "file": sv_rel,
                 "line": line_no,
                 "summary": desc
@@ -1045,12 +1093,26 @@ def build_database():
                 if not sv_rel:
                     sv_rel = doc_file.replace('-svh.html', '.svh').replace('-sv.html', '.sv').replace('-txt.html', '.txt')
                 line_no = find_decl_line(sv_rel, sname, sym_type, parent_class)
+                var_type = ""
+                if sym_type in ("variable", "port"):
+                    if parent_class and parent_class in classes_db and sname in classes_db[parent_class].get("fields", {}):
+                        var_type = classes_db[parent_class]["fields"][sname].get("var_type", "")
+                    if not var_type:
+                        flines = get_lines(sv_rel)
+                        if 1 <= line_no <= len(flines):
+                            m_vt = re.match(
+                                r'^\s*(?:(?:local|protected|static|const|rand|randc|virtual)\s+)*([A-Za-z_][A-Za-z0-9_:]*)',
+                                re.sub(r'//.*$', '', flines[line_no - 1])
+                            )
+                            if m_vt:
+                                var_type = m_vt.group(1).split('::')[-1]
 
                 symbols_index.append({
                     "name": full_name,
                     "short_name": sname,
                     "type": sym_type,
                     "class": parent_class,
+                    "var_type": var_type or None,
                     "file": sv_rel,
                     "line": line_no,
                     "summary": desc

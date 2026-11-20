@@ -45,13 +45,9 @@ def test_css_styles():
     assert CSS_PATH.exists(), "style.css does not exist!"
     css = CSS_PATH.read_text(encoding="utf-8")
     required_selectors = [
-        ".code-find-widget",
-        "mark.find-match",
-        "mark.find-match.find-match-current",
-        ".token-highlight",
-        ".ctrl-hoverable",
-        ".code-quick-info-tooltip",
         "#monaco-editor-pane",
+        ".monaco-fallback-pre",
+        ".monaco-active-line-highlight",
         ".code-wrap-active"
     ]
     for sel in required_selectors:
@@ -64,11 +60,10 @@ def test_js_controllers():
     js_path = JS_DIR / "page_common.js"
     assert js_path.exists(), "page_common.js does not exist!"
     js = js_path.read_text(encoding="utf-8")
-    assert "initCodeFindWidget" in js, "Missing initCodeFindWidget in page_common.js"
-    assert "initOccurrenceHighlighter" in js, "Missing initOccurrenceHighlighter in page_common.js"
-    assert "initDefinitionResolver" in js, "Missing initDefinitionResolver in page_common.js"
-    assert "initQuickInfoHover" in js, "Missing initQuickInfoHover in page_common.js"
+    assert ("initCodeFindWidget" in js or "initMonacoFindTrigger" in js), "Missing Find controller in page_common.js"
     assert "initMonacoLoader" in js, "Missing initMonacoLoader in page_common.js"
+    assert "registerUvmSystemVerilogLanguage" in js, "Missing registerUvmSystemVerilogLanguage in page_common.js"
+    assert "defineUvmMonacoThemes" in js, "Missing defineUvmMonacoThemes in page_common.js"
     assert "initCodeEditorShortcuts" in js, "Missing initCodeEditorShortcuts in page_common.js"
     print("  OK: All JavaScript controllers present in page_common.js.")
 
@@ -91,12 +86,13 @@ def test_source_views():
         content = f.read_text(encoding="utf-8")
         assert "js/uvm_symbol_quick.js" in content, f"{f.name} missing uvm_symbol_quick.js"
         assert "js/page_common.js" in content, f"{f.name} missing page_common.js"
+        assert 'id="monaco-editor-pane"' in content, f"{f.name} missing #monaco-editor-pane"
         assert 'id="code-find-widget"' in content, f"{f.name} missing #code-find-widget"
         assert 'id="code-quick-info"' in content, f"{f.name} missing #code-quick-info"
-        assert 'id="monaco-editor-pane"' in content, f"{f.name} missing #monaco-editor-pane"
         assert 'id="btn-toggle-find"' in content, f"{f.name} missing #btn-toggle-find"
         assert 'id="btn-toggle-wrap"' in content, f"{f.name} missing #btn-toggle-wrap"
         assert 'id="btn-toggle-monaco"' in content, f"{f.name} missing #btn-toggle-monaco"
+        assert 'class="sv-code-table"' in content, f"{f.name} missing .sv-code-table"
         checked += 1
     print(f"  OK: All {checked} source views verified.")
 
@@ -110,12 +106,13 @@ def test_example_studios():
         content = f.read_text(encoding="utf-8")
         assert "js/uvm_symbol_quick.js" in content, f"{f.name} missing uvm_symbol_quick.js"
         assert "js/page_common.js" in content, f"{f.name} missing page_common.js"
+        assert 'id="monaco-editor-pane"' in content, f"{f.name} missing #monaco-editor-pane"
         assert 'id="code-find-widget"' in content, f"{f.name} missing #code-find-widget"
         assert 'id="code-quick-info"' in content, f"{f.name} missing #code-quick-info"
-        assert 'id="monaco-editor-pane"' in content, f"{f.name} missing #monaco-editor-pane"
         assert 'id="btn-toggle-find"' in content, f"{f.name} missing #btn-toggle-find"
         assert 'id="btn-toggle-wrap"' in content, f"{f.name} missing #btn-toggle-wrap"
         assert 'id="btn-toggle-monaco"' in content, f"{f.name} missing #btn-toggle-monaco"
+        assert 'class="sv-code-table"' in content, f"{f.name} missing .sv-code-table"
         checked += 1
     print(f"  OK: All {checked} example studios verified.")
 
@@ -123,11 +120,11 @@ def test_example_studios():
 def test_clickable_uvm_symbols_integration():
     print("[6/6] Testing enriched clickable UVM symbols & disambiguation assets...")
     quick_js = (JS_DIR / "uvm_symbol_quick.js").read_text(encoding="utf-8")
-    for key in ('"constants":', '"types":', '"vars":', '"doc_url":'):
+    for key in ('"constants":', '"types":', '"vars":', '"doc_url":', '"classFields":'):
         assert key in quick_js, f"uvm_symbol_quick.js missing {key}"
 
     page_common = (JS_DIR / "page_common.js").read_text(encoding="utf-8")
-    for sym_token in ("lookupUvmSymbol", "sym-disambig-popover", "sv-uvm-type", "sv-constant"):
+    for sym_token in ("lookupUvmSymbol", "sym-disambig-popover", "openUvmDocFromMonaco", "openUvmDefFromMonaco"):
         assert sym_token in page_common, f"page_common.js missing {sym_token}"
 
     app_js = (JS_DIR / "app.js").read_text(encoding="utf-8")
@@ -135,22 +132,53 @@ def test_clickable_uvm_symbols_integration():
 
     css_text = CSS_PATH.read_text(encoding="utf-8")
     assert ".sym-disambig-popover" in css_text, "style.css missing .sym-disambig-popover"
-    assert ".sv-method.clickable-uvm-sym" in css_text, "style.css missing .sv-method.clickable-uvm-sym"
-
-    obj_html = (EX_DIR / "phasing" / "objections.html").read_text(encoding="utf-8")
-    for expected in (
-        "sv-uvm-type clickable-uvm-sym",
-        "sv-macro clickable-uvm-sym",
-        "sv-method clickable-uvm-sym",
-        "sv-constant clickable-uvm-sym",
-    ):
-        assert expected in obj_html, f"objections.html missing {expected}"
-
-    primer_html = (EX_DIR / "registers" / "primer.html").read_text(encoding="utf-8")
-    assert 'data-sym="write"' in primer_html and "sv-method clickable-uvm-sym" in primer_html, (
-        "primer.html missing clickable method write"
-    )
     print("  OK: Enriched clickable UVM symbols and disambiguation popover verified.")
+
+
+def test_monaco_and_symbol_anchor_regressions():
+    print("[7/7] Testing Monaco integration & symbol doc-anchor regressions...")
+    sym_file = JS_DIR / "uvm_symbol_quick.js"
+    raw = sym_file.read_text(encoding="utf-8")
+    json_str = raw.split("window.UVM_SYMBOLS = ", 1)[1].strip().rstrip(";")
+    data = json.loads(json_str)
+
+    missing_anchors = [
+        (mname, entry.get("class"))
+        for mname, mlist in data.get("methods", {}).items()
+        for entry in mlist
+        if "#" not in (entry.get("doc_url") or "")
+    ]
+    assert not missing_anchors, f"Found {len(missing_anchors)} method entries without #anchor: {missing_anchors[:5]}"
+
+    new_entries = data.get("methods", {}).get("new", [])
+    assert not any(e.get("class") == "Global" for e in new_entries), (
+        "SV constructor 'new' must not be indexed under Global"
+    )
+
+    page_common = (JS_DIR / "page_common.js").read_text(encoding="utf-8")
+    assert "id: 'uvm-systemverilog'" in page_common, "Monaco must use dedicated 'uvm-systemverilog' language ID"
+    assert "['class', 'endclass']" not in page_common, (
+        "Monaco brackets config must not include ['class', 'endclass'] (breaks typedef class)"
+    )
+    assert "...Object.keys(syms.methods || {})" not in page_common, (
+        "Monarch uvmMethodsSet must not include all syms.methods keys (pollutes local variables)"
+    )
+    assert "bracketPairColorization: { enabled: false }" in page_common, (
+        "Monaco bracketPairColorization must stay disabled for color parity"
+    )
+    assert "uvm.openDoc" in page_common and "uvm.openSource" in page_common, (
+        "Monaco hover/action commands uvm.openDoc and uvm.openSource missing"
+    )
+    assert "SV_NATIVE_METHODS_JS" in page_common and "isMonacoTokenIgnoredAt" in page_common, (
+        "False-positive guards missing in page_common.js"
+    )
+    assert "comment.tag', '@pop'" in page_common, (
+        "Monarch comment_line must pop on end-of-line rules so comments never bleed"
+    )
+
+    css_text = CSS_PATH.read_text(encoding="utf-8")
+    assert ".monaco-active-line-highlight" in css_text, "style.css missing .monaco-active-line-highlight"
+    print("  OK: Monaco integration, Monarch grammar guards, and 100% anchored method doc URLs verified.")
 
 
 if __name__ == "__main__":
@@ -163,6 +191,7 @@ if __name__ == "__main__":
     test_source_views()
     test_example_studios()
     test_clickable_uvm_symbols_integration()
+    test_monaco_and_symbol_anchor_regressions()
     print("=" * 60)
     print("  ALL VERIFICATIONS PASSED SUCCESSFULLY!")
     print("=" * 60)

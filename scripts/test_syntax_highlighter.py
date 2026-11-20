@@ -140,6 +140,51 @@ def test_clickable_uvm_symbols():
     print("✔ test_clickable_uvm_symbols passed")
 
 
+def test_sv_tick_literals_and_doc_unification():
+    # Ensure SV tick literals and unpacked array literals are never swallowed as C char literals
+    snippet = "a = '0 + '1; b = '{default:0}; mode = UVM_BACKDOOR;"
+    doc_html = sh.highlight_doc_snippet(snippet)
+    assert '<span class="sv-string">' not in doc_html, f"SV tick literals mis-parsed as string: {doc_html}"
+    assert doc_html.count('<span class="sv-number">') >= 3, f"Expected tick/int numbers in: {doc_html}"
+    assert '<span class="sv-constant">UVM_BACKDOOR</span>' in doc_html, (
+        "Catalog UVM constants must be highlighted identically in doc snippets"
+    )
+
+    # Multi-language doc snippet routing (C / DPI and Makefile)
+    c_doc = sh.highlight_doc_snippet('#include <stdio.h>\nint add(int a) { return a; }', lang="C / DPI")
+    assert '<span class="sv-preproc">#include</span>' in c_doc, "C/DPI snippet should use C tokenizer"
+    mk_doc = sh.highlight_doc_snippet('all: sim\nCC = gcc', lang="Makefile")
+    assert '<span class="sv-op">:</span>' in mk_doc, "Makefile snippet should use Makefile tokenizer"
+    print("✔ test_sv_tick_literals_and_doc_unification passed")
+
+
+def test_typedef_and_super_resolution():
+    code = "\n".join([
+        "typedef class uvm_component;",
+        "class my_drv #(type T = int) extends uvm_driver #(T);",
+        "  function new(string name, uvm_component parent);",
+        "    super.new(name, parent);",
+        "  endfunction",
+        "  virtual function void build_phase(uvm_phase phase);",
+        "    super.build_phase(phase);",
+        "    q.size();",
+        "    obj = new();",
+        "  endfunction",
+        "endclass",
+    ])
+    rows, _ = sh.highlight_source_code_table_rows(code, "drv.sv", clickable_sym_links=True)
+    html_out = "".join(rows)
+    assert 'data-sym="build_phase" data-sym-kind="method" data-sym-base="uvm_driver"' in html_out, (
+        "Parameterized subclass super.build_phase must resolve base uvm_driver"
+    )
+    assert 'data-sym="size"' not in html_out, "Native SV q.size() must not link to UVM docs"
+    assert '>new</span>' in html_out and 'data-sym="new" data-sym-kind="method" data-sym-base="uvm_driver"' in html_out
+    # Bare obj = new() (line 9) must not become clickable
+    line9 = rows[8]
+    assert 'data-sym="new"' not in line9, f"Bare obj = new() must not link to UVM docs: {line9}"
+    print("✔ test_typedef_and_super_resolution passed")
+
+
 if __name__ == "__main__":
     test_system_tasks()
     test_types_vs_keywords()
@@ -149,4 +194,6 @@ if __name__ == "__main__":
     test_comments_and_tags()
     test_c_dpi_and_makefile()
     test_clickable_uvm_symbols()
+    test_sv_tick_literals_and_doc_unification()
+    test_typedef_and_super_resolution()
     print("\n🎉 ALL SYNTAX HIGHLIGHTER TESTS PASSED!")

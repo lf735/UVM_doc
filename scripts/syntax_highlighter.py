@@ -238,12 +238,11 @@ C_CONSTANTS: Set[str] = {'NULL', 'null', 'true', 'false', 'TRUE', 'FALSE'}
 # Regular Expressions for Tokenization
 # ==============================================================================
 
-# SystemVerilog tokenizer pattern
+# SystemVerilog tokenizer pattern (Note: SV uses '0/'1/'{...}/type'(expr), not C char literals)
 SV_TOKEN_REGEX = re.compile(
     r'(?P<BLOCK_COMMENT_START>/\*)|'
     r'(?P<LINE_COMMENT>//[^\n]*)|'
     r'(?P<STRING>"([^"\\]|\\.)*")|'
-    r'(?P<CHAR>\'([^\'\\]|\\.)*\')|'
     r'(?P<MACRO>`[a-zA-Z_][a-zA-Z0-9_]*)|'
     r'(?P<SYSTEM_TF>\$[a-zA-Z_][a-zA-Z0-9_$]*)|'
     r'(?P<BASED_NUM>\b\d+\s*\'[sS]?[bBoOdDhH]\s*[0-9a-fA-F_xzXZ]+\b)|'
@@ -369,7 +368,12 @@ def _infer_method_context(
         m_dot = re.search(r'([A-Za-z_][A-Za-z0-9_]*)\s*\.$', prev_text)
         if m_dot:
             recv = m_dot.group(1)
-            if recv in ('this', 'super'):
+            if recv == 'super':
+                return None, base
+            if recv == 'this':
+                cur_cls = line_ctx.get('current_class') if line_ctx else None
+                if cur_cls and cur_cls in catalog['classes']:
+                    return cur_cls, None
                 return None, base
             if line_ctx:
                 vtype = line_ctx.get('var_types', {}).get(recv)
@@ -388,20 +392,54 @@ def _infer_method_context(
 
 def _update_sv_line_context(line: str, line_ctx: Dict[str, Any], catalog: Dict[str, Any]) -> None:
     """Updates lightweight per-file SystemVerilog class and variable type tracking."""
-    code_part = re.sub(r'//.*$', '', line)
+    code_part = re.sub(r'/\*[\s\S]*?\*/', '', line)
+    code_part = re.sub(r'//.*$', '', code_part)
     code_part = re.sub(r'"[^"]*"', '""', code_part)
 
-    m_cls = re.search(r'\bclass\s+([A-Za-z_][A-Za-z0-9_]*)\s+extends\s+([A-Za-z_][A-Za-z0-9_]*)', code_part)
+    if re.search(r'\btypedef\b', code_part):
+        return
+
+    if line_ctx.get('in_out_of_block_method') and re.search(r'\bend(?:function|task)\b', code_part):
+        line_ctx['current_class'] = None
+        line_ctx['current_uvm_base'] = None
+        line_ctx['in_out_of_block_method'] = False
+        return
+
+    m_cls = re.search(
+        r'\bclass\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?extends\s+([A-Za-z_][A-Za-z0-9_]*)',
+        code_part
+    )
     if m_cls:
         cls_name, base_name = m_cls.group(1), m_cls.group(2)
         uvm_base = base_name if base_name in catalog['classes'] else line_ctx['class_base_map'].get(base_name)
+        line_ctx['current_class'] = cls_name
+        line_ctx['in_out_of_block_method'] = False
         if uvm_base:
             line_ctx['class_base_map'][cls_name] = uvm_base
             line_ctx['current_uvm_base'] = uvm_base
         else:
             line_ctx['current_uvm_base'] = None
-    elif re.search(r'\bendclass\b', code_part):
-        line_ctx['current_uvm_base'] = None
+    else:
+        m_cls_only = re.match(r'^\s*(?:virtual\s+)?class\s+([A-Za-z_][A-Za-z0-9_]*)', code_part)
+        if m_cls_only:
+            cls_name = m_cls_only.group(1)
+            line_ctx['current_class'] = cls_name
+            line_ctx['in_out_of_block_method'] = False
+            line_ctx['current_uvm_base'] = line_ctx['class_base_map'].get(cls_name)
+        elif re.search(r'\bendclass\b', code_part):
+            line_ctx['current_class'] = None
+            line_ctx['current_uvm_base'] = None
+            line_ctx['in_out_of_block_method'] = False
+        elif not line_ctx.get('current_class'):
+            m_out = re.search(
+                r'\b(?:function|task)\b[^;()]*?\b([A-Za-z_][A-Za-z0-9_]*)\s*::\s*[A-Za-z_][A-Za-z0-9_]*\s*(?:\(|;)',
+                code_part
+            )
+            if m_out:
+                cls_name = m_out.group(1)
+                line_ctx['current_class'] = cls_name
+                line_ctx['in_out_of_block_method'] = True
+                line_ctx['current_uvm_base'] = cls_name if cls_name in catalog['classes'] else line_ctx['class_base_map'].get(cls_name)
 
     known_types = catalog['classes'] | catalog['types']
     for m_var in re.finditer(
@@ -411,6 +449,25 @@ def _update_sv_line_context(line: str, line_ctx: Dict[str, Any], catalog: Dict[s
         tname, vname = m_var.group(1), m_var.group(2)
         if tname in known_types and vname not in ALL_SV_KEYWORDS:
             line_ctx['var_types'][vname] = tname
+
+
+# Built-in SystemVerilog methods (queues, dynamic/assoc arrays, strings, semaphores) that should not link to UVM docs without UVM owner context
+SV_NATIVE_METHODS: Set[str] = {
+    'size', 'exists', 'delete', 'first', 'last', 'next', 'prev',
+    'find', 'find_index', 'find_first', 'find_last', 'min', 'max', 'sum',
+    'sort', 'rsort', 'shuffle', 'reverse', 'unique',
+    'pop_front', 'pop_back', 'push_front', 'push_back', 'insert',
+    'num', 'len', 'substr', 'atoi', 'atohex', 'atooct', 'atobin', 'itoa', 'hextoa', 'octtoa', 'bintoa',
+    'toupper', 'tolower', 'getc', 'putc', 'compare', 'icompare'
+}
+
+# Generic method names that require a known UVM owner/base when called as `obj.method(...)`
+AMBIGUOUS_DOT_METHODS: Set[str] = {
+    'new', 'get', 'set', 'put', 'peek', 'try_get', 'try_put', 'try_peek',
+    'read', 'write', 'reset', 'init', 'clear', 'start', 'stop',
+    'open', 'close', 'copy', 'print', 'clone', 'pack', 'unpack', 'record',
+    'create', 'status', 'name', 'type', 'randomize', 'pre_randomize', 'post_randomize'
+}
 
 
 def tokenize_sv_line(
@@ -423,7 +480,7 @@ def tokenize_sv_line(
     Tokenizes a single line of SystemVerilog code into HTML syntax spans.
     Returns: (list_of_html_spans, new_in_block_comment_state)
     """
-    catalog = _get_uvm_symbol_catalog() if clickable_sym_links else None
+    catalog = _get_uvm_symbol_catalog()
     pos = 0
     line_len = len(line)
     line_parts: List[str] = []
@@ -468,7 +525,7 @@ def tokenize_sv_line(
                 elif kind == 'LINE_COMMENT':
                     line_parts.append(highlight_comment_content(val))
                     pos = end
-                elif kind == 'STRING' or kind == 'CHAR':
+                elif kind in ('STRING', 'CHAR'):
                     line_parts.append(highlight_string_content(val))
                     pos = end
                 elif kind == 'MACRO':
@@ -500,7 +557,7 @@ def tokenize_sv_line(
                         line_parts.append(f'<span class="sv-type">{esc}</span>')
                     elif val in SV_QUALIFIERS:
                         line_parts.append(f'<span class="sv-qualifier">{esc}</span>')
-                    elif val in SV_CONSTANTS or (clickable_sym_links and catalog and val in catalog['constants']):
+                    elif val in SV_CONSTANTS or (catalog and val in catalog['constants']):
                         if (
                             clickable_sym_links
                             and val not in {'null', 'this', 'super', '$root', '$unit'}
@@ -560,9 +617,19 @@ def tokenize_sv_line(
                             )
                             if is_call or is_dot_member or is_scope_member or is_func_hdr or is_unambiguous_bare:
                                 owner, base = _infer_method_context(prev_text, line_ctx, catalog)
-                                line_parts.append(
-                                    _format_clickable_sym('sv-method', val, esc, 'method', 'method ', owner, base)
-                                )
+                                should_link = True
+                                if (is_dot_member or is_func_hdr) and not owner and not base:
+                                    if val in SV_NATIVE_METHODS or val == 'new':
+                                        should_link = False
+                                elif not is_dot_member and not is_scope_member and not is_func_hdr:
+                                    if val in SV_NATIVE_METHODS or val == 'new':
+                                        should_link = False
+                                if should_link:
+                                    line_parts.append(
+                                        _format_clickable_sym('sv-method', val, esc, 'method', 'method ', owner, base)
+                                    )
+                                else:
+                                    line_parts.append(f'<span class="sv-method">{esc}</span>')
                             else:
                                 line_parts.append(
                                     f'<span class="sv-method">{esc}</span>'
@@ -638,7 +705,7 @@ def tokenize_c_line(line: str, in_block_comment: bool) -> Tuple[List[str], bool]
                 elif kind == 'LINE_COMMENT':
                     line_parts.append(highlight_comment_content(val))
                     pos = end
-                elif kind == 'STRING' or kind == 'CHAR':
+                elif kind in ('STRING', 'CHAR'):
                     line_parts.append(highlight_string_content(val))
                     pos = end
                 elif kind == 'PREPROC':
@@ -726,17 +793,52 @@ def tokenize_makefile_line(line: str) -> List[str]:
 # Full Source & Document Block Highlighting APIs
 # ==============================================================================
 
+def build_suite_class_base_map(file_contents: List[Tuple[str, str]]) -> Dict[str, str]:
+    """
+    Pre-scans all SystemVerilog files in an example or tutorial chapter to build
+    a shared mapping of user class names -> UVM base class (transitive).
+    """
+    catalog = _get_uvm_symbol_catalog()
+    raw_parents: Dict[str, str] = {}
+    for fname, content in file_contents:
+        if fname.endswith(('.c', '.cc', '.h', '.cpp', '.hpp', '.mk')) or 'makefile' in fname.lower():
+            continue
+        for line in content.splitlines():
+            code_part = re.sub(r'//.*$', '', line)
+            if re.match(r'^\s*typedef\s+', code_part):
+                continue
+            m_cls = re.search(
+                r'\bclass\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?extends\s+([A-Za-z_][A-Za-z0-9_]*)',
+                code_part
+            )
+            if m_cls:
+                raw_parents[m_cls.group(1)] = m_cls.group(2)
+
+    resolved: Dict[str, str] = {}
+    for cls_name in raw_parents:
+        curr = raw_parents[cls_name]
+        seen = {cls_name}
+        while curr and curr not in seen:
+            if curr in catalog['classes']:
+                resolved[cls_name] = curr
+                break
+            seen.add(curr)
+            curr = raw_parents.get(curr, '')
+    return resolved
+
+
 def highlight_source_code_table_rows(
     code: str,
     filename: str,
-    clickable_sym_links: bool = False
+    clickable_sym_links: bool = False,
+    shared_class_base_map: Optional[Dict[str, str]] = None
 ) -> Tuple[List[str], int]:
     """
     Renders syntax-highlighted HTML table rows with line numbers for a complete source file.
     Supports .sv, .svh, .v, .c, .cc, .h, and Makefile.* files.
     Returns: (list_of_html_rows, line_count)
     """
-    is_c = filename.endswith(('.c', '.cc', '.h'))
+    is_c = filename.endswith(('.c', '.cc', '.h', '.cpp', '.hpp'))
     is_makefile = ('makefile' in filename.lower() or filename.endswith('.mk'))
     lines = code.splitlines()
     rows: List[str] = []
@@ -745,7 +847,7 @@ def highlight_source_code_table_rows(
     line_ctx: Optional[Dict[str, Any]] = (
         {
             'current_uvm_base': None,
-            'class_base_map': {},
+            'class_base_map': dict(shared_class_base_map) if shared_class_base_map else {},
             'var_types': dict(catalog['var_types']),
         }
         if catalog
@@ -778,18 +880,26 @@ def highlight_source_code_table_rows(
     return rows, len(lines)
 
 
-def highlight_doc_snippet(raw_code: str) -> str:
+def highlight_doc_snippet(raw_code: str, lang: str = "SystemVerilog") -> str:
     """
     High-fidelity tokenizer for documentation code blocks (<pre><code>...</code></pre>).
-    Preserves exact whitespace and handles multi-line blocks cleanly.
+    Preserves exact whitespace and handles multi-line blocks cleanly across SV, C/DPI, and Makefiles.
     """
     code = html.unescape(raw_code)
     lines = code.splitlines(keepends=True)
     out_parts: List[str] = []
     in_block_comment = False
+    lang_low = (lang or "").lower()
+    is_c = lang_low in ("c", "cpp", "c / dpi", "c/dpi")
+    is_makefile = lang_low in ("makefile", "make")
 
     for line in lines:
-        parts, in_block_comment = tokenize_sv_line(line, in_block_comment, clickable_sym_links=False)
+        if is_makefile:
+            parts = tokenize_makefile_line(line)
+        elif is_c:
+            parts, in_block_comment = tokenize_c_line(line, in_block_comment)
+        else:
+            parts, in_block_comment = tokenize_sv_line(line, in_block_comment, clickable_sym_links=False)
         out_parts.extend(parts)
 
     return "".join(out_parts)

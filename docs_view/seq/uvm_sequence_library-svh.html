@@ -141,7 +141,7 @@
 <span class="sv-uvm-type">uvm_config_db</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_sequence_lib_mode</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-constant">null</span><span class="sv-op">,</span>
                                    <span class="sv-string">&quot;env.agent.sequencer.main_phase&quot;</span><span class="sv-op">,</span>
                                    <span class="sv-string">&quot;default_sequence.selection_mode&quot;</span><span class="sv-op">,</span>
-                                   <span class="sv-ident">UVM_SEQ_LIB_RANDC</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
+                                   <span class="sv-constant">UVM_SEQ_LIB_RANDC</span><span class="sv-op">)</span><span class="sv-op">;</span></code></pre>
 </div><p>Alternatively, you may create an instance of the sequence library a priori, initialize all its parameters, randomize it, then set it to run as-is on the sequencer.</p><div class="code-block-container" data-lang="SystemVerilog">
   <button type="button" class="code-copy-btn" title="Copy code" aria-label="Copy code to clipboard">
     <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -149,7 +149,7 @@
   <pre class="code-block-content"><code><span class="sv-ident">main_seq_lib</span> <span class="sv-ident">my_seq_lib</span><span class="sv-op">;</span>
 <span class="sv-ident">my_seq_lib</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;my_seq_lib&quot;</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
-<span class="sv-ident">my_seq_lib</span><span class="sv-op">.</span><span class="sv-ident">selection_mode</span> <span class="sv-op">=</span> <span class="sv-ident">UVM_SEQ_LIB_RANDC</span><span class="sv-op">;</span>
+<span class="sv-ident">my_seq_lib</span><span class="sv-op">.</span><span class="sv-ident">selection_mode</span> <span class="sv-op">=</span> <span class="sv-constant">UVM_SEQ_LIB_RANDC</span><span class="sv-op">;</span>
 <span class="sv-ident">my_seq_lib</span><span class="sv-op">.</span><span class="sv-ident">min_random_count</span> <span class="sv-op">=</span> <span class="sv-number">500</span><span class="sv-op">;</span>
 <span class="sv-ident">my_seq_lib</span><span class="sv-op">.</span><span class="sv-ident">max_random_count</span> <span class="sv-op">=</span> <span class="sv-number">1000</span><span class="sv-op">;</span>
 <span class="sv-type">void</span>&#x27;<span class="sv-op">(</span><span class="sv-ident">my_seq_lib</span><span class="sv-op">.</span><span class="sv-method">randomize</span><span class="sv-op">(</span><span class="sv-op">)</span><span class="sv-op">)</span><span class="sv-op">;</span>
@@ -449,7 +449,7 @@
     <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
   </button>
   <pre class="code-block-content"><code><span class="sv-uvm-type">uvm_sequence_library_cfg</span> <span class="sv-ident">cfg</span><span class="sv-op">;</span>
-<span class="sv-ident">cfg</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;seqlib_cfg&quot;</span><span class="sv-op">,</span> <span class="sv-ident">UVM_SEQ_LIB_RANDC</span><span class="sv-op">,</span> <span class="sv-number">1000</span><span class="sv-op">,</span> <span class="sv-number">2000</span><span class="sv-op">)</span><span class="sv-op">;</span>
+<span class="sv-ident">cfg</span> <span class="sv-op">=</span> <span class="sv-method">new</span><span class="sv-op">(</span><span class="sv-string">&quot;seqlib_cfg&quot;</span><span class="sv-op">,</span> <span class="sv-constant">UVM_SEQ_LIB_RANDC</span><span class="sv-op">,</span> <span class="sv-number">1000</span><span class="sv-op">,</span> <span class="sv-number">2000</span><span class="sv-op">)</span><span class="sv-op">;</span>
 
 <span class="sv-uvm-type">uvm_config_db</span> <span class="sv-op">#(</span><span class="sv-uvm-type">uvm_sequence_library_cfg</span><span class="sv-op">)</span><span class="sv-op">::</span><span class="sv-method">set</span><span class="sv-op">(</span><span class="sv-constant">null</span><span class="sv-op">,</span>
                                    <span class="sv-string">&quot;env.agent.sequencer.main_ph&quot;</span><span class="sv-op">,</span>

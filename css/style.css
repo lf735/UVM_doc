@@ -8937,11 +8937,27 @@
     height: 100% !important;
     z-index: 90;
     background: var(--code-bg);
-    display: none;
+    display: block;
+    font-variant-ligatures: none !important;
+    font-feature-settings: "liga" 0, "clig" 0, "calt" 0, "dlig" 0 !important;
   }
 
-  #monaco-editor-pane.active {
-    display: block;
+  .monaco-fallback-pre {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--code-text);
+    background: var(--code-bg);
+    white-space: pre;
+  }
+
+  .monaco-active-line-highlight {
+    background: var(--code-active-line) !important;
   }
 
   .btn-monaco-ide {

@@ -617,18 +617,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
       // 4. Suffix match (methods or nested types, e.g. class::method or class.method)
-      if (!match) {
+      if (!match && !resolvedOwner) {
         match = UVM_DATA.searchIndex.find(s => {
           if (!s.name || !s.doc) return false;
           return s.name.endsWith('::' + symClean) || s.name.endsWith('.' + symClean);
-        });
-      }
-      // 5. Broad substring match for classes and macros
-      if (!match) {
-        match = UVM_DATA.searchIndex.find(s => {
-          if (!s.name || !s.doc) return false;
-          const sLower = s.name.toLowerCase();
-          return (s.type === 'class' || s.type === 'macro') && (sLower.includes(cleanLower) || cleanLower.includes(sLower));
         });
       }
 
@@ -638,6 +630,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (!fullDoc) {
+      if (rawSymbol) return;
       fullDoc = 'docs_view/overviews/intro-txt.html';
     }
 

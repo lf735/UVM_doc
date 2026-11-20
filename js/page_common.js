@@ -1983,7 +1983,7 @@ window.PageCommon = (function () {
     const btnCopyExampleLink = document.getElementById('btn-copy-example-link');
     const btnSplitSource = document.getElementById('btn-split-source');
 
-    if (!studioTabBar && !codePanes.length && !document.querySelector('.sv-code-table')) return;
+    if (!studioTabBar && !document.getElementById('monaco-editor-pane') && !document.getElementById('raw-source-text')) return;
 
     let currentFileIdx = 0;
     const zipPayloadEl = document.getElementById('zip-payload');
@@ -2022,7 +2022,8 @@ window.PageCommon = (function () {
     }
 
     function switchFileTab(idx) {
-      if (idx < 0 || idx >= codePanes.length) return;
+      const totalFiles = Math.max(filesList.length, studioTabs.length, codePanes.length);
+      if (idx < 0 || idx >= totalFiles) return;
       currentFileIdx = idx;
 
       studioTabs.forEach(function (tab, i) {
@@ -2092,6 +2093,29 @@ window.PageCommon = (function () {
     // Smooth Line Scrolling & Centering helper
     let lastScrolledLine = null;
     let lastScrolledTime = 0;
+    let monacoEditorInstance = null;
+    let isMonacoActive = false;
+    let monacoActiveLineDecorations = [];
+    let pendingMonacoTargetLine = null;
+
+    function revealAndHighlightLineInMonaco(lineNum) {
+      const n = parseInt(String(lineNum || '').replace(/^#?L?/, ''), 10);
+      if (!isMonacoActive || !monacoEditorInstance || isNaN(n) || n < 1) return;
+      const model = monacoEditorInstance.getModel();
+      const maxLine = model ? model.getLineCount() : n;
+      const targetLine = Math.min(Math.max(1, n), maxLine);
+      monacoEditorInstance.setPosition({ lineNumber: targetLine, column: 1 });
+      monacoEditorInstance.revealLineInCenter(targetLine, (window.monaco && monaco.editor.ScrollType) ? monaco.editor.ScrollType.Smooth : 0);
+      if (window.monaco) {
+        monacoActiveLineDecorations = monacoEditorInstance.deltaDecorations(monacoActiveLineDecorations, [{
+          range: new monaco.Range(targetLine, 1, targetLine, 1),
+          options: {
+            isWholeLine: true,
+            className: 'monaco-active-line-highlight'
+          }
+        }]);
+      }
+    }
 
     function scrollToLine(lineHashOrNum) {
       if (!lineHashOrNum) return;
@@ -2100,28 +2124,27 @@ window.PageCommon = (function () {
       if (lastScrolledLine === lineStr && (now - lastScrolledTime) < 400) {
         return;
       }
-      const selector = `#L${lineStr}`;
-      const targetRow = document.querySelector(`.file-code-pane tr${selector}`) ||
-        document.querySelector(`.sv-code-table tr${selector}`) ||
-        document.getElementById(`L${lineStr}`);
-      if (targetRow) {
+      const lineNum = parseInt(lineStr, 10);
+      if (!isNaN(lineNum) && lineNum >= 1) {
         lastScrolledLine = lineStr;
         lastScrolledTime = now;
-        document.querySelectorAll('.file-code-pane tr.active-line, .sv-code-table tr.active-line').forEach(function (tr) {
-          tr.classList.remove('active-line');
-        });
-        void targetRow.offsetWidth;
-        targetRow.classList.add('active-line');
-
-        const container = studioCodeContainer || document.getElementById('src-code-container') || document.querySelector('.code-container');
-        if (container && container.scrollHeight > container.clientHeight && getComputedStyle(container).overflowY !== 'visible') {
-          const cRect = container.getBoundingClientRect();
-          const rRect = targetRow.getBoundingClientRect();
-          const offsetTop = rRect.top - cRect.top + container.scrollTop;
-          const targetScroll = Math.max(0, offsetTop - (container.clientHeight / 2));
-          container.scrollTo({ top: targetScroll, left: 0, behavior: 'smooth' });
+        if (isMonacoActive && monacoEditorInstance) {
+          revealAndHighlightLineInMonaco(lineNum);
         } else {
-          targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          pendingMonacoTargetLine = lineNum;
+          const pane = getActivePane();
+          if (pane) {
+            pane.querySelectorAll('tr.active-line').forEach(function (tr) {
+              tr.classList.remove('active-line');
+            });
+            const targetRow = pane.querySelector(`tr#L${lineNum}`) ||
+              pane.querySelector(`tr[data-line="${lineNum}"]`) ||
+              (pane.querySelector(`td.ln[data-line="${lineNum}"]`) ? pane.querySelector(`td.ln[data-line="${lineNum}"]`).closest('tr') : null);
+            if (targetRow) {
+              targetRow.classList.add('active-line');
+              scrollToRow(targetRow);
+            }
+          }
         }
         try {
           history.replaceState(null, '', `#L${lineStr}`);
@@ -2289,8 +2312,8 @@ window.PageCommon = (function () {
       const findCount = document.getElementById('find-count');
       const findPrev = document.getElementById('find-prev');
       const findNext = document.getElementById('find-next');
-      const findCase = document.getElementById('find-case');
-      const findWord = document.getElementById('find-word');
+      const findCase = document.getElementById('find-case-toggle') || document.getElementById('find-case');
+      const findWord = document.getElementById('find-word-toggle') || document.getElementById('find-word');
       const findClose = document.getElementById('find-close');
 
       let currentMatches = [];
@@ -2309,6 +2332,7 @@ window.PageCommon = (function () {
       };
 
       function showWidget() {
+        findWidget.style.display = 'flex';
         findWidget.classList.add('visible');
         if (btnToggleFind) btnToggleFind.classList.add('active');
         if (findInput) {
@@ -2324,6 +2348,7 @@ window.PageCommon = (function () {
 
       function hideWidget() {
         findWidget.classList.remove('visible');
+        findWidget.style.display = 'none';
         if (btnToggleFind) btnToggleFind.classList.remove('active');
         clearFindMatches();
       }
@@ -2610,9 +2635,12 @@ window.PageCommon = (function () {
           }
 
           if (!targetRow) {
+            const escapedTok = cleanToken.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const declRegex = new RegExp('(?:^|\\s)(?:class|function|task|typedef|interface|module|package|covergroup)\\s+(?:\\w+\\s+)?' + escapedTok + '\\b|`define\\s+' + escapedTok + '\\b');
+            const fwdClassRegex = /^\s*typedef\s+(?:interface\s+)?class\b/;
             for (let i = 0; i < rows.length; i++) {
               const text = rows[i].querySelector('.code') ? rows[i].querySelector('.code').textContent : '';
-              const declRegex = new RegExp('(?:class|function|task|typedef)\\s+(?:\\w+\\s+)?' + cleanToken + '\\b|`define\\s+' + cleanToken + '\\b');
+              if (fwdClassRegex.test(text) || /^\s*(?:extern|pure\s+virtual)\b/.test(text)) continue;
               if (declRegex.test(text)) {
                 targetRow = rows[i];
                 break;
@@ -2680,6 +2708,7 @@ window.PageCommon = (function () {
       function hideTooltip() {
         clearTimeout(hoverTimer);
         quickInfo.classList.remove('visible');
+        quickInfo.style.display = 'none';
         currentTokenEl = null;
       }
 
@@ -2734,6 +2763,7 @@ window.PageCommon = (function () {
           </div>
         `;
 
+        quickInfo.style.display = 'block';
         const tRect = target.getBoundingClientRect();
         const cRect = studioCodeContainer.getBoundingClientRect();
 
@@ -2796,209 +2826,1247 @@ window.PageCommon = (function () {
       });
     })();
 
-    // 5. Monaco Editor Dynamic Loader
-    let monacoEditorInstance = null;
-    let isMonacoActive = false;
+    // 5. Monaco Editor Dynamic Loader & Deep UVM/SystemVerilog IDE Integration
     (function initMonacoLoader() {
       const btnToggleMonaco = document.getElementById('btn-toggle-monaco');
       const monacoPane = document.getElementById('monaco-editor-pane');
+      const fallbackPre = document.getElementById('monaco-fallback-pre');
       if (!btnToggleMonaco || !monacoPane) return;
+
+      const MONACO_STATE_KEY = 'uvm_monaco_active';
+      const MONACO_STICKY_KEY = 'uvm_monaco_sticky_scroll';
+
+      function getActiveFileName() {
+        if (filesList[currentFileIdx] && filesList[currentFileIdx].name) {
+          return filesList[currentFileIdx].name;
+        }
+        const activeTab = studioTabs[currentFileIdx];
+        if (activeTab) {
+          const df = activeTab.getAttribute('data-file') || activeTab.textContent.trim();
+          if (df) return df;
+        }
+        return window.location.pathname.replace(/\.html$/i, '');
+      }
+
+      function detectMonacoLanguage(filename) {
+        const clean = String(filename || '').split('/').pop().split('\\').pop().toLowerCase();
+        if (!clean) return 'uvm-systemverilog';
+        if (clean === 'makefile' || clean.startsWith('makefile.') || clean.endsWith('.mk')) return 'makefile';
+        if (clean.endsWith('.c') || clean.endsWith('.h')) return 'c';
+        if (clean.endsWith('.cpp') || clean.endsWith('.cc') || clean.endsWith('.cxx') || clean.endsWith('.hpp') || clean.endsWith('.hh')) return 'cpp';
+        if (clean.endsWith('.py')) return 'python';
+        if (clean.endsWith('.json')) return 'json';
+        if (clean.endsWith('.md')) return 'markdown';
+        if (clean.endsWith('.sh') || clean.endsWith('.bash')) return 'shell';
+        if (clean.endsWith('.tcl') || clean.endsWith('.do')) return 'tcl';
+        return 'uvm-systemverilog';
+      }
+
+      let monacoLoadingState = 'idle'; // 'idle' | 'loading' | 'ready'
+      const monacoLoadQueue = [];
+      let monacoActivationSeq = 0;
 
       function loadMonacoScript(onSuccess, onError) {
         if (window.monaco) {
+          monacoLoadingState = 'ready';
           onSuccess();
           return;
         }
+        monacoLoadQueue.push({ onSuccess: onSuccess, onError: onError || function () { } });
+        if (monacoLoadingState === 'loading') return;
+        monacoLoadingState = 'loading';
+
+        function flushSuccess() {
+          monacoLoadingState = 'ready';
+          while (monacoLoadQueue.length > 0) {
+            const cb = monacoLoadQueue.shift();
+            try { cb.onSuccess(); } catch (e) { console.error('[Monaco] Activation error:', e); }
+          }
+        }
+        function flushError() {
+          monacoLoadingState = 'idle';
+          while (monacoLoadQueue.length > 0) {
+            const cb = monacoLoadQueue.shift();
+            try { cb.onError(); } catch (e) { console.error('[Monaco] Load error:', e); }
+          }
+        }
+
         if (window.require && window.require.config) {
           window.require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
-          window.require(['vs/editor/editor.main'], function () { onSuccess(); });
+          window.require(['vs/editor/editor.main'], flushSuccess, flushError);
           return;
         }
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js';
         script.onload = function () {
           window.require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs' } });
-          window.require(['vs/editor/editor.main'], function () { onSuccess(); });
+          window.require(['vs/editor/editor.main'], flushSuccess, flushError);
         };
-        script.onerror = onError || function () { };
+        script.onerror = flushError;
         document.head.appendChild(script);
+      }
+
+      function defineUvmMonacoThemes() {
+        if (window.__uvmMonacoThemesDefined || !window.monaco) return;
+        window.__uvmMonacoThemesDefined = true;
+
+        monaco.editor.defineTheme('uvm-light', {
+          base: 'vs',
+          inherit: true,
+          rules: [
+            { token: 'keyword.control', foreground: 'cf222e', fontStyle: 'bold' },
+            { token: 'keyword.decl', foreground: 'd73a49', fontStyle: 'bold' },
+            { token: 'type.builtin', foreground: '0969da' },
+            { token: 'type.uvm', foreground: '0550ae', fontStyle: 'bold' },
+            { token: 'keyword.qualifier', foreground: '8250df', fontStyle: 'italic' },
+            { token: 'constant', foreground: '0550ae', fontStyle: 'bold' },
+            { token: 'entity.name.macro', foreground: 'bc4c00', fontStyle: 'bold' },
+            { token: 'keyword.preproc', foreground: '8250df', fontStyle: 'bold' },
+            { token: 'support.function.system', foreground: 'b35900', fontStyle: 'bold' },
+            { token: 'entity.name.function', foreground: '6f42c1' },
+            { token: 'string', foreground: '0a3069' },
+            { token: 'string.escape', foreground: 'cf222e', fontStyle: 'bold' },
+            { token: 'comment', foreground: '57606a', fontStyle: 'italic' },
+            { token: 'comment.tag', foreground: 'b08800', fontStyle: 'bold' },
+            { token: 'number', foreground: '0969da' },
+            { token: 'operators', foreground: '24292f' },
+            { token: 'delimiter', foreground: '24292f' },
+            { token: 'identifier', foreground: '24292f' }
+          ],
+          colors: {
+            'editor.background': '#f8f9fa',
+            'editor.foreground': '#202124',
+            'editorGutter.background': '#f1f3f4',
+            'editorLineNumber.foreground': '#6e7781',
+            'editorLineNumber.activeForeground': '#1a73e8',
+            'editor.lineHighlightBackground': '#f1f3f4',
+            'editor.selectionBackground': '#d2e3fc',
+            'editorCursor.foreground': '#1a73e8'
+          }
+        });
+
+        monaco.editor.defineTheme('uvm-dark', {
+          base: 'vs-dark',
+          inherit: true,
+          rules: [
+            { token: 'keyword.control', foreground: 'ff7b72', fontStyle: 'bold' },
+            { token: 'keyword.decl', foreground: 'ff7b72', fontStyle: 'bold' },
+            { token: 'type.builtin', foreground: '79c0ff' },
+            { token: 'type.uvm', foreground: '58a6ff', fontStyle: 'bold' },
+            { token: 'keyword.qualifier', foreground: 'd2a8ff', fontStyle: 'italic' },
+            { token: 'constant', foreground: '79c0ff', fontStyle: 'bold' },
+            { token: 'entity.name.macro', foreground: 'ffab70', fontStyle: 'bold' },
+            { token: 'keyword.preproc', foreground: 'd2a8ff', fontStyle: 'bold' },
+            { token: 'support.function.system', foreground: 'f0883e', fontStyle: 'bold' },
+            { token: 'entity.name.function', foreground: 'bc8cff' },
+            { token: 'string', foreground: 'a5d6ff' },
+            { token: 'string.escape', foreground: 'ff7b72', fontStyle: 'bold' },
+            { token: 'comment', foreground: '8b949e', fontStyle: 'italic' },
+            { token: 'comment.tag', foreground: 'e3b341', fontStyle: 'bold' },
+            { token: 'number', foreground: '79c0ff' },
+            { token: 'operators', foreground: 'e6edf3' },
+            { token: 'delimiter', foreground: 'e6edf3' },
+            { token: 'identifier', foreground: 'e6edf3' }
+          ],
+          colors: {
+            'editor.background': '#232529',
+            'editor.foreground': '#e8eaed',
+            'editorGutter.background': '#1b1c1f',
+            'editorLineNumber.foreground': '#80868b',
+            'editorLineNumber.activeForeground': '#8ab4f8',
+            'editor.lineHighlightBackground': '#2e3035',
+            'editor.selectionBackground': '#264f78',
+            'editorCursor.foreground': '#8ab4f8'
+          }
+        });
+      }
+
+      function registerUvmSystemVerilogLanguage() {
+        if (window.__uvmSvMonarchRegistered || !window.monaco) return;
+        window.__uvmSvMonarchRegistered = true;
+
+        monaco.languages.register({
+          id: 'uvm-systemverilog',
+          extensions: ['.sv', '.svh', '.v', '.vh'],
+          aliases: ['UVM SystemVerilog', 'uvm-systemverilog']
+        });
+
+        monaco.languages.setLanguageConfiguration('uvm-systemverilog', {
+          comments: {
+            lineComment: '//',
+            blockComment: ['/*', '*/']
+          },
+          brackets: [
+            ['{', '}'],
+            ['[', ']'],
+            ['(', ')']
+          ],
+          autoClosingPairs: [
+            { open: '{', close: '}' },
+            { open: '[', close: ']' },
+            { open: '(', close: ')' },
+            { open: '"', close: '"' }
+          ],
+          surroundingPairs: [
+            { open: '{', close: '}' },
+            { open: '[', close: ']' },
+            { open: '(', close: ')' },
+            { open: '"', close: '"' }
+          ]
+        });
+
+        const syms = getUvmSymbols() || {};
+        const uvmTypesSet = new Set([
+          'uvm_pkg',
+          ...Object.keys(syms.classes || {}),
+          ...Object.keys(syms.types || {})
+        ]);
+        const uvmConstantsSet = new Set([
+          'null', 'this', 'super', '$root', '$unit',
+          'UVM_NONE', 'UVM_LOW', 'UVM_MEDIUM', 'UVM_HIGH', 'UVM_FULL', 'UVM_DEBUG',
+          'UVM_INFO', 'UVM_WARNING', 'UVM_ERROR', 'UVM_FATAL',
+          'UVM_NO_ACTION', 'UVM_DISPLAY', 'UVM_LOG', 'UVM_COUNT', 'UVM_EXIT', 'UVM_CALL', 'UVM_STOP', 'UVM_RM_RECORD',
+          'UVM_ALL_ON', 'UVM_DEFAULT', 'UVM_PASSIVE', 'UVM_ACTIVE',
+          'UVM_COPY', 'UVM_COMPARE', 'UVM_PRINT', 'UVM_RECORD', 'UVM_PACK', 'UVM_UNPACK',
+          'UVM_NOCOPY', 'UVM_NOCOMPARE', 'UVM_NOPRINT', 'UVM_NORECORD', 'UVM_NOPACK',
+          'UVM_REFERENCE', 'UVM_PHYSICAL', 'UVM_ABSTRACT', 'UVM_READ', 'UVM_WRITE',
+          'UVM_HEX', 'UVM_DEC', 'UVM_BIN', 'UVM_OCT', 'UVM_STRING', 'UVM_TIME',
+          'UVM_TLM_READ_COMMAND', 'UVM_TLM_WRITE_COMMAND', 'UVM_TLM_IGNORE_COMMAND',
+          'UVM_TLM_OK_RESPONSE', 'UVM_TLM_INCOMPLETE_RESPONSE', 'UVM_TLM_GENERIC_ERROR_RESPONSE',
+          'UVM_TLM_ADDRESS_ERROR_RESPONSE', 'UVM_TLM_COMMAND_ERROR_RESPONSE',
+          'UVM_TLM_BURST_ERROR_RESPONSE', 'UVM_TLM_BYTE_ENABLE_ERROR_RESPONSE',
+          'UVM_TLM_ACCEPTED', 'UVM_TLM_UPDATED', 'UVM_TLM_COMPLETED',
+          ...Object.keys(syms.constants || {})
+        ]);
+        // Only unambiguous UVM lifecycle/API methods (never pollute local variables like data/addr/name/size/status)
+        const uvmMethodsSet = new Set([
+          'build_phase', 'connect_phase', 'end_of_elaboration_phase',
+          'start_of_simulation_phase', 'run_phase', 'pre_reset_phase', 'reset_phase',
+          'post_reset_phase', 'pre_configure_phase', 'configure_phase',
+          'post_configure_phase', 'pre_main_phase', 'main_phase', 'post_main_phase',
+          'pre_shutdown_phase', 'shutdown_phase', 'post_shutdown_phase',
+          'extract_phase', 'check_phase', 'report_phase', 'final_phase',
+          'phase_started', 'phase_ready_to_end', 'phase_ended',
+          'raise_objection', 'drop_objection', 'set_drain_time',
+          'start_item', 'finish_item', 'start', 'body', 'pre_body', 'post_body',
+          'create', 'get_type', 'type_id', 'run_test',
+          'set_config_int', 'set_config_string', 'set_config_object',
+          'get_config_int', 'get_config_string', 'get_config_object',
+          'set_report_verbosity_level', 'set_report_id_verbosity',
+          'set_report_severity_action', 'set_report_id_action',
+          'print', 'clone', 'copy', 'compare', 'pack', 'unpack', 'record',
+          'sprint', 'convert2string', 'do_print', 'do_copy', 'do_compare',
+          'do_pack', 'do_unpack', 'do_record', 'sample', 'get_full_name',
+          'get_name', 'get_parent', 'get_num_children', 'lookup',
+          'b_transport', 'nb_transport_fw', 'nb_transport_bw', 'can_put', 'can_get',
+          'try_put', 'try_get', 'put', 'get', 'peek', 'try_peek', 'write'
+        ]);
+
+        monaco.languages.setMonarchTokensProvider('uvm-systemverilog', {
+          defaultToken: 'identifier',
+          controlKeywords: [
+            'begin', 'end', 'if', 'else', 'case', 'casex', 'casez', 'default', 'endcase',
+            'for', 'foreach', 'while', 'do', 'repeat', 'forever', 'return',
+            'break', 'continue', 'wait', 'wait_order', 'fork', 'join',
+            'join_any', 'join_none', 'disable', 'randcase', 'randsequence',
+            'expect', 'matches'
+          ],
+          declKeywords: [
+            'class', 'endclass', 'module', 'endmodule', 'interface', 'endinterface',
+            'package', 'endpackage', 'program', 'endprogram', 'function', 'endfunction',
+            'task', 'endtask', 'extends', 'implements', 'typedef', 'enum', 'struct',
+            'union', 'covergroup', 'endgroup', 'property', 'endproperty', 'sequence',
+            'endsequence', 'generate', 'endgenerate', 'clocking', 'endclocking',
+            'import', 'export', 'checker', 'endchecker', 'config', 'endconfig',
+            'primitive', 'endprimitive', 'table', 'endtable', 'specify', 'endspecify',
+            'bind', 'alias', 'assign', 'deassign', 'force', 'release', 'defparam',
+            'design', 'instance', 'cell', 'use', 'liblist', 'library', 'nettype',
+            'initial', 'final', 'always', 'always_comb', 'always_ff', 'always_latch',
+            'cover', 'coverpoint', 'cross', 'bins', 'binsof', 'illegal_bins', 'ignore_bins',
+            'assert', 'assume', 'restrict', 'constraint', 'solve', 'before', 'with',
+            'inside', 'dist', 'tagged', 'accept_tr', 'reject_on', 'sync_accept_on',
+            'sync_reject_on', 'first_match', 'throughout', 'within', 'intersect',
+            'nexttime', 's_nexttime', 'always_s', 's_always', 'eventually', 's_eventually',
+            'until', 's_until', 'until_with', 's_until_with'
+          ],
+          builtinTypes: [
+            'bit', 'logic', 'reg', 'wire', 'tri', 'tri0', 'tri1', 'wand', 'wor',
+            'triand', 'trior', 'trireg', 'uwire', 'supply0', 'supply1',
+            'byte', 'shortint', 'int', 'longint', 'integer', 'time',
+            'shortreal', 'real', 'realtime', 'string', 'chandle', 'event', 'void',
+            'signed', 'unsigned', 'type', 'var'
+          ],
+          qualifiers: [
+            'virtual', 'local', 'protected', 'pure', 'static', 'const',
+            'automatic', 'rand', 'randc', 'ref', 'input', 'output', 'inout',
+            'extern', 'packed', 'untyped', 'interconnect', 'modport',
+            'priority', 'unique', 'unique0', 'soft', 'strong', 'weak',
+            'weak0', 'weak1', 'pull0', 'pull1', 'pulldown', 'pullup',
+            'highz0', 'highz1', 'small', 'medium', 'large', 'scalared',
+            'vectored', 'pulsestyle_onevent', 'pulsestyle_ondetect',
+            'showcancelled', 'noshowcancelled', 'edge', 'posedge', 'negedge'
+          ],
+          preprocDirectives: [
+            '`define', '`undef', '`ifdef', '`ifndef', '`else', '`elsif', '`endif',
+            '`include', '`timescale', '`default_nettype', '`line', '`resetall',
+            '`celldefine', '`endcelldefine', '`protect', '`endprotect'
+          ],
+          constants: Array.from(uvmConstantsSet),
+          uvmTypes: Array.from(uvmTypesSet),
+          uvmMethods: Array.from(uvmMethodsSet),
+          tokenizer: {
+            root: [
+              [/\/\*/, 'comment', '@comment_block'],
+              [/\/\/$/, 'comment'],
+              [/\/\//, 'comment', '@comment_line'],
+              [/"/, 'string', '@string'],
+              [/`[a-zA-Z_][a-zA-Z0-9_]*/, {
+                cases: {
+                  '@preprocDirectives': 'keyword.preproc',
+                  '@default': 'entity.name.macro'
+                }
+              }],
+              [/\$[a-zA-Z_][a-zA-Z0-9_$]*/, {
+                cases: {
+                  '@constants': 'constant',
+                  '@default': 'support.function.system'
+                }
+              }],
+              [/\b\d+\s*'[sS]?[bBoOdDhH]\s*[0-9a-fA-F_xzXZ]+\b/, 'number'],
+              [/'[01xzXZ]\b/, 'number'],
+              [/'[sS]?[bBoOdDhH]\s*[0-9a-fA-F_xzXZ]+\b/, 'number'],
+              [/'(?=\{|\()/, 'operators'],
+              [/\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(?:fs|ps|ns|us|ms|s)?\b/, 'number'],
+              [/(\.)([a-zA-Z_][a-zA-Z0-9_]*)(?=\s*\()/, ['delimiter', 'entity.name.function']],
+              [/([a-zA-Z_][a-zA-Z0-9_]*)(?=\s*\()/, {
+                cases: {
+                  '@controlKeywords': 'keyword.control',
+                  '@declKeywords': 'keyword.decl',
+                  '@builtinTypes': 'type.builtin',
+                  '@qualifiers': 'keyword.qualifier',
+                  '@constants': 'constant',
+                  '@uvmTypes': 'type.uvm',
+                  '@default': 'entity.name.function'
+                }
+              }],
+              [/\b(?:uvm|ovm)_[a-zA-Z0-9_]*\b/, {
+                cases: {
+                  '@constants': 'constant',
+                  '@uvmMethods': 'entity.name.function',
+                  '@default': 'type.uvm'
+                }
+              }],
+              [/[a-zA-Z_][a-zA-Z0-9_]*/, {
+                cases: {
+                  '@controlKeywords': 'keyword.control',
+                  '@declKeywords': 'keyword.decl',
+                  '@builtinTypes': 'type.builtin',
+                  '@qualifiers': 'keyword.qualifier',
+                  '@constants': 'constant',
+                  '@uvmTypes': 'type.uvm',
+                  '@uvmMethods': 'entity.name.function',
+                  '@default': 'identifier'
+                }
+              }],
+              [/[{}()\[\]]/, '@brackets'],
+              [/[;,.::@#?]/, 'delimiter'],
+              [/[=<>!~&|+\-*/%^]+/, 'operators']
+            ],
+            comment_line: [
+              [/\b(?:TODO|FIXME|NOTE|IMPORTANT|WARNING|TIP|BUG|CLASS|FUNCTION|TASK|MACRO|GROUP)\b:?$/, 'comment.tag', '@pop'],
+              [/@(?:param|return|see)\b:?$/, 'comment.tag', '@pop'],
+              [/\b(?:TODO|FIXME|NOTE|IMPORTANT|WARNING|TIP|BUG|CLASS|FUNCTION|TASK|MACRO|GROUP)\b:?/, 'comment.tag'],
+              [/@(?:param|return|see)\b:?/, 'comment.tag'],
+              [/[^A-Za-z@]+$/, 'comment', '@pop'],
+              [/[A-Za-z]+$/, 'comment', '@pop'],
+              [/@$/, 'comment', '@pop'],
+              [/[^A-Za-z@]+|[A-Za-z]+|@/, 'comment']
+            ],
+            comment_block: [
+              [/\b(?:TODO|FIXME|NOTE|IMPORTANT|WARNING|TIP|BUG|CLASS|FUNCTION|TASK|MACRO|GROUP)\b:?/, 'comment.tag'],
+              [/@(?:param|return|see)\b:?/, 'comment.tag'],
+              [/\*\//, 'comment', '@pop'],
+              [/[^*A-Za-z@]+|\*|[A-Za-z]+|@/, 'comment']
+            ],
+            string: [
+              [/%[0-9]*[a-zA-Z%]$/, 'string.escape', '@pop'],
+              [/\\[ntrbfv"'\\]$/, 'string.escape', '@pop'],
+              [/\\x[0-9a-fA-F]{1,2}$/, 'string.escape', '@pop'],
+              [/\\[0-7]{1,3}$/, 'string.escape', '@pop'],
+              [/%[0-9]*[a-zA-Z%]/, 'string.escape'],
+              [/\\[ntrbfv"'\\]/, 'string.escape'],
+              [/\\x[0-9a-fA-F]{1,2}/, 'string.escape'],
+              [/\\[0-7]{1,3}/, 'string.escape'],
+              [/[^\\"%]+$|%$/, 'string', '@pop'],
+              [/[^\\"%]+|%/, 'string'],
+              [/"/, 'string', '@pop']
+            ]
+          }
+        });
+      }
+
+      const NON_UVM_MONACO_TOKEN_PREFIXES = [
+        'comment', 'string', 'number', 'keyword.', 'type.builtin', 'support.function.system', 'operators'
+      ];
+
+      function isMonacoTokenIgnoredAt(model, position) {
+        if (!model || !position || !window.monaco || !monaco.editor || !monaco.editor.tokenize) return false;
+        try {
+          const langId = model.getLanguageId ? model.getLanguageId() : 'uvm-systemverilog';
+          if (langId !== 'uvm-systemverilog') return true;
+          const lineContent = model.getLineContent(position.lineNumber) || '';
+          const tokensArr = monaco.editor.tokenize(lineContent, langId);
+          const lineTokens = tokensArr && tokensArr[0];
+          if (!lineTokens || !lineTokens.length) return false;
+          const col0 = Math.max(0, position.column - 1);
+          let tokType = '';
+          for (let i = lineTokens.length - 1; i >= 0; i--) {
+            if (lineTokens[i].offset <= col0) {
+              tokType = lineTokens[i].type || '';
+              break;
+            }
+          }
+          for (let k = 0; k < NON_UVM_MONACO_TOKEN_PREFIXES.length; k++) {
+            if (tokType.startsWith(NON_UVM_MONACO_TOKEN_PREFIXES[k])) return true;
+          }
+        } catch (err) { }
+        return false;
+      }
+
+      function buildMonacoLocalTypeContext(model, upToLine) {
+        const syms = getUvmSymbols() || {};
+        const uvmClasses = syms.classes || {};
+        const uvmTypes = syms.types || {};
+        const classBaseMap = {};
+        const varTypes = {};
+        const sources = [];
+        if (Array.isArray(filesList)) {
+          filesList.forEach(function (f) {
+            if (f && f.content && /\.(?:svh?|vh?)$/i.test(f.name || '')) {
+              sources.push({ text: f.content, limit: Infinity });
+            }
+          });
+        }
+        if (model) {
+          sources.push({ text: model.getValue(), limit: upToLine || Infinity });
+        }
+
+        const rawParents = {};
+        sources.forEach(function (src) {
+          const lines = src.text.split('\n');
+          const max = Math.min(lines.length, src.limit);
+          for (let i = 0; i < max; i++) {
+            let clean = lines[i].replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/, '').replace(/"[^"]*"/g, '""');
+            if (/\btypedef\b/.test(clean)) continue;
+            if (/^\s*(?:virtual\s+)?class\b/.test(clean) && !clean.includes(';')) {
+              let j = i + 1;
+              while (j < max && j <= i + 6 && !clean.includes(';')) {
+                clean += ' ' + lines[j].replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/, '').replace(/"[^"]*"/g, '""');
+                j++;
+              }
+            }
+            const mCls = clean.match(/\bclass\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?extends\s+([A-Za-z_][A-Za-z0-9_]*)/);
+            if (mCls) {
+              rawParents[mCls[1]] = mCls[2];
+            }
+          }
+        });
+        Object.keys(rawParents).forEach(function (c) {
+          let curr = rawParents[c];
+          const seen = new Set([c]);
+          while (curr && !seen.has(curr)) {
+            if (uvmClasses[curr]) {
+              classBaseMap[c] = curr;
+              break;
+            }
+            seen.add(curr);
+            curr = rawParents[curr];
+          }
+        });
+
+        let currentUvmBase = '';
+        let currentClassName = '';
+        let inOutOfBlockMethod = false;
+        if (model) {
+          const maxLine = Math.min(model.getLineCount(), upToLine || model.getLineCount());
+          for (let i = 1; i <= maxLine; i++) {
+            let clean = (model.getLineContent(i) || '').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/, '').replace(/"[^"]*"/g, '""');
+            if (/^\s*endclass\b/.test(clean)) {
+              currentUvmBase = '';
+              currentClassName = '';
+              inOutOfBlockMethod = false;
+              continue;
+            }
+            if (inOutOfBlockMethod && /^\s*end(?:function|task)\b/.test(clean)) {
+              currentUvmBase = '';
+              currentClassName = '';
+              inOutOfBlockMethod = false;
+              continue;
+            }
+            if (!/\btypedef\b/.test(clean) && /^\s*(?:virtual\s+)?class\b/.test(clean)) {
+              let j = i + 1;
+              while (j <= maxLine && j <= i + 6 && !clean.includes(';')) {
+                clean += ' ' + (model.getLineContent(j) || '').replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/, '').replace(/"[^"]*"/g, '""');
+                j++;
+              }
+              const mCls = clean.match(/\bclass\s+([A-Za-z_][A-Za-z0-9_]*)(?:\s*#\s*\([^)]*\))?(?:\s+extends\s+([A-Za-z_][A-Za-z0-9_]*))?/);
+              if (mCls) {
+                currentClassName = mCls[1];
+                inOutOfBlockMethod = false;
+                const knownParent = syms.classParents && syms.classParents[mCls[1]] ? syms.classParents[mCls[1]].parent : '';
+                currentUvmBase = (mCls[2] && uvmClasses[mCls[2]]) ? mCls[2] : (knownParent || classBaseMap[mCls[1]] || '');
+                continue;
+              }
+            }
+            if (!currentClassName && /^\s*(?:virtual\s+|static\s+|protected\s+|local\s+)*(?:function|task)\b/.test(clean)) {
+              const mOut = clean.match(/\b(?:function|task)\b[^;()]*?\b([A-Za-z_][A-Za-z0-9_]*)\s*::\s*[A-Za-z_][A-Za-z0-9_]*\s*(?:\(|;)/);
+              if (mOut) {
+                currentClassName = mOut[1];
+                inOutOfBlockMethod = true;
+                const knownParent = syms.classParents && syms.classParents[mOut[1]] ? syms.classParents[mOut[1]].parent : '';
+                currentUvmBase = knownParent || classBaseMap[mOut[1]] || '';
+              }
+            }
+            const varRe = /\b([A-Za-z_][A-Za-z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?([A-Za-z_][A-Za-z0-9_]*)\b/g;
+            let mv;
+            while ((mv = varRe.exec(clean)) !== null) {
+              const tname = mv[1];
+              const vname = mv[2];
+              if (uvmClasses[tname] || uvmTypes[tname] || classBaseMap[tname]) {
+                varTypes[vname] = tname;
+              }
+            }
+          }
+        }
+        return { classBaseMap: classBaseMap, varTypes: varTypes, currentUvmBase: currentUvmBase, currentClassName: currentClassName };
+      }
+
+      function extractMonacoSymbolContext(model, position) {
+        if (!model || !position) return null;
+        if (isMonacoTokenIgnoredAt(model, position)) return null;
+        const word = model.getWordAtPosition(position);
+        if (!word) return null;
+        const lineContent = model.getLineContent(position.lineNumber) || '';
+        const hasBacktick = word.startColumn > 1 && lineContent.charAt(word.startColumn - 2) === '`';
+        const clean = word.word.replace(/^`/, '');
+        const syms = getUvmSymbols() || {};
+        const beforeWord = lineContent.slice(0, Math.max(0, word.startColumn - 1));
+        const afterWord = lineContent.slice(Math.max(0, word.endColumn - 1)).trimStart();
+
+        let ownerClass = '';
+        let baseClass = '';
+        let symKind = hasBacktick ? 'macro' : '';
+
+        const scopeMatch = beforeWord.match(/([a-zA-Z_][a-zA-Z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?::\s*$/);
+        const dotChainMatch = !scopeMatch ? beforeWord.match(/([a-zA-Z_][a-zA-Z0-9_]*(?:\s*\.\s*[a-zA-Z_][a-zA-Z0-9_]*)*)\s*\.\s*$/) : null;
+        const dotMatch = dotChainMatch ? [dotChainMatch[0], dotChainMatch[1].split('.').pop().trim()] : null;
+
+        if (afterWord.startsWith('(') || scopeMatch || dotMatch) {
+          if (!symKind && !(syms.classes && syms.classes[clean]) && !(syms.types && syms.types[clean])) {
+            symKind = 'method';
+          }
+        }
+
+        if (scopeMatch || dotMatch) {
+          const lctx = buildMonacoLocalTypeContext(model, position.lineNumber);
+          if (scopeMatch) {
+            const qual = scopeMatch[1];
+            if (qual === 'type_id') {
+              const outerM = beforeWord.match(/([a-zA-Z_][a-zA-Z0-9_]*)\s*(?:#\s*\([^)]*\)\s*)?::\s*type_id\s*::\s*$/);
+              const outerBase = outerM ? (lctx.classBaseMap[outerM[1]] || outerM[1]) : '';
+              ownerClass = ['uvm_component', 'uvm_test', 'uvm_env', 'uvm_agent', 'uvm_driver', 'uvm_monitor', 'uvm_scoreboard', 'uvm_sequencer'].includes(outerBase)
+                ? 'uvm_component_registry'
+                : 'uvm_object_registry';
+            } else if (syms.classes && syms.classes[qual]) {
+              ownerClass = qual;
+            } else if (lctx.classBaseMap[qual]) {
+              baseClass = lctx.classBaseMap[qual];
+            } else {
+              ownerClass = qual;
+            }
+          } else if (dotChainMatch) {
+            const parts = dotChainMatch[1].split('.').map(function (s) { return s.trim(); }).filter(Boolean);
+            let curType = '';
+            const first = parts[0];
+            if (first === 'super') {
+              curType = lctx.currentUvmBase;
+            } else if (first === 'this') {
+              curType = (lctx.currentClassName && syms.classes && syms.classes[lctx.currentClassName])
+                ? lctx.currentClassName
+                : lctx.currentUvmBase;
+            } else if (lctx.varTypes[first]) {
+              curType = lctx.varTypes[first];
+            } else if (lctx.currentClassName || lctx.currentUvmBase) {
+              const startCls = (lctx.currentClassName && syms.classes && syms.classes[lctx.currentClassName])
+                ? lctx.currentClassName
+                : lctx.currentUvmBase;
+              const fld = resolveUvmClassField(startCls, first, syms);
+              if (fld && fld.var_type) {
+                curType = fld.var_type;
+              }
+            }
+            if (!curType && syms.vars && syms.vars[first]) {
+              curType = syms.vars[first].var_type || syms.vars[first].class || '';
+            }
+            for (let pi = 1; pi < parts.length && curType; pi++) {
+              const stepCls = (syms.classes && syms.classes[curType]) ? curType : (lctx.classBaseMap[curType] || '');
+              const fld = stepCls ? resolveUvmClassField(stepCls, parts[pi], syms) : null;
+              curType = (fld && fld.var_type) ? fld.var_type : '';
+            }
+            if (first === 'super' && parts.length === 1) {
+              baseClass = curType;
+            } else if (curType) {
+              if (syms.classes && syms.classes[curType]) ownerClass = curType;
+              else if (lctx.classBaseMap[curType]) baseClass = lctx.classBaseMap[curType];
+              else baseClass = curType;
+            }
+          }
+        } else if (!hasBacktick) {
+          const lctx = buildMonacoLocalTypeContext(model, position.lineNumber);
+          if (clean === 'new') {
+            if (/\bfunction\b/.test(beforeWord)) {
+              if (lctx.currentClassName && syms.classes && syms.classes[lctx.currentClassName]) {
+                ownerClass = lctx.currentClassName;
+              } else if (lctx.currentUvmBase) {
+                baseClass = lctx.currentUvmBase;
+              }
+            } else {
+              const assignM = beforeWord.match(/([A-Za-z_][A-Za-z0-9_]*)\s*=\s*$/);
+              if (assignM && lctx.varTypes[assignM[1]]) {
+                const vt = lctx.varTypes[assignM[1]];
+                if (syms.classes && syms.classes[vt]) ownerClass = vt;
+                else if (lctx.classBaseMap[vt]) baseClass = lctx.classBaseMap[vt];
+                else ownerClass = vt;
+              }
+            }
+          } else if (lctx.currentClassName && syms.classes && syms.classes[lctx.currentClassName]) {
+            baseClass = lctx.currentClassName;
+          } else if (lctx.currentUvmBase) {
+            baseClass = lctx.currentUvmBase;
+          }
+        }
+
+        return {
+          word: word,
+          clean: clean,
+          ownerClass: ownerClass,
+          baseClass: baseClass,
+          symKind: symKind
+        };
+      }
+
+      function getMonacoCursorScreenAnchor(position) {
+        const rect = monacoPane.getBoundingClientRect();
+        let top = rect.top + 40;
+        let left = rect.left + 40;
+        try {
+          const pos = monacoEditorInstance && position ? monacoEditorInstance.getScrolledVisiblePosition(position) : null;
+          if (pos) {
+            top = rect.top + pos.top;
+            left = rect.left + pos.left;
+          }
+        } catch (err) { }
+        return {
+          getBoundingClientRect: function () {
+            return { top: top, bottom: top + 18, left: left, right: left + 40, width: 40, height: 18 };
+          }
+        };
+      }
+
+      function openUvmDocFromMonaco(cleanToken, ownerClass, baseClass, symKind, position, explicitDocUrl) {
+        const resolved = lookupUvmSymbol(cleanToken, ownerClass, baseClass, symKind);
+        if (resolved && resolved.isAmbiguous) {
+          showSymbolDisambigPopover(getMonacoCursorScreenAnchor(position), resolved);
+          return true;
+        }
+        if (resolved) {
+          dispatchOpenDoc(explicitDocUrl || resolved.doc_url || undefined, cleanToken, resolved.ownerClass || ownerClass);
+          return true;
+        }
+        if (explicitDocUrl) {
+          dispatchOpenDoc(explicitDocUrl, cleanToken, ownerClass);
+          return true;
+        }
+        return false;
+      }
+
+      function findLocalSymbolLineInModel(model, cleanToken) {
+        if (!model || !cleanToken) return null;
+        const escaped = cleanToken.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const impRegex = new RegExp('(?:function|task)\\s+(?:\\w+\\s+)?\\w+::' + escaped + '\\b');
+        const declRegex = new RegExp('^\\s*(?:virtual\\s+|local\\s+|protected\\s+|static\\s+)*(?:class|function|task|typedef|interface|module|package|covergroup|constraint)\\b[^;\\n]*\\b' + escaped + '\\b|^\\s*`define\\s+' + escaped + '\\b');
+        const fwdClassRegex = /^\s*typedef\s+(?:interface\s+)?class\b/;
+        const lineCount = model.getLineCount();
+        for (let i = 1; i <= lineCount; i++) {
+          const lineText = model.getLineContent(i);
+          if (fwdClassRegex.test(lineText) || /^\s*(?:extern|pure\s+virtual)\b/.test(lineText)) continue;
+          if (impRegex.test(lineText) || declRegex.test(lineText)) {
+            return i;
+          }
+        }
+        return null;
+      }
+
+      function openUvmDefFromMonaco(cleanToken, ownerClass, baseClass, symKind, model) {
+        const localLine = findLocalSymbolLineInModel(model, cleanToken);
+        const resolved = lookupUvmSymbol(cleanToken, ownerClass, baseClass, symKind);
+        const sym = resolved ? (resolved.isAmbiguous ? resolved.primary : resolved) : null;
+        if (sym && sym.file) {
+          if (window.location.pathname.includes(sym.file + '.html')) {
+            revealAndHighlightLineInMonaco(sym.line || localLine || 1);
+          } else {
+            dispatchOpenSource('src_view/' + sym.file + '.html#L' + (sym.line || 1));
+          }
+          return true;
+        }
+        if (localLine) {
+          revealAndHighlightLineInMonaco(localLine);
+          return true;
+        }
+        return false;
       }
 
       function setupMonacoLanguageProviders() {
         if (window.__monacoProvidersRegistered || !window.monaco || !getUvmSymbols()) return;
         window.__monacoProvidersRegistered = true;
 
-        monaco.languages.registerHoverProvider('systemverilog', {
+        monaco.editor.registerCommand('uvm.openDoc', function (accessor, rawArgs) {
+          let args = rawArgs;
+          if (typeof args === 'string') {
+            try { args = JSON.parse(args); } catch (e) { args = {}; }
+          }
+          args = args || {};
+          const pos = (args.lineNumber && args.column)
+            ? { lineNumber: args.lineNumber, column: args.column }
+            : (monacoEditorInstance ? monacoEditorInstance.getPosition() : null);
+          openUvmDocFromMonaco(args.symbol || '', args.ownerClass || '', args.baseClass || '', args.symKind || '', pos, args.docUrl || '');
+        });
+
+        monaco.editor.registerCommand('uvm.openSource', function (accessor, rawArgs) {
+          let args = rawArgs;
+          if (typeof args === 'string') {
+            try { args = JSON.parse(args); } catch (e) { args = {}; }
+          }
+          args = args || {};
+          if (args.file && window.location.pathname.includes(args.file + '.html')) {
+            revealAndHighlightLineInMonaco(args.line || 1);
+          } else if (args.srcUrl) {
+            dispatchOpenSource(args.srcUrl);
+          } else if (args.file) {
+            dispatchOpenSource('src_view/' + args.file + '.html#L' + (args.line || 1));
+          }
+        });
+
+        monaco.languages.registerHoverProvider('uvm-systemverilog', {
           provideHover: function (model, position) {
-            const word = model.getWordAtPosition(position);
-            if (!word) return null;
-            const clean = word.word.replace(/^`/, '');
-            const resolved = lookupUvmSymbol(clean);
-            const sym = resolved ? (resolved.isAmbiguous ? resolved.primary : resolved) : null;
-            if (!sym) return null;
+            const ctx = extractMonacoSymbolContext(model, position);
+            if (!ctx) return null;
+            const resolved = lookupUvmSymbol(ctx.clean, ctx.ownerClass, ctx.baseClass, ctx.symKind);
+            if (!resolved) return null;
+            const sym = resolved.isAmbiguous ? resolved.primary : resolved;
+            const entry = sym.entry || {};
+            const typeLabel = (sym.type || 'symbol').toUpperCase();
+            const titleText = `${sym.ownerClass ? sym.ownerClass + '::' : ''}${ctx.clean}`;
             const contents = [
-              { value: `**[${(sym.type || 'symbol').toUpperCase()}]** \`${sym.ownerClass ? sym.ownerClass + '::' : ''}${clean}\`` },
-              { value: `*Source:* \`${sym.file}:${sym.line || 1}\`` }
+              { value: `**[${typeLabel}]** \`${titleText}\`` }
             ];
-            if (sym.doc) contents.push({ value: sym.doc });
+            if (entry.params || entry.extends) {
+              contents.push({ value: `\`\`\`systemverilog\n${sym.type || 'class'} ${ctx.clean}${entry.params ? ' #(' + entry.params + ')' : ''}${entry.extends ? ' extends ' + entry.extends : ''}\n\`\`\`` });
+            } else if (entry.signature) {
+              contents.push({ value: `\`\`\`systemverilog\n${entry.signature}\n\`\`\`` });
+            }
+            if (resolved.isAmbiguous && resolved.candidates) {
+              const preview = resolved.candidates.slice(0, 3).map(function (c) { return c.class; }).join(', ');
+              contents.push({ value: `*Defined in ${resolved.candidates.length} classes:* ${preview}${resolved.candidates.length > 3 ? ', ...' : ''}` });
+            }
+            if (sym.file) {
+              contents.push({ value: `*Source:* \`${sym.file}:${sym.line || 1}\`` });
+            }
+            if (sym.doc) {
+              contents.push({ value: sym.doc });
+            }
+
+            const actions = [];
+            if (sym.doc_url || resolved.isAmbiguous) {
+              const docArgs = encodeURIComponent(JSON.stringify({
+                symbol: ctx.clean,
+                docUrl: sym.doc_url || '',
+                ownerClass: sym.ownerClass || ctx.ownerClass || '',
+                baseClass: ctx.baseClass || '',
+                symKind: ctx.symKind || '',
+                lineNumber: position.lineNumber,
+                column: position.column
+              }));
+              actions.push(`[View Docs](command:uvm.openDoc?${docArgs})`);
+            }
+            if (sym.file) {
+              const srcArgs = encodeURIComponent(JSON.stringify({
+                file: sym.file,
+                line: sym.line || 1,
+                srcUrl: `src_view/${sym.file}.html#L${sym.line || 1}`
+              }));
+              actions.push(`[Go to Definition (F12)](command:uvm.openSource?${srcArgs})`);
+            }
+            if (actions.length > 0) {
+              contents.push({
+                value: actions.join(' &nbsp;|&nbsp; '),
+                isTrusted: true
+              });
+            }
             return {
-              range: new monaco.Range(position.lineNumber, word.startColumn, position.lineNumber, word.endColumn),
+              range: new monaco.Range(position.lineNumber, ctx.word.startColumn, position.lineNumber, ctx.word.endColumn),
               contents: contents
             };
           }
         });
 
-        monaco.languages.registerDefinitionProvider('systemverilog', {
+        monaco.languages.registerDefinitionProvider('uvm-systemverilog', {
           provideDefinition: function (model, position) {
-            const word = model.getWordAtPosition(position);
-            if (!word) return null;
-            const clean = word.word.replace(/^`/, '');
-            const resolved = lookupUvmSymbol(clean);
-            const sym = resolved ? (resolved.isAmbiguous ? resolved.primary : resolved) : null;
-            if (!sym) return null;
-            if (sym.file && !window.location.pathname.includes(sym.file)) {
-              dispatchOpenSource(`src_view/${sym.file}.html#L${sym.line || 1}`);
+            const ctx = extractMonacoSymbolContext(model, position);
+            if (!ctx) return null;
+            const localLine = findLocalSymbolLineInModel(model, ctx.clean);
+            if (localLine) {
+              return {
+                uri: model.uri,
+                range: new monaco.Range(localLine, 1, localLine, 1)
+              };
             }
-            return {
-              uri: model.uri,
-              range: new monaco.Range(sym.line || 1, 1, sym.line || 1, 1)
-            };
+            const resolved = lookupUvmSymbol(ctx.clean, ctx.ownerClass, ctx.baseClass, ctx.symKind);
+            const sym = resolved ? (resolved.isAmbiguous ? resolved.primary : resolved) : null;
+            if (sym && sym.file && window.location.pathname.includes(sym.file + '.html')) {
+              return {
+                uri: model.uri,
+                range: new monaco.Range(sym.line || 1, 1, sym.line || 1, 1)
+              };
+            }
+            return null;
+          }
+        });
+
+        monaco.languages.registerDocumentSymbolProvider('uvm-systemverilog', {
+          provideDocumentSymbols: function (model) {
+            const lineCount = model.getLineCount();
+            const roots = [];
+            const stack = [];
+            let inBlockComment = false;
+
+            const startPatterns = [
+              { kind: monaco.languages.SymbolKind.Class, re: /^\s*(?:virtual\s+)?class\s+([a-zA-Z_][a-zA-Z0-9_]*)/, endRe: /^\s*endclass\b/ },
+              { kind: monaco.languages.SymbolKind.Interface, re: /^\s*interface\s+(?:automatic\s+)?([a-zA-Z_][a-zA-Z0-9_]*)/, endRe: /^\s*endinterface\b/ },
+              { kind: monaco.languages.SymbolKind.Module, re: /^\s*module\s+(?:automatic\s+)?([a-zA-Z_][a-zA-Z0-9_]*)/, endRe: /^\s*endmodule\b/ },
+              { kind: monaco.languages.SymbolKind.Package, re: /^\s*package\s+(?:automatic\s+)?([a-zA-Z_][a-zA-Z0-9_]*)/, endRe: /^\s*endpackage\b/ },
+              { kind: monaco.languages.SymbolKind.Function, re: /^\s*(?:(?:virtual|local|protected|static|pure|extern)\s+)*function\s+(?:automatic\s+)?(?:[\w:<>#\[\]\s]+\s+)?([a-zA-Z_][a-zA-Z0-9_:]*)\s*\(/, endRe: /^\s*endfunction\b/ },
+              { kind: monaco.languages.SymbolKind.Method, re: /^\s*(?:(?:virtual|local|protected|static|pure|extern)\s+)*task\s+(?:automatic\s+)?([a-zA-Z_][a-zA-Z0-9_:]*)\s*(?:\(|;)/, endRe: /^\s*endtask\b/ },
+              { kind: monaco.languages.SymbolKind.Struct, re: /^\s*covergroup\s+([a-zA-Z_][a-zA-Z0-9_]*)/, endRe: /^\s*endgroup\b/ }
+            ];
+
+            for (let i = 1; i <= lineCount; i++) {
+              let line = model.getLineContent(i);
+              if (inBlockComment) {
+                const endIdx = line.indexOf('*/');
+                if (endIdx !== -1) {
+                  inBlockComment = false;
+                  line = line.slice(endIdx + 2);
+                } else {
+                  continue;
+                }
+              }
+              const blkStart = line.indexOf('/*');
+              if (blkStart !== -1 && line.indexOf('*/', blkStart + 2) === -1) {
+                inBlockComment = true;
+                line = line.slice(0, blkStart);
+              }
+              line = line.replace(/\/\*[\s\S]*?\*\//g, '').replace(/"(?:[^"\\]|\\.)*"/g, '""').replace(/\/\/.*$/, '');
+              if (!line.trim()) continue;
+
+              if (stack.length > 0 && stack[stack.length - 1].endRe.test(line)) {
+                const top = stack.pop();
+                top.symbol.range = new monaco.Range(top.startLine, 1, i, model.getLineMaxColumn(i));
+                continue;
+              }
+
+              if (/\btypedef\b/.test(line) && /\bclass\b/.test(line)) continue;
+              if (/^\s*(?:import|export)\s+"DPI/i.test(line)) continue;
+
+              let matched = false;
+              for (let p = 0; p < startPatterns.length; p++) {
+                const pat = startPatterns[p];
+                const m = line.match(pat.re);
+                if (m && m[1]) {
+                  const symNode = {
+                    name: m[1],
+                    detail: '',
+                    kind: pat.kind,
+                    range: new monaco.Range(i, 1, i, model.getLineMaxColumn(i)),
+                    selectionRange: new monaco.Range(i, 1, i, model.getLineMaxColumn(i)),
+                    children: []
+                  };
+                  if (stack.length > 0) {
+                    stack[stack.length - 1].symbol.children.push(symNode);
+                  } else {
+                    roots.push(symNode);
+                  }
+                  if (!/^\s*(?:extern|pure\s+virtual)\b/.test(line)) {
+                    stack.push({ symbol: symNode, startLine: i, endRe: pat.endRe });
+                  }
+                  matched = true;
+                  break;
+                }
+              }
+              if (matched) continue;
+
+              const tdMatch = line.match(/^\s*typedef\s+.*\b([a-zA-Z_][a-zA-Z0-9_]*)\s*;/);
+              if (tdMatch && tdMatch[1]) {
+                const tdSym = {
+                  name: tdMatch[1],
+                  detail: 'typedef',
+                  kind: monaco.languages.SymbolKind.TypeParameter,
+                  range: new monaco.Range(i, 1, i, model.getLineMaxColumn(i)),
+                  selectionRange: new monaco.Range(i, 1, i, model.getLineMaxColumn(i)),
+                  children: []
+                };
+                if (stack.length > 0) stack[stack.length - 1].symbol.children.push(tdSym);
+                else roots.push(tdSym);
+              }
+            }
+            while (stack.length > 0) {
+              const top = stack.pop();
+              top.symbol.range = new monaco.Range(top.startLine, 1, lineCount, model.getLineMaxColumn(lineCount));
+            }
+            return roots;
+          }
+        });
+
+        monaco.languages.registerFoldingRangeProvider('uvm-systemverilog', {
+          provideFoldingRanges: function (model) {
+            const lineCount = model.getLineCount();
+            const ranges = [];
+            const blockStack = [];
+            const ifdefStack = [];
+            let commentStart = -1;
+
+            const openers = [
+              { open: /^\s*(?:virtual\s+)?class\b/, close: /^\s*endclass\b/ },
+              { open: /^\s*(?:(?:virtual|local|protected|static|pure)\s+)*function\b/, close: /^\s*endfunction\b/ },
+              { open: /^\s*(?:(?:virtual|local|protected|static|pure)\s+)*task\b/, close: /^\s*endtask\b/ },
+              { open: /^\s*module\b/, close: /^\s*endmodule\b/ },
+              { open: /^\s*interface\b/, close: /^\s*endinterface\b/ },
+              { open: /^\s*package\b/, close: /^\s*endpackage\b/ },
+              { open: /^\s*program\b/, close: /^\s*endprogram\b/ },
+              { open: /^\s*covergroup\b/, close: /^\s*endgroup\b/ },
+              { open: /^\s*case[xz]?\b/, close: /^\s*endcase\b/ },
+              { open: /\bbegin\b(?:\s*:\s*\w+)?\s*(?:\/\/.*)?$/, close: /^\s*end\b/ },
+              { open: /^\s*fork\b/, close: /^\s*join(?:_any|_none)?\b/ }
+            ];
+
+            for (let i = 1; i <= lineCount; i++) {
+              const rawLine = model.getLineContent(i);
+              if (commentStart === -1) {
+                const cIdx = rawLine.indexOf('/*');
+                if (cIdx !== -1 && rawLine.indexOf('*/', cIdx + 2) === -1) {
+                  commentStart = i;
+                }
+              } else if (rawLine.indexOf('*/') !== -1) {
+                if (i > commentStart) {
+                  ranges.push({ start: commentStart, end: i, kind: monaco.languages.FoldingRangeKind.Comment });
+                }
+                commentStart = -1;
+                continue;
+              }
+              if (commentStart !== -1) continue;
+
+              const line = rawLine.replace(/\/\*[\s\S]*?\*\//g, '').replace(/"(?:[^"\\]|\\.)*"/g, '""').replace(/\/\/.*$/, '');
+              if (/^\s*`ifn?def\b/.test(line)) {
+                ifdefStack.push(i);
+                continue;
+              }
+              if (/^\s*`endif\b/.test(line) && ifdefStack.length > 0) {
+                const start = ifdefStack.pop();
+                if (i > start) ranges.push({ start: start, end: i, kind: monaco.languages.FoldingRangeKind.Region });
+                continue;
+              }
+              if (/^\s*(?:extern|pure\s+virtual)\b/.test(line)) continue;
+              if (/\btypedef\b/.test(line)) continue;
+              if (/^\s*(?:import|export)\s+"DPI/i.test(line)) continue;
+
+              let closed = false;
+              for (let s = blockStack.length - 1; s >= 0; s--) {
+                if (blockStack[s].close.test(line)) {
+                  const popped = blockStack.splice(s, 1)[0];
+                  if (i > popped.start) ranges.push({ start: popped.start, end: i });
+                  closed = true;
+                  break;
+                }
+              }
+              if (closed && !/\bbegin\b(?:\s*:\s*\w+)?\s*$/.test(line)) continue;
+
+              for (let k = 0; k < openers.length; k++) {
+                if (openers[k].open.test(line)) {
+                  blockStack.push({ start: i, close: openers[k].close });
+                  break;
+                }
+              }
+            }
+            return ranges;
+          }
+        });
+      }
+
+      function attachMonacoEditorActions(editor) {
+        if (!editor || editor.__uvmActionsAttached) return;
+        editor.__uvmActionsAttached = true;
+
+        editor.addAction({
+          id: 'uvm-view-docs',
+          label: 'UVM: View Documentation',
+          keybindings: [monaco.KeyMod.Alt | monaco.KeyCode.KeyD],
+          contextMenuGroupId: 'navigation',
+          contextMenuOrder: 1.1,
+          run: function (ed) {
+            const pos = ed.getPosition();
+            const ctx = extractMonacoSymbolContext(ed.getModel(), pos);
+            if (ctx) {
+              openUvmDocFromMonaco(ctx.clean, ctx.ownerClass, ctx.baseClass, ctx.symKind, pos, '');
+            }
+          }
+        });
+
+        editor.addAction({
+          id: 'uvm-goto-def',
+          label: 'UVM: Go to Definition',
+          keybindings: [monaco.KeyCode.F12],
+          contextMenuGroupId: 'navigation',
+          contextMenuOrder: 1.2,
+          run: function (ed) {
+            const pos = ed.getPosition();
+            const ctx = extractMonacoSymbolContext(ed.getModel(), pos);
+            if (ctx) {
+              openUvmDefFromMonaco(ctx.clean, ctx.ownerClass, ctx.baseClass, ctx.symKind, ed.getModel());
+            }
+          }
+        });
+
+        editor.addAction({
+          id: 'uvm-toggle-sticky-scroll',
+          label: 'UVM: Toggle Sticky Scroll',
+          contextMenuGroupId: '1_modification',
+          contextMenuOrder: 9.1,
+          run: function (ed) {
+            const cur = ed.getOption(monaco.editor.EditorOption.stickyScroll);
+            const nextEnabled = !(cur && cur.enabled);
+            ed.updateOptions({ stickyScroll: { enabled: nextEnabled } });
+            try { localStorage.setItem(MONACO_STICKY_KEY, nextEnabled ? '1' : '0'); } catch (e) { }
+          }
+        });
+
+        editor.onMouseDown(function (e) {
+          if (!e.target || !e.target.position) return;
+          const ev = e.event;
+          if (!(ev.ctrlKey || ev.metaKey || ev.altKey)) return;
+          const model = editor.getModel();
+          const ctx = extractMonacoSymbolContext(model, e.target.position);
+          if (!ctx) return;
+          if (ev.altKey && !ev.ctrlKey && !ev.metaKey) {
+            openUvmDocFromMonaco(ctx.clean, ctx.ownerClass, ctx.baseClass, ctx.symKind, e.target.position, '');
+          } else if (ev.ctrlKey || ev.metaKey) {
+            openUvmDefFromMonaco(ctx.clean, ctx.ownerClass, ctx.baseClass, ctx.symKind, model);
           }
         });
       }
 
       function getMonacoTheme() {
         const curTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        return (curTheme === 'dark' || curTheme === 'night') ? 'vs-dark' : 'vs';
+        return (curTheme === 'dark' || curTheme === 'night') ? 'uvm-dark' : 'uvm-light';
       }
 
       const VSCODE_ICON_SVG = '<svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zM18 17.5l-6-5.5 6-5.5v11z"/></svg>';
       const CLOSE_ICON_SVG = '<svg class="monaco-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
 
-      function activateMonaco() {
-        btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + ' <span>Loading Monaco...</span>';
+      function getInitialTargetLine() {
+        const hash = window.location.hash;
+        if (hash && (hash.startsWith('#L') || hash.startsWith('#line-'))) {
+          const n = parseInt(hash.replace(/^#(?:L|line-)/, ''), 10);
+          if (!isNaN(n) && n >= 1) return n;
+        }
+        const activeRow = document.querySelector('.file-code-pane tr.active-line, .sv-code-table tr.active-line');
+        if (activeRow) {
+          const raw = activeRow.id ? activeRow.id.replace(/^L/, '') : activeRow.getAttribute('data-line');
+          const n = parseInt(raw || '', 10);
+          if (!isNaN(n) && n >= 1) return n;
+        }
+        return null;
+      }
 
-        const prevHeight = studioCodeContainer ? studioCodeContainer.offsetHeight : 0;
-        const targetHeight = Math.max(prevHeight, 520);
+      let monacoTutAddedDecorations = [];
+      function applyTutorialAddedLines() {
+        if (!monacoEditorInstance || !window.monaco || !window.__tutAddedLinesByFile) return;
+        const fname = getActiveFileName();
+        const added = window.__tutAddedLinesByFile[fname] || [];
+        const decs = added.map(function (ln) {
+          return {
+            range: new monaco.Range(ln, 1, ln, 1),
+            options: { isWholeLine: true, className: 'tut-line-added' }
+          };
+        });
+        monacoTutAddedDecorations = monacoEditorInstance.deltaDecorations(monacoTutAddedDecorations, decs);
+      }
+
+      function activateMonaco() {
+        const activationId = ++monacoActivationSeq;
 
         if (studioCodeContainer) {
+          studioCodeContainer.scrollTop = 0;
+          studioCodeContainer.scrollLeft = 0;
           studioCodeContainer.classList.add('monaco-active');
-          if (studioCodeContainer.classList.contains('studio-code-container')) {
-            studioCodeContainer.style.height = targetHeight + 'px';
+          if (studioCodeContainer.classList.contains('studio-code-container') && !studioCodeContainer.style.height) {
+            const prevHeight = studioCodeContainer.offsetHeight || 0;
+            studioCodeContainer.style.height = Math.max(prevHeight, 520) + 'px';
           }
         }
 
         loadMonacoScript(function () {
+          if (activationId !== monacoActivationSeq) return;
+          registerUvmSystemVerilogLanguage();
+          defineUvmMonacoThemes();
           setupMonacoLanguageProviders();
+
           const codeText = getActiveCodeText();
+          const lang = detectMonacoLanguage(getActiveFileName());
           const themeName = getMonacoTheme();
+          let stickyEnabled = true;
+          try { stickyEnabled = localStorage.getItem(MONACO_STICKY_KEY) !== '0'; } catch (e) { }
 
-          codePanes.forEach(function (p) { p.style.display = 'none'; });
-          const svTable = document.querySelector('.sv-code-table');
-          if (svTable) svTable.style.display = 'none';
-
+          if (fallbackPre) fallbackPre.style.display = 'none';
           monacoPane.style.display = 'block';
           monacoPane.classList.add('active');
 
           if (!monacoEditorInstance) {
             monacoEditorInstance = monaco.editor.create(monacoPane, {
               value: codeText,
-              language: 'systemverilog',
+              language: lang,
               theme: themeName,
               readOnly: true,
               lineNumbers: 'on',
               renderWhitespace: 'none',
               scrollBeyondLastLine: false,
               automaticLayout: true,
-              fontFamily: 'Consolas, "Cascadia Mono", monospace',
+              fontFamily: 'Consolas, "Cascadia Mono", "Roboto Mono", SFMono-Regular, Menlo, Monaco, monospace',
               fontSize: 13,
-              minimap: { enabled: true }
+              fontLigatures: false,
+              minimap: { enabled: true },
+              stickyScroll: { enabled: stickyEnabled },
+              smoothScrolling: true,
+              bracketPairColorization: { enabled: false },
+              guides: { bracketPairs: false, indentation: false },
+              occurrencesHighlight: 'singleFile',
+              folding: true
             });
+            attachMonacoEditorActions(monacoEditorInstance);
           } else {
+            const model = monacoEditorInstance.getModel();
+            if (model) monaco.editor.setModelLanguage(model, lang);
             monacoEditorInstance.setValue(codeText);
             monaco.editor.setTheme(themeName);
           }
 
-          requestAnimationFrame(function () {
-            if (monacoEditorInstance) {
+          isMonacoActive = true;
+          applyTutorialAddedLines();
+
+          const targetLine = pendingMonacoTargetLine || getInitialTargetLine();
+          pendingMonacoTargetLine = null;
+          monacoEditorInstance.layout();
+          const initialLayoutInfo = monacoEditorInstance.getLayoutInfo ? monacoEditorInstance.getLayoutInfo() : null;
+          const hadHeight = initialLayoutInfo && initialLayoutInfo.height > 0;
+          if (targetLine && hadHeight) {
+            revealAndHighlightLineInMonaco(targetLine);
+          } else if (targetLine) {
+            requestAnimationFrame(function () {
+              if (activationId !== monacoActivationSeq || !monacoEditorInstance) return;
               monacoEditorInstance.layout();
-            }
-          });
+              revealAndHighlightLineInMonaco(targetLine);
+            });
+          }
           setTimeout(function () {
-            if (monacoEditorInstance) {
+            if (activationId === monacoActivationSeq && monacoEditorInstance) {
               monacoEditorInstance.layout();
             }
           }, 80);
-
-          const hash = window.location.hash;
-          if (hash && hash.startsWith('#L')) {
-            const lineNum = parseInt(hash.replace('#L', ''), 10);
-            if (!isNaN(lineNum)) {
-              monacoEditorInstance.revealLineInCenter(lineNum);
-              monacoEditorInstance.setPosition({ lineNumber: lineNum, column: 1 });
-            }
-          }
-
-          isMonacoActive = true;
-          btnToggleMonaco.innerHTML = CLOSE_ICON_SVG + ' <span>Standard View</span>';
-          btnToggleMonaco.classList.add('active');
         }, function () {
-          btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + ' <span>Monaco Error</span>';
-          if (studioCodeContainer) {
-            studioCodeContainer.classList.remove('monaco-active');
-            if (studioCodeContainer.classList.contains('studio-code-container')) {
-              studioCodeContainer.style.height = '';
-            }
+          if (activationId !== monacoActivationSeq) return;
+          if (fallbackPre) {
+            fallbackPre.textContent = getActiveCodeText();
+            fallbackPre.style.display = 'block';
+          } else {
+            deactivateMonaco();
           }
-          setTimeout(function () {
-            btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + ' <span>Monaco IDE</span>';
-          }, 3000);
         });
       }
 
       function deactivateMonaco() {
+        monacoActivationSeq++;
+        isMonacoActive = false;
         monacoPane.style.display = 'none';
         monacoPane.classList.remove('active');
-
+        if (fallbackPre) fallbackPre.style.display = 'none';
         if (studioCodeContainer) {
           studioCodeContainer.classList.remove('monaco-active');
           if (studioCodeContainer.classList.contains('studio-code-container')) {
             studioCodeContainer.style.height = '';
           }
         }
-
-        codePanes.forEach(function (p, idx) {
-          p.style.display = (idx === currentFileIdx) ? '' : 'none';
-        });
-        const svTable = document.querySelector('.sv-code-table');
-        if (svTable) svTable.style.display = '';
-        isMonacoActive = false;
-        btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + ' <span>Monaco IDE</span>';
         btnToggleMonaco.classList.remove('active');
+        btnToggleMonaco.innerHTML = VSCODE_ICON_SVG + '<span>Monaco IDE</span>';
+        try { localStorage.setItem(MONACO_STATE_KEY, '0'); } catch (e) { }
       }
 
       btnToggleMonaco.addEventListener('click', function () {
         if (isMonacoActive) {
           deactivateMonaco();
         } else {
+          btnToggleMonaco.classList.add('active');
+          btnToggleMonaco.innerHTML = CLOSE_ICON_SVG + '<span>Classic View</span>';
+          try { localStorage.setItem(MONACO_STATE_KEY, '1'); } catch (e) { }
           activateMonaco();
         }
       });
 
       registerMessageHandler(function (data) {
         if (data.theme && monacoEditorInstance && window.monaco) {
-          const theme = (data.theme === 'dark' || data.theme === 'night') ? 'vs-dark' : 'vs';
+          const theme = (data.theme === 'dark' || data.theme === 'night') ? 'uvm-dark' : 'uvm-light';
           monaco.editor.setTheme(theme);
         }
       });
+
+      // Always start in the default Classic View on page load; Monaco opens on demand via #btn-toggle-monaco
+      monacoPane.style.display = 'none';
+      if (studioCodeContainer) studioCodeContainer.classList.remove('monaco-active');
+      try { localStorage.setItem(MONACO_STATE_KEY, '0'); } catch (e) { }
+
+      // Expose helpers for tab switches and tutorial line decorations
+      window.__detectUvmMonacoLanguage = detectMonacoLanguage;
+      window.__getActiveUvmFileName = getActiveFileName;
+      window.__applyMonacoTutorialAddedLines = applyTutorialAddedLines;
     })();
 
-    // Synchronize tab switches with tools
+    // Synchronize tab switches with Monaco
     onFileTabSwitched = function (idx) {
-      if (typeof clearFindMatches === 'function') clearFindMatches();
-      if (typeof clearTokenOccurrences === 'function') clearTokenOccurrences();
       if (isMonacoActive && monacoEditorInstance) {
+        const model = monacoEditorInstance.getModel();
+        if (model && window.monaco && window.__detectUvmMonacoLanguage && window.__getActiveUvmFileName) {
+          monaco.editor.setModelLanguage(model, window.__detectUvmMonacoLanguage(window.__getActiveUvmFileName()));
+        }
         monacoEditorInstance.setValue(getActiveCodeText());
+        monacoEditorInstance.setScrollTop(0);
+        monacoEditorInstance.setPosition({ lineNumber: 1, column: 1 });
+        monacoActiveLineDecorations = monacoEditorInstance.deltaDecorations(monacoActiveLineDecorations, []);
+        if (typeof window.__applyMonacoTutorialAddedLines === 'function') {
+          window.__applyMonacoTutorialAddedLines();
+        }
+      } else {
+        const fallbackPre = document.getElementById('monaco-fallback-pre');
+        if (fallbackPre && fallbackPre.style.display === 'block') {
+          fallbackPre.textContent = getActiveCodeText();
+        }
       }
     };
 
@@ -3010,6 +4078,9 @@ window.PageCommon = (function () {
         if (!studioCodeContainer) return;
         const isWrapped = studioCodeContainer.classList.toggle('code-wrap-active');
         if (btnToggleWrap) btnToggleWrap.classList.toggle('active', isWrapped);
+        if (isMonacoActive && monacoEditorInstance) {
+          monacoEditorInstance.updateOptions({ wordWrap: isWrapped ? 'on' : 'off' });
+        }
       }
 
       if (btnToggleWrap) {
@@ -3023,6 +4094,11 @@ window.PageCommon = (function () {
         }
         if ((e.ctrlKey || e.metaKey) && (e.key === 'g' || e.key === 'G')) {
           e.preventDefault();
+          if (isMonacoActive && monacoEditorInstance) {
+            monacoEditorInstance.focus();
+            monacoEditorInstance.trigger('keyboard', 'editor.action.gotoLine', null);
+            return;
+          }
           const input = prompt('Go to line number:');
           if (input) {
             const line = parseInt(input.trim().replace(/^L/, ''), 10);
@@ -3167,9 +4243,41 @@ window.PageCommon = (function () {
     while (curr && !seen.has(curr)) {
       seen.add(curr);
       chain.push(curr);
-      curr = (nodes && nodes[curr]) ? nodes[curr].parent : null;
+      if (nodes && nodes[curr]) {
+        curr = nodes[curr].parent;
+      } else {
+        const syms = getUvmSymbols();
+        curr = (syms && syms.classParents && syms.classParents[curr]) ? syms.classParents[curr].parent : null;
+      }
     }
     return chain;
+  }
+
+  const SV_NATIVE_METHODS_JS = new Set([
+    'size', 'exists', 'delete', 'first', 'last', 'next', 'prev',
+    'find', 'find_index', 'find_first', 'find_last', 'min', 'max', 'sum',
+    'sort', 'rsort', 'shuffle', 'reverse', 'unique',
+    'pop_front', 'pop_back', 'push_front', 'push_back', 'insert',
+    'num', 'len', 'substr', 'atoi', 'atohex', 'atooct', 'atobin', 'itoa', 'hextoa', 'octtoa', 'bintoa',
+    'toupper', 'tolower', 'getc', 'putc', 'compare', 'icompare'
+  ]);
+
+  function isKnownUvmOwnerClass(clsName, syms) {
+    if (!clsName) return false;
+    if (clsName === 'Global' || clsName === 'Globals') return true;
+    return Boolean((syms.classes && syms.classes[clsName]) || (syms.classParents && syms.classParents[clsName]));
+  }
+
+  function resolveUvmClassField(clsName, fieldName, syms) {
+    if (!clsName || !fieldName || !syms || !syms.classFields) return null;
+    const chain = getUvmAncestorChain(clsName);
+    for (let i = 0; i < chain.length; i++) {
+      const cmap = syms.classFields[chain[i]];
+      if (cmap && cmap[fieldName]) {
+        return Object.assign({ class: chain[i] }, cmap[fieldName]);
+      }
+    }
+    return null;
   }
 
   const PRIORITY_DISAMBIG_CLASSES = new Set([
@@ -3275,8 +4383,25 @@ window.PageCommon = (function () {
     const syms = getUvmSymbols();
     if (!cleanToken || !syms) return null;
 
+    const ownerIsKnownUvm = isKnownUvmOwnerClass(ownerClass, syms);
+    const baseIsKnownUvm = isKnownUvmOwnerClass(baseClass, syms);
+    // Reject explicitly non-UVM receivers (e.g. vif.reset(), my_queue.size())
+    if (ownerClass && !ownerIsKnownUvm && !baseIsKnownUvm) {
+      return null;
+    }
+
+    function canResolveMethod() {
+      if (cleanToken === 'new' && !ownerIsKnownUvm && !baseIsKnownUvm) {
+        return false;
+      }
+      if (SV_NATIVE_METHODS_JS.has(cleanToken) && !ownerIsKnownUvm && !baseIsKnownUvm) {
+        return false;
+      }
+      return true;
+    }
+
     if (symKind === 'method' && syms.methods && syms.methods[cleanToken]) {
-      return resolveMethodEntry(cleanToken, syms.methods[cleanToken], ownerClass, baseClass);
+      return canResolveMethod() ? resolveMethodEntry(cleanToken, syms.methods[cleanToken], ownerClass, baseClass) : null;
     }
     if (symKind === 'macro' && syms.macros && syms.macros[cleanToken]) {
       return formatSingleSymbol(cleanToken, 'macro', syms.macros[cleanToken]);
@@ -3303,11 +4428,30 @@ window.PageCommon = (function () {
     if (syms.constants && syms.constants[cleanToken]) {
       return formatSingleSymbol(cleanToken, 'constant', syms.constants[cleanToken]);
     }
+    if (ownerIsKnownUvm || baseIsKnownUvm) {
+      const targetCls = ownerIsKnownUvm ? ownerClass : baseClass;
+      const cf = resolveUvmClassField(targetCls, cleanToken, syms);
+      if (cf) {
+        return formatSingleSymbol(cleanToken, cf.kind || 'variable', cf);
+      }
+    }
+
     if (syms.vars && syms.vars[cleanToken]) {
-      return formatSingleSymbol(cleanToken, 'variable', syms.vars[cleanToken]);
+      const vEntry = syms.vars[cleanToken];
+      const isGlobalUvmVar = /^(?:uvm_|ovm_|\+UVM_|\+uvm_)/.test(cleanToken);
+      if (isGlobalUvmVar) {
+        return formatSingleSymbol(cleanToken, 'variable', vEntry);
+      }
+      if (ownerIsKnownUvm || baseIsKnownUvm) {
+        const targetCls = ownerIsKnownUvm ? ownerClass : baseClass;
+        const chain = getUvmAncestorChain(targetCls);
+        if (!vEntry.class || chain.includes(vEntry.class)) {
+          return formatSingleSymbol(cleanToken, 'variable', vEntry);
+        }
+      }
     }
     if (syms.methods && syms.methods[cleanToken]) {
-      return resolveMethodEntry(cleanToken, syms.methods[cleanToken], ownerClass, baseClass);
+      return canResolveMethod() ? resolveMethodEntry(cleanToken, syms.methods[cleanToken], ownerClass, baseClass) : null;
     }
     return null;
   }

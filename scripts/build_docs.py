@@ -124,6 +124,9 @@ def highlight_doc_code(raw_code):
     return sh.highlight_doc_snippet(raw_code)
 
 def highlight_before_params(text):
+    catalog = sh._get_uvm_symbol_catalog()
+    uvm_types = catalog['classes'] | catalog['types']
+    uvm_consts = catalog['constants']
     def repl_text(t):
         tokens = re.split(r'(\b[a-zA-Z_][a-zA-Z0-9_]*\b|\()', t)
         words = [tok for tok in tokens if re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', tok)]
@@ -140,9 +143,9 @@ def highlight_before_params(text):
                 res.append(f'<span class="sv-type">{tok}</span>')
             elif tok in sh.SV_QUALIFIERS:
                 res.append(f'<span class="sv-qualifier">{tok}</span>')
-            elif tok in sh.SV_CONSTANTS:
+            elif tok in sh.SV_CONSTANTS or tok in uvm_consts or tok.startswith('UVM_'):
                 res.append(f'<span class="sv-constant">{tok}</span>')
-            elif tok.startswith(('uvm_', 'UVM_')):
+            elif tok in uvm_types or tok.startswith(('uvm_', 'ovm_')):
                 res.append(f'<span class="sv-uvm-type">{tok}</span>')
             elif tok == method_name or tok in sh.KNOWN_UVM_METHODS:
                 res.append(f'<span class="sv-proto-name">{tok}</span>')
@@ -154,6 +157,9 @@ def highlight_before_params(text):
     return highlight_outside_tags(text, repl_text)
 
 def highlight_type_cell(text):
+    catalog = sh._get_uvm_symbol_catalog()
+    uvm_types = catalog['classes'] | catalog['types']
+    uvm_consts = catalog['constants']
     def repl_text(t):
         def repl(m):
             w = m.group(0)
@@ -165,9 +171,9 @@ def highlight_type_cell(text):
                 return f'<span class="sv-type">{w}</span>'
             elif w in sh.SV_QUALIFIERS:
                 return f'<span class="sv-qualifier">{w}</span>'
-            elif w in sh.SV_CONSTANTS:
+            elif w in sh.SV_CONSTANTS or w in uvm_consts or w.startswith('UVM_'):
                 return f'<span class="sv-constant">{w}</span>'
-            elif w.startswith(('uvm_', 'UVM_')) or 'uvm' in w:
+            elif w in uvm_types or w.startswith(('uvm_', 'ovm_')):
                 return f'<span class="sv-uvm-type">{w}</span>'
             else:
                 return f'<span class="sv-type">{w}</span>'
