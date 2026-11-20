@@ -303,6 +303,13 @@ Pour toute nouvelle fonctionnalité ou extension future (ex : ajout de nouvelles
   2. **Hiérarchie TOC cohérente** : Utiliser `<h3 class="CTitle">` pour tout `<div class="CGroup">` injecté afin de ne pas déclencher le mode `has_h2` dans `extract_doc_headings()`.
   3. **Parité `[data-theme="dark"]`** : Chaque nouveau composant UI (`.internal-details-section`, `.undocumented-notice`, `.badge-*`) doit disposer de ses variables/surcharges `[data-theme="dark"]` dans `css/style.css`.
 
+### Règle 17 : Architecture Duale de l'Éditeur de Code (Vue Classique par Défaut & Monaco à la Demande)
+- **Principe** : Le visualiseur de code (`src_view`, `examples_view`, `tutorial_view`) doit démarrer instantanément sur la table HTML native (`.sv-code-table` / `.file-code-pane`), tout en offrant **Monaco Editor** à la demande via `#btn-toggle-monaco`.
+- **Règles d'implémentation** :
+  1. **Démarrage déterministe en vue classique** : Ne jamais réactiver automatiquement Monaco au chargement depuis `localStorage` ; forcer `#monaco-editor-pane` à `display: none` et retirer `.monaco-active` afin de préserver le défilement natif et d'éviter le téléchargement de plusieurs mégaoctets de JS/workers à l'ouverture.
+  2. **Parité des outils de la vue par défaut (`js/page_common.js`)** : `scrollToLine()` doit scroller et surligner `tr#L<num>` lorsque `!isMonacoActive` ; `initCodeFindWidget()` (avec `#find-case-toggle` / `#find-word-toggle`) et `initQuickInfoHover()` doivent basculer explicitement `style.display` (`flex`/`none` et `block`/`none`) pour outrepasser le `style="display:none;"` initial.
+  3. **Activation/désactivation propre de Monaco** : `activateMonaco()` doit remettre `scrollTop = 0; scrollLeft = 0;` sur le conteneur avant d'afficher `#monaco-editor-pane`, passer un callback d'erreur (`flushError`) à `window.require(...)` et exposer `deactivateMonaco()` pour restaurer la hauteur et l'ascenseur natifs.
+
 ---
 
 ## 4. Méthodologie de Vérification & Recette Automatisée
@@ -355,7 +362,7 @@ Avant de valider une version :
 - [ ] **Validation des Studios** : `python scripts/verify_examples.py` (28/28 assertions validées).
 - [ ] **Validation des Scénarios & Logs** : `python scripts/verify_stepper_calibration.py` (5/5 piliers vérifiés).
 - [ ] **Validation des Notes Sources** : `python scripts/verify_source_notes.py` (39/39 suites validées, zéro fuite de licence Apache).
-- [ ] **Suite Unifiée Complète** : `python scripts/run_tests.py` (11/11 suites au vert, incluant `verify_js_syntax.py`, `verify_code_containers.py` et `verify_code_editor_tools.py` sur les 155 sources UVM + pages `src_view/examples/`).
+- [ ] **Suite Unifiée Complète** : `python scripts/run_tests.py` (12/12 suites au vert, incluant `verify_js_syntax.py`, `verify_code_containers.py` et `verify_code_editor_tools.py` sur les 650 vues sources + 39 studios d'exemples).
 - [ ] **Stabilité de la Barre de Titre (Ancres & Mobile)** : Ouvrir une URL avec ancre (`#/doc/...#...` ou `#/src/...#L...`) sur desktop et mobile (`<= 860px`) : `.app-header` reste fixée en haut, `.view-switcher` est masqué sur mobile et `#open-full-doc` affiche d'emblée l'icône Source.
 - [ ] **Ouverture & URL des Sources d'Exemple** : Cliquer sur un fichier dans la bannière d'un exemple ouvre `src_view/examples/<catégorie>/<suite>/<fichier>.html` en Split View sur desktop (`#/split?doc=...&src=examples/...`) ou en vue Source sur mobile (`#/src/examples/...`), et changer d'onglet dans le Code Studio en Split View synchronise le panneau droit et l'URL.
 - [ ] **Focus Clavier Immédiat en Recherche Modale** : Cliquer sur la barre de recherche ou appuyer sur `/` active immédiatement la saisie clavier et présélectionne la requête en cours.

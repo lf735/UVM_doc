@@ -1530,3 +1530,27 @@ Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met �
   - Pour les sources SVG (`.svg` ou `data:image/svg+xml`), garantie d'un `viewBox` et zoom par dimensions CSS (`width`/`height = baseNatural * currentZoom`) sans `transform: scale(...)`, forçant Chromium à re-rasteriser le vecteur à pleine netteté.
 - **Architecture tutoriel modulaire (`tutorial_content/`, `build_tutorial.py`, `verify_tutorial.py`)** :
   - Manifeste unique `tutorial_content/tutorial_manifest.yaml`, chapitres isolés en `tutorial_content/chapters/<slug>.md` (YAML frontmatter + Markdown), graphe Capstone piloté par `layerSlug`/`chapterSlug` (`tutorial_content/tutorial_capstone_graph.yaml`), URLs stables `tutorial_view/<slug>.html`, `js/tutorial_meta.js` généré pour `home.html`, et assertions dynamiques dans `verify_tutorial.py`.
+
+---
+
+## 50. Architecture Duale de l'Éditeur de Code : Vue Classique par Défaut, Monaco à la Demande & Pièges de Cohabitation (`page_common.js`, `style.css`, `verify_code_editor_tools.py`)
+
+### Les Symptômes Observés
+1. **Lenteur et surpoids au chargement** : un audit Lighthouse sur `http://localhost:8000/#/doc/base/uvm_object-svh.html` a montré un LCP/Interactive à **2,8 s** et **7,84 Mo** transférés, dont **3,4 Mo** pour `editor.main.js` + **331 Ko** pour `workerMain.js` + **1,06 Mo** pour `uvm_symbol_quick.js` chargés inutilement par Monaco.
+2. **Barre de défilement bloquée et icônes inopérantes** : dans la vue par défaut, l'ascenseur de `.src-code-container` ne défilait plus et les boutons (`Find`, `Wrap`, `Quick Info`, saut de ligne `#L...`) ne répondaient pas.
+3. **Vue Monaco invisible à l'ouverture** : cliquer sur `#btn-toggle-monaco` après avoir scrollé ou après un échec AMD laissait l'éditeur vide ou hors-champ.
+
+### L'Anatomie des Pièges
+1. **Activation automatique de Monaco via `localStorage`** : `initMonacoLoader()` réactivait Monaco au chargement dès que `uvm_monaco_active === '1'`, ajoutant `.monaco-active` (`overflow: hidden !important;`) sur `.src-code-container` et masquant la vue classique par défaut.
+2. **Variable non déclarée et callback AMD sans gestion d'erreur** : une référence résiduelle à `fallbackPre` non déclarée levait une `ReferenceError` dans `onSuccess`, et `window.require(['vs/editor/editor.main'], flushSuccess)` sans callback d'erreur laissait `monacoLoadingState` figé à `'loading'` tout en avalant l'exception dans `try { ... } catch (e) { }`.
+3. **Positionnement absolu de `#monaco-editor-pane` après défilement** : `#monaco-editor-pane` étant en `position: absolute; top: 0; inset: 0;`, tout `scrollTop > 0` préalable sur le conteneur plaçait Monaco au-dessus de la zone visible.
+4. **Conflit `style="display:none;"` et divergence d'IDs** : `#code-find-widget` et `#code-quick-info` avaient un `style="display:none;"` inline dans le HTML généré, empêchant `.classList.add('visible')` seul de les afficher ; de plus, `initCodeFindWidget()` cherchait `#find-case`/`#find-word` au lieu de `#find-case-toggle`/`#find-word-toggle`.
+5. **`scrollToLine()` limité à Monaco** : lorsque `!isMonacoActive`, `scrollToLine()` se contentait d'enregistrer `pendingMonacoTargetLine` sans scroller ni surligner `tr#L<num>` dans `.sv-code-table`.
+
+### Les Solutions Appliquées (`js/page_common.js`, `scripts/verify_code_editor_tools.py`)
+1. **Démarrage systématique sur la vue classique (`.sv-code-table`)** : `initMonacoLoader()` force `#monaco-editor-pane` en `display: none`, retire `.monaco-active` et réinitialise `uvm_monaco_active` à `'0'` au chargement ; Monaco s'ouvre uniquement à la demande via `#btn-toggle-monaco` (avec `deactivateMonaco()` propre pour revenir à la vue classique).
+2. **Ouverture fiable de Monaco** : réinitialisation de `studioCodeContainer.scrollTop = 0; scrollLeft = 0;` dans `activateMonaco()`, ajout du 3e argument `flushError` sur `window.require(...)`, et journalisation `console.error` en cas d'exception.
+3. **Réparation complète de l'éditeur par défaut** :
+   - `scrollToLine()` cible `tr#L<num>` / `tr[data-line="<num>"]` dans `getActivePane()`, applique `.active-line` et appelle `scrollToRow()` quand `!isMonacoActive`.
+   - `showWidget()`/`hideWidget()` et `showTooltip()`/`hideTooltip()` basculent explicitement `style.display` (`flex`/`none` et `block`/`none`), et `initCodeFindWidget()` cible `#find-case-toggle` / `#find-word-toggle`.
+4. **Tests alignés (`scripts/verify_code_editor_tools.py`)** : vérification de la présence conjointe de `.sv-code-table`, `#code-find-widget`, `#code-quick-info`, `#btn-toggle-monaco` et `#monaco-editor-pane` sur les 650 vues sources et les 39 studios d'exemples (`12/12` suites vertes).
