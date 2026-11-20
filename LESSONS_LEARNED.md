@@ -1554,3 +1554,34 @@ Le reset CSS global `* { box-sizing: border-box; margin: 0; padding: 0; }` met �
    - `scrollToLine()` cible `tr#L<num>` / `tr[data-line="<num>"]` dans `getActivePane()`, applique `.active-line` et appelle `scrollToRow()` quand `!isMonacoActive`.
    - `showWidget()`/`hideWidget()` et `showTooltip()`/`hideTooltip()` basculent explicitement `style.display` (`flex`/`none` et `block`/`none`), et `initCodeFindWidget()` cible `#find-case-toggle` / `#find-word-toggle`.
 4. **Tests alignés (`scripts/verify_code_editor_tools.py`)** : vérification de la présence conjointe de `.sv-code-table`, `#code-find-widget`, `#code-quick-info`, `#btn-toggle-monaco` et `#monaco-editor-pane` sur les 650 vues sources et les 39 studios d'exemples (`12/12` suites vertes).
+
+---
+
+## 51. Audit Lighthouse & Optimisations Systémiques : Chargement Paresseux d'Iframe, Déduplication des Index JS/CSS, Reflows Forcés & Conformité WCAG (`index.html`, `app.js`, `page_builder_common.py`, `build_docs.py`, `style.css`)
+
+### Les Symptômes Observés
+1. **Poids réseau et CPU excessifs en mode documentation (`mode-docs`)** : l'audit Lighthouse sur `http://localhost:8000/#/doc/base/uvm_object-svh.html` relevait **6 663 KiB** transférés, **892 KiB** de JS non minifié, **420 ms** de ressources bloquant le rendu et un reflow forcé de **16,1 ms** dans `js/app.js`.
+2. **Échecs d'accessibilité Lighthouse (scores à `0`)** : `meta-viewport` (`user-scalable=no`), `list` (`<div>` enfant direct d'un `<ul>` dans l'arbre de navigation) et `color-contrast` (`--text-subtle: #80868b`).
+3. **Piège de désynchronisation Générateur Python vs HTML généré lors d'un revert partiel** : si un revert restaure les fichiers HTML (`src_view/`, `examples_view/`) et `js/page_common.js` sans restaurer `scripts/page_builder_common.py` (`render_code_container`, `render_code_studio`, `render_source_viewer`) ni `css/style.css` (`#monaco-editor-pane { display: none; }`), les tests passent sur les HTML existants mais échouent dès la régénération suivante (`python scripts/build_docs.py`).
+
+### L'Anatomie des Pièges
+1. **Iframe `#src-frame` chargée à vide au démarrage** : dans `index.html`, `#src-frame` pointait en dur vers `src_view/comps/uvm_driver.svh.html#L44`. Même lorsque `#src-pane` était masqué (`mode-docs`), le navigateur chargeait et exécutait la page source complète et ses scripts en parallèle de `#doc-frame`.
+2. **Re-parsing de `uvm_symbol_quick.js` (1 065 KiB) et double téléchargement de `style.css` (247 KiB)** :
+   - `page_builder_common.py` injectait `<script src=".../js/uvm_symbol_quick.js" defer>` dans toutes les pages `docs_view/`, alors qu'en mode SPA `window.parent.UVM_SYMBOLS` est déjà chargé par `index.html`.
+   - `index.html` chargeait `css/style.css?v=2.3` tandis que `home.html` et `docs_view/` chargeaient `css/style.css` (sans query string), contournant le cache HTTP et téléchargeant deux fois les 247 KiB de CSS.
+3. **JSON indenté dans `js/search_data.js` et scripts synchrones** : `json.dumps(payload, indent=2)` ajoutait ~584 KiB d'espaces/sauts de ligne dans `search_data.js`, chargé sans `defer` dans `index.html`.
+4. **Reflow synchrone dans `resetShellScroll()`** : `document.querySelectorAll('.app-layout, .app-viewport, .pane')` suivi d'une lecture `el.scrollTop` / `el.scrollLeft` était exécuté à chaque événement `scroll`.
+5. **Enfant `<div>` direct dans `<ul class="nav-group-items">`** : dans `renderGroupItemsHtml()` (`js/app.js`), les sous-groupes (`item.type === 'group'`) émettaient `<div class="nav-group">` directement dans `<ul>` sans `<li>` englobant.
+
+### Les Solutions Appliquées
+1. **Chargement paresseux d'`#src-frame` (`index.html`, `js/app.js`)** : initialisation sur `src="about:blank" data-default-src="src_view/comps/uvm_driver.svh.html#L44"` et chargement différé dans `setViewMode()` uniquement à l'entrée en mode `split` ou `source`.
+2. **Partage en 0 ms de `UVM_SYMBOLS` sur `docs_view/` (`scripts/page_builder_common.py`)** : `uvm_symbol_quick.js` n'est injecté statiquement que sur les pages contenant `#monaco-editor-pane` ; les pages `docs_view/` lisent `window.parent.UVM_SYMBOLS` (ou chargent le script à la demande en mode autonome via `ensureUvmSymbolsLoaded()`).
+3. **Compactage de `js/search_data.js` (-584 KiB), `defer` et déblocage du rendu (`scripts/build_docs.py`, `index.html`)** :
+   - Passage à `json.dumps(payload, separators=(',', ':'))` (**1 758,6 KiB** au lieu de **2 343,0 KiB**).
+   - Ajout de `defer` sur tous les scripts de fin de `<body>` dans `index.html`, chargement non-bloquant de Google Fonts (`media="print" onload="this.media='all'"`) et uniformisation de `href="css/style.css"`.
+4. **Élimination du reflow forcé (`js/app.js`)** : `resetShellScroll(ev)` inspecte uniquement `ev.target` au lieu de parcourir tous les panneaux du shell via `querySelectorAll`.
+5. **Conformité WCAG AA & HTML (`index.html`, `home.html`, `page_shell.html`, `js/app.js`, `css/style.css`)** :
+   - Suppression de `maximum-scale=1.0, user-scalable=no` sur `<meta name="viewport">`.
+   - Encapsulation des sous-groupes `.nav-group` dans `<li style="list-style:none;">` au sein de `<ul class="nav-group-items">`.
+   - Ajustement de `--text-subtle` (`#5f6368` en thème clair, `#9aa0a6` en thème sombre, ratio > 4.5:1).
+6. **Règle d'or de cohérence du pipeline de build** : toute modification de l'architecture des conteneurs de code doit être synchronisée simultanément sur les 5 couches (**`scripts/page_builder_common.py` → `python scripts/build_docs.py` → `css/style.css` → `js/page_common.js` → `python scripts/run_tests.py`**).

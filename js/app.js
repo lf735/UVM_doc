@@ -397,6 +397,15 @@ document.addEventListener('DOMContentLoaded', () => {
     appContainer.classList.remove('mode-docs', 'mode-source', 'mode-split');
     appContainer.classList.add(`mode-${mode}`);
 
+    // Lazy-load srcFrame only when entering split or source mode
+    if ((mode === 'split' || mode === 'source') && srcFrame) {
+      let curSrcAttr = srcFrame.getAttribute('src') || '';
+      if (!curSrcAttr || curSrcAttr === 'about:blank') {
+        const targetSrc = currentSrcUrl || srcFrame.getAttribute('data-default-src') || 'src_view/comps/uvm_driver.svh.html#L44';
+        setFrameSrc(srcFrame, targetSrc);
+      }
+    }
+
     updatePaneExpandButtons(mode);
     updateBookmarkButtonState();
 
@@ -1795,7 +1804,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ? `<a href="#" data-doc-href="${item.overviewHref}" class="nav-group-title-link nav-item-link ${isOverviewActive ? 'active' : ''}" title="View ${escapeHtml(item.title)} Overview">${highlightMatch(item.title, matcher)}</a>`
           : `<span class="nav-group-title-text">${highlightMatch(item.title, matcher)}</span>`;
 
-        out += `<div class="nav-group ${hasOverview ? 'has-overview' : ''}">
+        out += `<li style="list-style:none;"><div class="nav-group ${hasOverview ? 'has-overview' : ''}">
           <div class="nav-group-header">
             ${titleHtml}
             <button type="button" class="nav-group-chevron-btn" title="Toggle section" aria-label="Toggle ${escapeHtml(item.title)} section">
@@ -1805,7 +1814,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <ul class="nav-group-items">
             ${renderGroupItemsHtml(item.children || [], matcher)}
           </ul>
-        </div>`;
+        </div></li>`;
       }
     });
     return out;
@@ -4073,7 +4082,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Prevent the outer app shell from ever scrolling (e.g. via iframe anchor/fragment navigation or scrollIntoView)
-  function resetShellScroll() {
+  function resetShellScroll(ev) {
     if (window.scrollY !== 0 || window.scrollX !== 0) {
       window.scrollTo(0, 0);
     }
@@ -4083,10 +4092,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.body && document.body.scrollTop !== 0) {
       document.body.scrollTop = 0;
     }
-    document.querySelectorAll('.app-layout, .app-viewport, .pane').forEach((el) => {
-      if (el.scrollTop !== 0) el.scrollTop = 0;
-      if (el.scrollLeft !== 0) el.scrollLeft = 0;
-    });
+    const targetEl = ev && ev.target ? ev.target : null;
+    if (targetEl && targetEl.matches && targetEl.matches('.app-layout, .app-viewport, .pane')) {
+      if (targetEl.scrollTop !== 0) targetEl.scrollTop = 0;
+      if (targetEl.scrollLeft !== 0) targetEl.scrollLeft = 0;
+    }
   }
 
   window.addEventListener('scroll', resetShellScroll, { passive: true });
@@ -4094,7 +4104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const t = e.target;
     if (t === document || t === document.documentElement || t === document.body ||
       (t && t.matches && t.matches('.app-layout, .app-viewport, .pane'))) {
-      resetShellScroll();
+      resetShellScroll(e);
     }
   }, { capture: true, passive: true });
 

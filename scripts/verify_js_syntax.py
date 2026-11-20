@@ -168,8 +168,23 @@ def check_inline_html_scripts(node_bin: str) -> list[str]:
     return failures
 
 
-def main() -> int:
+def find_node_binary() -> str | None:
     node_bin = shutil.which("node")
+    if node_bin:
+        return node_bin
+    candidates = [
+        Path(r"C:\Program Files\nodejs\node.exe"),
+        Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "nodejs" / "node.exe",
+        Path(os.environ.get("NVM_SYMLINK", "")) / "node.exe",
+    ]
+    for cand in candidates:
+        if cand.is_file():
+            return str(cand)
+    return None
+
+
+def main() -> int:
+    node_bin = find_node_binary()
     if not node_bin:
         msg = "Node.js (`node`) not found in PATH; cannot run V8 JS syntax verification."
         if os.environ.get("CI"):

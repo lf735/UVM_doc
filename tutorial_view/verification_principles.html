@@ -16,7 +16,7 @@
       } catch (e) { }
     })();
   </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>02. Core Verification Principles: Stimuli, Checks &amp; Metrics | UVM 1.2 Step-by-Step Tutorial</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/diff2html@3.4.48/bundles/css/diff2html.min.css">
   <link rel="stylesheet" href="../css/style.css">
@@ -311,7 +311,6 @@
     </div>
   </div>
   <div id="tut-quiz-payload" style="display:none;" data-tut-quiz='[{&quot;q&quot;: &quot;Where should functional coverage (`covergroup`) be sampled in a properly architected UVM testbench?&quot;, &quot;options&quot;: [&quot;Inside the sequence right after req.randomize()&quot;, &quot;Inside a passive uvm_subscriber connected to the monitor&#x27;s analysis_port&quot;, &quot;Inside tb_top&#x27;s initial block&quot;], &quot;answer&quot;: 1, &quot;explanation&quot;: &quot;Sampling from the monitor&#x27;s analysis_port guarantees you measure transactions that actually occurred on the pins, independent of active/passive reuse.&quot;}, {&quot;q&quot;: &quot;Why must a uvm_driver never verify DUT output correctness?&quot;, &quot;options&quot;: [&quot;Because drivers do not have access to uvm_info macros&quot;, &quot;Because when reusing the agent in UVM_PASSIVE mode at SoC level, the driver is not instantiated&quot;, &quot;Because SystemVerilog forbids classes from reading output signals&quot;], &quot;answer&quot;: 1, &quot;explanation&quot;: &quot;In passive subsystem/SoC reuse, only the monitor, scoreboard, and coverage collectors remain active\u2014so checking must live outside the driver.&quot;}]'></div>
-  <script src="../js/uvm_symbol_quick.js" defer></script>
   <script src="../js/page_common.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>

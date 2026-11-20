@@ -19,7 +19,7 @@
     /* Text (Google Greys) */
     --text-main: #202124;
     --text-muted: #5f6368;
-    --text-subtle: #80868b;
+    --text-subtle: #5f6368;
 
     /* Borders */
     --border-color: #dadce0;
@@ -107,7 +107,7 @@
 
     --text-main: #e8eaed;
     --text-muted: #9aa0a6;
-    --text-subtle: #80868b;
+    --text-subtle: #9aa0a6;
 
     --border-color: #36393f;
     --border-subtle: #2c2f34;
@@ -8937,9 +8937,13 @@
     height: 100% !important;
     z-index: 90;
     background: var(--code-bg);
-    display: block;
+    display: none;
     font-variant-ligatures: none !important;
     font-feature-settings: "liga" 0, "clig" 0, "calt" 0, "dlig" 0 !important;
+  }
+
+  #monaco-editor-pane.active {
+    display: block;
   }
 
   .monaco-fallback-pre {

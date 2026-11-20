@@ -2982,7 +2982,7 @@ def generate_search_and_nav_data():
  * Generated UVM 1.2 Documentation Data & Navigation Index
  * Contains category tree, source tree, and full search index.
  */
-const UVM_DATA = {json.dumps(payload, indent=2)};
+const UVM_DATA = {json.dumps(payload, separators=(',', ':'))};
 """
     with open(out_file, 'w', encoding='utf-8', newline='\n') as f:
         f.write(js_content)
